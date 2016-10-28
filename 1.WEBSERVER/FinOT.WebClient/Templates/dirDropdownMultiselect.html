@@ -1,0 +1,30 @@
+﻿<div class='multiselect-dropdown-parent btn-group'>
+    <span class="input-group-btn">
+        <button type="button" class="dropdown-toggle form-control btn btn-sm btn-default" ng-click="openDropdown()"><div align="left">{{formatSelectedModel()}}&nbsp;<span class="caret pull-right" style="margin-top:7px;"></span></div></button>
+    </span>
+    <ul ng-show="options.length" ng-class="getUlClassName()" ng-style="{display: open ? 'block' : 'none'}" aria-labelledby='dropdownMenu' style="max-height:200px; overflow-y: auto;">
+        <li ng-show="showSelect">
+            <a ng-click='selectAll()'>
+                <span class='glyphicon glyphicon-ok'
+                      aria-hidden='true'></span> Check All
+            </a>
+        </li>
+
+        <li ng-show="showSelect">
+            <a ng-click='deselectAll();'>
+                <span class='glyphicon glyphicon-remove'
+                      aria-hidden='true'></span> Uncheck All
+            </a>
+        </li>
+
+        <li class='divider' ng-show="showSelect"></li>
+
+        <li ng-repeat='option in options'>
+            <a ng-click='selectItem(option)'>
+                <span ng-class='getLiClassName(option)'
+                      aria-hidden='true'></span>&nbsp;&nbsp;{{((display==undefined)?option:option[display])}}
+            </a>
+        </li>
+    </ul>
+
+</div>

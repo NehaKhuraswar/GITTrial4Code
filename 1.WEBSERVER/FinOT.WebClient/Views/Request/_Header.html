@@ -1,0 +1,119 @@
+﻿<div class="panel panel-primary nopadding-bottom">
+    <div class="panel-heading clearfix clickable" ng-click="toggleHeader = !toggleHeader">
+        <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleHeader, 'glyphicon glyphicon-chevron-right': !toggleHeader}"></i></div>
+        <h3 class="panel-title pull-left margin-left-10">Header</h3>
+        <div class="pull-right">
+            <button id="btnEditHeader" class="btn btn-default btn-xs" ng-click="Ctrl.openAddPopup()"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button>            
+        </div>
+    </div>
+    <div collapse="toggleHeader">
+        <div class="panel-body">
+            <form role="form" class="form-horizontal">
+                <!--Column 1-->
+
+                <div class="col-md-4 nopadding">
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Request #</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{reqid}}</p>                            
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Status</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.Status.Description}}</p>                            
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">OT Code</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.OTCode}}</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Request Type</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.RequestType.Description}}</p>                            
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Cash/Comp</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.CashOrComp}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--Column 2-->
+                <div class="col-md-4 nopadding">
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Bureau Owner</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.BureauOwner}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Start Date</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.StartDate}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">End Date</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.EndDate}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">IFY</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.IFY}}</p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!--Column 3-->
+                <div class="col-md-4 nopadding">                    
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Authorized OT Amount</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.AuthorizedOTAmount}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Estimated OT Hours</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.EstimatedOTHours}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Authorized OT Hours</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.AuthorizedOTHours}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-md-4 align-label">Active OT Code</label>
+                        <div class="col-md-6">
+                            <p class="form-control-static">{{model.ActiveOTCode}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label>Brief Description</label>
+                    <p class="form-control-static">{{model.BriefDescription}}</p>                
+                </div>
+                <div class="form-group form-group-sm">
+                    <label>Detailed Description</label>
+                    <p class="form-control-static">{{model.DetailDescription}}</p>
+                </div>
+            </form>
+            <!--end form-->
+        </div>
+        <!--end  panel body-->
+    </div>
+    <!--end search toggle-->
+</div>

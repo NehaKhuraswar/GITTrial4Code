@@ -1,0 +1,50 @@
+﻿@model RAP.WebClient.Models.AppModel
+<!DOCTYPE html>
+<html ng-controller="mainController">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>{{Page.title()}}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/favicon.png")" />
+    <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/favicon.ico")"/><![endif]-->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<script type="text/javascript">
+        sessionStorage.setItem("UserDisplayName", "@string.Format("{0} {1}", Model.Header.User.FirstName, Model.Header.User.LastName)");
+        sessionStorage.setItem("username", "@Model.Header.User.Username");
+        sessionStorage.setItem("apibaseurl", "@Model.AppDetails.ApiBaseURL");
+    </script>*@
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row row-header-finance">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 0.5em; min-height: 50px;">
+                @*@Html.Partial("_UserMenu", Model.Header.UserApplications.ToList(), new ViewDataDictionary { { "User", Model.Header.User }, { "AppDetails", Model.AppDetails } })
+                <img src="@Url.Content("~/Images/nyc-logo-desktop.png")" alt="NYC DOHMH" title="NYC DOHMH" style="padding-right: 0.5em; width: 78px; height: 36px;" />
+                <img src="@Url.Content("~/Images/DOHMH-desktop.png")" alt="NYC Health | The New York City Department of Health and Mental Hygiene" title="NYC Health | The New York City Department of Health and Mental Hygiene" class="hidden-xs" style="width: 295px; height: 43px;" />
+                <span style="font-size: 1.2em; font-weight: bold; line-height: 1.4;" class="visible-xs">Financial Systems: OTS</span>*@
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 hidden-xs" style="min-height: 20px;">
+                <span style="font-size: 1.2em; font-weight: bold; line-height: 1.4;">Rent Adjustment Program</span>
+            </div>
+        </div>
+        <div class="row">
+            @*@Html.Partial("_MainMenu", Model.Header.Menus.ToList(), new ViewDataDictionary { { "DefaultURL", Model.Header.Application.DefaultUrl} })*@
+        </div>
+    </div>
+    @*modal dialog has z-index of 1050 so set the z-index of inform more than that to bring it to front.*@
+    <div inform class="inform-animate inform-fixed inform-shadow" style="z-index: 1051"></div>
+    <div id="body" ng-view class="container-fluid"></div>
+    <footer style="margin-top: 3em;">
+        <nav class="navbar navbar-fixed-bottom row-footer-finance" role="navigation">
+            <div class="container-fluid">
+                <span style="font-size: 0.8em; line-height: 2em;" class="pull-right">Rent Adjustment Program: Service Allocation | Deployment Date: @Model.AppDetails.DeploymentDate</span>
+            </div>
+        </nav>
+    </footer>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularApp")
+    @Scripts.Render("~/bundles/angularTemplates")
+</body>
+</html>

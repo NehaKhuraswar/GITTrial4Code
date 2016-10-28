@@ -1,0 +1,183 @@
+﻿
+    <div class="panel panel-primary nopadding-bottom margin-top-5">
+        <div class="panel-heading clearfix clickable" ng-click="toggleApproval = !toggleNotes">
+            <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleApproval, 'glyphicon glyphicon-chevron-right': !toggleApproval}"></i></div>
+            <h3 class="panel-title pull-left margin-left-10">Approvals</h3>
+            <div class="pull-right">
+                <button id="btnEditApproval" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button>
+            </div>
+        </div>
+        <div collapse="toggleApproval">
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <thead class="strong">
+                        <tr>
+                            <td class="nopadding-left" rowspan="2" width="5%" style="border-right: 1px solid black">
+                                <span>Bureau</span>
+                            </td>
+                            <td colspan="3" width="60%" align="center" style="border-bottom: black">
+                                Program Approvals
+                            </td>
+                            <td colspan="1" width="50%" align="center" style="border-bottom:  black" >
+                                OBA Approvals
+                            </td>
+                            <td colspan="1" width="50%" align="center" style="border-bottom: black">
+                                Payroll Approvals
+                            </td>
+                        </tr>
+                        <tr width="95%">
+                            <td width="35%" align="left">
+                                Originator
+                            </td>
+                            <td width="35%" align="left">
+                                Bureau
+                            </td>
+                            <td width="35%" align="left">
+                                Division
+                            </td>
+                            <td width="100%" align="left">
+                                Approval
+                            </td>
+                            <td width="100%" align="left">
+                                Approval
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="nopadding-left">
+                                <a href="#/request/{{value[0].ReqID}}">1</a>
+                            </td>
+                            <td colspan="6" style="word-wrap: break-word">
+                                <table class="table table-condensed no-border nopadding-bottom">
+                                    <tr>
+                                        <td width="8%">{{line.FY}}</td>
+                                        <td width="37%" style="word-wrap:break-word">{{line.RCName}}</td>
+                                        <td width="11%">
+                                            <span tooltip="{{line.TargetDivision.Description}}">{{line.TargetDivision.Code}}</span><br />
+                                            <span tooltip="{{line.SourceDivision.Description}}">{{line.SourceDivision.Code}}</span>
+                                        </td>
+                                        <td width="11%">
+                                            <span tooltip="{{line.TargetBureau.Description}}">{{line.TargetBureau.Code}}</span><br />
+                                            <span tooltip="{{line.SourceBureau.Description}}">{{line.SourceBureau.Code}}</span>
+                                        </td>
+                                        <td width="10%">
+                                            <span tooltip="{{line.TargetProgram.Description}}">{{line.TargetProgram.Code}}</span><br />
+                                            <span tooltip="{{line.SourceProgram.Description}}">{{line.SourceProgram.Code}}</span>
+                                        </td>
+                                        <td width="21%">{{line.ExpenseType}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                {{value[0].FundingClass.Description}}
+                                <span ng-if="value[0].FundingClassCode != null"><span tooltip="{{value[0].FundingClassCode.Description}}">{{" / " + value[0].FundingClassCode.Code}}</span></span>
+                            </td>
+                            <td>
+                                <span ng-if="value[0].Restructure != null">{{value[0].Restructure.Description}}</span>
+                            </td>
+                            <td>
+                                <span>{{value[0].Status.Description}}</span>
+                                <span tooltip="Returned" ng-show="value[0].ReturnIndicator" class='glyphicon glyphicon-exclamation-sign' style="color: red;"></span>
+                            </td>
+                            <td align="center">
+                                <span tooltip-placement="left" tooltip="{{value[0].Audit.LastModifiedByName}} {{value[0].Audit.LastModifiedDate | date:'MM/dd/yyyy h:mm:ss a'}}">
+                                    <i class="fa fa-sticky-note-o"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-condensed table-hover">
+                  
+                <caption class="strong">
+                    <span>Grant Approvals</span>
+                </caption>
+                <thead>
+                    <tr class="strong">
+                        <td class="col-md-1 margin-left-10">
+                            Grant Code
+                        </td>
+                        <td class="col-md-2">
+                            Grant Approval
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!--ng-repeat="fy in Ctrl.model.FYDetails | orderBy: 'FY'"-->
+                        <td>
+                            <!--Read from database, for now hardcoded-->
+                            <span>Grant Code value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+                        <td>
+                            <!--Read from database, for now hardcoded-->
+                            <span>Grant Approval value</span>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+                <table class="table table-condensed table-hover">
+                    <caption class="strong">
+                        <span>OBA Approvals</span>
+                    </caption>
+                    <thead>
+                        <tr class="strong">
+                            <td class="col-md-1 margin-left-10">
+                                Division
+                            </td>
+                            <td class="col-md-2">
+                                OBA Approval
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!--ng-repeat="fy in Ctrl.model.FYDetails | orderBy: 'FY'"-->
+                            <td>
+                                <!--Read from database, for now hardcoded-->
+                                <span>Division value</span>
+                                {value[0].RC}}<
+                                /span>-->
+                            </td>
+                            <td>
+                                <!--Read from database, for now hardcoded-->
+                                <span>OBA Approval value</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-condensed table-hover">
+                    <caption class="strong">
+                        <span>Payroll Approvals</span>
+                    </caption>
+                    <thead>
+                        <tr class="strong">
+                            <td class="col-md-1 margin-left-10">
+                                Division
+                            </td>
+                            <td class="col-md-2">
+                                Payroll Approval
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!--ng-repeat="fy in Ctrl.model.FYDetails | orderBy: 'FY'"-->
+                            <td>
+                                <!--Read from database, for now hardcoded-->
+                                <span>Division value</span>
+                                {value[0].RC}}<
+                                /span>-->
+                            </td>
+                            <td>
+                                <!--Read from database, for now hardcoded-->
+                                <span>Payroll Approval value</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>

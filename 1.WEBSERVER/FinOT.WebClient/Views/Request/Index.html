@@ -1,0 +1,21 @@
+﻿<div ng-if="Ctrl.model != null || Ctrl.model != undefined">
+    <div class="row margin-top-15-minus">
+        <div class="col-lg-8 pull-left">
+            <h4><label class="label label-info label-as-badge">OT Request # {{Ctrl.model.ReqID}}</label></h4>
+        </div>
+    </div>
+    <div class="row margin-top-5">
+        <div class="col-lg-12">
+            
+
+            <ot-header reqid="Ctrl.model.ReqID" model="Ctrl.model.Header" ></ot-header>
+            <ot-staff reqid="Ctrl.model.ReqID" model="Ctrl.model.Staff"></ot-staff>
+            <ot-funding></ot-funding>
+            <ot-approval></ot-approval>
+            <!--Notes Section-->
+            <ot-notes reqid="Ctrl.model.ReqID" model="Ctrl.model.Notes"></ot-notes>
+            <!--END panel-primary-->
+
+        </div>
+    </div>
+</div>

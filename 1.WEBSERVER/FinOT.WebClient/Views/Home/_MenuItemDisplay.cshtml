@@ -1,0 +1,24 @@
+﻿@model RAP.Core.FinServices.APIService.Menu
+@{
+    var allMenuItems = ViewData["AllMenu"] as IEnumerable<RAP.Core.FinServices.APIService.Menu>;
+    var subMenuItems = ((allMenuItems != null) && (allMenuItems.Count() > 0)) ? allMenuItems.Where(m => m.ParentId == Model.Id) : null;
+    bool hasSubMenu = (subMenuItems != null) && (subMenuItems.Count() > 0);
+    string menuTarget = Model.Target ?? string.Empty;
+}
+
+@if (hasSubMenu)
+{
+    <li dropdown class="dropdown">
+        <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">@Model.Name <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            @foreach (var subMenuItem in subMenuItems.OrderBy(o => o.DisplayOrder))
+            {
+                @Html.Partial("_MenuItemDisplay", subMenuItem, new ViewDataDictionary { {"AllMenu", allMenuItems} })
+            }
+        </ul>
+    </li>
+}
+else
+{
+    <li id="@Model.PageTag" class="main-menu-item"><a href="@Url.Content(Model.ActionUrl)" class="main-menu-nav" title="@Model.Title" target="@menuTarget">@Model.Name</a></li>
+}

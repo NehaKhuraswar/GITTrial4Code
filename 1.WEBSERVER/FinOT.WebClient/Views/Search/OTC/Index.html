@@ -1,0 +1,44 @@
+﻿<div class="row margin-top-15-minus">
+    <div class="col-lg-8 pull-left">
+        <h4><label class="label label-info label-as-badge">RC Search</label></h4>
+    </div>
+</div>
+<div class="row margin-top-5">
+    <div class="col-lg-12">
+        <div class="panel panel-primary nopadding-bottom">
+            <div class="panel-heading clearfix clickable" ng-click="toggleSearch = !toggleSearch">
+                <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleSearch, 'glyphicon glyphicon-chevron-right': !toggleSearch}"></i></div>
+                <h3 class="panel-title pull-left margin-left-10">Search Criteria</h3>
+            </div>
+            <div collapse="toggleSearch">
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal">
+                        
+                    </form>
+                    <!--end form-->
+                </div>
+                <!--end search panel body-->
+            </div>
+            <!--end search toggle-->
+        </div>
+        <!--end search-->
+        <div class="panel panel-primary nopadding-bottom margin-top-5">
+            <div class="panel-heading clearfix clickable" ng-click="toggleResults = !toggleResults">
+                <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleResults, 'glyphicon glyphicon-chevron-right': !toggleResults}"></i></div>
+                <h3 class="panel-title pull-left margin-left-10">Results</h3>
+                <div class="pull-right" ng-if="Ctrl.model.List.length">
+                    <button id="btnExportExcel" class="btn btn-default btn-xs" ng-click="onExportResults()"><i class="fa fa-file-excel-o"></i>&nbsp;Export</button>
+                </div>
+            </div>
+            <div collapse="toggleResults">
+                <div class="panel-body">
+                    
+                </div>
+                <!--end results panel body-->
+            </div>
+            <!--end results toggle-->
+        </div>
+        <!--end results-->
+    </div>
+
+</div>

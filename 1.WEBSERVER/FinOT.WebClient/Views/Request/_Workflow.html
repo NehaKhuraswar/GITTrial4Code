@@ -1,0 +1,30 @@
+﻿<div class="modal-content">
+    <form ng-submit="submit()">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" data-dismiss="modal" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modaltitle">{{Ctrl.ActionName}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12" ng-if="Ctrl.Action=='R'">
+                    <div name="NewStatus" class="form-group form-group-sm">
+                        <label class="control-label">Status</label>
+                        <select class="form-control"
+                                ng-model="Ctrl.NewStatus"
+                                ng-options="status.Description for status in Ctrl.PriorStatusList track by status.ID">
+                            <option value="" selected>Select Status</option>
+                        </select>
+                    </div>
+                </div>
+                <div name="Comments" class="col-sm-12 form-group">
+                    <label class="control-label">Comments (<span style="font-style: italic;">{{Ctrl.CommentStatus}}</span>)</label>
+                    <textarea class="form-control" rms-maxinput="1000" rows="3" ng-model="Ctrl.Comments" placeholder="Enter Comments"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" ng-click="cancel()">Close</button>
+            <button type="submit" class="btn btn-sm btn-primary">{{Ctrl.ActionName}}</button>
+        </div>
+    </form>
+</div>

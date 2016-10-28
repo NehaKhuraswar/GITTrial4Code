@@ -1,0 +1,429 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-left: 5px;
+    margin-right: 15px;
+}
+
+body::-webkit-scrollbar {
+    width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+/************************************************* Customized ********************************************/
+.panel-heading span {
+    margin-top: -15px;
+}
+
+.panel-heading .panel-title {
+    font-size: 14px;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.margin-top-15-minus {
+    margin-top: -15px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.pad-bottom-5 {
+    padding-bottom: 5px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.margin-right-10 {
+    margin-left: 10px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.nopadding-left {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.nopadding-right {
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+}
+
+.nopadding-bottom {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.nopadding-top {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.table thead {
+    background-color: #ddd;
+}
+
+.table tbody tr td {
+    vertical-align: middle !important;
+}
+
+.newRow {
+    background-color: #E6FAE3;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.label-as-badge {
+    border-radius: 1em;
+    font-size: 16px;
+}
+/************************************************* END Customized ********************************************/
+
+/* UI customizations */
+.font-small {
+    font-size: small;
+}
+
+.font-smaller {
+    font-size: smaller;
+}
+
+.row-header-finance {
+    background: url(../Images/headerBg.gif) repeat-x;
+}
+
+.row-footer-finance {
+    background: url(../Images/footerBg.gif) repeat-x;
+    bottom: 0;
+}
+
+.vertically-center {
+    vertical-align: middle !important;
+}
+
+
+/* Bootstrap customizations */
+.spacer {
+    margin-top: 1em; /* define margin as you see fit */
+}
+
+.spacer-sm {
+    margin-top: 0.5em; /* define margin as you see fit */
+}
+
+.spacer-lg {
+    margin-top: 2em; /* define margin as you see fit */
+}
+
+.navbar-nav > li > a {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+
+.navbar {
+    min-height: 30px !important;
+}
+
+.navbar-brand {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    height: auto;
+}
+
+.navbar-finance {
+    background: url(../Images/navBg.gif) repeat-x;
+    background-color: #222;
+    border-color: #080808;
+    font-size: 12px;
+    font-weight: bold;
+    height: 32px !important;
+    min-height: 32px !important;
+    border-radius: 0px;
+}
+
+    .navbar-finance .navbar-brand {
+        color: #777;
+    }
+
+        .navbar-finance .navbar-brand:hover, .navbar-finance .navbar-brand:focus {
+            color: #fff;
+            background-color: transparent;
+        }
+
+    .navbar-finance .navbar-text {
+        color: #777;
+    }
+
+    .navbar-finance .navbar-nav > li > a {
+        color: #ccc;
+    }
+
+        .navbar-finance .navbar-nav > li > a:hover, .navbar-finance .navbar-nav > li > a:focus {
+            color: #fff;
+            background-color: transparent;
+        }
+
+    .navbar-finance .navbar-nav > .active > a, .navbar-finance .navbar-nav > .active > a:hover, .navbar-finance .navbar-nav > .active > a:focus {
+        color: #fff;
+        background-color: #080808;
+    }
+
+    .navbar-finance .navbar-nav > .disabled > a, .navbar-finance .navbar-nav > .disabled > a:hover, .navbar-finance .navbar-nav > .disabled > a:focus {
+        color: #444;
+        background-color: transparent;
+    }
+
+    .navbar-finance .navbar-toggle {
+        border-color: #333;
+    }
+
+        .navbar-finance .navbar-toggle:hover, .navbar-finance .navbar-toggle:focus {
+            background-color: #333;
+        }
+
+        .navbar-finance .navbar-toggle .icon-bar {
+            background-color: #fff;
+        }
+
+    .navbar-finance .navbar-collapse, .navbar-finance .navbar-form {
+        border-color: #101010;
+    }
+
+    .navbar-finance .navbar-nav > .open > a, .navbar-finance .navbar-nav > .open > a:hover, .navbar-finance .navbar-nav > .open > a:focus {
+        color: #fff;
+        background-color: #080808;
+    }
+
+@media (max-width: 767px) {
+    .navbar-finance .navbar-toggle {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        margin-top: 3px;
+    }
+
+    .navbar-finance .navbar-nav .open .dropdown-menu > .dropdown-header {
+        border-color: #080808;
+    }
+
+    .navbar-finance .navbar-nav .open .dropdown-menu .divider {
+        background-color: #080808;
+    }
+
+    .navbar-finance .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+
+        .navbar-finance .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-finance .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #fff;
+            background-color: transparent;
+        }
+
+    .navbar-finance .navbar-nav .open .dropdown-menu > .active > a, .navbar-finance .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-finance .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #fff;
+        background-color: #080808;
+    }
+
+    .navbar-finance .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-finance .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-finance .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+        color: #444;
+        background-color: transparent;
+    }
+}
+
+.navbar-finance .navbar-link {
+    color: #777;
+}
+
+    .navbar-finance .navbar-link:hover {
+        color: #fff;
+    }
+
+.navbar-finance .btn-link {
+    color: #777;
+}
+
+    .navbar-finance .btn-link:hover, .navbar-finance .btn-link:focus {
+        color: #fff;
+    }
+
+    .navbar-finance .btn-link[disabled]:hover, fieldset[disabled] .navbar-finance .btn-link:hover, .navbar-finance .btn-link[disabled]:focus, fieldset[disabled] .navbar-finance .btn-link:focus {
+        color: #444;
+    }
+
+
+/* spinner for progress modal */
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+
+
+
+.animate-repeat {
+    list-style: none;
+    box-sizing: border-box;
+}
+
+    .animate-repeat.ng-move,
+    .animate-repeat.ng-enter,
+    .animate-repeat.ng-leave {
+        -webkit-transition: all linear 0.5s;
+        transition: all linear 0.5s;
+    }
+
+        .animate-repeat.ng-leave.ng-leave-active,
+        .animate-repeat.ng-move,
+        .animate-repeat.ng-enter {
+            opacity: 0;
+            max-height: 0;
+        }
+
+            .animate-repeat.ng-leave,
+            .animate-repeat.ng-move.ng-move-active,
+            .animate-repeat.ng-enter.ng-enter-active {
+                opacity: 1;
+                max-height: 40px;
+            }
+
+
+.select2 > .select2-choice.ui-select-match {
+    /* Because of the inclusion of Bootstrap */
+    height: 29px;
+}
+
+.selectize-control > .selectize-dropdown {
+    top: 36px;
+}
+
+.ui-select-choices {
+    min-height: 30px;
+}
+
+.empty {
+    font-style: italic;
+}
+
+.datepicker .btn-default {
+    /*border-width: 0px;*/
+    /*box-shadow: none;*/
+    /*background-color: #00FF00;*/
+}
+
+.datepicker .btn[disabled] {
+    opacity: 0.90;
+    filter: alpha(opacity=90);
+    background-color: #C0C0C0;
+    color: #777;
+}
+
+/*.table th, .table td { 
+     border-top: none !important; 
+ }*/
+
+.table.no-border tr td, .table.no-border tr th {
+    border-width: 0;
+}
+
+.large-modal-window .modal-dialog {
+    width: 1100px;
+}
+
+.align-label {
+    padding-top: 7px;
+}
+
+.panel-heading-sm {
+    padding: 5px 5px;
+}
+
+.well-xs {
+    padding: 0px 0px 0px 10px;
+    margin-bottom: 0px;
+}
+
+
+/*Multiselect Dropdown*/
+ul.dropdown-menu li {
+    cursor: pointer;
+}
+
+ul.dropdown-menu li span.red {
+    color: red;
+}
+
+ul.dropdown-menu li span.green {
+    color: green;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+
+.red {
+  border: solid 1px red;
+}

@@ -1,0 +1,59 @@
+﻿<div class="panel panel-primary nopadding-bottom margin-top-5">
+    <div class="panel-heading clearfix clickable" ng-click="toggleNotes = !toggleNotes">
+        <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleNotes, 'glyphicon glyphicon-chevron-right': !toggleNotes}"></i></div>
+        <h3 class="panel-title pull-left margin-left-10">Notes</h3>
+        <div class="pull-right">
+            <button id="btnAddNotes" class="btn btn-default btn-xs" ng-click="Ctrl.AddNote()"><i class="glyphicon glyphicon-new-window"></i>&nbsp;Add</button>
+        </div>
+    </div>
+    <div collapse="toggleNotes">
+        <div class="panel-body nopadding-bottom">
+            <div class="col-sm-12">
+                <table class="table table-condensed table-hover">
+                    <thead>
+                        <tr class="strong">
+                            <td class="col-sm-2">
+                                <span style="padding-left: 5px;">#</span><span style="padding-left: 15px;">Item ID</span>
+                            </td>
+                            <td class="col-sm-2">
+                                TimeStamp
+                            </td>
+                            <td class="col-sm-2">
+                                Note Description
+                            </td>
+                            <td class="col-sm-6">
+                                Context
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in model | orderBy: '-Audit.LastModifiedDate' track by $index">
+                            <td>
+                                <span style="padding-left: 5px;">{{$index+1}} </span>
+                                <span style="padding-left: 15px;">
+                                    <a class="clickable" ng-click="Ctrl.openConsultEmail(item.Audit.LastModifiedBy)">{{item.Audit.LastModifiedByName}}</a>
+                                </span>
+                            </td>
+                            <td>
+                                <span>{{item.TimeStamp | date:'MM/dd/yyyy h:mm a'}}</span>
+                            </td>
+                            <td>
+                                <span>{{item.NoteDescription}}</span>
+                            </td>
+                            <td>
+                                <div><i ng-if="item.PostCompleteIndicator" class="fa fa-flag" style="color: red;" tooltip="Added after final approval"></i>&nbsp;{{item.Context}}</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot ng-hide="model.length">
+                        <tr>
+                            <td colspan="4"><i>no notes</i></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!--END of panel-body-->
+    </div>
+    <!--END of toggleNotes-->
+</div>

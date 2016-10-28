@@ -1,0 +1,34 @@
+﻿@model List<RAP.Core.FinServices.APIService.Menu>
+@{
+    var allMenuItems = Model as IEnumerable<RAP.Core.FinServices.APIService.Menu>;
+    var menuItems = (allMenuItems != null) ? allMenuItems.Where(m => m.Level == 0) : null;
+    if ((menuItems == null) || (menuItems.Count() <= 0))
+    {
+        menuItems = new List<RAP.Core.FinServices.APIService.Menu>();
+    }
+    var defaultUrl = (string)ViewData["DefaultURL"]; ;
+}
+<nav class="navbar navbar-finance" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#app-menu-navbar-collapse"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            <a class="navbar-brand visible-xs" href="@defaultUrl" style="font-size: 16px; font-weight: bold; color: #fff;">FinSCA</a>
+        </div>
+        <div id="app-menu-navbar-collapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                @foreach (var menuItem in menuItems.OrderBy(o => o.DisplayOrder))
+                {
+                    @Html.Partial("_MenuItemDisplay", menuItem, new ViewDataDictionary { {"AllMenu", allMenuItems} })
+                }
+            </ul>
+            <div class="navbar-right" role="search" style="margin-right: 10px;">
+                <div class="form-group form-group-sm">
+                    <form>
+                        <input type="text" id="txtQuickSearch" class="input-sm input-quicksearch" style="max-width: 120px; font-weight: normal;" ng-model="quickSearch.Text" placeholder="OT Request #" />
+                        <button type="submit" class="btn btn-sm btn-warning btn-sm action-quicksearch" ng-click="quickSearch()"><span class="glyphicon glyphicon-search"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

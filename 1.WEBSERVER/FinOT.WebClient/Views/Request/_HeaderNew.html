@@ -1,0 +1,83 @@
+﻿<div class="modal-content">
+    <form role="form" ng-submit="submit()">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" data-dismiss="modal" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modaltitle">New OT Request</h4>
+        </div>
+        <div class="modal-body row">
+            <div class="col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label>Request Type</label>
+                    <select class="form-control"
+                            ng-model="Ctrl.model.RequestType.ID" required>
+                        <option value="1" selected>Regular</option>
+                        <option value="2">Stand-By</option>
+                        <option value="3">Agency-Wide</option>
+                    </select>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label>Cash/Comp</label>
+                    <select class="form-control"
+                            ng-model="Ctrl.model.CashOrComp" required>
+                        <option value="" selected>Select</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Comp">Comp</option>
+                    </select>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label>Bureau Owner</label>
+                    <input type="text" class="form-control input-sm" maxlength="15" ng-trim="false" placeholder="Enter Bureau Owner" required
+                           ng-model="Ctrl.model.BureauOwner" />
+                </div>
+            </div>
+            <!--Column 2-->
+            <div class="col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label>Estimated OT Hours</label>
+                    <input type="number" step="any" class="form-control input-sm"
+                           maxlength="5" min="0" max="99.99" ng-trim="false" ng-model="Ctrl.model.EstimatedOTHours" required />
+                </div>
+                <div class="form-group form-group-sm">
+                    <label>Authorized OT Hours</label>
+                    <input type="number" step="any" class="form-control input-sm"
+                           maxlength="5" min="0" max="99.99" ng-trim="false" ng-model="Ctrl.model.AuthorizedOTHours" required />
+                </div>                
+                <div class="form-group form-group-sm">
+                    <label>Authorized OT Amount</label>
+                    <input type="number" step="any" class="form-control input-sm"
+                           maxlength="8" min="0" max="99999.99" ng-trim="false" ng-model="Ctrl.model.AuthorizedOTAmount" required />
+                </div>                
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group form-group-sm">
+                    <label>Active OT Code</label>
+                    <input type="text" class="form-control input-sm" maxlength="8" ng-trim="false" ng-model="Ctrl.model.ActiveOTCode" />
+                </div>
+                <div class="form-group form-group-sm">
+                    <label>Start Date</label>
+                    <input type="text" class="form-control" datepicker-popup="MM/dd/yyyy" ng-pattern="datePattern" ng-model="Ctrl.model.StartDate" required />
+                </div>
+                <div class="form-group form-group-sm">
+                    <label>End Date</label>
+                    <input type="text" class="form-control" datepicker-popup="MM/dd/yyyy" ng-pattern="datePattern" ng-model="Ctrl.model.EndDate" required />
+                </div>
+            </div>
+            <siv class="col-sm-12">
+                <div class="form-group form-group-sm">
+                    <label>Brief Description</label>
+                    <textarea name="Brief Description" class="form-control" rms-maxinput="1000" rows="2" ng-model="Ctrl.model.BriefDescription" required></textarea>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label>Detailed Description</label>
+                    <textarea name="Detailed Description" class="form-control" rms-maxinput="1000" rows="3" ng-model="Ctrl.model.DetailDescription" required></textarea>
+                </div>
+            </siv>
+            </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" ng-click="cancel()">Close</button>
+            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+        </div>
+</form>
+</div>

@@ -1,0 +1,111 @@
+﻿<div class="panel panel-primary nopadding-bottom margin-top-5">
+    <div class="panel-heading clearfix clickable" ng-click="toggleResults = !toggleResults">
+        <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleResults, 'glyphicon glyphicon-chevron-right': !toggleResults}"></i></div>
+        <h3 class="panel-title pull-left margin-left-10">Staff</h3>
+        <div class="pull-right">
+            <button id="btnEditStaff" class="btn btn-default btn-xs" ng-click="Ctrl.AddStaff()"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button>            
+        </div>
+    </div>
+    <div collapse="toggleResults">
+        <div class="panel-body">
+            <table class="table table-condensed">
+                <thead class="strong">
+                    <tr>
+                        <td class="nopadding-left" rowspan="2" width="2%">
+                            <span class="clickable">Item ID</span>
+                            <!--<span ng-show="Ctrl.model.SortBy == 'ReqID' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'ReqID' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>-->
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">Bureau Owner</span>
+                            <!--<span ng-show="Ctrl.model.SortBy == 'ReqType' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'ReqType' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>-->
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">First Name</span>
+                            <!--<span ng-show="Ctrl.model.SortBy == 'RC' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'RC' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>-->
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">Last Name</span>
+                            <!--<span ng-show="Ctrl.model.SortBy == 'RC' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'RC' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>-->
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">ERN</span>
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">Title Code</span>
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">Title</span>
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">Hours</span>
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">Work Unit</span>
+                        </td>
+                        <td rowspan="2" width="3%">
+                            <span class="clickable">Supervisor</span>
+                        </td>
+                </thead>
+                <tbody>
+                    <!--Body section provides the list of the all the employers who are authorized to use the OT code-->
+                    <tr>
+                        <!--ng-repeat="(key, value) in Ctrl.model.List | groupBy: 'ReqID' | orderBy:Ctrl.model.SortBy:Ctrl.model.SortReverse">-->
+                        <td class="nopadding-left">
+                            <a href="#/request/{{key}}">{{key}}</a>
+                        </td>
+                        <td>
+                            <!--<span>{{value[0].RequestType.Description}}</span>-->
+                            <span>EDB Bureau value</span>
+                        </td>
+                        <td>
+                            <span>First Name value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+                        <td>
+                            <span>Last Name value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+                        <td>
+                            <span>ERN value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+                        <td>
+                            <span>Title Code value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+                        <td>
+                            <span>Title value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+                        <td>
+                            <span>Work Unit value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+                        <td>
+                            <span>Supervisor value</span>
+                            <!--<span>{{value[0].RC}}</span>-->
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <nav class="pull-left" ng-if="Ctrl.model.List.length">
+                <ul class="pager nopadding-bottom">
+                    <li ng-class="{'disabled': Ctrl.model.CurrentPage == 1}">
+                        <a href="" title="Previous page" ng-click="getPage(Ctrl.model.CurrentPage - 1)">&lsaquo; Previous</a>
+                    </li>
+                    <li ng-class="{'disabled': Ctrl.isLastPage()}">
+                        <a href="" title="Next page" ng-click="getPage(Ctrl.model.CurrentPage + 1)">Next &rsaquo;</a>
+                    </li>
+                    <li>
+                        <span class="range-label">Displaying {{ Ctrl.model.CurrentPage }} of {{ Ctrl.totalPage() }}</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

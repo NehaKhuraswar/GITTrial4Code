@@ -1,0 +1,48 @@
+﻿@using RAP.WebClient.Common;
+@using RAP.WebClient.Models;
+@model List<RAP.Core.FinServices.APIService.Application>
+@{
+    IEnumerable<RAP.Core.FinServices.APIService.Application> apps = Model as IEnumerable<RAP.Core.FinServices.APIService.Application>;
+    if (apps == null)
+    {
+        apps = new List<RAP.Core.FinServices.APIService.Application>();
+    }
+
+    var user = (RAP.Core.FinServices.APIService.User)ViewData["User"];
+    var details = (AppDetails)ViewData["AppDetails"];
+    string displayName = string.Format("{0} {1}", user.FirstName, user.LastName);
+    string portalUrl = details.FinancePortalURL;
+    string myRolesPrivilegesUrl = details.MyRolesPrivilegesURL;
+    string environmentName = details.Environment;
+}
+<div class="pull-right">
+    @if (!string.IsNullOrEmpty(environmentName))
+    { <span class="label label-warning hidden-xs hidden-sm">@environmentName</span> }
+    <div class="btn-group" style="margin-right: 15px;" dropdown>
+        <button class="btn btn-sm btn-danger display-roles-privileges" type="button">@displayName</button>
+        <button class="btn btn-sm btn-danger dropdown-toggle" type="button" dropdown-toggle>
+            <span class="caret"></span><span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            @if (!string.IsNullOrEmpty(portalUrl))
+            {
+                <li><a href="@Url.Content(portalUrl)">Portal</a></li>
+            }
+            @if (!string.IsNullOrEmpty(myRolesPrivilegesUrl))
+            {
+                <li><a href="@Url.Content(myRolesPrivilegesUrl)" target="_blank">My Roles &amp; Privileges</a></li>
+            }
+            @if (apps.Count() > 0)
+            {
+                <li class="divider"></li>
+                <li class="navbar-text"><strong>My Applications</strong></li>
+                foreach (var app in apps)
+                {
+                    <li>
+                        <a href="@app.DefaultUrl" @if (app.Id != Constants.APPLICATION_ID) { <text> target="_blank" </text>         }>@app.Abbreviation</a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>

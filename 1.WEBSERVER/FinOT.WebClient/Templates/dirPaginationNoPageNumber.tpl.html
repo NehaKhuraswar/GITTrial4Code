@@ -1,0 +1,7 @@
+﻿<nav>
+    <ul class="pager pull-left nopadding-bottom">
+        <li ng-class="{'disabled': pagination.current == 1}"><a href="" title="Previous page" ng-click="setCurrent(pagination.current - 1)">&lsaquo; Previous</a></li>
+        <li ng-class="{'disabled': pagination.current == pagination.last}"><a href="" title="Next page" ng-click="setCurrent(pagination.current + 1)">Next &rsaquo;</a></li>
+        <li><span class="range-label">Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}</span></li>
+    </ul>
+</nav>
