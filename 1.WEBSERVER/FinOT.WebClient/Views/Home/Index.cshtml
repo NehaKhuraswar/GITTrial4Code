@@ -20,36 +20,20 @@
     <div class="container-fluid">
         <div class="row row-header-finance">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 0.5em; min-height: 50px;">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Rent Adjustment Program", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                    </ul>
-                    @*@Html.Partial("_LoginPartial")*@
-                </div>
                 @*@Html.Partial("_UserMenu", Model.Header.UserApplications.ToList(), new ViewDataDictionary { { "User", Model.Header.User }, { "AppDetails", Model.AppDetails } })
                 <img src="@Url.Content("~/Images/nyc-logo-desktop.png")" alt="NYC DOHMH" title="NYC DOHMH" style="padding-right: 0.5em; width: 78px; height: 36px;" />
                 <img src="@Url.Content("~/Images/DOHMH-desktop.png")" alt="NYC Health | The New York City Department of Health and Mental Hygiene" title="NYC Health | The New York City Department of Health and Mental Hygiene" class="hidden-xs" style="width: 295px; height: 43px;" />
                 <span style="font-size: 1.2em; font-weight: bold; line-height: 1.4;" class="visible-xs">Financial Systems: OTS</span>*@
             </div>
-            @*<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 hidden-xs" style="min-height: 20px;">
-                <span style="font-size: 1.2em; font-weight: bold; line-height: 1.4;">Rent Adjustment Program1</span>
-            </div>*@
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 hidden-xs" style="min-height: 20px;">
+                <span style="font-size: 1.2em; font-weight: bold; line-height: 1.4;">Rent Adjustment Program</span>
+                @*<button>Register</button>*@
+            </div>
+
         </div>
         <div class="row">
+            <button class="btn btn-default" ng-click="Register()">Register</button>
+
             @*@Html.Partial("_MainMenu", Model.Header.Menus.ToList(), new ViewDataDictionary { { "DefaultURL", Model.Header.Application.DefaultUrl} })*@
         </div>
     </div>

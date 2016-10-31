@@ -11,6 +11,7 @@ namespace RAP.Core.DataModels
     {
         public OTRequest()
         {
+            CustDetails = new CustDetails();
             Header = new Header();
             Staff = new Staff();
             Funding = new Funding();
@@ -18,11 +19,20 @@ namespace RAP.Core.DataModels
             
         }
         public int? ReqID { get; set; }
+        public CustDetails CustDetails { get; set; }
         public Header Header { get; set; }
         public Staff Staff { get; set; }
         public Funding Funding { get; set; }
         public Approvals Approvals { get; set; }
         
+    }
+    public class CustDetails
+    {
+        public CustDetails()
+        {
+        }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
     public class Header
     {

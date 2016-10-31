@@ -169,6 +169,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Views\Register\CreateUser.html" />
+    <Content Include="Views\Register\Register.html" />
     <Content Include="Views\Report\Index.html" />
     <Content Include="Views\Request\_Approval.html" />
     <Content Include="Views\Request\_Funding.html" />
