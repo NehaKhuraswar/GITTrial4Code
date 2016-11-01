@@ -118,6 +118,7 @@
     <Content Include="Application\2.Controllers\otnotesController.js" />
     <Content Include="Application\2.Controllers\otrequestController.js" />
     <Content Include="Application\2.Controllers\otstaffController.js" />
+    <Content Include="Application\2.Controllers\rapregisterController.js" />
     <Content Include="Application\2.Controllers\reportController.js" />
     <Content Include="Application\2.Controllers\searchController.js" />
     <Content Include="Application\2.Controllers\workqueueController.js" />

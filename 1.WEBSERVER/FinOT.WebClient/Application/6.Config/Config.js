@@ -40,9 +40,9 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
         })
         .when('/register', {
             templateUrl: 'views/register/CreateUser.html',
-            //controller: otrequestController,
-            //controllerAs: 'Ctrl',
-            //resolve: otrequestController_resolve
+            controller: rapregisterController,
+            controllerAs: 'Ctrl',
+            resolve: rapregisterController_resolve
         })
         .when('/report/:reportid', {
             templateUrl: 'views/report/index.html',
