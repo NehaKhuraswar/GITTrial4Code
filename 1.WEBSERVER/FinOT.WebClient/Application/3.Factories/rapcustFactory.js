@@ -3,18 +3,18 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
     var _routePrefix = 'api/cust';
 
-    //var _GetOTRequest = function (reqid, fy) {
-    //    blockUI.start();
+    var _GetOTRequest = function (reqid, fy) {
+        blockUI.start();
 
-    //    var url = _routePrefix + '/get';
-    //    if (!(reqid == null || reqid == undefined)) { url += '/' + reqid; }
-    //    if (!(fy == null || fy == undefined)) { url += '/' + fy; }
+        var url = _routePrefix + '/get';
+        if (!(reqid == null || reqid == undefined)) { url += '/' + reqid; }
+        if (!(fy == null || fy == undefined)) { url += '/' + fy; }
 
-    //    return ajax.Get(url)
-    //    .finally(function () {
-    //        blockUI.stop();
-    //    });
-    //}
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     var _GetNotes = function (reqid) {
         blockUI.start();

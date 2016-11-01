@@ -3,7 +3,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'otrequestFacto
     var self = this;
     self.model = [];
     self.Register = function (model) {
-        
+        var plainBodyText = "";
     }
 
 }];
