@@ -1,9 +1,9 @@
 ﻿'use strict';
-var rapregisterController = ['$scope', '$modal', 'alertService',  function ($scope, $modal, alert) {
+var rapregisterController = ['$scope', '$modal', 'alertService', 'otrequestFactory', function ($scope, $modal, alert, otFactory) {
     var self = this;
     self.model = [];
-    self.Register = function () {
-        var plainBodyText = "";
+    self.Register = function (model) {
+        
     }
 
 }];

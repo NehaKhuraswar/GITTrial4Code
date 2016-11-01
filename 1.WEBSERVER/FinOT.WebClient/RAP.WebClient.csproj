@@ -127,6 +127,7 @@
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\otrequestFactory.js" />
+    <Content Include="Application\3.Factories\rapcustFactory.js" />
     <Content Include="Application\3.Factories\reportFactory.js" />
     <Content Include="Application\3.Factories\searchFactory.js" />
     <Content Include="Application\3.Factories\workqueueFactory.js" />

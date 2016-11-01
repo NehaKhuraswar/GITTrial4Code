@@ -3,6 +3,7 @@ var otrequestModule = angular.module('otrequestModule', ['ngFileUpload'])
     .factory('otrequestFactory', otrequestFactory)
     .controller('otrequestController', otrequestController)
     .controller('otnotesController', otnotesController)
+    .controller('rapregisterController', rapregisterController)
     .controller('otheaderController', otheaderController)
     .controller('otstaffController', otstaffController)
     .controller('otdocumentsController', otdocumentsController)
@@ -27,6 +28,18 @@ var otrequestModule = angular.module('otrequestModule', ['ngFileUpload'])
             },
             templateUrl: 'Views/Request/_Header.html',
             controller: 'otheaderController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('otRegister', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/Register/_CreateUser.html',
+            controller: 'otregisterController',
             controllerAs: 'Ctrl'
         };
     })

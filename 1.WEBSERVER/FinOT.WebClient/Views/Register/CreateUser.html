@@ -6,8 +6,9 @@
             </div>
             <div class="panel-body">
                 <p>Create Account.</p>
+                <input type="text" class="form-control input-sm" maxlength="8" ng-trim="false" ng-model="Ctrl.model.CustDetails.FirstName" />
                 <!--<button id="btnRegister" class="btn btn-default btn-xs" ng-click="Ctrl.openAddPopup()"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button>-->            
-                <button ng-click="Ctrl.Register()">Register user</button>
+                <button ng-click="Ctrl.Register(Ctrl.model.CustDetails)">Register user</button>
             </div>
         </div>
     </div>

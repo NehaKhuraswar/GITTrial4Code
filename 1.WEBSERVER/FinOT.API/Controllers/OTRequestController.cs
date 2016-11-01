@@ -134,6 +134,35 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<OTRequest>>(ReturnCode, transaction);
         }
+        [HttpPost]
+        [Route("saveCust")]
+        // [ValidateModelState]
+        public HttpResponseMessage SaveCustDetails([FromBody] CustDetails objCustDetails, [FromUri]int? CustID = null)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<OTRequest> transaction = new TranInfo<OTRequest>();
+            try
+            {
+                ExtractClaimDetails();
+
+                IList<string> Warnings;
+                int custid = service.SaveCustDetails(CustID, objCustDetails, Username, out Warnings);
+                //transaction.data = reqid;
+                //transaction.data = service.GetOTRequest(reqid, null, Username);
+                transaction.warnings = Warnings;
+                transaction.status = true;
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+
+                if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<OTRequest>>(ReturnCode, transaction);
+        }
 
         [HttpPost]
         [Route("notes/save")]
