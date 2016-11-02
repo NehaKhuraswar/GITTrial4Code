@@ -75,6 +75,7 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<OTRequest>>(ReturnCode, transaction);
         }
+        
 
         [HttpGet]
         [Route("notes/get/{ReqID:int}")]

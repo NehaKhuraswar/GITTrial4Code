@@ -16,7 +16,7 @@ using RAP.Business.Implementation;
 namespace RAP.API.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/application")]
+    [RoutePrefix("api/accountmanagement")]
     public class AccountManagementController : ApiController
     {
         string Username, CorrelationID, ExceptionMessage, InnerExceptionMessage;
@@ -51,6 +51,41 @@ namespace RAP.API.Controllers
             {
                 throw ex;
             }
+        }
+        [HttpGet]
+        [Route("get/{custid:int?}")]
+        public HttpResponseMessage GetCustomer(int? custid = null)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+
+            try
+            {
+                ExtractClaimDetails();
+
+                CustomerInfo obj;
+                //if (custid.HasValue)
+                //{
+                //  //  obj = service.GetCustomer((int)reqid, fy, Username);
+                //}
+                //else
+                //{
+                obj = new CustomerInfo();
+                //}
+
+                transaction.data = obj;
+                transaction.status = true;
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+
+                if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
 
         [Route("reportsource")]
@@ -128,17 +163,19 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<ReportPage>>(ReturnCode, transaction);
         }
-      
+        
+
+        [Route("saveCust")]
         [HttpPost]
-        public HttpResponseMessage InsertCustomer([FromBody] CustomerInfo custModel)
+        public HttpResponseMessage SaveCustomer([FromBody] CustomerInfo custModel)
         {
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<ReportPage> transaction = new TranInfo<ReportPage>();
+            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
 
             try
             {
-                transaction.status = accService.InsertCustomer(custModel);
+                transaction.status = accService.SaveCustomer(custModel);
             }
             catch(Exception ex)
             {
@@ -146,7 +183,7 @@ namespace RAP.API.Controllers
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
             }
-            return Request.CreateResponse<TranInfo<ReportPage>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
 
     }

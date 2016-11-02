@@ -17,7 +17,7 @@ namespace RAP.DAL
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
 
-       public bool InsertCustomer(CustomerInfo message)
+        public bool SaveCustomer(CustomerInfo message)
        {
            try
            {

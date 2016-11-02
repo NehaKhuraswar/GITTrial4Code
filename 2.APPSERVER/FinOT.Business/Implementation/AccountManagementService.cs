@@ -25,9 +25,9 @@ namespace RAP.Business.Implementation
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
 
-        public bool InsertCustomer(CustomerInfo message)
+        public bool SaveCustomer(CustomerInfo message)
         {
-            return accDBHandler.InsertCustomer(message);
+            return accDBHandler.SaveCustomer(message);
         }
     }
 }

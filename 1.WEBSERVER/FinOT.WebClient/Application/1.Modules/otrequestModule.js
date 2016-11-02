@@ -1,6 +1,7 @@
 ﻿'use strict';
 var otrequestModule = angular.module('otrequestModule', ['ngFileUpload'])
     .factory('otrequestFactory', otrequestFactory)
+    .factory('rapcustFactory', rapcustFactory)
     .controller('otrequestController', otrequestController)
     .controller('otnotesController', otnotesController)
     .controller('rapregisterController', rapregisterController)

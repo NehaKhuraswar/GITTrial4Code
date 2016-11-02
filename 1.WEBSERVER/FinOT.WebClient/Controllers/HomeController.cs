@@ -30,7 +30,7 @@ namespace RAP.Web.Controllers
 
                     System.Net.WebClient client = new System.Net.WebClient();
                     string url = WebConfigurationManager.AppSettings[Constants.RCAPIBASE_URL] + string.Format(Constants.APPHEADER_URL, username);
-                    model.Header = JsonConvert.DeserializeObject<RAP.Core.FinServices.APIService.ApplicationHeader>(client.DownloadString(url));
+                  //  model.Header = JsonConvert.DeserializeObject<RAP.Core.FinServices.APIService.ApplicationHeader>(client.DownloadString(url));
 
                     Session.Add(Constants.SESSION_APPMODEL, model);
                 }
