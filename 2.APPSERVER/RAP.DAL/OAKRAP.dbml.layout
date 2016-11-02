@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="OAKRAP">
+  <DataContextMoniker Name="/OAKRAPDataContext" />
+  <nestedChildShapes>
+    <classShape Id="2859ae86-0019-4de0-80a9-b39919cbea24" absoluteBounds="0.5, 0.5, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/OAKRAPDataContext/CustomerDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8440e086-2f8e-4aeb-8a84-13c69b233ad3" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0860dcf9-3ab8-47de-8030-9fe8ba0f529a" absoluteBounds="2.75, 0.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/OAKRAPDataContext/UserType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ccba2033-a8be-464b-b0b5-849864487e61" absoluteBounds="2.7649999999999997, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

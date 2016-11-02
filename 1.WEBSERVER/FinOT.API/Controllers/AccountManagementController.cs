@@ -10,6 +10,8 @@ using RAP.Core.FinServices.APIService;
 using RAP.API.Models;
 using System.Web.Http.Controllers;
 using System.Security.Claims;
+using RAP.Core.DataModels;
+using RAP.Business.Implementation;
 
 namespace RAP.API.Controllers
 {
@@ -124,6 +126,26 @@ namespace RAP.API.Controllers
                 LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
+            return Request.CreateResponse<TranInfo<ReportPage>>(ReturnCode, transaction);
+        }
+      
+        [HttpPost]
+        public HttpResponseMessage InsertCustomer([FromBody] CustomerInfo custModel)
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<ReportPage> transaction = new TranInfo<ReportPage>();
+
+            try
+            {
+                transaction.status = accService.InsertCustomer(custModel);
+            }
+            catch(Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
             return Request.CreateResponse<TranInfo<ReportPage>>(ReturnCode, transaction);
         }
 

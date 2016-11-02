@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAP.API", "1.WEBSERVER\FinO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAP.WebClient", "1.WEBSERVER\FinOT.WebClient\RAP.WebClient.csproj", "{8584A323-9031-4DD2-8AAB-97334F236971}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAP.DAL", "2.APPSERVER\RAP.DAL\RAP.DAL.csproj", "{5CB8DA73-FB9B-4D15-9339-D626C0F94973}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://ev-tfs-dev:8080/tfs/ca_state_collection
 		SccLocalPath0 = .
@@ -34,6 +36,9 @@ Global
 		SccProjectUniqueName5 = 2.APPSERVER\\FinOT.Persistence\\RAP.Persistence.csproj
 		SccProjectName5 = 2.APPSERVER/FinOT.Persistence
 		SccLocalPath5 = 2.APPSERVER\\FinOT.Persistence
+		SccProjectUniqueName6 = 2.APPSERVER\\RAP.DAL\\RAP.DAL.csproj
+		SccProjectName6 = 2.APPSERVER/RAP.DAL
+		SccLocalPath6 = 2.APPSERVER\\RAP.DAL
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +76,12 @@ Global
 		{8584A323-9031-4DD2-8AAB-97334F236971}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
 		{8584A323-9031-4DD2-8AAB-97334F236971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8584A323-9031-4DD2-8AAB-97334F236971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB8DA73-FB9B-4D15-9339-D626C0F94973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB8DA73-FB9B-4D15-9339-D626C0F94973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB8DA73-FB9B-4D15-9339-D626C0F94973}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB8DA73-FB9B-4D15-9339-D626C0F94973}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{5CB8DA73-FB9B-4D15-9339-D626C0F94973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB8DA73-FB9B-4D15-9339-D626C0F94973}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

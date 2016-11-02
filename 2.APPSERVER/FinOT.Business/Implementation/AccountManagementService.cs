@@ -8,19 +8,26 @@ using RAP.Core.DataModels;
 using RAP.Core.Services;
 using RAP.Core.Persisters;
 using RAP.Business.Helper;
-
+using RAP.DAL;
 
 namespace RAP.Business.Implementation
 {
-    internal class AccountManagementService : IAccountManagementService
+    public class AccountManagementService : IAccountManagementService
     {
         public string CorrelationId { get; set; }
         private readonly IAccountManagementPersister persister;
-        public AccountManagementService(IAccountManagementPersister _persister)
-        {
-            this.persister = _persister;
-        }
+        //public AccountManagementService(IAccountManagementPersister _persister)
+        //{
+        //    this.persister = _persister;
+        //}
 
         //implements all methods from IMasterDataService
+
+        AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
+
+        public bool InsertCustomer(CustomerInfo message)
+        {
+            return accDBHandler.InsertCustomer(message);
+        }
     }
 }

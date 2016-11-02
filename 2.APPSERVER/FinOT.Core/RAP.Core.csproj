@@ -49,6 +49,7 @@
     <Compile Include="Common\Common.cs" />
     <Compile Include="DataModels\Audit.cs" />
     <Compile Include="DataModels\CodeDescription.cs" />
+    <Compile Include="DataModels\CustomerDetails.cs" />
     <Compile Include="DataModels\Document.cs" />
     <Compile Include="DataModels\IDDescription.cs" />
     <Compile Include="DataModels\Notes.cs" />
