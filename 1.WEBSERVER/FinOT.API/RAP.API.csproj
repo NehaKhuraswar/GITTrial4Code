@@ -155,7 +155,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\APIHelper.cs" />
     <Compile Include="Common\LogHelper.cs" />
-    <Compile Include="Controllers\AccountManagementController.cs" />
+    <Compile Include="Controllers\RapRegisterController.cs" />
     <Compile Include="Controllers\ApplicationProcessingController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\WorkQueueController.cs" />

@@ -1,7 +1,8 @@
 ﻿'use strict';
 var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
-    var _routePrefix = 'api/accountmanagement';
+    //  var _routePrefix = 'api/accountmanagement';
+    var _routePrefix = 'api/otrequest';
 
     var _GetOTRequest = function (reqid, fy) {
         blockUI.start();
@@ -17,11 +18,17 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     }
     var _GetCustomer = function (custid) {
         blockUI.start();
-
-        var url = _routePrefix + '/get';
-        if (!(custid == null || custid == undefined)) { url += '/' + custid; }
-
-        return ajax.Get(url)
+        var reqid = null;
+        //var url = _routePrefix + '/get';
+        //if (!(custid == null || custid == undefined)) { url += '/' + custid; }
+        var url = _routePrefix + '/notes/get'
+        if (!(reqid == null || reqid == undefined)) { url = url + '/' + reqid; }
+        //try{
+            return ajax.Get(url)
+        //}
+        //catch(err){
+        //   console.log(err.name + ': "' + err.message +  '" occurred when assigning x.');
+        //}
         .finally(function () {
             blockUI.stop();
         });
@@ -77,7 +84,7 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     factory.GetNotes = _GetNotes;
     factory.SaveNotes = _SaveNotes;
     factory.SaveCustomer = _SaveCustomer;
-    factory.GetCustomer = _GetCustomer;
+    factory.GetCustomer = _GetCustomer
     
     return factory;
 }];

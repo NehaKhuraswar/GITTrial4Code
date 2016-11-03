@@ -5,10 +5,30 @@
                 <strong>User</strong>
             </div>
             <div class="panel-body">
-                <p>Create Account.</p>
-                <input type="text" class="form-control input-sm" maxlength="8" ng-trim="false" ng-model="Ctrl.model.CustDetails.FirstName" />
-                <!--<button id="btnRegister" class="btn btn-default btn-xs" ng-click="Ctrl.openAddPopup()"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button>-->            
-                <button ng-click="Ctrl.Register(Ctrl.model.CustDetails)">Register user</button>
+                <p>Create Account</p>
+                <p>First Name</p>
+                <input type="text" class="form-control input-sm"  ng-trim="false" ng-model="Ctrl.model.CustomerInfo.FirstName" required/>
+                <p>Last Name</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.LastName" required />
+                <p>Phone Number</p>
+                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.PhoneNumber" required />
+                <p>Email</p>
+                <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.email" required />
+                <p>Address Line 1</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Address1" required />
+                <p>Address Line 2</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Address2" required />
+                <p>City</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.City" required />
+                <p>State</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.State" required />
+                <p>Zip Code</p>
+                <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Zip" required />
+                <p>Password</p>
+                <input type="password" class="form-control input-sm" maxlength="8" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Password" required />
+                
+                <label><input type="checkbox" ng-model="Ctrl.model.CustomerInfo.EmailNotificationFlag" required/>    Email Notification</label>
+                <button ng-click="Ctrl.Register(Ctrl.model.CustomerInfo)">Register user</button>
             </div>
         </div>
     </div>

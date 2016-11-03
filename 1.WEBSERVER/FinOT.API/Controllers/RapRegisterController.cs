@@ -17,10 +17,10 @@ namespace RAP.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/accountmanagement")]
-    public class AccountManagementController : ApiController
+    public class RapRegisterController : ApiController
     {
         string Username, CorrelationID, ExceptionMessage, InnerExceptionMessage;
-        public AccountManagementController() { }
+        public RapRegisterController() { }
 
         public void ExtractClaimDetails()
         {
