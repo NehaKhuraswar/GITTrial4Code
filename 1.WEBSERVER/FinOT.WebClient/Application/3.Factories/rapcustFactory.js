@@ -1,8 +1,8 @@
 ﻿'use strict';
 var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
-    //  var _routePrefix = 'api/accountmanagement';
-    var _routePrefix = 'api/otrequest';
+      var _routePrefix = 'api/accountmanagement';
+   // var _routePrefix = 'api/otrequest';
 
     var _GetOTRequest = function (reqid, fy) {
         blockUI.start();
@@ -19,9 +19,9 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var _GetCustomer = function (custid) {
         blockUI.start();
         var reqid = null;
-        //var url = _routePrefix + '/get';
+        var url = _routePrefix + '/get';
         //if (!(custid == null || custid == undefined)) { url += '/' + custid; }
-        var url = _routePrefix + '/notes/get'
+       // var url = _routePrefix + '/notes/get'
         if (!(reqid == null || reqid == undefined)) { url = url + '/' + reqid; }
         //try{
             return ajax.Get(url)

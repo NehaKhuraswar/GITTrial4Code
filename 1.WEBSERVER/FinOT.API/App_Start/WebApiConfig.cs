@@ -15,7 +15,7 @@ namespace RAP.API
         {
             // Web API configuration and services
             // Use only bearer tokens
-            config.SuppressDefaultHostAuthentication();
+            //config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             // Enable CORS
             var cors = new EnableCorsAttribute("*", "*", "*");
