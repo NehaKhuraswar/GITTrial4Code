@@ -52,6 +52,76 @@ namespace RAP.API.Controllers
                 throw ex;
             }
         }
+        //[HttpGet]
+        //[Route("logincust/{email:string}/{password:string}")]
+        //public HttpResponseMessage LoginCust(string email, string password)
+        //[HttpGet]
+        //[Route("logincust/")]
+        //public HttpResponseMessage LoginCust([FromBody] LoginInfo custModel)
+        //{
+        //    HttpStatusCode ReturnCode = HttpStatusCode.OK;
+        //    TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+
+        //    try
+        //    {
+        //        //  ExtractClaimDetails();
+
+        //        CustomerInfo obj;
+        //        //if (custid.HasValue)
+        //        //{
+        //        //  //  obj = service.GetCustomer((int)reqid, fy, Username);
+        //        //}
+        //        //else
+        //        //{
+        //        obj = new CustomerInfo();
+        //        //}
+
+        //        transaction.data = obj;
+        //        transaction.status = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction.AddException(ex.Message);
+        //        ReturnCode = HttpStatusCode.InternalServerError;
+
+        //        if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+        //        //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+        //    }
+
+        //    return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        //}
+        //{
+        //    HttpStatusCode ReturnCode = HttpStatusCode.OK;
+        //    TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+
+        //    try
+        //    {
+        //        //  ExtractClaimDetails();
+
+        //        CustomerInfo obj;
+        //        //if (custid.HasValue)
+        //        //{
+        //        //  //  obj = service.GetCustomer((int)reqid, fy, Username);
+        //        //}
+        //        //else
+        //        //{
+        //        obj = new CustomerInfo();
+        //        //}
+
+        //        transaction.data = obj;
+        //        transaction.status = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction.AddException(ex.Message);
+        //        ReturnCode = HttpStatusCode.InternalServerError;
+
+        //        if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+        //        //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+        //    }
+
+        //    return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        //}
         [HttpGet]
         [Route("get/{custid:int?}")]
         public HttpResponseMessage GetCustomer(int? custid = null)
@@ -61,7 +131,7 @@ namespace RAP.API.Controllers
 
             try
             {
-                ExtractClaimDetails();
+              //  ExtractClaimDetails();
 
                 CustomerInfo obj;
                 //if (custid.HasValue)

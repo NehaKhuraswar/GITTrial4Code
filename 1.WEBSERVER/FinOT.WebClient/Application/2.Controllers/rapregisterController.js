@@ -6,18 +6,28 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         var plainBodyText = "";
 
         rapFactory.SaveCustomer(null, model).then(function (response) {
-                if (!alert.checkResponse(response)) {
-                    return;
-                }
-                $modalInstance.close(response.data);
-            });
-        //otFactory.SaveCustDetails(custID, self.model).then(function (response) {
-        //    if (!alert.checkResponse(response)) {
-        //        return;
-        //    }
-        //    $modalInstance.close(response.data);
-        //});
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            $modalInstance.close(response.data);
+        });
     }
+    //self.Login = function (model) {
+    //    var plainBodyText = "";
+
+    //    rapFactory.LoginCustomer(null, model).then(function (response) {
+    //            if (!alert.checkResponse(response)) {
+    //                return;
+    //            }
+    //            $modalInstance.close(response.data);
+    //        });
+    //    //otFactory.SaveCustDetails(custID, self.model).then(function (response) {
+    //    //    if (!alert.checkResponse(response)) {
+    //    //        return;
+    //    //    }
+    //    //    $modalInstance.close(response.data);
+    //    //});
+    //}
 
 }];
 var rapregisterController_resolve = {

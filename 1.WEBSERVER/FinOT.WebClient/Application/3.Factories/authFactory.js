@@ -1,6 +1,8 @@
 ﻿'use strict';
 var authFactory = ['$q', '$location', 'ajaxService', function ($q, $location, ajax) {
     var authFactory = {};
+    
+   
 
     var _fetchToken = function () {
         var defer = $q.defer();
@@ -70,6 +72,7 @@ var authFactory = ['$q', '$location', 'ajaxService', function ($q, $location, aj
     authFactory.isViewer = _isViewer;
     authFactory.isA6ConfigManager = _isA6ConfigManager;
     authFactory.getDatetime = _getDatetime;
+   // authFactory.login = _Login;
 
     return authFactory;
 }];

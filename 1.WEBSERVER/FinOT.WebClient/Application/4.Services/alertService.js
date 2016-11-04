@@ -1,7 +1,7 @@
 ﻿'use strict';
 var alertService = ['inform', function (inform) {
     var self = this;
-
+   // self.isAuthenticated = false;
     self.checkResponse = function (res) {
         if (res != null && res != undefined) {
             if (res.exceptions != null && res.exceptions.length) { self.Error(res.exceptions); }

@@ -4,6 +4,7 @@ var otrequestModule = angular.module('otrequestModule', ['ngFileUpload'])
     .factory('rapcustFactory', rapcustFactory)
     .controller('otrequestController', otrequestController)
     .controller('otnotesController', otnotesController)
+    .controller('raploginController', raploginController)
     .controller('rapregisterController', rapregisterController)
     .controller('otheaderController', otheaderController)
     .controller('otstaffController', otstaffController)
@@ -39,7 +40,7 @@ var otrequestModule = angular.module('otrequestModule', ['ngFileUpload'])
                 reqid: '=',
                 model: '=model',
             },
-            templateUrl: 'Views/Register/_CreateUser.html',
+            templateUrl: 'Views/Account/_CreateUser.html',
             controller: 'otregisterController',
             controllerAs: 'Ctrl'
         };

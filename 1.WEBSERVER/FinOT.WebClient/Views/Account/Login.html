@@ -1,0 +1,17 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>User</strong>
+            </div>
+            <div class="panel-body">
+                <p>Create Account</p>
+                <p>Email Id</p>
+                <input type="text" class="form-control input-sm"  ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Email" required/>
+                <p>Password</p>
+                <input type="password" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Password" required />
+               <button ng-click="Ctrl.Login(Ctrl.model.CustomerInfo)">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

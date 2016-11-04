@@ -23,4 +23,10 @@ namespace RAP.Core.DataModels
         public bool EmailNotificationFlag { get; set; }
 
     }
+    public class LoginInfo
+    {
+        public string email { get; set; }
+        public string Password { get; set; }
+
+    }
 }

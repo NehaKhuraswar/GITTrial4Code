@@ -23,7 +23,7 @@ namespace RAP.Web.Controllers
                 if (model == null)
                 {
                     model = new AppModel();
-                    string username = "HEALTH\\sannapaneni"; // User.Identity.Name;
+                    string username = "abc\\neha"; // User.Identity.Name;
                     string domain = username.Contains(@"\") ? username.Substring(0, username.IndexOf(@"\")) : null;
                     username = username.Contains(@"\") ? username.Substring(username.LastIndexOf(@"\") + 1) : username;
                     username = username.ToLower();

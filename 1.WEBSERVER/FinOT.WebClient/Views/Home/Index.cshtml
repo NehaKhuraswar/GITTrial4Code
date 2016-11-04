@@ -10,11 +10,11 @@
     <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/favicon.ico")"/><![endif]-->
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*<script type="text/javascript">
-        sessionStorage.setItem("UserDisplayName", "@string.Format("{0} {1}", Model.Header.User.FirstName, Model.Header.User.LastName)");
-        sessionStorage.setItem("username", "@Model.Header.User.Username");
-        sessionStorage.setItem("apibaseurl", "@Model.AppDetails.ApiBaseURL");
-    </script>*@
+    <script type="text/javascript">
+        @*sessionStorage.setItem("UserDisplayName", "@string.Format("{0} {1}", Model.Header.User.FirstName, Model.Header.User.LastName)");
+        sessionStorage.setItem("username", "@Model.Header.User.Username");*@
+        sessionStorage.setItem("apibaseurl", "http://localhost:38000/");@*"@Model.AppDetails.ApiBaseURL");*@
+    </script>
 </head>
 <body>
     <div class="container-fluid">
@@ -33,6 +33,7 @@
         </div>
         <div class="row">
             <button class="btn btn-default" ng-click="Register()">Register</button>
+            <button class="btn btn-default" ng-click="Login()">Login</button>
 
             @*@Html.Partial("_MainMenu", Model.Header.Menus.ToList(), new ViewDataDictionary { { "DefaultURL", Model.Header.Application.DefaultUrl} })*@
         </div>

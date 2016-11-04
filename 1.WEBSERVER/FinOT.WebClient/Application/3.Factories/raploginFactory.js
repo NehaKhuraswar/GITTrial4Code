@@ -3,7 +3,21 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
       var _routePrefix = 'api/accountmanagement';
     //var _routePrefix = 'api/otrequest';
+    
+      var _Login = function (model) {
+          blockUI.start();
 
+          var url = _routePrefix + '/logincust';
+          //if (!(email == null || email == undefined)) { url += '/' + email; }
+          //if (!(password == null || password == undefined)) { url += '/' + password; }
+
+          //return ajax.Get(url)
+          return ajax.Get(model, url)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
+    
     var _GetOTRequest = function (reqid, fy) {
         blockUI.start();
 
