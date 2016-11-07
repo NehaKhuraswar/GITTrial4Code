@@ -46,7 +46,7 @@ namespace RAP.DAL
                    custTable.City = message.City;
                    custTable.State = message.State;
                    custTable.Zip = message.Zip;
-                   custTable.UserTypeID = message.UserTypeID;
+                   custTable.UserTypeID = 1;
                    custTable.Password = message.Password;
                    custTable.CreatedDate = DateTime.Now;
                    custTable.EmailNotificationFlag = message.EmailNotificationFlag;

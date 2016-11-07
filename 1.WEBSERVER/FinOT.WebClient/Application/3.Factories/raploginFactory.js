@@ -1,23 +1,21 @@
 ﻿'use strict';
-var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
+var raploginFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
-      var _routePrefix = 'api/accountmanagement';
+    var _routePrefix = 'api/accountmanagement';
     //var _routePrefix = 'api/otrequest';
-    
-      var _Login = function (model) {
-          blockUI.start();
+    var _Login = function (model) {
+        blockUI.start();
 
-          var url = _routePrefix + '/logincust';
-          //if (!(email == null || email == undefined)) { url += '/' + email; }
-          //if (!(password == null || password == undefined)) { url += '/' + password; }
+        var url = _routePrefix + '/logincust';
+        //if (!(email == null || email == undefined)) { url += '/' + email; }
+        //if (!(password == null || password == undefined)) { url += '/' + password; }
 
-          //return ajax.Get(url)
-          return ajax.Get(model, url)
-          .finally(function () {
-              blockUI.stop();
-          });
-      }
-    
+        //return ajax.Get(url)
+        return ajax.Get(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     var _GetOTRequest = function (reqid, fy) {
         blockUI.start();
 
@@ -38,14 +36,14 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
         //var url = _routePrefix + '/notes/get';
         if (!(reqid == null || reqid == undefined)) { url = url + '/' + reqid; }
         //try{
-            return ajax.Get(url)
-        //}
-        //catch(err){
-        //   console.log(err.name + ': "' + err.message +  '" occurred when assigning x.');
-        //}
-        .finally(function () {
-            blockUI.stop();
-        });
+        return ajax.Get(url)
+    //}
+    //catch(err){
+    //   console.log(err.name + ': "' + err.message +  '" occurred when assigning x.');
+    //}
+    .finally(function () {
+        blockUI.stop();
+    });
     }
 
     var _GetNotes = function (reqid) {
@@ -58,13 +56,12 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
     }
-    
+
     var _SaveOTRequest = function (reqid, model) {
         blockUI.start();
 
         var url = _routePrefix + '/save';
-        if (!(reqid == null || reqid == undefined))
-        {
+        if (!(reqid == null || reqid == undefined)) {
             url += '?reqid=' + reqid;
         }
 
@@ -98,7 +95,8 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     factory.GetNotes = _GetNotes;
     factory.SaveNotes = _SaveNotes;
     factory.SaveCustomer = _SaveCustomer;
-    factory.GetCustomer = _GetCustomer
-    
+    factory.GetCustomer = _GetCustomer;
+    factory.Login = _Login;
+
     return factory;
 }];
