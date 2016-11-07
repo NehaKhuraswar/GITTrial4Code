@@ -1,5 +1,5 @@
 ﻿'use strict';
-var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', function ($scope, $modal, alert, rapFactory) {
+var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', '$location', function ($scope, $modal, alert, rapFactory, $location) {
     var self = this;
     self.model = [];
     self.Login = function (model) {
@@ -9,7 +9,9 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
             if (!alert.checkResponse(response)) {
                 return;
             }
-         //   $modalInstance.close(response.data);
+            $scope.model = response.data;
+            $location.path("/dashboard");
+
         });
     }
     //self.Login = function (model) {

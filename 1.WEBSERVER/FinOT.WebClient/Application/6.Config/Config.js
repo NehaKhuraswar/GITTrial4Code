@@ -50,6 +50,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: raploginController_resolve
         })
+        .when('/dashboard', {
+                templateUrl: 'views/account/Dashboard.html'//,
+                //controller: raploginController,
+                //controllerAs: 'Ctrl',
+                //resolve: raploginController_resolve
+         })
         .when('/report/:reportid', {
             templateUrl: 'views/report/index.html',
             controller: reportController,
