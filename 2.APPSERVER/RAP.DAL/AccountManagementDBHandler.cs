@@ -16,7 +16,52 @@ namespace RAP.DAL
         {
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
+        public CustomerInfo GetCustomer(CustomerInfo message)
+        {
+            try
+            {
+                CustomerInfo custinfo ;
+                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                {
 
+                    var custdetails = db.CustomerDetails.Where(x => x.email == message.email && x.Password == message.Password)
+                                                            .Select(c => new CustomerInfo() {
+                                                             FirstName = c.FirstName, 
+                                                             LastName = c.LastName,
+                                                             email = c.email,
+                                                             Address1 = c.AddressLine1,
+                                                            Address2 = c.AddressLine2,
+                                                            City = c.City,
+                                                            PhoneNumber = c.PhoneNumber,
+                                                            State = c.State,
+                                                            Zip = c.Zip,
+                                                            UserTypeID = (int)c.UserTypeID}).FirstOrDefault();
+                    if (custdetails != null)
+                    {
+                        custinfo = new CustomerInfo();
+                        custinfo.FirstName = custdetails.FirstName;
+                        custinfo.LastName = custdetails.LastName;
+                        custinfo.Address1 = custdetails.Address1;
+                        custinfo.Address2 = custdetails.Address2;
+                        custinfo.City = custdetails.City;
+                        custinfo.PhoneNumber = custdetails.PhoneNumber;
+                        custinfo.State = custdetails.State;
+                        custinfo.Zip = custdetails.Zip;
+                        custinfo.email = custdetails.email;
+                        custinfo.UserTypeID = custdetails.UserTypeID;
+                    }
+                    else
+                    {
+                        custinfo = null;
+                    }
+                }
+                return custinfo;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public bool SaveCustomer(CustomerInfo message)
        {
            try

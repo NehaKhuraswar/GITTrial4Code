@@ -7,10 +7,10 @@
             <div class="panel-body">
                 <p>Create Account</p>
                 <p>Email Id</p>
-                <input type="text" class="form-control input-sm"  ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Email" required/>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Email" required />
                 <p>Password</p>
                 <input type="password" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Password" required />
-               <button ng-click="Ctrl.Login(Ctrl.model)">Login</button>
+                <button ng-click="Ctrl.Login(Ctrl.model.CustomerInfo)">Login</button>
             </div>
         </div>
     </div>

@@ -29,5 +29,9 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.SaveCustomer(message);
         }
+        public CustomerInfo GetCustomer(CustomerInfo message)
+        {
+            return accDBHandler.GetCustomer(message);
+        }
     }
 }

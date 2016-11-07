@@ -5,11 +5,11 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     self.Login = function (model) {
         var plainBodyText = "";
 
-        rapFactory.Login(null, model).then(function (response) {
+        rapFactory.Login(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $modalInstance.close(response.data);
+         //   $modalInstance.close(response.data);
         });
     }
     //self.Login = function (model) {

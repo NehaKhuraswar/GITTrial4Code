@@ -52,76 +52,7 @@ namespace RAP.API.Controllers
                 throw ex;
             }
         }
-        //[HttpGet]
-        //[Route("logincust/{email:string}/{password:string}")]
-        //public HttpResponseMessage LoginCust(string email, string password)
-        //[HttpGet]
-        //[Route("logincust/")]
-        //public HttpResponseMessage LoginCust([FromBody] LoginInfo custModel)
-        //{
-        //    HttpStatusCode ReturnCode = HttpStatusCode.OK;
-        //    TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
-
-        //    try
-        //    {
-        //        //  ExtractClaimDetails();
-
-        //        CustomerInfo obj;
-        //        //if (custid.HasValue)
-        //        //{
-        //        //  //  obj = service.GetCustomer((int)reqid, fy, Username);
-        //        //}
-        //        //else
-        //        //{
-        //        obj = new CustomerInfo();
-        //        //}
-
-        //        transaction.data = obj;
-        //        transaction.status = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction.AddException(ex.Message);
-        //        ReturnCode = HttpStatusCode.InternalServerError;
-
-        //        if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
-        //        //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
-        //    }
-
-        //    return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
-        //}
-        //{
-        //    HttpStatusCode ReturnCode = HttpStatusCode.OK;
-        //    TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
-
-        //    try
-        //    {
-        //        //  ExtractClaimDetails();
-
-        //        CustomerInfo obj;
-        //        //if (custid.HasValue)
-        //        //{
-        //        //  //  obj = service.GetCustomer((int)reqid, fy, Username);
-        //        //}
-        //        //else
-        //        //{
-        //        obj = new CustomerInfo();
-        //        //}
-
-        //        transaction.data = obj;
-        //        transaction.status = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        transaction.AddException(ex.Message);
-        //        ReturnCode = HttpStatusCode.InternalServerError;
-
-        //        if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
-        //        //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
-        //    }
-
-        //    return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
-        //}
+     
         [HttpGet]
         [Route("get/{custid:int?}")]
         public HttpResponseMessage GetCustomer(int? custid = null)
@@ -157,6 +88,45 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+        [Route("logincust")]
+        [HttpPost]
+        public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
+        
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+
+            try
+            {
+
+                CustomerInfo obj;
+                obj = accService.GetCustomer(loginInfo);
+                if (obj != null)
+                {
+                    transaction.data = obj;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.data = null;
+                    transaction.status = false;
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+               // transaction.AddException(ex.Message);
+                //ReturnCode = HttpStatusCode.InternalServerError;
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        }
+       
 
         [Route("reportsource")]
         [HttpPost]
