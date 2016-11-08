@@ -52,7 +52,7 @@ namespace RAP.API.Controllers
                 throw ex;
             }
         }
-     
+        
         [HttpGet]
         [Route("get/{custid:int?}")]
         public HttpResponseMessage GetCustomer(int? custid = null)
@@ -127,7 +127,45 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
        
+        
+        [Route("searchinvite")]
+        [HttpPost]
+        public HttpResponseMessage SearchInviteThirdPartyUser([FromBody] CustomerInfo loginInfo)
+        
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
 
+            try
+            {
+
+                CustomerInfo obj;
+                obj = accService.GetCustomer(loginInfo);
+                if (obj != null)
+                {
+                    transaction.data = obj;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.data = null;
+                    transaction.status = false;
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+               // transaction.AddException(ex.Message);
+                //ReturnCode = HttpStatusCode.InternalServerError;
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        }
         [Route("reportsource")]
         [HttpPost]
         public HttpResponseMessage GetReportSource([FromBody] Dictionary<string, string> objParams, [FromUri]int ReportID)

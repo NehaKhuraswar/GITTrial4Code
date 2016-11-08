@@ -106,7 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Application\1.Modules\otrequestModule.js" />
+    <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\1.Modules\reportModule.js" />
     <Content Include="Application\1.Modules\searchModule.js" />
     <Content Include="Application\1.Modules\workqueueModule.js" />
@@ -118,6 +118,7 @@
     <Content Include="Application\2.Controllers\otnotesController.js" />
     <Content Include="Application\2.Controllers\otrequestController.js" />
     <Content Include="Application\2.Controllers\otstaffController.js" />
+    <Content Include="Application\2.Controllers\rapdashboardController.js" />
     <Content Include="Application\2.Controllers\raploginController.js" />
     <Content Include="Application\2.Controllers\rapregisterController.js" />
     <Content Include="Application\2.Controllers\reportController.js" />
@@ -129,6 +130,7 @@
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\otrequestFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
+    <Content Include="Application\3.Factories\rapdashboardFactory.js" />
     <Content Include="Application\3.Factories\raploginFactory.js" />
     <Content Include="Application\3.Factories\reportFactory.js" />
     <Content Include="Application\3.Factories\searchFactory.js" />

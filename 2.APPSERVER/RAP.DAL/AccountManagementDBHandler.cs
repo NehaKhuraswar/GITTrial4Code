@@ -35,7 +35,8 @@ namespace RAP.DAL
                                                             PhoneNumber = c.PhoneNumber,
                                                             State = c.State,
                                                             Zip = c.Zip,
-                                                            UserTypeID = (int)c.UserTypeID}).FirstOrDefault();
+                                                            UserTypeID = (int)c.UserTypeID,
+                                                            custID = (int)c.CustomerID}).FirstOrDefault();
                     if (custdetails != null)
                     {
                         custinfo = new CustomerInfo();
@@ -49,6 +50,7 @@ namespace RAP.DAL
                         custinfo.Zip = custdetails.Zip;
                         custinfo.email = custdetails.email;
                         custinfo.UserTypeID = custdetails.UserTypeID;
+                        custinfo.custID = custdetails.custID;
                     }
                     else
                     {

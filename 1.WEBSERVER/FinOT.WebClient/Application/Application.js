@@ -1,5 +1,5 @@
 ﻿'use strict';
-var app = angular.module('OTS', ['ngRoute', 'blockUI', 'inform', 'ui.select', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'angularjs-dropdown-multiselect', 'angular.filter', 'workqueueModule', 'searchModule', 'otrequestModule', 'reportModule'])
+var app = angular.module('OTS', ['ngRoute', 'blockUI', 'inform', 'ui.select', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'angularjs-dropdown-multiselect', 'angular.filter', 'workqueueModule', 'searchModule', 'rapModule', 'reportModule'])
 .config(Config)
 .service('ajaxService', ajaxService)
 .service('alertService', alertService)

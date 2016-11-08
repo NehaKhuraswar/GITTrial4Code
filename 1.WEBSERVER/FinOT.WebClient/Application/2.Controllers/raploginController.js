@@ -1,14 +1,17 @@
 ﻿'use strict';
-var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', '$location', function ($scope, $modal, alert, rapFactory, $location) {
+var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     self.model = [];
+   // rapFactory.param.set("temp");
     self.Login = function (model) {
-        var plainBodyText = "";
-
+        
         rapFactory.Login(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
+ 
+          //  angular.copy(response.data, MyService.value);
+            rapGlobalFactory.CustomerDetails = response.data;
             $scope.model = response.data;
             $location.path("/dashboard");
 

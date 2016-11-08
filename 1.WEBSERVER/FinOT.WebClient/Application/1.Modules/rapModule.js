@@ -1,12 +1,34 @@
 ﻿'use strict';
-var otrequestModule = angular.module('otrequestModule', ['ngFileUpload'])
+var rapModule = angular.module('rapModule', ['ngFileUpload'])
+    
     .factory('otrequestFactory', otrequestFactory)
     .factory('rapcustFactory', rapcustFactory)
+    .factory('rapGlobalFactory', function () {
+
+          // public
+         var CustID = 0;
+         var CustomerDetails;
+          // public
+          return {
+
+              get: function () {
+                  return CustomerDetails;
+              },
+
+              set: function (val) {
+                  CustomerDetails = val;
+              }
+
+          };
+      })
+
     .factory('raploginFactory', raploginFactory)
+    .factory('rapdashboardFactory', rapdashboardFactory)
     .controller('otrequestController', otrequestController)
     .controller('otnotesController', otnotesController)
     .controller('raploginController', raploginController)
     .controller('rapregisterController', rapregisterController)
+    .controller('rapdashboardController', rapdashboardController)
     .controller('otheaderController', otheaderController)
     .controller('otstaffController', otstaffController)
     .controller('otdocumentsController', otdocumentsController)
