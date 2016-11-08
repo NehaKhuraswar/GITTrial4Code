@@ -5,20 +5,29 @@
                 <strong>User</strong>
             </div>
             <div class="panel-body">
-                <p>Invite third Party Representation</p>
-                <p>Email</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.emailSearch" required />
-                <button class="btn btn-default" ng-click="SearchInviteThirdPartyUser(Ctrl.emailSearch)">Search</button>
-                <p>Authorize user access</p>
-                <label><input type="checkbox" ng-model="Ctrl.model.CustomerInfo.MailNotificationFlag" required />   Mail Notification</label>    
+                <div>
+                    <p>Invite third Party Representation</p>
+                    <p>Email</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Email" required />
+                    <button class="btn btn-default" ng-click="Ctrl.SearchInviteThirdPartyUser(Ctrl.model.CustomerInfo)">Search</button>
+                </div>
+                <div ng-show="Ctrl.showEmailFound">
+                    <p>Authorize user access</p>
+                    <p>{{Ctrl.model.FirstName}} {{Ctrl.model.LastName}}</p>
+                    <p>{{Ctrl.model.email}}</p>
+                    <label><input type="checkbox" ng-model="Ctrl.IsConsent" required />I hereby consent</label>
+                    <button class="btn btn-default" ng-click="Ctrl.Authorize(Ctrl.model)">Authorize</button>
+                </div>
 
-                <p>Users with access to your account</p>
-                <!--<div ng-repeat="model in collection | orderBy: 'id' as filtered_result track by model.id">
-                    *     model.name}}
-                    *
-                </div>-->
-                <button class="btn btn-default" ng-click="Remove()">Remove</button>
-            </div>
+                    
+
+                    <p>Users with access to your account</p>
+                    <!--<div ng-repeat="model in collection | orderBy: 'id' as filtered_result track by model.id">
+            *     model.name}}
+            *
+        </div>-->
+                    <button class="btn btn-default" ng-click="Remove()">Remove</button>
+                </div>
         </div>
     </div>
 </div>
