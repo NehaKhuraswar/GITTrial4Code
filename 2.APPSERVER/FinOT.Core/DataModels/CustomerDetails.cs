@@ -23,7 +23,7 @@ namespace RAP.Core.DataModels
         public string UserType { get; set; }
         public string Password { get; set; }
         public bool EmailNotificationFlag { get; set; }
-
+        public bool MailNotificationFlag { get; set; }
 
     }
     public class PetitionDetails

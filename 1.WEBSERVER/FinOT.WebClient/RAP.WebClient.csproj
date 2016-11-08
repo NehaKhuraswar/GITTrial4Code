@@ -119,6 +119,7 @@
     <Content Include="Application\2.Controllers\otrequestController.js" />
     <Content Include="Application\2.Controllers\otstaffController.js" />
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
+    <Content Include="Application\2.Controllers\rapinvitethirdpartyController.js" />
     <Content Include="Application\2.Controllers\raploginController.js" />
     <Content Include="Application\2.Controllers\rapregisterController.js" />
     <Content Include="Application\2.Controllers\reportController.js" />
@@ -131,6 +132,7 @@
     <Content Include="Application\3.Factories\otrequestFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
+    <Content Include="Application\3.Factories\rapinvitethirdpartyFactory.js" />
     <Content Include="Application\3.Factories\raploginFactory.js" />
     <Content Include="Application\3.Factories\reportFactory.js" />
     <Content Include="Application\3.Factories\searchFactory.js" />
@@ -177,8 +179,8 @@
     <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Views\Account\CreateUser.html" />
     <Content Include="Views\Account\Dashboard.html" />
+    <Content Include="Views\Account\InviteThirdParty.html" />
     <Content Include="Views\Account\Login.html" />
-    <Content Include="Views\Account\Register.html" />
     <Content Include="Views\Report\Index.html" />
     <Content Include="Views\Request\_Approval.html" />
     <Content Include="Views\Request\_Funding.html" />

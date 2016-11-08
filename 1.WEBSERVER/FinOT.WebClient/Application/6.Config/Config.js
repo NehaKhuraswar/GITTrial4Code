@@ -55,7 +55,13 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
                 controller: rapdashboardController,
                 controllerAs: 'Ctrl',
                 resolve: rapdashboardController_resolve
-         })
+        })
+        .when('/invitethirdparty', {
+                templateUrl: 'views/account/InviteThirdParty.html',
+                controller: rapinvitethirdpartyController,
+                controllerAs: 'Ctrl',
+                resolve: rapinvitethirdpartyController_resolve
+        })
         .when('/report/:reportid', {
             templateUrl: 'views/report/index.html',
             controller: reportController,

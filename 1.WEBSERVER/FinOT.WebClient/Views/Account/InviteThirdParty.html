@@ -1,0 +1,24 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>User</strong>
+            </div>
+            <div class="panel-body">
+                <p>Invite third Party Representation</p>
+                <p>Email</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.emailSearch" required />
+                <button class="btn btn-default" ng-click="SearchInviteThirdPartyUser(Ctrl.emailSearch)">Search</button>
+                <p>Authorize user access</p>
+                <label><input type="checkbox" ng-model="Ctrl.model.CustomerInfo.MailNotificationFlag" required />   Mail Notification</label>    
+
+                <p>Users with access to your account</p>
+                <!--<div ng-repeat="model in collection | orderBy: 'id' as filtered_result track by model.id">
+                    *     model.name}}
+                    *
+                </div>-->
+                <button class="btn btn-default" ng-click="Remove()">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>

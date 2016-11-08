@@ -17,22 +17,6 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
 
         });
     }
-    //self.Login = function (model) {
-    //    var plainBodyText = "";
-
-    //    rapFactory.LoginCustomer(null, model).then(function (response) {
-    //            if (!alert.checkResponse(response)) {
-    //                return;
-    //            }
-    //            $modalInstance.close(response.data);
-    //        });
-    //    //otFactory.SaveCustDetails(custID, self.model).then(function (response) {
-    //    //    if (!alert.checkResponse(response)) {
-    //    //        return;
-    //    //    }
-    //    //    $modalInstance.close(response.data);
-    //    //});
-    //}
 
 }];
 var raploginController_resolve = {

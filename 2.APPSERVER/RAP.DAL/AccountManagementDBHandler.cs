@@ -64,6 +64,42 @@ namespace RAP.DAL
                 return null;
             }
         }
+        public CustomerInfo SearchInviteThirdPartyUser(String message)
+        {
+            try
+            {
+                CustomerInfo custinfo;
+                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                {
+
+                    var custdetails = db.CustomerDetails.Where(x => x.email == message)
+                                                            .Select(c => new CustomerInfo()
+                                                            {
+                                                                FirstName = c.FirstName,
+                                                                LastName = c.LastName,
+                                                                email = c.email,                                                               
+                                                                custID = (int)c.CustomerID
+                                                            }).FirstOrDefault();
+                    if (custdetails != null)
+                    {
+                        custinfo = new CustomerInfo();
+                        custinfo.FirstName = custdetails.FirstName;
+                        custinfo.LastName = custdetails.LastName;
+                        custinfo.email = custdetails.email;
+                        custinfo.custID = custdetails.custID;
+                    }
+                    else
+                    {
+                        custinfo = null;
+                    }
+                }
+                return custinfo;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public bool SaveCustomer(CustomerInfo message)
        {
            try
@@ -96,7 +132,10 @@ namespace RAP.DAL
                    custTable.UserTypeID = 1;
                    custTable.Password = message.Password;
                    custTable.CreatedDate = DateTime.Now;
-                   custTable.EmailNotificationFlag = message.EmailNotificationFlag;
+
+                   // RAP-TBD
+                 //  custTable.EmailNotificationFlag = message.EmailNotificationFlag;
+                   //custTable.EmailNotificationFlag = message.MailNotificationFlag;
                    db.CustomerDetails.InsertOnSubmit(custTable);
                    db.SubmitChanges();
                 }

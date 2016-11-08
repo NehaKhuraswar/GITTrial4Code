@@ -33,5 +33,9 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.GetCustomer(message);
         }
+        public CustomerInfo SearchInviteThirdPartyUser(String message)
+        {
+            return accDBHandler.SearchInviteThirdPartyUser(message);
+        }
     }
 }

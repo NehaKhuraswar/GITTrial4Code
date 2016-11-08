@@ -1,18 +1,18 @@
 ﻿'use strict';
-var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
+var rapinvitethirdpartyFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
   
 
-    //var _SearchInviteThirdPartyUser = function (model) {
-    //    blockUI.start();
+    var _SearchInviteThirdPartyUser = function (model) {
+        blockUI.start();
 
-    //    var url = _routePrefix + '/searchinvite'
-    //    return ajax.Post(model, url)
-    //    .finally(function () {
-    //        blockUI.stop();
-    //    });
-    //}
+        var url = _routePrefix + '/searchinvite'
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     //var _GetOTRequest = function (reqid, fy) {
     //    blockUI.start();
 
@@ -93,7 +93,7 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     //factory.SaveNotes = _SaveNotes;
     //factory.SaveCustomer = _SaveCustomer;
     //factory.GetCustomer = _GetCustomer;
-  //  factory.SearchInviteThirdPartyUser = _SearchInviteThirdPartyUser;
+    factory.SearchInviteThirdPartyUser = _SearchInviteThirdPartyUser;
 
     return factory;
 }];

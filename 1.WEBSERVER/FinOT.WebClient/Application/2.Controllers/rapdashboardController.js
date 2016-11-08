@@ -1,13 +1,9 @@
 ﻿'use strict';
-var rapdashboardController = ['$scope', '$modal', 'alertService', 'model', 'rapdashboardFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, model, rapGlobalFactory) {
+var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboardFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     self.model = rapGlobalFactory.CustomerDetails;
-    self.SearchInviteThirdPartyUser = function (model) {
-        rapFactory.SearchInviteThirdPartyUser(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                                return;
-            }
-        });
+    self.InviteThirdPartyUser = function () {
+        $location.path("/invitethirdparty");
     }
 
 }];
