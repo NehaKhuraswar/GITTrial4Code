@@ -8,43 +8,182 @@
             <div class="panel-body">
                 <p>Renter petition : Lost Services</p>
                 <p>___________________________________________________________________________________________</p>
-                <p>I (We) contest one or more rent increases on one or more of the following grounds:</p>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">a)</label>
+                <p>Have you lost services or are you being changed for services originally provided by the owner?</p>
+                <div class="radio">
+                    <label><input type="radio" name="FiledPetitionInPast">Yes</label>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">b)</label>
+                <div class="radio">
+                    <label><input type="radio" name="FiledPetitionInPast">No</label>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">c)</label>
+                <p>Describe the reduced service(s) </p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.DescriptionOfLostServices" required />
+                
+                <p>Your estimated dollar value of the lost service(s) or problems </p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.EstimatedDollarValueLostService" required />
+                
+                <p>Date loss began</p>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Month
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jan</a></li>
+                        <li><a href="#">Feb</a></li>
+                        <li><a href="#">Mar</a></li>
+                    </ul>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">d)</label>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Date
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">e)</label>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Year
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">2014</a></li>
+                        <li><a href="#">2013</a></li>
+                        <li><a href="#">2012</a></li>
+                    </ul>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">f1)</label>
+
+                <p>Date you began paying for the services</p>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Month
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jan</a></li>
+                        <li><a href="#">Feb</a></li>
+                        <li><a href="#">Mar</a></li>
+                    </ul>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">f2)</label>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Date
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">g)</label>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Year
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">2014</a></li>
+                        <li><a href="#">2013</a></li>
+                        <li><a href="#">2012</a></li>
+                    </ul>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">h)</label>
+                <button ng-click="Ctrl.AttachDocumentation()">Attach additional documentation</button>
+                <p>___________________________________________________________________________________________</p>
+
+                <button ng-click="Ctrl.AddAnotherLostService()">Add another lost service description</button>
+
+                <p>___________________________________________________________________________________________</p>
+
+                <p>Are you claiming any serious problems with the condition of your unit?</p>
+                <div class="radio">
+                    <label><input type="radio" name="FiledPetitionInPast">Yes</label>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">i)</label>
+                <div class="radio">
+                    <label><input type="radio" name="FiledPetitionInPast">No</label>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">j)</label>
+
+                <p>Describe the problems </p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.DescriptionOfProblem" required />
+
+                <p>Your estimated dollar value of the lost service(s) or problems </p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.EstimatedDollarValueProblem" required />
+
+                <p>Date problems began</p>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Month
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jan</a></li>
+                        <li><a href="#">Feb</a></li>
+                        <li><a href="#">Mar</a></li>
+                    </ul>
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">j)</label>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Date
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
                 </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Year
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">2014</a></li>
+                        <li><a href="#">2013</a></li>
+                        <li><a href="#">2012</a></li>
+                    </ul>
+                </div>
+
+                <p>Date you began paying to address the problems</p>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Month
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jan</a></li>
+                        <li><a href="#">Feb</a></li>
+                        <li><a href="#">Mar</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Date
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Year
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">2014</a></li>
+                        <li><a href="#">2013</a></li>
+                        <li><a href="#">2012</a></li>
+                    </ul>
+                </div>
+                <button ng-click="Ctrl.AttachDocumentationProblems()">Attach additional documentation</button>
+                <p>___________________________________________________________________________________________</p>
+
+                <button ng-click="Ctrl.AddAnotherProblem()">Add another problem description</button>
 
 
                 <button ng-click="Ctrl.ContinueToReview()">Continue</button>
