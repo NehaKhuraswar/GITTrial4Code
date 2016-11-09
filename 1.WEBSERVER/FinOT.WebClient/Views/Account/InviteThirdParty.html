@@ -12,13 +12,22 @@
                     <button class="btn btn-default" ng-click="Ctrl.SearchInviteThirdPartyUser(Ctrl.model.CustomerInfo)">Search</button>
                 </div>
                 <div ng-show="Ctrl.showEmailFound">
-                    <p>Authorize user access</p>
+                    <p>Authorize user access {{Ctrl.showEmailFound}}</p>
                     <p>{{Ctrl.model.FirstName}} {{Ctrl.model.LastName}}</p>
                     <p>{{Ctrl.model.email}}</p>
                     <label><input type="checkbox" ng-model="Ctrl.IsConsent" required />I hereby consent</label>
                     <button class="btn btn-default" ng-click="Ctrl.Authorize(Ctrl.model)">Authorize</button>
                 </div>
-
+                <div ng-show="Ctrl.showEmailNotFound">
+                    <p>Invite representative</p>
+                    <p>A user with the email {{Ctrl.model.CustomerInfo.Email}} was not found in the system</p>
+                    <p>Would you like to invite this user to create account</p>
+                    <button class="btn btn-default" ng-click="Ctrl.Invite(Ctrl.model.CustomerInfo)">Invite</button>
+                </div>
+                <div>
+                    <p>Users with access to your account</p>
+                    <button class="btn btn-default" ng-click="Ctrl.Remove(Ctrl.model)">Remove</button>
+                </div>
                     
 
                     <p>Users with access to your account</p>

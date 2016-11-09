@@ -164,6 +164,35 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+        [Route("authorize/{custid:int?}")]
+        [HttpPost]
+        public HttpResponseMessage AuthorizeThirdPartyUser([FromBody] CustomerInfo thirdpartyInfo, int? custid = null)
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+
+            try
+            {
+
+                bool bCompleted;
+                bCompleted = accService.AuthorizeThirdPartyUser((int)custid, thirdpartyInfo.custID);
+                transaction.status = bCompleted;
+                 
+
+
+            }
+            catch (Exception ex)
+            {
+                // transaction.AddException(ex.Message);
+                //ReturnCode = HttpStatusCode.InternalServerError;
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        }
        
         [Route("reportsource")]
         [HttpPost]

@@ -5,6 +5,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.InviteThirdPartyUser = function () {
         $location.path("/invitethirdparty");
     }
+    self.FilePetition = function () {
+        $location.path("/filePetition");
+    }
 
 }];
 var rapdashboardController_resolve = {

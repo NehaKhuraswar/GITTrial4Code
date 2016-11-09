@@ -37,5 +37,10 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.SearchInviteThirdPartyUser(message);
         }
+        public bool AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
+        {
+            return accDBHandler.AuthorizeThirdPartyUser(CustID, thirdpartyCustID);
+        }
+        
     }
 }
