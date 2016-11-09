@@ -1,0 +1,99 @@
+﻿
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>User</strong>
+            </div>
+            <div class="panel-body">
+                <p>Renter petition : Applicant and property information</p>
+                <p>___________________________________________________________________________________________</p>
+                <p>Applicant's name  and rental address</p>
+                <p>{{Ctrl.model.FirstName}} {{Ctrl.model.LastName}}</p>
+                <p>{{Ctrl.model.Address1}} {{Ctrl.model.Address2}}</p>
+                <p>{{Ctrl.model.City}} {{Ctrl.model.State}} {{Ctrl.model.Zip}}</p>
+                <p>{{Ctrl.model.PhoneNumber}}</p>
+
+
+                <p>___________________________________________________________________________________________</p>
+                <p>Your Representative</p>
+                <p>Is anybody representating you</p>        
+                <!--RAP-TBD  Associate the model-->        
+                <div class="radio">
+                    <label><input type="radio" name="IsRepresentative">Yes</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="IsRepresentative">No</label>
+                </div>
+                <div>
+                    <p>First Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.FirstName" required />
+                    <p>Last Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.LastName" required />
+                    <p>Address Line 1</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Address1" required />
+                    <p>Address Line 2</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Address2" required />
+                    <p>City</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.City" required />
+                    <p>State</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.State" required />
+                    <p>Zip Code</p>
+                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Zip" required />
+                    <p>Phone Number</p>
+                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.PhoneNumber" required />
+                    <p>Email</p>
+                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.email" required />
+                </div>
+                <p>___________________________________________________________________________________________</p>
+                <p>Property Owner(s) name and mailing address</p>
+                <p>First Name</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.FirstName" required />
+                <p>Last Name</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.LastName" required />
+                <p>Address Line 1</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Address1" required />
+                <p>Address Line 2</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Address2" required />
+                <p>City</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.City" required />
+                <p>State</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.State" required />
+                <p>Zip Code</p>
+                <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Zip" required />
+                <p>Phone Number</p>
+                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.PhoneNumber" required />
+                <p>Email</p>
+                <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.email" required />
+                <p>___________________________________________________________________________________________</p>
+                <p> Property information </p>
+                <p>Number of Units</p>
+                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Numberofunits" required />
+                <div class="radio">
+                    <label><input type="radio" name="IsDontknow">I don't know</label>
+                </div>
+                <p>Type of Unit you rent</p>
+                <div class="radio">
+                    <label><input type="radio" name="TypeOfUnit">House</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="TypeOfUnit">Condominium</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="TypeOfUnit">Apartment, Room, or Live-work</label>
+                </div>
+                <p>Are you current on Rent?</p>
+                <div class="radio">
+                    <label><input type="radio" name="IsCurrentOnRent">Yes</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="IsCurrentOnRent">No</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="IsCurrentOnRent">Legally withholding rent</label>
+                </div>
+                <button ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

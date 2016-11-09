@@ -62,6 +62,48 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
                 controllerAs: 'Ctrl',
                 resolve: rapinvitethirdpartyController_resolve
         })
+        .when('/filePetition', {
+            templateUrl: 'views/account/FilePetition.html',
+            controller: rapFilePetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapFilePetitionController_resolve
+        })
+        .when('/applicationinfo', {
+            templateUrl: 'views/account/ApplicationInfo.html',
+            controller: rapFilePetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapFilePetitionController_resolve
+        })
+        .when('/groundsforpetition', {
+            templateUrl: 'views/account/GroundsForPetition.html',
+            controller: rapFilePetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapFilePetitionController_resolve
+        })
+        .when('/rentalhistory', {
+            templateUrl: 'views/account/RentalHistory.html',
+            controller: rapFilePetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapFilePetitionController_resolve
+        })
+        .when('/lostservices', {
+            templateUrl: 'views/account/LostServices.html',
+            controller: rapFilePetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapFilePetitionController_resolve
+        })
+        .when('/review', {
+            templateUrl: 'views/account/Review.html',
+            controller: rapFilePetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapFilePetitionController_resolve
+        })
+        .when('/verification', {
+            templateUrl: 'views/account/Verification.html',
+            controller: rapFilePetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapFilePetitionController_resolve
+        })
         .when('/report/:reportid', {
             templateUrl: 'views/report/index.html',
             controller: reportController,
