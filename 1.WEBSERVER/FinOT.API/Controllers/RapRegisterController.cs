@@ -292,5 +292,16 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
 
+        [Route("invite")]
+        [HttpPost]
+        public HttpResponseMessage Invite([FromBody] CustomerInfo custModel)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            transaction.data = true;
+
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+
     }
 }

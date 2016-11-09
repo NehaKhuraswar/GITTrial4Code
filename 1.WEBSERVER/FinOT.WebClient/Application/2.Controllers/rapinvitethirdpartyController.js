@@ -37,7 +37,7 @@ var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinv
         
         rapFactory.SearchInviteThirdPartyUser(email).then(function (response) {
             if (!alert.checkResponse(response)) {
-                showEmailNotFound = true;
+                self.showEmailNotFound = true;
                 return;
             }
             self.showEmailFound = true;
@@ -55,6 +55,12 @@ var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinv
         else {
             alert.Error("Please consent to Authorize the third party")
         }
+    }
+    self.Invite = function (model) {
+       rapFactory.Invite(model).then(function (response) {
+
+
+            });
     }
 
 }];

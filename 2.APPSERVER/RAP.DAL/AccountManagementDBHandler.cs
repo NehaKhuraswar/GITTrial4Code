@@ -109,18 +109,6 @@ namespace RAP.DAL
                     using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
                     {
 
-                        //if (message.UserTypeID == 0)
-                        //{
-                        //    int? userTypeResponse = null;
-                        //    userTypeResponse = db.UserTypes.Where(t => t.Description == message.UserType).Select(p => p.UserTypeID).FirstOrDefault();
-
-                        //    if (userTypeResponse == null)
-                        //    {
-                        //        return false;
-                        //    }
-                        //    message.UserTypeID = Convert.ToInt32(userTypeResponse);
-                        //}
-
                         ThirdPartyRepresentation thirdpartyTable = new ThirdPartyRepresentation();
                         thirdpartyTable.CustomerID = CustID;
                         thirdpartyTable.ThirdPartyCustomerID = thirdpartyCustID;

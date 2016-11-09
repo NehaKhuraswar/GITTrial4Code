@@ -25,8 +25,19 @@ var rapinvitethirdpartyFactory = ['blockUI', 'ajaxService', function (blockUI, a
             blockUI.stop();
         });
     }
+    var _Invite = function ( model) {
+        blockUI.start();
+
+        var url = _routePrefix + '/invite'
+        
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     factory.SearchInviteThirdPartyUser = _SearchInviteThirdPartyUser;
     factory.Authorize = _Authorize;
+    factory.Invite = _Invite;
     return factory;
 }];
