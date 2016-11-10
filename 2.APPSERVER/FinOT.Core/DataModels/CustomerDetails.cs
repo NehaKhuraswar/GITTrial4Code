@@ -13,6 +13,7 @@ namespace RAP.Core.DataModels
         {
             thirdpartyDetails = new List<ThirdPartyDetails>();
         }
+        public int selected { get; set; }
         public int custID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

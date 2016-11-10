@@ -1,12 +1,13 @@
 ﻿'use strict';
-var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', function ($scope, $modal, alert, rapFactory, $location) {
+var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    self.model = [];
+    self.model = rapGlobalFactory.CustomerDetails;
     self.rent = [];
-
+    //self.selectedValue = 1;
+    self.selectedObj = {};
     var _getrent = function () {
         return rapFactory.GetRent().then(function (response) {
-            if (!alert.checkresponse(response)) { return; }
+           // if (!alert.checkresponse(response)) { return; }
             self.rent = response.data;
         });
     }
@@ -22,6 +23,7 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
         $location.path("/rentalhistory");
     }
     self.ContinueToLostServices = function () {
+        var a = self.selectedObj;
         $location.path("/lostservices");
     }
     self.ContinueToReview  = function () {

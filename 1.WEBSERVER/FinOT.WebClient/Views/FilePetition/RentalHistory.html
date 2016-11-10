@@ -83,12 +83,21 @@
                     <label><input type="radio" name="NoRAPNotice">I was never given a RAP notice by my property owner</label>
                 </div>
                 <p>Is your rent subsidized or controlled  by any government agency, including HUD</p>
-                <div class="radio">
+                <label ng-repeat="rent in Ctrl.rent" for="{{rent.id}}">
+                 <input type="radio"
+                       ng-model="Ctrl.selectedObj"
+                       ng-value="rent.id"
+                       id="{{rent.id}}"
+                       name="rentdisplay">{{rent.name}}
+                </label>
+               
+
+                <!--<div class="radio">
                     <label><input type="radio" name="IsSubsidized">Yes</label>
                 </div>
                 <div class="radio">
                     <label><input type="radio" name="IsSubsidized">No</label>
-                </div>
+                </div>-->
 
                 <p>___________________________________________________________________________________________</p>
                 <strong>Rent Increases</strong>
@@ -191,7 +200,7 @@
                 <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.ListOfPastPetitions" required />
                 <button ng-click="Ctrl.AddAnotherCaseNumber()">Add another case number</button>
 
-                <button ng-click="Ctrl.ContinueToLostServices()">Continue</button>
+                <button ng-click="Ctrl.ContinueToLostServices(Ctrl.selectedValue)">Continue</button>
             </div>
         </div>
     </div>

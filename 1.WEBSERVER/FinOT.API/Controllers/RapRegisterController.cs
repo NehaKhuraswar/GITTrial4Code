@@ -73,8 +73,8 @@ namespace RAP.API.Controllers
                 //{
                 obj = new List<Rent>();
                 //}
-                Rent obj1 = new Rent() { id = 1, name = "New Rent" };
-                Rent obj2 = new Rent() { id = 2, name = "New Rent" };
+                Rent obj1 = new Rent() { id = 1, name = "Yes" };
+                Rent obj2 = new Rent() { id = 2, name = "No" };
                 obj.Add(obj1);
                 obj.Add(obj2);
                 transaction.data = obj;
