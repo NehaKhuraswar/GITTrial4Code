@@ -15,13 +15,13 @@ namespace RAP.DAL
         public AccountManagementDBHandler()
         {
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
-        }
+        }   
         public CustomerInfo GetCustomer(CustomerInfo message)
         {
             try
             {
                 CustomerInfo custinfo ;
-                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
                     var custdetails = db.CustomerDetails.Where(x => x.email == message.email && x.Password == message.Password)
@@ -69,7 +69,7 @@ namespace RAP.DAL
             try
             {
                 CustomerInfo custinfo;
-                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
                     var custdetails = db.CustomerDetails.Where(x => x.email == message)
@@ -106,7 +106,7 @@ namespace RAP.DAL
             {
                // CustomerInfo custinfo;
                 
-                    using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                    using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                     {
 
                         ThirdPartyRepresentation thirdpartyTable = new ThirdPartyRepresentation();
@@ -131,7 +131,7 @@ namespace RAP.DAL
             try
             {
                 ThirdPartyDetails thirdPartyDetails;
-                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
                     var ThirdPartyCustomerID = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
@@ -164,7 +164,7 @@ namespace RAP.DAL
        {
            try
            {
-               using(OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+               using(AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                {
                    
                    if(message.UserTypeID == 0)

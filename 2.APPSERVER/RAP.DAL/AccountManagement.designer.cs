@@ -23,7 +23,7 @@ namespace RAP.DAL
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="OAKRAP")]
-	public partial class OAKRAPDataContext : System.Data.Linq.DataContext
+	public partial class AccountManagementDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -44,31 +44,31 @@ namespace RAP.DAL
     partial void DeleteNotificationPreference(NotificationPreference instance);
     #endregion
 		
-		public OAKRAPDataContext() : 
+		public AccountManagementDataContext() : 
 				base(global::RAP.DAL.Properties.Settings.Default.OAKRAPConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public OAKRAPDataContext(string connection) : 
+		public AccountManagementDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public OAKRAPDataContext(System.Data.IDbConnection connection) : 
+		public AccountManagementDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public OAKRAPDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public AccountManagementDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public OAKRAPDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public AccountManagementDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();

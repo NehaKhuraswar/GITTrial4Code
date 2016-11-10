@@ -51,11 +51,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountManagementDBHandler.cs" />
-    <Compile Include="OAKRAP.designer.cs">
+    <Compile Include="AccountManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OAKRAP.dbml</DependentUpon>
+      <DependentUpon>AccountManagement.dbml</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationProcessing.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationProcessing.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationProcessingDBHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -65,9 +71,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="OAKRAP.dbml">
+    <None Include="AccountManagement.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>OAKRAP.designer.cs</LastGenOutput>
+      <LastGenOutput>AccountManagement.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ApplicationProcessing.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ApplicationProcessing.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -79,8 +90,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OAKRAP.dbml.layout">
-      <DependentUpon>OAKRAP.dbml</DependentUpon>
+    <None Include="AccountManagement.dbml.layout">
+      <DependentUpon>AccountManagement.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +99,11 @@
       <Project>{71ee247b-df70-4636-bca3-b20eab4e875f}</Project>
       <Name>RAP.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ApplicationProcessing.dbml.layout">
+      <DependentUpon>ApplicationProcessing.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

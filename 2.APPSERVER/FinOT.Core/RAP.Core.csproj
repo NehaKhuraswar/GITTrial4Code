@@ -47,6 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\ExceptionHandler.cs" />
+    <Compile Include="Common\IExceptionHandler.cs" />
+    <Compile Include="Common\OperationStatus.cs" />
+    <Compile Include="Common\ReturnResult.cs" />
+    <Compile Include="Common\StatusEnum.cs" />
     <Compile Include="DataModels\Audit.cs" />
     <Compile Include="DataModels\CodeDescription.cs" />
     <Compile Include="DataModels\CustomerDetails.cs" />
@@ -54,6 +59,7 @@
     <Compile Include="DataModels\IDDescription.cs" />
     <Compile Include="DataModels\Notes.cs" />
     <Compile Include="DataModels\OTRequest.cs" />
+    <Compile Include="DataModels\TenantPetition.cs" />
     <Compile Include="FinServices\APIService.cs" />
     <Compile Include="FinServices\LogService.cs" />
     <Compile Include="Persisters\IAccountManagementPersister.cs" />
