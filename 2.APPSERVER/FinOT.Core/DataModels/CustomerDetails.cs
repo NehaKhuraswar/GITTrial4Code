@@ -9,6 +9,10 @@ namespace RAP.Core.DataModels
     
     public class CustomerInfo
     {
+        public CustomerInfo()
+        {
+            thirdpartyDetails = new List<ThirdPartyDetails>();
+        }
         public int custID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,7 +28,21 @@ namespace RAP.Core.DataModels
         public string Password { get; set; }
         public bool EmailNotificationFlag { get; set; }
         public bool MailNotificationFlag { get; set; }
+        public List<ThirdPartyDetails> thirdpartyDetails { get; set; }
+ 
+    }
+    public class Rent
+    {
 
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+    public class ThirdPartyDetails
+    {
+        public int custID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string email { get; set; }
     }
     public class PetitionDetails
     {

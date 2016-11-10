@@ -3,7 +3,16 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     var factory = {};
       var _routePrefix = 'api/accountmanagement';
     //var _routePrefix = 'api/otrequest';
+      var _GetRent = function () {
+          blockUI.start();
 
+          var url = _routePrefix + '/getrent';
+         
+          return ajax.Get(url)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
     var _GetOTRequest = function (reqid, fy) {
         blockUI.start();
 
@@ -84,7 +93,8 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     factory.GetNotes = _GetNotes;
     factory.SaveNotes = _SaveNotes;
     factory.SaveCustomer = _SaveCustomer;
-    factory.GetCustomer = _GetCustomer
+    factory.GetCustomer = _GetCustomer;
+    factory.GetRent = _GetRent;
     
     return factory;
 }];

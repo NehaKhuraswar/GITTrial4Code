@@ -25,6 +25,18 @@ var rapinvitethirdpartyFactory = ['blockUI', 'ajaxService', function (blockUI, a
             blockUI.stop();
         });
     }
+    var _GetAuthorizedUsers = function (custid) {
+        blockUI.start();
+
+        var url = _routePrefix + '/authorizedusers'
+        if (!(custid == null || custid == undefined)) {
+            url += '?custid=' + custid;
+        }
+        return ajax.Post(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     var _Invite = function ( model) {
         blockUI.start();
 
@@ -39,5 +51,6 @@ var rapinvitethirdpartyFactory = ['blockUI', 'ajaxService', function (blockUI, a
     factory.SearchInviteThirdPartyUser = _SearchInviteThirdPartyUser;
     factory.Authorize = _Authorize;
     factory.Invite = _Invite;
+    factory.GetAuthorizedUsers = _GetAuthorizedUsers;
     return factory;
 }];

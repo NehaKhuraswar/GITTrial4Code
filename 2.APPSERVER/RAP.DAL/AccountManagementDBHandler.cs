@@ -124,6 +124,42 @@ namespace RAP.DAL
                 return false;
             }
         }
+        public ThirdPartyDetails GetAuthorizedUsers(int custID)
+        {
+            
+            
+            try
+            {
+                ThirdPartyDetails thirdPartyDetails;
+                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                {
+
+                    var ThirdPartyCustomerID = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
+                                                            .Select(c => new ThirdPartyDetails()
+                                                            {
+                                                                custID = (int)c.ThirdPartyCustomerID
+                                                            }).ToList();
+                    thirdPartyDetails = new ThirdPartyDetails();
+                    //if (custdetails != null)
+                    //{
+                    //    custinfo = new CustomerInfo();
+                    //    custinfo.FirstName = custdetails.FirstName;
+                    //    custinfo.LastName = custdetails.LastName;
+                    //    custinfo.email = custdetails.email;
+                    //    custinfo.custID = custdetails.custID;
+                    //}
+                    //else
+                    //{
+                    //    custinfo = null;
+                    //}
+                }
+                return thirdPartyDetails;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public bool SaveCustomer(CustomerInfo message)
        {
            try

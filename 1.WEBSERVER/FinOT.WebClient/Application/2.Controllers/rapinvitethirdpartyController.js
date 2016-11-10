@@ -1,17 +1,20 @@
 ﻿'use strict';
 var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinvitethirdpartyFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    self.model = [];
+    self.model = rapGlobalFactory.CustomerDetails;
     self.showEmailNotFound = false;
     self.showEmailFound = false;
     self.IsConsent = false;
+    
+    
    // self.AuthorizedUsers = [];
-   //// var _getAuthorizedUsers = function () {
-        //return dataFactory.GetAuthorizedUsers().then(function (response) {
-        //    if (!alert.checkResponse(response)) { return; }
-        //    self.AuthorizedUsers = response.data;
-        //});
-  //  }
+    var _getauthorizedusers = function () {
+        return rapfactory.GetAuthorizedUsers(self.model.custID).then(function (response) {
+            if (!alert.checkresponse(response)) { return; }
+            self.authorizedusers = response.data;
+        });
+    }
+    _getauthorizedusers();
  //   $q.all([_getAuthorizedUsers()]).then(function () {
 
         //if (self.model.RequestType.ID == 1) {

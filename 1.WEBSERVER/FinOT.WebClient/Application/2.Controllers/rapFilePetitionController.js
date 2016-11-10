@@ -2,6 +2,16 @@
 var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', function ($scope, $modal, alert, rapFactory, $location) {
     var self = this;
     self.model = [];
+    self.rent = [];
+
+    var _getrent = function () {
+        return rapFactory.GetRent().then(function (response) {
+            if (!alert.checkresponse(response)) { return; }
+            self.rent = response.data;
+        });
+    }
+    _getrent();
+
     self.Continue = function () {
         $location.path("/applicationinfo");
     }
