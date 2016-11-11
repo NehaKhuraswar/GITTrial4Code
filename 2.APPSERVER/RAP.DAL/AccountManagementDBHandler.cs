@@ -131,7 +131,7 @@ namespace RAP.DAL
             try
             {
                 List<ThirdPartyDetails> thirdPartyDetails;
-                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
                     //var ThirdPartyCustomerID = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
