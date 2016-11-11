@@ -6,53 +6,11 @@ using System.Threading.Tasks;
 
 namespace RAP.Core.DataModels
 {
-    public class TenantPetitionFormInfoM
-    {
-        private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
-        private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
-        private List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
-
-        public List<UnitTypeM> UnitTypes
-        {
-            get
-            {
-                return _unitTypes;
-            }
-            set
-            {
-                _unitTypes = value;
-            }
-        }
-
-        public List<CurrentOnRentM> CurrentOnRent
-        {
-            get
-            {
-                return _currentOnRent;
-            }
-            set
-            {
-                _currentOnRent = value;
-            }
-        }
-
-        public List<PetitionGroundM> PetitionGrounds
-        {
-            get
-            {
-                return _petitionGrounds;
-            }
-            set
-            {
-                _petitionGrounds = value;
-            }
-        }
-    }
-
+    
     public class CaseInfoM
     {
         public int PetitionCategoryID { get; set; }
-        public TenantPetitionIfoM TenantPetitionInfo { get; set; }
+        public TenantPetitionInfoM TenantPetitionInfo { get; set; }
         public int TenantUserID { get; set; }
         public bool bThirdPartyRepresentation { get; set; }
         public UserInfoM ThirdPartyInfo { get; set; }
@@ -84,8 +42,10 @@ namespace RAP.Core.DataModels
 
     }
 
-    public class TenantPetitionIfoM
+    public class TenantPetitionInfoM
     {
+        private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
+        private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         private List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
         private List<TenantRentIncreaseInfoM> _rentIncreases = new List<TenantRentIncreaseInfoM>();
         private List<TenantLostServiceInfoM> _lostServices = new List<TenantLostServiceInfoM>();
@@ -149,6 +109,29 @@ namespace RAP.Core.DataModels
                 _problems = value;
             }
         }
+        public List<UnitTypeM> UnitTypes
+        {
+            get
+            {
+                return _unitTypes;
+            }
+            set
+            {
+                _unitTypes = value;
+            }
+        }
+
+        public List<CurrentOnRentM> CurrentOnRent
+        {
+            get
+            {
+                return _currentOnRent;
+            }
+            set
+            {
+                _currentOnRent = value;
+            }
+        }
 
     }
 
@@ -192,7 +175,19 @@ namespace RAP.Core.DataModels
 
     public class PetitionGroundM
     {
-        public int ID { get; set; }
-        public string Description { get; set; }
+        private bool _selected = false;
+        public int PetitionGroundID { get; set; }
+        public string PetitionGroundDescription { get; set; }
+        public bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = true;
+            }
+        }
     }
 }

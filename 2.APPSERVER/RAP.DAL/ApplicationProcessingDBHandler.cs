@@ -17,12 +17,12 @@ namespace RAP.DAL
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
 
-        public ReturnResult<TenantPetitionFormInfoM> GetTenantPetitionFormInfo()
+        public ReturnResult<TenantPetitionInfoM> GetTenantPetitionFormInfo()
        {
-            ReturnResult<TenantPetitionFormInfoM> result = new ReturnResult<TenantPetitionFormInfoM>();
-            List<UnitType> _units = new List<UnitType>();
+           ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            List<UnitTypeM> _units = new List<UnitTypeM>();
             List<CurrentOnRentM> _rentStatusItems = new List<CurrentOnRentM>();
-            List<PetitionGround> _petitionGrounds = new List<PetitionGround>();
+            List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
             try
             {
                 using(ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
@@ -37,9 +37,9 @@ namespace RAP.DAL
                     {                       
                         foreach(var unit in units)
                         {
-                            UnitType _unit = new UnitType();
+                            UnitTypeM _unit = new UnitTypeM();
                             _unit.UnitTypeID = unit.UnitTypeID;
-                            _unit.Description = unit.Description;
+                            _unit.UnitDescription = unit.Description;
                             _units.Add(_unit);
                         }
 
@@ -84,9 +84,9 @@ namespace RAP.DAL
                    {
                        foreach (var petitionGround in petitionGrounds)
                        {
-                           PetitionGround _petitionGround = new PetitionGround();
+                           PetitionGroundM _petitionGround = new PetitionGroundM();
                            _petitionGround.PetitionGroundID = petitionGround.PetitionGroundID;
-                           _petitionGround.PetitionDescription = petitionGround.PetitionDescription;
+                           _petitionGround.PetitionGroundDescription = petitionGround.PetitionDescription;
                            _petitionGrounds.Add(_petitionGround);
                        }
                    }
@@ -97,7 +97,9 @@ namespace RAP.DAL
                         return result;
                     }
 
-                  //  result.result.UnitTypes = _units 
+                    result.result.UnitTypes = _units;
+                    result.result.CurrentOnRent = _rentStatusItems;
+                    result.result.PetitionGrounds = _petitionGrounds; 
                    
                 }
 
