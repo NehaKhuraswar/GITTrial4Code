@@ -165,17 +165,17 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
         [Route("authorizedusers/{custid:int?}")]
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage GetAuthorizedUsers(int? custID = null)
         {
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<ThirdPartyDetails> transaction = new TranInfo<ThirdPartyDetails>();
+            TranInfo<List<ThirdPartyDetails>> transaction = new TranInfo<List<ThirdPartyDetails>>();
 
             try
             {
 
-                ThirdPartyDetails obj;
+                List<ThirdPartyDetails> obj;
                 obj = accService.GetAuthorizedUsers((int)custID);
                 if (obj != null)
                 {
@@ -199,7 +199,7 @@ namespace RAP.API.Controllers
                 //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
-            return Request.CreateResponse<TranInfo<ThirdPartyDetails>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<List<ThirdPartyDetails>>>(ReturnCode, transaction);
         }
         [Route("searchinvite")]
         [HttpPost]

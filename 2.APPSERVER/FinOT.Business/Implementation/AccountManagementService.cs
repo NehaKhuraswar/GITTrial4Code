@@ -41,7 +41,7 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.AuthorizeThirdPartyUser(CustID, thirdpartyCustID);
         }
-        public ThirdPartyDetails GetAuthorizedUsers(int custID)
+        public List<ThirdPartyDetails> GetAuthorizedUsers(int custID)
         {
             return accDBHandler.GetAuthorizedUsers(custID);
         }

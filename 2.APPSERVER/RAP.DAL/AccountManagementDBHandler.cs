@@ -15,7 +15,7 @@ namespace RAP.DAL
         public AccountManagementDBHandler()
         {
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
-        }   
+        }
         public CustomerInfo GetCustomer(CustomerInfo message)
         {
             try
@@ -124,22 +124,60 @@ namespace RAP.DAL
                 return false;
             }
         }
-        public ThirdPartyDetails GetAuthorizedUsers(int custID)
+        public List<ThirdPartyDetails> GetAuthorizedUsers(int custID)
         {
             
             
             try
             {
-                ThirdPartyDetails thirdPartyDetails;
-                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                List<ThirdPartyDetails> thirdPartyDetails;
+                using (OAKRAPDataContext db = new OAKRAPDataContext(_connString))
                 {
 
-                    var ThirdPartyCustomerID = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
-                                                            .Select(c => new ThirdPartyDetails()
+                    //var ThirdPartyCustomerID = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
+                    //                                        .Select(c => new ThirdPartyDetails()
+                    //                                        {
+                    //                                            custID = (int)c.ThirdPartyCustomerID
+                    //                                        }).ToList();
+     //               var a = db.ThirdPartyRepresentations         // source
+     //.Join(db.CustomerDetails,         // target
+     //   c => c.ThirdPartyCustomerID,          // FK
+     //   cm => cm.CustomerID,   // PK
+     //   (c, cm) => new { ThirdPartyRepresentations = c, CustomerDetails = cm })
+     //   .Select(x => x.CustomerDetails){};
+
+
+                    //DataTable customerDetails = db.CustomerDetails;
+                    //DataTable orders = ds.Tables["SalesOrderHeader"];
+
+                    var query =
+                        db.ThirdPartyRepresentations.AsEnumerable().Join(db.CustomerDetails.AsEnumerable(),
+                        t => t.ThirdPartyCustomerID,
+                        c => c.CustomerID,
+                        (t, c) => new
+                        {
+                            CustomerID = t.ThirdPartyCustomerID,
+                            FirstName = c.FirstName,
+                            LastName = c.LastName,
+                            email = c.email
+                        });
+
+                    
+                    thirdPartyDetails = new List<ThirdPartyDetails>();
+                    int index = 0;
+
+                    foreach (var CustomerDetails in query)
                                                             {
-                                                                custID = (int)c.ThirdPartyCustomerID
-                                                            }).ToList();
-                    thirdPartyDetails = new ThirdPartyDetails();
+                        ThirdPartyDetails obj = new ThirdPartyDetails();
+                        obj.custID = CustomerDetails.CustomerID;
+                        obj.FirstName = CustomerDetails.FirstName;
+                        obj.LastName = CustomerDetails.LastName;
+                        obj.email = CustomerDetails.email;
+
+                        thirdPartyDetails.Add(obj);
+                        index++;
+                    }
+
                     //if (custdetails != null)
                     //{
                     //    custinfo = new CustomerInfo();

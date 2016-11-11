@@ -9,8 +9,7 @@ var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinv
     
    // self.AuthorizedUsers = [];
     var _getauthorizedusers = function () {
-        return rapfactory.GetAuthorizedUsers(self.model.custID).then(function (response) {
-            if (!alert.checkresponse(response)) { return; }
+        return rapFactory.GetAuthorizedUsers(self.model.custID).then(function (response) {            
             self.authorizedusers = response.data;
         });
     }
@@ -37,7 +36,8 @@ var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinv
 
  //   })
     self.SearchInviteThirdPartyUser = function (email) {
-        
+        self.showEmailFound = false;
+        self.showEmailNotFound = false;
         rapFactory.SearchInviteThirdPartyUser(email).then(function (response) {
             if (!alert.checkResponse(response)) {
                 self.showEmailNotFound = true;

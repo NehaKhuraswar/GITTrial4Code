@@ -32,7 +32,7 @@ var rapinvitethirdpartyFactory = ['blockUI', 'ajaxService', function (blockUI, a
         if (!(custid == null || custid == undefined)) {
             url += '?custid=' + custid;
         }
-        return ajax.Post(url)
+        return ajax.Get(url)
         .finally(function () {
             blockUI.stop();
         });

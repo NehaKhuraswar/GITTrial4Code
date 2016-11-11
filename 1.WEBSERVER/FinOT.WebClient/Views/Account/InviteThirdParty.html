@@ -26,17 +26,15 @@
                 </div>
                 <div>
                     <p>Users with access to your account</p>
+                    <div ng-repeat="authorizeduser in Ctrl.authorizedusers">
+                        
+                                {{authorizeduser.FirstName}} {{authorizeduser.LastName}}
+                                {{authorizeduser.email}}
+                            
+                    </div>
                     <button class="btn btn-default" ng-click="Ctrl.Remove(Ctrl.model)">Remove</button>
-                </div>
-                    
+                </div>                    
 
-                    <p>Users with access to your account</p>
-                    <!--<div ng-repeat="model in collection | orderBy: 'id' as filtered_result track by model.id">
-            *     model.name}}
-            *
-        </div>-->
-                    <button class="btn btn-default" ng-click="Remove()">Remove</button>
-                </div>
         </div>
     </div>
 </div>
