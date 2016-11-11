@@ -47,8 +47,8 @@
       <Column Name="bSeriousProblem" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="TenantPetitionInfo_TenantPetitionType" Member="TenantPetitionTypes" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionType" />
       <Association Name="TenantPetitionInfo_TenantProblemInfo" Member="TenantProblemInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantProblemInfo" />
-      <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantRentalIncrementInfo" />
       <Association Name="TenantPetitionInfo_TenantLostServiceInfo" Member="TenantLostServiceInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantLostServiceInfo" />
+      <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantRentalIncrementInfo" />
       <Association Name="UnitType_TenantPetitionInfo" Member="UnitType" ThisKey="UnitTypeID" OtherKey="UnitTypeID" Type="UnitType" IsForeignKey="true" />
     </Type>
   </Table>
@@ -70,19 +70,6 @@
       <Column Name="ProblemBeganDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="PayingToProblemBeganDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="TenantPetitionInfo_TenantProblemInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos">
-    <Type Name="TenantRentalIncrementInfo">
-      <Column Name="RentalIncreaseInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenantPetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bRentIncreaseNoticeGiven" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RentIncreaseNoticeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RentIncreaseEffectiveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RentIncreasedFrom" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RentIncreasedTo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="bRentIncreaseContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UserInfo" Member="UserInfos">
@@ -141,6 +128,19 @@
       <Association Name="UserInfo_CaseDetail" Member="UserInfo" ThisKey="OwnerUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
       <Association Name="UserInfo_CaseDetail1" Member="UserInfo1" ThisKey="TenantUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
       <Association Name="UserInfo_CaseDetail2" Member="UserInfo2" ThisKey="ThirdPartyUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos">
+    <Type Name="TenantRentalIncrementInfo">
+      <Column Name="RentalIncreaseInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenantPetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bRentIncreaseNoticeGiven" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RentIncreaseNoticeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RentIncreaseEffectiveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RentIncreasedFrom" Type="System.Decimal" DbType="Decimal(6,2)" CanBeNull="true" />
+      <Column Name="RentIncreasedTo" Type="System.Decimal" DbType="Decimal(6,2)" CanBeNull="true" />
+      <Column Name="bRentIncreaseContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

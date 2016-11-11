@@ -68,7 +68,7 @@ namespace RAP.Core.DataModels
             }
         }
         public DateTime MoveInDate { get; set; }
-        public double InitalRent { get; set; }
+        public decimal InitalRent { get; set; }
         public bool bRAPNoticeGiven { get; set; }
         public DateTime RAPNoticeGivenDate { get; set; }
         public bool bRentControlledByAgency { get; set; }
