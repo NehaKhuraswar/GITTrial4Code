@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
-      var _routePrefix = 'api/accountmanagement';
+      var _routePrefix = 'api/applicationprocessing';
     //var _routePrefix = 'api/otrequest';
       var _GetRent = function () {
           blockUI.start();
@@ -13,18 +13,28 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
               blockUI.stop();
           });
       }
-    var _GetOTRequest = function (reqid, fy) {
+      var _GetCaseInfo = function () {
         blockUI.start();
 
-        var url = _routePrefix + '/get';
-        if (!(reqid == null || reqid == undefined)) { url += '/' + reqid; }
-        if (!(fy == null || fy == undefined)) { url += '/' + fy; }
+        var url = _routePrefix + '/getcaseinfo';
 
         return ajax.Get(url)
         .finally(function () {
             blockUI.stop();
         });
-    }
+      }
+    
+      var _SaveCaseInfo = function (model) {
+          blockUI.start();
+
+          var url = _routePrefix + '/savecaseinfo';
+
+          return ajax.Post(model)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
+
     var _GetCustomer = function (custid) {
         blockUI.start();
         var reqid = 1;
@@ -88,13 +98,15 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
         return '"' + value + '"'
     }
 
-    factory.GetOTRequest = _GetOTRequest;
+    //factory.GetOTRequest = _GetOTRequest;
     factory.SaveOTRequest = _SaveOTRequest;
     factory.GetNotes = _GetNotes;
     factory.SaveNotes = _SaveNotes;
     factory.SaveCustomer = _SaveCustomer;
     factory.GetCustomer = _GetCustomer;
     factory.GetRent = _GetRent;
+    factory.GetCaseInfo = _GetCaseInfo;
+    factory.SaveCaseInfo = _SaveCaseInfo;
     
     return factory;
 }];

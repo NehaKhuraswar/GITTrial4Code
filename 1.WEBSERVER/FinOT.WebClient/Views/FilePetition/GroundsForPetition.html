@@ -9,7 +9,14 @@
                 <p>Renter petition : Grounds for Petition</p>
                 <p>___________________________________________________________________________________________</p>
                 <p>I (We) contest one or more rent increases on one or more of the following grounds:</p>
-                <div class="checkbox">
+                <div ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
+                    <label>
+                        {{petitionground.Description}}:
+                        <input type="checkbox" id="petitionground.ID" ng-model="petitionground.selected">
+                    </label>
+                </div>
+
+                <!--<div class="checkbox">
                     <label><input type="checkbox" value="">a)</label>
                 </div>
                 <div class="checkbox">
@@ -44,7 +51,7 @@
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" value="">j)</label>
-                </div>
+                </div>-->
 
 
                 <button ng-click="Ctrl.ContinueToRentalHistory()">Continue</button>

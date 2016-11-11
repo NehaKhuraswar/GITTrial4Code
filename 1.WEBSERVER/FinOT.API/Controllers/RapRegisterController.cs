@@ -53,44 +53,7 @@ namespace RAP.API.Controllers
                 throw ex;
             }
         }
-        [HttpGet]
-        [Route("getRent")]
-        public HttpResponseMessage GetRent()
-        {
-            HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<List<Rent>> transaction = new TranInfo<List<Rent>>();
-
-            try
-            {
-                //  ExtractClaimDetails();
-
-                List<Rent> obj;
-                //if (custid.HasValue)
-                //{
-                //  //  obj = service.GetCustomer((int)reqid, fy, Username);
-                //}
-                //else
-                //{
-                obj = new List<Rent>();
-                //}
-                Rent obj1 = new Rent() { id = 1, name = "Yes" };
-                Rent obj2 = new Rent() { id = 2, name = "No" };
-                obj.Add(obj1);
-                obj.Add(obj2);
-                transaction.data = obj;
-                transaction.status = true;
-            }
-            catch (Exception ex)
-            {
-                transaction.AddException(ex.Message);
-                ReturnCode = HttpStatusCode.InternalServerError;
-
-                if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
-                //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
-            }
-
-            return Request.CreateResponse<TranInfo<List<Rent>>>(ReturnCode, transaction);
-        }
+        
         [HttpGet]
         [Route("get/{custid:int?}")]
         public HttpResponseMessage GetCustomer(int? custid = null)
