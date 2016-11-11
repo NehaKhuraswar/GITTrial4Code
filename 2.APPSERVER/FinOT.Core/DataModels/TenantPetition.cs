@@ -186,7 +186,7 @@ namespace RAP.Core.DataModels
             }
             set
             {
-                _selected = true;
+                _selected = value;
             }
         }
     }
