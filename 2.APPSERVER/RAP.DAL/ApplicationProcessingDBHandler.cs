@@ -17,11 +17,11 @@ namespace RAP.DAL
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
 
-        public ReturnResult<TenantPetitionFormInfo> GetTenantPetitionFormInfo()
+        public ReturnResult<TenantPetitionFormInfoM> GetTenantPetitionFormInfo()
        {
-            ReturnResult<TenantPetitionFormInfo> result = new ReturnResult<TenantPetitionFormInfo>();
+            ReturnResult<TenantPetitionFormInfoM> result = new ReturnResult<TenantPetitionFormInfoM>();
             List<UnitType> _units = new List<UnitType>();
-            List<CurrentOnRent> _rentStatusItems = new List<CurrentOnRent>();
+            List<CurrentOnRentM> _rentStatusItems = new List<CurrentOnRentM>();
             List<PetitionGround> _petitionGrounds = new List<PetitionGround>();
             try
             {
@@ -61,7 +61,7 @@ namespace RAP.DAL
                     {
                         foreach(var rentStatusItem in rentStausItems)
                         {
-                            CurrentOnRent _rentStatusItem = new CurrentOnRent();
+                            CurrentOnRentM _rentStatusItem = new CurrentOnRentM();
                             _rentStatusItem.StatusID = rentStatusItem.RentStatusID;
                             _rentStatusItem.Status = rentStatusItem.RentStatus;
                             _rentStatusItems.Add(_rentStatusItem);
