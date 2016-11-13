@@ -10,7 +10,7 @@
     <Type Name="PetitionGround">
       <Column Name="PetitionGroundID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PetitionDescription" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="PetitionGround_TenantPetitionType" Member="TenantPetitionTypes" ThisKey="PetitionGroundID" OtherKey="PetitionGroundID" Type="TenantPetitionType" />
+      <Association Name="PetitionGround_TenantPetitionGroundInfo" Member="TenantPetitionGroundInfos" ThisKey="PetitionGroundID" OtherKey="PetitionGroundID" Type="TenantPetitionGroundInfo" />
     </Type>
   </Table>
   <Table Name="dbo.UnitType" Member="UnitTypes">
@@ -45,20 +45,11 @@
       <Column Name="PreviousCaseIDs" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
       <Column Name="bLostService" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="bSeriousProblem" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="TenantPetitionInfo_TenantPetitionType" Member="TenantPetitionTypes" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionType" />
       <Association Name="TenantPetitionInfo_TenantProblemInfo" Member="TenantProblemInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantProblemInfo" />
       <Association Name="TenantPetitionInfo_TenantLostServiceInfo" Member="TenantLostServiceInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantLostServiceInfo" />
       <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantRentalIncrementInfo" />
+      <Association Name="TenantPetitionInfo_TenantPetitionGroundInfo" Member="TenantPetitionGroundInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionGroundInfo" />
       <Association Name="UnitType_TenantPetitionInfo" Member="UnitType" ThisKey="UnitTypeID" OtherKey="UnitTypeID" Type="UnitType" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TenantPetitionType" Member="TenantPetitionTypes">
-    <Type Name="TenantPetitionType">
-      <Column Name="TenantPetitionTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenantPetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PetitionGroundID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="PetitionGround_TenantPetitionType" Member="PetitionGround" ThisKey="PetitionGroundID" OtherKey="PetitionGroundID" Type="PetitionGround" IsForeignKey="true" />
-      <Association Name="TenantPetitionInfo_TenantPetitionType" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TenantProblemInfo" Member="TenantProblemInfos">
@@ -141,6 +132,15 @@
       <Column Name="RentIncreasedTo" Type="System.Decimal" DbType="Decimal(6,2)" CanBeNull="true" />
       <Column Name="bRentIncreaseContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantPetitionGroundInfo" Member="TenantPetitionGroundInfos">
+    <Type Name="TenantPetitionGroundInfo">
+      <Column Name="TenantPetitionGroudID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenantPetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PetitionGroundID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PetitionGround_TenantPetitionGroundInfo" Member="PetitionGround" ThisKey="PetitionGroundID" OtherKey="PetitionGroundID" Type="PetitionGround" IsForeignKey="true" />
+      <Association Name="TenantPetitionInfo_TenantPetitionGroundInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

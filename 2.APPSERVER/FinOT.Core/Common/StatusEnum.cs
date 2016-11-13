@@ -12,6 +12,7 @@ namespace RAP.Core.Common
 
         #region Data
         NoDataFound,
+        DatabaseException,
         #endregion
         
         #region Exceptions

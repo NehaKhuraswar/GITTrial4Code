@@ -76,6 +76,11 @@ namespace RAP.Core.Common
                     StatusCode = "0107";
                     StatusMessage = "The argument passed is null";
                     break;
+
+                case StatusEnum.DatabaseException:
+                    StatusCode = "0108";
+                    StatusMessage = "Error occured in database operation ";
+                    break;
                 #endregion
 
                 default:

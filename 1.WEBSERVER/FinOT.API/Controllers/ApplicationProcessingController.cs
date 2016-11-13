@@ -8,6 +8,7 @@ using System.Web.Http.Controllers;
 using System.Security.Claims;
 using RAP.Core.Services;
 using RAP.Core.DataModels;
+using RAP.Core.Common;
 using RAP.API.Models;
 using RAP.API.Common;
 
@@ -18,20 +19,20 @@ namespace RAP.API.Controllers
     public class ApplicationProcessingController : ApiController
     {
         private string Username, ExceptionMessage, InnerExceptionMessage;
-        private readonly IApplicationProcessingService service;
+        private readonly IApplicationProcessingService _service;
         public ApplicationProcessingController() { }
-        public ApplicationProcessingController(IApplicationProcessingService _service)
+        public ApplicationProcessingController(IApplicationProcessingService service)
         {
-            service = _service;
+            _service = service;
         }
 
         public void ExtractClaimDetails()
         {
             HttpRequestContext context = Request.GetRequestContext();
             var principle = Request.GetRequestContext().Principal as ClaimsPrincipal;
-            service.CorrelationId = principle.Claims.Where(x => x.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
+            _service.CorrelationId = principle.Claims.Where(x => x.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
             Username = principle.Claims.Where(x => x.Type == ClaimTypes.Name).FirstOrDefault().Value;
-            ExceptionMessage = "An error occured while processing your request. Reference# " + service.CorrelationId;
+            ExceptionMessage = "An error occured while processing your request. Reference# " + _service.CorrelationId;
         }
 
         #region "GET REQUESTS"
@@ -76,35 +77,32 @@ namespace RAP.API.Controllers
 
         [Route("getcaseinfo")]
         [HttpGet]
-        public HttpResponseMessage GetCaseInfo()
+        public HttpResponseMessage GetCaseDetails()
         {
             //Appl accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
-
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
 
-                CaseInfoM obj;
-                obj = new CaseInfoM();
-              //  obj = accService.GetAuthorizedUsers((int)custID);
-                //if (obj != null)
-                //{
-                        transaction.data = obj;
+                result = _service.GetCaseDetails();
+                if(result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
                     transaction.status = true;
-                //}
-                //else
-                //{
-                //    transaction.data = null;
-                //    transaction.status = false;
-                //}
-
+                }
+                else
+                {
+                    transaction.status = false;
+                }
 
             }
             catch (Exception ex)
             {
-                // transaction.AddException(ex.Message);
-                //ReturnCode = HttpStatusCode.InternalServerError;
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
 
                 //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
                 //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
@@ -117,15 +115,24 @@ namespace RAP.API.Controllers
         #region "POST REQUEST"
         [Route("savecaseinfo")]
         [HttpPost]
-        public HttpResponseMessage SaveCaseInfo([FromBody] CaseInfoM caseModel)
+        public HttpResponseMessage SaveCaseDetails([FromBody] CaseInfoM caseInfo)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
-
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-           //     transaction.status = accService.SaveCaseInfo(caseModel);
+                result = _service.SaveCaseDetails(caseInfo);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
             }
             catch (Exception ex)
             {

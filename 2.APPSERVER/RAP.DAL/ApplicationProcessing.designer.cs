@@ -45,9 +45,6 @@ namespace RAP.DAL
     partial void InsertTenantPetitionInfo(TenantPetitionInfo instance);
     partial void UpdateTenantPetitionInfo(TenantPetitionInfo instance);
     partial void DeleteTenantPetitionInfo(TenantPetitionInfo instance);
-    partial void InsertTenantPetitionType(TenantPetitionType instance);
-    partial void UpdateTenantPetitionType(TenantPetitionType instance);
-    partial void DeleteTenantPetitionType(TenantPetitionType instance);
     partial void InsertTenantProblemInfo(TenantProblemInfo instance);
     partial void UpdateTenantProblemInfo(TenantProblemInfo instance);
     partial void DeleteTenantProblemInfo(TenantProblemInfo instance);
@@ -63,6 +60,9 @@ namespace RAP.DAL
     partial void InsertTenantRentalIncrementInfo(TenantRentalIncrementInfo instance);
     partial void UpdateTenantRentalIncrementInfo(TenantRentalIncrementInfo instance);
     partial void DeleteTenantRentalIncrementInfo(TenantRentalIncrementInfo instance);
+    partial void InsertTenantPetitionGroundInfo(TenantPetitionGroundInfo instance);
+    partial void UpdateTenantPetitionGroundInfo(TenantPetitionGroundInfo instance);
+    partial void DeleteTenantPetitionGroundInfo(TenantPetitionGroundInfo instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -135,14 +135,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<TenantPetitionType> TenantPetitionTypes
-		{
-			get
-			{
-				return this.GetTable<TenantPetitionType>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TenantProblemInfo> TenantProblemInfos
 		{
 			get
@@ -180,6 +172,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantRentalIncrementInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TenantPetitionGroundInfo> TenantPetitionGroundInfos
+		{
+			get
+			{
+				return this.GetTable<TenantPetitionGroundInfo>();
 			}
 		}
 	}
@@ -280,7 +280,7 @@ namespace RAP.DAL
 		
 		private string _PetitionDescription;
 		
-		private EntitySet<TenantPetitionType> _TenantPetitionTypes;
+		private EntitySet<TenantPetitionGroundInfo> _TenantPetitionGroundInfos;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -294,7 +294,7 @@ namespace RAP.DAL
 		
 		public PetitionGround()
 		{
-			this._TenantPetitionTypes = new EntitySet<TenantPetitionType>(new Action<TenantPetitionType>(this.attach_TenantPetitionTypes), new Action<TenantPetitionType>(this.detach_TenantPetitionTypes));
+			this._TenantPetitionGroundInfos = new EntitySet<TenantPetitionGroundInfo>(new Action<TenantPetitionGroundInfo>(this.attach_TenantPetitionGroundInfos), new Action<TenantPetitionGroundInfo>(this.detach_TenantPetitionGroundInfos));
 			OnCreated();
 		}
 		
@@ -338,16 +338,16 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PetitionGround_TenantPetitionType", Storage="_TenantPetitionTypes", ThisKey="PetitionGroundID", OtherKey="PetitionGroundID")]
-		public EntitySet<TenantPetitionType> TenantPetitionTypes
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PetitionGround_TenantPetitionGroundInfo", Storage="_TenantPetitionGroundInfos", ThisKey="PetitionGroundID", OtherKey="PetitionGroundID")]
+		public EntitySet<TenantPetitionGroundInfo> TenantPetitionGroundInfos
 		{
 			get
 			{
-				return this._TenantPetitionTypes;
+				return this._TenantPetitionGroundInfos;
 			}
 			set
 			{
-				this._TenantPetitionTypes.Assign(value);
+				this._TenantPetitionGroundInfos.Assign(value);
 			}
 		}
 		
@@ -371,13 +371,13 @@ namespace RAP.DAL
 			}
 		}
 		
-		private void attach_TenantPetitionTypes(TenantPetitionType entity)
+		private void attach_TenantPetitionGroundInfos(TenantPetitionGroundInfo entity)
 		{
 			this.SendPropertyChanging();
 			entity.PetitionGround = this;
 		}
 		
-		private void detach_TenantPetitionTypes(TenantPetitionType entity)
+		private void detach_TenantPetitionGroundInfos(TenantPetitionGroundInfo entity)
 		{
 			this.SendPropertyChanging();
 			entity.PetitionGround = null;
@@ -672,13 +672,13 @@ namespace RAP.DAL
 		
 		private System.Nullable<bool> _bSeriousProblem;
 		
-		private EntitySet<TenantPetitionType> _TenantPetitionTypes;
-		
 		private EntitySet<TenantProblemInfo> _TenantProblemInfos;
 		
 		private EntitySet<TenantLostServiceInfo> _TenantLostServiceInfos;
 		
 		private EntitySet<TenantRentalIncrementInfo> _TenantRentalIncrementInfos;
+		
+		private EntitySet<TenantPetitionGroundInfo> _TenantPetitionGroundInfos;
 		
 		private EntityRef<UnitType> _UnitType;
 		
@@ -720,10 +720,10 @@ namespace RAP.DAL
 		
 		public TenantPetitionInfo()
 		{
-			this._TenantPetitionTypes = new EntitySet<TenantPetitionType>(new Action<TenantPetitionType>(this.attach_TenantPetitionTypes), new Action<TenantPetitionType>(this.detach_TenantPetitionTypes));
 			this._TenantProblemInfos = new EntitySet<TenantProblemInfo>(new Action<TenantProblemInfo>(this.attach_TenantProblemInfos), new Action<TenantProblemInfo>(this.detach_TenantProblemInfos));
 			this._TenantLostServiceInfos = new EntitySet<TenantLostServiceInfo>(new Action<TenantLostServiceInfo>(this.attach_TenantLostServiceInfos), new Action<TenantLostServiceInfo>(this.detach_TenantLostServiceInfos));
 			this._TenantRentalIncrementInfos = new EntitySet<TenantRentalIncrementInfo>(new Action<TenantRentalIncrementInfo>(this.attach_TenantRentalIncrementInfos), new Action<TenantRentalIncrementInfo>(this.detach_TenantRentalIncrementInfos));
+			this._TenantPetitionGroundInfos = new EntitySet<TenantPetitionGroundInfo>(new Action<TenantPetitionGroundInfo>(this.attach_TenantPetitionGroundInfos), new Action<TenantPetitionGroundInfo>(this.detach_TenantPetitionGroundInfos));
 			this._UnitType = default(EntityRef<UnitType>);
 			OnCreated();
 		}
@@ -1032,19 +1032,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantPetitionInfo_TenantPetitionType", Storage="_TenantPetitionTypes", ThisKey="TenantPetitionID", OtherKey="TenantPetitionID")]
-		public EntitySet<TenantPetitionType> TenantPetitionTypes
-		{
-			get
-			{
-				return this._TenantPetitionTypes;
-			}
-			set
-			{
-				this._TenantPetitionTypes.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantPetitionInfo_TenantProblemInfo", Storage="_TenantProblemInfos", ThisKey="TenantPetitionID", OtherKey="TenantPetitionID")]
 		public EntitySet<TenantProblemInfo> TenantProblemInfos
 		{
@@ -1081,6 +1068,19 @@ namespace RAP.DAL
 			set
 			{
 				this._TenantRentalIncrementInfos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantPetitionInfo_TenantPetitionGroundInfo", Storage="_TenantPetitionGroundInfos", ThisKey="TenantPetitionID", OtherKey="TenantPetitionID")]
+		public EntitySet<TenantPetitionGroundInfo> TenantPetitionGroundInfos
+		{
+			get
+			{
+				return this._TenantPetitionGroundInfos;
+			}
+			set
+			{
+				this._TenantPetitionGroundInfos.Assign(value);
 			}
 		}
 		
@@ -1138,18 +1138,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		private void attach_TenantPetitionTypes(TenantPetitionType entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantPetitionInfo = this;
-		}
-		
-		private void detach_TenantPetitionTypes(TenantPetitionType entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantPetitionInfo = null;
-		}
-		
 		private void attach_TenantProblemInfos(TenantProblemInfo entity)
 		{
 			this.SendPropertyChanging();
@@ -1185,197 +1173,17 @@ namespace RAP.DAL
 			this.SendPropertyChanging();
 			entity.TenantPetitionInfo = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantPetitionType")]
-	public partial class TenantPetitionType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TenantPetitionTypeID;
-		
-		private int _TenantPetitionID;
-		
-		private int _PetitionGroundID;
-		
-		private EntityRef<PetitionGround> _PetitionGround;
-		
-		private EntityRef<TenantPetitionInfo> _TenantPetitionInfo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTenantPetitionTypeIDChanging(int value);
-    partial void OnTenantPetitionTypeIDChanged();
-    partial void OnTenantPetitionIDChanging(int value);
-    partial void OnTenantPetitionIDChanged();
-    partial void OnPetitionGroundIDChanging(int value);
-    partial void OnPetitionGroundIDChanged();
-    #endregion
-		
-		public TenantPetitionType()
+		private void attach_TenantPetitionGroundInfos(TenantPetitionGroundInfo entity)
 		{
-			this._PetitionGround = default(EntityRef<PetitionGround>);
-			this._TenantPetitionInfo = default(EntityRef<TenantPetitionInfo>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.TenantPetitionInfo = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantPetitionTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TenantPetitionTypeID
+		private void detach_TenantPetitionGroundInfos(TenantPetitionGroundInfo entity)
 		{
-			get
-			{
-				return this._TenantPetitionTypeID;
-			}
-			set
-			{
-				if ((this._TenantPetitionTypeID != value))
-				{
-					this.OnTenantPetitionTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._TenantPetitionTypeID = value;
-					this.SendPropertyChanged("TenantPetitionTypeID");
-					this.OnTenantPetitionTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantPetitionID", DbType="Int NOT NULL")]
-		public int TenantPetitionID
-		{
-			get
-			{
-				return this._TenantPetitionID;
-			}
-			set
-			{
-				if ((this._TenantPetitionID != value))
-				{
-					if (this._TenantPetitionInfo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTenantPetitionIDChanging(value);
-					this.SendPropertyChanging();
-					this._TenantPetitionID = value;
-					this.SendPropertyChanged("TenantPetitionID");
-					this.OnTenantPetitionIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PetitionGroundID", DbType="Int NOT NULL")]
-		public int PetitionGroundID
-		{
-			get
-			{
-				return this._PetitionGroundID;
-			}
-			set
-			{
-				if ((this._PetitionGroundID != value))
-				{
-					if (this._PetitionGround.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPetitionGroundIDChanging(value);
-					this.SendPropertyChanging();
-					this._PetitionGroundID = value;
-					this.SendPropertyChanged("PetitionGroundID");
-					this.OnPetitionGroundIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PetitionGround_TenantPetitionType", Storage="_PetitionGround", ThisKey="PetitionGroundID", OtherKey="PetitionGroundID", IsForeignKey=true)]
-		public PetitionGround PetitionGround
-		{
-			get
-			{
-				return this._PetitionGround.Entity;
-			}
-			set
-			{
-				PetitionGround previousValue = this._PetitionGround.Entity;
-				if (((previousValue != value) 
-							|| (this._PetitionGround.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._PetitionGround.Entity = null;
-						previousValue.TenantPetitionTypes.Remove(this);
-					}
-					this._PetitionGround.Entity = value;
-					if ((value != null))
-					{
-						value.TenantPetitionTypes.Add(this);
-						this._PetitionGroundID = value.PetitionGroundID;
-					}
-					else
-					{
-						this._PetitionGroundID = default(int);
-					}
-					this.SendPropertyChanged("PetitionGround");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantPetitionInfo_TenantPetitionType", Storage="_TenantPetitionInfo", ThisKey="TenantPetitionID", OtherKey="TenantPetitionID", IsForeignKey=true)]
-		public TenantPetitionInfo TenantPetitionInfo
-		{
-			get
-			{
-				return this._TenantPetitionInfo.Entity;
-			}
-			set
-			{
-				TenantPetitionInfo previousValue = this._TenantPetitionInfo.Entity;
-				if (((previousValue != value) 
-							|| (this._TenantPetitionInfo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TenantPetitionInfo.Entity = null;
-						previousValue.TenantPetitionTypes.Remove(this);
-					}
-					this._TenantPetitionInfo.Entity = value;
-					if ((value != null))
-					{
-						value.TenantPetitionTypes.Add(this);
-						this._TenantPetitionID = value.TenantPetitionID;
-					}
-					else
-					{
-						this._TenantPetitionID = default(int);
-					}
-					this.SendPropertyChanged("TenantPetitionInfo");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.TenantPetitionInfo = null;
 		}
 	}
 	
@@ -3156,6 +2964,198 @@ namespace RAP.DAL
 					if ((value != null))
 					{
 						value.TenantRentalIncrementInfos.Add(this);
+						this._TenantPetitionID = value.TenantPetitionID;
+					}
+					else
+					{
+						this._TenantPetitionID = default(int);
+					}
+					this.SendPropertyChanged("TenantPetitionInfo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantPetitionGroundInfo")]
+	public partial class TenantPetitionGroundInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TenantPetitionGroudID;
+		
+		private int _TenantPetitionID;
+		
+		private int _PetitionGroundID;
+		
+		private EntityRef<PetitionGround> _PetitionGround;
+		
+		private EntityRef<TenantPetitionInfo> _TenantPetitionInfo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTenantPetitionGroudIDChanging(int value);
+    partial void OnTenantPetitionGroudIDChanged();
+    partial void OnTenantPetitionIDChanging(int value);
+    partial void OnTenantPetitionIDChanged();
+    partial void OnPetitionGroundIDChanging(int value);
+    partial void OnPetitionGroundIDChanged();
+    #endregion
+		
+		public TenantPetitionGroundInfo()
+		{
+			this._PetitionGround = default(EntityRef<PetitionGround>);
+			this._TenantPetitionInfo = default(EntityRef<TenantPetitionInfo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantPetitionGroudID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TenantPetitionGroudID
+		{
+			get
+			{
+				return this._TenantPetitionGroudID;
+			}
+			set
+			{
+				if ((this._TenantPetitionGroudID != value))
+				{
+					this.OnTenantPetitionGroudIDChanging(value);
+					this.SendPropertyChanging();
+					this._TenantPetitionGroudID = value;
+					this.SendPropertyChanged("TenantPetitionGroudID");
+					this.OnTenantPetitionGroudIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantPetitionID", DbType="Int NOT NULL")]
+		public int TenantPetitionID
+		{
+			get
+			{
+				return this._TenantPetitionID;
+			}
+			set
+			{
+				if ((this._TenantPetitionID != value))
+				{
+					if (this._TenantPetitionInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTenantPetitionIDChanging(value);
+					this.SendPropertyChanging();
+					this._TenantPetitionID = value;
+					this.SendPropertyChanged("TenantPetitionID");
+					this.OnTenantPetitionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PetitionGroundID", DbType="Int NOT NULL")]
+		public int PetitionGroundID
+		{
+			get
+			{
+				return this._PetitionGroundID;
+			}
+			set
+			{
+				if ((this._PetitionGroundID != value))
+				{
+					if (this._PetitionGround.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPetitionGroundIDChanging(value);
+					this.SendPropertyChanging();
+					this._PetitionGroundID = value;
+					this.SendPropertyChanged("PetitionGroundID");
+					this.OnPetitionGroundIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PetitionGround_TenantPetitionGroundInfo", Storage="_PetitionGround", ThisKey="PetitionGroundID", OtherKey="PetitionGroundID", IsForeignKey=true)]
+		public PetitionGround PetitionGround
+		{
+			get
+			{
+				return this._PetitionGround.Entity;
+			}
+			set
+			{
+				PetitionGround previousValue = this._PetitionGround.Entity;
+				if (((previousValue != value) 
+							|| (this._PetitionGround.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PetitionGround.Entity = null;
+						previousValue.TenantPetitionGroundInfos.Remove(this);
+					}
+					this._PetitionGround.Entity = value;
+					if ((value != null))
+					{
+						value.TenantPetitionGroundInfos.Add(this);
+						this._PetitionGroundID = value.PetitionGroundID;
+					}
+					else
+					{
+						this._PetitionGroundID = default(int);
+					}
+					this.SendPropertyChanged("PetitionGround");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantPetitionInfo_TenantPetitionGroundInfo", Storage="_TenantPetitionInfo", ThisKey="TenantPetitionID", OtherKey="TenantPetitionID", IsForeignKey=true)]
+		public TenantPetitionInfo TenantPetitionInfo
+		{
+			get
+			{
+				return this._TenantPetitionInfo.Entity;
+			}
+			set
+			{
+				TenantPetitionInfo previousValue = this._TenantPetitionInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._TenantPetitionInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TenantPetitionInfo.Entity = null;
+						previousValue.TenantPetitionGroundInfos.Remove(this);
+					}
+					this._TenantPetitionInfo.Entity = value;
+					if ((value != null))
+					{
+						value.TenantPetitionGroundInfos.Add(this);
 						this._TenantPetitionID = value.TenantPetitionID;
 					}
 					else

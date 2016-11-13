@@ -9,6 +9,7 @@ namespace RAP.Core.DataModels
     
     public class CaseInfoM
     {
+        public string CaseID { get; set; }
         public int PetitionCategoryID { get; set; }
         public TenantPetitionInfoM TenantPetitionInfo { get; set; }
         public int TenantUserID { get; set; }
@@ -139,8 +140,8 @@ namespace RAP.Core.DataModels
     {
         public bool bRentIncreaseNoticeGiven { get; set; }
         public DateTime RentIncreaseNoticeDate { get; set; }
-        public double RentIncreasedFrom { get; set; }
-        public double RentIncreasedTo { get; set; }
+        public decimal RentIncreasedFrom { get; set; }
+        public decimal RentIncreasedTo { get; set; }
         public DateTime RentIncreaseEffectiveDate { get; set; }
         public bool bRentIncreaseContested { get; set; }
     }
@@ -148,7 +149,7 @@ namespace RAP.Core.DataModels
     public class TenantLostServiceInfoM
     {
         public string ReducedServiceDescription { get; set; }
-        public double EstimatedLoss { get; set; }
+        public decimal EstimatedLoss { get; set; }   
         public DateTime LossBeganDate { get; set; }
         public DateTime PayingToServiceBeganDate { get; set; }
     }
@@ -156,7 +157,7 @@ namespace RAP.Core.DataModels
     public class TenantProblemInfoM
     {
         public string ProblemDescription { get; set; }
-        public double EstimatedLoss { get; set; }
+        public decimal EstimatedLoss { get; set; }
         public DateTime ProblemBeganDate { get; set; }
         public DateTime PayingToProblemBeganDate { get; set; }
     }
