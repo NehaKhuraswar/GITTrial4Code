@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapapplicationinfoFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -16,26 +16,26 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //    });
     //}
 
-    var _GetCaseInfo = function (model) {
+   // var _GetCaseInfo = function (model) {
 
-        rapFactory.GetCaseInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
+   //     rapFactory.GetCaseInfo().then(function (response) {
+   //         if (!alert.checkResponse(response)) {
+   //             return;
+   //         }
            
-            self.caseinfo = response.data;           
+   //         self.caseinfo = response.data;           
 
-        });
-    }
-   // _getrent();
-    _GetCaseInfo();
+   //     });
+   // }
+   //// _getrent();
+   // _GetCaseInfo();
 
-    self.Continue = function () {
-        $location.path("/applicationinfo");
+   // self.Continue = function () {
+   //     $location.path("/applicationinfo");
+   // }
+    self.ContinueToGroundsforPetition = function () {
+        $location.path("/groundsforpetition");
     }
-    //self.ContinueToGroundsforPetition = function () {
-    //    $location.path("/groundsforpetition");
-    //}
     //self.ContinueToRentalHistory = function () {
     //    $location.path("/rentalhistory");
     //}
@@ -49,9 +49,9 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //self.ContinueToVerification = function () {
     //    $location.path("/verification");
     //}
-    ////self.SubmitPetition = function () {
-    ////  //  $location.path("/verification");
-    ////}
+    //self.SubmitPetition = function () {
+    //  //  $location.path("/verification");
+    //}
     //self.SubmitPetition = function (model) {
      
 
@@ -63,8 +63,8 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //    });
     //}
 }];
-var rapFilePetitionController_resolve = {
-    model: ['$route', 'alertService', 'rapfilepetitionFactory', function ($route, alert, rapFactory) {
+var rapApplicationInfoController_resolve = {
+    model: ['$route', 'alertService', 'rapapplicationinfoFactory', function ($route, alert, rapFactory) {
         ////return auth.fetchToken().then(function (response) {
         //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {
         //  if (!alert.checkResponse(response)) { return; }

@@ -70,39 +70,39 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
         })
         .when('/applicationinfo', {
             templateUrl: 'views/filepetition/ApplicationInfo.html',
-            controller: rapFilePetitionController,
+            controller: rapApplicationInfoController,
             controllerAs: 'Ctrl',
-            resolve: rapFilePetitionController_resolve
+            resolve: rapApplicationInfoController_resolve
         })
         .when('/groundsforpetition', {
             templateUrl: 'views/filepetition/GroundsForPetition.html',
-            controller: rapFilePetitionController,
+            controller: rapGroundsOfPetitionController,
             controllerAs: 'Ctrl',
-            resolve: rapFilePetitionController_resolve
+            resolve: rapGroundsOfPetitionController_resolve
         })
         .when('/rentalhistory', {
             templateUrl: 'views/filepetition/RentalHistory.html',
-            controller: rapFilePetitionController,
+            controller: rapRentalHistoryController,
             controllerAs: 'Ctrl',
-            resolve: rapFilePetitionController_resolve
+            resolve: rapRentalHistoryController_resolve
         })
         .when('/lostservices', {
             templateUrl: 'views/filepetition/LostServices.html',
-            controller: rapFilePetitionController,
+            controller: rapLostServicesController,
             controllerAs: 'Ctrl',
-            resolve: rapFilePetitionController_resolve
+            resolve: rapLostServicesController_resolve
         })
         .when('/review', {
             templateUrl: 'views/filepetition/Review.html',
-            controller: rapFilePetitionController,
+            controller: rapReviewController,
             controllerAs: 'Ctrl',
-            resolve: rapFilePetitionController_resolve
+            resolve: rapReviewController_resolve
         })
         .when('/verification', {
             templateUrl: 'views/filepetition/Verification.html',
-            controller: rapFilePetitionController,
+            controller: rapVerificationController,
             controllerAs: 'Ctrl',
-            resolve: rapFilePetitionController_resolve
+            resolve: rapVerificationController_resolve
         })
         .when('/report/:reportid', {
             templateUrl: 'views/report/index.html',
