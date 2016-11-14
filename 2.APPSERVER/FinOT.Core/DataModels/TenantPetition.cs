@@ -10,8 +10,8 @@ namespace RAP.Core.DataModels
     public class CaseInfoM
     {
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
-        public UserInfoM _thirdPartyInfo = new UserInfoM();
-        public UserInfoM _ownerInfo = new UserInfoM();
+        private UserInfoM _thirdPartyInfo = new UserInfoM();
+        private UserInfoM _ownerInfo = new UserInfoM();
         public string CaseID { get; set; }
         public int PetitionCategoryID { get; set; }
         public TenantPetitionInfoM TenantPetitionInfo
