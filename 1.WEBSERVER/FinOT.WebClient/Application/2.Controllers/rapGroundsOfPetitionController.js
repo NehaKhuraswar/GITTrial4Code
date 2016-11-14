@@ -3,10 +3,8 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = [];
-    self.rent = [];
-    //self.selectedValue = 1;
-    self.selectedObj = {};
+    self.caseinfo = rapGlobalFactory.CaseDetails;
+    
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {
@@ -37,6 +35,7 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
     //    $location.path("/groundsforpetition");
     //}
     self.ContinueToRentalHistory = function () {
+        rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/rentalhistory");
     }
     //self.ContinueToLostServices = function () {

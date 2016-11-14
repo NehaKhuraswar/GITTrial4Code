@@ -124,6 +124,30 @@ namespace RAP.DAL
                 return false;
             }
         }
+        public bool RemoveThirdParty(int CustID, int thirdPartyRepresentationID)
+        {
+            try
+            {
+                // CustomerInfo custinfo;
+
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    ThirdPartyRepresentation thirdpartyTable = db.ThirdPartyRepresentations.First(i => i.ThirdPartyRepresentationID == thirdPartyRepresentationID);
+                    thirdpartyTable.IsDeleted = true;
+                    thirdpartyTable.ModifiedDate = DateTime.Now;
+                   // thirdpartyTable.ThirdPartyCustomerID = thirdPartyRepresentationID;
+                    db.SubmitChanges();
+                  //  db.ThirdPartyRepresentations.InsertOnSubmit(thirdpartyTable);
+                   // db.SubmitChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public List<ThirdPartyDetails> GetAuthorizedUsers(int custID)
         {
             
@@ -156,6 +180,7 @@ namespace RAP.DAL
                         c => c.CustomerID,
                         (t, c) => new
                         {
+                            ID = t.ThirdPartyRepresentationID,
                             CustomerID = t.ThirdPartyCustomerID,
                             FirstName = c.FirstName,
                             LastName = c.LastName,
@@ -169,6 +194,7 @@ namespace RAP.DAL
                     foreach (var CustomerDetails in query)
                                                             {
                         ThirdPartyDetails obj = new ThirdPartyDetails();
+                        obj.ThirdPartyRepresentationID = CustomerDetails.ID;
                         obj.custID = CustomerDetails.CustomerID;
                         obj.FirstName = CustomerDetails.FirstName;
                         obj.LastName = CustomerDetails.LastName;

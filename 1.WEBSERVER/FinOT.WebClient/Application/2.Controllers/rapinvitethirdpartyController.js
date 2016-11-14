@@ -66,6 +66,13 @@ var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinv
             });
     }
 
+    self.RemoveThirdParty = function (authorizedusers) {
+        rapFactory.RemoveThirdParty(rapGlobalFactory.CustomerDetails.custID, authorizedusers[0]).then(function (response) {
+
+
+        });
+    }
+
 }];
 var rapinvitethirdpartyController_resolve = {
     model: ['$route', 'alertService', 'raploginFactory', function ($route, alert, rapFactory) {

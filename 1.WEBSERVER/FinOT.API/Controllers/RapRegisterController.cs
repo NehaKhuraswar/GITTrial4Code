@@ -230,6 +230,35 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+        [Route("removethirdparty/{custid:int?}")]
+        [HttpPost]
+        public HttpResponseMessage RemoveThirdParty([FromBody] ThirdPartyDetails thirdpartyInfo, int? custid = null)
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+
+            try
+            {
+
+                bool bCompleted;
+                bCompleted = accService.RemoveThirdParty((int)custid, thirdpartyInfo.ThirdPartyRepresentationID);
+                transaction.status = bCompleted;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                // transaction.AddException(ex.Message);
+                //ReturnCode = HttpStatusCode.InternalServerError;
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
        
         [Route("reportsource")]
         [HttpPost]

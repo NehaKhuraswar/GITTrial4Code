@@ -40,6 +40,7 @@ namespace RAP.Core.DataModels
     }
     public class ThirdPartyDetails
     {
+        public int ThirdPartyRepresentationID { get; set; }
         public int custID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

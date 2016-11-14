@@ -3,10 +3,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = [];
-    self.rent = [];
-    //self.selectedValue = 1;
-    self.selectedObj = {};
+    self.caseinfo = rapGlobalFactory.CaseDetails;
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {
@@ -41,6 +38,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
    // }
     self.ContinueToLostServices = function () {
         var a = self.selectedObj;
+        rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/lostservices");
     }
     //self.ContinueToReview  = function () {

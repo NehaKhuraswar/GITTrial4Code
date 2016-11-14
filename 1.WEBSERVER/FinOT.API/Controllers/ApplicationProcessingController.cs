@@ -85,6 +85,7 @@ namespace RAP.API.Controllers
         [HttpGet]
         public HttpResponseMessage GetCaseDetails()
         {
+
             //Appl accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();

@@ -8,6 +8,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
           // public
          var CustID = 0;
          var CustomerDetails;
+         var CaseDetails;
           // public
           return {
 
@@ -26,6 +27,12 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapdashboardFactory', rapdashboardFactory)
     .factory('rapinvitethirdpartyFactory', rapinvitethirdpartyFactory)
     .factory('rapfilepetitionFactory', rapfilepetitionFactory)
+    .factory('rapapplicationinfoFactory', rapapplicationinfoFactory)
+    .factory('rapgroundsofpetitionFactory', rapgroundsofpetitionFactory)
+    .factory('raplostservicesFactory', raplostservicesFactory)
+    .factory('raprentalhistoryFactory', raprentalhistoryFactory)
+    .factory('rapreviewFactory', rapreviewFactory)
+    .factory('rapverificationFactory', rapverificationFactory)
     .controller('otrequestController', otrequestController)
     .controller('otnotesController', otnotesController)
     .controller('raploginController', raploginController)
@@ -33,6 +40,12 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapdashboardController', rapdashboardController)
     .controller('rapinvitethirdpartyController', rapinvitethirdpartyController)
     .controller('rapFilePetitionController', rapFilePetitionController)
+    .controller('rapApplicationInfoController', rapApplicationInfoController)
+    .controller('rapGroundsOfPetitionController', rapGroundsOfPetitionController)
+    .controller('rapRentalHistoryController', rapRentalHistoryController)
+    .controller('rapLostServicesController', rapLostServicesController)
+    .controller('rapReviewController', rapReviewController)
+    .controller('rapVerificationController', rapVerificationController)
     .controller('otheaderController', otheaderController)
     .controller('otstaffController', otstaffController)
     .controller('otdocumentsController', otdocumentsController)

@@ -41,6 +41,10 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.AuthorizeThirdPartyUser(CustID, thirdpartyCustID);
         }
+        public bool RemoveThirdParty(int CustID, int ThirdPartyRepresentationID)
+        {
+            return accDBHandler.RemoveThirdParty(CustID, ThirdPartyRepresentationID);
+        }
         public List<ThirdPartyDetails> GetAuthorizedUsers(int custID)
         {
             return accDBHandler.GetAuthorizedUsers(custID);

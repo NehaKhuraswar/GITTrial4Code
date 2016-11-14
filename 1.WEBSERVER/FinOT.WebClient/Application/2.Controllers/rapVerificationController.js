@@ -3,10 +3,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = [];
-    self.rent = [];
-    //self.selectedValue = 1;
-    self.selectedObj = {};
+    self.caseinfo = rapGlobalFactory.CaseDetails;
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {
@@ -54,7 +51,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
     //}
     self.SubmitPetition = function (model) {
      
-
+        rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveCaseInfo(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

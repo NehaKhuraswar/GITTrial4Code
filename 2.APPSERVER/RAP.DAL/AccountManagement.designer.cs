@@ -36,12 +36,12 @@ namespace RAP.DAL
     partial void InsertUserType(UserType instance);
     partial void UpdateUserType(UserType instance);
     partial void DeleteUserType(UserType instance);
-    partial void InsertThirdPartyRepresentation(ThirdPartyRepresentation instance);
-    partial void UpdateThirdPartyRepresentation(ThirdPartyRepresentation instance);
-    partial void DeleteThirdPartyRepresentation(ThirdPartyRepresentation instance);
     partial void InsertNotificationPreference(NotificationPreference instance);
     partial void UpdateNotificationPreference(NotificationPreference instance);
     partial void DeleteNotificationPreference(NotificationPreference instance);
+    partial void InsertThirdPartyRepresentation(ThirdPartyRepresentation instance);
+    partial void UpdateThirdPartyRepresentation(ThirdPartyRepresentation instance);
+    partial void DeleteThirdPartyRepresentation(ThirdPartyRepresentation instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -67,8 +67,8 @@ namespace RAP.DAL
 		{
 			OnCreated();
 		}
-		
-		public AccountManagementDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+
+        public AccountManagementDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -90,19 +90,19 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<ThirdPartyRepresentation> ThirdPartyRepresentations
-		{
-			get
-			{
-				return this.GetTable<ThirdPartyRepresentation>();
-			}
-		}
-		
 		public System.Data.Linq.Table<NotificationPreference> NotificationPreferences
 		{
 			get
 			{
 				return this.GetTable<NotificationPreference>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ThirdPartyRepresentation> ThirdPartyRepresentations
+		{
+			get
+			{
+				return this.GetTable<ThirdPartyRepresentation>();
 			}
 		}
 	}
@@ -141,11 +141,11 @@ namespace RAP.DAL
 		
 		private System.Nullable<bool> _EmailNotificationFlag;
 		
+		private EntityRef<NotificationPreference> _NotificationPreference;
+		
 		private EntityRef<ThirdPartyRepresentation> _ThirdPartyRepresentation;
 		
 		private EntitySet<ThirdPartyRepresentation> _ThirdPartyRepresentations;
-		
-		private EntityRef<NotificationPreference> _NotificationPreference;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -183,9 +183,9 @@ namespace RAP.DAL
 		
 		public CustomerDetail()
 		{
+			this._NotificationPreference = default(EntityRef<NotificationPreference>);
 			this._ThirdPartyRepresentation = default(EntityRef<ThirdPartyRepresentation>);
 			this._ThirdPartyRepresentations = new EntitySet<ThirdPartyRepresentation>(new Action<ThirdPartyRepresentation>(this.attach_ThirdPartyRepresentations), new Action<ThirdPartyRepresentation>(this.detach_ThirdPartyRepresentations));
-			this._NotificationPreference = default(EntityRef<NotificationPreference>);
 			OnCreated();
 		}
 		
@@ -469,6 +469,35 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_NotificationPreference", Storage="_NotificationPreference", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
+		public NotificationPreference NotificationPreference
+		{
+			get
+			{
+				return this._NotificationPreference.Entity;
+			}
+			set
+			{
+				NotificationPreference previousValue = this._NotificationPreference.Entity;
+				if (((previousValue != value) 
+							|| (this._NotificationPreference.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._NotificationPreference.Entity = null;
+						previousValue.CustomerDetail = null;
+					}
+					this._NotificationPreference.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerDetail = this;
+					}
+					this.SendPropertyChanged("NotificationPreference");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation", Storage="_ThirdPartyRepresentation", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
 		public ThirdPartyRepresentation ThirdPartyRepresentation
 		{
@@ -508,35 +537,6 @@ namespace RAP.DAL
 			set
 			{
 				this._ThirdPartyRepresentations.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_NotificationPreference", Storage="_NotificationPreference", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
-		public NotificationPreference NotificationPreference
-		{
-			get
-			{
-				return this._NotificationPreference.Entity;
-			}
-			set
-			{
-				NotificationPreference previousValue = this._NotificationPreference.Entity;
-				if (((previousValue != value) 
-							|| (this._NotificationPreference.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._NotificationPreference.Entity = null;
-						previousValue.CustomerDetail = null;
-					}
-					this._NotificationPreference.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerDetail = this;
-					}
-					this.SendPropertyChanged("NotificationPreference");
-				}
 			}
 		}
 		
@@ -634,222 +634,6 @@ namespace RAP.DAL
 					this._Description = value;
 					this.SendPropertyChanged("Description");
 					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ThirdPartyRepresentation")]
-	public partial class ThirdPartyRepresentation : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ThirdPartyRepresentationID;
-		
-		private int _CustomerID;
-		
-		private int _ThirdPartyCustomerID;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private EntityRef<CustomerDetail> _CustomerDetail;
-		
-		private EntityRef<CustomerDetail> _CustomerDetail1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnThirdPartyRepresentationIDChanging(int value);
-    partial void OnThirdPartyRepresentationIDChanged();
-    partial void OnCustomerIDChanging(int value);
-    partial void OnCustomerIDChanged();
-    partial void OnThirdPartyCustomerIDChanging(int value);
-    partial void OnThirdPartyCustomerIDChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    #endregion
-		
-		public ThirdPartyRepresentation()
-		{
-			this._CustomerDetail = default(EntityRef<CustomerDetail>);
-			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThirdPartyRepresentationID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int ThirdPartyRepresentationID
-		{
-			get
-			{
-				return this._ThirdPartyRepresentationID;
-			}
-			set
-			{
-				if ((this._ThirdPartyRepresentationID != value))
-				{
-					this.OnThirdPartyRepresentationIDChanging(value);
-					this.SendPropertyChanging();
-					this._ThirdPartyRepresentationID = value;
-					this.SendPropertyChanged("ThirdPartyRepresentationID");
-					this.OnThirdPartyRepresentationIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					if (this._CustomerDetail.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThirdPartyCustomerID", DbType="Int NOT NULL")]
-		public int ThirdPartyCustomerID
-		{
-			get
-			{
-				return this._ThirdPartyCustomerID;
-			}
-			set
-			{
-				if ((this._ThirdPartyCustomerID != value))
-				{
-					if (this._CustomerDetail1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnThirdPartyCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._ThirdPartyCustomerID = value;
-					this.SendPropertyChanged("ThirdPartyCustomerID");
-					this.OnThirdPartyCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public CustomerDetail CustomerDetail
-		{
-			get
-			{
-				return this._CustomerDetail.Entity;
-			}
-			set
-			{
-				CustomerDetail previousValue = this._CustomerDetail.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerDetail.Entity = null;
-						previousValue.ThirdPartyRepresentation = null;
-					}
-					this._CustomerDetail.Entity = value;
-					if ((value != null))
-					{
-						value.ThirdPartyRepresentation = this;
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(int);
-					}
-					this.SendPropertyChanged("CustomerDetail");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation1", Storage="_CustomerDetail1", ThisKey="ThirdPartyCustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public CustomerDetail CustomerDetail1
-		{
-			get
-			{
-				return this._CustomerDetail1.Entity;
-			}
-			set
-			{
-				CustomerDetail previousValue = this._CustomerDetail1.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerDetail1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerDetail1.Entity = null;
-						previousValue.ThirdPartyRepresentations.Remove(this);
-					}
-					this._CustomerDetail1.Entity = value;
-					if ((value != null))
-					{
-						value.ThirdPartyRepresentations.Add(this);
-						this._ThirdPartyCustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._ThirdPartyCustomerID = default(int);
-					}
-					this.SendPropertyChanged("CustomerDetail1");
 				}
 			}
 		}
@@ -1049,6 +833,270 @@ namespace RAP.DAL
 						this._CustomerID = default(int);
 					}
 					this.SendPropertyChanged("CustomerDetail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ThirdPartyRepresentation")]
+	public partial class ThirdPartyRepresentation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ThirdPartyRepresentationID;
+		
+		private int _CustomerID;
+		
+		private int _ThirdPartyCustomerID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<bool> _IsDeleted;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnThirdPartyRepresentationIDChanging(int value);
+    partial void OnThirdPartyRepresentationIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnThirdPartyCustomerIDChanging(int value);
+    partial void OnThirdPartyCustomerIDChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnIsDeletedChanging(System.Nullable<bool> value);
+    partial void OnIsDeletedChanged();
+    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public ThirdPartyRepresentation()
+		{
+			this._CustomerDetail = default(EntityRef<CustomerDetail>);
+			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThirdPartyRepresentationID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int ThirdPartyRepresentationID
+		{
+			get
+			{
+				return this._ThirdPartyRepresentationID;
+			}
+			set
+			{
+				if ((this._ThirdPartyRepresentationID != value))
+				{
+					this.OnThirdPartyRepresentationIDChanging(value);
+					this.SendPropertyChanging();
+					this._ThirdPartyRepresentationID = value;
+					this.SendPropertyChanged("ThirdPartyRepresentationID");
+					this.OnThirdPartyRepresentationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._CustomerDetail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThirdPartyCustomerID", DbType="Int NOT NULL")]
+		public int ThirdPartyCustomerID
+		{
+			get
+			{
+				return this._ThirdPartyCustomerID;
+			}
+			set
+			{
+				if ((this._ThirdPartyCustomerID != value))
+				{
+					if (this._CustomerDetail1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnThirdPartyCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._ThirdPartyCustomerID = value;
+					this.SendPropertyChanged("ThirdPartyCustomerID");
+					this.OnThirdPartyCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit")]
+		public System.Nullable<bool> IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public CustomerDetail CustomerDetail
+		{
+			get
+			{
+				return this._CustomerDetail.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail.Entity = null;
+						previousValue.ThirdPartyRepresentation = null;
+					}
+					this._CustomerDetail.Entity = value;
+					if ((value != null))
+					{
+						value.ThirdPartyRepresentation = this;
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(int);
+					}
+					this.SendPropertyChanged("CustomerDetail");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation1", Storage="_CustomerDetail1", ThisKey="ThirdPartyCustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public CustomerDetail CustomerDetail1
+		{
+			get
+			{
+				return this._CustomerDetail1.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail1.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail1.Entity = null;
+						previousValue.ThirdPartyRepresentations.Remove(this);
+					}
+					this._CustomerDetail1.Entity = value;
+					if ((value != null))
+					{
+						value.ThirdPartyRepresentations.Add(this);
+						this._ThirdPartyCustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._ThirdPartyCustomerID = default(int);
+					}
+					this.SendPropertyChanged("CustomerDetail1");
 				}
 			}
 		}

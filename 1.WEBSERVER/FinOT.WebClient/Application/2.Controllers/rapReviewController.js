@@ -3,10 +3,7 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = [];
-    self.rent = [];
-    //self.selectedValue = 1;
-    self.selectedObj = {};
+    self.caseinfo = rapGlobalFactory.CaseDetails;
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {
@@ -47,6 +44,7 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
    //     $location.path("/review");
    // }
     self.ContinueToVerification = function () {
+        rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/verification");
     }
     //self.SubmitPetition = function () {

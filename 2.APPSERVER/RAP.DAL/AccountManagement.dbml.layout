@@ -14,26 +14,6 @@
         <elementListCompartment Id="ccba2033-a8be-464b-b0b5-849864487e61" absoluteBounds="2.7649999999999997, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c2833987-436e-4024-a9ce-1a9cbaa63cb4" absoluteBounds="5.125, 2.75, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/OAKRAPDataContext/ThirdPartyRepresentation" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0090f87b-7cc4-44c5-84b5-ddf42c16c61a" absoluteBounds="5.14, 3.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(2.5 : 3.37580485026042); (5.125 : 3.37580485026042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/OAKRAPDataContext/CustomerDetail/CustomerDetail_ThirdPartyRepresentation" />
-      <nodes>
-        <classShapeMoniker Id="2859ae86-0019-4de0-80a9-b39919cbea24" />
-        <classShapeMoniker Id="c2833987-436e-4024-a9ce-1a9cbaa63cb4" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 3.00040242513021); (5.125 : 3.00040242513021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/OAKRAPDataContext/CustomerDetail/CustomerDetail_ThirdPartyRepresentation1" />
-      <nodes>
-        <classShapeMoniker Id="2859ae86-0019-4de0-80a9-b39919cbea24" />
-        <classShapeMoniker Id="c2833987-436e-4024-a9ce-1a9cbaa63cb4" />
-      </nodes>
-    </associationConnector>
     <classShape Id="4219107d-9811-46ba-8968-b3b1ac246359" absoluteBounds="6.25, 0.5, 2, 1.7708968098958331">
       <DataClassMoniker Name="/OAKRAPDataContext/NotificationPreference" />
       <nestedChildShapes>
@@ -45,6 +25,26 @@
       <nodes>
         <classShapeMoniker Id="2859ae86-0019-4de0-80a9-b39919cbea24" />
         <classShapeMoniker Id="4219107d-9811-46ba-8968-b3b1ac246359" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f90db60e-c5df-4e5d-891a-ac1008e0683a" absoluteBounds="4.125, 2.625, 2, 1.9631982421875">
+      <DataClassMoniker Name="/OAKRAPDataContext/ThirdPartyRepresentation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9465dba5-31f9-46dc-803a-f20c8d480e11" absoluteBounds="4.14, 3.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 3.31330485026042); (4.125 : 3.31330485026042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OAKRAPDataContext/CustomerDetail/CustomerDetail_ThirdPartyRepresentation" />
+      <nodes>
+        <classShapeMoniker Id="2859ae86-0019-4de0-80a9-b39919cbea24" />
+        <classShapeMoniker Id="f90db60e-c5df-4e5d-891a-ac1008e0683a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 2.90665242513021); (4.125 : 2.90665242513021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OAKRAPDataContext/CustomerDetail/CustomerDetail_ThirdPartyRepresentation1" />
+      <nodes>
+        <classShapeMoniker Id="2859ae86-0019-4de0-80a9-b39919cbea24" />
+        <classShapeMoniker Id="f90db60e-c5df-4e5d-891a-ac1008e0683a" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -3,7 +3,7 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = [];
+    self.caseinfo = rapGlobalFactory.CaseDetails;
     self.rent = [];
     //self.selectedValue = 1;
     self.selectedObj = {};
@@ -24,11 +24,13 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
             }
            
             self.caseinfo = response.data;           
-
+            rapGlobalFactory.CaseDetails = self.caseinfo;
         });
     }
-   // _getrent();
-    _GetCaseInfo();
+    // _getrent();
+    if (self.caseinfo == null) {
+        _GetCaseInfo();
+    }
 
     self.Continue = function () {
         $location.path("/applicationinfo");

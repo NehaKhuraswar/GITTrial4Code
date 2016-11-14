@@ -3,10 +3,10 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = [];
-    self.rent = [];
+    self.caseinfo = rapGlobalFactory.CaseDetails;
+//    self.rent = [];
     //self.selectedValue = 1;
-    self.selectedObj = {};
+///    self.selectedObj = {};
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {
@@ -16,24 +16,25 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     //    });
     //}
 
-   // var _GetCaseInfo = function (model) {
+    //var _GetCaseInfo = function (model) {
 
-   //     rapFactory.GetCaseInfo().then(function (response) {
-   //         if (!alert.checkResponse(response)) {
-   //             return;
-   //         }
+    //    rapFactory.GetCaseInfo().then(function (response) {
+    //        if (!alert.checkResponse(response)) {
+    //            return;
+    //        }
            
-   //         self.caseinfo = response.data;           
+    //        self.caseinfo = response.data;           
 
-   //     });
-   // }
+    //    });
+    //}
    //// _getrent();
-   // _GetCaseInfo();
+    //_GetCaseInfo();
 
    // self.Continue = function () {
    //     $location.path("/applicationinfo");
    // }
     self.ContinueToGroundsforPetition = function () {
+        rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/groundsforpetition");
     }
     //self.ContinueToRentalHistory = function () {
