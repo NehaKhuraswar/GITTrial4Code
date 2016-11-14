@@ -11,6 +11,8 @@ using RAP.Core.DataModels;
 using RAP.Core.Common;
 using RAP.API.Models;
 using RAP.API.Common;
+//TBD
+using RAP.Business.Implementation;
 
 namespace RAP.API.Controllers
 {
@@ -20,7 +22,11 @@ namespace RAP.API.Controllers
     {
         private string Username, ExceptionMessage, InnerExceptionMessage;
         private readonly IApplicationProcessingService _service;
-        public ApplicationProcessingController() { }
+       
+        public ApplicationProcessingController()
+        {
+            _service = new ApplicationProcessingService();
+        }
         public ApplicationProcessingController(IApplicationProcessingService service)
         {
             _service = service;

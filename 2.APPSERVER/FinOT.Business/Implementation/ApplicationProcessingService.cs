@@ -10,11 +10,16 @@ using RAP.DAL;
 
 namespace RAP.Business.Implementation
 {
-    internal class ApplicationProcessingService : IApplicationProcessingService
+    public class ApplicationProcessingService : IApplicationProcessingService
     {
         public string CorrelationId { get; set; }
         private readonly IApplicationProcessingDBHandler _dbHandler;
         private readonly IExceptionHandler _eHandler;
+        //TBD
+        public ApplicationProcessingService()
+        {
+            _dbHandler = new ApplicationProcessingDBHandler();
+        }
         public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler, IExceptionHandler eHandler)
         {
             this._dbHandler = dbHandler;

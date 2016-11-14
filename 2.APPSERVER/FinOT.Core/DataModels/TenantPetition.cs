@@ -9,13 +9,47 @@ namespace RAP.Core.DataModels
     
     public class CaseInfoM
     {
+        private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
+        public UserInfoM _thirdPartyInfo = new UserInfoM();
+        public UserInfoM _ownerInfo = new UserInfoM();
         public string CaseID { get; set; }
         public int PetitionCategoryID { get; set; }
-        public TenantPetitionInfoM TenantPetitionInfo { get; set; }
+        public TenantPetitionInfoM TenantPetitionInfo
+        {
+            get
+            {
+                return _tenantPetitionInfo;
+            }
+            set
+            {
+                _tenantPetitionInfo = value;
+            }
+        }       
+                
         public int TenantUserID { get; set; }
         public bool bThirdPartyRepresentation { get; set; }
-        public UserInfoM ThirdPartyInfo { get; set; }
-        public UserInfoM OwnerInfo { get; set; }
+        public UserInfoM ThirdPartyInfo
+        {
+            get
+            {
+                return _thirdPartyInfo;
+            }
+            set
+            {
+                _thirdPartyInfo = value;
+            }
+        }
+        public UserInfoM OwnerInfo
+        {
+            get
+            {
+                return _ownerInfo;
+            }
+            set
+            {
+                _ownerInfo = value;
+            }
+        }
         public bool bAgreeToCityMediation { get; set; }
         public bool bCaseFiledByThirdParty { get; set; }
         public int CaseFileBy { get; set; }
