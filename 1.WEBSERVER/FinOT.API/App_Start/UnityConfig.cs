@@ -9,9 +9,9 @@ namespace RAP.API
     {
         public static void Register()
         {
-            var container = new UnityContainer();
-            container.LoadConfiguration();
-            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+            //var container = new UnityContainer();
+            //container.LoadConfiguration();
+            //GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
 }
