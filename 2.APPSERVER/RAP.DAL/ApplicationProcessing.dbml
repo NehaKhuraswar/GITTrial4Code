@@ -53,8 +53,7 @@
       <Column Name="email" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="UserInfo_CaseDetail" Member="CaseDetails" ThisKey="UserID" OtherKey="OwnerUserID" Type="CaseDetail" />
-      <Association Name="UserInfo_CaseDetail1" Member="CaseDetails1" ThisKey="UserID" OtherKey="TenantUserID" Type="CaseDetail" />
-      <Association Name="UserInfo_CaseDetail2" Member="CaseDetails2" ThisKey="UserID" OtherKey="ThirdPartyUserID" Type="CaseDetail" />
+      <Association Name="UserInfo_CaseDetail1" Member="CaseDetails1" ThisKey="UserID" OtherKey="ThirdPartyUserID" Type="CaseDetail" />
     </Type>
   </Table>
   <Table Name="dbo.TenantLostServiceInfo" Member="TenantLostServiceInfos">
@@ -66,35 +65,6 @@
       <Column Name="LossBeganDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="PayingToServiceBeganDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="TenantPetitionInfo_TenantLostServiceInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.CaseDetails" Member="CaseDetails">
-    <Type Name="CaseDetail">
-      <Column Name="C_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CaseID" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="PetitionFileID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PetitionCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TenantUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="OwnerUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bAgreeToCityMediation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CaseFiledBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bCaseFiledByThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CaseAssignedTo" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="CityUserFirstName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="CityUserLastName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="CityUserMailID" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="WorlFlowID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="LastModifiedBy" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
-      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="HearingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="AppealDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="PetitionDetail_CaseDetail" Member="PetitionDetail" ThisKey="PetitionFileID" OtherKey="PetitionFileID" Type="PetitionDetail" IsForeignKey="true" />
-      <Association Name="UserInfo_CaseDetail" Member="UserInfo" ThisKey="OwnerUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
-      <Association Name="UserInfo_CaseDetail1" Member="UserInfo1" ThisKey="TenantUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
-      <Association Name="UserInfo_CaseDetail2" Member="UserInfo2" ThisKey="ThirdPartyUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TenantPetitionGroundInfo" Member="TenantPetitionGroundInfos">
@@ -141,6 +111,34 @@
       <Column Name="RentIncreasedTo" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
       <Column Name="bRentIncreaseContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CaseDetails" Member="CaseDetails">
+    <Type Name="CaseDetail">
+      <Column Name="C_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CaseID" Type="System.String" DbType="VarChar(8) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PetitionFileID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PetitionCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenantUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OwnerUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bAgreeToCityMediation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CaseFiledBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bCaseFiledByThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CaseAssignedTo" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="CityUserFirstName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="CityUserLastName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="CityUserMailID" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="WorlFlowID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastModifiedBy" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HearingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AppealDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="PetitionDetail_CaseDetail" Member="PetitionDetail" ThisKey="PetitionFileID" OtherKey="PetitionFileID" Type="PetitionDetail" IsForeignKey="true" />
+      <Association Name="UserInfo_CaseDetail" Member="UserInfo" ThisKey="OwnerUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
+      <Association Name="UserInfo_CaseDetail1" Member="UserInfo1" ThisKey="ThirdPartyUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
