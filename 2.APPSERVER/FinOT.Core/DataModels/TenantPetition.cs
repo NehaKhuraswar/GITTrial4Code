@@ -12,6 +12,8 @@ namespace RAP.Core.DataModels
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
         private UserInfoM _thirdPartyInfo = new UserInfoM();
         private UserInfoM _ownerInfo = new UserInfoM();
+        private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
+        private bool _appealFiled = false;
         public string CaseID { get; set; }
         public int PetitionCategoryID { get; set; }
         public TenantPetitionInfoM TenantPetitionInfo
@@ -60,6 +62,29 @@ namespace RAP.Core.DataModels
         public int WorlFlowID { get; set; }
         public DateTime HearingDate { get; set; }
         public DateTime AppealDate { get; set; }
+        public bool bAppealfiled
+        {
+            get
+            {
+                return _appealFiled;
+            }
+            set
+            {
+                _appealFiled = value;
+            }
+        }
+        public int AppealFiledBy { get; set; }
+        public List<AppealGroundM> AppealGrounds
+        {
+            get
+            {
+                return _appealGrounds;
+            }
+            set
+            {
+                _appealGrounds = value;
+            }
+        }
     }
 
     public class UserInfoM
@@ -213,6 +238,24 @@ namespace RAP.Core.DataModels
         private bool _selected = false;
         public int PetitionGroundID { get; set; }
         public string PetitionGroundDescription { get; set; }
+        public bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+            }
+        }
+    }
+
+    public class AppealGroundM
+    {
+        private bool _selected = false;
+        public int AppealGroundID { get; set; }
+        public string AppealDescription { get; set; }
         public bool Selected
         {
             get
