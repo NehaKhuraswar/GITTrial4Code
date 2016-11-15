@@ -265,7 +265,7 @@ namespace RAP.DAL
                petitionDB.bPetitionFiledPrviously = petition.bPetitionFiledPrviously;
                petitionDB.PreviousCaseIDs = petition.PreviousCaseIDs;
                petitionDB.bLostService = petition.bLostService;
-               petitionDB.bSeriousProblem = petitionDB.bSeriousProblem;
+               petitionDB.bSeriousProblem = petition.bProblem;
 
                db.TenantPetitionInfos.InsertOnSubmit(petitionDB);
                db.SubmitChanges();
@@ -286,7 +286,9 @@ namespace RAP.DAL
                    rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
                    if (item.bRentIncreaseNoticeGiven)
                    {
-                       rentIncrementDB.RentIncreaseNoticeDate = item.RentIncreaseNoticeDate;
+                     //  rentIncrementDB.RentIncreaseNoticeDate = item.RentIncreaseNoticeDate;
+                       rentIncrementDB.RentIncreaseNoticeDate = DateTime.Now;
+
                    }
                    //TBD
                    rentIncrementDB.RentIncreaseEffectiveDate = DateTime.Now;
