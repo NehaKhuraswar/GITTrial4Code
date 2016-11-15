@@ -157,7 +157,9 @@ namespace RAP.DAL
                    caseDetailsDB.PetitionFileID = petitionFileID;
                    //TBD
                    caseDetailsDB.PetitionCategoryID = 1;
-                   caseDetailsDB.TenantUserID = caseInfo.TenantUserID;
+                   //TBD
+                   caseDetailsDB.TenantUserID = 1;
+                   //caseDetailsDB.TenantUserID = caseInfo.TenantUserID;
                    caseDetailsDB.bThirdPartyRepresentation = caseInfo.bThirdPartyRepresentation;
                    caseDetailsDB.ThirdPartyUserID = thirdPartyUSerID;
                    caseDetailsDB.OwnerUserID = ownerUserID;
@@ -230,6 +232,7 @@ namespace RAP.DAL
            int tenantPetitionID = SaveTenantPetitionInfo(petition);
            if (tenantPetitionID != 0)
            {
+               petition.PetitionID = tenantPetitionID;
                SaveTenantRentalIncrementInfo(petition);
                SaveTenantLostServiceInfo(petition);
                SaveTenantProblemInfo(petition);
@@ -250,10 +253,14 @@ namespace RAP.DAL
                petitionDB.RentStatusID = petition.CurrentRentStatusID;
                petitionDB.LegalWithHoldingExplanation = petition.LegalWithHoldingExplanation;
                petitionDB.bCitationDocUnavailable = petition.bCitationDocUnavailable;
-               petitionDB.MoveInDate = petition.MoveInDate;
+               //To be removed
+               petitionDB.MoveInDate = DateTime.Now;
+              // petitionDB.MoveInDate = petition.MoveInDate;
                petitionDB.InitialRent = petition.InitalRent;
                petitionDB.bRAPNoticeGiven = petition.bRAPNoticeGiven;
-               petitionDB.RAPNoticeGivnDate = petition.RAPNoticeGivenDate;
+               // To be removed
+               petitionDB.RAPNoticeGivnDate = DateTime.Now;
+             //  petitionDB.RAPNoticeGivnDate = petition.RAPNoticeGivenDate;
                petitionDB.bRentControlledByAgency = petition.bRentControlledByAgency;
                petitionDB.bPetitionFiledPrviously = petition.bPetitionFiledPrviously;
                petitionDB.PreviousCaseIDs = petition.PreviousCaseIDs;
@@ -281,7 +288,9 @@ namespace RAP.DAL
                    {
                        rentIncrementDB.RentIncreaseNoticeDate = item.RentIncreaseNoticeDate;
                    }
-                   rentIncrementDB.RentIncreaseEffectiveDate = item.RentIncreaseEffectiveDate;
+                   //TBD
+                   rentIncrementDB.RentIncreaseEffectiveDate = DateTime.Now;
+                  // rentIncrementDB.RentIncreaseEffectiveDate = item.RentIncreaseEffectiveDate;
                    rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
                    rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
                    rentIncrementDB.bRentIncreaseContested = item.bRentIncreaseContested;
@@ -305,8 +314,12 @@ namespace RAP.DAL
                        lostServiceDB.TenantPetitionID = petition.PetitionID;
                        lostServiceDB.ReducedServiceDescription = item.ReducedServiceDescription;
                        lostServiceDB.EstimatedLoss = item.EstimatedLoss;
-                       lostServiceDB.LossBeganDate = item.LossBeganDate;
-                       lostServiceDB.PayingToServiceBeganDate = item.PayingToServiceBeganDate;
+                       //TBD
+                       lostServiceDB.LossBeganDate = DateTime.Now;
+                       //TBD
+                      // lostServiceDB.LossBeganDate = item.LossBeganDate;
+                       lostServiceDB.PayingToServiceBeganDate = DateTime.Now;
+                      // lostServiceDB.PayingToServiceBeganDate = item.PayingToServiceBeganDate;
 
                        db.TenantLostServiceInfos.InsertOnSubmit(lostServiceDB);
                        db.SubmitChanges();
@@ -327,8 +340,12 @@ namespace RAP.DAL
                        problemDB.TenantPetitionID = petition.PetitionID;
                        problemDB.ProblemDescription = item.ProblemDescription;
                        problemDB.EstimatedLoss = item.EstimatedLoss;
-                       problemDB.ProblemBeganDate = item.ProblemBeganDate;
-                       problemDB.PayingToProblemBeganDate = item.PayingToProblemBeganDate;
+                       //TBD
+                     //  problemDB.ProblemBeganDate = item.ProblemBeganDate;
+                       problemDB.ProblemBeganDate = DateTime.Now;
+                       //TBD
+                       problemDB.PayingToProblemBeganDate = DateTime.Now;
+                     //  problemDB.PayingToProblemBeganDate = item.PayingToProblemBeganDate;
 
                        db.TenantProblemInfos.InsertOnSubmit(problemDB);
                        db.SubmitChanges();
