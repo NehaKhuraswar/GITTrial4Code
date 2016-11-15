@@ -29,7 +29,7 @@ var rapverificationFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
 
           var url = _routePrefix + '/savecaseinfo';
 
-          return ajax.Post(model)
+          return ajax.Post(model, url)
           .finally(function () {
               blockUI.stop();
           });
