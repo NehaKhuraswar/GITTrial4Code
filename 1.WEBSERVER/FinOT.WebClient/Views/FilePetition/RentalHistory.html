@@ -105,17 +105,17 @@
                 <p>___________________________________________________________________________________________</p>
                 <strong>Rent Increases</strong>
                 <p>Did you recieve a rent program notice with the notice of increase</p>
-                <div ng-repeat="rentincrease in Ctrl.caseinfo.TenantPetitionInfo.RentIncreases">
+                <!--<div ng-repeat="rentincrease in Ctrl.caseinfo.TenantPetitionInfo.RentIncreases">-->
                     <div class="radio">
                         <label>
                             <input type="radio" name="IsRentNotice" value="true"
-                                   ng-model="rentincrease.bRentIncreaseNoticeGiven">Yes
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven">Yes
                         </label>
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" name="IsRentNotice" value="false"
-                                   ng-model="rentincrease.bRentIncreaseNoticeGiven">No
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven">No
                         </label>
                     </div>
                     
@@ -155,8 +155,8 @@
                         </ul>
                     </div>
                     <p>Monthly Rent Increase</p>
-                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="rentincrease.RentIncreasedFrom" required />
-                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="rentincrease.RentIncreasedTo" required />
+                <input type="number" placeholder="From" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].RentIncreasedFrom" required />
+                <input type="number" placeholder="To" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].RentIncreasedTo" required />
 
                     <p>When did the property owner first provide you with the written NOTICE TO TENANTS of the existence of RAP</p>
                     <div class="dropdown">
@@ -196,16 +196,16 @@
                     <div class="radio">
                         <label>
                             <input type="radio" name="IsContesting" value="true"
-                                   ng-model="rentincrease.bRentIncreaseContested">Yes
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseContested">Yes
                         </label>
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" name="IsContesting" value="false"
-                                   ng-model="rentincrease.bRentIncreaseContested">No
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseContested">No
                         </label>
                     </div>
-                </div>
+                <!--</div>-->
                 <button ng-click="Ctrl.AddAnotherRentIncreaseRecord()">Add another rent increase record</button>
                 <p>Have you ever filed a petition for your rental unit?</p>
                 <div class="radio">

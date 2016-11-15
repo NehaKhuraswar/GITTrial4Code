@@ -9,17 +9,18 @@
                 <p>Renter petition : Lost Services</p>
                 <p>___________________________________________________________________________________________</p>
                 <p>Have you lost services or are you being changed for services originally provided by the owner?</p>
+            
                 <div class="radio">
-                    <label><input type="radio" name="FiledPetitionInPast">Yes</label>
+                    <label><input type="radio" name="LostServices" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService">Yes</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="FiledPetitionInPast">No</label>
+                    <label><input type="radio" name="LostServices" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService">No</label>
                 </div>
                 <p>Describe the reduced service(s) </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.DescriptionOfLostServices" required />
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].ReducedServiceDescription" required />
                 
                 <p>Your estimated dollar value of the lost service(s) or problems </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.EstimatedDollarValueLostService" required />
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].EstimatedLoss" required />
                 
                 <p>Date loss began</p>
                 <div class="dropdown">
@@ -99,17 +100,17 @@
 
                 <p>Are you claiming any serious problems with the condition of your unit?</p>
                 <div class="radio">
-                    <label><input type="radio" name="FiledPetitionInPast">Yes</label>
+                    <label><input type="radio" name="Problem" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">Yes</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="FiledPetitionInPast">No</label>
+                    <label><input type="radio" name="Problem" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">No</label>
                 </div>
 
                 <p>Describe the problems </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.DescriptionOfProblem" required />
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemDescription" required />
 
                 <p>Your estimated dollar value of the lost service(s) or problems </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.EstimatedDollarValueProblem" required />
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].EstimatedLoss" required />
 
                 <p>Date problems began</p>
                 <div class="dropdown">
