@@ -197,7 +197,7 @@ namespace RAP.DAL
        private int SaveUserInfo(UserInfoM userInfo)
        {
            int userID = 0;
-           using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+           using (CommonDataContext db = new CommonDataContext())
            {
                var user = db.UserInfos.Where(x => (x.FirstName == userInfo.FirstName && x.LastName == userInfo.LastName && x.AddressLine1 == userInfo.AddressLine1 && x.AddressLine2 == userInfo.AddressLine2 && x.City == userInfo.City && x.State == userInfo.State && x.Zip == userInfo.Zip)).FirstOrDefault();
 
@@ -216,7 +216,7 @@ namespace RAP.DAL
                    userInfoDB.State = userInfo.State;
                    userInfoDB.Zip = userInfo.Zip;
                    userInfoDB.PhoneNumber = userInfo.PhoneNumber;
-                   userInfoDB.email = userInfo.Email;
+                   userInfoDB.ContactEmail = userInfo.Email;
 
                    db.UserInfos.InsertOnSubmit(userInfoDB);
                    db.SubmitChanges();

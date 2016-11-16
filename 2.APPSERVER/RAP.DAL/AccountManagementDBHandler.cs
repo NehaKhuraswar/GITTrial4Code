@@ -21,40 +21,54 @@ namespace RAP.DAL
             try
             {
                 CustomerInfo custinfo ;
+
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
-                    var custdetails = db.CustomerDetails.Where(x => x.email == message.email && x.Password == message.Password)
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password)
                                                             .Select(c => new CustomerInfo() {
-                                                             FirstName = c.FirstName, 
-                                                             LastName = c.LastName,
-                                                             email = c.email,
-                                                             Address1 = c.AddressLine1,
-                                                            Address2 = c.AddressLine2,
-                                                            City = c.City,
-                                                            PhoneNumber = c.PhoneNumber,
-                                                            State = c.State,
-                                                            Zip = c.Zip,
-                                                            UserTypeID = (int)c.UserTypeID,
+                                                             email = c.Email,
+                                                            UserID = (int)c.UserID,
                                                             custID = (int)c.CustomerID}).FirstOrDefault();
+                    
                     if (custdetails != null)
                     {
                         custinfo = new CustomerInfo();
-                        custinfo.FirstName = custdetails.FirstName;
-                        custinfo.LastName = custdetails.LastName;
-                        custinfo.Address1 = custdetails.Address1;
-                        custinfo.Address2 = custdetails.Address2;
-                        custinfo.City = custdetails.City;
-                        custinfo.PhoneNumber = custdetails.PhoneNumber;
-                        custinfo.State = custdetails.State;
-                        custinfo.Zip = custdetails.Zip;
                         custinfo.email = custdetails.email;
-                        custinfo.UserTypeID = custdetails.UserTypeID;
+                        custinfo.UserID = custdetails.UserID;
                         custinfo.custID = custdetails.custID;
                     }
                     else
                     {
                         custinfo = null;
+                    }
+                }
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+
+                    var userinfos = db.UserInfos.Where(x => x.UserID == custinfo.UserID)
+                                                            .Select(c => new UserInfo()
+                                                            {
+                                                                FirstName = c.FirstName,
+                                                                LastName = c.LastName,
+                                                                AddressLine1 = c.AddressLine1,
+                                                                AddressLine2 = c.AddressLine2,
+                                                                City = c.City,
+                                                                PhoneNumber = c.PhoneNumber,
+                                                                State = c.State,
+                                                                Zip = c.Zip,
+                                                            }).FirstOrDefault();
+
+                    if (userinfos != null)
+                    {
+                        custinfo.FirstName = userinfos.FirstName;
+                        custinfo.LastName = userinfos.LastName;
+                        custinfo.Address1 = userinfos.AddressLine1;
+                        custinfo.Address2 = userinfos.AddressLine2;
+                        custinfo.City = userinfos.City;
+                        custinfo.PhoneNumber = userinfos.PhoneNumber;
+                        custinfo.State = userinfos.State;
+                        custinfo.Zip = userinfos.Zip;
                     }
                 }
                 return custinfo;
@@ -72,25 +86,41 @@ namespace RAP.DAL
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
-                    var custdetails = db.CustomerDetails.Where(x => x.email == message)
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == message)
                                                             .Select(c => new CustomerInfo()
                                                             {
-                                                                FirstName = c.FirstName,
-                                                                LastName = c.LastName,
-                                                                email = c.email,                                                               
+                                                                //FirstName = c.FirstName,
+                                                                //LastName = c.LastName,
+                                                                email = c.Email,                                                               
                                                                 custID = (int)c.CustomerID
                                                             }).FirstOrDefault();
                     if (custdetails != null)
                     {
                         custinfo = new CustomerInfo();
-                        custinfo.FirstName = custdetails.FirstName;
-                        custinfo.LastName = custdetails.LastName;
+                        //custinfo.FirstName = custdetails.FirstName;
+                        //custinfo.LastName = custdetails.LastName;
                         custinfo.email = custdetails.email;
                         custinfo.custID = custdetails.custID;
                     }
                     else
                     {
                         custinfo = null;
+                    }
+                }
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+
+                    var userinfos = db.UserInfos.Where(x => x.UserID == custinfo.UserID)
+                                                            .Select(c => new UserInfo()
+                                                            {
+                                                                FirstName = c.FirstName,
+                                                                LastName = c.LastName,
+                                                            }).FirstOrDefault();
+
+                    if (userinfos != null)
+                    {
+                        custinfo.FirstName = userinfos.FirstName;
+                        custinfo.LastName = userinfos.LastName;
                     }
                 }
                 return custinfo;
@@ -157,23 +187,13 @@ namespace RAP.DAL
                 List<ThirdPartyDetails> thirdPartyDetails;
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-
-                    //var ThirdPartyCustomerID = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
-                    //                                        .Select(c => new ThirdPartyDetails()
-                    //                                        {
-                    //                                            custID = (int)c.ThirdPartyCustomerID
-                    //                                        }).ToList();
-     //               var a = db.ThirdPartyRepresentations         // source
-     //.Join(db.CustomerDetails,         // target
-     //   c => c.ThirdPartyCustomerID,          // FK
-     //   cm => cm.CustomerID,   // PK
-     //   (c, cm) => new { ThirdPartyRepresentations = c, CustomerDetails = cm })
-     //   .Select(x => x.CustomerDetails){};
-
-
-                    //DataTable customerDetails = db.CustomerDetails;
-                    //DataTable orders = ds.Tables["SalesOrderHeader"];
-
+                    var custdetails = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
+                                                            .Select(c => new ThirdPartyDetails()
+                                                            {
+                                                                ThirdPartyRepresentationID = c.ThirdPartyCustomerID,
+                                                              //  UserID = (int)c.UserID,
+                                                              //  custID = (int)c.CustomerID
+                                                            }).FirstOrDefault();
                     var query =
                         db.ThirdPartyRepresentations.AsEnumerable().Join(db.CustomerDetails.AsEnumerable(),
                         t => t.ThirdPartyCustomerID,
@@ -182,9 +202,10 @@ namespace RAP.DAL
                         {
                             ID = t.ThirdPartyRepresentationID,
                             CustomerID = t.ThirdPartyCustomerID,
-                            FirstName = c.FirstName,
-                            LastName = c.LastName,
-                            email = c.email
+                            //NEW-RAP-TBD
+                            //FirstName = c.FirstName,
+                            //LastName = c.LastName,
+                            //email = c.email
                         });
 
                     
@@ -196,26 +217,14 @@ namespace RAP.DAL
                         ThirdPartyDetails obj = new ThirdPartyDetails();
                         obj.ThirdPartyRepresentationID = CustomerDetails.ID;
                         obj.custID = CustomerDetails.CustomerID;
-                        obj.FirstName = CustomerDetails.FirstName;
-                        obj.LastName = CustomerDetails.LastName;
-                        obj.email = CustomerDetails.email;
+                        //NEW-RAP-TBD
+                        //obj.FirstName = CustomerDetails.FirstName;
+                        //obj.LastName = CustomerDetails.LastName;
+                        //obj.email = CustomerDetails.email;
 
                         thirdPartyDetails.Add(obj);
                         index++;
                     }
-
-                    //if (custdetails != null)
-                    //{
-                    //    custinfo = new CustomerInfo();
-                    //    custinfo.FirstName = custdetails.FirstName;
-                    //    custinfo.LastName = custdetails.LastName;
-                    //    custinfo.email = custdetails.email;
-                    //    custinfo.custID = custdetails.custID;
-                    //}
-                    //else
-                    //{
-                    //    custinfo = null;
-                    //}
                 }
                 return thirdPartyDetails;
             }
@@ -224,45 +233,98 @@ namespace RAP.DAL
                 return null;
             }
         }
+        
+        public bool CheckCustAccount(CustomerInfo message)
+        {
+            try
+            {                
+
+                    
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var custInfo = db.CustomerDetails.Where(x => x.Email == message.email)
+                                    .Select(c => new CustomerInfo()
+                                    {
+                                        custID = c.CustomerID,
+                                    }).FirstOrDefault();
+                    if (custInfo != null)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public bool SaveCustomer(CustomerInfo message)
        {
            try
            {
-               using(AccountManagementDataContext db = new AccountManagementDataContext(_connString))
-               {
-                   
-                   if(message.UserTypeID == 0)
-                   {
-                       int? userTypeResponse = null;
-                           userTypeResponse = db.UserTypes.Where(t => t.Description == message.UserType).Select(p => p.UserTypeID).FirstOrDefault();
+               // Account already exists
+               if (CheckCustAccount(message))
+                   return false;
 
-                       if (userTypeResponse == null)
-                       {
-                           return false;
-                       }
-                       message.UserTypeID = Convert.ToInt32(userTypeResponse);                   
-                   }
+               
+
+                using (CommonDataContext dbCommon = new CommonDataContext(_connString))
+                {
+                    // Check for the user info, if all the details already match get the user id and directly create the customer account
+                    // else enter the details in the userinfo table
+                    var userInfos = dbCommon.UserInfos.Where(x => x.FirstName == message.FirstName
+                                && x.LastName == message.LastName
+                                && x.PhoneNumber == message.PhoneNumber
+                                && x.AddressLine1 == message.Address1
+                                && x.AddressLine2 == message.Address2
+                                && x.City == message.City
+                                && x.State == message.State
+                                && x.Zip == message.Zip
+                                ).Select(c => new CustomerInfo()
+                                    {
+                                        UserID = c.UserID,
+                                    }).FirstOrDefault();
+
+                    if (userInfos == null)
+                    {
+                        UserInfo userinfoTable = new UserInfo();
+                        userinfoTable.FirstName = message.FirstName;
+                        userinfoTable.LastName = message.LastName;
+                        userinfoTable.PhoneNumber = message.PhoneNumber;
+                        userinfoTable.AddressLine1 = message.Address1;
+                        userinfoTable.AddressLine2 = message.Address2;
+                        userinfoTable.City = message.City;
+                        userinfoTable.State = message.State;
+                        userinfoTable.Zip = message.Zip;
+                        userinfoTable.CreatedDate = DateTime.Now;
+
+
+                        // RAP-TBD
+                        //  custTable.EmailNotificationFlag = message.EmailNotificationFlag;
+                        //custTable.EmailNotificationFlag = message.MailNotificationFlag;
+                        dbCommon.UserInfos.InsertOnSubmit(userinfoTable);
+                        dbCommon.SubmitChanges();
+                        message.UserID = userinfoTable.UserID;
+                    }
+                    else
+                    {
+                        message.UserID = userInfos.UserID;
+                    }
+                    
+                }
+               
+               using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+               {
 
                    CustomerDetail custTable = new CustomerDetail();
-                   custTable.FirstName = message.FirstName;
-                   custTable.LastName = message.LastName;
-                   custTable.PhoneNumber = message.PhoneNumber;
-                   custTable.email = message.email;
-                   custTable.AddressLine1 = message.Address1;
-                   custTable.AddressLine2 = message.Address2;
-                   custTable.City = message.City;
-                   custTable.State = message.State;
-                   custTable.Zip = message.Zip;
-                   custTable.UserTypeID = 1;
+                   custTable.Email = message.email;
                    custTable.Password = message.Password;
+                   custTable.UserID = message.UserID;  
                    custTable.CreatedDate = DateTime.Now;
-
-                   // RAP-TBD
-                 //  custTable.EmailNotificationFlag = message.EmailNotificationFlag;
-                   //custTable.EmailNotificationFlag = message.MailNotificationFlag;
                    db.CustomerDetails.InsertOnSubmit(custTable);
                    db.SubmitChanges();
-                }
+                   message.custID = custTable.CustomerID;
+               }               
                return true;
            }
            catch(Exception ex)
@@ -270,6 +332,7 @@ namespace RAP.DAL
                return false;
            }
        }
+
         
     }
 }

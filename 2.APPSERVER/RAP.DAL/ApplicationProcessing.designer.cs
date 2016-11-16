@@ -45,9 +45,6 @@ namespace RAP.DAL
     partial void InsertTenantProblemInfo(TenantProblemInfo instance);
     partial void UpdateTenantProblemInfo(TenantProblemInfo instance);
     partial void DeleteTenantProblemInfo(TenantProblemInfo instance);
-    partial void InsertUserInfo(UserInfo instance);
-    partial void UpdateUserInfo(UserInfo instance);
-    partial void DeleteUserInfo(UserInfo instance);
     partial void InsertTenantLostServiceInfo(TenantLostServiceInfo instance);
     partial void UpdateTenantLostServiceInfo(TenantLostServiceInfo instance);
     partial void DeleteTenantLostServiceInfo(TenantLostServiceInfo instance);
@@ -132,14 +129,6 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantProblemInfo>();
-			}
-		}
-		
-		public System.Data.Linq.Table<UserInfo> UserInfos
-		{
-			get
-			{
-				return this.GetTable<UserInfo>();
 			}
 		}
 		
@@ -856,364 +845,6 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserInfo")]
-	public partial class UserInfo : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _UserID;
-		
-		private string _FirstName;
-		
-		private string _LastName;
-		
-		private string _AddressLine1;
-		
-		private string _AddressLine2;
-		
-		private string _City;
-		
-		private string _State;
-		
-		private string _Zip;
-		
-		private string _PhoneNumber;
-		
-		private string _email;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private EntitySet<CaseDetail> _CaseDetails;
-		
-		private EntitySet<CaseDetail> _CaseDetails1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIDChanging(int value);
-    partial void OnUserIDChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnAddressLine1Changing(string value);
-    partial void OnAddressLine1Changed();
-    partial void OnAddressLine2Changing(string value);
-    partial void OnAddressLine2Changed();
-    partial void OnCityChanging(string value);
-    partial void OnCityChanged();
-    partial void OnStateChanging(string value);
-    partial void OnStateChanged();
-    partial void OnZipChanging(string value);
-    partial void OnZipChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    #endregion
-		
-		public UserInfo()
-		{
-			this._CaseDetails = new EntitySet<CaseDetail>(new Action<CaseDetail>(this.attach_CaseDetails), new Action<CaseDetail>(this.detach_CaseDetails));
-			this._CaseDetails1 = new EntitySet<CaseDetail>(new Action<CaseDetail>(this.attach_CaseDetails1), new Action<CaseDetail>(this.detach_CaseDetails1));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string FirstName
-		{
-			get
-			{
-				return this._FirstName;
-			}
-			set
-			{
-				if ((this._FirstName != value))
-				{
-					this.OnFirstNameChanging(value);
-					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string LastName
-		{
-			get
-			{
-				return this._LastName;
-			}
-			set
-			{
-				if ((this._LastName != value))
-				{
-					this.OnLastNameChanging(value);
-					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine1", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string AddressLine1
-		{
-			get
-			{
-				return this._AddressLine1;
-			}
-			set
-			{
-				if ((this._AddressLine1 != value))
-				{
-					this.OnAddressLine1Changing(value);
-					this.SendPropertyChanging();
-					this._AddressLine1 = value;
-					this.SendPropertyChanged("AddressLine1");
-					this.OnAddressLine1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine2", DbType="VarChar(25)")]
-		public string AddressLine2
-		{
-			get
-			{
-				return this._AddressLine2;
-			}
-			set
-			{
-				if ((this._AddressLine2 != value))
-				{
-					this.OnAddressLine2Changing(value);
-					this.SendPropertyChanging();
-					this._AddressLine2 = value;
-					this.SendPropertyChanged("AddressLine2");
-					this.OnAddressLine2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string City
-		{
-			get
-			{
-				return this._City;
-			}
-			set
-			{
-				if ((this._City != value))
-				{
-					this.OnCityChanging(value);
-					this.SendPropertyChanging();
-					this._City = value;
-					this.SendPropertyChanged("City");
-					this.OnCityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
-		public string Zip
-		{
-			get
-			{
-				return this._Zip;
-			}
-			set
-			{
-				if ((this._Zip != value))
-				{
-					this.OnZipChanging(value);
-					this.SendPropertyChanging();
-					this._Zip = value;
-					this.SendPropertyChanged("Zip");
-					this.OnZipChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string PhoneNumber
-		{
-			get
-			{
-				return this._PhoneNumber;
-			}
-			set
-			{
-				if ((this._PhoneNumber != value))
-				{
-					this.OnPhoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(35)")]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfo_CaseDetail", Storage="_CaseDetails", ThisKey="UserID", OtherKey="OwnerUserID")]
-		public EntitySet<CaseDetail> CaseDetails
-		{
-			get
-			{
-				return this._CaseDetails;
-			}
-			set
-			{
-				this._CaseDetails.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfo_CaseDetail1", Storage="_CaseDetails1", ThisKey="UserID", OtherKey="ThirdPartyUserID")]
-		public EntitySet<CaseDetail> CaseDetails1
-		{
-			get
-			{
-				return this._CaseDetails1;
-			}
-			set
-			{
-				this._CaseDetails1.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_CaseDetails(CaseDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserInfo = this;
-		}
-		
-		private void detach_CaseDetails(CaseDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserInfo = null;
-		}
-		
-		private void attach_CaseDetails1(CaseDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserInfo1 = this;
-		}
-		
-		private void detach_CaseDetails1(CaseDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserInfo1 = null;
 		}
 	}
 	
@@ -2504,10 +2135,6 @@ namespace RAP.DAL
 		
 		private EntityRef<PetitionDetail> _PetitionDetail;
 		
-		private EntityRef<UserInfo> _UserInfo;
-		
-		private EntityRef<UserInfo> _UserInfo1;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2559,8 +2186,6 @@ namespace RAP.DAL
 		public CaseDetail()
 		{
 			this._PetitionDetail = default(EntityRef<PetitionDetail>);
-			this._UserInfo = default(EntityRef<UserInfo>);
-			this._UserInfo1 = default(EntityRef<UserInfo>);
 			OnCreated();
 		}
 		
@@ -2699,10 +2324,6 @@ namespace RAP.DAL
 			{
 				if ((this._ThirdPartyUserID != value))
 				{
-					if (this._UserInfo1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnThirdPartyUserIDChanging(value);
 					this.SendPropertyChanging();
 					this._ThirdPartyUserID = value;
@@ -2723,10 +2344,6 @@ namespace RAP.DAL
 			{
 				if ((this._OwnerUserID != value))
 				{
-					if (this._UserInfo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnOwnerUserIDChanging(value);
 					this.SendPropertyChanging();
 					this._OwnerUserID = value;
@@ -3026,74 +2643,6 @@ namespace RAP.DAL
 						this._PetitionFileID = default(int);
 					}
 					this.SendPropertyChanged("PetitionDetail");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfo_CaseDetail", Storage="_UserInfo", ThisKey="OwnerUserID", OtherKey="UserID", IsForeignKey=true)]
-		public UserInfo UserInfo
-		{
-			get
-			{
-				return this._UserInfo.Entity;
-			}
-			set
-			{
-				UserInfo previousValue = this._UserInfo.Entity;
-				if (((previousValue != value) 
-							|| (this._UserInfo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserInfo.Entity = null;
-						previousValue.CaseDetails.Remove(this);
-					}
-					this._UserInfo.Entity = value;
-					if ((value != null))
-					{
-						value.CaseDetails.Add(this);
-						this._OwnerUserID = value.UserID;
-					}
-					else
-					{
-						this._OwnerUserID = default(int);
-					}
-					this.SendPropertyChanged("UserInfo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfo_CaseDetail1", Storage="_UserInfo1", ThisKey="ThirdPartyUserID", OtherKey="UserID", IsForeignKey=true)]
-		public UserInfo UserInfo1
-		{
-			get
-			{
-				return this._UserInfo1.Entity;
-			}
-			set
-			{
-				UserInfo previousValue = this._UserInfo1.Entity;
-				if (((previousValue != value) 
-							|| (this._UserInfo1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserInfo1.Entity = null;
-						previousValue.CaseDetails1.Remove(this);
-					}
-					this._UserInfo1.Entity = value;
-					if ((value != null))
-					{
-						value.CaseDetails1.Add(this);
-						this._ThirdPartyUserID = value.UserID;
-					}
-					else
-					{
-						this._ThirdPartyUserID = default(int);
-					}
-					this.SendPropertyChanged("UserInfo1");
 				}
 			}
 		}

@@ -39,23 +39,6 @@
       <Association Name="TenantPetitionInfo_TenantProblemInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.UserInfo" Member="UserInfos">
-    <Type Name="UserInfo">
-      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="LastName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="AddressLine1" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="AddressLine2" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
-      <Column Name="City" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="State" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Zip" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="UserInfo_CaseDetail" Member="CaseDetails" ThisKey="UserID" OtherKey="OwnerUserID" Type="CaseDetail" />
-      <Association Name="UserInfo_CaseDetail1" Member="CaseDetails1" ThisKey="UserID" OtherKey="ThirdPartyUserID" Type="CaseDetail" />
-    </Type>
-  </Table>
   <Table Name="dbo.TenantLostServiceInfo" Member="TenantLostServiceInfos">
     <Type Name="TenantLostServiceInfo">
       <Column Name="LostServiceInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -137,8 +120,6 @@
       <Column Name="HearingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="AppealDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="PetitionDetail_CaseDetail" Member="PetitionDetail" ThisKey="PetitionFileID" OtherKey="PetitionFileID" Type="PetitionDetail" IsForeignKey="true" />
-      <Association Name="UserInfo_CaseDetail" Member="UserInfo" ThisKey="OwnerUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
-      <Association Name="UserInfo_CaseDetail1" Member="UserInfo1" ThisKey="ThirdPartyUserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

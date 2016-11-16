@@ -27,6 +27,7 @@ namespace RAP.Core.DataModels
         public int UserTypeID { get; set; }
         public string UserType { get; set; }
         public string Password { get; set; }
+        public int UserID { get; set; }
         public bool EmailNotificationFlag { get; set; }
         public bool MailNotificationFlag { get; set; }
         public List<ThirdPartyDetails> thirdpartyDetails { get; set; }
