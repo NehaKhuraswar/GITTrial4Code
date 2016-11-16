@@ -37,38 +37,52 @@ namespace RAP.DAL
                         custinfo.email = custdetails.email;
                         custinfo.UserID = custdetails.UserID;
                         custinfo.custID = custdetails.custID;
+                        var notifications = db.NotificationPreferences.Where(x => x.CustomerID == custinfo.custID)
+                                                                .Select(c => new CustomerInfo()
+                                                                {
+                                                                    EmailNotificationFlag = c.EmailNotification,
+                                                                    MailNotificationFlag = c.MailNotification
+                                                                }).FirstOrDefault();
+                        if(notifications != null)
+                        {
+                            custinfo.MailNotificationFlag = notifications.MailNotificationFlag;
+                            custinfo.EmailNotificationFlag = notifications.EmailNotificationFlag;
+                        }
                     }
                     else
                     {
                         custinfo = null;
                     }
                 }
-                using (CommonDataContext db = new CommonDataContext(_connString))
+                if (custinfo != null)
                 {
-
-                    var userinfos = db.UserInfos.Where(x => x.UserID == custinfo.UserID)
-                                                            .Select(c => new UserInfo()
-                                                            {
-                                                                FirstName = c.FirstName,
-                                                                LastName = c.LastName,
-                                                                AddressLine1 = c.AddressLine1,
-                                                                AddressLine2 = c.AddressLine2,
-                                                                City = c.City,
-                                                                PhoneNumber = c.PhoneNumber,
-                                                                State = c.State,
-                                                                Zip = c.Zip,
-                                                            }).FirstOrDefault();
-
-                    if (userinfos != null)
+                    using (CommonDataContext db = new CommonDataContext(_connString))
                     {
-                        custinfo.FirstName = userinfos.FirstName;
-                        custinfo.LastName = userinfos.LastName;
-                        custinfo.Address1 = userinfos.AddressLine1;
-                        custinfo.Address2 = userinfos.AddressLine2;
-                        custinfo.City = userinfos.City;
-                        custinfo.PhoneNumber = userinfos.PhoneNumber;
-                        custinfo.State = userinfos.State;
-                        custinfo.Zip = userinfos.Zip;
+
+                        var userinfos = db.UserInfos.Where(x => x.UserID == custinfo.UserID)
+                                                                .Select(c => new CustomerInfo()
+                                                                {
+                                                                    FirstName = c.FirstName,
+                                                                    LastName = c.LastName,
+                                                                    Address1 = c.AddressLine1,
+                                                                    Address2 = c.AddressLine2,
+                                                                    City = c.City,
+                                                                    PhoneNumber = c.PhoneNumber,
+                                                                    State = c.State,
+                                                                    Zip = c.Zip,
+                                                                }).FirstOrDefault();
+
+                        if (userinfos != null)
+                        {
+                            custinfo.FirstName = userinfos.FirstName;
+                            custinfo.LastName = userinfos.LastName;
+                            custinfo.Address1 = userinfos.Address1;
+                            custinfo.Address2 = userinfos.Address2;
+                            custinfo.City = userinfos.City;
+                            custinfo.PhoneNumber = userinfos.PhoneNumber;
+                            custinfo.State = userinfos.State;
+                            custinfo.Zip = userinfos.Zip;
+                        }
                     }
                 }
                 return custinfo;
