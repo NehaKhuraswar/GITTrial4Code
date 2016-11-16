@@ -13,6 +13,7 @@ namespace RAP.Core.DataModels
         private UserInfoM _thirdPartyInfo = new UserInfoM();
         private UserInfoM _ownerInfo = new UserInfoM();
         private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
+        private List<DocumentM> _documnts = new List<DocumentM>();
         private bool _appealFiled = false;
         public string CaseID { get; set; }
         public int PetitionCategoryID { get; set; }
@@ -85,6 +86,19 @@ namespace RAP.Core.DataModels
                 _appealGrounds = value;
             }
         }
+
+        public List<DocumentM> Documents
+        {
+            get
+            {
+                return _documnts;
+            }
+            set
+            {
+                _documnts = value;
+            }
+        }
+        
     }
 
     public class UserInfoM

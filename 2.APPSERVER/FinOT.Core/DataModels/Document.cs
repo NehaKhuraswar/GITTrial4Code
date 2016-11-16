@@ -8,7 +8,7 @@ namespace RAP.Core.DataModels
 {
     public class Document : DocumentContent
     {
-        public int? DocID { get; set; }
+        public int? DocID { get; set; }        
         public IDDescription Section { get; set; }
         public int KeyID { get; set; }
         public string AdditionalKey { get; set; }
@@ -27,4 +27,16 @@ namespace RAP.Core.DataModels
         public string Extension { get; set; }
         public string ContentType { get; set; }
     }
+
+     public class DocumentM
+     {
+         public int? DocID { get; set; }
+         public string DocName { get; set; }
+         public string Extension { get; set; }
+         public string DocType { get; set; }
+         public string DocTitle { get; set; }
+         public byte[] Content { get; set; }
+         public string DocThirdPartyID { get; set; }
+         
+     }
 }
