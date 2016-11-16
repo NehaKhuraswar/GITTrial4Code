@@ -324,7 +324,16 @@ namespace RAP.DAL
                    db.CustomerDetails.InsertOnSubmit(custTable);
                    db.SubmitChanges();
                    message.custID = custTable.CustomerID;
-               }               
+
+                   NotificationPreference notificationTable = new NotificationPreference();
+                   notificationTable.CustomerID = message.custID;
+                   notificationTable.EmailNotification = message.EmailNotificationFlag;
+                   notificationTable.MailNotification = message.MailNotificationFlag;
+                   notificationTable.CreatedDate = DateTime.Now;
+                   db.NotificationPreferences.InsertOnSubmit(notificationTable);
+                   db.SubmitChanges();
+               }     
+              
                return true;
            }
            catch(Exception ex)
