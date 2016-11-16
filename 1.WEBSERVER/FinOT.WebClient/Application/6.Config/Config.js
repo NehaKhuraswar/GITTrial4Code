@@ -92,6 +92,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapLostServicesController_resolve
         })
+       .when('/document', {
+              templateUrl: 'views/filepetition/Document.html',
+              controller: rapDocumentController,
+              controllerAs: 'Ctrl',
+              resolve: rapDocumentController_resolve
+          })
         .when('/review', {
             templateUrl: 'views/filepetition/Review.html',
             controller: rapReviewController,

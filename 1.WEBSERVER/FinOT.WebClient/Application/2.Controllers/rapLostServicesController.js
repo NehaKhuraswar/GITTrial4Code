@@ -40,9 +40,9 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     //    var a = self.selectedObj;
     //    $location.path("/lostservices");
     //}
-    self.ContinueToReview = function () {
+    self.ContinueToDocument = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $location.path("/review");
+        $location.path("/document");
     }
     //self.ContinueToVerification = function () {
     //    $location.path("/verification");

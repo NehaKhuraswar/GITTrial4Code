@@ -120,6 +120,7 @@
     <Content Include="Application\2.Controllers\otstaffController.js" />
     <Content Include="Application\2.Controllers\rapApplicationInfoController.js" />
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
+    <Content Include="Application\2.Controllers\RAPDocumentController.js" />
     <Content Include="Application\2.Controllers\rapFilePetitionController.js" />
     <Content Include="Application\2.Controllers\rapGroundsOfPetitionController.js" />
     <Content Include="Application\2.Controllers\rapinvitethirdpartyController.js" />
@@ -134,12 +135,14 @@
     <Content Include="Application\2.Controllers\workqueueController.js" />
     <Content Include="Application\3.Factories\authFactory.js" />
     <Content Include="Application\3.Factories\authInterceptorService.js" />
+    <Content Include="Application\3.Factories\HtmlPage1.html" />
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\otrequestFactory.js" />
     <Content Include="Application\3.Factories\rapapplicationinfoFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
+    <Content Include="Application\3.Factories\RapDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapfilepetitionFactory.js" />
     <Content Include="Application\3.Factories\rapgroundsofpetitionFactory.js" />
     <Content Include="Application\3.Factories\rapinvitethirdpartyFactory.js" />
@@ -194,6 +197,7 @@
     <Content Include="Views\FilePetition\ApplicationInfo.html" />
     <Content Include="Views\Account\CreateUser.html" />
     <Content Include="Views\Account\Dashboard.html" />
+    <Content Include="Views\FilePetition\Document.html" />
     <Content Include="Views\FilePetition\FilePetition.html" />
     <Content Include="Views\FilePetition\GroundsForPetition.html" />
     <Content Include="Views\Account\InviteThirdParty.html" />
