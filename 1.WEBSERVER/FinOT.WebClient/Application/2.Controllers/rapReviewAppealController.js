@@ -1,11 +1,11 @@
 ﻿'use strict';
-var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverificationFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewappealFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.SubmitPetition = function (model) {
-     
+   
+    self.SubmitAppeal = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveCaseInfo(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -14,9 +14,10 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
             $modalInstance.close(response.data);
         });
     }
+   
 }];
-var rapVerificationController_resolve = {
-    model: ['$route', 'alertService', 'rapverificationFactory', function ($route, alert, rapFactory) {
+var rapReviewAppealController_resolve = {
+    model: ['$route', 'alertService', 'rapreviewappealFactory', function ($route, alert, rapFactory) {
         ////return auth.fetchToken().then(function (response) {
         //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {
         //  if (!alert.checkResponse(response)) { return; }

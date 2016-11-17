@@ -110,6 +110,36 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapVerificationController_resolve
         })
+        .when('/fileappeal', {
+            templateUrl: 'views/fileAppeal/FileAppeal.html',
+            controller: rapFileAppealController,
+            controllerAs: 'Ctrl',
+            resolve: rapFileAppealController_resolve
+        })
+        .when('/appellantsinfo', {
+            templateUrl: 'views/fileAppeal/AppellantsInfo.html',
+            controller: rapAppellantsInfoController,
+            controllerAs: 'Ctrl',
+            resolve: rapAppellantsInfoController_resolve
+        })
+        .when('/groundsforappeal', {
+            templateUrl: 'views/fileAppeal/GroundsForAppeal.html',
+            controller: rapGroundsOfAppealController,
+            controllerAs: 'Ctrl',
+            resolve: rapGroundsOfAppealController_resolve
+        })
+        .when('/reviewappeal', {
+            templateUrl: 'views/fileAppeal/Review.html',
+            controller: rapReviewAppealController,
+            controllerAs: 'Ctrl',
+            resolve: rapReviewAppealController_resolve
+        })
+        .when('/servingappeal', {
+            templateUrl: 'views/fileAppeal/ServingAppeal.html',
+            controller: rapServingAppealController,
+            controllerAs: 'Ctrl',
+            resolve: rapServingAppealController_resolve
+        })
         .when('/report/:reportid', {
             templateUrl: 'views/report/index.html',
             controller: reportController,

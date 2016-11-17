@@ -9,104 +9,107 @@
                 <p>Appeal : Appellant's and property information</p>
                 <p>___________________________________________________________________________________________</p>
                 <p>Appellant's name  and rental address</p>
-                <p>{{Ctrl.custDetails.FirstName}} {{Ctrl.custDetails.LastName}}</p>
-                <p>{{Ctrl.custDetails.Address1}} {{Ctrl.custDetails.Address2}}</p>
-                <p>{{Ctrl.custDetails.City}} {{Ctrl.custDetails.State}} {{Ctrl.custDetails.Zip}}</p>
-                <p>{{Ctrl.custDetails.PhoneNumber}}</p>
+                <p>{{Ctrl.custDetails.User.FirstName}} {{Ctrl.custDetails.User.LastName}}</p>
+                <p>{{Ctrl.custDetails.User.AddressLine1}} {{Ctrl.custDetails.User.AddressLine2}}</p>
+                <p>{{Ctrl.custDetails.User.City}} {{Ctrl.custDetails.User.State}} {{Ctrl.custDetails.User.Zip}}</p>
+                <p>{{Ctrl.custDetails.User.PhoneNumber}}</p>
 
 
                 <p>___________________________________________________________________________________________</p>
                 <strong>Case</strong>
                 <p>Case Number</p>   
-                <p>{{Ctrl.CaseDe}}</p>    
+                <p>{{Ctrl.caseinfo.CaseID}}</p>    
+                <p>Date of the decision that you are appealing</p>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Month
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jan</a></li>
+                        <li><a href="#">Feb</a></li>
+                        <li><a href="#">Mar</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Date
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Year
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">2014</a></li>
+                        <li><a href="#">2013</a></li>
+                        <li><a href="#">2012</a></li>
+                    </ul>
+                </div>
+                <strong>Property Address(include unit number)</strong>
+
                 <div class="radio">
-                    <label><input type="radio" name="IsRepresentative" value="true" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation">Yes</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsRepresentative" value="false" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation">No</label>
-                </div>
-                <div>
-                    <p>First Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.FirstName" required />
-                    <p>Last Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.LastName" required />
-                    <p>Address Line 1</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine1" required />
-                    <p>Address Line 2</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine2" required />
-                    <p>City</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.City" required />
-                    <p>State</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.State" required />
-                    <p>Zip Code</p>
-                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Zip" required />
-                    <p>Phone Number</p>
-                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.PhoneNumber" required />
-                    <p>Email</p>
-                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Email" required />
-                </div>
-                <p>___________________________________________________________________________________________</p>
-                <p>Property Owner(s) name and mailing address</p>
-                <p>First Name</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.FirstName" required />
-                <p>Last Name</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.LastName" required />
-                <p>Address Line 1</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine1" required />
-                <p>Address Line 2</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine2" required />
+                    <label><input type="radio" name="SameAsMailingAddress" 
+                                  ng-change="SameAsMailingAddress()" 
+                                  ng-model="Ctrl.SameAsMailingAddress">Same as mailing address</label>
+                </div>                
+                <p>Property Address 1</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.custDetails.User.AddressLine1" required />
+                <p>Property Address 2</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.custDetails.User.AddressLine2" required />
                 <p>City</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.City" required />
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.custDetails.User.City" required />
                 <p>State</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.State" required />
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.custDetails.User.State" required />
                 <p>Zip Code</p>
-                <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.Zip" required />
+                <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.custDetails.User.Zip" required />
                 <p>Phone Number</p>
                 <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.PhoneNumber" required />
                 <p>Email</p>
                 <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.Email" required />
+
                 <p>___________________________________________________________________________________________</p>
-                <p> Property information </p>
-                <p>Number of Units</p>
-                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits" required />
+                <strong>Your representative</strong>
+                <p>Is anybody representing you</p>
                 <div class="radio">
-                    <label><input type="radio" name="IsDontknow">I don't know</label>
-                </div>
-                <p>Type of Unit you rent</p>
-                <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
-                    <input type="radio"
-                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId"
-                           ng-value="unittype.UnitTypeID"
-                           id="{{unittype.UnitTypeID}}"
-                           name="units">{{unittype.UnitDescription}}
-                </label>
-                <!--<div class="radio">
-                    <label><input type="radio" name="TypeOfUnit">House</label>
+                    <label><input type="radio" name="IsRepresenting" value="true" 
+                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentationAppeal">Yes</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="TypeOfUnit">Condominium</label>
+                    <label><input type="radio" name="IsRepresenting" value="false" 
+                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentationAppeal">No</label>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="TypeOfUnit">Apartment, Room, or Live-work</label>
-                </div>-->
-                <p>Are you current on Rent?</p>
-                <label ng-repeat="currentonrent in Ctrl.caseinfo.TenantPetitionInfo.CurrentOnRent" for="{{currentonrent.StatusID}}">
-                    <input type="radio"
-                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.CurrentRentStatusID"
-                           ng-value="currentonrent.StatusID"
-                           id="{{currentonrent.StatusID}}"
-                           name="currentrent">{{currentonrent.Status}}
-                </label>
-                <!--<div class="radio">
-                    <label><input type="radio" name="IsCurrentOnRent">Yes</label>
+
+                <div ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentationAppeal">
+                    <p>First Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.FirstName" required />
+                    <p>Last Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.LastName" required />
+                    <p>Address Line 1</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.AddressLine1" required />
+                    <p>Address Line 2</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.AddressLine2" required />
+                    <p>City</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.City" required />
+                    <p>State</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.State" required />
+                    <p>Zip Code</p>
+                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.Zip" required />
+                    <p>Phone Number</p>
+                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.PhoneNumber" required />
+                    <p>Email</p>
+                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.Email" required />
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsCurrentOnRent">No</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsCurrentOnRent">Legally withholding rent</label>
-                </div>-->
-                <button ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
+                <p>___________________________________________________________________________________________</p>
+              
+                <button ng-click="Ctrl.ContinueToGroundsforAppeal()">Continue</button>
             </div>
         </div>
     </div>

@@ -8,6 +8,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.FilePetition = function () {
         $location.path("/filePetition");
     }
+    self.FileAppeal = function () {
+        $location.path("/fileappeal");
+    }
 
 }];
 var rapdashboardController_resolve = {

@@ -12,6 +12,7 @@ namespace RAP.Core.DataModels
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
         private UserInfoM _thirdPartyInfo = new UserInfoM();
         private UserInfoM _ownerInfo = new UserInfoM();
+        private UserInfoM _appealThirdPartyInfo = new UserInfoM();
         private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
         private List<DocumentM> _documnts = new List<DocumentM>();
         private bool _appealFiled = false;
@@ -63,6 +64,18 @@ namespace RAP.Core.DataModels
         public int WorlFlowID { get; set; }
         public DateTime HearingDate { get; set; }
         public DateTime AppealDate { get; set; }
+        public bool bThirdPartyRepresentationAppeal { get; set; }
+        public UserInfoM AppealThirdPartyInfo
+        {
+            get
+            {
+                return _appealThirdPartyInfo;
+            }
+            set
+            {
+                _appealThirdPartyInfo = value;
+            }
+        }
         public bool bAppealfiled
         {
             get

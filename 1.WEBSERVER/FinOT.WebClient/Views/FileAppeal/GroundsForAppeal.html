@@ -3,57 +3,30 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-danger font-small">
             <div class="panel-heading">
-                <strong>User</strong>
+                <strong>Appeal: Grounds for Appeal</strong>
             </div>
             <div class="panel-body">
-                <p>Renter petition : Grounds for Petition</p>
+                
                 <p>___________________________________________________________________________________________</p>
-                <p>I (We) contest one or more rent increases on one or more of the following grounds:</p>
+                <p>I appeal the decision issued in the case on the following grounds:</p>
                 <div ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
                     <label>
-                        {{petitionground.PetitionGroundDescription}}:
                         <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
+                        {{petitionground.PetitionGroundDescription}}                        
                     </label>
                 </div>
-
-                <!--<div class="checkbox">
-                    <label><input type="checkbox" value="">a)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">b)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">c)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">d)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">e)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">f1)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">f2)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">g)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">h)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">i)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">j)</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">j)</label>
-                </div>-->
-
-
+                <p>Number of pages attached. Please number the attached pages consecutively</p>
+                <ul class="dropdown">
+                    <li><span>1</span></li>
+                    <li><span>2</span></li>
+                    <li><span>3</span></li>
+                    <li><span>4</span></li>
+                    <li><span>5</span></li>
+                </ul>
+                <!--<ul class="dropdown-menu">
+                    <li ng-repeat="i in getNumber(number)"><span>{$index+1}}</span></li>
+                </ul>-->
+                <button ng-click="Ctrl.AttachExplaination()">Attach explaination</button>
                 <button ng-click="Ctrl.ContinueToRentalHistory()">Continue</button>
             </div>
         </div>

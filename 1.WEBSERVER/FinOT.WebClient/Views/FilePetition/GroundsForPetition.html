@@ -10,9 +10,9 @@
                 <p>___________________________________________________________________________________________</p>
                 <p>I (We) contest one or more rent increases on one or more of the following grounds:</p>
                 <div ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
-                    <label>
-                        {{petitionground.PetitionGroundDescription}}:
+                    <label>                        
                         <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
+                        {{petitionground.PetitionGroundDescription}}
                     </label>
                 </div>
 
