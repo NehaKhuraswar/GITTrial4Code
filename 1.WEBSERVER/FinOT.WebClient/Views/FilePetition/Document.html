@@ -9,7 +9,7 @@
                 <p>Description of the document that you are attaching</p>
                 <input type="text" class="form-control input-sm" ng-trim="false" />
                 <div>
-                    <input type="file" />
+                    <input type="file" ngf-select ngf-change="onFileSelect($files)" />
                 </div>
 
                 <button ng-click="Ctrl.ContinueToReview()">Continue</button>
