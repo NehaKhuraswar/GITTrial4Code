@@ -12,6 +12,7 @@ namespace RAP.DAL
     public class ApplicationProcessingDBHandler : IApplicationProcessingDBHandler
     {
        private readonly string _connString;
+       CommonDBHandler commondbHandler = new CommonDBHandler();
        public ApplicationProcessingDBHandler()
         {
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
@@ -108,6 +109,285 @@ namespace RAP.DAL
                    result.result.TenantPetitionInfo = _petition;
                    result.status = new OperationStatus() { Status = StatusEnum.Success };
                }
+               return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+       }
+
+       public ReturnResult<CaseInfoM> GetCaseDetails(string caseID)
+       {
+           ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           result.result = new CaseInfoM();
+           CaseInfoM caseInfo = new CaseInfoM();          
+           
+           int petitionFileID = 0;
+           int ownerUserID = 0;
+           int thirdPartyUSerID = 0;
+           try
+           {
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   var caseDetails = db.CaseDetails.Where(x => x.CaseID == caseID).FirstOrDefault();
+                   if(caseDetails != null)
+                   {
+                       petitionFileID = caseDetails.PetitionFileID;
+                       ownerUserID = caseDetails.OwnerUserID;
+                       thirdPartyUSerID = caseDetails.ThirdPartyUserID;
+                       caseInfo.bThirdPartyRepresentation = (bool) caseDetails.bThirdPartyRepresentation;
+                       caseInfo.bAgreeToCityMediation = (bool) caseDetails.bAgreeToCityMediation;
+
+                       //TBD
+                       caseInfo.CaseFileBy = 1;
+                       caseInfo.bCaseFiledByThirdParty = (bool)caseDetails.bCaseFiledByThirdParty;
+                        //TBD
+                       caseInfo.CaseAssignedTo = "12345";
+                       //TBD
+                       caseInfo.CityUserFirstName = "City";
+                       //TBD
+                       caseInfo.CityUserLastName = "Admin";
+                       //TBD
+                       caseInfo.CityUserMailID = "testcity@gmail.com";                      
+
+                       caseInfo.CaseID = caseDetails.CaseID;
+                       caseInfo.TenantPetitionInfo = GetTenantPetition(petitionFileID).result;
+                       //if (petitionFileID == 0)
+                       //{
+                       //    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                       //    return result;
+                       //}
+                       ReturnResult<UserInfoM> resultOwnerInfo = new ReturnResult<UserInfoM>();
+                       resultOwnerInfo = commondbHandler.GetUserInfo(ownerUserID);
+                       caseInfo.OwnerInfo = resultOwnerInfo.result;
+                       //if (ownerUserID == 0)
+                       //{
+                       //    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                       //    return result;
+                       //}
+                       if (caseInfo.bThirdPartyRepresentation)
+                       {
+                           ReturnResult<UserInfoM> resultThirdPartyInfo = new ReturnResult<UserInfoM>();
+                           resultThirdPartyInfo = commondbHandler.GetUserInfo(thirdPartyUSerID);
+
+                           caseInfo.ThirdPartyInfo = resultThirdPartyInfo.result;
+                           //if (thirdPartyUSerID == 0)
+                           //{
+                           //    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                           //    return result;
+                           //}
+                       }
+
+                   }
+               }
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+               
+                return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+       }
+       private ReturnResult<TenantPetitionInfoM> GetTenantPetition(int PetitionID)
+       {
+           ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+           try
+           {
+               result = GetTenantPetitionInfo(PetitionID);
+               if (result != null)
+               {
+
+                   result.result.RentIncreases = GetTenantRentalIncrementInfo(PetitionID).result;
+                   result.result.LostServices = GetTenantLostServiceInfo(PetitionID).result;
+                   result.result.Problems = GetTenantProblemInfo(PetitionID).result;
+                   result.result.PetitionGrounds = GetPetitionGroundInfo(PetitionID).result;
+                   // TBD
+                   //   petitionID = GetPetitionFileID(tenantPetitionID, 1);
+               }
+               return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+       }
+       private ReturnResult<TenantPetitionInfoM> GetTenantPetitionInfo(int PetitionID)
+       {
+           ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+           TenantPetitionInfoM tenantPetitionInfo = new TenantPetitionInfoM();
+           try
+           {
+               if (PetitionID != 0)
+               {
+                   using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+                   {
+                       var tenantPetitionInfoDB = db.TenantPetitionInfos.Where(x => x.TenantPetitionID == PetitionID).FirstOrDefault();
+                       //TenantPetitionInfo petitionDB = new TenantPetitionInfo();
+                       tenantPetitionInfo.NumberOfUnits = (int)tenantPetitionInfoDB.NumberOfUnits;
+                       tenantPetitionInfo.UnitTypeId = tenantPetitionInfoDB.UnitTypeID;
+                       tenantPetitionInfo.CurrentRentStatusID = tenantPetitionInfoDB.RentStatusID;
+                       tenantPetitionInfo.LegalWithHoldingExplanation = tenantPetitionInfoDB.LegalWithHoldingExplanation;
+                       tenantPetitionInfo.bCitationDocUnavailable = Convert.ToBoolean(tenantPetitionInfoDB.bCitationDocUnavailable);
+                       //To be removed
+                       tenantPetitionInfo.MoveInDate = tenantPetitionInfoDB.MoveInDate;
+                       tenantPetitionInfo.InitialRent = tenantPetitionInfoDB.InitialRent;
+                       tenantPetitionInfo.bRAPNoticeGiven = Convert.ToBoolean(tenantPetitionInfoDB.bRAPNoticeGiven);
+                       // To be removed
+                       tenantPetitionInfo.RAPNoticeGivenDate = Convert.ToDateTime(tenantPetitionInfoDB.RAPNoticeGivnDate);
+                       tenantPetitionInfo.bRentControlledByAgency = Convert.ToBoolean(tenantPetitionInfoDB.bRentControlledByAgency);
+                       tenantPetitionInfo.bPetitionFiledPrviously = Convert.ToBoolean(tenantPetitionInfoDB.bPetitionFiledPrviously);
+                       tenantPetitionInfo.PreviousCaseIDs = tenantPetitionInfoDB.PreviousCaseIDs;
+                       tenantPetitionInfo.bLostService = Convert.ToBoolean(tenantPetitionInfoDB.bLostService);
+                       tenantPetitionInfo.bProblem = Convert.ToBoolean(tenantPetitionInfoDB.bSeriousProblem);
+
+                       result.result = tenantPetitionInfo;
+                       result.status = new OperationStatus() { Status = StatusEnum.Success };
+                                             
+                   }
+               }
+               return result; 
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+           
+       }
+       private ReturnResult<List<TenantRentIncreaseInfoM>> GetTenantRentalIncrementInfo(int PetitionId)
+       {
+           ReturnResult<List<TenantRentIncreaseInfoM>> result = new ReturnResult<List<TenantRentIncreaseInfoM>>();
+           List<TenantRentIncreaseInfoM> tenantRentIncreaseInfo = new List<TenantRentIncreaseInfoM>();
+           try
+           {
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   var TenantRentalIncrementInfoDB = db.TenantRentalIncrementInfos.Where(x => x.TenantPetitionID == PetitionId).ToList();
+                   foreach (var item in TenantRentalIncrementInfoDB)
+                   {
+                       TenantRentIncreaseInfoM objTenantRentIncreaseInfoM = new TenantRentIncreaseInfoM();
+                       //TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
+                       //rentIncrementDB.TenantPetitionID = petition.PetitionID;
+                       objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
+                       objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = Convert.ToDateTime(item.RentIncreaseNoticeDate);
+                       objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = Convert.ToDateTime(item.RentIncreaseEffectiveDate);
+                       objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
+                       objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
+                       objTenantRentIncreaseInfoM.bRentIncreaseContested = Convert.ToBoolean(item.bRentIncreaseContested);
+
+                       tenantRentIncreaseInfo.Add(objTenantRentIncreaseInfoM);
+                   }
+               }
+               result.result = tenantRentIncreaseInfo;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+               return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+
+       }
+
+       private ReturnResult<List<TenantLostServiceInfoM>> GetTenantLostServiceInfo(int PetitionID)
+       {
+           ReturnResult<List<TenantLostServiceInfoM>> result = new ReturnResult<List<TenantLostServiceInfoM>>();
+           List<TenantLostServiceInfoM> tenantLostServiceInfo = new List<TenantLostServiceInfoM>();
+           try
+           {
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   var TenantLostServiceInfoDB = db.TenantLostServiceInfos.Where(x => x.TenantPetitionID == PetitionID).ToList();
+                   foreach (var item in TenantLostServiceInfoDB)
+                   {
+                       TenantLostServiceInfoM objTenantLostServiceInfoM = new TenantLostServiceInfoM();
+
+                       objTenantLostServiceInfoM.ReducedServiceDescription = item.ReducedServiceDescription;
+                       objTenantLostServiceInfoM.EstimatedLoss = item.EstimatedLoss;
+                       objTenantLostServiceInfoM.LossBeganDate = item.LossBeganDate;
+                       objTenantLostServiceInfoM.PayingToServiceBeganDate = item.PayingToServiceBeganDate;
+
+                       tenantLostServiceInfo.Add(objTenantLostServiceInfoM);
+                   }
+               }
+               result.result = tenantLostServiceInfo;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+               return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+       }
+
+
+       private ReturnResult<List<TenantProblemInfoM>> GetTenantProblemInfo(int PetitionID)
+       {
+           ReturnResult<List<TenantProblemInfoM>> result = new ReturnResult<List<TenantProblemInfoM>>();
+           List<TenantProblemInfoM> tenantProblemInfo = new List<TenantProblemInfoM>();
+           try
+           {
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   var TenantProblemInfoDB = db.TenantProblemInfos.Where(x => x.TenantPetitionID == PetitionID).ToList();
+                   foreach (var item in TenantProblemInfoDB)
+                   {
+                       TenantProblemInfoM objTenantProblemInfoM = new TenantProblemInfoM();
+                       objTenantProblemInfoM.ProblemDescription = item.ProblemDescription;
+                       objTenantProblemInfoM.EstimatedLoss = item.EstimatedLoss;
+                       objTenantProblemInfoM.ProblemBeganDate = item.ProblemBeganDate;
+
+                       tenantProblemInfo.Add(objTenantProblemInfoM);
+                   }
+               }
+               result.result = tenantProblemInfo;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+               return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+       }
+
+       private ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int PetitionID)
+       {
+           ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
+           List<PetitionGroundM> PetitionGroundInfo = new List<PetitionGroundM>();
+           try
+           {
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   var TenantPetitionGroundInfoDB = db.TenantPetitionGroundInfos.Where(x => x.TenantPetitionID == PetitionID).ToList();
+                   foreach (var item in TenantPetitionGroundInfoDB)
+                   {
+                       PetitionGroundM objPetitionGroundM = new PetitionGroundM();
+                       objPetitionGroundM.PetitionGroundID = item.PetitionGroundID;
+                       PetitionGroundInfo.Add(objPetitionGroundM);
+                   }
+               }
+               result.result = PetitionGroundInfo;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+
                return result;
            }
            catch (Exception ex)
@@ -256,7 +536,7 @@ namespace RAP.DAL
                //To be removed
                petitionDB.MoveInDate = DateTime.Now;
               // petitionDB.MoveInDate = petition.MoveInDate;
-               petitionDB.InitialRent = petition.InitalRent;
+               petitionDB.InitialRent = petition.InitialRent;
                petitionDB.bRAPNoticeGiven = petition.bRAPNoticeGiven;
                // To be removed
                petitionDB.RAPNoticeGivnDate = DateTime.Now;
