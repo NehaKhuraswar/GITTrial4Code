@@ -13,7 +13,7 @@
                 </div>
                 <div ng-show="Ctrl.showEmailFound">
                     <p>Authorize user access {{Ctrl.showEmailFound}}</p>
-                    <p>{{Ctrl.model.FirstName}} {{Ctrl.model.LastName}}</p>
+                    <p>{{Ctrl.model.User.FirstName}} {{Ctrl.model.User.LastName}}</p>
                     <p>{{Ctrl.model.email}}</p>
                     <label><input type="checkbox" ng-model="Ctrl.IsConsent" required />I hereby consent</label>
                     <button class="btn btn-default" ng-click="Ctrl.Authorize(Ctrl.model)">Authorize</button>

@@ -3,21 +3,22 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-danger font-small">
             <div class="panel-heading">
-                <strong>Renter petition : Applicant and property information</strong>
+                <strong>Appeal : Appellant's and property information</strong>
             </div>
             <div class="panel-body">
-                <p>Renter petition : Applicant and property information</p>
+                <p>Appeal : Appellant's and property information</p>
                 <p>___________________________________________________________________________________________</p>
-                <p>Applicant's name  and rental address</p>
-                <p>{{Ctrl.custDetails.User.FirstName}} {{Ctrl.custDetails.User.LastName}}</p>
-                <p>{{Ctrl.custDetails.User.AddressLine1}} {{Ctrl.custDetails.User.AddressLine2}}</p>
-                <p>{{Ctrl.custDetails.User.City}} {{Ctrl.custDetails.User.State}} {{Ctrl.custDetails.User.Zip}}</p>
-                <p>{{Ctrl.custDetails.User.PhoneNumber}}</p>
+                <p>Appellant's name  and rental address</p>
+                <p>{{Ctrl.custDetails.FirstName}} {{Ctrl.custDetails.LastName}}</p>
+                <p>{{Ctrl.custDetails.Address1}} {{Ctrl.custDetails.Address2}}</p>
+                <p>{{Ctrl.custDetails.City}} {{Ctrl.custDetails.State}} {{Ctrl.custDetails.Zip}}</p>
+                <p>{{Ctrl.custDetails.PhoneNumber}}</p>
 
 
                 <p>___________________________________________________________________________________________</p>
-                <p>Your Representative</p>
-                <p>Is anybody representating you</p>       
+                <strong>Case</strong>
+                <p>Case Number</p>   
+                <p>{{Ctrl.CaseDe}}</p>    
                 <div class="radio">
                     <label><input type="radio" name="IsRepresentative" value="true" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation">Yes</label>
                 </div>

@@ -1,14 +1,17 @@
-﻿<div class="row">
+﻿
+<div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-danger font-small">
             <div class="panel-heading">
                 <strong>User</strong>
             </div>
             <div class="panel-body">
-                <p>Account : {{Ctrl.model.User.FirstName}}</p>
-                <button class="btn btn-default" ng-click="Ctrl.InviteThirdPartyUser()">Invite Third Party Representation</button>
-                <button class="btn btn-default" ng-click="Ctrl.FilePetition()">File a Petition</button>
+                <p>Renter petition : Verification</p>
+                <p>___________________________________________________________________________________________</p>
                 
+
+
+                <button ng-click="Ctrl.SubmitPetition(Ctrl.caseinfo)">Submit Petition</button>
             </div>
         </div>
     </div>

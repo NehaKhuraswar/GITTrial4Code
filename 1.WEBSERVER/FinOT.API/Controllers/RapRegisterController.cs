@@ -13,6 +13,7 @@ using System.Security.Claims;
 using RAP.Core.DataModels;
 using RAP.Business.Implementation;
 using System.Net.Mail;
+using RAP.Core.Common;
 
 namespace RAP.API.Controllers
 {
@@ -60,6 +61,7 @@ namespace RAP.API.Controllers
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
 
             try
             {
@@ -67,6 +69,7 @@ namespace RAP.API.Controllers
 
                 CustomerInfo obj;
                 //if (custid.HasValue)
+                
                 //{
                 //  //  obj = service.GetCustomer((int)reqid, fy, Username);
                 //}
@@ -97,20 +100,18 @@ namespace RAP.API.Controllers
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
 
             try
             {
-
-                CustomerInfo obj;
-                obj = accService.GetCustomer(loginInfo);
-                if (obj != null)
+                result = accService.GetCustomer(loginInfo);
+                if (result.status.Status == StatusEnum.Success)
                 {
-                    transaction.data = obj;
+                    transaction.data = result.result;
                     transaction.status = true;
                 }
                 else
                 {
-                    transaction.data = null;
                     transaction.status = false;
                 }
                 
@@ -118,6 +119,10 @@ namespace RAP.API.Controllers
             }
             catch (Exception ex)
             {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+
                // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -134,20 +139,19 @@ namespace RAP.API.Controllers
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<List<ThirdPartyDetails>> transaction = new TranInfo<List<ThirdPartyDetails>>();
-
+            ReturnResult<List<ThirdPartyDetails>> result = new ReturnResult<List<ThirdPartyDetails>>();
             try
             {
 
-                List<ThirdPartyDetails> obj;
-                obj = accService.GetAuthorizedUsers((int)custID);
-                if (obj != null)
+
+                result = accService.GetAuthorizedUsers((int)custID);
+                if (result.status.Status == StatusEnum.Success)
                 {
-                    transaction.data = obj;
+                    transaction.data = result.result;
                     transaction.status = true;
                 }
                 else
                 {
-                    transaction.data = null;
                     transaction.status = false;
                 }
 
@@ -155,6 +159,9 @@ namespace RAP.API.Controllers
             }
             catch (Exception ex)
             {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -171,20 +178,19 @@ namespace RAP.API.Controllers
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
-
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
             try
             {
 
-                CustomerInfo obj;
-                obj = accService.SearchInviteThirdPartyUser(loginInfo.email);
-                if (obj != null)
+                
+                result = accService.SearchInviteThirdPartyUser(loginInfo.email);
+                if (result.status.Status == StatusEnum.Success)
                 {
-                    transaction.data = obj;
+                    transaction.data = result.result;
                     transaction.status = true;
                 }
                 else
                 {
-                    transaction.data = null;
                     transaction.status = false;
                 }
 
@@ -192,6 +198,9 @@ namespace RAP.API.Controllers
             }
             catch (Exception ex)
             {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -208,19 +217,29 @@ namespace RAP.API.Controllers
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
-
+            ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
 
-                bool bCompleted;
-                bCompleted = accService.AuthorizeThirdPartyUser((int)custid, thirdpartyInfo.custID);
-                transaction.status = bCompleted;
+                result = accService.AuthorizeThirdPartyUser((int)custid, thirdpartyInfo.custID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    //transaction.data = (bool)result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
                  
 
 
             }
             catch (Exception ex)
             {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -237,19 +256,29 @@ namespace RAP.API.Controllers
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<bool> transaction = new TranInfo<bool>();
-
+            ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
 
-                bool bCompleted;
-                bCompleted = accService.RemoveThirdParty((int)custid, thirdpartyInfo.ThirdPartyRepresentationID);
-                transaction.status = bCompleted;
+                
+                result = accService.RemoveThirdParty((int)custid, thirdpartyInfo.ThirdPartyRepresentationID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
 
 
 
             }
             catch (Exception ex)
             {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -344,13 +373,23 @@ namespace RAP.API.Controllers
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
 
             try
             {
-                transaction.status = accService.SaveCustomer(custModel);
+                result = accService.SaveCustomer(custModel);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
             }
             catch(Exception ex)
             {
+
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;

@@ -13,6 +13,7 @@ namespace RAP.Core.Common
         #region Data
         NoDataFound,
         DatabaseException,
+        AccountAlreadyExist,
         #endregion
         
         #region Exceptions

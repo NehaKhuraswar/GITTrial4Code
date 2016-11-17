@@ -5,39 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using RAP.Core.DataModels;
+using RAP.Core.Common;
 
 namespace RAP.DAL
 {
     public class AccountManagementDBHandler
     {
         private readonly string _connString;
-
+        CommonDBHandler commondbHandler = new CommonDBHandler();
         public AccountManagementDBHandler()
         {
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
-        public CustomerInfo GetCustomer(CustomerInfo message)
+        public ReturnResult<CustomerInfo> GetCustomer(CustomerInfo message)
         {
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
             try
             {
-                CustomerInfo custinfo ;
+               // CustomerInfo custinfo ;
 
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
-                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password)
-                                                            .Select(c => new CustomerInfo() {
-                                                             email = c.Email,
-                                                            UserID = (int)c.UserID,
-                                                            custID = (int)c.CustomerID}).FirstOrDefault();
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password).FirstOrDefault();
+                                                            
                     
                     if (custdetails != null)
                     {
-                        custinfo = new CustomerInfo();
-                        custinfo.email = custdetails.email;
-                        custinfo.UserID = custdetails.UserID;
-                        custinfo.custID = custdetails.custID;
-                        var notifications = db.NotificationPreferences.Where(x => x.CustomerID == custinfo.custID)
+                        message.User.UserID = (int)custdetails.UserID;                        
+                        message.email = custdetails.Email;
+                        message.custID = custdetails.CustomerID;
+                        var notifications = db.NotificationPreferences.Where(x => x.CustomerID == message.custID)
                                                                 .Select(c => new CustomerInfo()
                                                                 {
                                                                     EmailNotificationFlag = c.EmailNotification,
@@ -45,55 +43,36 @@ namespace RAP.DAL
                                                                 }).FirstOrDefault();
                         if(notifications != null)
                         {
-                            custinfo.MailNotificationFlag = notifications.MailNotificationFlag;
-                            custinfo.EmailNotificationFlag = notifications.EmailNotificationFlag;
+                            message.MailNotificationFlag = notifications.MailNotificationFlag;
+                            message.EmailNotificationFlag = notifications.EmailNotificationFlag;
                         }
                     }
                     else
                     {
-                        custinfo = null;
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
                     }
                 }
-                if (custinfo != null)
+                if (message != null)
                 {
-                    using (CommonDataContext db = new CommonDataContext(_connString))
-                    {
-
-                        var userinfos = db.UserInfos.Where(x => x.UserID == custinfo.UserID)
-                                                                .Select(c => new CustomerInfo()
-                                                                {
-                                                                    FirstName = c.FirstName,
-                                                                    LastName = c.LastName,
-                                                                    Address1 = c.AddressLine1,
-                                                                    Address2 = c.AddressLine2,
-                                                                    City = c.City,
-                                                                    PhoneNumber = c.PhoneNumber,
-                                                                    State = c.State,
-                                                                    Zip = c.Zip,
-                                                                }).FirstOrDefault();
-
-                        if (userinfos != null)
-                        {
-                            custinfo.FirstName = userinfos.FirstName;
-                            custinfo.LastName = userinfos.LastName;
-                            custinfo.Address1 = userinfos.Address1;
-                            custinfo.Address2 = userinfos.Address2;
-                            custinfo.City = userinfos.City;
-                            custinfo.PhoneNumber = userinfos.PhoneNumber;
-                            custinfo.State = userinfos.State;
-                            custinfo.Zip = userinfos.Zip;
-                        }
-                    }
+                    ReturnResult<UserInfoM> resultUserInfo = commondbHandler.GetUserInfo(message.User.UserID);
+                    message.User = resultUserInfo.result;
                 }
-                return custinfo;
+                result.result = message;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
             }
             catch (Exception ex)
             {
-                return null;
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
             }
         }
-        public CustomerInfo SearchInviteThirdPartyUser(String message)
+        public ReturnResult<CustomerInfo> SearchInviteThirdPartyUser(String message)
         {
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
             try
             {
                 CustomerInfo custinfo;
@@ -101,31 +80,28 @@ namespace RAP.DAL
                 {
 
                     var custdetails = db.CustomerDetails.Where(x => x.Email == message)
-                                                            .Select(c => new CustomerInfo()
-                                                            {
-                                                                //FirstName = c.FirstName,
-                                                                //LastName = c.LastName,
-                                                                email = c.Email,                                                               
-                                                                custID = (int)c.CustomerID
-                                                            }).FirstOrDefault();
+                                                            .FirstOrDefault();
                     if (custdetails != null)
                     {
                         custinfo = new CustomerInfo();
                         //custinfo.FirstName = custdetails.FirstName;
                         //custinfo.LastName = custdetails.LastName;
-                        custinfo.email = custdetails.email;
-                        custinfo.custID = custdetails.custID;
+                        custinfo.User.UserID = (int)custdetails.UserID;
+                        custinfo.email = custdetails.Email;
+                        custinfo.custID = custdetails.CustomerID;
                     }
                     else
                     {
-                        custinfo = null;
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
                     }
                 }
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
 
-                    var userinfos = db.UserInfos.Where(x => x.UserID == custinfo.UserID)
-                                                            .Select(c => new UserInfo()
+                    var userinfos = db.UserInfos.Where(x => x.UserID == custinfo.User.UserID)
+                                                            .Select(c => new UserInfoM()
                                                             {
                                                                 FirstName = c.FirstName,
                                                                 LastName = c.LastName,
@@ -133,19 +109,24 @@ namespace RAP.DAL
 
                     if (userinfos != null)
                     {
-                        custinfo.FirstName = userinfos.FirstName;
-                        custinfo.LastName = userinfos.LastName;
+                        custinfo.User.FirstName = userinfos.FirstName;
+                        custinfo.User.LastName = userinfos.LastName;
                     }
                 }
-                return custinfo;
+                result.result = custinfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
             }
             catch (Exception ex)
             {
-                return null;
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
             }
         }
-        public bool AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
+        public ReturnResult<bool> AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
         {
+            ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
                // CustomerInfo custinfo;
@@ -156,20 +137,25 @@ namespace RAP.DAL
                         ThirdPartyRepresentation thirdpartyTable = new ThirdPartyRepresentation();
                         thirdpartyTable.CustomerID = CustID;
                         thirdpartyTable.ThirdPartyCustomerID = thirdpartyCustID;
+                        thirdpartyTable.CreatedDate = DateTime.Now;
 
                         db.ThirdPartyRepresentations.InsertOnSubmit(thirdpartyTable);
                         db.SubmitChanges();
                     }
-                
-                return true;
+                    result.result = true;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
             }
             catch (Exception ex)
             {
-                return false;
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
             }
         }
-        public bool RemoveThirdParty(int CustID, int thirdPartyRepresentationID)
+        public ReturnResult<bool> RemoveThirdParty(int CustID, int thirdPartyRepresentationID)
         {
+            ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
                 // CustomerInfo custinfo;
@@ -185,16 +171,20 @@ namespace RAP.DAL
                    // db.SubmitChanges();
                 }
 
-                return true;
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
             }
             catch (Exception ex)
             {
-                return false;
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
             }
         }
-        public List<ThirdPartyDetails> GetAuthorizedUsers(int custID)
+        public ReturnResult<List<ThirdPartyDetails>> GetAuthorizedUsers(int custID)
         {
-            
+            ReturnResult<List<ThirdPartyDetails>> result = new ReturnResult<List<ThirdPartyDetails>>();
             
             try
             {
@@ -240,7 +230,9 @@ namespace RAP.DAL
                         index++;
                     }
                 }
-                return thirdPartyDetails;
+                result.result = thirdPartyDetails;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
             }
             catch (Exception ex)
             {
@@ -272,60 +264,29 @@ namespace RAP.DAL
                 return false;
             }
         }
-        public bool SaveCustomer(CustomerInfo message)
+        public ReturnResult<bool> SaveCustomer(CustomerInfo message)
        {
+           ReturnResult<bool> result = new ReturnResult<bool>();
+           ReturnResult<UserInfoM> UserResult = new ReturnResult<UserInfoM>();
            try
            {
                // Account already exists
                if (CheckCustAccount(message))
-                   return false;
-
-               
-
-                using (CommonDataContext dbCommon = new CommonDataContext(_connString))
-                {
-                    // Check for the user info, if all the details already match get the user id and directly create the customer account
-                    // else enter the details in the userinfo table
-                    var userInfos = dbCommon.UserInfos.Where(x => x.FirstName == message.FirstName
-                                && x.LastName == message.LastName
-                                && x.PhoneNumber == message.PhoneNumber
-                                && x.AddressLine1 == message.Address1
-                                && x.AddressLine2 == message.Address2
-                                && x.City == message.City
-                                && x.State == message.State
-                                && x.Zip == message.Zip
-                                ).Select(c => new CustomerInfo()
-                                    {
-                                        UserID = c.UserID,
-                                    }).FirstOrDefault();
-
-                    if (userInfos == null)
-                    {
-                        UserInfo userinfoTable = new UserInfo();
-                        userinfoTable.FirstName = message.FirstName;
-                        userinfoTable.LastName = message.LastName;
-                        userinfoTable.PhoneNumber = message.PhoneNumber;
-                        userinfoTable.AddressLine1 = message.Address1;
-                        userinfoTable.AddressLine2 = message.Address2;
-                        userinfoTable.City = message.City;
-                        userinfoTable.State = message.State;
-                        userinfoTable.Zip = message.Zip;
-                        userinfoTable.CreatedDate = DateTime.Now;
+               {
+                   result.status = new OperationStatus() { Status = StatusEnum.AccountAlreadyExist };
+                   return result;
+               }
 
 
-                        // RAP-TBD
-                        //  custTable.EmailNotificationFlag = message.EmailNotificationFlag;
-                        //custTable.EmailNotificationFlag = message.MailNotificationFlag;
-                        dbCommon.UserInfos.InsertOnSubmit(userinfoTable);
-                        dbCommon.SubmitChanges();
-                        message.UserID = userinfoTable.UserID;
-                    }
-                    else
-                    {
-                        message.UserID = userInfos.UserID;
-                    }
-                    
-                }
+
+               UserResult = commondbHandler.SaveUserInfo(message.User);
+               if (UserResult.status.Status != StatusEnum.Success)
+               {
+                   result.status.Status = UserResult.status.Status;
+                   result.result = false;
+                   return result;
+               }
+               message.User = UserResult.result;                
                
                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                {
@@ -333,7 +294,7 @@ namespace RAP.DAL
                    CustomerDetail custTable = new CustomerDetail();
                    custTable.Email = message.email;
                    custTable.Password = message.Password;
-                   custTable.UserID = message.UserID;  
+                   custTable.UserID = message.User.UserID;  
                    custTable.CreatedDate = DateTime.Now;
                    db.CustomerDetails.InsertOnSubmit(custTable);
                    db.SubmitChanges();
@@ -346,13 +307,16 @@ namespace RAP.DAL
                    notificationTable.CreatedDate = DateTime.Now;
                    db.NotificationPreferences.InsertOnSubmit(notificationTable);
                    db.SubmitChanges();
-               }     
-              
-               return true;
+               }
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               result.result = true;
+               return result;
            }
            catch(Exception ex)
            {
-               return false;
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
            }
        }
 

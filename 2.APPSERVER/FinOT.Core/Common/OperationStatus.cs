@@ -35,6 +35,10 @@ namespace RAP.Core.Common
 
                     StatusMessage = "Operation done successfully";
                     break;
+                case StatusEnum.AccountAlreadyExist:
+                    StatusCode = "0001";
+                    StatusMessage = "The user account already exists";
+                    break;
 
                 case StatusEnum.NoDataFound:
                     StatusCode = "0100";

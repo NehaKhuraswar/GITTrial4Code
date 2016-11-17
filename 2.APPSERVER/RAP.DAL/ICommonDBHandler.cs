@@ -6,6 +6,7 @@ namespace RAP.DAL
 {
    public interface ICommonDBHandler
     {
-       ReturnResult<int> SaveUserInfo(UserInfoM userInfo);
+       ReturnResult<UserInfoM> SaveUserInfo(UserInfoM userInfo);
+       ReturnResult<UserInfoM> GetUserInfo(int UserId);
     }
 }

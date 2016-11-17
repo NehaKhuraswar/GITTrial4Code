@@ -9,6 +9,7 @@ using RAP.Core.Services;
 using RAP.Core.Persisters;
 using RAP.Business.Helper;
 using RAP.DAL;
+using RAP.Core.Common;
 
 namespace RAP.Business.Implementation
 {
@@ -25,27 +26,27 @@ namespace RAP.Business.Implementation
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
 
-        public bool SaveCustomer(CustomerInfo message)
+        public ReturnResult<bool> SaveCustomer(CustomerInfo message)
         {
             return accDBHandler.SaveCustomer(message);
         }
-        public CustomerInfo GetCustomer(CustomerInfo message)
+        public ReturnResult<CustomerInfo> GetCustomer(CustomerInfo message)
         {
             return accDBHandler.GetCustomer(message);
         }
-        public CustomerInfo SearchInviteThirdPartyUser(String message)
+        public ReturnResult<CustomerInfo> SearchInviteThirdPartyUser(String message)
         {
             return accDBHandler.SearchInviteThirdPartyUser(message);
         }
-        public bool AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
+        public ReturnResult<bool> AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
         {
             return accDBHandler.AuthorizeThirdPartyUser(CustID, thirdpartyCustID);
         }
-        public bool RemoveThirdParty(int CustID, int ThirdPartyRepresentationID)
+        public ReturnResult<bool> RemoveThirdParty(int CustID, int ThirdPartyRepresentationID)
         {
             return accDBHandler.RemoveThirdParty(CustID, ThirdPartyRepresentationID);
         }
-        public List<ThirdPartyDetails> GetAuthorizedUsers(int custID)
+        public ReturnResult<List<ThirdPartyDetails>> GetAuthorizedUsers(int custID)
         {
             return accDBHandler.GetAuthorizedUsers(custID);
         }

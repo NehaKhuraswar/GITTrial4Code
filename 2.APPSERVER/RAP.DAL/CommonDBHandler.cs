@@ -21,42 +21,98 @@ namespace RAP.DAL
         /// </summary>
         /// <returns></returns>
 
-        private int SaveUserInfo(UserInfoM userInfo)
+        public ReturnResult<UserInfoM> SaveUserInfo(UserInfoM userInfo)
         {
-            int userID = 0;
-            using (CommonDataContext db = new CommonDataContext())
+            ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
+            try
             {
-                var user = db.UserInfos.Where(x => (x.FirstName == userInfo.FirstName
-                                                        && x.LastName == userInfo.LastName
-                                                        && x.AddressLine1 == userInfo.AddressLine1
-                                                        && x.AddressLine2 == userInfo.AddressLine2
-                                                        && x.City == userInfo.City
-                                                        && x.State == userInfo.State
-                                                        && x.Zip == userInfo.Zip)).FirstOrDefault();
-
-                if (user != null)
+                using (CommonDataContext db = new CommonDataContext())
                 {
-                    userID = user.UserID;
-                }
-                else
-                {
-                    UserInfo userInfoDB = new UserInfo();
-                    userInfoDB.FirstName = userInfo.FirstName;
-                    userInfoDB.LastName = userInfo.LastName;
-                    userInfoDB.AddressLine1 = userInfo.AddressLine1;
-                    userInfoDB.AddressLine2 = userInfo.AddressLine2;
-                    userInfoDB.City = userInfo.City;
-                    userInfoDB.State = userInfo.State;
-                    userInfoDB.Zip = userInfo.Zip;
-                    userInfoDB.PhoneNumber = userInfo.PhoneNumber;
-                    userInfoDB.ContactEmail = userInfo.Email;
+                    var user = db.UserInfos.Where(x => (x.FirstName == userInfo.FirstName
+                                                            && x.LastName == userInfo.LastName
+                                                            && x.AddressLine1 == userInfo.AddressLine1
+                                                            && x.AddressLine2 == userInfo.AddressLine2
+                                                            && x.City == userInfo.City
+                                                            && x.State == userInfo.State
+                                                            && x.Zip == userInfo.Zip)).FirstOrDefault();
 
-                    db.UserInfos.InsertOnSubmit(userInfoDB);
-                    db.SubmitChanges();
-                    userID = userInfoDB.UserID;
+                    if (user != null)
+                    {
+                        userInfo.UserID = user.UserID;                      
+                    }
+                    else
+                    {
+                        UserInfo userInfoDB = new UserInfo();
+                        userInfoDB.FirstName = userInfo.FirstName;
+                        userInfoDB.LastName = userInfo.LastName;
+                        userInfoDB.AddressLine1 = userInfo.AddressLine1;
+                        userInfoDB.AddressLine2 = userInfo.AddressLine2;
+                        userInfoDB.City = userInfo.City;
+                        userInfoDB.State = userInfo.State;
+                        userInfoDB.Zip = userInfo.Zip;
+                        userInfoDB.PhoneNumber = userInfo.PhoneNumber;
+                        userInfoDB.ContactEmail = userInfo.Email;
+                        userInfoDB.CreatedDate = DateTime.Now;
+
+                        db.UserInfos.InsertOnSubmit(userInfoDB);
+                        db.SubmitChanges();
+                        userInfo.UserID = userInfoDB.UserID;
+                    }
+                    result.result = userInfo;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }                
+            }
+            catch(Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<UserInfoM> GetUserInfo(int UserId)
+        {
+            ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
+            UserInfoM userinfo = new UserInfoM();
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext())
+                {
+                    var userinfos = db.UserInfos.Where(x => x.UserID == UserId)
+                                                                .Select(c => new UserInfoM()
+                                                                {
+                                                                    FirstName = c.FirstName,
+                                                                    LastName = c.LastName,
+                                                                    AddressLine1 = c.AddressLine1,
+                                                                    AddressLine2 = c.AddressLine2,
+                                                                    City = c.City,
+                                                                    PhoneNumber = c.PhoneNumber,
+                                                                    State = c.State,
+                                                                    Zip = c.Zip,
+                                                                }).FirstOrDefault();
+
+                    if (userinfos != null)
+                    {
+                        userinfo.FirstName = userinfos.FirstName;
+                        userinfo.LastName = userinfos.LastName;
+                        userinfo.AddressLine1 = userinfos.AddressLine1;
+                        userinfo.AddressLine2 = userinfos.AddressLine2;
+                        userinfo.City = userinfos.City;
+                        userinfo.PhoneNumber = userinfos.PhoneNumber;
+                        userinfo.State = userinfos.State;
+                        userinfo.Zip = userinfos.Zip;
+                    }
+                    result.result = userinfo;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
                 }
             }
-            return userID;
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
         }
 
     }
