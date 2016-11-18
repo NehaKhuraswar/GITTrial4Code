@@ -20,6 +20,23 @@
                 <p>Case Number</p>   
                 <p>{{Ctrl.caseinfo.CaseID}}</p>    
                 <p>Date of the decision that you are appealing</p>
+                <input type="text" class="form-control"
+                       name="EED"
+                       ng-required="true"
+                       ng-model="line.EED"
+                       datepicker-popup="MM/dd/yyyy"
+                       is-open="line.calenderIsopenEED"
+                       min-date="line.ESD"
+                       max-date="line.maxdate"
+                       date-disabled="exceptLastDay(date, mode)"
+                       datepicker-options="dateOptions"
+                       show-button-bar="false"
+                       ng-readonly="true" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="line.calenderIsopenEED=true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                         Select Month
