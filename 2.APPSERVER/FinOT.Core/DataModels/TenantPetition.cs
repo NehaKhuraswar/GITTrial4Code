@@ -10,12 +10,13 @@ namespace RAP.Core.DataModels
     public class CaseInfoM
     {
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
+        private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();
         private UserInfoM _thirdPartyInfo = new UserInfoM();
         private UserInfoM _ownerInfo = new UserInfoM();
-        private UserInfoM _appealThirdPartyInfo = new UserInfoM();
+        
         private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
         private List<DocumentM> _documnts = new List<DocumentM>();
-        private bool _appealFiled = false;
+        
         public string CaseID { get; set; }
         public int PetitionCategoryID { get; set; }
         public TenantPetitionInfoM TenantPetitionInfo
@@ -28,7 +29,18 @@ namespace RAP.Core.DataModels
             {
                 _tenantPetitionInfo = value;
             }
-        }       
+        }    
+        public TenantAppealInfoM TenantAppealInfo
+        {
+            get
+            {
+                return _tenantappealInfo;
+            }
+            set
+            {
+                _tenantappealInfo = value;
+            }
+        }
                 
         public int TenantUserID { get; set; }
         public bool bThirdPartyRepresentation { get; set; }
@@ -65,40 +77,8 @@ namespace RAP.Core.DataModels
         public DateTime HearingDate { get; set; }
         public DateTime AppealDate { get; set; }
         public bool bThirdPartyRepresentationAppeal { get; set; }
-        public UserInfoM AppealThirdPartyInfo
-        {
-            get
-            {
-                return _appealThirdPartyInfo;
-            }
-            set
-            {
-                _appealThirdPartyInfo = value;
-            }
-        }
-        public bool bAppealfiled
-        {
-            get
-            {
-                return _appealFiled;
-            }
-            set
-            {
-                _appealFiled = value;
-            }
-        }
-        public int AppealFiledBy { get; set; }
-        public List<AppealGroundM> AppealGrounds
-        {
-            get
-            {
-                return _appealGrounds;
-            }
-            set
-            {
-                _appealGrounds = value;
-            }
-        }
+       
+        
 
         public List<DocumentM> Documents
         {
@@ -128,7 +108,43 @@ namespace RAP.Core.DataModels
         public string Email { get; set; }
 
     }
+    public class TenantAppealInfoM
+    {
+        private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
+        public string CaseID { get; set; }
+        private bool _appealFiled = false;
+        public bool bThirdPartyRepresentation = false;
 
+       // private UserInfoM _appealThirdPartyInfo = new UserInfoM();
+        public UserInfoM AppealThirdPartyInfo = new UserInfoM();
+        public int thirdPartyUserID;
+
+        public List<UserInfoM> AppealOpposingPartyInfo = new List<UserInfoM>();
+        public List<int> opposingPartyUserID = new List<int>();
+        public bool bAppealfiled
+        {
+            get
+            {
+                return _appealFiled;
+            }
+            set
+            {
+                _appealFiled = value;
+            }
+        }
+        public int AppealFiledBy { get; set; }
+        public List<AppealGroundM> AppealGrounds
+        {
+            get
+            {
+                return _appealGrounds;
+            }
+            set
+            {
+                _appealGrounds = value;
+            }
+        }
+    }
     public class TenantPetitionInfoM
     {
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
@@ -219,6 +235,7 @@ namespace RAP.Core.DataModels
                 _currentOnRent = value;
             }
         }
+
 
     }
 

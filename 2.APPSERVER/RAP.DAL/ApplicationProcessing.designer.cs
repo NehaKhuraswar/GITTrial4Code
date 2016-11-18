@@ -60,6 +60,12 @@ namespace RAP.DAL
     partial void InsertCaseDetail(CaseDetail instance);
     partial void UpdateCaseDetail(CaseDetail instance);
     partial void DeleteCaseDetail(CaseDetail instance);
+    partial void InsertAppealGround(AppealGround instance);
+    partial void UpdateAppealGround(AppealGround instance);
+    partial void DeleteAppealGround(AppealGround instance);
+    partial void InsertTenantAppealGroundInfo(TenantAppealGroundInfo instance);
+    partial void UpdateTenantAppealGroundInfo(TenantAppealGroundInfo instance);
+    partial void DeleteTenantAppealGroundInfo(TenantAppealGroundInfo instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -169,6 +175,22 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<CaseDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AppealGround> AppealGrounds
+		{
+			get
+			{
+				return this.GetTable<AppealGround>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TenantAppealGroundInfo> TenantAppealGroundInfos
+		{
+			get
+			{
+				return this.GetTable<TenantAppealGroundInfo>();
 			}
 		}
 	}
@@ -2643,6 +2665,271 @@ namespace RAP.DAL
 						this._PetitionFileID = default(int);
 					}
 					this.SendPropertyChanged("PetitionDetail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AppealGrounds")]
+	public partial class AppealGround : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AppealGroundID;
+		
+		private string _AppealDescription;
+		
+		private EntitySet<TenantAppealGroundInfo> _TenantAppealGroundInfos;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAppealGroundIDChanging(int value);
+    partial void OnAppealGroundIDChanged();
+    partial void OnAppealDescriptionChanging(string value);
+    partial void OnAppealDescriptionChanged();
+    #endregion
+		
+		public AppealGround()
+		{
+			this._TenantAppealGroundInfos = new EntitySet<TenantAppealGroundInfo>(new Action<TenantAppealGroundInfo>(this.attach_TenantAppealGroundInfos), new Action<TenantAppealGroundInfo>(this.detach_TenantAppealGroundInfos));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealGroundID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AppealGroundID
+		{
+			get
+			{
+				return this._AppealGroundID;
+			}
+			set
+			{
+				if ((this._AppealGroundID != value))
+				{
+					this.OnAppealGroundIDChanging(value);
+					this.SendPropertyChanging();
+					this._AppealGroundID = value;
+					this.SendPropertyChanged("AppealGroundID");
+					this.OnAppealGroundIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealDescription", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string AppealDescription
+		{
+			get
+			{
+				return this._AppealDescription;
+			}
+			set
+			{
+				if ((this._AppealDescription != value))
+				{
+					this.OnAppealDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._AppealDescription = value;
+					this.SendPropertyChanged("AppealDescription");
+					this.OnAppealDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AppealGround_TenantAppealGroundInfo", Storage="_TenantAppealGroundInfos", ThisKey="AppealGroundID", OtherKey="AppealGroundID")]
+		public EntitySet<TenantAppealGroundInfo> TenantAppealGroundInfos
+		{
+			get
+			{
+				return this._TenantAppealGroundInfos;
+			}
+			set
+			{
+				this._TenantAppealGroundInfos.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TenantAppealGroundInfos(TenantAppealGroundInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.AppealGround = this;
+		}
+		
+		private void detach_TenantAppealGroundInfos(TenantAppealGroundInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.AppealGround = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantAppealGroundInfo")]
+	public partial class TenantAppealGroundInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TenantAppealGroudID;
+		
+		private string _CaseID;
+		
+		private int _AppealGroundID;
+		
+		private EntityRef<AppealGround> _AppealGround;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTenantAppealGroudIDChanging(int value);
+    partial void OnTenantAppealGroudIDChanged();
+    partial void OnCaseIDChanging(string value);
+    partial void OnCaseIDChanged();
+    partial void OnAppealGroundIDChanging(int value);
+    partial void OnAppealGroundIDChanged();
+    #endregion
+		
+		public TenantAppealGroundInfo()
+		{
+			this._AppealGround = default(EntityRef<AppealGround>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantAppealGroudID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TenantAppealGroudID
+		{
+			get
+			{
+				return this._TenantAppealGroudID;
+			}
+			set
+			{
+				if ((this._TenantAppealGroudID != value))
+				{
+					this.OnTenantAppealGroudIDChanging(value);
+					this.SendPropertyChanging();
+					this._TenantAppealGroudID = value;
+					this.SendPropertyChanged("TenantAppealGroudID");
+					this.OnTenantAppealGroudIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseID", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string CaseID
+		{
+			get
+			{
+				return this._CaseID;
+			}
+			set
+			{
+				if ((this._CaseID != value))
+				{
+					this.OnCaseIDChanging(value);
+					this.SendPropertyChanging();
+					this._CaseID = value;
+					this.SendPropertyChanged("CaseID");
+					this.OnCaseIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealGroundID", DbType="Int NOT NULL")]
+		public int AppealGroundID
+		{
+			get
+			{
+				return this._AppealGroundID;
+			}
+			set
+			{
+				if ((this._AppealGroundID != value))
+				{
+					if (this._AppealGround.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAppealGroundIDChanging(value);
+					this.SendPropertyChanging();
+					this._AppealGroundID = value;
+					this.SendPropertyChanged("AppealGroundID");
+					this.OnAppealGroundIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AppealGround_TenantAppealGroundInfo", Storage="_AppealGround", ThisKey="AppealGroundID", OtherKey="AppealGroundID", IsForeignKey=true)]
+		public AppealGround AppealGround
+		{
+			get
+			{
+				return this._AppealGround.Entity;
+			}
+			set
+			{
+				AppealGround previousValue = this._AppealGround.Entity;
+				if (((previousValue != value) 
+							|| (this._AppealGround.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AppealGround.Entity = null;
+						previousValue.TenantAppealGroundInfos.Remove(this);
+					}
+					this._AppealGround.Entity = value;
+					if ((value != null))
+					{
+						value.TenantAppealGroundInfos.Add(this);
+						this._AppealGroundID = value.AppealGroundID;
+					}
+					else
+					{
+						this._AppealGroundID = default(int);
+					}
+					this.SendPropertyChanged("AppealGround");
 				}
 			}
 		}

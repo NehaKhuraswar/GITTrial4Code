@@ -80,7 +80,42 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<List<Rent>>>(ReturnCode, transaction);
         }
+        [Route("getcaseinfo/{petitionid:int?}")]
+        [HttpGet]
+        public HttpResponseMessage GetCaseDetails(int? petitionid = null)
+        {
 
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                result = _service.GetCaseDetails();
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
         [Route("getcaseinfo")]
         [HttpGet]
         public HttpResponseMessage GetCaseDetails()

@@ -81,6 +81,7 @@ namespace RAP.DAL
                     var userinfos = db.UserInfos.Where(x => x.UserID == UserId)
                                                                 .Select(c => new UserInfoM()
                                                                 {
+                                                                    UserID = c.UserID,
                                                                     FirstName = c.FirstName,
                                                                     LastName = c.LastName,
                                                                     AddressLine1 = c.AddressLine1,
@@ -93,6 +94,7 @@ namespace RAP.DAL
 
                     if (userinfos != null)
                     {
+                        userinfo.UserID = userinfos.UserID;
                         userinfo.FirstName = userinfos.FirstName;
                         userinfo.LastName = userinfos.LastName;
                         userinfo.AddressLine1 = userinfos.AddressLine1;

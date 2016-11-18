@@ -9,20 +9,20 @@
                 
                 <p>___________________________________________________________________________________________</p>
                 <p>I appeal the decision issued in the case on the following grounds:</p>
-                <div ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
+                <div ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
                     <label>
                         <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
-                        {{petitionground.PetitionGroundDescription}}                        
+                        {{appealground.AppealDescription}}
                     </label>
                 </div>
-                <p>Number of pages attached. Please number the attached pages consecutively</p>
+                <!--<p>Number of pages attached. Please number the attached pages consecutively</p>
                 <ul class="dropdown">
                     <li><span>1</span></li>
                     <li><span>2</span></li>
                     <li><span>3</span></li>
                     <li><span>4</span></li>
                     <li><span>5</span></li>
-                </ul>
+                </ul>-->
                 <!--<ul class="dropdown-menu">
                     <li ng-repeat="i in getNumber(number)"><span>{$index+1}}</span></li>
                 </ul>-->
