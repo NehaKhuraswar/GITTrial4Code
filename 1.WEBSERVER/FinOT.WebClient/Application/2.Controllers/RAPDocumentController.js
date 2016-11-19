@@ -14,7 +14,8 @@ var rapDocumentController = ['$scope', '$modal', 'alertService', '$location', 'r
         if ($files && $files.length)
         {
             var fileName = $files[0].name;
-            var fileContent = $files[0];
+          //  var fileContent = $files[0]);
+
            // var file = $scope.createNewDocument();
            // file.FileName = newFileName;
             //self.editmodel.push(file);

@@ -38,7 +38,9 @@
       <HintPath>..\..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,10 +52,12 @@
     <Compile Include="Helper\DataTableHelper.cs" />
     <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Implementation\AccountManagementService.cs" />
+    <Compile Include="Implementation\DocumentService.cs" />
     <Compile Include="Implementation\OTRequestService.cs" />
     <Compile Include="Implementation\NotificationService.cs" />
     <Compile Include="Implementation\ApplicationProcessingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy Class\CheckIn.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FinOT.Core\RAP.Core.csproj">
@@ -67,6 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

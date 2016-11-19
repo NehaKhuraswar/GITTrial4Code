@@ -13,6 +13,7 @@ using RAP.API.Models;
 using RAP.API.Common;
 //TBD
 using RAP.Business.Implementation;
+using System.IO;
 
 namespace RAP.API.Controllers
 {
@@ -22,10 +23,12 @@ namespace RAP.API.Controllers
     {
         private string Username, ExceptionMessage, InnerExceptionMessage;
         private readonly IApplicationProcessingService _service;
+        private readonly IdocumentService _docService;
        
         public ApplicationProcessingController()
         {
             _service = new ApplicationProcessingService();
+            _docService = new DocumentService();
         }
         public ApplicationProcessingController(IApplicationProcessingService service)
         {
@@ -165,6 +168,12 @@ namespace RAP.API.Controllers
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
+              var doc = getDoc();
+              var docServiceResult =   _docService.UploadDocument(doc);
+                if(docServiceResult.status.Status != StatusEnum.Success)
+                {
+                    transaction.status = false;
+                }
                 result = _service.SaveCaseDetails(caseInfo);
                 if (result.status.Status == StatusEnum.Success)
                 {
@@ -187,5 +196,25 @@ namespace RAP.API.Controllers
         //all POST requests goes here
         #endregion
 
+
+        //TBR
+        private DocumentM getDoc()
+        {
+            string filename = @"C:\Oakland\Ref Documents\flowMap.pdf";
+            DocumentM doc = new DocumentM();
+            doc.DocName = "RAPFirstDoc";
+            doc.DocTitle = "RAPFirstDoc";
+            doc.DocType = "PDF";
+
+            byte[] bArray = null;
+            FileStream fs = new FileStream(filename,
+                                           FileMode.Open,
+                                           FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            long numBytes = new FileInfo(filename).Length;
+            bArray = br.ReadBytes((int)numBytes);
+            doc.Content = bArray;
+            return doc;
+        }
     }
 }

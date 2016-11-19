@@ -87,6 +87,13 @@ namespace RAP.Core.Common
                     break;
                 #endregion
 
+                #region System Errors
+                case StatusEnum.UploadFailed:
+                    StatusCode = "0201";
+                    StatusMessage = "Document upload failed";
+                    break;
+                #endregion
+
                 default:
                     StatusCode = "1111";
                     StatusMessage = "Unknown exception occured";

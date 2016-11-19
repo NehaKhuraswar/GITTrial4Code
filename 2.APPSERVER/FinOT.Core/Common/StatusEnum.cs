@@ -25,5 +25,8 @@ namespace RAP.Core.Common
         CommunicationException,
         AuthenticationFailed,
         #endregion
+        #region System
+        UploadFailed,
+        #endregion
     }
 }
