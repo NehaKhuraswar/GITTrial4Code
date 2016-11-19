@@ -13,9 +13,22 @@ var rapDocumentController = ['$scope', '$modal', 'alertService', '$location', 'r
     $scope.onFileSelect = function ($files) {
         if ($files && $files.length)
         {
-            var fileName = $files[0].name;
-          //  var fileContent = $files[0]);
+            //var fileName = $files[0].name;
+           var file = $files[0];
+           var reader = new FileReader();
+            reader.readAsArrayBuffer(file);
+            var array = null;
+           reader.onload = function ()
+           {
 
+                var arrayBuffer = this.result,
+                 array = new Uint8Array(arrayBuffer),
+                 binaryString = String.fromCharCode.apply(null, array);
+
+              console.log(binaryString);
+
+           }
+          
            // var file = $scope.createNewDocument();
            // file.FileName = newFileName;
             //self.editmodel.push(file);
