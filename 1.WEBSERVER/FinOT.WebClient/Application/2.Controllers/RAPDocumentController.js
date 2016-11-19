@@ -16,24 +16,24 @@ var rapDocumentController = ['$scope', '$modal', 'alertService', '$location', 'r
             //var fileName = $files[0].name;
             var file = $files[0];
 
-            var file = new java.io.RandomAccessFile(file, "r");
-            var bArr = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, file.length());
-            file.read(bArr)
+            //var file = new java.io.RandomAccessFile(file, "r");
+            //var bArr = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, file.length());
+            //file.read(bArr)
 
 
-           //var reader = new FileReader();
-           // reader.readAsArrayBuffer(file);
-           // var array = null;
-           //reader.onload = function ()
-           //{
+           var reader = new FileReader();
+            reader.readAsArrayBuffer(file);
+            var arrayBuffer = null;
+           reader.onload = function (e)
+           {
 
-           //     var arrayBuffer = this.result,
-           //      array = new Uint8Array(arrayBuffer),
-           //      binaryString = String.fromCharCode.apply(null, array);
+               arrayBuffer = e.target.result;
+              //   array = new Uint8Array(arrayBuffer),
+              //   binaryString = String.fromCharCode.apply(null, array);
 
-           //   console.log(binaryString);
+              //console.log(binaryString);
 
-           //}
+           }
           
            // var file = $scope.createNewDocument();
            // file.FileName = newFileName;
