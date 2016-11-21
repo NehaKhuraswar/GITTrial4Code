@@ -147,6 +147,7 @@ namespace RAP.DAL
            int petitionFileID = 0;
            int ownerUserID = 0;
            int thirdPartyUSerID = 0;
+           int appealID = 0;
            try
            {
                using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
@@ -157,6 +158,7 @@ namespace RAP.DAL
                        petitionFileID = caseDetails.PetitionFileID;
                        ownerUserID = caseDetails.OwnerUserID;
                        thirdPartyUSerID = caseDetails.ThirdPartyUserID;
+                       appealID = (caseDetails.TenantAppealID == null) ? 0 : Convert.ToInt32(caseDetails.TenantAppealID);
                        caseInfo.bThirdPartyRepresentation = (bool) caseDetails.bThirdPartyRepresentation;
                        caseInfo.bAgreeToCityMediation = (bool) caseDetails.bAgreeToCityMediation;
 
@@ -174,6 +176,7 @@ namespace RAP.DAL
 
                        caseInfo.CaseID = caseDetails.CaseID;
                        caseInfo.TenantPetitionInfo = GetTenantPetition(petitionFileID).result;
+                       caseInfo.TenantAppealInfo.AppealGrounds = GetAppealGroundInfo(appealID).result;
                        //if (petitionFileID == 0)
                        //{
                        //    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
@@ -396,12 +399,32 @@ namespace RAP.DAL
            {
                using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
                {
+                   var petitionGrounds = db.PetitionGrounds;
+                   if (petitionGrounds == null)
+                   {
+                       result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                       return result;
+                   }
+                   else
+                   {
+                       foreach (var petitionGround in petitionGrounds)
+                       {
+                           PetitionGroundM _petitionGround = new PetitionGroundM();
+                           _petitionGround.PetitionGroundID = petitionGround.PetitionGroundID;
+                           _petitionGround.PetitionGroundDescription = petitionGround.PetitionDescription;
+                           PetitionGroundInfo.Add(_petitionGround);
+                       }
+                   }
                    var TenantPetitionGroundInfoDB = db.TenantPetitionGroundInfos.Where(x => x.TenantPetitionID == PetitionID).ToList();
                    foreach (var item in TenantPetitionGroundInfoDB)
                    {
-                       PetitionGroundM objPetitionGroundM = new PetitionGroundM();
-                       objPetitionGroundM.PetitionGroundID = item.PetitionGroundID;
-                       PetitionGroundInfo.Add(objPetitionGroundM);
+                       foreach(var item1 in PetitionGroundInfo)
+                       {
+                           if(item1.PetitionGroundID == item.PetitionGroundID)
+                           {
+                               item1.Selected = true;
+                           }
+                       }
                    }
                }
                result.result = PetitionGroundInfo;
@@ -416,7 +439,62 @@ namespace RAP.DAL
                return result;
            }
        }
+       private ReturnResult<TenantAppealInfoM> GetAppealInfo(int appealID)
+       {
+           ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+           result.result.AppealGrounds = GetAppealGroundInfo(appealID).result;
 
+           return result;
+        
+       }
+       private ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(int appealID)
+       {
+           ReturnResult<List<AppealGroundM>> result = new ReturnResult<List<AppealGroundM>>();
+           List<AppealGroundM> AppealGroundInfo = new List<AppealGroundM>();
+           try
+           {
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   var appealGrounds = db.AppealGrounds;
+                   if (appealGrounds == null)
+                   {
+                       result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                       return result;
+                   }
+                   else
+                   {
+                       foreach (var appealGround in appealGrounds)
+                       {
+                           AppealGroundM _appealGround = new AppealGroundM();
+                           _appealGround.AppealGroundID = appealGround.AppealGroundID;
+                           _appealGround.AppealDescription = appealGround.AppealDescription;
+                           AppealGroundInfo.Add(_appealGround);
+                       }
+                   }
+                   var TenantAppealGroundInfoDB = db.TenantAppealGroundInfos.Where(x => x.TenantAppealGroudID == appealID).ToList();
+                   foreach (var item in TenantAppealGroundInfoDB)
+                   {
+                       foreach (var item1 in AppealGroundInfo)
+                       {
+                           if (item1.AppealGroundID == item.TenantAppealGroudID)
+                           {
+                               item1.Selected = true;
+                           }
+                       }
+                   }
+               }
+               result.result = AppealGroundInfo;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+               return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+       }
        // public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
        //{
            
@@ -685,7 +763,7 @@ namespace RAP.DAL
            }
        }
 
-       private ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+       public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
        {
            int thirdPartyUserID = 0;
            int opposingPartyUserID = 0;
@@ -713,22 +791,7 @@ namespace RAP.DAL
                    }
                    TenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
                }
-
-               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
-               {
-                   foreach (var item in TenantAppealInfo.AppealGrounds)
-                   {
-                       if (item.Selected)
-                       {
-                           TenantAppealGroundInfo TenantAppealGroundInfoDB = new TenantAppealGroundInfo();
-                           TenantAppealGroundInfoDB.CaseID = TenantAppealInfo.CaseID;
-                           TenantAppealGroundInfoDB.AppealGroundID = item.AppealGroundID;
-
-                           db.TenantAppealGroundInfos.InsertOnSubmit(TenantAppealGroundInfoDB);
-                           db.SubmitChanges();
-                       }
-                   }
-               }
+              
                result.result = TenantAppealInfo;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;
@@ -741,6 +804,39 @@ namespace RAP.DAL
            }
 
        }
+       public ReturnResult<Boolean> SaveAppealGroundInfo(List<AppealGroundM> AppealGrounds)
+       {
+           ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+           try
+           {
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   foreach (var item in AppealGrounds)
+                   {
+                       if (item.Selected)
+                       {
+                           TenantAppealGroundInfo TenantAppealGroundInfoDB = new TenantAppealGroundInfo();
+                           // TenantAppealGroundInfoDB.CaseID = TenantAppealInfo.CaseID; Make Appeal ID
+                           TenantAppealGroundInfoDB.AppealGroundID = item.AppealGroundID;
+
+                           db.TenantAppealGroundInfos.InsertOnSubmit(TenantAppealGroundInfoDB);
+                           db.SubmitChanges();
+                       }
+                   }
+               }
+               result.result = true;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               IExceptionHandler eHandler = new ExceptionHandler();
+               result.status = eHandler.HandleException(ex);
+               return result;
+           }
+           
+       }
+
        private int GetPetitionFileID(int petitionID, int petitionCategory)
        {
            int petitionFileID = 0;
