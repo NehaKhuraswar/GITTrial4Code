@@ -11,7 +11,7 @@
                 <p>I appeal the decision issued in the case on the following grounds:</p>
                 <div ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
                     <label>
-                        <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
+                        <input type="checkbox" id="appealground.AppealGroundID" ng-model="appealground.Selected">
                         {{appealground.AppealDescription}}
                     </label>
                 </div>
@@ -27,7 +27,7 @@
                     <li ng-repeat="i in getNumber(number)"><span>{$index+1}}</span></li>
                 </ul>-->
                 <button ng-click="Ctrl.AttachExplaination()">Attach explaination</button>
-                <button ng-click="Ctrl.ContinueToRentalHistory(Ctrl.caseinfo.TenantAppealInfo.AppealGrounds)">Continue</button>
+                <button ng-click="Ctrl.ContinueToRentalHistory(Ctrl.caseinfo.TenantAppealInfo)">Continue</button>
             </div>
         </div>
     </div>

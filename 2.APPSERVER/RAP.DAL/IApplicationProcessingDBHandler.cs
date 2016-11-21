@@ -10,8 +10,8 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> GetCaseDetails();
         ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
-        ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo);
-        ReturnResult<Boolean> SaveAppealGroundInfo(List<AppealGroundM> AppealGrounds);
+        ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
+        ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
 
      //   ReturnResult<CaseInfoM> GetCaseDetails(int caseID);
     }

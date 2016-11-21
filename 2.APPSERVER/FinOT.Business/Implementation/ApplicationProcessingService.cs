@@ -54,13 +54,13 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+        public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo)
         {
-            //private ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+            
              ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
-                result = _dbHandler.SaveTenantAppealInfo(TenantAppealInfo);
+                result = _dbHandler.SaveTenantAppealInfo(caseInfo);
                 return result;
             }
             catch(Exception ex)
@@ -69,13 +69,13 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-       public ReturnResult<Boolean> SaveAppealGroundInfo(List<AppealGroundM> AppealGrounds)
+        public ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
         {
-            //private ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+            
             ReturnResult<Boolean> result = new ReturnResult<Boolean>();
             try
             {
-                result = _dbHandler.SaveAppealGroundInfo(AppealGrounds);
+                result = _dbHandler.SaveAppealGroundInfo(tenantAppealInfo);
                 return result;
             }
             catch (Exception ex)

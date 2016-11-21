@@ -763,25 +763,25 @@ namespace RAP.DAL
            }
        }
 
-       public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+       public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo)
        {
            int thirdPartyUserID = 0;
            int opposingPartyUserID = 0;
            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
            try
            {
-               if (TenantAppealInfo.bThirdPartyRepresentation)
+               if (caseInfo.TenantAppealInfo.bThirdPartyRepresentation)
                {
-                   thirdPartyUserID = SaveUserInfo(TenantAppealInfo.AppealThirdPartyInfo);
+                   thirdPartyUserID = SaveUserInfo(caseInfo.TenantAppealInfo.AppealThirdPartyInfo);
                     if (thirdPartyUserID == 0)
                     {
                         result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                         return result;
                     }
-                    TenantAppealInfo.thirdPartyUserID = thirdPartyUserID;
+                    caseInfo.TenantAppealInfo.thirdPartyUserID = thirdPartyUserID;
                    
                }
-               foreach (var item in TenantAppealInfo.AppealOpposingPartyInfo)
+               foreach (var item in caseInfo.TenantAppealInfo.AppealOpposingPartyInfo)
                {
                    opposingPartyUserID = SaveUserInfo(item);
                    if (opposingPartyUserID == 0)
@@ -789,10 +789,29 @@ namespace RAP.DAL
                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                        return result;
                    }
-                   TenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
+                   caseInfo.TenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
                }
-              
-               result.result = TenantAppealInfo;
+               using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
+               {
+                   TenantAppealDetail appealDB = new TenantAppealDetail();
+                   appealDB.bThirdPartyRepresentation = caseInfo.TenantAppealInfo.bThirdPartyRepresentation;
+                   appealDB.ThirdPartyUserID = caseInfo.TenantAppealInfo.thirdPartyUserID;
+                   appealDB.CreatedDate = DateTime.Now;
+
+                   db.TenantAppealDetails.InsertOnSubmit(appealDB);
+                   db.SubmitChanges();
+                   caseInfo.TenantAppealInfo.AppealID = appealDB.TenantAppealID;
+
+
+                   CaseDetail caseDB = db.CaseDetails.First(i => i.CaseID == caseInfo.CaseID);
+                   caseDB.TenantAppealID = caseInfo.TenantAppealInfo.AppealID;
+                   caseDB.LastModifiedDate = DateTime.Now;
+                   db.SubmitChanges();
+               }
+
+
+
+               result.result = caseInfo.TenantAppealInfo;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;
            }
@@ -804,20 +823,22 @@ namespace RAP.DAL
            }
 
        }
-       public ReturnResult<Boolean> SaveAppealGroundInfo(List<AppealGroundM> AppealGrounds)
+       public ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
        {
            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
            try
            {
                using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext())
                {
-                   foreach (var item in AppealGrounds)
+                   foreach (var item in tenantAppealInfo.AppealGrounds)
                    {
                        if (item.Selected)
                        {
                            TenantAppealGroundInfo TenantAppealGroundInfoDB = new TenantAppealGroundInfo();
-                           // TenantAppealGroundInfoDB.CaseID = TenantAppealInfo.CaseID; Make Appeal ID
+                           TenantAppealGroundInfoDB.AppealID = tenantAppealInfo.AppealID;
                            TenantAppealGroundInfoDB.AppealGroundID = item.AppealGroundID;
+                           TenantAppealGroundInfoDB.CreatedDate = DateTime.Now;
+                           TenantAppealGroundInfoDB.IsDeleted = false;
 
                            db.TenantAppealGroundInfos.InsertOnSubmit(TenantAppealGroundInfoDB);
                            db.SubmitChanges();

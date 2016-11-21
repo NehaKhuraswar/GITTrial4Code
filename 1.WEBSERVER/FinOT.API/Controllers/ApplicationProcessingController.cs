@@ -196,7 +196,7 @@ namespace RAP.API.Controllers
 
         [Route("savetenantappealinfo")]
         [HttpPost]
-        public HttpResponseMessage SaveCaseDetails([FromBody] TenantAppealInfoM tenantAppealInfo)
+        public HttpResponseMessage SaveTenantAppealInfo([FromBody] CaseInfoM caseInfo)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -204,8 +204,8 @@ namespace RAP.API.Controllers
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
-                
-                result = _service.SaveTenantAppealInfo(tenantAppealInfo);
+
+                result = _service.SaveTenantAppealInfo(caseInfo);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -226,7 +226,7 @@ namespace RAP.API.Controllers
         }
         [Route("saveappealgroundinfo")]
         [HttpPost]
-        public HttpResponseMessage SaveAppealGroundInfo([FromBody] List<AppealGroundM> AppealGrounds)
+        public HttpResponseMessage SaveAppealGroundInfo([FromBody] TenantAppealInfoM tenantAppealInfo)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -235,7 +235,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveAppealGroundInfo(AppealGrounds);
+                result = _service.SaveAppealGroundInfo(tenantAppealInfo);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
