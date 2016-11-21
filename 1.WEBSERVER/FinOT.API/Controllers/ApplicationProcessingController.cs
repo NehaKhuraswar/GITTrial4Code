@@ -202,8 +202,8 @@ namespace RAP.API.Controllers
         {
             string filename = @"C:\Oakland\Ref Documents\flowMap.pdf";
             DocumentM doc = new DocumentM();
-            doc.DocName = "RAPFirstDoc";
-            doc.DocTitle = "RAPFirstDoc";
+            doc.DocName = "RAPSecondDoc";
+            doc.DocTitle = "RAPSecondDoc";
             doc.DocType = "PDF";
 
             byte[] bArray = null;
