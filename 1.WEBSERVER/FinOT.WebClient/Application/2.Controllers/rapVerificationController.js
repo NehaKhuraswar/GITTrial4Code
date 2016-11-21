@@ -4,16 +4,16 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.SubmitPetition = function (model) {
+        self.SubmitPetition = function (model) {
      
-        rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveCaseInfo(rapGlobalFactory.CaseDetails).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-            $modalInstance.close(response.data);
-        });
-    }
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+            rapFactory.SaveCaseInfo(rapGlobalFactory.CaseDetails).then(function (response) {
+                if (!alert.checkResponse(response)) {
+                    return;
+                }
+                $modalInstance.close(response.data);
+            });
+        }
 }];
 var rapVerificationController_resolve = {
     model: ['$route', 'alertService', 'rapverificationFactory', function ($route, alert, rapFactory) {

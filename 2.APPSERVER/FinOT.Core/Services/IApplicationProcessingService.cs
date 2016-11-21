@@ -8,7 +8,10 @@ namespace RAP.Core.Services
     {
         string CorrelationId { get; set; }
         ReturnResult<CaseInfoM> GetCaseDetails();
+        ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
+        ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo);
+        ReturnResult<bool> SaveAppealGroundInfo(List<AppealGroundM> AppealGrounds);
 
     }
 }

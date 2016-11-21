@@ -27,7 +27,7 @@
                     <li ng-repeat="i in getNumber(number)"><span>{$index+1}}</span></li>
                 </ul>-->
                 <button ng-click="Ctrl.AttachExplaination()">Attach explaination</button>
-                <button ng-click="Ctrl.ContinueToRentalHistory()">Continue</button>
+                <button ng-click="Ctrl.ContinueToRentalHistory(Ctrl.caseinfo.TenantAppealInfo.AppealGrounds)">Continue</button>
             </div>
         </div>
     </div>

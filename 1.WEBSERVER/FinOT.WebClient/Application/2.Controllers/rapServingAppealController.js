@@ -8,6 +8,17 @@ var rapServingAppealController = ['$scope', '$modal', 'alertService', 'rapservin
         rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/reviewappeal");
     }
+   
+    //self.AddAnotherOpposingParty = function (opposingParty) {     
+    //    self.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo.push(opposingParty);
+    //    var a;
+    //    //rapFactory.AddAnotherOpposingParty(opposingParty).then(function (response) {
+    //    //    if (!alert.checkResponse(response)) {
+    //    //        return;
+    //    //    }
+    //    //    $modalInstance.close(response.data);
+    //    //});
+    //}
 }];
 var rapServingAppealController_resolve = {
     model: ['$route', 'alertService', 'rapservingappealFactory', function ($route, alert, rapFactory) {

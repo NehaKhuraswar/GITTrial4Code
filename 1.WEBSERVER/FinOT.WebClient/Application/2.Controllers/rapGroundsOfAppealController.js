@@ -4,9 +4,24 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.ContinueToRentalHistory = function () {
-        rapGlobalFactory.CaseDetails = self.caseinfo;
-        $location.path("/servingappeal");
+    //self.ContinueToRentalHistory = function () {
+    //    rapGlobalFactory.CaseDetails = self.caseinfo;
+    //    $location.path("/servingappeal");
+    //}
+    self.ContinueToRentalHistory = function (model) {
+        rapFactory.SaveAppealGroundInfo(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            // $modalInstance.close(response.data);
+            //rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
+            //self.caseinfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
+            if (response.data == true) {
+                $location.path("/servingappeal");
+            }
+        });
+        // rapGlobalFactory.CaseDetails = self.caseinfo;
+
     }
 }];
 var rapGroundsOfAppealController_resolve = {

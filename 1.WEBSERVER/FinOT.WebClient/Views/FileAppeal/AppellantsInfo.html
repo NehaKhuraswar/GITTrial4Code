@@ -65,36 +65,36 @@
                 <p>Is anybody representing you</p>
                 <div class="radio">
                     <label><input type="radio" name="IsRepresenting" value="true" 
-                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentationAppeal">Yes</label>
+                                  ng-model="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation">Yes</label>
                 </div>
                 <div class="radio">
                     <label><input type="radio" name="IsRepresenting" value="false" 
-                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentationAppeal">No</label>
+                                  ng-model="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation">No</label>
                 </div>
 
-                <div ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentationAppeal">
+                <div ng-show="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation">
                     <p>First Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.FirstName" required />
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.FirstName" required />
                     <p>Last Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.LastName" required />
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.LastName" required />
                     <p>Address Line 1</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.AddressLine1" required />
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.AddressLine1" required />
                     <p>Address Line 2</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.AddressLine2" required />
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.AddressLine2" required />
                     <p>City</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.City" required />
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.City" required />
                     <p>State</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.State" required />
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.State" required />
                     <p>Zip Code</p>
-                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.Zip" required />
+                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.Zip" required />
                     <p>Phone Number</p>
-                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.PhoneNumber" required />
+                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.PhoneNumber" required />
                     <p>Email</p>
-                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.AppealThirdPartyInfo.Email" required />
+                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealThirdPartyInfo.Email" required />
                 </div>
                 <p>___________________________________________________________________________________________</p>
               
-                <button ng-click="Ctrl.ContinueToGroundsforAppeal()">Continue</button>
+                <button ng-click="Ctrl.ContinueToGroundsforAppeal(Ctrl.caseinfo.TenantAppealInfo)">Continue</button>
             </div>
         </div>
     </div>

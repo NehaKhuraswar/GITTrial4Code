@@ -40,7 +40,50 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        
+        public ReturnResult<CaseInfoM> GetCaseDetails(string caseID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetCaseDetails(caseID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+        {
+            //private ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+            try
+            {
+                result = _dbHandler.SaveTenantAppealInfo(TenantAppealInfo);
+                return result;
+            }
+            catch(Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+       public ReturnResult<Boolean> SaveAppealGroundInfo(List<AppealGroundM> AppealGrounds)
+        {
+            //private ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(TenantAppealInfoM TenantAppealInfo)
+            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+            try
+            {
+                result = _dbHandler.SaveAppealGroundInfo(AppealGrounds);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();

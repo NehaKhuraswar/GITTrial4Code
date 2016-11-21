@@ -7,8 +7,28 @@
             </div>
             <div class="panel-body">
                 <p>___________________________________________________________________________________________</p>
-                
 
+                <div>
+                    <p>First Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.FirstName" required />
+                    <p>Last Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.LastName" required />
+                    <p>Address Line 1</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.AddressLine1" required />
+                    <p>Address Line 2</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.AddressLine2" required />
+                    <p>City</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.City" required />
+                    <p>State</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.State" required />
+                    <p>Zip Code</p>
+                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="opposingParty.Zip" required />
+                    <p>Phone Number</p>
+                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.PhoneNumber" required />
+                    <p>Email</p>
+                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="opposingParty.Email" required />
+                </div>
+                <button ng-click="Ctrl.AddAnotherOpposingParty(opposingParty)">Add another oppposing Party</button>
 
                 <button ng-click="Ctrl.ContinueToReview()">Continue</button>
             </div>

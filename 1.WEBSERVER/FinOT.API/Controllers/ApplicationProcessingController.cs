@@ -83,9 +83,9 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<List<Rent>>>(ReturnCode, transaction);
         }
-        [Route("getcaseinfo/{petitionid:int?}")]
-        [HttpGet]
-        public HttpResponseMessage GetCaseDetails(int? petitionid = null)
+        [Route("getcaseinfo")]
+        [HttpPost]
+        public HttpResponseMessage GetCaseDetails( CaseInfoM caseInfo )
         {
 
             //Appl accService = new AccountManagementService();
@@ -95,7 +95,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetCaseDetails();
+                result = _service.GetCaseDetails(caseInfo.CaseID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -193,6 +193,97 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+
+        [Route("savetenantappealinfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveCaseDetails([FromBody] TenantAppealInfoM tenantAppealInfo)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantAppealInfoM> transaction = new TranInfo<TenantAppealInfoM>();
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+            try
+            {
+                
+                result = _service.SaveTenantAppealInfo(tenantAppealInfo);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
+        }
+        [Route("saveappealgroundinfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveAppealGroundInfo([FromBody] List<AppealGroundM> AppealGrounds)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<Boolean> transaction = new TranInfo<Boolean>();
+            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+            try
+            {
+
+                result = _service.SaveAppealGroundInfo(AppealGrounds);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<Boolean>>(ReturnCode, transaction);
+        }
+
+        //[Route("addopposingparty")]
+        //[HttpPost]
+        //public HttpResponseMessage AddAnotherOpposingParty([FromBody] UserInfoM userInfo)
+        //{
+        //    //AccountManagementService accService = new AccountManagementService();
+        //    HttpStatusCode ReturnCode = HttpStatusCode.OK;
+        //    TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+        //    ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+        //    try
+        //    {
+        //        result = _service.SaveCaseDetails(caseInfo);
+        //        if (result.status.Status == StatusEnum.Success)
+        //        {
+        //            transaction.data = result.result;
+        //            transaction.status = true;
+        //        }
+        //        else
+        //        {
+        //            transaction.status = false;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        transaction.status = false;
+        //        transaction.AddException(ex.Message);
+        //        ReturnCode = HttpStatusCode.InternalServerError;
+        //    }
+        //    return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        //}
         //all POST requests goes here
         #endregion
 

@@ -110,8 +110,9 @@ namespace RAP.Core.DataModels
     }
     public class TenantAppealInfoM
     {
+        public int AppealID;
         private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
-        public string CaseID { get; set; }
+       // public string CaseID { get; set; }
         private bool _appealFiled = false;
         public bool bThirdPartyRepresentation = false;
 
@@ -121,6 +122,9 @@ namespace RAP.Core.DataModels
 
         public List<UserInfoM> AppealOpposingPartyInfo = new List<UserInfoM>();
         public List<int> opposingPartyUserID = new List<int>();
+        public DateTime CreatedDate;
+        public DateTime OpposingPartyCommunicateDate;
+
         public bool bAppealfiled
         {
             get

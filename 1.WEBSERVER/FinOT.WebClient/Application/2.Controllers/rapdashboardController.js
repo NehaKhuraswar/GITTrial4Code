@@ -1,6 +1,7 @@
 ﻿'use strict';
 var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboardFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
+    self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CustomerDetails;
     self.InviteThirdPartyUser = function () {
         $location.path("/invitethirdparty");
@@ -8,8 +9,33 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.FilePetition = function () {
         $location.path("/filePetition");
     }
-    self.FileAppeal = function () {
+    self.FileAppeal = function (model) {
+        //self.caseinfo.CaseID = 
+        rapFactory.GetCaseInfoWithModel(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+
+            self.caseinfo = response.data;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+        });
         $location.path("/fileappeal");
+    }
+
+    var _GetCaseInfo = function () {
+
+        rapFactory.GetCaseInfo().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+
+            self.caseinfo = response.data;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+        });
+    }
+    // _getrent();
+    if (self.caseinfo == null) {
+        _GetCaseInfo();
     }
 
 }];

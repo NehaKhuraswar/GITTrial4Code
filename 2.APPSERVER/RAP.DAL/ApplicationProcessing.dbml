@@ -25,7 +25,6 @@
       <Column Name="PetitionFileID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TenantPetitionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="OwnerPetitionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="PetitionDetail_CaseDetail" Member="CaseDetails" ThisKey="PetitionFileID" OtherKey="PetitionFileID" Type="CaseDetail" />
     </Type>
   </Table>
   <Table Name="dbo.TenantProblemInfo" Member="TenantProblemInfos">
@@ -96,11 +95,27 @@
       <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantPetitionInfo" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.AppealGrounds" Member="AppealGrounds">
+    <Type Name="AppealGround">
+      <Column Name="AppealGroundID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AppealDescription" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="AppealGround_TenantAppealGroundInfo" Member="TenantAppealGroundInfos" ThisKey="AppealGroundID" OtherKey="AppealGroundID" Type="TenantAppealGroundInfo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantAppealGroundInfo" Member="TenantAppealGroundInfos">
+    <Type Name="TenantAppealGroundInfo">
+      <Column Name="TenantAppealGroudID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CaseID" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="AppealGroundID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AppealGround_TenantAppealGroundInfo" Member="AppealGround" ThisKey="AppealGroundID" OtherKey="AppealGroundID" Type="AppealGround" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.CaseDetails" Member="CaseDetails">
     <Type Name="CaseDetail">
       <Column Name="C_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CaseID" Type="System.String" DbType="VarChar(8) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CaseID" Type="System.String" DbType="VarChar(8)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="PetitionFileID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenantAppealID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PetitionCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TenantUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
@@ -119,22 +134,6 @@
       <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="HearingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="AppealDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="PetitionDetail_CaseDetail" Member="PetitionDetail" ThisKey="PetitionFileID" OtherKey="PetitionFileID" Type="PetitionDetail" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.AppealGrounds" Member="AppealGrounds">
-    <Type Name="AppealGround">
-      <Column Name="AppealGroundID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AppealDescription" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="AppealGround_TenantAppealGroundInfo" Member="TenantAppealGroundInfos" ThisKey="AppealGroundID" OtherKey="AppealGroundID" Type="TenantAppealGroundInfo" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TenantAppealGroundInfo" Member="TenantAppealGroundInfos">
-    <Type Name="TenantAppealGroundInfo">
-      <Column Name="TenantAppealGroudID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CaseID" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
-      <Column Name="AppealGroundID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="AppealGround_TenantAppealGroundInfo" Member="AppealGround" ThisKey="AppealGroundID" OtherKey="AppealGroundID" Type="AppealGround" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
