@@ -7,8 +7,8 @@
     <ProjectGuid>{AE980304-914E-410C-B747-3A969BFF63FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FinOT.Persistence</RootNamespace>
-    <AssemblyName>FinOT.Persistence</AssemblyName>
+    <RootNamespace>RAP.Persistence</RootNamespace>
+    <AssemblyName>RAP.Persistence</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

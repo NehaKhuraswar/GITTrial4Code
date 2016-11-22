@@ -7,8 +7,8 @@
     <ProjectGuid>{3D74196E-3E3C-40C6-B53B-3232CFB61987}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FinOT.Business</RootNamespace>
-    <AssemblyName>FinOT.Business</AssemblyName>
+    <RootNamespace>RAP.Business</RootNamespace>
+    <AssemblyName>RAP.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

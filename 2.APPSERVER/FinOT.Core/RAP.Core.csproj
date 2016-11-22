@@ -7,8 +7,8 @@
     <ProjectGuid>{71EE247B-DF70-4636-BCA3-B20EAB4E875F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FinOT.Core</RootNamespace>
-    <AssemblyName>FinOT.Core</AssemblyName>
+    <RootNamespace>RAP.Core</RootNamespace>
+    <AssemblyName>RAP.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
