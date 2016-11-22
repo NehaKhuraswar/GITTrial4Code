@@ -150,4 +150,14 @@
       <Association Name="AppealGround_TenantAppealGroundInfo" Member="AppealGround" ThisKey="AppealGroundID" OtherKey="AppealGroundID" Type="AppealGround" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.AppealOpposingParty" Member="AppealOpposingParties">
+    <Type Name="AppealOpposingParty">
+      <Column Name="AppealOpposingPartyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AppealID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OpposingPartyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

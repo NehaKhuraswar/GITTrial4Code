@@ -4,8 +4,22 @@ var rapServingAppealController = ['$scope', '$modal', 'alertService', 'rapservin
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.AddAnotherOpposingParty = function (model) {
+        rapFactory.AddAnotherOpposingParty(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }            
+        });
+        // rapGlobalFactory.CaseDetails = self.caseinfo;
+
+    }
+    
     self.ContinueToReview = function () {
-        rapGlobalFactory.CaseDetails = self.caseinfo;
+        rapFactory.SaveTenantServingAppeal(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+        });
         $location.path("/reviewappeal");
     }
    

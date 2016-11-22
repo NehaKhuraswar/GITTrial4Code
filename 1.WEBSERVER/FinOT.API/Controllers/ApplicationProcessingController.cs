@@ -224,6 +224,66 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
         }
+        [Route("savetenantservingappeal")]
+        [HttpPost]
+        public HttpResponseMessage SaveTenantServingAppeal([FromBody] CaseInfoM caseInfo)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantAppealInfoM> transaction = new TranInfo<TenantAppealInfoM>();
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+            try
+            {
+
+                result = _service.SaveTenantServingAppeal(caseInfo);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
+        }
+        [Route("addanotheropposingparty")]
+        [HttpPost]
+        public HttpResponseMessage AddAnotherOpposingParty([FromBody] CaseInfoM caseInfo)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                result = _service.AddAnotherOpposingParty(caseInfo);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
         [Route("saveappealgroundinfo")]
         [HttpPost]
         public HttpResponseMessage SaveAppealGroundInfo([FromBody] TenantAppealInfoM tenantAppealInfo)

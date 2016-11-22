@@ -69,6 +69,36 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo)
+        {
+
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+            try
+            {
+                result = _dbHandler.SaveTenantServingAppeal(caseInfo);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo)
+        {
+
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.AddAnotherOpposingParty(caseInfo);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
         {
             

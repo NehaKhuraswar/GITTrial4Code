@@ -112,7 +112,8 @@ namespace RAP.API.Controllers
                 }
                 else
                 {
-                    transaction.status = false;
+                   // transaction.warnings.Add(result.status.StatusMessage);
+                    transaction.AddException(result.status.StatusMessage);
                 }
                 
 

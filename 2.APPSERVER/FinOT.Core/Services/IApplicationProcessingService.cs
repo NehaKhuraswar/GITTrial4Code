@@ -12,6 +12,9 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
         ReturnResult<bool> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
+        ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);
+        ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo);
+        
 
     }
 }

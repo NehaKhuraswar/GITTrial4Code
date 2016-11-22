@@ -7,6 +7,7 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
         
         rapFactory.Login(model).then(function (response) {
             if (!alert.checkResponse(response)) {
+                alert.Error(response.warnings[0]);
                 return;
             }
  
