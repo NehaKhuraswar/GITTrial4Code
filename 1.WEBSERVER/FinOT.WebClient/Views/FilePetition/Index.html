@@ -21,12 +21,8 @@
                     </ul>
                 </div>
                 <div class="col-md-9 col-sm-12">
-                    <div class="application-step step-1">
-                        <h3 class="step-heading">Petition Type</h3>
-
-                        <form name="frmTenentPetition" id="frmTenentPetition" action="documents.html" method="post" class="application-form">
-                         
-                           
+                    <div class="application-step step-1">                   
+                        <form name="frmTenentPetition" id="frmTenentPetition" action="documents.html" method="post" class="application-form">                      
                             <rap-petitiontype ng-show="Ctrl.bPetitionType" model="Ctrl"></rap-petitiontype>
                             <rap-applicationinfo ng-show="Ctrl.bAppInfo" model="Ctrl"></rap-applicationinfo>
                             <rap-groundsofpetition ng-show="Ctrl.bGrounds" model="Ctrl"></rap-groundsofpetition>
@@ -34,10 +30,8 @@
                             <rap-lostservices ng-show="Ctrl.bLostServices" model="Ctrl"></rap-lostservices>
                             <rap-document ng-show="Ctrl.bAddDocuments" model="Ctrl"></rap-document>
                             <rap-review ng-show="Ctrl.bReview" model="Ctrl"></rap-review>
-                            <rap-verification ng-show="Ctrl.bVerification" model="Ctrl"></rap-verification>
-                            
-                           
-                            
+                            <rap-verification ng-show="Ctrl.bVerification" model="Ctrl"></rap-verification>                  
+                                                  
                         </form>
                     </div>
                 </div>

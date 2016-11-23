@@ -1,84 +1,164 @@
-﻿
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-danger font-small">
-            <div class="panel-heading">
-                <strong>Renter petition : Applicant and property information</strong>
-            </div>
-            <div class="panel-body">
-                <p>Renter petition : Applicant and property information</p>
-                <p>___________________________________________________________________________________________</p>
-                <p>Applicant's name  and rental address</p>
-                <p>{{Ctrl.custDetails.User.FirstName}} {{Ctrl.custDetails.User.LastName}}</p>
-                <p>{{Ctrl.custDetails.User.AddressLine1}} {{Ctrl.custDetails.User.AddressLine2}}</p>
-                <p>{{Ctrl.custDetails.User.City}} {{Ctrl.custDetails.User.State}} {{Ctrl.custDetails.User.Zip}}</p>
-                <p>{{Ctrl.custDetails.User.PhoneNumber}}</p>
+﻿<div class="application-step step-1">
+    <h3 class="step-heading">Tenant Petition: <span>Applicant and Property Information</span></h3>
+    <div class="step-content create-new">
+        <div class="subhead no-top-margin">
+            <h4>Applicant’s name and rental address</h4>
+            <a href="#" class="btn-link btn-edit">Edit</a>
+        </div>
+        <p>{{Ctrl.custDetails.User.FirstName}} {{Ctrl.custDetails.User.LastName}}</p>
+        <p>{{Ctrl.custDetails.User.AddressLine1}} {{Ctrl.custDetails.User.AddressLine2}}</p>
+        <p>{{Ctrl.custDetails.User.City}} {{Ctrl.custDetails.User.State}} {{Ctrl.custDetails.User.Zip}}</p>
+        <p>{{Ctrl.custDetails.User.PhoneNumber}}</p>
 
 
-                <p>___________________________________________________________________________________________</p>
-                <p>Your Representative</p>
-                <p>Is anybody representating you</p>       
-                <div class="radio">
-                    <label><input type="radio" name="IsRepresentative" value="true" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation">Yes</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsRepresentative" value="false" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation">No</label>
-                </div>
-                <div>
-                    <p>First Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.FirstName" required />
-                    <p>Last Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.LastName" required />
-                    <p>Address Line 1</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine1" required />
-                    <p>Address Line 2</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine2" required />
-                    <p>City</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.City" required />
-                    <p>State</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.State" required />
-                    <p>Zip Code</p>
-                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Zip" required />
-                    <p>Phone Number</p>
-                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.PhoneNumber" required />
-                    <p>Email</p>
-                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Email" required />
-                </div>
-                <p>___________________________________________________________________________________________</p>
-                <p>Property Owner(s) name and mailing address</p>
-                <p>First Name</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.FirstName" required />
-                <p>Last Name</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.LastName" required />
-                <p>Address Line 1</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine1" required />
-                <p>Address Line 2</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine2" required />
-                <p>City</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.City" required />
-                <p>State</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.State" required />
-                <p>Zip Code</p>
-                <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.Zip" required />
-                <p>Phone Number</p>
-                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.PhoneNumber" required />
-                <p>Email</p>
-                <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.Email" required />
-                <p>___________________________________________________________________________________________</p>
-                <p> Property information </p>
-                <p>Number of Units</p>
-                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits" required />
-                <div class="radio">
-                    <label><input type="radio" name="IsDontknow">I don't know</label>
-                </div>
-                <p>Type of Unit you rent</p>
-                <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
-                    <input type="radio"
-                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId"
-                           ng-value="unittype.UnitTypeID"
-                           id="{{unittype.UnitTypeID}}"
-                           name="units">{{unittype.UnitDescription}}
+
+        <div class="subhead">
+            <h4>Your representative</h4>
+        </div>
+        <div class="field-group">
+            <p class="input-label">Is anybody representing you?</p>
+            <div class="form-group-radio vertical clearfix">
+                <label for="anybody_representing_you_yes">
+                    <input type="radio" name="anybody_representing_you" value="true" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation" checked="checked" data-toggle="show" data-toggle-id="representative-info"><i></i><span>Yes</span>
                 </label>
+                <label for="anybody_representing_you_no">
+                    <input type="radio" name="anybody_representing_you" value="false" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation" data-toggle="hide" data-toggle-id="representative-info" /><i></i> <span>No</span>
+                </label>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="representative-info">
+            <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
+
+            <div class="field-group">
+                <label for="representative_firstname">Name</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.FirstName" required />
+            </div>
+
+            <div class="field-group">
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.LastName" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_address1">Mailing address 1</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine1" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_address2">Mailing address 2 (optional)</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine2" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_city">City</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.City" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_state">State</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.State" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_zip_code">Zip Code</label>
+                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Zip" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_phone_number">Phone number</label>
+                <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.PhoneNumber" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_email">Email Address</label>
+                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Email" required />
+            </div>
+        </div>
+
+        <div class="subhead">
+            <h4>Property owner(s) name and mailing address</h4>
+        </div>
+        <div id="property-owner-info">
+
+            <div class="field-group">
+                <label for="representative_firstname">Name</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.FirstName" required />
+            </div>
+
+            <div class="field-group">
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.LastName" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_address1">Mailing address 1</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine1" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_address2">Mailing address 2 (optional)</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine2" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_city">City</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.City" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_state">State</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.State" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_zip_code">Zip Code</label>
+                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.OwnerInfo.ThirdPartyInfo.Zip" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_phone_number">Phone number</label>
+                <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.PhoneNumber" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_email">Email Address</label>
+                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.Email" required />
+            </div>
+
+
+
+            <div class="subhead">
+                <h4>Property information</h4>
+            </div>
+            <div id="property-info">
+
+                <div class="field-group">
+                    <label for="pi_units_count">Number of units</label>
+                    <input type="number" ng-trim="false" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
+                    <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range">
+                        <option value="option_01">Option 01</option>
+                        <option value="option_02">Option 02</option>
+                        <option value="option_03">Option 03</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <p class="input-label">Type of unit you rent</p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
+                            <input type="radio"
+                                   class="input-field"
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId"
+                                   ng-value="unittype.UnitTypeID"
+                                   id="{{unittype.UnitTypeID}}"
+                                   name="units">{{unittype.UnitDescription}}
+                        </label>
+                        <div class="clear"></div>
+                    </div>
+                </div>
                 <!--<div class="radio">
                     <label><input type="radio" name="TypeOfUnit">House</label>
                 </div>
@@ -88,25 +168,33 @@
                 <div class="radio">
                     <label><input type="radio" name="TypeOfUnit">Apartment, Room, or Live-work</label>
                 </div>-->
-                <p>Are you current on Rent?</p>
-                <label ng-repeat="currentonrent in Ctrl.caseinfo.TenantPetitionInfo.CurrentOnRent" for="{{currentonrent.StatusID}}">
-                    <input type="radio"
-                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.CurrentRentStatusID"
-                           ng-value="currentonrent.StatusID"
-                           id="{{currentonrent.StatusID}}"
-                           name="currentrent">{{currentonrent.Status}}
-                </label>
-                <!--<div class="radio">
-                    <label><input type="radio" name="IsCurrentOnRent">Yes</label>
+                <div class="field-group">
+                    <p class="input-label">Are you current on paying your rent?</p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label ng-repeat="currentonrent in Ctrl.caseinfo.TenantPetitionInfo.CurrentOnRent" for="{{currentonrent.StatusID}}">
+                            <input type="radio"
+                                   class="input-field"
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.CurrentRentStatusID"
+                                   ng-value="currentonrent.StatusID"
+                                   id="{{currentonrent.StatusID}}"
+                                   name="currentrent">{{currentonrent.Status}}
+                        </label>
+                        <div class="clear"></div>
+                    </div>
                 </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsCurrentOnRent">No</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsCurrentOnRent">Legally withholding rent</label>
-                </div>-->
-                <button ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
             </div>
-        </div>
-    </div>
-</div>
+            <!--<div class="radio">
+                <label><input type="radio" name="IsCurrentOnRent">Yes</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="IsCurrentOnRent">No</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="IsCurrentOnRent">Legally withholding rent</label>
+            </div>-->
+
+            <button class="btn-primary" ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
+            </div>
+
+
+
