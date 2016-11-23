@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RAP.Core.DataModels
-{
-    public class OwnerPetition
-    {
+{   
         public class OwnerPetitionInfoM
         {
             private List<OwnerPropertInfoM> _ownerPropertInfo = new List<OwnerPropertInfoM>();
@@ -80,4 +78,4 @@ namespace RAP.Core.DataModels
        }
 
     }
-}
+
