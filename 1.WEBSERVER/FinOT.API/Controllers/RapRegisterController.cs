@@ -54,7 +54,8 @@ namespace RAP.API.Controllers
                 throw ex;
             }
         }
-        
+
+        [AllowAnonymous]
         [HttpGet]
         [Route("get/{custid:int?}")]
         public HttpResponseMessage GetCustomer(int? custid = null)
@@ -92,8 +93,7 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
-
-        [AllowAnonymous]
+        
         [Route("logincust")]
         [HttpPost]
         public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
@@ -116,6 +116,7 @@ namespace RAP.API.Controllers
                 {
                    // transaction.warnings.Add(result.status.StatusMessage);
                     transaction.AddException(result.status.StatusMessage);
+                    transaction.status = false;
                 }
                 
 

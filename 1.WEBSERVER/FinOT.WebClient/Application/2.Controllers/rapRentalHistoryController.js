@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprentalhistoryFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    
+    self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     //var _getrent = function () {
@@ -39,7 +39,8 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     self.ContinueToLostServices = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $location.path("/lostservices");
+        $scope.model.bRentalHistory = false;
+        $scope.model.bLostServices = true;
     }
     //self.ContinueToReview  = function () {
     //    $location.path("/review");

@@ -63,10 +63,10 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
                 resolve: rapinvitethirdpartyController_resolve
         })
         .when('/filePetition', {
-            templateUrl: 'views/filepetition/FilePetition.html',
-            controller: rapFilePetitionController,
+            templateUrl: 'views/filepetition/Index.html',
+            controller: rapPetitionMainController,
             controllerAs: 'Ctrl',
-            resolve: rapFilePetitionController_resolve
+            resolve: rapPetitionMainController_resolve
         })
         .when('/applicationinfo', {
             templateUrl: 'views/filepetition/ApplicationInfo.html',

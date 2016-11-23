@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -7,7 +7,6 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.rent = [];
     //self.selectedValue = 1;
     self.selectedObj = {};
-    self.model = $scope.model;
     
     
     //var _getrent = function () {
@@ -18,7 +17,56 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //        self.rent = response.data;
     //    });
     //}
-    
+    var _DisableAll = function () {
+        self.bPetitionType = false;
+        self.bImpInfo = false;
+        self.bAppInfo = false;
+        self.bGrounds = false;
+        self.bRentalHistory = false;
+        self.bLostServices = false;
+        self.bAddDocuments = false;
+        self.bReview = false;
+        self.bVerification = false;
+    };
+    _DisableAll();
+    self.bPetitionType = true;
+
+    self.showPetitionType = function () {
+        _DisableAll();
+        self.bPetitionType = true;
+    };
+    self.showImpInfo = function () {
+        _DisableAll();
+        self.bImpInfo = true;
+    };
+    self.showAppInfo = function () {
+        _DisableAll();
+        self.bAppInfo = true;
+    };
+    self.showGrounds = function () {
+        _DisableAll();
+        self.bGrounds = true;
+    };
+    self.showRentalHistory = function () {
+        _DisableAll();
+        self.bRentalHistory = true;
+    };
+    self.showLostServices = function () {
+        _DisableAll();
+        self.bLostServices = true;
+    };
+    self.showAddDocuments = function () {
+        _DisableAll();
+        self.bAddDocuments = true;
+    };
+    self.showReview = function () {
+        _DisableAll();
+        self.bReview = true;
+    };
+    self.showVerification = function () {
+        _DisableAll();
+        self.bVerification = true;
+    };
 
 
     var _GetCaseInfo = function (model) {
@@ -37,11 +85,9 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
         _GetCaseInfo();
     }
 
-    self.Continue = function () {
-        $scope.model.bPetitionType = false;
-        $scope.model.bAppInfo = true;
-        //$location.path("/applicationinfo");
-    }
+    //self.Continue = function () {
+    //    $location.path("/applicationinfo");
+    //}
     //self.ContinueToGroundsforPetition = function () {
     //    $location.path("/groundsforpetition");
     //}
@@ -72,7 +118,7 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //    });
     //}
 }];
-var rapFilePetitionController_resolve = {
+var rapPetitionMainController_resolve = {
     model: ['$route', 'alertService', 'rapfilepetitionFactory', function ($route, alert, rapFactory) {
         ////return auth.fetchToken().then(function (response) {
         //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {

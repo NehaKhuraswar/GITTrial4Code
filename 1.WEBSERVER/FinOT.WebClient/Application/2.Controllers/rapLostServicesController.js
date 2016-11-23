@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostservicesFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    
+    self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     //var _getrent = function () {
@@ -43,6 +43,8 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     self.ContinueToDocument = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/document");
+         $scope.model.bLostServices = false;
+        $scope.model.bAddDocuments = true;
     }
     //self.ContinueToVerification = function () {
     //    $location.path("/verification");

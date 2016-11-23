@@ -1,0 +1,54 @@
+﻿<div class="container outer-container">
+    <div class="header">
+        <h1 id="sitetitle"><a href="#">City of Oakland</a></h1>
+        <div class="description">Rent Adjustment  <br />Program</div>
+    </div><!-- .header -->
+
+    <div id="SkipToMainContent">
+        <div class="application-form-wrapper">
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <ul class="application-steps">
+                        <li class="current"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
+                        <li><a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
+                        <li><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
+                        <li><a ng-click="Ctrl.showGrounds()">Grounds for Petition</a></li>
+                        <li><a ng-click="Ctrl.showRentalHistory()">Rental History</a></li>
+                        <li><a ng-click="Ctrl.showLostServices()">Lost Services</a></li>
+                        <li><a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a></li>
+                        <li><a ng-click="Ctrl.showReview()">Review</a></li>
+                        <li><a ng-click="Ctrl.showVerification()">Verification</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="application-step step-1">
+                        <h3 class="step-heading">Petition Type</h3>
+
+                        <form name="frmTenentPetition" id="frmTenentPetition" action="documents.html" method="post" class="application-form">
+                         
+                           
+                            <rap-petitiontype ng-show="Ctrl.bPetitionType" model="Ctrl"></rap-petitiontype>
+                            <rap-applicationinfo ng-show="Ctrl.bAppInfo" model="Ctrl"></rap-applicationinfo>
+                            <rap-groundsofpetition ng-show="Ctrl.bGrounds" model="Ctrl"></rap-groundsofpetition>
+                            <rap-rentalhistory ng-show="Ctrl.bRentalHistory" model="Ctrl"></rap-rentalhistory>
+                            <rap-lostservices ng-show="Ctrl.bLostServices" model="Ctrl"></rap-lostservices>
+                            <rap-document ng-show="Ctrl.bAddDocuments" model="Ctrl"></rap-document>
+                            <rap-review ng-show="Ctrl.bReview" model="Ctrl"></rap-review>
+                            <rap-verification ng-show="Ctrl.bVerification" model="Ctrl"></rap-verification>
+                            
+                           
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!-- #SkipToMainContent -->
+
+        <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->
+    </div><!-- .container .outer-container -->
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!--<script src='js/jquery.maskedinput.js'></script>-->
+    <script src='js/tooltip.js'></script>
+    <script src='js/functions.js'></script>
+    </body>

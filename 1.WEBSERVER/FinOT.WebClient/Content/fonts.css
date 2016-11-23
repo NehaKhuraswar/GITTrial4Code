@@ -1,0 +1,70 @@
+/** Web Fonts Embed */
+  
+@font-face {
+  font-family: 'FaktPro-Blond';
+  src: url('../webfonts/FaktPro-Blond.eot');
+  src: url('../webfonts/FaktPro-Blond.otf');
+  src: url('../webfonts/FaktPro-Blond.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/FaktPro-Blond.woff') format('woff'),
+       url('../webfonts/FaktPro-Blond.ttf') format('truetype');
+       /*url('../webfonts/2BFBD2_0_0.svg#wf') format('svg');*/
+}
+
+@font-face {
+  font-family: 'FaktPro-BlondItalic';
+  src: url('../webfonts/FaktPro-BlondItalic.eot');
+  src: url('../webfonts/FaktPro-BlondItalic.otf');
+  src: url('../webfonts/FaktPro-BlondItalic.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/FaktPro-BlondItalic.woff') format('woff'),
+       url('../webfonts/FaktPro-BlondItalic.ttf') format('truetype');
+       /*url('../webfonts/2BFBD2_0_0.svg#wf') format('svg');*/
+}
+
+@font-face {
+  font-family: 'FaktPro-Medium';
+  src: url('../webfonts/FaktPro-Medium.eot');
+  src: url('../webfonts/FaktPro-Medium.otf');
+  src: url('../webfonts/FaktPro-Medium.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/FaktPro-Medium.woff') format('woff'),
+       url('../webfonts/FaktPro-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  /*font-family: 'FaktPro-MediumItalic';*/
+  font-family: 'FaktPro-Medium';
+  src: url('../webfonts/FaktPro-MediumItalic.eot');
+  src: url('../webfonts/FaktPro-MediumItalic.otf');
+  src: url('../webfonts/FaktPro-MediumItalic.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/FaktPro-MediumItalic.woff') format('woff'),
+       url('../webfonts/FaktPro-MediumItalic.ttf') format('truetype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'FaktPro-Normal';
+  src: url('../webfonts/FaktPro-Normal.eot');
+  src: url('../webfonts/FaktPro-Normal.otf');
+  src: url('../webfonts/FaktPro-Normal.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/FaktPro-Normal.woff') format('woff'),
+       url('../webfonts/FaktPro-Normal.ttf') format('truetype');
+}
+
+@font-face {
+  /*font-family: 'FaktPro-NormalItalic';*/
+  font-family: 'FaktPro-Normal';
+  src: url('../webfonts/FaktPro-NormalItalic.eot');
+  src: url('../webfonts/FaktPro-NormalItalic.otf');
+  src: url('../webfonts/FaktPro-NormalItalic.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/FaktPro-NormalItalic.woff') format('woff'),
+       url('../webfonts/FaktPro-NormalItalic.ttf') format('truetype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'FaktSlabPro-Light';
+  src: url('../webfonts/FaktSlabPro-Light.eot');
+  src: url('../webfonts/FaktSlabPro-Light.otf');
+  src: url('../webfonts/FaktSlabPro-Light.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/FaktSlabPro-Light.woff') format('woff'),
+       url('../webfonts/FaktSlabPro-Light.ttf') format('truetype');
+}

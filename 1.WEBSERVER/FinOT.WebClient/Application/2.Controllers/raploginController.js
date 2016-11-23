@@ -6,13 +6,27 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     self.Login = function (model) {
         
         rapFactory.Login(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                alert.Error(response.warnings[0]);
-                return;
-            }
+            if (response.data !== "") {
+                        sessionStorage.setItem('token', response.data.access_token);
+                        sessionStorage.setItem('username', response.data.Username);
+                        sessionStorage.setItem('roles', response.data.Roles);
+                        sessionStorage.setItem('expire', new Date(Date.now() + response.data.expires_in * 1000));
+                        
+            } else { //defer.reject();
+                $location.path("/notoken") }
+                //}, function (response) {
+                //    if (response.data.error != undefined && response.data.error == "NOACCESS") {
+                //        $location.path("/noaccess");
+                //    }
+                //    //defer.reject(response);
+                //});
+            //if (!alert.checkResponse(response)) {
+            //    alert.Error(response.warnings[0]);
+            //    return;
+            //}
  
           //  angular.copy(response.data, MyService.value);
-            rapGlobalFactory.CustomerDetails = response.data;
+            rapGlobalFactory.CustomerDetails.User.FirstName = response.data.FirstName;
             $scope.model = response.data;
             $location.path("/dashboard");
 
@@ -21,12 +35,12 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
 
 }];
 var raploginController_resolve = {
-    model: ['$route', 'alertService', 'raploginFactory', function ($route, alert, rapFactory) {
+    model: ['$route', 'alertService', 'raploginFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
         //return auth.fetchToken().then(function (response) {
         return rapFactory.GetCustomer(null).then(function (response) {
-            //   if (!alert.checkResponse(response)) { return; }
-            //    return response.data;
-            //});
+               if (!alert.checkResponse(response)) { return; }
+               rapGlobalFactory.CustomerDetails= response.data;
+            
         });
     }]
 }

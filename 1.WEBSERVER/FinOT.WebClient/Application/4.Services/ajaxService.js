@@ -5,11 +5,11 @@ var ajaxService = ['$http', '$location', function ($http, $location) {
         _base = sessionStorage.getItem('apibaseurl');
     }
 
-    this.getToken = function (username) {
+    this.getToken = function (username,password) {
         return $http({
             method: 'POST',
             url: _base + "token",
-            data: "grant_type=password&username=" + username,
+            data: "grant_type=password&username=" + username + "&password=" + password,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
     }

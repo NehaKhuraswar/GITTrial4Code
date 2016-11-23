@@ -72,6 +72,103 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             controllerAs: 'Ctrl'
         };
     })
+    .directive('rapPetitiontype', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/FilePetition.html',
+            controller: 'rapFilePetitionController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapApplicationinfo', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/ApplicationInfo.html',
+            controller: 'rapApplicationInfoController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapGroundsofpetition', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/GroundsForPetition.html',
+            controller: 'rapGroundsOfPetitionController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapRentalhistory', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/RentalHistory.html',
+            controller: 'rapRentalHistoryController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapLostservices', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/LostServices.html',
+            controller: 'rapLostServicesController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapDocument', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/Document.html',
+            controller: 'rapDocumentController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapReview', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/Review.html',
+            controller: 'rapReviewController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapVerification', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/Review.html',
+            controller: 'rapVerificationController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    
     .directive('otHeader', function () {
         return {
             restrict: 'E',

@@ -254,7 +254,7 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
         }
-        [Route("addanotheropposingparty")]
+        [Route("addopposingparty")]
         [HttpPost]
         public HttpResponseMessage AddAnotherOpposingParty([FromBody] CaseInfoM caseInfo)
         {

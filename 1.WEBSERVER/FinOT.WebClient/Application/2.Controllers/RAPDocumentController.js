@@ -7,7 +7,9 @@ var rapDocumentController = ['$scope', '$modal', 'alertService', '$location', 'r
 
     self.ContinueToReview = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $location.path("/review");
+        $scope.model.bAddDocuments = false;
+        $scope.model.bReview = true;
+       
     }
 
     $scope.onFileSelect = function ($files) {

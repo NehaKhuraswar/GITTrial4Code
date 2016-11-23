@@ -9,6 +9,9 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using RAP.Core.FinServices.APIService;
 using RAP.API.Common;
+using RAP.Core.DataModels;
+using RAP.Business.Implementation;
+using RAP.Core.Common;
 
 namespace RAP.API.Providers
 {
@@ -29,14 +32,29 @@ namespace RAP.API.Providers
             {
                 Username = HttpContext.Current.GetOwinContext().Request.User.Identity.Name;
             }
-            //using windowsidentity
-            if (string.IsNullOrEmpty(Username))
+
+            CustomerInfo cust = new CustomerInfo();
+            cust.email = Username;
+            cust.Password = context.Password;
+
+            AccountManagementService accService = new AccountManagementService();
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
+            result = accService.GetCustomer(cust);
+            if (result.status.Status != StatusEnum.Success)
             {
-                Username = WindowsIdentity.GetCurrent().Name;
+
+                return;
             }
-            //extract the username excluding domain name
-            Username = Username.Contains(@"\") ? Username.Substring(Username.LastIndexOf(@"\") + 1) : Username;
-            Username = Username.ToLower();
+
+            
+            //using windowsidentity
+            //if (string.IsNullOrEmpty(Username))
+            //{
+            //    Username = WindowsIdentity.GetCurrent().Name;
+            //}
+            ////extract the username excluding domain name
+            //Username = Username.Contains(@"\") ? Username.Substring(Username.LastIndexOf(@"\") + 1) : Username;
+            //Username = Username.ToLower();
 
             ////hardcoded values for test
             //List<Role> roles = new List<Role>();
@@ -46,7 +64,12 @@ namespace RAP.API.Providers
 
             //check if the user has access
             APIHelper api = new APIHelper();
-            IList<int> roles = api.GetUserRoles(Username, CorrelationId);
+            //IList<int> roles = api.GetUserRoles(Username, CorrelationId);
+            IList<int> roles = new List<int>();
+            roles.Add(2600);
+
+            
+            
             if (roles != null)
             {
                 if (roles.Count > 0)
@@ -64,20 +87,22 @@ namespace RAP.API.Providers
             //if user has access generate token with Username and Roles in claims
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, Username));
-            identity.AddClaim(new Claim(ClaimTypes.Role, Roles));
+            //identity.AddClaim(new Claim(ClaimTypes.Role, Roles));
             identity.AddClaim(new Claim(ClaimTypes.SerialNumber, CorrelationId));
-            AuthenticationProperties properties = CreateProperties(Username, Roles);
+           // identity.AddClaim(new Claim(ClaimTypes.GivenName, result.result.User.FirstName));
+            AuthenticationProperties properties = CreateProperties(Username, result.result.User.FirstName);
 
             AuthenticationTicket ticket = new AuthenticationTicket(identity, properties);
             await Task.Run(() => context.Validated(ticket));
         }
 
-        public static AuthenticationProperties CreateProperties(string Username, string Roles)
+        public static AuthenticationProperties CreateProperties(string Username,  string FirstName)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "Username", Username },
-                { "Roles", Roles }
+               
+                {"FirstName", FirstName}
             };
             return new AuthenticationProperties(data);
         }

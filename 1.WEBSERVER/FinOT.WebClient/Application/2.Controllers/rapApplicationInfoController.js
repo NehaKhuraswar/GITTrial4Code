@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapapplicationinfoFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    
+    self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
 //    self.rent = [];
@@ -35,7 +35,12 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
    // }
     self.ContinueToGroundsforPetition = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $location.path("/groundsforpetition");
+        //rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
+        //    if (!alert.checkResponse(response)) {return; }
+        // });
+         $scope.model.bAppInfo = false;
+        $scope.model.bGrounds = true;
+        
     }
     //self.ContinueToRentalHistory = function () {
     //    $location.path("/rentalhistory");

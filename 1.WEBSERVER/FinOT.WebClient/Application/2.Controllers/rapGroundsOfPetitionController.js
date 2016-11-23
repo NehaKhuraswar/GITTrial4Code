@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgroundsofpetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    
+    self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     
@@ -36,7 +36,8 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
     //}
     self.ContinueToRentalHistory = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $location.path("/rentalhistory");
+        $scope.model.bGrounds = false;
+        $scope.model.bRentalHistory = true;
     }
     //self.ContinueToLostServices = function () {
     //    var a = self.selectedObj;

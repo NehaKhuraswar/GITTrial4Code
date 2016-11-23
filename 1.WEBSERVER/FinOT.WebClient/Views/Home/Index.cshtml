@@ -8,13 +8,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" type="image/png" href="@Url.Content("~/favicon.png")" />
     <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/favicon.ico")"/><![endif]-->
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/fonts.css")
+    @Styles.Render("~/Content/styles.css")
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
     <script type="text/javascript">
         @*sessionStorage.setItem("UserDisplayName", "@string.Format("{0} {1}", Model.Header.User.FirstName, Model.Header.User.LastName)");
         sessionStorage.setItem("username", "@Model.Header.User.Username");*@
         sessionStorage.setItem("apibaseurl", "http://localhost:38000/");@*"@Model.AppDetails.ApiBaseURL");*@
-    </script>
+    </script>   
 </head>
 <body>
     <div class="container-fluid">
@@ -42,11 +44,11 @@
     <div inform class="inform-animate inform-fixed inform-shadow" style="z-index: 1051"></div>
     <div id="body" ng-view class="container-fluid"></div>
     <footer style="margin-top: 3em;">
-        <nav class="navbar navbar-fixed-bottom row-footer-finance" role="navigation">
+        @*<nav class="navbar navbar-fixed-bottom row-footer-finance" role="navigation">
             <div class="container-fluid">
                 <span style="font-size: 0.8em; line-height: 2em;" class="pull-right">Rent Adjustment Program: Service Allocation | Deployment Date: @Model.AppDetails.DeploymentDate</span>
             </div>
-        </nav>
+        </nav>*@
     </footer>
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularApp")
