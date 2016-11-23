@@ -92,6 +92,8 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("logincust")]
         [HttpPost]
         public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
