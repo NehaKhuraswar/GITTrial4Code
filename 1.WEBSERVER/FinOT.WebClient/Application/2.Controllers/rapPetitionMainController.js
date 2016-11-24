@@ -119,11 +119,14 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //}
 }];
 var rapPetitionMainController_resolve = {
-    model: ['$route', 'alertService', 'rapfilepetitionFactory', function ($route, alert, rapFactory) {
-        ////return auth.fetchToken().then(function (response) {
-        //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {
-        //  if (!alert.checkResponse(response)) { return; }
-        //        return response.data;
-        //    });
+    model: ['$route', 'alertService', 'rapfilepetitionFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
+        rapFactory.GetCaseInfo().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+
+            self.caseinfo = response.data;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+        });
     }]
 }

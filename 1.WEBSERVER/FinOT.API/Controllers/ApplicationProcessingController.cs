@@ -227,7 +227,102 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+        [Route("savetenantlostserviceinfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] TenantPetitionInfoM petition)
+        {
+            ExtractClaimDetails();
 
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                result = _service.SaveTenantLostServiceInfo(petition);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+        [Route("savepetitiongroundinfo")]
+        [HttpPost]
+        public HttpResponseMessage SavePetitionGroundInfo([FromBody] TenantPetitionInfoM petition)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                result = _service.SavePetitionGroundInfo(petition);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+        [Route("saverentalincrementinfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveTenantRentalIncrementInfo([FromBody] TenantPetitionInfoM petition)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                result = _service.SaveTenantRentalIncrementInfo(petition);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
         [Route("savetenantappealinfo")]
         [HttpPost]
         public HttpResponseMessage SaveTenantAppealInfo([FromBody] CaseInfoM caseInfo)

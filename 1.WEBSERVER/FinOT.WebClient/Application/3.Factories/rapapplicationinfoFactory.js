@@ -13,6 +13,19 @@ var rapapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, aj
             blockUI.stop();
         });
     }
+    var _GetCaseInfo = function () {
+        blockUI.start();
+
+        var url = _routePrefix + '/getcaseinfo';
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
+
+    factory.GetCaseInfo = _GetCaseInfo;
     factory.SaveApplicationInfo = _SaveApplicationInfo;
     
     return factory;

@@ -4,6 +4,21 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    var _GetCaseInfo = function (model) {
+
+        rapFactory.GetCaseInfo().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+
+            self.caseinfo = response.data;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+        });
+    }
+    // _getrent();
+    if (self.caseinfo == null) {
+        _GetCaseInfo();
+    }
 //    self.rent = [];
     //self.selectedValue = 1;
 ///    self.selectedObj = {};

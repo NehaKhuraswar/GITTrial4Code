@@ -142,6 +142,49 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<bool> SaveTenantRentalIncrementInfo(TenantPetitionInfoM petition)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.SaveTenantRentalIncrementInfo(petition);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<bool> SaveTenantLostServiceInfo(TenantPetitionInfoM petition)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.SaveTenantLostServiceInfo(petition);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.SavePetitionGroundInfo(petition);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         //implements all methods from IOTRequestService
     }
 }

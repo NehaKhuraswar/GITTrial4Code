@@ -94,7 +94,7 @@ namespace RAP.DAL
 		
 		private string _State;
 		
-		private string _Zip;
+		private int _Zip;
 		
 		private string _PhoneNumber;
 		
@@ -120,7 +120,7 @@ namespace RAP.DAL
     partial void OnCityChanged();
     partial void OnStateChanging(string value);
     partial void OnStateChanged();
-    partial void OnZipChanging(string value);
+    partial void OnZipChanging(int value);
     partial void OnZipChanged();
     partial void OnPhoneNumberChanging(string value);
     partial void OnPhoneNumberChanged();
@@ -275,8 +275,8 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
-		public string Zip
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="Int NOT NULL")]
+		public int Zip
 		{
 			get
 			{

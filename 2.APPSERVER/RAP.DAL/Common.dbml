@@ -9,7 +9,7 @@
       <Column Name="AddressLine2" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="City" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="State" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Zip" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Zip" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="ContactEmail" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
