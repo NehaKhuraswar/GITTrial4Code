@@ -19,10 +19,10 @@
             <p class="input-label">Is anybody representing you?</p>
             <div class="form-group-radio vertical clearfix">
                 <label for="anybody_representing_you_yes">
-                    <input type="radio" name="anybody_representing_you" value="true" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation" checked="checked" data-toggle="show" data-toggle-id="representative-info"><i></i><span>Yes</span>
+                    <input type="radio" name="anybody_representing_you" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation" checked="checked"  ><i></i><span>Yes</span>
                 </label>
                 <label for="anybody_representing_you_no">
-                    <input type="radio" name="anybody_representing_you" value="false" ng-model="Ctrl.caseinfo.bThirdPartyRepresentation" data-toggle="hide" data-toggle-id="representative-info" /><i></i> <span>No</span>
+                    <input type="radio" name="anybody_representing_you" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation" /><i></i> <span>No</span>
                 </label>
                 <div class="clear"></div>
             </div>
@@ -32,46 +32,46 @@
 
             <div class="field-group">
                 <label for="representative_firstname">Name</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.FirstName" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName" required />
             </div>
 
             <div class="field-group">
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.LastName" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_address1">Mailing address 1</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine1" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_address2">Mailing address 2 (optional)</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.AddressLine2" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_city">City</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.City" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_state">State</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.State" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_zip_code">Zip Code</label>
-                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Zip" required />
+                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_phone_number">Phone number</label>
-                <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.PhoneNumber" required />
+                <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_email">Email Address</label>
-                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.ThirdPartyInfo.Email" required />
+                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email" required />
             </div>
         </div>
 
@@ -82,46 +82,46 @@
 
             <div class="field-group">
                 <label for="representative_firstname">Name</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.FirstName" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName" required />
             </div>
 
             <div class="field-group">
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.LastName" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_address1">Mailing address 1</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine1" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_address2">Mailing address 2 (optional)</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.AddressLine2" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_city">City</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.City" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_state">State</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.State" required />
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_zip_code">Zip Code</label>
-                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.OwnerInfo.ThirdPartyInfo.Zip" required />
+                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.ThirdPartyInfo.Zip" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_phone_number">Phone number</label>
-                <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.PhoneNumber" required />
+                <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber" required />
             </div>
 
             <div class="field-group">
                 <label for="representative_email">Email Address</label>
-                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerInfo.Email" required />
+                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email" required />
             </div>
 
 

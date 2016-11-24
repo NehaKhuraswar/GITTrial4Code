@@ -128,6 +128,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.SaveApplicationInfo(caseInfo, UserID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         //implements all methods from IOTRequestService
     }
 }

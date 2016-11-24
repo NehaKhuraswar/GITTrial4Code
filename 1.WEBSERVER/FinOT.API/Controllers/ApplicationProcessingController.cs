@@ -22,6 +22,7 @@ namespace RAP.API.Controllers
     public class ApplicationProcessingController : ApiController
     {
         private string Username, ExceptionMessage, InnerExceptionMessage;
+        private int UserID;
         private readonly IApplicationProcessingService _service;
         private readonly IdocumentService _docService;
        
@@ -41,6 +42,7 @@ namespace RAP.API.Controllers
             var principle = Request.GetRequestContext().Principal as ClaimsPrincipal;
             _service.CorrelationId = principle.Claims.Where(x => x.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
             Username = principle.Claims.Where(x => x.Type == ClaimTypes.Name).FirstOrDefault().Value;
+            UserID = Convert.ToInt32(principle.Claims.Where(x => x.Type == ClaimTypes.UserData).FirstOrDefault().Value);
             ExceptionMessage = "An error occured while processing your request. Reference# " + _service.CorrelationId;
         }
 
@@ -175,6 +177,38 @@ namespace RAP.API.Controllers
                     transaction.status = false;
                 }
                 result = _service.SaveCaseDetails(caseInfo);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+        [Route("saveapplicationinfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveApplicationInfo([FromBody] CaseInfoM caseInfo)
+        {
+            ExtractClaimDetails();
+            
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                result = _service.SaveApplicationInfo(caseInfo, UserID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

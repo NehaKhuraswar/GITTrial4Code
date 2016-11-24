@@ -36,6 +36,7 @@ namespace RAP.API.Providers
             CustomerInfo cust = new CustomerInfo();
             cust.email = Username;
             cust.Password = context.Password;
+            
 
             AccountManagementService accService = new AccountManagementService();
             ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
@@ -63,46 +64,37 @@ namespace RAP.API.Providers
             //Roles = string.Join(",", from item in roles select item.Id.ToString());
 
             //check if the user has access
-            APIHelper api = new APIHelper();
-            //IList<int> roles = api.GetUserRoles(Username, CorrelationId);
-            IList<int> roles = new List<int>();
-            roles.Add(2600);
+            //APIHelper api = new APIHelper();
+            ////IList<int> roles = api.GetUserRoles(Username, CorrelationId);
+            //IList<int> roles = new List<int>();
+            //roles.Add(2600);
 
             
             
-            if (roles != null)
-            {
-                if (roles.Count > 0)
-                {
-                    Roles = string.Join(",", roles);
-                }
-            }
+            
 
-            if (string.IsNullOrEmpty(Roles))
-            {
-                context.SetError("NOACCESS");
-                return;
-            }
-
+            string UserID = Convert.ToString(result.result.User.UserID );
             //if user has access generate token with Username and Roles in claims
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, Username));
             //identity.AddClaim(new Claim(ClaimTypes.Role, Roles));
             identity.AddClaim(new Claim(ClaimTypes.SerialNumber, CorrelationId));
+            identity.AddClaim(new Claim(ClaimTypes.UserData,UserID ));
            // identity.AddClaim(new Claim(ClaimTypes.GivenName, result.result.User.FirstName));
-            AuthenticationProperties properties = CreateProperties(Username, result.result.User.FirstName);
+            AuthenticationProperties properties = CreateProperties(Username, result.result.User.FirstName, UserID);
 
             AuthenticationTicket ticket = new AuthenticationTicket(identity, properties);
             await Task.Run(() => context.Validated(ticket));
         }
 
-        public static AuthenticationProperties CreateProperties(string Username,  string FirstName)
+        public static AuthenticationProperties CreateProperties(string Username, string FirstName, string UserID)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "Username", Username },
                
-                {"FirstName", FirstName}
+                {"FirstName", FirstName},
+                {"UserID", UserID}
             };
             return new AuthenticationProperties(data);
         }

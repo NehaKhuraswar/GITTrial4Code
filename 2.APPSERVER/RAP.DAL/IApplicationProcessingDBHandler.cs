@@ -10,6 +10,7 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> GetCaseDetails();
         ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
+        ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
         ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);

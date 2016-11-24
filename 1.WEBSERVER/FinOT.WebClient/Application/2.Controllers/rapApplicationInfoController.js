@@ -35,9 +35,9 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
    // }
     self.ContinueToGroundsforPetition = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        //rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
-        //    if (!alert.checkResponse(response)) {return; }
-        // });
+        rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
+            if (!alert.checkResponse(response)) {return; }
+         });
          $scope.model.bAppInfo = false;
         $scope.model.bGrounds = true;
         

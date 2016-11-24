@@ -43,29 +43,7 @@ namespace RAP.Core.DataModels
         }
                 
         public int TenantUserID { get; set; }
-        public bool bThirdPartyRepresentation { get; set; }
-        public UserInfoM ThirdPartyInfo
-        {
-            get
-            {
-                return _thirdPartyInfo;
-            }
-            set
-            {
-                _thirdPartyInfo = value;
-            }
-        }
-        public UserInfoM OwnerInfo
-        {
-            get
-            {
-                return _ownerInfo;
-            }
-            set
-            {
-                _ownerInfo = value;
-            }
-        }
+        
         public bool bAgreeToCityMediation { get; set; }
         public bool bCaseFiledByThirdParty { get; set; }
         public int CaseFileBy { get; set; }
@@ -151,29 +129,29 @@ namespace RAP.Core.DataModels
     }
     public class TenantPetitionInfoM
     {
+        public TenantPetitionInfoM()
+        {
+            ThirdPartyInfo = new UserInfoM();
+            OwnerInfo = new UserInfoM();
+            PropertyManager = new UserInfoM();
+        }
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
         private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         private List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
         private List<TenantRentIncreaseInfoM> _rentIncreases = new List<TenantRentIncreaseInfoM>();
         private List<TenantLostServiceInfoM> _lostServices = new List<TenantLostServiceInfoM>();
         private List<TenantProblemInfoM> _problems = new List<TenantProblemInfoM>();
+        public bool bThirdPartyRepresentation { get; set; }
+        public UserInfoM ThirdPartyInfo { get; set; }
+        public UserInfoM OwnerInfo { get; set; }
+        public UserInfoM PropertyManager { get; set; }
         public int PetitionID { get; set; }
         public int NumberOfUnits { get; set; }
         public int UnitTypeId { get; set; }
         public int CurrentRentStatusID { get; set; }
-        public string LegalWithHoldingExplanation { get; set; }
+        public string ProvideExplanation { get; set; }
         public bool bCitationDocUnavailable { get; set; }
-        public List<PetitionGroundM> PetitionGrounds
-        {
-            get
-            {
-                return _petitionGrounds;
-            }
-            set
-            {
-                _petitionGrounds = value;
-            }
-        }
+        public List<PetitionGroundM> PetitionGrounds { get; set; }  
         public DateTime MoveInDate { get; set; }
         public decimal InitialRent { get; set; }
         public bool bRAPNoticeGiven { get; set; }
