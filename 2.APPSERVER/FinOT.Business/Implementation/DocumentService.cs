@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.ServiceModel;
 using RAP.Core.Common;
 using RAP.Core.DataModels;
 using RAP.Core.Services;
-using RAP.Business.Proxy;
+using RAP.Business.CheckInService;
+
 
 namespace RAP.Business.Implementation
 {
@@ -20,11 +22,22 @@ namespace RAP.Business.Implementation
           {
               var serviceObj = ConvertToServiceObj(doc);
               string endpoint = ConfigurationManager.AppSettings["WebcenterEndPoint"];
-              
-              CheckInSoapClient checkInService = new CheckInSoapClient();              
-              checkInService.ClientCredentials.UserName.UserName = "intrapapp01";
-              //checkInServiceClientCredentials.UserName.Password = "intrapapp01";
-              var serviceResult =  checkInService.CheckInUniversal(doc.DocName, doc.DocTitle, doc.DocType, "RAP", "", "", null, serviceObj, null, null);
+              BasicHttpBinding myBinding = new BasicHttpBinding();
+              myBinding.Security.Mode = BasicHttpSecurityMode.Transport;
+              myBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+              myBinding.MaxReceivedMessageSize =Convert.ToInt64(ConfigurationManager.AppSettings["MaxReceivedMessageSize"]);
+              myBinding.MaxBufferSize = Convert.ToInt32(ConfigurationManager.AppSettings["MaxBufferSize"]);
+              myBinding.MaxBufferPoolSize = Convert.ToInt64(ConfigurationManager.AppSettings["MaxBufferPoolSize"]);
+              EndpointAddress ea = new EndpointAddress(endpoint);
+              CheckInSoapClient checkInService = new CheckInSoapClient(myBinding,ea);
+              checkInService.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["WebcenterUserName"];
+              checkInService.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["WebcenterPassword"];
+              string docAuthor = ConfigurationManager.AppSettings["DocAuthor"];
+              string docType = ConfigurationManager.AppSettings["DocType"];
+              string securityGroup = ConfigurationManager.AppSettings["SecurityGroup"];
+              IdcProperty[] idcProperty = new IdcProperty[0];
+              IdcFile idcFile = new IdcFile();
+              var serviceResult = checkInService.CheckInUniversal(doc.DocName, doc.DocTitle, docType, docAuthor, securityGroup, "", idcProperty, serviceObj, idcFile, idcProperty);
               if(serviceResult == null)
               {
                   result.status = new OperationStatus() { Status = StatusEnum.UploadFailed };
