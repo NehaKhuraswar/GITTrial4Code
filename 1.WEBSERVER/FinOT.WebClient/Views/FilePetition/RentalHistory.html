@@ -1,26 +1,24 @@
 ﻿
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-danger font-small">
-            <div class="panel-heading">
-                <strong>User</strong>
+<h3 class="step-heading">Tenant Petition: <span>Rental History</span></h3>
+<div class="step-content step1">
+    <div class="field-group subhead no-top-margin">
+        <p class="input-label">When did you move into the unit?</p>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Month
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jan</a></li>
+                        <li><a href="#">Feb</a></li>
+                        <li><a href="#">Mar</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="panel-body">
-                <p>Renter petition : Rental History</p>
-                <p>___________________________________________________________________________________________</p>
-                <p>Date you moved into the unit</p>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Month
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Jan</a></li>
-                        <li><a href="#">Feb</a></li>
-                        <li><a href="#">Mar</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                         Select Date
                         <span class="caret"></span>
@@ -31,7 +29,9 @@
                         <li><a href="#">3</a></li>
                     </ul>
                 </div>
-                <div class="dropdown">
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                         Select Year
                         <span class="caret"></span>
@@ -42,191 +42,275 @@
                         <li><a href="#">2012</a></li>
                     </ul>
                 </div>
-                <p>Initial monthly Rent</p>
-                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.InitialRent" required />
-
-                <p>When did the property owner first provide you with the written NOTICE TO TENANTS of the existence of RAP</p>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Month
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Jan</a></li>
-                        <li><a href="#">Feb</a></li>
-                        <li><a href="#">Mar</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Date
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Year
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">2014</a></li>
-                        <li><a href="#">2013</a></li>
-                        <li><a href="#">2012</a></li>
-                    </ul>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="NoRAPNotice" value="true" 
-                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRAPNoticeGiven"
-                                  >I was never given a RAP notice by my property owner</label>
-                </div>
-                <p>Is your rent subsidized or controlled  by any government agency, including HUD</p>
-                <div class="radio">
-                    <label><input type="radio" name="IsControlled" value="true" 
-                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRentControlledByAgency">Yes</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsControlled" value="false" 
-                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRentControlledByAgency">No</label>
-                </div>
-               
-
-                <!--<div class="radio">
-                    <label><input type="radio" name="IsSubsidized">Yes</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="IsSubsidized">No</label>
-                </div>-->
-
-                <p>___________________________________________________________________________________________</p>
-                <strong>Rent Increases</strong>
-                <p>Did you recieve a rent program notice with the notice of increase</p>
-                <!--<div ng-repeat="rentincrease in Ctrl.caseinfo.TenantPetitionInfo.RentIncreases">-->
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="IsRentNotice" value="true"
-                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven">Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="IsRentNotice" value="false"
-                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven">No
-                        </label>
-                    </div>
-                    
-
-                    <p>Date notice served</p>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Month
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Jan</a></li>
-                            <li><a href="#">Feb</a></li>
-                            <li><a href="#">Mar</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Date
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Year
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">2014</a></li>
-                            <li><a href="#">2013</a></li>
-                            <li><a href="#">2012</a></li>
-                        </ul>
-                    </div>
-                    <p>Monthly Rent Increase</p>
-                <input type="number" placeholder="From" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].RentIncreasedFrom" required />
-                <input type="number" placeholder="To" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].RentIncreasedTo" required />
-
-                    <p>When did the property owner first provide you with the written NOTICE TO TENANTS of the existence of RAP</p>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Month
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Jan</a></li>
-                            <li><a href="#">Feb</a></li>
-                            <li><a href="#">Mar</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Date
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Year
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">2014</a></li>
-                            <li><a href="#">2013</a></li>
-                            <li><a href="#">2012</a></li>
-                        </ul>
-                    </div>
-                    <p>Are you contesting this increase in this petition</p>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="IsContesting" value="true"
-                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseContested">Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="IsContesting" value="false"
-                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseContested">No
-                        </label>
-                    </div>
-                <!--</div>-->
-                <button ng-click="Ctrl.AddAnotherRentIncreaseRecord()">Add another rent increase record</button>
-                <p>Have you ever filed a petition for your rental unit?</p>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="FiledPetitionInPast" value="true"
-                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.bPetitionFiledPrviously">Yes
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="FiledPetitionInPast" value="false"
-                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.bPetitionFiledPrviously">No
-                    </label>
-                </div>
-                <p>List case number of all Petition(s) you have ever filed for this rental unit</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" 
-                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.PreviousCaseIDs" required />
-                <button ng-click="Ctrl.AddAnotherCaseNumber()">Add another case number</button>
-
-                <button ng-click="Ctrl.ContinueToLostServices(Ctrl.selectedValue)">Continue</button>
             </div>
         </div>
-    </div>
-</div>
+        </div>
+        <div class="field-group">
+            <label for="initial_monthly_rent">Initial monthly rent</label>
+            <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.InitialRent" required />
+        </div>
+
+
+        <div class="field-group">
+            <p class="input-label">When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)?</p>
+
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="field-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Month
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Jan</a></li>
+                            <li><a href="#">Feb</a></li>
+                            <li><a href="#">Mar</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="field-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Date
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="field-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Year
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">2014</a></li>
+                            <li><a href="#">2013</a></li>
+                            <li><a href="#">2012</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+            iv class="field-group">
+            <div class="form-group-radio vertical clearfix">
+                <label for="rap_notice" class="has-info-btn">
+                    <input type="radio" name="NoRAPNotice" value="true" class="input-field"
+                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRAPNoticeGiven">I was never given a RAP notice by my property owner
+                </label>
+                <div class="clear"></div>
+            </div>
+
+            <div class="field-group">
+                <p class="input-label has-info-btn">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?  <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
+                <div class="form-group-radio vertical clearfix">
+                    <label for="rent_subsidized_yes">
+                        <input type="radio" name="IsControlled" value="true" class="input-field"
+                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRentControlledByAgency"><i></i><span>Yes</span>
+                    </label>
+                    <label for="rent_subsidized_no">
+                        <input type="radio" name="IsControlled" value="false" class="input-field"
+                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRentControlledByAgency"><i></i> <span>No</span>
+                    </label>
+                </div>
+            </div>
+
+
+            <!--<div class="radio">
+            <label><input type="radio" name="IsSubsidized">Yes</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="IsSubsidized">No</label>
+        </div>-->
+
+
+            <div class="subhead type2">
+                <h4>Rent Increases</h4>
+            </div>
+
+            <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later)  to contest the rent increase. (O.M.C. 8.22.090 A 2) If you never got the RAP Notice you can contest all past increases.</p>
+            <div class="field-group subhead">
+                <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>
+                <p>Did you recieve a rent program notice with the notice of increase</p>
+                <!--<div ng-repeat="rentincrease in Ctrl.caseinfo.TenantPetitionInfo.RentIncreases">-->
+                <div class="form-group-radio vertical clearfix">
+                    <label for="receive_rent_increase_notice_yes">
+                        <input type="radio" name="IsRentNotice" value="true" class="input-field"
+                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven"><i></i><span>Yes</span>
+                    </label>
+
+                    <label for="receive_rent_increase_notice_no">
+                        <input type="radio" name="IsRentNotice" class="input-field" value="false"
+                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven">No
+                    </label>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+
+            <div class="field-group">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="field-group">
+                            <label for="notice_served_month">Date notice served</label>
+                            <select name="notice_served_month" id="notice_served_month" class="custom-select" data-placeholder="Month">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="field-group">
+                            <label for="notice_served_day">&nbsp;</label>
+                            <select name="notice_served_day" id="notice_served_day" class="custom-select" data-placeholder="Day">
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="field-group">
+                            <label for="notice_served_year">&nbsp;</label>
+                            <select name="notice_served_year" id="notice_served_year" class="custom-select" data-placeholder="Year">
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .field-group -->
+
+            <p>Monthly Rent Increase</p>
+            <input type="number" placeholder="From" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].RentIncreasedFrom" required />
+            <input type="number" placeholder="To" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].RentIncreasedTo" required />
+
+            <p>When did the property owner first provide you with the written NOTICE TO TENANTS of the existence of RAP</p>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    Select Month
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Jan</a></li>
+                    <li><a href="#">Feb</a></li>
+                    <li><a href="#">Mar</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    Select Date
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    Select Year
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">2014</a></li>
+                    <li><a href="#">2013</a></li>
+                    <li><a href="#">2012</a></li>
+                </ul>
+            </div>
+
+            <div class="field-group">
+                <p class="input-label">Are you contesting this increase in this petition?</p>
+                <div class="form-group-radio vertical clearfix">
+                    <label for="contesting_increase_yes">
+                        <input type="radio" name="IsContesting" value="true" class="input-field"
+                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseContested"><i></i><span>Yes</span>
+                    </label>
+
+                    <label for="contesting_increase_no">
+                        <input type="radio" name="IsContesting" value="false"
+                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseContested"><i></i> <span>No</span>
+                    </label>
+                </div>
+                <!--</div>-->
+                <button ng-click="Ctrl.AddAnotherRentIncreaseRecord()">Add another rent increase record</button>
+                </div>
+                <div class="field-group subhead">
+                    <p class="input-label">Have you ever filed a petition for your rental unit?</p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label for="filed_rental_unit_petition_yes">
+                            <input type="radio" name="FiledPetitionInPast" value="true" class="input-field"
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.bPetitionFiledPrviously" /><i></i><span>Yes</span>
+                        </label>
+
+                        <label for="filed_rental_unit_petition_no">
+                            <input type="radio" name="FiledPetitionInPast" value="false"
+                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.bPetitionFiledPrviously"><i></i> <span>No</span>
+                        </label>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="all_petitions_no">List case number of all Petition(s) you have ever filed for this rental unit.</label>
+                    <input type="text" class="form-control input-sm" ng-trim="false"
+                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.PreviousCaseIDs" required />
+                    <br />
+                    <button ng-click="Ctrl.AddAnotherCaseNumber()">Add another case number</button>
+                    </div>
+                </div>
+
+                    <button class="btn-primary" ng-click="Ctrl.ContinueToLostServices(Ctrl.selectedValue)">Continue</button>

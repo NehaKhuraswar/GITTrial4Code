@@ -1,19 +1,17 @@
-﻿<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-danger font-small">
-            <div class="panel-heading">
-                <strong>User</strong>
-            </div>
-            <div class="panel-body">
-                <p>Renter petition : Additional Documentation</p>
-                <p>Description of the document that you are attaching</p>
-                <input type="text" class="form-control input-sm" ng-trim="false" />
-                <div>
-                    <input type="file" ngf-select ngf-change="onFileSelect($files)" />
-                </div>
+﻿
+<h3 class="step-heading">Tenant Petition: <span>Additional Documentation</span></h3>
+<div class="step-content step1">
 
-                <button ng-click="Ctrl.ContinueToReview()">Continue</button>
-            </div>         
-         </div>
+    <div class="field-group subhead no-top-margin">
+        <p>Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine as part of your petition.</p>
     </div>
-</div>
+
+    <div class="field-group subhead">
+        <label for="document_description">Description of the document that you are attaching</label>
+        <input type="text" class="form-control input-sm" ng-trim="false" />
+        <div>
+            <input type="file" ngf-select ngf-change="onFileSelect($files)" />
+        </div>
+        </div></div>
+
+        <button class="btn-primary" ng-click="Ctrl.ContinueToReview()">Continue</button>
