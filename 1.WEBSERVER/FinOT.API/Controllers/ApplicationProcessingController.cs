@@ -38,15 +38,18 @@ namespace RAP.API.Controllers
 
         public void ExtractClaimDetails()
         {
-            HttpRequestContext context = Request.GetRequestContext();
-            var principle = Request.GetRequestContext().Principal as ClaimsPrincipal;
-            _service.CorrelationId = principle.Claims.Where(x => x.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
-            Username = principle.Claims.Where(x => x.Type == ClaimTypes.Name).FirstOrDefault().Value;
-            UserID = Convert.ToInt32(principle.Claims.Where(x => x.Type == ClaimTypes.UserData).FirstOrDefault().Value);
-            ExceptionMessage = "An error occured while processing your request. Reference# " + _service.CorrelationId;
+            UserID = 20;
+            //HttpRequestContext context = Request.GetRequestContext();
+            //var principle = Request.GetRequestContext().Principal as ClaimsPrincipal;
+            //_service.CorrelationId = principle.Claims.Where(x => x.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
+            //Username = principle.Claims.Where(x => x.Type == ClaimTypes.Name).FirstOrDefault().Value;
+            //UserID = Convert.ToInt32(principle.Claims.Where(x => x.Type == ClaimTypes.UserData).FirstOrDefault().Value);
+            //ExceptionMessage = "An error occured while processing your request. Reference# " + _service.CorrelationId;
         }
 
         #region "GET REQUESTS"
+
+        [AllowAnonymous]
         [HttpGet]
         [Route("getRent")]
         public HttpResponseMessage GetRent()
@@ -85,6 +88,8 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<List<Rent>>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("getcaseinfo")]
         [HttpPost]
         public HttpResponseMessage GetCaseDetails( CaseInfoM caseInfo )
@@ -121,6 +126,8 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("getcaseinfo")]
         [HttpGet]
         public HttpResponseMessage GetCaseDetails()
@@ -160,6 +167,8 @@ namespace RAP.API.Controllers
         #endregion
 
         #region "POST REQUEST"
+
+        [AllowAnonymous]
         [Route("savecaseinfo")]
         [HttpPost]
         public HttpResponseMessage SaveCaseDetails([FromBody] CaseInfoM caseInfo)
@@ -195,6 +204,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("saveapplicationinfo")]
         [HttpPost]
         public HttpResponseMessage SaveApplicationInfo([FromBody] CaseInfoM caseInfo)
@@ -227,6 +238,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("savetenantlostserviceinfo")]
         [HttpPost]
         public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] TenantPetitionInfoM petition)
@@ -259,6 +272,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("savepetitiongroundinfo")]
         [HttpPost]
         public HttpResponseMessage SavePetitionGroundInfo([FromBody] TenantPetitionInfoM petition)
@@ -291,6 +306,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("saverentalincrementinfo")]
         [HttpPost]
         public HttpResponseMessage SaveTenantRentalIncrementInfo([FromBody] TenantPetitionInfoM petition)
@@ -323,6 +340,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("savetenantappealinfo")]
         [HttpPost]
         public HttpResponseMessage SaveTenantAppealInfo([FromBody] CaseInfoM caseInfo)
@@ -353,6 +372,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("savetenantservingappeal")]
         [HttpPost]
         public HttpResponseMessage SaveTenantServingAppeal([FromBody] CaseInfoM caseInfo)
@@ -383,6 +404,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("addopposingparty")]
         [HttpPost]
         public HttpResponseMessage AddAnotherOpposingParty([FromBody] CaseInfoM caseInfo)
@@ -413,6 +436,8 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("saveappealgroundinfo")]
         [HttpPost]
         public HttpResponseMessage SaveAppealGroundInfo([FromBody] TenantAppealInfoM tenantAppealInfo)

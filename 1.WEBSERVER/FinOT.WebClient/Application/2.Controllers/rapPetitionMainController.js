@@ -1,9 +1,9 @@
 ﻿'use strict';
-var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', 'model',function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, model) {
     var self = this;
-    
+    self.model=[];
     self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = rapGlobalFactory.CaseDetails;
+    //self.caseinfo = rapGlobalFactory.CaseDetails;
     self.rent = [];
     //self.selectedValue = 1;
     self.selectedObj = {};
@@ -29,7 +29,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         self.bVerification = false;
     };
     _DisableAll();
-    self.bPetitionType = true;
+    
 
     self.showPetitionType = function () {
         _DisableAll();
@@ -69,15 +69,16 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     };
 
 
-    var _GetCaseInfo = function (model) {
+    var _GetCaseInfo = function () {
 
         rapFactory.GetCaseInfo().then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-           
-            self.caseinfo = response.data;           
+            self.model = response.data;
+            self.caseinfo = self.model;           
             rapGlobalFactory.CaseDetails = self.caseinfo;
+            self.bPetitionType = true;
         });
     }
     // _getrent();
@@ -120,13 +121,13 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
 }];
 var rapPetitionMainController_resolve = {
     model: ['$route', 'alertService', 'rapfilepetitionFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
-        rapFactory.GetCaseInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-
-            self.caseinfo = response.data;
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-        });
+        //rapFactory.GetCaseInfo().then(function (response) {
+        //    if (!alert.checkResponse(response)) {
+        //        return;
+        //    }
+        //    return response.data;
+        //    //self.caseinfo = response.data;
+        //    //rapGlobalFactory.CaseDetails = self.caseinfo;
+        //});
     }]
 }

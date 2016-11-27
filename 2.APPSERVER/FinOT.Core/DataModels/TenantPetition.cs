@@ -134,11 +134,14 @@ namespace RAP.Core.DataModels
             ThirdPartyInfo = new UserInfoM();
             OwnerInfo = new UserInfoM();
             PropertyManager = new UserInfoM();
+            RentIncreases = new List<TenantRentIncreaseInfoM>();
+            //TenantRentIncreaseInfoM obj = new TenantRentIncreaseInfoM();
+            //RentIncreases.Add(obj);
+
         }
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
         private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         private List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
-        private List<TenantRentIncreaseInfoM> _rentIncreases = new List<TenantRentIncreaseInfoM>();
         private List<TenantLostServiceInfoM> _lostServices = new List<TenantLostServiceInfoM>();
         private List<TenantProblemInfoM> _problems = new List<TenantProblemInfoM>();
         public bool bThirdPartyRepresentation { get; set; }
@@ -157,17 +160,8 @@ namespace RAP.Core.DataModels
         public bool bRAPNoticeGiven { get; set; }
         public DateTime RAPNoticeGivenDate { get; set; }
         public bool bRentControlledByAgency { get; set; }
-        public List<TenantRentIncreaseInfoM> RentIncreases
-        {
-            get
-            {
-                return _rentIncreases;
-            }
-            set
-            {
-                _rentIncreases = value;
-            }
-        }
+        public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
+        
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
         public bool bLostService { get; set; }

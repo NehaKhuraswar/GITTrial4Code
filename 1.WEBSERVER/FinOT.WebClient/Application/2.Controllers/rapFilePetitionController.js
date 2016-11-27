@@ -21,21 +21,21 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     
 
 
-    var _GetCaseInfo = function (model) {
+    //var _GetCaseInfo = function (model) {
 
-        rapFactory.GetCaseInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
+    //    rapFactory.GetCaseInfo().then(function (response) {
+    //        if (!alert.checkResponse(response)) {
+    //            return;
+    //        }
            
-            self.caseinfo = response.data;           
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-        });
-    }
-    // _getrent();
-    if (self.caseinfo == null) {
-        _GetCaseInfo();
-    }
+    //        self.caseinfo = response.data;           
+    //        rapGlobalFactory.CaseDetails = self.caseinfo;
+    //    });
+    //}
+    //// _getrent();
+    //if (self.caseinfo == null) {
+    //    _GetCaseInfo();
+    //}
 
     self.Continue = function () {
         $scope.model.bPetitionType = false;

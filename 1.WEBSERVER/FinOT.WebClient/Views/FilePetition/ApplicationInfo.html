@@ -112,7 +112,7 @@
 
             <div class="field-group">
                 <label for="representative_zip_code">Zip Code</label>
-                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.ThirdPartyInfo.Zip" required />
+                <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip" required />
             </div>
 
             <div class="field-group">
@@ -125,21 +125,40 @@
                 <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email" required />
             </div>
 
-
-
             <div class="subhead">
-                <h4>Property information</h4>
+                <h4>Property manager(s) name and mailing address</h4>
             </div>
-            <div id="property-info">
-
-                <div class="field-group">
-                    <label for="pi_units_count">Number of units</label>
-                    <input type="number" ng-trim="false" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits" required />
+            <div id="property-manager-info">
+                <div class="radio">
+                    <label for="same_as_po_info">
+                        <input type="radio" name="same_as_po_info" id="same_as_po_info" class="input-field" value="Yes                             " /><i></i><span>Same as property owner info                             </span>
+                    </label>
+                    <div class="clear"></div>
                 </div>
 
                 <div class="field-group">
-                    <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
-                    <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range">
+                    <label for="pm_firstname">Name</label>
+                    <input type="text" name="pm_firstname" id="pm_firstname" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName" placeholder="First" />
+                </div>
+
+                <div class="field-group">
+                    <input type="text" name="pm_lastname" id="pm_lastname" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName" placeholder=" last" />
+                </div>
+                <p>&nbsp;</p>
+
+                <div class="field-group">
+                    <label for="pm_address1">Mailing address 1</label>
+                    <input type="text" name="pm_address1" id="pm_address1" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1" placeholder=" " />
+                </div>
+
+                <div class="field-group">
+                    <label for="pm_address2">Mailing address 2 (optional)</label>
+                    <input type="text" name="pm_address2" id="pm_address2" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2" placeholder="" />
+                </div>
+
+                <div class="field-group">
+                    <label for="pm_state">State</label>
+                    <select name="pm_state" id="pm_state" class="custom-select" data-placeholder="Select">
                         <option value="option_01">Option 01</option>
                         <option value="option_02">Option 02</option>
                         <option value="option_03">Option 03</option>
@@ -147,54 +166,101 @@
                 </div>
 
                 <div class="field-group">
-                    <p class="input-label">Type of unit you rent</p>
-                    <div class="form-group-radio vertical clearfix">
-                        <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
-                            <input type="radio"
-                                   class="input-field"
-                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId"
-                                   ng-value="unittype.UnitTypeID"
-                                   id="{{unittype.UnitTypeID}}"
-                                   name="units">{{unittype.UnitDescription}}
-                        </label>
-                        <div class="clear"></div>
-                    </div>
+                    <label for="pm_city">City</label>
+                    <input type="text" name="pm_city" id="pm_city" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City" class="field-input" />
                 </div>
-                <!--<div class="radio">
-                    <label><input type="radio" name="TypeOfUnit">House</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="TypeOfUnit">Condominium</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="TypeOfUnit">Apartment, Room, or Live-work</label>
-                </div>-->
-                <div class="field-group">
-                    <p class="input-label">Are you current on paying your rent?</p>
-                    <div class="form-group-radio vertical clearfix">
-                        <label ng-repeat="currentonrent in Ctrl.caseinfo.TenantPetitionInfo.CurrentOnRent" for="{{currentonrent.StatusID}}">
-                            <input type="radio"
-                                   class="input-field"
-                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.CurrentRentStatusID"
-                                   ng-value="currentonrent.StatusID"
-                                   id="{{currentonrent.StatusID}}"
-                                   name="currentrent">{{currentonrent.Status}}
-                        </label>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="radio">
-                <label><input type="radio" name="IsCurrentOnRent">Yes</label>
-            </div>
-            <div class="radio">
-                <label><input type="radio" name="IsCurrentOnRent">No</label>
-            </div>
-            <div class="radio">
-                <label><input type="radio" name="IsCurrentOnRent">Legally withholding rent</label>
-            </div>-->
 
-            <button class="btn-primary" ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
+                <div class="field-group">
+                    <label for="pm_zip_code">Zip Code</label>
+                    <input type="number" name="pm_zip_code" id="pm_zip_code" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip" class="field-input" />
+                </div>
+
+                <div class="field-group">
+                    <label for="pm_phone_number">Phone number</label>
+                    <input type="text" name="pm_phone_number" id="pm_phone_number" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber" class="field-input" />
+                </div>
+
+                <div class="field-group">
+                    <label for="pm_email">Email Address</label>
+                    <input type="text" name="pm_email" id="pm_email" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email" class="field-input email" />
+                </div>
+
+
+
+                <div class="subhead">
+                    <h4>Property information</h4>
+                </div>
+                <div id="property-info">
+
+                    <div class="field-group">
+                        <label for="pi_units_count">Number of units</label>
+                        <input type="number" ng-trim="false" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits" required />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
+                        <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range">
+                            <option value="option_01">Option 01</option>
+                            <option value="option_02">Option 02</option>
+                            <option value="option_03">Option 03</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="input-label">Type of unit you rent</p>
+                        <div class="radio">
+                            <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
+                                <input type="radio"
+                                       class="input-field"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId"
+                                       ng-value="unittype.UnitTypeID"
+                                       id="{{unittype.UnitTypeID}}"
+                                       name="units">{{unittype.UnitDescription}}
+                            </label>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <!--<div class="radio">
+                <label><input type="radio" name="TypeOfUnit">House</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="TypeOfUnit">Condominium</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="TypeOfUnit">Apartment, Room, or Live-work</label>
+            </div>-->
+                    <div class="field-group">
+                        <p class="input-label">Are you current on paying your rent?</p>
+                        <div class="radio">
+                            <label ng-repeat="currentonrent in Ctrl.caseinfo.TenantPetitionInfo.CurrentOnRent" for="{{currentonrent.StatusID}}">
+                                <input type="radio"
+                                       class="input-field"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.CurrentRentStatusID"
+                                       ng-value="currentonrent.StatusID"
+                                       id="{{currentonrent.StatusID}}"
+                                       name="currentrent">{{currentonrent.Status}}
+                            </label>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="explanation" class="field-group">
+                    <label for="pi_explanation">If you are not current on paying your rent, please provide an explanation.</label>
+                    <textarea name="pi_explanation" id="pi_explanation" class="field-input textarea" rows="8" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ProvideExplanation"></textarea>
+                </div>
+
+                <!--<div class="radio">
+            <label><input type="radio" name="IsCurrentOnRent">Yes</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="IsCurrentOnRent">No</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="IsCurrentOnRent">Legally withholding rent</label>
+        </div>-->
+
+                <button class="btn-primary" ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
             </div>
         </div>
 

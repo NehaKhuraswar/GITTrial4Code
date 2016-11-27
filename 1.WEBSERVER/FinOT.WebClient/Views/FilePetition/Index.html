@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <ul class="application-steps">
-                        <li class="current"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
+                        <li class="current" ><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
                         <li><a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
                         <li><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
                         <li><a ng-click="Ctrl.showGrounds()">Grounds for Petition</a></li>
@@ -22,16 +22,32 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">                   
-                        <form name="frmTenentPetition" id="frmTenentPetition" action="documents.html" method="post" class="application-form">                      
-                            <rap-petitiontype ng-show="Ctrl.bPetitionType" model="Ctrl"></rap-petitiontype>
-                            <rap-applicationinfo ng-show="Ctrl.bAppInfo" model="Ctrl"></rap-applicationinfo>
-                            <rap-groundsofpetition ng-show="Ctrl.bGrounds" model="Ctrl"></rap-groundsofpetition>
-                            <rap-rentalhistory ng-show="Ctrl.bRentalHistory" model="Ctrl"></rap-rentalhistory>
-                            <rap-lostservices ng-show="Ctrl.bLostServices" model="Ctrl"></rap-lostservices>
-                            <rap-document ng-show="Ctrl.bAddDocuments" model="Ctrl"></rap-document>
-                            <rap-review ng-show="Ctrl.bReview" model="Ctrl"></rap-review>
-                            <rap-verification ng-show="Ctrl.bVerification" model="Ctrl"></rap-verification>                  
-                                                  
+                        <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">                      
+                            <div ng-if="Ctrl.bPetitionType">
+                                <rap-petitiontype model="Ctrl"></rap-petitiontype>
+                            </div>
+                            <div ng-if="Ctrl.bAppInfo">
+                                <rap-applicationinfo ng-show="Ctrl.bAppInfo" model="Ctrl" casedetails="Ctrl.model"></rap-applicationinfo>
+                            </div>
+
+                            <div ng-if="Ctrl.bGrounds">
+                                <rap-groundsofpetition ng-show="Ctrl.bGrounds" model="Ctrl"></rap-groundsofpetition>
+                            </div>
+                            <div ng-if="Ctrl.bRentalHistory">
+                                <rap-rentalhistory ng-show="Ctrl.bRentalHistory" model="Ctrl"></rap-rentalhistory>
+                            </div>
+                            <div ng-if="Ctrl.bLostServices">
+                                <rap-lostservices ng-show="Ctrl.bLostServices" model="Ctrl"></rap-lostservices>
+                            </div>
+                            <div ng-if="Ctrl.bAddDocuments">
+                                <rap-document ng-show="Ctrl.bAddDocuments" model="Ctrl"></rap-document>
+                            </div>
+                            <div ng-if="Ctrl.bReview">
+                                <rap-review ng-show="Ctrl.bReview" model="Ctrl"></rap-review>
+                            </div>
+                            <div ng-if="Ctrl.bVerification">
+                                <rap-verification ng-show="Ctrl.bVerification" model="Ctrl"></rap-verification>
+                            </div>
                         </form>
                     </div>
                 </div>

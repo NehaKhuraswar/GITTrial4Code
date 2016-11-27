@@ -3,30 +3,25 @@ var raploginFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
   
-
     var _Login = function (model) {
         blockUI.start();
 
-        var url =  '/token'
-        return ajax.getToken(model.Email, model.Password)
-        //ajax.getToken(sessionStorage.getItem('username')).then(function (response) {
-        //    if (response.data !== "") {
-        //        sessionStorage.setItem('token', response.data.access_token);
-        //        sessionStorage.setItem('username', response.data.Username);
-        //        sessionStorage.setItem('roles', response.data.Roles);
-        //        sessionStorage.setItem('expire', new Date(Date.now() + response.data.expires_in * 1000));
-        //        defer.resolve();
-        //    } else { defer.reject(); $location.path("/notoken") }
-        //}, function (response) {
-        //    if (response.data.error != undefined && response.data.error == "NOACCESS") {
-        //        $location.path("/noaccess");
-        //    }
-        //    defer.reject(response);
-        //});
+        var url = _routePrefix + '/logincust'
+        return ajax.Post(model, url)
         .finally(function () {
             blockUI.stop();
         });
     }
+    //var _Login = function (model) {
+    //    blockUI.start();
+
+    //    var url =  '/token'
+    //    return ajax.getToken(model.Email, model.Password)
+        
+    //    .finally(function () {
+    //        blockUI.stop();
+    //    });
+    //}
     var _GetOTRequest = function (reqid, fy) {
         blockUI.start();
 

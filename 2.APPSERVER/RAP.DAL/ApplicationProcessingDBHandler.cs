@@ -610,20 +610,20 @@ namespace RAP.DAL
                     result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                     return result;
                 }
-
-                PropertyManagerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager);
-                if (PropertyManagerUserID == 0)
-                {
-                    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                    return result;
-                }
+                PropertyManagerUserID = ownerUserID;
+                //PropertyManagerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager);
+                //if (PropertyManagerUserID == 0)
+                //{
+                //    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                //    return result;
+                //}
                 TenantPetitionInfo petitionDB = new TenantPetitionInfo();
                 petitionDB.bThirdPartyRepresentation = caseInfo.TenantPetitionInfo.bThirdPartyRepresentation;
                 petitionDB.ThirdPartyUserID = thirdPartyUserID;
                 petitionDB.OwnerUserID = ownerUserID;
                 petitionDB.PropertyManagerUserID = PropertyManagerUserID;
                 petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
-                petitionDB.UnitTypeID = caseInfo.TenantPetitionInfo.UnitTypeId;
+                petitionDB.UnitTypeID =  caseInfo.TenantPetitionInfo.UnitTypeId;
                 petitionDB.RentStatusID = caseInfo.TenantPetitionInfo.CurrentRentStatusID;
                 petitionDB.ProvideExplanation = caseInfo.TenantPetitionInfo.ProvideExplanation;
                 petitionDB.CreatedDate = DateTime.Now;
@@ -890,6 +890,7 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
              try
             {
+                petition.PetitionGrounds[0].Selected = true; //TBD
                 foreach (var item in petition.PetitionGrounds)
                 {
                     if (item.Selected)

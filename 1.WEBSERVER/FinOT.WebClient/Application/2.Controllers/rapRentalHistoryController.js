@@ -39,8 +39,12 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     self.ContinueToLostServices = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $scope.model.bRentalHistory = false;
-        $scope.model.bLostServices = true;
+        rapFactory.SaveTenantRentalIncrementInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            $scope.model.bRentalHistory = false;
+            $scope.model.bLostServices = true;
+        });
+        
     }
     //self.ContinueToReview  = function () {
     //    $location.path("/review");

@@ -93,7 +93,8 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
-        
+
+        [AllowAnonymous]
         [Route("logincust")]
         [HttpPost]
         public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
@@ -136,6 +137,7 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
         [Route("authorizedusers/{custid:int?}")]
         [HttpGet]
         public HttpResponseMessage GetAuthorizedUsers(int? custID = null)
@@ -175,6 +177,7 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<List<ThirdPartyDetails>>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
         [Route("searchinvite")]
         [HttpPost]
         public HttpResponseMessage SearchInviteThirdPartyUser([FromBody] CustomerInfo loginInfo)
@@ -214,6 +217,8 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("authorize/{custid:int?}")]
         [HttpPost]
         public HttpResponseMessage AuthorizeThirdPartyUser([FromBody] CustomerInfo thirdpartyInfo, int? custid = null)
@@ -253,6 +258,8 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
         [Route("removethirdparty/{custid:int?}")]
         [HttpPost]
         public HttpResponseMessage RemoveThirdParty([FromBody] ThirdPartyDetails thirdpartyInfo, int? custid = null)
@@ -368,8 +375,8 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<ReportPage>>(ReturnCode, transaction);
         }
-        
 
+        [AllowAnonymous]
         [Route("saveCust")]
         [HttpPost]
         public HttpResponseMessage SaveCustomer([FromBody] CustomerInfo custModel)
@@ -400,7 +407,7 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
-
+        [AllowAnonymous]
         [Route("invite")]
         [HttpPost]
         public HttpResponseMessage Invite([FromBody] CustomerInfo custModel)

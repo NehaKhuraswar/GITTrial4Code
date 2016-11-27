@@ -90,6 +90,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             scope: {
                 reqid: '=',
                 model: '=model',
+
             },
             templateUrl: 'Views/FilePetition/ApplicationInfo.html',
             controller: 'rapApplicationInfoController',

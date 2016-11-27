@@ -42,9 +42,13 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     //}
     self.ContinueToDocument = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $location.path("/document");
-         $scope.model.bLostServices = false;
-        $scope.model.bAddDocuments = true;
+        rapFactory.SaveTenantLostServiceInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            $scope.model.bLostServices = false;
+            $scope.model.bAddDocuments = true;
+        });
+       // $location.path("/document");
+         
     }
     //self.ContinueToVerification = function () {
     //    $location.path("/verification");

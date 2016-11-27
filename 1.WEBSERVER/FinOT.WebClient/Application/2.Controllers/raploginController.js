@@ -3,30 +3,36 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     var self = this;
     self.model = [];
    // rapFactory.param.set("temp");
-    self.Login = function (model) {
+    //self.Login = function (model) {
         
-        rapFactory.Login(model).then(function (response) {
-            if (response.data !== "") {
-                        sessionStorage.setItem('token', response.data.access_token);
-                        sessionStorage.setItem('username', response.data.Username);
-                        sessionStorage.setItem('roles', response.data.Roles);
-                        sessionStorage.setItem('expire', new Date(Date.now() + response.data.expires_in * 1000));
+    //    rapFactory.Login(model).then(function (response) {
+    //        if (response.data !== "") {
+    //                    sessionStorage.setItem('token', response.data.access_token);
+    //                    sessionStorage.setItem('username', response.data.Username);
+    //                    sessionStorage.setItem('roles', response.data.Roles);
+    //                    sessionStorage.setItem('expire', new Date(Date.now() + response.data.expires_in * 1000));
                         
-            } else { //defer.reject();
-                $location.path("/notoken") }
-                //}, function (response) {
-                //    if (response.data.error != undefined && response.data.error == "NOACCESS") {
-                //        $location.path("/noaccess");
-                //    }
-                //    //defer.reject(response);
-                //});
-            //if (!alert.checkResponse(response)) {
-            //    alert.Error(response.warnings[0]);
-            //    return;
-            //}
+    //        } else { 
+    //            $location.path("/notoken")
+    //        }
+                
  
-          //  angular.copy(response.data, MyService.value);
-            rapGlobalFactory.CustomerDetails.User.FirstName = response.data.FirstName;
+    //        rapGlobalFactory.CustomerDetails.User.FirstName = response.data.FirstName;
+    //        $scope.model = response.data;
+    //        $location.path("/dashboard");
+
+    //    });
+    //}
+    self.Login = function (model) {
+
+        rapFactory.Login(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                alert.Error(response.warnings[0]);
+                return;
+            }
+
+            //  angular.copy(response.data, MyService.value);
+            rapGlobalFactory.CustomerDetails = response.data;
             $scope.model = response.data;
             $location.path("/dashboard");
 
