@@ -164,7 +164,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
                 reqid: '=',
                 model: '=model',
             },
-            templateUrl: 'Views/FilePetition/Review.html',
+            templateUrl: 'Views/FilePetition/Verification.html',
             controller: 'rapVerificationController',
             controllerAs: 'Ctrl'
         };

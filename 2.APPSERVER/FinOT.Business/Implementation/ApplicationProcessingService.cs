@@ -114,6 +114,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.SubmitTenantPetition(caseInfo);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();

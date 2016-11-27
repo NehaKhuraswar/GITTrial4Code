@@ -4,10 +4,10 @@ var rapverificationFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
       var _routePrefix = 'api/applicationprocessing';
     
     
-      var _SaveCaseInfo = function (model) {
+      var _SubmitTenantPetition = function (model) {
           blockUI.start();
 
-          var url = _routePrefix + '/savecaseinfo';
+          var url = _routePrefix + '/submittenantpetition';
 
           return ajax.Post(model, url)
           .finally(function () {

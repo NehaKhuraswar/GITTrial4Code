@@ -10,6 +10,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetCaseDetails();
         ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
+        ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition);
         ReturnResult<bool> SaveTenantRentalIncrementInfo(TenantPetitionInfoM petition);

@@ -584,6 +584,50 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           
+            try
+            {
+
+
+                CaseDetail caseDetailsDB = new CaseDetail();
+                caseDetailsDB.PetitionFileID = caseInfo.TenantPetitionInfo.PetitionID;
+                ////TBD
+                //caseDetailsDB.PetitionCategoryID = 1;
+                ////TBD
+                //caseDetailsDB.TenantUserID = 1;
+                
+                //TBD
+                caseDetailsDB.CaseAssignedTo = "12345";
+                //TBD
+                caseDetailsDB.CityUserFirstName = "City";
+                //TBD
+                caseDetailsDB.CityUserLastName = "Admin";
+                //TBD
+                caseDetailsDB.CityUserMailID = "testcity@gmail.com";
+                //TBD
+                caseDetailsDB.WorlFlowID = 1;
+                caseDetailsDB.CreatedDate = DateTime.Now;
+
+
+                _dbContext.CaseDetails.InsertOnSubmit(caseDetailsDB);
+                _dbContext.SubmitChanges();
+                caseInfo.CaseID = caseDetailsDB.CaseID;
+
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();

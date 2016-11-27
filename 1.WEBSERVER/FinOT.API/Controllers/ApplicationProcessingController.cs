@@ -167,7 +167,39 @@ namespace RAP.API.Controllers
         #endregion
 
         #region "POST REQUEST"
+        
+        [AllowAnonymous]
+        [Route("submittenantpetition")]
+        [HttpPost]
+        public HttpResponseMessage SubmitTenantPetition([FromBody] CaseInfoM caseInfo)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
 
+
+                result = _service.SubmitTenantPetition(caseInfo);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
         [AllowAnonymous]
         [Route("savecaseinfo")]
         [HttpPost]

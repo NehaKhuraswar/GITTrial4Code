@@ -7,7 +7,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
         self.SubmitPetition = function (model) {
      
             rapGlobalFactory.CaseDetails = self.caseinfo;
-            rapFactory.SaveCaseInfo(rapGlobalFactory.CaseDetails).then(function (response) {
+            rapFactory.SubmitTenantPetition(rapGlobalFactory.CaseDetails).then(function (response) {
                 if (!alert.checkResponse(response)) {
                     return;
                 }
