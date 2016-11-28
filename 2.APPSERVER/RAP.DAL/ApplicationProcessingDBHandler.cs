@@ -403,7 +403,12 @@ namespace RAP.DAL
                 return result;
             }
         }
-         private ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
+        /// <summary>
+        /// Get Petition ground info
+        /// </summary>
+        /// <param name="petitionID"></param>
+        /// <returns>Petition Ground Object</returns>
+        private ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
         {
             ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
             List<PetitionGroundM> PetitionGroundInfo = new List<PetitionGroundM>();
