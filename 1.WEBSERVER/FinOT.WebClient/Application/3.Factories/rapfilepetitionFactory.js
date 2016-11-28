@@ -3,12 +3,11 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
     
-      var _GetCaseInfo = function () {
+      var _GetCaseInfo = function (model, UserID) {
         blockUI.start();
+        var url = _routePrefix + '/getcaseinfo/'+ UserID;
 
-        var url = _routePrefix + '/getcaseinfo';
-
-        return ajax.Get(url)
+        return ajax.Post(model,url)
         .finally(function () {
             blockUI.stop();
         });

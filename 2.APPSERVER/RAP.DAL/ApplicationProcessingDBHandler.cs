@@ -217,6 +217,50 @@ namespace RAP.DAL
                 return result;
             }
         }
+        private ReturnResult<TenantPetitionInfoM> GetTenantPetition(int UserID, int a)
+        {
+            ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            try
+            {
+                var TenantPetitionInfoDB = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == UserID).FirstOrDefault();
+                TenantPetitionInfoM tenantPetitionInfo = new TenantPetitionInfoM();
+                if (TenantPetitionInfoDB != null)
+                {
+                    tenantPetitionInfo.PetitionID = TenantPetitionInfoDB.TenantPetitionID;
+                    tenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionInfoDB.bThirdPartyRepresentation;
+                    if (tenantPetitionInfo.bThirdPartyRepresentation)
+                    {
+                        tenantPetitionInfo.ThirdPartyInfo = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
+                    }
+                    if (TenantPetitionInfoDB.OwnerUserID >= 1)
+                    {
+                        tenantPetitionInfo.OwnerInfo = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
+                    }
+                    if (TenantPetitionInfoDB.PropertyManagerUserID >= 1)
+                    {
+                        tenantPetitionInfo.PropertyManager = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                    }
+
+                    tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                    tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
+                    tenantPetitionInfo.CurrentRentStatusID = TenantPetitionInfoDB.RentStatusID;
+                    tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
+                }
+
+                result.result = tenantPetitionInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        
+        
         private ReturnResult<TenantPetitionInfoM> GetTenantPetition(int PetitionId)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
@@ -353,7 +397,78 @@ namespace RAP.DAL
                 return result;
             }
         }
+         private ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
+        {
+            ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
+            List<PetitionGroundM> PetitionGroundInfo = new List<PetitionGroundM>();
+            try
+            {
 
+                var petitionGrounds = _dbContext.PetitionGrounds;
+                if (petitionGrounds == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var petitionGround in petitionGrounds)
+                    {
+                        PetitionGroundM _petitionGround = new PetitionGroundM();
+                        _petitionGround.PetitionGroundID = petitionGround.PetitionGroundID;
+                        _petitionGround.PetitionGroundDescription = petitionGround.PetitionDescription;
+                        PetitionGroundInfo.Add(_petitionGround);
+                    }
+                }
+                var TenantPetitionGroundInfoDB = _dbContext.TenantPetitionGroundInfos.Where(x => x.PetitionGroundID == petitionID).ToList();
+                foreach (var item in TenantPetitionGroundInfoDB)
+                {
+                    foreach (var item1 in PetitionGroundInfo)
+                    {
+                        if (item1.PetitionGroundID == item.PetitionGroundID)
+                        {
+                            item1.Selected = true;
+                        }
+                    }
+                }
+
+                result.result = PetitionGroundInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<CaseInfoM> GetCaseDetails(int UserID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            result.result = new CaseInfoM();
+            CaseInfoM caseInfo = new CaseInfoM();           
+            try
+            {              
+                  
+                caseInfo.TenantPetitionInfo = GetTenantPetition(UserID, 0).result;
+                caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
+                caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
+                caseInfo.TenantPetitionInfo.RentIncreases = GetTenantRentalIncrementInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
+               
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         //private ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int PetitionID)
         //{
         //    ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
@@ -456,53 +571,7 @@ namespace RAP.DAL
                 return result;
             }
         }
-        private ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
-        {
-            ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
-            List<PetitionGroundM> PetitionGroundInfo = new List<PetitionGroundM>();
-            try
-            {
-
-                var petitionGrounds = _dbContext.PetitionGrounds;
-                if (petitionGrounds == null)
-                {
-                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
-                    return result;
-                }
-                else
-                {
-                    foreach (var petitionGround in petitionGrounds)
-                    {
-                        PetitionGroundM _petitionGround = new PetitionGroundM();
-                        _petitionGround.PetitionGroundID = petitionGround.PetitionGroundID;
-                        _petitionGround.PetitionGroundDescription = petitionGround.PetitionDescription;
-                        PetitionGroundInfo.Add(_petitionGround);
-                    }
-                }
-                var TenantPetitionGroundInfoDB = _dbContext.TenantPetitionGroundInfos.Where(x => x.PetitionGroundID == petitionID).ToList();
-                foreach (var item in TenantPetitionGroundInfoDB)
-                {
-                    foreach (var item1 in PetitionGroundInfo)
-                    {
-                        if (item1.PetitionGroundID == item.PetitionGroundID)
-                        {
-                            item1.Selected = true;
-                        }
-                    }
-                }
-
-                result.result = PetitionGroundInfo;
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                IExceptionHandler eHandler = new ExceptionHandler();
-                result.status = eHandler.HandleException(ex);
-                return result;
-            }
-        }
+       
         /// <summary>
         /// Files the petition details
         /// </summary>

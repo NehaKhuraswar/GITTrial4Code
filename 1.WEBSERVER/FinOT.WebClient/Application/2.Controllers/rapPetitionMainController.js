@@ -71,7 +71,8 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
 
     var _GetCaseInfo = function () {
 
-        rapFactory.GetCaseInfo().then(function (response) {
+        
+        rapFactory.GetCaseInfo(null, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }

@@ -9,6 +9,7 @@ namespace RAP.DAL
     {
         ReturnResult<CaseInfoM> GetCaseDetails();
         ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
+        ReturnResult<CaseInfoM> GetCaseDetails(int UserID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
