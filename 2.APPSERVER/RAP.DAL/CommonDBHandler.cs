@@ -16,6 +16,38 @@ namespace RAP.DAL
         {
             _connString = ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
+
+        /// <summary>
+        /// Save error details to the database
+        /// </summary>
+        /// <returns></returns>
+
+        public void SaveErrorDetails(string ErrorNumber, string ErrorMessage, string ErrorMessageDetails, int CustID, string OperationName)
+        {
+           
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext())
+                {
+                    ErrorDetail error = new ErrorDetail();
+                    error.ErrorNumber = ErrorNumber;
+                    error.ErrorMessage = ErrorMessage;
+                    error.ErrorMessageDetails = ErrorMessageDetails;
+                    error.CustID = CustID;
+                    error.OperationName = OperationName;
+                    error.CreatedDate = DateTime.Now;
+
+                    db.ErrorDetails.InsertOnSubmit(error);
+                    db.SubmitChanges();
+                                     
+                }
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                
+            }
+        }
         /// <summary>
         /// Gets the data needed to to display on the tenant petition form
         /// </summary>

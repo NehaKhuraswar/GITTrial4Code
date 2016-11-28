@@ -14,6 +14,7 @@ using RAP.Core.DataModels;
 using RAP.Business.Implementation;
 using System.Net.Mail;
 using RAP.Core.Common;
+using RAP.Core.Services;
 
 namespace RAP.API.Controllers
 {
@@ -22,7 +23,11 @@ namespace RAP.API.Controllers
     public class RapRegisterController : ApiController
     {
         string Username, CorrelationID, ExceptionMessage, InnerExceptionMessage;
-        public RapRegisterController() { }
+        private readonly ICommonService _commonService;
+        private readonly string errorCode = "5555";
+        public RapRegisterController() {
+            _commonService = new CommonService();
+        }
 
         public void ExtractClaimDetails()
         {
@@ -88,6 +93,7 @@ namespace RAP.API.Controllers
                 ReturnCode = HttpStatusCode.InternalServerError;
 
                 if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetCustomer");
                 //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
@@ -116,8 +122,10 @@ namespace RAP.API.Controllers
                 else
                 {
                    // transaction.warnings.Add(result.status.StatusMessage);
-                    transaction.AddException(result.status.StatusMessage);
+                    
                     transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
                 }
                 
 
@@ -127,7 +135,7 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-
+                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 0, "LoginCust");
                // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -159,6 +167,8 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "GetAuthorizedUsers");
                 }
 
 
@@ -168,6 +178,7 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
+                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetAuthorizedUsers");
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -199,6 +210,8 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SearchInviteThirdPartyUser");
                 }
 
 
@@ -208,6 +221,7 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
+                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SearchInviteThirdPartyUser");
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -239,6 +253,8 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "AuthorizeThirdPartyUser");
                 }
                  
 
@@ -249,6 +265,7 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
+                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "AuthorizeThirdPartyUser");
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -280,6 +297,8 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "RemoveThirdParty");
                 }
 
 
@@ -290,6 +309,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
+                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "RemoveThirdParty");
+
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -300,81 +321,7 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
        
-        [Route("reportsource")]
-        [HttpPost]
-        public HttpResponseMessage GetReportSource([FromBody] Dictionary<string, string> objParams, [FromUri]int ReportID)
-        {
-            
-            HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<ReportPage> transaction = new TranInfo<ReportPage>();
-
-            try
-            {
-                ExtractClaimDetails();
-
-                StringBuilder reportSource = new StringBuilder();
-                APIHelper api = new APIHelper();
-                var header = api.GetAppHeader(Username, CorrelationID);
-                var allReports = header.Reports;
-                var allPages = header.Pages;
-
-                ReportDetails report = allReports.Where(s => s.Id == ReportID).FirstOrDefault();
-                if (report != null)
-                {
-                    //reportSource.Append(Url.Content("~/WebForms/Report.aspx"));
-                    reportSource.Append(Url.Content("/RAP/WebForms/Report.aspx"));
-                    reportSource.Append(string.Format("?ReportName={0}", report.Name));
-                    if (!string.IsNullOrEmpty(report.Parameters))
-                    {
-                        string paramValue = "", param = report.Parameters;
-                        string[] stdParams = param.Split(',').ToArray();
-                        foreach (string key in stdParams)
-                        {
-                            if (objParams.ContainsKey(key))
-                            {
-                                paramValue += (string.IsNullOrEmpty(paramValue) ? "" : "&") + key + "=" + objParams[key].ToString();
-
-                                if (objParams.ContainsKey("Show" + key))
-                                    paramValue += "&Show" + key + "=" + objParams["Show" + key].ToString();
-                                else
-                                    paramValue += "&Show" + key + "=false";
-                            }
-                            else
-                            {
-                                param = param.Replace("," + key, "");
-                                param = param.Replace(key + ",", "");
-                                param = param.Replace(key, "");
-                            }
-                        }
-
-                        if (!string.IsNullOrEmpty(paramValue)) { paramValue = "&" + paramValue; }
-                        
-                        reportSource.Append(string.Format("&Parameters={0}{1}", param, paramValue));
-                    }
-
-                    reportSource.Append(string.Format("&ReportServer={0}", report.ReportServer));
-                    reportSource.Append(string.Format("&ReportPath={0}", report.ReportPath));
-
-                    //get page title
-                    string pageTitle = string.Empty;
-                    var page = allPages.Where(w => w.Id == ReportID).FirstOrDefault();
-                    if (page != null) { pageTitle = page.Name; }
-
-                    transaction.data = new ReportPage() { PageTitle = pageTitle, Source = reportSource.ToString() }; ;
-                    transaction.status = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                transaction.AddException(ex.Message);
-                ReturnCode = HttpStatusCode.InternalServerError;
-
-                if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
-                LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
-            }
-
-            return Request.CreateResponse<TranInfo<ReportPage>>(ReturnCode, transaction);
-        }
+       
 
         [AllowAnonymous]
         [Route("saveCust")]
@@ -396,6 +343,8 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);                    
+                    _commonService.SaveErrorDetails(result.status.StatusCode,result.status.StatusMessage,result.status.StatusDetails, 23, "SaveCustomer");
                 }
             }
             catch(Exception ex)
@@ -404,6 +353,7 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
+                _commonService.SaveErrorDetails(errorCode,ex.Message,ex.InnerException.StackTrace.ToString(),23, "SaveCustomer");
             }
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }

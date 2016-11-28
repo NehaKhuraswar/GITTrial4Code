@@ -148,7 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
@@ -158,11 +160,9 @@
     <Compile Include="Controllers\RapRegisterController.cs" />
     <Compile Include="Controllers\ApplicationProcessingController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
-    <Compile Include="Controllers\WorkQueueController.cs" />
     <Compile Include="Filters\AuthorizeAttribute.cs" />
     <Compile Include="Models\TranInfo.cs" />
     <Compile Include="Providers\InMemoryMultipartStreamProvider.cs" />
-    <Compile Include="Controllers\OTRequestController.cs" />
     <Compile Include="Filters\RoleAuthorizeAttribute.cs" />
     <Compile Include="Filters\ValidateModelStateFilter.cs" />
     <Compile Include="Common\Extensions.cs" />

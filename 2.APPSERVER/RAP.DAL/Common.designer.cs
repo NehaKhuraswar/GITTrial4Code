@@ -33,6 +33,9 @@ namespace RAP.DAL
     partial void InsertUserInfo(UserInfo instance);
     partial void UpdateUserInfo(UserInfo instance);
     partial void DeleteUserInfo(UserInfo instance);
+    partial void InsertErrorDetail(ErrorDetail instance);
+    partial void UpdateErrorDetail(ErrorDetail instance);
+    partial void DeleteErrorDetail(ErrorDetail instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -70,6 +73,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<UserInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ErrorDetail> ErrorDetails
+		{
+			get
+			{
+				return this.GetTable<ErrorDetail>();
 			}
 		}
 	}
@@ -337,6 +348,212 @@ namespace RAP.DAL
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorDetails")]
+	public partial class ErrorDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ErrorID;
+		
+		private string _ErrorNumber;
+		
+		private string _ErrorMessage;
+		
+		private string _ErrorMessageDetails;
+		
+		private System.Nullable<int> _CustID;
+		
+		private string _OperationName;
+		
+		private System.DateTime _CreatedDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnErrorIDChanging(int value);
+    partial void OnErrorIDChanged();
+    partial void OnErrorNumberChanging(string value);
+    partial void OnErrorNumberChanged();
+    partial void OnErrorMessageChanging(string value);
+    partial void OnErrorMessageChanged();
+    partial void OnErrorMessageDetailsChanging(string value);
+    partial void OnErrorMessageDetailsChanged();
+    partial void OnCustIDChanging(System.Nullable<int> value);
+    partial void OnCustIDChanged();
+    partial void OnOperationNameChanging(string value);
+    partial void OnOperationNameChanged();
+    partial void OnCreatedDateChanging(System.DateTime value);
+    partial void OnCreatedDateChanged();
+    #endregion
+		
+		public ErrorDetail()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ErrorID
+		{
+			get
+			{
+				return this._ErrorID;
+			}
+			set
+			{
+				if ((this._ErrorID != value))
+				{
+					this.OnErrorIDChanging(value);
+					this.SendPropertyChanging();
+					this._ErrorID = value;
+					this.SendPropertyChanged("ErrorID");
+					this.OnErrorIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorNumber", DbType="VarChar(10)")]
+		public string ErrorNumber
+		{
+			get
+			{
+				return this._ErrorNumber;
+			}
+			set
+			{
+				if ((this._ErrorNumber != value))
+				{
+					this.OnErrorNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ErrorNumber = value;
+					this.SendPropertyChanged("ErrorNumber");
+					this.OnErrorNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(MAX)")]
+		public string ErrorMessage
+		{
+			get
+			{
+				return this._ErrorMessage;
+			}
+			set
+			{
+				if ((this._ErrorMessage != value))
+				{
+					this.OnErrorMessageChanging(value);
+					this.SendPropertyChanging();
+					this._ErrorMessage = value;
+					this.SendPropertyChanged("ErrorMessage");
+					this.OnErrorMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessageDetails", DbType="NChar(10)")]
+		public string ErrorMessageDetails
+		{
+			get
+			{
+				return this._ErrorMessageDetails;
+			}
+			set
+			{
+				if ((this._ErrorMessageDetails != value))
+				{
+					this.OnErrorMessageDetailsChanging(value);
+					this.SendPropertyChanging();
+					this._ErrorMessageDetails = value;
+					this.SendPropertyChanged("ErrorMessageDetails");
+					this.OnErrorMessageDetailsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustID", DbType="Int")]
+		public System.Nullable<int> CustID
+		{
+			get
+			{
+				return this._CustID;
+			}
+			set
+			{
+				if ((this._CustID != value))
+				{
+					this.OnCustIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustID = value;
+					this.SendPropertyChanged("CustID");
+					this.OnCustIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string OperationName
+		{
+			get
+			{
+				return this._OperationName;
+			}
+			set
+			{
+				if ((this._OperationName != value))
+				{
+					this.OnOperationNameChanging(value);
+					this.SendPropertyChanging();
+					this._OperationName = value;
+					this.SendPropertyChanged("OperationName");
+					this.OnOperationNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedDate
 		{
 			get
 			{
