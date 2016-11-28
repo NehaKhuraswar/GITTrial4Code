@@ -38,8 +38,6 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapgroundsofappealFactory', rapgroundsofappealFactory)
     .factory('rapservingappealFactory', rapservingappealFactory)
     .factory('rapreviewappealFactory', rapreviewappealFactory)
-    .controller('otrequestController', otrequestController)
-    .controller('otnotesController', otnotesController)
     .controller('raploginController', raploginController)
     .controller('rapregisterController', rapregisterController)
     .controller('rapdashboardController', rapdashboardController)
@@ -57,21 +55,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapGroundsOfAppealController', rapGroundsOfAppealController)
     .controller('rapServingAppealController', rapServingAppealController)
     .controller('rapReviewAppealController', rapReviewAppealController)
-    .controller('otheaderController', otheaderController)
-    .controller('otstaffController', otstaffController)
-    .controller('otdocumentsController', otdocumentsController)
-    .directive('otRequest', function () {
-        return {
-            restrict: 'E',
-            scope: {
-                reqid: '=',
-                model: '=model'
-            },
-            templateUrl: 'Views/Request/_Request.html',
-            controller: 'otheaderController',
-            controllerAs: 'Ctrl'
-        };
-    })
+
+   
     .directive('rapPetitiontype', function () {
         return {
             restrict: 'E',
