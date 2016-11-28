@@ -40,6 +40,16 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     //    var a = self.selectedObj;
     //    $location.path("/lostservices");
     //}
+
+    self.onFileSelect = function ($files) {
+        if ($files && $files.length) {
+            var fileName = $files[0].name;
+            var file = $files[0];
+            self.caseinfo.TenantPetitionInfo.File = file;
+
+        }
+    }
+
     self.ContinueToDocument = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveTenantLostServiceInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {

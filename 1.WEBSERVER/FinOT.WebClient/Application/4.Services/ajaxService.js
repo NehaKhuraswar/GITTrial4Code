@@ -33,7 +33,8 @@ var ajaxService = ['$http', '$location', function ($http, $location) {
             method: 'POST',
             url: _url,
             data: data,
-            headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem('token') }
+            headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem('token'), 'enctype' : 'multipart/form-data' }
+          
         }).then(function (response) {
             return response.data;
         }).catch(function (response) {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
+using System.IO;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.ServiceModel;
@@ -15,11 +17,12 @@ namespace RAP.Business.Implementation
 {
   public class DocumentService : IdocumentService
     {
-      public ReturnResult<DocumentM> UploadDocument(DocumentM doc)
+      public ReturnResult<DocumentM> UploadDocument(HttpPostedFile file)
       {
           ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
           try
           {
+              DocumentM doc = getDocumentObj(file);
               var serviceObj = ConvertToServiceObj(doc);
               string endpoint = ConfigurationManager.AppSettings["WebcenterEndPoint"];
               BasicHttpBinding myBinding = new BasicHttpBinding();
@@ -65,6 +68,21 @@ namespace RAP.Business.Implementation
               serviceObj.fileContent = doc.Content;
           }
           return serviceObj;
+      }
+
+      private DocumentM getDocumentObj(HttpPostedFile file)
+      {
+          DocumentM doc = new DocumentM();
+          doc.DocName = file.FileName;
+            
+          BinaryReader b = new BinaryReader(file.InputStream);
+          var content = b.ReadBytes(file.ContentLength);
+          if(content !=null)
+          {
+              doc.Content = content;
+          }
+
+          return doc;
       }
     }
 }

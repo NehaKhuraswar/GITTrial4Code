@@ -217,12 +217,12 @@ namespace RAP.API.Controllers
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-              var doc = getDoc();
-              var docServiceResult =   _docService.UploadDocument(doc);
-                if(docServiceResult.status.Status != StatusEnum.Success)
-                {
-                    transaction.status = false;
-                }
+              //var doc = getDoc();
+              //var docServiceResult =   _docService.UploadDocument(doc);
+                //if(docServiceResult.status.Status != StatusEnum.Success)
+                //{
+                //    transaction.status = false;
+                //}
                 result = _service.SaveCaseDetails(caseInfo);
                 if (result.status.Status == StatusEnum.Success)
                 {
@@ -282,7 +282,13 @@ namespace RAP.API.Controllers
         [HttpPost]
         public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] TenantPetitionInfoM petition)
         {
+            //Document upload sample - TBD
+            if(petition.File != null)
+            {
+                ReturnResult<DocumentM> docUploadResult = _docService.UploadDocument(petition.File);
+            }
             ExtractClaimDetails();
+           
 
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;

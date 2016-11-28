@@ -182,6 +182,7 @@
                     </ul>
                 </div>
                 <button ng-click="Ctrl.AttachDocumentationProblems()">Attach additional documentation</button>
+                <input type="file" ngf-select ngf-change="Ctrl.onFileSelect($files)" />
                 <p>___________________________________________________________________________________________</p>
 
                 <button ng-click="Ctrl.AddAnotherProblem()">Add another problem description</button>

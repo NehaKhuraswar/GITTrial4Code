@@ -12,32 +12,26 @@ var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', 
        
     }
 
+    //$scope.onFileSelect = function ($files) {
+    //    if ($files && $files.length)
+    //    {
+    //        //var fileName = $files[0].name;
+    //        var file = $files[0];
+    //        self.caseinfo.TenantPetitionInfo.File = file;
+    //        var data = new FormData();
+    //        data.append(file);
+    //        blockUI.start();
 
-    $scope.createNewDocument = function () {
-        return {
-            DocID: null,           
-            DocName: null,
-            Extension: null,
-            DocType: null,
-            Content: null,          
-        }
-    }
-    $scope.onFileSelect = function ($files) {
-        if ($files && $files.length)
-        {
-            //var fileName = $files[0].name;
-            var file = $files[0];
-            var data = new FormData();
-            data.append(file);
-            blockUI.start();
+    //        var _routePrefix = 'api/applicationprocessing';
+    //        var url = _routePrefix + '/savecaseinfo';
 
-            var _routePrefix = 'api/applicationprocessing';
-            var url = _routePrefix + '/savecaseinfo';
+    //        return ajax.Post(data, url)
+    //        .finally(function () {
+    //            blockUI.stop();
+    //        });
+    //    }
+    //}
 
-            return ajax.Post(data, url)
-            .finally(function () {
-                blockUI.stop();
-            });
             //var file = new java.io.RandomAccessFile(file, "r");
             //var bArr = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, file.length());
             //file.read(bArr)
@@ -62,8 +56,8 @@ var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', 
             //self.editmodel.push(file);
           //  $scope.newFiles.push($files[0].name);
            // $scope.newFilesContent.push($files[0]);
-        }
-    }
+        
+    
     
 }];
 var rapDocumentController_resolve = {

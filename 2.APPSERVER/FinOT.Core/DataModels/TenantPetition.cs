@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace RAP.Core.DataModels
 {
@@ -135,6 +136,7 @@ namespace RAP.Core.DataModels
             OwnerInfo = new UserInfoM();
             PropertyManager = new UserInfoM();
             RentIncreases = new List<TenantRentIncreaseInfoM>();
+            
             //TenantRentIncreaseInfoM obj = new TenantRentIncreaseInfoM();
             //RentIncreases.Add(obj);
 
@@ -144,6 +146,7 @@ namespace RAP.Core.DataModels
         private List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
         private List<TenantLostServiceInfoM> _lostServices = new List<TenantLostServiceInfoM>();
         private List<TenantProblemInfoM> _problems = new List<TenantProblemInfoM>();
+        
         public bool bThirdPartyRepresentation { get; set; }
         public UserInfoM ThirdPartyInfo { get; set; }
         public UserInfoM OwnerInfo { get; set; }
@@ -161,10 +164,11 @@ namespace RAP.Core.DataModels
         public DateTime RAPNoticeGivenDate { get; set; }
         public bool bRentControlledByAgency { get; set; }
         public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
-        
+        public HttpPostedFile File { get; set; }
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
         public bool bLostService { get; set; }
+                
         public  List<TenantLostServiceInfoM> LostServices
         {
             get
