@@ -450,9 +450,48 @@ namespace RAP.DAL
             result.result = new CaseInfoM();
             CaseInfoM caseInfo = new CaseInfoM();           
             try
-            {              
+            {  
+                
                   
                 caseInfo.TenantPetitionInfo = GetTenantPetition(UserID, 0).result;
+
+                var units = _dbContext.UnitTypes;
+                if (units == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var unit in units)
+                    {
+                        UnitTypeM _unit = new UnitTypeM();
+                        _unit.UnitTypeID = unit.UnitTypeID;
+                        _unit.UnitDescription = unit.Description;
+                        caseInfo.TenantPetitionInfo.UnitTypes.Add(_unit);
+                    }
+
+                }
+
+
+                var rentStausItems = _dbContext.CurrentOnRentStatus;
+                if (rentStausItems == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var rentStatusItem in rentStausItems)
+                    {
+                        CurrentOnRentM _rentStatusItem = new CurrentOnRentM();
+                        _rentStatusItem.StatusID = rentStatusItem.RentStatusID;
+                        _rentStatusItem.Status = rentStatusItem.RentStatus;
+                        caseInfo.TenantPetitionInfo.CurrentOnRent.Add(_rentStatusItem);
+                    }
+                }
+
+               
                 caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
                 caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
                 caseInfo.TenantPetitionInfo.RentIncreases = GetTenantRentalIncrementInfo(caseInfo.TenantPetitionInfo.PetitionID).result;

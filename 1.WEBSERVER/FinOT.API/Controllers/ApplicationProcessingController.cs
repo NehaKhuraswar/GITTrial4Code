@@ -38,7 +38,7 @@ namespace RAP.API.Controllers
 
         public void ExtractClaimDetails()
         {
-            UserID = 20;
+            UserID = 23;
             //HttpRequestContext context = Request.GetRequestContext();
             //var principle = Request.GetRequestContext().Principal as ClaimsPrincipal;
             //_service.CorrelationId = principle.Claims.Where(x => x.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
