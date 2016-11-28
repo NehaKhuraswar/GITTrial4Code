@@ -17,22 +17,27 @@ namespace RAP.DAL
         {
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
+        #region "Get"
+        /// <summary>
+        /// Get customer information
+        /// </summary>
+        /// <returns>Customer Info Object</returns>
         public ReturnResult<CustomerInfo> GetCustomer(CustomerInfo message)
         {
             ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
             try
             {
-               // CustomerInfo custinfo ;
+                // CustomerInfo custinfo ;
 
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
                     var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password).FirstOrDefault();
-                                                            
-                    
+
+
                     if (custdetails != null)
                     {
-                        message.User.UserID = (int)custdetails.UserID;                        
+                        message.User.UserID = (int)custdetails.UserID;
                         message.email = custdetails.Email;
                         message.custID = custdetails.CustomerID;
                         var notifications = db.NotificationPreferences.Where(x => x.CustomerID == message.custID)
@@ -41,7 +46,7 @@ namespace RAP.DAL
                                                                     EmailNotificationFlag = c.EmailNotification,
                                                                     MailNotificationFlag = c.MailNotification
                                                                 }).FirstOrDefault();
-                        if(notifications != null)
+                        if (notifications != null)
                         {
                             message.MailNotificationFlag = notifications.MailNotificationFlag;
                             message.EmailNotificationFlag = notifications.EmailNotificationFlag;
@@ -70,6 +75,72 @@ namespace RAP.DAL
                 return result;
             }
         }
+        /// <summary>
+        /// Get third party users
+        /// </summary>
+        /// <returns>Third party details</returns>
+        public ReturnResult<List<ThirdPartyDetails>> GetAuthorizedUsers(int custID)
+        {
+            ReturnResult<List<ThirdPartyDetails>> result = new ReturnResult<List<ThirdPartyDetails>>();
+
+            try
+            {
+                List<ThirdPartyDetails> thirdPartyDetails;
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var custdetails = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
+                                                            .Select(c => new ThirdPartyDetails()
+                                                            {
+                                                                ThirdPartyRepresentationID = c.ThirdPartyCustomerID,
+                                                                //  UserID = (int)c.UserID,
+                                                                //  custID = (int)c.CustomerID
+                                                            }).FirstOrDefault();
+                    var query =
+                        db.ThirdPartyRepresentations.AsEnumerable().Join(db.CustomerDetails.AsEnumerable(),
+                        t => t.ThirdPartyCustomerID,
+                        c => c.CustomerID,
+                        (t, c) => new
+                        {
+                            ID = t.ThirdPartyRepresentationID,
+                            CustomerID = t.ThirdPartyCustomerID,
+                            //NEW-RAP-TBD
+                            //FirstName = c.FirstName,
+                            //LastName = c.LastName,
+                            //email = c.email
+                        });
+
+
+                    thirdPartyDetails = new List<ThirdPartyDetails>();
+                    int index = 0;
+
+                    foreach (var CustomerDetails in query)
+                    {
+                        ThirdPartyDetails obj = new ThirdPartyDetails();
+                        obj.ThirdPartyRepresentationID = CustomerDetails.ID;
+                        obj.custID = CustomerDetails.CustomerID;
+                        //NEW-RAP-TBD
+                        //obj.FirstName = CustomerDetails.FirstName;
+                        //obj.LastName = CustomerDetails.LastName;
+                        //obj.email = CustomerDetails.email;
+
+                        thirdPartyDetails.Add(obj);
+                        index++;
+                    }
+                }
+                result.result = thirdPartyDetails;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion  
+        /// <summary>
+        /// Search third party
+        /// </summary>
+        /// <returns>true or false</returns>
         public ReturnResult<CustomerInfo> SearchInviteThirdPartyUser(String message)
         {
             ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
@@ -124,6 +195,10 @@ namespace RAP.DAL
                 return result;
             }
         }
+        /// <summary>
+        /// Authorize third party
+        /// </summary>
+        /// <returns>true or false</returns>
         public ReturnResult<bool> AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
@@ -153,6 +228,10 @@ namespace RAP.DAL
                 return result;
             }
         }
+        /// <summary>
+        /// Remove third party
+        /// </summary>
+        /// <returns>true or false</returns>
         public ReturnResult<bool> RemoveThirdParty(int CustID, int thirdPartyRepresentationID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
@@ -182,71 +261,15 @@ namespace RAP.DAL
                 return result;
             }
         }
-        public ReturnResult<List<ThirdPartyDetails>> GetAuthorizedUsers(int custID)
-        {
-            ReturnResult<List<ThirdPartyDetails>> result = new ReturnResult<List<ThirdPartyDetails>>();
-            
-            try
-            {
-                List<ThirdPartyDetails> thirdPartyDetails;
-                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
-                {
-                    var custdetails = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
-                                                            .Select(c => new ThirdPartyDetails()
-                                                            {
-                                                                ThirdPartyRepresentationID = c.ThirdPartyCustomerID,
-                                                              //  UserID = (int)c.UserID,
-                                                              //  custID = (int)c.CustomerID
-                                                            }).FirstOrDefault();
-                    var query =
-                        db.ThirdPartyRepresentations.AsEnumerable().Join(db.CustomerDetails.AsEnumerable(),
-                        t => t.ThirdPartyCustomerID,
-                        c => c.CustomerID,
-                        (t, c) => new
-                        {
-                            ID = t.ThirdPartyRepresentationID,
-                            CustomerID = t.ThirdPartyCustomerID,
-                            //NEW-RAP-TBD
-                            //FirstName = c.FirstName,
-                            //LastName = c.LastName,
-                            //email = c.email
-                        });
-
-                    
-                    thirdPartyDetails = new List<ThirdPartyDetails>();
-                    int index = 0;
-
-                    foreach (var CustomerDetails in query)
-                                                            {
-                        ThirdPartyDetails obj = new ThirdPartyDetails();
-                        obj.ThirdPartyRepresentationID = CustomerDetails.ID;
-                        obj.custID = CustomerDetails.CustomerID;
-                        //NEW-RAP-TBD
-                        //obj.FirstName = CustomerDetails.FirstName;
-                        //obj.LastName = CustomerDetails.LastName;
-                        //obj.email = CustomerDetails.email;
-
-                        thirdPartyDetails.Add(obj);
-                        index++;
-                    }
-                }
-                result.result = thirdPartyDetails;
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-        
+        /// <summary>
+        /// Check if customer exists or not
+        /// </summary>
+        /// <returns>true or false</returns>
         public bool CheckCustAccount(CustomerInfo message)
         {
             try
-            {                
-
-                    
-                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+            {               
+                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
                     var custInfo = db.CustomerDetails.Where(x => x.Email == message.email)
                                     .Select(c => new CustomerInfo()
@@ -264,6 +287,11 @@ namespace RAP.DAL
                 return false;
             }
         }
+        #region "Save"
+        /// <summary>
+        /// Save cutomer information
+        /// </summary>
+        /// <returns>true or false</returns>
         public ReturnResult<bool> SaveCustomer(CustomerInfo message)
        {
            ReturnResult<bool> result = new ReturnResult<bool>();
@@ -319,7 +347,7 @@ namespace RAP.DAL
                return result;
            }
        }
+        #endregion
 
-        
     }
 }
