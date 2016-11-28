@@ -107,17 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Application\1.Modules\rapModule.js" />
-    <Content Include="Application\1.Modules\reportModule.js" />
-    <Content Include="Application\1.Modules\searchModule.js" />
-    <Content Include="Application\1.Modules\workqueueModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
-    <Content Include="Application\2.Controllers\otapprovalController.js" />
-    <Content Include="Application\2.Controllers\otdocumentsController.js" />
-    <Content Include="Application\2.Controllers\otfundingController.js" />
-    <Content Include="Application\2.Controllers\otheaderController.js" />
-    <Content Include="Application\2.Controllers\otnotesController.js" />
-    <Content Include="Application\2.Controllers\otrequestController.js" />
-    <Content Include="Application\2.Controllers\otstaffController.js" />
     <Content Include="Application\2.Controllers\rapAppellantsInfoController.js" />
     <Content Include="Application\2.Controllers\rapApplicationInfoController.js" />
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
@@ -136,15 +126,11 @@
     <Content Include="Application\2.Controllers\rapReviewController.js" />
     <Content Include="Application\2.Controllers\rapServingAppealController.js" />
     <Content Include="Application\2.Controllers\rapVerificationController.js" />
-    <Content Include="Application\2.Controllers\reportController.js" />
-    <Content Include="Application\2.Controllers\searchController.js" />
-    <Content Include="Application\2.Controllers\workqueueController.js" />
     <Content Include="Application\3.Factories\authFactory.js" />
     <Content Include="Application\3.Factories\authInterceptorService.js" />
     <Content Include="Application\3.Factories\HtmlPage1.html" />
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
-    <Content Include="Application\3.Factories\otrequestFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapapplicationinfoFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
@@ -162,9 +148,6 @@
     <Content Include="Application\3.Factories\rapreviewFactory.js" />
     <Content Include="Application\3.Factories\rapservingappealFactory.js" />
     <Content Include="Application\3.Factories\rapverificationFactory.js" />
-    <Content Include="Application\3.Factories\reportFactory.js" />
-    <Content Include="Application\3.Factories\searchFactory.js" />
-    <Content Include="Application\3.Factories\workqueueFactory.js" />
     <Content Include="Application\4.Services\ajaxService.js" />
     <Content Include="Application\4.Services\alertService.js" />
     <Content Include="Application\5.Global\Directives.js" />
@@ -230,11 +213,6 @@
     <Content Include="Views\FilePetition\RentalHistory.html" />
     <Content Include="Views\FilePetition\Review.html" />
     <Content Include="Views\FilePetition\Verification.html" />
-    <Content Include="Views\Report\Index.html" />
-    <Content Include="Views\Request\_Approval.html" />
-    <Content Include="Views\Request\_Funding.html" />
-    <Content Include="Views\Request\_Staff.html" />
-    <Content Include="Views\Request\_StaffNew.html" />
     <Content Include="Webforms\Report.aspx" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -337,18 +315,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Request\Index.html" />
-    <Content Include="Views\Request\_Documents.html" />
-    <Content Include="Views\Request\_Header.html" />
-    <Content Include="Views\Request\_HeaderNew.html" />
-    <Content Include="Views\Request\_Notes.html" />
-    <Content Include="Views\Request\_NotesAdd.html" />
-    <Content Include="Views\Request\_Workflow.html" />
-    <Content Include="Views\Search\OTC\Index.html" />
-    <Content Include="Views\Search\Request\Index.html" />
     <Content Include="Views\Shared\noaccess.html" />
     <Content Include="Views\Shared\notoken.html" />
-    <Content Include="Views\Workqueue\Index.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
