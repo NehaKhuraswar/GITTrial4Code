@@ -31,8 +31,8 @@ namespace RAP.Business.Implementation
                     mail.To.Add("venky.soundar@gcomsoft.com,neha.bhandari@gcomsoft.com,sanjay@gcomsoft.com");
                     mail.Subject = message.Subject;
                     mail.Body = message.MessageBody;
-                    mail.CC.Add(string.Join(",", message.CC.Select(a => string.Concat("'", a, "'"))));
-                    mail.Bcc.Add(string.Join(",", message.BCC.Select(a => string.Concat("'", a, "'"))));
+                    //mail.CC.Add(string.Join(",", message.CC.Select(a => string.Concat("'", a, "'"))));
+                    //mail.Bcc.Add(string.Join(",", message.BCC.Select(a => string.Concat("'", a, "'"))));
                     mail.IsBodyHtml = false;
                     if (message.Attachments != null)
                     {
