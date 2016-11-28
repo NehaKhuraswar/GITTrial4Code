@@ -36,6 +36,7 @@
       <Column Name="Password" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CustomerIdentityKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="CustomerDetail_NotificationPreference" Member="NotificationPreference" ThisKey="CustomerID" OtherKey="CustomerID" Type="NotificationPreference" Cardinality="One" />
       <Association Name="CustomerDetail_ThirdPartyRepresentation" Member="ThirdPartyRepresentation" ThisKey="CustomerID" OtherKey="CustomerID" Type="ThirdPartyRepresentation" Cardinality="One" />
       <Association Name="CustomerDetail_ThirdPartyRepresentation1" Member="ThirdPartyRepresentations" ThisKey="CustomerID" OtherKey="ThirdPartyCustomerID" Type="ThirdPartyRepresentation" />

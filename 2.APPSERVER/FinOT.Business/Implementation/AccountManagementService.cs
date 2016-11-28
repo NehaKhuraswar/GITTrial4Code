@@ -26,13 +26,13 @@ namespace RAP.Business.Implementation
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
 
-        public ReturnResult<bool> SaveCustomer(CustomerInfo message)
+        public ReturnResult<CustomerInfo> SaveCustomer(CustomerInfo message)
         {
             return accDBHandler.SaveCustomer(message);
         }
         public ReturnResult<CustomerInfo> GetCustomer(CustomerInfo message)
         {
-            return accDBHandler.GetCustomer(message);
+           return accDBHandler.GetCustomer(message);
         }
         public ReturnResult<CustomerInfo> SearchInviteThirdPartyUser(String message)
         {
@@ -50,6 +50,8 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.GetAuthorizedUsers(custID);
         }
+
+        
         
     }
 }

@@ -13,7 +13,7 @@ using System.Configuration;
 
 namespace RAP.Business.Implementation
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         public ReturnResult<bool> SendEmail(EmailM message)
         {
@@ -28,16 +28,18 @@ namespace RAP.Business.Implementation
                 using (MailMessage mail = new MailMessage())
                 {
                     mail.From = new MailAddress(emailFrom);
-                    mail.To.Add(string.Join(",", message.RecipientAddress.Select(a => string.Concat("'", a, "'"))));
+                    mail.To.Add("venky.soundar@gcomsoft.com,neha.bhandari@gcomsoft.com,sanjay@gcomsoft.com");
                     mail.Subject = message.Subject;
                     mail.Body = message.MessageBody;
                     mail.CC.Add(string.Join(",", message.CC.Select(a => string.Concat("'", a, "'"))));
                     mail.Bcc.Add(string.Join(",", message.BCC.Select(a => string.Concat("'", a, "'"))));
                     mail.IsBodyHtml = false;
-
-                    foreach (string attahment in message.Attachments)
+                    if (message.Attachments != null)
                     {
-                        mail.Attachments.Add(new Attachment(attahment));
+                        foreach (string attahment in message.Attachments)
+                        {
+                            mail.Attachments.Add(new Attachment(attahment));
+                        }
                     }
 
                     using (SmtpClient smtp = new SmtpClient(hostAddress, portNumber))
@@ -47,7 +49,7 @@ namespace RAP.Business.Implementation
                         smtp.Send(mail);
                     }
                 }
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)

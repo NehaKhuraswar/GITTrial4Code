@@ -12,6 +12,7 @@ using System.Web.Http.Controllers;
 using System.Security.Claims;
 using RAP.Core.DataModels;
 using RAP.Business.Implementation;
+using RAP.Core.Services;
 using System.Net.Mail;
 using RAP.Core.Common;
 using RAP.Core.Services;
@@ -24,8 +25,10 @@ namespace RAP.API.Controllers
     {
         string Username, CorrelationID, ExceptionMessage, InnerExceptionMessage;
         private readonly ICommonService _commonService;
-        private readonly string errorCode = "5555";
-        public RapRegisterController() {
+        private readonly string errorCode = "5555";       
+      
+        public RapRegisterController()
+        {
             _commonService = new CommonService();
         }
 
@@ -329,15 +332,17 @@ namespace RAP.API.Controllers
         public HttpResponseMessage SaveCustomer([FromBody] CustomerInfo custModel)
         {
             AccountManagementService accService = new AccountManagementService();
+            IEmailService emailService = new EmailService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
 
             try
             {
                 result = accService.SaveCustomer(custModel);
                 if (result.status.Status == StatusEnum.Success)
                 {
+                    emailService.SendEmail(getRegisterCustomerEmailModel(result.result));
                     transaction.status = true;
                 }
                 else
@@ -386,6 +391,17 @@ namespace RAP.API.Controllers
             transaction.data = true;
 
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+
+        //TBD to be removed
+        private EmailM getRegisterCustomerEmailModel(CustomerInfo customer)
+        {
+            EmailM model = new EmailM();
+            model.Subject = "RAP Account registered successfully. CustomerIDentityKey :" + customer.CustomerIdentityKey.ToString();
+            string[] toAddresses = { "venky.soundar@gcomsoft.com", "neha.bhandari@gcomsoft.com", "sanjay@gcomsoft.com" };
+            model.RecipientAddress = toAddresses;
+            model.MessageBody = "Hello" + customer.User.FirstName + " " + customer.User.LastName + ",  Your account created successfully";
+            return model;
         }
 
     }

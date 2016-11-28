@@ -73,6 +73,7 @@
     <Compile Include="Services\IAccountManagementService.cs" />
     <Compile Include="Services\ICommonService.cs" />
     <Compile Include="Services\IdocumentService.cs" />
+    <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IOTRequestService.cs" />
     <Compile Include="Services\IApplicationProcessingService.cs" />
     <Compile Include="Services\INotificationService.cs" />

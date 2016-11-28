@@ -13,6 +13,7 @@ namespace RAP.DAL
     {
         private readonly string _connString;
         CommonDBHandler commondbHandler = new CommonDBHandler();
+        Random random = new Random();
         public AccountManagementDBHandler()
         {
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
@@ -292,9 +293,9 @@ namespace RAP.DAL
         /// Save cutomer information
         /// </summary>
         /// <returns>true or false</returns>
-        public ReturnResult<bool> SaveCustomer(CustomerInfo message)
+        public ReturnResult<CustomerInfo> SaveCustomer(CustomerInfo message)
        {
-           ReturnResult<bool> result = new ReturnResult<bool>();
+           ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
            ReturnResult<UserInfoM> UserResult = new ReturnResult<UserInfoM>();
            try
            {
@@ -305,13 +306,10 @@ namespace RAP.DAL
                    return result;
                }
 
-
-
                UserResult = commondbHandler.SaveUserInfo(message.User);
                if (UserResult.status.Status != StatusEnum.Success)
                {
                    result.status.Status = UserResult.status.Status;
-                   result.result = false;
                    return result;
                }
                message.User = UserResult.result;                
@@ -324,6 +322,8 @@ namespace RAP.DAL
                    custTable.Password = message.Password;
                    custTable.UserID = message.User.UserID;  
                    custTable.CreatedDate = DateTime.Now;
+                   message.CustomerIdentityKey = getCustomerIdentityKey();
+                   custTable.CustomerIdentityKey = message.CustomerIdentityKey;
                    db.CustomerDetails.InsertOnSubmit(custTable);
                    db.SubmitChanges();
                    message.custID = custTable.CustomerID;
@@ -337,7 +337,7 @@ namespace RAP.DAL
                    db.SubmitChanges();
                }
                result.status = new OperationStatus() { Status = StatusEnum.Success };
-               result.result = true;
+               result.result = message;
                return result;
            }
            catch(Exception ex)
@@ -347,6 +347,31 @@ namespace RAP.DAL
                return result;
            }
        }
+
+        private Int32 getCustomerIdentityKey()
+        {
+            int randomNo = 0;
+            using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+            {
+                var CustomerIdentityKeys = from r in db.CustomerDetails select r.CustomerIdentityKey;
+                if (CustomerIdentityKeys != null)
+                {
+                    for (int i = 0; i < CustomerIdentityKeys.Count(); i++)
+                    {
+                        randomNo = random.Next(100000000, 999999999);
+                        if (CustomerIdentityKeys.Contains(randomNo))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            return randomNo;
+        }
         #endregion
 
     }

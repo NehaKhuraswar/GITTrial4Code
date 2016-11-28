@@ -674,6 +674,8 @@ namespace RAP.DAL
 		
 		private System.Nullable<System.DateTime> _ModifiedDate;
 		
+		private System.Nullable<int> _CustomerIdentityKey;
+		
 		private EntityRef<NotificationPreference> _NotificationPreference;
 		
 		private EntityRef<ThirdPartyRepresentation> _ThirdPartyRepresentation;
@@ -696,6 +698,8 @@ namespace RAP.DAL
     partial void OnCreatedDateChanged();
     partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnModifiedDateChanged();
+    partial void OnCustomerIdentityKeyChanging(System.Nullable<int> value);
+    partial void OnCustomerIdentityKeyChanged();
     #endregion
 		
 		public CustomerDetail()
@@ -822,6 +826,26 @@ namespace RAP.DAL
 					this._ModifiedDate = value;
 					this.SendPropertyChanged("ModifiedDate");
 					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerIdentityKey", DbType="Int")]
+		public System.Nullable<int> CustomerIdentityKey
+		{
+			get
+			{
+				return this._CustomerIdentityKey;
+			}
+			set
+			{
+				if ((this._CustomerIdentityKey != value))
+				{
+					this.OnCustomerIdentityKeyChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerIdentityKey = value;
+					this.SendPropertyChanged("CustomerIdentityKey");
+					this.OnCustomerIdentityKeyChanged();
 				}
 			}
 		}

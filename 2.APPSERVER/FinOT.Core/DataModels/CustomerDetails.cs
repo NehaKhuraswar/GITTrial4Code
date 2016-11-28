@@ -22,7 +22,7 @@ namespace RAP.Core.DataModels
         public bool MailNotificationFlag { get; set; }
         public List<ThirdPartyDetails> thirdpartyDetails { get; set; }
         public UserInfoM User { get; set; }
- 
+        public Int32 CustomerIdentityKey { get; set; } 
     }
     public class Rent
     {
