@@ -123,6 +123,7 @@
     <Content Include="Application\2.Controllers\rapregisterController.js" />
     <Content Include="Application\2.Controllers\rapRentalHistoryController.js" />
     <Content Include="Application\2.Controllers\rapReviewAppealController.js" />
+    <Content Include="Application\2.Controllers\rapTenantPetitionVerifyController.js" />
     <Content Include="Application\2.Controllers\rapReviewController.js" />
     <Content Include="Application\2.Controllers\rapServingAppealController.js" />
     <Content Include="Application\2.Controllers\rapVerificationController.js" />

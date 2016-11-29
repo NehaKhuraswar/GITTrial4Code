@@ -122,6 +122,7 @@ namespace RAP.DAL
                                                                     PhoneNumber = c.PhoneNumber,
                                                                     State = c.State,
                                                                     Zip = c.Zip,
+                                                                    Email = c.ContactEmail,
                                                                 }).FirstOrDefault();
 
                     if (userinfos != null)
@@ -135,6 +136,8 @@ namespace RAP.DAL
                         userinfo.PhoneNumber = userinfos.PhoneNumber;
                         userinfo.State = userinfos.State;
                         userinfo.Zip = userinfos.Zip;
+                        userinfo.Email = userinfos.Email;
+
                     }
                     result.result = userinfo;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };

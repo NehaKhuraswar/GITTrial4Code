@@ -2,42 +2,7 @@
 var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectConfig', 'blockUIConfig', 'informProvider', 'paginationTemplateProvider', function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig, blockUIConfig, informProvider, paginationTemplateProvider) {
     //config routes
     $routeProvider
-        .when('/', {
-            templateUrl: 'views/workqueue/index.html',
-            controller: 'workqueueController',
-            controllerAs: 'Ctrl',
-            resolve: workqueueController_resolve
-        })
-        .when('/workqueue', {
-            templateUrl: 'views/workqueue/index.html',
-            controller: 'workqueueController',
-            controllerAs: 'Ctrl',
-            resolve: workqueueController_resolve
-        })
-        .when('/search/otcode', {
-            templateUrl: 'views/search/otc/index.html',
-            controller: 'searchController',
-            controllerAs: 'Ctrl',
-            resolve: searchOTCController_resolve
-        })
-        .when('/search/request', {
-            templateUrl: 'views/search/request/index.html',
-            controller: 'searchController',
-            controllerAs: 'Ctrl',
-            resolve: searchRequestController_resolve
-        })
-        .when('/request', {
-            templateUrl: 'views/request/index.html',
-            controller: otrequestController,
-            controllerAs: 'Ctrl',
-            resolve: otrequestController_resolve
-        })
-        .when('/request/:reqid', {
-            templateUrl: 'views/request/index.html',
-            controller: otrequestController,
-            controllerAs: 'Ctrl',
-            resolve: otrequestController_resolve
-        })
+        
         .when('/register', {
             templateUrl: 'views/account/CreateUser.html',
             controller: rapregisterController,
@@ -140,12 +105,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapServingAppealController_resolve
         })
-        .when('/report/:reportid', {
-            templateUrl: 'views/report/index.html',
-            controller: reportController,
-            controllerAs: 'Ctrl',
-            resolve: reportController_resolve
-        })
+       
         .when('/error', {
             templateUrl: 'views/shared/error.html',
         })

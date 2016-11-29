@@ -1,29 +1,16 @@
-﻿var mainController = ['$scope', '$location', 'Page', 'authFactory', function ($scope, $location, Page, auth) {
+﻿var mainController = ['$scope', '$location', 'Page', 'authFactory', 'alertService', function ($scope, $location, Page, auth, alertService) {
     $scope.Page = Page;
 
     $scope.Register = { Text: '' };
     $scope.Register = function () {
-        var text = 'Staff.html';//$scope.quickSearch.Text;
-        if (angular.isDefined(text) && text.trim() != '') {
-            //$scope.quickSearch.Text = '';
-            //$location.path("/register/" + text.trim());
-            $location.path("/register");
-        //}r  //$scope.Login = function () {
-        
-    //        $location.path("/login");
-    }
+       
+          $location.path("/register");
   
     }
     $scope.Login = function () {
-        var text = 'Staff.html';//$scope.quickSearch.Text;
-        if (angular.isDefined(text) && text.trim() != '') {
-            //$scope.quickSearch.Text = '';
-            //$location.path("/register/" + text.trim());
+        
+           
             $location.path("/login");
-            //}r  //$scope.Login = function () {
-
-            //        $location.path("/login");
-        }
 
     }
     //$scope.Register = function () {

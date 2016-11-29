@@ -115,7 +115,13 @@
                 <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip" required />
             </div>
 
-            <div class="field-group">
+            <p>Phone Number</p>
+            <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber" required />
+            <p>Email</p>
+            <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email" required />
+
+
+            <!--<div class="field-group">
                 <label for="representative_phone_number">Phone number</label>
                 <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber" required />
             </div>
@@ -123,7 +129,7 @@
             <div class="field-group">
                 <label for="representative_email">Email Address</label>
                 <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email" required />
-            </div>
+            </div>-->
 
             <div class="subhead">
                 <h4>Property manager(s) name and mailing address</h4>
@@ -174,8 +180,11 @@
                     <label for="pm_zip_code">Zip Code</label>
                     <input type="number" name="pm_zip_code" id="pm_zip_code" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip" class="field-input" />
                 </div>
-
-                <div class="field-group">
+                <p>Phone Number</p>
+                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber" required />
+                <p>Email</p>
+                <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email" required />
+                <!--<div class="field-group">
                     <label for="pm_phone_number">Phone number</label>
                     <input type="text" name="pm_phone_number" id="pm_phone_number" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber" class="field-input" />
                 </div>
@@ -183,7 +192,7 @@
                 <div class="field-group">
                     <label for="pm_email">Email Address</label>
                     <input type="text" name="pm_email" id="pm_email" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email" class="field-input email" />
-                </div>
+                </div>-->
 
 
 

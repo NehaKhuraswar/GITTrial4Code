@@ -33,10 +33,10 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
 var rapregisterController_resolve = {
     model: ['$route', 'alertService', 'rapcustFactory', function ($route, alert, rapFactory) {
         //return auth.fetchToken().then(function (response) {
-        return rapFactory.GetCustomer(null).then(function (response) {
-             //   if (!alert.checkResponse(response)) { return; }
-            //    return response.data;
-            //});
-        });
+        //return rapFactory.GetCustomer(null).then(function (response) {
+        //     //   if (!alert.checkResponse(response)) { return; }
+        //    //    return response.data;
+        //    //});
+        //});
     }]
 }

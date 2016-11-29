@@ -43,10 +43,10 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
 var raploginController_resolve = {
     model: ['$route', 'alertService', 'raploginFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
         //return auth.fetchToken().then(function (response) {
-        return rapFactory.GetCustomer(null).then(function (response) {
-               if (!alert.checkResponse(response)) { return; }
-               rapGlobalFactory.CustomerDetails= response.data;
+        //return rapFactory.GetCustomer(null).then(function (response) {
+        //       if (!alert.checkResponse(response)) { return; }
+        //       rapGlobalFactory.CustomerDetails= response.data;
             
-        });
+        //});
     }]
 }
