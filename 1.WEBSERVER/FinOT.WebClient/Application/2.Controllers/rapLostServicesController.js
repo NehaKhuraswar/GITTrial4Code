@@ -45,8 +45,20 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
         if ($files && $files.length) {
             var fileName = $files[0].name;
             var file = $files[0];
-            self.caseinfo.TenantPetitionInfo.File = file;
-
+            var reader = new FileReader();
+            reader.fileName = file.name;
+            self.caseinfo.TenantPetitionInfo.Document.DocName = file.name;
+            reader.readAsArrayBuffer(file);
+           
+            reader.onload = function (e)
+            {
+                var arrayBuffer = e.target.result;
+                var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+                self.caseinfo.TenantPetitionInfo.Document.Base64Content = base64String;
+                // self.caseinfo.TenantPetitionInfo.FileContet = new Uint8Array(arrayBuffer);
+               
+            }
+           
         }
     }
 

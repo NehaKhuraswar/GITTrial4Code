@@ -36,6 +36,7 @@ namespace RAP.Core.DataModels
          public string DocType { get; set; }
          public string DocTitle { get; set; }
          public byte[] Content { get; set; }
+         public string Base64Content { get; set; }
          public int DocThirdPartyID { get; set; }
          
      }

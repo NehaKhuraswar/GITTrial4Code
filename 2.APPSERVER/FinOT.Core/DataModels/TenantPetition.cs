@@ -43,8 +43,7 @@ namespace RAP.Core.DataModels
             }
         }
                 
-        public int TenantUserID { get; set; }
-        
+        public int TenantUserID { get; set; }        
         public bool bAgreeToCityMediation { get; set; }
         public bool bCaseFiledByThirdParty { get; set; }
         public int CaseFileBy { get; set; }
@@ -55,8 +54,7 @@ namespace RAP.Core.DataModels
         public int WorlFlowID { get; set; }
         public DateTime HearingDate { get; set; }
         public DateTime AppealDate { get; set; }
-        public bool bThirdPartyRepresentationAppeal { get; set; }
-       
+        public bool bThirdPartyRepresentationAppeal { get; set; }     
         
 
         public List<DocumentM> Documents
@@ -136,7 +134,8 @@ namespace RAP.Core.DataModels
             OwnerInfo = new UserInfoM();
             PropertyManager = new UserInfoM();
             RentIncreases = new List<TenantRentIncreaseInfoM>();
-            
+            Document = new DocumentM();
+         
             //TenantRentIncreaseInfoM obj = new TenantRentIncreaseInfoM();
             //RentIncreases.Add(obj);
 
@@ -164,7 +163,7 @@ namespace RAP.Core.DataModels
         public DateTime RAPNoticeGivenDate { get; set; }
         public bool bRentControlledByAgency { get; set; }
         public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
-        public HttpPostedFile File { get; set; }
+        public DocumentM Document { get; set; }
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
         public bool bLostService { get; set; }

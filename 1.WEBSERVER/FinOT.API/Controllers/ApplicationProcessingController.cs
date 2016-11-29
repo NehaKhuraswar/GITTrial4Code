@@ -303,10 +303,10 @@ namespace RAP.API.Controllers
         public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] TenantPetitionInfoM petition)
         {
             //Document upload sample - TBD
-            if(petition.File != null)
-            {
-                ReturnResult<DocumentM> docUploadResult = _docService.UploadDocument(petition.File);
-            }
+            //if(petition.File != null)
+            //{
+            //    ReturnResult<DocumentM> docUploadResult = _docService.UploadDocument(petition.File);
+            //}
             ExtractClaimDetails();
            
 
