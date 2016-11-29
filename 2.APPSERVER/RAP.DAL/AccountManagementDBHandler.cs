@@ -322,6 +322,7 @@ namespace RAP.DAL
                    custTable.Password = message.Password;
                    custTable.UserID = message.User.UserID;  
                    custTable.CreatedDate = DateTime.Now;
+                   custTable.ModifiedDate = DateTime.Now;
                    message.CustomerIdentityKey = getCustomerIdentityKey();
                    custTable.CustomerIdentityKey = message.CustomerIdentityKey;
                    db.CustomerDetails.InsertOnSubmit(custTable);

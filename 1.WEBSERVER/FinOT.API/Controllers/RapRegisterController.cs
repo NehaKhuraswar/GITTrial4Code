@@ -348,7 +348,7 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);                    
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);                    
                     _commonService.SaveErrorDetails(result.status.StatusCode,result.status.StatusMessage,result.status.StatusDetails, 23, "SaveCustomer");
                 }
             }
