@@ -126,7 +126,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     //config blockUI
-    //blockUIConfig.message = 'Processing...';
+    blockUIConfig.message = '';
     blockUIConfig.delay = 100;
     blockUIConfig.autoBlock = false;
 
