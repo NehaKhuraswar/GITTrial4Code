@@ -25,11 +25,13 @@ namespace RAP.API.Controllers
     {
         string Username, CorrelationID, ExceptionMessage, InnerExceptionMessage;
         private readonly ICommonService _commonService;
+        private readonly IExceptionHandler _eHandler;
         private readonly string errorCode = "5555";       
       
         public RapRegisterController()
         {
             _commonService = new CommonService();
+            _eHandler = new ExceptionHandler();
         }
 
         public void ExtractClaimDetails()
@@ -94,9 +96,9 @@ namespace RAP.API.Controllers
             {
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
 
-                if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetCustomer");
                 //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
@@ -109,6 +111,7 @@ namespace RAP.API.Controllers
         public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
         
         {
+            System.Diagnostics.EventLog.WriteEntry("Application", "LoginCust started");
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
@@ -128,7 +131,8 @@ namespace RAP.API.Controllers
                     
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
+
+                    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
                 }
                 
 
@@ -138,7 +142,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 0, "LoginCust");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
                // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -171,7 +176,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "GetAuthorizedUsers");
+                    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "GetAuthorizedUsers");
                 }
 
 
@@ -181,8 +186,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetAuthorizedUsers");
-                // transaction.AddException(ex.Message);
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
                 //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
@@ -214,7 +219,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SearchInviteThirdPartyUser");
+                    
                 }
 
 
@@ -224,7 +229,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SearchInviteThirdPartyUser");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -257,7 +263,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "AuthorizeThirdPartyUser");
+                   
                 }
                  
 
@@ -268,7 +274,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "AuthorizeThirdPartyUser");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
 
@@ -301,7 +308,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "RemoveThirdParty");
+                    
                 }
 
 
@@ -312,7 +319,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "RemoveThirdParty");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
 
                 // transaction.AddException(ex.Message);
                 //ReturnCode = HttpStatusCode.InternalServerError;
@@ -331,6 +339,7 @@ namespace RAP.API.Controllers
         [HttpPost]
         public HttpResponseMessage SaveCustomer([FromBody] CustomerInfo custModel)
         {
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Save Customer started");
             AccountManagementService accService = new AccountManagementService();
             IEmailService emailService = new EmailService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -349,7 +358,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);                    
-                    _commonService.SaveErrorDetails(result.status.StatusCode,result.status.StatusMessage,result.status.StatusDetails, 23, "SaveCustomer");
+                    
                 }
             }
             catch(Exception ex)
@@ -358,7 +367,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode,ex.Message,ex.InnerException.StackTrace.ToString(),23, "SaveCustomer");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }

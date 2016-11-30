@@ -8,6 +8,6 @@ namespace RAP.DAL
     {
        ReturnResult<UserInfoM> SaveUserInfo(UserInfoM userInfo);
        ReturnResult<UserInfoM> GetUserInfo(int UserId);
-       void SaveErrorDetails(string ErrorNumber, string ErrorMessage, string ErrorMessageDetails, int CustID, string OperationName);
+       void SaveErrorLog(OperationStatus status);
     }
 }

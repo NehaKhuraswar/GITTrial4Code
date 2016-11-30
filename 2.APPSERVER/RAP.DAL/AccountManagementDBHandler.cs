@@ -29,7 +29,7 @@ namespace RAP.DAL
             try
             {
                 // CustomerInfo custinfo ;
-
+               // System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
@@ -65,12 +65,14 @@ namespace RAP.DAL
                     ReturnResult<UserInfoM> resultUserInfo = commondbHandler.GetUserInfo(message.User.UserID);
                     message.User = resultUserInfo.result;
                 }
+               // System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started"); 
                 result.result = message;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
             {
+                //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
                 return result;
@@ -299,6 +301,7 @@ namespace RAP.DAL
            ReturnResult<UserInfoM> UserResult = new ReturnResult<UserInfoM>();
            try
            {
+             //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer started");
                // Account already exists
                if (CheckCustAccount(message))
                {
@@ -337,13 +340,15 @@ namespace RAP.DAL
                    db.NotificationPreferences.InsertOnSubmit(notificationTable);
                    db.SubmitChanges();
                }
+             //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                result.result = message;
                return result;
            }
            catch(Exception ex)
            {
-               IExceptionHandler eHandler = new ExceptionHandler();
+              // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+              IExceptionHandler eHandler = new ExceptionHandler();
                result.status = eHandler.HandleException(ex);
                return result;
            }

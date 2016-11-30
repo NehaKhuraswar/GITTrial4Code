@@ -6,7 +6,7 @@ namespace RAP.Core.Services
 {
     public interface ICommonService
     {
-        void SaveErrorDetails(string ErrorNumber, string ErrorMessage, string ErrorMessageDetails, int CustID, string OperationName);
+        void LogError(OperationStatus status);
 
     }
 }

@@ -27,6 +27,7 @@ namespace RAP.API.Controllers
         private readonly IApplicationProcessingService _service;
         private readonly ICommonService _commonService;
         private readonly IdocumentService _docService;
+        private IExceptionHandler _eHandler;
         private readonly string errorCode = "5555";
        
         public ApplicationProcessingController()
@@ -34,6 +35,7 @@ namespace RAP.API.Controllers
             _service = new ApplicationProcessingService();
             _docService = new DocumentService();
             _commonService = new CommonService();
+            _eHandler = new ExceptionHandler();
         }
         public ApplicationProcessingController(IApplicationProcessingService service)
         {
@@ -87,7 +89,7 @@ namespace RAP.API.Controllers
                 ReturnCode = HttpStatusCode.InternalServerError;
 
                 if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetRent");
+                //_commonService.LogError(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetRent");
                 //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
@@ -122,8 +124,7 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "GetCaseDetails2");
+                    transaction.AddException(result.status.StatusMessage);                      
                 }
 
             }
@@ -132,7 +133,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetCaseDetails2");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
 
                 //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
                 //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
@@ -164,7 +166,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "GetCaseDetails");
+                   
                 }
 
             }
@@ -173,7 +175,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetCaseDetails");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
           
                 //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
                 //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
@@ -208,7 +211,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SubmitTenantPetition");
+                    
                 }
             }
             catch (Exception ex)
@@ -216,7 +219,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SubmitTenantPetition");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
@@ -247,7 +251,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SaveCaseDetails");
+                    
                 }
             }
             catch (Exception ex)
@@ -255,7 +259,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SaveCaseDetails");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
@@ -284,7 +289,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SaveApplicationInfo");
+                    
                 }
             }
             catch (Exception ex)
@@ -292,7 +297,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SaveApplicationInfo");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
@@ -327,7 +333,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SaveTenantLostServiceInfo");
+                    
                 }
             }
             catch (Exception ex)
@@ -335,7 +341,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SaveTenantLostServiceInfo");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
@@ -364,7 +371,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SavePetitionGroundInfo");
+                    
                 }
             }
             catch (Exception ex)
@@ -372,7 +379,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SavePetitionGroundInfo");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
@@ -401,7 +409,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SaveTenantRentalIncrementInfo");
+                    
                 }
             }
             catch (Exception ex)
@@ -409,7 +417,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SaveTenantRentalIncrementInfo");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
@@ -436,7 +445,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SaveTenantAppealInfo");
+                    
                 }
             }
             catch (Exception ex)
@@ -444,7 +453,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SaveTenantAppealInfo");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
         }
@@ -470,8 +480,7 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SaveTenantServingAppeal");
+                    transaction.AddException(result.status.StatusMessage);                      
                 }
             }
             catch (Exception ex)
@@ -479,7 +488,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SaveTenantServingAppeal");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
         }
@@ -505,8 +515,7 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "AddAnotherOpposingParty");
+                    transaction.AddException(result.status.StatusMessage);                    
                 }
             }
             catch (Exception ex)
@@ -514,7 +523,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "AddAnotherOpposingParty");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
@@ -541,7 +551,7 @@ namespace RAP.API.Controllers
                 {
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
-                    _commonService.SaveErrorDetails(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "SaveAppealGroundInfo");
+                   
                 }
             }
             catch (Exception ex)
@@ -549,7 +559,8 @@ namespace RAP.API.Controllers
                 transaction.status = false;
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
-                _commonService.SaveErrorDetails(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "SaveAppealGroundInfo");
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<Boolean>>(ReturnCode, transaction);
         }

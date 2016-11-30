@@ -33,9 +33,9 @@ namespace RAP.DAL
     partial void InsertUserInfo(UserInfo instance);
     partial void UpdateUserInfo(UserInfo instance);
     partial void DeleteUserInfo(UserInfo instance);
-    partial void InsertErrorDetail(ErrorDetail instance);
-    partial void UpdateErrorDetail(ErrorDetail instance);
-    partial void DeleteErrorDetail(ErrorDetail instance);
+    partial void InsertErrorLog(ErrorLog instance);
+    partial void UpdateErrorLog(ErrorLog instance);
+    partial void DeleteErrorLog(ErrorLog instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -76,11 +76,11 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<ErrorDetail> ErrorDetails
+		public System.Data.Linq.Table<ErrorLog> ErrorLogs
 		{
 			get
 			{
-				return this.GetTable<ErrorDetail>();
+				return this.GetTable<ErrorLog>();
 			}
 		}
 	}
@@ -387,8 +387,8 @@ namespace RAP.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorDetails")]
-	public partial class ErrorDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
+	public partial class ErrorLog : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -400,10 +400,6 @@ namespace RAP.DAL
 		private string _ErrorMessage;
 		
 		private string _ErrorMessageDetails;
-		
-		private System.Nullable<int> _CustID;
-		
-		private string _OperationName;
 		
 		private System.DateTime _CreatedDate;
 		
@@ -419,15 +415,11 @@ namespace RAP.DAL
     partial void OnErrorMessageChanged();
     partial void OnErrorMessageDetailsChanging(string value);
     partial void OnErrorMessageDetailsChanged();
-    partial void OnCustIDChanging(System.Nullable<int> value);
-    partial void OnCustIDChanged();
-    partial void OnOperationNameChanging(string value);
-    partial void OnOperationNameChanged();
     partial void OnCreatedDateChanging(System.DateTime value);
     partial void OnCreatedDateChanged();
     #endregion
 		
-		public ErrorDetail()
+		public ErrorLog()
 		{
 			OnCreated();
 		}
@@ -508,46 +500,6 @@ namespace RAP.DAL
 					this._ErrorMessageDetails = value;
 					this.SendPropertyChanged("ErrorMessageDetails");
 					this.OnErrorMessageDetailsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustID", DbType="Int")]
-		public System.Nullable<int> CustID
-		{
-			get
-			{
-				return this._CustID;
-			}
-			set
-			{
-				if ((this._CustID != value))
-				{
-					this.OnCustIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustID = value;
-					this.SendPropertyChanged("CustID");
-					this.OnCustIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OperationName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string OperationName
-		{
-			get
-			{
-				return this._OperationName;
-			}
-			set
-			{
-				if ((this._OperationName != value))
-				{
-					this.OnOperationNameChanging(value);
-					this.SendPropertyChanging();
-					this._OperationName = value;
-					this.SendPropertyChanged("OperationName");
-					this.OnOperationNameChanged();
 				}
 			}
 		}

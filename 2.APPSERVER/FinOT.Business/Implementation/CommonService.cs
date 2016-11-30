@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Data;
 using System.Collections.Generic;
+using System.Configuration;
 using RAP.Core.Common;
 using RAP.Core.Services;
 using RAP.Core.DataModels;
@@ -15,21 +16,30 @@ namespace RAP.Business.Implementation
         public string CorrelationId { get; set; }
         private readonly ICommonDBHandler _dbHandler;
         private readonly IExceptionHandler _eHandler;
+    
         //TBD
         public CommonService()
         {
-            _dbHandler = new CommonDBHandler();
+            _dbHandler = new CommonDBHandler();            
         }
         public CommonService(ICommonDBHandler dbHandler, IExceptionHandler eHandler)
         {
             this._dbHandler = dbHandler;
             this._eHandler = eHandler;
         }
-        public void SaveErrorDetails(string ErrorNumber, string ErrorMessage, string ErrorMessageDetails, int CustID, string OperationName)
+        public void LogError(OperationStatus status)
         {
-             _dbHandler.SaveErrorDetails(ErrorNumber,  ErrorMessage,  ErrorMessageDetails,  CustID,  OperationName);
-              return;
+            try
+            {
+                _dbHandler.SaveErrorLog(status);
+            }
+            catch(Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                eHandler.HandleException(ex);               
+            }     
+                        
         }
-        //implements all methods from IOTRequestService
+        
     }
 }

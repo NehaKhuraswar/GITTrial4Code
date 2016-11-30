@@ -12,40 +12,41 @@ namespace RAP.DAL
     public class CommonDBHandler : ICommonDBHandler
     {
         private readonly string _connString;
+        private bool _logToDatabase; 
+         
         public CommonDBHandler()
         {
             _connString = ConfigurationManager.AppSettings["RAPDBConnectionString"];
+             _logToDatabase = string.IsNullOrEmpty(ConfigurationManager.AppSettings["logToDatabase"]) ? false : ((ConfigurationManager.AppSettings["logToDatabase"] == "true" ? true : false));
         }
 
         /// <summary>
-        /// Save error details to the database
+        /// Logs error details to the database
         /// </summary>
         /// <returns></returns>
 
-        public void SaveErrorDetails(string ErrorNumber, string ErrorMessage, string ErrorMessageDetails, int CustID, string OperationName)
+        public void SaveErrorLog(OperationStatus status)
         {
            
             try
             {
-                using (CommonDataContext db = new CommonDataContext())
+                if (_logToDatabase)
                 {
-                    ErrorDetail error = new ErrorDetail();
-                    error.ErrorNumber = ErrorNumber;
-                    error.ErrorMessage = ErrorMessage;
-                    error.ErrorMessageDetails = ErrorMessageDetails;
-                    error.CustID = CustID;
-                    error.OperationName = OperationName;
-                    error.CreatedDate = DateTime.Now;
-
-                    db.ErrorDetails.InsertOnSubmit(error);
-                    db.SubmitChanges();
-                                     
+                    using (CommonDataContext db = new CommonDataContext(_connString))
+                    {
+                        ErrorLog error = new ErrorLog();
+                        error.ErrorNumber = status.StatusCode;
+                        error.ErrorMessage = status.StatusMessage;
+                        error.ErrorMessageDetails = status.StatusDetails;
+                        error.CreatedDate = DateTime.Now;
+                        db.ErrorLogs.InsertOnSubmit(error);
+                        db.SubmitChanges();
+                    }
                 }
             }
             catch (Exception ex)
             {
-                IExceptionHandler eHandler = new ExceptionHandler();
-                
+                              
             }
         }
         /// <summary>
@@ -58,7 +59,8 @@ namespace RAP.DAL
             ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
             try
             {
-                using (CommonDataContext db = new CommonDataContext())
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveUserInfo started");
+                using (CommonDataContext db = new CommonDataContext(_connString))
                 {
                     var user = db.UserInfos.Where(x => (x.FirstName == userInfo.FirstName
                                                             && x.LastName == userInfo.LastName
@@ -90,6 +92,7 @@ namespace RAP.DAL
                         db.SubmitChanges();
                         userInfo.UserID = userInfoDB.UserID;
                     }
+                    System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveUserInfo completed");
                     result.result = userInfo;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
                     return result;
@@ -97,6 +100,7 @@ namespace RAP.DAL
             }
             catch(Exception ex)
             {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
                 return result;
@@ -108,7 +112,7 @@ namespace RAP.DAL
             UserInfoM userinfo = new UserInfoM();
             try
             {
-                using (CommonDataContext db = new CommonDataContext())
+                using (CommonDataContext db = new CommonDataContext(_connString))
                 {
                     var userinfos = db.UserInfos.Where(x => x.UserID == UserId)
                                                                 .Select(c => new UserInfoM()
