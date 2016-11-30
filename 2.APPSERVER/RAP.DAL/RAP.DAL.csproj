@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DashboardDBHandler.cs" />
     <Compile Include="AccountManagementDBHandler.cs" />
     <Compile Include="AccountManagement.designer.cs">
       <AutoGen>True</AutoGen>
@@ -70,7 +71,13 @@
     <Compile Include="CommonDBHandler.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Dashboard.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dashboard.dbml</DependentUpon>
+    </Compile>
     <Compile Include="IApplicationProcessingDBHandler.cs" />
+    <Compile Include="IDashboardDBHandler.cs" />
     <Compile Include="ICommonDBHandler.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -96,6 +103,11 @@
     <None Include="Common.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Common.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Dashboard.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Dashboard.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -125,6 +137,11 @@
   <ItemGroup>
     <None Include="Common.dbml.layout">
       <DependentUpon>Common.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dashboard.dbml.layout">
+      <DependentUpon>Dashboard.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

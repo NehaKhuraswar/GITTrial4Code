@@ -85,6 +85,11 @@ namespace RAP.Core.Common
                     StatusCode = "0108";
                     StatusMessage = "Error occured in database operation ";
                     break;
+
+                case StatusEnum.DatabaseMessage:
+                    StatusCode = "0109";
+                    break;
+
                 #endregion
 
                 #region System Errors

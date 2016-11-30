@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="OAKRAP" Class="DashboardDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ev-sql-dev;Initial Catalog=OAKRAP;Integrated Security=True" SettingsObjectName="RAP.DAL.Properties.Settings" SettingsPropertyName="OAKRAPConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Activity" Member="Activities">
+    <Type Name="Activity">
+      <Column Name="ActivityID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Activity_ActivityStatus" Member="ActivityStatus" ThisKey="ActivityID" OtherKey="ActivityID" Type="ActivityStatus" />
+      <Association Name="Activity_CaseActivityStatus" Member="CaseActivityStatus" ThisKey="ActivityID" OtherKey="ActivityID" Type="CaseActivityStatus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ActivityStatus" Member="ActivityStatus">
+    <Type Name="ActivityStatus">
+      <Column Name="ActivityStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Activity_ActivityStatus" Member="Activity" ThisKey="ActivityID" OtherKey="ActivityID" Type="Activity" IsForeignKey="true" />
+      <Association Name="Status_ActivityStatus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StatusDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Status_ActivityStatus" Member="ActivityStatus" ThisKey="StatusID" OtherKey="StatusID" Type="ActivityStatus" />
+      <Association Name="Status_CaseActivityStatus" Member="CaseActivityStatus" ThisKey="StatusID" OtherKey="StatusID" Type="CaseActivityStatus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CaseActivityStatus" Member="CaseActivityStatus">
+    <Type Name="CaseActivityStatus">
+      <Column Name="CaseActivityStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="C_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="LastModifiedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Activity_CaseActivityStatus" Member="Activity" ThisKey="ActivityID" OtherKey="ActivityID" Type="Activity" IsForeignKey="true" />
+      <Association Name="Status_CaseActivityStatus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.USP_ActivityCase_Get" Method="USP_ActivityCase_Get">
+    <Parameter Name="C_ID" Parameter="c_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <Parameter Name="errorCode" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="USP_ActivityCase_GetResult">
+      <Column Name="ActivityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

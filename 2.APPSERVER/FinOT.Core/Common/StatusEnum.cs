@@ -14,6 +14,7 @@ namespace RAP.Core.Common
         NoDataFound,
         DatabaseException,
         AccountAlreadyExist,
+        DatabaseMessage,
         #endregion
         
         #region Exceptions
