@@ -94,10 +94,15 @@ namespace RAP.Core.DataModels
     
     public class OwnerPetitionApplicantInfoM
     {
+        public OwnerPetitionApplicantInfoM()
+        {
+            ThirdPartyUser = new UserInfoM();
+        }
         public int OwnerPetitionApplicantInfoID { get; set; }
         public int ApplicantUserID { get; set; }
         public bool bThirdPartyRepresentation { get; set; }
         public int ThirdPartyUserID { get; set; }
+        public UserInfoM ThirdPartyUser { get; set; }
         public bool bBusinessLicensePaid { get; set; }
         public string BusinessLicenseNumber { get; set; }
         public bool bRentAdjustmentProgramFeePaid { get; set; }
