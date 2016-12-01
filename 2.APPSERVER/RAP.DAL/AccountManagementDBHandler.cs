@@ -357,6 +357,8 @@ namespace RAP.DAL
         private Int32 getCustomerIdentityKey()
         {
             int randomNo = 0;
+            int CustomerIdentityKeyFrom = string.IsNullOrEmpty(ConfigurationManager.AppSettings["CustomerIdentityKeyFrom"]) ? 100000000 : Convert.ToInt32(ConfigurationManager.AppSettings["CustomerIdentityKeyFrom"]);
+            int CustomerIdentityKeyTo = string.IsNullOrEmpty(ConfigurationManager.AppSettings["CustomerIdentityKeyTo"]) ? 999999999 : Convert.ToInt32(ConfigurationManager.AppSettings["CustomerIdentityKeyTo"]);
             using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
             {
                 var CustomerIdentityKeys = from r in db.CustomerDetails select r.CustomerIdentityKey;
@@ -364,7 +366,7 @@ namespace RAP.DAL
                 {
                     for (int i = 0; i < CustomerIdentityKeys.Count(); i++)
                     {
-                        randomNo = random.Next(100000000, 999999999);
+                        randomNo = random.Next(CustomerIdentityKeyFrom, CustomerIdentityKeyTo);
                         if (CustomerIdentityKeys.Contains(randomNo))
                         {
                             continue;
