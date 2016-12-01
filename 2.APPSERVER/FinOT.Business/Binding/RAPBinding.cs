@@ -21,6 +21,8 @@ namespace RAP.Business.Binding
            Bind<IExceptionHandler>().To<ExceptionHandler>();
            Bind<ICommonDBHandler>().To<CommonDBHandler>();
            Bind<IApplicationProcessingDBHandler>().To<ApplicationProcessingDBHandler>();
+           Bind<IDashboardDBHandler>().To<DashboardDBHandler>();
+           Bind<IDashboardService>().To<DashboardService>();
        }
     }
 }

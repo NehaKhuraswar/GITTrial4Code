@@ -7,10 +7,19 @@
             <div class="panel-body">
                 <p>Account : {{Ctrl.model.User.FirstName}} </p>
                 <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.CaseID" required />
+                <p>Enter C_ID </p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.C_ID" required />
                 <button class="btn btn-default" ng-click="Ctrl.InviteThirdPartyUser()">Invite Third Party Representation</button>
                 <button class="btn btn-default" ng-click="Ctrl.FilePetition()">File a Petition</button>
                 <button class="btn btn-default" ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)">File an Appeal</button>
-                
+                <button class="btn btn-default" ng-click="Ctrl.GetCaseActivityStatus(Ctrl.caseinfo)">Case Activity Status</button>
+                <button class="btn btn-default" ng-click="Ctrl.NewCaseStatus()">New Case Activity Status</button>
+
+                <div ng-repeat="activity in Ctrl.caseinfo.ActivityStatus">                    
+                    <p>{{activity.Activity.ActivityDesc}}</p>                   
+                    <p>{{activity.Status.StatusDesc}}</p>
+                    <p>{{activity.Date}}</p>
+                </div>
             </div>
         </div>
     </div>

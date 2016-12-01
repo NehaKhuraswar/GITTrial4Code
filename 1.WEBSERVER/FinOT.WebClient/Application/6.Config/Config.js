@@ -33,6 +33,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapPetitionMainController_resolve
         })
+        .when('/newCaseStatus', {
+            templateUrl: 'views/account/NewCaseStatus.html',
+            controller: rapNewCaseStatusController,
+            controllerAs: 'Ctrl',
+            resolve: rapNewCaseStatusController_resolve
+        })
         .when('/applicationinfo', {
             templateUrl: 'views/filepetition/ApplicationInfo.html',
             controller: rapApplicationInfoController,

@@ -1,15 +1,16 @@
-﻿using System;
+﻿using RAP.Core.DataModels;
 using RAP.Core.Common;
-using RAP.Core.DataModels;
 using System.Collections.Generic;
 
-namespace RAP.DAL
+namespace RAP.Core.Services
 {
-    public interface IDashboardDBHandler
+    public interface IDashboardService
     {
+        string CorrelationId { get; set; }
         ReturnResult<List<ActivityStatus_M>> GetActivityStatusForCase(int C_ID);
-        ReturnResult<List<Activity_M>> GetActivity();
         ReturnResult<List<Status_M>> GetStatus(int activityID);
+        ReturnResult<List<Activity_M>> GetActivity();
+        
 
     }
 }

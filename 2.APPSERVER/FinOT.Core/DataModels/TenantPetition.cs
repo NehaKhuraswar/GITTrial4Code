@@ -19,6 +19,7 @@ namespace RAP.Core.DataModels
         private List<DocumentM> _documnts = new List<DocumentM>();
         
         public string CaseID { get; set; }
+        public int C_ID { get; set; }
         public int PetitionCategoryID { get; set; }
         public TenantPetitionInfoM TenantPetitionInfo
         {
@@ -54,7 +55,20 @@ namespace RAP.Core.DataModels
         public int WorlFlowID { get; set; }
         public DateTime HearingDate { get; set; }
         public DateTime AppealDate { get; set; }
-        public bool bThirdPartyRepresentationAppeal { get; set; }     
+        public bool bThirdPartyRepresentationAppeal { get; set; }
+        private List<ActivityStatus_M> _activityStatus = new List<ActivityStatus_M>();
+
+        public List<ActivityStatus_M> ActivityStatus
+        {
+            get
+            {
+                return _activityStatus;
+            }
+            set
+            {
+                _activityStatus = value;
+            }
+        }
         
 
         public List<DocumentM> Documents

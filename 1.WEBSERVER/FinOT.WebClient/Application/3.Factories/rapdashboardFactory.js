@@ -16,6 +16,16 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
     }
+    var _GetCaseActivityStatus = function(model) {
+        blockUI.start();
+
+        var url = 'api/dashboard' + '/getcaseactivitystatus';
+
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+         });
+    }
 
     var _GetCaseInfo = function () {
         blockUI.start();
@@ -32,6 +42,7 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     factory.GetCaseInfo = _GetCaseInfo;
 
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
+    factory.GetCaseActivityStatus = _GetCaseActivityStatus;
 
 
     return factory;

@@ -161,6 +161,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\APIHelper.cs" />
     <Compile Include="Common\LogHelper.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\RapRegisterController.cs" />
     <Compile Include="Controllers\ApplicationProcessingController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />

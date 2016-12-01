@@ -9,6 +9,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.FilePetition = function () {
         $location.path("/filePetition");
     }
+    self.NewCaseStatus = function () {
+        $location.path("/newCaseStatus");
+    }
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseInfoWithModel(model).then(function (response) {
@@ -20,6 +23,20 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
             rapGlobalFactory.CaseDetails = self.caseinfo;
         });
         $location.path("/fileappeal");
+    }
+
+    self.GetCaseActivityStatus = function (model) {
+        //self.caseinfo.CaseID = 
+        rapFactory.GetCaseActivityStatus(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo.ActivityStatus = response.data;
+
+           // self.caseinfo = response.data;
+            //rapGlobalFactory.CaseDetails = self.caseinfo;
+        });
+       // $location.path("/fileappeal");
     }
 
     var _GetCaseInfo = function () {

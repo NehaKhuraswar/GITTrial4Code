@@ -42,7 +42,12 @@ namespace RAP.Core.DataModels
     }
     public class ActivityStatus_M
     {
-        
+        public ActivityStatus_M()
+        {
+            Activity = new Activity_M();
+            Status = new Status_M();
+            
+        }
         public Activity_M Activity { get; set; }
         public Status_M Status { get; set; }
         public DateTime Date { get; set; }
@@ -57,6 +62,14 @@ namespace RAP.Core.DataModels
         public int StatusID { get; set; }
         public string StatusDesc { get; set; }
     }
+
+    //public class CaseStatusActivity_M
+    //{
+    //    public int ActivityID { get; set; }
+    //    public string ActivityName { get; set; }
+    //    public int StatusID { get; set; }
+    //    public string StatusDesc { get; set; }
+    //}
     
 
   

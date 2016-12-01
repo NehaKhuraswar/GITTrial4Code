@@ -60,6 +60,7 @@
     <Compile Include="Helper\DataTableHelper.cs" />
     <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Implementation\AccountManagementService.cs" />
+    <Compile Include="Implementation\DashboardService.cs" />
     <Compile Include="Implementation\CommonService.cs" />
     <Compile Include="Implementation\DocumentService.cs" />
     <Compile Include="Implementation\EmailService.cs" />

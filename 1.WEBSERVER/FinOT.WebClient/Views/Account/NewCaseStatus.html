@@ -1,0 +1,27 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>User</strong>
+            </div>
+            <div class="panel-body">
+
+                <select class="form-control"
+                        ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
+                        ng-model="Ctrl.ActivityStatus.Activity"
+                        ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"
+                        required>
+                    <option value="" selected>Select Activity</option>
+                </select>   
+                
+                <select class="form-control"
+                        ng-model="Ctrl.ActivityStatus.Status"
+                        ng-options="status as (activity.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
+                        required>
+                    <option value="" selected>Select Status</option>
+                </select>     
+                <button class="btn btn-default" ng-click="Ctrl.Submit(Ctrl.ActivityStatus)">Submit</button>         
+            </div>
+        </div>
+    </div>
+</div>

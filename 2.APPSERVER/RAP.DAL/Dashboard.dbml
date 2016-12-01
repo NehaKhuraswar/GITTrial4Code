@@ -40,13 +40,23 @@
       <Association Name="Status_CaseActivityStatus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
     </Type>
   </Table>
-  <Function Name="dbo.USP_ActivityCase_Get" Method="USP_ActivityCase_Get">
+  <Function Name="dbo.USP_ActivityStatusForCase_Get" Method="USP_ActivityStatusForCase_Get">
     <Parameter Name="C_ID" Parameter="c_ID" Type="System.Int32" DbType="Int" />
     <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
     <Parameter Name="errorCode" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <ElementType Name="USP_ActivityCase_GetResult">
+    <ElementType Name="USP_ActivityStatusForCase_GetResult">
       <Column Name="ActivityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ActivityName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_Status_Get" Method="USP_Status_Get">
+    <Parameter Name="ActivityID" Parameter="activityID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <Parameter Name="errorCode" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="USP_Status_GetResult">
       <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StatusDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>

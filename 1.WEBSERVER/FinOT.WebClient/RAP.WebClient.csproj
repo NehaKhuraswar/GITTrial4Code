@@ -115,6 +115,7 @@
     <Content Include="Application\2.Controllers\rapFileAppealController.js" />
     <Content Include="Application\2.Controllers\rapFilePetitionController.js" />
     <Content Include="Application\2.Controllers\rapGroundsOfAppealController.js" />
+    <Content Include="Application\2.Controllers\rapNewCaseStatusController.js" />
     <Content Include="Application\2.Controllers\rapGroundsOfPetitionController.js" />
     <Content Include="Application\2.Controllers\rapinvitethirdpartyController.js" />
     <Content Include="Application\2.Controllers\raploginController.js" />
@@ -140,6 +141,7 @@
     <Content Include="Application\3.Factories\rapfileappealFactory.js" />
     <Content Include="Application\3.Factories\rapfilepetitionFactory.js" />
     <Content Include="Application\3.Factories\rapgroundsofappealFactory.js" />
+    <Content Include="Application\3.Factories\rapnewcasestatusFactory.js" />
     <Content Include="Application\3.Factories\rapgroundsofpetitionFactory.js" />
     <Content Include="Application\3.Factories\rapinvitethirdpartyFactory.js" />
     <Content Include="Application\3.Factories\raploginFactory.js" />
@@ -196,6 +198,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Views\Account\NewCaseStatus.html" />
     <Content Include="Views\FileAppeal\AppellantsInfo.html" />
     <Content Include="Views\FileAppeal\FileAppeal.html" />
     <Content Include="Views\FileAppeal\GroundsForAppeal.html" />
