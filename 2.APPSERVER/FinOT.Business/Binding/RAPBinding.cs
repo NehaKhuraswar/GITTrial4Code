@@ -19,6 +19,7 @@ namespace RAP.Business.Binding
            Bind<IdocumentService>().To <DocumentService>();
            Bind<ICommonService>().To<CommonService>();
            Bind<IExceptionHandler>().To<ExceptionHandler>();
+           Bind<ICommonDBHandler>().To<CommonDBHandler>();
            Bind<IApplicationProcessingDBHandler>().To<ApplicationProcessingDBHandler>();
        }
     }
