@@ -14,16 +14,16 @@ namespace RAP.Business.Implementation
     {
         public string CorrelationId { get; set; }
         private readonly IApplicationProcessingDBHandler _dbHandler;
-        private readonly IExceptionHandler _eHandler;
+        private readonly IExceptionHandler _eHandler = new ExceptionHandler();
         //TBD
-        public ApplicationProcessingService()
-        {
-            _dbHandler = new ApplicationProcessingDBHandler();
-        }
-        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler, IExceptionHandler eHandler)
+        //public ApplicationProcessingService()
+        //{
+        //    _dbHandler = new ApplicationProcessingDBHandler();
+        //}
+        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler)
         {
             this._dbHandler = dbHandler;
-            this._eHandler = eHandler;
+            //this._eHandler = eHandler;
         }
        
         public ReturnResult<CaseInfoM> GetCaseDetails()

@@ -6,12 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Security.Claims;
+using Ninject;
 using RAP.Core.Services;
 using RAP.Core.DataModels;
 using RAP.Core.Common;
 using RAP.API.Models;
 using RAP.API.Common;
-
+using RAP.Business.Binding;
 //TBD
 using RAP.Business.Implementation;
 using System.IO;
@@ -22,20 +23,20 @@ namespace RAP.API.Controllers
     [RoutePrefix("api/applicationprocessing")]
     public class ApplicationProcessingController : ApiController
     {
-        private string Username, ExceptionMessage, InnerExceptionMessage;
+      
         private int UserID;
         private readonly IApplicationProcessingService _service;
         private readonly ICommonService _commonService;
         private readonly IdocumentService _docService;
         private IExceptionHandler _eHandler;
-        private readonly string errorCode = "5555";
+       
        
         public ApplicationProcessingController()
         {
-            _service = new ApplicationProcessingService();
-            _docService = new DocumentService();
-            _commonService = new CommonService();
-            _eHandler = new ExceptionHandler();
+            _service = RAPDependancyResolver.Instance.GetKernel().Get<IApplicationProcessingService>();           
+            _docService = RAPDependancyResolver.Instance.GetKernel().Get<IdocumentService>();
+            _commonService = RAPDependancyResolver.Instance.GetKernel().Get<ICommonService>();
+            _eHandler = RAPDependancyResolver.Instance.GetKernel().Get<IExceptionHandler>();
         }
         public ApplicationProcessingController(IApplicationProcessingService service)
         {
@@ -88,7 +89,7 @@ namespace RAP.API.Controllers
                 transaction.AddException(ex.Message);
                 ReturnCode = HttpStatusCode.InternalServerError;
 
-                if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+               // if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
                 //_commonService.LogError(errorCode, ex.Message, ex.InnerException.StackTrace.ToString(), 23, "GetRent");
                 //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }

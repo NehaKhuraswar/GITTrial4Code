@@ -13,9 +13,11 @@ using System.Security.Claims;
 using RAP.Core.DataModels;
 using RAP.Business.Implementation;
 using RAP.Core.Services;
+using Ninject;
 using System.Net.Mail;
 using RAP.Core.Common;
 using RAP.Core.Services;
+using RAP.Business.Binding;
 
 namespace RAP.API.Controllers
 {
@@ -30,8 +32,8 @@ namespace RAP.API.Controllers
       
         public RapRegisterController()
         {
-            _commonService = new CommonService();
-            _eHandler = new ExceptionHandler();
+            _commonService = RAPDependancyResolver.Instance.GetKernel().Get<ICommonService>();
+            _eHandler = RAPDependancyResolver.Instance.GetKernel().Get<IExceptionHandler>();
         }
 
         public void ExtractClaimDetails()

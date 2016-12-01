@@ -18,10 +18,10 @@ namespace RAP.Business.Implementation
         private readonly IExceptionHandler _eHandler;
     
         //TBD
-        public CommonService()
-        {
-            _dbHandler = new CommonDBHandler();            
-        }
+        //public CommonService()
+        //{
+        //    _dbHandler = new CommonDBHandler();            
+        //}
         public CommonService(ICommonDBHandler dbHandler, IExceptionHandler eHandler)
         {
             this._dbHandler = dbHandler;
