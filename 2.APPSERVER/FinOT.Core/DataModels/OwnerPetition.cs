@@ -80,9 +80,14 @@ namespace RAP.Core.DataModels
     #region New changes
   public class OwnerPetitionInfoM
   {
+      public OwnerPetitionInfoM()
+      {
+          ApplicantInfo = new OwnerPetitionApplicantInfoM();
+          PropertyInfo = new OwnerPetitionPropertyInfoM();
+      }
       public int OwnerPetitionID { get; set; }
-      public int OwnerPetitionApplicantInfoID { get; set; }
-      public int OwnerPropertyID { get; set; }
+      public OwnerPetitionApplicantInfoM ApplicantInfo { get; set; }
+      public OwnerPetitionPropertyInfoM PropertyInfo { get; set; }
       public bool bPetitionFiledByThirdParty { get; set; }
       public bool bAgreeToCityMediation { get; set; }
       public int PetitionFiledBy { get; set; }

@@ -1345,59 +1345,35 @@ namespace RAP.DAL
                 }
             }
         }
-        public ReturnResult<bool> SaveOwnerPetitionInfo(OwnerPetitionInfoM model)
+       
+        /// <summary>
+        /// Save Owner petition information
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ReturnResult<OwnerPetitionInfoM> SaveOwnerPetitionInfo(OwnerPetitionInfoM model)
         {
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            ReturnResult<OwnerPetitionInfoM> result = new ReturnResult<OwnerPetitionInfoM>();
             try
             {
-                //if (model.OwnerPetitionID != 0)
-                //{
-                //    var petitionInfo = from r in _dbContext.OwnerPetitionInfos
-                //                       where r.OwnerPetitionID == model.OwnerPetitionID
-                //                       select r;
-                //    if (petitionInfo.Any())
-                //    //{
-                //    //    petitionInfo.First().ApplicantUserID = model.ApplicantUserID;
-                //    //    petitionInfo.First().bThirdPartyRepresentation = model.bThirdPartyRepresentation;
-                //    //    petitionInfo.First().ThirdPartyUserID = model.ThirdPartyUserID;
-                //    //    petitionInfo.First().BuildingAcquiredDate = model.BuildingAcquiredDate;
-                //    //    petitionInfo.First().NumberOfUnits = model.NumberOfUnits;
-                //    //    petitionInfo.First().BusinessLicenseNumber = model.BusinessLicenseNumber;
-                //    //    petitionInfo.First().bDebitServiceCosts = model.bDebitServiceCosts;
-                //    //    petitionInfo.First().bIncreasedHousingCost = model.bIncreasedHousingCost;
-                //    //    petitionInfo.First().bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
-                //    //    petitionInfo.First().bAgreeToCityMediation = model.bAgreeToCityMediation;
-                //    //    petitionInfo.First().LanguageID = model.LanguageID;
-                //    //    petitionInfo.First().LastModifiedDate = DateTime.Now;
-
-                //   // }
-                //}
-                //else
-                //{
-                //    OwnerPetitionInfo petitionInfo = new OwnerPetitionInfo();
-                //    petitionInfo.ApplicantUserID = model.ApplicantUserID;
-                //    petitionInfo.bThirdPartyRepresentation = model.bThirdPartyRepresentation;
-                //    petitionInfo.ThirdPartyUserID = model.ThirdPartyUserID;
-                //    petitionInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
-                //    petitionInfo.NumberOfUnits = model.NumberOfUnits;
-                //    petitionInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
-                //    petitionInfo.bDebitServiceCosts = model.bDebitServiceCosts;
-                //    petitionInfo.bIncreasedHousingCost = model.bIncreasedHousingCost;
-                //    petitionInfo.bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
-                //    petitionInfo.bAgreeToCityMediation = model.bAgreeToCityMediation;
-                //    petitionInfo.LanguageID = model.LanguageID;
-                //    petitionInfo.PetitionFiledBy = model.PetitionFiledBy;
-                //    petitionInfo.CreatedDate = DateTime.Now;
-                //    _dbContext.OwnerPetitionInfos.InsertOnSubmit(petitionInfo);
-                //    _dbContext.SubmitChanges();
-                //}
+                OwnerPetitionInfo petitionInfo = new OwnerPetitionInfo();
+                petitionInfo.OwnerPetitionApplicantInfoID = model.ApplicantInfo.ApplicantUserID;
+                petitionInfo.OwnerPropertyID = model.PropertyInfo.OwnerPropertyID;
+                petitionInfo.bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
+                petitionInfo.bAgreeToCityMediation = model.bAgreeToCityMediation;
+                petitionInfo.PetitionFiledBy = model.PetitionFiledBy;
+                petitionInfo.CreatedDate = DateTime.Now;
+                _dbContext.OwnerPetitionInfos.InsertOnSubmit(petitionInfo);
+                _dbContext.SubmitChanges();
+                model.PropertyInfo.OwnerPropertyID = petitionInfo.OwnerPetitionID;
+                result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
             {
-                IExceptionHandler eHandler = new ExceptionHandler();
-                result.status = eHandler.HandleException(ex);
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
