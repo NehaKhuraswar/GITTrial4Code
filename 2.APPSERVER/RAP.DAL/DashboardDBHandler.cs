@@ -148,9 +148,46 @@ namespace RAP.DAL
                 return result;
             }
         }
-      
-        //#region "Save"
-       
+        #endregion
+
+        #region "Save"
+        public ReturnResult<bool> SaveNewActivityStatus(ActivityStatus_M activityStatus, int C_ID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                using (DashboardDataContext db = new DashboardDataContext(_connString))
+                {
+                    string errorMessage = "";
+                    int? errorCode = 0;
+
+
+                    //TBD
+                    int returnCode =  db.USP_NewActivityStatus_Save(activityStatus.Activity.ActivityID, activityStatus.Status.StatusID,
+                                    C_ID, DateTime.Now, activityStatus.EmployeeID, ref errorMessage, ref errorCode);
+
+                    if (errorCode != 0)
+                    {
+                        result.result = false;
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseMessage, StatusMessage = errorMessage };
+                        return result;
+                    }
+
+                    
+                    result.result = true;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         #endregion
 
     }

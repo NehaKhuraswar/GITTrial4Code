@@ -41,8 +41,10 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
             self.StatusList = response.data;
         });               
     }
-    self.Submit = function (model) {
-        rapFactory.SaveNewActivityStatus(model).then(function (response) {
+    self.Submit = function (model, C_ID) {
+        //TBD remove C_ID hardcoding
+        model.EmployeeID = 1;
+        rapFactory.SaveNewActivityStatus(model, 2).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
         });        
     }

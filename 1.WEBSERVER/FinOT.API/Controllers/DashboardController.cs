@@ -131,7 +131,7 @@ namespace RAP.API.Controllers
 
         [AllowAnonymous]
         [Route("getemptyactivitystatus")]
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage GetEmptyActivityStatus()
         {
 
@@ -195,6 +195,47 @@ namespace RAP.API.Controllers
             }
 
             return Request.CreateResponse<TranInfo<List<ActivityStatus_M>>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("savenewactivitystatus/{cid:int}")]
+        [HttpPost]
+        public HttpResponseMessage SaveNewActivityStatus(ActivityStatus_M activityStatus, int CID)
+        {
+            ExtractClaimDetails();
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _service.SaveNewActivityStatus(activityStatus, CID);
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
         #endregion
     }

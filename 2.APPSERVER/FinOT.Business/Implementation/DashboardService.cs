@@ -25,6 +25,20 @@ namespace RAP.Business.Implementation
             this._dbHandler = dbHandler;
         }
 
+        public ReturnResult<bool> SaveNewActivityStatus(ActivityStatus_M activityStatus, int C_ID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.SaveNewActivityStatus(activityStatus, C_ID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<List<ActivityStatus_M>> GetActivityStatusForCase(int C_ID)
         {
             ReturnResult<List<ActivityStatus_M>> result = new ReturnResult<List<ActivityStatus_M>>();

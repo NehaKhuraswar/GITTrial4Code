@@ -32,6 +32,18 @@ var rapnewcasestatusFactory = ['blockUI', 'ajaxService', function (blockUI, ajax
               blockUI.stop();
           });
       }
+
+      var _SaveNewActivityStatus = function (model, CID) {
+          blockUI.start();
+
+          var url = _routePrefix + '/savenewactivitystatus/' + CID;
+
+          return ajax.Post(model,url)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
+      factory.SaveNewActivityStatus = _SaveNewActivityStatus;
       factory.GetEmptyActivityStatus = _GetEmptyActivityStatus;
       factory.GetActivity = _GetActivity;
       factory.GetStatus = _GetStatus;

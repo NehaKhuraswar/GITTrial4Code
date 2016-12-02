@@ -10,6 +10,7 @@ namespace RAP.DAL
         ReturnResult<List<ActivityStatus_M>> GetActivityStatusForCase(int C_ID);
         ReturnResult<List<Activity_M>> GetActivity();
         ReturnResult<List<Status_M>> GetStatus(int activityID);
+        ReturnResult<bool> SaveNewActivityStatus(ActivityStatus_M activityStatus, int C_ID);
 
     }
 }

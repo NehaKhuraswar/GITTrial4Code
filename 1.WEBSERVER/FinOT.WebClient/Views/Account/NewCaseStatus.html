@@ -16,11 +16,11 @@
                 
                 <select class="form-control"
                         ng-model="Ctrl.ActivityStatus.Status"
-                        ng-options="status as (activity.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
+                        ng-options="status as (status.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
                         required>
                     <option value="" selected>Select Status</option>
                 </select>     
-                <button class="btn btn-default" ng-click="Ctrl.Submit(Ctrl.ActivityStatus)">Submit</button>         
+                <button class="btn btn-default" ng-click="Ctrl.Submit(Ctrl.ActivityStatus, Ctrl.caseinfo.C_ID)">Submit</button>         
             </div>
         </div>
     </div>

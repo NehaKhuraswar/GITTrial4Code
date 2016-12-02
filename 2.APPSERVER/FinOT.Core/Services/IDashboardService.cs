@@ -10,7 +10,7 @@ namespace RAP.Core.Services
         ReturnResult<List<ActivityStatus_M>> GetActivityStatusForCase(int C_ID);
         ReturnResult<List<Status_M>> GetStatus(int activityID);
         ReturnResult<List<Activity_M>> GetActivity();
-        
+        ReturnResult<bool> SaveNewActivityStatus(ActivityStatus_M activityStatus, int C_ID);
 
     }
 }

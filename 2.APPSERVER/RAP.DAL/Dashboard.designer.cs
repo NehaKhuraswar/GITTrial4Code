@@ -123,6 +123,15 @@ namespace RAP.DAL
 			errorCode = ((System.Nullable<int>)(result.GetParameterValue(2)));
 			return ((ISingleResult<USP_Status_GetResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_NewActivityStatus_Save")]
+		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, createdDate, createdBy, message, errorCode);
+			message = ((string)(result.GetParameterValue(5)));
+			errorCode = ((System.Nullable<int>)(result.GetParameterValue(6)));
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Activity")]
