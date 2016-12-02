@@ -168,26 +168,8 @@
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="LastModifiedBy" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="OwnerPetitionApplicantInfo_OwnerPetitionInfo" Member="OwnerPetitionApplicantInfo" ThisKey="OwnerPetitionApplicantInfoID" OtherKey="OwnerPetitionApplicantInfoID" Type="OwnerPetitionApplicantInfo" IsForeignKey="true" />
       <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo" Member="OwnerPetitionPropertyInfo" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionPropertyInfo" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.OwnerPetitionPropertyInfo" Member="OwnerPetitionPropertyInfos">
-    <Type Name="OwnerPetitionPropertyInfo">
-      <Column Name="OwnerPropertyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UnitTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MovedInDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="InitialRent" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
-      <Column Name="bRAPNoticeGiven" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RAPNoticeGivenDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RentStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IsPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo" Member="OwnerPetitionInfos" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionInfo" />
-      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionRentalIncrementInfo" Member="OwnerPetitionRentalIncrementInfos" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionRentalIncrementInfo" />
-      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionTenantInfo" Member="OwnerPetitionTenantInfos" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionTenantInfo" />
-      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionRentalIncrementInfo1" Member="OwnerPetitionRentalIncrementInfo1s" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionRentalIncrementInfo1" />
-      <Association Name="CurrentOnRentStatus_OwnerPetitionPropertyInfo" Member="CurrentOnRentStatus" ThisKey="RentStatusID" OtherKey="RentStatusID" Type="CurrentOnRentStatus" IsForeignKey="true" />
-      <Association Name="UnitType_OwnerPetitionPropertyInfo" Member="UnitType" ThisKey="UnitTypeID" OtherKey="UnitTypeID" Type="UnitType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.OwnerPetitionRentalIncrementInfo" Member="OwnerPetitionRentalIncrementInfos">
@@ -218,27 +200,48 @@
       <Association Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReasonInfos" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReasonInfo" />
     </Type>
   </Table>
-  <Table Name="dbo.OwnerPetitionRentalIncrementInfo" Member="OwnerPetitionRentalIncrementInfo1s">
-    <Type Name="OwnerPetitionRentalIncrementInfo1">
-      <Column Name="RentalIncreaseInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="OwnerPropertyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bRentIncreaseNoticeGiven" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RentIncreaseNoticeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RentIncreaseEffectiveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RentIncreasedFrom" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
-      <Column Name="RentIncreasedTo" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
-      <Association Name="OwnerPetitionRentalIncrementInfo1_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReasonInfos" ThisKey="RentalIncreaseInfoID" OtherKey="RentalIncreaseInfoID" Type="OwnerRentIncreaseReasonInfo" />
-      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionRentalIncrementInfo1" Member="OwnerPetitionPropertyInfo" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionPropertyInfo" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReasonInfos">
     <Type Name="OwnerRentIncreaseReasonInfo">
       <Column Name="RentIncreaseReasonInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RentalIncreaseInfoID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ReasonID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="OwnerPetitionRentalIncrementInfo_OwnerRentIncreaseReasonInfo" Member="OwnerPetitionRentalIncrementInfo" ThisKey="RentalIncreaseInfoID" OtherKey="RentalIncreaseInfoID" Type="OwnerPetitionRentalIncrementInfo" IsForeignKey="true" />
-      <Association Name="OwnerPetitionRentalIncrementInfo1_OwnerRentIncreaseReasonInfo" Member="OwnerPetitionRentalIncrementInfo1" ThisKey="RentalIncreaseInfoID" OtherKey="RentalIncreaseInfoID" Type="OwnerPetitionRentalIncrementInfo1" IsForeignKey="true" />
       <Association Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReason" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReason" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OwnerPetitionApplicantInfo" Member="OwnerPetitionApplicantInfos">
+    <Type Name="OwnerPetitionApplicantInfo">
+      <Column Name="OwnerPetitionApplicantInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ApplicantUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bBusinessLicensePaid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BusinessLicenseNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="bRentAdjustmentProgramFeePaid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BuildingAcquiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NumberOfUnits" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bMoreThanOneStreetOnParcel" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="OwnerPetitionApplicantInfo_OwnerPetitionInfo" Member="OwnerPetitionInfos" ThisKey="OwnerPetitionApplicantInfoID" OtherKey="OwnerPetitionApplicantInfoID" Type="OwnerPetitionInfo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OwnerPetitionPropertyInfo" Member="OwnerPetitionPropertyInfos">
+    <Type Name="OwnerPetitionPropertyInfo">
+      <Column Name="OwnerPropertyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UnitTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MovedInDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InitialRent" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="bRAPNoticeGiven" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RAPNoticeGivenDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RentStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo" Member="OwnerPetitionInfos" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionInfo" />
+      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionRentalIncrementInfo" Member="OwnerPetitionRentalIncrementInfos" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionRentalIncrementInfo" />
+      <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionTenantInfo" Member="OwnerPetitionTenantInfos" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionTenantInfo" />
+      <Association Name="CurrentOnRentStatus_OwnerPetitionPropertyInfo" Member="CurrentOnRentStatus" ThisKey="RentStatusID" OtherKey="RentStatusID" Type="CurrentOnRentStatus" IsForeignKey="true" />
+      <Association Name="UnitType_OwnerPetitionPropertyInfo" Member="UnitType" ThisKey="UnitTypeID" OtherKey="UnitTypeID" Type="UnitType" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

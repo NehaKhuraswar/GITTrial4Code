@@ -110,7 +110,7 @@ namespace RAP.Core.DataModels
         public int NumberOfUnits { get; set; }
         public bool bMoreThanOneStreetOnParcel { get; set; }
         public int CustomerID { get; set; }
-        public int IsPetitionFiled { get; set; }
+        public int bPetitionFiled { get; set; }
     }
 
     public class OwnerPetitionPropertyInfoM
@@ -121,11 +121,11 @@ namespace RAP.Core.DataModels
         public int UnitTypeID { get; set; }
         public DateTime MovedInDate { get; set; }
         public decimal InitialRent { get; set; }
-        public bool bRAPNoticeGive { get; set; }
+        public bool bRAPNoticeGiven { get; set; }
         public DateTime RAPNoticeGivenDate { get; set; }
         public int RentStatusID { get; set; }
         public int CustomerID { get; set; }
-        public int IsPetitionFiled { get; set; }
+        public bool bPetitionFiled { get; set; }
         public List<OwnerPetitionTenantInfoM> TenantInfo
         {
             get
@@ -153,9 +153,13 @@ namespace RAP.Core.DataModels
 
     public class OwnerPetitionTenantInfoM
     {
+        public OwnerPetitionTenantInfoM()
+        {
+            TenantUserInfo = new UserInfoM();
+        }
         public int TenantInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
-        public int TenantUserID { get; set; }
+        public UserInfoM TenantUserInfo { get; set; }
 
     }
 
@@ -179,6 +183,7 @@ namespace RAP.Core.DataModels
 
     public class OwnerPetitionRentalIncrementInfoM
     {
+        private List<OwnerRentIncreaseReasonsM> _rentIncreaseReasons = new List<OwnerRentIncreaseReasonsM>();
         public int RentalIncreaseInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public bool bRentIncreaseNoticeGiven { get; set; }
@@ -186,7 +191,18 @@ namespace RAP.Core.DataModels
         public DateTime RentIncreaseEffectiveDate { get; set; }
         public decimal RentIncreasedFrom { get; set; }
         public decimal RentIncreasedTo { get; set; }
-
+        public List<OwnerRentIncreaseReasonsM> RentIncreaseReasons
+        {
+            get
+            {
+                return _rentIncreaseReasons;
+            }
+            set
+            {
+                _rentIncreaseReasons = value;
+            }
+        }
+       
     }
     #endregion
 

@@ -13,9 +13,12 @@ namespace RAP.DAL
     {
         private readonly string _connString;
         private readonly ApplicationProcessingDataContext _dbContext;
-        CommonDBHandler commondbHandler = new CommonDBHandler();
-        public ApplicationProcessingDBHandler()
+        private ICommonDBHandler _commondbHandler;
+        private IExceptionHandler _eHandler;
+        public ApplicationProcessingDBHandler(ICommonDBHandler commondbHandler, IExceptionHandler eHandler)
         {
+            this._commondbHandler = commondbHandler;
+            this._eHandler = eHandler;
             _dbContext = new ApplicationProcessingDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
         }
         #region "Get"
@@ -191,7 +194,7 @@ namespace RAP.DAL
                         //    return result;
                         //}
                         ReturnResult<UserInfoM> resultOwnerInfo = new ReturnResult<UserInfoM>();
-                        resultOwnerInfo = commondbHandler.GetUserInfo(ownerUserID);
+                        resultOwnerInfo = _commondbHandler.GetUserInfo(ownerUserID);
                        // caseInfo.OwnerInfo = resultOwnerInfo.result;
                         //if (ownerUserID == 0)
                         //{
@@ -236,15 +239,15 @@ namespace RAP.DAL
                     tenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionInfoDB.bThirdPartyRepresentation;
                     if (tenantPetitionInfo.bThirdPartyRepresentation)
                     {
-                        tenantPetitionInfo.ThirdPartyInfo = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
+                        tenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
                     }
                     if (TenantPetitionInfoDB.OwnerUserID >= 1)
                     {
-                        tenantPetitionInfo.OwnerInfo = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
+                        tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
                     }
                     if (TenantPetitionInfoDB.PropertyManagerUserID >= 1)
                     {
-                        tenantPetitionInfo.PropertyManager = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                        tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
                     }
 
                     tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
@@ -283,10 +286,10 @@ namespace RAP.DAL
                     tenantPetitionInfo.bThirdPartyRepresentation =(bool) TenantPetitionInfoDB.bThirdPartyRepresentation;
                     if(tenantPetitionInfo.bThirdPartyRepresentation)
                     {
-                        tenantPetitionInfo.ThirdPartyInfo = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
+                        tenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
                     }
-                    tenantPetitionInfo.OwnerInfo = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
-                    tenantPetitionInfo.PropertyManager = commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                    tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
+                    tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
                 }
                 tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
                 tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
@@ -1266,166 +1269,343 @@ namespace RAP.DAL
         #endregion   
         
         #region Owner petition
-
+        /// <summary>
+        /// Save or Update Applicant Information page of Owners petition.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ReturnResult<OwnerPetitionApplicantInfoM> SaveOwnerApplicantInfo(OwnerPetitionApplicantInfoM model)
+        {
+            ReturnResult<OwnerPetitionApplicantInfoM> result = new ReturnResult<OwnerPetitionApplicantInfoM>();
+            int thirdPartyUserID = 0;           
+            {
+                try
+                {
+                    if(model.bThirdPartyRepresentation)
+                    {
+                        var saveUserResult = _commondbHandler.SaveUserInfo(model.ThirdPartyUser);
+                        if(saveUserResult.status.Status != StatusEnum.Success)
+                        {
+                            result.status = saveUserResult.status;
+                            return result;
+                        }
+                        thirdPartyUserID = saveUserResult.result.UserID;
+                    }
+                    if(model.OwnerPetitionApplicantInfoID != 0)
+                    {
+                        var applicantInfo = from r in _dbContext.OwnerPetitionApplicantInfos 
+                                            where r.OwnerPetitionApplicantInfoID == model.OwnerPetitionApplicantInfoID
+                                            select r;
+                       if(applicantInfo.Any())
+                       {
+                           if(thirdPartyUserID > 0)
+                           {
+                           applicantInfo.First().ThirdPartyUserID = thirdPartyUserID;
+                           }
+                           applicantInfo.First().bThirdPartyRepresentation = model.bThirdPartyRepresentation;
+                           applicantInfo.First().bBusinessLicensePaid = model.bBusinessLicensePaid;
+                           applicantInfo.First().BusinessLicenseNumber = model.BusinessLicenseNumber;
+                           applicantInfo.First().bRentAdjustmentProgramFeePaid = model.bRentAdjustmentProgramFeePaid;
+                           applicantInfo.First().BuildingAcquiredDate = model.BuildingAcquiredDate;
+                           applicantInfo.First().NumberOfUnits = model.NumberOfUnits;
+                           applicantInfo.First().bMoreThanOneStreetOnParcel = model.bMoreThanOneStreetOnParcel;
+                           _dbContext.SubmitChanges();
+                       }
+                    }
+                    else
+                    {
+                        OwnerPetitionApplicantInfo applicantInfo = new OwnerPetitionApplicantInfo();
+                        applicantInfo.ApplicantUserID = model.ApplicantUserID;
+                        applicantInfo.bThirdPartyRepresentation = model.bThirdPartyRepresentation;
+                        if (thirdPartyUserID > 0)
+                        {
+                            applicantInfo.ThirdPartyUserID = thirdPartyUserID;
+                        }
+                        applicantInfo.bBusinessLicensePaid = model.bBusinessLicensePaid;
+                        applicantInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
+                        applicantInfo.bRentAdjustmentProgramFeePaid = model.bRentAdjustmentProgramFeePaid;
+                        applicantInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
+                        applicantInfo.NumberOfUnits = model.NumberOfUnits;
+                        applicantInfo.bMoreThanOneStreetOnParcel = model.bMoreThanOneStreetOnParcel;
+                        applicantInfo.CustomerID = model.CustomerID;
+                        applicantInfo.bPetitionFiled = false;
+                        _dbContext.OwnerPetitionApplicantInfos.InsertOnSubmit(applicantInfo);
+                        _dbContext.SubmitChanges();
+                        model.OwnerPetitionApplicantInfoID = applicantInfo.OwnerPetitionApplicantInfoID;                      
+                    }
+                    result.result = model;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;                   
+                }
+                catch(Exception ex)
+                {
+                    result.status = _eHandler.HandleException(ex);
+                    _commondbHandler.SaveErrorLog(result.status);
+                    return result;
+                }
+            }
+        }
         public ReturnResult<bool> SaveOwnerPetitionInfo(OwnerPetitionInfoM model)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                if (model.OwnerPetitionID != 0)
-                {
-                    var petitionInfo = from r in _dbContext.OwnerPetitionInfos
-                                       where r.OwnerPetitionID == model.OwnerPetitionID
-                                       select r;
-                    if (petitionInfo.Any())
-                    {
-                        petitionInfo.First().ApplicantUserID = model.ApplicantUserID;
-                        petitionInfo.First().bThirdPartyRepresentation = model.bThirdPartyRepresentation;
-                        petitionInfo.First().ThirdPartyUserID = model.ThirdPartyUserID;
-                        petitionInfo.First().BuildingAcquiredDate = model.BuildingAcquiredDate;
-                        petitionInfo.First().NumberOfUnits = model.NumberOfUnits;
-                        petitionInfo.First().BusinessLicenseNumber = model.BusinessLicenseNumber;
-                        petitionInfo.First().bDebitServiceCosts = model.bDebitServiceCosts;
-                        petitionInfo.First().bIncreasedHousingCost = model.bIncreasedHousingCost;
-                        petitionInfo.First().bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
-                        petitionInfo.First().bAgreeToCityMediation = model.bAgreeToCityMediation;
-                        petitionInfo.First().LanguageID = model.LanguageID;
-                        petitionInfo.First().LastModifiedDate = DateTime.Now;
+                //if (model.OwnerPetitionID != 0)
+                //{
+                //    var petitionInfo = from r in _dbContext.OwnerPetitionInfos
+                //                       where r.OwnerPetitionID == model.OwnerPetitionID
+                //                       select r;
+                //    if (petitionInfo.Any())
+                //    //{
+                //    //    petitionInfo.First().ApplicantUserID = model.ApplicantUserID;
+                //    //    petitionInfo.First().bThirdPartyRepresentation = model.bThirdPartyRepresentation;
+                //    //    petitionInfo.First().ThirdPartyUserID = model.ThirdPartyUserID;
+                //    //    petitionInfo.First().BuildingAcquiredDate = model.BuildingAcquiredDate;
+                //    //    petitionInfo.First().NumberOfUnits = model.NumberOfUnits;
+                //    //    petitionInfo.First().BusinessLicenseNumber = model.BusinessLicenseNumber;
+                //    //    petitionInfo.First().bDebitServiceCosts = model.bDebitServiceCosts;
+                //    //    petitionInfo.First().bIncreasedHousingCost = model.bIncreasedHousingCost;
+                //    //    petitionInfo.First().bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
+                //    //    petitionInfo.First().bAgreeToCityMediation = model.bAgreeToCityMediation;
+                //    //    petitionInfo.First().LanguageID = model.LanguageID;
+                //    //    petitionInfo.First().LastModifiedDate = DateTime.Now;
 
+                //   // }
+                //}
+                //else
+                //{
+                //    OwnerPetitionInfo petitionInfo = new OwnerPetitionInfo();
+                //    petitionInfo.ApplicantUserID = model.ApplicantUserID;
+                //    petitionInfo.bThirdPartyRepresentation = model.bThirdPartyRepresentation;
+                //    petitionInfo.ThirdPartyUserID = model.ThirdPartyUserID;
+                //    petitionInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
+                //    petitionInfo.NumberOfUnits = model.NumberOfUnits;
+                //    petitionInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
+                //    petitionInfo.bDebitServiceCosts = model.bDebitServiceCosts;
+                //    petitionInfo.bIncreasedHousingCost = model.bIncreasedHousingCost;
+                //    petitionInfo.bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
+                //    petitionInfo.bAgreeToCityMediation = model.bAgreeToCityMediation;
+                //    petitionInfo.LanguageID = model.LanguageID;
+                //    petitionInfo.PetitionFiledBy = model.PetitionFiledBy;
+                //    petitionInfo.CreatedDate = DateTime.Now;
+                //    _dbContext.OwnerPetitionInfos.InsertOnSubmit(petitionInfo);
+                //    _dbContext.SubmitChanges();
+                //}
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        /// <summary>
+        /// Save Owner property information (Rental Property page on Owner ptition) and addes Tenant information
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model)
+        {
+            ReturnResult<OwnerPetitionPropertyInfoM> result = new ReturnResult<OwnerPetitionPropertyInfoM>();
+            try
+            {
+                if (model.OwnerPropertyID != 0)
+                {
+                    var propertyInfo = from r in _dbContext.OwnerPetitionPropertyInfos
+                                       where r.OwnerPropertyID == model.OwnerPropertyID
+                                       select r;
+                    if (propertyInfo.Any())
+                    {
+                        propertyInfo.First().UnitTypeID = model.UnitTypeID;
+                        _dbContext.SubmitChanges();
                     }
                 }
                 else
                 {
-                    OwnerPetitionInfo petitionInfo = new OwnerPetitionInfo();
-                    petitionInfo.ApplicantUserID = model.ApplicantUserID;
-                    petitionInfo.bThirdPartyRepresentation = model.bThirdPartyRepresentation;
-                    petitionInfo.ThirdPartyUserID = model.ThirdPartyUserID;
-                    petitionInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
-                    petitionInfo.NumberOfUnits = model.NumberOfUnits;
-                    petitionInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
-                    petitionInfo.bDebitServiceCosts = model.bDebitServiceCosts;
-                    petitionInfo.bIncreasedHousingCost = model.bIncreasedHousingCost;
-                    petitionInfo.bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
-                    petitionInfo.bAgreeToCityMediation = model.bAgreeToCityMediation;
-                    petitionInfo.LanguageID = model.LanguageID;
-                    petitionInfo.PetitionFiledBy = model.PetitionFiledBy;
-                    petitionInfo.CreatedDate = DateTime.Now;
-                    _dbContext.OwnerPetitionInfos.InsertOnSubmit(petitionInfo);
+
+                    OwnerPetitionPropertyInfo propertyInfo = new OwnerPetitionPropertyInfo();
+                    propertyInfo.UnitTypeID = model.UnitTypeID;
+                    propertyInfo.CustomerID = model.CustomerID;
+                    propertyInfo.bPetitionFiled = model.bPetitionFiled;
+                    _dbContext.OwnerPetitionPropertyInfos.InsertOnSubmit(propertyInfo);
                     _dbContext.SubmitChanges();
+                    model.OwnerPropertyID = propertyInfo.OwnerPropertyID;
                 }
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
-                return result;
-            }
-            catch (Exception ex)
-            {
-                IExceptionHandler eHandler = new ExceptionHandler();
-                result.status = eHandler.HandleException(ex);
-                return result;
-            }
-        }
-
-        public ReturnResult<bool> SaveOwnerPropertyInfo(List<OwnerPropertInfoM> models)
-        {           
-            ReturnResult<bool> result = new ReturnResult<bool>();
-            try
-            {
-                foreach (var model in models)
+                if (model.TenantInfo.Any())
                 {
-                    if (model.OwnerPropertyID != 0)
+                    OwnerPetitionTenantInfo tenantInfo = new OwnerPetitionTenantInfo();
+                    List<OwnerPetitionTenantInfoM> tenantsInfoM = new List<OwnerPetitionTenantInfoM>();
+                    foreach (var tenant in model.TenantInfo)
                     {
-                        var propertyInfo = from r in _dbContext.OwnerPropertyInfos
-                                           where r.OwnerPropertyID == model.OwnerPropertyID
+                        var userResult = _commondbHandler.SaveUserInfo(tenant.TenantUserInfo);
+                        if (userResult.status.Status == StatusEnum.Success)
+                        {
+                            var userinfo = from r in _dbContext.OwnerPetitionTenantInfos
+                                           where r.TenantUserID == userResult.result.UserID
                                            select r;
-                        if (propertyInfo.Any())
-                        {
-                            propertyInfo.First().UnitTypeID = model.UnitTypeID;
-                            propertyInfo.First().TenantUserID = model.TenantUserID;
-                            propertyInfo.First().MovedInDate = model.MovedInDate;
-                            propertyInfo.First().InitialRent = model.InitialRent;
-                            propertyInfo.First().bRAPNoticeGiven = model.bRAPNoticeGiven;
-                            propertyInfo.First().RAPNoticeGivenDate = model.RAPNoticeGivenDate;
-                            propertyInfo.First().RentStatusID = model.RentStatusID;
-                            propertyInfo.First().bBanking = model.bBanking;
-                            propertyInfo.First().bDebitServiceCosts = model.bDebitServiceCosts;
-                            propertyInfo.First().bIncreasedHousingCost = model.bIncreasedHousingCost;
-                            _dbContext.SubmitChanges();
-                          }
-                        
-                    }
-                    else
-                    {
+                            if (!userinfo.Any())
+                            {
 
-                        OwnerPropertyInfo propertyInfo = new OwnerPropertyInfo();
-                        propertyInfo.OwnerPetitionID = model.OwnerPetitionID;
-                        propertyInfo.UnitTypeID = model.UnitTypeID;
-                        propertyInfo.TenantUserID = model.TenantUserID;
-                        propertyInfo.MovedInDate = model.MovedInDate;
-                        propertyInfo.InitialRent = model.InitialRent;
-                        propertyInfo.bRAPNoticeGiven = model.bRAPNoticeGiven;
-                        propertyInfo.RAPNoticeGivenDate = model.RAPNoticeGivenDate;
-                        propertyInfo.RentStatusID = model.RentStatusID;
-                        propertyInfo.bBanking = model.bBanking;
-                        propertyInfo.bDebitServiceCosts = model.bDebitServiceCosts;
-                        propertyInfo.bIncreasedHousingCost = model.bIncreasedHousingCost;
-                        _dbContext.OwnerPropertyInfos.InsertOnSubmit(propertyInfo);
-                        _dbContext.SubmitChanges();
-                    }                   
-                }
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
-                result.result = true;
-                return result;
-            }
-            catch (Exception ex)
-            {
-                IExceptionHandler eHandler = new ExceptionHandler();
-                result.status = eHandler.HandleException(ex);
-                return result;
-            }
-        }
-
-        public ReturnResult<bool> SaveOwnerRentIncreaseInfo(List<OwnerRentIncreaseInfoM> models)
-        {
-            ReturnResult<bool> result = new ReturnResult<bool>();
-            try
-            {
-                foreach (var model in models)
-                {
-                    if (model.RentalIncreaseInfoID != 0)
-                    {
-                        var rentIncreaseInfo = from r in _dbContext.OwnerRentalIncrementInfos
-                                               where r.RentalIncreaseInfoID == model.RentalIncreaseInfoID
-                                               select r;
-                        if(rentIncreaseInfo.Any())
+                                tenant.TenantUserInfo = userResult.result;
+                                tenantInfo.TenantUserID = tenant.TenantUserInfo.UserID;
+                                tenantInfo.OwnerPropertyID = model.OwnerPropertyID;
+                                _dbContext.OwnerPetitionTenantInfos.InsertOnSubmit(tenantInfo);
+                                _dbContext.SubmitChanges();
+                                tenant.TenantInfoID = tenantInfo.TenantInfoID;
+                                tenantsInfoM.Add(tenant);
+                            }
+                            else
+                            {
+                                tenantsInfoM.Add(tenant);
+                            }
+                        }
+                        else
                         {
-                            rentIncreaseInfo.First().bRentIncreaseNoticeGiven = model.bRentIncreaseNoticeGiven;
-                            rentIncreaseInfo.First().RentIncreaseNoticeDate = model.RentIncreaseNoticeDate;
-                            rentIncreaseInfo.First().RentIncreaseEffectiveDate = model.RentIncreaseEffectiveDate;
-                            rentIncreaseInfo.First().RentIncreasedFrom = model.RentIncreasedFrom;
-                            rentIncreaseInfo.First().RentIncreasedTo = model.RentIncreasedTo;
-                            _dbContext.SubmitChanges();
+                            result.status = userResult.status;
+                            return result;
                         }
                     }
-                    else
-                    {
-                        OwnerRentalIncrementInfo rentIncreaseInfo = new OwnerRentalIncrementInfo();
-                        rentIncreaseInfo.OwnerPropertyID = model.OwnerPropertyID;
-                        rentIncreaseInfo.bRentIncreaseNoticeGiven = model.bRentIncreaseNoticeGiven;
-                        rentIncreaseInfo.RentIncreaseNoticeDate = model.RentIncreaseNoticeDate;
-                        rentIncreaseInfo.RentIncreaseEffectiveDate = model.RentIncreaseEffectiveDate;
-                        rentIncreaseInfo.RentIncreasedFrom = model.RentIncreasedFrom;
-                        rentIncreaseInfo.RentIncreasedTo = model.RentIncreasedTo;
-                        _dbContext.OwnerRentalIncrementInfos.InsertOnSubmit(rentIncreaseInfo);
-                        _dbContext.SubmitChanges();
-                    }
-                }            
+                    model.TenantInfo = tenantsInfoM;
+                }
+                result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
-                result.result = true;
                 return result;
             }
             catch (Exception ex)
             {
-                IExceptionHandler eHandler = new ExceptionHandler();
-                result.status = eHandler.HandleException(ex);
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+        /// <summary>
+        /// Saves Owner rental increment information and updates property information (Rent History page on Owner ptition)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(OwnerPetitionPropertyInfoM model)
+        {
+            ReturnResult<OwnerPetitionPropertyInfoM> result = new ReturnResult<OwnerPetitionPropertyInfoM>();
+            try
+            {
+                if (model.OwnerPropertyID > 0)
+                {
+                    var propertyInfo = from r in _dbContext.OwnerPetitionPropertyInfos
+                                       where r.OwnerPropertyID == model.OwnerPropertyID
+                                       select r;
+                    if (propertyInfo.Any())
+                    {
+                        propertyInfo.First().MovedInDate = model.MovedInDate;
+                        propertyInfo.First().InitialRent = model.InitialRent;
+                        propertyInfo.First().bRAPNoticeGiven = model.bRAPNoticeGiven;
+                        propertyInfo.First().RAPNoticeGivenDate = model.RAPNoticeGivenDate;
+                        propertyInfo.First().RentStatusID = model.RentStatusID;
+                        _dbContext.SubmitChanges();
+                    }
+                }
+
+                if (model.RentalInfo.Any())
+                {
+                    List<OwnerPetitionRentalIncrementInfoM> _rentalInfo = new List<OwnerPetitionRentalIncrementInfoM>();
+                    foreach (var rent in model.RentalInfo)
+                    {
+                        if (rent.RentalIncreaseInfoID != 0)
+                        {
+                            var rentIncreaseInfo = from r in _dbContext.OwnerPetitionRentalIncrementInfos
+                                                   where r.RentalIncreaseInfoID == rent.RentalIncreaseInfoID
+                                                   select r;
+                            if (rentIncreaseInfo.Any())
+                            {
+                                rentIncreaseInfo.First().bRentIncreaseNoticeGiven = rent.bRentIncreaseNoticeGiven;
+                                rentIncreaseInfo.First().RentIncreaseNoticeDate = rent.RentIncreaseNoticeDate;
+                                rentIncreaseInfo.First().RentIncreaseEffectiveDate = rent.RentIncreaseEffectiveDate;
+                                rentIncreaseInfo.First().RentIncreasedFrom = rent.RentIncreasedFrom;
+                                rentIncreaseInfo.First().RentIncreasedTo = rent.RentIncreasedTo;
+                                _dbContext.SubmitChanges();
+                                _rentalInfo.Add(rent);
+                            }
+                        }
+                        else
+                        {
+                            OwnerPetitionRentalIncrementInfo rentIncreaseInfo = new OwnerPetitionRentalIncrementInfo();
+                            rentIncreaseInfo.OwnerPropertyID = model.OwnerPropertyID;
+                            rentIncreaseInfo.bRentIncreaseNoticeGiven = rent.bRentIncreaseNoticeGiven;
+                            rentIncreaseInfo.RentIncreaseNoticeDate = rent.RentIncreaseNoticeDate;
+                            rentIncreaseInfo.RentIncreaseEffectiveDate = rent.RentIncreaseEffectiveDate;
+                            rentIncreaseInfo.RentIncreasedFrom = rent.RentIncreasedFrom;
+                            rentIncreaseInfo.RentIncreasedTo = rent.RentIncreasedTo;
+                            _dbContext.OwnerPetitionRentalIncrementInfos.InsertOnSubmit(rentIncreaseInfo);
+                            _dbContext.SubmitChanges();
+                            rent.RentalIncreaseInfoID = rentIncreaseInfo.RentalIncreaseInfoID;
+                            _rentalInfo.Add(rent);
+                        }
+                    }
+                    model.RentalInfo = _rentalInfo;
+
+                    foreach (var rentIncrease in model.RentalInfo)
+                    {
+                        if (rentIncrease.RentIncreaseReasons.Select(x => x.IsSelected == true).Any())
+                        {
+                            var rentIncreaseReasonDB = from r in _dbContext.OwnerRentIncreaseReasonInfos
+                                                       where r.RentalIncreaseInfoID == rentIncrease.RentalIncreaseInfoID
+                                                       select r;
+                            if (rentIncreaseReasonDB.Any())
+                            {
+                                foreach (var item in rentIncrease.RentIncreaseReasons)
+                                {
+                                    if (item.IsSelected)
+                                    {
+                                        if (!rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
+                                        {
+                                            OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
+                                            rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
+                                            rentIncreaseReason.ReasonID = item.ReasonID;
+                                            _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
+                                            _dbContext.SubmitChanges();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
+                                        {
+                                            OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
+                                            rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
+                                            rentIncreaseReason.ReasonID = item.ReasonID;
+                                            _dbContext.OwnerRentIncreaseReasonInfos.DeleteOnSubmit(rentIncreaseReason);
+                                            _dbContext.SubmitChanges();
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in rentIncrease.RentIncreaseReasons)
+                                {
+                                    if (item.IsSelected)
+                                    {
+                                        OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
+                                        rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
+                                        rentIncreaseReason.ReasonID = item.ReasonID;
+                                        _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
+                                        _dbContext.SubmitChanges();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }        
