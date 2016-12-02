@@ -4,42 +4,7 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    //var _getrent = function () {
-    //    return rapFactory.GetRent().then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        self.rent = response.data;
-    //    });
-    //}
-
-   // var _GetCaseInfo = function (model) {
-
-   //     rapFactory.GetCaseInfo().then(function (response) {
-   //         if (!alert.checkResponse(response)) {
-   //             return;
-   //         }
-           
-   //         self.caseinfo = response.data;           
-
-   //     });
-   // }
-   //// _getrent();
-   // _GetCaseInfo();
-
-    //self.Continue = function () {
-    //    $location.path("/applicationinfo");
-    //}
-    //self.ContinueToGroundsforPetition = function () {
-    //    $location.path("/groundsforpetition");
-    //}
-    //self.ContinueToRentalHistory = function () {
-    //    $location.path("/rentalhistory");
-    //}
-    //self.ContinueToLostServices = function () {
-    //    var a = self.selectedObj;
-    //    $location.path("/lostservices");
-    //}
+   
 
     self.onFileSelect = function ($files) {
         if ($files && $files.length) {

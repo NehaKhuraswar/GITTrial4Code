@@ -97,35 +97,28 @@
             </div>
             </div>
             iv class="field-group">
-    <div class="radio">
-                <label for=" rap_notice" class="has-info-btn">
-        <input type="radio" name="NoRAPNotice" value="true" class="input-field"
-               ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRAPNoticeGiven">I was never given a RAP notice by my property owner
+    <div class="form-group-radio vertical clearfix">
+        <label for="rap_notice" class="has-info-btn">
+            <input type="radio" name="NoRAPNotice" value="true" class="input-field" id="rap_notice"
+                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRAPNoticeGiven">I was never given a RAP notice by my property owner
         </label>
         <div class="clear"></div>
     </div>
 
             <div class="field-group">
                 <p class="input-label has-info-btn">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?  <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
                     <label for="rent_subsidized_yes">
-                        <input type="radio" name="IsControlled" value="true" class="input-field"
+                        <input type="radio" name="IsControlled" value="true" class="input-field" id="rent_subsidized_yes"
                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRentControlledByAgency"><i></i><span>Yes</span>
                     </label>
                     <label for="rent_subsidized_no">
-                        <input type="radio" name="IsControlled" value="false" class="input-field"
+                        <input type="radio" name="IsControlled" value="false" class="input-field" id="rent_subsidized_no"
                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.bRentControlledByAgency"><i></i> <span>No</span>
                     </label>
                 </div>
             </div>
 
-
-            <!--<div class="radio">
-            <label><input type="radio" name="IsSubsidized">Yes</label>
-        </div>
-        <div class="radio">
-            <label><input type="radio" name="IsSubsidized">No</label>
-        </div>-->
 
 
             <div class="subhead type2">
@@ -137,14 +130,14 @@
                 <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>
                 <p>Did you recieve a rent program notice with the notice of increase</p>
                 <!--<div ng-repeat="rentincrease in Ctrl.caseinfo.TenantPetitionInfo.RentIncreases">-->
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
                     <label for="receive_rent_increase_notice_yes">
-                        <input type="radio" name="IsRentNotice" value="true" class="input-field"
+                        <input type="radio" name="IsRentNotice" value="true" class="input-field" id="receive_rent_increase_notice_yes"
                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven"><i></i><span>Yes</span>
                     </label>
 
                     <label for="receive_rent_increase_notice_no">
-                        <input type="radio" name="IsRentNotice" class="input-field" value="false"
+                        <input type="radio" name="IsRentNotice" class="input-field" value="false" id="receive_rent_increase_notice_no"
                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseNoticeGiven">No
                     </label>
                     <div class="clear"></div>
@@ -274,7 +267,7 @@
 
             <div class="field-group">
                 <p class="input-label">Are you contesting this increase in this petition?</p>
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
                     <label for="contesting_increase_yes">
                         <input type="radio" name="IsContesting" value="true" class="input-field"
                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.RentIncreases[0].bRentIncreaseContested"><i></i><span>Yes</span>
@@ -290,7 +283,7 @@
                 </div>
                 <div class="field-group subhead">
                     <p class="input-label">Have you ever filed a petition for your rental unit?</p>
-                    <div class="radio">
+                    <div class="form-group-radio vertical clearfix">
                         <label for="filed_rental_unit_petition_yes">
                             <input type="radio" name="FiledPetitionInPast" value="true" class="input-field"
                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.bPetitionFiledPrviously" /><i></i><span>Yes</span>

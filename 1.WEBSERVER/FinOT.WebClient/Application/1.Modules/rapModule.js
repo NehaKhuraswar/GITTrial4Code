@@ -57,7 +57,28 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapGroundsOfAppealController', rapGroundsOfAppealController)
     .controller('rapServingAppealController', rapServingAppealController)
     .controller('rapReviewAppealController', rapReviewAppealController)
-
+    .directive('yearDrop',function(){
+        function getYears(offset, range) {
+            var range = range / 2;
+            var currentYear = new Date().getFullYear();
+            var years = [];
+            for (var i = range; i > 0 ; i--) {
+                
+                years.push(currentYear + offset - i);
+            }
+            for (var i = 0; i < range + 1; i++){
+                years.push(currentYear + offset + i);
+            }
+            return years;
+        }
+        return {
+            link: function (scope, element, attrs) {
+                scope.years = getYears(+attrs.offset, +attrs.range);
+                scope.selected = scope.years[0];
+            },
+            template: '<select ng-model="selected" ng-options="y for y in years"></select>'
+        };
+    })
    
     .directive('rapPetitiontype', function () {
         return {

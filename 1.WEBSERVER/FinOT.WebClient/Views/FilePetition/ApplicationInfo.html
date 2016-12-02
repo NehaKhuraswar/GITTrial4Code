@@ -18,12 +18,12 @@
         <div class="field-group">
             <p class="input-label">Is anybody representing you?</p>
 
-            <div class="radio">
+            <div class="form-group-radio vertical clearfix">
                 <label for="anybody_representing_you_yes">
-                    <input type="radio" name="anybody_representing_you" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation" ><i></i><span>Yes</span>
+                    <input type="radio" name="anybody_representing_you" id="anybody_representing_you_yes" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation"><i></i><span>Yes</span>
                 </label>
                 <label for="anybody_representing_you_no">
-                    <input type="radio" name="anybody_representing_you" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation" /><i></i> <span>No</span>
+                    <input type="radio" name="anybody_representing_you" id="anybody_representing_you_no" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation" /><i></i> <span>No</span>
                 </label>
                 <div class="clear"></div>
             </div>
@@ -135,7 +135,7 @@
                 <h4>Property manager(s) name and mailing address</h4>
             </div>
             <div id="property-manager-info">
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
                     <label for="same_as_po_info">
                         <input type="radio" name="same_as_po_info" id="same_as_po_info" class="input-field" value="Yes                             " /><i></i><span>Same as property owner info                             </span>
                     </label>
@@ -217,7 +217,7 @@
 
                     <div class="field-group">
                         <p class="input-label">Type of unit you rent</p>
-                        <div class="radio">
+                        <div class="form-group-radio vertical clearfix">
                             <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
                                 <input type="radio"
                                        class="input-field"
@@ -229,18 +229,10 @@
                             <div class="clear"></div>
                         </div>
                     </div>
-                    <!--<div class="radio">
-                <label><input type="radio" name="TypeOfUnit">House</label>
-            </div>
-            <div class="radio">
-                <label><input type="radio" name="TypeOfUnit">Condominium</label>
-            </div>
-            <div class="radio">
-                <label><input type="radio" name="TypeOfUnit">Apartment, Room, or Live-work</label>
-            </div>-->
+                   
                     <div class="field-group">
                         <p class="input-label">Are you current on paying your rent?</p>
-                        <div class="radio">
+                        <div class="form-group-radio vertical clearfix">
                             <label ng-repeat="currentonrent in Ctrl.caseinfo.TenantPetitionInfo.CurrentOnRent" for="{{currentonrent.StatusID}}">
                                 <input type="radio"
                                        class="input-field"
@@ -259,15 +251,7 @@
                     <textarea name="pi_explanation" id="pi_explanation" class="field-input textarea" rows="8" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ProvideExplanation"></textarea>
                 </div>
 
-                <!--<div class="radio">
-            <label><input type="radio" name="IsCurrentOnRent">Yes</label>
-        </div>
-        <div class="radio">
-            <label><input type="radio" name="IsCurrentOnRent">No</label>
-        </div>
-        <div class="radio">
-            <label><input type="radio" name="IsCurrentOnRent">Legally withholding rent</label>
-        </div>-->
+           
 
                 <button class="btn-primary" ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
             </div>

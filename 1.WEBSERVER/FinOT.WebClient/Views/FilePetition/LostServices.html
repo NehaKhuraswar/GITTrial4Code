@@ -10,10 +10,10 @@
                 <p>___________________________________________________________________________________________</p>
                 <p>Have you lost services or are you being changed for services originally provided by the owner?</p>
             
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
                     <label><input type="radio" name="LostServices" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService">Yes</label>
                 </div>
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
                     <label><input type="radio" name="LostServices" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService">No</label>
                 </div>
                 <p>Describe the reduced service(s) </p>
@@ -22,174 +22,222 @@
                 <p>Your estimated dollar value of the lost service(s) or problems </p>
                 <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].EstimatedLoss" required />
                 
-                <p>Date loss began</p>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Month
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Jan</a></li>
-                        <li><a href="#">Feb</a></li>
-                        <li><a href="#">Mar</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Date
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Year
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">2014</a></li>
-                        <li><a href="#">2013</a></li>
-                        <li><a href="#">2012</a></li>
-                    </ul>
-                </div>
+                
+                <div class="field-group no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="field-group">
+                                <label for="date_loss_began_month">Date loss began</label>
+                                <select name="date_loss_began_month" id="date_loss_began_month" class="custom-select" data-placeholder="Month">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                        </div>
 
-                <p>Date you began paying for the services</p>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Month
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Jan</a></li>
-                        <li><a href="#">Feb</a></li>
-                        <li><a href="#">Mar</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Date
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Year
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">2014</a></li>
-                        <li><a href="#">2013</a></li>
-                        <li><a href="#">2012</a></li>
-                    </ul>
-                </div>
-                <button ng-click="Ctrl.AttachDocumentation()">Attach additional documentation</button>
-                <p>___________________________________________________________________________________________</p>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="field-group">
+                                <label for="date_loss_began_day">&nbsp;</label>
+                                <select name="date_loss_began_day" id="date_loss_began_day" class="custom-select" data-placeholder="Day">
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                </select>
+                            </div>
+                        </div>
 
-                <button ng-click="Ctrl.AddAnotherLostService()">Add another lost service description</button>
-
-                <p>___________________________________________________________________________________________</p>
-
-                <p>Are you claiming any serious problems with the condition of your unit?</p>
-                <div class="radio">
-                    <label><input type="radio" name="Problem" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">Yes</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="Problem" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">No</label>
-                </div>
-
-                <p>Describe the problems </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemDescription" required />
-
-                <p>Your estimated dollar value of the lost service(s) or problems </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].EstimatedLoss" required />
-
-                <p>Date problems began</p>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Month
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Jan</a></li>
-                        <li><a href="#">Feb</a></li>
-                        <li><a href="#">Mar</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Date
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Year
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">2014</a></li>
-                        <li><a href="#">2013</a></li>
-                        <li><a href="#">2012</a></li>
-                    </ul>
-                </div>
-
-                <p>Date you began paying to address the problems</p>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Month
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Jan</a></li>
-                        <li><a href="#">Feb</a></li>
-                        <li><a href="#">Mar</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Date
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Year
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">2014</a></li>
-                        <li><a href="#">2013</a></li>
-                        <li><a href="#">2012</a></li>
-                    </ul>
-                </div>
-                <button ng-click="Ctrl.AttachDocumentationProblems()">Attach additional documentation</button>
-                <input type="file" ngf-select ngf-change="Ctrl.onFileSelect($files)" />
-                <p>___________________________________________________________________________________________</p>
-
-                <button ng-click="Ctrl.AddAnotherProblem()">Add another problem description</button>
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="field-group">
+                                <label for="date_loss_began_year">&nbsp;</label>
+                                <div year-drop offset="0" range="10"></div>
+                                <!--<select name="date_loss_began_year" id="date_loss_began_year" class="custom-select" data-placeholder="Year">
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                </select>-->
+                            </div>
+                        </div>
+                    </div>
 
 
-                <button ng-click="Ctrl.ContinueToDocument()">Continue</button>
-            </div>
+                    <p>Date you began paying for the services</p>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Month
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Jan</a></li>
+                            <li><a href="#">Feb</a></li>
+                            <li><a href="#">Mar</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Date
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Year
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">2014</a></li>
+                            <li><a href="#">2013</a></li>
+                            <li><a href="#">2012</a></li>
+                        </ul>
+                    </div>
+                    <button ng-click="Ctrl.AttachDocumentation()">Attach additional documentation</button>
+                    <p>___________________________________________________________________________________________</p>
+
+                    <button ng-click="Ctrl.AddAnotherLostService()">Add another lost service description</button>
+
+                    <p>___________________________________________________________________________________________</p>
+
+                    <p>Are you claiming any serious problems with the condition of your unit?</p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label><input type="radio" name="Problem" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">Yes</label>
+                    </div>
+                    <div class="form-group-radio vertical clearfix">
+                        <label><input type="radio" name="Problem" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">No</label>
+                    </div>
+
+                    <p>Describe the problems </p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemDescription" required />
+
+                    <p>Your estimated dollar value of the lost service(s) or problems </p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].EstimatedLoss" required />
+
+                    <p>Date problems began</p>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Month
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Jan</a></li>
+                            <li><a href="#">Feb</a></li>
+                            <li><a href="#">Mar</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Date
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Year
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">2014</a></li>
+                            <li><a href="#">2013</a></li>
+                            <li><a href="#">2012</a></li>
+                        </ul>
+                    </div>
+
+                    <p>Date you began paying to address the problems</p>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Month
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Jan</a></li>
+                            <li><a href="#">Feb</a></li>
+                            <li><a href="#">Mar</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Date
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Select Year
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">2014</a></li>
+                            <li><a href="#">2013</a></li>
+                            <li><a href="#">2012</a></li>
+                        </ul>
+                    </div>
+                    <button ng-click="Ctrl.AttachDocumentationProblems()">Attach additional documentation</button>
+                    <input type="file" ngf-select ngf-change="Ctrl.onFileSelect($files)" />
+                    <p>___________________________________________________________________________________________</p>
+
+                    <button ng-click="Ctrl.AddAnotherProblem()">Add another problem description</button>
+
+
+                    <button ng-click="Ctrl.ContinueToDocument()">Continue</button>
+                </div>
         </div>
     </div>
 </div>
