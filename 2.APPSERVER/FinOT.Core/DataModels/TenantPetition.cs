@@ -170,11 +170,11 @@ namespace RAP.Core.DataModels
         public int CurrentRentStatusID { get; set; }
         public string ProvideExplanation { get; set; }
         public bool bCitationDocUnavailable { get; set; }
-        public List<PetitionGroundM> PetitionGrounds { get; set; }  
-        public DateTime MoveInDate { get; set; }
+        public List<PetitionGroundM> PetitionGrounds { get; set; }
+        public CustomDate MoveInDate { get; set; }
         public decimal InitialRent { get; set; }
         public bool bRAPNoticeGiven { get; set; }
-        public DateTime RAPNoticeGivenDate { get; set; }
+        public CustomDate RAPNoticeGivenDate { get; set; }
         public bool bRentControlledByAgency { get; set; }
         public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
         public DocumentM Document { get; set; }
@@ -235,27 +235,27 @@ namespace RAP.Core.DataModels
     public class TenantRentIncreaseInfoM
     {
         public bool bRentIncreaseNoticeGiven { get; set; }
-        public DateTime RentIncreaseNoticeDate { get; set; }
+        public CustomDate RentIncreaseNoticeDate { get; set; }
         public decimal RentIncreasedFrom { get; set; }
         public decimal RentIncreasedTo { get; set; }
-        public DateTime RentIncreaseEffectiveDate { get; set; }
+        public CustomDate RentIncreaseEffectiveDate { get; set; }
         public bool bRentIncreaseContested { get; set; }
     }
 
     public class TenantLostServiceInfoM
     {
         public string ReducedServiceDescription { get; set; }
-        public decimal EstimatedLoss { get; set; }   
-        public DateTime LossBeganDate { get; set; }
-        public DateTime PayingToServiceBeganDate { get; set; }
+        public decimal EstimatedLoss { get; set; }
+        public CustomDate LossBeganDate { get; set; }
+        public CustomDate PayingToServiceBeganDate { get; set; }
     }
 
     public class TenantProblemInfoM
     {
         public string ProblemDescription { get; set; }
         public decimal EstimatedLoss { get; set; }
-        public DateTime ProblemBeganDate { get; set; }
-        public DateTime PayingToProblemBeganDate { get; set; }
+        public CustomDate ProblemBeganDate { get; set; }
+        public CustomDate PayingToProblemBeganDate { get; set; }
     }
    
     public class UnitTypeM
@@ -263,7 +263,12 @@ namespace RAP.Core.DataModels
         public int UnitTypeID { get; set; }
         public string UnitDescription { get; set; }
     }
-
+    public class CustomDate
+    {
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
+    }
     public class CurrentOnRentM
     {
         public int StatusID { get; set; }

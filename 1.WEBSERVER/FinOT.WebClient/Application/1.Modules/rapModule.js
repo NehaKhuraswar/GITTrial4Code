@@ -76,7 +76,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
                 scope.years = getYears(+attrs.offset, +attrs.range);
                 scope.selected = scope.years[0];
             },
-            template: '<select ng-model="selected" ng-options="y for y in years"></select>'
+            template: '<select class="class="custom-select" ng-model="Ctrl.selected" ng-options="y for y in years"></select>'
         };
     })
    

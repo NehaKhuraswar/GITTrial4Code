@@ -1,243 +1,269 @@
 ﻿
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-danger font-small">
-            <div class="panel-heading">
-                <strong>User</strong>
-            </div>
-            <div class="panel-body">
-                <p>Renter petition : Lost Services</p>
-                <p>___________________________________________________________________________________________</p>
-                <p>Have you lost services or are you being changed for services originally provided by the owner?</p>
-            
-                <div class="form-group-radio vertical clearfix">
-                    <label><input type="radio" name="LostServices" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService">Yes</label>
-                </div>
-                <div class="form-group-radio vertical clearfix">
-                    <label><input type="radio" name="LostServices" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService">No</label>
-                </div>
-                <p>Describe the reduced service(s) </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].ReducedServiceDescription" required />
-                
-                <p>Your estimated dollar value of the lost service(s) or problems </p>
-                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].EstimatedLoss" required />
-                
-                
-                <div class="field-group no-top-margin">
-                    <div class="row">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="field-group">
-                                <label for="date_loss_began_month">Date loss began</label>
-                                <select name="date_loss_began_month" id="date_loss_began_month" class="custom-select" data-placeholder="Month">
-                                    <option value="1">January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">March</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7">July</option>
-                                    <option value="8">August</option>
-                                    <option value="9">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="field-group">
-                                <label for="date_loss_began_day">&nbsp;</label>
-                                <select name="date_loss_began_day" id="date_loss_began_day" class="custom-select" data-placeholder="Day">
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
-                                    <option value="05">05</option>
-                                    <option value="06">06</option>
-                                    <option value="07">07</option>
-                                    <option value="08">08</option>
-                                    <option value="09">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                    <option value="21">21</option>
-                                    <option value="22">22</option>
-                                    <option value="23">23</option>
-                                    <option value="24">24</option>
-                                    <option value="25">25</option>
-                                    <option value="26">26</option>
-                                    <option value="27">27</option>
-                                    <option value="28">28</option>
-                                    <option value="29">29</option>
-                                    <option value="30">30</option>
-                                    <option value="31">31</option>
-                                </select>
-                            </div>
-                        </div>
+<div class="row">  
+    <div class="col-md-9 col-sm-12">
+        <div class="application-step step-1">
+            <h3 class="step-heading">Tenant Petition: <span>Description of Lost Services and Problems</span></h3>
 
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="field-group">
-                                <label for="date_loss_began_year">&nbsp;</label>
-                                <div year-drop offset="0" range="10"></div>
-                                <!--<select name="date_loss_began_year" id="date_loss_began_year" class="custom-select" data-placeholder="Year">
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                </select>-->
-                            </div>
+            <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
+                <div class="step-content step1">
+
+                    <div class="field-group subhead no-top-margin">
+                        <div class="form-group-checkbox vertical clearfix">
+                            <label for="housing_services_decreased">
+                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" value="Yes" /><i></i><span><strong>The housing services I am being provided have decreased.</strong></span>
+                            </label>
                         </div>
                     </div>
 
-
-                    <p>Date you began paying for the services</p>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Month
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Jan</a></li>
-                            <li><a href="#">Feb</a></li>
-                            <li><a href="#">Mar</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Date
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Year
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">2014</a></li>
-                            <li><a href="#">2013</a></li>
-                            <li><a href="#">2012</a></li>
-                        </ul>
-                    </div>
-                    <button ng-click="Ctrl.AttachDocumentation()">Attach additional documentation</button>
-                    <p>___________________________________________________________________________________________</p>
-
-                    <button ng-click="Ctrl.AddAnotherLostService()">Add another lost service description</button>
-
-                    <p>___________________________________________________________________________________________</p>
-
-                    <p>Are you claiming any serious problems with the condition of your unit?</p>
-                    <div class="form-group-radio vertical clearfix">
-                        <label><input type="radio" name="Problem" value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">Yes</label>
-                    </div>
-                    <div class="form-group-radio vertical clearfix">
-                        <label><input type="radio" name="Problem" value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem">No</label>
+                    <div class="subhead no-top-margin">
+                        <h4>Lost Service</h4>
                     </div>
 
-                    <p>Describe the problems </p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemDescription" required />
+                    <div class="field-group">
+                        <p class="input-label">Have you lost services or are you being charged for services originally provided by the property owner?</p>
+                        <div class="form-group-radio vertical clearfix">
+                            <label for="charged_for_services_yes">
+                                <input type="radio" name="charged_for_services" id="charged_for_services_yes" class="input-field" value="Yes"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService" checked="checked" /><i></i><span>Yes</span>
+                            </label>
 
-                    <p>Your estimated dollar value of the lost service(s) or problems </p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].EstimatedLoss" required />
-
-                    <p>Date problems began</p>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Month
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Jan</a></li>
-                            <li><a href="#">Feb</a></li>
-                            <li><a href="#">Mar</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Date
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Year
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">2014</a></li>
-                            <li><a href="#">2013</a></li>
-                            <li><a href="#">2012</a></li>
-                        </ul>
+                            <label for="charged_for_services_no">
+                                <input type="radio" name="charged_for_services" id="charged_for_services_no" class="input-field" value="No"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService" /><i></i> <span>No</span>
+                            </label>
+                            <div class="clear"></div>
+                        </div>
                     </div>
 
-                    <p>Date you began paying to address the problems</p>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Month
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Jan</a></li>
-                            <li><a href="#">Feb</a></li>
-                            <li><a href="#">Mar</a></li>
-                        </ul>
+                    <div class="field-group">
+                        <label for="list_reduced_services">Describe the reduced service(s) including 1) a list of the lost housing service(s) 2) How you calculate the dollar value of lost service(s). Please attach documentary evidence  if available.</label>
+                        <textarea name="list_reduced_services" id="list_reduced_services" class="field-input textarea" rows="8"
+                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].ReducedServiceDescription"></textarea>
                     </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Date
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                        </ul>
+
+                    <div class="field-group">
+                        <label for="estimated_dollar_value">Your estimated dollar value of the lost service(s) or problem(s)</label>
+                        <input type="text" name="estimated_dollar_value" id="estimated_dollar_value" class="field-input"
+                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].EstimatedLoss" placeholder="" />
                     </div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                            Select Year
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">2014</a></li>
-                            <li><a href="#">2013</a></li>
-                            <li><a href="#">2012</a></li>
-                        </ul>
+
+                    <div class="field-group no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="date_loss_began_month">Date loss began</label>
+                                    <select name="date_loss_began_month" id="date_loss_began_month" class="custom-select" data-placeholder="Month"
+                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].LossBeganDate.Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="date_loss_began_day">&nbsp;</label>
+                                    <select name="date_loss_began_day" id="date_loss_began_day" class="custom-select" data-placeholder="Day"
+                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].LossBeganDate.Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="date_loss_began_year">&nbsp;</label>
+                                    <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].LossBeganDate.Year"
+                                            name="date_loss_began_year" id="date_loss_began_year" class="custom-select" data-placeholder="Year">
+                                        <option ng-repeat="year in  Ctrl.years"
+                                                value="{{year}}">
+                                            {{year}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-addfile">
+                            <div class="input-file-wrapper">
+                                <span class="btn-link">Attach additional documentation</span>
+                                <input type="file" id="lost_services_documentation" name="lost_services_documentation" />
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn-link">Add another lost service description</a>
+                        <p>&nbsp;</p>
+                    </div><!-- .field-group -->
+
+                    <div class="subhead type2">
+                        <h4>Problems</h4>
                     </div>
-                    <button ng-click="Ctrl.AttachDocumentationProblems()">Attach additional documentation</button>
-                    <input type="file" ngf-select ngf-change="Ctrl.onFileSelect($files)" />
-                    <p>___________________________________________________________________________________________</p>
 
-                    <button ng-click="Ctrl.AddAnotherProblem()">Add another problem description</button>
+                    <div class="field-group">
+                        <p class="input-label">Are you claiming any serious problems with the condition of your unit?</p>
+                        <div class="form-group-radio vertical clearfix">
+                            <label for="claiming_any_unit_problem">
+                                <input type="radio" name="claiming_any_unit_problem" id="claiming_any_unit_problem_yes" class="input-field" value="Yes"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem" checked="checked" /><i></i><span>Yes</span>
+                            </label>
 
+                            <label for="claiming_any_unit_problem_no">
+                                <input type="radio" name="claiming_any_unit_problem" id="claiming_any_unit_problem_no" class="input-field" value="No"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem" /><i></i> <span>No</span>
+                            </label>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
 
-                    <button ng-click="Ctrl.ContinueToDocument()">Continue</button>
+                    <div class="field-group">
+                        <label for="describe_problems">Describe problem(s) with your unit including 1) a list of the problem(s); 2) How you calculate the dollar value of incurred monetary loss as a result of these problem(s). Please attach documentary evidence if available.</label>
+                        <textarea name="describe_problems" id="describe_problems" class="field-input textarea" rows="8"
+                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemDescription"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="dollar_monetary_loss">Your estimated dollar value of incurred monetary loss as a result these problem(s)</label>
+                        <input type="text" name="dollar_monetary_loss" id="dollar_monetary_loss" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].EstimatedLoss" />
+                    </div>
+
+                    <div class="field-group no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="date_problem_began_month">Date problem(s) began</label>
+                                    <select name="date_problem_began_month" id="date_problem_began_month" class="custom-select"
+                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemBeganDate.Month" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="date_problem_began_day">&nbsp;</label>
+                                    <select name="date_problem_began_day" id="date_problem_began_day" class="custom-select"
+                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemBeganDate.Day" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="date_loss_began_year">&nbsp;</label>
+                                    <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemBeganDate.Year"
+                                            name="date_loss_began_year" id="date_loss_began_year" class="custom-select" data-placeholder="Year">
+                                        <option ng-repeat="year in  Ctrl.years"
+                                                value="{{year}}">
+                                            {{year}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-addfile">
+                            <div class="input-file-wrapper">
+                                <span class="btn-link">Attach additional documentation</span>
+                                <input type="file" id="problem_documentation" name="problem_documentation" />
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn-link">Add another problem description</a>
+                    </div><!-- .field-group -->
+
+                    <div class="field-group">
+                        <p><br />To have a unit inspected and code violations cited, contact the City of Oakland, Code Compliance Unit, 250 Frank H. Ogawa Plaza, 2nd Floor, Oakland, CA 94612. Phone: (510) 238-3381</p>
+                    </div>
                 </div>
+
+
+                <div class="step-footer">
+                    <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.ContinueToDocument()" />
+                    <input type="button" id="save" name="save" class="btn-primary btn-gray" value="Save" ng-click="Ctrl.Save()" />
+                </div>
+            </form>
         </div>
     </div>
 </div>
