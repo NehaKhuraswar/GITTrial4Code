@@ -1,0 +1,37 @@
+﻿
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>Appeal: Serving of appeal to the opposing parties</strong>
+            </div>
+            <div class="panel-body">
+                <p>___________________________________________________________________________________________</p>
+
+                <div>
+                    <p>First Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].FirstName" required />
+                    <p>Last Name</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].LastName" required />
+                    <p>Address Line 1</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].AddressLine1" required />
+                    <p>Address Line 2</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].AddressLine2" required />
+                    <p>City</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].City" required />
+                    <p>State</p>
+                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].State" required />
+                    <p>Zip Code</p>
+                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].Zip" required />
+                    <p>Phone Number</p>
+                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].PhoneNumber" required />
+                    <p>Email</p>
+                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].Email" required />
+                </div>
+                <button ng-click="Ctrl.AddAnotherOpposingParty(Ctrl.caseinfo)">Add another oppposing Party</button>
+
+                <button ng-click="Ctrl.ContinueToReview()">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -57,6 +57,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapGroundsOfAppealController', rapGroundsOfAppealController)
     .controller('rapServingAppealController', rapServingAppealController)
     .controller('rapReviewAppealController', rapReviewAppealController)
+    .controller('rapAppealMainController', rapAppealMainController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -177,5 +178,67 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             controllerAs: 'Ctrl'
         };
     })
-    
+    .directive('rapAppellantinfo', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FileAppeal/AppellantsInfo.html',
+            controller: 'rapAppellantsInfoController',
+            controllerAs: 'Ctrl'
+        };
+    })
+
+    .directive('rapImpinfoappeal', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FileAppeal/ImportantInfo.html',
+            controller: 'rapImpInfoAppealController',
+            controllerAs: 'Ctrl'
+        };
+    })
+
+    .directive('rapGrounds', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FileAppeal/GroundsForAppeal.html',
+            controller: 'rapGroundsOfAppealController',
+            controllerAs: 'Ctrl'
+        };
+    })
+
+    .directive('rapServingappeal', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FileAppeal/ServingAppeal.html',
+            controller: 'rapServingAppealController',
+            controllerAs: 'Ctrl'
+        };
+    })  
    
+    .directive('rapReview', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FileAppeal/Review.html',
+            controller: 'rapReviewController',
+            controllerAs: 'Ctrl'
+        };
+    }) 

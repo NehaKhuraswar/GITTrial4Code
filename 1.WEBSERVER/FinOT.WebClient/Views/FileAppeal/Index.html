@@ -1,0 +1,113 @@
+﻿<div class="container outer-container">
+    <div class="header">
+        <h1 id="sitetitle"><a href="#">City of Oakland</a></h1>
+        <div class="description">Rent Adjustment  <br />Program</div>
+    </div><!-- .header -->
+
+    <div id="SkipToMainContent">
+        <div class="application-form-wrapper">
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <ul class="application-steps">
+                        <li data-step="1"><a ng-click="Ctrl.showAppealType()">Appeal Type</a></li>
+                        <li data-step="2"><a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
+                        <li data-step="3"><a ng-click="Ctrl.showAppellantInfo()">Applicant Information</a></li>
+                        <li data-step="4"><a ng-click="Ctrl.showGrounds()">Grounds for Appeal</a></li>
+                        <li data-step="7"><a ng-click="Ctrl.showAddDoc()">Additional Documentation</a></li>
+                        <li data-step="8"><a ng-click="Ctrl.showServingAppeal()">Serving an Appeal</a></li>
+                        <li data-step="9"><a ng-click="Ctrl.showReview()">Review</a></li>
+                       
+                        <!--<li class="current" ng-if="Ctrl.bPetitionType"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
+                        <li class="active"
+                            ng-if="Ctrl.bAddDocuments || Ctrl.bAppInfo || Ctrl.bGrounds || Ctrl.bLostServices
+                            || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification">
+                            <a ng-click="Ctrl.showPetitionType()">Petition Type</a>
+                        </li>
+
+                        <li><a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
+                        
+                        <li class="current" ng-if="Ctrl.bAppInfo"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
+                        <li class="active"
+                            ng-if="Ctrl.bAddDocuments  || Ctrl.bGrounds || Ctrl.bLostServices
+                            || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
+                        <li ng-if="!(Ctrl.bAppInfo || Ctrl.bAddDocuments  || Ctrl.bGrounds || Ctrl.bLostServices
+                            || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification)"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
+
+                        <li class="current" ng-if="Ctrl.bGrounds"><a ng-click="Ctrl.showGrounds()">Grounds for Petition</a></li>
+                        <li class="active"
+                            ng-if="Ctrl.bAddDocuments  || Ctrl.bLostServices || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification">
+                            <a ng-click="Ctrl.showGrounds()">Grounds for Petition</a>
+                        </li>
+                        <li ng-if="!( Ctrl.bGrounds || Ctrl.bAddDocuments  || Ctrl.bLostServices || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification)">
+                            <a ng-click="Ctrl.showGrounds()">Grounds for Petition</a>
+                        </li>
+
+                        <li class="current" ng-if="Ctrl.bRentalHistory"><a ng-click="Ctrl.showRentalHistory()">Rental History</a></li>
+                        <li class="active"
+                            ng-if="Ctrl.bAddDocuments  || Ctrl.bLostServices
+                             || Ctrl.bReview || Ctrl.bVerification"><a ng-click="Ctrl.showRentalHistory()">Rental History</a>
+                        </li>
+                        <li ng-if="!(Ctrl.bRentalHistory || Ctrl.bAddDocuments  || Ctrl.bLostServices
+                             || Ctrl.bReview || Ctrl.bVerification)">
+                            <a ng-click="Ctrl.showRentalHistory()">Rental History</a>
+                        </li>
+
+                        <li class="current" ng-if="Ctrl.bLostServices"><a ng-click="Ctrl.showLostServices()">Lost Services</a></li>
+                        <li class="active"
+                            ng-if="Ctrl.bAddDocuments || Ctrl.bReview || Ctrl.bVerification">
+                            <a ng-click="Ctrl.showLostServices()">Lost Services</a>
+                        </li>
+                        <li ng-if="!(Ctrl.bLostServices || Ctrl.bAddDocuments || Ctrl.bReview || Ctrl.bVerification)">
+                            <a ng-click="Ctrl.showLostServices()">Lost Services</a>
+                        </li>
+
+                        <li class="current" ng-if="Ctrl.bAddDocuments"><a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a></li>
+                        <li class="active"
+                            ng-if="Ctrl.bReview || Ctrl.bVerification">
+                            <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a>
+                        </li>
+                        <li ng-if="!(Ctrl.bAddDocuments ||Ctrl.bReview || Ctrl.bVerification">
+                            <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a>
+                        </li>
+
+                        <li class="current" ng-if="Ctrl.bReview"><a ng-click="Ctrl.showReview()">Review</a></li>
+                        <li class="active"
+                            ng-if="Ctrl.bVerification"><a ng-click="Ctrl.showReview()">Review</a></li>
+                        <li ng-if="!(Ctrl.bReview || Ctrl.bVerification)"><a ng-click="Ctrl.showReview()">Review</a></li>
+
+                        <li class="current" ng-if="Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>
+                        <li ng-if="!Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>-->
+                    </ul>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="application-step step-1">                   
+                        <form name="frmAppeal" id="frmAppeal" method="post" class="application-form">
+                            <div ng-if="Ctrl.bAppellantInfo">
+                                <rap-appellantinfo model="Ctrl"></rap-appellantinfo>
+                            </div>
+                            <div ng-if="Ctrl.bImpInfoAppeal">
+                                <rap-impinfoappeal  model="Ctrl" casedetails="Ctrl.model"></rap-impinfoappeal>
+                            </div>
+                            <div ng-if="Ctrl.bGrounds">
+                                <rap-grounds  model="Ctrl"></rap-grounds>
+                            </div>
+                            <div ng-if="Ctrl.bServingAppeal">
+                                <rap-servingappeal  model="Ctrl"></rap-servingappeal>
+                            </div>
+                            <div ng-if="Ctrl.bReview">
+                                <rap-review  model="Ctrl"></rap-review>
+                            </div>                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!-- #SkipToMainContent -->
+
+        <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->
+    </div><!-- .container .outer-container -->
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!--<script src='js/jquery.maskedinput.js'></script>-->
+    <script src='js/tooltip.js'></script>
+    <script src='js/functions.js'></script>
+    </body>

@@ -82,10 +82,10 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             resolve: rapVerificationController_resolve
         })
         .when('/fileappeal', {
-            templateUrl: 'views/fileAppeal/FileAppeal.html',
-            controller: rapFileAppealController,
+            templateUrl: 'views/fileAppeal/Index.html',
+            controller: rapAppealMainController,
             controllerAs: 'Ctrl',
-            resolve: rapFileAppealController_resolve
+            resolve: rapAppealMainController_resolve
         })
         .when('/appellantsinfo', {
             templateUrl: 'views/fileAppeal/AppellantsInfo.html',

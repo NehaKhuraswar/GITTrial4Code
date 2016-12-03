@@ -322,8 +322,8 @@ namespace RAP.DAL
                         //TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
                         //rentIncrementDB.TenantPetitionID = petition.PetitionID;
                         objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
-                        objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = Convert.ToDateTime(item.RentIncreaseNoticeDate);
-                        objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = Convert.ToDateTime(item.RentIncreaseEffectiveDate);
+                        //objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = Convert.ToDateTime(item.RentIncreaseNoticeDate);
+                        //objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = Convert.ToDateTime(item.RentIncreaseEffectiveDate);
                         objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
                         objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
                         objTenantRentIncreaseInfoM.bRentIncreaseContested = Convert.ToBoolean(item.bRentIncreaseContested);
@@ -358,8 +358,9 @@ namespace RAP.DAL
 
                         objTenantLostServiceInfoM.ReducedServiceDescription = item.ReducedServiceDescription;
                         objTenantLostServiceInfoM.EstimatedLoss = item.EstimatedLoss;
-                        objTenantLostServiceInfoM.LossBeganDate = item.LossBeganDate;
-                        objTenantLostServiceInfoM.PayingToServiceBeganDate = item.PayingToServiceBeganDate;
+                        //tbd
+                        //objTenantLostServiceInfoM.LossBeganDate = Convert.ToDateTime(item.LossBeganDate;
+                        //objTenantLostServiceInfoM.PayingToServiceBeganDate = item.PayingToServiceBeganDate;
 
                         tenantLostServiceInfo.Add(objTenantLostServiceInfoM);
                     }
@@ -389,7 +390,7 @@ namespace RAP.DAL
                         TenantProblemInfoM objTenantProblemInfoM = new TenantProblemInfoM();
                         objTenantProblemInfoM.ProblemDescription = item.ProblemDescription;
                         objTenantProblemInfoM.EstimatedLoss = item.EstimatedLoss;
-                        objTenantProblemInfoM.ProblemBeganDate = item.ProblemBeganDate;
+                       // objTenantProblemInfoM.ProblemBeganDate = item.ProblemBeganDate;
 
                         tenantProblemInfo.Add(objTenantProblemInfoM);
                     }

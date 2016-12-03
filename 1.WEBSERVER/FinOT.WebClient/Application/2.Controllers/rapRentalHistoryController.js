@@ -4,38 +4,17 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    //var _getrent = function () {
-    //    return rapFactory.GetRent().then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        self.rent = response.data;
-    //    });
-    //}
 
-   // var _GetCaseInfo = function (model) {
+    var range = 10 / 2;
+    var currentYear = new Date().getFullYear();
+    self.years = [];
+    for (var i = range; i > 0 ; i--) {
 
-   //     rapFactory.GetCaseInfo().then(function (response) {
-   //         if (!alert.checkResponse(response)) {
-   //             return;
-   //         }
-           
-   //         self.caseinfo = response.data;           
-
-   //     });
-   // }
-   //// _getrent();
-   // _GetCaseInfo();
-
-   // self.Continue = function () {
-   //     $location.path("/applicationinfo");
-   // }
-   // self.ContinueToGroundsforPetition = function () {
-   //     $location.path("/groundsforpetition");
-   // }
-   // self.ContinueToRentalHistory = function () {
-   //     $location.path("/rentalhistory");
-   // }
+        self.years.push(currentYear - i);
+    }
+    for (var i = 0; i < range + 1; i++) {
+        self.years.push(currentYear + i);
+    }
     self.ContinueToLostServices = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
@@ -46,25 +25,15 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
         });
         
     }
-    //self.ContinueToReview  = function () {
-    //    $location.path("/review");
-    //}
-    //self.ContinueToVerification = function () {
-    //    $location.path("/verification");
-    //}
-    //self.SubmitPetition = function () {
-    //  //  $location.path("/verification");
-    //}
-    //self.SubmitPetition = function (model) {
-     
+    self.Save = function () {
+        var a = self.selectedObj;
+        rapGlobalFactory.CaseDetails = self.caseinfo;
+        rapFactory.SaveTenantRentalIncrementInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }          
+        });
 
-    //    rapFactory.SaveCaseInfo(model).then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        $modalInstance.close(response.data);
-    //    });
-    //}
+    }
+    
 }];
 var rapRentalHistoryController_resolve = {
     model: ['$route', 'alertService', 'raprentalhistoryFactory', function ($route, alert, rapFactory) {
