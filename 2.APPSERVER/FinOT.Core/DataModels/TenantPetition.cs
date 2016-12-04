@@ -8,82 +8,82 @@ using System.Web;
 namespace RAP.Core.DataModels
 {
     
-    public class CaseInfoM
-    {
-        private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
-        private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();
-        private UserInfoM _thirdPartyInfo = new UserInfoM();
-        private UserInfoM _ownerInfo = new UserInfoM();
+    //public class CaseInfoM
+    //{
+    //    private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
+    //    private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();
+    //    private UserInfoM _thirdPartyInfo = new UserInfoM();
+    //    private UserInfoM _ownerInfo = new UserInfoM();
         
-        private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
-        private List<DocumentM> _documnts = new List<DocumentM>();
+    //    private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
+    //    private List<DocumentM> _documnts = new List<DocumentM>();
         
-        public string CaseID { get; set; }
-        public int C_ID { get; set; }
-        public int PetitionCategoryID { get; set; }
-        public TenantPetitionInfoM TenantPetitionInfo
-        {
-            get
-            {
-                return _tenantPetitionInfo;
-            }
-            set
-            {
-                _tenantPetitionInfo = value;
-            }
-        }    
-        public TenantAppealInfoM TenantAppealInfo
-        {
-            get
-            {
-                return _tenantappealInfo;
-            }
-            set
-            {
-                _tenantappealInfo = value;
-            }
-        }
+    //    public string CaseID { get; set; }
+    //    public int C_ID { get; set; }
+    //    public int PetitionCategoryID { get; set; }
+    //    public TenantPetitionInfoM TenantPetitionInfo
+    //    {
+    //        get
+    //        {
+    //            return _tenantPetitionInfo;
+    //        }
+    //        set
+    //        {
+    //            _tenantPetitionInfo = value;
+    //        }
+    //    }    
+    //    public TenantAppealInfoM TenantAppealInfo
+    //    {
+    //        get
+    //        {
+    //            return _tenantappealInfo;
+    //        }
+    //        set
+    //        {
+    //            _tenantappealInfo = value;
+    //        }
+    //    }
                 
-        public int TenantUserID { get; set; }        
-        public bool bAgreeToCityMediation { get; set; }
-        public bool bCaseFiledByThirdParty { get; set; }
-        public int CaseFileBy { get; set; }
-        public string CaseAssignedTo { get; set; }
-        public string CityUserFirstName { get; set; }
-        public string CityUserLastName { get; set; }
-        public string CityUserMailID { get; set; }
-        public int WorlFlowID { get; set; }
-        public DateTime HearingDate { get; set; }
-        public DateTime AppealDate { get; set; }
-        public bool bThirdPartyRepresentationAppeal { get; set; }
-        private List<ActivityStatus_M> _activityStatus = new List<ActivityStatus_M>();
+    //    public int TenantUserID { get; set; }        
+    //    public bool bAgreeToCityMediation { get; set; }
+    //    public bool bCaseFiledByThirdParty { get; set; }
+    //    public int CaseFileBy { get; set; }
+    //    public string CaseAssignedTo { get; set; }
+    //    public string CityUserFirstName { get; set; }
+    //    public string CityUserLastName { get; set; }
+    //    public string CityUserMailID { get; set; }
+    //    public int WorlFlowID { get; set; }
+    //    public DateTime HearingDate { get; set; }
+    //    public DateTime AppealDate { get; set; }
+    //    public bool bThirdPartyRepresentationAppeal { get; set; }
+    //    private List<ActivityStatus_M> _activityStatus = new List<ActivityStatus_M>();
 
-        public List<ActivityStatus_M> ActivityStatus
-        {
-            get
-            {
-                return _activityStatus;
-            }
-            set
-            {
-                _activityStatus = value;
-            }
-        }
+    //    public List<ActivityStatus_M> ActivityStatus
+    //    {
+    //        get
+    //        {
+    //            return _activityStatus;
+    //        }
+    //        set
+    //        {
+    //            _activityStatus = value;
+    //        }
+    //    }
         
 
-        public List<DocumentM> Documents
-        {
-            get
-            {
-                return _documnts;
-            }
-            set
-            {
-                _documnts = value;
-            }
-        }
+    //    public List<DocumentM> Documents
+    //    {
+    //        get
+    //        {
+    //            return _documnts;
+    //        }
+    //        set
+    //        {
+    //            _documnts = value;
+    //        }
+    //    }
         
-    }
+    //}
 
     public class UserInfoM
     {

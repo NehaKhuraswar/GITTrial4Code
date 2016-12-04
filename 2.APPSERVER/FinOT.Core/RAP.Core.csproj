@@ -55,6 +55,7 @@
     <Compile Include="Common\ReturnResult.cs" />
     <Compile Include="Common\StatusEnum.cs" />
     <Compile Include="DataModels\Audit.cs" />
+    <Compile Include="DataModels\Petition.cs" />
     <Compile Include="DataModels\CodeDescription.cs" />
     <Compile Include="DataModels\CustomerDetails.cs" />
     <Compile Include="DataModels\Document.cs" />

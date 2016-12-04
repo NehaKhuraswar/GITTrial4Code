@@ -111,7 +111,7 @@ namespace RAP.Core.DataModels
         public bool bBusinessLicensePaid { get; set; }
         public string BusinessLicenseNumber { get; set; }
         public bool bRentAdjustmentProgramFeePaid { get; set; }
-        public DateTime BuildingAcquiredDate { get; set; }
+        public DateTime? BuildingAcquiredDate { get; set; }
         public int NumberOfUnits { get; set; }
         public bool bMoreThanOneStreetOnParcel { get; set; }
         public int CustomerID { get; set; }
@@ -122,6 +122,8 @@ namespace RAP.Core.DataModels
     {
         private List<OwnerPetitionTenantInfoM> _tenantInfo = new List<OwnerPetitionTenantInfoM>();
         private List<OwnerPetitionRentalIncrementInfoM> _rentalInfo = new List<OwnerPetitionRentalIncrementInfoM>();
+        private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
+        private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         public int OwnerPropertyID { get; set; }
         public int UnitTypeID { get; set; }
         public DateTime MovedInDate { get; set; }
@@ -151,6 +153,29 @@ namespace RAP.Core.DataModels
             set
             {
                 _rentalInfo = value;
+            }
+        }
+        public List<UnitTypeM> UnitTypes
+        {
+            get
+            {
+                return _unitTypes;
+            }
+            set
+            {
+                _unitTypes = value;
+            }
+        }
+
+        public List<CurrentOnRentM> CurrentOnRent
+        {
+            get
+            {
+                return _currentOnRent;
+            }
+            set
+            {
+                _currentOnRent = value;
             }
         }
      
