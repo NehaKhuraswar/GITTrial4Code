@@ -5,7 +5,9 @@
     </div><!-- .header -->
 
     <div id="SkipToMainContent">
+    
         <div class="application-form-wrapper">
+        
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <ul class="application-steps">
@@ -17,7 +19,7 @@
                         </li>
 
                         <li><a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
-                        
+
                         <li class="current" ng-if="Ctrl.bAppInfo"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
                         <li class="active"
                             ng-if="Ctrl.bAddDocuments  || Ctrl.bGrounds || Ctrl.bLostServices
@@ -37,7 +39,8 @@
                         <li class="current" ng-if="Ctrl.bRentalHistory"><a ng-click="Ctrl.showRentalHistory()">Rental History</a></li>
                         <li class="active"
                             ng-if="Ctrl.bAddDocuments  || Ctrl.bLostServices
-                             || Ctrl.bReview || Ctrl.bVerification"><a ng-click="Ctrl.showRentalHistory()">Rental History</a>
+                             || Ctrl.bReview || Ctrl.bVerification">
+                            <a ng-click="Ctrl.showRentalHistory()">Rental History</a>
                         </li>
                         <li ng-if="!(Ctrl.bRentalHistory || Ctrl.bAddDocuments  || Ctrl.bLostServices
                              || Ctrl.bReview || Ctrl.bVerification)">
@@ -72,8 +75,8 @@
                     </ul>
                 </div>
                 <div class="col-md-9 col-sm-12">
-                    <div class="application-step step-1">                   
-                        <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">                      
+                    <div class="application-step step-1">
+                        <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">
                             <div ng-if="Ctrl.bPetitionType">
                                 <rap-petitiontype model="Ctrl"></rap-petitiontype>
                             </div>
@@ -103,6 +106,7 @@
                     </div>
                 </div>
             </div>
+           
         </div><!-- #SkipToMainContent -->
 
         <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->

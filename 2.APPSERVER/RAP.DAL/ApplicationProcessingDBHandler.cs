@@ -1256,6 +1256,7 @@ namespace RAP.DAL
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             List<PetitionCategoryM> _categories = new List<PetitionCategoryM>();
+            CaseInfoM model = new CaseInfoM();
             try
             {
                 PetitionCategory petitionCategory = new PetitionCategory();
@@ -1274,7 +1275,8 @@ namespace RAP.DAL
                         _categories.Add(_category);
                     }
                 }
-                result.result.PetitionCategory = _categories;
+                model.PetitionCategory = _categories;
+                result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }

@@ -20,7 +20,9 @@ namespace RAP.DAL
         ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);
         ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo);
-       
+        ReturnResult<CaseInfoM> GetPetitioncategory();
+        ReturnResult<CaseInfoM> GetOwnerApplicantInfo(CaseInfoM model);
+        ReturnResult<OwnerPetitionApplicantInfoM> SaveOwnerApplicantInfo(OwnerPetitionApplicantInfoM model);
 
      //   ReturnResult<CaseInfoM> GetCaseDetails(int caseID);
     }

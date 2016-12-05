@@ -14,16 +14,18 @@ namespace RAP.Business.Implementation
     {
         public string CorrelationId { get; set; }
         private readonly IApplicationProcessingDBHandler _dbHandler;
-        private readonly IExceptionHandler _eHandler = new ExceptionHandler();
+        private readonly IExceptionHandler _eHandler;
+        private readonly ICommonService _commonService;
         //TBD
         //public ApplicationProcessingService()
         //{
         //    _dbHandler = new ApplicationProcessingDBHandler();
         //}
-        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler)
+        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler, IExceptionHandler eHandler, ICommonService commonService)
         {
             this._dbHandler = dbHandler;
-            //this._eHandler = eHandler;
+            this._eHandler = eHandler;
+            this._commonService = commonService;
         }
        
         public ReturnResult<CaseInfoM> GetCaseDetails()
@@ -214,6 +216,32 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        #region Common File Petition methods
+        //public ReturnResult<CaseInfoM> GetCaseModel()
+        //{
+        //    ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+        //    CaseInfoM model = new CaseInfoM();
+        //    result.result = model;
+        //    result.status = new OperationStatus() { Status = StatusEnum.Success };
+        //    return result;
+        //}
+        public ReturnResult<CaseInfoM> GetPetitioncategory()
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           try
+           {
+               result = _dbHandler.GetPetitioncategory();
+               return result;
+           }
+            catch(Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commonService.LogError(result.status);
+               return result;
+           }
+        }
+        #endregion
         //implements all methods from IOTRequestService
     }
 }
