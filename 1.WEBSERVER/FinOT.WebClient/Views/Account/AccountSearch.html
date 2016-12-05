@@ -1,0 +1,123 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>User</strong>
+            </div>
+            <div class="panel-body">
+
+                <div class="field-group">
+                    <label for="account_types">Account types</label>
+                    <select class="form-control"
+                            ng-model="Ctrl.AccountSearchModel.AccountType"
+                            ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID"
+                            required>
+                        <option value="" selected>Select Account Type</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="account_firstname">First Name</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.FirstName" required />
+                </div>
+                <div class="field-group">
+                    <label for="account_lastname">Last Name</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.LastName" required />
+                </div>
+                <div class="field-group">
+                    <label for="account_email">Email</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.Email" required />
+                </div>
+                <div class="field-group">
+                    <label for="account_line1">Address Line1</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.AddressLine1" required />
+                </div>
+                <div class="field-group">
+                    <label for="account_line2">Address Line2</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.AddressLine2" required />
+                </div>
+                <div class="field-group">
+                    <label for="account_number">Phone Number</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.PhoneNumber" required />
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" ng-click="Ctrl.AccountSearch(Ctrl.AccountSearchModel)">Search</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="onClearFilter()">Clear</button>
+            </div>
+        </div>
+        <div class="panel panel-primary nopadding-bottom margin-top-5">
+            <div class="panel-heading clearfix clickable" ng-click="toggleResults = !toggleResults">
+                <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleResults, 'glyphicon glyphicon-chevron-right': !toggleResults}"></i></div>
+                <h3 class="panel-title pull-left margin-left-10">Results <div class="badge">{{Ctrl.model.TotalCount || ''}}</div></h3>
+                <div class="pull-right">
+                    <button id="btnExportSearch" class="btn btn-default btn-xs" ng-click="onExportResults()"><i class="fa fa-file-excel-o"></i>&nbsp;Export</button>
+                </div>
+            </div>
+            <table class="table table-condensed nopadding-bottom">
+                <thead class="strong">
+                    <tr>
+                        <td width="5%">
+                            <span ng-click="onSort('Name')" class="clickable">Name</span>
+                            <span ng-show="Ctrl.model.SortBy == 'Name' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'Name' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>
+                        </td>
+                        <td width="10%">
+                            <span ng-click="onSort('AccountType')" class="clickable">Account Type</span>
+                            <span ng-show="Ctrl.model.SortBy == 'AccountTypeID' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'AccountTypeID' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>
+                        </td>
+                        <td width="8%">
+                            <span ng-click="onSort('Email')" class="clickable">Email</span>
+                            <span ng-show="Ctrl.model.SortBy == 'Email' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'Email' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>
+                        </td>
+                        <td width="8%">
+                            <span ng-click="onSort('CreatedDate')" class="clickable">Account created on</span>
+                            <span ng-show="Ctrl.model.SortBy == 'CreatedDate' && !Ctrl.model.SortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="Ctrl.model.SortBy == 'CreatedDate' && Ctrl.model.SortReverse" class="fa fa-caret-up"></span>
+                        </td>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in Ctrl.AccountSearchResult">
+                        <td class="nopadding-left">
+                            {{item.Name}}
+                        </td>
+                        <td>
+                            {{item.AccountType}}</a>
+                        </td>
+                        <td>
+                            {{item.Email}}
+                        </td>
+                        <td>
+                            {{item.CreatedDate | date:'MM/dd/yyyy'}}
+                        </td>                       
+                    </tr>
+                </tbody>
+                <tfoot ng-hide="Ctrl.AccountSearchResult.length">
+                    <tr>
+                        <td colspan="12"><i>No Results found</i></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <nav class="pull-left" ng-if="Ctrl.AccountSearchResult.length">
+                <ul class="pager nopadding-bottom">
+                    <li ng-class="{'disabled': Ctrl.model.CurrentPage == 1}">
+                        <a href="" title="Previous page" ng-click="getPage(Ctrl.model.CurrentPage - 1)">&lsaquo; Previous</a>
+                    </li>
+                    <li ng-class="{'disabled': Ctrl.isLastPage()}">
+                        <a href="" title="Next page" ng-click="getPage(Ctrl.model.CurrentPage + 1)">Next &rsaquo;</a>
+                    </li>
+                    <li>
+                        <span class="range-label">Displaying {{ Ctrl.model.CurrentPage }} of {{ Ctrl.totalPage() }}</span>
+                    </li>
+                    <li>
+                        <span class="range-label">
+                            <select ng-change="onPageSizeChange()"
+                                    ng-model="Ctrl.model.PageSize"
+                                    ng-options="o for o in pagesizeOptions"></select> per page
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+               
+        </div>

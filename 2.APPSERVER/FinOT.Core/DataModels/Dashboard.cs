@@ -64,6 +64,23 @@ namespace RAP.Core.DataModels
         public string StatusDesc { get; set; }
     }
 
+    public class AccountSearch
+    {
+        public AccountType AccountType { get; set; }
+        public DateTime AccountCreationDate { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string PhoneNumber { get; set; }
+    }
+
+    public class AccountType
+    {
+        public int AccountTypeID { get; set; }
+        public string AccountTypeDesc { get; set; }
+    }
     //public class CaseStatusActivity_M
     //{
     //    public int ActivityID { get; set; }

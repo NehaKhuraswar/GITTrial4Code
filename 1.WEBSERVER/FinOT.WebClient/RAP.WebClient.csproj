@@ -114,6 +114,7 @@
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
     <Content Include="Application\2.Controllers\RAPDocumentController.js" />
     <Content Include="Application\2.Controllers\rapFileAppealController.js" />
+    <Content Include="Application\2.Controllers\rapSearchAccountController.js" />
     <Content Include="Application\2.Controllers\rapFilePetitionController.js" />
     <Content Include="Application\2.Controllers\rapGroundsOfAppealController.js" />
     <Content Include="Application\2.Controllers\rapNewCaseStatusController.js" />
@@ -131,7 +132,6 @@
     <Content Include="Application\2.Controllers\rapVerificationController.js" />
     <Content Include="Application\3.Factories\authFactory.js" />
     <Content Include="Application\3.Factories\authInterceptorService.js" />
-    <Content Include="Application\3.Factories\HtmlPage1.html" />
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
@@ -140,6 +140,7 @@
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
     <Content Include="Application\3.Factories\RapDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapfileappealFactory.js" />
+    <Content Include="Application\3.Factories\rapSearchAccountFactory.js" />
     <Content Include="Application\3.Factories\rapfilepetitionFactory.js" />
     <Content Include="Application\3.Factories\rapgroundsofappealFactory.js" />
     <Content Include="Application\3.Factories\rapnewcasestatusFactory.js" />
@@ -199,6 +200,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Views\Account\AccountSearch.html" />
     <Content Include="Views\Account\NewCaseStatus.html" />
     <Content Include="Views\FileAppeal\AppellantsInfo.html" />
     <Content Include="Views\FileAppeal\FileAppeal.html" />

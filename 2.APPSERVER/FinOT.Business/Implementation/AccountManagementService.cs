@@ -51,6 +51,16 @@ namespace RAP.Business.Implementation
             return accDBHandler.GetAuthorizedUsers(custID);
         }
 
+        public ReturnResult<List<AccountType>> GetAccountTypes()
+        {
+            return accDBHandler.GetAccountTypes();
+        }
+
+        public ReturnResult<SearchResult> GetAccountSearch(AccountSearch accountSearch)
+        {
+            return accDBHandler.GetAccountSearch(accountSearch);
+        }
+
         
         
     }

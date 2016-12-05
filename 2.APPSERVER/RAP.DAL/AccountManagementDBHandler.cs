@@ -136,7 +136,77 @@ namespace RAP.DAL
             }
             catch (Exception ex)
             {
-                return null;
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<List<AccountType>> GetAccountTypes()
+        {
+            ReturnResult<List<AccountType>> result = new ReturnResult<List<AccountType>>();
+
+            try
+            {
+                List<AccountType> accountTypes = new List<AccountType>();
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var accountTypesDB = db.CityAccountTypes.ToList();
+
+
+                    foreach (var item in accountTypesDB)
+                    {
+                        AccountType obj = new AccountType();
+                        obj.AccountTypeID = item.CityAccountTypeID;
+                        obj.AccountTypeDesc = item.CityAccountTypeDesc;
+                        accountTypes.Add(obj);                        
+                    }
+                }
+                result.result = accountTypes;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<SearchResult> GetAccountSearch(AccountSearch accountSearch)
+        {
+            ReturnResult<SearchResult> result = new ReturnResult<SearchResult>();
+
+            try
+            {
+                SearchResult searchResult = new SearchResult();
+                //List<CustomerInfo accounts = new CustomerInfo();
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    CustomerInfo account = new CustomerInfo();
+                    searchResult.List.Add(account);
+                   // var accountTypesDB = db.CityAccountTypes.ToList();
+
+
+                    //foreach (var item in accountTypesDB)
+                    //{
+                    //    AccountType obj = new AccountType();
+                    //    obj.AccountTypeID = item.CityAccountTypeID;
+                    //    obj.AccountTypeDesc = item.CityAccountTypeDesc;
+                    //    accountTypes.Add(obj);
+                    //}
+                }
+               
+                result.result = searchResult;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
             }
         }
         #endregion  

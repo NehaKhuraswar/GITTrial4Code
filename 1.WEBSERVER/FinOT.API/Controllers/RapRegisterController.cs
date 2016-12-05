@@ -156,6 +156,70 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
         [AllowAnonymous]
+        [HttpGet]
+        [Route("getaccounttypes")]
+        public HttpResponseMessage GetAccountTypes()
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<AccountType>> transaction = new TranInfo<List<AccountType>>();
+            ReturnResult<List<AccountType>> result = new ReturnResult<List<AccountType>>();
+            try
+            {
+                result = accService.GetAccountTypes();
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<List<AccountType>>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getemptyaccountsearchmodel")]
+        public HttpResponseMessage GetEmptyAccountSearchModel()
+        {
+           
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<AccountSearch> transaction = new TranInfo<AccountSearch>();
+            ReturnResult<AccountSearch> result = new ReturnResult<AccountSearch>();
+            
+            try
+            {
+                
+
+                transaction.data =  new AccountSearch();
+                transaction.status = true;
+                
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse <TranInfo<AccountSearch>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("authorizedusers/{custid:int?}")]
         [HttpGet]
         public HttpResponseMessage GetAuthorizedUsers(int? custID = null)
@@ -333,8 +397,44 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
-       
-       
+
+        [AllowAnonymous]
+        [Route("getaccountsearch")]
+        [HttpPost]
+        public HttpResponseMessage GetAccountSearch([FromBody] AccountSearch accountSearch)
+        {
+            System.Diagnostics.EventLog.WriteEntry("Account", "Controller Get account search started");
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<SearchResult> transaction = new TranInfo<SearchResult>();
+            ReturnResult<SearchResult> result = new ReturnResult<SearchResult>();
+
+            try
+            {
+                result = accService.GetAccountSearch(accountSearch);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<SearchResult>>(ReturnCode, transaction);
+        }
 
         [AllowAnonymous]
         [Route("saveCust")]

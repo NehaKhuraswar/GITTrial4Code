@@ -42,4 +42,10 @@
       <Association Name="CustomerDetail_ThirdPartyRepresentation1" Member="ThirdPartyRepresentations" ThisKey="CustomerID" OtherKey="ThirdPartyCustomerID" Type="ThirdPartyRepresentation" />
     </Type>
   </Table>
+  <Table Name="dbo.CityAccountType" Member="CityAccountTypes">
+    <Type Name="CityAccountType">
+      <Column Name="CityAccountTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CityAccountTypeDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

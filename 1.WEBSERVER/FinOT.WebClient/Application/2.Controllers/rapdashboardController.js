@@ -12,6 +12,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.NewCaseStatus = function () {
         $location.path("/newCaseStatus");
     }
+    self.AccountSearch = function () {
+        $location.path("/accountSearch");
+    }
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseInfoWithModel(model).then(function (response) {

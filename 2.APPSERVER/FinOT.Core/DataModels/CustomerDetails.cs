@@ -14,6 +14,7 @@ namespace RAP.Core.DataModels
             thirdpartyDetails = new List<ThirdPartyDetails>();
             User = new UserInfoM();
         }
+        public string AccountType { get; set; }
         public int selected { get; set; }
         public int custID { get; set; }
         public string email { get; set; }
@@ -22,7 +23,8 @@ namespace RAP.Core.DataModels
         public bool MailNotificationFlag { get; set; }
         public List<ThirdPartyDetails> thirdpartyDetails { get; set; }
         public UserInfoM User { get; set; }
-        public Int32 CustomerIdentityKey { get; set; } 
+        public Int32 CustomerIdentityKey { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
     public class Rent
     {
@@ -49,5 +51,18 @@ namespace RAP.Core.DataModels
         public string email { get; set; }
         public string Password { get; set; }
 
+    }
+
+    public class SearchResult
+    {
+        public SearchResult()
+        {
+            List = new List<CustomerInfo>();
+        }
+        public List<CustomerInfo> List;
+        public string SortBy;
+        public bool SortReverse;
+        public int PageSize;
+        public int CurrentPage;
     }
 }
