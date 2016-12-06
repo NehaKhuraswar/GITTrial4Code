@@ -85,6 +85,7 @@ namespace RAP.Core.DataModels
           ApplicantInfo = new OwnerPetitionApplicantInfoM();
           PropertyInfo = new OwnerPetitionPropertyInfoM();
       }
+      private List<OwnerRentIncreaseReasonsM> _rentIncreaseReasons = new List<OwnerRentIncreaseReasonsM>();
       public int OwnerPetitionID { get; set; }
       public OwnerPetitionApplicantInfoM ApplicantInfo { get; set; }
       public OwnerPetitionPropertyInfoM PropertyInfo { get; set; }
@@ -94,6 +95,17 @@ namespace RAP.Core.DataModels
       public DateTime CreatedDate { get; set; }
       public string LastModifiedBy { get; set; }
       public DateTime LastModifiedDate { get; set; }
+      public List<OwnerRentIncreaseReasonsM> RentIncreaseReasons
+      {
+          get
+          {
+              return _rentIncreaseReasons;
+          }
+          set
+          {
+              _rentIncreaseReasons = value;
+          }
+      }
 
   }
     
@@ -102,11 +114,11 @@ namespace RAP.Core.DataModels
         public OwnerPetitionApplicantInfoM()
         {
             ThirdPartyUser = new UserInfoM();
+            ApplicantUserInfo = new UserInfoM();
         }
         public int OwnerPetitionApplicantInfoID { get; set; }
-        public int ApplicantUserID { get; set; }
+        public UserInfoM ApplicantUserInfo { get; set; }
         public bool bThirdPartyRepresentation { get; set; }
-        public int ThirdPartyUserID { get; set; }
         public UserInfoM ThirdPartyUser { get; set; }
         public bool bBusinessLicensePaid { get; set; }
         public string BusinessLicenseNumber { get; set; }
@@ -213,7 +225,7 @@ namespace RAP.Core.DataModels
 
     public class OwnerPetitionRentalIncrementInfoM
     {
-        private List<OwnerRentIncreaseReasonsM> _rentIncreaseReasons = new List<OwnerRentIncreaseReasonsM>();
+        
         public int RentalIncreaseInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public bool bRentIncreaseNoticeGiven { get; set; }
@@ -221,17 +233,7 @@ namespace RAP.Core.DataModels
         public DateTime RentIncreaseEffectiveDate { get; set; }
         public decimal RentIncreasedFrom { get; set; }
         public decimal RentIncreasedTo { get; set; }
-        public List<OwnerRentIncreaseReasonsM> RentIncreaseReasons
-        {
-            get
-            {
-                return _rentIncreaseReasons;
-            }
-            set
-            {
-                _rentIncreaseReasons = value;
-            }
-        }
+        
        
     }
     #endregion

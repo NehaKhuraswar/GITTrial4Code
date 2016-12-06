@@ -109,12 +109,12 @@ namespace RAP.DAL
         public ReturnResult<UserInfoM> GetUserInfo(int UserId)
         {
             ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
-            UserInfoM userinfo = new UserInfoM();
+            UserInfoM _userinfo = new UserInfoM();
             try
             {
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
-                    var userinfos = db.UserInfos.Where(x => x.UserID == UserId)
+                    var userinfo = db.UserInfos.Where(x => x.UserID == UserId)
                                                                 .Select(c => new UserInfoM()
                                                                 {
                                                                     UserID = c.UserID,
@@ -129,21 +129,22 @@ namespace RAP.DAL
                                                                     Email = c.ContactEmail,
                                                                 }).FirstOrDefault();
 
-                    if (userinfos != null)
+                    if (userinfo != null)
                     {
-                        userinfo.UserID = userinfos.UserID;
-                        userinfo.FirstName = userinfos.FirstName;
-                        userinfo.LastName = userinfos.LastName;
-                        userinfo.AddressLine1 = userinfos.AddressLine1;
-                        userinfo.AddressLine2 = userinfos.AddressLine2;
-                        userinfo.City = userinfos.City;
-                        userinfo.PhoneNumber = userinfos.PhoneNumber;
-                        userinfo.State = userinfos.State;
-                        userinfo.Zip = userinfos.Zip;
-                        userinfo.Email = userinfos.Email;
+                        _userinfo = userinfo;
+                        //userinfo.UserID = userinfos.UserID;
+                        //userinfo.FirstName = userinfos.FirstName;
+                        //userinfo.LastName = userinfos.LastName;
+                        //userinfo.AddressLine1 = userinfos.AddressLine1;
+                        //userinfo.AddressLine2 = userinfos.AddressLine2;
+                        //userinfo.City = userinfos.City;
+                        //userinfo.PhoneNumber = userinfos.PhoneNumber;
+                        //userinfo.State = userinfos.State;
+                        //userinfo.Zip = userinfos.Zip;
+                        //userinfo.Email = userinfos.Email;
 
                     }
-                    result.result = userinfo;
+                    result.result = _userinfo;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
                     return result;
                 }
