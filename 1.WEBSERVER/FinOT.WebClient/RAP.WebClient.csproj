@@ -115,6 +115,7 @@
     <Content Include="Application\2.Controllers\RAPDocumentController.js" />
     <Content Include="Application\2.Controllers\rapFileAppealController.js" />
     <Content Include="Application\2.Controllers\rapCityUserAcctController.js" />
+    <Content Include="Application\2.Controllers\rapImpInfoController.js" />
     <Content Include="Application\2.Controllers\rapSearchAccountController.js" />
     <Content Include="Application\2.Controllers\rapFilePetitionController.js" />
     <Content Include="Application\2.Controllers\rapGroundsOfAppealController.js" />
@@ -217,6 +218,7 @@
     <Content Include="Views\Account\Dashboard.html" />
     <Content Include="Views\FilePetition\Document.html" />
     <Content Include="Views\FilePetition\FilePetition.html" />
+    <Content Include="Views\FilePetition\ImportantInformation.html" />
     <Content Include="Views\FilePetition\GroundsForPetition.html" />
     <Content Include="Views\Account\InviteThirdParty.html" />
     <Content Include="Views\Account\Login.html" />

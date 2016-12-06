@@ -40,7 +40,7 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         $scope.model.bPetitionType = false;
-        $scope.model.bAppInfo = true;
+        $scope.model.bImpInfo = true;
         //$location.path("/applicationinfo");
     }
     //self.ContinueToGroundsforPetition = function () {

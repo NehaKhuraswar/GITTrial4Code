@@ -62,6 +62,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapServingAppealController', rapServingAppealController)
     .controller('rapReviewAppealController', rapReviewAppealController)
     .controller('rapAppealMainController', rapAppealMainController)
+    .controller('rapImpInfoController', rapImpInfoController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -94,6 +95,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             },
             templateUrl: 'Views/FilePetition/FilePetition.html',
             controller: 'rapFilePetitionController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapImpinfo', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/ImportantInformation.html',
+            controller: 'rapImpInfoController',
             controllerAs: 'Ctrl'
         };
     })
