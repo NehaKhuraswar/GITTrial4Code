@@ -66,14 +66,27 @@ namespace RAP.Core.DataModels
 
     public class AccountSearch
     {
+        //public AccountSearch()
+        //{
+        //    FromDate = null;
+        //    ToDate = null;
+        //}
+
         public AccountType AccountType { get; set; }
         public DateTime AccountCreationDate { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int APNNumber { get; set; }
         public string Email { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string PhoneNumber { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+        public int PageSize { get; set; }
+        public string SortBy {get; set;} 
+		public bool SortReverse {get; set;}
+        public int CurrentPage { get; set; }
     }
 
     public class AccountType

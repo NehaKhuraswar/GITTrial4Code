@@ -14,7 +14,8 @@
                 <button class="btn btn-default" ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)">File an Appeal</button>
                 <button class="btn btn-default" ng-click="Ctrl.AccountSearch()">Account Search</button>
                 <button class="btn btn-default" ng-click="Ctrl.GetCaseActivityStatus(Ctrl.caseinfo)">Case Activity Status</button>
-                <button class="btn btn-default" ng-click="Ctrl.NewCaseStatus()">New Case Activity Status</button>                
+                <button class="btn btn-default" ng-click="Ctrl.NewCaseStatus()">New Case Activity Status</button>          
+                <button class="btn btn-default" ng-click="Ctrl.CreateCityUserAccount()">Create City User Account</button>       
                 <div ng-repeat="activity in Ctrl.caseinfo.ActivityStatus">                    
                     <p>{{activity.Activity.ActivityDesc}}</p>                   
                     <p>{{activity.Status.StatusDesc}}</p>

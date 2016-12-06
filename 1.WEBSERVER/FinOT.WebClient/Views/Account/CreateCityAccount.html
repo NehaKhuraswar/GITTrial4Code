@@ -1,0 +1,45 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>User</strong>
+            </div>
+            <div class="panel-body">
+                <p>Create Account</p>
+                <div class="field-group">
+                    <label for="account_types">Account types</label>
+                    <select class="form-control"
+                            ng-model="Ctrl.CityUserAccount.AccountType"
+                            ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID"
+                            required>
+                        <option value="" selected>Select Account Type</option>
+                    </select>
+                </div>
+                <p>First Name</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.FirstName" required />
+                <p>Last Name</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.LastName" required />
+                <p>Email</p>
+                <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.Email" required />
+                <p>Employee ID</p>
+                <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.EmployeeID" required />
+                <p>Password</p>
+                <input type="password" class="form-control input-sm" maxlength="8" ng-trim="false" ng-model="Ctrl.CityUserAccount.Password" required />
+                <p>Title</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.Title" required />
+                <p>Department</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.Department" required />
+                <p>OfficeLocation</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.OfficeLocation" required />
+                <p>OfficePhoneNumber</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.OfficePhoneNumber" required />
+                <p>MobilePhoneNumber</p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.MobilePhoneNumber" required />
+                
+                <label><input type="checkbox" ng-model="Ctrl.CityUserAccount.IsHearingOfficer" required />Is Hearing Officer?</label>
+                <label><input type="checkbox" ng-model="Ctrl.CityUserAccount.IsAnalyst" required /> Is Analyst</label>    
+                <button ng-click="Ctrl.CreateAccount(Ctrl.CityUserAccount)">Create Account</button>
+            </div>
+        </div>
+    </div>
+</div>

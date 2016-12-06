@@ -26,6 +26,24 @@ namespace RAP.Core.DataModels
         public Int32 CustomerIdentityKey { get; set; }
         public DateTime CreatedDate { get; set; }
     }
+    public class CityUserAccount_M
+    {
+        public AccountType AccountType { get; set; }
+        public int UserID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public int EmployeeID { get; set; }
+        public string Password { get; set; }
+        public string Title { get; set; }
+        public string Department { get; set; }
+        public string OfficeLocation { get; set; }
+        public string OfficePhoneNumber { get; set; }
+        public string MobilePhoneNumber { get; set; }
+        public bool IsHearingOfficer { get; set; }
+        public bool IsAnalyst { get; set; }
+        public DateTime CreatedDate { get; set; }
+    }
     public class Rent
     {
 
@@ -57,12 +75,22 @@ namespace RAP.Core.DataModels
     {
         public SearchResult()
         {
-            List = new List<CustomerInfo>();
+            List = new List<SearchResultCustomerInfo>();
         }
-        public List<CustomerInfo> List;
+        public List<SearchResultCustomerInfo> List;
         public string SortBy;
         public bool SortReverse;
         public int PageSize;
         public int CurrentPage;
+    }
+
+    public class SearchResultCustomerInfo
+    {
+        public string AccountType { get; set; }       
+        public int custID { get; set; }
+        public string email { get; set; }
+        public string Name { get; set; }
+        public int RankNo { get; set; }
+        //public DateTime CreatedDate { get; set; }
     }
 }

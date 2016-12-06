@@ -15,6 +15,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.AccountSearch = function () {
         $location.path("/accountSearch");
     }
+    self.CreateCityUserAccount = function () {
+        $location.path("/createCityUserAccount");
+    }
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseInfoWithModel(model).then(function (response) {

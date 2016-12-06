@@ -1,8 +1,8 @@
 ﻿'use strict';
-var rapSearchAccountFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
+var rapcityuserregisterFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
-    
+
     var _GetAccountTypes = function () {
         blockUI.start();
         var url = _routePrefix + '/getaccounttypes/'
@@ -12,10 +12,17 @@ var rapSearchAccountFactory = ['blockUI', 'ajaxService', function (blockUI, ajax
             blockUI.stop();
         });
     }
-
-    var _GetEmptyAccountSearchModel = function () {
+    var _CreateCityUserAccount = function (model) {
         blockUI.start();
-        var url = _routePrefix + '/getemptyaccountsearchmodel/'
+        var url = _routePrefix + '/createcityuseraccount';
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+     var _GetCityUserAcctEmpty = function () {
+        blockUI.start();
+        var url = _routePrefix + '/getcityuseracctempty';
 
         return ajax.Get(url)
         .finally(function () {
@@ -23,21 +30,11 @@ var rapSearchAccountFactory = ['blockUI', 'ajaxService', function (blockUI, ajax
         });
     }
 
-    var _GetAccountSearch = function (model) {
-        blockUI.start();
-        var url = _routePrefix + '/getaccountsearch/'
-
-        return ajax.Post(model,url)
-        .finally(function () {
-            blockUI.stop();
-        });
-    }
-    
-
-
+   
+  
+    factory.CreateCityUserAccount = _CreateCityUserAccount;
+    factory.GetCityUserAcctEmpty = _GetCityUserAcctEmpty;
     factory.GetAccountTypes = _GetAccountTypes;
-    factory.GetEmptyAccountSearchModel = _GetEmptyAccountSearchModel;
-    factory.GetAccountSearch = _GetAccountSearch;
     
     return factory;
 }];

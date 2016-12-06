@@ -114,6 +114,7 @@
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
     <Content Include="Application\2.Controllers\RAPDocumentController.js" />
     <Content Include="Application\2.Controllers\rapFileAppealController.js" />
+    <Content Include="Application\2.Controllers\rapCityUserAcctController.js" />
     <Content Include="Application\2.Controllers\rapSearchAccountController.js" />
     <Content Include="Application\2.Controllers\rapFilePetitionController.js" />
     <Content Include="Application\2.Controllers\rapGroundsOfAppealController.js" />
@@ -136,6 +137,7 @@
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapapplicationinfoFactory.js" />
+    <Content Include="Application\3.Factories\rapcityuserregisterFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
     <Content Include="Application\3.Factories\RapDocumentFactory.js" />
@@ -201,6 +203,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Views\Account\AccountSearch.html" />
+    <Content Include="Views\Account\CreateCityAccount.html" />
     <Content Include="Views\Account\NewCaseStatus.html" />
     <Content Include="Views\FileAppeal\AppellantsInfo.html" />
     <Content Include="Views\FileAppeal\FileAppeal.html" />

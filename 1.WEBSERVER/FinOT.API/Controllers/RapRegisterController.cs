@@ -108,6 +108,46 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
+        [Route("getcityuseracctempty")]
+        public HttpResponseMessage GetCityUserAcctEmpty()
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CityUserAccount_M> transaction = new TranInfo<CityUserAccount_M>();
+            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
+
+            try
+            {
+                //  ExtractClaimDetails();
+
+                CityUserAccount_M obj;
+                //if (custid.HasValue)
+
+                //{
+                //  //  obj = service.GetCustomer((int)reqid, fy, Username);
+                //}
+                //else
+                //{
+                obj = new CityUserAccount_M();
+                //}
+
+                transaction.data = obj;
+                transaction.status = true;
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CityUserAccount_M>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("logincust")]
         [HttpPost]
         public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
@@ -474,6 +514,46 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("createcityuseraccount")]
+        [HttpPost]
+        public HttpResponseMessage CreateCityUserAccount([FromBody] CityUserAccount_M cityUserModel)
+        {
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Save Customer started");
+            AccountManagementService accService = new AccountManagementService();
+            IEmailService emailService = new EmailService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CityUserAccount_M> transaction = new TranInfo<CityUserAccount_M>();
+            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
+
+            try
+            {
+                result = accService.CreateCityUserAccount(cityUserModel);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    //emailService.SendEmail(getRegisterCustomerEmailModel(result.result));
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CityUserAccount_M>>(ReturnCode, transaction);
+        }
+
         [AllowAnonymous]
         [Route("invite")]
         [HttpPost]

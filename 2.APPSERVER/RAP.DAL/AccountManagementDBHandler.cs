@@ -184,18 +184,33 @@ namespace RAP.DAL
                 //List<CustomerInfo accounts = new CustomerInfo();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    CustomerInfo account = new CustomerInfo();
+                    SearchResultCustomerInfo account = new SearchResultCustomerInfo();
+                    string errorMessage = "";
+
+                    var Resultdb = db.USP_SearchAccount_Get(accountSearch.AccountType.AccountTypeID,
+                        accountSearch.FirstName,accountSearch.LastName, accountSearch.Email, accountSearch.APNNumber,
+                         accountSearch.AddressLine1, accountSearch.AddressLine2,
+                        accountSearch.PhoneNumber, accountSearch.SortBy, accountSearch.SortReverse,
+                        accountSearch.PageSize, accountSearch.CurrentPage,  ref errorMessage);
+
+                    
+                    foreach (var item in Resultdb)
+                    {
+                        int a = (int)item.RankNo;
+                        account.custID = (int)item.CustomerID;
+
+                        account.email = item.Email;
+                        account.AccountType = item.AcctTypeDesc;
+                       // account.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                        account.Name = item.Name;
+                        account.RankNo = (int)item.RankNo;
+                    }
+                   
                     searchResult.List.Add(account);
-                   // var accountTypesDB = db.CityAccountTypes.ToList();
-
-
-                    //foreach (var item in accountTypesDB)
-                    //{
-                    //    AccountType obj = new AccountType();
-                    //    obj.AccountTypeID = item.CityAccountTypeID;
-                    //    obj.AccountTypeDesc = item.CityAccountTypeDesc;
-                    //    accountTypes.Add(obj);
-                    //}
+                    searchResult.PageSize = accountSearch.PageSize;
+                    searchResult.SortBy = accountSearch.SortBy;
+                    searchResult.SortReverse = accountSearch.SortReverse;
+                    searchResult.CurrentPage = accountSearch.CurrentPage;
                 }
                
                 result.result = searchResult;
@@ -335,6 +350,32 @@ namespace RAP.DAL
             }
         }
         /// <summary>
+        /// Check if City User/Admin exists or not
+        /// </summary>
+        /// <returns>true or false</returns>
+        public bool CheckCityUser(string Email)
+        {
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var cityUser = db.CityUserAccounts.Where(x => x.Email == Email)
+                                    .Select(c => new CustomerInfo()
+                                    {
+                                        custID = c.CityUserID
+                                    }).FirstOrDefault();
+                    if (cityUser != null)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        /// <summary>
         /// Check if customer exists or not
         /// </summary>
         /// <returns>true or false</returns>
@@ -423,7 +464,55 @@ namespace RAP.DAL
                return result;
            }
        }
+        public ReturnResult<CityUserAccount_M> CreateCityUserAccount(CityUserAccount_M message)
+        {
+            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
+            ReturnResult<CityUserAccount_M> UserResult = new ReturnResult<CityUserAccount_M>();
+            try
+            {
+                //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer started");
+                // Account already exists
+                if (CheckCityUser(message.Email))
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.AccountAlreadyExist };
+                    return result;
+                }
 
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+
+                    CityUserAccount cityUserTable = new CityUserAccount();
+                    cityUserTable.CityAccountTypeID = message.AccountType.AccountTypeID;
+                    cityUserTable.FirstName = message.FirstName;
+                    cityUserTable.LastName = message.LastName;
+                    cityUserTable.Password = message.Password;
+                    cityUserTable.Email = message.Email;
+                    cityUserTable.EmployeeID = message.EmployeeID;
+                    cityUserTable.IsAnalyst = message.IsAnalyst;
+                    cityUserTable.IsHearingOfficer = message.IsHearingOfficer;
+                    cityUserTable.Title = message.Title;
+                    cityUserTable.Department = message.Department;
+                    cityUserTable.OfficePhoneNumber = message.OfficePhoneNumber;
+                    cityUserTable.MobilePhoneNumber = message.MobilePhoneNumber;
+                    cityUserTable.OfficeLocation = message.OfficeLocation;
+                    cityUserTable.CreatedDate = DateTime.Now;
+                    db.CityUserAccounts.InsertOnSubmit(cityUserTable);
+                    db.SubmitChanges();
+                    message.UserID = cityUserTable.CityUserID;                  
+                }
+                //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                result.result = message;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         private Int32 getCustomerIdentityKey()
         {
             int randomNo = 0;

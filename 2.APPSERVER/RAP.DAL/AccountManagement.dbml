@@ -46,6 +46,53 @@
     <Type Name="CityAccountType">
       <Column Name="CityAccountTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CityAccountTypeDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="CityAccountType_CityUserAccount" Member="CityUserAccounts" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityUserAccount" />
     </Type>
   </Table>
+  <Table Name="dbo.CityUserAccount" Member="CityUserAccounts">
+    <Type Name="CityUserAccount">
+      <Column Name="CityUserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="CityAccountTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsAnalyst" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsHearingOfficer" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="OfficeLocation" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="OfficePhoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MobilePhoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="CityAccountType_CityUserAccount" Member="CityAccountType" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityAccountType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Temp" Member="Temps">
+    <Type Name="Temp" Id="ID1">
+      <Column Name="RankNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AcctTypeDesc" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.USP_SearchAccount_Get" Method="USP_SearchAccount_Get">
+    <Parameter Name="AcctType" Parameter="acctType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(35)" />
+    <Parameter Name="APNNumber" Parameter="aPNNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AddressLine1" Parameter="addressLine1" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="AddressLine2" Parameter="addressLine2" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="SortReverse" Parameter="sortReverse" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="PageSize" Parameter="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CurrentPage" Parameter="currentPage" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <ElementType IdRef="ID1" />
+  </Function>
 </Database>

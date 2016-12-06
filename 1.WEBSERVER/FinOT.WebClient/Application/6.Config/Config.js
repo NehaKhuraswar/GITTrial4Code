@@ -45,6 +45,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapSearchAccountController_resolve
         })
+        .when('/createCityUserAccount', {
+            templateUrl: 'views/account/CreateCityAccount.html',
+            controller: rapCityUserAcctController,
+            controllerAs: 'Ctrl',
+            resolve: rapCityUserAcctController_resolve
+        })
         .when('/applicationinfo', {
             templateUrl: 'views/filepetition/ApplicationInfo.html',
             controller: rapApplicationInfoController,

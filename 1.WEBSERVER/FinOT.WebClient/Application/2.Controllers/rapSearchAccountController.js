@@ -20,6 +20,10 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
     _getEmptyAccountSearchModel();
     
     self.AccountSearch = function (model) {
+        model.PageSize = 10;
+        model.CurrentPage = 1;
+        model.SortBy = "Name";
+        model.SortReverse = 0;
         rapFactory.GetAccountSearch(model).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.AccountSearchResult = response.data;
