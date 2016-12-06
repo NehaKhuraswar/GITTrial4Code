@@ -1388,8 +1388,8 @@ namespace RAP.DAL
             }
         }
         #endregion
+        
         #region Owner petition Save Functions
-
         /// <summary>
         /// Save or Update Applicant Information page of Owners petition.
         /// </summary>

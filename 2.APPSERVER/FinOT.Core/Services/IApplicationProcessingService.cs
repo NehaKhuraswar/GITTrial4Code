@@ -21,7 +21,10 @@ namespace RAP.Core.Services
         ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);
         ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> GetPetitioncategory();
-        
+        ReturnResult<CaseInfoM> GetOwnerApplicantInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> GetRentIncreaseReasonInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> SaveOwnerApplicantInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model);        
 
     }
 }

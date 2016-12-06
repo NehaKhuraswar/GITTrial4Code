@@ -27,7 +27,7 @@ namespace RAP.Business.Implementation
             this._eHandler = eHandler;
             this._commonService = commonService;
         }
-       
+
         public ReturnResult<CaseInfoM> GetCaseDetails()
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -72,14 +72,14 @@ namespace RAP.Business.Implementation
         }
         public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo)
         {
-            
-             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
                 result = _dbHandler.SaveTenantAppealInfo(caseInfo);
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.status = _eHandler.HandleException(ex);
                 return result;
@@ -117,7 +117,7 @@ namespace RAP.Business.Implementation
         }
         public ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
         {
-            
+
             ReturnResult<Boolean> result = new ReturnResult<Boolean>();
             try
             {
@@ -144,7 +144,7 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-       
+
         public ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -153,7 +153,7 @@ namespace RAP.Business.Implementation
                 result = _dbHandler.SaveCaseDetails(caseInfo);
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 result.status = _eHandler.HandleException(ex);
                 return result;
@@ -218,30 +218,114 @@ namespace RAP.Business.Implementation
         }
 
         #region Common File Petition methods
-        //public ReturnResult<CaseInfoM> GetCaseModel()
-        //{
-        //    ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
-        //    CaseInfoM model = new CaseInfoM();
-        //    result.result = model;
-        //    result.status = new OperationStatus() { Status = StatusEnum.Success };
-        //    return result;
-        //}
         public ReturnResult<CaseInfoM> GetPetitioncategory()
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
-           try
-           {
-               result = _dbHandler.GetPetitioncategory();
-               return result;
-           }
-            catch(Exception ex)
-           {
-               result.status = _eHandler.HandleException(ex);
-               _commonService.LogError(result.status);
-               return result;
-           }
+            try
+            {
+                result = _dbHandler.GetPetitioncategory();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
         }
         #endregion
-        //implements all methods from IOTRequestService
+
+        #region Get Owner Petition Methods
+        public ReturnResult<CaseInfoM> GetOwnerApplicantInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetOwnerApplicantInfo(model);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<CaseInfoM> GetRentIncreaseReasonInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<OwnerRentIncreaseReasonsM> _reasons = new List<OwnerRentIncreaseReasonsM>();
+            try
+            {
+                var dbResult = _dbHandler.GetRentIncreaseReasonInfo(model.OwnerPetitionInfo);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model.OwnerPetitionInfo.RentIncreaseReasons = dbResult.result;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+        #endregion
+
+        #region Save Owner Petition Methods
+        public ReturnResult<CaseInfoM> SaveOwnerApplicantInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.SaveOwnerApplicantInfo(model.OwnerPetitionInfo.ApplicantInfo);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model.OwnerPetitionInfo.ApplicantInfo = dbResult.result;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.SaveRentIncreaseReasonInfo(model.OwnerPetitionInfo);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        #endregion
     }
 }

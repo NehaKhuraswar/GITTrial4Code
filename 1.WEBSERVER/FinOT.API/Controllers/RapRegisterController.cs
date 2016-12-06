@@ -153,7 +153,7 @@ namespace RAP.API.Controllers
         public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
         
         {
-            System.Diagnostics.EventLog.WriteEntry("Application", "LoginCust started");
+            //System.Diagnostics.EventLog.WriteEntry("Application", "LoginCust started");
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
