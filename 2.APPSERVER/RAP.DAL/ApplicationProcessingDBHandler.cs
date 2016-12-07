@@ -1330,7 +1330,11 @@ namespace RAP.DAL
                     _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
                  
                     result.result.OwnerPetitionInfo.ApplicantInfo = _applicantInfo;
-                }           
+                }
+                else
+                {
+                    result.result = model;
+                }
 
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

@@ -225,7 +225,7 @@ namespace RAP.API.Controllers
         #region Get Owner Petition Methods
         [AllowAnonymous]
         [Route("GetOwnerApplicantInfo")]
-        [HttpGet]
+        [HttpPost]
         public HttpResponseMessage GetOwnerApplicantInfo([FromBody] CaseInfoM model)
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;

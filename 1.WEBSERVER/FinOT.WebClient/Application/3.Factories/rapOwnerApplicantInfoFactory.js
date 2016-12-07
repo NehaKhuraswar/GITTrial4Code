@@ -3,6 +3,15 @@ var rapOwnerApplicantInfoFactory = ['blockUI', 'ajaxService', function (blockUI,
     var factory = {};
     var _routePrefix = 'api/applicationprocessing';
 
+    var _getApplicantInfo = function (model) {
+        blockUI.start();
+        var url = _routePrefix + '/GetOwnerApplicantInfo';
+
+            return ajax.Post(model, url)
+            .finally(function () {
+                blockUI.stop();
+            });
+    }
     //var _SaveApplicationInfo = function (model) {
     //    blockUI.start();
 
@@ -25,7 +34,7 @@ var rapOwnerApplicantInfoFactory = ['blockUI', 'ajaxService', function (blockUI,
     //}
 
 
-    //factory.GetCaseInfo = _GetCaseInfo;
+    factory.GetCaseInfo = _getApplicantInfo;
     //factory.SaveApplicationInfo = _SaveApplicationInfo;
 
     return factory;

@@ -4,7 +4,20 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-
+    self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
+    if (self.caseinfo.bCaseFiledByThirdParty == false)
+    {
+        self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = self.custDetails.User;
+    }
+    else
+    {
+        self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = self.custDetails.User;
+    }
+    rapFactory.GetCaseInfo(self.caseinfo).then(function (response) {
+        if (!alert.checkResponse(response)) { return; }
+        rapGlobalFactory.CaseDetails = response.data;
+        self.caseinfo = response.data;
+    });
 
     //self.ContinueToGroundsforPetition = function () {
     //    rapGlobalFactory.CaseDetails = self.caseinfo;
