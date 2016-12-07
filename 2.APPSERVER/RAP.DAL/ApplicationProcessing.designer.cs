@@ -96,6 +96,9 @@ namespace RAP.DAL
     partial void InsertOwnerRentIncreaseReasonInfo(OwnerRentIncreaseReasonInfo instance);
     partial void UpdateOwnerRentIncreaseReasonInfo(OwnerRentIncreaseReasonInfo instance);
     partial void DeleteOwnerRentIncreaseReasonInfo(OwnerRentIncreaseReasonInfo instance);
+    partial void InsertNumberRangeForUnit(NumberRangeForUnit instance);
+    partial void UpdateNumberRangeForUnit(NumberRangeForUnit instance);
+    partial void DeleteNumberRangeForUnit(NumberRangeForUnit instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -301,6 +304,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<OwnerRentIncreaseReasonInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<NumberRangeForUnit> NumberRangeForUnits
+		{
+			get
+			{
+				return this.GetTable<NumberRangeForUnit>();
 			}
 		}
 	}
@@ -5265,6 +5276,92 @@ namespace RAP.DAL
 						this._ReasonID = default(int);
 					}
 					this.SendPropertyChanged("OwnerRentIncreaseReason");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NumberRangeForUnits")]
+	public partial class NumberRangeForUnit : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RangeID;
+		
+		private string _RangeDesc;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRangeIDChanging(int value);
+    partial void OnRangeIDChanged();
+    partial void OnRangeDescChanging(string value);
+    partial void OnRangeDescChanged();
+    #endregion
+		
+		public NumberRangeForUnit()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RangeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RangeID
+		{
+			get
+			{
+				return this._RangeID;
+			}
+			set
+			{
+				if ((this._RangeID != value))
+				{
+					this.OnRangeIDChanging(value);
+					this.SendPropertyChanging();
+					this._RangeID = value;
+					this.SendPropertyChanged("RangeID");
+					this.OnRangeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RangeDesc", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string RangeDesc
+		{
+			get
+			{
+				return this._RangeDesc;
+			}
+			set
+			{
+				if ((this._RangeDesc != value))
+				{
+					this.OnRangeDescChanging(value);
+					this.SendPropertyChanging();
+					this._RangeDesc = value;
+					this.SendPropertyChanged("RangeDesc");
+					this.OnRangeDescChanged();
 				}
 			}
 		}

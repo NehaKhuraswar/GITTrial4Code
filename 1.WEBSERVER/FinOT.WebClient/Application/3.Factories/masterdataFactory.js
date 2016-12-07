@@ -2,7 +2,14 @@
 var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI, ajax, $timeout) {
     var factory = {};
     var _routePrefix = 'api/masterdata';
-
+    var _GetStateList  = function () {
+        blockUI.start();
+        var url = 'api/accountmanagement' + '/getstatelist';
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     var _GetFiscalYear = function (reqtypeid) {
         blockUI.start();
         var url = _routePrefix + '/fiscalyear/get';
@@ -133,6 +140,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
     factory.GetDocumentExtensions = _GetDocumentExtensions;
     factory.GetFourthCharList = _GetFourthCharList;
     factory.GetStatusList = _GetStatusList;
+    factory.GetStateList = _GetStateList;
 
     return factory;
 }];

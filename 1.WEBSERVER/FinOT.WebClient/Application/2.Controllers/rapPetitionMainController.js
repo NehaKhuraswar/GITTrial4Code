@@ -97,19 +97,19 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
 
 
 
-    //var _GetCaseInfo = function () {
+    var _GetCaseInfo = function () {
 
         
-    //    rapFactory.GetCaseInfo(null, self.custDetails.custID).then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        self.model = response.data;
-    //        self.caseinfo = self.model;           
-    //        rapGlobalFactory.CaseDetails = self.caseinfo;
-    //        self.bPetitionType = true;
-    //    });
-    //}
+        rapFactory.GetCaseInfo(null, self.custDetails.custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.model = response.data;
+            self.caseinfo = self.model;           
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+            self.bPetitionType = true;
+        });
+    }
 
     var _getPetitionCategory = function () {
         rapFactory.GetPetitionCategory().then(function (response) {

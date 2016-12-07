@@ -21,6 +21,21 @@ namespace RAP.DAL
             this._eHandler = eHandler;
             _dbContext = new ApplicationProcessingDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
         }
+        private  CustomDate  GetDateFromDatabase(DateTime DatabaseDate)
+        {
+            try
+            {
+                CustomDate FrontEndDate = new CustomDate();
+                FrontEndDate.Day = DatabaseDate.Day;
+                FrontEndDate.Month = DatabaseDate.Month;
+                FrontEndDate.Year = DatabaseDate.Year;
+                return FrontEndDate;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
         #region "Get"
         /// <summary>
         /// Gets the data needed to to display on the tenant petition form
@@ -36,6 +51,7 @@ namespace RAP.DAL
             List<CurrentOnRentM> _rentStatusItems = new List<CurrentOnRentM>();
             List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
             List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
+            List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
             try
             {
 
@@ -102,6 +118,25 @@ namespace RAP.DAL
                         _petitionGrounds.Add(_petitionGround);
                     }
                 }
+               
+                var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                if (rangeDB == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var item in rangeDB)
+                    {
+                        NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                        obj.RangeID = item.RangeID;
+                        obj.RangeDesc = item.RangeDesc;
+                        _rangeOfUnits.Add(obj);
+                    }
+                }
+
+                
                 var appealGrounds = _dbContext.AppealGrounds;
                 if (appealGrounds == null)
                 {
@@ -128,6 +163,7 @@ namespace RAP.DAL
                 _petition.UnitTypes = _units;
                 _petition.CurrentOnRent = _rentStatusItems;
                 _petition.PetitionGrounds = _petitionGrounds;
+                _petition.RangeOfUnits = _rangeOfUnits;
                 _appeal.AppealGrounds = _appealGrounds;
                 result.result.TenantPetitionInfo = _petition;
                 result.result.TenantAppealInfo = _appeal;
@@ -315,8 +351,8 @@ namespace RAP.DAL
                         //TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
                         //rentIncrementDB.TenantPetitionID = petition.PetitionID;
                         objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
-                        //objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = Convert.ToDateTime(item.RentIncreaseNoticeDate);
-                        //objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = Convert.ToDateTime(item.RentIncreaseEffectiveDate);
+                        objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
+                        objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
                         objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
                         objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
                         objTenantRentIncreaseInfoM.bRentIncreaseContested = Convert.ToBoolean(item.bRentIncreaseContested);
@@ -351,9 +387,9 @@ namespace RAP.DAL
 
                         objTenantLostServiceInfoM.ReducedServiceDescription = item.ReducedServiceDescription;
                         objTenantLostServiceInfoM.EstimatedLoss = item.EstimatedLoss;
-                        //tbd
-                        //objTenantLostServiceInfoM.LossBeganDate = Convert.ToDateTime(item.LossBeganDate;
-                        //objTenantLostServiceInfoM.PayingToServiceBeganDate = item.PayingToServiceBeganDate;
+                       
+                        objTenantLostServiceInfoM.LossBeganDate = GetDateFromDatabase(Convert.ToDateTime(item.LossBeganDate));
+                        objTenantLostServiceInfoM.PayingToServiceBeganDate = GetDateFromDatabase(Convert.ToDateTime(item.PayingToServiceBeganDate));
 
                         tenantLostServiceInfo.Add(objTenantLostServiceInfoM);
                     }
@@ -383,7 +419,7 @@ namespace RAP.DAL
                         TenantProblemInfoM objTenantProblemInfoM = new TenantProblemInfoM();
                         objTenantProblemInfoM.ProblemDescription = item.ProblemDescription;
                         objTenantProblemInfoM.EstimatedLoss = item.EstimatedLoss;
-                       // objTenantProblemInfoM.ProblemBeganDate = item.ProblemBeganDate;
+                        objTenantProblemInfoM.ProblemBeganDate = GetDateFromDatabase(Convert.ToDateTime(item.ProblemBeganDate));
 
                         tenantProblemInfo.Add(objTenantProblemInfoM);
                     }
@@ -452,6 +488,9 @@ namespace RAP.DAL
                 return result;
             }
         }
+      
+
+
         public ReturnResult<CaseInfoM> GetCaseDetails(int UserID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -728,8 +767,6 @@ namespace RAP.DAL
            
             try
             {
-
-
                 CaseDetail caseDetailsDB = new CaseDetail();
                 caseDetailsDB.PetitionID = caseInfo.TenantPetitionInfo.PetitionID;
                 ////TBD
@@ -965,11 +1002,13 @@ namespace RAP.DAL
                     if (item.bRentIncreaseNoticeGiven)
                     {
                         //  rentIncrementDB.RentIncreaseNoticeDate = item.RentIncreaseNoticeDate;
-                        rentIncrementDB.RentIncreaseNoticeDate = DateTime.Now;
+                        rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
+                            item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
 
                     }
                     //TBD
-                    rentIncrementDB.RentIncreaseEffectiveDate = DateTime.Now;
+                    rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
+                            item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
                     // rentIncrementDB.RentIncreaseEffectiveDate = item.RentIncreaseEffectiveDate;
                     rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
                     rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
@@ -1005,12 +1044,10 @@ namespace RAP.DAL
                         lostServiceDB.TenantPetitionID = petition.PetitionID;
                         lostServiceDB.ReducedServiceDescription = item.ReducedServiceDescription;
                         lostServiceDB.EstimatedLoss = item.EstimatedLoss;
-                        //TBD
-                        lostServiceDB.LossBeganDate = DateTime.Now;
-                        //TBD
-                        // lostServiceDB.LossBeganDate = item.LossBeganDate;
-                        lostServiceDB.PayingToServiceBeganDate = DateTime.Now;
-                        // lostServiceDB.PayingToServiceBeganDate = item.PayingToServiceBeganDate;
+                        lostServiceDB.LossBeganDate = new DateTime(item.LossBeganDate.Year,
+                            item.LossBeganDate.Month, item.LossBeganDate.Day);
+                        lostServiceDB.PayingToServiceBeganDate = new DateTime(item.PayingToServiceBeganDate.Year,
+                            item.PayingToServiceBeganDate.Month, item.PayingToServiceBeganDate.Day);
 
                         _dbContext.TenantLostServiceInfos.InsertOnSubmit(lostServiceDB);
                         _dbContext.SubmitChanges();
@@ -1047,9 +1084,11 @@ namespace RAP.DAL
                         problemDB.EstimatedLoss = item.EstimatedLoss;
                         //TBD
                         //  problemDB.ProblemBeganDate = item.ProblemBeganDate;
-                        problemDB.ProblemBeganDate = DateTime.Now;
+                        problemDB.ProblemBeganDate = new DateTime(item.ProblemBeganDate.Year,
+                            item.ProblemBeganDate.Month, item.ProblemBeganDate.Day);
                         //TBD
-                        problemDB.PayingToProblemBeganDate = DateTime.Now;
+                        problemDB.PayingToProblemBeganDate = new DateTime(item.PayingToProblemBeganDate.Year,
+                            item.PayingToProblemBeganDate.Month, item.PayingToProblemBeganDate.Day);
                         //  problemDB.PayingToProblemBeganDate = item.PayingToProblemBeganDate;
 
                         _dbContext.TenantProblemInfos.InsertOnSubmit(problemDB);

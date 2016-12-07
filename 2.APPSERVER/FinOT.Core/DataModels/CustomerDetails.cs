@@ -44,6 +44,12 @@ namespace RAP.Core.DataModels
         public bool IsAnalyst { get; set; }
         public DateTime CreatedDate { get; set; }
     }
+    public class StateM
+    {
+        public int StateID { get; set; }
+        public string StateCode { get; set; }
+        public string StateName { get; set; }
+    }
     public class Rent
     {
 

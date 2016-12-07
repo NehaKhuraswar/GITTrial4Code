@@ -1,7 +1,17 @@
 ﻿'use strict';
-var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', function ($scope, $modal, alert, rapFactory) {
+var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, masterFactory) {
     var self = this;
     self.model = [];
+    self.StateList = [];
+    var _GetStateList = function () {
+        masterFactory.GetStateList().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.StateList = response.data;
+        });
+    }
+    _GetStateList();
     var checkPassword = function (pwd, email) {
         if (email == pwd)
             return false;

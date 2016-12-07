@@ -79,6 +79,13 @@
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.State" Member="States">
+    <Type Name="State">
+      <Column Name="StateID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StateCode" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="StateName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.USP_SearchAccount_Get" Method="USP_SearchAccount_Get">
     <Parameter Name="AcctType" Parameter="acctType" Type="System.Int32" DbType="Int" />
     <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(25)" />

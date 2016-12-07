@@ -246,4 +246,10 @@
       <Association Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReason" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReason" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.NumberRangeForUnits" Member="NumberRangeForUnits">
+    <Type Name="NumberRangeForUnit">
+      <Column Name="RangeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RangeDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

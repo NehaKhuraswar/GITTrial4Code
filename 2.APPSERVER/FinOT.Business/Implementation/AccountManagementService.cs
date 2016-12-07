@@ -59,7 +59,10 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.GetAccountTypes();
         }
-
+        public ReturnResult<List<StateM>> GetStateList()
+        {
+            return accDBHandler.GetStateList();
+        }
         public ReturnResult<SearchResult> GetAccountSearch(AccountSearch accountSearch)
         {
             return accDBHandler.GetAccountSearch(accountSearch);

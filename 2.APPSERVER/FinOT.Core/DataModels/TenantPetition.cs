@@ -139,6 +139,7 @@ namespace RAP.Core.DataModels
                 _appealGrounds = value;
             }
         }
+
     }
     public class TenantPetitionInfoM
     {
@@ -159,6 +160,7 @@ namespace RAP.Core.DataModels
         private List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
         private List<TenantLostServiceInfoM> _lostServices = new List<TenantLostServiceInfoM>();
         private List<TenantProblemInfoM> _problems = new List<TenantProblemInfoM>();
+        private List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
         
         public bool bThirdPartyRepresentation { get; set; }
         public UserInfoM ThirdPartyInfo { get; set; }
@@ -182,7 +184,19 @@ namespace RAP.Core.DataModels
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
         public bool bLostService { get; set; }
-                
+
+
+        public List<NumberRangeForUnitsM> RangeOfUnits
+        {
+            get
+            {
+                return _rangeOfUnits;
+            }
+            set
+            {
+                _rangeOfUnits = value;
+            }
+        }
         public  List<TenantLostServiceInfoM> LostServices
         {
             get
@@ -275,7 +289,11 @@ namespace RAP.Core.DataModels
         public int StatusID { get; set; }
         public string Status { get; set; }
     }
-
+    public class NumberRangeForUnitsM
+    {
+        public int RangeID { get; set; }
+        public string RangeDesc { get; set; }
+    }
     public class PetitionGroundM
     {
         private bool _selected = false;

@@ -173,6 +173,38 @@ namespace RAP.DAL
                 return result;
             }
         }
+        public ReturnResult<List<StateM>> GetStateList()
+        {
+            ReturnResult<List<StateM>> result = new ReturnResult<List<StateM>>();
+
+            try
+            {
+                List<StateM> states = new List<StateM>();
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var stateDB = db.States.ToList();
+
+
+                    foreach (var item in stateDB)
+                    {
+                        StateM obj = new StateM();
+                        obj.StateID = item.StateID;
+                        obj.StateCode = item.StateCode;
+                        obj.StateName = item.StateName;
+                        states.Add(obj);
+                    }
+                }
+                result.result = states;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
 
         public ReturnResult<SearchResult> GetAccountSearch(AccountSearch accountSearch)
         {

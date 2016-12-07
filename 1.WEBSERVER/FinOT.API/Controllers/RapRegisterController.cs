@@ -229,6 +229,40 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<List<AccountType>>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getstatelist")]
+        public HttpResponseMessage GetStateList()
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<StateM>> transaction = new TranInfo<List<StateM>>();
+            ReturnResult<List<StateM>> result = new ReturnResult<List<StateM>>();
+            try
+            {
+                result = accService.GetStateList();
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<List<StateM>>>(ReturnCode, transaction);
+        }
 
         [AllowAnonymous]
         [HttpGet]
