@@ -41,7 +41,7 @@
                     <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.PhoneNumber" required />
                 </div>
                 <button type="button" class="btn btn-sm btn-primary" ng-click="Ctrl.AccountSearch(Ctrl.AccountSearchModel)">Search</button>
-                <button type="button" class="btn btn-sm btn-default" ng-click="onClearFilter()">Clear</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="Ctrl.OnClearFilter()">Clear</button>
             </div>
         </div>
         <div class="panel panel-primary nopadding-bottom margin-top-5">
@@ -86,7 +86,7 @@
                             {{item.AccountType}}</a>
                         </td>
                         <td>
-                            {{item.Email}}
+                            {{item.email}}
                         </td>
                         <td>
                             {{item.CreatedDate | date:'MM/dd/yyyy'}}
@@ -101,20 +101,20 @@
             </table>
             <nav class="pull-left" ng-if="Ctrl.AccountSearchResult.length">
                 <ul class="pager nopadding-bottom">
-                    <li ng-class="{'disabled': Ctrl.model.CurrentPage == 1}">
-                        <a href="" title="Previous page" ng-click="getPage(Ctrl.model.CurrentPage - 1)">&lsaquo; Previous</a>
+                    <li ng-class="{'disabled': Ctrl.AccountSearchModel.CurrentPage == 1}">
+                        <a href="" title="Previous page" ng-click="Ctrl.GetPage((Ctrl.AccountSearchModel.CurrentPage - 1),Ctrl.AccountSearchModel)">&lsaquo; Previous</a>
                     </li>
                     <li ng-class="{'disabled': Ctrl.isLastPage()}">
-                        <a href="" title="Next page" ng-click="getPage(Ctrl.model.CurrentPage + 1)">Next &rsaquo;</a>
+                        <a href="" title="Next page" ng-click="Ctrl.GetPage((Ctrl.AccountSearchModel.CurrentPage + 1),Ctrl.AccountSearchModel)">Next &rsaquo;</a>
                     </li>
                     <li>
-                        <span class="range-label">Displaying {{ Ctrl.model.CurrentPage }} of {{ Ctrl.totalPage() }}</span>
+                        <span class="range-label">Displaying {{ Ctrl.AccountSearchModel.CurrentPage }} of {{ Ctrl.TotalPage() }}</span>
                     </li>
                     <li>
                         <span class="range-label">
-                            <select ng-change="onPageSizeChange()"
-                                    ng-model="Ctrl.model.PageSize"
-                                    ng-options="o for o in pagesizeOptions"></select> per page
+                            <select ng-change="Ctrl.OnPageSizeChange()"
+                                    ng-model="Ctrl.AccountSearchModel.PageSize"
+                                    ng-options="o for o in Ctrl.pagesizeOptions"></select> per page
                         </span>
                     </li>
                 </ul>

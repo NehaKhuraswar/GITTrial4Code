@@ -95,4 +95,20 @@
     <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
     <ElementType IdRef="ID1" />
   </Function>
+  <Function Name="dbo.USP_CountSearchAccount_Get" Method="USP_CountSearchAccount_Get">
+    <Parameter Name="AcctType" Parameter="acctType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(35)" />
+    <Parameter Name="APNNumber" Parameter="aPNNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AddressLine1" Parameter="addressLine1" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="AddressLine2" Parameter="addressLine2" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="SortReverse" Parameter="sortReverse" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="PageSize" Parameter="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CurrentPage" Parameter="currentPage" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

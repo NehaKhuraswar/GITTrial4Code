@@ -82,6 +82,7 @@ namespace RAP.Core.DataModels
         public bool SortReverse;
         public int PageSize;
         public int CurrentPage;
+        public int TotalCount;
     }
 
     public class SearchResultCustomerInfo
@@ -91,6 +92,6 @@ namespace RAP.Core.DataModels
         public string email { get; set; }
         public string Name { get; set; }
         public int RankNo { get; set; }
-        //public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

@@ -143,6 +143,14 @@ namespace RAP.DAL
 			message = ((string)(result.GetParameterValue(12)));
 			return ((ISingleResult<Temp>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_CountSearchAccount_Get")]
+		public int USP_CountSearchAccount_Get([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AcctType", DbType="Int")] System.Nullable<int> acctType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="VarChar(25)")] string firstName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastName", DbType="VarChar(25)")] string lastName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(35)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="APNNumber", DbType="Int")] System.Nullable<int> aPNNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine1", DbType="VarChar(25)")] string addressLine1, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine2", DbType="VarChar(25)")] string addressLine2, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PhoneNumber", DbType="VarChar(15)")] string phoneNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortBy", DbType="VarChar(50)")] string sortBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortReverse", DbType="Bit")] System.Nullable<bool> sortReverse, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PageSize", DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CurrentPage", DbType="Int")] System.Nullable<int> currentPage, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), acctType, firstName, lastName, email, aPNNumber, addressLine1, addressLine2, phoneNumber, sortBy, sortReverse, pageSize, currentPage, message);
+			message = ((string)(result.GetParameterValue(12)));
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserType")]

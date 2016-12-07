@@ -193,24 +193,31 @@ namespace RAP.DAL
                         accountSearch.PhoneNumber, accountSearch.SortBy, accountSearch.SortReverse,
                         accountSearch.PageSize, accountSearch.CurrentPage,  ref errorMessage);
 
+                    int TotalResultCount = db.USP_CountSearchAccount_Get(accountSearch.AccountType.AccountTypeID,
+                        accountSearch.FirstName, accountSearch.LastName, accountSearch.Email, accountSearch.APNNumber,
+                         accountSearch.AddressLine1, accountSearch.AddressLine2,
+                        accountSearch.PhoneNumber, accountSearch.SortBy, accountSearch.SortReverse,
+                        accountSearch.PageSize, accountSearch.CurrentPage, ref errorMessage);
+
                     
                     foreach (var item in Resultdb)
                     {
-                        int a = (int)item.RankNo;
                         account.custID = (int)item.CustomerID;
-
                         account.email = item.Email;
                         account.AccountType = item.AcctTypeDesc;
-                       // account.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                        account.CreatedDate = Convert.ToDateTime(item.CreatedDate);
                         account.Name = item.Name;
                         account.RankNo = (int)item.RankNo;
+                        searchResult.List.Add(account);
+                        
                     }
                    
-                    searchResult.List.Add(account);
+                    
                     searchResult.PageSize = accountSearch.PageSize;
                     searchResult.SortBy = accountSearch.SortBy;
                     searchResult.SortReverse = accountSearch.SortReverse;
                     searchResult.CurrentPage = accountSearch.CurrentPage;
+                    searchResult.TotalCount = TotalResultCount;
                 }
                
                 result.result = searchResult;

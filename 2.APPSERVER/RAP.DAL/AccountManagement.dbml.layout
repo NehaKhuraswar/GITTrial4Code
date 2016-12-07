@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="OAKRAP">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.75" name="OAKRAP">
   <DataContextMoniker Name="/AccountManagementDataContext" />
   <nestedChildShapes>
     <classShape Id="0860dcf9-3ab8-47de-8030-9fe8ba0f529a" absoluteBounds="2.75, 0.5, 2, 1.1939925130208333">
@@ -66,10 +66,10 @@
         <classShapeMoniker Id="707f1a3a-ebab-4a09-8d81-cc6d7ea4c396" />
       </nodes>
     </associationConnector>
-    <classShape Id="29897467-5f6b-46c6-8561-eda0aa696727" absoluteBounds="3.875, 6.125, 2, 1.9631982421875">
+    <classShape Id="f7d8fec3-b73b-4964-8736-252b3758ff98" absoluteBounds="4.375, 8.5, 2, 1.9631982421875">
       <DataClassMoniker Name="/AccountManagementDataContext/Temp" />
       <nestedChildShapes>
-        <elementListCompartment Id="c631c181-4402-41e1-b58d-1977540dddce" absoluteBounds="3.89, 6.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="68fd7ea7-0784-4999-bbe8-47d169eed4be" absoluteBounds="4.39, 8.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
