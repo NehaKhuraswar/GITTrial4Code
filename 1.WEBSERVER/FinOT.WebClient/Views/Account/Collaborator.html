@@ -1,0 +1,77 @@
+﻿<div class="application-form-wrapper">
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12">
+            <div class="application-step step-1">
+                <h3 class="step-heading">Invite an Account Collaborator</h3>
+
+                <form name="frmInviteAccountcollaborator" id="frmInviteAccountcollaborator" action="#" method="post" class="application-form">
+                    <div class="step-content step1">
+
+                        <div class="field-group subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-md-8 col-xs-12">
+                                    <p>Your collaborator needs to have an account in order to be given access to your account. Search for the email address your collaborator used to set up their account.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group no-bottom-margin">
+                            <label for="email" class="hidden">Email</label>
+                            <input type="text" name="email" id="email" class="field-input full-width" placeholder="Email Address" />
+                        </div>
+                    </div>
+
+                    <div class="step-footer no-top-margin">
+                        <input type="button" id="btn-search" name="btn-search" class="btn-primary" value="Search" />
+                    </div>
+                </form>
+
+                <!-- Previously requested translation services -->
+                <form name="frmCollaboratorsWithAccess" id="frmCollaboratorsWithAccess" action="#" method="post" class="application-form">
+                    <div class="step-content step1">
+                        <div class="field-group subhead type2">
+                            <h4>Collaborators with access to your account</h4>
+                        </div>
+
+                        <div class="subhead">
+                            <div class="collaborator">
+                                <div class="name">Margaret Davis</div>
+                                <div class="email">margaret@davisandpartners.com</div>
+                            </div>
+                        </div>
+
+                        <div class="field-group mar-bottom-40">
+                            <a href="#" class="btn-link">Remove all access</a>
+                        </div>
+
+
+                        <div class="field-group subhead">
+                            <p>Select all cases that you would like this collaborator to have access to</p>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                                <label for="chk_case1">
+                                    <input type="checkbox" name="chk_case1" id="chk_case1" value="T17-0451" /><i></i><span>T17-0451</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                                <label for="chk_case2">
+                                    <input type="checkbox" name="chk_case2" id="chk_case2" value="T17-0416" /><i></i><span>T17-0416</span>
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="field-group">
+                            <a href="#" class="btn-link">Update access privileges</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

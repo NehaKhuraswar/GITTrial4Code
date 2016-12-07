@@ -210,6 +210,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Views\Account\ChangePassword.html" />
+    <Content Include="Views\Account\Collaborator.html" />
     <Content Include="Views\Account\ResendPIN.html" />
     <Content Include="Views\Account\AccountSearch.html" />
     <Content Include="Views\Account\CreateCityAccount.html" />

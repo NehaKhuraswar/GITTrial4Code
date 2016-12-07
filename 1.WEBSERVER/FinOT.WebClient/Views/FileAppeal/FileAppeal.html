@@ -1,21 +1,39 @@
-﻿<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-danger font-small">
-            <div class="panel-heading">
-                <strong>File Appeal</strong>
-            </div>
-            <div class="panel-body">
-                <p>Are you appealing as a renter or as a property owner?</p>
+﻿<div class="application-form-wrapper">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            <?php include('sidebar-appeal.html'); ?>
+        </div>
 
-                <!--RAP-TBD  Associate the model--> 
-                <div class="radio">
-                    <label><input type="radio" name="FilingAs">Renter</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="FilingAs">Property owner</label>
-                </div>
-                <button ng-click="Ctrl.Continue()">Continue</button>
+        <div class="col-md-9 col-sm-12">
+            <div class="application-step step-1">
+                <h3 class="step-heading">Appeal</h3>
+
+                <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
+                    <div class="step-content step1">
+
+                        <div class="field-group subhead no-top-margin">
+                            <p class="input-label fs-18">Are you filing as a tenant or as a property owner?</p>
+
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="filing_as_tenant">
+                                    <input type="radio" name="tenant_or_owner" id="filing_as_tenant" class="input-field" value="Tenant " checked="checked" /><i></i><span>Tenant </span>
+                                </label>
+
+                                <label for="filing_as_owner">
+                                    <input type="radio" name="tenant_or_owner" id="filing_as_owner" class="input-field" value="Property Owner" /><i></i> <span>Property Owner</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="step-footer">
+                        <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.Continue()" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
