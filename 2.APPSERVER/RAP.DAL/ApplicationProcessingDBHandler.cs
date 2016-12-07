@@ -21,21 +21,7 @@ namespace RAP.DAL
             this._eHandler = eHandler;
             _dbContext = new ApplicationProcessingDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
         }
-        private  CustomDate  GetDateFromDatabase(DateTime DatabaseDate)
-        {
-            try
-            {
-                CustomDate FrontEndDate = new CustomDate();
-                FrontEndDate.Day = DatabaseDate.Day;
-                FrontEndDate.Month = DatabaseDate.Month;
-                FrontEndDate.Year = DatabaseDate.Year;
-                return FrontEndDate;
-            }
-            catch(Exception ex)
-            {
-                return null;
-            }
-        }
+      
         #region "Get"
         /// <summary>
         /// Gets the data needed to to display on the tenant petition form
@@ -351,8 +337,8 @@ namespace RAP.DAL
                         //TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
                         //rentIncrementDB.TenantPetitionID = petition.PetitionID;
                         objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
-                        objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
-                        objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
+                        objTenantRentIncreaseInfoM.RentIncreaseNoticeDate =_commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
+                        objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
                         objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
                         objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
                         objTenantRentIncreaseInfoM.bRentIncreaseContested = Convert.ToBoolean(item.bRentIncreaseContested);
@@ -387,9 +373,9 @@ namespace RAP.DAL
 
                         objTenantLostServiceInfoM.ReducedServiceDescription = item.ReducedServiceDescription;
                         objTenantLostServiceInfoM.EstimatedLoss = item.EstimatedLoss;
-                       
-                        objTenantLostServiceInfoM.LossBeganDate = GetDateFromDatabase(Convert.ToDateTime(item.LossBeganDate));
-                        objTenantLostServiceInfoM.PayingToServiceBeganDate = GetDateFromDatabase(Convert.ToDateTime(item.PayingToServiceBeganDate));
+
+                        objTenantLostServiceInfoM.LossBeganDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.LossBeganDate));
+                        objTenantLostServiceInfoM.PayingToServiceBeganDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.PayingToServiceBeganDate));
 
                         tenantLostServiceInfo.Add(objTenantLostServiceInfoM);
                     }
@@ -419,7 +405,7 @@ namespace RAP.DAL
                         TenantProblemInfoM objTenantProblemInfoM = new TenantProblemInfoM();
                         objTenantProblemInfoM.ProblemDescription = item.ProblemDescription;
                         objTenantProblemInfoM.EstimatedLoss = item.EstimatedLoss;
-                        objTenantProblemInfoM.ProblemBeganDate = GetDateFromDatabase(Convert.ToDateTime(item.ProblemBeganDate));
+                        objTenantProblemInfoM.ProblemBeganDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.ProblemBeganDate));
 
                         tenantProblemInfo.Add(objTenantProblemInfoM);
                     }
@@ -1365,7 +1351,7 @@ namespace RAP.DAL
                     _applicantInfo.bBusinessLicensePaid = (applicantInfo.bBusinessLicensePaid != null) ? Convert.ToBoolean(applicantInfo.bBusinessLicensePaid) : false; 
                     _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                     _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false; 
-                    _applicantInfo.BuildingAcquiredDate = applicantInfo.BuildingAcquiredDate;
+                    _applicantInfo.BuildingAcquiredDate =_commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
                     _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.bRentAdjustmentProgramFeePaid) : 0;
                     _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                     _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
@@ -1468,7 +1454,7 @@ namespace RAP.DAL
                                applicantInfo.First().bBusinessLicensePaid == model.bBusinessLicensePaid &&
                                applicantInfo.First().BusinessLicenseNumber == model.BusinessLicenseNumber &&
                                 applicantInfo.First().bRentAdjustmentProgramFeePaid == model.bRentAdjustmentProgramFeePaid &&
-                               applicantInfo.First().BuildingAcquiredDate == model.BuildingAcquiredDate &&
+                               applicantInfo.First().BuildingAcquiredDate == new DateTime(model.BuildingAcquiredDate.Year,model.BuildingAcquiredDate.Month,model.BuildingAcquiredDate.Day) &&
                                applicantInfo.First().NumberOfUnits == model.NumberOfUnits &&
                                applicantInfo.First().bMoreThanOneStreetOnParcel == model.bMoreThanOneStreetOnParcel && 
                                ((thirdPartyUserID > 0) ? applicantInfo.First().ThirdPartyUserID == thirdPartyUserID : true )
@@ -1488,7 +1474,7 @@ namespace RAP.DAL
                                _applicantInfo.bBusinessLicensePaid = model.bBusinessLicensePaid;
                                _applicantInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
                                _applicantInfo.bRentAdjustmentProgramFeePaid = model.bRentAdjustmentProgramFeePaid;
-                               _applicantInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
+                               _applicantInfo.BuildingAcquiredDate = new DateTime(model.BuildingAcquiredDate.Year, model.BuildingAcquiredDate.Month, model.BuildingAcquiredDate.Day);
                                _applicantInfo.NumberOfUnits = model.NumberOfUnits;
                                _applicantInfo.bMoreThanOneStreetOnParcel = model.bMoreThanOneStreetOnParcel;
                                _applicantInfo.CustomerID = model.CustomerID;                         
@@ -1511,9 +1497,8 @@ namespace RAP.DAL
                         applicantInfo.bBusinessLicensePaid = model.bBusinessLicensePaid;
                         applicantInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
                         applicantInfo.bRentAdjustmentProgramFeePaid = model.bRentAdjustmentProgramFeePaid;
-                        applicantInfo.BuildingAcquiredDate = DateTime.Now;
-                        //applicantInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
-                        //TBD
+                       applicantInfo.BuildingAcquiredDate =new DateTime(model.BuildingAcquiredDate.Year,model.BuildingAcquiredDate.Month,model.BuildingAcquiredDate.Day);
+                        
                         applicantInfo.NumberOfUnits = model.NumberOfUnits;
                         applicantInfo.bMoreThanOneStreetOnParcel = model.bMoreThanOneStreetOnParcel;
                         applicantInfo.CustomerID = model.CustomerID;                     

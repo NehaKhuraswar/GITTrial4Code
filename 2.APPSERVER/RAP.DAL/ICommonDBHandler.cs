@@ -9,5 +9,6 @@ namespace RAP.DAL
        ReturnResult<UserInfoM> SaveUserInfo(UserInfoM userInfo);
        ReturnResult<UserInfoM> GetUserInfo(int UserId);
        void SaveErrorLog(OperationStatus status);
+       CustomDate GetDateFromDatabase(DateTime DatabaseDate);
     }
 }

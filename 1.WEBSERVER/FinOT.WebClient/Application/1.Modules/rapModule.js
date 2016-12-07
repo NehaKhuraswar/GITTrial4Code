@@ -9,6 +9,9 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          var CustID = 0;
          var CustomerDetails;
          var CaseDetails;
+
+         
+        
           // public
           return {
 

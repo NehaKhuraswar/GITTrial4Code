@@ -19,6 +19,17 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         self.caseinfo = response.data;
     });
 
+    var range = 10 / 2;
+    var currentYear = new Date().getFullYear();
+    self.years = [];
+    for (var i = range; i > 0 ; i--) {
+
+        self.years.push(currentYear - i);
+    }
+    for (var i = 0; i < range + 1; i++) {
+        self.years.push(currentYear + i);
+    }
+
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {

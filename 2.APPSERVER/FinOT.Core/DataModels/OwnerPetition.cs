@@ -115,6 +115,7 @@ namespace RAP.Core.DataModels
         {
             ThirdPartyUser = new UserInfoM();
             ApplicantUserInfo = new UserInfoM();
+            BuildingAcquiredDate = new CustomDate();
         }
         public int OwnerPetitionApplicantInfoID { get; set; }
         public UserInfoM ApplicantUserInfo { get; set; }
@@ -123,7 +124,7 @@ namespace RAP.Core.DataModels
         public bool bBusinessLicensePaid { get; set; }
         public string BusinessLicenseNumber { get; set; }
         public bool bRentAdjustmentProgramFeePaid { get; set; }
-        public DateTime? BuildingAcquiredDate { get; set; }
+        public CustomDate BuildingAcquiredDate { get; set; }
         public int NumberOfUnits { get; set; }
         public bool bMoreThanOneStreetOnParcel { get; set; }
         public int CustomerID { get; set; }

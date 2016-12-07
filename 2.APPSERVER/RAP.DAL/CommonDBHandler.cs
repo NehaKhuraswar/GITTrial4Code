@@ -161,5 +161,26 @@ namespace RAP.DAL
             }
         }
 
+        /// <summary>
+        /// Coverts Datetime to CustomDate
+        /// </summary>
+        /// <param name="DatabaseDate"></param>
+        /// <returns></returns>
+        public CustomDate GetDateFromDatabase(DateTime DatabaseDate)
+        {
+            try
+            {
+                CustomDate FrontEndDate = new CustomDate();
+                FrontEndDate.Day = DatabaseDate.Day;
+                FrontEndDate.Month = DatabaseDate.Month;
+                FrontEndDate.Year = DatabaseDate.Year;
+                return FrontEndDate;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }
