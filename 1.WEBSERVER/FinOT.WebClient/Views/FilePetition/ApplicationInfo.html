@@ -57,7 +57,12 @@
 
             <div class="field-group">
                 <label for="representative_state">State</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State" required />
+                <select name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
+                        ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State"
+                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                    <option value="" selected>Select state</option>
+                </select>
+                <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State" required />-->
             </div>
 
             <div class="field-group">
@@ -106,8 +111,13 @@
             </div>
 
             <div class="field-group">
-                <label for="representative_state">State</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State" required />
+                <label for="owner_state">State</label>
+                <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State" required />-->
+                <select name="owner_state" id="owner_state" class="custom-select" data-placeholder="Select"
+                        ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"
+                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                    <option value="" selected>Select state</option>
+                </select>
             </div>
 
             <div class="field-group">
@@ -167,11 +177,16 @@
 
                 <div class="field-group">
                     <label for="pm_state">State</label>
-                    <select name="pm_state" id="pm_state" class="custom-select" data-placeholder="Select">
+                    <select name="pm_state" id="pm_state" class="custom-select" data-placeholder="Select"
+                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State"
+                            ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                        <option value="" selected>Select state</option>
+                    </select>
+                    <!--<select name="pm_state" id="pm_state" class="custom-select" data-placeholder="Select">
                         <option value="option_01">Option 01</option>
                         <option value="option_02">Option 02</option>
                         <option value="option_03">Option 03</option>
-                    </select>
+                    </select>-->
                 </div>
 
                 <div class="field-group">
