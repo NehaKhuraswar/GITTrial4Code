@@ -216,6 +216,8 @@
     <Content Include="Views\Account\AccountSearch.html" />
     <Content Include="Views\Account\CreateCityAccount.html" />
     <Content Include="Views\Account\NewCaseStatus.html" />
+    <Content Include="Views\Account\TranslationRequestedServicesHearing.html" />
+    <Content Include="Views\Account\TranslationServicesHearing.html" />
     <Content Include="Views\FileAppeal\AppellantsInfo.html" />
     <Content Include="Views\FileAppeal\FileAppeal.html" />
     <Content Include="Views\FileAppeal\GroundsForAppeal.html" />
