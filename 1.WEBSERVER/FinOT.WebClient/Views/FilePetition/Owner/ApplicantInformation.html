@@ -1,5 +1,129 @@
 ﻿<div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
         <h3 class="step-heading">Owner Petition for Approval of Rent Increase: <span>Applicant and Property Information</span></h3>
+       
+        <div class="step-content create-new">
+            <div class="subhead no-top-margin">
+                <h4>Applicant’s name and rental address</h4>
+                <a href="#" class="btn-link btn-edit">Edit</a>
+            </div> 
+            <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
+                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
+                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
+                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
+                <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}</p>
+                <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
+            </div>
+            <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                <div class="field-group">
+                    <label for="Applicant_firstname">Name</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName" required />
+                </div>
+
+                <div class="field-group">
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="Applicant_address1">Mailing address 1</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="Applicant_address2">Mailing address 2 (optional)</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="Applicant_city">City</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="Applicant_state">State</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="Applicant_zip_code">Zip Code</label>
+                    <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="Applicante_phone_number">Phone number</label>
+                    <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber" required />
+                </div>
+
+                <div class="field-group">
+                    <label for="Applicant_email">Email Address</label>
+                    <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                </div>
+            </div>
+
+                <div class="subhead">
+                    <h4>Your representative</h4>
+                </div>
+
+                <div id="representative-info">
+                    <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
+                    <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                        <div class="field-group">
+                            <label for="representative_firstname">Name</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />
+                        </div>
+
+                        <div class="field-group">
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_address1">Mailing address 1</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_address2">Mailing address 2 (optional)</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_city">City</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_state">State</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_zip_code">Zip Code</label>
+                            <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_phone_number">Phone number</label>
+                            <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_email">Email Address</label>
+                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                        </div>
+                        </div>
+                    <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                    </div>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
+                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
+                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                    </div>
+            </div>
+
+
+        <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
         </div>
     </div>

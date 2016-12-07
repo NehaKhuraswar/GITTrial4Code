@@ -19,8 +19,11 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         self.caseinfo = response.data;
     });
 
-    //self.ContinueToGroundsforPetition = function () {
-    //    rapGlobalFactory.CaseDetails = self.caseinfo;
+    self.Continue = function () {
+        rapGlobalFactory.CaseDetails = self.caseinfo;
+    }
+    //self.ContinueToGrrapGlobalFactory.CaseDetails = self.caseinfo;oundsforPetition = function () {
+    //    
     //    rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
     //        if (!alert.checkResponse(response)) { return; }
     //        rapGlobalFactory.CaseDetails = response.data;
