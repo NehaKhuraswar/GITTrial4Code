@@ -7,7 +7,7 @@ using RAP.Core.Services;
 using RAP.Core.DataModels;
 using RAP.Business.Helper;
 using RAP.DAL;
-
+using System.Configuration;
 namespace RAP.Business.Implementation
 {
     public class ApplicationProcessingService : IApplicationProcessingService
@@ -241,7 +241,16 @@ namespace RAP.Business.Implementation
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                result = _dbHandler.GetOwnerApplicantInfo(model);
+                string RAPFee = ConfigurationManager.AppSettings["RAPFee"];
+                var dbResult = _dbHandler.GetOwnerApplicantInfo(model);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                dbResult.result.OwnerPetitionInfo.ApplicantInfo.RAPFee = string.IsNullOrEmpty(RAPFee) ? "69" : RAPFee;
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)

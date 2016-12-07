@@ -128,6 +128,7 @@ namespace RAP.Core.DataModels
         public bool bMoreThanOneStreetOnParcel { get; set; }
         public int CustomerID { get; set; }
         public int bPetitionFiled { get; set; }
+        public string RAPFee { get; set; }
     }
 
     public class OwnerPetitionPropertyInfoM
