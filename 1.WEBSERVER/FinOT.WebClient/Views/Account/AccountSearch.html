@@ -15,34 +15,61 @@
                         <option value="" selected>Select Account Type</option>
                     </select>
                 </div>
-
-                <div class="field-group">
-                    <label for="account_firstname">First Name</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.FirstName" required />
+                <div ng-if="Ctrl.AccountSearchModel.AccountType.AccountTypeID == 3">
+                    <div class="field-group">
+                        <label for="account_firstname">First Name</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.FirstName" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_lastname">Last Name</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.LastName" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_email">Email</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.Email" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_line1">Address Line1</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.AddressLine1" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_line2">Address Line2</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.AddressLine2" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_line2">City</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.City" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_line2">Zip</label>
+                        <input type="number" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.Zip" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_number">Phone Number</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.PhoneNumber" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_number">APN Number</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.APN" required />
+                    </div>
                 </div>
-                <div class="field-group">
-                    <label for="account_lastname">Last Name</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.LastName" required />
-                </div>
-                <div class="field-group">
-                    <label for="account_email">Email</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.Email" required />
-                </div>
-                <div class="field-group">
-                    <label for="account_line1">Address Line1</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.AddressLine1" required />
-                </div>
-                <div class="field-group">
-                    <label for="account_line2">Address Line2</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.AddressLine2" required />
-                </div>
-                <div class="field-group">
-                    <label for="account_number">Phone Number</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.PhoneNumber" required />
-                </div>
-                <div class="field-group">
-                    <label for="account_number">APN Number</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.APN" required />
+                <div ng-if="Ctrl.AccountSearchModel.AccountType.AccountTypeID != 3">
+                    <div class="field-group">
+                        <label for="account_firstname">First Name</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.FirstName" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_lastname">Last Name</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.LastName" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_email">Email</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.Email" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="account_number">Office Phone Number</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.PhoneNumber" required />
+                    </div>
                 </div>
                 <button type="button" class="btn btn-sm btn-default" ng-disabled="Ctrl.AccountSearchModel.AccountType == null" ng-click="Ctrl.AccountSearch(Ctrl.AccountSearchModel)">Search</button>
                 <button type="button" class="btn btn-sm btn-default" ng-click="Ctrl.OnClearFilter()">Clear</button>

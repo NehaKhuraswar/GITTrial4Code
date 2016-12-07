@@ -2,7 +2,15 @@
 var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', function ($scope, $modal, alert, rapFactory) {
     var self = this;
     self.model = [];
-    self.Register = function (model) {        
+    //var checkPassword = function (str) {
+    //    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    //    return re.test(str);
+    //}
+    self.Register = function (model) {
+        //if (!checkPassword(model.Password))
+        //{
+        //    return;
+        //}
         rapFactory.SaveCustomer(null, model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

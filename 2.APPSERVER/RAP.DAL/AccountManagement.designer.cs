@@ -128,16 +128,16 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Temp> Temps
+		public System.Data.Linq.Table<ReturnAccountSearch> ReturnAccountSearches
 		{
 			get
 			{
-				return this.GetTable<Temp>();
+				return this.GetTable<ReturnAccountSearch>();
 			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_SearchAccount_Get")]
-		public ISingleResult<Temp> USP_SearchAccount_Get(
+		public ISingleResult<ReturnAccountSearch> USP_SearchAccount_Get(
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AcctType", DbType="Int")] System.Nullable<int> acctType, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="VarChar(25)")] string firstName, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastName", DbType="VarChar(25)")] string lastName, 
@@ -147,6 +147,8 @@ namespace RAP.DAL
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="ToDate", DbType="DateTime")] System.Nullable<System.DateTime> toDate, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine1", DbType="VarChar(25)")] string addressLine1, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine2", DbType="VarChar(25)")] string addressLine2, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="City", DbType="VarChar(20)")] string city, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Zip", DbType="Int")] System.Nullable<int> zip, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PhoneNumber", DbType="VarChar(15)")] string phoneNumber, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortBy", DbType="VarChar(50)")] string sortBy, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortReverse", DbType="Bit")] System.Nullable<bool> sortReverse, 
@@ -155,10 +157,10 @@ namespace RAP.DAL
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalCount", DbType="Int")] ref System.Nullable<int> totalCount, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), acctType, firstName, lastName, email, aPNNumber, fromDate, toDate, addressLine1, addressLine2, phoneNumber, sortBy, sortReverse, pageSize, currentPage, totalCount, message);
-			totalCount = ((System.Nullable<int>)(result.GetParameterValue(14)));
-			message = ((string)(result.GetParameterValue(15)));
-			return ((ISingleResult<Temp>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), acctType, firstName, lastName, email, aPNNumber, fromDate, toDate, addressLine1, addressLine2, city, zip, phoneNumber, sortBy, sortReverse, pageSize, currentPage, totalCount, message);
+			totalCount = ((System.Nullable<int>)(result.GetParameterValue(16)));
+			message = ((string)(result.GetParameterValue(17)));
+			return ((ISingleResult<ReturnAccountSearch>)(result.ReturnValue));
 		}
 	}
 	
@@ -1562,8 +1564,8 @@ namespace RAP.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Temp")]
-	public partial class Temp
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReturnAccountSearch")]
+	public partial class ReturnAccountSearch
 	{
 		
 		private System.Nullable<int> _RankNo;
@@ -1578,7 +1580,7 @@ namespace RAP.DAL
 		
 		private System.Nullable<System.DateTime> _CreatedDate;
 		
-		public Temp()
+		public ReturnAccountSearch()
 		{
 		}
 		

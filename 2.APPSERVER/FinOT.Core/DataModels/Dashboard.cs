@@ -80,6 +80,8 @@ namespace RAP.Core.DataModels
         public string Email { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public int Zip { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }

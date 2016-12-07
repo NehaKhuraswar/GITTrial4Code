@@ -191,8 +191,9 @@ namespace RAP.DAL
                     var Resultdb = db.USP_SearchAccount_Get(accountSearch.AccountType.AccountTypeID,
                         accountSearch.FirstName,accountSearch.LastName, accountSearch.Email, accountSearch.APNNumber,
                         accountSearch.FromDate, accountSearch.ToDate,
-                         accountSearch.AddressLine1, accountSearch.AddressLine2,
-                        accountSearch.PhoneNumber, accountSearch.SortBy, accountSearch.SortReverse,
+                         accountSearch.AddressLine1, accountSearch.AddressLine2, accountSearch.City, 
+                         accountSearch.Zip, accountSearch.PhoneNumber,
+                         accountSearch.SortBy, accountSearch.SortReverse,
                         accountSearch.PageSize, accountSearch.CurrentPage, ref TotalCount, ref errorMessage );
                     
                     

@@ -69,8 +69,8 @@
       <Association Name="CityAccountType_CityUserAccount" Member="CityAccountType" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityAccountType" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Temp" Member="Temps">
-    <Type Name="Temp" Id="ID1">
+  <Table Name="dbo.ReturnAccountSearch" Member="ReturnAccountSearches">
+    <Type Name="ReturnAccountSearch" Id="ID1">
       <Column Name="RankNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="AcctTypeDesc" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
@@ -89,6 +89,8 @@
     <Parameter Name="ToDate" Parameter="toDate" Type="System.DateTime" DbType="DateTime" />
     <Parameter Name="AddressLine1" Parameter="addressLine1" Type="System.String" DbType="VarChar(25)" />
     <Parameter Name="AddressLine2" Parameter="addressLine2" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="Zip" Parameter="zip" Type="System.Int32" DbType="Int" />
     <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(15)" />
     <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="SortReverse" Parameter="sortReverse" Type="System.Boolean" DbType="Bit" />
