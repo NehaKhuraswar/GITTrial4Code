@@ -1,34 +1,104 @@
-﻿
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-danger font-small">
-            <div class="panel-heading">
-                <strong>Appeal: Grounds for Appeal</strong>
-            </div>
-            <div class="panel-body">
-                
-                <p>___________________________________________________________________________________________</p>
-                <p>I appeal the decision issued in the case on the following grounds:</p>
-                <div ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
-                    <label>
-                        <input type="checkbox" id="appealground.AppealGroundID" ng-model="appealground.Selected">
-                        {{appealground.AppealDescription}}
-                    </label>
+﻿<div class="col-md-9 col-sm-12">
+    <div class="application-step step-1">
+        <h3 class="step-heading">Tenant Petition: <span>Grounds for Appeal</span></h3>
+
+        <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
+            <div class="step-content create-new">
+
+                <div class="subhead no-top-margin">
+                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
                 </div>
-                <!--<p>Number of pages attached. Please number the attached pages consecutively</p>
-                <ul class="dropdown">
-                    <li><span>1</span></li>
-                    <li><span>2</span></li>
-                    <li><span>3</span></li>
-                    <li><span>4</span></li>
-                    <li><span>5</span></li>
-                </ul>-->
-                <!--<ul class="dropdown-menu">
-                    <li ng-repeat="i in getNumber(number)"><span>{$index+1}}</span></li>
-                </ul>-->
-                <button ng-click="Ctrl.AttachExplaination()">Attach explaination</button>
-                <button ng-click="Ctrl.ContinueToRentalHistory(Ctrl.caseinfo.TenantAppealInfo)">Continue</button>
+
+                <div class="field-group">
+                    <div class="form-group-checkbox vertical clearfix">
+                        <div class="checkbox-wrapper border-top-green pad-t15">
+                            <label for="ground_for_appeal_chkbox1">
+                                <input type="checkbox" name="ground_for_appeal_chkbox1" id="ground_for_appeal_chkbox1" value="1) Minor Math/Clerical Errors which require the hearing decision to be updated." /><i></i><span><strong>1) Minor Math/Clerical Errors which require the hearing decision to be updated.</strong></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <div class="form-group-checkbox vertical clearfix">
+                        <div class="checkbox-wrapper border-top-green pad-t15">
+                            <label for="ground_for_appeal_chkbox2">
+                                <input type="checkbox" name="ground_for_appeal_chkbox2" id="ground_for_appeal_chkbox2" value="2) Major Math/Clerical Errors which the math or clerical error is substantial enough to require the decision to be updated to an extent which impacts the other party." /><i></i><span><strong>2) Major Math/Clerical Errors which the math or clerical error is substantial enough to require the decision to be updated to an extent which impacts the other party.</strong></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <div class="form-group-checkbox vertical clearfix">
+                        <div class="checkbox-wrapper border-top-green pad-t15">
+                            <label for="ground_for_appeal_chkbox3">
+                                <input type="checkbox" name="ground_for_appeal_chkbox3" id="ground_for_appeal_chkbox3" value="3) Appealing the Decision for one of the grounds listed below." /><i></i><span><strong>3) Appealing the Decision for one of the grounds listed below.</strong></span>
+                            </label>
+
+                            <div class="checkbox-wrapper">
+                                <label for="ground_for_appeal_sub_chkbox1">
+                                    <input type="checkbox" name="ground_for_appeal_sub_chkbox1" id="ground_for_appeal_sub_chkbox1" value="a) The decision is inconsistent with OMC Chapter 8.22, Rent Board Regulations or prior decisions of the Board. You must identify the Ordinance section, regulation or prior Board decision(s) and specify the inconsistency." /><i></i><span>a) The decision is inconsistent with OMC Chapter 8.22, Rent Board Regulations or prior decisions of the Board. You must identify the Ordinance section, regulation or prior Board decision(s) and specify the inconsistency.</span>
+                                </label>
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <label for="ground_for_appeal_sub_chkbox2">
+                                    <input type="checkbox" name="ground_for_appeal_sub_chkbox2" id="ground_for_appeal_sub_chkbox2" value="b) The decision is inconsistent with decisions issued by other hearing officers.  You must identify the prior inconsistent decision and explain how the decision is inconsistent." /><i></i><span>b) The decision is inconsistent with decisions issued by other hearing officers.  You must identify the prior inconsistent decision and explain how the decision is inconsistent.</span>
+                                </label>
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <label for="ground_for_appeal_sub_chkbox3">
+                                    <input type="checkbox" name="ground_for_appeal_sub_chkbox3" id="ground_for_appeal_sub_chkbox3" value="c) The decision raises a new policy issue that has not been decided by the Board. You must provide a detailed statement of the issue and why the issue should be decided in your favor." /><i></i><span>c) The decision raises a new policy issue that has not been decided by the Board. You must provide a detailed statement of the issue and why the issue should be decided in your favor.</span>
+                                </label>
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <label for="ground_for_appeal_sub_chkbox4">
+                                    <input type="checkbox" name="ground_for_appeal_sub_chkbox4" id="ground_for_appeal_sub_chkbox4" value="d) The decision is not supported by substantial evidence. You must explain why the decision is not supported by substantial evidence found in the case record. The entire case record is available to the Board, but sections of audio recordings must be pre-designated to Rent Adjustment Staff." /><i></i><span>d) The decision is not supported by substantial evidence. You must explain why the decision is not supported by substantial evidence found in the case record. The entire case record is available to the Board, but sections of audio recordings must be pre-designated to Rent Adjustment Staff.</span>
+                                </label>
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <label for="ground_for_appeal_sub_chkbox5">
+                                    <input type="checkbox" name="ground_for_appeal_sub_chkbox5" id="ground_for_appeal_sub_chkbox5" value="e) I was denied a sufficient opportunity to present my claim or respond to the petitioner’s claim. You must explain why the decision is not supported by substantial evidence found in the case record. The entire case record is available to the Board, but sections of audio recordings must be pre-designated to Rent Adjustment Staff." /><i></i><span>e) I was denied a sufficient opportunity to present my claim or respond to the petitioner’s claim. You must explain why the decision is not supported by substantial evidence found in the case record. The entire case record is available to the Board, but sections of audio recordings must be pre-designated to Rent Adjustment Staff.</span>
+                                </label>
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <label for="ground_for_appeal_sub_chkbox6">
+                                    <input type="checkbox" name="ground_for_appeal_sub_chkbox6" id="ground_for_appeal_sub_chkbox6" value="f) The decision denies me a fair return on my investment. You must specifically state why you have been denied a fair return and attach the calculations supporting your claim." /><i></i><span>f) The decision denies me a fair return on my investment. You must specifically state why you have been denied a fair return and attach the calculations supporting your claim.</span>
+                                </label>
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <label for="ground_for_appeal_sub_chkbox7">
+                                    <input type="checkbox" name="ground_for_appeal_sub_chkbox7" id="ground_for_appeal_sub_chkbox7" value="g) Other. You must attach a detailed explanation of your grounds for appeal. Submissions to the Board are limited to 25 pages from each party." /><i></i><span>g) Other. You must attach a detailed explanation of your grounds for appeal. Submissions to the Board are limited to 25 pages from each party.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <p><strong>The maximum file size limit for uploads is 25MB</strong></p>
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach explanation</span>
+                                    <input type="file" id="explanation_file" name="explanation_file" ng-click="Ctrl.AttachExplaination()" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-        </div>
+
+            <div class="step-footer">
+                <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToRentalHistory(Ctrl.caseinfo.TenantAppealInfo)" />
+            </div>
+        </form>
     </div>
 </div>
+
+
