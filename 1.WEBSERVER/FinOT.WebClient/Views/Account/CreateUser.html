@@ -63,18 +63,24 @@
 
                         <div class="field-group">
                             <label for="residential_city">City</label>
-                            <input type="text" name="residential_city" id="residential_city" class="field-input" placeholder="" ng-model="Ctrl.model.CustomerInfo.User.City" />
+                            <input type="text" name="residential_city" id="residential_city" class="field-input" placeholder="" 
+                                   ng-model="Ctrl.model.CustomerInfo.User.City" />
                         </div>
 
                         <div class="field-group">
                             <label for="residential_state">State</label>
-                            <div class="input-wrapper">
+                            <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select"
+                                    ng-model="Ctrl.model.CustomerInfo.User.State"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                    <option value="" selected>Select state</option>
+                            </select>
+                            <!--<div class="input-wrapper">
                                 <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select" ng-model="Ctrl.model.CustomerInfo.User.State">
                                     <option value="option_01">Option 01</option>
                                     <option value="option_02">Option 02</option>
                                     <option value="option_03">Option 03</option>
                                 </select>
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="field-group">

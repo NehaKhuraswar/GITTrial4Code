@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory',  function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
    // self.model = model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -8,7 +8,7 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //self.selectedValue = 1;
     self.selectedObj = {};
     self.model = $scope.model;
-    
+    self.bCaseFiledByThirdParty = false;
     
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
@@ -33,27 +33,23 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     
 
 
-    //var _GetCaseInfo = function (model) {
-
-    //    rapFactory.GetCaseInfo().then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-           
-    //        self.caseinfo = response.data;           
-    //        rapGlobalFactory.CaseDetails = self.caseinfo;
-    //    });
-    //}
-    //// _getrent();
-    //if (self.caseinfo == null) {
-    //    _GetCaseInfo();
-    //}
 
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         if (self.caseinfo.PetitionCategoryID == 1) {
             $scope.model.bPetitionType = false;
             $scope.model.bImpInfo = true;
+            self.bCaseFiledByThirdParty = self.caseinfo.bCaseFiledByThirdParty;
+            rapFactory.GetCaseInfo().then(function (response) {
+                if (!alert.checkResponse(response)) {
+                    return;
+                }
+
+                self.caseinfo = response.data;
+                self.caseinfo.bCaseFiledByThirdParty = self.bCaseFiledByThirdParty;
+                self.caseinfo.PetitionCategoryID = 1;
+                rapGlobalFactory.CaseDetails = self.caseinfo;
+            });
         }
         else if(self.caseinfo.PetitionCategoryID == 2)
         {

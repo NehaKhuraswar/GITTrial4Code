@@ -1,10 +1,19 @@
 ﻿'use strict';
-var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapapplicationinfoFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapapplicationinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    
+    self.StateList = [];
+    var _GetStateList = function () {
+        masterFactory.GetStateList().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.StateList = response.data;
+        });
+    }
+    _GetStateList();
     
     self.ChangeSameAsPropertyOwner = function ()
     {

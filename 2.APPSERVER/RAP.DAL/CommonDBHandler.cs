@@ -67,7 +67,7 @@ namespace RAP.DAL
                                                             && x.AddressLine1 == userInfo.AddressLine1
                                                             && x.AddressLine2 == userInfo.AddressLine2
                                                             && x.City == userInfo.City
-                                                            && x.State == userInfo.State
+                                                            && x.StateID == userInfo.State.StateID
                                                             && x.Zip == userInfo.Zip)).FirstOrDefault();
 
                     if (user != null)
@@ -82,7 +82,7 @@ namespace RAP.DAL
                         userInfoDB.AddressLine1 = userInfo.AddressLine1;
                         userInfoDB.AddressLine2 = userInfo.AddressLine2;
                         userInfoDB.City = userInfo.City;
-                        userInfoDB.State = userInfo.State;
+                        userInfoDB.StateID = userInfo.State.StateID;
                         userInfoDB.Zip = userInfo.Zip;
                         userInfoDB.PhoneNumber = userInfo.PhoneNumber;
                         userInfoDB.ContactEmail = userInfo.Email;
@@ -114,34 +114,35 @@ namespace RAP.DAL
             {
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
-                    var userinfo = db.UserInfos.Where(x => x.UserID == UserId)
-                                                                .Select(c => new UserInfoM()
-                                                                {
-                                                                    UserID = c.UserID,
-                                                                    FirstName = c.FirstName,
-                                                                    LastName = c.LastName,
-                                                                    AddressLine1 = c.AddressLine1,
-                                                                    AddressLine2 = c.AddressLine2,
-                                                                    City = c.City,
-                                                                    PhoneNumber = c.PhoneNumber,
-                                                                    State = c.State,
-                                                                    Zip = c.Zip,
-                                                                    Email = c.ContactEmail,
-                                                                }).FirstOrDefault();
+                    var userinfo = db.UserInfos.Where(x => x.UserID == UserId).FirstOrDefault();
+                                                                //.Select(c => new UserInfoM()
+                                                                //{
+                                                                //    UserID = c.UserID,
+                                                                //    FirstName = c.FirstName,
+                                                                //    LastName = c.LastName,
+                                                                //    AddressLine1 = c.AddressLine1,
+                                                                //    AddressLine2 = c.AddressLine2,
+                                                                //    City = c.City,
+                                                                //    PhoneNumber = c.PhoneNumber,
+                                                                //    State.StateID = c.State.SID,
+                                                                //    Zip = c.Zip,
+                                                                //    Email = c.ContactEmail,
+                                                                //})
 
                     if (userinfo != null)
                     {
-                        _userinfo = userinfo;
-                        //userinfo.UserID = userinfos.UserID;
-                        //userinfo.FirstName = userinfos.FirstName;
-                        //userinfo.LastName = userinfos.LastName;
-                        //userinfo.AddressLine1 = userinfos.AddressLine1;
-                        //userinfo.AddressLine2 = userinfos.AddressLine2;
-                        //userinfo.City = userinfos.City;
-                        //userinfo.PhoneNumber = userinfos.PhoneNumber;
-                        //userinfo.State = userinfos.State;
-                        //userinfo.Zip = userinfos.Zip;
-                        //userinfo.Email = userinfos.Email;
+                        
+
+                        _userinfo.UserID = userinfo.UserID;
+                        _userinfo.FirstName = userinfo.FirstName;
+                        _userinfo.LastName = userinfo.LastName;
+                        _userinfo.AddressLine1 = userinfo.AddressLine1;
+                        _userinfo.AddressLine2 = userinfo.AddressLine2;
+                        _userinfo.City = userinfo.City;
+                        _userinfo.PhoneNumber = userinfo.PhoneNumber;
+                        _userinfo.State.StateID = userinfo.StateID;
+                        _userinfo.Zip = userinfo.Zip;
+                        _userinfo.Email = userinfo.ContactEmail;
 
                     }
                     result.result = _userinfo;

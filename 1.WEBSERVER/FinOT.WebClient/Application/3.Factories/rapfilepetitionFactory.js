@@ -3,15 +3,19 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
     
-      //var _GetCaseInfo = function (model, UserID) {
-      //  blockUI.start();
-      //  var url = _routePrefix + '/getcaseinfo/'+ UserID;
+      var _GetCaseInfo = function () {
+          blockUI.start();
 
-      //  return ajax.Post(model,url)
-      //  .finally(function () {
-      //      blockUI.stop();
-      //  });
-      //}
+          var url = _routePrefix + '/getcaseinfo';
+
+          return ajax.Get(url)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
+
+
+      
       var _getPetitionCategory = function()
       {
           blockUI.start();
@@ -24,9 +28,7 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
       }
 
       factory.GetPetitionCategory = _getPetitionCategory;
-    
-     
-   // factory.GetCaseInfo = _GetCaseInfo;
+      factory.GetCaseInfo = _GetCaseInfo;
     
     return factory;
 }];

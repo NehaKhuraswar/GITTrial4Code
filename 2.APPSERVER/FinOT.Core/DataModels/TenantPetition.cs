@@ -93,7 +93,7 @@ namespace RAP.Core.DataModels
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string City { get; set; }
-        public string State { get; set; }
+        public StateM State { get; set; }
         public int Zip { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
@@ -150,6 +150,7 @@ namespace RAP.Core.DataModels
             PropertyManager = new UserInfoM();
             RentIncreases = new List<TenantRentIncreaseInfoM>();
             Document = new DocumentM();
+            SelectedRangeOfUnits = new NumberRangeForUnitsM();
          
             //TenantRentIncreaseInfoM obj = new TenantRentIncreaseInfoM();
             //RentIncreases.Add(obj);
@@ -169,6 +170,7 @@ namespace RAP.Core.DataModels
         public UserInfoM PropertyManager { get; set; }
         public int PetitionID { get; set; }
         public int NumberOfUnits { get; set; }
+        public NumberRangeForUnitsM SelectedRangeOfUnits { get; set; }
         public int UnitTypeId { get; set; }
         public int CurrentRentStatusID { get; set; }
         public string ProvideExplanation { get; set; }

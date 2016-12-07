@@ -915,7 +915,9 @@ namespace RAP.DAL
             int userID = 0;
             using (CommonDataContext db = new CommonDataContext())
             {
-                var user = db.UserInfos.Where(x => (x.FirstName == userInfo.FirstName && x.LastName == userInfo.LastName && x.AddressLine1 == userInfo.AddressLine1 && x.AddressLine2 == userInfo.AddressLine2 && x.City == userInfo.City && x.State == userInfo.State && x.Zip == userInfo.Zip)).FirstOrDefault();
+                var user = db.UserInfos.Where(x => (x.FirstName == userInfo.FirstName && x.LastName == userInfo.LastName 
+                    && x.AddressLine1 == userInfo.AddressLine1 && x.AddressLine2 == userInfo.AddressLine2 
+                    && x.City == userInfo.City && x.StateID == userInfo.State.StateID && x.Zip == userInfo.Zip)).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -929,7 +931,7 @@ namespace RAP.DAL
                     userInfoDB.AddressLine1 = userInfo.AddressLine1;
                     userInfoDB.AddressLine2 = userInfo.AddressLine2;
                     userInfoDB.City = userInfo.City;
-                    userInfoDB.State = userInfo.State;
+                    userInfoDB.StateID = userInfo.State.StateID;
                     userInfoDB.Zip = userInfo.Zip;
                     userInfoDB.PhoneNumber = userInfo.PhoneNumber;
                     userInfoDB.ContactEmail = userInfo.Email;

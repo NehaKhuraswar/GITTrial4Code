@@ -211,10 +211,10 @@
 
                     <div class="field-group">
                         <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
-                        <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range">
-                            <option value="option_01">Option 01</option>
-                            <option value="option_02">Option 02</option>
-                            <option value="option_03">Option 03</option>
+                        <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range"
+                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits"
+                                ng-options="range as (range.RangeDesc) for range in Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits track by range.RangeID">
+                            <option value="" selected>Select range</option>
                         </select>
                     </div>
 
