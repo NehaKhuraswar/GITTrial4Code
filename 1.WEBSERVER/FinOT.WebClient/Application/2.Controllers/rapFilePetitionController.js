@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    
+   // self.model = model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.rent = [];
@@ -17,6 +17,18 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //        }
     //        self.rent = response.data;
     //    });
+    //}
+    //self.ShowtPetitionForm = function () {
+    //    if (self.caseinfo.PetitionCategoryID == 1)
+    //    {
+    //        $scope.model.bTenantPetition = true;
+    //        $scope.model.bOwnerPetiton = false;
+    //    }
+    //    else if (self.caseinfo.PetitionCategoryID == 2)
+    //    {
+    //        $scope.model.bOwnerPetiton = true;
+    //        $scope.model.bTenantPetition = false;
+    //    }
     //}
     
 

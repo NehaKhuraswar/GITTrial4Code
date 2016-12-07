@@ -186,7 +186,7 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
 
-        #region Common Common File Petition method      
+        #region Common File Petition method      
         [AllowAnonymous]
         [Route("GetPetitioncategory")]
         [HttpGet]

@@ -1,7 +1,20 @@
 ﻿'use strict';
 var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', 'model',function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, model) {
     var self = this;
-    self.model=[];
+    self.model = [];
+    //self.indexModel = {
+    //    bPetitionType: false,
+    //    bImpInfo: false,
+    //    bAppInfo: false,
+    //    bGrounds: false,
+    //    bRentalHistory: false,
+    //    bLostServices: false,
+    //    bAddDocuments: false,
+    //    bReview: false,
+    //    bVerification: false,
+    //    bTenantPetition: false,
+    //    bOwnerPetiton : false
+    //};
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.rent = [];

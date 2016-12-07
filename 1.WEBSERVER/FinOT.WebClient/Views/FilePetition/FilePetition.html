@@ -15,19 +15,24 @@
         </div>-->
 
 
-        <div class="field-group">            
+        <div class="field-group">
             <div class="radio">
                 <label ng-repeat="category in Ctrl.caseinfo.PetitionCategory" for="{{category.PetitionCategoryID}}">
                     <input type="radio" class="input-field"
        ng-model="Ctrl.caseinfo.PetitionCategoryID"
-       ng-value="category.PetitionCategoryID"
+       ng-value="category.PetitionCategoryID"       
        id="{{category.PetitionCategoryID}}"
        name="PetitionCategory">{{category.PetitionCategory}}
+                    
                 </label>
-               
-            </div>
+            </div>           
         </div>
-    </div>
+        <div class="field-group">
+            <label> This form is submitted by third-party representative on behalf of the petitioner</label>
+            <input type="checkbox" class="checkbox" ng-model="Ctrl.model.caseinfo.bCaseFiledByThirdParty">
+         </div>
+        </div>
+       
 </div>
 <div class="step-footer">
     <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
