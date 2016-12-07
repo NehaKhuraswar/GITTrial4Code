@@ -1,0 +1,29 @@
+﻿<div class="application-form-wrapper">
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12">
+            <div class="application-step step-1">
+                <h3 class="step-heading">Resend PIN Number</h3>
+
+                <form name="frmResendPin" id="frmLogin" action="#" method="post" class="application-form login-form">
+                    <div class="step-content step1">
+                        <div class="field-group subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-md-8 col-xs-12">
+                                    <p>
+                                        If you misplaced the PIN that was sent to you when you created your account, click on the  “Resend PIN” button below to have it sent to you again. You will need to enter this PIN to verify your signature when you submit your petiton.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-footer no-top-margin">
+                        <input type="button" id="btn-resent-pin" name="btn-resent-pin" class="btn-primary" value="Resent PIN" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
