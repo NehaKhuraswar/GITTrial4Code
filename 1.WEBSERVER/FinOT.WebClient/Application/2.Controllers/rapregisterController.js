@@ -2,15 +2,27 @@
 var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', function ($scope, $modal, alert, rapFactory) {
     var self = this;
     self.model = [];
-    //var checkPassword = function (str) {
-    //    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    //    return re.test(str);
-    //}
+    var checkPassword = function (pwd, email) {
+        if (email == pwd)
+            return false;
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\_\-])(?=.{8,})");
+        return strongRegex.test(pwd);
+    }
+    var checkPhoneNumber = function (phoneNumber) {
+        var strongRegex = new RegExp("^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$");
+        return strongRegex.test(phoneNumber);
+    }
     self.Register = function (model) {
-        //if (!checkPassword(model.Password))
-        //{
-        //    return;
-        //}
+        if (!checkPassword(model.Password, model.email))
+        {
+            alert.Error("The password you have entered is not valid! ")
+            return;
+        }
+        if (!checkPhoneNumber(model.PhoneNumber))
+        {
+            alert.Error("Phone number is not valid")
+            return;
+        }
         rapFactory.SaveCustomer(null, model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

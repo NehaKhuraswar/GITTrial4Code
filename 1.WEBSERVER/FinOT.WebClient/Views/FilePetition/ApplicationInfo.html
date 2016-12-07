@@ -135,10 +135,11 @@
                 <h4>Property manager(s) name and mailing address</h4>
             </div>
             <div id="property-manager-info">
-                <div class="form-group-radio vertical clearfix">
+                <div class="checkbox">
                     <label for="same_as_po_info">
-                        <input type="radio" name="same_as_po_info" id="same_as_po_info" class="input-field" value="Yes
-                            " /><i></i><span>Same as property owner info
+                        <input type="checkbox" name="same_as_po_info" id="same_as_po_info" class="input-field" value="Yes
+                            " ng-model="Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo"
+                               ng-change="Ctrl.ChangeSameAsPropertyOwner()" /><i></i><span>Same as property owner info
                             </span>
                     </label>
                     <div class="clear"></div>

@@ -163,6 +163,7 @@ namespace RAP.Core.DataModels
         public bool bThirdPartyRepresentation { get; set; }
         public UserInfoM ThirdPartyInfo { get; set; }
         public UserInfoM OwnerInfo { get; set; }
+        public bool bSameAsOwnerInfo { get; set; }
         public UserInfoM PropertyManager { get; set; }
         public int PetitionID { get; set; }
         public int NumberOfUnits { get; set; }
