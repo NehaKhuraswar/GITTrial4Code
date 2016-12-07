@@ -66,11 +66,11 @@ namespace RAP.Core.DataModels
 
     public class AccountSearch
     {
-        //public AccountSearch()
-        //{
-        //    FromDate = null;
-        //    ToDate = null;
-        //}
+        public AccountSearch()
+        {
+            FromDate = new DateTime(2016, 10 , 28);
+            ToDate = DateTime.Now;
+        }
 
         public AccountType AccountType { get; set; }
         public DateTime AccountCreationDate { get; set; }

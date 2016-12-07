@@ -184,24 +184,21 @@ namespace RAP.DAL
                 //List<CustomerInfo accounts = new CustomerInfo();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    SearchResultCustomerInfo account = new SearchResultCustomerInfo();
+                    
                     string errorMessage = "";
+                    int? TotalCount = 0;
 
                     var Resultdb = db.USP_SearchAccount_Get(accountSearch.AccountType.AccountTypeID,
                         accountSearch.FirstName,accountSearch.LastName, accountSearch.Email, accountSearch.APNNumber,
+                        accountSearch.FromDate, accountSearch.ToDate,
                          accountSearch.AddressLine1, accountSearch.AddressLine2,
                         accountSearch.PhoneNumber, accountSearch.SortBy, accountSearch.SortReverse,
-                        accountSearch.PageSize, accountSearch.CurrentPage,  ref errorMessage);
-
-                    int TotalResultCount = db.USP_CountSearchAccount_Get(accountSearch.AccountType.AccountTypeID,
-                        accountSearch.FirstName, accountSearch.LastName, accountSearch.Email, accountSearch.APNNumber,
-                         accountSearch.AddressLine1, accountSearch.AddressLine2,
-                        accountSearch.PhoneNumber, accountSearch.SortBy, accountSearch.SortReverse,
-                        accountSearch.PageSize, accountSearch.CurrentPage, ref errorMessage);
-
+                        accountSearch.PageSize, accountSearch.CurrentPage, ref TotalCount, ref errorMessage );
+                    
                     
                     foreach (var item in Resultdb)
                     {
+                        SearchResultCustomerInfo account = new SearchResultCustomerInfo();
                         account.custID = (int)item.CustomerID;
                         account.email = item.Email;
                         account.AccountType = item.AcctTypeDesc;
@@ -217,7 +214,7 @@ namespace RAP.DAL
                     searchResult.SortBy = accountSearch.SortBy;
                     searchResult.SortReverse = accountSearch.SortReverse;
                     searchResult.CurrentPage = accountSearch.CurrentPage;
-                    searchResult.TotalCount = TotalResultCount;
+                    searchResult.TotalCount = (int)TotalCount;
                 }
                
                 result.result = searchResult;

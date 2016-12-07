@@ -39,6 +39,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
     
     self.AccountSearch = function (model) {
         //model.PageSize = 10;
+       
         model.CurrentPage = 1;
         model.SortBy = "Name";
         model.SortReverse = 0;
@@ -51,6 +52,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
     }
     self.OnClearFilter = function () {
         _getEmptyAccountSearchModel();
+        self.AccountSearchResult = [];
     }
     self.isLastPage = function () {
         return (self.AccountSearchModel.TotalCount - (self.AccountSearchModel.CurrentPage * self.AccountSearchModel.PageSize) <= 0);
@@ -71,10 +73,9 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
         return (Math.floor(self.AccountSearchModel.TotalCount / self.AccountSearchModel.PageSize) + (((self.AccountSearchModel.TotalCount % self.AccountSearchModel.PageSize) != 0) ? 1 : 0))
     };
     self.OnPageSizeChange = function () {
-        model.CurrentPage = 1;
-        model.SortBy = "Name";
-        model.SortReverse = 0;
-        rapFactory.GetAccountSearch(model).then(function (response) {
+        self.AccountSearchModel.CurrentPage = 1;
+        
+        rapFactory.GetAccountSearch(self.AccountSearchModel).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.AccountSearchResult = response.data.List;
             self.AccountSearchModel.TotalCount = response.data.TotalCount;

@@ -40,7 +40,11 @@
                     <label for="account_number">Phone Number</label>
                     <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.PhoneNumber" required />
                 </div>
-                <button type="button" class="btn btn-sm btn-primary" ng-click="Ctrl.AccountSearch(Ctrl.AccountSearchModel)">Search</button>
+                <div class="field-group">
+                    <label for="account_number">APN Number</label>
+                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.AccountSearchModel.APN" required />
+                </div>
+                <button type="button" class="btn btn-sm btn-default" ng-disabled="Ctrl.AccountSearchModel.AccountType == null" ng-click="Ctrl.AccountSearch(Ctrl.AccountSearchModel)">Search</button>
                 <button type="button" class="btn btn-sm btn-default" ng-click="Ctrl.OnClearFilter()">Clear</button>
             </div>
         </div>
@@ -48,9 +52,7 @@
             <div class="panel-heading clearfix clickable" ng-click="toggleResults = !toggleResults">
                 <div class="clickable pull-left"><i ng-class="{'glyphicon glyphicon-chevron-down': toggleResults, 'glyphicon glyphicon-chevron-right': !toggleResults}"></i></div>
                 <h3 class="panel-title pull-left margin-left-10">Results <div class="badge">{{Ctrl.model.TotalCount || ''}}</div></h3>
-                <div class="pull-right">
-                    <button id="btnExportSearch" class="btn btn-default btn-xs" ng-click="onExportResults()"><i class="fa fa-file-excel-o"></i>&nbsp;Export</button>
-                </div>
+                
             </div>
             <table class="table table-condensed nopadding-bottom">
                 <thead class="strong">
