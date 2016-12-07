@@ -189,10 +189,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\black_checkmark.png" />
+    <Content Include="Images\checkbox-active-green.png" />
     <Content Include="Images\checkbox-active.png" />
     <Content Include="Images\checkbox.png" />
     <Content Include="Images\checkmark.png" />
     <Content Include="Images\drop-down-triangle.png" />
+    <Content Include="Images\icon-collapse.png" />
+    <Content Include="Images\icon-error.png" />
+    <Content Include="Images\icon-expanded.png" />
     <Content Include="Images\icon-info-green.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\radio-button-active.png" />
