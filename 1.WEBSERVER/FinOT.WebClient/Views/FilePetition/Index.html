@@ -73,7 +73,12 @@
                         <li class="current" ng-if="Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>
                         <li ng-if="!Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>
                     </ul>
-                </div>
+                   
+                    <ul class="application-steps">
+                        <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
+                        <li class="current" ng-if="Ctrl.ownerApplicantInfo"><a ng-click="Ctrl.ShowOwnerApplicantInfo()">Applicant Information</a></li>
+                    </ul>
+</div>
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">
                         <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">
@@ -104,6 +109,12 @@
                             </div>
                             <div ng-if="Ctrl.bVerification">
                                 <rap-verification ng-show="Ctrl.bVerification" model="Ctrl"></rap-verification>
+                            </div>
+                            <div ng-if="Ctrl.ownerImpInfo">
+                                <rap-ownerimpinfo ng-show="Ctrl.ownerImpInfo" model="Ctrl"></rap-ownerimpinfo>
+                            </div>
+                            <div ng-if="Ctrl.ownerApplicantInfo">
+                                <rap-ownerapplicantinfo ng-show="Ctrl.ownerApplicantInfo" model="Ctrl"></rap-ownerapplicantinfo>
                             </div>
                         </form>
                     </div>

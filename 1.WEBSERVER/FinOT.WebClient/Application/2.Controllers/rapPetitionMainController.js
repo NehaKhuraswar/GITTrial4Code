@@ -15,6 +15,9 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //    bTenantPetition: false,
     //    bOwnerPetiton : false
     //};
+
+    self.ownerImpInfo = false;
+
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.rent = [];
@@ -40,6 +43,9 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         self.bAddDocuments = false;
         self.bReview = false;
         self.bVerification = false;
+        self.ownerImpInfo = false;
+        self.ownerApplicantInfo = false;
+
     };
     _DisableAll();
     
@@ -80,6 +86,15 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         _DisableAll();
         self.bVerification = true;
     };
+    self.ShowOwnerImpInfo = function() {
+        _DisableAll();
+        self.ownerImpInfo = true;
+    }
+    self.ShowOwnerApplicantInfo = function () {
+        _DisableAll();
+        self.ownerApplicantInfo = true;
+}
+
 
 
     //var _GetCaseInfo = function () {

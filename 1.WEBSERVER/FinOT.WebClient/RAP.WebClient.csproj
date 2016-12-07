@@ -116,6 +116,8 @@
     <Content Include="Application\2.Controllers\rapFileAppealController.js" />
     <Content Include="Application\2.Controllers\rapCityUserAcctController.js" />
     <Content Include="Application\2.Controllers\rapImpInfoController.js" />
+    <Content Include="Application\2.Controllers\rapOwnerApplicantInfoController.js" />
+    <Content Include="Application\2.Controllers\rapOwnerImpInfoController.js" />
     <Content Include="Application\2.Controllers\rapSearchAccountController.js" />
     <Content Include="Application\2.Controllers\rapFilePetitionController.js" />
     <Content Include="Application\2.Controllers\rapGroundsOfAppealController.js" />
@@ -143,6 +145,7 @@
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
     <Content Include="Application\3.Factories\RapDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapfileappealFactory.js" />
+    <Content Include="Application\3.Factories\rapOwnerApplicantInfoFactory.js" />
     <Content Include="Application\3.Factories\rapSearchAccountFactory.js" />
     <Content Include="Application\3.Factories\rapfilepetitionFactory.js" />
     <Content Include="Application\3.Factories\rapgroundsofappealFactory.js" />
@@ -224,6 +227,8 @@
     <Content Include="Views\Account\Login.html" />
     <Content Include="Views\FilePetition\Index.html" />
     <Content Include="Views\FilePetition\LostServices.html" />
+    <Content Include="Views\FilePetition\Owner\ApplicantInformation.html" />
+    <Content Include="Views\FilePetition\Owner\ImportantInformation.html" />
     <Content Include="Views\FilePetition\RentalHistory.html" />
     <Content Include="Views\FilePetition\Review.html" />
     <Content Include="Views\FilePetition\Verification.html" />

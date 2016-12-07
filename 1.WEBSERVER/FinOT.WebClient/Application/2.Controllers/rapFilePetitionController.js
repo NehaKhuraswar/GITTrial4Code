@@ -51,8 +51,15 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
 
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $scope.model.bPetitionType = false;
-        $scope.model.bImpInfo = true;
+        if (self.caseinfo.PetitionCategoryID == 1) {
+            $scope.model.bPetitionType = false;
+            $scope.model.bImpInfo = true;
+        }
+        else if(self.caseinfo.PetitionCategoryID == 2)
+        {
+            $scope.model.bPetitionType = false;
+            $scope.model.ownerImpInfo = true;
+}
         //$location.path("/applicationinfo");
     }
     //self.ContinueToGroundsforPetition = function () {
