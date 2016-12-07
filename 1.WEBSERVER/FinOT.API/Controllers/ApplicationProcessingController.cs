@@ -686,7 +686,7 @@ namespace RAP.API.Controllers
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                _service.SaveOwnerApplicantInfo(model);
+               result = _service.SaveOwnerApplicantInfo(model);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

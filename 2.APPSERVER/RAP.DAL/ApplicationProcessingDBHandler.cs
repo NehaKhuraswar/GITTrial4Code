@@ -1511,7 +1511,9 @@ namespace RAP.DAL
                         applicantInfo.bBusinessLicensePaid = model.bBusinessLicensePaid;
                         applicantInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
                         applicantInfo.bRentAdjustmentProgramFeePaid = model.bRentAdjustmentProgramFeePaid;
-                        applicantInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
+                        applicantInfo.BuildingAcquiredDate = DateTime.Now;
+                        //applicantInfo.BuildingAcquiredDate = model.BuildingAcquiredDate;
+                        //TBD
                         applicantInfo.NumberOfUnits = model.NumberOfUnits;
                         applicantInfo.bMoreThanOneStreetOnParcel = model.bMoreThanOneStreetOnParcel;
                         applicantInfo.CustomerID = model.CustomerID;                     

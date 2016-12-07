@@ -64,10 +64,24 @@
             <div class="subhead">
                 <h4>Your representative</h4>
             </div>
+            <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                <p class="input-label">Is anybody representing you?</p>
+                <div class="form-group-radio vertical clearfix">
+                    <label>
+                        <input type="radio" class="input-field"
+                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="true" /><i></i><span>Yes</span>
+                    </label>
 
+                    <label>
+                        <input type="radio" class="input-field"
+                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="false" /><i></i> <span>No</span>
+                    </label>
+                    <div class="clear"></div>
+                </div>
+            </div>
             <div id="representative-info">
                 <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
-                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}} && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation">
                     <div class="field-group">
                         <label for="representative_firstname">Name</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />

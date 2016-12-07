@@ -13,7 +13,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     {
         self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = self.custDetails.User;
     }
-    rapFactory.GetCaseInfo(self.caseinfo).then(function (response) {
+    rapFactory.GetApplicationInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
@@ -21,6 +21,13 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
 
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
+        rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            rapGlobalFactory.CaseDetails = response.data;
+            
+        });
+
+
     }
     //self.ContinueToGrrapGlobalFactory.CaseDetails = self.caseinfo;oundsforPetition = function () {
     //    

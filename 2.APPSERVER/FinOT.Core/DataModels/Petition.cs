@@ -104,4 +104,10 @@ namespace RAP.Core.DataModels
         public int PetitionCategoryID { get; set; }
         public string PetitionCategory { get; set; }
     }
+    public class CustomDate
+    {
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
+    }
 }

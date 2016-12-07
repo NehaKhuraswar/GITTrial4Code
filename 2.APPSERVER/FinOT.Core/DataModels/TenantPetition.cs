@@ -87,6 +87,10 @@ namespace RAP.Core.DataModels
 
     public class UserInfoM
     {
+        public UserInfoM()
+        {
+            State = new StateM();
+        }
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -280,12 +284,7 @@ namespace RAP.Core.DataModels
         public int UnitTypeID { get; set; }
         public string UnitDescription { get; set; }
     }
-    public class CustomDate
-    {
-        public int Day { get; set; }
-        public int Month { get; set; }
-        public int Year { get; set; }
-    }
+    
     public class CurrentOnRentM
     {
         public int StatusID { get; set; }
