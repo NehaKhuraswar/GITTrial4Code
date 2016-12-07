@@ -180,7 +180,7 @@ namespace RAP.DAL
             try
             {
                 List<StateM> states = new List<StateM>();
-                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                using (CommonDataContext db = new CommonDataContext(_connString))
                 {
                     var stateDB = db.States.ToList();
 

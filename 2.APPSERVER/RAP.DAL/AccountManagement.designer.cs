@@ -48,9 +48,6 @@ namespace RAP.DAL
     partial void InsertCityUserAccount(CityUserAccount instance);
     partial void UpdateCityUserAccount(CityUserAccount instance);
     partial void DeleteCityUserAccount(CityUserAccount instance);
-    partial void InsertState(State instance);
-    partial void UpdateState(State instance);
-    partial void DeleteState(State instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -136,14 +133,6 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<ReturnAccountSearch>();
-			}
-		}
-		
-		public System.Data.Linq.Table<State> States
-		{
-			get
-			{
-				return this.GetTable<State>();
 			}
 		}
 		
@@ -1688,116 +1677,6 @@ namespace RAP.DAL
 				{
 					this._CreatedDate = value;
 				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.State")]
-	public partial class State : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _StateID;
-		
-		private string _StateCode;
-		
-		private string _StateName;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnStateIDChanging(int value);
-    partial void OnStateIDChanged();
-    partial void OnStateCodeChanging(string value);
-    partial void OnStateCodeChanged();
-    partial void OnStateNameChanging(string value);
-    partial void OnStateNameChanged();
-    #endregion
-		
-		public State()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int StateID
-		{
-			get
-			{
-				return this._StateID;
-			}
-			set
-			{
-				if ((this._StateID != value))
-				{
-					this.OnStateIDChanging(value);
-					this.SendPropertyChanging();
-					this._StateID = value;
-					this.SendPropertyChanged("StateID");
-					this.OnStateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateCode", DbType="VarChar(2) NOT NULL", CanBeNull=false)]
-		public string StateCode
-		{
-			get
-			{
-				return this._StateCode;
-			}
-			set
-			{
-				if ((this._StateCode != value))
-				{
-					this.OnStateCodeChanging(value);
-					this.SendPropertyChanging();
-					this._StateCode = value;
-					this.SendPropertyChanged("StateCode");
-					this.OnStateCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string StateName
-		{
-			get
-			{
-				return this._StateName;
-			}
-			set
-			{
-				if ((this._StateName != value))
-				{
-					this.OnStateNameChanging(value);
-					this.SendPropertyChanging();
-					this._StateName = value;
-					this.SendPropertyChanged("StateName");
-					this.OnStateNameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

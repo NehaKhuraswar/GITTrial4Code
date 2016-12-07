@@ -14,5 +14,18 @@
         <elementListCompartment Id="abdea81d-549c-4531-b8ae-b3fc1550b498" absoluteBounds="4.64, 3.335, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="9e4aacf8-98bd-411e-8721-006a8b407229" absoluteBounds="4.125, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CommonDataContext/State" />
+      <nestedChildShapes>
+        <elementListCompartment Id="98760434-8048-475f-b8da-43d0c710365c" absoluteBounds="4.14, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.375 : 2.3862939453125); (5.375 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CommonDataContext/State/State_UserInfo" />
+      <nodes>
+        <classShapeMoniker Id="9e4aacf8-98bd-411e-8721-006a8b407229" />
+        <classShapeMoniker Id="f6e22a85-e332-4389-a803-6a20c6aa4fde" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
