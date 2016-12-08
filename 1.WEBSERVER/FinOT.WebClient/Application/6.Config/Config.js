@@ -9,6 +9,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapregisterController_resolve
         })
+        .when('/forgotpassword', {
+            templateUrl: 'views/account/ChangePassword.html',
+            controller: rapregisterController,
+            controllerAs: 'Ctrl',
+            resolve: rapregisterController_resolve
+        })       
         .when('/login', {
             templateUrl: 'views/account/Login.html',
             controller: raploginController,

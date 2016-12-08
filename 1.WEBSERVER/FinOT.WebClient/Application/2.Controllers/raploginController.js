@@ -11,7 +11,9 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
         });
     }
     _getAccountTypes();
-
+    self.ForgotPassword = function () {
+        $location.path("/forgotpassword");
+    }
     self.CreateAccount = function () {
         $location.path("/register");
     }
