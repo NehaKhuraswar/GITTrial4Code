@@ -1,0 +1,127 @@
+﻿<div class="application-form-wrapper">
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12">
+            <div class="application-step step-1">
+                <h3 class="step-heading">Your Representative: <span>Add New Representative</span></h3>
+
+                <form name="frmCreateAccount" id="frmCreateAccount" action="#" method="post" class="application-form create-account">
+                    <div class="step-content step1">
+                        <div class="subhead no-top-margin no-bottom-margin">
+                            <p><strong>This information will be used to send notifications about your case to your representative.</strong></p>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="first_name">Name</label>
+                            <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" />
+                        </div>
+
+                        <div class="field-group mar-bottom-40">
+                            <input type="text" name="last_name" id="last_name" class="field-input" placeholder="Last" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="business_name">Business name</label>
+                            <input type="text" name="business_name" id="business_name" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="mailing_address1">Mailing address 1</label>
+                            <input type="text" name="mailing_address1" id="mailing_address1" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="mailing_address2">Mailing address 2 (optional)</label>
+                            <input type="text" name="mailing_address2" id="mailing_address2" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="residential_state">State</label>
+                            <div class="input-wrapper">
+                                <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select">
+                                    <option value="option_01">Option 01</option>
+                                    <option value="option_02">Option 02</option>
+                                    <option value="option_03">Option 03</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="city">City</label>
+                            <input type="text" name="city" id="city" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="zipcode">Zip code</label>
+                            <input type="text" name="zipcode" id="zipcode" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" name="phone" id="phone" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group mar-bottom-40">
+                            <label for="email">Email address</label>
+                            <input type="text" name="email" id="email" class="field-input email" placeholder="" />
+                        </div>
+
+                        <div class="field-group subhead">
+                            <p>Select all cases that you would like your representative to have access to</p>
+                            <div class="form-group-checkbox vertical clearfix">
+                                <div class="checkbox-wrapper">
+                                    <label for="chk_case1">
+                                        <input type="checkbox" name="chk_case1" id="chk_case1" value="T17-0451" /><i></i><span>T17-0451</span>
+                                    </label>
+
+                                    <label for="chk_case2">
+                                        <input type="checkbox" name="chk_case2" id="chk_case2" value="T17-0416" /><i></i><span>T17-0416</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Preferred way of receiving notifications -->
+                        <div class="subhead type2 ">
+                            <h4>Preferred way of receiving notifications</h4>
+                        </div>
+                        <div class="field-group">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group no-bottom-margin">
+                            <div class="form-group-checkbox vertical clearfix">
+                                <div class="checkbox-wrapper">
+                                    <label for="chk_service_proof">
+                                        <input type="checkbox" name="chk_service_proof" id="chk_service_proof" value="Proof of service by mail " /><i></i><span>Proof of service by mail </span>
+                                    </label>
+
+                                    <label for="chk_case2">
+                                        <input type="checkbox" name="chk_email" id="chk_email" value="Email" /><i></i><span>Email</span>
+                                    </label>
+                                    <br />
+
+                                    <label for="chk_acknowledgement">
+                                        <input type="checkbox" name="chk_acknowledgement" id="chk_acknowledgement" value="Yes" /><i></i><span>I acknowledge that representatives will receive notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="step-footer no-top-margin">
+                        <input type="button" id="btn-save" name="btn-save" class="btn-primary" value="Save" />
+                        <input type="button" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
