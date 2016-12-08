@@ -172,11 +172,11 @@
                         <div class="form-group-checkbox vertical clearfix">
                             <div class="checkbox-wrapper">
                                 <label for="notification_service_proof_mail">
-                                    <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail" ng-value="Yes"                                             /><i></i><span>Proof of service by mail Email</span>
+                                    <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail"                                             ng-model="Ctrl.CustomerInfo.MailNotificationFlag"                                              /><i></i><span>Proof of service by mail Email</span>
                                 </label>
 
                                 <label for="notification_by_email">
-                                    <input type="checkbox" name="notification_by_email" id="notification_by_email" ng-value="Yes"
+                                    <input type="checkbox" name="notification_by_email" id="notification_by_email" 
                                            ng-model="Ctrl.CustomerInfo.EmailNotificationFlag" /><i></i><span>Email</span>
                                 </label>
                             </div>

@@ -1097,31 +1097,89 @@ namespace RAP.DAL
         public ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
-             try
+            try
             {
-                petition.PetitionGrounds[0].Selected = true; //TBD
-                foreach (var item in petition.PetitionGrounds)
+                var groundsDb = from r in _dbContext.TenantPetitionGroundInfos
+                                           where r.TenantPetitionID == petition.PetitionID
+                                           select r;
+                if (groundsDb.Any())
                 {
-                    if (item.Selected)
+                    foreach (var item in petition.PetitionGrounds)
                     {
-                        TenantPetitionGroundInfo petitionGroundsDB = new TenantPetitionGroundInfo();
-                        petitionGroundsDB.TenantPetitionID = petition.PetitionID;
-                        petitionGroundsDB.PetitionGroundID = item.PetitionGroundID;
+                        if (item.Selected)
+                        {
+                            if (!groundsDb.Where(x => x.PetitionGroundID == item.PetitionGroundID).Any())
+                            {
+                                TenantPetitionGroundInfo petitionGroundsDB = new TenantPetitionGroundInfo();
+                                petitionGroundsDB.TenantPetitionID = petition.PetitionID;
+                                petitionGroundsDB.PetitionGroundID = item.PetitionGroundID;
 
-                        _dbContext.TenantPetitionGroundInfos.InsertOnSubmit(petitionGroundsDB);
-                        _dbContext.SubmitChanges();
+                                _dbContext.TenantPetitionGroundInfos.InsertOnSubmit(petitionGroundsDB);
+                                _dbContext.SubmitChanges();
+                            }
+                        }
+                        else
+                        {
+                            if (groundsDb.Where(x => x.PetitionGroundID == item.PetitionGroundID).Any())
+                            {
+                                _dbContext.TenantPetitionGroundInfos.DeleteOnSubmit(groundsDb.Where(x => x.PetitionGroundID == item.PetitionGroundID).First());
+                                _dbContext.SubmitChanges();
+                            }
+                        }
+
                     }
                 }
-                result.result = true;
+                else
+                {
+                    foreach (var item in petition.PetitionGrounds)
+                    {
+                        if (item.Selected)
+                        {
+                            TenantPetitionGroundInfo petitionGroundsDB = new TenantPetitionGroundInfo();
+                            petitionGroundsDB.TenantPetitionID = petition.PetitionID;
+                            petitionGroundsDB.PetitionGroundID = item.PetitionGroundID;
+
+                            _dbContext.TenantPetitionGroundInfos.InsertOnSubmit(petitionGroundsDB);
+                            _dbContext.SubmitChanges();
+                        }
+                    }
+                }
+
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
-             catch (Exception ex)
-             {
-                 IExceptionHandler eHandler = new ExceptionHandler();
-                 result.status = eHandler.HandleException(ex);
-                 return result;
-             }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+            //ReturnResult<bool> result = new ReturnResult<bool>();
+            // try
+            //{
+            //    petition.PetitionGrounds[0].Selected = true; //TBD
+            //    foreach (var item in petition.PetitionGrounds)
+            //    {
+            //        if (item.Selected)
+            //        {
+            //            TenantPetitionGroundInfo petitionGroundsDB = new TenantPetitionGroundInfo();
+            //            petitionGroundsDB.TenantPetitionID = petition.PetitionID;
+            //            petitionGroundsDB.PetitionGroundID = item.PetitionGroundID;
+
+            //            _dbContext.TenantPetitionGroundInfos.InsertOnSubmit(petitionGroundsDB);
+            //            _dbContext.SubmitChanges();
+            //        }
+            //    }
+            //    result.result = true;
+            //    result.status = new OperationStatus() { Status = StatusEnum.Success };
+            //    return result;
+            //}
+            // catch (Exception ex)
+            // {
+            //     IExceptionHandler eHandler = new ExceptionHandler();
+            //     result.status = eHandler.HandleException(ex);
+            //     return result;
+            // }
             
         }
 
