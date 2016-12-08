@@ -259,7 +259,7 @@ namespace RAP.API.Controllers
 
         [AllowAnonymous]
         [Route("GetRentIncreaseReasonInfo")]
-        [HttpGet]
+        [HttpPost]
         public HttpResponseMessage GetRentIncreaseReasonInfo([FromBody] CaseInfoM model)
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -267,16 +267,16 @@ namespace RAP.API.Controllers
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                _service.GetRentIncreaseReasonInfo(model);
-                if (result.status.Status == StatusEnum.Success)
+               var dbResult = _service.GetRentIncreaseReasonInfo(model);
+               if (dbResult.status.Status == StatusEnum.Success)
                 {
-                    transaction.data = result.result;
+                    transaction.data = dbResult.result;
                     transaction.status = true;
                 }
                 else
                 {
                     transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);
+                    transaction.AddException(dbResult.status.StatusMessage);
 
                 }
             }
@@ -720,16 +720,16 @@ namespace RAP.API.Controllers
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                _service.SaveRentIncreaseReasonInfo(model);
-                if (result.status.Status == StatusEnum.Success)
+               var dbResult = _service.SaveRentIncreaseReasonInfo(model);
+               if (dbResult.status.Status == StatusEnum.Success)
                 {
-                    transaction.data = result.result;
+                    transaction.data = dbResult.result;
                     transaction.status = true;
                 }
                 else
                 {
                     transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);
+                    transaction.AddException(dbResult.status.StatusMessage);
 
                 }
             }

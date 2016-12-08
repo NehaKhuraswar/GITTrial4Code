@@ -34,21 +34,12 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
-            rapGlobalFactory.CaseDetails = response.data;
-            
+            rapGlobalFactory.CaseDetails = response.data;            
         });
-
-
+        $scope.model.ownerApplicantInfo = false;
+        $scope.model.ownerJustification = true;
     }
-    //self.ContinueToGrrapGlobalFactory.CaseDetails = self.caseinfo;oundsforPetition = function () {
-    //    
-    //    rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
-    //        if (!alert.checkResponse(response)) { return; }
-    //        rapGlobalFactory.CaseDetails = response.data;
-    //        $scope.model.bAppInfo = false;
-    //        $scope.model.bGrounds = true;
-    //    });
-    //}
+ 
 }];
 var rapApplicationInfoController_resolve = {
     model: ['$route', 'alertService', 'rapOwnerApplicantInfoFactory', function ($route, alert, rapFactory) {

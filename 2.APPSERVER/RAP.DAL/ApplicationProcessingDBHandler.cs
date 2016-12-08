@@ -1389,7 +1389,7 @@ namespace RAP.DAL
             {
                 var resaons = _dbContext.OwnerRentIncreaseReasons;
 
-                var selectedReasons = _dbContext.OwnerRentIncreaseReasonInfos.Where(x => x.OwnerPetitionApplicantInfoID == petition.ApplicantInfo.ApplicantUserInfo.UserID);
+                var selectedReasons = _dbContext.OwnerRentIncreaseReasonInfos.Where(x => x.OwnerPetitionApplicantInfoID == petition.ApplicantInfo.OwnerPetitionApplicantInfoID);
 
                 if (resaons.Any())
                 {
@@ -1643,7 +1643,7 @@ namespace RAP.DAL
             try
             {
                 var rentIncreaseReasonDB = from r in _dbContext.OwnerRentIncreaseReasonInfos
-                                           where r.OwnerPetitionApplicantInfoID == petition.ApplicantInfo.ApplicantUserInfo.UserID
+                                           where r.OwnerPetitionApplicantInfoID == petition.ApplicantInfo.OwnerPetitionApplicantInfoID
                                            select r;
                 if (rentIncreaseReasonDB.Any())
                 {
@@ -1651,10 +1651,10 @@ namespace RAP.DAL
                     {
                         if (item.IsSelected)
                         {
-                            if (!rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
+                            if (!rentIncreaseReasonDB.Where(x => x.ReasonID == item.ReasonID).Any())
                             {
                                 OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-                                rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.ApplicantUserInfo.UserID;
+                                rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
                                 rentIncreaseReason.ReasonID = item.ReasonID;
                                 _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
                                 _dbContext.SubmitChanges();
@@ -1662,12 +1662,12 @@ namespace RAP.DAL
                         }
                         else
                         {
-                            if (rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
+                            if (rentIncreaseReasonDB.Where(x => x.ReasonID == item.ReasonID).Any())
                             {
-                                OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-                                rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.ApplicantUserInfo.UserID;
-                                rentIncreaseReason.ReasonID = item.ReasonID;
-                                _dbContext.OwnerRentIncreaseReasonInfos.DeleteOnSubmit(rentIncreaseReason);
+                                //OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
+                                //rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
+                                //rentIncreaseReason.ReasonID = item.ReasonID;
+                                _dbContext.OwnerRentIncreaseReasonInfos.DeleteOnSubmit(rentIncreaseReasonDB.Where(x => x.ReasonID == item.ReasonID).First());
                                 _dbContext.SubmitChanges();
                             }
                         }
@@ -1681,7 +1681,7 @@ namespace RAP.DAL
                         if (item.IsSelected)
                         {
                             OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-                            rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.ApplicantUserInfo.UserID;
+                            rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
                             rentIncreaseReason.ReasonID = item.ReasonID;
                             _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
                             _dbContext.SubmitChanges();

@@ -20,28 +20,7 @@ var rapOwnerApplicantInfoFactory = ['blockUI', 'ajaxService', function (blockUI,
         .finally(function () {
             blockUI.stop();
         });
-    }
-    //var _SaveApplicationInfo = function (model) {
-    //    blockUI.start();
-
-    //    var url = _routePrefix + '/saveapplicationinfo';
-
-    //    return ajax.Post(model, url)
-    //    .finally(function () {
-    //        blockUI.stop();
-    //    });
-    //}
-    //var _GetCaseInfo = function () {
-    //    blockUI.start();
-
-    //    var url = _routePrefix + '/getcaseinfo';
-
-    //    return ajax.Get(url)
-    //    .finally(function () {
-    //        blockUI.stop();
-    //    });
-    //}
-
+    } 
 
     factory.GetApplicationInfo = _getApplicantInfo;
     factory.SaveApplicationInfo = _saveApplicantInfo;

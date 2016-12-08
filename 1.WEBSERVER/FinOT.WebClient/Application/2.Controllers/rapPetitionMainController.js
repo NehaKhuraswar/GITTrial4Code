@@ -45,6 +45,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         self.bVerification = false;
         self.ownerImpInfo = false;
         self.ownerApplicantInfo = false;
+        self.ownerJustification = false;
 
     };
     _DisableAll();
@@ -93,7 +94,11 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.ShowOwnerApplicantInfo = function () {
         _DisableAll();
         self.ownerApplicantInfo = true;
-}
+    }
+    self.ShowOwnerJustification = function () {
+        _DisableAll();
+        self.ownerJustification = true;
+    }
 
 
 
