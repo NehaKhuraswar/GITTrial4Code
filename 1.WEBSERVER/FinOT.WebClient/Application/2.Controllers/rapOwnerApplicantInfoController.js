@@ -1,10 +1,21 @@
 ﻿'use strict';
-var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapOwnerApplicantInfoFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapOwnerApplicantInfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
+    self.StateList = [];
+    var _GetStateList = function () {
+        masterFactory.GetStateList().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.StateList = response.data;
+        });
+    }
+    _GetStateList();
+
     if (self.caseinfo.bCaseFiledByThirdParty == false)
     {
         self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = self.custDetails.User;
