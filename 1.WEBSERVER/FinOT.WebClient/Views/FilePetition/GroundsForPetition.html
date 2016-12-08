@@ -1,116 +1,107 @@
-﻿<div class="application-form-wrapper">
-    <div class="row">
-        <div class="col-md-3 col-sm-12">
-            <?php include('sidebar-tenant-petition.html'); ?>
-        </div>
+﻿
 
-        <div class="col-md-9 col-sm-12">
-            <div class="application-step step-1">
-                <h3 class="step-heading">Tenant Petition: <span>Grounds for Petition</span></h3>
+<div class="col-md-9 col-sm-12">
+<div class="application-step step-1">
+    <h3 class="step-heading">Tenant Petition: <span>Grounds for Petition</span></h3>
+    <!--<div class="step-content create-new">-->
 
-                <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
-                    <div class="step-content create-new">
+        <div class="subhead no-top-margin"></div>
 
-                        <div class="subhead no-top-margin"></div>
+        <div class="field-group">
+            <p class="input-label">I (we) contest one or more rent increases on one or more of the following grounds:</p>
 
-                        <div class="field-group">
-                            <p class="input-label">I (we) contest one or more rent increases on one or more of the following grounds:</p>
+            <div class="form-group-checkbox vertical clearfix">
+                <div class="checkbox-wrapper">
+                    <label>
+                        <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
+                        {{petitionground.PetitionGroundDescription}}
+                    </label>
+                </div>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_1">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_1" value="a) The increases exceeds the CPI Adjustment and is (are) unjustified or is (are) greater than 10%" /><i></i><span>a) The increases exceeds the CPI Adjustment and is (are) unjustified or is (are) greater than 10%</span>
+                    </label>
+                </div>
 
-                            <div class="form-group-checkbox vertical clearfix">
-                                <div class="checkbox-wrapper">
-                                    <label>
-                                        <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
-                                        {{petitionground.PetitionGroundDescription}}
-                                    </label>
-                                </div>
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_1">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_1" value="a) The increases exceeds the CPI Adjustment and is (are) unjustified or is (are) greater than 10%" /><i></i><span>a) The increases exceeds the CPI Adjustment and is (are) unjustified or is (are) greater than 10%</span>
-                                    </label>
-                                </div>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_2">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_2" value="b) The owner did not give me a summary of the justification(s) for the increase despite my written request" /><i></i><span>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</span>
+                    </label>
+                </div>
 
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_2">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_2" value="b) The owner did not give me a summary of the justification(s) for the increase despite my written request" /><i></i><span>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</span>
-                                    </label>
-                                </div>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_3">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_3" value="c) The rent was raised illegally after the unit was vacated (Costa-Hawkins violation)" /><i></i><span>c) The rent was raised illegally after the unit was vacated (Costa-Hawkins violation)</span>
+                    </label>
+                </div>
 
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_3">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_3" value="c) The rent was raised illegally after the unit was vacated (Costa-Hawkins violation)" /><i></i><span>c) The rent was raised illegally after the unit was vacated (Costa-Hawkins violation)</span>
-                                    </label>
-                                </div>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_4">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_4" value="d) No written notice of Rent Program was given to me together with the notice of increase(s) I am contesting." /><i></i><span>d) No written notice of Rent Program was given to me together with the notice of increase(s) I am contesting.</span>
+                    </label>
+                </div>
 
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_4">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_4" value="d) No written notice of Rent Program was given to me together with the notice of increase(s) I am contesting." /><i></i><span>d) No written notice of Rent Program was given to me together with the notice of increase(s) I am contesting.</span>
-                                    </label>
-                                </div>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_5">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_5" value="e) A City of Oakland form notice of the existence of the Rent Program was not given to me at least six months before the effective date of the rent increase(s) I am contesting." /><i></i><span>e) A City of Oakland form notice of the existence of the Rent Program was not given to me at least six months before the effective date of the rent increase(s) I am contesting.</span>
+                    </label>
+                </div>
 
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_5">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_5" value="e) A City of Oakland form notice of the existence of the Rent Program was not given to me at least six months before the effective date of the rent increase(s) I am contesting." /><i></i><span>e) A City of Oakland form notice of the existence of the Rent Program was not given to me at least six months before the effective date of the rent increase(s) I am contesting.</span>
-                                    </label>
-                                </div>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_6">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_6" value="f) At present, there exists a health, safety, fire, or building code violation in the unit" data-chktoggle="related-info" /><i></i><span>f) At present, there exists a health, safety, fire, or building code violation in the unit.</span>
+                    </label>
 
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_6">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_6" value="f) At present, there exists a health, safety, fire, or building code violation in the unit" data-chktoggle="related-info" /><i></i><span>f) At present, there exists a health, safety, fire, or building code violation in the unit.</span>
-                                    </label>
+                    <div class="related-info">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  </p>
 
-                                    <div class="related-info">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  </p>
-
-                                        <p>Attach a copy of a citation or report, if the owner has been cited.</p>
-                                        <div class="field-addfile">
-                                            <div class="input-file-wrapper">
-                                                <span class="btn-link">Attach</span>
-                                                <input type="file" id="solution_asset_file" name="solution_asset_file" />
-                                            </div>
-                                        </div>
-                                    </div><!-- .related-info -->
-                                </div>
-
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_7">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_7" value="g) The contested increase is the second rent increase in a 12-month period." /><i></i><span>g) The contested increase is the second rent increase in a 12-month period.</span>
-                                    </label>
-                                </div>
-
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_8">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_8" value="h) My rent was not reduced after the expiration period of the rent increase based on capital improvements." /><i></i><span>h) My rent was not reduced after the expiration period of the rent increase based on capital improvements.</span>
-                                    </label>
-                                </div>
-
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_9">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_9" value="i) The proposed rent increase would exceed an overall increase of 30% in 5 years. (The 5-year period begins with rent increases noticed on or after August 1, 2014)" /><i></i><span>i) The proposed rent increase would exceed an overall increase of 30% in 5 years. (The 5-year period begins with rent increases noticed on or after August 1, 2014)</span>
-                                    </label>
-                                </div>
-
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_10">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_10" value="j) I wish to contest an exemption from the Rent Adjustment Ordinance (OMC 8.22, Article 1)" /><i></i><span>j) I wish to contest an exemption from the Rent Adjustment Ordinance (OMC 8.22, Article 1)</span>
-                                    </label>
-                                </div>
-
-                                <div class="checkbox-wrapper">
-                                    <label for="contest_rent_increase_11">
-                                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_11" value="k) Improper service of rent increase" /><i></i><span>k) Improper service of rent increase</span>
-                                    </label>
-                                </div>
-
+                        <p>Attach a copy of a citation or report, if the owner has been cited.</p>
+                        <div class="field-addfile">
+                            <div class="input-file-wrapper">
+                                <span class="btn-link">Attach</span>
+                                <input type="file" id="solution_asset_file" name="solution_asset_file" />
                             </div>
                         </div>
+                    </div><!-- .related-info -->
+                </div>
 
-                    </div>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_7">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_7" value="g) The contested increase is the second rent increase in a 12-month period." /><i></i><span>g) The contested increase is the second rent increase in a 12-month period.</span>
+                    </label>
+                </div>
 
-                    <div class="step-footer">
-                        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToRentalHistory()" />
-                    </div>
-                </form>
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_8">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_8" value="h) My rent was not reduced after the expiration period of the rent increase based on capital improvements." /><i></i><span>h) My rent was not reduced after the expiration period of the rent increase based on capital improvements.</span>
+                    </label>
+                </div>
+
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_9">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_9" value="i) The proposed rent increase would exceed an overall increase of 30% in 5 years. (The 5-year period begins with rent increases noticed on or after August 1, 2014)" /><i></i><span>i) The proposed rent increase would exceed an overall increase of 30% in 5 years. (The 5-year period begins with rent increases noticed on or after August 1, 2014)</span>
+                    </label>
+                </div>
+
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_10">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_10" value="j) I wish to contest an exemption from the Rent Adjustment Ordinance (OMC 8.22, Article 1)" /><i></i><span>j) I wish to contest an exemption from the Rent Adjustment Ordinance (OMC 8.22, Article 1)</span>
+                    </label>
+                </div>
+
+                <div class="checkbox-wrapper">
+                    <label for="contest_rent_increase_11">
+                        <input type="checkbox" name="contest_rent_increase" id="contest_rent_increase_11" value="k) Improper service of rent increase" /><i></i><span>k) Improper service of rent increase</span>
+                    </label>
+                </div>
+
             </div>
         </div>
+
+    <!--</div>-->
+
+    <div class="step-footer">
+        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToRentalHistory()" />
     </div>
+</div>
 </div>
