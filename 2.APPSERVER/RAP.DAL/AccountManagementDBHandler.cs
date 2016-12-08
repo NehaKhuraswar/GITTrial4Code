@@ -79,6 +79,62 @@ namespace RAP.DAL
             }
         }
         /// <summary>
+        /// Get City user information
+        /// </summary>
+        /// <returns>Customer Info Object</returns>
+        public ReturnResult<CityUserAccount_M> GetCityUser(CityUserAccount_M message)
+        {
+            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
+            try
+            {
+                CityUserAccount_M cityUser = new CityUserAccount_M();
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    
+
+                    var cityDetails = db.CityUserAccounts.Where(x => x.Email == message.Email && x.Password == message.Password
+                                                                    && x.CityAccountTypeID == message.AccountType.AccountTypeID).FirstOrDefault();
+
+
+                    if (cityDetails != null)
+                    {
+                        cityUser.UserID = (int)cityDetails.CityUserID;
+                        cityUser.AccountType = message.AccountType;
+                        cityUser.FirstName = cityDetails.FirstName;
+                        cityUser.LastName = cityDetails.LastName;
+                        cityUser.MobilePhoneNumber = cityDetails.MobilePhoneNumber;
+                        cityUser.OfficePhoneNumber = cityDetails.OfficePhoneNumber;
+                        cityUser.OfficeLocation = cityDetails.OfficeLocation;
+                        cityUser.Title = cityDetails.Title;
+                        cityUser.Department = cityDetails.Department;
+                        cityUser.CreatedDate = cityDetails.CreatedDate;
+                        cityUser.Email = cityDetails.Email;
+                        cityUser.EmployeeID =(int) cityDetails.EmployeeID;
+                        cityUser.IsAnalyst = cityDetails.IsAnalyst;
+                        cityUser.IsHearingOfficer = cityDetails.IsHearingOfficer;
+                        
+                    }
+                    else
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
+                    }
+                }
+                // System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started"); 
+                result.result = cityUser;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        /// <summary>
         /// Get third party users
         /// </summary>
         /// <returns>Third party details</returns>
@@ -519,14 +575,14 @@ namespace RAP.DAL
                 {
 
                     CityUserAccount cityUserTable = new CityUserAccount();
-                    cityUserTable.CityAccountTypeID = message.AccountType.AccountTypeID;
+                    cityUserTable.CityAccountTypeID = (int)message.AccountType.AccountTypeID;
                     cityUserTable.FirstName = message.FirstName;
                     cityUserTable.LastName = message.LastName;
                     cityUserTable.Password = message.Password;
                     cityUserTable.Email = message.Email;
-                    cityUserTable.EmployeeID = message.EmployeeID;
-                    cityUserTable.IsAnalyst = message.IsAnalyst;
-                    cityUserTable.IsHearingOfficer = message.IsHearingOfficer;
+                    cityUserTable.EmployeeID = (int)message.EmployeeID;
+                    cityUserTable.IsAnalyst = Convert.ToBoolean(message.IsAnalyst);
+                    cityUserTable.IsHearingOfficer = Convert.ToBoolean(message.IsHearingOfficer);
                     cityUserTable.Title = message.Title;
                     cityUserTable.Department = message.Department;
                     cityUserTable.OfficePhoneNumber = message.OfficePhoneNumber;

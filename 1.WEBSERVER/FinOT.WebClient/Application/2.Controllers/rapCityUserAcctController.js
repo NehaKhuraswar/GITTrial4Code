@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuserregisterFactory', function ($scope, $modal, alert, rapFactory) {
+var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuserregisterFactory', 'masterdataFactory', '$location', function ($scope, $modal, alert, rapFactory, masterFactory, $location) {
     var self = this;
    // self.CityUserAccount = [];
     self.AccountTypesList = [];
@@ -8,7 +8,8 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
         rapFactory.CreateCityUserAccount(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
-            }            
+            }
+            $location.path("/admindashboard");
         });
     }
 
@@ -22,7 +23,7 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
     //}   
     
     var _getAccountTypes = function () {
-        rapFactory.GetAccountTypes().then(function (response) {
+        masterFactory.GetAccountTypes().then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.AccountTypesList = response.data;
         });

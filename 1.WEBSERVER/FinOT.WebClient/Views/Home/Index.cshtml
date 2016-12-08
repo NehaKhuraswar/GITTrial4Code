@@ -33,12 +33,12 @@
             </div>
 
         </div>
-        <div class="row">
+        @*<div class="row">
             <button class="btn btn-default" ng-click="Register()">Register</button>
-            <button class="btn btn-default" ng-click="Login()">Login</button>
+            <button class="btn btn-default" ng-click="Login()">Login</button>*@
 
             @*@Html.Partial("_MainMenu", Model.Header.Menus.ToList(), new ViewDataDictionary { { "DefaultURL", Model.Header.Application.DefaultUrl} })*@
-        </div>
+        @*</div>*@
     </div>
     @*modal dialog has z-index of 1050 so set the z-index of inform more than that to bring it to front.*@
     <div inform class="inform-animate inform-fixed inform-shadow" style="z-index: 1051"></div>

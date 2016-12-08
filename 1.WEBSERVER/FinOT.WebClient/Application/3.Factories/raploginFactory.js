@@ -6,7 +6,18 @@ var raploginFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var _Login = function (model) {
         blockUI.start();
 
-        var url = _routePrefix + '/logincust'
+        var url = _routePrefix + '/logincust';
+       
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+    var _LoginCity = function (model) {
+        blockUI.start();
+
+        var url = _routePrefix + '/logincityuser';
+       
         return ajax.Post(model, url)
         .finally(function () {
             blockUI.stop();
@@ -103,6 +114,6 @@ var raploginFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     factory.SaveCustomer = _SaveCustomer;
     factory.GetCustomer = _GetCustomer;
     factory.Login = _Login;
-
+    factory.LoginCity = _LoginCity;
     return factory;
 }];

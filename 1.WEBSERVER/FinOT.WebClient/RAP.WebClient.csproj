@@ -111,6 +111,8 @@
     <Content Include="Application\2.Controllers\rapAppealMainController.js" />
     <Content Include="Application\2.Controllers\rapAppellantsInfoController.js" />
     <Content Include="Application\2.Controllers\rapApplicationInfoController.js" />
+    <Content Include="Application\2.Controllers\rapadmindashboardController.js" />
+    <Content Include="Application\2.Controllers\rapstaffdashboardController.js" />
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
     <Content Include="Application\2.Controllers\RAPDocumentController.js" />
     <Content Include="Application\2.Controllers\rapFileAppealController.js" />
@@ -144,6 +146,8 @@
     <Content Include="Application\3.Factories\rapapplicationinfoFactory.js" />
     <Content Include="Application\3.Factories\rapcityuserregisterFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
+    <Content Include="Application\3.Factories\rapadmindashboardFactory.js" />
+    <Content Include="Application\3.Factories\rapstaffdashboardFactory.js" />
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
     <Content Include="Application\3.Factories\RapDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapfileappealFactory.js" />
@@ -217,6 +221,8 @@
     <Content Include="Views\Account\AddNewRepresentative.html" />
     <Content Include="Views\Account\ChangePassword.html" />
     <Content Include="Views\Account\Collaborator.html" />
+    <Content Include="Views\Account\AdminDashboard.html" />
+    <Content Include="Views\Account\StaffDashboard.html" />
     <Content Include="Views\Account\ResendPIN.html" />
     <Content Include="Views\Account\AccountSearch.html" />
     <Content Include="Views\Account\CreateCityAccount.html" />
@@ -232,7 +238,7 @@
     <Content Include="Views\FileAppeal\ServingAppeal.html" />
     <Content Include="Views\FilePetition\ApplicationInfo.html" />
     <Content Include="Views\Account\CreateUser.html" />
-    <Content Include="Views\Account\Dashboard.html" />
+    <Content Include="Views\Account\PublicDashboard.html" />
     <Content Include="Views\FilePetition\Document.html" />
     <Content Include="Views\FilePetition\FilePetition.html" />
     <Content Include="Views\FilePetition\ImportantInformation.html" />

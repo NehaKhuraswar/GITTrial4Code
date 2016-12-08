@@ -9,7 +9,7 @@
             <div class="checkbox-wrapper">
                 <div ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
                     <label>
-                        <input type="checkbox" id="petitionground.ID" >
+                        <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
                         {{petitionground.PetitionGroundDescription}}
                     </label>
                 </div>

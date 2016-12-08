@@ -38,6 +38,10 @@ namespace RAP.Business.Implementation
         {
            return accDBHandler.GetCustomer(message);
         }
+        public ReturnResult<CityUserAccount_M> GetCityUser(CityUserAccount_M message)
+        {
+            return accDBHandler.GetCityUser(message);
+        }
         public ReturnResult<CustomerInfo> SearchInviteThirdPartyUser(String message)
         {
             return accDBHandler.SearchInviteThirdPartyUser(message);

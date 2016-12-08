@@ -9,6 +9,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          var CustID = 0;
          var CustomerDetails;
          var CaseDetails;
+         var CityUser;
 
          
         
@@ -28,6 +29,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
 
     .factory('raploginFactory', raploginFactory)
     .factory('rapdashboardFactory', rapdashboardFactory)
+    .factory('rapstaffdashboardFactory', rapstaffdashboardFactory)
+    .factory('rapadmindashboardFactory', rapadmindashboardFactory)
     .factory('rapnewcasestatusFactory', rapnewcasestatusFactory)
     .factory('rapSearchAccountFactory', rapSearchAccountFactory)
     .factory('rapinvitethirdpartyFactory', rapinvitethirdpartyFactory)
@@ -50,6 +53,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('raploginController', raploginController)
     .controller('rapregisterController', rapregisterController)
     .controller('rapdashboardController', rapdashboardController)
+    .controller('rapstaffdashboardController', rapstaffdashboardController)
+    .controller('rapadmindashboardController', rapadmindashboardController)
     .controller('rapNewCaseStatusController', rapNewCaseStatusController)
     .controller('rapSearchAccountController', rapSearchAccountController)
     .controller('rapCityUserAcctController', rapCityUserAcctController)

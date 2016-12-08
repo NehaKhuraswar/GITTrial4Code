@@ -3,15 +3,7 @@ var rapcityuserregisterFactory = ['blockUI', 'ajaxService', function (blockUI, a
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
 
-    var _GetAccountTypes = function () {
-        blockUI.start();
-        var url = _routePrefix + '/getaccounttypes/'
-
-        return ajax.Get(url)
-        .finally(function () {
-            blockUI.stop();
-        });
-    }
+    
     var _CreateCityUserAccount = function (model) {
         blockUI.start();
         var url = _routePrefix + '/createcityuseraccount';
@@ -34,7 +26,7 @@ var rapcityuserregisterFactory = ['blockUI', 'ajaxService', function (blockUI, a
   
     factory.CreateCityUserAccount = _CreateCityUserAccount;
     factory.GetCityUserAcctEmpty = _GetCityUserAcctEmpty;
-    factory.GetAccountTypes = _GetAccountTypes;
+    //factory.GetAccountTypes = _GetAccountTypes;
     
     return factory;
 }];

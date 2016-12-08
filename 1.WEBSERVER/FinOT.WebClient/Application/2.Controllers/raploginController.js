@@ -1,7 +1,16 @@
 ﻿'use strict';
-var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = [];
+    self.AccountTypesList = [];
+    self.SelectedAccountType;
+    var _getAccountTypes = function () {
+        masterFactory.GetAccountTypes().then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.AccountTypesList = response.data;
+        });
+    }
+    _getAccountTypes();
    // rapFactory.param.set("temp");
     //self.Login = function (model) {
         
@@ -23,20 +32,38 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
 
     //    });
     //}
-    self.Login = function (model) {
-
-        rapFactory.Login(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                alert.Error(response.warnings[0]);
-                return;
-            }
-
-            //  angular.copy(response.data, MyService.value);
-            rapGlobalFactory.CustomerDetails = response.data;
-            $scope.model = response.data;
-            $location.path("/dashboard");
-
-        });
+    self.Login = function (model, accounttype) {
+        if (accounttype.AccountTypeID == 3) {
+            rapFactory.Login(model).then(function (response) {
+                    if (!alert.checkResponse(response)) {
+                        alert.Error(response.warnings[0]);
+                        return;
+                    }                
+                    rapGlobalFactory.CustomerDetails = response.data;                    
+                    $location.path("/publicdashboard");    
+            });
+        }
+        else //if (accounttype.AccountTypeID == 1 || ) 
+        {
+            model.AccountType = accounttype;
+            rapFactory.LoginCity(model).then(function (response) {
+                if (!alert.checkResponse(response)) {
+                    alert.Error(response.warnings[0]);
+                    return;
+                }                
+                rapGlobalFactory.CityUser = response.data;
+                if (accounttype.AccountTypeID == 1 )
+                    $location.path("/staffdashboard");
+                else if (accounttype.AccountTypeID == 2)
+                    $location.path("/admindashboard");
+            });
+        }
+        //else if (accounttype.AccountTypeID == 2) {
+        //    rapGlobalFactory.CityAdmin = response.data;
+        //    $location.path("/dashboard");
+        //}
+        
+        
     }
 
 }];

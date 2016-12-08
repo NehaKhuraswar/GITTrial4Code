@@ -10,6 +10,17 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
             blockUI.stop();
         });
     }
+
+    var _GetAccountTypes = function () {
+        blockUI.start();
+        var url = 'api/accountmanagement' + '/getaccounttypes'
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
     var _GetFiscalYear = function (reqtypeid) {
         blockUI.start();
         var url = _routePrefix + '/fiscalyear/get';
@@ -141,6 +152,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
     factory.GetFourthCharList = _GetFourthCharList;
     factory.GetStatusList = _GetStatusList;
     factory.GetStateList = _GetStateList;
+    factory.GetAccountTypes = _GetAccountTypes;
 
     return factory;
 }];

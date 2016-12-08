@@ -15,11 +15,23 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: raploginController_resolve
         })
-        .when('/dashboard', {
-                templateUrl: 'views/account/Dashboard.html',
+        .when('/publicdashboard', {
+                templateUrl: 'views/account/PublicDashboard.html',
                 controller: rapdashboardController,
                 controllerAs: 'Ctrl',
                 resolve: rapdashboardController_resolve
+        })
+        .when('/staffdashboard', {
+                    templateUrl: 'views/account/StaffDashboard.html',
+                    controller: rapstaffdashboardController,
+                    controllerAs: 'Ctrl',
+                    resolve: rapstaffdashboardController_resolve
+        })
+        .when('/admindashboard', {
+                    templateUrl: 'views/account/AdminDashboard.html',
+                    controller: rapadmindashboardController,
+                    controllerAs: 'Ctrl',
+                    resolve: rapadmindashboardController_resolve
         })
         .when('/invitethirdparty', {
                 templateUrl: 'views/account/InviteThirdParty.html',

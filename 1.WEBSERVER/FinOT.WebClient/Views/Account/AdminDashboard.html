@@ -1,0 +1,23 @@
+﻿<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-danger font-small">
+            <div class="panel-heading">
+                <strong>Admin Dashboard</strong>
+            </div>
+            <div class="panel-body">
+                <p>Account : {{Ctrl.model.FirstName}} </p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.CaseID" required />
+                <p>Enter C_ID </p>
+                <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.C_ID" required />               
+                <button class="btn btn-default" ng-click="Ctrl.AccountSearch()">Account Search</button>          
+                <button class="btn btn-default" ng-click="Ctrl.CreateCityUserAccount()">Create City User Account</button>     
+                <button class="btn btn-default" ng-click="Ctrl.CreatePublicUserAccount()">Create Public User Account</button>       
+                <div ng-repeat="activity in Ctrl.caseinfo.ActivityStatus">                    
+                    <p>{{activity.Activity.ActivityDesc}}</p>                   
+                    <p>{{activity.Status.StatusDesc}}</p>
+                    <p>{{activity.Date}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

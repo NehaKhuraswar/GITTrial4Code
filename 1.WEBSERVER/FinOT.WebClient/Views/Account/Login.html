@@ -17,6 +17,13 @@
                             <label for="login_password">Password</label>
                             <input type="password" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Password" required />
                         </div>
+                        <label for="account_types">Account type</label>
+                        <select class="form-control"
+                                ng-model="Ctrl.SelectedAccountType"
+                                ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID"
+                                required>
+                            <option value="" selected>Select Account Type</option>
+                        </select>
 
                         <div class="field-group no-bottom-margin">
                             <a href="#" class="forgot-password">Forgot Password?</a>
@@ -24,7 +31,7 @@
                     </div>
 
                     <div class="step-footer no-top-margin">
-                        <input type="button" id="btn-login" name="btn-login" class="btn-primary" value="Log in" ng-click="Ctrl.Login(Ctrl.model.CustomerInfo)" />
+                        <input type="button" id="btn-login" name="btn-login" class="btn-primary" value="Log in" ng-click="Ctrl.Login(Ctrl.model.CustomerInfo, Ctrl.SelectedAccountType)" />
                         <input type="button" id="btn-create" name="btn-create" class="btn-primary" value="Create account" />
                     </div>
 

@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearchAccountFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearchAccountFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.AccountTypesList = [];
     self.AccountSearchModel = [];
@@ -22,7 +22,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
     //    return (Math.floor(self.model.TotalCount / self.model.PageSize) + (((self.model.TotalCount % self.model.PageSize) != 0) ? 1 : 0))
     //};
     var _getAccountTypes = function () {        
-        rapFactory.GetAccountTypes().then(function (response) {
+        masterFactory.GetAccountTypes().then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.AccountTypesList = response.data;
         });
