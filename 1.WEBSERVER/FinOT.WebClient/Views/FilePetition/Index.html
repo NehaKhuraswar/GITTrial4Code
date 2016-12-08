@@ -78,6 +78,7 @@
                         <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
                         <li class="current"><a ng-click="Ctrl.ShowOwnerApplicantInfo()">Applicant Information</a></li>
                         <li class="current"><a ng-click="Ctrl.ShowOwnerJustification()">Justification For Rent Increase</a></li>
+                        <li class="current"><a ng-click="Ctrl.ShowOwnerRentalProperty()">Rental Property</a></li>
                     </ul>
 </div>
                 <div class="col-md-9 col-sm-12">
@@ -119,6 +120,9 @@
                             </div>
                             <div ng-if="Ctrl.ownerJustification">
                                 <rap-ownerjustification ng-show="Ctrl.ownerJustification" model="Ctrl"></rap-ownerjustification>
+                            </div>
+                            <div ng-if="Ctrl.ownerRentalProperty">
+                                <rap-ownerrentalproperty ng-show="Ctrl.ownerRentalProperty" model="Ctrl"></rap-ownerrentalproperty>
                             </div>
                         </form>
                     </div>

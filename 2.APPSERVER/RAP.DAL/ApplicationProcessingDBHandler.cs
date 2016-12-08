@@ -1420,6 +1420,56 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<OwnerPetitionPropertyInfoM> GetOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model)
+        {
+            ReturnResult<OwnerPetitionPropertyInfoM> result = new ReturnResult<OwnerPetitionPropertyInfoM>();
+            try
+            {
+                if (!model.UnitTypes.Any())
+                {
+                    model.UnitTypes = getUnitTypes();
+                }
+                var propertyInfo = from r in _dbContext.OwnerPetitionPropertyInfos
+                                   where r.CustomerID == model.CustomerID && r.bPetitionFiled == false
+                                   select r;
+                if (propertyInfo.Any())
+                {
+                    model.OwnerPropertyID = propertyInfo.First().OwnerPropertyID;
+                    model.UnitTypeID = propertyInfo.First().UnitTypeID;
+
+                    var tentantInfo = from r in _dbContext.OwnerPetitionTenantInfos
+                                      where r.OwnerPropertyID == model.OwnerPropertyID
+                                      select r;
+                    if (tentantInfo.Any())
+                    {
+                        foreach (var item in tentantInfo)
+                        {
+                            OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
+                            var userResult = _commondbHandler.GetUserInfo(item.TenantUserID);
+                            if (userResult.status.Status == StatusEnum.Success)
+                            {
+                                _tenant.TenantUserInfo = userResult.result;
+                                _tenant.TenantInfoID = item.TenantInfoID;
+                            }
+                            model.TenantInfo.Add(_tenant);
+                        }
+                    }
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+        
+
+
         #endregion
         
         #region Owner petition Save Functions
@@ -1895,5 +1945,23 @@ namespace RAP.DAL
             return ownerPetitionID;
         }
         #endregion
+
+       private List<UnitTypeM> getUnitTypes()
+       {
+           List<UnitTypeM> _units = new List<UnitTypeM>();
+           var units = _dbContext.UnitTypes;
+           if (units != null)
+           {
+               foreach (var unit in units)
+               {
+                   UnitTypeM _unit = new UnitTypeM();
+                   _unit.UnitTypeID = unit.UnitTypeID;
+                   _unit.UnitDescription = unit.Description;
+                   _units.Add(_unit);
+               }
+           }
+           return _units;
+       }
+    
     }
 }

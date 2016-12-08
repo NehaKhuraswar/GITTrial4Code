@@ -46,6 +46,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapcityuserregisterFactory', rapcityuserregisterFactory)
     .factory('rapOwnerApplicantInfoFactory', rapOwnerApplicantInfoFactory)
     .factory('rapOwnerJustificationFactory', rapOwnerJustificationFactory)
+    .factory('rapOwnerRentalPropertyFactory', rapOwnerRentalPropertyFactory)
     .controller('raploginController', raploginController)
     .controller('rapregisterController', rapregisterController)
     .controller('rapdashboardController', rapdashboardController)
@@ -70,7 +71,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapImpInfoController', rapImpInfoController)
     .controller('rapOwnerImpInfoController', rapOwnerImpInfoController)
     .controller('rapOwnerApplicantInfoController', rapOwnerApplicantInfoController)
-     .controller('rapOwnerJustificationController', rapOwnerJustificationController)
+    .controller('rapOwnerJustificationController', rapOwnerJustificationController)
+    .controller('rapOwnerRentalPropertyController', rapOwnerRentalPropertyController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -303,3 +305,15 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
           controllerAs: 'Ctrl'
       };
   })
+ .directive('rapOwnerrentalproperty', function () {
+     return {
+         restrict: 'E',
+         scope: {
+             reqid: '=',
+             model: '=model',
+         },
+         templateUrl: 'Views/FilePetition/Owner/RentalProperty.html',
+         controller: 'rapOwnerRentalPropertyController',
+         controllerAs: 'Ctrl'
+     };
+ })

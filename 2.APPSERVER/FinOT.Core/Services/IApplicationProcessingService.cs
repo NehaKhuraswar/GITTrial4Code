@@ -23,8 +23,9 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetPetitioncategory();
         ReturnResult<CaseInfoM> GetOwnerApplicantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> GetRentIncreaseReasonInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> GetOwnerPropertyAndTenantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOwnerApplicantInfo(CaseInfoM model);
-        ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model);        
-
+        ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> SaveOwnerPropertyAndTenantInfo(CaseInfoM model);
     }
 }
