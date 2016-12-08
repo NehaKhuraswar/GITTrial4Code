@@ -787,6 +787,7 @@ namespace RAP.DAL
             int ownerUserID = 0;
             int thirdPartyUserID = 0;
             int PropertyManagerUserID = 0;
+            int applicantUserID = 0;
             try
             {
                 if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
@@ -799,7 +800,12 @@ namespace RAP.DAL
                     }
                 }
 
-
+                applicantUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.ApplicantUserInfo);
+                if (applicantUserID == 0)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                    return result;
+                }
                 ownerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.OwnerInfo);
                 if (ownerUserID == 0)
                 {
@@ -815,7 +821,9 @@ namespace RAP.DAL
                 //}
                 TenantPetitionInfo petitionDB = new TenantPetitionInfo();
                 petitionDB.bThirdPartyRepresentation = caseInfo.TenantPetitionInfo.bThirdPartyRepresentation;
+
                 petitionDB.ThirdPartyUserID = thirdPartyUserID;
+                petitionDB.ApplicantUserID = applicantUserID;
                 petitionDB.OwnerUserID = ownerUserID;
                 petitionDB.PropertyManagerUserID = PropertyManagerUserID;
                 petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
@@ -823,7 +831,7 @@ namespace RAP.DAL
                 petitionDB.RentStatusID = caseInfo.TenantPetitionInfo.CurrentRentStatusID;
                 petitionDB.ProvideExplanation = caseInfo.TenantPetitionInfo.ProvideExplanation;
                 petitionDB.CreatedDate = DateTime.Now;
-                petitionDB.PetitionFiledBy = UserID;
+                petitionDB.PetitionFiledBy = caseInfo.TenantPetitionInfo.CustomerID;
                 _dbContext.TenantPetitionInfos.InsertOnSubmit(petitionDB);
                 _dbContext.SubmitChanges();
                 caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
@@ -1506,7 +1514,7 @@ namespace RAP.DAL
                                applicantInfo.First().bBusinessLicensePaid == model.bBusinessLicensePaid &&
                                applicantInfo.First().BusinessLicenseNumber == model.BusinessLicenseNumber &&
                                 applicantInfo.First().bRentAdjustmentProgramFeePaid == model.bRentAdjustmentProgramFeePaid &&
-                               applicantInfo.First().BuildingAcquiredDate == new DateTime(model.BuildingAcquiredDate.Year,model.BuildingAcquiredDate.Month,model.BuildingAcquiredDate.Day) &&
+                              // applicantInfo.First().BuildingAcquiredDate == new DateTime(model.BuildingAcquiredDate.Year,model.BuildingAcquiredDate.Month,model.BuildingAcquiredDate.Day) &&
                                applicantInfo.First().NumberOfUnits == model.NumberOfUnits &&
                                applicantInfo.First().bMoreThanOneStreetOnParcel == model.bMoreThanOneStreetOnParcel && 
                                ((thirdPartyUserID > 0) ? applicantInfo.First().ThirdPartyUserID == thirdPartyUserID : true )
@@ -1526,7 +1534,7 @@ namespace RAP.DAL
                                _applicantInfo.bBusinessLicensePaid = model.bBusinessLicensePaid;
                                _applicantInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
                                _applicantInfo.bRentAdjustmentProgramFeePaid = model.bRentAdjustmentProgramFeePaid;
-                               _applicantInfo.BuildingAcquiredDate = new DateTime(model.BuildingAcquiredDate.Year, model.BuildingAcquiredDate.Month, model.BuildingAcquiredDate.Day);
+                               //_applicantInfo.BuildingAcquiredDate = new DateTime(model.BuildingAcquiredDate.Year, model.BuildingAcquiredDate.Month, model.BuildingAcquiredDate.Day);
                                _applicantInfo.NumberOfUnits = model.NumberOfUnits;
                                _applicantInfo.bMoreThanOneStreetOnParcel = model.bMoreThanOneStreetOnParcel;
                                _applicantInfo.CustomerID = model.CustomerID;                         
@@ -1549,7 +1557,7 @@ namespace RAP.DAL
                         applicantInfo.bBusinessLicensePaid = model.bBusinessLicensePaid;
                         applicantInfo.BusinessLicenseNumber = model.BusinessLicenseNumber;
                         applicantInfo.bRentAdjustmentProgramFeePaid = model.bRentAdjustmentProgramFeePaid;
-                       applicantInfo.BuildingAcquiredDate =new DateTime(model.BuildingAcquiredDate.Year,model.BuildingAcquiredDate.Month,model.BuildingAcquiredDate.Day);
+                       //applicantInfo.BuildingAcquiredDate =new DateTime(model.BuildingAcquiredDate.Year,model.BuildingAcquiredDate.Month,model.BuildingAcquiredDate.Day);
                         
                         applicantInfo.NumberOfUnits = model.NumberOfUnits;
                         applicantInfo.bMoreThanOneStreetOnParcel = model.bMoreThanOneStreetOnParcel;

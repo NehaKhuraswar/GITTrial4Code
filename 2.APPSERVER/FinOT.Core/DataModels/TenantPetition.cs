@@ -155,9 +155,7 @@ namespace RAP.Core.DataModels
             RentIncreases = new List<TenantRentIncreaseInfoM>();
             Document = new DocumentM();
             SelectedRangeOfUnits = new NumberRangeForUnitsM();
-         
-            //TenantRentIncreaseInfoM obj = new TenantRentIncreaseInfoM();
-            //RentIncreases.Add(obj);
+            ApplicantUserInfo = new UserInfoM();
 
         }
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
@@ -168,6 +166,7 @@ namespace RAP.Core.DataModels
         private List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
         
         public bool bThirdPartyRepresentation { get; set; }
+        public UserInfoM ApplicantUserInfo { get; set; } 
         public UserInfoM ThirdPartyInfo { get; set; }
         public UserInfoM OwnerInfo { get; set; }
         public bool bSameAsOwnerInfo { get; set; }
@@ -190,7 +189,7 @@ namespace RAP.Core.DataModels
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
         public bool bLostService { get; set; }
-
+        public int CustomerID { get; set; }
 
         public List<NumberRangeForUnitsM> RangeOfUnits
         {

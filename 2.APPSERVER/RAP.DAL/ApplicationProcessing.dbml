@@ -103,26 +103,6 @@
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TenantPetitionInfo" Member="TenantPetitionInfos">
-    <Type Name="TenantPetitionInfo">
-      <Column Name="TenantPetitionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="OwnerUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PropertyManagerUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NumberOfUnits" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="UnitTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RentStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ProvideExplanation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PetitionFiledBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="TenantPetitionInfo_TenantProblemInfo" Member="TenantProblemInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantProblemInfo" />
-      <Association Name="TenantPetitionInfo_TenantLostServiceInfo" Member="TenantLostServiceInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantLostServiceInfo" />
-      <Association Name="TenantPetitionInfo_TenantPetitionGroundInfo" Member="TenantPetitionGroundInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionGroundInfo" />
-      <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantRentalIncrementInfo" />
-    </Type>
-  </Table>
   <Table Name="dbo.OwnerPetitionInfo" Member="OwnerPetitionInfos">
     <Type Name="OwnerPetitionInfo">
       <Column Name="OwnerPetitionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -250,6 +230,27 @@
     <Type Name="NumberRangeForUnit">
       <Column Name="RangeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RangeDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantPetitionInfo" Member="TenantPetitionInfos">
+    <Type Name="TenantPetitionInfo">
+      <Column Name="TenantPetitionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ApplicantUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OwnerUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PropertyManagerUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumberOfUnits" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RentStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProvideExplanation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PetitionFiledBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="TenantPetitionInfo_TenantProblemInfo" Member="TenantProblemInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantProblemInfo" />
+      <Association Name="TenantPetitionInfo_TenantLostServiceInfo" Member="TenantLostServiceInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantLostServiceInfo" />
+      <Association Name="TenantPetitionInfo_TenantPetitionGroundInfo" Member="TenantPetitionGroundInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionGroundInfo" />
+      <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantRentalIncrementInfo" />
     </Type>
   </Table>
 </Database>
