@@ -13,6 +13,7 @@ namespace RAP.Core.DataModels
         {
             thirdpartyDetails = new List<ThirdPartyDetails>();
             User = new UserInfoM();
+            MailingAddress = new MailingAddress_M();
         }
         public string AccountType { get; set; }
         public int selected { get; set; }
@@ -23,8 +24,24 @@ namespace RAP.Core.DataModels
         public bool MailNotificationFlag { get; set; }
         public List<ThirdPartyDetails> thirdpartyDetails { get; set; }
         public UserInfoM User { get; set; }
+        public MailingAddress_M MailingAddress { get; set; }
         public Int32 CustomerIdentityKey { get; set; }
         public DateTime CreatedDate { get; set; }
+        public bool IsSameMailingAddress { get; set; }
+    }
+    public class MailingAddress_M
+    {
+        public MailingAddress_M()
+        {
+            State = new StateM();
+        }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public StateM State { get; set; }
+        public int Zip { get; set; }
+        public string PhoneNumber { get; set; }
+
     }
     public class CityUserAccount_M
     {

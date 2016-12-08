@@ -11,6 +11,10 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
         });
     }
     _getAccountTypes();
+
+    self.CreateAccount = function () {
+        $location.path("/register");
+    }
    // rapFactory.param.set("temp");
     //self.Login = function (model) {
         

@@ -530,6 +530,7 @@ namespace RAP.DAL
                    custTable.UserID = message.User.UserID;  
                    custTable.CreatedDate = DateTime.Now;
                    custTable.ModifiedDate = DateTime.Now;
+                   custTable.bMailingAddress = !message.IsSameMailingAddress;
                    message.CustomerIdentityKey = getCustomerIdentityKey();
                    custTable.CustomerIdentityKey = message.CustomerIdentityKey;
                    db.CustomerDetails.InsertOnSubmit(custTable);
@@ -543,6 +544,22 @@ namespace RAP.DAL
                    notificationTable.CreatedDate = DateTime.Now;
                    db.NotificationPreferences.InsertOnSubmit(notificationTable);
                    db.SubmitChanges();
+
+                   if (!message.IsSameMailingAddress)
+                   {
+                       MailingAddress mailing = new MailingAddress();
+                       mailing.AddressLine1 = message.MailingAddress.AddressLine1;
+                       mailing.AddressLine2 = message.MailingAddress.AddressLine2;
+                       mailing.City = message.MailingAddress.City;
+                       mailing.StateID = message.MailingAddress.State.StateID;
+                       mailing.Zip = message.MailingAddress.Zip;
+                       mailing.PhoneNumber = message.MailingAddress.PhoneNumber;
+                       mailing.CustomerID = message.custID;
+                       mailing.LastModifiedDate = DateTime.Now;
+                       db.MailingAddresses.InsertOnSubmit(mailing);
+                       db.SubmitChanges();
+                   }
+                   
                }
              //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
                result.status = new OperationStatus() { Status = StatusEnum.Success };

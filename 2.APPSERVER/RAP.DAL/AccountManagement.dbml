@@ -28,20 +28,6 @@
       <Association Name="CustomerDetail_ThirdPartyRepresentation1" Member="CustomerDetail1" ThisKey="ThirdPartyCustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.CustomerDetails" Member="CustomerDetails">
-    <Type Name="CustomerDetail">
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
-      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CustomerIdentityKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="CustomerDetail_NotificationPreference" Member="NotificationPreference" ThisKey="CustomerID" OtherKey="CustomerID" Type="NotificationPreference" Cardinality="One" />
-      <Association Name="CustomerDetail_ThirdPartyRepresentation" Member="ThirdPartyRepresentation" ThisKey="CustomerID" OtherKey="CustomerID" Type="ThirdPartyRepresentation" Cardinality="One" />
-      <Association Name="CustomerDetail_ThirdPartyRepresentation1" Member="ThirdPartyRepresentations" ThisKey="CustomerID" OtherKey="ThirdPartyCustomerID" Type="ThirdPartyRepresentation" />
-    </Type>
-  </Table>
   <Table Name="dbo.CityAccountType" Member="CityAccountTypes">
     <Type Name="CityAccountType">
       <Column Name="CityAccountTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -77,6 +63,39 @@
       <Column Name="MobilePhoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="CityAccountType_CityUserAccount" Member="CityAccountType" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityAccountType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerDetails" Member="CustomerDetails">
+    <Type Name="CustomerDetail">
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CustomerIdentityKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bMailingAddress" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bParcelAddress" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CustomerDetail_NotificationPreference" Member="NotificationPreference" ThisKey="CustomerID" OtherKey="CustomerID" Type="NotificationPreference" Cardinality="One" />
+      <Association Name="CustomerDetail_ThirdPartyRepresentation" Member="ThirdPartyRepresentation" ThisKey="CustomerID" OtherKey="CustomerID" Type="ThirdPartyRepresentation" Cardinality="One" />
+      <Association Name="CustomerDetail_ThirdPartyRepresentation1" Member="ThirdPartyRepresentations" ThisKey="CustomerID" OtherKey="ThirdPartyCustomerID" Type="ThirdPartyRepresentation" />
+      <Association Name="CustomerDetail_CustomerDetail" Member="CustomerDetail2" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" Cardinality="One" />
+      <Association Name="CustomerDetail_MailingAddress" Member="MailingAddresses" ThisKey="CustomerID" OtherKey="CustomerID" Type="MailingAddress" />
+      <Association Name="CustomerDetail_CustomerDetail" Member="CustomerDetail1" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MailingAddress" Member="MailingAddresses">
+    <Type Name="MailingAddress">
+      <Column Name="MailingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine1" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine2" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="StateID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Zip" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="CustomerDetail_MailingAddress" Member="CustomerDetail" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.USP_SearchAccount_Get" Method="USP_SearchAccount_Get">
