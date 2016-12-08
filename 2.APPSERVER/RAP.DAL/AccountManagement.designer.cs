@@ -120,19 +120,19 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<CityUserAccount> CityUserAccounts
-		{
-			get
-			{
-				return this.GetTable<CityUserAccount>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ReturnAccountSearch> ReturnAccountSearches
 		{
 			get
 			{
 				return this.GetTable<ReturnAccountSearch>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CityUserAccount> CityUserAccounts
+		{
+			get
+			{
+				return this.GetTable<CityUserAccount>();
 			}
 		}
 		
@@ -1125,6 +1125,123 @@ namespace RAP.DAL
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReturnAccountSearch")]
+	public partial class ReturnAccountSearch
+	{
+		
+		private System.Nullable<int> _RankNo;
+		
+		private string _Name;
+		
+		private string _AcctTypeDesc;
+		
+		private string _Email;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		public ReturnAccountSearch()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RankNo", DbType="Int")]
+		public System.Nullable<int> RankNo
+		{
+			get
+			{
+				return this._RankNo;
+			}
+			set
+			{
+				if ((this._RankNo != value))
+				{
+					this._RankNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcctTypeDesc", DbType="VarChar(25)")]
+		public string AcctTypeDesc
+		{
+			get
+			{
+				return this._AcctTypeDesc;
+			}
+			set
+			{
+				if ((this._AcctTypeDesc != value))
+				{
+					this._AcctTypeDesc = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(35)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CityUserAccount")]
 	public partial class CityUserAccount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1245,7 +1362,7 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(25)")]
 		public string LastName
 		{
 			get
@@ -1265,7 +1382,7 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
 		public string Email
 		{
 			get
@@ -1560,123 +1677,6 @@ namespace RAP.DAL
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReturnAccountSearch")]
-	public partial class ReturnAccountSearch
-	{
-		
-		private System.Nullable<int> _RankNo;
-		
-		private string _Name;
-		
-		private string _AcctTypeDesc;
-		
-		private string _Email;
-		
-		private System.Nullable<int> _CustomerID;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		public ReturnAccountSearch()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RankNo", DbType="Int")]
-		public System.Nullable<int> RankNo
-		{
-			get
-			{
-				return this._RankNo;
-			}
-			set
-			{
-				if ((this._RankNo != value))
-				{
-					this._RankNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcctTypeDesc", DbType="VarChar(25)")]
-		public string AcctTypeDesc
-		{
-			get
-			{
-				return this._AcctTypeDesc;
-			}
-			set
-			{
-				if ((this._AcctTypeDesc != value))
-				{
-					this._AcctTypeDesc = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(35)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this._Email = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
-		public System.Nullable<int> CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					this._CustomerID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this._CreatedDate = value;
-				}
 			}
 		}
 	}
