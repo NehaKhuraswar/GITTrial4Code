@@ -33,9 +33,6 @@ namespace RAP.DAL
     partial void InsertUserType(UserType instance);
     partial void UpdateUserType(UserType instance);
     partial void DeleteUserType(UserType instance);
-    partial void InsertNotificationPreference(NotificationPreference instance);
-    partial void UpdateNotificationPreference(NotificationPreference instance);
-    partial void DeleteNotificationPreference(NotificationPreference instance);
     partial void InsertThirdPartyRepresentation(ThirdPartyRepresentation instance);
     partial void UpdateThirdPartyRepresentation(ThirdPartyRepresentation instance);
     partial void DeleteThirdPartyRepresentation(ThirdPartyRepresentation instance);
@@ -51,6 +48,9 @@ namespace RAP.DAL
     partial void InsertMailingAddress(MailingAddress instance);
     partial void UpdateMailingAddress(MailingAddress instance);
     partial void DeleteMailingAddress(MailingAddress instance);
+    partial void InsertNotificationPreference(NotificationPreference instance);
+    partial void UpdateNotificationPreference(NotificationPreference instance);
+    partial void DeleteNotificationPreference(NotificationPreference instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -88,14 +88,6 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<UserType>();
-			}
-		}
-		
-		public System.Data.Linq.Table<NotificationPreference> NotificationPreferences
-		{
-			get
-			{
-				return this.GetTable<NotificationPreference>();
 			}
 		}
 		
@@ -144,6 +136,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<MailingAddress>();
+			}
+		}
+		
+		public System.Data.Linq.Table<NotificationPreference> NotificationPreferences
+		{
+			get
+			{
+				return this.GetTable<NotificationPreference>();
 			}
 		}
 		
@@ -236,205 +236,6 @@ namespace RAP.DAL
 					this._Description = value;
 					this.SendPropertyChanged("Description");
 					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NotificationPreference")]
-	public partial class NotificationPreference : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _NotificationPreferenceID;
-		
-		private int _CustomerID;
-		
-		private bool _EmailNotification;
-		
-		private bool _MailNotification;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private EntityRef<CustomerDetail> _CustomerDetail;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnNotificationPreferenceIDChanging(int value);
-    partial void OnNotificationPreferenceIDChanged();
-    partial void OnCustomerIDChanging(int value);
-    partial void OnCustomerIDChanged();
-    partial void OnEmailNotificationChanging(bool value);
-    partial void OnEmailNotificationChanged();
-    partial void OnMailNotificationChanging(bool value);
-    partial void OnMailNotificationChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    #endregion
-		
-		public NotificationPreference()
-		{
-			this._CustomerDetail = default(EntityRef<CustomerDetail>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationPreferenceID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
-		public int NotificationPreferenceID
-		{
-			get
-			{
-				return this._NotificationPreferenceID;
-			}
-			set
-			{
-				if ((this._NotificationPreferenceID != value))
-				{
-					this.OnNotificationPreferenceIDChanging(value);
-					this.SendPropertyChanging();
-					this._NotificationPreferenceID = value;
-					this.SendPropertyChanged("NotificationPreferenceID");
-					this.OnNotificationPreferenceIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					if (this._CustomerDetail.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailNotification", DbType="Bit NOT NULL")]
-		public bool EmailNotification
-		{
-			get
-			{
-				return this._EmailNotification;
-			}
-			set
-			{
-				if ((this._EmailNotification != value))
-				{
-					this.OnEmailNotificationChanging(value);
-					this.SendPropertyChanging();
-					this._EmailNotification = value;
-					this.SendPropertyChanged("EmailNotification");
-					this.OnEmailNotificationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailNotification", DbType="Bit NOT NULL")]
-		public bool MailNotification
-		{
-			get
-			{
-				return this._MailNotification;
-			}
-			set
-			{
-				if ((this._MailNotification != value))
-				{
-					this.OnMailNotificationChanging(value);
-					this.SendPropertyChanging();
-					this._MailNotification = value;
-					this.SendPropertyChanged("MailNotification");
-					this.OnMailNotificationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_NotificationPreference", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public CustomerDetail CustomerDetail
-		{
-			get
-			{
-				return this._CustomerDetail.Entity;
-			}
-			set
-			{
-				CustomerDetail previousValue = this._CustomerDetail.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerDetail.Entity = null;
-						previousValue.NotificationPreference = null;
-					}
-					this._CustomerDetail.Entity = value;
-					if ((value != null))
-					{
-						value.NotificationPreference = this;
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(int);
-					}
-					this.SendPropertyChanged("CustomerDetail");
 				}
 			}
 		}
@@ -1418,8 +1219,6 @@ namespace RAP.DAL
 		
 		private System.Nullable<bool> _bParcelAddress;
 		
-		private EntityRef<NotificationPreference> _NotificationPreference;
-		
 		private EntityRef<ThirdPartyRepresentation> _ThirdPartyRepresentation;
 		
 		private EntitySet<ThirdPartyRepresentation> _ThirdPartyRepresentations;
@@ -1456,7 +1255,6 @@ namespace RAP.DAL
 		
 		public CustomerDetail()
 		{
-			this._NotificationPreference = default(EntityRef<NotificationPreference>);
 			this._ThirdPartyRepresentation = default(EntityRef<ThirdPartyRepresentation>);
 			this._ThirdPartyRepresentations = new EntitySet<ThirdPartyRepresentation>(new Action<ThirdPartyRepresentation>(this.attach_ThirdPartyRepresentations), new Action<ThirdPartyRepresentation>(this.detach_ThirdPartyRepresentations));
 			this._CustomerDetail2 = default(EntityRef<CustomerDetail>);
@@ -1645,35 +1443,6 @@ namespace RAP.DAL
 					this._bParcelAddress = value;
 					this.SendPropertyChanged("bParcelAddress");
 					this.OnbParcelAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_NotificationPreference", Storage="_NotificationPreference", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
-		public NotificationPreference NotificationPreference
-		{
-			get
-			{
-				return this._NotificationPreference.Entity;
-			}
-			set
-			{
-				NotificationPreference previousValue = this._NotificationPreference.Entity;
-				if (((previousValue != value) 
-							|| (this._NotificationPreference.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._NotificationPreference.Entity = null;
-						previousValue.CustomerDetail = null;
-					}
-					this._NotificationPreference.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerDetail = this;
-					}
-					this.SendPropertyChanged("NotificationPreference");
 				}
 			}
 		}
@@ -2111,6 +1880,164 @@ namespace RAP.DAL
 						this._CustomerID = default(int);
 					}
 					this.SendPropertyChanged("CustomerDetail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NotificationPreference")]
+	public partial class NotificationPreference : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NotificationPreferenceID;
+		
+		private int _UserID;
+		
+		private bool _EmailNotification;
+		
+		private bool _MailNotification;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNotificationPreferenceIDChanging(int value);
+    partial void OnNotificationPreferenceIDChanged();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnEmailNotificationChanging(bool value);
+    partial void OnEmailNotificationChanged();
+    partial void OnMailNotificationChanging(bool value);
+    partial void OnMailNotificationChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    #endregion
+		
+		public NotificationPreference()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationPreferenceID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int NotificationPreferenceID
+		{
+			get
+			{
+				return this._NotificationPreferenceID;
+			}
+			set
+			{
+				if ((this._NotificationPreferenceID != value))
+				{
+					this.OnNotificationPreferenceIDChanging(value);
+					this.SendPropertyChanging();
+					this._NotificationPreferenceID = value;
+					this.SendPropertyChanged("NotificationPreferenceID");
+					this.OnNotificationPreferenceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailNotification", DbType="Bit NOT NULL")]
+		public bool EmailNotification
+		{
+			get
+			{
+				return this._EmailNotification;
+			}
+			set
+			{
+				if ((this._EmailNotification != value))
+				{
+					this.OnEmailNotificationChanging(value);
+					this.SendPropertyChanging();
+					this._EmailNotification = value;
+					this.SendPropertyChanged("EmailNotification");
+					this.OnEmailNotificationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailNotification", DbType="Bit NOT NULL")]
+		public bool MailNotification
+		{
+			get
+			{
+				return this._MailNotification;
+			}
+			set
+			{
+				if ((this._MailNotification != value))
+				{
+					this.OnMailNotificationChanging(value);
+					this.SendPropertyChanging();
+					this._MailNotification = value;
+					this.SendPropertyChanged("MailNotification");
+					this.OnMailNotificationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
 				}
 			}
 		}

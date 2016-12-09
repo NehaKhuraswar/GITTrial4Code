@@ -129,7 +129,7 @@
                     <div class="field-group">
                         <label for="representative_email">Email Address</label>
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email" required />
-                    </div>
+                    </div>                    
                 </div>
                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                     <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyUser.LastName}}</p>
@@ -312,16 +312,16 @@
                         <div class="field-group">
                             <p class="input-label">Are you current on paying your rent?</p>
                             <div class="form-group-radio vertical clearfix">
-                                <label ng-repeat="currentonrent in Ctrl.caseinfo.TenantPetitionInfo.CurrentOnRent" for="{{currentonrent.StatusID}}">
-                                    <input type="radio"
-                                           class="input-field"
-                                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.CurrentRentStatusID"
-                                           ng-value="currentonrent.StatusID"
-                                           id="{{currentonrent.StatusID}}"
-                                           name="currentrent">{{currentonrent.Status}}
+                                <label for="pi_paying_rent_yes">
+                                    <input type="radio" name="pi_paying_rent_yes" id="pi_paying_rent_yes" ng-value="true"
+                                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus"><i></i><span>Yes</span>
+                                </label>
+                                <label for="pi_paying_rent_no">
+                                    <input type="radio" name="pi_paying_rent_no" id="pi_paying_rent_no" ng-value="false"
+                                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus" /><i></i> <span>No</span>
                                 </label>
                                 <div class="clear"></div>
-                            </div>
+                            </div>                            
                         </div>
                     </div>
 

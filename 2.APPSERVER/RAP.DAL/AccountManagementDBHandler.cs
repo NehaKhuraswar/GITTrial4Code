@@ -41,7 +41,7 @@ namespace RAP.DAL
                         message.User.UserID = (int)custdetails.UserID;
                         message.email = custdetails.Email;
                         message.custID = custdetails.CustomerID;
-                        var notifications = db.NotificationPreferences.Where(x => x.CustomerID == message.custID)
+                        var notifications = db.NotificationPreferences.Where(x => x.UserID == message.User.UserID)
                                                                 .Select(c => new CustomerInfo()
                                                                 {
                                                                     EmailNotificationFlag = c.EmailNotification,
@@ -538,7 +538,7 @@ namespace RAP.DAL
                    message.custID = custTable.CustomerID;
 
                    NotificationPreference notificationTable = new NotificationPreference();
-                   notificationTable.CustomerID = message.custID;
+                   notificationTable.UserID = message.User.UserID;  
                    notificationTable.EmailNotification = message.EmailNotificationFlag;
                    notificationTable.MailNotification = message.MailNotificationFlag;
                    notificationTable.CreatedDate = DateTime.Now;

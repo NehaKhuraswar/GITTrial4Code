@@ -4971,7 +4971,7 @@ namespace RAP.DAL
 		
 		private int _UnitTypeID;
 		
-		private int _RentStatusID;
+		private bool _bRentStatus;
 		
 		private string _ProvideExplanation;
 		
@@ -5009,8 +5009,8 @@ namespace RAP.DAL
     partial void OnNumberOfUnitsChanged();
     partial void OnUnitTypeIDChanging(int value);
     partial void OnUnitTypeIDChanged();
-    partial void OnRentStatusIDChanging(int value);
-    partial void OnRentStatusIDChanged();
+    partial void OnbRentStatusChanging(bool value);
+    partial void OnbRentStatusChanged();
     partial void OnProvideExplanationChanging(string value);
     partial void OnProvideExplanationChanged();
     partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
@@ -5190,22 +5190,22 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentStatusID", DbType="Int NOT NULL")]
-		public int RentStatusID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bRentStatus", DbType="Bit NOT NULL")]
+		public bool bRentStatus
 		{
 			get
 			{
-				return this._RentStatusID;
+				return this._bRentStatus;
 			}
 			set
 			{
-				if ((this._RentStatusID != value))
+				if ((this._bRentStatus != value))
 				{
-					this.OnRentStatusIDChanging(value);
+					this.OnbRentStatusChanging(value);
 					this.SendPropertyChanging();
-					this._RentStatusID = value;
-					this.SendPropertyChanged("RentStatusID");
-					this.OnRentStatusIDChanged();
+					this._bRentStatus = value;
+					this.SendPropertyChanged("bRentStatus");
+					this.OnbRentStatusChanged();
 				}
 			}
 		}

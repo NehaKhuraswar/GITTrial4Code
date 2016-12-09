@@ -175,7 +175,7 @@ namespace RAP.Core.DataModels
         public int NumberOfUnits { get; set; }
         public NumberRangeForUnitsM SelectedRangeOfUnits { get; set; }
         public int UnitTypeId { get; set; }
-        public int CurrentRentStatusID { get; set; }
+        public bool bCurrentRentStatus { get; set; }
         public string ProvideExplanation { get; set; }
         public bool bCitationDocUnavailable { get; set; }
         public List<PetitionGroundM> PetitionGrounds { get; set; }
