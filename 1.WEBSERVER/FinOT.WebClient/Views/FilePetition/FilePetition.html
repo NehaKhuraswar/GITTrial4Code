@@ -1,40 +1,52 @@
 ﻿<h3 class="step-heading">Petition Type</h3>
     <div class="step-content step1">
 
-        <div class="field-group subhead no-top-margin">
-            <p class="input-label fs-18">Are you filing as a tenant or as a property owner?</p>
+        <div class="step-content step1">
 
-            <!--<div class="form-group-radio vertical clearfix">
+            <div class="field-group subhead no-top-margin">
+                <p class="input-label fs-18">Are you filing as a tenant or as a property owner?</p>
+
+                <!--div class="form-group-radio vertical clearfix">
                 <label for="filing_as_tenant">
-                    <input type="radio" name="tenant_or_owner" id="filing_as_tenant" class="input-field" value="Tenant                 " checked="checked" /><i></i><span>Tenant                 </span>
+                    <input type="radio" name="tenant_or_owner" id="filing_as_tenant" class="input-field" value="Tenant                 " checked="checked" />Tenant                 </span>
                 </label>
 
                 <label for="filing_as_owner">
                     <input type="radio" name="tenant_or_owner" id="filing_as_owner" class="input-field" value="Property Owner" /><i></i> <span>Property Owner</span>
                 </label>
                 <div class="clear"></div>
-            </div>-->
+            </div-->
 
 
-            <div class="field-group">
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
+                    <!--div class="radio"-->
                     <label ng-repeat="category in Ctrl.caseinfo.PetitionCategory" for="{{category.PetitionCategoryID}}">
                         <input type="radio" class="input-field"
                                ng-model="Ctrl.caseinfo.PetitionCategoryID"
                                ng-value="category.PetitionCategoryID"
                                id="{{category.PetitionCategoryID}}"
-                               name="PetitionCategory">{{category.PetitionCategory}}
+                               name="PetitionCategory"><i></i><span>{{category.PetitionCategory}}</span>
 
                     </label>
+                    <!--/div-->
                 </div>
-            </div>
-            <div class="field-group">
-                <label> This form is submitted by third-party representative on behalf of the petitioner</label>
-                <input type="checkbox" class="checkbox" ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty">
-            </div>
-        </div>
+                <div class="field-group">
+                    <div class="form-group-checkbox vertical clearfix">
+                        <div class="checkbox-wrapper">
+                            <label for="by_third_party">
+                                <input type="checkbox" class="checkbox" id="by_third_party" ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty"><i></i><span>This form is submitted by third-party representative on behalf of the petitioner</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-    </div>
+            </div>
+            <div class="step-footer">
+                <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
+            </div>
+
+
+        </div>
     <div class="step-footer">
         <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
     </div>
