@@ -235,6 +235,7 @@
     <Content Include="Views\FileAppeal\Index.html" />
     <Content Include="Views\FileAppeal\Review.html" />
     <Content Include="Views\FileAppeal\ServingAppeal.html" />
+    <Content Include="Views\FilePetition\ApplicationInfo - Copy.html" />
     <Content Include="Views\FilePetition\ApplicationInfo.html" />
     <Content Include="Views\Account\CreateUser.html" />
     <Content Include="Views\Account\PublicDashboard.html" />

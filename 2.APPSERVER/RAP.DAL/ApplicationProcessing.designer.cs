@@ -4981,6 +4981,8 @@ namespace RAP.DAL
 		
 		private System.Nullable<System.DateTime> _ModifiedDate;
 		
+		private bool _IsSubmitted;
+		
 		private EntitySet<TenantProblemInfo> _TenantProblemInfos;
 		
 		private EntitySet<TenantLostServiceInfo> _TenantLostServiceInfos;
@@ -5019,6 +5021,8 @@ namespace RAP.DAL
     partial void OnPetitionFiledByChanged();
     partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnModifiedDateChanged();
+    partial void OnIsSubmittedChanging(bool value);
+    partial void OnIsSubmittedChanged();
     #endregion
 		
 		public TenantPetitionInfo()
@@ -5286,6 +5290,26 @@ namespace RAP.DAL
 					this._ModifiedDate = value;
 					this.SendPropertyChanged("ModifiedDate");
 					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmitted", DbType="Bit NOT NULL")]
+		public bool IsSubmitted
+		{
+			get
+			{
+				return this._IsSubmitted;
+			}
+			set
+			{
+				if ((this._IsSubmitted != value))
+				{
+					this.OnIsSubmittedChanging(value);
+					this.SendPropertyChanging();
+					this._IsSubmitted = value;
+					this.SendPropertyChanged("IsSubmitted");
+					this.OnIsSubmittedChanged();
 				}
 			}
 		}

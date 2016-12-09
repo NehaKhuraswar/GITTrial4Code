@@ -323,6 +323,68 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID)
+        {
+            ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            try
+            {
+                List<UnitTypeM> _units = new List<UnitTypeM>();
+                var units = _dbContext.UnitTypes;
+                if (units == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var unit in units)
+                    {
+                        UnitTypeM _unit = new UnitTypeM();
+                        _unit.UnitTypeID = unit.UnitTypeID;
+                        _unit.UnitDescription = unit.Description;
+                        _units.Add(_unit);
+                    }
+
+                }
+                var TenantPetitionInfoDB = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
+                                                && x.IsSubmitted == false).FirstOrDefault();
+                TenantPetitionInfoM tenantPetitionInfo = new TenantPetitionInfoM();
+                if (TenantPetitionInfoDB != null)
+                {
+                    tenantPetitionInfo.PetitionID = TenantPetitionInfoDB.TenantPetitionID;
+                    tenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionInfoDB.bThirdPartyRepresentation;
+                    if (tenantPetitionInfo.bThirdPartyRepresentation)
+                    {
+                        tenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
+                    }
+                    tenantPetitionInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ApplicantUserID).result;
+                    tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
+                    tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                    if (tenantPetitionInfo.OwnerInfo.UserID == tenantPetitionInfo.PropertyManager.UserID)
+                    {
+                        tenantPetitionInfo.bSameAsOwnerInfo = true;
+                    }
+                    tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                    tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
+                    tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
+                    tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
+                    tenantPetitionInfo.CustomerID =(int) TenantPetitionInfoDB.PetitionFiledBy;                    
+                }
+                tenantPetitionInfo.UnitTypes = _units;
+
+                result.result = tenantPetitionInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         private ReturnResult<List<TenantRentIncreaseInfoM>> GetTenantRentalIncrementInfo(int PetitionId)
         {
             ReturnResult<List<TenantRentIncreaseInfoM>> result = new ReturnResult<List<TenantRentIncreaseInfoM>>();
@@ -790,58 +852,125 @@ namespace RAP.DAL
             int applicantUserID = 0;
             try
             {
-                if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                if (caseInfo.TenantPetitionInfo.PetitionID > 0)
                 {
-                    thirdPartyUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo);
-                    if (thirdPartyUserID == 0)
+
+                    if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                    {
+                        thirdPartyUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo);
+                        if (thirdPartyUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
+
+                    applicantUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.ApplicantUserInfo);
+                    if (applicantUserID == 0)
                     {
                         result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                         return result;
                     }
-                }
+                    ownerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.OwnerInfo);
+                    if (ownerUserID == 0)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                        return result;
+                    }
+                    if (caseInfo.TenantPetitionInfo.bSameAsOwnerInfo)
+                    {
+                        PropertyManagerUserID = ownerUserID;
+                    }
+                    else
+                    {
+                        PropertyManagerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager);
+                        if (PropertyManagerUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
 
-                applicantUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.ApplicantUserInfo);
-                if (applicantUserID == 0)
-                {
-                    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                    return result;
-                }
-                ownerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.OwnerInfo);
-                if (ownerUserID == 0)
-                {
-                    result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                    return result;
-                }
-                if (caseInfo.TenantPetitionInfo.bSameAsOwnerInfo)
-                {
-                    PropertyManagerUserID = ownerUserID;
+                    TenantPetitionInfo petitionDB = _dbContext.TenantPetitionInfos
+                                                        .Where(x => x.IsSubmitted == false && x.TenantPetitionID == caseInfo.TenantPetitionInfo.PetitionID).FirstOrDefault();
+                    petitionDB.bThirdPartyRepresentation = caseInfo.TenantPetitionInfo.bThirdPartyRepresentation;
+
+                    petitionDB.ThirdPartyUserID = thirdPartyUserID;
+                    petitionDB.ApplicantUserID = applicantUserID;
+                    petitionDB.OwnerUserID = ownerUserID;
+                    petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
+                    petitionDB.UnitTypeID =  caseInfo.TenantPetitionInfo.UnitTypeId;
+                    petitionDB.bRentStatus = caseInfo.TenantPetitionInfo.bCurrentRentStatus;
+                    if (caseInfo.TenantPetitionInfo.bCurrentRentStatus == false)
+                    {
+                        petitionDB.ProvideExplanation = caseInfo.TenantPetitionInfo.ProvideExplanation;
+                    }
+                    petitionDB.CreatedDate = DateTime.Now;
+                    petitionDB.PetitionFiledBy = caseInfo.TenantPetitionInfo.CustomerID;
+                    petitionDB.IsSubmitted = false;
+                    _dbContext.SubmitChanges();
+                    caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
                 }
                 else
                 {
-                    PropertyManagerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager);
-                    if (PropertyManagerUserID == 0)
+                    if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                    {
+                        thirdPartyUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo);
+                        if (thirdPartyUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
+
+                    applicantUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.ApplicantUserInfo);
+                    if (applicantUserID == 0)
                     {
                         result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                         return result;
                     }
-                }
+                    ownerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.OwnerInfo);
+                    if (ownerUserID == 0)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                        return result;
+                    }
+                    if (caseInfo.TenantPetitionInfo.bSameAsOwnerInfo)
+                    {
+                        PropertyManagerUserID = ownerUserID;
+                    }
+                    else
+                    {
+                        PropertyManagerUserID = SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager);
+                        if (PropertyManagerUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
                 
-                TenantPetitionInfo petitionDB = new TenantPetitionInfo();
-                petitionDB.bThirdPartyRepresentation = caseInfo.TenantPetitionInfo.bThirdPartyRepresentation;
+                    TenantPetitionInfo petitionDB = new TenantPetitionInfo();
+                    petitionDB.bThirdPartyRepresentation = caseInfo.TenantPetitionInfo.bThirdPartyRepresentation;
 
-                petitionDB.ThirdPartyUserID = thirdPartyUserID;
-                petitionDB.ApplicantUserID = applicantUserID;
-                petitionDB.OwnerUserID = ownerUserID;
-                petitionDB.PropertyManagerUserID = PropertyManagerUserID;
-                petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
-                petitionDB.UnitTypeID =  caseInfo.TenantPetitionInfo.UnitTypeId;
-                petitionDB.bRentStatus = caseInfo.TenantPetitionInfo.bCurrentRentStatus;
-                petitionDB.ProvideExplanation = caseInfo.TenantPetitionInfo.ProvideExplanation;
-                petitionDB.CreatedDate = DateTime.Now;
-                petitionDB.PetitionFiledBy = caseInfo.TenantPetitionInfo.CustomerID;
-                _dbContext.TenantPetitionInfos.InsertOnSubmit(petitionDB);
-                _dbContext.SubmitChanges();
-                caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
+                    petitionDB.ThirdPartyUserID = thirdPartyUserID;
+                    petitionDB.ApplicantUserID = applicantUserID;
+                    petitionDB.OwnerUserID = ownerUserID;
+                    petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
+                    petitionDB.UnitTypeID =  caseInfo.TenantPetitionInfo.UnitTypeId;
+                    petitionDB.bRentStatus = caseInfo.TenantPetitionInfo.bCurrentRentStatus;
+                    if (caseInfo.TenantPetitionInfo.bCurrentRentStatus == false)
+                    {
+                        petitionDB.ProvideExplanation = caseInfo.TenantPetitionInfo.ProvideExplanation;
+                    }
+                    petitionDB.CreatedDate = DateTime.Now;
+                    petitionDB.PetitionFiledBy = caseInfo.TenantPetitionInfo.CustomerID;
+                    petitionDB.IsSubmitted = false;
+                    _dbContext.TenantPetitionInfos.InsertOnSubmit(petitionDB);
+                    _dbContext.SubmitChanges();
+                    caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
+                }
 
                 //petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
                 //petitionDB.UnitTypeID = caseInfo.TenantPetitionInfo.UnitTypeId;

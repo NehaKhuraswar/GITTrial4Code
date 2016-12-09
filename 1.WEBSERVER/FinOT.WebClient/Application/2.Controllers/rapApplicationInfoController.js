@@ -11,6 +11,17 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     else {
         self.caseinfo.TenantPetitionInfo.ThirdPartyUser = self.custDetails.User;
     }
+
+    var _GetTenantApplicationInfo = function (custID) {
+        rapFactory.GetTenantApplicationInfo(custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo.TenantPetitionInfo = response.data;
+        });
+    }
+    _GetTenantApplicationInfo(self.custDetails.custID);
+
     self.StateList = [];
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {

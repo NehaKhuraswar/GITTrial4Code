@@ -13,6 +13,18 @@ var rapapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, aj
             blockUI.stop();
         });
     }
+    var _GetTenantApplicationInfo = function (customerid) {
+        blockUI.start();
+
+        var url = _routePrefix + '/getapplicationinfo';
+        if (!(customerid == null || customerid == undefined)) { url = url + '/' + customerid; }
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
     var _GetCaseInfo = function () {
         blockUI.start();
 
@@ -27,6 +39,7 @@ var rapapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, aj
 
     factory.GetCaseInfo = _GetCaseInfo;
     factory.SaveApplicationInfo = _SaveApplicationInfo;
+    factory.GetTenantApplicationInfo = _GetTenantApplicationInfo;
     
     return factory;
 }];

@@ -159,6 +159,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID)
+        {
+            ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            try
+            {
+                result = _dbHandler.GetTenantApplicationInfo(CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
