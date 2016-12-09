@@ -3747,9 +3747,9 @@ strong {
 .form-group-radio input[type="radio"],
 .form-group-radio input[type="checkbox"],
 .form-group-checkbox input[type="radio"],
-/*.form-group-checkbox input[type="checkbox"] {
+.form-group-checkbox input[type="checkbox"] {
   display: none;
-}*/
+}
 /* line 1026, ../sass/styles.scss */
 .form-group-radio input[type="checkbox"] + i,
 .form-group-checkbox input[type="checkbox"] + i {
