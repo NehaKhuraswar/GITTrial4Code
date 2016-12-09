@@ -14,6 +14,7 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
+        ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
         ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition);
         ReturnResult<bool> SaveTenantLostServiceInfo(TenantPetitionInfoM petition);
         ReturnResult<bool> SaveTenantRentalIncrementInfo(TenantPetitionInfoM petition);
@@ -28,6 +29,9 @@ namespace RAP.DAL
         ReturnResult<OwnerPetitionApplicantInfoM> SaveOwnerApplicantInfo(OwnerPetitionApplicantInfoM model);
         ReturnResult<bool> SaveRentIncreaseReasonInfo(OwnerPetitionInfoM petition);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model);
+
+
+
 
      //   ReturnResult<CaseInfoM> GetCaseDetails(int caseID);
     }

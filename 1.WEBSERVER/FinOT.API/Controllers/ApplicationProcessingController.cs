@@ -407,6 +407,46 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+        
+        [AllowAnonymous]
+        [Route("getgroundsinfo/{petitionID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetPetitionGroundInfo(int petitionID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<PetitionGroundM>> transaction = new TranInfo<List<PetitionGroundM>>();
+            ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
+            try
+            {
+
+                result = _service.GetPetitionGroundInfo(petitionID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<PetitionGroundM>>>(ReturnCode, transaction);
+        }
+
+
         [AllowAnonymous]
         [Route("getapplicationinfo/{CustomerID:int}")]
         [HttpGet]

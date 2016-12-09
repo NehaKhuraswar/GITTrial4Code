@@ -159,6 +159,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
+        {
+            ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
+            try
+            {
+                result = _dbHandler.GetPetitionGroundInfo(petitionID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();

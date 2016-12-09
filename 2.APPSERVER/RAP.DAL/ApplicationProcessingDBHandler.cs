@@ -489,7 +489,7 @@ namespace RAP.DAL
         /// </summary>
         /// <param name="petitionID"></param>
         /// <returns>Petition Ground Object</returns>
-        private ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
+        public ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
         {
             ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
             List<PetitionGroundM> PetitionGroundInfo = new List<PetitionGroundM>();
@@ -512,7 +512,7 @@ namespace RAP.DAL
                         PetitionGroundInfo.Add(_petitionGround);
                     }
                 }
-                var TenantPetitionGroundInfoDB = _dbContext.TenantPetitionGroundInfos.Where(x => x.PetitionGroundID == petitionID).ToList();
+                var TenantPetitionGroundInfoDB = _dbContext.TenantPetitionGroundInfos.Where(x => x.TenantPetitionID == petitionID).ToList();
                 foreach (var item in TenantPetitionGroundInfoDB)
                 {
                     foreach (var item1 in PetitionGroundInfo)

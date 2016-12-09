@@ -12,6 +12,19 @@ var rapgroundsofpetitionFactory = ['blockUI', 'ajaxService', function (blockUI, 
               blockUI.stop();
           });
       }
+
+      var _GetPetitionGroundInfo = function (petitionID) {
+          blockUI.start();
+
+          var url = _routePrefix + '/getgroundsinfo';
+          if (!(petitionID == null || petitionID == undefined)) { url = url + '/' + petitionID; }
+
+          return ajax.Get(url)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
       factory.SavePetitionGroundInfo = _SavePetitionGroundInfo;
+      factory.GetPetitionGroundInfo = _GetPetitionGroundInfo;
     return factory;
 }];
