@@ -430,6 +430,9 @@ namespace RAP.DAL
             }
 
         }
+        
+
+        // getting the lost services and problems for the tenant petition form
         public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID)
         {
             ReturnResult<LostServicesPageM> result = new ReturnResult<LostServicesPageM>();
@@ -444,16 +447,27 @@ namespace RAP.DAL
                         TenantLostServiceInfoM objTenantLostServiceInfoM = new TenantLostServiceInfoM();
 
                         objTenantLostServiceInfoM.ReducedServiceDescription = item.ReducedServiceDescription;
-                        objTenantLostServiceInfoM.EstimatedLoss = item.EstimatedLoss;
+                        objTenantLostServiceInfoM.EstimatedLoss = Convert.ToDecimal(item.EstimatedLoss);
 
                         objTenantLostServiceInfoM.LossBeganDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.LossBeganDate));
-                        objTenantLostServiceInfoM.PayingToServiceBeganDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.PayingToServiceBeganDate));
-
+                        
                         tenantLostServiceInfo.Add(objTenantLostServiceInfoM);
                     }
                     obj.LostServices = tenantLostServiceInfo;
+
+                    if(tenantLostServiceInfo.Count() > 0)
+                    {
+                        obj.bLostService = true;
+                    }
+
+
                     List<TenantProblemInfoM> Problems = GetTenantProblemInfo(PetitionID).result;
                     obj.Problems = Problems;
+                    if (Problems.Count() > 0)
+                    {
+                        obj.bProblem = true;
+                    }
+
                     result.result = obj;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
@@ -478,7 +492,7 @@ namespace RAP.DAL
                     {
                         TenantProblemInfoM objTenantProblemInfoM = new TenantProblemInfoM();
                         objTenantProblemInfoM.ProblemDescription = item.ProblemDescription;
-                        objTenantProblemInfoM.EstimatedLoss = item.EstimatedLoss;
+                        objTenantProblemInfoM.EstimatedLoss = Convert.ToDecimal(item.EstimatedLoss);
                         objTenantProblemInfoM.ProblemBeganDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.ProblemBeganDate));
 
                         tenantProblemInfo.Add(objTenantProblemInfoM);
@@ -1229,8 +1243,8 @@ namespace RAP.DAL
                         lostServiceDB.EstimatedLoss = item.EstimatedLoss;
                         lostServiceDB.LossBeganDate = new DateTime(item.LossBeganDate.Year,
                             item.LossBeganDate.Month, item.LossBeganDate.Day);
-                        lostServiceDB.PayingToServiceBeganDate = new DateTime(item.PayingToServiceBeganDate.Year,
-                            item.PayingToServiceBeganDate.Month, item.PayingToServiceBeganDate.Day);
+                        //lostServiceDB.PayingToServiceBeganDate = new DateTime(item.PayingToServiceBeganDate.Year,
+                        //    item.PayingToServiceBeganDate.Month, item.PayingToServiceBeganDate.Day);
 
                         _dbContext.TenantLostServiceInfos.InsertOnSubmit(lostServiceDB);
                         _dbContext.SubmitChanges();
@@ -1278,10 +1292,8 @@ namespace RAP.DAL
                         //  problemDB.ProblemBeganDate = item.ProblemBeganDate;
                         problemDB.ProblemBeganDate = new DateTime(item.ProblemBeganDate.Year,
                             item.ProblemBeganDate.Month, item.ProblemBeganDate.Day);
-                        //TBD
-                        problemDB.PayingToProblemBeganDate = new DateTime(item.PayingToProblemBeganDate.Year,
-                            item.PayingToProblemBeganDate.Month, item.PayingToProblemBeganDate.Day);
-                        //  problemDB.PayingToProblemBeganDate = item.PayingToProblemBeganDate;
+                    
+                        
 
                         _dbContext.TenantProblemInfos.InsertOnSubmit(problemDB);
                         _dbContext.SubmitChanges();
