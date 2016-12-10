@@ -20,6 +20,7 @@ namespace RAP.DAL
         ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition);
         ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message);
         ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID);
+        ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int PetitionID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
         ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);

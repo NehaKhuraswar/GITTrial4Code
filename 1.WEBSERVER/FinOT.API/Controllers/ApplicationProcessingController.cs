@@ -457,6 +457,44 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("gettenantreview/{PetitionId:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantReviewInfo(int PetitionId)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantPetitionInfoM> transaction = new TranInfo<TenantPetitionInfoM>();
+            ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            try
+            {
+
+                result = _service.GetTenantReviewInfo(PetitionId);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<TenantPetitionInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("getemptyrentalhistoryinfo")]
         [HttpGet]
         public HttpResponseMessage GetEmptyTenantRentalIncrementInfo()

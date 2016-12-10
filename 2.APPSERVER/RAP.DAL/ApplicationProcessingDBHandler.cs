@@ -480,6 +480,28 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int PetitionID)
+        {
+            ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            TenantPetitionInfoM obj = new TenantPetitionInfoM();
+            try
+            {
+
+                //GetTenantApplicationInfo(PetitionID);
+                
+                result.result = obj;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         private ReturnResult<List<TenantProblemInfoM>> GetTenantProblemInfo(int PetitionID)
         {
             ReturnResult<List<TenantProblemInfoM>> result = new ReturnResult<List<TenantProblemInfoM>>();

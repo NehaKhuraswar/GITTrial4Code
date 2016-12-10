@@ -20,18 +20,18 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
                         <div class="col-sm-6 col-xs-12">
-                            Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                            T (510) 453-5462  <br />bobjohnson@gmail.com 
+                            {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}   <br />
+                            T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}} 
                         </div>
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead">
+                <div class="field-group filled-info subhead" >
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
                         <div class="col-sm-6 col-xs-12">
-                            Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                            T (510) 453-5462  <br />bobjohnson@gmail.com 
+                            {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.LastName}}   <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.City}}, {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
+                            T {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.Email}} 
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -40,8 +40,8 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
                         <div class="col-sm-6 col-xs-12">
-                            Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                            T (510) 453-5462  <br />bobjohnson@gmail.com 
+                            {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.FirstName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.LastName}}   <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.AddressLine1}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.City}}, {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.State.StateName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
+                            T {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.Email}} 
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -50,8 +50,8 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
                         <div class="col-sm-6 col-xs-12">
-                            Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                            T (510) 453-5462  <br />bobjohnson@gmail.com 
+                            {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.FirstName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.LastName}}   <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.AddressLine1}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.City}}, {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.State.StateName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.Zip}}   <br />
+                            T {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.Email}} 
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -59,21 +59,21 @@
                 <div class="field-group filled-info subhead">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
-                        <div class="col-sm-6 col-xs-12">1-10</div>
+                        <div class="col-sm-6 col-xs-12">{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.NumberOfUnits}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>
-                        <div class="col-sm-6 col-xs-12">Apartment, Room, or Live-work</div>
+                        <div class="col-sm-6 col-xs-12">{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.UnitTypes[rapGlobalFactory.CaseDetails.TenantPetitionInfo.UnitTypeId].UnitDescription}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>
-                        <div class="col-sm-6 col-xs-12">Yes</div>
+                        <div class="col-sm-6 col-xs-12">{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.bCurrentRentStatus}}</div>
                     </div>
                 </div><!-- .field-group -->
 
@@ -83,8 +83,11 @@
                 </div>
 
                 <div class="field-group filled-info">
-                    <p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
-                    <p>g) The contested increase is the second rent increase in a 12-month period.</p>
+                    <!--<div ng-repeat="item in rapGlobalFactory.CaseDetails.TenantPetitionInfo.">-->
+                        <p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
+                        <p>g) The contested increase is the second rent increase in a 12-month period.</p>
+                    <!--</div>-->
+
                 </div>
 
 

@@ -264,18 +264,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         };
     })  
    
-    .directive('rapReview', function () {
-        return {
-            restrict: 'E',
-            scope: {
-                reqid: '=',
-                model: '=model',
-            },
-            templateUrl: 'Views/FileAppeal/Review.html',
-            controller: 'rapReviewController',
-            controllerAs: 'Ctrl'
-        };
-    })
+    //.directive('rapReview', function () {
+    //    return {
+    //        restrict: 'E',
+    //        scope: {
+    //            reqid: '=',
+    //            model: '=model',
+    //        },
+    //        templateUrl: 'Views/FileAppeal/Review.html',
+    //        controller: 'rapReviewController',
+    //        controllerAs: 'Ctrl'
+    //    };
+    //})
   .directive('rapOwnerimpinfo', function () {
       return {
           restrict: 'E',
