@@ -140,11 +140,11 @@ namespace RAP.Core.DataModels
         private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         public int OwnerPropertyID { get; set; }
         public int UnitTypeID { get; set; }
-        public DateTime MovedInDate { get; set; }
-        public decimal InitialRent { get; set; }
-        public bool bRAPNoticeGiven { get; set; }
-        public DateTime RAPNoticeGivenDate { get; set; }
-        public int RentStatusID { get; set; }
+        public CustomDate MovedInDate { get; set; }
+        public decimal? InitialRent { get; set; }      
+        public int? RAPNoticeStatusID { get; set; }
+        public CustomDate RAPNoticeGivenDate { get; set; }
+        public int? RentStatusID { get; set; }
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }
         public List<OwnerPetitionTenantInfoM> TenantInfo
@@ -232,11 +232,11 @@ namespace RAP.Core.DataModels
         public int RentalIncreaseInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public bool bRentIncreaseNoticeGiven { get; set; }
-        public DateTime RentIncreaseNoticeDate { get; set; }
-        public DateTime RentIncreaseEffectiveDate { get; set; }
-        public decimal RentIncreasedFrom { get; set; }
-        public decimal RentIncreasedTo { get; set; }
-        
+        public CustomDate RentIncreaseNoticeDate { get; set; }
+        public CustomDate RentIncreaseEffectiveDate { get; set; }
+        public decimal? RentIncreasedFrom { get; set; }
+        public decimal? RentIncreasedTo { get; set; }
+        public bool isDeleted { get; set; }        
        
     }
     #endregion

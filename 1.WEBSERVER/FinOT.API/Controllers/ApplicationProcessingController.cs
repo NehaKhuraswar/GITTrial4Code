@@ -947,6 +947,39 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+       
+        [AllowAnonymous]
+        [Route("GetOwnerRentIncreaseAndPropertyInfo")]
+        [HttpPost]
+        public HttpResponseMessage GetOwnerRentIncreaseAndPropertyInfo([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _service.GetOwnerRentIncreaseAndPropertyInfo(model);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
 
         
         [AllowAnonymous]
@@ -1050,6 +1083,42 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("SaveOwnerRentIncreaseAndUpdatePropertyInfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveOwnerRentIncreaseAndUpdatePropertyInfo([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _service.SaveOwnerRentIncreaseAndUpdatePropertyInfo(model);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+
+
         #endregion
 
         //[Route("addopposingparty")]

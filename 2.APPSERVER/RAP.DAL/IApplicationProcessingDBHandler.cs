@@ -28,11 +28,11 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> GetOwnerApplicantInfo(CaseInfoM model);
         ReturnResult<OwnerPetitionPropertyInfoM> GetOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model);
         ReturnResult<List<OwnerRentIncreaseReasonsM>> GetRentIncreaseReasonInfo(OwnerPetitionInfoM petition);
+        ReturnResult<CaseInfoM> GetOwnerRentIncreaseAndPropertyInfo(CaseInfoM model);
         ReturnResult<OwnerPetitionApplicantInfoM> SaveOwnerApplicantInfo(OwnerPetitionApplicantInfoM model);
         ReturnResult<bool> SaveRentIncreaseReasonInfo(OwnerPetitionInfoM petition);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model);
-
-
+        ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(OwnerPetitionPropertyInfoM model);
 
 
      //   ReturnResult<CaseInfoM> GetCaseDetails(int caseID);

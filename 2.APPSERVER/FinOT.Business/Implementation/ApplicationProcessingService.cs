@@ -369,6 +369,22 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<CaseInfoM> GetOwnerRentIncreaseAndPropertyInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetOwnerRentIncreaseAndPropertyInfo(model);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         #endregion
 
         #region Save Owner Petition Methods
@@ -396,12 +412,13 @@ namespace RAP.Business.Implementation
             }
         }
 
+
         public ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                var dbResult = _dbHandler.SaveRentIncreaseReasonInfo(model.OwnerPetitionInfo);
+                var dbResult = _dbHandler.SaveRentIncreaseReasonInfo(model.OwnerPetitionInfo);  
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
                     result.status = dbResult.status;
@@ -443,6 +460,29 @@ namespace RAP.Business.Implementation
             }
         }
 
+        public ReturnResult<CaseInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.SaveOwnerRentIncreaseAndUpdatePropertyInfo(model.OwnerPetitionInfo.PropertyInfo);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model.OwnerPetitionInfo.PropertyInfo = dbResult.result;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         #endregion
     }
 }

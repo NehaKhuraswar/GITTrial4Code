@@ -12,7 +12,7 @@ namespace RAP.Core.DataModels
         {
             CityAnalyst = new CityUser();
             HearingOfficer = new CityUser();
-            OwnerPetitionTenantInfo = new OwnerPetitionTenantInfoM();
+            OwnerPetitionTenantInfo = new OwnerPetitionTenantInfoM();           
         }
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
         private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();  
@@ -20,6 +20,7 @@ namespace RAP.Core.DataModels
         private List<ActivityStatus_M> _activityStatus = new List<ActivityStatus_M>();
         private OwnerPetitionInfoM _ownerPetitionInfo = new OwnerPetitionInfoM();
         private List<PetitionCategoryM> _petitionCategory = new List<PetitionCategoryM>();
+        private List<RAPNoticeStausM> _rapStatus = new List<RAPNoticeStausM>();
         public string CaseID { get; set; }
         public int C_ID { get; set; }
         public int PetitionCategoryID { get; set; }
@@ -70,6 +71,17 @@ namespace RAP.Core.DataModels
             }
         }
 
+        public List<RAPNoticeStausM> RAPNoticeStatus
+        {
+            get
+            {
+                return _rapStatus;
+            }
+            set
+            {
+                _rapStatus = value;
+            }
+        }
         public bool bCaseFiledByThirdParty { get; set; }
         public int CaseFileBy { get; set; }
         public CityUser CityAnalyst { get; set; }
@@ -112,5 +124,10 @@ namespace RAP.Core.DataModels
         public int Day { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
+    }
+    public class RAPNoticeStausM
+    {
+        public int RAPNoticeStatusID { get; set; }
+        public string RAPNoticeStatus { get; set; }
     }
 }
