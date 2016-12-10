@@ -12,6 +12,7 @@ namespace RAP.Core.DataModels
         {
             CityAnalyst = new CityUser();
             HearingOfficer = new CityUser();
+            OwnerPetitionTenantInfo = new OwnerPetitionTenantInfoM();
         }
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
         private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();  
@@ -44,6 +45,8 @@ namespace RAP.Core.DataModels
                 _ownerPetitionInfo = value;
             }
         }
+
+        public OwnerPetitionTenantInfoM OwnerPetitionTenantInfo { get; set; }
         public TenantAppealInfoM TenantAppealInfo
         {
             get

@@ -1831,7 +1831,7 @@ namespace RAP.DAL
                     OwnerPetitionPropertyInfo propertyInfo = new OwnerPetitionPropertyInfo();
                     propertyInfo.UnitTypeID = model.UnitTypeID;
                     propertyInfo.CustomerID = model.CustomerID;
-                    propertyInfo.bPetitionFiled = model.bPetitionFiled;
+                    propertyInfo.bPetitionFiled = false;
                     _dbContext.OwnerPetitionPropertyInfos.InsertOnSubmit(propertyInfo);
                     _dbContext.SubmitChanges();
                     model.OwnerPropertyID = propertyInfo.OwnerPropertyID;

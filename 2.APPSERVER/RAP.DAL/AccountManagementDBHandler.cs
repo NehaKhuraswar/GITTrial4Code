@@ -29,7 +29,7 @@ namespace RAP.DAL
             try
             {
                 // CustomerInfo custinfo ;
-               // System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                //System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
@@ -65,14 +65,14 @@ namespace RAP.DAL
                     ReturnResult<UserInfoM> resultUserInfo = commondbHandler.GetUserInfo(message.User.UserID);
                     message.User = resultUserInfo.result;
                 }
-               // System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started"); 
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started"); 
                 result.result = message;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
             {
-                //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
                 return result;
@@ -200,6 +200,7 @@ namespace RAP.DAL
 
         public ReturnResult<List<AccountType>> GetAccountTypes()
         {
+            System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetAccountTypes started");
             ReturnResult<List<AccountType>> result = new ReturnResult<List<AccountType>>();
 
             try
@@ -224,6 +225,7 @@ namespace RAP.DAL
             }
             catch (Exception ex)
             {
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetAccountTypes exception : " + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
                 return result;
@@ -231,6 +233,7 @@ namespace RAP.DAL
         }
         public ReturnResult<List<StateM>> GetStateList()
         {
+            System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetStateList started");
             ReturnResult<List<StateM>> result = new ReturnResult<List<StateM>>();
 
             try
@@ -256,6 +259,8 @@ namespace RAP.DAL
             }
             catch (Exception ex)
             {
+               
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetStateList exception : " + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
                 return result;

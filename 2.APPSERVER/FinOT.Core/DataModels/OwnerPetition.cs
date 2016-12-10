@@ -201,6 +201,7 @@ namespace RAP.Core.DataModels
         {
             TenantUserInfo = new UserInfoM();
         }
+     
         public int TenantInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public UserInfoM TenantUserInfo { get; set; }
