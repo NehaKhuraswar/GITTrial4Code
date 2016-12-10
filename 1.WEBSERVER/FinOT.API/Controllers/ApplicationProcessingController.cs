@@ -419,6 +419,44 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<TenantRentalHistoryM>>(ReturnCode, transaction);
         }
         [AllowAnonymous]
+        [Route("gettenantlostservice/{PetitionId:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantLostServiceInfo(int PetitionId)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<LostServicesPageM> transaction = new TranInfo<LostServicesPageM>();
+            ReturnResult<LostServicesPageM> result = new ReturnResult<LostServicesPageM>();
+            try
+            {
+
+                result = _service.GetTenantLostServiceInfo(PetitionId);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<LostServicesPageM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("getemptyrentalhistoryinfo")]
         [HttpGet]
         public HttpResponseMessage GetEmptyTenantRentalIncrementInfo()
@@ -446,6 +484,65 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantRentIncreaseInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("getemptylostservicesinfo")]
+        [HttpGet]
+        public HttpResponseMessage GetEmptyLostServicesInfo()
+        {
+
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantLostServiceInfoM> transaction = new TranInfo<TenantLostServiceInfoM>();
+            ReturnResult<TenantLostServiceInfoM> result = new ReturnResult<TenantLostServiceInfoM>();
+            try
+            {
+
+                TenantLostServiceInfoM obj = new TenantLostServiceInfoM();
+                transaction.data = obj;
+                transaction.status = true;
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<TenantLostServiceInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("getemptyproblemsinfo")]
+        [HttpGet]
+        public HttpResponseMessage GetEmptyProblemsInfo()
+        {
+
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantProblemInfoM> transaction = new TranInfo<TenantProblemInfoM>();
+            ReturnResult<TenantProblemInfoM> result = new ReturnResult<TenantProblemInfoM>();
+            try
+            {
+
+                TenantProblemInfoM obj = new TenantProblemInfoM();
+                transaction.data = obj;
+                transaction.status = true;
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<TenantProblemInfoM>>(ReturnCode, transaction);
+        }
+
 
         [AllowAnonymous]
         [Route("saveapplicationinfo")]
@@ -488,7 +585,7 @@ namespace RAP.API.Controllers
         [AllowAnonymous]
         [Route("savetenantlostserviceinfo")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] TenantPetitionInfoM petition)
+        public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] LostServicesPageM message)
         {
             //Document upload sample - TBD
             //if(petition.File != null)
@@ -505,7 +602,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantLostServiceInfo(petition);
+                result = _service.SaveTenantLostServiceInfo(message);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

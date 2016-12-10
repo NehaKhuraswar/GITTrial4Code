@@ -231,6 +231,7 @@ namespace RAP.Core.DataModels
             LostServices = new List<TenantLostServiceInfoM>();
             Problems = new List<TenantProblemInfoM>();
         }
+        public int PetitionID { get; set; }
         public bool bHouseServiceDecreased { get; set; }
         public bool bLostService { get; set; }
         public List<TenantLostServiceInfoM> LostServices{get; set;} 

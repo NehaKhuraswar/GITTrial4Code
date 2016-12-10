@@ -11,7 +11,7 @@
                     <div class="field-group subhead no-top-margin">
                         <div class="form-group-checkbox vertical clearfix">
                             <label for="housing_services_decreased">
-                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" value="Yes" /><i></i><span><strong>The housing services I am being provided have decreased.</strong></span>
+                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" ng-value="true" /><i></i><span><strong>The housing services I am being provided have decreased.</strong></span>
                             </label>
                         </div>
                     </div>
@@ -24,13 +24,13 @@
                         <p class="input-label">Have you lost services or are you being charged for services originally provided by the property owner?</p>
                         <div class="form-group-radio vertical clearfix">
                             <label for="charged_for_services_yes">
-                                <input type="radio" name="charged_for_services" id="charged_for_services_yes" class="input-field" value="Yes"
-                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService" checked="checked" /><i></i><span>Yes</span>
+                                <input type="radio" name="charged_for_services" id="charged_for_services_yes" class="input-field" ng-value="true"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bLostService" checked="checked" /><i></i><span>Yes</span>
                             </label>
 
                             <label for="charged_for_services_no">
-                                <input type="radio" name="charged_for_services" id="charged_for_services_no" class="input-field" value="No"
-                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bLostService" /><i></i> <span>No</span>
+                                <input type="radio" name="charged_for_services" id="charged_for_services_no" class="input-field" ng-value="false"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bLostService" /><i></i> <span>No</span>
                             </label>
                             <div class="clear"></div>
                         </div>
@@ -39,13 +39,13 @@
                     <div class="field-group">
                         <label for="list_reduced_services">Describe the reduced service(s) including 1) a list of the lost housing service(s) 2) How you calculate the dollar value of lost service(s). Please attach documentary evidence  if available.</label>
                         <textarea name="list_reduced_services" id="list_reduced_services" class="field-input textarea" rows="8"
-                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].ReducedServiceDescription"></textarea>
+                                  ng-model="Ctrl.LostServices.ReducedServiceDescription"></textarea>
                     </div>
 
                     <div class="field-group">
                         <label for="estimated_dollar_value">Your estimated dollar value of the lost service(s) or problem(s)</label>
                         <input type="text" name="estimated_dollar_value" id="estimated_dollar_value" class="field-input"
-                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].EstimatedLoss" placeholder="" />
+                               ng-model="Ctrl.LostServices.EstimatedLoss" placeholder="" />
                     </div>
 
                     <div class="field-group no-top-margin">
@@ -54,7 +54,7 @@
                                 <div class="field-group">
                                     <label for="date_loss_began_month">Date loss began</label>
                                     <select name="date_loss_began_month" id="date_loss_began_month" class="custom-select" data-placeholder="Month"
-                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].LossBeganDate.Month">
+                                            ng-model="Ctrl.LostServices.LossBeganDate.Month">
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
@@ -75,7 +75,7 @@
                                 <div class="field-group">
                                     <label for="date_loss_began_day">&nbsp;</label>
                                     <select name="date_loss_began_day" id="date_loss_began_day" class="custom-select" data-placeholder="Day"
-                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].LossBeganDate.Day">
+                                            ng-model="Ctrl.LostServices.LossBeganDate.Day">
                                         <option value="01">01</option>
                                         <option value="02">02</option>
                                         <option value="03">03</option>
@@ -114,7 +114,7 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <label for="date_loss_began_year">&nbsp;</label>
-                                    <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServices[0].LossBeganDate.Year"
+                                    <select ng-model="Ctrl.LostServices.LossBeganDate.Year"
                                             name="date_loss_began_year" id="date_loss_began_year" class="custom-select" data-placeholder="Year">
                                         <option ng-repeat="year in  Ctrl.years"
                                                 value="{{year}}">
@@ -132,7 +132,38 @@
                             </div>
                         </div>
 
-                        <a href="#" class="btn-link">Add another lost service description</a>
+                        <a class="btn-link" ng-click="Ctrl.AddAnotherLostServices(Ctrl.LostServices)">Add another lost service description</a>
+                        <p>&nbsp;</p>
+                        <div ng-show="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.LostServices.length > 0">
+                            <table class="table table-condensed nopadding-bottom">
+                                <thead class="strong">
+                                    <tr>
+                                        <td>
+                                            <span>LossBeganDate</span>
+                                        </td>
+                                        <td>
+                                            <span>ReducedServiceDescription</span>
+                                        </td>
+                                        <td>
+                                            <span>EstimatedLoss</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.LostServices">
+                                        <td class="nopadding-left">
+                                            {{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}
+                                        </td>
+                                        <td>
+                                            {{item.ReducedServiceDescription}}
+                                        </td>
+                                        <td>
+                                            {{item.EstimatedLoss}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <p>&nbsp;</p>
                     </div><!-- .field-group -->
 
@@ -143,14 +174,14 @@
                     <div class="field-group">
                         <p class="input-label">Are you claiming any serious problems with the condition of your unit?</p>
                         <div class="form-group-radio vertical clearfix">
-                            <label for="claiming_any_unit_problem">
-                                <input type="radio" name="claiming_any_unit_problem" id="claiming_any_unit_problem_yes" class="input-field" value="Yes"
-                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem" checked="checked" /><i></i><span>Yes</span>
+                            <label for="claiming_any_unit_problem_yes">
+                                <input type="radio" name="claiming_any_unit_problem_yes" id="claiming_any_unit_problem_yes" class="input-field" ng-value="true"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bProblem" checked="checked" /><i></i><span>Yes</span>
                             </label>
 
                             <label for="claiming_any_unit_problem_no">
-                                <input type="radio" name="claiming_any_unit_problem" id="claiming_any_unit_problem_no" class="input-field" value="No"
-                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.bProblem" /><i></i> <span>No</span>
+                                <input type="radio" name="claiming_any_unit_problem" id="claiming_any_unit_problem_no" class="input-field" ng-value="false"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bProblem" /><i></i> <span>No</span>
                             </label>
                             <div class="clear"></div>
                         </div>
@@ -159,12 +190,12 @@
                     <div class="field-group">
                         <label for="describe_problems">Describe problem(s) with your unit including 1) a list of the problem(s); 2) How you calculate the dollar value of incurred monetary loss as a result of these problem(s). Please attach documentary evidence if available.</label>
                         <textarea name="describe_problems" id="describe_problems" class="field-input textarea" rows="8"
-                                  ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemDescription"></textarea>
+                                  ng-model="Ctrl.Problems.ProblemDescription"></textarea>
                     </div>
 
                     <div class="field-group">
                         <label for="dollar_monetary_loss">Your estimated dollar value of incurred monetary loss as a result these problem(s)</label>
-                        <input type="text" name="dollar_monetary_loss" id="dollar_monetary_loss" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].EstimatedLoss" />
+                        <input type="text" name="dollar_monetary_loss" id="dollar_monetary_loss" class="field-input" placeholder="" ng-model="Ctrl.Problems.EstimatedLoss" />
                     </div>
 
                     <div class="field-group no-top-margin">
@@ -173,7 +204,7 @@
                                 <div class="field-group">
                                     <label for="date_problem_began_month">Date problem(s) began</label>
                                     <select name="date_problem_began_month" id="date_problem_began_month" class="custom-select"
-                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemBeganDate.Month" data-placeholder="Month">
+                                            ng-model="Ctrl.Problems.ProblemBeganDate.Month" data-placeholder="Month">
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
@@ -194,7 +225,7 @@
                                 <div class="field-group">
                                     <label for="date_problem_began_day">&nbsp;</label>
                                     <select name="date_problem_began_day" id="date_problem_began_day" class="custom-select"
-                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemBeganDate.Day" data-placeholder="Day">
+                                            ng-model="Ctrl.Problems.ProblemBeganDate.Day" data-placeholder="Day">
                                         <option value="01">01</option>
                                         <option value="02">02</option>
                                         <option value="03">03</option>
@@ -232,7 +263,7 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <label for="date_loss_began_year">&nbsp;</label>
-                                    <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.Problems[0].ProblemBeganDate.Year"
+                                    <select ng-model="Ctrl.Problems.ProblemBeganDate.Year"
                                             name="date_loss_began_year" id="date_loss_began_year" class="custom-select" data-placeholder="Year">
                                         <option ng-repeat="year in  Ctrl.years"
                                                 value="{{year}}">
@@ -250,9 +281,38 @@
                             </div>
                         </div>
 
-                        <a href="#" class="btn-link">Add another problem description</a>
+                        <a class="btn-link" ng-click="Ctrl.AddAnotherProblem(Ctrl.Problems)">Add another problem description</a>
                     </div><!-- .field-group -->
-
+                    <div ng-show="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Problems.length > 0">
+                        <table class="table table-condensed nopadding-bottom">
+                            <thead class="strong">
+                                <tr>
+                                    <td>
+                                        <span>LossBeganDate</span>
+                                    </td>
+                                    <td>
+                                        <span>ReducedServiceDescription</span>
+                                    </td>
+                                    <td>
+                                        <span>EstimatedLoss</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Problems">
+                                    <td class="nopadding-left">
+                                        {{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}
+                                    </td>
+                                    <td>
+                                        {{item.ProblemDescription}}
+                                    </td>
+                                    <td>
+                                        {{item.EstimatedLoss}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="field-group">
                         <p><br />To have a unit inspected and code violations cited, contact the City of Oakland, Code Compliance Unit, 250 Frank H. Ogawa Plaza, 2nd Floor, Oakland, CA 94612. Phone: (510) 238-3381</p>
                     </div>

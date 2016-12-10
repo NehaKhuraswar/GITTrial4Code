@@ -234,12 +234,26 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<bool> SaveTenantLostServiceInfo(TenantPetitionInfoM petition)
+        public ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                result = _dbHandler.SaveTenantLostServiceInfo(petition);
+                result = _dbHandler.SaveTenantLostServiceInfo(message);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID)
+        {
+            ReturnResult<LostServicesPageM> result = new ReturnResult<LostServicesPageM>();
+            try
+            {
+                result = _dbHandler.GetTenantLostServiceInfo(PetitionID);
                 return result;
             }
             catch (Exception ex)

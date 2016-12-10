@@ -200,7 +200,7 @@ namespace RAP.DAL
                         caseInfo.CaseID = caseDetails.CaseID;
                         caseInfo.TenantPetitionInfo = GetTenantPetition(petitionFileID).result;
                         caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(petitionFileID).result;
-                        caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(petitionFileID).result;
+                       // caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(petitionFileID).result;
                         caseInfo.TenantAppealInfo.AppealGrounds = GetAppealGroundInfo(appealID).result;
                         //if (petitionFileID == 0)
                         //{
@@ -429,9 +429,10 @@ namespace RAP.DAL
             }
 
         }
-        private ReturnResult<List<TenantLostServiceInfoM>> GetTenantLostServiceInfo(int PetitionID)
+        public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID)
         {
-            ReturnResult<List<TenantLostServiceInfoM>> result = new ReturnResult<List<TenantLostServiceInfoM>>();
+            ReturnResult<LostServicesPageM> result = new ReturnResult<LostServicesPageM>();
+            LostServicesPageM obj = new LostServicesPageM();
             List<TenantLostServiceInfoM> tenantLostServiceInfo = new List<TenantLostServiceInfoM>();
             try
             {
@@ -449,8 +450,10 @@ namespace RAP.DAL
 
                         tenantLostServiceInfo.Add(objTenantLostServiceInfoM);
                     }
-                
-                result.result = tenantLostServiceInfo;
+                    obj.LostServices = tenantLostServiceInfo;
+                    List<TenantProblemInfoM> Problems = GetTenantProblemInfo(PetitionID).result;
+                    obj.Problems = Problems;
+                    result.result = obj;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
                 return result;
@@ -596,7 +599,7 @@ namespace RAP.DAL
 
                
                 caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
-                caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
+                //caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
                
                 result.result = caseInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -1088,8 +1091,8 @@ namespace RAP.DAL
             if (tenantPetitionID != 0)
             {
                 petition.PetitionID = tenantPetitionID;
-                SaveTenantLostServiceInfo(petition);
-                SaveTenantProblemInfo(petition);
+                //SaveTenantLostServiceInfo(petition);
+                //SaveTenantProblemInfo(petition);
                 SavePetitionGroundInfo(petition);
                 petitionID = GetPetitionID(tenantPetitionID, 1);
             }
@@ -1132,16 +1135,41 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                TenantRentalHistory rentalHistoryDB = new TenantRentalHistory();
-                rentalHistoryDB.PetitionID = rentalHistory.PetitionID;
-                rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
-                rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
-                rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
-                rentalHistoryDB.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
-                rentalHistoryDB.bRentControlledByAgency = rentalHistory.bRentControlledByAgency;
-                rentalHistoryDB.CreatedDate = DateTime.Now;
-                _dbContext.TenantRentalHistories.InsertOnSubmit(rentalHistoryDB);
-                _dbContext.SubmitChanges();
+                var rentalHistoryRecord = _dbContext.TenantRentalHistories.Where(x => x.PetitionID == rentalHistory.PetitionID).FirstOrDefault();
+                if (rentalHistoryRecord != null)
+                {                   
+                    rentalHistoryRecord.PetitionID = rentalHistory.PetitionID;
+                    rentalHistoryRecord.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    rentalHistoryRecord.InitialRent = rentalHistory.InitialRent;
+                    rentalHistoryRecord.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    rentalHistoryRecord.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
+                    rentalHistoryRecord.bRentControlledByAgency = rentalHistory.bRentControlledByAgency;
+                    rentalHistoryRecord.CreatedDate = DateTime.Now;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    TenantRentalHistory rentalHistoryDB = new TenantRentalHistory();
+                    rentalHistoryDB.PetitionID = rentalHistory.PetitionID;
+                    rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
+                    rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    rentalHistoryDB.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
+                    rentalHistoryDB.bRentControlledByAgency = rentalHistory.bRentControlledByAgency;
+                    rentalHistoryDB.CreatedDate = DateTime.Now;
+                    _dbContext.TenantRentalHistories.InsertOnSubmit(rentalHistoryDB);
+                    _dbContext.SubmitChanges();
+                }
+                var rentIncrementRecord = _dbContext.TenantRentalIncrementInfos.Where(x =>x.TenantPetitionID == rentalHistory.PetitionID).ToList();
+                if(rentIncrementRecord != null)
+                {
+                    foreach(var item in rentIncrementRecord)
+                    {
+                        _dbContext.TenantRentalIncrementInfos.DeleteOnSubmit(item);
+                        _dbContext.SubmitChanges();
+                    }
+                }
+
                 foreach (var item in rentalHistory.RentIncreases)
                 {
                     TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
@@ -1176,17 +1204,26 @@ namespace RAP.DAL
 
         }
 
-        public ReturnResult<bool> SaveTenantLostServiceInfo(TenantPetitionInfoM petition)
+        public ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                if (petition.bLostService)
+                var lostServicesRecord = _dbContext.TenantLostServiceInfos.Where(x => x.TenantPetitionID == message.PetitionID).ToList();
+                if (lostServicesRecord != null)
                 {
-                    foreach (var item in petition.LostServices)
+                    foreach (var item in lostServicesRecord)
+                    {
+                        _dbContext.TenantLostServiceInfos.DeleteOnSubmit(item);
+                        _dbContext.SubmitChanges();
+                    }
+                }
+                if (message.bLostService)
+                {
+                    foreach (var item in message.LostServices)
                     {
                         TenantLostServiceInfo lostServiceDB = new TenantLostServiceInfo();
-                        lostServiceDB.TenantPetitionID = petition.PetitionID;
+                        lostServiceDB.TenantPetitionID = message.PetitionID;
                         lostServiceDB.ReducedServiceDescription = item.ReducedServiceDescription;
                         lostServiceDB.EstimatedLoss = item.EstimatedLoss;
                         lostServiceDB.LossBeganDate = new DateTime(item.LossBeganDate.Year,
@@ -1199,9 +1236,18 @@ namespace RAP.DAL
                     }
 
                 }
-                if (petition.bProblem)
+                var ProblemsRecord = _dbContext.TenantProblemInfos.Where(x => x.TenantPetitionID == message.PetitionID).ToList();
+                if (ProblemsRecord != null)
                 {
-                    SaveTenantProblemInfo(petition);
+                    foreach (var item in ProblemsRecord)
+                    {
+                        _dbContext.TenantProblemInfos.DeleteOnSubmit(item);
+                        _dbContext.SubmitChanges();
+                    }
+                }
+                if (message.bProblem)
+                {
+                    SaveTenantProblemInfo(message);
                 }
                 result.result = true;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -1216,15 +1262,15 @@ namespace RAP.DAL
            
         }
 
-        private void SaveTenantProblemInfo(TenantPetitionInfoM petition)
+        private void SaveTenantProblemInfo(LostServicesPageM message)
         {
-            if (petition.bProblem)
+            if (message.bProblem)
             {
-              
-                    foreach (var item in petition.Problems)
+
+                foreach (var item in message.Problems)
                     {
                         TenantProblemInfo problemDB = new TenantProblemInfo();
-                        problemDB.TenantPetitionID = petition.PetitionID;
+                        problemDB.TenantPetitionID = message.PetitionID;
                         problemDB.ProblemDescription = item.ProblemDescription;
                         problemDB.EstimatedLoss = item.EstimatedLoss;
                         //TBD

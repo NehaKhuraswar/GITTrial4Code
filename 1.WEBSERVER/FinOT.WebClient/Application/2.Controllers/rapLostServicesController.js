@@ -4,6 +4,8 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.LostServices;
+    self.Problems;
 
     var range = 10 / 2;
     var currentYear = new Date().getFullYear();
@@ -15,8 +17,39 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     for (var i = 0; i < range + 1; i++) {
         self.years.push(currentYear  + i);
     }
-    
 
+    var _GetEmptyLostServicesInfo = function () {
+        rapFactory.GetEmptyLostServicesInfo().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.LostServices = response.data;
+         });
+     }
+    _GetEmptyLostServicesInfo();
+
+    var _GetEmptyProblemsInfo = function() {
+        rapFactory.GetEmptyProblemsInfo().then(function (response) {
+            if(!alert.checkResponse(response)) {
+                return;
+            }
+            self.Problems = response.data;
+        });
+     }
+    _GetEmptyProblemsInfo();
+
+
+     var _GetTenantLostServiceInfo = function (petitionId) {
+        rapFactory.GetTenantLostServiceInfo(petitionId).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+        }
+        self.caseinfo.TenantPetitionInfo.LostServicesPage = response.data;
+        });
+    }
+    _GetTenantLostServiceInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
+
+    
     self.onFileSelect = function ($files) {
         if ($files && $files.length) {
             var fileName = $files[0].name;
@@ -38,9 +71,25 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
         }
     }
 
+    self.AddAnotherLostServices = function (lostservice) {
+        var _lostservice = angular.copy(lostservice);
+        self.caseinfo.TenantPetitionInfo.LostServicesPage.LostServices.push(_lostservice);
+        lostservice.LossBeganDate = null;
+        lostservice.ReducedServiceDescription = null;
+        lostservice.EstimatedLoss = 0;
+    }
+
+    self.AddAnotherProblem = function (problem) {
+        var _problem = angular.copy(problem);
+        self.caseinfo.TenantPetitionInfo.LostServicesPage.Problems.push(_problem);
+        problem.ProblemBeganDate = null;
+        problem.ProblemDescription = null;
+        problem.EstimatedLoss = 0;
+    }
     self.ContinueToDocument = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveTenantLostServiceInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+        rapGlobalFactory.CaseDetails.TenantPetitionInfo.LostServicesPage.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
+        rapFactory.SaveTenantLostServiceInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.LostServicesPage).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bLostServices = false;
             $scope.model.bAddDocuments = true;
