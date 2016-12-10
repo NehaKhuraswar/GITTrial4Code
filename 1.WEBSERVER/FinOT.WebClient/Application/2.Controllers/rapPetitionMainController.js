@@ -46,8 +46,8 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         self.ownerImpInfo = false;
         self.ownerApplicantInfo = false;
         self.ownerJustification = false;
-        self.ownerRentalProperty = false
-
+        self.ownerRentalProperty = false;
+        self.ownerRentalHistory = false;
     };
     _DisableAll();
     
@@ -103,6 +103,10 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.ShowOwnerRentalProperty = function () {
         _DisableAll();
         self.ownerRentalProperty = true;
+    }
+    self.ShowOwnerRentalHistory = function () {
+        _DisableAll();
+        self.ownerRentalHistory = true;
     }
 
 

@@ -112,6 +112,7 @@
     <Content Include="Application\2.Controllers\rapAppellantsInfoController.js" />
     <Content Include="Application\2.Controllers\rapApplicationInfoController.js" />
     <Content Include="Application\2.Controllers\rapadmindashboardController.js" />
+    <Content Include="Application\2.Controllers\rapOwnerRentalHistoryController.js" />
     <Content Include="Application\2.Controllers\rapstaffdashboardController.js" />
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
     <Content Include="Application\2.Controllers\RAPDocumentController.js" />
@@ -147,6 +148,7 @@
     <Content Include="Application\3.Factories\rapcityuserregisterFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
     <Content Include="Application\3.Factories\rapadmindashboardFactory.js" />
+    <Content Include="Application\3.Factories\rapOwnerRentalHistoryFactory.js" />
     <Content Include="Application\3.Factories\rapstaffdashboardFactory.js" />
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
     <Content Include="Application\3.Factories\RapDocumentFactory.js" />
@@ -249,6 +251,7 @@
     <Content Include="Views\FilePetition\Owner\ApplicantInformation.html" />
     <Content Include="Views\FilePetition\Owner\ImportantInformation.html" />
     <Content Include="Views\FilePetition\Owner\Justification.html" />
+    <Content Include="Views\FilePetition\Owner\RentalHistory.html" />
     <Content Include="Views\FilePetition\Owner\RentalProperty.html" />
     <Content Include="Views\FilePetition\RentalHistory.html" />
     <Content Include="Views\FilePetition\Review.html" />
