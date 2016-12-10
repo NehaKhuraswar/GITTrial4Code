@@ -152,7 +152,7 @@ namespace RAP.Core.DataModels
             ThirdPartyInfo = new UserInfoM();
             OwnerInfo = new UserInfoM();
             PropertyManager = new UserInfoM();
-            RentIncreases = new List<TenantRentIncreaseInfoM>();
+           // RentIncreases = new List<TenantRentIncreaseInfoM>();
             Document = new DocumentM();
             SelectedRangeOfUnits = new NumberRangeForUnitsM();
             ApplicantUserInfo = new UserInfoM();
@@ -179,12 +179,7 @@ namespace RAP.Core.DataModels
         public string ProvideExplanation { get; set; }
         public bool bCitationDocUnavailable { get; set; }
         public List<PetitionGroundM> PetitionGrounds { get; set; }
-        public CustomDate MoveInDate { get; set; }
-        public decimal InitialRent { get; set; }
-        public bool bRAPNoticeGiven { get; set; }
-        public CustomDate RAPNoticeGivenDate { get; set; }
-        public bool bRentControlledByAgency { get; set; }
-        public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
+        public TenantRentalHistoryM TenantRentalHistory { get; set; }
         public DocumentM Document { get; set; }
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
@@ -251,7 +246,21 @@ namespace RAP.Core.DataModels
 
 
     }
-
+    public class TenantRentalHistoryM
+    {
+        public TenantRentalHistoryM ()
+        {
+            RentIncreases = new List<TenantRentIncreaseInfoM>();
+        }
+        public int PetitionID { get; set; }
+        public CustomDate MoveInDate { get; set; }
+        public decimal InitialRent { get; set; }
+        public bool bRAPNoticeGiven { get; set; }
+        public CustomDate RAPNoticeGivenDate { get; set; }
+        public bool bRentControlledByAgency { get; set; }
+        public string PreviousCaseIDs { get; set; }
+        public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
+    }
     public class TenantRentIncreaseInfoM
     {
         public bool bRentIncreaseNoticeGiven { get; set; }

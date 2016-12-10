@@ -4,7 +4,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-
+    self.RentalIncreaseModel;
     var range = 10 / 2;
     var currentYear = new Date().getFullYear();
     self.years = [];
@@ -15,20 +15,52 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     for (var i = 0; i < range + 1; i++) {
         self.years.push(currentYear + i);
     }
+    var _GetEmptyTenantRentalIncrementInfo = function () {
+        rapFactory.GetEmptyTenantRentalIncrementInfo().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.RentalIncreaseModel = response.data;
+        });
+    }
+    _GetEmptyTenantRentalIncrementInfo();
+    var _GetRentalHistoryInfo = function (petitionId) {
+        rapFactory.GetRentalHistoryInfo(petitionId).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo.TenantPetitionInfo.TenantRentalHistory = response.data;
+        });
+    }
+    _GetRentalHistoryInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
+
     self.ContinueToLostServices = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveTenantRentalIncrementInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bRentalHistory = false;
             $scope.model.bLostServices = true;
         });
         
     }
+
+    self.AddAnotherRentIncrease = function (rentalIncrease) {
+        var _rentalIncrease = angular.copy(rentalIncrease);
+        self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(_rentalIncrease);
+        rentalIncrease.bRentIncreaseNoticeGiven = 0;
+        rentalIncrease.RentIncreaseNoticeDate = null;
+        rentalIncrease.RentIncreaseEffectiveDate = null;
+        rentalIncrease.RentIncreasedFrom = 0;
+        rentalIncrease.RentIncreasedTo = 0;
+        rentalIncrease.bRentIncreaseContested = 0;
+
+    }
+
     self.Save = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveTenantRentalIncrementInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }          
         });
 

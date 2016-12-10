@@ -173,6 +173,24 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+       
+        public ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId)
+        {
+            ReturnResult<TenantRentalHistoryM> result = new ReturnResult<TenantRentalHistoryM>();
+            try
+            {
+                result = _dbHandler.GetRentalHistoryInfo(PetitionId);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        
+
         public ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
@@ -202,12 +220,12 @@ namespace RAP.Business.Implementation
             }
         }
 
-        public ReturnResult<bool> SaveTenantRentalIncrementInfo(TenantPetitionInfoM petition)
+        public ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                result = _dbHandler.SaveTenantRentalIncrementInfo(petition);
+                result = _dbHandler.SaveTenantRentalHistoryInfo(rentalHistory);
                 return result;
             }
             catch (Exception ex)

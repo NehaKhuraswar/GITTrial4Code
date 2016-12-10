@@ -1,34 +1,23 @@
 ﻿
 
 <div class="col-md-9 col-sm-12">
-<div class="application-step step-1">
+<!--<div class="application-step step-1">-->
     <h3 class="step-heading">Tenant Petition: <span>Grounds for Petition</span></h3>
-    <!--<div class="step-content create-new">-->
-
         <div class="subhead no-top-margin"></div>
-
         <div class="field-group">
             <p class="input-label">I (we) contest one or more rent increases on one or more of the following grounds:</p>
-
-            <div ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
-                <div class="checkbox">
-                    <div class="checkbox-wrapper">
-                        <label>
-                            <input type="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
-                            {{petitionground.PetitionGroundDescription}}
-                        </label>
-                    </div>
-
-                    
+            
+            <div class="form-group-checkbox vertical clearfix">
+                <div class="checkbox-wrapper" ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
+                    <label for="petitionground.ID">
+                        <input type="checkbox" class="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
+                        <i></i><span>{{petitionground.PetitionGroundDescription}}</span>
+                    </label>
                 </div>
-
-            </div>
+            </div>   
         </div>
-
-    <!--</div>-->
-
     <div class="step-footer">
         <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToRentalHistory()" />
     </div>
 </div>
-</div>
+<!--</div>-->

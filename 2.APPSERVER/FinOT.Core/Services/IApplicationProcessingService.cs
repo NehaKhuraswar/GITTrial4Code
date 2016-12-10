@@ -14,8 +14,9 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition);
-        ReturnResult<bool> SaveTenantRentalIncrementInfo(TenantPetitionInfoM petition);
+        ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory);
         ReturnResult<bool> SaveTenantLostServiceInfo(TenantPetitionInfoM petition);
+        ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);

@@ -252,6 +252,21 @@
       <Association Name="TenantPetitionInfo_TenantLostServiceInfo" Member="TenantLostServiceInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantLostServiceInfo" />
       <Association Name="TenantPetitionInfo_TenantPetitionGroundInfo" Member="TenantPetitionGroundInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionGroundInfo" />
       <Association Name="TenantPetitionInfo_TenantRentalIncrementInfo" Member="TenantRentalIncrementInfos" ThisKey="TenantPetitionID" OtherKey="TenantPetitionID" Type="TenantRentalIncrementInfo" />
+      <Association Name="TenantPetitionInfo_TenantRentalHistory" Member="TenantRentalHistories" ThisKey="TenantPetitionID" OtherKey="PetitionID" Type="TenantRentalHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantRentalHistory" Member="TenantRentalHistories">
+    <Type Name="TenantRentalHistory">
+      <Column Name="TenantRentalHistoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MoveInDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="InitialRent" Type="System.Decimal" DbType="Decimal(9,2) NOT NULL" CanBeNull="false" />
+      <Column Name="bRAPNoticeGiven" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RAPNoticeGivenDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="bRentControlledByAgency" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PreviousCaseIDs" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TenantPetitionInfo_TenantRentalHistory" Member="TenantPetitionInfo" ThisKey="PetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

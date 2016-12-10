@@ -201,7 +201,6 @@ namespace RAP.DAL
                         caseInfo.TenantPetitionInfo = GetTenantPetition(petitionFileID).result;
                         caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(petitionFileID).result;
                         caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(petitionFileID).result;
-                        caseInfo.TenantPetitionInfo.RentIncreases = GetTenantRentalIncrementInfo(petitionFileID).result;
                         caseInfo.TenantAppealInfo.AppealGrounds = GetAppealGroundInfo(appealID).result;
                         //if (petitionFileID == 0)
                         //{
@@ -385,30 +384,39 @@ namespace RAP.DAL
                 return result;
             }
         }
-        private ReturnResult<List<TenantRentIncreaseInfoM>> GetTenantRentalIncrementInfo(int PetitionId)
+        public ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId)
         {
-            ReturnResult<List<TenantRentIncreaseInfoM>> result = new ReturnResult<List<TenantRentIncreaseInfoM>>();
-            List<TenantRentIncreaseInfoM> tenantRentIncreaseInfo = new List<TenantRentIncreaseInfoM>();
+            ReturnResult<TenantRentalHistoryM> result = new ReturnResult<TenantRentalHistoryM>();
+            TenantRentalHistoryM tenantRentalHistory = new TenantRentalHistoryM();
             try
             {
-                
+                var TenantRentalHistoryDB = _dbContext.TenantRentalHistories.Where(x => x.PetitionID == PetitionId).FirstOrDefault();
+                if (TenantRentalHistoryDB != null)
+                {
+                    tenantRentalHistory.PetitionID = TenantRentalHistoryDB.PetitionID;
+                    tenantRentalHistory.InitialRent = TenantRentalHistoryDB.InitialRent;
+                    tenantRentalHistory.bRAPNoticeGiven = TenantRentalHistoryDB.bRAPNoticeGiven;
+                    tenantRentalHistory.bRentControlledByAgency = TenantRentalHistoryDB.bRentControlledByAgency;
+                    tenantRentalHistory.MoveInDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantRentalHistoryDB.MoveInDate));
+                    tenantRentalHistory.RAPNoticeGivenDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantRentalHistoryDB.RAPNoticeGivenDate));
+                    //tenantRentalHistory.PreviousCaseIDs = TenantRentalHistoryDB.P;
+
                     var TenantRentalIncrementInfoDB = _dbContext.TenantRentalIncrementInfos.Where(x => x.TenantPetitionID == PetitionId).ToList();
                     foreach (var item in TenantRentalIncrementInfoDB)
                     {
                         TenantRentIncreaseInfoM objTenantRentIncreaseInfoM = new TenantRentIncreaseInfoM();
-                        //TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
-                        //rentIncrementDB.TenantPetitionID = petition.PetitionID;
                         objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
-                        objTenantRentIncreaseInfoM.RentIncreaseNoticeDate =_commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
+                        objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
                         objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
                         objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
                         objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
                         objTenantRentIncreaseInfoM.bRentIncreaseContested = Convert.ToBoolean(item.bRentIncreaseContested);
 
-                        tenantRentIncreaseInfo.Add(objTenantRentIncreaseInfoM);
+                        tenantRentalHistory.RentIncreases.Add(objTenantRentIncreaseInfoM);
                     }
-                
-                result.result = tenantRentIncreaseInfo;
+                }
+
+                result.result = tenantRentalHistory;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
                 return result;
@@ -589,7 +597,6 @@ namespace RAP.DAL
                
                 caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
                 caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
-                caseInfo.TenantPetitionInfo.RentIncreases = GetTenantRentalIncrementInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
                
                 result.result = caseInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -1081,7 +1088,6 @@ namespace RAP.DAL
             if (tenantPetitionID != 0)
             {
                 petition.PetitionID = tenantPetitionID;
-                SaveTenantRentalIncrementInfo(petition);
                 SaveTenantLostServiceInfo(petition);
                 SaveTenantProblemInfo(petition);
                 SavePetitionGroundInfo(petition);
@@ -1121,27 +1127,33 @@ namespace RAP.DAL
             return petitionID;
         }
 
-        public ReturnResult<bool> SaveTenantRentalIncrementInfo(TenantPetitionInfoM petition)
+        public ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                foreach (var item in petition.RentIncreases)
+                TenantRentalHistory rentalHistoryDB = new TenantRentalHistory();
+                rentalHistoryDB.PetitionID = rentalHistory.PetitionID;
+                rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
+                rentalHistoryDB.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
+                rentalHistoryDB.bRentControlledByAgency = rentalHistory.bRentControlledByAgency;
+                rentalHistoryDB.CreatedDate = DateTime.Now;
+                _dbContext.TenantRentalHistories.InsertOnSubmit(rentalHistoryDB);
+                _dbContext.SubmitChanges();
+                foreach (var item in rentalHistory.RentIncreases)
                 {
                     TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
-                    rentIncrementDB.TenantPetitionID = petition.PetitionID;
+                    rentIncrementDB.TenantPetitionID = rentalHistory.PetitionID;
                     rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
                     if (item.bRentIncreaseNoticeGiven)
                     {
-                        //  rentIncrementDB.RentIncreaseNoticeDate = item.RentIncreaseNoticeDate;
                         rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
                             item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
 
-                    }
-                    //TBD
+                    }                    
                     rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
                             item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
-                    // rentIncrementDB.RentIncreaseEffectiveDate = item.RentIncreaseEffectiveDate;
                     rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
                     rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
                     rentIncrementDB.bRentIncreaseContested = item.bRentIncreaseContested;

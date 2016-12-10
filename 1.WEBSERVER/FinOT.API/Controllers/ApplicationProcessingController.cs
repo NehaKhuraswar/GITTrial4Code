@@ -484,6 +484,71 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantPetitionInfoM>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
+        [Route("getrentalhistoryinfo/{PetitionId:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetRentalHistoryInfo(int PetitionId)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantRentalHistoryM> transaction = new TranInfo<TenantRentalHistoryM>();
+            ReturnResult<TenantRentalHistoryM> result = new ReturnResult<TenantRentalHistoryM>();
+            try
+            {
+
+                result = _service.GetRentalHistoryInfo(PetitionId);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<TenantRentalHistoryM>>(ReturnCode, transaction);
+        }
+        [AllowAnonymous]
+        [Route("getemptyrentalhistoryinfo")]
+        [HttpGet]
+        public HttpResponseMessage GetEmptyTenantRentalIncrementInfo()
+        {
+            
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantRentIncreaseInfoM> transaction = new TranInfo<TenantRentIncreaseInfoM>();
+            ReturnResult<TenantRentIncreaseInfoM> result = new ReturnResult<TenantRentIncreaseInfoM>();
+            try
+            {
+
+                TenantRentIncreaseInfoM obj = new TenantRentIncreaseInfoM();
+                transaction.data = obj;
+                transaction.status = true;          
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<TenantRentIncreaseInfoM>>(ReturnCode, transaction);
+        }
 
         [AllowAnonymous]
         [Route("saveapplicationinfo")]
@@ -606,9 +671,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("saverentalincrementinfo")]
+        [Route("saverentalhistoryinfo")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantRentalIncrementInfo([FromBody] TenantPetitionInfoM petition)
+        public HttpResponseMessage SaveTenantRentalHistoryInfo([FromBody] TenantRentalHistoryM rentalHistory)
         {
             ExtractClaimDetails();
 
@@ -619,7 +684,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantRentalIncrementInfo(petition);
+                result = _service.SaveTenantRentalHistoryInfo(rentalHistory);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

@@ -14,10 +14,11 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
+        ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId);
+        ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
         ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition);
         ReturnResult<bool> SaveTenantLostServiceInfo(TenantPetitionInfoM petition);
-        ReturnResult<bool> SaveTenantRentalIncrementInfo(TenantPetitionInfoM petition);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
         ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);
