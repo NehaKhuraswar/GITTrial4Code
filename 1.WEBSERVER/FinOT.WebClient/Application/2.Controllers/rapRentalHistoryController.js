@@ -37,6 +37,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     self.ContinueToLostServices = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
+        rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
         rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bRentalHistory = false;

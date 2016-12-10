@@ -1136,6 +1136,7 @@ namespace RAP.DAL
                 rentalHistoryDB.PetitionID = rentalHistory.PetitionID;
                 rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
                 rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
+                rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
                 rentalHistoryDB.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
                 rentalHistoryDB.bRentControlledByAgency = rentalHistory.bRentControlledByAgency;
                 rentalHistoryDB.CreatedDate = DateTime.Now;

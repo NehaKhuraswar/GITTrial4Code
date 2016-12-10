@@ -156,13 +156,12 @@ namespace RAP.Core.DataModels
             Document = new DocumentM();
             SelectedRangeOfUnits = new NumberRangeForUnitsM();
             ApplicantUserInfo = new UserInfoM();
+            LostServicesPage = new LostServicesPageM();
 
         }
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
         private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         private List<PetitionGroundM> _petitionGrounds = new List<PetitionGroundM>();
-        private List<TenantLostServiceInfoM> _lostServices = new List<TenantLostServiceInfoM>();
-        private List<TenantProblemInfoM> _problems = new List<TenantProblemInfoM>();
         private List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
         
         public bool bThirdPartyRepresentation { get; set; }
@@ -183,7 +182,8 @@ namespace RAP.Core.DataModels
         public DocumentM Document { get; set; }
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
-        public bool bLostService { get; set; }
+        public LostServicesPageM LostServicesPage { get; set; }
+        
         public int CustomerID { get; set; }
 
         public List<NumberRangeForUnitsM> RangeOfUnits
@@ -197,29 +197,7 @@ namespace RAP.Core.DataModels
                 _rangeOfUnits = value;
             }
         }
-        public  List<TenantLostServiceInfoM> LostServices
-        {
-            get
-            {
-                return _lostServices;
-            }
-            set
-            {
-                _lostServices = value;
-            }
-        }
-        public bool bProblem { get; set; }
-        public List<TenantProblemInfoM> Problems
-        {
-            get
-            {
-                return _problems;
-            }
-            set
-            {
-                _problems = value;
-            }
-        }
+        
         public List<UnitTypeM> UnitTypes
         {
             get
@@ -246,6 +224,20 @@ namespace RAP.Core.DataModels
 
 
     }
+    public class LostServicesPageM
+    {
+        public LostServicesPageM()
+        {
+            LostServices = new List<TenantLostServiceInfoM>();
+            Problems = new List<TenantProblemInfoM>();
+        }
+        public bool bHouseServiceDecreased { get; set; }
+        public bool bLostService { get; set; }
+        public List<TenantLostServiceInfoM> LostServices{get; set;} 
+        public bool bProblem { get; set; }
+        public List<TenantProblemInfoM> Problems { get; set; } 
+   
+    }
     public class TenantRentalHistoryM
     {
         public TenantRentalHistoryM ()
@@ -259,6 +251,7 @@ namespace RAP.Core.DataModels
         public CustomDate RAPNoticeGivenDate { get; set; }
         public bool bRentControlledByAgency { get; set; }
         public string PreviousCaseIDs { get; set; }
+        public bool bPetitionFiledPrviously { get; set; }
         public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
     }
     public class TenantRentIncreaseInfoM
