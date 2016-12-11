@@ -13,7 +13,7 @@
 
                 <div class="subhead type2">
                     <h4>Applicant and Property Information</h4>
-                    <a href="#" class="btn-link btn-edit">Edit</a>
+                    <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
                 </div>
 
                 <div class="field-group filled-info">
@@ -29,9 +29,9 @@
                 <div class="field-group filled-info subhead" >
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
-                        <div class="col-sm-6 col-xs-12">
-                            {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.LastName}}   <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.City}}, {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
-                            T {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.ThirdPartyInfo.Email}} 
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
+                            {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
+                            T {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}}
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -40,8 +40,8 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
                         <div class="col-sm-6 col-xs-12">
-                            {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.FirstName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.LastName}}   <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.AddressLine1}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.City}}, {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.State.StateName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
-                            T {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.OwnerInfo.Email}} 
+                            {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
+                            T {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}} 
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -50,8 +50,8 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
                         <div class="col-sm-6 col-xs-12">
-                            {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.FirstName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.LastName}}   <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.AddressLine1}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.City}}, {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.State.StateName}} {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.Zip}}   <br />
-                            T {{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.PropertyManager.Email}} 
+                            {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}   <br />
+                            T {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}} 
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -59,21 +59,22 @@
                 <div class="field-group filled-info subhead">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
-                        <div class="col-sm-6 col-xs-12">{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.NumberOfUnits}}</div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>
-                        <div class="col-sm-6 col-xs-12">{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.UnitTypes[rapGlobalFactory.CaseDetails.TenantPetitionInfo.UnitTypeId].UnitDescription}}</div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.UnitTypes[Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId].UnitDescription}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>
-                        <div class="col-sm-6 col-xs-12">{{rapGlobalFactory.CaseDetails.TenantPetitionInfo.bCurrentRentStatus}}</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">Yes</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">No</div>
                     </div>
                 </div><!-- .field-group -->
 
@@ -83,10 +84,13 @@
                 </div>
 
                 <div class="field-group filled-info">
-                    <!--<div ng-repeat="item in rapGlobalFactory.CaseDetails.TenantPetitionInfo.">-->
-                        <p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
-                        <p>g) The contested increase is the second rent increase in a 12-month period.</p>
-                    <!--</div>-->
+                    <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
+                        <div ng-show="item.Selected">
+                            {{item.PetitionGroundDescription}}
+                        </div>
+                        <!--<p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
+                        <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
+                    </div>
 
                 </div>
 
@@ -100,77 +104,88 @@
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into the unit?</div></div>
-                        <div class="col-sm-6 col-xs-12">01/09/16</div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Year}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Initial monthly rent</div></div>
-                        <div class="col-sm-6 col-xs-12">$2000</div>
+                        <div class="col-sm-6 col-xs-12">${{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.InitialRent}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)?</div></div>
-                        <div class="col-sm-6 col-xs-12">01/09/16</div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?</div></div>
-                        <div class="col-sm-6 col-xs-12">Yes</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">Yes</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">No</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a rent program notice with the notice of increase?</div></div>
-                        <div class="col-sm-6 col-xs-12">Yes</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">Yes</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">No</div>
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
-                        <div class="col-sm-6 col-xs-12">01/09/16</div>
-                    </div>
-                </div><!-- .field-group -->
+                <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                        </div>
+                    </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
-                        <div class="col-sm-6 col-xs-12">$200</div>
-                    </div>
-                </div><!-- .field-group -->
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                            <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
+                        </div>
+                    </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
-                        <div class="col-sm-6 col-xs-12">01/09/16</div>
-                    </div>
-                </div><!-- .field-group -->
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                        </div>
+                    </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Are you contesting this increase in this petition?</div></div>
-                        <div class="col-sm-6 col-xs-12">Yes</div>
-                    </div>
-                </div><!-- .field-group -->
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Are you contesting this increase in this petition?</div></div>
+                            <div class="col-sm-6 col-xs-12" ng-show="item.bRentIncreaseContested">Yes</div>
+                            <div class="col-sm-6 col-xs-12" ng-show="!item.bRentIncreaseContested">No</div>
+                        </div>
+                    </div><!-- .field-group -->
+                </div>
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Have you ever filed a petition for your rental unit?</div></div>
-                        <div class="col-sm-6 col-xs-12">No</div>
+                        <div class="col-sm-6 col-xs-12" 
+                             ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bPetitionFiledPrviously">Yes</div>
+                        <div class="col-sm-6 col-xs-12"
+                             ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bPetitionFiledPrviously">No</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">The housing services I am being provided have decreased.</div></div>
-                        <div class="col-sm-6 col-xs-12">No</div>
+                        <div class="col-sm-6 col-xs-12"
+                             ng-show="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bHouseServiceDecreased">Yes</div>
+                        <div class="col-sm-6 col-xs-12"
+                             ng-show="!Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bHouseServiceDecreased">No</div>
                     </div>
                 </div><!-- .field-group -->
 
