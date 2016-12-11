@@ -248,12 +248,12 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int PetitionID)
+        public ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
             try
             {
-                result = _dbHandler.GetTenantReviewInfo(PetitionID);
+                result = _dbHandler.GetTenantReviewInfo(CustomerID);
                 return result;
             }
             catch (Exception ex)

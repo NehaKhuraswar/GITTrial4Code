@@ -5,6 +5,16 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
 
+    var _GetTenantReviewInfo = function (custID) {
+        rapFactory.GetTenantReviewInfo(custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo.TenantPetitionInfo = response.data;
+        });
+    }
+    _GetTenantReviewInfo(self.custDetails.custID);
+
     self.EditApplicantInfo = function () {
         $scope.model.bReview = false;
         $scope.model.bAppInfo = true;

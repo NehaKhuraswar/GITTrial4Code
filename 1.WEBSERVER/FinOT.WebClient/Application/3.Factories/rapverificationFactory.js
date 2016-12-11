@@ -14,7 +14,7 @@ var rapverificationFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
               blockUI.stop();
           });
       }
-    factory.SaveCaseInfo = _SaveCaseInfo;
+      factory.SubmitTenantPetition = _SubmitTenantPetition;
     
     return factory;
 }];

@@ -457,9 +457,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("gettenantreview/{PetitionId:int}")]
+        [Route("gettenantreview/{CustomerID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetTenantReviewInfo(int PetitionId)
+        public HttpResponseMessage GetTenantReviewInfo(int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -470,7 +470,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetTenantReviewInfo(PetitionId);
+                result = _service.GetTenantReviewInfo(CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

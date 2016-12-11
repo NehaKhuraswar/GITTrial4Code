@@ -105,12 +105,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
         //    controllerAs: 'Ctrl',
         //    resolve: rapReviewController_resolve
         //})
-        .when('/verification', {
-            templateUrl: 'views/filepetition/Verification.html',
-            controller: rapVerificationController,
-            controllerAs: 'Ctrl',
-            resolve: rapVerificationController_resolve
-        })
+        //.when('/verification', {
+        //    templateUrl: 'views/filepetition/Verification.html',
+        //    controller: rapVerificationController,
+        //    controllerAs: 'Ctrl',
+        //    resolve: rapVerificationController_resolve
+        //})
         .when('/fileappeal', {
             templateUrl: 'views/fileAppeal/Index.html',
             controller: rapAppealMainController,
