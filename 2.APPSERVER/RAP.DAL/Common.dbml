@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="OAKRAP" Class="CommonDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=ev-sql-dev;Initial Catalog=OAKRAP;Integrated Security=True" SettingsObjectName="RAP.DAL.Properties.Settings" SettingsPropertyName="OAKRAPConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.ErrorLog" Member="ErrorLogs">
-    <Type Name="ErrorLog">
-      <Column Name="ErrorID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ErrorNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ErrorMessageDetails" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.UserInfo" Member="UserInfos">
     <Type Name="UserInfo">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -31,6 +22,15 @@
       <Column Name="StateCode" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
       <Column Name="StateName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="State_UserInfo" Member="UserInfos" ThisKey="StateID" OtherKey="StateID" Type="UserInfo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ErrorLog" Member="ErrorLogs">
+    <Type Name="ErrorLog">
+      <Column Name="ErrorID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ErrorNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ErrorMessage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ErrorMessageDetails" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

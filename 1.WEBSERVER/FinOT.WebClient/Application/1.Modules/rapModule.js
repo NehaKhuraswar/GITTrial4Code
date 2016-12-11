@@ -324,7 +324,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          controllerAs: 'Ctrl'
      };
  })
-.directive('rapOwnerrentalproperty', function () {
+.directive('rapOwnerrentalhistory', function () {
     return {
         restrict: 'E',
         scope: {

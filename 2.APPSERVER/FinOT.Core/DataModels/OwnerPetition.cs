@@ -117,10 +117,23 @@ namespace RAP.Core.DataModels
             ApplicantUserInfo = new UserInfoM();
             BuildingAcquiredDate = new CustomDate();
         }
+        private bool _bThirdPartyRepresentation = false;
         public int OwnerPetitionApplicantInfoID { get; set; }
         public UserInfoM ApplicantUserInfo { get; set; }
-        public bool bThirdPartyRepresentation { get; set; }
+        public bool bThirdPartyRepresentation
+        {
+            get
+            {
+               return _bThirdPartyRepresentation;
+            }
+            set
+            {
+                _bThirdPartyRepresentation = value;
+            }
+        }
         public UserInfoM ThirdPartyUser { get; set; }
+        public bool ThirdPartyEmailNotification { get; set; }
+        public bool ThirdPartyMailNotification { get; set; }
         public bool bBusinessLicensePaid { get; set; }
         public string BusinessLicenseNumber { get; set; }
         public bool bRentAdjustmentProgramFeePaid { get; set; }
@@ -128,7 +141,7 @@ namespace RAP.Core.DataModels
         public int NumberOfUnits { get; set; }
         public bool bMoreThanOneStreetOnParcel { get; set; }
         public int CustomerID { get; set; }
-        public int bPetitionFiled { get; set; }
+        public bool bPetitionFiled { get; set; }
         public string RAPFee { get; set; }
     }
 
@@ -205,7 +218,7 @@ namespace RAP.Core.DataModels
         public int TenantInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public UserInfoM TenantUserInfo { get; set; }
-
+        public bool IsDeleted { get; set; }
     }
 
     public class OwnerRentIncreaseReasonsM
@@ -227,8 +240,7 @@ namespace RAP.Core.DataModels
     }
 
     public class OwnerPetitionRentalIncrementInfoM
-    {
-        
+    {        
         public int RentalIncreaseInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public bool bRentIncreaseNoticeGiven { get; set; }

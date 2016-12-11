@@ -92,10 +92,13 @@
                         <td>
                             <span>Zip</span>
                         </td>
+                        <td>
+                            <span>Remove</span>
+                        </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo">
+                    <tr ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
                         <td class="nopadding-left">
                             {{item.TenantUserInfo.FirstName}}
                         </td>
@@ -117,6 +120,7 @@
                         <td>
                             {{item.TenantUserInfo.Zip}}
                         </td>
+                        <td><button class="btn-primary" ng-click="Ctrl.RemoveTenant(item)">Remove</button></td>
                     </tr>
                 </tbody>
             </table>

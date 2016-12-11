@@ -59,6 +59,21 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber =0;
         self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = "";
     }
+    self.RemoveTenant = function(_tenant)
+    {
+        var index = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.indexOf(_tenant);
+        self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.splice(index, 1);
+        _tenant.IsDeleted = true;
+        self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(_tenant);
+        //self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.update(
+        //    self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.indexOf(function (item) {
+        //        return item.TenantUserInfo.FirstName == _tenant.TenantUserInfo.FirstName && item.TenantUserInfo.LastName == _tenant.TenantUserInfo.LastName;
+        //    }), function (item) { return item.set(item.IsDeleted, true); }
+        //    );    
+        //self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.remove(_tenant);
+        //_tenant.IsDeleted = true;
+        //self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(_tenant);
+    }
 
 }];
 var rapApplicationInfoController_resolve = {

@@ -407,14 +407,13 @@ namespace RAP.Business.Implementation
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                var dbResult = _dbHandler.SaveOwnerApplicantInfo(model.OwnerPetitionInfo.ApplicantInfo);
+                var dbResult = _dbHandler.SaveOwnerApplicantInfo(model);
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
                     result.status = dbResult.status;
                     return result;
                 }
-                model.OwnerPetitionInfo.ApplicantInfo = dbResult.result;
-                result.result = model;
+                result.result = dbResult.result;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }

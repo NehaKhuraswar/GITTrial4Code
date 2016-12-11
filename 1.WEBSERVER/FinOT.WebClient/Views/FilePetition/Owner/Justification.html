@@ -2,7 +2,7 @@
     <div class="application-step step-1">
         <h3 class="step-heading">Owner Petition for Approval of Rent Increase: <span>Justification For Rent Increase</span></h3>
 
-        <div class="step-content create-new">
+
             <div class="subhead no-top-margin"></div>
             <div class="field-group">
                 <p class="input-label">Check all that apply. <b>I (we) petition for approval of one or more rent increases on the following grounds that the increase(es) is/are justified by :</b></p>
@@ -10,14 +10,14 @@
                     <div class="checkbox-wrapper">
                         <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons">
                             <label>
-                                <input type="checkbox" ng-model="reason.IsSelected" id="reason.ReasonID">
+                                <input type="checkbox" class="checkbox" ng-model="reason.IsSelected" id="reason.ReasonID">
                                 {{reason.ReasonDescription}}
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+       
         <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
     </div>
 </div>

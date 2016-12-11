@@ -30,7 +30,7 @@ namespace RAP.DAL
         ReturnResult<OwnerPetitionPropertyInfoM> GetOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model);
         ReturnResult<List<OwnerRentIncreaseReasonsM>> GetRentIncreaseReasonInfo(OwnerPetitionInfoM petition);
         ReturnResult<CaseInfoM> GetOwnerRentIncreaseAndPropertyInfo(CaseInfoM model);
-        ReturnResult<OwnerPetitionApplicantInfoM> SaveOwnerApplicantInfo(OwnerPetitionApplicantInfoM model);
+        ReturnResult<CaseInfoM> SaveOwnerApplicantInfo(CaseInfoM model);
         ReturnResult<bool> SaveRentIncreaseReasonInfo(OwnerPetitionInfoM petition);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(OwnerPetitionPropertyInfoM model);
