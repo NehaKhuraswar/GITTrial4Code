@@ -9,12 +9,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapregisterController_resolve
         })
-        .when('/editpublicuser', {
-            templateUrl: 'views/account/EditUser.html',
-            controller: rapeditCustController,
-            controllerAs: 'Ctrl',
-            resolve: rapeditCustController_resolve
-        })
+        //.when('/editpublicuser', {
+        //    templateUrl: 'views/account/EditUser.html',
+        //    controller: rapeditCustController,
+        //    controllerAs: 'Ctrl',
+        //    resolve: rapeditCustController_resolve
+        //})
         .when('/forgotpassword', {
             templateUrl: 'views/account/ChangePassword.html',
             controller: rapregisterController,
