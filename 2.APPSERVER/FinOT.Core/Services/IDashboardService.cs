@@ -11,6 +11,10 @@ namespace RAP.Core.Services
         ReturnResult<List<Status_M>> GetStatus(int activityID);
         ReturnResult<List<Activity_M>> GetActivity();
         ReturnResult<bool> SaveNewActivityStatus(ActivityStatus_M activityStatus, int C_ID);
+        ReturnResult<List<CityUserAccount_M>> GetHearingOfficers();
+        ReturnResult<List<CityUserAccount_M>> GetAnalysts();
+        ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID);
+        ReturnResult<bool> AssignHearingOfficer(int cID, int HearingOfficerUserID);
 
     }
 }

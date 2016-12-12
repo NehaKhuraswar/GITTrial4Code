@@ -1,9 +1,11 @@
 ﻿'use strict';
-var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaffdashboardFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaffdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CityUser;
     self.CaseList = [];
+    self.Analysts = [];
+    self.HearingOfficers = [];
     self.InviteThirdPartyUser = function () {
         $location.path("/invitethirdparty");
     }
@@ -53,6 +55,25 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     }
     _GetCasesNoAnalyst();
 
+    var _GetAnalysts = function () {
+        masterFactory.GetAnalysts().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.Analysts = response.data;
+        });
+    }
+    _GetAnalysts();
+
+    var _GetHearingOfficers = function () {
+        masterFactory.GetHearingOfficers().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.HearingOfficers = response.data;
+        });
+    }
+    _GetHearingOfficers();
     var _GetCaseInfo = function () {
 
         rapFactory.GetCaseInfo().then(function (response) {
@@ -68,6 +89,27 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     if (self.caseinfo == null) {
         _GetCaseInfo();
     }
+
+    self.AssignAnalyst = function (C_ID, AnalystUserID) {
+
+        rapFactory.AssignAnalyst(C_ID, AnalystUserID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            _GetCasesNoAnalyst();
+        });
+    }
+
+    self.AssignHearingOfficer = function (C_ID, HearingOfficerUserID) {
+
+        rapFactory.AssignHearingOfficer(C_ID, HearingOfficerUserID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            _GetCasesNoAnalyst();
+        });
+    }
+    
 
 }];
 var rapstaffdashboardController_resolve = {

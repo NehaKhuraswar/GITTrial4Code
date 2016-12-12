@@ -67,6 +67,65 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<List<CityUserAccount_M>> GetHearingOfficers()
+        {
+            ReturnResult<List<CityUserAccount_M>> result = new ReturnResult<List<CityUserAccount_M>>();
+            try
+            {
+                result = _dbHandler.GetHearingOfficers();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<List<CityUserAccount_M>> GetAnalysts()
+        {
+            ReturnResult<List<CityUserAccount_M>> result = new ReturnResult<List<CityUserAccount_M>>();
+            try
+            {
+                result = _dbHandler.GetAnalysts();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> AssignHearingOfficer(int cID, int HearingOfficerUserID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.AssignHearingOfficer(cID, HearingOfficerUserID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.AssignAnalyst( cID,  AnalystUserID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<List<Status_M>> GetStatus(int activityID)
         {
             ReturnResult<List<Status_M>> result = new ReturnResult<List<Status_M>>();

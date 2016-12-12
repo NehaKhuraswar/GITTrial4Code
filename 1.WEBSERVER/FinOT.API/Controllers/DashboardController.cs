@@ -125,6 +125,141 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<List<Activity_M>>>(ReturnCode, transaction);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("gethearingofficers")]
+        public HttpResponseMessage GetHearingOfficers()
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<CityUserAccount_M>> transaction = new TranInfo<List<CityUserAccount_M>>();
+            ReturnResult<List<CityUserAccount_M>> result = new ReturnResult<List<CityUserAccount_M>>();
+            try
+            {
+                result = _service.GetHearingOfficers();
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<List<CityUserAccount_M>>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getanalysts")]
+        public HttpResponseMessage GetAnalysts()
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<CityUserAccount_M>> transaction = new TranInfo<List<CityUserAccount_M>>();
+            ReturnResult<List<CityUserAccount_M>> result = new ReturnResult<List<CityUserAccount_M>>();
+            try
+            {
+                result = _service.GetAnalysts();
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<List<CityUserAccount_M>>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("assignanalyst/{cID:int}/{AnalystUserID:int}")]
+        public HttpResponseMessage AssignAnalyst(int cID, int AnalystUserID)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _service.AssignAnalyst(cID, AnalystUserID);
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("assignhearingofficer/{cID:int}/{HearingOfficerUserID:int}")]
+        public HttpResponseMessage AssignHearingOfficer(int cID, int HearingOfficerUserID)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _service.AssignHearingOfficer(cID, HearingOfficerUserID);
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+
         #endregion
 
         #region "POST REQUEST"

@@ -71,6 +71,146 @@ namespace RAP.DAL
                 return result;
             }
         }
+        public ReturnResult<List<CityUserAccount_M>> GetHearingOfficers()
+        {
+            ReturnResult<List<CityUserAccount_M>> result = new ReturnResult<List<CityUserAccount_M>>();
+            try
+            {
+                List<CityUserAccount_M> HearingOfficers = new List<CityUserAccount_M>();
+
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var HearingOfficersDB = db.CityUserAccounts.Where(x => x.IsHearingOfficer == true).ToList();
+
+                    foreach (var item in HearingOfficersDB)
+                    {
+                        CityUserAccount_M objHearingOfficer = new CityUserAccount_M();
+                        objHearingOfficer.UserID = (int)item.CityUserID;
+                        objHearingOfficer.FirstName = item.FirstName;
+                        objHearingOfficer.LastName = item.LastName;
+                        objHearingOfficer.MobilePhoneNumber = item.MobilePhoneNumber;
+                        objHearingOfficer.OfficePhoneNumber = item.OfficePhoneNumber;
+                        objHearingOfficer.OfficeLocation = item.OfficeLocation;
+                        objHearingOfficer.Title = item.Title;
+                        objHearingOfficer.Department = item.Department;
+                        objHearingOfficer.CreatedDate = item.CreatedDate;
+                        objHearingOfficer.Email = item.Email;
+                        objHearingOfficer.EmployeeID = (int)item.EmployeeID;
+                        objHearingOfficer.IsAnalyst = item.IsAnalyst;
+                        objHearingOfficer.IsHearingOfficer = item.IsHearingOfficer;
+                        HearingOfficers.Add(objHearingOfficer);
+
+                    }
+                    result.result = HearingOfficers;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<List<CityUserAccount_M>> GetAnalysts()
+        {
+            ReturnResult<List<CityUserAccount_M>> result = new ReturnResult<List<CityUserAccount_M>>();
+            try
+            {
+                List<CityUserAccount_M> Analysts = new List<CityUserAccount_M>();
+
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var AnalystsDB = db.CityUserAccounts.Where(x => x.IsAnalyst == true).ToList();
+
+                    foreach (var item in AnalystsDB)
+                    {
+                        CityUserAccount_M objAnalyst = new CityUserAccount_M();
+                        objAnalyst.UserID = (int)item.CityUserID;
+                        objAnalyst.FirstName = item.FirstName;
+                        objAnalyst.LastName = item.LastName;
+                        objAnalyst.MobilePhoneNumber = item.MobilePhoneNumber;
+                        objAnalyst.OfficePhoneNumber = item.OfficePhoneNumber;
+                        objAnalyst.OfficeLocation = item.OfficeLocation;
+                        objAnalyst.Title = item.Title;
+                        objAnalyst.Department = item.Department;
+                        objAnalyst.CreatedDate = item.CreatedDate;
+                        objAnalyst.Email = item.Email;
+                        objAnalyst.EmployeeID = (int)item.EmployeeID;
+                        objAnalyst.IsAnalyst = item.IsAnalyst;
+                        objAnalyst.IsHearingOfficer = item.IsHearingOfficer;
+                        Analysts.Add(objAnalyst);
+
+                    }
+                    result.result = Analysts;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext(_connString))
+                {
+                    var caseDB = db.CaseDetails.Where(x => x.C_ID == cID).FirstOrDefault();
+                    if (caseDB != null)
+                    {
+                        caseDB.CityAnalystUserID = AnalystUserID;
+                    }
+
+                    result.result = true;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> AssignHearingOfficer(int cID, int HearingOfficerUserID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (ApplicationProcessingDataContext db = new ApplicationProcessingDataContext(_connString))
+                {
+                    var caseDB = db.CaseDetails.Where(x => x.C_ID == cID).FirstOrDefault();
+                    if (caseDB != null)
+                    {
+                        caseDB.HearingOfficerUserID = HearingOfficerUserID;
+                    }
+
+                    result.result = true;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
 
         public ReturnResult<List<Activity_M>> GetActivity()
         {
