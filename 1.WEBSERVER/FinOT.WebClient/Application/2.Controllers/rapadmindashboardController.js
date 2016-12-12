@@ -21,6 +21,9 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     self.CreatePublicUserAccount = function () {
         $location.path("/register");
     }
+    self.EditPublicUserAccount = function () {
+        $location.path("/editpublicuser");
+    }
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseInfoWithModel(model).then(function (response) {

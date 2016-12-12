@@ -3,6 +3,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     
     
     .factory('rapcustFactory', rapcustFactory)
+    .factory('rapeditcustFactory', rapeditcustFactory)
     .factory('rapGlobalFactory', function () {
 
           // public
@@ -55,6 +56,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapOwnerRentalHistoryFactory', rapOwnerRentalHistoryFactory)
     .controller('raploginController', raploginController)
     .controller('rapregisterController', rapregisterController)
+    .controller('rapeditCustController', rapeditCustController)
     .controller('rapChangePasswordController', rapChangePasswordController)
     .controller('rapResendPinController', rapResendPinController)
     .controller('rapdashboardController', rapdashboardController)

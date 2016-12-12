@@ -30,6 +30,10 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.SaveCustomer(message);
         }
+        public ReturnResult<CustomerInfo> EditCustomer(CustomerInfo message)
+        {
+            return accDBHandler.EditCustomer(message);
+        }
         public ReturnResult<CityUserAccount_M> CreateCityUserAccount(CityUserAccount_M message)
         {
             return accDBHandler.CreateCityUserAccount(message);

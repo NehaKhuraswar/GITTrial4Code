@@ -658,6 +658,68 @@ namespace RAP.DAL
                return result;
            }
        }
+
+        /// <summary>
+        /// Edit cutomer information
+        /// </summary>
+        /// <returns>true or false</returns>
+        public ReturnResult<CustomerInfo> EditCustomer(CustomerInfo message)
+        {
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
+            ReturnResult<UserInfoM> UserResult = new ReturnResult<UserInfoM>();
+            CommonDBHandler commondb = new CommonDBHandler();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    CustomerDetail custTable = db.CustomerDetails.Where(x => x.CustomerID == message.custID).FirstOrDefault();
+                    if (custTable != null)
+                    {
+                        commondb.EditUserInfo(message.User);
+
+                        custTable.Email = message.email;
+                        custTable.Password = message.Password;
+                        custTable.UserID = message.User.UserID;
+                        custTable.ModifiedDate = DateTime.Now;
+                        custTable.bMailingAddress = !message.IsSameMailingAddress;
+                        message.CustomerIdentityKey = getCustomerIdentityKey();
+                        custTable.CustomerIdentityKey = message.CustomerIdentityKey;
+                        db.SubmitChanges();
+
+                        NotificationPreference notificationTable = db.NotificationPreferences.Where(x => x.UserID == message.User.UserID).FirstOrDefault();
+                        notificationTable.EmailNotification = message.EmailNotificationFlag;
+                        notificationTable.MailNotification = message.MailNotificationFlag;
+                        db.SubmitChanges();
+
+                        if (!message.IsSameMailingAddress)
+                        {
+                            MailingAddress mailing = db.MailingAddresses.Where(x => x.CustomerID == message.custID).FirstOrDefault();
+                            mailing.AddressLine1 = message.MailingAddress.AddressLine1;
+                            mailing.AddressLine2 = message.MailingAddress.AddressLine2;
+                            mailing.City = message.MailingAddress.City;
+                            mailing.StateID = message.MailingAddress.State.StateID;
+                            mailing.Zip = message.MailingAddress.Zip;
+                            mailing.PhoneNumber = message.MailingAddress.PhoneNumber;
+                            mailing.CustomerID = message.custID;
+                            mailing.LastModifiedDate = DateTime.Now;
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+                //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                result.result = message;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
         public ReturnResult<CityUserAccount_M> CreateCityUserAccount(CityUserAccount_M message)
         {
             ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();

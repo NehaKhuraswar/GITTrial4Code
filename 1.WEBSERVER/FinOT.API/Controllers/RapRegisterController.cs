@@ -695,6 +695,45 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("editCust")]
+        [HttpPost]
+        public HttpResponseMessage EditCustomer([FromBody] CustomerInfo custModel)
+        {
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Save Customer started");
+            AccountManagementService accService = new AccountManagementService();
+            IEmailService emailService = new EmailService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
+
+            try
+            {
+                result = accService.EditCustomer(custModel);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    //emailService.SendEmail(getRegisterCustomerEmailModel(result.result));
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("createcityuseraccount")]
         [HttpPost]
         public HttpResponseMessage CreateCityUserAccount([FromBody] CityUserAccount_M cityUserModel)

@@ -106,6 +106,45 @@ namespace RAP.DAL
                 return result;
             }
         }
+        /// <summary>
+        /// Edits the data needed to to display on the tenant petition form
+        /// </summary>
+        /// <returns></returns>
+
+        public ReturnResult<UserInfoM> EditUserInfo(UserInfoM userInfo)
+        {
+            ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
+            try
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveUserInfo started");
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    var userInfoDB = db.UserInfos.Where(x => (x.UserID == userInfo.UserID)).FirstOrDefault();
+                    
+                    userInfoDB.FirstName = userInfo.FirstName;
+                    userInfoDB.LastName = userInfo.LastName;
+                    userInfoDB.AddressLine1 = userInfo.AddressLine1;
+                    userInfoDB.AddressLine2 = userInfo.AddressLine2;
+                    userInfoDB.City = userInfo.City;
+                    userInfoDB.StateID = userInfo.State.StateID;
+                    userInfoDB.Zip = userInfo.Zip;
+                    userInfoDB.PhoneNumber = userInfo.PhoneNumber;
+                    userInfoDB.ContactEmail = userInfo.Email;
+                    db.SubmitChanges();
+                }
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveUserInfo completed");
+                result.result = userInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;               
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<UserInfoM> GetUserInfo(int UserId)
         {
             ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
