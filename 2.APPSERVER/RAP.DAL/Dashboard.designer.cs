@@ -125,11 +125,11 @@ namespace RAP.DAL
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_NewActivityStatus_Save")]
-		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
+		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="VarChar(250)")] string notes, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, createdDate, createdBy, message, errorCode);
-			message = ((string)(result.GetParameterValue(5)));
-			errorCode = ((System.Nullable<int>)(result.GetParameterValue(6)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, notes, createdDate, createdBy, message, errorCode);
+			message = ((string)(result.GetParameterValue(6)));
+			errorCode = ((System.Nullable<int>)(result.GetParameterValue(7)));
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -624,6 +624,8 @@ namespace RAP.DAL
 		
 		private int _StatusID;
 		
+		private string _Notes;
+		
 		private bool _IsActive;
 		
 		private System.DateTime _CreatedDate;
@@ -650,6 +652,8 @@ namespace RAP.DAL
     partial void OnActivityIDChanged();
     partial void OnStatusIDChanging(int value);
     partial void OnStatusIDChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
     partial void OnIsActiveChanging(bool value);
     partial void OnIsActiveChanged();
     partial void OnCreatedDateChanging(System.DateTime value);
@@ -757,6 +761,26 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(250)")]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
 		public bool IsActive
 		{
@@ -777,7 +801,7 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
 		public System.DateTime CreatedDate
 		{
 			get
@@ -817,7 +841,7 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> LastModifiedDate
 		{
 			get

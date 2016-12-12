@@ -19,7 +19,11 @@
                         ng-options="status as (status.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
                         required>
                     <option value="" selected>Select Status</option>
-                </select>     
+                </select>  
+                <div id="div_notes" class="field-group">
+                    <label for="notes">If you are not current on paying your rent, please provide an explanation.</label>
+                    <textarea name="notes" id="notes" class="field-input textarea" rows="8" ng-model="Ctrl.ActivityStatus.Notes"></textarea>
+                </div>   
                 <button class="btn btn-default" ng-click="Ctrl.Submit(Ctrl.ActivityStatus, Ctrl.caseinfo.C_ID)">Submit</button>         
             </div>
         </div>

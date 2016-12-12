@@ -2,7 +2,8 @@
 var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcasestatusFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     self.model = $scope.model;
-    self.custDetails = rapGlobalFactory.CustomerDetails;
+    self.CityUser = rapGlobalFactory.CityUser;
+    //self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.ActivityStatus = [];
     self.ActivityList = [];
@@ -43,7 +44,7 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
     }
     self.Submit = function (model, C_ID) {
         //TBD remove C_ID hardcoding
-        model.EmployeeID = 1;
+        model.EmployeeID = self.CityUser.EmployeeID;
         rapFactory.SaveNewActivityStatus(model, 2).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
         });        

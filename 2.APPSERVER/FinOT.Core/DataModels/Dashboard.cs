@@ -51,6 +51,7 @@ namespace RAP.Core.DataModels
         public Activity_M Activity { get; set; }
         public Status_M Status { get; set; }
         public DateTime Date { get; set; }
+        public string Notes { get; set; }
         public int EmployeeID { get; set; }
     }
     public class Activity_M
