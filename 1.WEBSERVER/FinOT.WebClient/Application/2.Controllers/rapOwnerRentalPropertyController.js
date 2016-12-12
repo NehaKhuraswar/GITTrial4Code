@@ -77,7 +77,7 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     }
 
 }];
-var rapApplicationInfoController_resolve = {
+var rapOwnerRentalPropertyController_resolve = {
     model: ['$route', 'alertService', 'rapOwnerRentalPropertyFactory', function ($route, alert, rapFactory) {
         ////return auth.fetchToken().then(function (response) {
         //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {

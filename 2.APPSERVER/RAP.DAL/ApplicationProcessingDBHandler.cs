@@ -2413,10 +2413,9 @@ namespace RAP.DAL
         {
             int ownerPetitionID = 0;
             OwnerPetitionInfo petitionInfo = new OwnerPetitionInfo();
-            petitionInfo.OwnerPetitionApplicantInfoID = model.ApplicantInfo.ApplicantUserInfo.UserID;
+            petitionInfo.OwnerPetitionApplicantInfoID = model.ApplicantInfo.OwnerPetitionApplicantInfoID;
             petitionInfo.OwnerPropertyID = model.PropertyInfo.OwnerPropertyID;
-            petitionInfo.bAgreeToCityMediation = model.bAgreeToCityMediation;
-            petitionInfo.PetitionFiledBy = model.PetitionFiledBy;
+            petitionInfo.bAgreeToCityMediation = model.bAgreeToCityMediation;           
             petitionInfo.CreatedDate = DateTime.Now;
             _dbContext.OwnerPetitionInfos.InsertOnSubmit(petitionInfo);
             _dbContext.SubmitChanges();

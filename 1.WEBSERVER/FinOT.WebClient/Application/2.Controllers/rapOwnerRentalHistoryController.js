@@ -35,9 +35,11 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
         });
+        $scope.model.ownerRentalHistory = false;
+        $scope.model.ownerAdditionalDocuments = true;
     }
 }];
-var rapApplicationInfoController_resolve = {
+var rapOwnerRentalHistoryController_resolve = {
     model: ['$route', 'alertService', 'rapOwnerRentalHistoryFactory', function ($route, alert, rapFactory) {
         ////return auth.fetchToken().then(function (response) {
         //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {

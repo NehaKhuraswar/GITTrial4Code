@@ -54,6 +54,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapOwnerJustificationFactory', rapOwnerJustificationFactory)
     .factory('rapOwnerRentalPropertyFactory', rapOwnerRentalPropertyFactory)
     .factory('rapOwnerRentalHistoryFactory', rapOwnerRentalHistoryFactory)
+    .factory('rapOwnerVerificationFactory', rapOwnerVerificationFactory)
     .controller('raploginController', raploginController)
     .controller('rapregisterController', rapregisterController)
     .controller('rapeditCustController', rapeditCustController)
@@ -86,6 +87,9 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapOwnerJustificationController', rapOwnerJustificationController)
     .controller('rapOwnerRentalPropertyController', rapOwnerRentalPropertyController)
     .controller('rapOwnerRentalHistoryController', rapOwnerRentalHistoryController)
+    .controller('rapOwnerDocumentsController', rapOwnerDocumentsController)
+    .controller('rapOwnerReviewController', rapOwnerReviewController)
+    .controller('rapOwnerVerificationController', rapOwnerVerificationController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -339,6 +343,42 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         },
         templateUrl: 'Views/FilePetition/Owner/RentalHistory.html',
         controller: 'rapOwnerRentalHistoryController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapOwneradditionaldocuments', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/FilePetition/Owner/AdditionalDocuments.html',
+        controller: 'rapOwnerDocumentsController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapOwnerreview', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/FilePetition/Owner/Review.html',
+        controller: 'rapOwnerReviewController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapOwnerverification', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/FilePetition/Owner/Verification.html',
+        controller: 'rapOwnerVerificationController',
         controllerAs: 'Ctrl'
     };
 })

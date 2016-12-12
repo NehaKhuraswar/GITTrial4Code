@@ -35,6 +35,7 @@ namespace RAP.DAL
         ReturnResult<bool> SaveRentIncreaseReasonInfo(OwnerPetitionInfoM petition);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(OwnerPetitionPropertyInfoM model);
+        ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model);
 
 
      //   ReturnResult<CaseInfoM> GetCaseDetails(int caseID);

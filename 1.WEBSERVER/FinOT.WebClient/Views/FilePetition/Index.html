@@ -80,6 +80,9 @@
                         <li class="current"><a ng-click="Ctrl.ShowOwnerJustification()">Justification For Rent Increase</a></li>
                         <li class="current"><a ng-click="Ctrl.ShowOwnerRentalProperty()">Rental Property</a></li>
                         <li class="current"><a ng-click="Ctrl.ShowOwnerRentalHistory()">Rental History</a></li>
+                        <li class="current"><a ng-click="Ctrl.ShowOwnerAdditionalDocuments()">Additional Documents</a></li>
+                        <li class="current"><a ng-click="Ctrl.ShowOwnerReview()">Review</a></li>
+                        <li class="current"><a ng-click="Ctrl.ShowOwnerVerification()">Verification</a></li>
                     </ul>
 </div>
                 <div class="col-md-9 col-sm-12">
@@ -127,6 +130,15 @@
                             </div>
                             <div ng-if="Ctrl.ownerRentalHistory">
                                 <rap-ownerrentalhistory ng-show="Ctrl.ownerRentalHistory" model="Ctrl"></rap-ownerrentalhistory>
+                            </div>
+                            <div ng-if="Ctrl.ownerAdditionalDocuments">
+                                <rap-owneradditionaldocuments ng-show="Ctrl.ownerAdditionalDocuments" model="Ctrl"></rap-owneradditionaldocuments>
+                            </div>
+                            <div ng-if="Ctrl.ownerReview">
+                                <rap-ownerreview ng-show="Ctrl.ownerReview" model="Ctrl"></rap-ownerreview>
+                            </div>
+                            <div ng-if="Ctrl.ownerVerification">
+                                <rap-ownerverification ng-show="Ctrl.ownerVerification" model="Ctrl"></rap-ownerverification>
                             </div>
                         </form>
                     </div>

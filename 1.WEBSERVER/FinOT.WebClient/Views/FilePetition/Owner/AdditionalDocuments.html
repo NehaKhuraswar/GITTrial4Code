@@ -1,0 +1,118 @@
+﻿div class="application-form-wrapper">
+<div class="row">
+    <div class="col-md-3 col-sm-12">
+        <?php include('sidebar-tenant-petition.html'); ?>
+    </div>
+
+
+    <div class="col-md-9 col-sm-12">
+        <div class="application-step step-1">
+            <h3 class="step-heading">Tenant Petition: <span>Additional Documentation</span></h3>
+
+            <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
+                <div class="step-content step1">
+
+                    <div class="field-group subhead no-top-margin">
+                        <p>Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine as part of your petition.</p>
+                    </div>
+
+                    <div class="field-group no-top-margin">
+                        <div class="accordion additional-docs">
+                            <div class="item">
+                                <div class="item-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-6">
+                                            <a href="#" class="btn-toggle"></a>
+                                            <div class="file-name">Rental_expenses.xsl</div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-6">
+                                            <div class="file-type">Excel</div>
+                                        </div>
+                                    </div><!-- .row -->
+                                    <a href="#" class="btn-link btn-delete">Delete</a>
+                                </div>
+
+                                <div class="item-content">
+                                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                </div>
+                            </div>
+
+                            <div class="item additional-doc">
+                                <div class="item-header">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-6">
+                                            <a href="#" class="btn-toggle"></a>
+                                            <div class="file-name">Rental_expenses.doc</div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-6">
+                                            <div class="file-type">Word</div>
+                                        </div>
+                                    </div><!-- .row -->
+                                    <a href="#" class="btn-link btn-delete">Delete</a>
+                                </div>
+
+                                <div class="item-content">
+                                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                </div>
+                            </div>
+                        </div><!-- .accordion -->
+                    </div><!-- .field-group -->
+
+                    <div class="field-group subhead">
+                        <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
+                        <div class="full-width">
+                            <select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
+                                <option value="Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="document_description">If none of the above options apply, please provide a description of the file that you are uploading below:</label>
+                        <textarea name="document_description" id="document_description" class="field-input textarea" rows="8"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <label for="file_type">File type</label>
+                                <select name="file_type" id="file_type" class="custom-select" data-placeholder="Select type">
+                                    <option value="PDF">PDF</option>
+                                    <option value="RTF">RTF</option>
+                                    <option value="Word">Word</option>
+                                    <option value="Excel">Excel</option>
+                                    <option value="JPEG">JPEG</option>
+                                    <option value="GIF">GIF</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p><strong>The maximum file size limit for uploads is 25MB</strong></p>
+
+                    <div class="field-group">
+                        <div class="field-addfile">
+                            <div class="input-file-wrapper">
+                                <span class="btn-link">Attach documentation</span>
+                                <input type="file" id="attach_documentation" name="attach_documentation" />
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn-link">Add another lost service description</a>
+                        <p>&nbsp;</p>
+                    </div><!-- .field-group -->
+
+                </div>
+
+
+                <div class="step-footer">
+                    <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ 
+

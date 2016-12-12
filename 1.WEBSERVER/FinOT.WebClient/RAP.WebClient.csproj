@@ -112,6 +112,9 @@
     <Content Include="Application\2.Controllers\rapAppellantsInfoController.js" />
     <Content Include="Application\2.Controllers\rapApplicationInfoController.js" />
     <Content Include="Application\2.Controllers\rapadmindashboardController.js" />
+    <Content Include="Application\2.Controllers\rapOwnerDocumentsController.js" />
+    <Content Include="Application\2.Controllers\rapOwnerReviewController.js" />
+    <Content Include="Application\2.Controllers\rapOwnerVerificationController.js" />
     <Content Include="Application\2.Controllers\rapResendPinController.js" />
     <Content Include="Application\2.Controllers\rapChangePasswordController.js" />
     <Content Include="Application\2.Controllers\rapOwnerRentalHistoryController.js" />
@@ -147,6 +150,7 @@
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapapplicationinfoFactory.js" />
+    <Content Include="Application\3.Factories\rapOwnerVerificationFactory.js" />
     <Content Include="Application\3.Factories\rapresendpinFactory.js" />
     <Content Include="Application\3.Factories\rapcityuserregisterFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
@@ -252,11 +256,14 @@
     <Content Include="Views\Account\Login.html" />
     <Content Include="Views\FilePetition\Index.html" />
     <Content Include="Views\FilePetition\LostServices.html" />
+    <Content Include="Views\FilePetition\Owner\AdditionalDocuments.html" />
     <Content Include="Views\FilePetition\Owner\ApplicantInformation.html" />
     <Content Include="Views\FilePetition\Owner\ImportantInformation.html" />
     <Content Include="Views\FilePetition\Owner\Justification.html" />
     <Content Include="Views\FilePetition\Owner\RentalHistory.html" />
     <Content Include="Views\FilePetition\Owner\RentalProperty.html" />
+    <Content Include="Views\FilePetition\Owner\Review.html" />
+    <Content Include="Views\FilePetition\Owner\Verification.html" />
     <Content Include="Views\FilePetition\RentalHistory.html" />
     <Content Include="Views\FilePetition\Review.html" />
     <Content Include="Views\FilePetition\Verification.html" />

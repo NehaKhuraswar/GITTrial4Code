@@ -57,9 +57,6 @@ namespace RAP.DAL
     partial void InsertAppealOpposingParty(AppealOpposingParty instance);
     partial void UpdateAppealOpposingParty(AppealOpposingParty instance);
     partial void DeleteAppealOpposingParty(AppealOpposingParty instance);
-    partial void InsertOwnerPetitionInfo(OwnerPetitionInfo instance);
-    partial void UpdateOwnerPetitionInfo(OwnerPetitionInfo instance);
-    partial void DeleteOwnerPetitionInfo(OwnerPetitionInfo instance);
     partial void InsertOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
     partial void UpdateOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
     partial void DeleteOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
@@ -102,6 +99,9 @@ namespace RAP.DAL
     partial void InsertCaseDetail(CaseDetail instance);
     partial void UpdateCaseDetail(CaseDetail instance);
     partial void DeleteCaseDetail(CaseDetail instance);
+    partial void InsertOwnerPetitionInfo(OwnerPetitionInfo instance);
+    partial void UpdateOwnerPetitionInfo(OwnerPetitionInfo instance);
+    partial void DeleteOwnerPetitionInfo(OwnerPetitionInfo instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -203,14 +203,6 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<AppealOpposingParty>();
-			}
-		}
-		
-		public System.Data.Linq.Table<OwnerPetitionInfo> OwnerPetitionInfos
-		{
-			get
-			{
-				return this.GetTable<OwnerPetitionInfo>();
 			}
 		}
 		
@@ -331,6 +323,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<CaseDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OwnerPetitionInfo> OwnerPetitionInfos
+		{
+			get
+			{
+				return this.GetTable<OwnerPetitionInfo>();
 			}
 		}
 	}
@@ -1820,342 +1820,6 @@ namespace RAP.DAL
 					this._ModifiedDate = value;
 					this.SendPropertyChanged("ModifiedDate");
 					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OwnerPetitionInfo")]
-	public partial class OwnerPetitionInfo : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _OwnerPetitionID;
-		
-		private int _OwnerPetitionApplicantInfoID;
-		
-		private System.Nullable<int> _OwnerPropertyID;
-		
-		private System.Nullable<bool> _bPetitionFiledByThirdParty;
-		
-		private System.Nullable<bool> _bAgreeToCityMediation;
-		
-		private int _PetitionFiledBy;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private string _LastModifiedBy;
-		
-		private System.Nullable<System.DateTime> _LastModifiedDate;
-		
-		private EntityRef<OwnerPetitionApplicantInfo> _OwnerPetitionApplicantInfo;
-		
-		private EntityRef<OwnerPetitionPropertyInfo> _OwnerPetitionPropertyInfo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnOwnerPetitionIDChanging(int value);
-    partial void OnOwnerPetitionIDChanged();
-    partial void OnOwnerPetitionApplicantInfoIDChanging(int value);
-    partial void OnOwnerPetitionApplicantInfoIDChanged();
-    partial void OnOwnerPropertyIDChanging(System.Nullable<int> value);
-    partial void OnOwnerPropertyIDChanged();
-    partial void OnbPetitionFiledByThirdPartyChanging(System.Nullable<bool> value);
-    partial void OnbPetitionFiledByThirdPartyChanged();
-    partial void OnbAgreeToCityMediationChanging(System.Nullable<bool> value);
-    partial void OnbAgreeToCityMediationChanged();
-    partial void OnPetitionFiledByChanging(int value);
-    partial void OnPetitionFiledByChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnLastModifiedByChanging(string value);
-    partial void OnLastModifiedByChanged();
-    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnLastModifiedDateChanged();
-    #endregion
-		
-		public OwnerPetitionInfo()
-		{
-			this._OwnerPetitionApplicantInfo = default(EntityRef<OwnerPetitionApplicantInfo>);
-			this._OwnerPetitionPropertyInfo = default(EntityRef<OwnerPetitionPropertyInfo>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerPetitionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int OwnerPetitionID
-		{
-			get
-			{
-				return this._OwnerPetitionID;
-			}
-			set
-			{
-				if ((this._OwnerPetitionID != value))
-				{
-					this.OnOwnerPetitionIDChanging(value);
-					this.SendPropertyChanging();
-					this._OwnerPetitionID = value;
-					this.SendPropertyChanged("OwnerPetitionID");
-					this.OnOwnerPetitionIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerPetitionApplicantInfoID", DbType="Int NOT NULL")]
-		public int OwnerPetitionApplicantInfoID
-		{
-			get
-			{
-				return this._OwnerPetitionApplicantInfoID;
-			}
-			set
-			{
-				if ((this._OwnerPetitionApplicantInfoID != value))
-				{
-					if (this._OwnerPetitionApplicantInfo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOwnerPetitionApplicantInfoIDChanging(value);
-					this.SendPropertyChanging();
-					this._OwnerPetitionApplicantInfoID = value;
-					this.SendPropertyChanged("OwnerPetitionApplicantInfoID");
-					this.OnOwnerPetitionApplicantInfoIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerPropertyID", DbType="Int")]
-		public System.Nullable<int> OwnerPropertyID
-		{
-			get
-			{
-				return this._OwnerPropertyID;
-			}
-			set
-			{
-				if ((this._OwnerPropertyID != value))
-				{
-					if (this._OwnerPetitionPropertyInfo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOwnerPropertyIDChanging(value);
-					this.SendPropertyChanging();
-					this._OwnerPropertyID = value;
-					this.SendPropertyChanged("OwnerPropertyID");
-					this.OnOwnerPropertyIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bPetitionFiledByThirdParty", DbType="Bit")]
-		public System.Nullable<bool> bPetitionFiledByThirdParty
-		{
-			get
-			{
-				return this._bPetitionFiledByThirdParty;
-			}
-			set
-			{
-				if ((this._bPetitionFiledByThirdParty != value))
-				{
-					this.OnbPetitionFiledByThirdPartyChanging(value);
-					this.SendPropertyChanging();
-					this._bPetitionFiledByThirdParty = value;
-					this.SendPropertyChanged("bPetitionFiledByThirdParty");
-					this.OnbPetitionFiledByThirdPartyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bAgreeToCityMediation", DbType="Bit")]
-		public System.Nullable<bool> bAgreeToCityMediation
-		{
-			get
-			{
-				return this._bAgreeToCityMediation;
-			}
-			set
-			{
-				if ((this._bAgreeToCityMediation != value))
-				{
-					this.OnbAgreeToCityMediationChanging(value);
-					this.SendPropertyChanging();
-					this._bAgreeToCityMediation = value;
-					this.SendPropertyChanged("bAgreeToCityMediation");
-					this.OnbAgreeToCityMediationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PetitionFiledBy", DbType="Int NOT NULL")]
-		public int PetitionFiledBy
-		{
-			get
-			{
-				return this._PetitionFiledBy;
-			}
-			set
-			{
-				if ((this._PetitionFiledBy != value))
-				{
-					this.OnPetitionFiledByChanging(value);
-					this.SendPropertyChanging();
-					this._PetitionFiledBy = value;
-					this.SendPropertyChanged("PetitionFiledBy");
-					this.OnPetitionFiledByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedBy", DbType="VarChar(25)")]
-		public string LastModifiedBy
-		{
-			get
-			{
-				return this._LastModifiedBy;
-			}
-			set
-			{
-				if ((this._LastModifiedBy != value))
-				{
-					this.OnLastModifiedByChanging(value);
-					this.SendPropertyChanging();
-					this._LastModifiedBy = value;
-					this.SendPropertyChanged("LastModifiedBy");
-					this.OnLastModifiedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> LastModifiedDate
-		{
-			get
-			{
-				return this._LastModifiedDate;
-			}
-			set
-			{
-				if ((this._LastModifiedDate != value))
-				{
-					this.OnLastModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._LastModifiedDate = value;
-					this.SendPropertyChanged("LastModifiedDate");
-					this.OnLastModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionApplicantInfo_OwnerPetitionInfo", Storage="_OwnerPetitionApplicantInfo", ThisKey="OwnerPetitionApplicantInfoID", OtherKey="OwnerPetitionApplicantInfoID", IsForeignKey=true)]
-		public OwnerPetitionApplicantInfo OwnerPetitionApplicantInfo
-		{
-			get
-			{
-				return this._OwnerPetitionApplicantInfo.Entity;
-			}
-			set
-			{
-				OwnerPetitionApplicantInfo previousValue = this._OwnerPetitionApplicantInfo.Entity;
-				if (((previousValue != value) 
-							|| (this._OwnerPetitionApplicantInfo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._OwnerPetitionApplicantInfo.Entity = null;
-						previousValue.OwnerPetitionInfos.Remove(this);
-					}
-					this._OwnerPetitionApplicantInfo.Entity = value;
-					if ((value != null))
-					{
-						value.OwnerPetitionInfos.Add(this);
-						this._OwnerPetitionApplicantInfoID = value.OwnerPetitionApplicantInfoID;
-					}
-					else
-					{
-						this._OwnerPetitionApplicantInfoID = default(int);
-					}
-					this.SendPropertyChanged("OwnerPetitionApplicantInfo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo", Storage="_OwnerPetitionPropertyInfo", ThisKey="OwnerPropertyID", OtherKey="OwnerPropertyID", IsForeignKey=true)]
-		public OwnerPetitionPropertyInfo OwnerPetitionPropertyInfo
-		{
-			get
-			{
-				return this._OwnerPetitionPropertyInfo.Entity;
-			}
-			set
-			{
-				OwnerPetitionPropertyInfo previousValue = this._OwnerPetitionPropertyInfo.Entity;
-				if (((previousValue != value) 
-							|| (this._OwnerPetitionPropertyInfo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._OwnerPetitionPropertyInfo.Entity = null;
-						previousValue.OwnerPetitionInfos.Remove(this);
-					}
-					this._OwnerPetitionPropertyInfo.Entity = value;
-					if ((value != null))
-					{
-						value.OwnerPetitionInfos.Add(this);
-						this._OwnerPropertyID = value.OwnerPropertyID;
-					}
-					else
-					{
-						this._OwnerPropertyID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("OwnerPetitionPropertyInfo");
 				}
 			}
 		}
@@ -4555,9 +4219,9 @@ namespace RAP.DAL
 		
 		private bool _bPetitionFiled;
 		
-		private EntitySet<OwnerPetitionInfo> _OwnerPetitionInfos;
-		
 		private EntitySet<OwnerRentIncreaseReasonInfo> _OwnerRentIncreaseReasonInfos;
+		
+		private EntitySet<OwnerPetitionInfo> _OwnerPetitionInfos;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4593,8 +4257,8 @@ namespace RAP.DAL
 		
 		public OwnerPetitionApplicantInfo()
 		{
-			this._OwnerPetitionInfos = new EntitySet<OwnerPetitionInfo>(new Action<OwnerPetitionInfo>(this.attach_OwnerPetitionInfos), new Action<OwnerPetitionInfo>(this.detach_OwnerPetitionInfos));
 			this._OwnerRentIncreaseReasonInfos = new EntitySet<OwnerRentIncreaseReasonInfo>(new Action<OwnerRentIncreaseReasonInfo>(this.attach_OwnerRentIncreaseReasonInfos), new Action<OwnerRentIncreaseReasonInfo>(this.detach_OwnerRentIncreaseReasonInfos));
+			this._OwnerPetitionInfos = new EntitySet<OwnerPetitionInfo>(new Action<OwnerPetitionInfo>(this.attach_OwnerPetitionInfos), new Action<OwnerPetitionInfo>(this.detach_OwnerPetitionInfos));
 			OnCreated();
 		}
 		
@@ -4858,19 +4522,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionApplicantInfo_OwnerPetitionInfo", Storage="_OwnerPetitionInfos", ThisKey="OwnerPetitionApplicantInfoID", OtherKey="OwnerPetitionApplicantInfoID")]
-		public EntitySet<OwnerPetitionInfo> OwnerPetitionInfos
-		{
-			get
-			{
-				return this._OwnerPetitionInfos;
-			}
-			set
-			{
-				this._OwnerPetitionInfos.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionApplicantInfo_OwnerRentIncreaseReasonInfo", Storage="_OwnerRentIncreaseReasonInfos", ThisKey="OwnerPetitionApplicantInfoID", OtherKey="OwnerPetitionApplicantInfoID")]
 		public EntitySet<OwnerRentIncreaseReasonInfo> OwnerRentIncreaseReasonInfos
 		{
@@ -4881,6 +4532,19 @@ namespace RAP.DAL
 			set
 			{
 				this._OwnerRentIncreaseReasonInfos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionApplicantInfo_OwnerPetitionInfo", Storage="_OwnerPetitionInfos", ThisKey="OwnerPetitionApplicantInfoID", OtherKey="OwnerPetitionApplicantInfoID")]
+		public EntitySet<OwnerPetitionInfo> OwnerPetitionInfos
+		{
+			get
+			{
+				return this._OwnerPetitionInfos;
+			}
+			set
+			{
+				this._OwnerPetitionInfos.Assign(value);
 			}
 		}
 		
@@ -4904,18 +4568,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		private void attach_OwnerPetitionInfos(OwnerPetitionInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerPetitionApplicantInfo = this;
-		}
-		
-		private void detach_OwnerPetitionInfos(OwnerPetitionInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerPetitionApplicantInfo = null;
-		}
-		
 		private void attach_OwnerRentIncreaseReasonInfos(OwnerRentIncreaseReasonInfo entity)
 		{
 			this.SendPropertyChanging();
@@ -4923,6 +4575,18 @@ namespace RAP.DAL
 		}
 		
 		private void detach_OwnerRentIncreaseReasonInfos(OwnerRentIncreaseReasonInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerPetitionApplicantInfo = null;
+		}
+		
+		private void attach_OwnerPetitionInfos(OwnerPetitionInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerPetitionApplicantInfo = this;
+		}
+		
+		private void detach_OwnerPetitionInfos(OwnerPetitionInfo entity)
 		{
 			this.SendPropertyChanging();
 			entity.OwnerPetitionApplicantInfo = null;
@@ -4953,11 +4617,11 @@ namespace RAP.DAL
 		
 		private System.Nullable<int> _RAPNoticeStatusID;
 		
-		private EntitySet<OwnerPetitionInfo> _OwnerPetitionInfos;
-		
 		private EntitySet<OwnerPetitionTenantInfo> _OwnerPetitionTenantInfos;
 		
 		private EntitySet<OwnerPetitionRentalIncrementInfo> _OwnerPetitionRentalIncrementInfos;
+		
+		private EntitySet<OwnerPetitionInfo> _OwnerPetitionInfos;
 		
 		private EntityRef<CurrentOnRentStatus> _CurrentOnRentStatus;
 		
@@ -4989,9 +4653,9 @@ namespace RAP.DAL
 		
 		public OwnerPetitionPropertyInfo()
 		{
-			this._OwnerPetitionInfos = new EntitySet<OwnerPetitionInfo>(new Action<OwnerPetitionInfo>(this.attach_OwnerPetitionInfos), new Action<OwnerPetitionInfo>(this.detach_OwnerPetitionInfos));
 			this._OwnerPetitionTenantInfos = new EntitySet<OwnerPetitionTenantInfo>(new Action<OwnerPetitionTenantInfo>(this.attach_OwnerPetitionTenantInfos), new Action<OwnerPetitionTenantInfo>(this.detach_OwnerPetitionTenantInfos));
 			this._OwnerPetitionRentalIncrementInfos = new EntitySet<OwnerPetitionRentalIncrementInfo>(new Action<OwnerPetitionRentalIncrementInfo>(this.attach_OwnerPetitionRentalIncrementInfos), new Action<OwnerPetitionRentalIncrementInfo>(this.detach_OwnerPetitionRentalIncrementInfos));
+			this._OwnerPetitionInfos = new EntitySet<OwnerPetitionInfo>(new Action<OwnerPetitionInfo>(this.attach_OwnerPetitionInfos), new Action<OwnerPetitionInfo>(this.detach_OwnerPetitionInfos));
 			this._CurrentOnRentStatus = default(EntityRef<CurrentOnRentStatus>);
 			this._UnitType = default(EntityRef<UnitType>);
 			OnCreated();
@@ -5185,19 +4849,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo", Storage="_OwnerPetitionInfos", ThisKey="OwnerPropertyID", OtherKey="OwnerPropertyID")]
-		public EntitySet<OwnerPetitionInfo> OwnerPetitionInfos
-		{
-			get
-			{
-				return this._OwnerPetitionInfos;
-			}
-			set
-			{
-				this._OwnerPetitionInfos.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionPropertyInfo_OwnerPetitionTenantInfo", Storage="_OwnerPetitionTenantInfos", ThisKey="OwnerPropertyID", OtherKey="OwnerPropertyID")]
 		public EntitySet<OwnerPetitionTenantInfo> OwnerPetitionTenantInfos
 		{
@@ -5221,6 +4872,19 @@ namespace RAP.DAL
 			set
 			{
 				this._OwnerPetitionRentalIncrementInfos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo", Storage="_OwnerPetitionInfos", ThisKey="OwnerPropertyID", OtherKey="OwnerPropertyID")]
+		public EntitySet<OwnerPetitionInfo> OwnerPetitionInfos
+		{
+			get
+			{
+				return this._OwnerPetitionInfos;
+			}
+			set
+			{
+				this._OwnerPetitionInfos.Assign(value);
 			}
 		}
 		
@@ -5312,18 +4976,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		private void attach_OwnerPetitionInfos(OwnerPetitionInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerPetitionPropertyInfo = this;
-		}
-		
-		private void detach_OwnerPetitionInfos(OwnerPetitionInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerPetitionPropertyInfo = null;
-		}
-		
 		private void attach_OwnerPetitionTenantInfos(OwnerPetitionTenantInfo entity)
 		{
 			this.SendPropertyChanging();
@@ -5343,6 +4995,18 @@ namespace RAP.DAL
 		}
 		
 		private void detach_OwnerPetitionRentalIncrementInfos(OwnerPetitionRentalIncrementInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerPetitionPropertyInfo = null;
+		}
+		
+		private void attach_OwnerPetitionInfos(OwnerPetitionInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerPetitionPropertyInfo = this;
+		}
+		
+		private void detach_OwnerPetitionInfos(OwnerPetitionInfo entity)
 		{
 			this.SendPropertyChanging();
 			entity.OwnerPetitionPropertyInfo = null;
@@ -5845,6 +5509,318 @@ namespace RAP.DAL
 						this._PetitionID = default(int);
 					}
 					this.SendPropertyChanged("PetitionDetail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OwnerPetitionInfo")]
+	public partial class OwnerPetitionInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _OwnerPetitionID;
+		
+		private int _OwnerPetitionApplicantInfoID;
+		
+		private System.Nullable<int> _OwnerPropertyID;
+		
+		private System.Nullable<bool> _bPetitionFiledByThirdParty;
+		
+		private System.Nullable<bool> _bAgreeToCityMediation;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private string _LastModifiedBy;
+		
+		private System.Nullable<System.DateTime> _LastModifiedDate;
+		
+		private EntityRef<OwnerPetitionApplicantInfo> _OwnerPetitionApplicantInfo;
+		
+		private EntityRef<OwnerPetitionPropertyInfo> _OwnerPetitionPropertyInfo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOwnerPetitionIDChanging(int value);
+    partial void OnOwnerPetitionIDChanged();
+    partial void OnOwnerPetitionApplicantInfoIDChanging(int value);
+    partial void OnOwnerPetitionApplicantInfoIDChanged();
+    partial void OnOwnerPropertyIDChanging(System.Nullable<int> value);
+    partial void OnOwnerPropertyIDChanged();
+    partial void OnbPetitionFiledByThirdPartyChanging(System.Nullable<bool> value);
+    partial void OnbPetitionFiledByThirdPartyChanged();
+    partial void OnbAgreeToCityMediationChanging(System.Nullable<bool> value);
+    partial void OnbAgreeToCityMediationChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnLastModifiedByChanging(string value);
+    partial void OnLastModifiedByChanged();
+    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastModifiedDateChanged();
+    #endregion
+		
+		public OwnerPetitionInfo()
+		{
+			this._OwnerPetitionApplicantInfo = default(EntityRef<OwnerPetitionApplicantInfo>);
+			this._OwnerPetitionPropertyInfo = default(EntityRef<OwnerPetitionPropertyInfo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerPetitionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int OwnerPetitionID
+		{
+			get
+			{
+				return this._OwnerPetitionID;
+			}
+			set
+			{
+				if ((this._OwnerPetitionID != value))
+				{
+					this.OnOwnerPetitionIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerPetitionID = value;
+					this.SendPropertyChanged("OwnerPetitionID");
+					this.OnOwnerPetitionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerPetitionApplicantInfoID", DbType="Int NOT NULL")]
+		public int OwnerPetitionApplicantInfoID
+		{
+			get
+			{
+				return this._OwnerPetitionApplicantInfoID;
+			}
+			set
+			{
+				if ((this._OwnerPetitionApplicantInfoID != value))
+				{
+					if (this._OwnerPetitionApplicantInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOwnerPetitionApplicantInfoIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerPetitionApplicantInfoID = value;
+					this.SendPropertyChanged("OwnerPetitionApplicantInfoID");
+					this.OnOwnerPetitionApplicantInfoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerPropertyID", DbType="Int")]
+		public System.Nullable<int> OwnerPropertyID
+		{
+			get
+			{
+				return this._OwnerPropertyID;
+			}
+			set
+			{
+				if ((this._OwnerPropertyID != value))
+				{
+					if (this._OwnerPetitionPropertyInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOwnerPropertyIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerPropertyID = value;
+					this.SendPropertyChanged("OwnerPropertyID");
+					this.OnOwnerPropertyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bPetitionFiledByThirdParty", DbType="Bit")]
+		public System.Nullable<bool> bPetitionFiledByThirdParty
+		{
+			get
+			{
+				return this._bPetitionFiledByThirdParty;
+			}
+			set
+			{
+				if ((this._bPetitionFiledByThirdParty != value))
+				{
+					this.OnbPetitionFiledByThirdPartyChanging(value);
+					this.SendPropertyChanging();
+					this._bPetitionFiledByThirdParty = value;
+					this.SendPropertyChanged("bPetitionFiledByThirdParty");
+					this.OnbPetitionFiledByThirdPartyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bAgreeToCityMediation", DbType="Bit")]
+		public System.Nullable<bool> bAgreeToCityMediation
+		{
+			get
+			{
+				return this._bAgreeToCityMediation;
+			}
+			set
+			{
+				if ((this._bAgreeToCityMediation != value))
+				{
+					this.OnbAgreeToCityMediationChanging(value);
+					this.SendPropertyChanging();
+					this._bAgreeToCityMediation = value;
+					this.SendPropertyChanged("bAgreeToCityMediation");
+					this.OnbAgreeToCityMediationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedBy", DbType="VarChar(25)")]
+		public string LastModifiedBy
+		{
+			get
+			{
+				return this._LastModifiedBy;
+			}
+			set
+			{
+				if ((this._LastModifiedBy != value))
+				{
+					this.OnLastModifiedByChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedBy = value;
+					this.SendPropertyChanged("LastModifiedBy");
+					this.OnLastModifiedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this.OnLastModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedDate = value;
+					this.SendPropertyChanged("LastModifiedDate");
+					this.OnLastModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionApplicantInfo_OwnerPetitionInfo", Storage="_OwnerPetitionApplicantInfo", ThisKey="OwnerPetitionApplicantInfoID", OtherKey="OwnerPetitionApplicantInfoID", IsForeignKey=true)]
+		public OwnerPetitionApplicantInfo OwnerPetitionApplicantInfo
+		{
+			get
+			{
+				return this._OwnerPetitionApplicantInfo.Entity;
+			}
+			set
+			{
+				OwnerPetitionApplicantInfo previousValue = this._OwnerPetitionApplicantInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._OwnerPetitionApplicantInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OwnerPetitionApplicantInfo.Entity = null;
+						previousValue.OwnerPetitionInfos.Remove(this);
+					}
+					this._OwnerPetitionApplicantInfo.Entity = value;
+					if ((value != null))
+					{
+						value.OwnerPetitionInfos.Add(this);
+						this._OwnerPetitionApplicantInfoID = value.OwnerPetitionApplicantInfoID;
+					}
+					else
+					{
+						this._OwnerPetitionApplicantInfoID = default(int);
+					}
+					this.SendPropertyChanged("OwnerPetitionApplicantInfo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo", Storage="_OwnerPetitionPropertyInfo", ThisKey="OwnerPropertyID", OtherKey="OwnerPropertyID", IsForeignKey=true)]
+		public OwnerPetitionPropertyInfo OwnerPetitionPropertyInfo
+		{
+			get
+			{
+				return this._OwnerPetitionPropertyInfo.Entity;
+			}
+			set
+			{
+				OwnerPetitionPropertyInfo previousValue = this._OwnerPetitionPropertyInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._OwnerPetitionPropertyInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OwnerPetitionPropertyInfo.Entity = null;
+						previousValue.OwnerPetitionInfos.Remove(this);
+					}
+					this._OwnerPetitionPropertyInfo.Entity = value;
+					if ((value != null))
+					{
+						value.OwnerPetitionInfos.Add(this);
+						this._OwnerPropertyID = value.OwnerPropertyID;
+					}
+					else
+					{
+						this._OwnerPropertyID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("OwnerPetitionPropertyInfo");
 				}
 			}
 		}

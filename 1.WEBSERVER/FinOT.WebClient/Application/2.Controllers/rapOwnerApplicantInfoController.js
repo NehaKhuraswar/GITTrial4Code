@@ -15,10 +15,10 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         });
     }
     _GetStateList();
-
+    self.caseinfo.CaseFileBy = self.custDetails.custID;
     if (self.caseinfo.bCaseFiledByThirdParty == false)
     {
-        self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = self.custDetails.User;
+        self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = self.custDetails.User;        
     }
     else
     {

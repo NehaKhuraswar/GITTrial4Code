@@ -35,5 +35,6 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOwnerPropertyAndTenantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model);
     }
 }
