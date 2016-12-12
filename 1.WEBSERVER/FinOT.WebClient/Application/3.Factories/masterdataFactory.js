@@ -30,6 +30,15 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
             blockUI.stop();
         });
     }
+    var _GetAnalysts = function () {
+        blockUI.start();
+        var url = 'api/dashboard' + '/getanalysts'
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     var _AssignAnalyst = function (C_ID, AnalystUserID) {
         blockUI.start();
