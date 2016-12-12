@@ -2398,6 +2398,12 @@ namespace RAP.DAL
                 model.C_ID = caseDetails.C_ID;
                 model.CaseID = caseDetails.CaseID;
 
+                var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == model.OwnerPetitionInfo.ApplicantInfo.OwnerPetitionApplicantInfoID).FirstOrDefault();
+                applicantInfo.bPetitionFiled = true;             
+                var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == model.OwnerPetitionInfo.PropertyInfo.OwnerPropertyID).FirstOrDefault();
+                propertyInfo.bPetitionFiled = true;
+                _dbContext.SubmitChanges();
+
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
