@@ -85,7 +85,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapOwnerApplicantInfoController', rapOwnerApplicantInfoController)
     .controller('rapOwnerJustificationController', rapOwnerJustificationController)
     .controller('rapOwnerRentalPropertyController', rapOwnerRentalPropertyController)
-    .controller('rapOwnerRentalPropertyController', rapOwnerRentalPropertyController)
+    .controller('rapOwnerRentalHistoryController', rapOwnerRentalHistoryController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -338,7 +338,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             model: '=model',
         },
         templateUrl: 'Views/FilePetition/Owner/RentalHistory.html',
-        controller: 'rapOwnerRentalPropertyController',
+        controller: 'rapOwnerRentalHistoryController',
         controllerAs: 'Ctrl'
     };
 })

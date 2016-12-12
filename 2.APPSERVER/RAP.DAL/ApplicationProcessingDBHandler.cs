@@ -1877,7 +1877,7 @@ namespace RAP.DAL
             try
             {
                 model.RAPNoticeStatus = getRAPNoticeStatus();
-
+                model.CurrentOnRent = getCurrentRentStatus();
                 if (model.OwnerPetitionInfo.PropertyInfo.OwnerPropertyID > 0)
                 {
                     var propertyInfo = (from r in _dbContext.OwnerPetitionPropertyInfos
@@ -1887,7 +1887,7 @@ namespace RAP.DAL
                     {
                         model.OwnerPetitionInfo.PropertyInfo.MovedInDate = (propertyInfo.MovedInDate == null) ? null :  _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.MovedInDate));
                         model.OwnerPetitionInfo.PropertyInfo.InitialRent = propertyInfo.InitialRent;
-                        model.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID = propertyInfo.RentStatusID;
+                        model.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID = propertyInfo.RAPNoticeStatusID;
                         model.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate = (propertyInfo.RAPNoticeGivenDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeGivenDate));
                         model.OwnerPetitionInfo.PropertyInfo.RentStatusID = propertyInfo.RentStatusID;
                     }
@@ -2232,7 +2232,7 @@ namespace RAP.DAL
                     {
                         propertyInfo.First().MovedInDate = new DateTime(model.MovedInDate.Year, model.MovedInDate.Month, model.MovedInDate.Day);
                         propertyInfo.First().InitialRent = model.InitialRent;
-                        propertyInfo.First().RentStatusID = model.RAPNoticeStatusID;
+                        propertyInfo.First().RAPNoticeStatusID = model.RAPNoticeStatusID;
                         propertyInfo.First().RAPNoticeGivenDate = new DateTime(model.RAPNoticeGivenDate.Year, model.RAPNoticeGivenDate.Month, model.RAPNoticeGivenDate.Day);
                         propertyInfo.First().RentStatusID = model.RentStatusID;
                         _dbContext.SubmitChanges();
@@ -2457,7 +2457,25 @@ namespace RAP.DAL
                 }
             }
             return _rapStatus;
-        }    
+        }
+
+        private List<CurrentOnRentM> getCurrentRentStatus()
+        {
+            List<CurrentOnRentM> _rentStatusItems = new List<CurrentOnRentM>();
+            var rentStausItems = _dbContext.CurrentOnRentStatus;
+           if(rentStausItems !=null)
+            {
+                foreach (var rentStatusItem in rentStausItems)
+                {
+                    CurrentOnRentM _rentStatusItem = new CurrentOnRentM();
+                    _rentStatusItem.StatusID = rentStatusItem.RentStatusID;
+                    _rentStatusItem.Status = rentStatusItem.RentStatus;
+                    _rentStatusItems.Add(_rentStatusItem);
+                }
+            }
+           return _rentStatusItems;
+        }
+    
     
     }
 }

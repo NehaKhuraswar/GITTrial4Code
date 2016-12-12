@@ -32,7 +32,8 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
         });
-
+        $scope.model.ownerRentalProperty = false;
+        $scope.model.ownerRentalHistory = true;
     }
     self.AddTenant = function (_userInfo)
     {

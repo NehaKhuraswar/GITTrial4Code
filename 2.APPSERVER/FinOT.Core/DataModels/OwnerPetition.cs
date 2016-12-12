@@ -147,10 +147,15 @@ namespace RAP.Core.DataModels
 
     public class OwnerPetitionPropertyInfoM
     {
+        public OwnerPetitionPropertyInfoM()
+        {
+            MovedInDate = new CustomDate();
+            RAPNoticeGivenDate = new CustomDate();
+        }
         private List<OwnerPetitionTenantInfoM> _tenantInfo = new List<OwnerPetitionTenantInfoM>();
         private List<OwnerPetitionRentalIncrementInfoM> _rentalInfo = new List<OwnerPetitionRentalIncrementInfoM>();
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
-        private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
+        
         public int OwnerPropertyID { get; set; }
         public int UnitTypeID { get; set; }
         public CustomDate MovedInDate { get; set; }
@@ -194,17 +199,7 @@ namespace RAP.Core.DataModels
             }
         }
 
-        public List<CurrentOnRentM> CurrentOnRent
-        {
-            get
-            {
-                return _currentOnRent;
-            }
-            set
-            {
-                _currentOnRent = value;
-            }
-        }
+       
      
     }
 

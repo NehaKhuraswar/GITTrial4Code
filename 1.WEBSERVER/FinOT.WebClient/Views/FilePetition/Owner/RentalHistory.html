@@ -15,8 +15,9 @@
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="moved_month" class="hidden"></label>
-                                    <select name="moved_month" id="moved_month" class="custom-select" data-placeholder="Month">
-                                        <option value="1">January</option>
+                                    <select name="moved_month" id="moved_month" class="custom-select" data-placeholder="Month"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Month">
+                                        <option value=" 1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
                                         <option value="4">April</option>
@@ -33,7 +34,8 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="moved_day" class="hidden"></label>
-                                    <select name="moved_day" id="moved_day" class="custom-select" data-placeholder="Day">
+                                    <select name="moved_day" id="moved_day" class="custom-select" data-placeholder="Day"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Day">
                                         <option value="01">01</option>
                                         <option value="02">02</option>
                                         <option value="03">03</option>
@@ -70,17 +72,12 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="moved_year" class="hidden"></label>
-                                    <select name="moved_year" id="moved_year" class="custom-select" data-placeholder="Year">
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
+                                    <select name="moved_year" id="moved_year" class="custom-select" data-placeholder="Year"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Year">
+                                        <option ng-repeat="year in Ctrl.years"
+                                            value="{{year}}">
+                                        {{year}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -88,32 +85,29 @@
 
                         <div class="field-group">
                             <label for="initial_monthly_rent">The tenant’s initial monthly rent including all services provided was</label>
-                            <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input" placeholder="Enter dollar amount" />
+                            <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.InitialRent" placeholder="Enter dollar amount" />
                         </div>
 
                         <div class="field-group">
                             <p class="input-label">Have you (or a previous Owner) given the City of Oakland’s form entitled NOTICE TO TENANTS OF RESIDENTIAL RENT ADJUSTMENT PROGRAM (“RAP Notice”) to all of the petitioning tenants?</p>
                             <div class="form-group-radio vertical clearfix">
-                                <label for="rap_notice_yes">
-                                    <input type="radio" name="rap_notice" id="rap_notice_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
-                                </label>
-
-                                <label for="rap_notice_no">
-                                    <input type="radio" name="rap_notice" id="rap_notice_no" class="input-field" value="No" /><i></i> <span>No</span>
-                                </label>
-                                <label for="rap_notice_donot_know">
-                                    <input type="radio" name="rap_notice" id="rap_notice_donot_know" class="input-field" value="No" /><i></i> <span> I don’t know</span>
-                                </label>
+                                <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus" for="{{item.RAPNoticeStatusID}}">
+                                    <input type="radio" id="{{item.RAPNoticeStatusID}}" name="RAPNoticeStatus" class="input-field"
+                                           ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID"
+                                           ng-value="item.RAPNoticeStatusID"><i></i><span>{{item.RAPNoticeStatus}}</span>
+                                </label>                                
                                 <div class="clear"></div>
                             </div>
-                        </div>
-
-                        <div class="field-group">
+                        </div>  
+               
+                        <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID.toString() == 1">
                             <p class="input-label">On what date was the Notice first given?</p>
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="notice_given_month" class="hidden"></label>
-                                    <select name="notice_given_month" id="notice_given_month" class="custom-select" data-placeholder="Month">
+                                    <select name="notice_given_month" id="notice_given_month" class="custom-select"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Month"
+                                            data-placeholder="Month">
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
@@ -131,7 +125,8 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="notice_given_day" class="hidden"></label>
-                                    <select name="notice_given_day" id="notice_given_day" class="custom-select" data-placeholder="Day">
+                                    <select name="notice_given_day" id="notice_given_day" class="custom-select" data-placeholder="Day"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Day">                                            
                                         <option value="01">01</option>
                                         <option value="02">02</option>
                                         <option value="03">03</option>
@@ -168,17 +163,12 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="notice_given_year" class="hidden"></label>
-                                    <select name="notice_given_year" id="notice_given_year" class="custom-select" data-placeholder="Year">
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
+                                    <select name="notice_given_year" id="notice_given_year" class="custom-select" data-placeholder="Year"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Year">
+                                        <option ng-repeat="year in Ctrl.years"
+                                                value="{{year}}">
+                                            {{year}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -195,13 +185,20 @@
 
                         <div class="field-group">
                             <p class="input-label">Is the tenant current on the rent?</p>
+                            <!--<div class="form-group-radio vertical clearfix">
+                                <label ng-repeat="item in Ctrl.caseinfo.CurrentOnRent" for="{{item.StatusID}}">      
+                                    <input type="radio" id="{{item.StatusID}}" class="input-field" name="CurrentOnRent"
+                                           ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID"
+                                           ng-value="item.RentStatusID"><i></i><span>{{item.Status}}</span>
+                                </label>                  
+                                                            
+                                <div class="clear"></div>
+                            </div>-->
                             <div class="form-group-radio vertical clearfix">
-                                <label for="current_rent_yes">
-                                    <input type="radio" name="current_rent" id="current_rent_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
-                                </label>
-
-                                <label for="current_rent_no">
-                                    <input type="radio" name="current_rent" id="current_rent_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                <label ng-repeat="item in Ctrl.caseinfo.CurrentOnRent" for="{{item.StatusID}}">      
+                                    <input type="radio" id="{{item.StatusID}}" name="CurrentOnRent" class="input-field"
+                                           ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID"
+                                           ng-value="item.StatusID"><i></i><span>{{item.Status}}</span>
                                 </label>
                                 <div class="clear"></div>
                             </div>
@@ -226,11 +223,13 @@
                             <p class="input-label">Did you provide rent program notice with the notice of rent increase?</p>
                             <div class="form-group-radio vertical clearfix">
                                 <label for="rent_program_notice_yes">
-                                    <input type="radio" name="rent_program_notice" id="rent_program_notice_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                    <input type="radio" name="rent_program_notice" id="rent_program_notice_yes" class="input-field"
+                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.bRentIncreaseNoticeGiven" ng-view="true" /><i></i><span>Yes</span>
                                 </label>
 
                                 <label for="rent_program_notice_no">
-                                    <input type="radio" name="rent_program_notice" id="rent_program_notice_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                    <input type="radio" name="rent_program_notice" id="rent_program_notice_no" class="input-field"
+                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.bRentIncreaseNoticeGiven" ng-view="false" /><i></i> <span>No</span>
                                 </label>
                                 <div class="clear"></div>
                             </div>
@@ -241,7 +240,8 @@
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="date_notice_served_month" class="hidden"></label>
-                                    <select name="date_notice_served_month" id="date_notice_served_month" class="custom-select" data-placeholder="Month">
+                                    <select name="date_notice_served_month" id="date_notice_served_month" class="custom-select" data-placeholder="Month"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseNoticeDate.Month">
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
@@ -259,7 +259,8 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="date_notice_served_day" class="hidden"></label>
-                                    <select name="date_notice_served_day" id="date_notice_served_day" class="custom-select" data-placeholder="Day">
+                                    <select name="date_notice_served_day" id="date_notice_served_day" class="custom-select" data-placeholder="Day"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseNoticeDate.Day">
                                         <option value="01">01</option>
                                         <option value="02">02</option>
                                         <option value="03">03</option>
@@ -296,17 +297,12 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="date_notice_served_year" class="hidden"></label>
-                                    <select name="date_notice_served_year" id="date_notice_served_year" class="custom-select" data-placeholder="Year">
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
+                                    <select name="date_notice_served_year" id="date_notice_served_year" class="custom-select" data-placeholder="Year"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseNoticeDate.Year">
+                                        <option ng-repeat="year in Ctrl.years"
+                                                value="{{year}}">
+                                            {{year}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -317,12 +313,14 @@
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12">
                                     <label for="monthly_increase_from" class="hidden"></label>
-                                    <input type="text" name="monthly_increase_from" id="monthly_increase_from" class="field-input" placeholder="From" />
+                                    <input type="text" name="monthly_increase_from" id="monthly_increase_from" class="field-input" placeholder="From"
+                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreasedFrom" />
                                 </div>
 
                                 <div class="col-sm-6 col-xs-12">
                                     <label for="monthly_increase_to" class="hidden"></label>
-                                    <input type="text" name="monthly_increase_to" id="monthly_increase_to" class="field-input" placeholder="To" />
+                                    <input type="text" name="monthly_increase_to" id="monthly_increase_to" class="field-input" placeholder="To"
+                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreasedTo" />
                                 </div>
                             </div>
                         </div><!-- .field-group -->
@@ -332,7 +330,8 @@
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="date_increase_effective_month" class="hidden"></label>
-                                    <select name="date_increase_effective_month" id="date_increase_effective_month" class="custom-select" data-placeholder="Month">
+                                    <select name="date_increase_effective_month" id="date_increase_effective_month" class="custom-select" data-placeholder="Month"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseEffectiveDate.Month">
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>
@@ -350,7 +349,8 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="date_increase_effective_day" class="hidden"></label>
-                                    <select name="date_increase_effective_day" id="date_increase_effective_day" class="custom-select" data-placeholder="Day">
+                                    <select name="date_increase_effective_day" id="date_increase_effective_day" class="custom-select" data-placeholder="Day"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseEffectiveDate.Day">
                                         <option value="01">01</option>
                                         <option value="02">02</option>
                                         <option value="03">03</option>
@@ -387,27 +387,22 @@
 
                                 <div class="col-sm-4 col-xs-12">
                                     <label for="date_increase_effective_year" class="hidden"></label>
-                                    <select name="date_increase_effective_year" id="date_increase_effective_year" class="custom-select" data-placeholder="Year">
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
+                                    <select name="date_increase_effective_year" id="date_increase_effective_year" class="custom-select" data-placeholder="Year"
+                                            ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseEffectiveDate.Year">
+                                        <option ng-repeat="year in Ctrl.years"
+                                                value="{{year}}">
+                                            {{year}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
                         </div><!-- .field-group -->
 
-                    </div>
+                    </div>                    
 
 
                     <div class="step-footer">
-                        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" />
+                        <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
                     </div>
                 </form>
             </div>
