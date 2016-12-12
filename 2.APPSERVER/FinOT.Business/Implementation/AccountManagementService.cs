@@ -38,6 +38,25 @@ namespace RAP.Business.Implementation
         {
            return accDBHandler.GetCustomer(message);
         }
+        public ReturnResult<CustomerInfo> ChangePassword(CustomerInfo message)
+        {
+            return accDBHandler.ChangePassword(message);
+        }
+        public ReturnResult<bool> ResendPin(CustomerInfo message)
+        {
+            ReturnResult<Int32> result = new ReturnResult<Int32>();
+            ReturnResult<bool> resultFinal = new ReturnResult<bool>();
+            result = accDBHandler.ResendPin(message);
+            if(result != null)
+            {
+                EmailM emailMessage = new EmailM();
+                emailMessage.MessageBody = message.email + " Sending Pin " + result.result;
+                emailMessage.Subject = "Your RAP Pin";
+                EmailService emailservice = new EmailService();
+                resultFinal = emailservice.SendEmail(emailMessage);
+            }
+            return resultFinal;
+        }
         public ReturnResult<CityUserAccount_M> GetCityUser(CityUserAccount_M message)
         {
             return accDBHandler.GetCityUser(message);

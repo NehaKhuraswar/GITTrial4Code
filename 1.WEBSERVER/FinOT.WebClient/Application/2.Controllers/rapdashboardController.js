@@ -18,6 +18,12 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.CreateCityUserAccount = function () {
         $location.path("/createCityUserAccount");
     }
+    self.ChangePassword = function () {
+        $location.path("/changepassword");
+    }
+    self.ResendPin = function () {
+        $location.path("/resendpin");
+    }
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseInfoWithModel(model).then(function (response) {

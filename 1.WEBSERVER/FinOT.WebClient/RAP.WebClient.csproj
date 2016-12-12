@@ -112,6 +112,8 @@
     <Content Include="Application\2.Controllers\rapAppellantsInfoController.js" />
     <Content Include="Application\2.Controllers\rapApplicationInfoController.js" />
     <Content Include="Application\2.Controllers\rapadmindashboardController.js" />
+    <Content Include="Application\2.Controllers\rapResendPinController.js" />
+    <Content Include="Application\2.Controllers\rapChangePasswordController.js" />
     <Content Include="Application\2.Controllers\rapOwnerRentalHistoryController.js" />
     <Content Include="Application\2.Controllers\rapstaffdashboardController.js" />
     <Content Include="Application\2.Controllers\rapdashboardController.js" />
@@ -145,9 +147,11 @@
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapapplicationinfoFactory.js" />
+    <Content Include="Application\3.Factories\rapresendpinFactory.js" />
     <Content Include="Application\3.Factories\rapcityuserregisterFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
     <Content Include="Application\3.Factories\rapadmindashboardFactory.js" />
+    <Content Include="Application\3.Factories\rapchangepwdFactory.js" />
     <Content Include="Application\3.Factories\rapOwnerRentalHistoryFactory.js" />
     <Content Include="Application\3.Factories\rapstaffdashboardFactory.js" />
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />

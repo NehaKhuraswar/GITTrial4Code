@@ -79,6 +79,85 @@ namespace RAP.DAL
             }
         }
         /// <summary>
+        /// Update/change Password 
+        /// </summary>
+        /// <returns>Customer Info Object</returns>
+        public ReturnResult<CustomerInfo> ChangePassword(CustomerInfo message)
+        {
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
+            try
+            {
+                // CustomerInfo custinfo ;
+                //System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.CustomerID == message.custID).FirstOrDefault();
+                    if(custdetails != null)
+                    {
+                        custdetails.Password = message.Password;
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
+                    }
+                }
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                result.result = message;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        /// <summary>
+        /// Resend Pin
+        /// </summary>
+        /// <returns>Customer Info Object</returns>
+        public ReturnResult<Int32> ResendPin(CustomerInfo message)
+        {
+            ReturnResult<Int32> result = new ReturnResult<Int32>();
+            try
+            {
+                // CustomerInfo custinfo ;
+                //System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.CustomerID == message.custID).FirstOrDefault();
+                    if (custdetails != null)
+                    {
+                        result.result = (int)custdetails.CustomerIdentityKey;
+                    }
+                    else
+                    {
+                        result.result = 0;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
+                    }
+                }
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+               // result.result = message;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        /// <summary>
         /// Get City user information
         /// </summary>
         /// <returns>Customer Info Object</returns>
