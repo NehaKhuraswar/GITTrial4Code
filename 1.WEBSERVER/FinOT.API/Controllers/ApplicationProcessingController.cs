@@ -381,6 +381,45 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantPetitionInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("getcasesnoanalyst")]
+        [HttpGet]
+        public HttpResponseMessage GetCasesNoAnalyst()
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<CaseInfoM>> transaction = new TranInfo<List<CaseInfoM>>();
+            ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();
+            try
+            {
+
+                result = _service.GetCasesNoAnalyst();
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<CaseInfoM>>>(ReturnCode, transaction);
+        }
+
         [AllowAnonymous]
         [Route("getrentalhistoryinfo/{PetitionId:int}")]
         [HttpGet]

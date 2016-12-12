@@ -3,7 +3,16 @@ var rapstaffdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
   
+    var _GetCasesNoAnalyst = function () {
+        blockUI.start();
 
+        var url = 'api/applicationprocessing' + '/getcasesnoanalyst';
+
+        return ajax.Get(url)
+       .finally(function () {
+           blockUI.stop();
+       });
+    }
     var _GetCaseInfoWithModel = function (model) {
         blockUI.start();
 
@@ -40,6 +49,7 @@ var rapstaffdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
     
      
     factory.GetCaseInfo = _GetCaseInfo;
+    factory.GetCasesNoAnalyst = _GetCasesNoAnalyst;
 
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;

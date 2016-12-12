@@ -3,6 +3,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CityUser;
+    self.CaseList = [];
     self.InviteThirdPartyUser = function () {
         $location.path("/invitethirdparty");
     }
@@ -42,6 +43,15 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         });
        // $location.path("/fileappeal");
     }
+    var _GetCasesNoAnalyst = function () {
+        rapFactory.GetCasesNoAnalyst().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.CaseList = response.data;
+        });
+    }
+    _GetCasesNoAnalyst();
 
     var _GetCaseInfo = function () {
 

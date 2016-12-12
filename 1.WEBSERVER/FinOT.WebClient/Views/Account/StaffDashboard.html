@@ -20,6 +20,37 @@
                     <p>{{activity.Status.StatusDesc}}</p>
                     <p>{{activity.Date}}</p>
                 </div>
+                <div ng-show="Ctrl.CaseList.length > 0">
+                    <table class="table table-condensed nopadding-bottom">
+                        <thead class="strong">
+                            <tr>
+                                <td>
+                                    <span>Case number</span>
+                                </td>
+                                <td>
+                                    <span>Date of Filing</span>
+                                </td>
+                                <td>
+                                    <span>Last Activity</span>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Ctrl.CaseList">
+                                <td class="nopadding-left">
+                                    {{item.CaseID}}
+                                    {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}
+                                </td>
+                                <td>
+                                    {{item.CreatedDate}}
+                                </td>
+                                <td>
+                                    {{item.LastModifiedDate}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
