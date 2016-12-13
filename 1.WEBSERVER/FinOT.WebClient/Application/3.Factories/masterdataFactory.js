@@ -59,6 +59,28 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
             blockUI.stop();
         });
     }
+
+    var _GetCustomer = function (custid) {
+        blockUI.start();
+        
+        var url = 'api/accountmanagement' + '/get';
+        if (!(custid == null || custid == undefined)) { url = url + '/' + custid; }
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+    
+    var _GetCasesForCustomer = function (C_ID) {
+        blockUI.start();
+        var url = 'api/applicationprocessing' + '/getcasesforcustomer/' + C_ID;
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     
     
 
@@ -72,7 +94,9 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
     factory.GetHearingOfficers = _GetHearingOfficers;
     factory.GetAnalysts = _GetAnalysts;
     factory.AssignAnalyst = _AssignAnalyst;
-    factory.AssignHearingOfficer =_AssignHearingOfficer;
+    factory.AssignHearingOfficer = _AssignHearingOfficer;
+    factory.GetCasesForCustomer = _GetCasesForCustomer;
+    factory.GetCustomer = _GetCustomer;
 
     return factory;
 }];

@@ -323,7 +323,7 @@ namespace RAP.DAL
                 return result;
             }
         }
-        // Get cases for the staff dashboard 
+        // Get cases for the staff dashboard which doesnot have analyst or the hearing officer assigned
         public ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst()
         {
             ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();
@@ -361,6 +361,68 @@ namespace RAP.DAL
                         }
                     }
                     else if(petitionDetailsDb.OwnerPetitionID != null)
+                    {
+                        var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
+                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
+                        if (applicantUser != null)
+                        {
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
+                        }
+                    }
+                    cases.Add(caseinfo);
+                }
+                result.result = cases;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+
+        }
+
+        // Get cases for the individual customer ID
+        public ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID)
+        {
+            ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();
+            try
+            {
+                List<CaseInfoM> cases = new List<CaseInfoM>();
+                var casesDB = _dbContext.CaseDetails.Where(x => x.CaseFiledBy == CustomerID).ToList();
+                foreach (var item in casesDB)
+                {
+                    CaseInfoM caseinfo = new CaseInfoM();
+                    caseinfo.CaseID = item.CaseID;
+                    caseinfo.C_ID = item.C_ID;
+                    if (item.CityAnalystUserID != null)
+                    {
+                        caseinfo.CityAnalyst.CityUserID = (int)item.CityAnalystUserID;
+                    }
+                    if (item.HearingOfficerUserID != null)
+                    {
+                        caseinfo.HearingOfficer.CityUserID = (int)item.HearingOfficerUserID;
+                    }
+                    caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                    caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
+
+
+                    // Get the petition applicant info
+                    var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == item.PetitionID).FirstOrDefault();
+
+                    if (petitionDetailsDb.TenantPetitionID != null)
+                    {
+                        var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
+                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
+                        if (applicantUser != null)
+                        {
+                            caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                        }
+                    }
+                    else if (petitionDetailsDb.OwnerPetitionID != null)
                     {
                         var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
                         ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);

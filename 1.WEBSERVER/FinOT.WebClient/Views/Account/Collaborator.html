@@ -1,71 +1,70 @@
-﻿<div class="application-form-wrapper">
-    <div class="row">
+﻿<h3 class="step-heading">Invite an Account Collaborator</h3>
 
-        <div class="col-md-12 col-sm-12">
-            <div class="application-step step-1">
-                <h3 class="step-heading">Invite an Account Collaborator</h3>
+<form name="frmSearchAccountCollaborator" id="frmSearchAccountCollaborator" action="#" method="post" class="application-form">
+    <div class="step-content step1">
 
-                    <div class="step-content step1">
-
-                        <div class="field-group subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-md-8 col-xs-12">
-                                    <p>Your collaborator needs to have an account in order to be given access to your account. Search for the email address your collaborator used to set up their account.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field-group no-bottom-margin">
-                            <label for="email" class="hidden">Email</label>
-                            <input type="text" name="email" id="email" class="field-input full-width" placeholder="Email Address" />
-                        </div>
-                    </div>
-
-                    <div class="step-footer no-top-margin">
-                        <input type="button" id="btn-search" name="btn-search" class="btn-primary" value="Search" />
-                    </div>
-                <!-- Previously requested translation services -->
-                    <div class="step-content step1">
-                        <div class="field-group subhead type2">
-                            <h4>Collaborators with access to your account</h4>
-                        </div>
-
-                        <div class="subhead no-bottom-margin">
-                            <div class="collaborator">
-                                <div class="name">Margaret Davis</div>
-                                <div class="email">margaret@davisandpartners.com</div>
-                            </div>
-                        </div>
-
-                        <div class="field-group mar-bottom-40">
-                            <a href="#" class="btn-link">Remove all access</a>
-                        </div>
-
-
-                        <div class="field-group subhead">
-                            <p>Select all cases that you would like this collaborator to have access to</p>
-                        </div>
-
-                        <div class="field-group">
-                            <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                <label for="chk_case1">
-                                    <input type="checkbox" name="chk_case1" id="chk_case1" value="T17-0451" /><i></i><span>T17-0451</span>
-                                </label>
-                            </div>
-
-                            <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                <label for="chk_case2">
-                                    <input type="checkbox" name="chk_case2" id="chk_case2" value="T17-0416" /><i></i><span>T17-0416</span>
-                                </label>
-                            </div>
-                        </div>
-
-
-                        <div class="field-group">
-                            <a href="#" class="btn-link">Update access privileges</a>
-                        </div>
-                    </div>
+        <div class="field-group subhead no-top-margin">
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <p>Your collaborator needs to have an account in order to be given access to your account. Search for the email address your collaborator used to set up their account.</p>
+                </div>
             </div>
         </div>
+
+        <div class="field-group no-bottom-margin">
+            <label for="email" class="hidden">Email</label>
+            <input type="text" name="email" id="email" class="field-input full-width" placeholder="Email Address" ng-model="Ctrl.Email" />
+        </div>
     </div>
-</div>
+
+    <div class="step-footer no-top-margin">
+        <input type="button" id="btn-search" name="btn-search" class="btn-primary" value="Search" ng-click="Ctrl.SearchInviteCollaborator(Ctrl.Email)" />
+    </div>
+</form>
+
+<!-- Authorize Collaborator -->
+<form name="frmAuthorizeCollaborator" id="frmAuthorizeCollaborator" action="#" method="post" class="application-form">
+    <div class="step-content step1">
+        <div class="field-group subhead type2">
+            <h4>Authorize your collaborator</h4>
+        </div>
+
+        <div class="subhead no-bottom-margin">
+            <div class="collaborator">
+                <div class="name">{{Ctrl.model.User.FirstName}} {{Ctrl.model.User.LastName}}</div>
+                <div class="email">{{Ctrl.model.email}}</div>
+            </div>
+        </div>
+
+        <div class="field-group no-top-margin">
+            <p>Select case numbers that you would like this user to have access to</p>
+        </div>
+
+        <div class="field-group" ng-repeat="case in Ctrl.Cases">
+            <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                <label for="{{case.CaseID}}">
+                    <input type="checkbox" name="{{case.CaseID}}" id="{{case.CaseID}}" ng-value="true"
+                           ng-model="case.Selected" /><i></i><span>{{case.CaseID}}</span>
+                </label>
+            </div>
+
+            <!--<div class="form-group-checkbox vertical clearfix no-bottom-margin">
+            <label for="chk_case2">
+                <input type="checkbox" name="chk_case2" id="chk_case2" value="T17-0416" /><i></i><span>T17-0416</span>
+            </label>
+        </div>-->
+        </div>
+
+        <div class="field-group subhead">
+            <div class="form-group-checkbox vertical full-width clearfix no-bottom-margin">
+                <label for="act_on_behalf">
+                    <input type="checkbox" name="act_on_behalf" id="act_on_behalf" ng-value="true" ng-model="Ctrl.IsConsent" /><i></i><span>I hereby give my consent for the following party to act on my behalf in relation to the City of Oakland.</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="step-footer no-top-margin">
+            <input type="button" id="btn-authorize" name="btn-authorize" class="btn-primary" value="Authorize" ng-click="Ctrl.Authorize()" />
+        </div>
+    </div>
+</form>

@@ -58,6 +58,8 @@
       <Association Name="CustomerDetail_MailingAddress" Member="MailingAddresses" ThisKey="CustomerID" OtherKey="CustomerID" Type="MailingAddress" />
       <Association Name="CustomerDetail_ThirdPartyRepresentation" Member="ThirdPartyRepresentation" ThisKey="CustomerID" OtherKey="CustomerID" Type="ThirdPartyRepresentation" Cardinality="One" />
       <Association Name="CustomerDetail_ThirdPartyCaseAssignment" Member="ThirdPartyCaseAssignments" ThisKey="CustomerID" OtherKey="CustomerID" Type="ThirdPartyCaseAssignment" />
+      <Association Name="CustomerDetail_CollaboratorAccess" Member="CollaboratorAccesses" ThisKey="CustomerID" OtherKey="CustomerID" Type="CollaboratorAccess" />
+      <Association Name="CustomerDetail_CollaboratorAccess1" Member="CollaboratorAccesses1" ThisKey="CustomerID" OtherKey="CollaboratorCustID" Type="CollaboratorAccess" />
       <Association Name="CustomerDetail_CustomerDetail" Member="CustomerDetail1" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
@@ -102,6 +104,19 @@
       <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CaseAssignedToThirdParty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="CustomerDetail_ThirdPartyCaseAssignment" Member="CustomerDetail" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CollaboratorAccess" Member="CollaboratorAccesses">
+    <Type Name="CollaboratorAccess">
+      <Column Name="CollaboratorAccessID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CollaboratorCustID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="C_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="CustomerDetail_CollaboratorAccess" Member="CustomerDetail" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
+      <Association Name="CustomerDetail_CollaboratorAccess1" Member="CustomerDetail1" ThisKey="CollaboratorCustID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.USP_SearchAccount_Get" Method="USP_SearchAccount_Get">

@@ -24,6 +24,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     self.ResendPin = function () {
         $location.path("/resendpin");
     }
+    self.Collaborator = function () {
+        $location.path("/collaborator");
+    }
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseInfoWithModel(model).then(function (response) {

@@ -112,6 +112,7 @@
     <Content Include="Application\2.Controllers\rapAppellantsInfoController.js" />
     <Content Include="Application\2.Controllers\rapApplicationInfoController.js" />
     <Content Include="Application\2.Controllers\rapadmindashboardController.js" />
+    <Content Include="Application\2.Controllers\rapcollaboratorController.js" />
     <Content Include="Application\2.Controllers\rapOwnerDocumentsController.js" />
     <Content Include="Application\2.Controllers\rapOwnerReviewController.js" />
     <Content Include="Application\2.Controllers\rapOwnerVerificationController.js" />
@@ -150,6 +151,7 @@
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapapplicationinfoFactory.js" />
+    <Content Include="Application\3.Factories\rapcollaboratorFactory.js" />
     <Content Include="Application\3.Factories\rapOwnerVerificationFactory.js" />
     <Content Include="Application\3.Factories\rapresendpinFactory.js" />
     <Content Include="Application\3.Factories\rapcityuserregisterFactory.js" />

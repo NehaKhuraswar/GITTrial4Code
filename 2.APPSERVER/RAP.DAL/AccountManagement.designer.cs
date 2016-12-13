@@ -54,6 +54,9 @@ namespace RAP.DAL
     partial void InsertThirdPartyCaseAssignment(ThirdPartyCaseAssignment instance);
     partial void UpdateThirdPartyCaseAssignment(ThirdPartyCaseAssignment instance);
     partial void DeleteThirdPartyCaseAssignment(ThirdPartyCaseAssignment instance);
+    partial void InsertCollaboratorAccess(CollaboratorAccess instance);
+    partial void UpdateCollaboratorAccess(CollaboratorAccess instance);
+    partial void DeleteCollaboratorAccess(CollaboratorAccess instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -155,6 +158,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<ThirdPartyCaseAssignment>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CollaboratorAccess> CollaboratorAccesses
+		{
+			get
+			{
+				return this.GetTable<CollaboratorAccess>();
 			}
 		}
 		
@@ -974,6 +985,10 @@ namespace RAP.DAL
 		
 		private EntitySet<ThirdPartyCaseAssignment> _ThirdPartyCaseAssignments;
 		
+		private EntitySet<CollaboratorAccess> _CollaboratorAccesses;
+		
+		private EntitySet<CollaboratorAccess> _CollaboratorAccesses1;
+		
 		private EntityRef<CustomerDetail> _CustomerDetail1;
 		
     #region Extensibility Method Definitions
@@ -1006,6 +1021,8 @@ namespace RAP.DAL
 			this._MailingAddresses = new EntitySet<MailingAddress>(new Action<MailingAddress>(this.attach_MailingAddresses), new Action<MailingAddress>(this.detach_MailingAddresses));
 			this._ThirdPartyRepresentation = default(EntityRef<ThirdPartyRepresentation>);
 			this._ThirdPartyCaseAssignments = new EntitySet<ThirdPartyCaseAssignment>(new Action<ThirdPartyCaseAssignment>(this.attach_ThirdPartyCaseAssignments), new Action<ThirdPartyCaseAssignment>(this.detach_ThirdPartyCaseAssignments));
+			this._CollaboratorAccesses = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses));
+			this._CollaboratorAccesses1 = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses1), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses1));
 			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
 			OnCreated();
 		}
@@ -1278,6 +1295,32 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess", Storage="_CollaboratorAccesses", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<CollaboratorAccess> CollaboratorAccesses
+		{
+			get
+			{
+				return this._CollaboratorAccesses;
+			}
+			set
+			{
+				this._CollaboratorAccesses.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess1", Storage="_CollaboratorAccesses1", ThisKey="CustomerID", OtherKey="CollaboratorCustID")]
+		public EntitySet<CollaboratorAccess> CollaboratorAccesses1
+		{
+			get
+			{
+				return this._CollaboratorAccesses1;
+			}
+			set
+			{
+				this._CollaboratorAccesses1.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail1", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
 		public CustomerDetail CustomerDetail1
 		{
@@ -1354,6 +1397,30 @@ namespace RAP.DAL
 		{
 			this.SendPropertyChanging();
 			entity.CustomerDetail = null;
+		}
+		
+		private void attach_CollaboratorAccesses(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = this;
+		}
+		
+		private void detach_CollaboratorAccesses(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = null;
+		}
+		
+		private void attach_CollaboratorAccesses1(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail1 = this;
+		}
+		
+		private void detach_CollaboratorAccesses1(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail1 = null;
 		}
 	}
 	
@@ -2183,6 +2250,294 @@ namespace RAP.DAL
 						this._CustomerID = default(int);
 					}
 					this.SendPropertyChanged("CustomerDetail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CollaboratorAccess")]
+	public partial class CollaboratorAccess : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CollaboratorAccessID;
+		
+		private int _CustomerID;
+		
+		private int _CollaboratorCustID;
+		
+		private int _C_ID;
+		
+		private System.Nullable<bool> _IsDeleted;
+		
+		private System.Nullable<System.DateTime> _LastModifiedDate;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCollaboratorAccessIDChanging(int value);
+    partial void OnCollaboratorAccessIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnCollaboratorCustIDChanging(int value);
+    partial void OnCollaboratorCustIDChanged();
+    partial void OnC_IDChanging(int value);
+    partial void OnC_IDChanged();
+    partial void OnIsDeletedChanging(System.Nullable<bool> value);
+    partial void OnIsDeletedChanged();
+    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastModifiedDateChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    #endregion
+		
+		public CollaboratorAccess()
+		{
+			this._CustomerDetail = default(EntityRef<CustomerDetail>);
+			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CollaboratorAccessID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CollaboratorAccessID
+		{
+			get
+			{
+				return this._CollaboratorAccessID;
+			}
+			set
+			{
+				if ((this._CollaboratorAccessID != value))
+				{
+					this.OnCollaboratorAccessIDChanging(value);
+					this.SendPropertyChanging();
+					this._CollaboratorAccessID = value;
+					this.SendPropertyChanged("CollaboratorAccessID");
+					this.OnCollaboratorAccessIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._CustomerDetail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CollaboratorCustID", DbType="Int NOT NULL")]
+		public int CollaboratorCustID
+		{
+			get
+			{
+				return this._CollaboratorCustID;
+			}
+			set
+			{
+				if ((this._CollaboratorCustID != value))
+				{
+					if (this._CustomerDetail1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCollaboratorCustIDChanging(value);
+					this.SendPropertyChanging();
+					this._CollaboratorCustID = value;
+					this.SendPropertyChanged("CollaboratorCustID");
+					this.OnCollaboratorCustIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int NOT NULL")]
+		public int C_ID
+		{
+			get
+			{
+				return this._C_ID;
+			}
+			set
+			{
+				if ((this._C_ID != value))
+				{
+					this.OnC_IDChanging(value);
+					this.SendPropertyChanging();
+					this._C_ID = value;
+					this.SendPropertyChanged("C_ID");
+					this.OnC_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit")]
+		public System.Nullable<bool> IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="Date")]
+		public System.Nullable<System.DateTime> LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this.OnLastModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedDate = value;
+					this.SendPropertyChanged("LastModifiedDate");
+					this.OnLastModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="Date")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public CustomerDetail CustomerDetail
+		{
+			get
+			{
+				return this._CustomerDetail.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail.Entity = null;
+						previousValue.CollaboratorAccesses.Remove(this);
+					}
+					this._CustomerDetail.Entity = value;
+					if ((value != null))
+					{
+						value.CollaboratorAccesses.Add(this);
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(int);
+					}
+					this.SendPropertyChanged("CustomerDetail");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess1", Storage="_CustomerDetail1", ThisKey="CollaboratorCustID", OtherKey="CustomerID", IsForeignKey=true)]
+		public CustomerDetail CustomerDetail1
+		{
+			get
+			{
+				return this._CustomerDetail1.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail1.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail1.Entity = null;
+						previousValue.CollaboratorAccesses1.Remove(this);
+					}
+					this._CustomerDetail1.Entity = value;
+					if ((value != null))
+					{
+						value.CollaboratorAccesses1.Add(this);
+						this._CollaboratorCustID = value.CustomerID;
+					}
+					else
+					{
+						this._CollaboratorCustID = default(int);
+					}
+					this.SendPropertyChanged("CustomerDetail1");
 				}
 			}
 		}
