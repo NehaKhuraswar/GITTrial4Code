@@ -174,6 +174,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
         })
         .otherwise({ redirectTo: '/' });
 
+    $locationProvider.html5Mode(true);
     //Enable cross domain calls
     $httpProvider.defaults.useXDomain = true;
     //Remove the header used to identify ajax call  that would prevent CORS from working
@@ -193,5 +194,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
     uiSelectConfig.resetSearchInput = true;
     uiSelectConfig.appendToBody = true;
     uiSelectConfig.refreshDelay = 0;
+
+   
 
 }];
