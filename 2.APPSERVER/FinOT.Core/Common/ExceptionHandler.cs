@@ -59,7 +59,7 @@ namespace RAP.Core.Common
 
           if (logToEventViewer)
           {
-              System.Diagnostics.EventLog.WriteEntry("Application", "ErrorNumber : " + status.StatusCode + " | ErrorMessage : " + status.StatusMessage + " | ErrorDetails : " + status.StatusDetails);
+              System.Diagnostics.EventLog.WriteEntry("Application", "RAP Application Error |  ErrorNumber : " + status.StatusCode + " | ErrorMessage : " + status.StatusMessage + " | ErrorDetails : " + status.StatusDetails);
           }
 
           return status;
