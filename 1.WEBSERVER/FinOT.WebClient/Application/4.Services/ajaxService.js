@@ -42,7 +42,12 @@ var ajaxService = ['$http', '$location', '$log', function ($http, $location, $lo
             headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem('token'), 'enctype' : 'multipart/form-data' }
           
         }).then(function (response) {
+            $log.info(response.data);
             return response.data;
+        },
+        function (reason)
+        {
+         $log.info(reason.status + ' | ' + reason.statusTex);
         }).catch(function (response) {
             if (response.status == 401) { $location.path('/noaccess'); }
             return response.data;
