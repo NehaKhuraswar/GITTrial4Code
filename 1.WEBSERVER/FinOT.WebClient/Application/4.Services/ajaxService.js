@@ -1,5 +1,5 @@
 ﻿'use strict';
-var ajaxService = ['$http', '$location', function ($http, $location) {
+var ajaxService = ['$http', '$location', '$log', function ($http, $location, $log) {
     var _base;
     if (_base == null || _base == undefined) {
         _base = sessionStorage.getItem('apibaseurl');
@@ -21,8 +21,14 @@ var ajaxService = ['$http', '$location', function ($http, $location) {
             url: _url,
             headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem('token') }
         }).then(function (response) {
+            $log.info(response.data);
             return response.data;
+        },
+        function(reason)
+        {
+            $log.info(reason.status + ' | ' + reason.statusTex);
         }).catch(function (response) {
+            $log.info(response.status + ' | ' + reason.statusTex);
             return response.data;
         })
     }
