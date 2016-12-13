@@ -73,6 +73,8 @@ namespace RAP.Core.DataModels
         public int id { get; set; }
         public string name { get; set; }
     }
+
+    // To be removed ThirdPartyInfoM created to server this purpose
     public class ThirdPartyDetails
     {
         public int ThirdPartyRepresentationID { get; set; }
@@ -80,6 +82,18 @@ namespace RAP.Core.DataModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string email { get; set; }
+    }
+
+    public class ThirdPartyInfoM
+    {
+        public ThirdPartyInfoM()
+        {
+            ThirdPartyUser = new UserInfoM();
+        }
+        public int CustomerID { get; set; }
+        public UserInfoM ThirdPartyUser { get; set; }
+        public bool EmailNotification { get; set; }
+        public bool MailNotificaton { get; set; }
     }
     public class PetitionDetails
     {

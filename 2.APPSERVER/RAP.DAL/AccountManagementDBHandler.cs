@@ -214,7 +214,7 @@ namespace RAP.DAL
             }
         }
         /// <summary>
-        /// Get third party users
+        /// To be removed - GetThirdpartyInfo is createad to server this purpose. 
         /// </summary>
         /// <returns>Third party details</returns>
         public ReturnResult<List<ThirdPartyDetails>> GetAuthorizedUsers(int custID)
@@ -223,49 +223,49 @@ namespace RAP.DAL
 
             try
             {
-                List<ThirdPartyDetails> thirdPartyDetails;
-                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
-                {
-                    var custdetails = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
-                                                            .Select(c => new ThirdPartyDetails()
-                                                            {
-                                                                ThirdPartyRepresentationID = c.ThirdPartyCustomerID,
-                                                                //  UserID = (int)c.UserID,
-                                                                //  custID = (int)c.CustomerID
-                                                            }).FirstOrDefault();
-                    var query =
-                        db.ThirdPartyRepresentations.AsEnumerable().Join(db.CustomerDetails.AsEnumerable(),
-                        t => t.ThirdPartyCustomerID,
-                        c => c.CustomerID,
-                        (t, c) => new
-                        {
-                            ID = t.ThirdPartyRepresentationID,
-                            CustomerID = t.ThirdPartyCustomerID,
-                            //NEW-RAP-TBD
-                            //FirstName = c.FirstName,
-                            //LastName = c.LastName,
-                            //email = c.email
-                        });
+                //List<ThirdPartyDetails> thirdPartyDetails;
+                //using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                //{
+                //    var custdetails = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
+                //                                            .Select(c => new ThirdPartyDetails()
+                //                                            {
+                //                                                ThirdPartyRepresentationID = c.ThirdPartyCustomerID,
+                //                                                //  UserID = (int)c.UserID,
+                //                                                //  custID = (int)c.CustomerID
+                //                                            }).FirstOrDefault();
+                //    var query =
+                //        db.ThirdPartyRepresentations.AsEnumerable().Join(db.CustomerDetails.AsEnumerable(),
+                //        t => t.ThirdPartyCustomerID,
+                //        c => c.CustomerID,
+                //        (t, c) => new
+                //        {
+                //            ID = t.ThirdPartyRepresentationID,
+                //            CustomerID = t.ThirdPartyCustomerID,
+                //            //NEW-RAP-TBD
+                //            //FirstName = c.FirstName,
+                //            //LastName = c.LastName,
+                //            //email = c.email
+                //        });
 
 
-                    thirdPartyDetails = new List<ThirdPartyDetails>();
-                    int index = 0;
+                //    thirdPartyDetails = new List<ThirdPartyDetails>();
+                //    int index = 0;
 
-                    foreach (var CustomerDetails in query)
-                    {
-                        ThirdPartyDetails obj = new ThirdPartyDetails();
-                        obj.ThirdPartyRepresentationID = CustomerDetails.ID;
-                        obj.custID = CustomerDetails.CustomerID;
-                        //NEW-RAP-TBD
-                        //obj.FirstName = CustomerDetails.FirstName;
-                        //obj.LastName = CustomerDetails.LastName;
-                        //obj.email = CustomerDetails.email;
+                //    foreach (var CustomerDetails in query)
+                //    {
+                //        ThirdPartyDetails obj = new ThirdPartyDetails();
+                //        obj.ThirdPartyRepresentationID = CustomerDetails.ID;
+                //        obj.custID = CustomerDetails.CustomerID;
+                //        //NEW-RAP-TBD
+                //        //obj.FirstName = CustomerDetails.FirstName;
+                //        //obj.LastName = CustomerDetails.LastName;
+                //        //obj.email = CustomerDetails.email;
 
-                        thirdPartyDetails.Add(obj);
-                        index++;
-                    }
-                }
-                result.result = thirdPartyDetails;
+                //        thirdPartyDetails.Add(obj);
+                //        index++;
+                //    }
+                //}
+               // result.result = thirdPartyDetails;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
@@ -273,6 +273,92 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> SaveOrUpdateThirdPartyInfo(ThirdPartyInfoM model)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+
+                    if (thirdParty != null)
+                    {
+                        thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
+                        thirdParty.MailNotification = model.MailNotificaton;
+                        thirdParty.EmailNotification = model.EmailNotification;
+                        thirdParty.ModifiedDate = DateTime.Now;
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        ThirdPartyRepresentation _thirdParty = new ThirdPartyRepresentation();
+                        _thirdParty.CustomerID = model.CustomerID;
+                        _thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
+                        _thirdParty.MailNotification = model.MailNotificaton;
+                        _thirdParty.EmailNotification = model.EmailNotification;
+                        _thirdParty.CreatedDate = DateTime.Now;
+                        db.ThirdPartyRepresentations.InsertOnSubmit(_thirdParty);
+                        db.SubmitChanges();
+                    }
+                }
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+           
+        }
+
+        public ReturnResult<ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID)
+        {
+            ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
+            ThirdPartyInfoM model = new ThirdPartyInfoM();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                    if (thirdParty != null)
+                    {
+                        model.CustomerID = CustomerID;
+                        model.ThirdPartyUser.UserID = thirdParty.ThirdPartyUserID;
+                        model.EmailNotification = (thirdParty.EmailNotification == null) ? false : Convert.ToBoolean(thirdParty.EmailNotification);
+                        model.MailNotificaton = (thirdParty.MailNotification == null) ? false : Convert.ToBoolean(thirdParty.MailNotification);
+
+                        var thirdPartyUserInforesult = commondbHandler.GetUserInfo(model.ThirdPartyUser.UserID);
+                        if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)
+                        {
+                            result.status = thirdPartyUserInforesult.status;
+                            return result;
+                        }
+                        model.ThirdPartyUser = thirdPartyUserInforesult.result;
+                    }
+                    else
+                    {
+                        model.CustomerID = CustomerID;
+                        model.ThirdPartyUser = null;
+                    }
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -476,7 +562,7 @@ namespace RAP.DAL
 
                         ThirdPartyRepresentation thirdpartyTable = new ThirdPartyRepresentation();
                         thirdpartyTable.CustomerID = CustID;
-                        thirdpartyTable.ThirdPartyCustomerID = thirdpartyCustID;
+                       // thirdpartyTable.ThirdPartyCustomerID = thirdpartyCustID;
                         thirdpartyTable.CreatedDate = DateTime.Now;
 
                         db.ThirdPartyRepresentations.InsertOnSubmit(thirdpartyTable);
@@ -509,7 +595,7 @@ namespace RAP.DAL
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
                     ThirdPartyRepresentation thirdpartyTable = db.ThirdPartyRepresentations.First(i => i.ThirdPartyRepresentationID == thirdPartyRepresentationID);
-                    thirdpartyTable.IsDeleted = true;
+                    //thirdpartyTable.IsDeleted = true;
                     thirdpartyTable.ModifiedDate = DateTime.Now;
                    // thirdpartyTable.ThirdPartyCustomerID = thirdPartyRepresentationID;
                     db.SubmitChanges();
