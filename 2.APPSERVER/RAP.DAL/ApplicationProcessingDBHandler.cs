@@ -1648,6 +1648,7 @@ namespace RAP.DAL
             
         }
 
+        //TBD - to be removed as we dont need to save the APpeal info
         public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo)
         {
             int thirdPartyUserID = 0;

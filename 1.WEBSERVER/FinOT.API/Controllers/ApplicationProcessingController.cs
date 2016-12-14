@@ -817,6 +817,8 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
 
+
+        //TBD - to be removed as we dont need to save the APpeal info
         [AllowAnonymous]
         [Route("savetenantappealinfo")]
         [HttpPost]

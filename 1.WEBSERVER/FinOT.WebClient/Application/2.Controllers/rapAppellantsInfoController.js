@@ -5,16 +5,18 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     
-    self.ContinueToGroundsforAppeal = function (model) {
-        rapFactory.SaveTenantAppealInfo(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-            // $modalInstance.close(response.data);
-            rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
-            self.caseinfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
-            $location.path("/groundsforappeal");
-        });
+    self.ContinueToGroundsforAppeal = function () {
+        $scope.model.bAppellantInfo = false;
+        $scope.model.bGrounds = true;
+        //rapFactory.SaveTenantAppealInfo(model).then(function (response) {
+        //    if (!alert.checkResponse(response)) {
+        //        return;
+        //    }
+        //    // $modalInstance.close(response.data);
+        //    rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
+        //    self.caseinfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
+        //    $location.path("/groundsforappeal");
+       // });
        // rapGlobalFactory.CaseDetails = self.caseinfo;
         
     }
