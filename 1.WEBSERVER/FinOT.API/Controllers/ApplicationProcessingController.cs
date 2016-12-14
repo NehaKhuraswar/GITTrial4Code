@@ -145,9 +145,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("getcaseinfo")]
+        [Route("getcaseinfo/{caseID}")]
         [HttpGet]
-        public HttpResponseMessage GetCaseDetails()
+        public HttpResponseMessage GetCaseDetails(string caseID)
         {
 
             //Appl accService = new AccountManagementService();
@@ -157,7 +157,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetCaseDetails();
+                result = _service.GetCaseInfo(caseID);
                 if(result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

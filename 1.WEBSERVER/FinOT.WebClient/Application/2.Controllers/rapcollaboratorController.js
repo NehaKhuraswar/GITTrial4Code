@@ -80,9 +80,12 @@ var rapcollaboratorController = ['$scope', '$modal', 'alertService', 'rapcollabo
             {
                 caseItem = self.Cases[i];
                 if (caseItem.Selected == true) {
-                    self.authorizedusers.CaseID.push(caseItem.CaseID);
+                    self.authorizedusers.C_ID.push(caseItem.C_ID);
                 }
             }
+            self.authorizedusers.custID = rapGlobalFactory.CustomerDetails.custID;
+            self.authorizedusers.collaboratorCustID = self.model.custID;
+
             //self.Cases.foreach(function (caseItem) {
             //    if (caseItem.Selected == true) {
             //        self.authorizedusers.CaseID.push(self.Cases.CaseID);
@@ -90,7 +93,7 @@ var rapcollaboratorController = ['$scope', '$modal', 'alertService', 'rapcollabo
             //});
            
            // self.authorizedusers = Ctrl
-            rapFactory.Authorize(rapGlobalFactory.CustomerDetails.custID, model).then(function (response) {
+            rapFactory.Authorize(self.authorizedusers).then(function (response) {
 
 
             });

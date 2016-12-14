@@ -44,6 +44,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('raprentalhistoryFactory', raprentalhistoryFactory)
     .factory('rapreviewFactory', rapreviewFactory)
     .factory('rapverificationFactory', rapverificationFactory)
+    .factory('rapappealtypeFactory', rapappealtypeFactory)
     .factory('rapappellantsinfoFactory', rapappellantsinfoFactory)
     .factory('rapfileappealFactory', rapfileappealFactory)
     .factory('rapgroundsofappealFactory', rapgroundsofappealFactory)
@@ -75,6 +76,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapDocumentController', rapDocumentController)
     .controller('rapReviewController', rapReviewController)
     .controller('rapVerificationController', rapVerificationController)
+    .controller('rapAppealTypeController', rapAppealTypeController)
+    .controller('rapAppealImpInfoController', rapAppealImpInfoController)
     .controller('rapAppellantsInfoController', rapAppellantsInfoController)
     .controller('rapFileAppealController', rapFileAppealController)
     .controller('rapGroundsOfAppealController', rapGroundsOfAppealController)
@@ -222,6 +225,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             controllerAs: 'Ctrl'
         };
     })
+    .directive('rapAppealtype', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FileAppeal/AppealType.html',
+            controller: 'rapAppealTypeController',
+            controllerAs: 'Ctrl'
+        };
+    })
     .directive('rapAppellantinfo', function () {
         return {
             restrict: 'E',
@@ -243,7 +258,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
                 model: '=model',
             },
             templateUrl: 'Views/FileAppeal/ImportantInfo.html',
-            controller: 'rapImpInfoAppealController',
+            controller: 'rapAppealImpInfoController',
             controllerAs: 'Ctrl'
         };
     })

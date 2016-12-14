@@ -29,15 +29,16 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
     }
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
-        rapFactory.GetCaseInfoWithModel(model).then(function (response) {
+        rapFactory.GetCaseInfoWithModel(model.C_ID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
 
             self.caseinfo = response.data;
             rapGlobalFactory.CaseDetails = self.caseinfo;
+            $location.path("/fileappeal");
         });
-        $location.path("/fileappeal");
+        
     }
 
     self.GetCaseActivityStatus = function (model) {

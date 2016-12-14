@@ -83,7 +83,6 @@ namespace RAP.Core.DataModels
         public string LastName { get; set; }
         public string email { get; set; }
     }
-
     public class ThirdPartyInfoM
     {
         public ThirdPartyInfoM()
@@ -94,6 +93,25 @@ namespace RAP.Core.DataModels
         public UserInfoM ThirdPartyUser { get; set; }
         public bool EmailNotification { get; set; }
         public bool MailNotificaton { get; set; }
+    }
+    public class Collaborator
+    {
+        public Collaborator()
+        {
+            collaboratorDetails = new List<CustomerInfo>();
+        }
+        public int custID { get; set; }
+        public List<CustomerInfo> collaboratorDetails { get; set; }
+    }
+    public class CollaboratorAccessM
+    {
+        public CollaboratorAccessM()
+        {
+            caseInfo = new List<CaseInfoM>();
+        }
+        public int custID { get; set; }
+        public int collaboratorCustID { get; set; }
+        public List<CaseInfoM> caseInfo { get; set; }
     }
     public class PetitionDetails
     {

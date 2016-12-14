@@ -78,6 +78,67 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        /// <summary>
+        /// Get customer information
+        /// </summary>
+        /// <returns>Customer Info Object</returns>
+        public ReturnResult<CustomerInfo> GetCustomer(int CustomerID)
+        {
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
+            try
+            {
+                CustomerInfo message = new CustomerInfo();
+                // CustomerInfo custinfo ;
+                //System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+
+                    var custdetails = db.CustomerDetails.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+
+
+                    if (custdetails != null)
+                    {
+                        message.User.UserID = (int)custdetails.UserID;
+                        message.email = custdetails.Email;
+                        message.custID = custdetails.CustomerID;
+                        var notifications = db.NotificationPreferences.Where(x => x.UserID == message.User.UserID)
+                                                                .Select(c => new CustomerInfo()
+                                                                {
+                                                                    EmailNotificationFlag = c.EmailNotification,
+                                                                    MailNotificationFlag = c.MailNotification
+                                                                }).FirstOrDefault();
+                        if (notifications != null)
+                        {
+                            message.MailNotificationFlag = notifications.MailNotificationFlag;
+                            message.EmailNotificationFlag = notifications.EmailNotificationFlag;
+                        }
+                    }
+                    else
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
+                    }
+                }
+                if (message != null)
+                {
+                    ReturnResult<UserInfoM> resultUserInfo = commondbHandler.GetUserInfo(message.User.UserID);
+                    message.User = resultUserInfo.result;
+                }
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                result.result = message;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         /// <summary>
         /// Update/change Password 
         /// </summary>
@@ -166,11 +227,13 @@ namespace RAP.DAL
             ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
             try
             {
+                
+
                 CityUserAccount_M cityUser = new CityUserAccount_M();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    
 
+                    
                     var cityDetails = db.CityUserAccounts.Where(x => x.Email == message.Email && x.Password == message.Password
                                                                     && x.CityAccountTypeID == message.AccountType.AccountTypeID).FirstOrDefault();
 
@@ -213,144 +276,92 @@ namespace RAP.DAL
                 return result;
             }
         }
+
         /// <summary>
-        /// To be removed - GetThirdpartyInfo is createad to server this purpose. 
+        /// Get City user information
         /// </summary>
-        /// <returns>Third party details</returns>
-        public ReturnResult<List<ThirdPartyDetails>> GetAuthorizedUsers(int custID)
+        /// <returns>Customer Info Object</returns>
+        public ReturnResult<CityUserAccount_M> GetCityUser(int UserID)
         {
-            ReturnResult<List<ThirdPartyDetails>> result = new ReturnResult<List<ThirdPartyDetails>>();
-
+            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
             try
             {
-                //List<ThirdPartyDetails> thirdPartyDetails;
-                //using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
-                //{
-                //    var custdetails = db.ThirdPartyRepresentations.Where(x => x.CustomerID == custID)
-                //                                            .Select(c => new ThirdPartyDetails()
-                //                                            {
-                //                                                ThirdPartyRepresentationID = c.ThirdPartyCustomerID,
-                //                                                //  UserID = (int)c.UserID,
-                //                                                //  custID = (int)c.CustomerID
-                //                                            }).FirstOrDefault();
-                //    var query =
-                //        db.ThirdPartyRepresentations.AsEnumerable().Join(db.CustomerDetails.AsEnumerable(),
-                //        t => t.ThirdPartyCustomerID,
-                //        c => c.CustomerID,
-                //        (t, c) => new
-                //        {
-                //            ID = t.ThirdPartyRepresentationID,
-                //            CustomerID = t.ThirdPartyCustomerID,
-                //            //NEW-RAP-TBD
-                //            //FirstName = c.FirstName,
-                //            //LastName = c.LastName,
-                //            //email = c.email
-                //        });
 
 
-                //    thirdPartyDetails = new List<ThirdPartyDetails>();
-                //    int index = 0;
-
-                //    foreach (var CustomerDetails in query)
-                //    {
-                //        ThirdPartyDetails obj = new ThirdPartyDetails();
-                //        obj.ThirdPartyRepresentationID = CustomerDetails.ID;
-                //        obj.custID = CustomerDetails.CustomerID;
-                //        //NEW-RAP-TBD
-                //        //obj.FirstName = CustomerDetails.FirstName;
-                //        //obj.LastName = CustomerDetails.LastName;
-                //        //obj.email = CustomerDetails.email;
-
-                //        thirdPartyDetails.Add(obj);
-                //        index++;
-                //    }
-                //}
-               // result.result = thirdPartyDetails;
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
-                return result;
-            }
-            catch (Exception ex)
-            {
-                IExceptionHandler eHandler = new ExceptionHandler();
-                result.status = eHandler.HandleException(ex);
-                return result;
-            }
-        }
-
-        public ReturnResult<bool> SaveOrUpdateThirdPartyInfo(ThirdPartyInfoM model)
-        {
-            ReturnResult<bool> result = new ReturnResult<bool>();
-            try
-            {
+                CityUserAccount_M cityUser = new CityUserAccount_M();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
 
-                    if (thirdParty != null)
+
+                    var cityDetails = db.CityUserAccounts.Where(x => x.CityUserID == UserID).FirstOrDefault();
+
+
+                    if (cityDetails != null)
                     {
-                        thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
-                        thirdParty.MailNotification = model.MailNotificaton;
-                        thirdParty.EmailNotification = model.EmailNotification;
-                        thirdParty.ModifiedDate = DateTime.Now;
-                        db.SubmitChanges();
+                        cityUser.UserID = (int)cityDetails.CityUserID;
+                        //cityUser.AccountType = cityDetails.AccountType;
+                        cityUser.FirstName = cityDetails.FirstName;
+                        cityUser.LastName = cityDetails.LastName;
+                        cityUser.MobilePhoneNumber = cityDetails.MobilePhoneNumber;
+                        cityUser.OfficePhoneNumber = cityDetails.OfficePhoneNumber;
+                        cityUser.OfficeLocation = cityDetails.OfficeLocation;
+                        cityUser.Title = cityDetails.Title;
+                        cityUser.Department = cityDetails.Department;
+                        cityUser.CreatedDate = cityDetails.CreatedDate;
+                        cityUser.Email = cityDetails.Email;
+                        cityUser.EmployeeID = (int)cityDetails.EmployeeID;
+                        cityUser.IsAnalyst = cityDetails.IsAnalyst;
+                        cityUser.IsHearingOfficer = cityDetails.IsHearingOfficer;
+
                     }
                     else
                     {
-                        ThirdPartyRepresentation _thirdParty = new ThirdPartyRepresentation();
-                        _thirdParty.CustomerID = model.CustomerID;
-                        _thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
-                        _thirdParty.MailNotification = model.MailNotificaton;
-                        _thirdParty.EmailNotification = model.EmailNotification;
-                        _thirdParty.CreatedDate = DateTime.Now;
-                        db.ThirdPartyRepresentations.InsertOnSubmit(_thirdParty);
-                        db.SubmitChanges();
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
                     }
                 }
-                result.result = true;
+                // System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started"); 
+                result.result = cityUser;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
             {
+                //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
-                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
-           
         }
-
-        public ReturnResult<ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID)
+        /// <summary>
+        /// Get Colloborator Users
+        /// </summary>
+        /// <returns>Collaborator details</returns>
+        public ReturnResult<Collaborator> GetAuthorizedUsers(int custID)
         {
-            ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
-            ThirdPartyInfoM model = new ThirdPartyInfoM();
+            ReturnResult<Collaborator> result = new ReturnResult<Collaborator>();
+
             try
             {
+                Collaborator collaborator = new Collaborator();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
-                    if (thirdParty != null)
+                    var collaboratorDB = db.CollaboratorAccesses.Where(x => x.CustomerID == custID).ToList();
+                    if (collaboratorDB != null)
                     {
-                        model.CustomerID = CustomerID;
-                        model.ThirdPartyUser.UserID = thirdParty.ThirdPartyUserID;
-                        model.EmailNotification = (thirdParty.EmailNotification == null) ? false : Convert.ToBoolean(thirdParty.EmailNotification);
-                        model.MailNotificaton = (thirdParty.MailNotification == null) ? false : Convert.ToBoolean(thirdParty.MailNotification);
-
-                        var thirdPartyUserInforesult = commondbHandler.GetUserInfo(model.ThirdPartyUser.UserID);
-                        if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)
+                        foreach (var item in collaboratorDB)
                         {
-                            result.status = thirdPartyUserInforesult.status;
-                            return result;
+                            ReturnResult<CustomerInfo> collaboratorInfo = GetCustomer((int)item.CollaboratorCustID);
+                            if (collaboratorInfo != null)
+                            {
+                                collaborator.collaboratorDetails.Add(collaboratorInfo.result);
+                            }                            
                         }
-                        model.ThirdPartyUser = thirdPartyUserInforesult.result;
-                    }
-                    else
-                    {
-                        model.CustomerID = CustomerID;
-                        model.ThirdPartyUser = null;
-                    }
+                        collaborator.custID = custID;
+                    }                    
                 }
-                result.result = model;
+                result.result = collaborator;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
@@ -358,7 +369,6 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
-                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -373,6 +383,12 @@ namespace RAP.DAL
                 List<AccountType> accountTypes = new List<AccountType>();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
+                    if (db == null)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                        return result;
+                    }
                     var accountTypesDB = db.CityAccountTypes.ToList();
 
 
@@ -392,7 +408,8 @@ namespace RAP.DAL
             {
                 System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetAccountTypes exception : " + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
-                result.status = eHandler.HandleException(ex);
+                //result.status = eHandler.HandleException(ex);
+                result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                 return result;
             }
         }
@@ -492,7 +509,7 @@ namespace RAP.DAL
         /// Search third party
         /// </summary>
         /// <returns>true or false</returns>
-        public ReturnResult<CustomerInfo> SearchInviteThirdPartyUser(String message)
+        public ReturnResult<CustomerInfo> SearchInviteCollaborator(String message)
         {
             ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
             try
@@ -547,30 +564,31 @@ namespace RAP.DAL
             }
         }
         /// <summary>
-        /// Authorize third party
+        /// Authorize Collaborator
         /// </summary>
         /// <returns>true or false</returns>
-        public ReturnResult<bool> AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
+        public ReturnResult<bool> AuthorizeCollaborator(CollaboratorAccessM access)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-               // CustomerInfo custinfo;
-                
-                    using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    foreach(var item in access.caseInfo)
                     {
+                        CollaboratorAccess collaborator = new CollaboratorAccess();
+                        collaborator.CustomerID = access.custID;
+                        collaborator.CollaboratorCustID = access.collaboratorCustID;
+                       //ollaborator.C_ID = item;
+                        collaborator.CreatedDate = DateTime.Now;
 
-                        ThirdPartyRepresentation thirdpartyTable = new ThirdPartyRepresentation();
-                        thirdpartyTable.CustomerID = CustID;
-                       // thirdpartyTable.ThirdPartyCustomerID = thirdpartyCustID;
-                        thirdpartyTable.CreatedDate = DateTime.Now;
-
-                        db.ThirdPartyRepresentations.InsertOnSubmit(thirdpartyTable);
+                        db.CollaboratorAccesses.InsertOnSubmit(collaborator);
                         db.SubmitChanges();
                     }
-                    result.result = true;
-                    result.status = new OperationStatus() { Status = StatusEnum.Success };
-                    return result;
+                }
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
             }
             catch (Exception ex)
             {
@@ -595,7 +613,7 @@ namespace RAP.DAL
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
                     ThirdPartyRepresentation thirdpartyTable = db.ThirdPartyRepresentations.First(i => i.ThirdPartyRepresentationID == thirdPartyRepresentationID);
-                    //thirdpartyTable.IsDeleted = true;
+                   // thirdpartyTable.IsDeleted = true;
                     thirdpartyTable.ModifiedDate = DateTime.Now;
                    // thirdpartyTable.ThirdPartyCustomerID = thirdPartyRepresentationID;
                     db.SubmitChanges();

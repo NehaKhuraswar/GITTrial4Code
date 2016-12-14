@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapfileappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
+var rapappealtypeFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
     

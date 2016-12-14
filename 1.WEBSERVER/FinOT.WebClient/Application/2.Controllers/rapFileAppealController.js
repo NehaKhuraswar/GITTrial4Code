@@ -16,21 +16,21 @@ var rapFileAppealController = ['$scope', '$modal', 'alertService', 'rapfileappea
     //    });
     //}
 
-    var _GetCaseInfo = function (model) {
-
-        rapFactory.GetCaseInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
+    //var _GetCaseInfo = function (model) {
+        
+    //    rapFactory.GetCaseInfo(model.CaseID).then(function (response) {
+    //        if (!alert.checkResponse(response)) {
+    //            return;
+    //        }
            
-            self.caseinfo = response.data;           
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-        });
-    }
-    // _getrent();
-    if (self.caseinfo == null) {
-        _GetCaseInfo();
-    }
+    //        self.caseinfo = response.data;           
+    //        rapGlobalFactory.CaseDetails = self.caseinfo;
+    //    });
+    //}
+    //// _getrent();
+    //if (self.caseinfo == null) {
+    //    _GetCaseInfo();
+    //}
 
     self.Continue = function () {
         $location.path("/appellantsinfo");

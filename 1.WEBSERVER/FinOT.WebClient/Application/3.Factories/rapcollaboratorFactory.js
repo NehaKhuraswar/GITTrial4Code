@@ -13,13 +13,13 @@ var rapcollaboratorFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
             blockUI.stop();
         });
     }
-    var _Authorize = function (custid, model) {
+    var _Authorize = function (model) {
         blockUI.start();
 
-        var url = _routePrefix + '/authorize'
-        if (!(custid == null || custid == undefined)) {
-            url += '?custid=' + custid;
-        }
+        var url = _routePrefix + '/authorizecollaborator';
+        //if (!(custid == null || custid == undefined)) {
+        //    url += '?custid=' + custid;
+        //}
         return ajax.Post(model, url)
         .finally(function () {
             blockUI.stop();

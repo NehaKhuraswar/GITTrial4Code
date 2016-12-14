@@ -18,6 +18,7 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
     //    });
     //}
     var _DisableAll = function () {
+        self.bAppealType = false;
         self.bAppellantInfo = false;
         self.bImpInfoAppeal = false;
         self.bGrounds = false;
@@ -25,7 +26,11 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
         self.bReview = false;
     };
     _DisableAll();
-    
+    self.bAppealType = true;
+    self.showAppealType = function () {
+        _DisableAll();
+        self.bAppealType = true;
+    };
 
     self.showAppellantInfo = function () {
         _DisableAll();
@@ -49,23 +54,23 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
     };
 
 
-    var _GetCaseInfo = function () {
+    //var _GetCaseInfo = function () {
 
         
-        rapFactory.GetCaseInfo(null, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-            self.model = response.data;
-            self.caseinfo = self.model;           
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-            self.bPetitionType = true;
-        });
-    }
-    // _getrent();
-    if (self.caseinfo == null) {
-        _GetCaseInfo();
-    }
+    //    rapFactory.GetCaseInfo(null, self.custDetails.custID).then(function (response) {
+    //        if (!alert.checkResponse(response)) {
+    //            return;
+    //        }
+    //        self.model = response.data;
+    //        self.caseinfo = self.model;           
+    //        rapGlobalFactory.CaseDetails = self.caseinfo;
+    //        self.bPetitionType = true;
+    //    });
+    //}
+    //// _getrent();
+    //if (self.caseinfo == null) {
+    //    _GetCaseInfo();
+    //}
 
     //self.Continue = function () {
     //    $location.path("/applicationinfo");

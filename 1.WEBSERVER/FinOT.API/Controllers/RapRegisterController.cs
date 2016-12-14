@@ -445,24 +445,25 @@ namespace RAP.API.Controllers
         {
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<List<ThirdPartyDetails>> transaction = new TranInfo<List<ThirdPartyDetails>>();
-            ReturnResult<List<ThirdPartyDetails>> result = new ReturnResult<List<ThirdPartyDetails>>();
+            TranInfo<CollaboratorAccessM> transaction = new TranInfo<CollaboratorAccessM>();
+            ReturnResult<CollaboratorAccessM> result = new ReturnResult<CollaboratorAccessM>();
             try
             {
 
-
-                result = accService.GetAuthorizedUsers((int)custID);
-                if (result.status.Status == StatusEnum.Success)
-                {
-                    transaction.data = result.result;
-                    transaction.status = true;
-                }
-                else
-                {
-                    transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);
-                    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "GetAuthorizedUsers");
-                }
+                transaction.data = new CollaboratorAccessM();
+                transaction.status = true;
+                //result = accService.GetAuthorizedUsers((int)custID);
+                //if (result.status.Status == StatusEnum.Success)
+                //{
+                //    transaction.data = result.result;
+                //    transaction.status = true;
+                //}
+                //else
+                //{
+                //    transaction.status = false;
+                //    transaction.AddException(result.status.StatusMessage);
+                //    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 23, "GetAuthorizedUsers");
+                //}
 
 
             }
@@ -479,12 +480,12 @@ namespace RAP.API.Controllers
                 //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
-            return Request.CreateResponse<TranInfo<List<ThirdPartyDetails>>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<CollaboratorAccessM>>(ReturnCode, transaction);
         }
         [AllowAnonymous]
         [Route("searchinvite")]
         [HttpPost]
-        public HttpResponseMessage SearchInviteThirdPartyUser([FromBody] CustomerInfo loginInfo)
+        public HttpResponseMessage SearchInviteCollaborator([FromBody] CustomerInfo loginInfo)
         {
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -494,7 +495,7 @@ namespace RAP.API.Controllers
             {
 
                 
-                result = accService.SearchInviteThirdPartyUser(loginInfo.email);
+                result = accService.SearchInviteCollaborator(loginInfo.email);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -526,22 +527,24 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
 
+       
+
         [AllowAnonymous]
-        [Route("authorize/{custid:int?}")]
+        [Route("authorizecollaborator")]
         [HttpPost]
-        public HttpResponseMessage AuthorizeThirdPartyUser([FromBody] CustomerInfo thirdpartyInfo, int? custid = null)
+        public HttpResponseMessage AuthorizeCollaborator([FromBody] CollaboratorAccessM access)
         {
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+            TranInfo<bool> transaction = new TranInfo<bool>();
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
 
-                result = accService.AuthorizeThirdPartyUser((int)custid, thirdpartyInfo.custID);
+                result = accService.AuthorizeCollaborator(access);
                 if (result.status.Status == StatusEnum.Success)
                 {
-                    //transaction.data = (bool)result.result;
+                    transaction.data = (bool)result.result;
                     transaction.status = true;
                 }
                 else
@@ -550,9 +553,6 @@ namespace RAP.API.Controllers
                     transaction.AddException(result.status.StatusMessage);
                    
                 }
-                 
-
-
             }
             catch (Exception ex)
             {
@@ -568,7 +568,7 @@ namespace RAP.API.Controllers
                 //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
-            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]

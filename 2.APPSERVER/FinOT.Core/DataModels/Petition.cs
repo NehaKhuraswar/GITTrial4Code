@@ -10,8 +10,8 @@ namespace RAP.Core.DataModels
     {
         public CaseInfoM()
         {
-            CityAnalyst = new CityUser();
-            HearingOfficer = new CityUser();
+            CityAnalyst = new CityUserAccount_M();
+            HearingOfficer = new CityUserAccount_M();
             OwnerPetitionTenantInfo = new OwnerPetitionTenantInfoM();
             OwnerPetitionRentalIncrementInfo = new OwnerPetitionRentalIncrementInfoM();
         }
@@ -100,8 +100,8 @@ namespace RAP.Core.DataModels
         }
         public bool bCaseFiledByThirdParty { get; set; }
         public int CaseFileBy { get; set; }
-        public CityUser CityAnalyst { get; set; }
-        public CityUser HearingOfficer { get; set; }        
+        public CityUserAccount_M CityAnalyst { get; set; }
+        public CityUserAccount_M HearingOfficer { get; set; }        
         public DateTime HearingDate { get; set; }
         public DateTime AppealDate { get; set; }
         public bool bThirdPartyRepresentationAppeal { get; set; }

@@ -82,12 +82,15 @@
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">                   
                         <form name="frmAppeal" id="frmAppeal" method="post" class="application-form">
-                            <div ng-if="Ctrl.bAppellantInfo">
-                                <rap-appellantinfo model="Ctrl"></rap-appellantinfo>
+                            <div ng-if="Ctrl.bAppealType">
+                                <rap-appealtype model="Ctrl"></rap-appealtype>
                             </div>
                             <div ng-if="Ctrl.bImpInfoAppeal">
-                                <rap-impinfoappeal  model="Ctrl" casedetails="Ctrl.model"></rap-impinfoappeal>
+                                <rap-impinfoappeal model="Ctrl" casedetails="Ctrl.model"></rap-impinfoappeal>
                             </div>
+                            <div ng-if="Ctrl.bAppellantInfo">
+                                <rap-appellantinfo model="Ctrl"></rap-appellantinfo>
+                            </div>                            
                             <div ng-if="Ctrl.bGrounds">
                                 <rap-grounds  model="Ctrl"></rap-grounds>
                             </div>

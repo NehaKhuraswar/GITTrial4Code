@@ -65,19 +65,19 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.GetCityUser(message);
         }
-        public ReturnResult<CustomerInfo> SearchInviteThirdPartyUser(String message)
+        public ReturnResult<CustomerInfo> SearchInviteCollaborator(String message)
         {
-            return accDBHandler.SearchInviteThirdPartyUser(message);
+            return accDBHandler.SearchInviteCollaborator(message);
         }
-        public ReturnResult<bool> AuthorizeThirdPartyUser(int CustID, int thirdpartyCustID)
+        public ReturnResult<bool> AuthorizeCollaborator(CollaboratorAccessM access)
         {
-            return accDBHandler.AuthorizeThirdPartyUser(CustID, thirdpartyCustID);
+            return accDBHandler.AuthorizeCollaborator(access);
         }
         public ReturnResult<bool> RemoveThirdParty(int CustID, int ThirdPartyRepresentationID)
         {
             return accDBHandler.RemoveThirdParty(CustID, ThirdPartyRepresentationID);
         }
-        public ReturnResult<List<ThirdPartyDetails>> GetAuthorizedUsers(int custID)
+        public ReturnResult<Collaborator> GetAuthorizedUsers(int custID)
         {
             return accDBHandler.GetAuthorizedUsers(custID);
         }

@@ -8,8 +8,9 @@ namespace RAP.DAL
    public interface IApplicationProcessingDBHandler
     {
         ReturnResult<CaseInfoM> GetCaseDetails();
-        ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
+       // ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
         ReturnResult<CaseInfoM> GetCaseDetails(int UserID);
+        ReturnResult<CaseInfoM> GetCaseInfo(string CaseID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);

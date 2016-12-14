@@ -4,14 +4,14 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var _routePrefix = 'api/accountmanagement';
   
 
-    var _GetCaseInfoWithModel = function (model) {
+    var _GetCaseInfoWithModel = function (caseid) {
         blockUI.start();
 
         var url = 'api/applicationprocessing' + '/getcaseinfo';
 
-        //if (!(caseid == null || caseid == undefined)) { url = url + '/' + caseid; }
+        if (!(caseid == null || caseid == undefined)) { url = url + '/' + caseid; }
 
-         return ajax.Post(model, url)
+         return ajax.Get( url)
         .finally(function () {
             blockUI.stop();
         });

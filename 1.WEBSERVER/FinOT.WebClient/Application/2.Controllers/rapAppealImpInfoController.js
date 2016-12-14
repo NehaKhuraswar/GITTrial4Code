@@ -1,0 +1,19 @@
+﻿'use strict';
+var rapAppealImpInfoController = ['$scope', '$modal', 'alertService',  '$location', 'rapGlobalFactory', function ($scope, $modal, alert,  $location, rapGlobalFactory) {
+    var self = this;
+
+    
+    self.Continue = function () {
+        $scope.model.bImpInfoAppeal = false;
+        $scope.model.bAppellantInfo = true;
+    }
+}];
+var rapAppealImpInfoController_resolve = {
+    model: ['$route', 'alertService',  function ($route, alert) {
+        ////return auth.fetchToken().then(function (response) {
+        //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {
+        //  if (!alert.checkResponse(response)) { return; }
+        //        return response.data;
+        //    });
+    }]
+}
