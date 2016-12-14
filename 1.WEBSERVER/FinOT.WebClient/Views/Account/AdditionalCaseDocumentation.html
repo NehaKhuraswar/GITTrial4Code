@@ -1,0 +1,106 @@
+﻿<div class="application-form-wrapper">
+    <div class="breadcrumb">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">T17-0238; Smith v. Johnson (Unit C)</a></li>
+            <li class="active">Additional case documentation</li>
+        </ul>
+    </div>
+
+    <div class="application-step step-1">
+        <h3 class="step-heading">Additional Case Documentation</h3>
+
+        <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
+            <div class="step-content step1">
+
+                <div class="field-group subhead no-top-margin no-bottom-margin">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <p>Please use the form below to include any additional documents that should be associated with the case.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group filled-info no-top-margin">
+                    <div class="info-title">File Name</div>
+                </div>
+
+                <div class="field-group no-top-margin">
+                    <div class="accordion additional-docs">
+                        <div class="item expanded">
+                            <div class="item-header">
+                                <a href="#" class="btn-toggle"></a>
+                                <div class="file-name">Hearing_decision.doc</div>
+
+                                <a href="#" class="btn-link btn-delete">Delete</a>
+                            </div>
+
+                            <div class="item-content">
+                                <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                            </div>
+                        </div>
+
+                        <div class="item additional-doc">
+                            <div class="item-header">
+                                <a href="#" class="btn-toggle"></a>
+                                <div class="file-name">Appeal_draft.doc</div>
+                                <a href="#" class="btn-link btn-delete">Delete</a>
+                            </div>
+
+                            <div class="item-content">
+                                <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                            </div>
+
+                            <!--            <div class="item-delete hidden">
+                                              <strong>Are you sure that you want to delete this file?</strong>
+                                              <div class="action-links">
+                                                <a href="#" class="btn-link btn-delete">Delete</a>
+                                                <a href="#" class="btn-link btn-cancel">Cancel</a>
+                                              </div>
+                                            </div>-->
+                        </div>
+                    </div><!-- .accordion -->
+                </div><!-- .field-group -->
+
+
+                <div class="subhead">
+                    <h4>Upload document</h4>
+                </div>
+
+                <div class="field-group">
+                    <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
+                    <div>
+                        <select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
+                            <option value="Pay stub">Pay stub</option>
+                            <option value="Option 2">Option 2</option>
+                            <option value="Option 3">Option 3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="document_description">Description of the document that you are attaching</label>
+                    <textarea name="document_description" id="document_description" class="field-input textarea" rows="8"></textarea>
+                </div>
+
+                <p><strong>The maximum file size limit for uploads is 25MB</strong></p>
+
+                <div class="field-group">
+                    <div class="field-addfile">
+                        <div class="input-file-wrapper">
+                            <span class="btn-link">Attach document</span>
+                            <input type="file" id="attach_document" name="attach_document" />
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+            </div>
+
+
+            <div class="step-footer">
+                <input type="button" id="submit" name="submit" class="btn-primary" value="Submit" />
+                <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" />
+            </div>
+        </form>
+    </div>
+</div>
