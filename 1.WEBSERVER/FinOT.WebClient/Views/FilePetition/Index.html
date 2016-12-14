@@ -10,6 +10,7 @@
         
             <div class="row">
                 <div class="col-md-3 col-sm-12">
+                    <div>
                     <ul class="application-steps">
                         <li class="current" ng-if="Ctrl.bPetitionType"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
                         <li class="active"
@@ -17,7 +18,10 @@
                             || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification">
                             <a ng-click="Ctrl.showPetitionType()">Petition Type</a>
                         </li>
-
+                        </ul>
+                    </div>
+                <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 1">
+                    <ul class="application-steps">
                         <li><a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
 
                         <li class="current" ng-if="Ctrl.bAppInfo"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
@@ -73,7 +77,8 @@
                         <li class="current" ng-if="Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>
                         <li ng-if="!Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>
                     </ul>
-                   
+                </div>
+                <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 2">
                     <ul class="application-steps">
                         <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
                         <li class="current"><a ng-click="Ctrl.ShowOwnerApplicantInfo()">Applicant Information</a></li>
@@ -84,7 +89,8 @@
                         <li class="current"><a ng-click="Ctrl.ShowOwnerReview()">Review</a></li>
                         <li class="current"><a ng-click="Ctrl.ShowOwnerVerification()">Verification</a></li>
                     </ul>
-</div>
+                </div>
+                </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">
                         <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">
