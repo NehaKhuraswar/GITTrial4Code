@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostservicesFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostservicesFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -17,7 +17,7 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     for (var i = 0; i < range + 1; i++) {
         self.years.push(currentYear  + i);
     }
-
+    self.Calender = masterFactory.Calender;
     var _GetEmptyLostServicesInfo = function () {
         rapFactory.GetEmptyLostServicesInfo().then(function (response) {
             if (!alert.checkResponse(response)) {

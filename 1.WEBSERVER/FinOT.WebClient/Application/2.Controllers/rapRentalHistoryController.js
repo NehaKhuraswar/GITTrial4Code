@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprentalhistoryFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprentalhistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -15,6 +15,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     for (var i = 0; i < range + 1; i++) {
         self.years.push(currentYear + i);
     }
+    self.Calender = masterFactory.Calender;
     var _GetEmptyTenantRentalIncrementInfo = function () {
         rapFactory.GetEmptyTenantRentalIncrementInfo().then(function (response) {
             if (!alert.checkResponse(response)) {

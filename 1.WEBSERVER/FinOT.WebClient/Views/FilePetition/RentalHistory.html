@@ -6,82 +6,29 @@
             <div class="application-step step-1">
                 <h3 class="step-heading">Tenant Petition: <span>Rental History</span></h3>
 
-                <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
-                    <div class="step-content step1">
+                <div class="step-content step1">
                         <div class="field-group subhead no-top-margin">
                             <p class="input-label">When did you move into the unit?</p>
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="move_month" class="hidden"></label>
-                                        <select name="move_month" id="move_month" 
-                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month" data-placeholder="Month">
-                                            <option ng-value="1">January</option>
-                                            <option ng-value="2">February</option>
-                                            <option ng-value="3">March</option>
-                                            <option ng-value="4">April</option>
-                                            <option ng-value="5">May</option>
-                                            <option ng-value="6">June</option>
-                                            <option ng-value="7">July</option>
-                                            <option ng-value="8">August</option>
-                                            <option ng-value="9">September</option>
-                                            <option ng-value="10">October</option>
-                                            <option ng-value="11">November</option>
-                                            <option ng-value="12">December</option>
-                                        </select>
+                                        <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month"
+                                                class="custom-select" data-placeholder="Month"
+                                                ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="move_day" class="hidden"></label>
-                                        <select name="move_day" id="move_day" class="custom-select"
-                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day" data-placeholder="Day">
-                                            <option ng-value="01">01</option>
-                                            <option ng-value="02">02</option>
-                                            <option ng-value="03">03</option>
-                                            <option ng-value="04">04</option>
-                                            <option ng-value="05">05</option>
-                                            <option ng-value="06">06</option>
-                                            <option ng-value="07">07</option>
-                                            <option ng-value="08">08</option>
-                                            <option ng-value="09">09</option>
-                                            <option ng-value="10">10</option>
-                                            <option ng-value="11">11</option>
-                                            <option ng-value="12">12</option>
-                                            <option ng-value="13">13</option>
-                                            <option ng-value="14">14</option>
-                                            <option ng-value="15">15</option>
-                                            <option ng-value="16">16</option>
-                                            <option ng-value="17">17</option>
-                                            <option ng-value="18">18</option>
-                                            <option ng-value="19">19</option>
-                                            <option ng-value="20">20</option>
-                                            <option ng-value="21">21</option>
-                                            <option ng-value="22">22</option>
-                                            <option ng-value="23">23</option>
-                                            <option ng-value="24">24</option>
-                                            <option ng-value="25">25</option>
-                                            <option ng-value="26">26</option>
-                                            <option ng-value="27">27</option>
-                                            <option ng-value="28">28</option>
-                                            <option ng-value="29">29</option>
-                                            <option ng-value="30">30</option>
-                                            <option ng-value="31">31</option>
-                                        </select>
+                                        <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day"
+                                                class="custom-select" data-placeholder="Day"
+                                                ng-options="day for day in  Ctrl.Calender.Days"></select>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="move_year">&nbsp;</label>
                                         <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Year"
-                                                name="move_year" id="move_year" class="custom-select" data-placeholder="Year">
-                                            <option ng-repeat="year in  Ctrl.years"
-                                                    ng-value="{{year}}">
-                                                {{year}}
-                                            </option>
-                                        </select>
+                                                class="custom-select" data-placeholder="Year"
+                                                ng-options="year for year in  Ctrl.Calender.Years"></select>
                                     </div>
                                 </div>
                             </div>
@@ -96,82 +43,30 @@
 
                         <div class="field-group">
                             <p class="input-label">When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)?</p>
-
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="written_notice_month" class="hidden"></label>
-                                        <select name="written_notice_month" id="written_notice_month" class="custom-select"
-                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Month" data-placeholder="Month">
-                                            <option value="1">January</option>
-                                            <option value="2">February</option>
-                                            <option value="3">March</option>
-                                            <option value="4">April</option>
-                                            <option value="5">May</option>
-                                            <option value="6">June</option>
-                                            <option value="7">July</option>
-                                            <option value="8">August</option>
-                                            <option value="9">September</option>
-                                            <option value="10">October</option>
-                                            <option value="11">November</option>
-                                            <option value="12">December</option>
-                                        </select>
+                                        <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Month"
+                                                class="custom-select" data-placeholder="Month"
+                                                ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="written_notice_day" class="hidden"></label>
-                                        <select name="written_notice_day" id="written_notice_day" class="custom-select"
-                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Day" data-placeholder="Day">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="14">14</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                            <option value="24">24</option>
-                                            <option value="25">25</option>
-                                            <option value="26">26</option>
-                                            <option value="27">27</option>
-                                            <option value="28">28</option>
-                                            <option value="29">29</option>
-                                            <option value="30">30</option>
-                                            <option value="31">31</option>
-                                        </select>
+                                        <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Day"
+                                                class="custom-select" data-placeholder="Day"
+                                                ng-options="day for day in  Ctrl.Calender.Days"></select>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="written_notice_year">&nbsp;</label>
                                         <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Year"
-                                                name="written_notice_year" id="written_notice_year" class="custom-select" data-placeholder="Year">
-                                            <option ng-repeat="year in  Ctrl.years"
-                                                    value="{{year}}">
-                                                {{year}}
-                                            </option>
-                                        </select>
+                                                class="custom-select" data-placeholder="Year"
+                                                ng-options="year for year in  Ctrl.Calender.Years"></select>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div><!-- .field-group -->
 
 
@@ -224,84 +119,32 @@
                             </div>
                         </div>
 
-                        <div class="field-group">
-                            <div class="row">
-                                <div class="col-sm-4 col-xs-12">
-                                    <div class="field-group">
-                                        <label for="notice_served_month">Date notice served</label>
-                                        <select name="notice_served_month" id="notice_served_month" class="custom-select"
-                                                ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Month" data-placeholder="Month">
-                                            <option value="1">January</option>
-                                            <option value="2">February</option>
-                                            <option value="3">March</option>
-                                            <option value="4">April</option>
-                                            <option value="5">May</option>
-                                            <option value="6">June</option>
-                                            <option value="7">July</option>
-                                            <option value="8">August</option>
-                                            <option value="9">September</option>
-                                            <option value="10">October</option>
-                                            <option value="11">November</option>
-                                            <option value="12">December</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-xs-12">
-                                    <div class="field-group">
-                                        <label for="notice_served_day">&nbsp;</label>
-                                        <select name="notice_served_day" id="notice_served_day" class="custom-select"
-                                                ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Day" data-placeholder="Day">
-                                            <option ng-value="01">01</option>
-                                            <option ng-value="02">02</option>
-                                            <option ng-value="03">03</option>
-                                            <option ng-value="04">04</option>
-                                            <option ng-value="05">05</option>
-                                            <option ng-value="06">06</option>
-                                            <option ng-value="07">07</option>
-                                            <option ng-value="08">08</option>
-                                            <option ng-value="09">09</option>
-                                            <option ng-value="10">10</option>
-                                            <option ng-value="11">11</option>
-                                            <option ng-value="12">12</option>
-                                            <option ng-value="13">13</option>
-                                            <option ng-value="14">14</option>
-                                            <option ng-value="15">15</option>
-                                            <option ng-value="16">16</option>
-                                            <option ng-value="17">17</option>
-                                            <option ng-value="18">18</option>
-                                            <option ng-value="19">19</option>
-                                            <option ng-value="20">20</option>
-                                            <option ng-value="21">21</option>
-                                            <option ng-value="22">22</option>
-                                            <option ng-value="23">23</option>
-                                            <option ng-value="24">24</option>
-                                            <option ng-value="25">25</option>
-                                            <option ng-value="26">26</option>
-                                            <option ng-value="27">27</option>
-                                            <option ng-value="28">28</option>
-                                            <option ng-value="29">29</option>
-                                            <option ng-value="30">30</option>
-                                            <option ng-value="31">31</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-xs-12">
-                                    <div class="field-group">
-                                        <label for="notice_served_year">&nbsp;</label>
-                                        <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Year"
-                                                name="notice_served_year" id="notice_served_year" class="custom-select" data-placeholder="Year">
-                                            <option ng-repeat="year in  Ctrl.years"
-                                                    ng-value="{{year}}">
-                                                {{year}}
-                                            </option>
-                                        </select>
-                                    </div>
+                    <div class="field-group">
+                        <label for="date_increase_effective_month">Date notice served</label>
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Month"
+                                            class="custom-select" data-placeholder="Month"
+                                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                 </div>
                             </div>
-                        </div><!-- .field-group -->
-
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Day"
+                                            class="custom-select" data-placeholder="Day"
+                                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Year"
+                                            class="custom-select" data-placeholder="Year"
+                                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .field-group -->
 
 
                         <div class="field-group">
@@ -314,77 +157,27 @@
                         </div><!-- .field-group -->
 
                         <div class="field-group">
+                            <label for="date_increase_effective_month">Date increase effective</label>
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="date_increase_effective_month">Date increase effective</label>
-                                        <select name="date_increase_effective_month" id="date_increase_effective_month" class="custom-select"
-                                                ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Month" data-placeholder="Month">
-                                            <option value="1">January</option>
-                                            <option value="2">February</option>
-                                            <option value="3">March</option>
-                                            <option value="4">April</option>
-                                            <option value="5">May</option>
-                                            <option value="6">June</option>
-                                            <option value="7">July</option>
-                                            <option value="8">August</option>
-                                            <option value="9">September</option>
-                                            <option value="10">October</option>
-                                            <option value="11">November</option>
-                                            <option value="12">December</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-xs-12">
-                                    <div class="field-group">
-                                        <label for="date_increase_effective_day">&nbsp;</label>
-                                        <select name="date_increase_effective_day" id="date_increase_effective_day" class="custom-select"
-                                                ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Day" data-placeholder="Day">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="14">14</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                            <option value="24">24</option>
-                                            <option value="25">25</option>
-                                            <option value="26">26</option>
-                                            <option value="27">27</option>
-                                            <option value="28">28</option>
-                                            <option value="29">29</option>
-                                            <option value="30">30</option>
-                                            <option value="31">31</option>
-                                        </select>
+                                        <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Month"
+                                                class="custom-select" data-placeholder="Month"
+                                                ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <label for="date_increase_effective_year">&nbsp;</label>
+                                        <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Day"
+                                                class="custom-select" data-placeholder="Day"
+                                                ng-options="day for day in  Ctrl.Calender.Days"></select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="field-group">
                                         <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Year"
-                                                name="date_increase_effective_year" id="date_increase_effective_year" class="custom-select" data-placeholder="Year">
-                                            <option ng-repeat="year in  Ctrl.years"
-                                                    ng-value="{{year}}">
-                                                {{year}}
-                                            </option>
-                                        </select>
+                                                class="custom-select" data-placeholder="Year"
+                                                ng-options="year for year in  Ctrl.Calender.Years"></select>
                                     </div>
                                 </div>
                             </div>
@@ -489,7 +282,6 @@
                         <input type="button" id="save" name="save" class="btn-primary btn-gray" value="Save"
                                ng-click="Ctrl.Save(Ctrl.selectedValue)" />
                     </div>
-                </form>
             </div>
         </div>
     </div>
