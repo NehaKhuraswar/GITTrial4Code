@@ -24,6 +24,54 @@ namespace RAP.DAL
       
         #region "Get"
         /// <summary>
+        /// Model to set Left Navigation Class
+        /// </summary>
+        /// <param name="CustomerID"></param>
+        /// <returns></returns>
+        public ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID)
+        {
+            ReturnResult<PetitionPageSubnmissionStatusM> result = new ReturnResult<PetitionPageSubnmissionStatusM>();
+            PetitionPageSubnmissionStatusM model = new PetitionPageSubnmissionStatusM();
+            try
+            {
+                var tPetition = _dbContext.TenantPetitionPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                if (tPetition != null)
+                {
+                    model.TenantPetition.ImportantInformation = (bool)tPetition.ImportantInformation;
+                    model.TenantPetition.ApplicantInformation = (bool)tPetition.ApplicantInformation;
+                    model.TenantPetition.GroundsForPetition = (bool)tPetition.GroundsForPetition;
+                    model.TenantPetition.RentHistory = (bool)tPetition.RentHistory;
+                    model.TenantPetition.LostService = (bool)tPetition.LostService;
+                    model.TenantPetition.AdditionalDocumentation = (bool)tPetition.AdditionalDocumentation;
+                    model.TenantPetition.Review = (bool)tPetition.Review;
+                    model.TenantPetition.Verification = (bool)tPetition.Verification;
+                }
+                var oPetition = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                if (oPetition != null)
+                {
+                    model.OwnerPetition.ImportantInformation = (bool)oPetition.ImportantInformation;
+                    model.OwnerPetition.ApplicantInformation = (bool)oPetition.ApplicantInformation;
+                    model.OwnerPetition.JustificationForRentIncrease = (bool)oPetition.JustificationForRentIncrease;
+                    model.OwnerPetition.RentalProperty = (bool)oPetition.RentalProperty;
+                    model.OwnerPetition.RentHistory = (bool)oPetition.RentHistory;
+                    model.OwnerPetition.AdditionalDocumentation = (bool)oPetition.AdditionalDocumentation;
+                    model.OwnerPetition.Review = (bool)oPetition.Review;
+                    model.OwnerPetition.Verification = (bool)oPetition.Verification;
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+        
+
+        /// <summary>
         /// Gets the data needed to to display on the tenant petition form
         /// </summary>
         /// <returns></returns>

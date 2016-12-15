@@ -28,6 +28,22 @@ namespace RAP.Business.Implementation
             this._commonService = commonService;
         }
 
+        public ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID)
+        {
+            ReturnResult<PetitionPageSubnmissionStatusM> result = new ReturnResult<PetitionPageSubnmissionStatusM>();
+            try
+            {
+                result = _dbHandler.GetPageSubmissionStatus(CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         public ReturnResult<CaseInfoM> GetCaseDetails()
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();

@@ -19,6 +19,9 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
         });
         $scope.model.ownerJustification = false;
         $scope.model.ownerRentalProperty = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oPetionCurrentStatus.RentalProperty = true;
+        $scope.model.oPetionActiveStatus.JustificationForRentIncrease = true;
     }
 
 }];

@@ -146,4 +146,39 @@ namespace RAP.Core.DataModels
         public int RAPNoticeStatusID { get; set; }
         public string RAPNoticeStatus { get; set; }
     }
+    public class PetitionPageSubnmissionStatusM
+    {
+        public PetitionPageSubnmissionStatusM()
+        {
+            OwnerPetition = new OwnerPetitionPageSubnmissionStatusM();
+            TenantPetition = new TenantPetitionPageSubnmissionStatusM();
+        }
+        public OwnerPetitionPageSubnmissionStatusM OwnerPetition { get; set; }
+        public TenantPetitionPageSubnmissionStatusM TenantPetition { get; set; } 
+    }
+    public class OwnerPetitionPageSubnmissionStatusM
+    {
+        public int CustomerID { get; set; }
+        public bool ImportantInformation { get; set; }
+        public bool ApplicantInformation { get; set; }
+        public bool JustificationForRentIncrease { get; set; }
+        public bool RentalProperty { get; set; }
+        public bool RentHistory { get; set; }
+        public bool AdditionalDocumentation { get; set; }
+        public bool Review { get; set; }
+        public bool Verification { get; set; }
+    }
+
+    public class TenantPetitionPageSubnmissionStatusM
+    {
+        public int CustomerID { get; set; }
+        public bool ImportantInformation { get; set; }
+        public bool ApplicantInformation { get; set; }
+        public bool GroundsForPetition { get; set; }
+        public bool RentHistory { get; set; }
+        public bool LostService { get; set; }
+        public bool AdditionalDocumentation { get; set; }
+        public bool Review { get; set; }
+        public bool Verification { get; set; }
+    }
 }

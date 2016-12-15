@@ -34,6 +34,9 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         });
         $scope.model.ownerRentalProperty = false;
         $scope.model.ownerRentalHistory = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oPetionCurrentStatus.RentHistory = true;
+        $scope.model.oPetionActiveStatus.RentalProperty = true;
     }
     self.AddTenant = function (_userInfo)
     {

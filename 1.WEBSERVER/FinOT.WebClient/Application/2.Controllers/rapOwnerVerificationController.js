@@ -10,6 +10,7 @@
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
         });
+        $scope.model.oPetionActiveStatus.Verification = true;
     }
 }];
 

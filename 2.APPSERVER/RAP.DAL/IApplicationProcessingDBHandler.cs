@@ -5,10 +5,11 @@ using System.Collections.Generic;
 
 namespace RAP.DAL
 {
-   public interface IApplicationProcessingDBHandler
+    public interface IApplicationProcessingDBHandler
     {
+        ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID);
         ReturnResult<CaseInfoM> GetCaseDetails();
-       // ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
+        // ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
         ReturnResult<CaseInfoM> GetCaseDetails(int UserID);
         ReturnResult<CaseInfoM> GetCaseInfo(string CaseID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
@@ -37,9 +38,6 @@ namespace RAP.DAL
         ReturnResult<bool> SaveRentIncreaseReasonInfo(OwnerPetitionInfoM petition);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerPropertyAndTenantInfo(OwnerPetitionPropertyInfoM model);
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(OwnerPetitionPropertyInfoM model);
-        ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model);
-
-
-     //   ReturnResult<CaseInfoM> GetCaseDetails(int caseID);
+        ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model);        
     }
 }

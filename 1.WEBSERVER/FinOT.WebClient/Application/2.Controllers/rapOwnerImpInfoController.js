@@ -6,7 +6,8 @@ var rapOwnerImpInfoController = ['$scope', '$modal', 'alertService','$location',
     self.Continue = function () {
         $scope.model.ownerImpInfo = false;
         $scope.model.ownerApplicantInfo = true;
-        
+        $scope.model.DisableAllCurrent();
+        $scope.model.oPetionCurrentStatus.ApplicantInformation = true;
     }
 }];
 var rapImpInfoController_resolve = {

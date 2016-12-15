@@ -55,6 +55,7 @@ namespace RAP.API.Controllers
         }
 
         #region "GET REQUESTS"
+      
 
         [AllowAnonymous]
         [HttpGet]
@@ -219,6 +220,40 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("GetPageSubmissionStatus/{CustomerID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetPageSubmissionStatus(int CustomerID)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<PetitionPageSubnmissionStatusM> transaction = new TranInfo<PetitionPageSubnmissionStatusM>();
+            ReturnResult<PetitionPageSubnmissionStatusM> result = new ReturnResult<PetitionPageSubnmissionStatusM>();
+            try
+            {
+
+                result = _service.GetPageSubmissionStatus(CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<PetitionPageSubnmissionStatusM>>(ReturnCode, transaction);
         }
         #endregion
 

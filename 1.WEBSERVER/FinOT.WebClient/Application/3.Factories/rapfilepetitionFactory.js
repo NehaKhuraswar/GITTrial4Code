@@ -14,8 +14,6 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
           });
       }
 
-
-      
       var _getPetitionCategory = function()
       {
           blockUI.start();
@@ -27,8 +25,20 @@ var rapfilepetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
           });
       }
 
+      var _getPageSubmission = function (custId)
+      {
+          blockUI.start();
+          var url = _routePrefix + '/GetPageSubmissionStatus/';
+          if (!(custId == null || custId == undefined)) { url = url + '/' + custId; }
+          return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+      }
+
       factory.GetPetitionCategory = _getPetitionCategory;
       factory.GetCaseInfo = _GetCaseInfo;
+      factory.GetPageSubmissionStatus = _getPageSubmission;
     
     return factory;
 }];

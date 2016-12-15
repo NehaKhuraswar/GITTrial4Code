@@ -37,6 +37,9 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         });
         $scope.model.ownerRentalHistory = false;
         $scope.model.ownerAdditionalDocuments = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oPetionCurrentStatus.AdditionalDocumentation = true;
+        $scope.model.oPetionActiveStatus.RentHistory = true;
     }
 }];
 var rapOwnerRentalHistoryController_resolve = {

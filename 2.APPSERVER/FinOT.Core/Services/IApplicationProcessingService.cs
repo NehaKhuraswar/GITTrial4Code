@@ -7,6 +7,7 @@ namespace RAP.Core.Services
     public interface IApplicationProcessingService
     {
         string CorrelationId { get; set; }
+        ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID);
         ReturnResult<CaseInfoM> GetCaseDetails();
         ReturnResult<CaseInfoM> GetCaseInfo(string caseID);
         ReturnResult<CaseInfoM> GetCaseDetails(int UserID);

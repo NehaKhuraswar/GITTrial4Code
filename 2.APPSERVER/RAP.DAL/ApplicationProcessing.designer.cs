@@ -102,6 +102,12 @@ namespace RAP.DAL
     partial void InsertOwnerPetitionInfo(OwnerPetitionInfo instance);
     partial void UpdateOwnerPetitionInfo(OwnerPetitionInfo instance);
     partial void DeleteOwnerPetitionInfo(OwnerPetitionInfo instance);
+    partial void InsertOwnerPetitionPageSubmissionStatus(OwnerPetitionPageSubmissionStatus instance);
+    partial void UpdateOwnerPetitionPageSubmissionStatus(OwnerPetitionPageSubmissionStatus instance);
+    partial void DeleteOwnerPetitionPageSubmissionStatus(OwnerPetitionPageSubmissionStatus instance);
+    partial void InsertTenantPetitionPageSubmissionStatus(TenantPetitionPageSubmissionStatus instance);
+    partial void UpdateTenantPetitionPageSubmissionStatus(TenantPetitionPageSubmissionStatus instance);
+    partial void DeleteTenantPetitionPageSubmissionStatus(TenantPetitionPageSubmissionStatus instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -331,6 +337,22 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<OwnerPetitionInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OwnerPetitionPageSubmissionStatus> OwnerPetitionPageSubmissionStatus
+		{
+			get
+			{
+				return this.GetTable<OwnerPetitionPageSubmissionStatus>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TenantPetitionPageSubmissionStatus> TenantPetitionPageSubmissionStatus
+		{
+			get
+			{
+				return this.GetTable<TenantPetitionPageSubmissionStatus>();
 			}
 		}
 	}
@@ -5821,6 +5843,562 @@ namespace RAP.DAL
 						this._OwnerPropertyID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("OwnerPetitionPropertyInfo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OwnerPetitionPageSubmissionStatus")]
+	public partial class OwnerPetitionPageSubmissionStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NavigationID;
+		
+		private int _CustomerID;
+		
+		private System.Nullable<bool> _ImportantInformation;
+		
+		private System.Nullable<bool> _ApplicantInformation;
+		
+		private System.Nullable<bool> _JustificationForRentIncrease;
+		
+		private System.Nullable<bool> _RentalProperty;
+		
+		private System.Nullable<bool> _RentHistory;
+		
+		private System.Nullable<bool> _AdditionalDocumentation;
+		
+		private System.Nullable<bool> _Review;
+		
+		private System.Nullable<bool> _Verification;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNavigationIDChanging(int value);
+    partial void OnNavigationIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnImportantInformationChanging(System.Nullable<bool> value);
+    partial void OnImportantInformationChanged();
+    partial void OnApplicantInformationChanging(System.Nullable<bool> value);
+    partial void OnApplicantInformationChanged();
+    partial void OnJustificationForRentIncreaseChanging(System.Nullable<bool> value);
+    partial void OnJustificationForRentIncreaseChanged();
+    partial void OnRentalPropertyChanging(System.Nullable<bool> value);
+    partial void OnRentalPropertyChanged();
+    partial void OnRentHistoryChanging(System.Nullable<bool> value);
+    partial void OnRentHistoryChanged();
+    partial void OnAdditionalDocumentationChanging(System.Nullable<bool> value);
+    partial void OnAdditionalDocumentationChanged();
+    partial void OnReviewChanging(System.Nullable<bool> value);
+    partial void OnReviewChanged();
+    partial void OnVerificationChanging(System.Nullable<bool> value);
+    partial void OnVerificationChanged();
+    #endregion
+		
+		public OwnerPetitionPageSubmissionStatus()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NavigationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NavigationID
+		{
+			get
+			{
+				return this._NavigationID;
+			}
+			set
+			{
+				if ((this._NavigationID != value))
+				{
+					this.OnNavigationIDChanging(value);
+					this.SendPropertyChanging();
+					this._NavigationID = value;
+					this.SendPropertyChanged("NavigationID");
+					this.OnNavigationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImportantInformation", DbType="Bit")]
+		public System.Nullable<bool> ImportantInformation
+		{
+			get
+			{
+				return this._ImportantInformation;
+			}
+			set
+			{
+				if ((this._ImportantInformation != value))
+				{
+					this.OnImportantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ImportantInformation = value;
+					this.SendPropertyChanged("ImportantInformation");
+					this.OnImportantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantInformation", DbType="Bit")]
+		public System.Nullable<bool> ApplicantInformation
+		{
+			get
+			{
+				return this._ApplicantInformation;
+			}
+			set
+			{
+				if ((this._ApplicantInformation != value))
+				{
+					this.OnApplicantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicantInformation = value;
+					this.SendPropertyChanged("ApplicantInformation");
+					this.OnApplicantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JustificationForRentIncrease", DbType="Bit")]
+		public System.Nullable<bool> JustificationForRentIncrease
+		{
+			get
+			{
+				return this._JustificationForRentIncrease;
+			}
+			set
+			{
+				if ((this._JustificationForRentIncrease != value))
+				{
+					this.OnJustificationForRentIncreaseChanging(value);
+					this.SendPropertyChanging();
+					this._JustificationForRentIncrease = value;
+					this.SendPropertyChanged("JustificationForRentIncrease");
+					this.OnJustificationForRentIncreaseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentalProperty", DbType="Bit")]
+		public System.Nullable<bool> RentalProperty
+		{
+			get
+			{
+				return this._RentalProperty;
+			}
+			set
+			{
+				if ((this._RentalProperty != value))
+				{
+					this.OnRentalPropertyChanging(value);
+					this.SendPropertyChanging();
+					this._RentalProperty = value;
+					this.SendPropertyChanged("RentalProperty");
+					this.OnRentalPropertyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentHistory", DbType="Bit")]
+		public System.Nullable<bool> RentHistory
+		{
+			get
+			{
+				return this._RentHistory;
+			}
+			set
+			{
+				if ((this._RentHistory != value))
+				{
+					this.OnRentHistoryChanging(value);
+					this.SendPropertyChanging();
+					this._RentHistory = value;
+					this.SendPropertyChanged("RentHistory");
+					this.OnRentHistoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalDocumentation", DbType="Bit")]
+		public System.Nullable<bool> AdditionalDocumentation
+		{
+			get
+			{
+				return this._AdditionalDocumentation;
+			}
+			set
+			{
+				if ((this._AdditionalDocumentation != value))
+				{
+					this.OnAdditionalDocumentationChanging(value);
+					this.SendPropertyChanging();
+					this._AdditionalDocumentation = value;
+					this.SendPropertyChanged("AdditionalDocumentation");
+					this.OnAdditionalDocumentationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Review", DbType="Bit")]
+		public System.Nullable<bool> Review
+		{
+			get
+			{
+				return this._Review;
+			}
+			set
+			{
+				if ((this._Review != value))
+				{
+					this.OnReviewChanging(value);
+					this.SendPropertyChanging();
+					this._Review = value;
+					this.SendPropertyChanged("Review");
+					this.OnReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verification", DbType="Bit")]
+		public System.Nullable<bool> Verification
+		{
+			get
+			{
+				return this._Verification;
+			}
+			set
+			{
+				if ((this._Verification != value))
+				{
+					this.OnVerificationChanging(value);
+					this.SendPropertyChanging();
+					this._Verification = value;
+					this.SendPropertyChanged("Verification");
+					this.OnVerificationChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantPetitionPageSubmissionStatus")]
+	public partial class TenantPetitionPageSubmissionStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NavigationID;
+		
+		private int _CustomerID;
+		
+		private System.Nullable<bool> _ImportantInformation;
+		
+		private System.Nullable<bool> _ApplicantInformation;
+		
+		private System.Nullable<bool> _GroundsForPetition;
+		
+		private System.Nullable<bool> _RentHistory;
+		
+		private System.Nullable<bool> _LostService;
+		
+		private System.Nullable<bool> _AdditionalDocumentation;
+		
+		private System.Nullable<bool> _Review;
+		
+		private System.Nullable<bool> _Verification;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNavigationIDChanging(int value);
+    partial void OnNavigationIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnImportantInformationChanging(System.Nullable<bool> value);
+    partial void OnImportantInformationChanged();
+    partial void OnApplicantInformationChanging(System.Nullable<bool> value);
+    partial void OnApplicantInformationChanged();
+    partial void OnGroundsForPetitionChanging(System.Nullable<bool> value);
+    partial void OnGroundsForPetitionChanged();
+    partial void OnRentHistoryChanging(System.Nullable<bool> value);
+    partial void OnRentHistoryChanged();
+    partial void OnLostServiceChanging(System.Nullable<bool> value);
+    partial void OnLostServiceChanged();
+    partial void OnAdditionalDocumentationChanging(System.Nullable<bool> value);
+    partial void OnAdditionalDocumentationChanged();
+    partial void OnReviewChanging(System.Nullable<bool> value);
+    partial void OnReviewChanged();
+    partial void OnVerificationChanging(System.Nullable<bool> value);
+    partial void OnVerificationChanged();
+    #endregion
+		
+		public TenantPetitionPageSubmissionStatus()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NavigationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NavigationID
+		{
+			get
+			{
+				return this._NavigationID;
+			}
+			set
+			{
+				if ((this._NavigationID != value))
+				{
+					this.OnNavigationIDChanging(value);
+					this.SendPropertyChanging();
+					this._NavigationID = value;
+					this.SendPropertyChanged("NavigationID");
+					this.OnNavigationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImportantInformation", DbType="Bit")]
+		public System.Nullable<bool> ImportantInformation
+		{
+			get
+			{
+				return this._ImportantInformation;
+			}
+			set
+			{
+				if ((this._ImportantInformation != value))
+				{
+					this.OnImportantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ImportantInformation = value;
+					this.SendPropertyChanged("ImportantInformation");
+					this.OnImportantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantInformation", DbType="Bit")]
+		public System.Nullable<bool> ApplicantInformation
+		{
+			get
+			{
+				return this._ApplicantInformation;
+			}
+			set
+			{
+				if ((this._ApplicantInformation != value))
+				{
+					this.OnApplicantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicantInformation = value;
+					this.SendPropertyChanged("ApplicantInformation");
+					this.OnApplicantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroundsForPetition", DbType="Bit")]
+		public System.Nullable<bool> GroundsForPetition
+		{
+			get
+			{
+				return this._GroundsForPetition;
+			}
+			set
+			{
+				if ((this._GroundsForPetition != value))
+				{
+					this.OnGroundsForPetitionChanging(value);
+					this.SendPropertyChanging();
+					this._GroundsForPetition = value;
+					this.SendPropertyChanged("GroundsForPetition");
+					this.OnGroundsForPetitionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentHistory", DbType="Bit")]
+		public System.Nullable<bool> RentHistory
+		{
+			get
+			{
+				return this._RentHistory;
+			}
+			set
+			{
+				if ((this._RentHistory != value))
+				{
+					this.OnRentHistoryChanging(value);
+					this.SendPropertyChanging();
+					this._RentHistory = value;
+					this.SendPropertyChanged("RentHistory");
+					this.OnRentHistoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LostService", DbType="Bit")]
+		public System.Nullable<bool> LostService
+		{
+			get
+			{
+				return this._LostService;
+			}
+			set
+			{
+				if ((this._LostService != value))
+				{
+					this.OnLostServiceChanging(value);
+					this.SendPropertyChanging();
+					this._LostService = value;
+					this.SendPropertyChanged("LostService");
+					this.OnLostServiceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalDocumentation", DbType="Bit")]
+		public System.Nullable<bool> AdditionalDocumentation
+		{
+			get
+			{
+				return this._AdditionalDocumentation;
+			}
+			set
+			{
+				if ((this._AdditionalDocumentation != value))
+				{
+					this.OnAdditionalDocumentationChanging(value);
+					this.SendPropertyChanging();
+					this._AdditionalDocumentation = value;
+					this.SendPropertyChanged("AdditionalDocumentation");
+					this.OnAdditionalDocumentationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Review", DbType="Bit")]
+		public System.Nullable<bool> Review
+		{
+			get
+			{
+				return this._Review;
+			}
+			set
+			{
+				if ((this._Review != value))
+				{
+					this.OnReviewChanging(value);
+					this.SendPropertyChanging();
+					this._Review = value;
+					this.SendPropertyChanged("Review");
+					this.OnReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verification", DbType="Bit")]
+		public System.Nullable<bool> Verification
+		{
+			get
+			{
+				return this._Verification;
+			}
+			set
+			{
+				if ((this._Verification != value))
+				{
+					this.OnVerificationChanging(value);
+					this.SendPropertyChanging();
+					this._Verification = value;
+					this.SendPropertyChanged("Verification");
+					this.OnVerificationChanged();
 				}
 			}
 		}

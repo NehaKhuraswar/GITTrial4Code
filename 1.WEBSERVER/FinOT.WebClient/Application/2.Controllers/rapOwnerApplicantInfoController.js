@@ -40,6 +40,11 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         });
         $scope.model.ownerApplicantInfo = false;
         $scope.model.ownerJustification = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oPetionCurrentStatus.JustificationForRentIncrease = true;
+        $scope.model.oPetionActiveStatus.PetitionCategory = true;
+        $scope.model.oPetionActiveStatus.ImportantInformation = true;
+        $scope.model.oPetionActiveStatus.ApplicantInformation = true;
     }
  
 }];

@@ -276,4 +276,32 @@
       <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionInfo" Member="OwnerPetitionPropertyInfo" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionPropertyInfo" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.OwnerPetitionPageSubmissionStatus" Member="OwnerPetitionPageSubmissionStatus">
+    <Type Name="OwnerPetitionPageSubmissionStatus">
+      <Column Name="NavigationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ImportantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ApplicantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="JustificationForRentIncrease" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RentalProperty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RentHistory" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AdditionalDocumentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Review" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Verification" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantPetitionPageSubmissionStatus" Member="TenantPetitionPageSubmissionStatus">
+    <Type Name="TenantPetitionPageSubmissionStatus">
+      <Column Name="NavigationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ImportantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ApplicantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="GroundsForPetition" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RentHistory" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LostService" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AdditionalDocumentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Review" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Verification" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

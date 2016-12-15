@@ -8,6 +8,9 @@
         rapGlobalFactory.CaseDetails = self.caseinfo;
         $scope.model.ownerReview = false;
         $scope.model.ownerVerification = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oPetionCurrentStatus.Verification = true;
+        $scope.model.oPetionActiveStatus.Review = true;
     }
 }];
 

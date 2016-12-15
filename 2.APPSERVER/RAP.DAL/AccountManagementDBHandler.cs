@@ -684,6 +684,7 @@ namespace RAP.DAL
                 return false;
             }
         }
+               
         #region "Save"
         /// <summary>
         /// Save cutomer information
