@@ -110,6 +110,7 @@ namespace RAP.Core.DataModels
        // public string CaseID { get; set; }
         private bool _appealFiled = false;
         public bool bThirdPartyRepresentation = false;
+        public string CaseNumber;
 
        // private UserInfoM _appealThirdPartyInfo = new UserInfoM();
         public UserInfoM AppealThirdPartyInfo = new UserInfoM();

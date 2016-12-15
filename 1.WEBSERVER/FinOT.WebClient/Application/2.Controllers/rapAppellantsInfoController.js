@@ -5,7 +5,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     
-    self.ContinueToGroundsforAppeal = function () {
+    self.ContinueToGroundsforAppeal = function (model) {
         $scope.model.bAppellantInfo = false;
         $scope.model.bGrounds = true;
         //rapFactory.SaveTenantAppealInfo(model).then(function (response) {

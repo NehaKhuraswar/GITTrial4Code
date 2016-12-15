@@ -86,6 +86,21 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy)
+        {
+            ReturnResult<List<AppealGroundM>> result = new ReturnResult<List<AppealGroundM>>();
+            try
+            {
+                result = _dbHandler.GetAppealGroundInfo(CaseNumber, AppealFiledBy);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         //TBD - to be removed as we dont need to save the APpeal info
         public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo)
         {

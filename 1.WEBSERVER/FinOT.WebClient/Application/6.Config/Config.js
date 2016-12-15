@@ -141,12 +141,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapAppellantsInfoController_resolve
         })
-        .when('/groundsforappeal', {
-            templateUrl: 'views/fileAppeal/GroundsForAppeal.html',
-            controller: rapGroundsOfAppealController,
-            controllerAs: 'Ctrl',
-            resolve: rapGroundsOfAppealController_resolve
-        })
+        //.when('/groundsforappeal', {
+        //    templateUrl: 'views/fileAppeal/GroundsForAppeal.html',
+        //    controller: rapGroundsOfAppealController,
+        //    controllerAs: 'Ctrl',
+        //    resolve: rapGroundsOfAppealController_resolve
+        //})
         .when('/reviewappeal', {
             templateUrl: 'views/fileAppeal/Review.html',
             controller: rapReviewAppealController,

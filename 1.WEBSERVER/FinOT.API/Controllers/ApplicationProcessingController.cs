@@ -187,6 +187,48 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
 
+        [AllowAnonymous]
+        [Route("getappealgroundinfo/{CaseNumber}/{AppealFiledBy:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetAppealGroundInfo(string CaseNumber, int AppealFiledBy)           
+        {
+
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<AppealGroundM>> transaction = new TranInfo<List<AppealGroundM>>();
+            ReturnResult<List<AppealGroundM>> result = new ReturnResult<List<AppealGroundM>>();
+            try
+            {
+
+                result = _service.GetAppealGroundInfo(CaseNumber, AppealFiledBy);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<List<AppealGroundM>>>(ReturnCode, transaction);
+        }
+
         #region Common File Petition method      
         [AllowAnonymous]
         [Route("GetPetitioncategory")]

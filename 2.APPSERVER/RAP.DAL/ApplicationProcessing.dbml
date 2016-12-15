@@ -50,17 +50,6 @@
       <Association Name="AppealGround_TenantAppealGroundInfo" Member="TenantAppealGroundInfos" ThisKey="AppealGroundID" OtherKey="AppealGroundID" Type="TenantAppealGroundInfo" />
     </Type>
   </Table>
-  <Table Name="dbo.TenantAppealDetails" Member="TenantAppealDetails">
-    <Type Name="TenantAppealDetail">
-      <Column Name="TenantAppealID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="OpposingPartyCommunicateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="AppealFiledBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="TenantAppealDetail_CaseDetail" Member="CaseDetails" ThisKey="TenantAppealID" OtherKey="TenantAppealID" Type="CaseDetail" />
-    </Type>
-  </Table>
   <Table Name="dbo.TenantAppealGroundInfo" Member="TenantAppealGroundInfos">
     <Type Name="TenantAppealGroundInfo">
       <Column Name="TenantAppealGroudID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -257,9 +246,9 @@
       <Column Name="AppealDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="HearingOfficerUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CityAnalystUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="TenantAppealDetail_CaseDetail" Member="TenantAppealDetail" ThisKey="TenantAppealID" OtherKey="TenantAppealID" Type="TenantAppealDetail" IsForeignKey="true" />
       <Association Name="PetitionCategory_CaseDetail" Member="PetitionCategory" ThisKey="PetitionCategoryID" OtherKey="PetitionCategoryID" Type="PetitionCategory" IsForeignKey="true" />
       <Association Name="PetitionDetail_CaseDetail" Member="PetitionDetail" ThisKey="PetitionID" OtherKey="PetitionID" Type="PetitionDetail" IsForeignKey="true" />
+      <Association Name="TenantAppealDetail_CaseDetail" Member="TenantAppealDetail" ThisKey="TenantAppealID" OtherKey="AppealID" Type="TenantAppealDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.OwnerPetitionInfo" Member="OwnerPetitionInfos">
@@ -302,6 +291,19 @@
       <Column Name="AdditionalDocumentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Review" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Verification" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantAppealDetails" Member="TenantAppealDetails">
+    <Type Name="TenantAppealDetail">
+      <Column Name="AppealID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OpposingPartyCommunicateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AppealFiledBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CaseNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsSubmitted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TenantAppealDetail_CaseDetail" Member="CaseDetails" ThisKey="AppealID" OtherKey="TenantAppealID" Type="CaseDetail" />
     </Type>
   </Table>
 </Database>

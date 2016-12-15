@@ -4,32 +4,34 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    //self.ContinueToRentalHistory = function () {
-    //    rapGlobalFactory.CaseDetails = self.caseinfo;
-    //    $location.path("/servingappeal");
-    //}
+
+    var _GetAppealGroundInfo = function (CaseNumber, appealFiledBy) {
+        rapFactory.GetAppealGroundInfo(CaseNumber, appealFiledBy).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo.TenantAppealInfo.AppealGrounds = response.data;
+        });
+    }
+    _GetAppealGroundInfo(self.caseinfo.CaseID, self.custDetails.custID);
+
     self.ContinueToRentalHistory = function (model) {
         rapFactory.SaveAppealGroundInfo(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            // $modalInstance.close(response.data);
-            //rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
-            //self.caseinfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
             if (response.data == true) {
                 $location.path("/servingappeal");
             }
         });
-        // rapGlobalFactory.CaseDetails = self.caseinfo;
-
     }
 }];
-var rapGroundsOfAppealController_resolve = {
-    model: ['$route', 'alertService', 'rapgroundsofappealFactory', function ($route, alert, rapFactory) {
-        ////return auth.fetchToken().then(function (response) {
-        //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {
-        //  if (!alert.checkResponse(response)) { return; }
-        //        return response.data;
-        //    });
-    }]
-}
+//var rapGroundsOfAppealController_resolve = {
+//    model: ['$route', 'alertService', 'rapgroundsofappealFactory', function ($route, alert, rapFactory) {
+//        ////return auth.fetchToken().then(function (response) {
+//        //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {
+//        //  if (!alert.checkResponse(response)) { return; }
+//        //        return response.data;
+//        //    });
+//    }]
+//}

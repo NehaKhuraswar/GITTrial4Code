@@ -26,6 +26,7 @@ namespace RAP.DAL
         ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID);
         ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
+        ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);
         ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);
         ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo);
