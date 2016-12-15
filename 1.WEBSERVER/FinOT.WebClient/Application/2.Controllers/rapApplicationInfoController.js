@@ -4,13 +4,8 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.caseinfo.TenantPetitionInfo.CustomerID = self.custDetails.custID;
-    if (self.caseinfo.bCaseFiledByThirdParty == false) {
-        self.caseinfo.TenantPetitionInfo.ApplicantUserInfo = self.custDetails.User;
-    }
-    else {
-        self.caseinfo.TenantPetitionInfo.ThirdPartyUser = self.custDetails.User;
-    }
+    
+    
 
     var _GetTenantApplicationInfo = function (custID) {
         rapFactory.GetTenantApplicationInfo(custID).then(function (response) {
@@ -18,6 +13,13 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
                 return;
             }
             self.caseinfo.TenantPetitionInfo = response.data;
+            if (self.caseinfo.bCaseFiledByThirdParty == false) {
+                self.caseinfo.TenantPetitionInfo.ApplicantUserInfo = self.custDetails.User;
+            }
+            else {
+                self.caseinfo.TenantPetitionInfo.ThirdPartyUser = self.custDetails.User;
+            }
+            self.caseinfo.TenantPetitionInfo.CustomerID = self.custDetails.custID;
         });
     }
     _GetTenantApplicationInfo(self.custDetails.custID);

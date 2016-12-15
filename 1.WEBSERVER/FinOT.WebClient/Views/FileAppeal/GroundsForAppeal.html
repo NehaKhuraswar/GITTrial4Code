@@ -9,21 +9,14 @@
 
                 <div class="field-group">
                     <div class="form-group-checkbox vertical clearfix">
-                        <div class="checkbox-wrapper border-top-green pad-t15">
-                            <div ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
-                                <label for="appealground.appealgroundid">
-                                    <input type="checkbox" name="appealground.appealgroundid" id="appealground.AppealGroundID" ng-model="appealground.Selected">
-                                    <i></i><span><strong>{{appealground.AppealDescription}}</strong></span>
-                                </label>
-                            </div>
-                            <!--<label for="ground_for_appeal_chkbox1">
-                                <input type="checkbox" name="ground_for_appeal_chkbox1" id="ground_for_appeal_chkbox1" value="1) Minor Math/Clerical Errors which require the hearing decision to be updated." /><i></i><span><strong>1) Minor Math/Clerical Errors which require the hearing decision to be updated.</strong></span>
-                            </label>-->
+                        <div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
+                            <label for="appealground.appealgroundid">
+                                <input type="checkbox" name="groundcheckboxappeal"  class="checkbox" id="appealground.appealgroundid" ng-model="appealground.Selected">
+                                <i></i><span>{{appealground.AppealDescription}}</span>
+                            </label>
                         </div>
-                    </div>
+                    </div>                       
                 </div>
-
-               
 
                         <div class="field-group">
                             <p><strong>The maximum file size limit for uploads is 25MB</strong></p>

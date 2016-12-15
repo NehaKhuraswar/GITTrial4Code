@@ -374,40 +374,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="webfonts\FaktPro-Blond.eot" />
-    <Content Include="webfonts\FaktPro-Blond.otf" />
-    <Content Include="webfonts\FaktPro-Blond.ttf" />
-    <Content Include="webfonts\FaktPro-Blond.woff" />
-    <Content Include="webfonts\FaktPro-BlondItalic.eot" />
-    <Content Include="webfonts\FaktPro-BlondItalic.otf" />
-    <Content Include="webfonts\FaktPro-BlondItalic.ttf" />
-    <Content Include="webfonts\FaktPro-BlondItalic.woff" />
-    <Content Include="webfonts\FaktPro-BlondItalic_web.ttf" />
-    <Content Include="webfonts\FaktPro-Blond_web.ttf" />
-    <Content Include="webfonts\FaktPro-Medium.eot" />
-    <Content Include="webfonts\FaktPro-Medium.otf" />
-    <Content Include="webfonts\FaktPro-Medium.ttf" />
-    <Content Include="webfonts\FaktPro-Medium.woff" />
-    <Content Include="webfonts\FaktPro-MediumItalic.eot" />
-    <Content Include="webfonts\FaktPro-MediumItalic.otf" />
-    <Content Include="webfonts\FaktPro-MediumItalic.ttf" />
-    <Content Include="webfonts\FaktPro-MediumItalic.woff" />
-    <Content Include="webfonts\FaktPro-MediumItalic_web.ttf" />
-    <Content Include="webfonts\FaktPro-Medium_web.ttf" />
-    <Content Include="webfonts\FaktPro-Normal.eot" />
-    <Content Include="webfonts\FaktPro-Normal.otf" />
-    <Content Include="webfonts\FaktPro-Normal.ttf" />
-    <Content Include="webfonts\FaktPro-Normal.woff" />
-    <Content Include="webfonts\FaktPro-NormalItalic.eot" />
-    <Content Include="webfonts\FaktPro-NormalItalic.otf" />
-    <Content Include="webfonts\FaktPro-NormalItalic.ttf" />
-    <Content Include="webfonts\FaktPro-NormalItalic.woff" />
-    <Content Include="webfonts\FaktPro-NormalItalic_web.ttf" />
-    <Content Include="webfonts\FaktPro-Normal_web.ttf" />
-    <Content Include="webfonts\FaktSlabPro-Light.eot" />
-    <Content Include="webfonts\FaktSlabPro-Light.otf" />
-    <Content Include="webfonts\FaktSlabPro-Light.ttf" />
-    <Content Include="webfonts\FaktSlabPro-Light.woff" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\noaccess.html" />

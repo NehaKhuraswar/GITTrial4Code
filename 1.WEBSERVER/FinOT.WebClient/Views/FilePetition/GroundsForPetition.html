@@ -10,7 +10,7 @@
             <div class="form-group-checkbox vertical clearfix">
                 <div class="checkbox-wrapper" ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
                     <label for="petitionground.ID">
-                        <input type="checkbox" class="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
+                        <input type="checkbox" name="petitiongroundcheckbox" class="checkbox" id="petitionground.ID" ng-model="petitionground.Selected">
                         <i></i><span>{{petitionground.PetitionGroundDescription}}</span>
                     </label>
                 </div>
