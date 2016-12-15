@@ -12,7 +12,7 @@
         $scope.model.oPetionCurrentStatus.Review = true;
         $scope.model.oPetionActiveStatus.AdditionalDocumentation = true;
     }
-    }    
+        
 }];
 
 var rapOwnerDocumentsController_resolve = {
