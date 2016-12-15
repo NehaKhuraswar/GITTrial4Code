@@ -1,0 +1,247 @@
+﻿<div class="application-form-wrapper">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            <?php include('sidebar-owner-response.html'); ?>
+        </div>
+
+        <div class="col-md-9 col-sm-12">
+            <div class="application-step step-1">
+                <h3 class="step-heading">Owner Response: <span>Applicant and Property Information</span></h3>
+
+                <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form">
+                    <div class="step-content step1">
+                        <div class="field-group subhead no-top-margin">
+                            <div class="info">
+                                <div class="title">Case number</div>
+                                <div class="text">T17-0238</div>
+                            </div>
+                        </div>
+
+                        <!-- Applicant’s name and address -->
+                        <div class="subhead">
+                            <h4>Applicant’s name and address</h4>
+                            <a href="#" class="btn-link btn-edit">Edit</a>
+                        </div>
+                        <div class="field-group">
+                            <p>Melanie Peterson  </p>
+                            <p>6185 Ruthland Rd,<br />Oakland, CA 94611  </p>
+                            <p>Tel: (510) 453-5461 <br />Email: johnsmith@gmail.com</p>
+                        </div>
+
+                        <div class="field-group">
+                            <p class="input-label has-info-btn">Have you paid your business license? <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_paid_business_license">Info</a></p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="paid_business_license_yes">
+                                    <input type="radio" name="paid_business_license" id="paid_business_license_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="paid_business_license_no">
+                                    <input type="radio" name="paid_business_license" id="paid_business_license_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="business_license_no">Oakland Business License number:</label>
+                            <input type="text" name="business_license_no" id="business_license_no" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach proof of payment of your business tax</span>
+                                    <input type="file" id="business_tax_payment_proof" name="business_tax_payment_proof" />
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group">
+                            <p class="input-label has-info-btn">Have you paid the Rent Adjustment Program Service Fee ($69 per unit)? <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_rent_adjustment_fee">Info</a></p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="paid_rent_adjustment_fee_yes">
+                                    <input type="radio" name="paid_rent_adjustment_fee" id="paid_rent_adjustment_fee_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="paid_rent_adjustment_fee_no">
+                                    <input type="radio" name="paid_rent_adjustment_fee" id="paid_rent_adjustment_fee_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach proof of payment of your Rental Property service fee</span>
+                                    <input type="file" id="rental_property_fee_proof" name="rental_property_fee_proof" />
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group">
+                            <label>Date on which you acquired the building</label>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="acquired_month" class="hidden"></label>
+                                    <select name="acquired_month" id="acquired_month" class="custom-select" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="acquired_day" class="hidden"></label>
+                                    <select name="acquired_day" id="acquired_day" class="custom-select" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="acquired_year" class="hidden"></label>
+                                    <select name="acquired_year" id="acquired_year" class="custom-select" data-placeholder="Year">
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group">
+                            <label for="builing_units">Total number of units</label>
+                            <input type="text" name="builing_units" id="builing_units" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <p class="input-label has-info-btn">Is there more than one street address on the parcel? <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_more_street_address">Info</a></p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="more_street_address_yes">
+                                    <input type="radio" name="more_street_address" id="more_street_address_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="more_street_address_no">
+                                    <input type="radio" name="more_street_address" id="more_street_address_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <!-- Your Representative -->
+                        <div class="subhead">
+                            <h4>Your Representative</h4>
+                            <a href="#" class="btn-link btn-edit">Edit</a>
+                        </div>
+                        <div class="field-group">
+                            <p>John Smith  </p>
+                            <p>1543 Grand View Dr, <br />Oakland, CA 94611  </p>
+                            <p>Tel: (510) 453-5461  <br />Email: johnsmith@gmail.com</p>
+                        </div>
+                        <div class="subhead field-group">
+                            <label for="tenant_first_name">Tenant’s name</label>
+                            <input type="text" name="tenant_first_name" id="tenant_first_name" class="field-input" placeholder="First" />
+                        </div>
+
+                        <div class="field-group">
+                            <input type="text" name="tenant_last_name" id="tenant_last_name" class="field-input" placeholder="Last" />
+                        </div>
+
+                        <div class="field-group mar-bottom-40">
+                            <a href="#" class="btn-link">Add another tenant’s name</a>
+                        </div>
+
+
+                        <!-- Property Address -->
+                        <div class="subhead">
+                            <h4>Rental Property Address</h4>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="rental_property_mailing_address1">Mailing address 1</label>
+                            <input type="text" name="rental_property_mailing_address1" id="rental_property_mailing_address1" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="rental_property_mailing_address2">Mailing address 2 (optional)</label>
+                            <input type="text" name="rental_property_mailing_address2" id="rental_property_mailing_address2" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="rental_property_state">State</label>
+                            <div class="input-wrapper">
+                                <select name="rental_property_state" id="rental_property_state" class="custom-select" data-placeholder="Select">
+                                    <option value="option_01">Option 01</option>
+                                    <option value="option_02">Option 02</option>
+                                    <option value="option_03">Option 03</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="rental_property_city">City</label>
+                            <input type="text" name="rental_property_city" id="rental_property_city" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="rental_property_zipcode">Zip code</label>
+                            <input type="text" name="rental_property_zipcode" id="rental_property_zipcode" class="field-input" placeholder="" />
+                        </div>
+
+                    </div>
+
+
+                    <div class="step-footer">
+                        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

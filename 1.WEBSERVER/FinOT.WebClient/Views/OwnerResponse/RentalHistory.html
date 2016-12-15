@@ -1,0 +1,680 @@
+﻿<div class="application-form-wrapper">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            <?php include('sidebar-owner-response.html'); ?>
+        </div>
+
+        <div class="col-md-9 col-sm-12">
+            <div class="application-step step-1">
+                <h3 class="step-heading">Owner Response: <span>Rental History</span></h3>
+
+                <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form">
+                    <div class="step-content step1">
+                        <div class="field-group subhead no-top-margin">
+                            <label>The tenant moved into the rental unit on</label>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="moved_month" class="hidden"></label>
+                                    <select name="moved_month" id="moved_month" class="custom-select" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="moved_day" class="hidden"></label>
+                                    <select name="moved_day" id="moved_day" class="custom-select" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="moved_year" class="hidden"></label>
+                                    <select name="moved_year" id="moved_year" class="custom-select" data-placeholder="Year">
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="initial_monthly_rent">The tenant’s initial monthly rent including all services provided was</label>
+                            <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input" placeholder="Enter dollar amount / month" />
+                        </div>
+
+                        <div class="field-group">
+                            <p class="input-label">Have you (or a previous Owner) given the City of Oakland’s form entitled NOTICE TO TENANTS OF RESIDENTIAL RENT ADJUSTMENT PROGRAM (“RAP Notice”) to all of the petitioning tenants?</p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="rap_notice_yes">
+                                    <input type="radio" name="rap_notice" id="rap_notice_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="rap_notice_no">
+                                    <input type="radio" name="rap_notice" id="rap_notice_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <label for="rap_notice_donot_know">
+                                    <input type="radio" name="rap_notice" id="rap_notice_donot_know" class="input-field" value="No" /><i></i> <span> I don’t know</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <p class="input-label">On what date was the Notice first given?</p>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="notice_given_month" class="hidden"></label>
+                                    <select name="notice_given_month" id="notice_given_month" class="custom-select" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="notice_given_day" class="hidden"></label>
+                                    <select name="notice_given_day" id="notice_given_day" class="custom-select" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="notice_given_year" class="hidden"></label>
+                                    <select name="notice_given_year" id="notice_given_year" class="custom-select" data-placeholder="Year">
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Upload signed copy of notice</span>
+                                    <input type="file" id="notice_signed_copy" name="notice_signed_copy" />
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group">
+                            <p class="input-label">Is the tenant current on the rent?</p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="current_rent_yes">
+                                    <input type="radio" name="current_rent" id="current_rent_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="current_rent_no">
+                                    <input type="radio" name="current_rent" id="current_rent_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Upload proof</span>
+                                    <input type="file" id="proof_of_rent" name="proof_of_rent" />
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group">
+                            <p class="input-label">Is the contested increase a Capital Improvements increase?</p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="contested_increase_yes">
+                                    <input type="radio" name="contested_increase" id="contested_increase_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="contested_increase_no">
+                                    <input type="radio" name="contested_increase" id="contested_increase_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <p class="input-label">Did you submit a petition for rent increase for Capital Improvements?</p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="capital_improvements_petition_yes">
+                                    <input type="radio" name="capital_improvements_petition" id="capital_improvements_petition_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="capital_improvements_petition_no">
+                                    <input type="radio" name="capital_improvements_petition" id="capital_improvements_petition_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="case_number">Case number</label>
+                            <input type="text" name="case_number" id="case_number" class="field-input" placeholder="" />
+                        </div>
+
+                        <div class="field-group">
+                            <p class="input-label">Did you submit a copy of the Enhanced Notice to the RAP office within 10 days of serving the tenant?</p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="submitted_enhanced_notice_yes">
+                                    <input type="radio" name="submitted_enhanced_notice" id="submitted_enhanced_notice_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="submitted_enhanced_notice_no">
+                                    <input type="radio" name="submitted_enhanced_notice" id="submitted_enhanced_notice_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <p class="input-label">Date on which the notice was given?</p>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="notice_month" class="hidden"></label>
+                                    <select name="notice_month" id="notice_month" class="custom-select" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="notice_day" class="hidden"></label>
+                                    <select name="notice_day" id="notice_day" class="custom-select" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="notice_year" class="hidden"></label>
+                                    <select name="notice_year" id="notice_year" class="custom-select" data-placeholder="Year">
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="subhead type2 no-bottom-margin">
+                            <h4>Rent Increase</h4><br />
+                            <p>Begin with the most recent rent increase and work backwards.</p>
+                        </div>
+
+                        <div class="field-group subhead no-top-margin">
+                            <p class="input-label">Did you provide rent program notice with the notice of rent increase?</p>
+                            <div class="form-group-radio vertical clearfix">
+                                <label for="rent_program_notice_yes">
+                                    <input type="radio" name="rent_program_notice" id="rent_program_notice_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
+                                </label>
+
+                                <label for="rent_program_notice_no">
+                                    <input type="radio" name="rent_program_notice" id="rent_program_notice_no" class="input-field" value="No" /><i></i> <span>No</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label>Date notice served</label>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="date_notice_served_month" class="hidden"></label>
+                                    <select name="date_notice_served_month" id="date_notice_served_month" class="custom-select" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="date_notice_served_day" class="hidden"></label>
+                                    <select name="date_notice_served_day" id="date_notice_served_day" class="custom-select" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="date_notice_served_year" class="hidden"></label>
+                                    <select name="date_notice_served_year" id="date_notice_served_year" class="custom-select" data-placeholder="Year">
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group">
+                            <label>Monthly rent increase</label>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="monthly_rent_increase_month" class="hidden"></label>
+                                    <select name="monthly_rent_increase_month" id="monthly_rent_increase_month" class="custom-select" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="monthly_rent_increase_day" class="hidden"></label>
+                                    <select name="monthly_rent_increase_day" id="monthly_rent_increase_day" class="custom-select" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="monthly_rent_increase_year" class="hidden"></label>
+                                    <select name="monthly_rent_increase_year" id="monthly_rent_increase_year" class="custom-select" data-placeholder="Year">
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group">
+                            <label>Date increase effective</label>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="date_increase_effective_month" class="hidden"></label>
+                                    <select name="date_increase_effective_month" id="date_increase_effective_month" class="custom-select" data-placeholder="Month">
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
+                                        <option value="7">July</option>
+                                        <option value="8">August</option>
+                                        <option value="9">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="date_increase_effective_day" class="hidden"></label>
+                                    <select name="date_increase_effective_day" id="date_increase_effective_day" class="custom-select" data-placeholder="Day">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <label for="date_increase_effective_year" class="hidden"></label>
+                                    <select name="date_increase_effective_year" id="date_increase_effective_year" class="custom-select" data-placeholder="Year">
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+
+                        <div class="field-group">
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach proof of payment of your business tax</span>
+                                    <input type="file" id="business_tax_payment_proof" name="business_tax_payment_proof" />
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="subhead">
+                            <strong>Justification for Rent Increase</strong>
+                        </div>
+                        <div class="field-group">
+                            <p>You must prove that each contested rent increase greater than the Annual CPI Adjustment is justified and was correctly served. Use the following table and check the applicable justification(s) box for each increase contested by the tenant(s) petition. For a summary of these justifications, please refer to the “Justifications for Increases Greater than the Annual CPI Rate” section in the attached Owner’s Guide to Rent Adjustment.</p>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="form-group-checkbox vertical clearfix">
+                                <div class="checkbox-wrapper has-info-btn no-bottom-margin">
+                                    <label for="justification_rent_increase_1">
+                                        <input type="checkbox" name="justification_rent_increase" id="justification_rent_increase_1" value="Banking (deferred annual increases) " /><i></i><span>Banking (deferred annual increases) </span> <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_justification_rent_increase_1">Info</a>
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-wrapper has-info-btn no-bottom-margin">
+                                    <label for="justification_rent_increase_2">
+                                        <input type="checkbox" name="justification_rent_increase" id="justification_rent_increase_2" value="Increased Housing Service Costs " /><i></i><span>Increased Housing Service Costs </span> <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_justification_rent_increase_2">Info</a>
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-wrapper has-info-btn no-bottom-margin">
+                                    <label for="justification_rent_increase_3">
+                                        <input type="checkbox" name="justification_rent_increase" id="justification_rent_increase_3" value="Capital Improvements" /><i></i><span>Capital Improvements</span> <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_justification_rent_increase_3">Info</a>
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-wrapper has-info-btn no-bottom-margin">
+                                    <label for="justification_rent_increase_4">
+                                        <input type="checkbox" name="justification_rent_increase" id="justification_rent_increase_4" value="Uninsured Repair Costs " /><i></i><span>Uninsured Repair Costs </span> <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_justification_rent_increase_4">Info</a>
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-wrapper has-info-btn no-bottom-margin">
+                                    <label for="justification_rent_increase_5">
+                                        <input type="checkbox" name="justification_rent_increase" id="justification_rent_increase_5" value="Fair Return " /><i></i><span>Fair Return </span> <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_justification_rent_increase_5">Info</a>
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-wrapper has-info-btn no-bottom-margin">
+                                    <label for="justification_rent_increase_6">
+                                        <input type="checkbox" name="justification_rent_increase" id="justification_rent_increase_6" value="Debt Service (if purchased before 4/1/14) " /><i></i><span>Debt Service (if purchased before 4/1/14) </span> <a href="#info" class="icon-info inline" data-toggle="tooltip" data-tooltip-id="or_justification_rent_increase_6">Info</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <p>For each justification checked, you must submit organized documents demonstrating your entitlement to the increase. Please see the “Justifications” section in the attached Owner’s Guide for details on the type of documentation required. Your supporting documents do not need to be attached here, but are due in the RAP office no later than seven (7) days before the first scheduled Hearing date.</p>
+                        </div>
+
+                        <div class="field-group subhead">
+                            <label for="attached_document_description">Description of the document that you are attaching</label>
+                            <textarea name="attached_document_description" id="attached_document_description" class="field-input textarea" rows="8"></textarea>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach document</span>
+                                    <input type="file" id="attached_document" name="attached_document" />
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group subhead type2"></div>
+                        <div class="field-group">
+                            <a href="#" class="btn-link">Add another rent increase record</a>
+                        </div><!-- .field-group -->
+
+                    </div>
+
+
+                    <div class="step-footer">
+                        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

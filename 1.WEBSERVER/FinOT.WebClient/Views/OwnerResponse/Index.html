@@ -1,0 +1,77 @@
+﻿<div class="container outer-container">
+    <div class="header">
+        <h1 id="sitetitle"><a href="#">City of Oakland</a></h1>
+        <div class="description">Rent Adjustment  <br />Program</div>
+    </div><!-- .header -->
+
+    <div id="SkipToMainContent">
+
+        <div class="application-form-wrapper">
+
+            <div class="row">
+                <div class="col-md-3 col-sm-12">                    
+                    <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 2">
+                        <ul class="application-steps">                      
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ImportantInformation}"><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOwnerApplicantInfo()">Applicant Information</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOwnerRentalProperty()">Rental Property</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOwnerRentalHistory()">Rental History</a></li>
+                            
+                            
+
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oPetionActiveStatus.AdditionalDocumentation && Ctrl.oPetionCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOwnerAdditionalDocuments()">Additional Documents</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Review, 'current' : !Ctrl.oPetionActiveStatus.Review && Ctrl.oPetionCurrentStatus.Review}"><a ng-click="Ctrl.ShowOwnerReview()">Review</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}"><a ng-click="Ctrl.ShowOwnerVerification()">Verification</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="application-step step-1">
+                        <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">
+                            <div ng-if="Ctrl.bPetitionType">
+                                <rap-petitiontype model="Ctrl"></rap-petitiontype>
+                            </div>
+                         
+                            <div ng-if="Ctrl.ownerImpInfo">
+                                <rap-ownerimpinfo ng-show="Ctrl.ownerImpInfo" model="Ctrl"></rap-ownerimpinfo>
+                            </div>
+                            <div ng-if="Ctrl.ownerApplicantInfo">
+                                <rap-ownerapplicantinfo ng-show="Ctrl.ownerApplicantInfo" model="Ctrl"></rap-ownerapplicantinfo>
+                            </div>
+                            <div ng-if="Ctrl.ownerJustification">
+                                <rap-ownerjustification ng-show="Ctrl.ownerJustification" model="Ctrl"></rap-ownerjustification>
+                            </div>
+                            <div ng-if="Ctrl.ownerRentalProperty">
+                                <rap-ownerrentalproperty ng-show="Ctrl.ownerRentalProperty" model="Ctrl"></rap-ownerrentalproperty>
+                            </div>
+                            <div ng-if="Ctrl.ownerRentalHistory">
+                                <rap-ownerrentalhistory ng-show="Ctrl.ownerRentalHistory" model="Ctrl"></rap-ownerrentalhistory>
+                            </div>
+                            <div ng-if="Ctrl.ownerAdditionalDocuments">
+                                <rap-owneradditionaldocuments ng-show="Ctrl.ownerAdditionalDocuments" model="Ctrl"></rap-owneradditionaldocuments>
+                            </div>
+                            <div ng-if="Ctrl.ownerReview">
+                                <rap-ownerreview ng-show="Ctrl.ownerReview" model="Ctrl"></rap-ownerreview>
+                            </div>
+                            <div ng-if="Ctrl.ownerVerification">
+                                <rap-ownerverification ng-show="Ctrl.ownerVerification" model="Ctrl"></rap-ownerverification>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- #SkipToMainContent -->
+
+        <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->
+    </div><!-- .container .outer-container -->
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!--<script src='js/jquery.maskedinput.js'></script>-->
+    <script src='js/tooltip.js'></script>
+    <script src='js/functions.js'></script>
+    </body>
+
+
+
+   

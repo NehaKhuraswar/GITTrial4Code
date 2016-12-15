@@ -115,6 +115,7 @@
     <Content Include="Application\2.Controllers\rapadmindashboardController.js" />
     <Content Include="Application\2.Controllers\rapcollaboratorController.js" />
     <Content Include="Application\2.Controllers\rapAppealImpInfoController.js" />
+    <Content Include="Application\2.Controllers\rapOResponseMainController.js" />
     <Content Include="Application\2.Controllers\rapOwnerDocumentsController.js" />
     <Content Include="Application\2.Controllers\rapOwnerReviewController.js" />
     <Content Include="Application\2.Controllers\rapOwnerVerificationController.js" />
@@ -274,6 +275,17 @@
     <Content Include="Views\FilePetition\RentalHistory.html" />
     <Content Include="Views\FilePetition\Review.html" />
     <Content Include="Views\FilePetition\Verification.html" />
+    <Content Include="Views\OwnerResponse\AdditionalDocuments.html" />
+    <Content Include="Views\OwnerResponse\ApplicantInformation.html" />
+    <Content Include="Views\OwnerResponse\DecreasedHousingService.html" />
+    <Content Include="Views\OwnerResponse\Exemption.html" />
+    <Content Include="Views\OwnerResponse\ImportantIformation.html" />
+    <Content Include="Views\OwnerResponse\Index.html" />
+    <Content Include="Views\OwnerResponse\PetitionType.html" />
+    <Content Include="Views\OwnerResponse\RentalHistory.html" />
+    <Content Include="Views\OwnerResponse\RentalProperty.html" />
+    <Content Include="Views\OwnerResponse\Review.html" />
+    <Content Include="Views\OwnerResponse\Verification.html" />
     <Content Include="Webforms\Report.aspx" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
