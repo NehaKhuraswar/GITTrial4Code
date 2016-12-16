@@ -16,13 +16,19 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
     _GetAppealGroundInfo(self.caseinfo.CaseID, self.custDetails.custID);
 
     self.ContinueToRentalHistory = function (model) {
+        model.AppealCategoryID = self.caseinfo.PetitionCategoryID;
+        model.CaseNumber = self.caseinfo.CaseID;
+        model.AppealFiledBy = self.custDetails.custID;
         rapFactory.SaveAppealGroundInfo(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            if (response.data == true) {
-                $location.path("/servingappeal");
-            }
+            rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
+            $scope.model.bGrounds = false;
+            $scope.model.bServingAppeal = true;
+            //if (response.data == true) {
+            //    $location.path("/servingappeal");
+            //}
         });
     }
 }];

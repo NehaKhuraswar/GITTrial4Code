@@ -13,6 +13,16 @@ var rapServingAppealController = ['$scope', '$modal', 'alertService', 'rapservin
         // rapGlobalFactory.CaseDetails = self.caseinfo;
 
     }
+    var _GetAppealServe = function (appealID) {
+        rapFactory.GetAppealServe(appealID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo.serveAppeal = response.data;
+        });
+    }
+    _GetAppealServe(self.caseinfo.TenantAppealInfo.AppealID);
+
     
     self.ContinueToReview = function () {
         rapFactory.SaveTenantServingAppeal(model).then(function (response) {

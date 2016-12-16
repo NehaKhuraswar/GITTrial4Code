@@ -106,6 +106,7 @@ namespace RAP.Core.DataModels
     public class TenantAppealInfoM
     {
         public int AppealID;
+        public int AppealCategoryID;
         private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
        // public string CaseID { get; set; }
         private bool _appealFiled = false;
@@ -318,9 +319,14 @@ namespace RAP.Core.DataModels
 
     public class AppealGroundM
     {
+        //public AppealGroundM()
+        //{
+        //    appeal = new List<AppealGroundMSub>();
+        //}
         private bool _selected = false;
         public int AppealGroundID { get; set; }
         public string AppealDescription { get; set; }
+       // List<AppealGroundMSub> appeal { get; set; }
         public bool Selected
         {
             get
@@ -333,4 +339,5 @@ namespace RAP.Core.DataModels
             }
         }
     }
+   
 }

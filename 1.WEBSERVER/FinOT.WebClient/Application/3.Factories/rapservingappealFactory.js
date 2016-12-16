@@ -11,9 +11,19 @@ var rapservingappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax
           .finally(function () {
               blockUI.stop();
         });
-       }
-   
+    }
+    var _GetAppealServe = function (AppealID) {
+        blockUI.start();
+
+        var url = _routePrefix + '/getappealserve/' + AppealID;
+
+        return ajax.Get( url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     factory.AddAnotherOpposingParty = _AddAnotherOpposingParty;
+    factory.GetAppealServe = _GetAppealServe;
     return factory;
 }];

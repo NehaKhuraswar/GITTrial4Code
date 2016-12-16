@@ -13,9 +13,20 @@ var rapfileappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
       }
+
+      var _GetPetitionCategory = function () {
+          blockUI.start();
+          var url = _routePrefix + '/GetPetitioncategory/';
+          var caseInfo = null;
+          return ajax.Get(url, caseInfo)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
     
      
-    factory.GetCaseInfo = _GetCaseInfo;
+      factory.GetCaseInfo = _GetCaseInfo;
+      factory.GetPetitionCategory = _GetPetitionCategory;
     
     return factory;
 }];

@@ -4,6 +4,8 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+
+
     
     self.ContinueToGroundsforAppeal = function (model) {
         $scope.model.bAppellantInfo = false;

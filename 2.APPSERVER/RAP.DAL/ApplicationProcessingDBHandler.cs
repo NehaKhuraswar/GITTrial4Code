@@ -244,6 +244,8 @@ namespace RAP.DAL
                 CaseInfoM caseInfo = new CaseInfoM();
                 caseInfo.C_ID = CaseDetailsDB.C_ID;
                 caseInfo.CaseID = CaseDetailsDB.CaseID;
+                caseInfo.AppealDate = Convert.ToDateTime(CaseDetailsDB.AppealDate);
+
                 AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
                 if (accDBHandler != null && CaseDetailsDB.CityAnalystUserID != null)
                 {
@@ -929,6 +931,44 @@ namespace RAP.DAL
             return result;
 
         }
+         public ReturnResult<ServeAppealM> GetAppealServe(int AppealID)
+        {
+            ReturnResult<ServeAppealM> result = new ReturnResult<ServeAppealM>();
+            ServeAppealM appealServe = new ServeAppealM();
+            try
+            {
+                var appealServeDB = _dbContext.ServeAppeals.Where(x => x.AppealID == AppealID).FirstOrDefault();
+                if (appealServeDB != null)
+                {
+                    appealServe.AppealID = (int)appealServeDB.AppealID;
+                    appealServe.bAcknowledgeNamePin = (bool)appealServeDB.bAcknowledgeNamePin;
+                    appealServe.bDeclaration = (bool)appealServeDB.bDeclaration;
+                    appealServe.bThirdParty = (bool)appealServeDB.bThirdParty;
+                    appealServe.PenaltyDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(appealServeDB.PenaltyDate));
+
+                    var opposingPartiesDB = _dbContext.AppealOpposingParties.Where(x => x.AppealID == AppealID).ToList();
+                    if(opposingPartiesDB != null)
+                    {
+                        foreach(var item in opposingPartiesDB)
+                        {
+                            appealServe.OpposingParty.Add(_commondbHandler.GetUserInfo((int)item.OpposingPartyID).result);
+                        }
+                    }
+
+                }
+
+                result.result = appealServe;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         ///<summary>
         ///Get appeal ground info based upon appealID
         ///</summary>
@@ -962,12 +1002,12 @@ namespace RAP.DAL
                     if (appealInfoDb != null)
                     {
                         var TenantAppealGroundInfoDB = _dbContext.TenantAppealGroundInfos
-                                                                .Where(x => x.TenantAppealGroudID == appealInfoDb.AppealID).ToList();
+                                                                .Where(x => x.AppealID == appealInfoDb.AppealID).ToList();
                         foreach (var item in TenantAppealGroundInfoDB)
                         {
                             foreach (var item1 in AppealGroundInfo)
                             {
-                                if (item1.AppealGroundID == item.TenantAppealGroudID)
+                                if (item1.AppealGroundID == item.AppealGroundID)
                                 {
                                     item1.Selected = true;
                                 }
@@ -1631,9 +1671,9 @@ namespace RAP.DAL
             }
 
         }
-        public ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
+        public ReturnResult<TenantAppealInfoM> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
         {
-            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
                 var appealExistsDB = _dbContext.TenantAppealDetails.Where(x => x.CaseNumber == tenantAppealInfo.CaseNumber && x.AppealFiledBy == tenantAppealInfo.AppealFiledBy).FirstOrDefault();
@@ -1646,6 +1686,7 @@ namespace RAP.DAL
                     TenantAppealDetail appealDB = new TenantAppealDetail();
                     appealDB.AppealFiledBy = tenantAppealInfo.AppealFiledBy;
                     appealDB.CaseNumber = tenantAppealInfo.CaseNumber;
+                    appealDB.AppealCategoryID = tenantAppealInfo.AppealCategoryID;
                     appealDB.IsSubmitted = false;
                     appealDB.CreatedDate = DateTime.Now;
 
@@ -1654,22 +1695,60 @@ namespace RAP.DAL
                     tenantAppealInfo.AppealID = appealDB.AppealID;
                 }
 
-                foreach (var item in tenantAppealInfo.AppealGrounds)
+                var groundsDb = from r in _dbContext.TenantAppealGroundInfos
+                                where r.AppealID == tenantAppealInfo.AppealID
+                                select r;
+                if (groundsDb.Any())
                 {
-                    if (item.Selected)
+                    
+                    foreach (var item in tenantAppealInfo.AppealGrounds)
                     {
-                        TenantAppealGroundInfo TenantAppealGroundInfoDB = new TenantAppealGroundInfo();
-                        TenantAppealGroundInfoDB.AppealID = tenantAppealInfo.AppealID;
-                        TenantAppealGroundInfoDB.AppealGroundID = item.AppealGroundID;
-                        TenantAppealGroundInfoDB.CreatedDate = DateTime.Now;
-                        TenantAppealGroundInfoDB.IsDeleted = false;
+                        if (item.Selected)
+                        {
+                            if (!groundsDb.Where(x => x.AppealGroundID == item.AppealGroundID).Any())
+                            {
+                                TenantAppealGroundInfo TenantAppealGroundInfoDB = new TenantAppealGroundInfo();
+                                TenantAppealGroundInfoDB.AppealID = tenantAppealInfo.AppealID;
+                                TenantAppealGroundInfoDB.AppealGroundID = item.AppealGroundID;
+                                TenantAppealGroundInfoDB.CreatedDate = DateTime.Now;
+                                TenantAppealGroundInfoDB.IsDeleted = false;
 
-                        _dbContext.TenantAppealGroundInfos.InsertOnSubmit(TenantAppealGroundInfoDB);
-                        _dbContext.SubmitChanges();
+                                _dbContext.TenantAppealGroundInfos.InsertOnSubmit(TenantAppealGroundInfoDB);
+                                _dbContext.SubmitChanges();
+                            }
+                        }
+                        else
+                        {
+                            if (groundsDb.Where(x => x.AppealGroundID == item.AppealGroundID).Any())
+                            {
+                                _dbContext.TenantAppealGroundInfos.DeleteOnSubmit(groundsDb.Where(x => x.AppealGroundID == item.AppealGroundID).First());
+                                _dbContext.SubmitChanges();
+                            }
+                        }
+
                     }
                 }
+                else
+                {
+                    foreach (var item in tenantAppealInfo.AppealGrounds)
+                    {
+                        if (item.Selected)
+                        {
+                            TenantAppealGroundInfo TenantAppealGroundInfoDB = new TenantAppealGroundInfo();
+                            TenantAppealGroundInfoDB.AppealID = tenantAppealInfo.AppealID;
+                            TenantAppealGroundInfoDB.AppealGroundID = item.AppealGroundID;
+                            TenantAppealGroundInfoDB.CreatedDate = DateTime.Now;
+                            TenantAppealGroundInfoDB.IsDeleted = false;
 
-                result.result = true;
+                            _dbContext.TenantAppealGroundInfos.InsertOnSubmit(TenantAppealGroundInfoDB);
+                            _dbContext.SubmitChanges();
+                        }
+                    }
+                   
+                }
+
+
+                result.result = tenantAppealInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }

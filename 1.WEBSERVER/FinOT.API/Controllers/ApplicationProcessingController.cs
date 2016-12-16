@@ -229,6 +229,48 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<List<AppealGroundM>>>(ReturnCode, transaction);
         }
 
+        [AllowAnonymous]
+        [Route("getappealserve/{AppealID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetAppealServe( int AppealID)
+        {
+
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<ServeAppealM> transaction = new TranInfo<ServeAppealM>();
+            ReturnResult<ServeAppealM> result = new ReturnResult<ServeAppealM>();
+            try
+            {
+
+                result = _service.GetAppealServe(AppealID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<ServeAppealM>>(ReturnCode, transaction);
+        }
+
         #region Common File Petition method      
         [AllowAnonymous]
         [Route("GetPetitioncategory")]
@@ -1009,8 +1051,8 @@ namespace RAP.API.Controllers
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<Boolean> transaction = new TranInfo<Boolean>();
-            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+            TranInfo<TenantAppealInfoM> transaction = new TranInfo<TenantAppealInfoM>();
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
 
@@ -1035,7 +1077,7 @@ namespace RAP.API.Controllers
                 result.status = _eHandler.HandleException(ex);
                 _commonService.LogError(result.status);
             }
-            return Request.CreateResponse<TranInfo<Boolean>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
         }
 
         #region Owner Petition Methods

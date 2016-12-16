@@ -8,13 +8,23 @@
                 </div>
 
                 <div class="field-group">
-                    <div class="form-group-checkbox vertical clearfix">
-                        <div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
-                            <label for="appealground.appealgroundid">
-                                <input type="checkbox" name="groundcheckboxappeal"  class="checkbox" id="appealground.appealgroundid" ng-model="appealground.Selected">
-                                <i></i><span>{{appealground.AppealDescription}}</span>
+                    <!--<div class="form-group-checkbox vertical clearfix">-->
+                        <!--<div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds | limitTo:3">-->
+                        <!--<div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds.slice(0, 3) track by $index">-->
+                        <!--<div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
+                            <label for="appealground.AppealGroundID">
+                                <input type="checkbox" name="groundcheckboxappeal" class="checkbox" id="appealground.AppealGroundID" ng-model="appealground.Selected">
+                                <i></i><span></span>
                             </label>
-                        </div>
+                        </div>-->
+                        <div class="form-group-checkbox vertical clearfix">
+                            <div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
+                                <label for="{{appealground.AppealGroundID}}">
+                                    <input type="checkbox" name="appealgroundcheckbox" class="checkbox" id="{{appealground.AppealGroundID}}"  ng-model="appealground.Selected">
+                                    <i></i><span>{{appealground.AppealDescription}}</span>
+                                </label>
+                            </div>
+                        <!--</div>-->   
                     </div>                       
                 </div>
 

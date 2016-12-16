@@ -7,6 +7,8 @@ var rapFileAppealController = ['$scope', '$modal', 'alertService', 'rapfileappea
     self.rent = [];
     //self.selectedValue = 1;
     self.selectedObj = {};
+    
+
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {

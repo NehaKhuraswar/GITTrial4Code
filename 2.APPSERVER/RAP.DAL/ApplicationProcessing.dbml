@@ -302,8 +302,20 @@
       <Column Name="AppealFiledBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="CaseNumber" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AppealCategoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsSubmitted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="TenantAppealDetail_CaseDetail" Member="CaseDetails" ThisKey="AppealID" OtherKey="TenantAppealID" Type="CaseDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServeAppeal" Member="ServeAppeals">
+    <Type Name="ServeAppeal">
+      <Column Name="AppealServeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AppealID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bAcknowledgeNamePin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bDeclaration" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PenaltyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

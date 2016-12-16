@@ -25,8 +25,9 @@ namespace RAP.Core.Services
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
         ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);
+        ReturnResult<ServeAppealM> GetAppealServe(int AppealID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
-        ReturnResult<bool> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
+        ReturnResult<TenantAppealInfoM> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo);
         ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> GetPetitioncategory();

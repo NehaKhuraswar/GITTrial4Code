@@ -355,6 +355,14 @@ namespace RAP.DAL
 				return this.GetTable<TenantAppealDetail>();
 			}
 		}
+		
+		public System.Data.Linq.Table<ServeAppeal> ServeAppeals
+		{
+			get
+			{
+				return this.GetTable<ServeAppeal>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CurrentOnRentStatus")]
@@ -6234,6 +6242,8 @@ namespace RAP.DAL
 		
 		private string _CaseNumber;
 		
+		private System.Nullable<int> _AppealCategoryID;
+		
 		private System.Nullable<bool> _IsSubmitted;
 		
 		private EntitySet<CaseDetail> _CaseDetails;
@@ -6256,6 +6266,8 @@ namespace RAP.DAL
     partial void OnCreatedDateChanged();
     partial void OnCaseNumberChanging(string value);
     partial void OnCaseNumberChanged();
+    partial void OnAppealCategoryIDChanging(System.Nullable<int> value);
+    partial void OnAppealCategoryIDChanged();
     partial void OnIsSubmittedChanging(System.Nullable<bool> value);
     partial void OnIsSubmittedChanged();
     #endregion
@@ -6406,6 +6418,26 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealCategoryID", DbType="Int")]
+		public System.Nullable<int> AppealCategoryID
+		{
+			get
+			{
+				return this._AppealCategoryID;
+			}
+			set
+			{
+				if ((this._AppealCategoryID != value))
+				{
+					this.OnAppealCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._AppealCategoryID = value;
+					this.SendPropertyChanged("AppealCategoryID");
+					this.OnAppealCategoryIDChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmitted", DbType="Bit")]
 		public System.Nullable<bool> IsSubmitted
 		{
@@ -6469,6 +6501,141 @@ namespace RAP.DAL
 		{
 			this.SendPropertyChanging();
 			entity.TenantAppealDetail = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServeAppeal")]
+	public partial class ServeAppeal
+	{
+		
+		private int _AppealServeID;
+		
+		private System.Nullable<int> _AppealID;
+		
+		private System.Nullable<bool> _bAcknowledgeNamePin;
+		
+		private System.Nullable<bool> _bThirdParty;
+		
+		private System.Nullable<bool> _bDeclaration;
+		
+		private System.Nullable<System.DateTime> _PenaltyDate;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		public ServeAppeal()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealServeID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int AppealServeID
+		{
+			get
+			{
+				return this._AppealServeID;
+			}
+			set
+			{
+				if ((this._AppealServeID != value))
+				{
+					this._AppealServeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealID", DbType="Int")]
+		public System.Nullable<int> AppealID
+		{
+			get
+			{
+				return this._AppealID;
+			}
+			set
+			{
+				if ((this._AppealID != value))
+				{
+					this._AppealID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bAcknowledgeNamePin", DbType="Bit")]
+		public System.Nullable<bool> bAcknowledgeNamePin
+		{
+			get
+			{
+				return this._bAcknowledgeNamePin;
+			}
+			set
+			{
+				if ((this._bAcknowledgeNamePin != value))
+				{
+					this._bAcknowledgeNamePin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bThirdParty", DbType="Bit")]
+		public System.Nullable<bool> bThirdParty
+		{
+			get
+			{
+				return this._bThirdParty;
+			}
+			set
+			{
+				if ((this._bThirdParty != value))
+				{
+					this._bThirdParty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bDeclaration", DbType="Bit")]
+		public System.Nullable<bool> bDeclaration
+		{
+			get
+			{
+				return this._bDeclaration;
+			}
+			set
+			{
+				if ((this._bDeclaration != value))
+				{
+					this._bDeclaration = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PenaltyDate", DbType="Date")]
+		public System.Nullable<System.DateTime> PenaltyDate
+		{
+			get
+			{
+				return this._PenaltyDate;
+			}
+			set
+			{
+				if ((this._PenaltyDate != value))
+				{
+					this._PenaltyDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="Date")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
 		}
 	}
 }

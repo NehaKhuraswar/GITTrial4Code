@@ -86,7 +86,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-
+        public ReturnResult<ServeAppealM> GetAppealServe(int AppealID)
+        {
+            ReturnResult<ServeAppealM> result = new ReturnResult<ServeAppealM>();
+            try
+            {
+                result = _dbHandler.GetAppealServe(AppealID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy)
         {
             ReturnResult<List<AppealGroundM>> result = new ReturnResult<List<AppealGroundM>>();
@@ -147,10 +160,10 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<Boolean> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
+        public ReturnResult<TenantAppealInfoM> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
         {
 
-            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
                 result = _dbHandler.SaveAppealGroundInfo(tenantAppealInfo);
