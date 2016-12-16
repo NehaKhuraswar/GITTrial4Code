@@ -40,7 +40,7 @@ namespace RAP.Business.Implementation
               string securityGroup = ConfigurationManager.AppSettings["SecurityGroup"];
               IdcProperty[] idcProperty = new IdcProperty[0];
               IdcFile idcFile = new IdcFile();
-              var serviceResult = checkInService.CheckInUniversal(doc.DocName, doc.DocTitle, docType, docAuthor, securityGroup, "", idcProperty, serviceObj, idcFile, idcProperty);
+              var serviceResult = checkInService.CheckInUniversal(doc.DocName, doc.DocDescription, docType, docAuthor, securityGroup, "", idcProperty, serviceObj, idcFile, idcProperty);
               if(serviceResult == null)
               {
                   result.status = new OperationStatus() { Status = StatusEnum.UploadFailed };

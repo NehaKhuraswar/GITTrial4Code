@@ -30,14 +30,24 @@ namespace RAP.Core.DataModels
 
      public class DocumentM
      {
-         public int? DocID { get; set; }
+         public int DocID { get; set; }
          public string DocName { get; set; }
-         public string Extension { get; set; }
-         public string DocType { get; set; }
+         public string DocCategory { get; set; }
          public string DocTitle { get; set; }
+         public string DocDescription { get; set; }
          public byte[] Content { get; set; }
          public string Base64Content { get; set; }
          public int DocThirdPartyID { get; set; }
-         
+         public int CustomerID { get; set; }
+         public int? C_ID { get; set; }
+         public bool IsPetitonFiled { get; set; }
+     }
+     public enum DocCategory
+     {
+         TenantPetition,
+         OwnerPetition,
+         OwnerPetitionResponse,
+         TenantPetitionResponse,
+         Appeal
      }
 }

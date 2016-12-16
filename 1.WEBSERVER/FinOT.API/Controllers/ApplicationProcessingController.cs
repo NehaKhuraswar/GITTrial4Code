@@ -1385,8 +1385,8 @@ namespace RAP.API.Controllers
             string filename = @"C:\Oakland\Ref Documents\flowMap.pdf";
             DocumentM doc = new DocumentM();
             doc.DocName = "RAPSecondDoc";
-            doc.DocTitle = "RAPSecondDoc";
-            doc.DocType = "PDF";
+            doc.DocDescription = "RAPSecondDoc";
+            //doc.DocType = "PDF";
 
             byte[] bArray = null;
             FileStream fs = new FileStream(filename,

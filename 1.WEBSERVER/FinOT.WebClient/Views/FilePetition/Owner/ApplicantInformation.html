@@ -161,6 +161,16 @@
                 <label for="Business_license">Oakland Business License Number</label>
                 <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber" required />
             </div>
+
+            <div class="field-group">
+                <div class="field-addfile">
+                    <div class="input-file-wrapper">
+                        <span class="btn-link">Attach proof of payment of your business tax</span>
+                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelect($files)" accept=".doc,.docx,.pdf,.xls" />
+                    </div>
+                </div>
+            </div>
+
             <div class="field-group">
                 <p class="input-label">Have you paid the Rent Adjustment Progrm service fee(${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)?</p>
                 <div class="form-group-radio vertical clearfix">
