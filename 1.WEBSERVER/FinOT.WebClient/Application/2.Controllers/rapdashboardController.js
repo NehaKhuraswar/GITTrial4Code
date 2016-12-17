@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboardFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CustomerDetails;
@@ -40,6 +40,13 @@ var rapdashboardController = ['$scope', '$modal', 'alertService',  'rapdashboard
         });
         
     }
+
+    var __GetCasesForCustomer = function () {
+        return masterFactory.GetCasesForCustomer(self.model.custID).then(function (response) {
+            self.Cases = response.data;
+        });
+    }
+    __GetCasesForCustomer();
 
     self.GetCaseActivityStatus = function (model) {
         //self.caseinfo.CaseID = 

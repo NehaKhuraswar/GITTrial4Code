@@ -130,13 +130,13 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo)
+        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo)
         {
 
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
-                result = _dbHandler.SaveTenantServingAppeal(caseInfo);
+                result = _dbHandler.SaveTenantServingAppeal(tenantAppealInfo);
                 return result;
             }
             catch (Exception ex)
@@ -145,13 +145,13 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo)
+        public ReturnResult<bool> AddAnotherOpposingParty(TenantAppealInfoM tenantAppealInfo)
         {
 
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                result = _dbHandler.AddAnotherOpposingParty(caseInfo);
+                result = _dbHandler.AddAnotherOpposingParty( tenantAppealInfo);
                 return result;
             }
             catch (Exception ex)
@@ -248,7 +248,8 @@ namespace RAP.Business.Implementation
                 result.status = _eHandler.HandleException(ex);
                 return result;
             }
-        }
+        }        
+
         public ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst()
         {
             ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();

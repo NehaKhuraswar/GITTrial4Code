@@ -108,6 +108,9 @@ namespace RAP.DAL
     partial void InsertTenantAppealDetail(TenantAppealDetail instance);
     partial void UpdateTenantAppealDetail(TenantAppealDetail instance);
     partial void DeleteTenantAppealDetail(TenantAppealDetail instance);
+    partial void InsertServeAppeal(ServeAppeal instance);
+    partial void UpdateServeAppeal(ServeAppeal instance);
+    partial void DeleteServeAppeal(ServeAppeal instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -6505,8 +6508,10 @@ namespace RAP.DAL
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServeAppeal")]
-	public partial class ServeAppeal
+	public partial class ServeAppeal : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _AppealServeID;
 		
@@ -6522,11 +6527,32 @@ namespace RAP.DAL
 		
 		private System.Nullable<System.DateTime> _CreatedDate;
 		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAppealServeIDChanging(int value);
+    partial void OnAppealServeIDChanged();
+    partial void OnAppealIDChanging(System.Nullable<int> value);
+    partial void OnAppealIDChanged();
+    partial void OnbAcknowledgeNamePinChanging(System.Nullable<bool> value);
+    partial void OnbAcknowledgeNamePinChanged();
+    partial void OnbThirdPartyChanging(System.Nullable<bool> value);
+    partial void OnbThirdPartyChanged();
+    partial void OnbDeclarationChanging(System.Nullable<bool> value);
+    partial void OnbDeclarationChanged();
+    partial void OnPenaltyDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPenaltyDateChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    #endregion
+		
 		public ServeAppeal()
 		{
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealServeID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealServeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int AppealServeID
 		{
 			get
@@ -6537,7 +6563,11 @@ namespace RAP.DAL
 			{
 				if ((this._AppealServeID != value))
 				{
+					this.OnAppealServeIDChanging(value);
+					this.SendPropertyChanging();
 					this._AppealServeID = value;
+					this.SendPropertyChanged("AppealServeID");
+					this.OnAppealServeIDChanged();
 				}
 			}
 		}
@@ -6553,7 +6583,11 @@ namespace RAP.DAL
 			{
 				if ((this._AppealID != value))
 				{
+					this.OnAppealIDChanging(value);
+					this.SendPropertyChanging();
 					this._AppealID = value;
+					this.SendPropertyChanged("AppealID");
+					this.OnAppealIDChanged();
 				}
 			}
 		}
@@ -6569,7 +6603,11 @@ namespace RAP.DAL
 			{
 				if ((this._bAcknowledgeNamePin != value))
 				{
+					this.OnbAcknowledgeNamePinChanging(value);
+					this.SendPropertyChanging();
 					this._bAcknowledgeNamePin = value;
+					this.SendPropertyChanged("bAcknowledgeNamePin");
+					this.OnbAcknowledgeNamePinChanged();
 				}
 			}
 		}
@@ -6585,7 +6623,11 @@ namespace RAP.DAL
 			{
 				if ((this._bThirdParty != value))
 				{
+					this.OnbThirdPartyChanging(value);
+					this.SendPropertyChanging();
 					this._bThirdParty = value;
+					this.SendPropertyChanged("bThirdParty");
+					this.OnbThirdPartyChanged();
 				}
 			}
 		}
@@ -6601,7 +6643,11 @@ namespace RAP.DAL
 			{
 				if ((this._bDeclaration != value))
 				{
+					this.OnbDeclarationChanging(value);
+					this.SendPropertyChanging();
 					this._bDeclaration = value;
+					this.SendPropertyChanged("bDeclaration");
+					this.OnbDeclarationChanged();
 				}
 			}
 		}
@@ -6617,7 +6663,11 @@ namespace RAP.DAL
 			{
 				if ((this._PenaltyDate != value))
 				{
+					this.OnPenaltyDateChanging(value);
+					this.SendPropertyChanging();
 					this._PenaltyDate = value;
+					this.SendPropertyChanged("PenaltyDate");
+					this.OnPenaltyDateChanged();
 				}
 			}
 		}
@@ -6633,8 +6683,32 @@ namespace RAP.DAL
 			{
 				if ((this._CreatedDate != value))
 				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
 					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
 				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

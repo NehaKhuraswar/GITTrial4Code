@@ -720,6 +720,35 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("getopposingparty")]
+        [HttpGet]
+        public HttpResponseMessage GetOpposingParty()
+        {
+
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<UserInfoM> transaction = new TranInfo<UserInfoM>();
+            ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
+            try
+            {
+
+                UserInfoM obj = new UserInfoM();
+                transaction.data = obj;
+                transaction.status = true;
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<UserInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("getemptylostservicesinfo")]
         [HttpGet]
         public HttpResponseMessage GetEmptyLostServicesInfo()
@@ -977,7 +1006,7 @@ namespace RAP.API.Controllers
         [AllowAnonymous]
         [Route("savetenantservingappeal")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantServingAppeal([FromBody] CaseInfoM caseInfo)
+        public HttpResponseMessage SaveTenantServingAppeal([FromBody] TenantAppealInfoM tenantAppealInfo)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -986,7 +1015,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantServingAppeal(caseInfo);
+                result = _service.SaveTenantServingAppeal(tenantAppealInfo);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -1012,7 +1041,7 @@ namespace RAP.API.Controllers
         [AllowAnonymous]
         [Route("addopposingparty")]
         [HttpPost]
-        public HttpResponseMessage AddAnotherOpposingParty([FromBody] CaseInfoM caseInfo)
+        public HttpResponseMessage AddAnotherOpposingParty([FromBody] TenantAppealInfoM tenantAppealInfo)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -1021,7 +1050,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.AddAnotherOpposingParty(caseInfo);
+                result = _service.AddAnotherOpposingParty(tenantAppealInfo);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

@@ -1026,7 +1026,40 @@ namespace RAP.DAL
                 result.status = eHandler.HandleException(ex);
                 return result;
             }
-        }       
+        }
+
+        //Get Review Tenant Petition
+        public ReturnResult<TenantAppealInfoM> GetTenantAppealReviewInfo(string CaseNumber, int AppealFiledBy)
+        {
+            ReturnResult<TenantAppealInfoM> tenantAppealResult = new ReturnResult<TenantAppealInfoM>();
+            ReturnResult<ServeAppealM> ServeAppealResult = new ReturnResult<ServeAppealM>();
+            ReturnResult<TenantRentalHistoryM> RentalHistoryResult = new ReturnResult<TenantRentalHistoryM>();
+            ReturnResult<LostServicesPageM> LostServicesResult = new ReturnResult<LostServicesPageM>();
+            
+            try
+            {
+                tenantAppealResult.result.AppealGrounds = GetAppealGroundInfo(CaseNumber, AppealFiledBy).result;
+                if (tenantAppealResult.status.Status != StatusEnum.Success)
+                    return tenantAppealResult;
+
+                ServeAppealResult = GetAppealServe((int)tenantAppealResult.result.AppealID);
+                if (ServeAppealResult != null)
+                {
+                    tenantAppealResult.result.serveAppeal = ServeAppealResult.result;
+                    tenantAppealResult.status = ServeAppealResult.status;
+                    if (ServeAppealResult.status.Status != StatusEnum.Success)
+                        return tenantAppealResult;
+                }
+
+                return tenantAppealResult;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                tenantAppealResult.status = eHandler.HandleException(ex);
+                return tenantAppealResult;
+            }
+        }
         /// <summary>
         /// Files the petition details
         /// </summary>
@@ -1760,21 +1793,37 @@ namespace RAP.DAL
             }
 
         }
-        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(CaseInfoM caseInfo)
+        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo)
         {
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
 
-                TenantAppealDetail appealDB = _dbContext.TenantAppealDetails.First(i => i.AppealID == caseInfo.TenantAppealInfo.AppealID);
-                caseInfo.TenantAppealInfo.OpposingPartyCommunicateDate = DateTime.Now;
-                appealDB.OpposingPartyCommunicateDate = DateTime.Now;
-                // appealDB.AppealFiledBy = DateTime.Now                   
+                ServeAppeal appealDB = _dbContext.ServeAppeals.Where(i => i.AppealID == tenantAppealInfo.AppealID).FirstOrDefault();
+                if(appealDB != null)
+                {
+                    appealDB.bAcknowledgeNamePin = tenantAppealInfo.serveAppeal.bAcknowledgeNamePin;
+                    appealDB.bDeclaration = tenantAppealInfo.serveAppeal.bDeclaration;
+                    appealDB.bThirdParty = tenantAppealInfo.serveAppeal.bThirdParty;
+                    appealDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day, tenantAppealInfo.serveAppeal.PenaltyDate.Year);
+                    appealDB.CreatedDate = DateTime.Now;                   
+                }
+                else
+                {
+                    ServeAppeal appealNewDB = new ServeAppeal();
+                    appealNewDB.AppealID = tenantAppealInfo.AppealID;
+                    appealNewDB.bAcknowledgeNamePin = tenantAppealInfo.serveAppeal.bAcknowledgeNamePin;
+                    appealNewDB.bDeclaration = tenantAppealInfo.serveAppeal.bDeclaration;
+                    appealNewDB.bThirdParty = tenantAppealInfo.serveAppeal.bThirdParty;
+                    appealNewDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Year,tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day);
+                    appealNewDB.CreatedDate = DateTime.Now;
+                    _dbContext.ServeAppeals.InsertOnSubmit(appealNewDB);
+                }              
                 _dbContext.SubmitChanges();
 
+                AddAnotherOpposingParty(tenantAppealInfo);
 
-
-                result.result = caseInfo.TenantAppealInfo;
+                result.result = tenantAppealInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
@@ -1787,33 +1836,46 @@ namespace RAP.DAL
         }
         #endregion
         #region "Add"
-        public ReturnResult<bool> AddAnotherOpposingParty(CaseInfoM caseInfo)
+        public ReturnResult<bool> AddAnotherOpposingParty(TenantAppealInfoM tenantAppealInfo)
         {
             int opposingPartyUserID = 0;
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
 
-                foreach (var item in caseInfo.TenantAppealInfo.AppealOpposingPartyInfo)
+
+
+                var appealOpposingExists = _dbContext.AppealOpposingParties.Where(x => x.AppealID == tenantAppealInfo.AppealID).ToList();
+                if (appealOpposingExists != null)
                 {
-                    //opposingPartyUserID = SaveUserInfo(item);
+                    foreach (var item in appealOpposingExists)
+                    {
+                        _dbContext.AppealOpposingParties.DeleteOnSubmit(item);
+                        _dbContext.SubmitChanges();
+                    }
+                }
+
+                foreach (var item in tenantAppealInfo.serveAppeal.OpposingParty)
+                {
+                    opposingPartyUserID = _commondbHandler.SaveUserInfo(item).result.UserID;
                     if (opposingPartyUserID == 0)
                     {
                         result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                         return result;
                     }
-                    caseInfo.TenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
+                    tenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
+
+                    AppealOpposingParty appealOpposingDB = new AppealOpposingParty();
+                    appealOpposingDB.AppealID = tenantAppealInfo.AppealID;
+                    appealOpposingDB.OpposingPartyID = opposingPartyUserID;
+                    appealOpposingDB.CreatedDate = DateTime.Now;
+                    appealOpposingDB.IsDeleted = false;
+                    appealOpposingDB.ModifiedDate = DateTime.Now;
+
+                    _dbContext.AppealOpposingParties.InsertOnSubmit(appealOpposingDB);
+                    _dbContext.SubmitChanges();
                 }
 
-                AppealOpposingParty appealOpposingDB = new AppealOpposingParty();
-                appealOpposingDB.AppealID = caseInfo.TenantAppealInfo.AppealID;
-                appealOpposingDB.OpposingPartyID = opposingPartyUserID;
-                appealOpposingDB.CreatedDate = DateTime.Now;
-                appealOpposingDB.IsDeleted = false;
-                appealOpposingDB.ModifiedDate = DateTime.Now;
-
-                _dbContext.AppealOpposingParties.InsertOnSubmit(appealOpposingDB);
-                _dbContext.SubmitChanges();
 
                 result.result = true;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };

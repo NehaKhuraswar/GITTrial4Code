@@ -15,7 +15,7 @@ namespace RAP.Core.DataModels
             OwnerPetitionTenantInfo = new OwnerPetitionTenantInfoM();
             OwnerPetitionRentalIncrementInfo = new OwnerPetitionRentalIncrementInfoM();
             Document = new DocumentM();
-            serveAppeal = new ServeAppealM();
+           
         }
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
         private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();  
@@ -101,7 +101,7 @@ namespace RAP.Core.DataModels
                 _rapStatus = value;
             }
         }
-        public ServeAppealM serveAppeal { get; set; }
+        
         public bool bCaseFiledByThirdParty { get; set; }
         public int CaseFileBy { get; set; }
         public CityUserAccount_M CityAnalyst { get; set; }
@@ -200,6 +200,12 @@ namespace RAP.Core.DataModels
 
     public class ServeAppealM
     {
+        public ServeAppealM()
+        {
+            OpposingParty = new List<UserInfoM>();
+            PenaltyDate = new CustomDate();
+        }
+        
         public int CustomerID { get; set; }
         public int AppealID { get; set; }
         public int pin { get; set; }

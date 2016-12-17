@@ -24,7 +24,7 @@
 
                 <div class="field-group">
                     <label for="your_pin">Enter your PIN to verify your identity.</label>
-                    <input type="text" name="your_pin" id="your_pin" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.serveAppeal.pin" />
+                    <input type="text" name="your_pin" id="your_pin" class="field-input" placeholder="" ng-model="Ctrl.serveAppeal.pin" />
                 </div>
 
                 <div class="field-group">
@@ -32,97 +32,55 @@
                     <div class="form-group-checkbox vertical clearfix">
                         <div class="checkbox-wrapper">
                             <label for="chk_condition1">
-                                <input type="checkbox" name="chk_condition1" id="chk_condition1" value="I acknowledge that the name, date and PIN represent me." ng-model="Ctrl.caseinfo.serveAppeal.bAcknowledgeNamePin" /><i></i><span>I acknowledge that the name, date and PIN represent me.</span>
+                                <input type="checkbox" name="chk_condition1" id="chk_condition1" value="I acknowledge that the name, date and PIN represent me."
+                                       ng-model="Ctrl.serveAppeal.bAcknowledgeNamePin" /><i></i><span>I acknowledge that the name, date and PIN represent me.</span>
                             </label>
                         </div>
 
                         <div class="checkbox-wrapper">
                             <label for="chk_condition2">
-                                <input type="checkbox" name="chk_condition2" id="chk_condition2" value="This form is being submitted by the third-party representative on behalf of the petitioner." ng-model="Ctrl.caseinfo.serveAppeal.bThirdParty" /><i></i><span>This form is being submitted by the third-party representative on behalf of the petitioner.</span>
+                                <input type="checkbox" name="chk_condition2" id="chk_condition2"
+                                       value="This form is being submitted by the third-party representative on behalf of the petitioner."
+                                       ng-model="Ctrl.serveAppeal.bThirdParty" /><i></i><span>This form is being submitted by the third-party representative on behalf of the petitioner.</span>
                             </label>
                         </div>
 
                         <div class="checkbox-wrapper no-bottom-margin">
                             <label for="chk_condition3">
-                                <input type="checkbox" name="chk_condition3" id="chk_condition3" value="I declare under penalty of perjury under the laws of the State of California that on" ng-model="Ctrl.caseinfo.serveAppeal.bDeclaration" /><i></i><span>I declare under penalty of perjury under the laws of the State of California that on</span>
+                                <input type="checkbox" name="chk_condition3" id="chk_condition3"
+                                       value="I declare under penalty of perjury under the laws of the State of California that on"
+                                       ng-model="Ctrl.serveAppeal.bDeclaration" /><i></i><span>I declare under penalty of perjury under the laws of the State of California that on</span>
                             </label>
                         </div>
                     </div>
 
-                    <div id="penalty_declare_date">
+                    <div class="field-group">
+                        <label for="date_increase_effective_month">Date increase effective</label>
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
-                                <label for="penalty_month" class="hidden"></label>
-                                <select name="penalty_month" id="penalty_month" class="custom-select" data-placeholder="Month">
-                                    <option value="1">January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">March</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7">July</option>
-                                    <option value="8">August</option>
-                                    <option value="9">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>
+                                <div class="field-group">
+                                    <select ng-model="Ctrl.serveAppeal.PenaltyDate.Month"
+                                            class="custom-select" data-placeholder="Month"
+                                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                                </div>
                             </div>
-
                             <div class="col-sm-4 col-xs-12">
-                                <label for="penalty_day" class="hidden"></label>
-                                <select name="penalty_day" id="penalty_day" class="custom-select" data-placeholder="Day">
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
-                                    <option value="05">05</option>
-                                    <option value="06">06</option>
-                                    <option value="07">07</option>
-                                    <option value="08">08</option>
-                                    <option value="09">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                    <option value="21">21</option>
-                                    <option value="22">22</option>
-                                    <option value="23">23</option>
-                                    <option value="24">24</option>
-                                    <option value="25">25</option>
-                                    <option value="26">26</option>
-                                    <option value="27">27</option>
-                                    <option value="28">28</option>
-                                    <option value="29">29</option>
-                                    <option value="30">30</option>
-                                    <option value="31">31</option>
-                                </select>
+                                <div class="field-group">
+                                    <select ng-model="Ctrl.serveAppeal.PenaltyDate.Day"
+                                            class="custom-select" data-placeholder="Day"
+                                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                                </div>
                             </div>
-
                             <div class="col-sm-4 col-xs-12">
-                                <label for="penalty_year" class="hidden"></label>
-                                <select name="penalty_year" id="penalty_year" class="custom-select" data-placeholder="Year">
-                                    <option value="2016">2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                </select>
+                                <div class="field-group">
+                                    <select ng-model="Ctrl.serveAppeal.PenaltyDate.Year"
+                                            class="custom-select" data-placeholder="Year"
+                                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div><!-- .field-group -->                   
+                    
                 </div>
 
 
@@ -132,52 +90,48 @@
 
                 <div class="field-group">
                     <label for="first_name">Name</label>
-                    <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].FirstName" />
+                    <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.OpposingParty.FirstName" />
                 </div>
                 <div class="field-group">
-                    <input type="text" name="last_name" id="last_name" class="field-input" placeholder="Last" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].LastName" />
+                    <input type="text" name="last_name" id="last_name" class="field-input" placeholder="Last" ng-model="Ctrl.OpposingParty.LastName" />
                 </div>
 
                 <div class="field-group">
                     <label for="mailing_address1">Mailing address 1</label>
-                    <input type="text" name="mailing_address1" id="mailing_address1" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].AddressLine1" />
+                    <input type="text" name="mailing_address1" id="mailing_address1" class="field-input" placeholder="" ng-model="Ctrl.OpposingParty.AddressLine1" />
                 </div>
 
                 <div class="field-group">
                     <label for="mailing_address2">Mailing address 2(optional)</label>
-                    <input type="text" name="mailing_address2" id="mailing_address2" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].AddressLine2" />
+                    <input type="text" name="mailing_address2" id="mailing_address2" class="field-input" placeholder="" ng-model="Ctrl.OpposingParty.AddressLine2" />
                 </div>
 
                 <div class="field-group">
-                    <label for="state">State</label>
-                    <div class="input-wrapper">
-                        <select name="state" id="state" class="custom-select" data-placeholder="Select">
-                            <option value="option_01">Option 01</option>
-                            <option value="option_02">Option 02</option>
-                            <option value="option_03">Option 03</option>
-                        </select>
-                    </div>
+                    <label for="Applicant_state">State</label>
+                    <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                            ng-model="Ctrl.OpposingParty.State"
+                            ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                 </div>
 
                 <div class="field-group">
                     <label for="city">City</label>
-                    <input type="text" name="city" id="city" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].City" />
+                    <input type="text" name="city" id="city" class="field-input" placeholder="" ng-model="Ctrl.OpposingParty.City" />
                 </div>
 
                 <div class="field-group">
                     <label for="zipcode">Zip code</label>
-                    <input type="text" name="zipcode" id="zipcode" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo[0].Zip" />
+                    <input type="text" name="zipcode" id="zipcode" class="field-input" placeholder="" ng-model="Ctrl.OpposingParty.Zip" />
                 </div>
 
                 <div class="field-group">
-                    <a href="#" class="btn-link" ng-click="Ctrl.AddAnotherOpposingParty(Ctrl.caseinfo)">Add another opposing party</a>
+                    <a class="btn-link" ng-click="Ctrl.AddAnotherOpposingParty(Ctrl.OpposingParty)">Add another opposing party</a>
                 </div>
 
             </div>
 
 
             <div class="step-footer">
-                <input type="button" id="save-continue" name="save-continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToReview()" />
+                <input type="button" id="save-continue" name="save-continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToReview(Ctrl.caseinfo.TenantAppealInfo)" />
             </div>
         </form>
     </div>

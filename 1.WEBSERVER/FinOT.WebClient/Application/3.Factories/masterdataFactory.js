@@ -72,9 +72,9 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
         });
     }
 
-    var _GetCasesForCustomer = function (C_ID) {
+    var _GetCasesForCustomer = function (custID) {
         blockUI.start();
-        var url = 'api/applicationprocessing' + '/getcasesforcustomer/' + C_ID;
+        var url = 'api/applicationprocessing' + '/getcasesforcustomer/' + custID;
 
         return ajax.Get(url)
         .finally(function () {

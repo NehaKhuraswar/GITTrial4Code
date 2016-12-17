@@ -105,6 +105,11 @@ namespace RAP.Core.DataModels
     }
     public class TenantAppealInfoM
     {
+        public TenantAppealInfoM()
+        {
+            serveAppeal = new ServeAppealM();
+            AppealOpposingPartyInfo = new List<UserInfoM>();
+        }
         public int AppealID;
         public int AppealCategoryID;
         private List<AppealGroundM> _appealGrounds = new List<AppealGroundM>();
@@ -112,12 +117,13 @@ namespace RAP.Core.DataModels
         private bool _appealFiled = false;
         public bool bThirdPartyRepresentation = false;
         public string CaseNumber;
+        public ServeAppealM serveAppeal { get; set; }
 
        // private UserInfoM _appealThirdPartyInfo = new UserInfoM();
         public UserInfoM AppealThirdPartyInfo = new UserInfoM();
         public int thirdPartyUserID;
 
-        public List<UserInfoM> AppealOpposingPartyInfo = new List<UserInfoM>();
+        public List<UserInfoM> AppealOpposingPartyInfo;
         public List<int> opposingPartyUserID = new List<int>();
         public DateTime CreatedDate;
         public DateTime OpposingPartyCommunicateDate;
