@@ -235,13 +235,17 @@ namespace RAP.DAL
 
                     
                     var cityDetails = db.CityUserAccounts.Where(x => x.Email == message.Email && x.Password == message.Password
-                                                                    && x.CityAccountTypeID == message.AccountType.AccountTypeID).FirstOrDefault();
+                                                                    ).FirstOrDefault();
 
 
                     if (cityDetails != null)
                     {
+                        AccountType accountType = new AccountType();
+                        var AccountTypeDB = db.CityAccountTypes.Where(x => x.CityAccountTypeID == cityDetails.CityAccountTypeID).FirstOrDefault();
+                        accountType.AccountTypeID = AccountTypeDB.CityAccountTypeID;
+                        accountType.AccountTypeDesc = AccountTypeDB.CityAccountTypeDesc;
                         cityUser.UserID = (int)cityDetails.CityUserID;
-                        cityUser.AccountType = message.AccountType;
+                        cityUser.AccountType = accountType;
                         cityUser.FirstName = cityDetails.FirstName;
                         cityUser.LastName = cityDetails.LastName;
                         cityUser.MobilePhoneNumber = cityDetails.MobilePhoneNumber;

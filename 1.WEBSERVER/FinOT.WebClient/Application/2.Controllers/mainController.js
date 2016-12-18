@@ -2,6 +2,6 @@
     $scope.Page = Page;
   
            
-    $location.path("/login");
+    $location.path("/loginURL");
  
 }];

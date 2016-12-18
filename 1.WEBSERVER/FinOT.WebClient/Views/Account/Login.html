@@ -19,15 +19,6 @@
                                 <input type="password" class="field-input form-control input-sm" ng-trim="false" ng-model="Ctrl.model.CustomerInfo.Password" required />
                             </div>
 
-                            <div class="field-group">
-                                <label for="account_types">Account type</label>
-                                <select class="field-input form-control"
-                                        ng-model="Ctrl.SelectedAccountType"
-                                        ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID"
-                                        required>
-                                    <option value="" selected>Select Account Type</option>
-                                </select>
-                            </div>
 
                             <div class="field-group no-bottom-margin">
                                 <a ng-click="Ctrl.ForgotPassword()" class="forgot-password">Forgot Password?</a>

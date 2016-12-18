@@ -33,11 +33,23 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapResendPinController_resolve
         })
-        .when('/login', {
+        .when('/loginURL', {
+            templateUrl: 'views/account/LoginURL.html',
+            controller: raploginURLController,
+            controllerAs: 'Ctrl',
+            resolve: raploginURLController_resolve
+        })
+        .when('/loginPublic', {
             templateUrl: 'views/account/Login.html',
             controller: raploginController,
             controllerAs: 'Ctrl',
             resolve: raploginController_resolve
+        })
+        .when('/loginCity', {
+            templateUrl: 'views/account/Login.html',
+            controller: raploginCityUserController,
+            controllerAs: 'Ctrl',
+            resolve: raploginCityUserController_resolve
         })
         .when('/publicdashboard', {
                 templateUrl: 'views/account/PublicDashboard.html',

@@ -39,39 +39,15 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     //    });
     //}
     self.Login = function (model, accounttype) {
-        if (accounttype.AccountTypeID == 3) {
-            rapFactory.Login(model).then(function (response) {
-                    if (!alert.checkResponse(response)) {
-                        alert.Error(response.warnings[0]);
-                        return;
-                    }                
-                    rapGlobalFactory.CustomerDetails = response.data;                    
-                    $location.path("/publicdashboard");    
-            });
-        }
-        else //if (accounttype.AccountTypeID == 1 || ) 
-        {
-            model.AccountType = accounttype;
-            rapFactory.LoginCity(model).then(function (response) {
-                if (!alert.checkResponse(response)) {
-                    alert.Error(response.warnings[0]);
-                    return;
-                }                
-                rapGlobalFactory.CityUser = response.data;
-                if (accounttype.AccountTypeID == 1 )
-                    $location.path("/staffdashboard");
-                else if (accounttype.AccountTypeID == 2)
-                    $location.path("/admindashboard");
-            });
-        }
-        //else if (accounttype.AccountTypeID == 2) {
-        //    rapGlobalFactory.CityAdmin = response.data;
-        //    $location.path("/dashboard");
-        //}
-        
-        
+        rapFactory.Login(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                alert.Error(response.warnings[0]);
+                return;
+            }                
+            rapGlobalFactory.CustomerDetails = response.data;                    
+            $location.path("/publicdashboard");    
+        });          
     }
-
 }];
 var raploginController_resolve = {
     model: ['$route', 'alertService', 'raploginFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
