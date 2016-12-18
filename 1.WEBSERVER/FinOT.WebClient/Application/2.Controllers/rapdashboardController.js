@@ -27,9 +27,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     self.Collaborator = function () {
         $location.path("/collaborator");
     }
-    self.FileAppeal = function (model) {
-        //self.caseinfo.CaseID = 
-        rapFactory.GetCaseInfoWithModel(model.C_ID).then(function (response) {
+    self.FileAppeal = function (C_ID) {
+        C_ID = 'RAP00013';
+        rapFactory.GetCaseInfoWithModel(C_ID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }

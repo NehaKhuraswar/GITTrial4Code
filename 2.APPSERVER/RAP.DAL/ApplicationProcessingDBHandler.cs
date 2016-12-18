@@ -15,10 +15,12 @@ namespace RAP.DAL
         private readonly ApplicationProcessingDataContext _dbContext;
        
         private ICommonDBHandler _commondbHandler;
+        private IDashboardDBHandler _dashboarddbHandler;
         private IExceptionHandler _eHandler;
-        public ApplicationProcessingDBHandler(ICommonDBHandler commondbHandler, IExceptionHandler eHandler)
+        public ApplicationProcessingDBHandler(ICommonDBHandler commondbHandler, IDashboardDBHandler dashboarddbHandler, IExceptionHandler eHandler)
         {
             this._commondbHandler = commondbHandler;
+            this._dashboarddbHandler = dashboarddbHandler;
             this._eHandler = eHandler;
             _dbContext = new ApplicationProcessingDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
         }
@@ -459,6 +461,7 @@ namespace RAP.DAL
                     CaseInfoM caseinfo = new CaseInfoM();
                     caseinfo.CaseID = item.CaseID;
                     caseinfo.C_ID = item.C_ID;
+                    caseinfo.PetitionCategoryID = (int) item.PetitionCategoryID;
                     if (item.CityAnalystUserID != null)
                     {
                         caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
@@ -492,6 +495,8 @@ namespace RAP.DAL
                             caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
                         }
                     }
+                    caseinfo.ActivityStatus =  _dashboarddbHandler.GetActivityStatusForCase(item.C_ID).result;
+
                     cases.Add(caseinfo);
                 }
                 result.result = cases;
