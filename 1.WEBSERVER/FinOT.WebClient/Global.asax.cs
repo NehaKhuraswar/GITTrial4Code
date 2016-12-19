@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Web.Http;
 
 namespace RAP.WebClient
 {
@@ -14,6 +15,7 @@ namespace RAP.WebClient
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            GlobalConfiguration.Configure(WebAPIConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
