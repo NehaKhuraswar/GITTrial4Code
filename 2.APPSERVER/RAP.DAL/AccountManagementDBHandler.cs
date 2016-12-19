@@ -41,6 +41,28 @@ namespace RAP.DAL
                         message.User.UserID = (int)custdetails.UserID;
                         message.email = custdetails.Email;
                         message.custID = custdetails.CustomerID;
+                        message.IsSameMailingAddress = !(bool)custdetails.bMailingAddress;
+
+                        if (!message.IsSameMailingAddress)
+                        {
+                            var mailingaddress = db.MailingAddresses.Where(x => x.CustomerID == message.custID).FirstOrDefault();
+                            if (mailingaddress != null)
+                            {
+                                message.MailingAddress.AddressLine1 = mailingaddress.AddressLine1;
+                                message.MailingAddress.AddressLine2 = mailingaddress.AddressLine2;
+                                message.MailingAddress.City = mailingaddress.City;
+                                message.MailingAddress.PhoneNumber = mailingaddress.PhoneNumber;
+                                message.MailingAddress.State.StateID = mailingaddress.StateID;
+                                message.MailingAddress.Zip = mailingaddress.Zip;
+                                using (CommonDataContext dbCommon = new CommonDataContext(_connString))
+                                {
+                                    var state = dbCommon.States.Where(x => x.StateID == message.MailingAddress.State.StateID).FirstOrDefault();
+                                    message.MailingAddress.State.StateName = state.StateName;
+                                    message.MailingAddress.State.StateCode = state.StateCode;
+                                }
+                            }
+                        }
+                        
                         var notifications = db.NotificationPreferences.Where(x => x.UserID == message.User.UserID)
                                                                 .Select(c => new CustomerInfo()
                                                                 {
@@ -102,6 +124,28 @@ namespace RAP.DAL
                         message.User.UserID = (int)custdetails.UserID;
                         message.email = custdetails.Email;
                         message.custID = custdetails.CustomerID;
+                        message.IsSameMailingAddress = !(bool)custdetails.bMailingAddress;
+
+                        if(!message.IsSameMailingAddress)
+                        {
+                            var mailingaddress = db.MailingAddresses.Where(x => x.CustomerID == message.custID).FirstOrDefault();
+                            if(mailingaddress != null)
+                            {
+                                message.MailingAddress.AddressLine1 = mailingaddress.AddressLine1;
+                                message.MailingAddress.AddressLine2 = mailingaddress.AddressLine2;
+                                message.MailingAddress.City = mailingaddress.City;
+                                message.MailingAddress.PhoneNumber = mailingaddress.PhoneNumber;
+                                message.MailingAddress.State.StateID = mailingaddress.StateID;
+                                message.MailingAddress.Zip = mailingaddress.Zip;
+                            }
+                        }
+                        using (CommonDataContext dbCommon = new CommonDataContext(_connString))
+                        {
+                            var state = dbCommon.States.Where(x => x.StateID == message.MailingAddress.State.StateID).FirstOrDefault();
+                            message.MailingAddress.State.StateName = state.StateName;
+                            message.MailingAddress.State.StateCode = state.StateCode;
+                        }
+
                         var notifications = db.NotificationPreferences.Where(x => x.UserID == message.User.UserID)
                                                                 .Select(c => new CustomerInfo()
                                                                 {
