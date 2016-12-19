@@ -27,6 +27,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     self.Collaborator = function () {
         $location.path("/collaborator");
     }
+    self.ChangeAccountInformation = function () {
+        $location.path("/editcustomerinformation");
+    }
     self.FileAppeal = function (C_ID) {
         C_ID = 'RAP00013';
         rapFactory.GetCaseInfoWithModel(C_ID).then(function (response) {

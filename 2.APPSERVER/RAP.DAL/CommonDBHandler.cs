@@ -62,6 +62,28 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveUserInfo started");
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
+                    //EditUserInfo
+                    if(userInfo.UserID != 0)
+                    {
+                        var userDB = db.UserInfos.Where(x => x.UserID == userInfo.UserID).FirstOrDefault();
+                        userDB.FirstName = userInfo.FirstName;
+                        userDB.LastName = userInfo.LastName;
+                        userDB.AddressLine1 = userInfo.AddressLine1;
+                        userDB.AddressLine2 = userInfo.AddressLine2;
+                        userDB.City = userInfo.City;
+                        userDB.StateID = userInfo.State.StateID;
+                        userDB.Zip = userInfo.Zip;
+                        userDB.PhoneNumber = userInfo.PhoneNumber;
+                        userDB.ContactEmail = userInfo.Email;
+                        userDB.CreatedDate = DateTime.Now;
+
+                        db.SubmitChanges();
+
+                        System.Diagnostics.EventLog.WriteEntry("Application", "DAL EditUserInfo completed");
+                        result.result = userInfo;
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                        return result;
+                    }
                     var user = db.UserInfos.Where(x => (x.FirstName == userInfo.FirstName
                                                             && x.LastName == userInfo.LastName
                                                             && x.AddressLine1 == userInfo.AddressLine1

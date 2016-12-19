@@ -1,18 +1,25 @@
 ﻿'use strict';
-var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', 'masterdataFactory', '$location', function ($scope, $modal, alert, rapFactory, masterFactory, $location) {
+var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', 'masterdataFactory', 'rapGlobalFactory', '$location', function ($scope, $modal, alert, rapFactory, masterFactory, rapGlobalFactory, $location) {
     var self = this;
-    self.CustomerInfo = [];
+    self.CustomerInfo = null;
     self.StateList = [];
     self.Password;
     self.ConfirmPassword;
+    if (rapGlobalFactory.CustomerDetails != null)
+    {
+        self.CustomerInfo = rapGlobalFactory.CustomerDetails;
+    }
     var _GetCustomerModel = function () {
         return rapFactory.GetCustomer(null).then(function (response) {
                if (!alert.checkResponse(response)) { return; }
                self.CustomerInfo = response.data;
-        });
-        
+        });        
     }
-    _GetCustomerModel();
+
+    if (self.CustomerInfo == null) {
+        _GetCustomerModel();
+    }
+
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {

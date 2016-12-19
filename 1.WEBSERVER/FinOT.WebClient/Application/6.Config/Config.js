@@ -9,6 +9,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapregisterController_resolve
         })
+        .when('/editcustomerinformation', {
+            templateUrl: 'views/account/CreateUser.html',
+            controller: rapregisterController,
+            controllerAs: 'Ctrl',
+            resolve: rapregisterController_resolve
+        })
         .when('/collaborator', {
             templateUrl: 'views/account/Collaborator.html',
             controller: rapcollaboratorController,

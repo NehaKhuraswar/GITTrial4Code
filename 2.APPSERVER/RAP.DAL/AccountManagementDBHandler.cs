@@ -702,11 +702,15 @@ namespace RAP.DAL
            {
              //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer started");
                // Account already exists
-               if (CheckCustAccount(message))
+               if ((int)(message.custID) == 0)
                {
-                   result.status = new OperationStatus() { Status = StatusEnum.AccountAlreadyExist };
-                   return result;
+                   if (CheckCustAccount(message))
+                   {
+                       result.status = new OperationStatus() { Status = StatusEnum.AccountAlreadyExist };
+                       return result;
+                   }
                }
+               
 
                UserResult = commondbHandler.SaveUserInfo(message.User);
                if (UserResult.status.Status != StatusEnum.Success)
@@ -718,43 +722,86 @@ namespace RAP.DAL
                
                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                {
+                  
+                       var custTableEdit = db.CustomerDetails.Where(x => x.CustomerID == message.custID).FirstOrDefault();
+                       if(custTableEdit != null)
+                       {
+                           custTableEdit.Email = message.email;
+                           custTableEdit.Password = message.Password;
+                           custTableEdit.UserID = message.User.UserID;
+                           custTableEdit.CreatedDate = DateTime.Now;
+                           custTableEdit.ModifiedDate = DateTime.Now;
+                           custTableEdit.bMailingAddress = !message.IsSameMailingAddress;
+                           db.SubmitChanges();
+                       }
+                       else
+                       {
+                           CustomerDetail custTable = new CustomerDetail();
+                           custTable.Email = message.email;
+                           custTable.Password = message.Password;
+                           custTable.UserID = message.User.UserID;
+                           custTable.CreatedDate = DateTime.Now;
+                           custTable.ModifiedDate = DateTime.Now;
+                           custTable.bMailingAddress = !message.IsSameMailingAddress;
+                           message.CustomerIdentityKey = getCustomerIdentityKey();
+                           custTable.CustomerIdentityKey = message.CustomerIdentityKey;
+                           db.CustomerDetails.InsertOnSubmit(custTable);
+                           db.SubmitChanges();
+                           message.custID = custTable.CustomerID;
+                       }
 
-                   CustomerDetail custTable = new CustomerDetail();
-                   custTable.Email = message.email;
-                   custTable.Password = message.Password;
-                   custTable.UserID = message.User.UserID;  
-                   custTable.CreatedDate = DateTime.Now;
-                   custTable.ModifiedDate = DateTime.Now;
-                   custTable.bMailingAddress = !message.IsSameMailingAddress;
-                   message.CustomerIdentityKey = getCustomerIdentityKey();
-                   custTable.CustomerIdentityKey = message.CustomerIdentityKey;
-                   db.CustomerDetails.InsertOnSubmit(custTable);
-                   db.SubmitChanges();
-                   message.custID = custTable.CustomerID;
+                       var NPreferenceDB = db.NotificationPreferences.Where(x=>x.UserID == message.User.UserID).FirstOrDefault();
+                       if (NPreferenceDB != null)
+                       {
+                           NPreferenceDB.UserID = message.User.UserID;
+                           NPreferenceDB.EmailNotification = message.EmailNotificationFlag;
+                           NPreferenceDB.MailNotification = message.MailNotificationFlag;
+                           NPreferenceDB.CreatedDate = DateTime.Now;
+                           db.SubmitChanges();
+                       }
+                       else
+                       {
+                           NotificationPreference notificationTable = new NotificationPreference();
+                           notificationTable.UserID = message.User.UserID;
+                           notificationTable.EmailNotification = message.EmailNotificationFlag;
+                           notificationTable.MailNotification = message.MailNotificationFlag;
+                           notificationTable.CreatedDate = DateTime.Now;
+                           db.NotificationPreferences.InsertOnSubmit(notificationTable);
+                           db.SubmitChanges();
+                       }
 
-                   NotificationPreference notificationTable = new NotificationPreference();
-                   notificationTable.UserID = message.User.UserID;  
-                   notificationTable.EmailNotification = message.EmailNotificationFlag;
-                   notificationTable.MailNotification = message.MailNotificationFlag;
-                   notificationTable.CreatedDate = DateTime.Now;
-                   db.NotificationPreferences.InsertOnSubmit(notificationTable);
-                   db.SubmitChanges();
+                       if (!message.IsSameMailingAddress)
+                       {
 
-                   if (!message.IsSameMailingAddress)
-                   {
-                       MailingAddress mailing = new MailingAddress();
-                       mailing.AddressLine1 = message.MailingAddress.AddressLine1;
-                       mailing.AddressLine2 = message.MailingAddress.AddressLine2;
-                       mailing.City = message.MailingAddress.City;
-                       mailing.StateID = message.MailingAddress.State.StateID;
-                       mailing.Zip = message.MailingAddress.Zip;
-                       mailing.PhoneNumber = message.MailingAddress.PhoneNumber;
-                       mailing.CustomerID = message.custID;
-                       mailing.LastModifiedDate = DateTime.Now;
-                       db.MailingAddresses.InsertOnSubmit(mailing);
-                       db.SubmitChanges();
-                   }
-                   
+                           var MailingDB = db.MailingAddresses.Where(x => x.CustomerID == message.custID).FirstOrDefault();
+                           if (MailingDB != null)
+                           {
+                               MailingDB.AddressLine1 = message.MailingAddress.AddressLine1;
+                               MailingDB.AddressLine2 = message.MailingAddress.AddressLine2;
+                               MailingDB.City = message.MailingAddress.City;
+                               MailingDB.StateID = message.MailingAddress.State.StateID;
+                               MailingDB.Zip = message.MailingAddress.Zip;
+                               MailingDB.PhoneNumber = message.MailingAddress.PhoneNumber;
+                               MailingDB.CustomerID = message.custID;
+                               MailingDB.LastModifiedDate = DateTime.Now;
+                               db.SubmitChanges();
+                           }
+                           else
+                           {
+                               MailingAddress mailing = new MailingAddress();
+                               mailing.AddressLine1 = message.MailingAddress.AddressLine1;
+                               mailing.AddressLine2 = message.MailingAddress.AddressLine2;
+                               mailing.City = message.MailingAddress.City;
+                               mailing.StateID = message.MailingAddress.State.StateID;
+                               mailing.Zip = message.MailingAddress.Zip;
+                               mailing.PhoneNumber = message.MailingAddress.PhoneNumber;
+                               mailing.CustomerID = message.custID;
+                               mailing.LastModifiedDate = DateTime.Now;
+                               db.MailingAddresses.InsertOnSubmit(mailing);
+                               db.SubmitChanges();
+                           }
+                       
+                   }                   
                }
              //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
                result.status = new OperationStatus() { Status = StatusEnum.Success };
