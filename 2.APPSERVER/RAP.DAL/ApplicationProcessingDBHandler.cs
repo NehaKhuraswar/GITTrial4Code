@@ -13,6 +13,7 @@ namespace RAP.DAL
     {
         private readonly string _connString;
         private readonly ApplicationProcessingDataContext _dbContext;
+        private readonly AccountManagementDataContext _dbAccount;
        
         private ICommonDBHandler _commondbHandler;
         private IDashboardDBHandler _dashboarddbHandler;
@@ -23,6 +24,7 @@ namespace RAP.DAL
             this._dashboarddbHandler = dashboarddbHandler;
             this._eHandler = eHandler;
             _dbContext = new ApplicationProcessingDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
+            _dbAccount = new AccountManagementDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
         }
       
         #region "Get"
@@ -936,9 +938,10 @@ namespace RAP.DAL
             return result;
 
         }
-         public ReturnResult<ServeAppealM> GetAppealServe(int AppealID)
+         public ReturnResult<CaseInfoM> GetAppealServe(int AppealID)
         {
-            ReturnResult<ServeAppealM> result = new ReturnResult<ServeAppealM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            CaseInfoM caseInfo = new CaseInfoM();
             ServeAppealM appealServe = new ServeAppealM();
             try
             {
@@ -961,8 +964,9 @@ namespace RAP.DAL
                     }
 
                 }
+                caseInfo.TenantAppealInfo.serveAppeal = appealServe;
 
-                result.result = appealServe;
+                result.result = caseInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
                 return result;
@@ -1047,7 +1051,7 @@ namespace RAP.DAL
                 if (tenantAppealResult.status.Status != StatusEnum.Success)
                     return tenantAppealResult;
 
-                ServeAppealResult = GetAppealServe((int)tenantAppealResult.result.AppealID);
+                ServeAppealResult.result = GetAppealServe((int)tenantAppealResult.result.AppealID).result.TenantAppealInfo.serveAppeal ;
                 if (ServeAppealResult != null)
                 {
                     tenantAppealResult.result.serveAppeal = ServeAppealResult.result;
@@ -1065,6 +1069,44 @@ namespace RAP.DAL
                 return tenantAppealResult;
             }
         }
+
+        /// <summary>
+        /// Files the petition details
+        /// </summary>
+        /// <param name="caseInfo"></param>
+        /// <returns></returns>
+        public ReturnResult<CaseInfoM> SubmitAppeal(CaseInfoM caseInfo)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           
+            try
+            {
+                var CaseInfoDB = _dbContext.CaseDetails.Where(x => x.CaseID == caseInfo.CaseID).FirstOrDefault();
+                if (CaseInfoDB != null)
+                {
+                    CaseInfoDB.TenantAppealID = caseInfo.TenantAppealInfo.AppealID;
+                    _dbContext.SubmitChanges();
+                }
+
+                var AppealDB = _dbContext.TenantAppealDetails.Where(x => x.AppealID == caseInfo.TenantAppealInfo.AppealID).FirstOrDefault();
+                if (AppealDB != null)
+                {
+                    AppealDB.IsSubmitted = true;
+                    _dbContext.SubmitChanges();
+                }
+
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        // tbd to be removed
         /// <summary>
         /// Files the petition details
         /// </summary>
@@ -1881,11 +1923,22 @@ namespace RAP.DAL
             }
 
         }
-        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo)
+        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo, int CustomerID)
         {
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
+                var CustDetails = _dbAccount.CustomerDetails.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                if(CustDetails != null)
+                {
+                    if(CustDetails.CustomerIdentityKey != tenantAppealInfo.serveAppeal.pin)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                        return result;
+                    }
+                }
+                
 
                 ServeAppeal appealDB = _dbContext.ServeAppeals.Where(i => i.AppealID == tenantAppealInfo.AppealID).FirstOrDefault();
                 if(appealDB != null)
@@ -1893,7 +1946,7 @@ namespace RAP.DAL
                     appealDB.bAcknowledgeNamePin = tenantAppealInfo.serveAppeal.bAcknowledgeNamePin;
                     appealDB.bDeclaration = tenantAppealInfo.serveAppeal.bDeclaration;
                     appealDB.bThirdParty = tenantAppealInfo.serveAppeal.bThirdParty;
-                    appealDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day, tenantAppealInfo.serveAppeal.PenaltyDate.Year);
+                    appealDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Year, tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day);
                     appealDB.CreatedDate = DateTime.Now;                   
                 }
                 else

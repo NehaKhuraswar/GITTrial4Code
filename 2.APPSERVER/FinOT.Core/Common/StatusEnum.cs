@@ -15,6 +15,7 @@ namespace RAP.Core.Common
         DatabaseException,
         AccountAlreadyExist,
         DatabaseMessage,
+        PinError,
         #endregion
         
         #region Exceptions

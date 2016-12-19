@@ -88,9 +88,9 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<ServeAppealM> GetAppealServe(int AppealID)
+        public ReturnResult<CaseInfoM> GetAppealServe(int AppealID)
         {
-            ReturnResult<ServeAppealM> result = new ReturnResult<ServeAppealM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
                 result = _dbHandler.GetAppealServe(AppealID);
@@ -132,13 +132,13 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo)
+        public ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo, int CustomerID)
         {
 
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
-                result = _dbHandler.SaveTenantServingAppeal(tenantAppealInfo);
+                result = _dbHandler.SaveTenantServingAppeal(tenantAppealInfo, CustomerID);
                 return result;
             }
             catch (Exception ex)
@@ -191,7 +191,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-
+        public ReturnResult<CaseInfoM> SubmitAppeal(CaseInfoM caseInfo)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.SubmitAppeal(caseInfo);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();

@@ -15,7 +15,7 @@
               
               <div class="subhead type2">
                 <h4>Applicant and property information</h4>
-                <a href="#" class="btn-link btn-edit">Edit</a>
+                  <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
               </div>
               
               <div class="field-group filled-info subhead">
@@ -81,14 +81,14 @@
               </div><!-- .field-group -->
               
               <div class="subhead type2 no-bottom-margin">
-                <h4>Grounds for Petition</h4>
-                <a href="#" class="btn-link btn-edit">Edit</a>
+                <h4>Grounds for appeal</h4>
+                  <a ng-click="Ctrl.EditGrounds()" class="btn-link btn-edit">Edit</a>
               </div>
 
               <div class="field-group filled-info">
-                <<div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
+                <div ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
                     <div ng-show="item.Selected">
-                        {{item.PetitionGroundDescription}}
+                        {{item.AppealDescription}}
                     </div>
                     <!--<p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
                     <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
@@ -151,7 +151,7 @@
               <!-- Serving of appeal to the opposing parties -->
               <div class="subhead type2">
                 <h4>Serving of appeal to the opposing parties</h4>
-                <a href="#" class="btn-link btn-edit">Edit</a>
+                  <a ng-click="Ctrl.EditServeAppeal()" class="btn-link btn-edit">Edit</a>
               </div>
               
               <div class="field-group">
@@ -162,39 +162,20 @@
                 </div>
               </div>
               
-              <div class="field-group filled-info subhead">
+            <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty">
                 <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>                  
-                  <div class="col-sm-6 col-xs-12">
-                    Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                      T (510) 453-5462  <br />bobjohnson@gmail.com 
-                  </div>
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>
+                    <div class="col-sm-6 col-xs-12">
+                        {{item.FirstName}} {{item.LastName}}   <br />{{item.AddressLine1}} {{item.AddressLine2}}, <br />{{item.City}}, {{item.State.StateCode}} {{item.Zip}}
+                    </div>
                 </div>
-              </div><!-- .field-group -->
+            </div><!-- .field-group -->              
               
-              <div class="field-group filled-info subhead">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>                 
-                  <div class="col-sm-6 col-xs-12">
-                    John Johnson  <br />1401 Jackson Street,  <br />Oakland, CA 94612 <br />Tel: (510) 453-5462 <br />Email: bobjohnson@gmail.com
-                  </div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="field-group filled-info subhead">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>                 
-                  <div class="col-sm-6 col-xs-12">
-                    Mike Johnson  <br />1401 Jackson Street, <br /> Oakland, CA 94612 <br />Tel: (510) 453-5462 <br />Email: bobjohnson@gmail.com
-                  </div>
-                </div>
-              </div><!-- .field-group -->
-              
-            </div>
+            
 
 
             <div class="step-footer">
-              <input type="button" id="submit-appeal" name="submit-appeal" class="btn-primary" value="Submit appeal" />
+                <input type="button" id="submit-appeal" name="submit-appeal" class="btn-primary" value="Submit appeal" ng-click="Ctrl.SubmitAppeal()" />
             </div>
         </div>
     </div>

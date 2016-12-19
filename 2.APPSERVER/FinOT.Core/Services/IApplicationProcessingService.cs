@@ -11,6 +11,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetCaseDetails();
         ReturnResult<CaseInfoM> GetCaseInfo(string caseID);
         ReturnResult<CaseInfoM> GetCaseDetails(int UserID);
+        ReturnResult<CaseInfoM> SubmitAppeal(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
@@ -26,11 +27,11 @@ namespace RAP.Core.Services
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
         ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);
-        ReturnResult<ServeAppealM> GetAppealServe(int AppealID);
+        ReturnResult<CaseInfoM> GetAppealServe(int AppealID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo);
         ReturnResult<TenantAppealInfoM> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(TenantAppealInfoM tenantAppealInfo);
-        ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo);
+        ReturnResult<TenantAppealInfoM> SaveTenantServingAppeal(TenantAppealInfoM tenantAppealInfo, int CustomerID);
         ReturnResult<CaseInfoM> GetPetitioncategory();
         ReturnResult<CaseInfoM> GetOwnerApplicantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> GetRentIncreaseReasonInfo(CaseInfoM model);

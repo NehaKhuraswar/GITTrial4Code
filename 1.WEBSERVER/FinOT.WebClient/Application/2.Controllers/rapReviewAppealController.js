@@ -7,12 +7,26 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
    
     self.SubmitAppeal = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveCaseInfo(rapGlobalFactory.CaseDetails).then(function (response) {
+        rapFactory.SubmitAppeal(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $modalInstance.close(response.data);
+            $location.path("/publicdashboard");
         });
+    }
+    self.EditApplicantInfo = function () {
+        $scope.model.bReview = false;
+        $scope.model.bAppellantInfo = true;
+    }
+
+
+    self.EditGrounds = function () {
+        $scope.model.bReview = false;
+        $scope.model.bGrounds = true;
+    }
+    self.EditServeAppeal = function () {
+        $scope.model.bReview = false;
+        $scope.model.bServingAppeal = true;
     }
    
 }];

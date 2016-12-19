@@ -4,17 +4,17 @@ var rapreviewappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
       var _routePrefix = 'api/applicationprocessing';
     
     
-      var _SaveCaseInfo = function (model) {
+      var _SubmitAppeal = function (model) {
           blockUI.start();
 
-          var url = _routePrefix + '/savecaseinfo';
+          var url = _routePrefix + '/submitappeal';
 
           return ajax.Post(model, url)
           .finally(function () {
               blockUI.stop();
           });
       }
-    factory.SaveCaseInfo = _SaveCaseInfo;
+      factory.SubmitAppeal = _SubmitAppeal;
     
     return factory;
 }];

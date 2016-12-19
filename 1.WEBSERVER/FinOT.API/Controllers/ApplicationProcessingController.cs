@@ -237,8 +237,8 @@ namespace RAP.API.Controllers
 
             //Appl accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<ServeAppealM> transaction = new TranInfo<ServeAppealM>();
-            ReturnResult<ServeAppealM> result = new ReturnResult<ServeAppealM>();
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
 
@@ -268,7 +268,7 @@ namespace RAP.API.Controllers
                 //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
             }
 
-            return Request.CreateResponse<TranInfo<ServeAppealM>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
 
         #region Common File Petition method      
@@ -411,6 +411,47 @@ namespace RAP.API.Controllers
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
                     
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("submitappeal")]
+        [HttpPost]
+        public HttpResponseMessage SubmitAppeal([FromBody] CaseInfoM caseInfo)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                //var doc = getDoc();
+                //var docServiceResult =   _docService.UploadDocument(doc);
+                //if(docServiceResult.status.Status != StatusEnum.Success)
+                //{
+                //    transaction.status = false;
+                //}
+                result = _service.SubmitAppeal(caseInfo);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
                 }
             }
             catch (Exception ex)
@@ -1004,9 +1045,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("savetenantservingappeal")]
+        [Route("savetenantservingappeal/{CustomerID:int}")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantServingAppeal([FromBody] TenantAppealInfoM tenantAppealInfo)
+        public HttpResponseMessage SaveTenantServingAppeal([FromBody] TenantAppealInfoM tenantAppealInfo, [FromUri] int CustomerID)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -1015,7 +1056,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantServingAppeal(tenantAppealInfo);
+                result = _service.SaveTenantServingAppeal(tenantAppealInfo, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

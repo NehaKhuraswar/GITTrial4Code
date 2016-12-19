@@ -44,6 +44,10 @@ namespace RAP.Core.Common
                     StatusCode = "0100";
                     StatusMessage = "No Data Found";
                     break;
+                case StatusEnum.PinError:
+                    StatusCode = "0002";
+                    StatusMessage = "PIN doesnot match, please renter the pin ";
+                    break;
 
                 #region Generic Unhandled Exceptions
                 case StatusEnum.InvalidArgumentException:
@@ -85,6 +89,8 @@ namespace RAP.Core.Common
                     StatusCode = "0108";
                     StatusMessage = "Error occured in database operation ";
                     break;
+
+               
 
                 case StatusEnum.DatabaseMessage:
                     StatusCode = "0109";

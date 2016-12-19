@@ -32,7 +32,9 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
             if (!alert.checkResponse(response)) {
                 return;
             }
-            self.serveAppeal = response.data;
+            // self.caseinfo = response.data;
+            self.caseinfo.TenantAppealInfo.serveAppeal = response.data.TenantAppealInfo.serveAppeal;
+            self.serveAppeal = self.caseinfo.TenantAppealInfo.serveAppeal;
             self.serveAppeal.AppealID = appealID;
         });
     }
@@ -41,11 +43,14 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     $q.all([_GetStateList(), _GetOpposingParty(), _GetAppealServe(self.caseinfo.TenantAppealInfo.AppealID)]).then(function () {
                     
     })
+    //$q.all([ _GetAppealServe(self.caseinfo.TenantAppealInfo.AppealID)]).then(function () {
+                    
+    //})
     //self.OpposingParty = angular.copy(self.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo);
 
     self.AddAnotherOpposingParty = function (model) {
         var _opposingParty= angular.copy(model);
-        self.serveAppeal.OpposingParty.Push(_opposingParty);
+        self.serveAppeal.OpposingParty.push(_opposingParty);
         model.FirstName = "";
         model.LastName = "";
         model.AddressLine1 = "";
@@ -60,17 +65,17 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
 
     
     self.ContinueToReview = function (serveAppeal) {
-        //if (serveAppeal.OpposingParty.length == 0)
-        //{
-        //   serveAppeal.OpposingParty.push(self.OpposingParty);
-        //}
-        //rapFactory.SaveTenantServingAppeal(serveAppeal).then(function (response) {
-        //    if (!alert.checkResponse(response)) {
-        //        return;
-        //    }
+        if (self.serveAppeal.OpposingParty.length == 0)
+        {
+            self.serveAppeal.OpposingParty.push(self.OpposingParty);
+        }
+        rapFactory.SaveTenantServingAppeal(self.caseinfo.TenantAppealInfo, self.custDetails.custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
             $scope.model.bServingAppeal = false;
             $scope.model.bReview = true;
-       // });
+        });
        // $location.path("/reviewappeal");
     }
    

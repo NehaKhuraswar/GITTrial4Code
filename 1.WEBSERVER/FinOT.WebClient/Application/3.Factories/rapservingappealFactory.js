@@ -32,10 +32,10 @@ var rapservingappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax
             blockUI.stop();
         });
     }
-    var _SaveTenantServingAppeal = function(model){
+    var _SaveTenantServingAppeal = function(model, CustID){
         blockUI.start();
 
-        var url = _routePrefix + '/savetenantservingappeal';
+        var url = _routePrefix + '/savetenantservingappeal/' + CustID;
 
         return ajax.Post(model, url)
         .finally(function () {

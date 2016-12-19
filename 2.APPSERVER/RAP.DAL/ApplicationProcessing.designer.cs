@@ -51,9 +51,6 @@ namespace RAP.DAL
     partial void InsertTenantAppealGroundInfo(TenantAppealGroundInfo instance);
     partial void UpdateTenantAppealGroundInfo(TenantAppealGroundInfo instance);
     partial void DeleteTenantAppealGroundInfo(TenantAppealGroundInfo instance);
-    partial void InsertAppealOpposingParty(AppealOpposingParty instance);
-    partial void UpdateAppealOpposingParty(AppealOpposingParty instance);
-    partial void DeleteAppealOpposingParty(AppealOpposingParty instance);
     partial void InsertOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
     partial void UpdateOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
     partial void DeleteOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
@@ -111,6 +108,9 @@ namespace RAP.DAL
     partial void InsertServeAppeal(ServeAppeal instance);
     partial void UpdateServeAppeal(ServeAppeal instance);
     partial void DeleteServeAppeal(ServeAppeal instance);
+    partial void InsertAppealOpposingParty(AppealOpposingParty instance);
+    partial void UpdateAppealOpposingParty(AppealOpposingParty instance);
+    partial void DeleteAppealOpposingParty(AppealOpposingParty instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -196,14 +196,6 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantAppealGroundInfo>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AppealOpposingParty> AppealOpposingParties
-		{
-			get
-			{
-				return this.GetTable<AppealOpposingParty>();
 			}
 		}
 		
@@ -364,6 +356,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<ServeAppeal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AppealOpposingParty> AppealOpposingParties
+		{
+			get
+			{
+				return this.GetTable<AppealOpposingParty>();
 			}
 		}
 	}
@@ -1461,188 +1461,6 @@ namespace RAP.DAL
 						this._AppealGroundID = default(int);
 					}
 					this.SendPropertyChanged("AppealGround");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AppealOpposingParty")]
-	public partial class AppealOpposingParty : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _AppealOpposingPartyID;
-		
-		private int _AppealID;
-		
-		private int _OpposingPartyID;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private System.Nullable<bool> _IsDeleted;
-		
-		private System.Nullable<System.DateTime> _ModifiedDate;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAppealOpposingPartyIDChanging(int value);
-    partial void OnAppealOpposingPartyIDChanged();
-    partial void OnAppealIDChanging(int value);
-    partial void OnAppealIDChanged();
-    partial void OnOpposingPartyIDChanging(int value);
-    partial void OnOpposingPartyIDChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnIsDeletedChanging(System.Nullable<bool> value);
-    partial void OnIsDeletedChanged();
-    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedDateChanged();
-    #endregion
-		
-		public AppealOpposingParty()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealOpposingPartyID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int AppealOpposingPartyID
-		{
-			get
-			{
-				return this._AppealOpposingPartyID;
-			}
-			set
-			{
-				if ((this._AppealOpposingPartyID != value))
-				{
-					this.OnAppealOpposingPartyIDChanging(value);
-					this.SendPropertyChanging();
-					this._AppealOpposingPartyID = value;
-					this.SendPropertyChanged("AppealOpposingPartyID");
-					this.OnAppealOpposingPartyIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealID", DbType="Int NOT NULL")]
-		public int AppealID
-		{
-			get
-			{
-				return this._AppealID;
-			}
-			set
-			{
-				if ((this._AppealID != value))
-				{
-					this.OnAppealIDChanging(value);
-					this.SendPropertyChanging();
-					this._AppealID = value;
-					this.SendPropertyChanged("AppealID");
-					this.OnAppealIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OpposingPartyID", DbType="Int NOT NULL")]
-		public int OpposingPartyID
-		{
-			get
-			{
-				return this._OpposingPartyID;
-			}
-			set
-			{
-				if ((this._OpposingPartyID != value))
-				{
-					this.OnOpposingPartyIDChanging(value);
-					this.SendPropertyChanging();
-					this._OpposingPartyID = value;
-					this.SendPropertyChanged("OpposingPartyID");
-					this.OnOpposingPartyIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit")]
-		public System.Nullable<bool> IsDeleted
-		{
-			get
-			{
-				return this._IsDeleted;
-			}
-			set
-			{
-				if ((this._IsDeleted != value))
-				{
-					this.OnIsDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._IsDeleted = value;
-					this.SendPropertyChanged("IsDeleted");
-					this.OnIsDeletedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
 				}
 			}
 		}
@@ -6688,6 +6506,188 @@ namespace RAP.DAL
 					this._CreatedDate = value;
 					this.SendPropertyChanged("CreatedDate");
 					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AppealOpposingParty")]
+	public partial class AppealOpposingParty : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AppealOpposingPartyID;
+		
+		private int _AppealID;
+		
+		private int _OpposingPartyID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<bool> _IsDeleted;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAppealOpposingPartyIDChanging(int value);
+    partial void OnAppealOpposingPartyIDChanged();
+    partial void OnAppealIDChanging(int value);
+    partial void OnAppealIDChanged();
+    partial void OnOpposingPartyIDChanging(int value);
+    partial void OnOpposingPartyIDChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnIsDeletedChanging(System.Nullable<bool> value);
+    partial void OnIsDeletedChanged();
+    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedDateChanged();
+    #endregion
+		
+		public AppealOpposingParty()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealOpposingPartyID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AppealOpposingPartyID
+		{
+			get
+			{
+				return this._AppealOpposingPartyID;
+			}
+			set
+			{
+				if ((this._AppealOpposingPartyID != value))
+				{
+					this.OnAppealOpposingPartyIDChanging(value);
+					this.SendPropertyChanging();
+					this._AppealOpposingPartyID = value;
+					this.SendPropertyChanged("AppealOpposingPartyID");
+					this.OnAppealOpposingPartyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealID", DbType="Int NOT NULL")]
+		public int AppealID
+		{
+			get
+			{
+				return this._AppealID;
+			}
+			set
+			{
+				if ((this._AppealID != value))
+				{
+					this.OnAppealIDChanging(value);
+					this.SendPropertyChanging();
+					this._AppealID = value;
+					this.SendPropertyChanged("AppealID");
+					this.OnAppealIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OpposingPartyID", DbType="Int NOT NULL")]
+		public int OpposingPartyID
+		{
+			get
+			{
+				return this._OpposingPartyID;
+			}
+			set
+			{
+				if ((this._OpposingPartyID != value))
+				{
+					this.OnOpposingPartyIDChanging(value);
+					this.SendPropertyChanging();
+					this._OpposingPartyID = value;
+					this.SendPropertyChanged("OpposingPartyID");
+					this.OnOpposingPartyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit")]
+		public System.Nullable<bool> IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
 				}
 			}
 		}
