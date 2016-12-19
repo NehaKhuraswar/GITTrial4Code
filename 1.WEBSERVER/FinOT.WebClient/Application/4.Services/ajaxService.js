@@ -15,7 +15,8 @@ var ajaxService = ['$http', '$location', '$log', function ($http, $location, $lo
     }
 
     this.Get = function (route, data) {
-        var _url = _base + route;
+        //var _url = _base + route;
+        var _url = '/' + route;
         return $http({
             method: 'GET',
             url: _url,
@@ -34,7 +35,8 @@ var ajaxService = ['$http', '$location', '$log', function ($http, $location, $lo
     }
     
     this.Post = function (data, route) {
-        var _url = _base + route;
+        //var _url = _base + route;
+        var _url = '/' + route;
         return $http({
             method: 'POST',
             url: _url,

@@ -70,7 +70,7 @@ namespace RAP.API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("get/{custid:int?}")]
-        public HttpResponseMessage GetCustomer(int? custid = null)
+        public HttpResponseMessage GetCustomer(string custid)
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
@@ -150,8 +150,7 @@ namespace RAP.API.Controllers
         [AllowAnonymous]
         [Route("logincust")]
         [HttpPost]
-        public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)
-        
+        public HttpResponseMessage LoginCust([FromBody] CustomerInfo loginInfo)        
         {
            //System.Diagnostics.EventLog.WriteEntry("Application", "LoginCust started");
             AccountManagementService accService = new AccountManagementService();
