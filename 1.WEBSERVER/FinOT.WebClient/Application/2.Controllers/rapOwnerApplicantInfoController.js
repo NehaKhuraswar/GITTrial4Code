@@ -36,24 +36,27 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     $scope.onFileSelect = function ($files) {
         if ($files && $files.length)
         {
-            for (var i = 0; i < $files.length; i++) {
+            for (var i = 0; i < $files.length; i++) {          
                 var file = $files[i];
-               var filename = file.name;
-                var index = filename.lastIndexOf(".");
-                var strsubstring = filename.substring(index, filename.length);
-                if (strsubstring.toUpperCase() == '.PDF' || strsubstring == '.DOC' || strsubstring == '.DOCX' || strsubstring == '.XLS') {
-                    var document = self.caseinfo.Document;
-                    document.DocTitle = 'Business Tax Proof'
-                    document.DocName = filename;
-                    document.CustomerID = self.custDetails.custID;                   
-                    var reader = new FileReader();
-                    reader.readAsArrayBuffer(file);
-                    reader.onload = function (e) {
-                        var arrayBuffer = e.target.result;
-                        var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
-                        document.Base64Content = base64String;
+                var filename = file.name;
+                var filesize = ((file.size / 1024) / 1024).toFixed(4);
+                if (filesize < 5) {
+                    var index = filename.lastIndexOf(".");
+                    var ext = filename.substring(index, filename.length).toUpperCase();
+                    if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS') {
+                        var document = self.caseinfo.Document;
+                        document.DocTitle = 'Business Tax Proof'
+                        document.DocName = filename;
+                        document.CustomerID = self.custDetails.custID;
+                        var reader = new FileReader();
+                        reader.readAsArrayBuffer(file);
+                        reader.onload = function (e) {
+                            var arrayBuffer = e.target.result;
+                            var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+                            document.Base64Content = base64String;
+                        }
+                        self.caseinfo.Documents.push(document);
                     }
-                    self.caseinfo.Documents.push(document);
                 }
             }
         }

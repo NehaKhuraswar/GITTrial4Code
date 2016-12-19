@@ -10,5 +10,7 @@ namespace RAP.DAL
        ReturnResult<UserInfoM> GetUserInfo(int UserId);
        void SaveErrorLog(OperationStatus status);
        CustomDate GetDateFromDatabase(DateTime DatabaseDate);
+       ReturnResult<DocumentM> SaveDocument(DocumentM doc);
+       
     }
 }

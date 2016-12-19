@@ -6,8 +6,8 @@ using System.Web;
 
 namespace RAP.Core.Services
 {
-    public interface IdocumentService
+    public interface IDocumentService
     {
-        ReturnResult<DocumentM> UploadDocument(HttpPostedFile file);
+        ReturnResult<DocumentM> UploadDocument(DocumentM doc);
     }
 }

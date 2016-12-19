@@ -27,14 +27,14 @@ namespace RAP.API.Controllers
         private int UserID;
         private readonly IApplicationProcessingService _service;
         private readonly ICommonService _commonService;
-        private readonly IdocumentService _docService;
+        private readonly IDocumentService _docService;
         private IExceptionHandler _eHandler;
        
        
         public ApplicationProcessingController()
         {
             _service = RAPDependancyResolver.Instance.GetKernel().Get<IApplicationProcessingService>();           
-            _docService = RAPDependancyResolver.Instance.GetKernel().Get<IdocumentService>();
+            _docService = RAPDependancyResolver.Instance.GetKernel().Get<IDocumentService>();
             _commonService = RAPDependancyResolver.Instance.GetKernel().Get<ICommonService>();
             _eHandler = RAPDependancyResolver.Instance.GetKernel().Get<IExceptionHandler>();
         }

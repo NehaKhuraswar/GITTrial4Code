@@ -40,6 +40,22 @@ namespace RAP.Business.Implementation
             }     
                         
         }
+
+       public ReturnResult<DocumentM> SaveDocument(DocumentM doc)
+        {
+            ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
+             try
+             {
+                 result = _dbHandler.SaveDocument(doc);
+                 return result;
+             }
+             catch (Exception ex)
+             {
+                 result.status = _eHandler.HandleException(ex);
+                 LogError(result.status);
+                 return result;
+             }
+        }
         
     }
 }

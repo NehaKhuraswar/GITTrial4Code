@@ -15,14 +15,20 @@ using RAP.Business.CheckInService;
 
 namespace RAP.Business.Implementation
 {
-  public class DocumentService : IdocumentService
+  public class DocumentService : IDocumentService
     {
-      public ReturnResult<DocumentM> UploadDocument(HttpPostedFile file)
+      private readonly IExceptionHandler _eHandler;
+      private readonly ICommonService _commonService;
+      public DocumentService(IExceptionHandler eHandler, ICommonService commonService)
+      {
+          this._eHandler = eHandler;
+          this._commonService = commonService;
+      }
+      public ReturnResult<DocumentM> UploadDocument(DocumentM doc)
       {
           ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
           try
           {
-              DocumentM doc = getDocumentObj(file);
               var serviceObj = ConvertToServiceObj(doc);
               string endpoint = ConfigurationManager.AppSettings["WebcenterEndPoint"];
               BasicHttpBinding myBinding = new BasicHttpBinding();
@@ -40,20 +46,32 @@ namespace RAP.Business.Implementation
               string securityGroup = ConfigurationManager.AppSettings["SecurityGroup"];
               IdcProperty[] idcProperty = new IdcProperty[0];
               IdcFile idcFile = new IdcFile();
-              var serviceResult = checkInService.CheckInUniversal(doc.DocName, doc.DocDescription, docType, docAuthor, securityGroup, "", idcProperty, serviceObj, idcFile, idcProperty);
+              var serviceResult = checkInService.CheckInUniversal(doc.DocName.Replace(" ","").Trim(), doc.DocTitle, docType, docAuthor, securityGroup, "", idcProperty, serviceObj, idcFile, idcProperty);
               if(serviceResult == null)
               {
-                  result.status = new OperationStatus() { Status = StatusEnum.UploadFailed };
-                  return result;
+                  throw new Exception("Document upload failed for the document" + doc.DocName);               
               }
               doc.DocThirdPartyID = serviceResult.dID;
+              if (doc.DocThirdPartyID > 0)
+              {
+                  doc.isUploaded = true;
+                 var saveDocumentResult = _commonService.SaveDocument(doc);
+                  if(saveDocumentResult.status.Status != StatusEnum.Success)
+                  {
+                      throw new Exception("Save document for the document" + doc.DocName);
+                  }
+                  doc.DocID = saveDocumentResult.result.DocID;
+              }
+              doc.Base64Content = string.Empty;
+              doc.Content = null;
               result.status = new OperationStatus() { Status = StatusEnum.Success };
+              result.result = doc;
               return result;
           }
           catch(Exception ex)
           {
-              IExceptionHandler eHandler = new ExceptionHandler();
-              result.status = eHandler.HandleException(ex);
+              result.status = _eHandler.HandleException(ex);
+              _commonService.LogError(result.status);
               return result;
           }    
       }
@@ -61,7 +79,7 @@ namespace RAP.Business.Implementation
       private IdcFile ConvertToServiceObj(DocumentM doc)
       {
           IdcFile serviceObj = new IdcFile();
-
+          doc.Content = Convert.FromBase64String(doc.Base64Content);
           if(!string.IsNullOrEmpty(doc.DocName) && doc.Content != null)
           {
               serviceObj.fileName = doc.DocName;
@@ -69,20 +87,20 @@ namespace RAP.Business.Implementation
           }
           return serviceObj;
       }
-
-      private DocumentM getDocumentObj(HttpPostedFile file)
-      {
-          DocumentM doc = new DocumentM();
-          doc.DocName = file.FileName;
+      //To be removed
+      //private DocumentM getDocumentObj(HttpPostedFile file)
+      //{
+      //    DocumentM doc = new DocumentM();
+      //    doc.DocName = file.FileName;
             
-          BinaryReader b = new BinaryReader(file.InputStream);
-          var content = b.ReadBytes(file.ContentLength);
-          if(content !=null)
-          {
-              doc.Content = content;
-          }
+      //    BinaryReader b = new BinaryReader(file.InputStream);
+      //    var content = b.ReadBytes(file.ContentLength);
+      //    if(content !=null)
+      //    {
+      //        doc.Content = content;
+      //    }
 
-          return doc;
-      }
+      //    return doc;
+      //}
     }
 }

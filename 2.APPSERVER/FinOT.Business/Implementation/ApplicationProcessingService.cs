@@ -16,16 +16,18 @@ namespace RAP.Business.Implementation
         private readonly IApplicationProcessingDBHandler _dbHandler;
         private readonly IExceptionHandler _eHandler;
         private readonly ICommonService _commonService;
+        private readonly IDocumentService _documentService;
         //TBD
         //public ApplicationProcessingService()
         //{
         //    _dbHandler = new ApplicationProcessingDBHandler();
         //}
-        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler, IExceptionHandler eHandler, ICommonService commonService)
+        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler, IExceptionHandler eHandler, ICommonService commonService, IDocumentService documentService)
         {
             this._dbHandler = dbHandler;
             this._eHandler = eHandler;
             this._commonService = commonService;
+            this._documentService = documentService;
         }
 
         public ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID)
@@ -478,6 +480,7 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> SaveOwnerApplicantInfo(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
                 var dbResult = _dbHandler.SaveOwnerApplicantInfo(model);
@@ -486,6 +489,17 @@ namespace RAP.Business.Implementation
                     result.status = dbResult.status;
                     return result;
                 }
+
+                foreach(var doc in model.Documents)
+                {
+                    doc.DocCategory = DocCategory.OwnerPetition.ToString();
+                    var docUploadResut = _documentService.UploadDocument(doc);
+                    if(docUploadResut.status.Status == StatusEnum.Success)
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                model.Documents = documents;
                 result.result = dbResult.result;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

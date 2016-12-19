@@ -16,7 +16,7 @@ namespace RAP.Business.Binding
        public override void Load()
        {
            Bind<IApplicationProcessingService>().To<ApplicationProcessingService>();
-           Bind<IdocumentService>().To <DocumentService>();
+           Bind<IDocumentService>().To <DocumentService>();
            Bind<ICommonService>().To<CommonService>();
            Bind<IExceptionHandler>().To<ExceptionHandler>();
            Bind<ICommonDBHandler>().To<CommonDBHandler>();

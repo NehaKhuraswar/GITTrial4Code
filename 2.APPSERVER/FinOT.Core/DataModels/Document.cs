@@ -41,6 +41,7 @@ namespace RAP.Core.DataModels
          public int CustomerID { get; set; }
          public int? C_ID { get; set; }
          public bool IsPetitonFiled { get; set; }
+         public bool isUploaded { get; set; }
      }
      public enum DocCategory
      {

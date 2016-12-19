@@ -243,5 +243,39 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<DocumentM> SaveDocument(DocumentM doc)
+        {
+            ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
+            try
+            {
+                if (doc != null)
+                {
+                    using (CommonDataContext db = new CommonDataContext(_connString))
+                    {
+                        Document document = new Document();
+                        document.DocName = doc.DocName;
+                        document.DocTitle = doc.DocTitle;
+                        document.DocThirdPartyID = doc.DocThirdPartyID;
+                        document.CustomerID = doc.CustomerID;
+                        document.DocCategory = doc.DocCategory;
+                        document.DocDescription = string.IsNullOrEmpty(doc.DocDescription) ? null : doc.DocDescription;
+                        db.Documents.InsertOnSubmit(document);
+                        db.SubmitChanges();
+                        doc.DocID = document.DocID;
+                    }
+                    result.result = doc;
+                }
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+        
     }
 }
