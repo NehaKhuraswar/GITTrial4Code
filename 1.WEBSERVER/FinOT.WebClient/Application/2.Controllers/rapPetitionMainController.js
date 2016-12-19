@@ -25,7 +25,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.selectedObj = {};
     self.PetitionSubmissionStatus = null;
     self.oPetionActiveStatus = null;
-    self.tPetionActieStatus = null;
+    self.tPetionActiveStatus = null;
     
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
@@ -197,7 +197,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
             }
             self.PetitionSubmissionStatus = response.data;
             self.oPetionActiveStatus = self.PetitionSubmissionStatus.OwnerPetition;
-            self.tPetionActieStatus = self.PetitionSubmissionStatus.TenantPetition;
+            self.tPetionActiveStatus = self.PetitionSubmissionStatus.TenantPetition;
         });
     }
     // _getrent();
@@ -220,6 +220,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         Review: false,
         Verification: false
     }
+
 
     self.DisableAllCurrent = function()
     {

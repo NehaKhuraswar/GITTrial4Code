@@ -846,9 +846,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("savetenantlostserviceinfo")]
+        [Route("savetenantlostserviceinfo/{CustomerID:int}")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] LostServicesPageM message)
+        public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] LostServicesPageM message, [FromUri] int CustomerID)
         {
             //Document upload sample - TBD
             //if(petition.File != null)
@@ -865,7 +865,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantLostServiceInfo(message);
+                result = _service.SaveTenantLostServiceInfo(message, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -890,9 +890,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("savepetitiongroundinfo")]
+        [Route("savepetitiongroundinfo/{CustomerID:int}")]
         [HttpPost]
-        public HttpResponseMessage SavePetitionGroundInfo([FromBody] TenantPetitionInfoM petition)
+        public HttpResponseMessage SavePetitionGroundInfo([FromBody] TenantPetitionInfoM petition, [FromUri] int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -903,7 +903,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SavePetitionGroundInfo(petition);
+                result = _service.SavePetitionGroundInfo(petition, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -928,9 +928,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("saverentalhistoryinfo")]
+        [Route("saverentalhistoryinfo/{CustomerID:int}")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantRentalHistoryInfo([FromBody] TenantRentalHistoryM rentalHistory)
+        public HttpResponseMessage SaveTenantRentalHistoryInfo([FromBody] TenantRentalHistoryM rentalHistory, [FromUri]int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -941,7 +941,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantRentalHistoryInfo(rentalHistory);
+                result = _service.SaveTenantRentalHistoryInfo(rentalHistory, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

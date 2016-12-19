@@ -72,6 +72,9 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.bAppInfo = false;
             $scope.model.bGrounds = true;
+            $scope.model.tPetionActiveStatus.PetitionCategory = true;
+            $scope.model.tPetionActiveStatus.ImportantInformation = true;
+            $scope.model.tPetionActiveStatus.ApplicantInformation = true;
          });     
     }
 }];

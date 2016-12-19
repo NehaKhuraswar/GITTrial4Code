@@ -39,10 +39,14 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
-        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory).then(function (response) {
+        if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
+            self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+        }
+        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bRentalHistory = false;
             $scope.model.bLostServices = true;
+            $scope.model.tPetionActiveStatus.RentHistory = true;
         });
         
     }
@@ -62,7 +66,10 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprental
     self.Save = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+        if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
+            self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+        }
+        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo, self.caseinfo.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }          
         });
 

@@ -46,10 +46,11 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
     //}
     self.ContinueToRentalHistory = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SavePetitionGroundInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo).then(function (response) {
+        rapFactory.SavePetitionGroundInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bGrounds = false;
             $scope.model.bRentalHistory = true;
+            $scope.model.tPetionActiveStatus.GroundsForPetition = true;
         });
         
     }

@@ -293,12 +293,12 @@ namespace RAP.Business.Implementation
             }
         }
 
-        public ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory)
+        public ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                result = _dbHandler.SaveTenantRentalHistoryInfo(rentalHistory);
+                result = _dbHandler.SaveTenantRentalHistoryInfo(rentalHistory,  CustomerID);
                 return result;
             }
             catch (Exception ex)
@@ -307,12 +307,12 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message)
+        public ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                result = _dbHandler.SaveTenantLostServiceInfo(message);
+                result = _dbHandler.SaveTenantLostServiceInfo(message,  CustomerID);
                 return result;
             }
             catch (Exception ex)
@@ -349,12 +349,12 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition)
+        public ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                result = _dbHandler.SavePetitionGroundInfo(petition);
+                result = _dbHandler.SavePetitionGroundInfo(petition,  CustomerID);
                 return result;
             }
             catch (Exception ex)

@@ -89,10 +89,17 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     self.ContinueToDocument = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.TenantPetitionInfo.LostServicesPage.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
-        rapFactory.SaveTenantLostServiceInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.LostServicesPage).then(function (response) {
+        if (self.caseinfo.TenantPetitionInfo.LostServicesPage.Problems.length == 0) {
+            self.caseinfo.TenantPetitionInfo.LostServicesPage.Problems.push(self.Problems);
+        }
+        if (self.caseinfo.TenantPetitionInfo.LostServicesPage.LostServices.length == 0) {
+            self.caseinfo.TenantPetitionInfo.LostServicesPage.LostServices.push(self.LostServices);
+        }
+        rapFactory.SaveTenantLostServiceInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.LostServicesPage, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bLostServices = false;
             $scope.model.bAddDocuments = true;
+            $scope.model.tPetionActiveStatus.LostService = true;
         });
        // $location.path("/document");
          

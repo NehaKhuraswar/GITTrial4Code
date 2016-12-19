@@ -8,7 +8,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     //self.selectedObj = {};
     self.PetitionSubmissionStatus = null;
     self.oPetionActiveStatus = null;
-    self.tPetionActieStatus = null;
+    self.tPetionActiveStatus = null;
 
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {

@@ -2,10 +2,10 @@
 var rapgroundsofpetitionFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
-      var _SavePetitionGroundInfo = function (model) {
+      var _SavePetitionGroundInfo = function (model, custID) {
           blockUI.start();
 
-          var url = _routePrefix + '/savepetitiongroundinfo';
+          var url = _routePrefix + '/savepetitiongroundinfo/' + custID;
 
           return ajax.Post(model, url)
           .finally(function () {

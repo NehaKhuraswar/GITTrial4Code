@@ -19,60 +19,22 @@
                     </div>
                 <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 1">
                     <ul class="application-steps">
-                        <li><a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
-
-                        <li class="current" ng-if="Ctrl.bAppInfo"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
-                        <li class="active"
-                            ng-if="Ctrl.bAddDocuments  || Ctrl.bGrounds || Ctrl.bLostServices
-                            || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
-                        <li ng-if="!(Ctrl.bAppInfo || Ctrl.bAddDocuments  || Ctrl.bGrounds || Ctrl.bLostServices
-                            || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification)"><a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
-
-                        <li class="current" ng-if="Ctrl.bGrounds"><a ng-click="Ctrl.showGrounds()">Grounds for Petition</a></li>
-                        <li class="active"
-                            ng-if="Ctrl.bAddDocuments  || Ctrl.bLostServices || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification">
-                            <a ng-click="Ctrl.showGrounds()">Grounds for Petition</a>
-                        </li>
-                        <li ng-if="!( Ctrl.bGrounds || Ctrl.bAddDocuments  || Ctrl.bLostServices || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification)">
-                            <a ng-click="Ctrl.showGrounds()">Grounds for Petition</a>
-                        </li>
-
-                        <li class="current" ng-if="Ctrl.bRentalHistory"><a ng-click="Ctrl.showRentalHistory()">Rental History</a></li>
-                        <li class="active"
-                            ng-if="Ctrl.bAddDocuments  || Ctrl.bLostServices
-                             || Ctrl.bReview || Ctrl.bVerification">
-                            <a ng-click="Ctrl.showRentalHistory()">Rental History</a>
-                        </li>
-                        <li ng-if="!(Ctrl.bRentalHistory || Ctrl.bAddDocuments  || Ctrl.bLostServices
-                             || Ctrl.bReview || Ctrl.bVerification)">
-                            <a ng-click="Ctrl.showRentalHistory()">Rental History</a>
-                        </li>
-
-                        <li class="current" ng-if="Ctrl.bLostServices"><a ng-click="Ctrl.showLostServices()">Lost Services</a></li>
-                        <li class="active"
-                            ng-if="Ctrl.bAddDocuments || Ctrl.bReview || Ctrl.bVerification">
-                            <a ng-click="Ctrl.showLostServices()">Lost Services</a>
-                        </li>
-                        <li ng-if="!(Ctrl.bLostServices || Ctrl.bAddDocuments || Ctrl.bReview || Ctrl.bVerification)">
-                            <a ng-click="Ctrl.showLostServices()">Lost Services</a>
-                        </li>
-
-                        <li class="current" ng-if="Ctrl.bAddDocuments"><a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a></li>
-                        <li class="active"
-                            ng-if="Ctrl.bReview || Ctrl.bVerification">
-                            <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a>
-                        </li>
-                        <li ng-if="!(Ctrl.bAddDocuments ||Ctrl.bReview || Ctrl.bVerification">
-                            <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a>
-                        </li>
-
-                        <li class="current" ng-if="Ctrl.bReview"><a ng-click="Ctrl.showReview()">Review</a></li>
-                        <li class="active"
-                            ng-if="Ctrl.bVerification"><a ng-click="Ctrl.showReview()">Review</a></li>
-                        <li ng-if="!(Ctrl.bReview || Ctrl.bVerification)"><a ng-click="Ctrl.showReview()">Review</a></li>
-
-                        <li class="current" ng-if="Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>
-                        <li ng-if="!Ctrl.bVerification"><a ng-click="Ctrl.showVerification()">Verification</a></li>
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bImpInfo}">
+                                <a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bAppInfo}"> 
+                                    <a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.GroundsForPetition, 'current' : !Ctrl.tPetionActiveStatus.GroundsForPetition && Ctrl.bGrounds}">
+                            <a ng-click="Ctrl.showGrounds()">Grounds for Petition</a></li>
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.RentHistory, 'current' : !Ctrl.tPetionActiveStatus.RentHistory && Ctrl.bRentalHistory}">
+                            <a ng-click="Ctrl.showRentalHistory()">Rental History</a></li>
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.LostService, 'current' : !Ctrl.tPetionActiveStatus.LostService && Ctrl.bLostServices}">
+                            <a ng-click="Ctrl.showLostServices()">Lost Services</a></li>
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.tPetionActiveStatus.AdditionalDocumentation && Ctrl.bAddDocuments}">
+                            <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a></li>
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Review, 'current' : !Ctrl.tPetionActiveStatus.Review && Ctrl.bReview}">
+                           <a ng-click="Ctrl.showReview()">Review</a></li>   
+                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Verification, 'current' : !Ctrl.tPetionActiveStatus.Verification && Ctrl.bVerification}">
+                            <a ng-click="Ctrl.showVerification()">Verification</a></li> 
                     </ul>
                 </div>
                 <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 2">

@@ -3,10 +3,10 @@ var raplostservicesFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
    
-      var _SaveTenantLostServiceInfo = function (model) {
+      var _SaveTenantLostServiceInfo = function (model, custID) {
           blockUI.start();
 
-          var url = _routePrefix + '/savetenantlostserviceinfo';
+          var url = _routePrefix + '/savetenantlostserviceinfo/' + custID;
 
           return ajax.Post(model, url)
           .finally(function () {

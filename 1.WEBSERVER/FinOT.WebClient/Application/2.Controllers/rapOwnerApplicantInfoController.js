@@ -70,9 +70,9 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         $scope.model.ownerJustification = true;
         $scope.model.DisableAllCurrent();
         $scope.model.oPetionCurrentStatus.JustificationForRentIncrease = true;
-        $scope.model.oPetionActiveStatus.PetitionCategory = true;
-        $scope.model.oPetionActiveStatus.ImportantInformation = true;
-        $scope.model.oPetionActiveStatus.ApplicantInformation = true;
+        $scope.model.tPetionActiveStatus.PetitionCategory = true;
+        $scope.model.tPetionActiveStatus.ImportantInformation = true;
+        $scope.model.tPetionActiveStatus.ApplicantInformation = true;
     }
  
 }];

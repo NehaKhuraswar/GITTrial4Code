@@ -40,26 +40,26 @@ namespace RAP.DAL
                 var tPetition = _dbContext.TenantPetitionPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
                 if (tPetition != null)
                 {
-                    model.TenantPetition.ImportantInformation = (bool)tPetition.ImportantInformation;
-                    model.TenantPetition.ApplicantInformation = (bool)tPetition.ApplicantInformation;
-                    model.TenantPetition.GroundsForPetition = (bool)tPetition.GroundsForPetition;
-                    model.TenantPetition.RentHistory = (bool)tPetition.RentHistory;
-                    model.TenantPetition.LostService = (bool)tPetition.LostService;
-                    model.TenantPetition.AdditionalDocumentation = (bool)tPetition.AdditionalDocumentation;
-                    model.TenantPetition.Review = (bool)tPetition.Review;
-                    model.TenantPetition.Verification = (bool)tPetition.Verification;
+                    model.TenantPetition.ImportantInformation =  Convert.ToBoolean(tPetition.ImportantInformation);
+                    model.TenantPetition.ApplicantInformation = Convert.ToBoolean(tPetition.ApplicantInformation);
+                    model.TenantPetition.GroundsForPetition = Convert.ToBoolean(tPetition.GroundsForPetition);
+                    model.TenantPetition.RentHistory = Convert.ToBoolean(tPetition.RentHistory);
+                    model.TenantPetition.LostService = Convert.ToBoolean(tPetition.LostService);
+                    model.TenantPetition.AdditionalDocumentation = Convert.ToBoolean(tPetition.AdditionalDocumentation);
+                    model.TenantPetition.Review = Convert.ToBoolean(tPetition.Review);
+                    model.TenantPetition.Verification = Convert.ToBoolean(tPetition.Verification);
                 }
                 var oPetition = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
                 if (oPetition != null)
                 {
-                    model.OwnerPetition.ImportantInformation = (bool)oPetition.ImportantInformation;
-                    model.OwnerPetition.ApplicantInformation = (bool)oPetition.ApplicantInformation;
-                    model.OwnerPetition.JustificationForRentIncrease = (bool)oPetition.JustificationForRentIncrease;
-                    model.OwnerPetition.RentalProperty = (bool)oPetition.RentalProperty;
-                    model.OwnerPetition.RentHistory = (bool)oPetition.RentHistory;
-                    model.OwnerPetition.AdditionalDocumentation = (bool)oPetition.AdditionalDocumentation;
-                    model.OwnerPetition.Review = (bool)oPetition.Review;
-                    model.OwnerPetition.Verification = (bool)oPetition.Verification;
+                    model.OwnerPetition.ImportantInformation = Convert.ToBoolean(oPetition.ImportantInformation);
+                    model.OwnerPetition.ApplicantInformation = Convert.ToBoolean(oPetition.ApplicantInformation);
+                    model.OwnerPetition.JustificationForRentIncrease = Convert.ToBoolean(oPetition.JustificationForRentIncrease);
+                    model.OwnerPetition.RentalProperty = Convert.ToBoolean(oPetition.RentalProperty);
+                    model.OwnerPetition.RentHistory = Convert.ToBoolean(oPetition.RentHistory);
+                    model.OwnerPetition.AdditionalDocumentation = Convert.ToBoolean(oPetition.AdditionalDocumentation);
+                    model.OwnerPetition.Review = Convert.ToBoolean(oPetition.Review);
+                    model.OwnerPetition.Verification = Convert.ToBoolean(oPetition.Verification);
                 }
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -1196,6 +1196,14 @@ namespace RAP.DAL
                         PetitionDB.IsSubmitted = true;
                         _dbContext.SubmitChanges();
                     }
+
+                    TenantPetitionPageSubmissionStatus PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
+                    if(PageStatus != null)
+                    {
+                        _dbContext.TenantPetitionPageSubmissionStatus.DeleteOnSubmit(PageStatus);
+                        _dbContext.SubmitChanges();
+                    }
+                    
                 }
 
                 result.result = caseInfo;
@@ -1280,6 +1288,21 @@ namespace RAP.DAL
                     petitionDB.IsSubmitted = false;
                     _dbContext.SubmitChanges();
                     caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
+
+                    var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == caseInfo.TenantPetitionInfo.CustomerID).FirstOrDefault();
+                    if (PageStatus != null)
+                    {
+                        PageStatus.ApplicantInformation = true;
+                        _dbContext.SubmitChanges();
+                    }
+                    else
+                    {
+                        var PageStatusNew = new TenantPetitionPageSubmissionStatus();
+                        PageStatusNew.CustomerID = caseInfo.TenantPetitionInfo.CustomerID;
+                        PageStatusNew.ApplicantInformation = true;
+                        _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                        _dbContext.SubmitChanges();
+                    }
                 }
                 else
                 {
@@ -1339,10 +1362,23 @@ namespace RAP.DAL
                     _dbContext.TenantPetitionInfos.InsertOnSubmit(petitionDB);
                     _dbContext.SubmitChanges();
                     caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
+
+                    var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x=>x.CustomerID == caseInfo.TenantPetitionInfo.CustomerID).FirstOrDefault();
+                    if (PageStatus != null)
+                    {
+                        PageStatus.ApplicantInformation = true;
+                        _dbContext.SubmitChanges();
+                    }
+                    else
+                    {
+                        var PageStatusNew = new TenantPetitionPageSubmissionStatus();
+                        PageStatusNew.CustomerID = caseInfo.TenantPetitionInfo.CustomerID;
+                        PageStatusNew.ApplicantInformation = true;
+                        _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                        _dbContext.SubmitChanges();
+                    }
                 }
-
-               
-
+                
                 result.result = caseInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -1365,7 +1401,7 @@ namespace RAP.DAL
                 petition.PetitionID = tenantPetitionID;
                 //SaveTenantLostServiceInfo(petition);
                 //SaveTenantProblemInfo(petition);
-                SavePetitionGroundInfo(petition);
+                //SavePetitionGroundInfo(petition);
                 petitionID = GetPetitionID(tenantPetitionID, 1);
             }
             return petitionID;
@@ -1402,7 +1438,7 @@ namespace RAP.DAL
             return petitionID;
         }
 
-        public ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory)
+        public ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -1461,6 +1497,22 @@ namespace RAP.DAL
 
                     _dbContext.TenantRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
                     _dbContext.SubmitChanges();
+
+
+                    var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                    if (PageStatus != null)
+                    {
+                        PageStatus.RentHistory = true;
+                        _dbContext.SubmitChanges();
+                    }
+                    else
+                    {
+                        var PageStatusNew = new TenantPetitionPageSubmissionStatus();
+                        PageStatusNew.CustomerID = CustomerID;
+                        PageStatusNew.RentHistory = true;
+                        _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                        _dbContext.SubmitChanges();
+                    } 
                 }
                 
                 result.result = true;
@@ -1476,7 +1528,7 @@ namespace RAP.DAL
 
         }
 
-        public ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message)
+        public ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -1521,6 +1573,22 @@ namespace RAP.DAL
                 {
                     SaveTenantProblemInfo(message);
                 }
+
+                var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.LostService = true;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var PageStatusNew = new TenantPetitionPageSubmissionStatus();
+                    PageStatusNew.CustomerID = CustomerID;
+                    PageStatusNew.LostService = true;
+                    _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
+                }
+
                 result.result = true;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -1559,7 +1627,7 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition)
+        public ReturnResult<bool> SavePetitionGroundInfo(TenantPetitionInfoM petition, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -1609,6 +1677,21 @@ namespace RAP.DAL
                         }
                     }
                 }
+                var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.GroundsForPetition = true;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var PageStatusNew = new TenantPetitionPageSubmissionStatus();
+                    PageStatusNew.CustomerID = CustomerID;
+                    PageStatusNew.GroundsForPetition = true;
+                    _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
+                }
+
 
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

@@ -34,6 +34,7 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
     self.ContinueToVerification = function () {
         $scope.model.bReview = false;
         $scope.model.bVerification = true;
+        $scope.model.tPetionActiveStatus.Review = true;
     }
 
 }];
