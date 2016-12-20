@@ -8,5 +8,6 @@ namespace RAP.Core.Services
     {
         void LogError(OperationStatus status);
         ReturnResult<DocumentM> SaveDocument(DocumentM doc);
+        ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string[] docTitle = null);
     }
 }

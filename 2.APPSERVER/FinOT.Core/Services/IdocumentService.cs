@@ -9,5 +9,6 @@ namespace RAP.Core.Services
     public interface IDocumentService
     {
         ReturnResult<DocumentM> UploadDocument(DocumentM doc);
+        ReturnResult<DocumentM> DownloadDocument(DocumentM doc);
     }
 }

@@ -12,12 +12,12 @@ namespace RAP.DAL
     public class CommonDBHandler : ICommonDBHandler
     {
         private readonly string _connString;
-        private bool _logToDatabase; 
-         
+        private bool _logToDatabase;
+
         public CommonDBHandler()
         {
             _connString = ConfigurationManager.AppSettings["RAPDBConnectionString"];
-             _logToDatabase = string.IsNullOrEmpty(ConfigurationManager.AppSettings["logToDatabase"]) ? false : ((ConfigurationManager.AppSettings["logToDatabase"] == "true" ? true : false));
+            _logToDatabase = string.IsNullOrEmpty(ConfigurationManager.AppSettings["logToDatabase"]) ? false : ((ConfigurationManager.AppSettings["logToDatabase"] == "true" ? true : false));
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace RAP.DAL
 
         public void SaveErrorLog(OperationStatus status)
         {
-           
+
             try
             {
                 if (_logToDatabase)
@@ -46,7 +46,7 @@ namespace RAP.DAL
             }
             catch (Exception ex)
             {
-                              
+
             }
         }
         /// <summary>
@@ -63,7 +63,7 @@ namespace RAP.DAL
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
                     //EditUserInfo
-                    if(userInfo.UserID != 0)
+                    if (userInfo.UserID != 0)
                     {
                         var userDB = db.UserInfos.Where(x => x.UserID == userInfo.UserID).FirstOrDefault();
                         userDB.FirstName = userInfo.FirstName;
@@ -94,7 +94,7 @@ namespace RAP.DAL
 
                     if (user != null)
                     {
-                        userInfo.UserID = user.UserID;                      
+                        userInfo.UserID = user.UserID;
                     }
                     else
                     {
@@ -118,9 +118,9 @@ namespace RAP.DAL
                     result.result = userInfo;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
                     return result;
-                }                
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
@@ -142,7 +142,7 @@ namespace RAP.DAL
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
                     var userInfoDB = db.UserInfos.Where(x => (x.UserID == userInfo.UserID)).FirstOrDefault();
-                    
+
                     userInfoDB.FirstName = userInfo.FirstName;
                     userInfoDB.LastName = userInfo.LastName;
                     userInfoDB.AddressLine1 = userInfo.AddressLine1;
@@ -157,7 +157,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveUserInfo completed");
                 result.result = userInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
-                return result;               
+                return result;
             }
             catch (Exception ex)
             {
@@ -176,23 +176,23 @@ namespace RAP.DAL
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
                     var userinfo = db.UserInfos.Where(x => x.UserID == UserId).FirstOrDefault();
-                                                                //.Select(c => new UserInfoM()
-                                                                //{
-                                                                //    UserID = c.UserID,
-                                                                //    FirstName = c.FirstName,
-                                                                //    LastName = c.LastName,
-                                                                //    AddressLine1 = c.AddressLine1,
-                                                                //    AddressLine2 = c.AddressLine2,
-                                                                //    City = c.City,
-                                                                //    PhoneNumber = c.PhoneNumber,
-                                                                //    State.StateID = c.State.SID,
-                                                                //    Zip = c.Zip,
-                                                                //    Email = c.ContactEmail,
-                                                                //})
+                    //.Select(c => new UserInfoM()
+                    //{
+                    //    UserID = c.UserID,
+                    //    FirstName = c.FirstName,
+                    //    LastName = c.LastName,
+                    //    AddressLine1 = c.AddressLine1,
+                    //    AddressLine2 = c.AddressLine2,
+                    //    City = c.City,
+                    //    PhoneNumber = c.PhoneNumber,
+                    //    State.StateID = c.State.SID,
+                    //    Zip = c.Zip,
+                    //    Email = c.ContactEmail,
+                    //})
 
                     if (userinfo != null)
                     {
-                        
+
 
                         _userinfo.UserID = userinfo.UserID;
                         _userinfo.FirstName = userinfo.FirstName;
@@ -276,6 +276,75 @@ namespace RAP.DAL
                 return result;
             }
         }
-        
+
+        public ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string[] docTitle = null)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> docs = new List<DocumentM>();
+            try
+            {
+
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+
+                    if (docTitle == null)
+                    {
+                        var _documents = db.Documents.Where(r => r.CustomerID == CustmerID && r.IsPetitionFiled == isPetitiofiled);
+                        if (_documents != null)
+                        {
+                            foreach (var item in _documents)
+                            {
+                                DocumentM doc = new DocumentM();
+                                doc.C_ID = item.C_ID;
+                                doc.CustomerID = item.CustomerID;
+                                doc.DocCategory = item.DocCategory;
+                                doc.DocName = item.DocName;
+                                doc.DocID = item.DocID;
+                                doc.DocThirdPartyID = item.DocThirdPartyID;
+                                doc.DocDescription = item.DocDescription;
+                                doc.DocTitle = item.DocTitle;
+                                doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
+                                doc.isUploaded = true;
+                                docs.Add(doc);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var _documents = db.Documents.Where(r => r.CustomerID == CustmerID && r.IsPetitionFiled == isPetitiofiled && docTitle.Contains(r.DocTitle));
+                        if (_documents != null)
+                        {
+                            foreach (var item in _documents)
+                            {
+                                DocumentM doc = new DocumentM();
+                                doc.C_ID = item.C_ID;
+                                doc.CustomerID = item.CustomerID;
+                                doc.DocCategory = item.DocCategory;
+                                doc.DocName = item.DocName;
+                                doc.DocID = item.DocID;
+                                doc.DocThirdPartyID = item.DocThirdPartyID;
+                                doc.DocDescription = item.DocDescription;
+                                doc.DocTitle = item.DocTitle;
+                                doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
+                                doc.isUploaded = true;
+                                docs.Add(doc);
+                            }
+                        }
+                    }
+
+                }
+                result.result = docs;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
     }
 }

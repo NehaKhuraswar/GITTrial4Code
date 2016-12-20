@@ -339,9 +339,41 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<PetitionPageSubnmissionStatusM>>(ReturnCode, transaction);
         }
-        #endregion
 
-     
+        [AllowAnonymous]
+        [Route("GetDocument")]
+        [HttpPost]
+        public HttpResponseMessage GetDocument([FromBody] DocumentM document)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<DocumentM> transaction = new TranInfo<DocumentM>();
+            ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
+            try
+            {
+                result = _docService.DownloadDocument(document);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<DocumentM>>(ReturnCode, transaction);
+        }
+
+        #endregion   
 
         #endregion
 

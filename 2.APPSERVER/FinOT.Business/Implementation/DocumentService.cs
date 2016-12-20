@@ -10,7 +10,7 @@ using System.ServiceModel;
 using RAP.Core.Common;
 using RAP.Core.DataModels;
 using RAP.Core.Services;
-using RAP.Business.CheckInService;
+
 
 
 namespace RAP.Business.Implementation
@@ -38,14 +38,14 @@ namespace RAP.Business.Implementation
               myBinding.MaxBufferSize = Convert.ToInt32(ConfigurationManager.AppSettings["MaxBufferSize"]);
               myBinding.MaxBufferPoolSize = Convert.ToInt64(ConfigurationManager.AppSettings["MaxBufferPoolSize"]);
               EndpointAddress ea = new EndpointAddress(endpoint);
-              CheckInSoapClient checkInService = new CheckInSoapClient(myBinding,ea);
+              CheckInService.CheckInSoapClient checkInService = new CheckInService.CheckInSoapClient(myBinding,ea);
               checkInService.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["WebcenterUserName"];
               checkInService.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["WebcenterPassword"];
               string docAuthor = ConfigurationManager.AppSettings["DocAuthor"];
               string docType = ConfigurationManager.AppSettings["DocType"];
               string securityGroup = ConfigurationManager.AppSettings["SecurityGroup"];
-              IdcProperty[] idcProperty = new IdcProperty[0];
-              IdcFile idcFile = new IdcFile();
+              CheckInService.IdcProperty[] idcProperty = new CheckInService.IdcProperty[0];
+              CheckInService.IdcFile idcFile = new CheckInService.IdcFile();
               var serviceResult = checkInService.CheckInUniversal(doc.DocName.Replace(" ","").Trim(), doc.DocTitle, docType, docAuthor, securityGroup, "", idcProperty, serviceObj, idcFile, idcProperty);
               if(serviceResult == null)
               {
@@ -76,9 +76,44 @@ namespace RAP.Business.Implementation
           }    
       }
 
-      private IdcFile ConvertToServiceObj(DocumentM doc)
+      public ReturnResult<DocumentM> DownloadDocument(DocumentM doc)
       {
-          IdcFile serviceObj = new IdcFile();
+          ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
+          try
+          {
+              string endpoint = ConfigurationManager.AppSettings["WebcenterEndPoint"];
+              BasicHttpBinding myBinding = new BasicHttpBinding();
+              myBinding.Security.Mode = BasicHttpSecurityMode.Transport;
+              myBinding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+              myBinding.MaxReceivedMessageSize = Convert.ToInt64(ConfigurationManager.AppSettings["MaxReceivedMessageSize"]);
+              myBinding.MaxBufferSize = Convert.ToInt32(ConfigurationManager.AppSettings["MaxBufferSize"]);
+              myBinding.MaxBufferPoolSize = Convert.ToInt64(ConfigurationManager.AppSettings["MaxBufferPoolSize"]);
+              EndpointAddress ea = new EndpointAddress(endpoint);
+              GetFileService.GetFileSoapClient getFileService = new GetFileService.GetFileSoapClient(myBinding, ea);
+              getFileService.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["WebcenterUserName"];
+              getFileService.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["WebcenterPassword"];
+              GetFileService.GetFileByIDResult serviceResult = getFileService.GetFileByID(doc.DocID, null, null);
+
+              if (serviceResult.downloadFile != null)
+              {
+                  throw new Exception("Download document failed " + doc.DocName);
+                  var content = serviceResult.downloadFile.fileContent;
+                  doc.Base64Content = Convert.ToBase64String(content);
+              }              
+              result.result = doc;
+              result.status = new OperationStatus() { Status = StatusEnum.Success };
+              return result;
+          }
+          catch (Exception ex)
+          {
+              result.status = _eHandler.HandleException(ex);
+              _commonService.LogError(result.status);
+              return result;
+          }    
+      }
+      private CheckInService.IdcFile ConvertToServiceObj(DocumentM doc)
+      {
+          CheckInService.IdcFile serviceObj = new CheckInService.IdcFile();
           doc.Content = Convert.FromBase64String(doc.Base64Content);
           if(!string.IsNullOrEmpty(doc.DocName) && doc.Content != null)
           {

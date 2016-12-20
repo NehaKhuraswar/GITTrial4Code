@@ -130,6 +130,15 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
         Years: _Years()
     }
 
+    var _getDocument = function (model) {
+        blockUI.start();
+        var url = 'api/applicationprocessing' + '/GetDocument';
+
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     
    
 
@@ -143,6 +152,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
     factory.GetCasesForCustomer = _GetCasesForCustomer;
     factory.GetCustomer = _GetCustomer;
     factory.Calender = _Calender;
+    factory.GetDocument = _getDocument;
 
     return factory;
 }];

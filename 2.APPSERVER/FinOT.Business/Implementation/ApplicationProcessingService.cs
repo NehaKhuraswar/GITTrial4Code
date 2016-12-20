@@ -411,6 +411,13 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 dbResult.result.OwnerPetitionInfo.ApplicantInfo.RAPFee = string.IsNullOrEmpty(RAPFee) ? "69" : RAPFee;
+
+                string[] titles = { "Business Tax Proof", "Rental Property Service Tax Proof" };
+                var docsResult = _commonService.GetDocuments(model.OwnerPetitionInfo.ApplicantInfo.CustomerID, false, titles);
+                if (docsResult.status.Status == StatusEnum.Success)
+                {
+                    model.Documents = docsResult.result;
+                }
                 result.result = dbResult.result;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -505,11 +512,14 @@ namespace RAP.Business.Implementation
 
                 foreach(var doc in model.Documents)
                 {
-                    doc.DocCategory = DocCategory.OwnerPetition.ToString();
-                    var docUploadResut = _documentService.UploadDocument(doc);
-                    if(docUploadResut.status.Status == StatusEnum.Success)
+                    if (!doc.isUploaded)
                     {
-                        documents.Add(doc);
+                        doc.DocCategory = DocCategory.OwnerPetition.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
                     }
                 }
                 model.Documents = documents;

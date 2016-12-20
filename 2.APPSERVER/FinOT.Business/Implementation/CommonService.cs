@@ -56,6 +56,22 @@ namespace RAP.Business.Implementation
                  return result;
              }
         }
+
+       public ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string[] docTitle = null)
+       {
+           ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+           try
+           {
+               result = _dbHandler.GetDocuments(CustmerID, isPetitiofiled, docTitle);
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               LogError(result.status);
+               return result;
+           }
+       }
         
     }
 }
