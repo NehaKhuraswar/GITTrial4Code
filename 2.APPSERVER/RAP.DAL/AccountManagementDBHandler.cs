@@ -41,7 +41,7 @@ namespace RAP.DAL
                         message.User.UserID = (int)custdetails.UserID;
                         message.email = custdetails.Email;
                         message.custID = custdetails.CustomerID;
-                        message.IsSameMailingAddress = !(bool)custdetails.bMailingAddress;
+                        message.IsSameMailingAddress = !Convert.ToBoolean(custdetails.bMailingAddress);
 
                         if (!message.IsSameMailingAddress)
                         {
