@@ -18,11 +18,23 @@
                             </label>
                         </div>-->
                         <div class="form-group-checkbox vertical clearfix">
-                            <div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
+                            <div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds| limitTo:2" border-top-green pad-t15">
                                 <label for="{{appealground.AppealGroundID}}">
-                                    <input type="checkbox" name="appealgroundcheckbox" class="checkbox" id="{{appealground.AppealGroundID}}"  ng-model="appealground.Selected">
-                                    <i></i><span>{{appealground.AppealDescription}}</span>
+                                    <input type="checkbox" name="appealgroundcheckbox" class="checkbox" id="{{appealground.AppealGroundID}}" ng-model="appealground.Selected">
+                                    <i></i><span><strong>{{appealground.AppealDescription}}</strong></span>
                                 </label>
+                            </div>
+                            <div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds.slice(2, 3) track by $index" border-top-green pad-t15">
+                                <label for="{{appealground.AppealGroundID}}">
+                                    <input type="checkbox" name="appealgroundcheckbox" class="checkbox" id="{{appealground.AppealGroundID}}" ng-model="appealground.Selected">
+                                    <i></i><span><strong>{{appealground.AppealDescription}}</strong></span>
+                                </label>
+                                <div class="checkbox-wrapper" ng-repeat="appealgroundSub in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds.slice(3, 10) track by $index">
+                                    <label for="{{appealgroundSub.AppealGroundID}}">
+                                        <input type="checkbox" name="appealgroundcheckbox" class="checkbox" id="{{appealgroundSub.AppealGroundID}}" ng-model="appealgroundSub.Selected">
+                                        <i></i><span>{{appealgroundSub.AppealDescription}}</span>
+                                    </label>
+                                </div>
                             </div>
                         <!--</div>-->   
                     </div>                       

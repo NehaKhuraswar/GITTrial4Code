@@ -1774,50 +1774,50 @@ namespace RAP.DAL
         }
 
         //TBD - to be removed as we dont need to save the APpeal info
-        public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo)
+        public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo, int CustomerID)
         {
-            int thirdPartyUserID = 0;
-            int opposingPartyUserID = 0;
+            
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
                 CommonDBHandler _dbCommon = new CommonDBHandler();
-                if (caseInfo.TenantAppealInfo.bThirdPartyRepresentation)
-                {
-                    thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantAppealInfo.AppealThirdPartyInfo).result.UserID;
-                    if (thirdPartyUserID == 0)
-                    {
-                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                        return result;
-                    }
-                    caseInfo.TenantAppealInfo.thirdPartyUserID = thirdPartyUserID;
+            //    if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+            //    {
+            //        //thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo.UserID).result.UserID;
+            //        //if (thirdPartyUserID == 0)
+            //        {
+            //            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+            //            return result;
+            //        }
+            //    //    caseInfo.TenantAppealInfo.thirdPartyUserID = thirdPartyUserID;
 
-                }
-                foreach (var item in caseInfo.TenantAppealInfo.AppealOpposingPartyInfo)
-                {
-                    opposingPartyUserID = _dbCommon.SaveUserInfo(item).result.UserID;
-                    if (opposingPartyUserID == 0)
-                    {
-                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                        return result;
-                    }
-                    caseInfo.TenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
-                }
+            //    }
+            ////    thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.ApplicantUserInfo).result.UserID;
+            ////    if (thirdPartyUserID == 0)
+            //    {
+            //        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+            //        return result;
+            //    }
+              //  caseInfo.TenantAppealInfo.thirdPartyUserID = thirdPartyUserID;
                 
-                    TenantAppealDetail appealDB = new TenantAppealDetail();
-                    appealDB.bThirdPartyRepresentation = caseInfo.TenantAppealInfo.bThirdPartyRepresentation;
-                    appealDB.ThirdPartyUserID = caseInfo.TenantAppealInfo.thirdPartyUserID;
-                    appealDB.CreatedDate = DateTime.Now;
+                TenantAppealDetail appealDB = new TenantAppealDetail();
+                appealDB.bThirdPartyRepresentation = caseInfo.TenantAppealInfo.bThirdPartyRepresentation;
+                appealDB.ThirdPartyUserID = caseInfo.TenantAppealInfo.thirdPartyUserID;
+                appealDB.AppealFiledBy = CustomerID;
+                appealDB.ApplicantUserID = caseInfo.TenantPetitionInfo.ApplicantUserInfo.UserID;
 
-                    _dbContext.TenantAppealDetails.InsertOnSubmit(appealDB);
-                    _dbContext.SubmitChanges();
-                    caseInfo.TenantAppealInfo.AppealID = appealDB.AppealID;
+               // appealDB.Pro
+                appealDB.CreatedDate = DateTime.Now;
+
+                _dbContext.TenantAppealDetails.InsertOnSubmit(appealDB);
+                _dbContext.SubmitChanges();
+                caseInfo.TenantAppealInfo.AppealID = appealDB.AppealID;
 
 
-                    CaseDetail caseDB = _dbContext.CaseDetails.First(i => i.CaseID == caseInfo.CaseID);
-                    caseDB.TenantAppealID = caseInfo.TenantAppealInfo.AppealID;
-                    caseDB.LastModifiedDate = DateTime.Now;
-                    _dbContext.SubmitChanges();
+                CaseDetail caseDB = _dbContext.CaseDetails.First(i => i.CaseID == caseInfo.CaseID);
+                caseDB.TenantAppealID = caseInfo.TenantAppealInfo.AppealID;
+                caseDB.LastModifiedDate = DateTime.Now;
+                _dbContext.SubmitChanges();
                 
 
 

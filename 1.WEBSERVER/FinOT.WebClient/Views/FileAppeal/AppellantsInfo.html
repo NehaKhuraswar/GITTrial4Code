@@ -1,54 +1,75 @@
 ﻿
-                <h3 class="step-heading">Appeal: <span>Applicant and Property Information</span></h3>
+<h3 class="step-heading">Appeal: <span>Applicant and Property Information</span></h3>
 
-                    <div class="step-content step1">
+<div class="step-content step1">
 
-                        <div class="subhead no-top-margin">
-                            <h4>Case</h4>
-                        </div>
-                        <div class="field-group">
-                            <div class="info">
-                                <div class="title">Case number</div>
-                                <div class="text">{{Ctrl.caseinfo.CaseID}}; {{Ctrl.caseInfoTenantPetitionInfo.OwnerInfo.FirstName}} v. {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} (Unit C)</div>
-                            </div>
+    <div class="subhead no-top-margin">
+        <h4>Case</h4>
+    </div>
+    <div class="field-group">
+        <div class="info">
+            <div class="title">Case number</div>
+            <div class="text">{{Ctrl.caseinfo.CaseID}}; {{Ctrl.caseInfo.TenantPetitionInfo.OwnerInfo.LastName}} v. {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}} (Unit C)</div>
+        </div>
 
-                            <div class="info">
-                                <div class="title">Date of the decision that you are appealing</div>
-                                <div class="text">{{Ctrl.caseInfo.AppealDate}}</div>
-                            </div>
-                        </div>
-
-
-                        <div class="subhead">
-                            <h4>Applicant’s name and address</h4>
-                        </div>
-                        <div class="field-group">
-                            <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}  </p>
-                            <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}  </p>
-                            <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.email}}</p>
-                        </div>
-
-                        <div class="subhead">
-                            <h4>Property Address (Include Unit Number)</h4>
-                        </div>
-                        <div class="field-group">
-                            <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}  </p>
-                            <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}  </p>
-                            <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.email}}</p>
-                        </div>
-
-                        <div class="subhead">
-                            <h4>Your Representative</h4>
-                        </div>
-                        <div class="field-group" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
-                            <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}  </p>
-                            <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}  </p>
-                            <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}}</p>
-                        </div>
+        <div class="info">
+            <div class="title">Date of the decision that you are appealing</div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <div class="field-group">
+                        <select ng-model="Ctrl.TenantAppealInfo.AppealDate.Month"
+                                class="custom-select" data-placeholder="Month"
+                                ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                     </div>
-
-
-                    <div class="step-footer">
-                        <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.ContinueToGroundsforAppeal()" />
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="field-group">
+                        <select ng-model="Ctrl.TenantAppealInfo.AppealDate.Day"
+                                class="custom-select" data-placeholder="Day"
+                                ng-options="day for day in  Ctrl.Calender.Days"></select>
                     </div>
-               
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="field-group">
+                        <select ng-model="Ctrl.TenantAppealInfo.AppealDate.Year"
+                                class="custom-select" data-placeholder="Year"
+                                ng-options="year for year in  Ctrl.Calender.Years"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="subhead">
+        <h4>Applicant’s name and address</h4>
+    </div>
+    <div class="field-group">
+        <p>{{Ctrl.custDetails.User.FirstName}} {{Ctrl.custDetails.User.LastName}}  </p>
+        <p>{{Ctrl.custDetails.User.AddressLine1}} {{Ctrl.custDetails.User.AddressLine2}} <br />{{Ctrl.custDetails.User.City}}, {{Ctrl.custDetails.User.State.StateName}} {{Ctrl.custDetails.User.Zip}}  </p>
+        <p>Tel: {{Ctrl.custDetails.User.PhoneNumber}}  <br />Email: {{Ctrl.custDetails.User.email}}</p>
+    </div>
+
+    <div class="subhead">
+        <h4>Property Address (Include Unit Number)</h4>
+    </div>
+    <div class="field-group">
+        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}  </p>
+        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}  </p>
+        <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.email}}</p>
+    </div>
+
+    <div class="subhead">
+        <h4>Your Representative</h4>
+    </div>
+    <div class="field-group" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
+        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}  </p>
+        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}  </p>
+        <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}}</p>
+    </div>
+</div>
+
+
+<div class="step-footer">
+    <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.ContinueToGroundsforAppeal(Ctrl.caseinfo)" />
+</div>

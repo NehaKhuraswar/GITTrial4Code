@@ -49,6 +49,9 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
             if (!alert.checkResponse(response)) { return; }
         });        
     }
+    self.Cancel = function (model, C_ID) {
+        $location.path("/staffdashboard");
+    }
 }];
 var rapNewCaseStatusController_resolve = {
     model: ['$route', 'alertService', 'rapnewcasestatusFactory', function ($route, alert, rapFactory) {

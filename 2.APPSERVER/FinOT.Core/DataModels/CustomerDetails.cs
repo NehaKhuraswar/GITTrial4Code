@@ -11,7 +11,7 @@ namespace RAP.Core.DataModels
     {
         public CustomerInfo()
         {
-            thirdpartyDetails = new List<ThirdPartyDetails>();
+            thirdpartyDetails = new ThirdPartyDetails();
             User = new UserInfoM();
             MailingAddress = new MailingAddress_M();
         }
@@ -22,7 +22,7 @@ namespace RAP.Core.DataModels
         public string Password { get; set; }
         public bool EmailNotificationFlag { get; set; }
         public bool MailNotificationFlag { get; set; }
-        public List<ThirdPartyDetails> thirdpartyDetails { get; set; }
+        public ThirdPartyDetails thirdpartyDetails { get; set; }
         public UserInfoM User { get; set; }
         public MailingAddress_M MailingAddress { get; set; }
         public Int32 CustomerIdentityKey { get; set; }

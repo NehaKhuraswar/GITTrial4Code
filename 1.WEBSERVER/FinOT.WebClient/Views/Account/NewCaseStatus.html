@@ -1,31 +1,74 @@
-﻿<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-danger font-small">
-            <div class="panel-heading">
-                <strong>User</strong>
-            </div>
-            <div class="panel-body">
+﻿<div class="container">
+    <div class="application-form-wrapper">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">T17-0238; Smith v. Johnson (Unit C)</a></li>
+                <li class="active">New case status</li>
+            </ul>
+        </div>
 
-                <select class="form-control"
-                        ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
-                        ng-model="Ctrl.ActivityStatus.Activity"
-                        ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"
-                        required>
-                    <option value="" selected>Select Activity</option>
-                </select>   
-                
-                <select class="form-control"
-                        ng-model="Ctrl.ActivityStatus.Status"
-                        ng-options="status as (status.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
-                        required>
-                    <option value="" selected>Select Status</option>
-                </select>  
-                <div id="div_notes" class="field-group">
-                    <label for="notes">If you are not current on paying your rent, please provide an explanation.</label>
-                    <textarea name="notes" id="notes" class="field-input textarea" rows="8" ng-model="Ctrl.ActivityStatus.Notes"></textarea>
-                </div>   
-                <button class="btn btn-default" ng-click="Ctrl.Submit(Ctrl.ActivityStatus, Ctrl.caseinfo.C_ID)">Submit</button>         
-            </div>
+        <div class="application-step step-1">
+            <h3 class="step-heading">New Case Status</h3>
+
+            <form name="frmNewCaseStatus" id="frmNewCaseStatus" action="#" method="post" class="application-form">
+                <div class="step-content step1">
+
+                    <div class="field-group subhead no-top-margin no-bottom-margin">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="field-group">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <label for="{{activity.ActivityID}}">Activity</label>
+                                <div class="full-width">
+                                    <select name="activity" id="{{activity.ActivityID}}" class="custom-select" data-placeholder="Select type"
+                                            ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
+                                            ng-model="Ctrl.ActivityStatus.Activity"
+                                            ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <label for="{{status.StatusID}}">Status</label>
+                                <div class="full-width">
+                                    <select name="status" id="{{status.StatusID}}" class="custom-select" data-placeholder="Select type"
+                                            ng-options="status as (status.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
+                                            ng-model="Ctrl.ActivityStatus.Status"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="activity_date">Activity date</label>
+                        <input type="text" name="activity_date" id="activity_date" class="field-input field-datepicker" />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="notes">Notes</label>
+                        <textarea name="notes" id="notes" class="field-input textarea" rows="8" ng-model="Ctrl.ActivityStatus.Notes"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step-footer">
+                    <input type="button" id="submit" name="submit" class="btn-primary" value="Submit" ng-click="Ctrl.Submit(Ctrl.ActivityStatus, Ctrl.caseinfo.C_ID)">
+                    <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
+                </div>
+            </form>
         </div>
     </div>
 </div>

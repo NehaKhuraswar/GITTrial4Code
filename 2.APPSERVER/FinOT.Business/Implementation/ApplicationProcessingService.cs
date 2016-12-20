@@ -117,13 +117,13 @@ namespace RAP.Business.Implementation
             }
         }
         //TBD - to be removed as we dont need to save the APpeal info
-        public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo)
+        public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo, int CustomerID)
         {
 
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
-                result = _dbHandler.SaveTenantAppealInfo(caseInfo);
+                result = _dbHandler.SaveTenantAppealInfo(caseInfo,  CustomerID);
                 return result;
             }
             catch (Exception ex)

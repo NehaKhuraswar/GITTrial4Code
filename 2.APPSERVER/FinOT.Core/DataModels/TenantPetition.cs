@@ -109,6 +109,7 @@ namespace RAP.Core.DataModels
         {
             serveAppeal = new ServeAppealM();
             AppealOpposingPartyInfo = new List<UserInfoM>();
+            AppealDate = new CustomDate();
         }
         public int AppealID;
         public int AppealCategoryID;
@@ -118,6 +119,7 @@ namespace RAP.Core.DataModels
         public bool bThirdPartyRepresentation = false;
         public string CaseNumber;
         public ServeAppealM serveAppeal { get; set; }
+        public CustomDate AppealDate { get; set; }
 
        // private UserInfoM _appealThirdPartyInfo = new UserInfoM();
         public UserInfoM AppealThirdPartyInfo = new UserInfoM();

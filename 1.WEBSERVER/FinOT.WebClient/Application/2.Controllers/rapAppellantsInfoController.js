@@ -1,24 +1,24 @@
 ﻿'use strict';
-var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappellantsinfoFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappellantsinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.TenantAppealInfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
+    self.Calender = masterFactory.Calender;
 
 
     
-    self.ContinueToGroundsforAppeal = function (model) {
-        $scope.model.bAppellantInfo = false;
-        $scope.model.bGrounds = true;
-        //rapFactory.SaveTenantAppealInfo(model).then(function (response) {
-        //    if (!alert.checkResponse(response)) {
-        //        return;
-        //    }
-        //    // $modalInstance.close(response.data);
-        //    rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
-        //    self.caseinfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
-        //    $location.path("/groundsforappeal");
-       // });
+    self.ContinueToGroundsforAppeal = function (model) {        
+        rapFactory.SaveTenantAppealInfo(model, self.custDetails.custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
+            self.caseinfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
+            $scope.model.bAppellantInfo = false;
+            $scope.model.bGrounds = true;
+        });
        // rapGlobalFactory.CaseDetails = self.caseinfo;
         
     }

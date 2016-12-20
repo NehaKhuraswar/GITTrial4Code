@@ -1041,9 +1041,9 @@ namespace RAP.API.Controllers
 
         //TBD - to be removed as we dont need to save the APpeal info
         [AllowAnonymous]
-        [Route("savetenantappealinfo")]
+        [Route("savetenantappealinfo/{CustomerID:int}")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantAppealInfo([FromBody] CaseInfoM caseInfo)
+        public HttpResponseMessage SaveTenantAppealInfo([FromBody] CaseInfoM caseInfo, [FromUri]int CustomerID)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -1052,7 +1052,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantAppealInfo(caseInfo);
+                result = _service.SaveTenantAppealInfo(caseInfo, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
