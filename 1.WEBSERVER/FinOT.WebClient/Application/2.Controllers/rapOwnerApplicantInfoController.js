@@ -62,6 +62,13 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         }
     }
 
+    self.Download = function(doc)
+    {
+        var url = "data:application/octet-stream," + encodeURIComponent(doc.Base64Content);
+        window.open(url, 'NewDocument');
+     }
+
+
 
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
