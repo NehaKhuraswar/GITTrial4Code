@@ -732,6 +732,92 @@ namespace RAP.DAL
                 return false;
             }
         }
+
+        public ReturnResult<bool> SaveOrUpdateThirdPartyInfo(ThirdPartyInfoM model)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+
+                    if (thirdParty != null)
+                    {
+                        thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
+                        thirdParty.MailNotification = model.MailNotificaton;
+                        thirdParty.EmailNotification = model.EmailNotification;
+                        thirdParty.ModifiedDate = DateTime.Now;
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        ThirdPartyRepresentation _thirdParty = new ThirdPartyRepresentation();
+                        _thirdParty.CustomerID = model.CustomerID;
+                        _thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
+                        _thirdParty.MailNotification = model.MailNotificaton;
+                        _thirdParty.EmailNotification = model.EmailNotification;
+                        _thirdParty.CreatedDate = DateTime.Now;
+                        db.ThirdPartyRepresentations.InsertOnSubmit(_thirdParty);
+                        db.SubmitChanges();
+                    }
+                }
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+
+        }
+
+        public ReturnResult<ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID)
+        {
+            ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
+            ThirdPartyInfoM model = new ThirdPartyInfoM();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                    if (thirdParty != null)
+                    {
+                        model.CustomerID = CustomerID;
+                        model.ThirdPartyUser.UserID = thirdParty.ThirdPartyUserID;
+                        model.EmailNotification = (thirdParty.EmailNotification == null) ? false : Convert.ToBoolean(thirdParty.EmailNotification);
+                        model.MailNotificaton = (thirdParty.MailNotification == null) ? false : Convert.ToBoolean(thirdParty.MailNotification);
+
+                        var thirdPartyUserInforesult = commondbHandler.GetUserInfo(model.ThirdPartyUser.UserID);
+                        if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)
+                        {
+                            result.status = thirdPartyUserInforesult.status;
+                            return result;
+                        }
+                        model.ThirdPartyUser = thirdPartyUserInforesult.result;
+                    }
+                    else
+                    {
+                        model.CustomerID = CustomerID;
+                        model.ThirdPartyUser = null;
+                    }
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
                
         #region "Save"
         /// <summary>
