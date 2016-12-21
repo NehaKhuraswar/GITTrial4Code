@@ -260,6 +260,7 @@ namespace RAP.DAL
                         document.DocCategory = doc.DocCategory;
                         document.DocDescription = string.IsNullOrEmpty(doc.DocDescription) ? null : doc.DocDescription;
                         document.IsPetitionFiled = false;
+                        document.MimeType = doc.MimeType;
                         db.Documents.InsertOnSubmit(document);
                         db.SubmitChanges();
                         doc.DocID = document.DocID;
@@ -304,6 +305,7 @@ namespace RAP.DAL
                                 doc.DocThirdPartyID = item.DocThirdPartyID;
                                 doc.DocDescription = item.DocDescription;
                                 doc.DocTitle = item.DocTitle;
+                                doc.MimeType = item.MimeType;
                                 doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
                                 doc.isUploaded = true;
                                 docs.Add(doc);
@@ -326,6 +328,7 @@ namespace RAP.DAL
                                 doc.DocThirdPartyID = item.DocThirdPartyID;
                                 doc.DocDescription = item.DocDescription;
                                 doc.DocTitle = item.DocTitle;
+                                doc.MimeType = item.MimeType;
                                 doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
                                 doc.isUploaded = true;
                                 docs.Add(doc);

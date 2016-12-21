@@ -417,6 +417,7 @@ namespace RAP.Business.Implementation
                 var docsResult = _commonService.GetDocuments(model.OwnerPetitionInfo.ApplicantInfo.CustomerID, false, titles);
                 if (docsResult.status.Status == StatusEnum.Success)
                 {
+
                     List<DocumentM> docs = new List<DocumentM>();
                     foreach (var doc in docsResult.result)
                     {

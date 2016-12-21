@@ -36,12 +36,12 @@ namespace RAP.DAL
     partial void InsertErrorLog(ErrorLog instance);
     partial void UpdateErrorLog(ErrorLog instance);
     partial void DeleteErrorLog(ErrorLog instance);
-    partial void InsertDocument(Document instance);
-    partial void UpdateDocument(Document instance);
-    partial void DeleteDocument(Document instance);
     partial void InsertUserInfo(UserInfo instance);
     partial void UpdateUserInfo(UserInfo instance);
     partial void DeleteUserInfo(UserInfo instance);
+    partial void InsertDocument(Document instance);
+    partial void UpdateDocument(Document instance);
+    partial void DeleteDocument(Document instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -90,19 +90,19 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Document> Documents
-		{
-			get
-			{
-				return this.GetTable<Document>();
-			}
-		}
-		
 		public System.Data.Linq.Table<UserInfo> UserInfos
 		{
 			get
 			{
 				return this.GetTable<UserInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Document> Documents
+		{
+			get
+			{
+				return this.GetTable<Document>();
 			}
 		}
 	}
@@ -378,260 +378,6 @@ namespace RAP.DAL
 					this._CreatedDate = value;
 					this.SendPropertyChanged("CreatedDate");
 					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Documents")]
-	public partial class Document : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DocID;
-		
-		private string _DocName;
-		
-		private string _DocCategory;
-		
-		private string _DocTitle;
-		
-		private string _DocDescription;
-		
-		private int _DocThirdPartyID;
-		
-		private int _CustomerID;
-		
-		private System.Nullable<int> _C_ID;
-		
-		private System.Nullable<bool> _IsPetitionFiled;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDocIDChanging(int value);
-    partial void OnDocIDChanged();
-    partial void OnDocNameChanging(string value);
-    partial void OnDocNameChanged();
-    partial void OnDocCategoryChanging(string value);
-    partial void OnDocCategoryChanged();
-    partial void OnDocTitleChanging(string value);
-    partial void OnDocTitleChanged();
-    partial void OnDocDescriptionChanging(string value);
-    partial void OnDocDescriptionChanged();
-    partial void OnDocThirdPartyIDChanging(int value);
-    partial void OnDocThirdPartyIDChanged();
-    partial void OnCustomerIDChanging(int value);
-    partial void OnCustomerIDChanged();
-    partial void OnC_IDChanging(System.Nullable<int> value);
-    partial void OnC_IDChanged();
-    partial void OnIsPetitionFiledChanging(System.Nullable<bool> value);
-    partial void OnIsPetitionFiledChanged();
-    #endregion
-		
-		public Document()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int DocID
-		{
-			get
-			{
-				return this._DocID;
-			}
-			set
-			{
-				if ((this._DocID != value))
-				{
-					this.OnDocIDChanging(value);
-					this.SendPropertyChanging();
-					this._DocID = value;
-					this.SendPropertyChanged("DocID");
-					this.OnDocIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string DocName
-		{
-			get
-			{
-				return this._DocName;
-			}
-			set
-			{
-				if ((this._DocName != value))
-				{
-					this.OnDocNameChanging(value);
-					this.SendPropertyChanging();
-					this._DocName = value;
-					this.SendPropertyChanged("DocName");
-					this.OnDocNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocCategory", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string DocCategory
-		{
-			get
-			{
-				return this._DocCategory;
-			}
-			set
-			{
-				if ((this._DocCategory != value))
-				{
-					this.OnDocCategoryChanging(value);
-					this.SendPropertyChanging();
-					this._DocCategory = value;
-					this.SendPropertyChanged("DocCategory");
-					this.OnDocCategoryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocTitle", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string DocTitle
-		{
-			get
-			{
-				return this._DocTitle;
-			}
-			set
-			{
-				if ((this._DocTitle != value))
-				{
-					this.OnDocTitleChanging(value);
-					this.SendPropertyChanging();
-					this._DocTitle = value;
-					this.SendPropertyChanged("DocTitle");
-					this.OnDocTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocDescription", DbType="VarChar(MAX)")]
-		public string DocDescription
-		{
-			get
-			{
-				return this._DocDescription;
-			}
-			set
-			{
-				if ((this._DocDescription != value))
-				{
-					this.OnDocDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._DocDescription = value;
-					this.SendPropertyChanged("DocDescription");
-					this.OnDocDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocThirdPartyID", DbType="Int NOT NULL")]
-		public int DocThirdPartyID
-		{
-			get
-			{
-				return this._DocThirdPartyID;
-			}
-			set
-			{
-				if ((this._DocThirdPartyID != value))
-				{
-					this.OnDocThirdPartyIDChanging(value);
-					this.SendPropertyChanging();
-					this._DocThirdPartyID = value;
-					this.SendPropertyChanged("DocThirdPartyID");
-					this.OnDocThirdPartyIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
-		public int CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					this.OnCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int")]
-		public System.Nullable<int> C_ID
-		{
-			get
-			{
-				return this._C_ID;
-			}
-			set
-			{
-				if ((this._C_ID != value))
-				{
-					this.OnC_IDChanging(value);
-					this.SendPropertyChanging();
-					this._C_ID = value;
-					this.SendPropertyChanged("C_ID");
-					this.OnC_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPetitionFiled", DbType="Bit")]
-		public System.Nullable<bool> IsPetitionFiled
-		{
-			get
-			{
-				return this._IsPetitionFiled;
-			}
-			set
-			{
-				if ((this._IsPetitionFiled != value))
-				{
-					this.OnIsPetitionFiledChanging(value);
-					this.SendPropertyChanging();
-					this._IsPetitionFiled = value;
-					this.SendPropertyChanged("IsPetitionFiled");
-					this.OnIsPetitionFiledChanged();
 				}
 			}
 		}
@@ -975,6 +721,284 @@ namespace RAP.DAL
 						this._StateID = default(int);
 					}
 					this.SendPropertyChanged("State");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Documents")]
+	public partial class Document : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DocID;
+		
+		private string _DocName;
+		
+		private string _DocCategory;
+		
+		private string _DocTitle;
+		
+		private string _DocDescription;
+		
+		private int _DocThirdPartyID;
+		
+		private int _CustomerID;
+		
+		private System.Nullable<int> _C_ID;
+		
+		private System.Nullable<bool> _IsPetitionFiled;
+		
+		private string _MimeType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDocIDChanging(int value);
+    partial void OnDocIDChanged();
+    partial void OnDocNameChanging(string value);
+    partial void OnDocNameChanged();
+    partial void OnDocCategoryChanging(string value);
+    partial void OnDocCategoryChanged();
+    partial void OnDocTitleChanging(string value);
+    partial void OnDocTitleChanged();
+    partial void OnDocDescriptionChanging(string value);
+    partial void OnDocDescriptionChanged();
+    partial void OnDocThirdPartyIDChanging(int value);
+    partial void OnDocThirdPartyIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnC_IDChanging(System.Nullable<int> value);
+    partial void OnC_IDChanged();
+    partial void OnIsPetitionFiledChanging(System.Nullable<bool> value);
+    partial void OnIsPetitionFiledChanged();
+    partial void OnMimeTypeChanging(string value);
+    partial void OnMimeTypeChanged();
+    #endregion
+		
+		public Document()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DocID
+		{
+			get
+			{
+				return this._DocID;
+			}
+			set
+			{
+				if ((this._DocID != value))
+				{
+					this.OnDocIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocID = value;
+					this.SendPropertyChanged("DocID");
+					this.OnDocIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string DocName
+		{
+			get
+			{
+				return this._DocName;
+			}
+			set
+			{
+				if ((this._DocName != value))
+				{
+					this.OnDocNameChanging(value);
+					this.SendPropertyChanging();
+					this._DocName = value;
+					this.SendPropertyChanged("DocName");
+					this.OnDocNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocCategory", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string DocCategory
+		{
+			get
+			{
+				return this._DocCategory;
+			}
+			set
+			{
+				if ((this._DocCategory != value))
+				{
+					this.OnDocCategoryChanging(value);
+					this.SendPropertyChanging();
+					this._DocCategory = value;
+					this.SendPropertyChanged("DocCategory");
+					this.OnDocCategoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocTitle", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string DocTitle
+		{
+			get
+			{
+				return this._DocTitle;
+			}
+			set
+			{
+				if ((this._DocTitle != value))
+				{
+					this.OnDocTitleChanging(value);
+					this.SendPropertyChanging();
+					this._DocTitle = value;
+					this.SendPropertyChanged("DocTitle");
+					this.OnDocTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocDescription", DbType="VarChar(MAX)")]
+		public string DocDescription
+		{
+			get
+			{
+				return this._DocDescription;
+			}
+			set
+			{
+				if ((this._DocDescription != value))
+				{
+					this.OnDocDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._DocDescription = value;
+					this.SendPropertyChanged("DocDescription");
+					this.OnDocDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocThirdPartyID", DbType="Int NOT NULL")]
+		public int DocThirdPartyID
+		{
+			get
+			{
+				return this._DocThirdPartyID;
+			}
+			set
+			{
+				if ((this._DocThirdPartyID != value))
+				{
+					this.OnDocThirdPartyIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocThirdPartyID = value;
+					this.SendPropertyChanged("DocThirdPartyID");
+					this.OnDocThirdPartyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int")]
+		public System.Nullable<int> C_ID
+		{
+			get
+			{
+				return this._C_ID;
+			}
+			set
+			{
+				if ((this._C_ID != value))
+				{
+					this.OnC_IDChanging(value);
+					this.SendPropertyChanging();
+					this._C_ID = value;
+					this.SendPropertyChanged("C_ID");
+					this.OnC_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPetitionFiled", DbType="Bit")]
+		public System.Nullable<bool> IsPetitionFiled
+		{
+			get
+			{
+				return this._IsPetitionFiled;
+			}
+			set
+			{
+				if ((this._IsPetitionFiled != value))
+				{
+					this.OnIsPetitionFiledChanging(value);
+					this.SendPropertyChanging();
+					this._IsPetitionFiled = value;
+					this.SendPropertyChanged("IsPetitionFiled");
+					this.OnIsPetitionFiledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MimeType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string MimeType
+		{
+			get
+			{
+				return this._MimeType;
+			}
+			set
+			{
+				if ((this._MimeType != value))
+				{
+					this.OnMimeTypeChanging(value);
+					this.SendPropertyChanging();
+					this._MimeType = value;
+					this.SendPropertyChanged("MimeType");
+					this.OnMimeTypeChanged();
 				}
 			}
 		}

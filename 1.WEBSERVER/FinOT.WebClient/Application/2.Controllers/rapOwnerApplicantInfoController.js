@@ -39,6 +39,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
             for (var i = 0; i < $files.length; i++) {          
                 var file = $files[i];
                 var filename = file.name;
+                var mimetype = file.type;
                 var filesize = ((file.size / 1024) / 1024).toFixed(4);
                 if (filesize < 5) {
                     var index = filename.lastIndexOf(".");
@@ -47,6 +48,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
                         var document = self.caseinfo.Document;
                         document.DocTitle = 'Business Tax Proof'
                         document.DocName = filename;
+                        document.MimeType = mimetype;
                         document.CustomerID = self.custDetails.custID;
                         var reader = new FileReader();
                         reader.readAsArrayBuffer(file);
@@ -64,44 +66,43 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
 
     self.Download = function(doc)
     {
-        var blob = b64toBlob(doc.Base64Content, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        var blobUrl = URL.createObjectURL(blob);
-        // window.location = blobUrl;
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-            window.navigator.msSaveOrOpenBlob(blob);
-        }
-        else {
+        masterFactory.GetDocument(doc);
+        //var blob = b64toBlob(doc.Base64Content, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        //var blobUrl = URL.createObjectURL(blob);
+        //// window.location = blobUrl;
+        //if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        //    window.navigator.msSaveOrOpenBlob(blob);
+        //}
+        //else {
             
-            window.open(blobUrl);
-        }
-       // var newdata = "data:" +  'application/vnd.openxmlformats-officedocument.wordprocessingml.document' + ";base64," + escape(doc.Base64Content);
-        //window.open(newdata);
+        //    window.open(blobUrl);
+        //}      
       
      }
 
-    function b64toBlob(b64Data, contentType, sliceSize) {
-        contentType = contentType || '';
-        sliceSize = sliceSize || 512;
+    //function b64toBlob(b64Data, contentType, sliceSize) {
+    //    contentType = contentType || '';
+    //    sliceSize = sliceSize || 512;
 
-        var byteCharacters = atob(b64Data);
-        var byteArrays = [];
+    //    var byteCharacters = atob(b64Data);
+    //    var byteArrays = [];
 
-        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            var slice = byteCharacters.slice(offset, offset + sliceSize);
+    //    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    //        var slice = byteCharacters.slice(offset, offset + sliceSize);
 
-            var byteNumbers = new Array(slice.length);
-            for (var i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
+    //        var byteNumbers = new Array(slice.length);
+    //        for (var i = 0; i < slice.length; i++) {
+    //            byteNumbers[i] = slice.charCodeAt(i);
+    //        }
 
-            var byteArray = new Uint8Array(byteNumbers);
+    //        var byteArray = new Uint8Array(byteNumbers);
 
-            byteArrays.push(byteArray);
-        }
+    //        byteArrays.push(byteArray);
+    //    }
 
-        var blob = new Blob(byteArrays, { type: contentType });
-        return blob;
-    }
+    //    var blob = new Blob(byteArrays, { type: contentType });
+    //    return blob;
+    //}
 
 
 

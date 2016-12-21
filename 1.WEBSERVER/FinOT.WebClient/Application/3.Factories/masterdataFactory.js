@@ -1,5 +1,5 @@
 ﻿'use strict';
-var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI, ajax, $timeout) {
+var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function (blockUI, ajax, $timeout, $http) {
     var factory = {};
     var _routePrefix = 'api/masterdata';
     var _GetStateList = function () {
@@ -88,6 +88,63 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
     }
 
 
+
+  var _getDocument = function (data) {        
+      var _url = 'api/applicationprocessing' + '/GetDocument';
+        return $http({
+            method: 'POST',
+            url: _url,
+            data: data,
+            headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem('token'), 'enctype': 'multipart/form-data' }
+
+        }).then(function (response) {            
+            _Download(response.data)
+        },
+        function (reason) {
+            $log.info(reason.status + ' | ' + reason.statusTex);
+        }).catch(function (response) {
+            if (response.status == 401) { $location.path('/noaccess'); }
+            return response.data;
+        });
+    }
+
+    var _Download = function (doc) {
+        var blob = b64toBlob(doc.data.Base64Content, doc.data.MimeType);
+        var blobUrl = URL.createObjectURL(blob);
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, doc.data.DocName);
+        }
+        else {
+
+            window.open(blobUrl);
+        }
+    }
+
+    function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        var blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
+
+
     var _Years = function () {
         var range = 5;
         var currentYear = new Date().getFullYear();
@@ -130,15 +187,15 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', function (blockUI
         Years: _Years()
     }
 
-    var _getDocument = function (model) {
-        blockUI.start();
-        var url = 'api/applicationprocessing' + '/GetDocument';
+    //var _getDocument = function (model) {
+    //    blockUI.start();
+    //    var url = 'api/applicationprocessing' + '/GetDocument';
 
-        return ajax.Post(model, url)
-        .finally(function () {
-            blockUI.stop();
-        });
-    }
+    //    return ajax.Post(model, url)
+    //    .finally(function () {
+    //        blockUI.stop();
+    //    });
+    //}
     
    
 
