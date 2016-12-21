@@ -7,8 +7,19 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     self.TenantAppealInfo;
     self.Calender = masterFactory.Calender;
     self.CaseID;
+    self.bEditApplicant = false;
     self.bCaseFiledByThirdParty = self.caseinfo.bCaseFiledByThirdParty;
     self.bShowApplicantInfo = false;
+    self.StateList = [];
+    var _GetStateList = function () {
+        masterFactory.GetStateList().then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.StateList = response.data;
+        });
+    }
+    _GetStateList();
     self.GetCaseInfoWithModel = function (CaseID) {
         rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -31,7 +42,9 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     }
 
     
-
+    self.EditApplicantName = function () {
+        self.bEditApplicant = true;
+    }
     
     self.ContinueToGroundsforAppeal = function (model) {        
         rapFactory.SaveTenantAppealInfo(model, self.custDetails.custID).then(function (response) {

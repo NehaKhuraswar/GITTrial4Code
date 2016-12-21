@@ -156,6 +156,24 @@ namespace RAP.Core.DataModels
         }
 
     }
+
+    public class VerificationM
+    {
+        public VerificationM()
+        {
+            date = DateTime.Now;
+        }
+        public DateTime date { get; set; }
+        public int pinVerify { get; set; }
+        public bool bAcknowledgePinName { get; set; }
+        public bool bDeclarePenalty { get; set; }
+        public bool bThirdParty { get; set; }
+        public int pinMediation { get; set; }
+        public bool bAcknowledgePinNameMediation { get; set; }
+        public bool bCaseMediation { get; set; }
+        public bool bThirdPartyMediation { get; set; }
+    }
+
     public class TenantPetitionInfoM
     {
         public TenantPetitionInfoM()
@@ -168,6 +186,7 @@ namespace RAP.Core.DataModels
             SelectedRangeOfUnits = new NumberRangeForUnitsM();
             ApplicantUserInfo = new UserInfoM();
             LostServicesPage = new LostServicesPageM();
+            Verification = new VerificationM();
 
         }
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
@@ -194,6 +213,7 @@ namespace RAP.Core.DataModels
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
         public LostServicesPageM LostServicesPage { get; set; }
+        public VerificationM Verification { get; set; }
         
         public int CustomerID { get; set; }
 

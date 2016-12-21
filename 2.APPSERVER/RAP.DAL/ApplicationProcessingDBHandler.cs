@@ -592,6 +592,8 @@ namespace RAP.DAL
             try
             {
                 List<UnitTypeM> _units = new List<UnitTypeM>();
+                List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
+
                 var units = _dbContext.UnitTypes;
                 if (units == null)
                 {
@@ -608,6 +610,23 @@ namespace RAP.DAL
                         _units.Add(_unit);
                     }
 
+                }
+
+                var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                if (rangeDB == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var item in rangeDB)
+                    {
+                        NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                        obj.RangeID = item.RangeID;
+                        obj.RangeDesc = item.RangeDesc;
+                        _rangeOfUnits.Add(obj);
+                    }
                 }
                 var TenantPetitionInfoDB = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
                                                 && x.IsSubmitted == false).FirstOrDefault();
@@ -629,12 +648,13 @@ namespace RAP.DAL
                     }
                     tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
                     tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
+                    tenantPetitionInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantPetitionInfoDB.RangeID);
                     tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
                     tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
                     tenantPetitionInfo.CustomerID =(int) TenantPetitionInfoDB.PetitionFiledBy;                    
                 }
                 tenantPetitionInfo.UnitTypes = _units;
-
+                tenantPetitionInfo.RangeOfUnits = _rangeOfUnits;
                 result.result = tenantPetitionInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
@@ -1261,6 +1281,31 @@ namespace RAP.DAL
            
             try
             {
+                var CustDetails = _dbAccount.CustomerDetails.Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
+                if(CustDetails != null)
+                {
+                    if(CustDetails.CustomerIdentityKey != caseInfo.TenantPetitionInfo.Verification.pinVerify)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                        return result;
+                    }
+                    if(CustDetails.CustomerIdentityKey != caseInfo.TenantPetitionInfo.Verification.pinMediation)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                        return result;
+                    }
+                }
+                TenantPetitionVerification verificationDB = new TenantPetitionVerification();
+                verificationDB.bCaseMediation = caseInfo.TenantPetitionInfo.Verification.bCaseMediation;
+                verificationDB.bDeclarePenalty = caseInfo.TenantPetitionInfo.Verification.bDeclarePenalty;
+                verificationDB.bThirdParty = caseInfo.TenantPetitionInfo.Verification.bThirdParty;
+                verificationDB.bThirdPartyMediation = caseInfo.TenantPetitionInfo.Verification.bThirdPartyMediation;
+                verificationDB.PetitionID = caseInfo.TenantPetitionInfo.PetitionID;
+                _dbContext.TenantPetitionVerifications.InsertOnSubmit(verificationDB);
+                _dbContext.SubmitChanges();
+
                 PetitionDetail petitionDetail = new PetitionDetail();
                 petitionDetail.TenantPetitionID = caseInfo.TenantPetitionInfo.PetitionID;
                 _dbContext.PetitionDetails.InsertOnSubmit(petitionDetail);
@@ -1376,6 +1421,7 @@ namespace RAP.DAL
                     }
                     petitionDB.CreatedDate = DateTime.Now;
                     petitionDB.PetitionFiledBy = caseInfo.TenantPetitionInfo.CustomerID;
+                    petitionDB.RangeID = caseInfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID;
                     petitionDB.IsSubmitted = false;
                     _dbContext.SubmitChanges();
                     caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
@@ -1831,7 +1877,7 @@ namespace RAP.DAL
             {
                 CommonDBHandler _dbCommon = new CommonDBHandler();
 
-                var appealExistsDB = _dbContext.TenantAppealDetails.Where(x => x.CaseNumber == caseInfo.TenantAppealInfo.CaseNumber && x.AppealFiledBy == CustomerID).FirstOrDefault();
+                var appealExistsDB = _dbContext.TenantAppealDetails.Where(x => x.CaseNumber == caseInfo.CaseID && x.AppealFiledBy == CustomerID).FirstOrDefault();
                 if (appealExistsDB != null)
                 {
                     tenantAppeal.AppealID = appealExistsDB.AppealID;

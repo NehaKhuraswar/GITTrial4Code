@@ -1,54 +1,62 @@
-﻿
+﻿<div class="container">
 
     <div id="SkipToMainContent">
-    
+
         <div class="application-form-wrapper">
-        
+
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <div>
-                    <ul class="application-steps">
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionCurrentStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.PetitionCategory}"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
-                        <!--<li class="current" ng-if="Ctrl.bPetitionType"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
-                        <li class="active"
-                            ng-if="Ctrl.bAddDocuments || Ctrl.bAppInfo || Ctrl.bGrounds || Ctrl.bLostServices
-                            || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification">
-                            <a ng-click="Ctrl.showPetitionType()">Petition Type</a>
-                        </li>-->
+                        <ul class="application-steps">
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionCurrentStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.PetitionCategory}"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
+                            <!--<li class="current" ng-if="Ctrl.bPetitionType"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
+                            <li class="active"
+                                ng-if="Ctrl.bAddDocuments || Ctrl.bAppInfo || Ctrl.bGrounds || Ctrl.bLostServices
+                                || Ctrl.bRentalHistory || Ctrl.bReview || Ctrl.bVerification">
+                                <a ng-click="Ctrl.showPetitionType()">Petition Type</a>
+                            </li>-->
                         </ul>
                     </div>
-                <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 1">
-                    <ul class="application-steps">
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bImpInfo}">
-                                <a ng-click="Ctrl.showImpInfo()">Important Information</a></li>
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bAppInfo}"> 
-                                    <a ng-click="Ctrl.showAppInfo()">Applicant Information</a></li>
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.GroundsForPetition, 'current' : !Ctrl.tPetionActiveStatus.GroundsForPetition && Ctrl.bGrounds}">
-                            <a ng-click="Ctrl.showGrounds()">Grounds for Petition</a></li>
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.RentHistory, 'current' : !Ctrl.tPetionActiveStatus.RentHistory && Ctrl.bRentalHistory}">
-                            <a ng-click="Ctrl.showRentalHistory()">Rental History</a></li>
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.LostService, 'current' : !Ctrl.tPetionActiveStatus.LostService && Ctrl.bLostServices}">
-                            <a ng-click="Ctrl.showLostServices()">Lost Services</a></li>
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.tPetionActiveStatus.AdditionalDocumentation && Ctrl.bAddDocuments}">
-                            <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a></li>
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Review, 'current' : !Ctrl.tPetionActiveStatus.Review && Ctrl.bReview}">
-                           <a ng-click="Ctrl.showReview()">Review</a></li>   
-                        <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Verification, 'current' : !Ctrl.tPetionActiveStatus.Verification && Ctrl.bVerification}">
-                            <a ng-click="Ctrl.showVerification()">Verification</a></li> 
-                    </ul>
-                </div>
-                <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 2">
-                    <ul class="application-steps">
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ImportantInformation}"><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOwnerApplicantInfo()">Applicant Information</a></li>
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.JustificationForRentIncrease, 'current' : !Ctrl.oPetionActiveStatus.JustificationForRentIncrease && Ctrl.oPetionCurrentStatus.JustificationForRentIncrease}"><a ng-click="Ctrl.ShowOwnerJustification()">Justification For Rent Increase</a></li>
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOwnerRentalProperty()">Rental Property</a></li>
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOwnerRentalHistory()">Rental History</a></li>
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oPetionActiveStatus.AdditionalDocumentation && Ctrl.oPetionCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOwnerAdditionalDocuments()">Additional Documents</a></li>
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Review, 'current' : !Ctrl.oPetionActiveStatus.Review && Ctrl.oPetionCurrentStatus.Review}"><a ng-click="Ctrl.ShowOwnerReview()">Review</a></li>
-                        <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}"><a ng-click="Ctrl.ShowOwnerVerification()">Verification</a></li>
-                    </ul>
-                </div>
+                    <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 1">
+                        <ul class="application-steps">
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bImpInfo}">
+                                <a ng-click="Ctrl.showImpInfo()">Important Information</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bAppInfo}">
+                                <a ng-click="Ctrl.showAppInfo()">Applicant Information</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.GroundsForPetition, 'current' : !Ctrl.tPetionActiveStatus.GroundsForPetition && Ctrl.bGrounds}">
+                                <a ng-click="Ctrl.showGrounds()">Grounds for Petition</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.RentHistory, 'current' : !Ctrl.tPetionActiveStatus.RentHistory && Ctrl.bRentalHistory}">
+                                <a ng-click="Ctrl.showRentalHistory()">Rental History</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.LostService, 'current' : !Ctrl.tPetionActiveStatus.LostService && Ctrl.bLostServices}">
+                                <a ng-click="Ctrl.showLostServices()">Lost Services</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.tPetionActiveStatus.AdditionalDocumentation && Ctrl.bAddDocuments}">
+                                <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Review, 'current' : !Ctrl.tPetionActiveStatus.Review && Ctrl.bReview}">
+                                <a ng-click="Ctrl.showReview()">Review</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Verification, 'current' : !Ctrl.tPetionActiveStatus.Verification && Ctrl.bVerification}">
+                                <a ng-click="Ctrl.showVerification()">Verification</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 2">
+                        <ul class="application-steps">
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ImportantInformation}"><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOwnerApplicantInfo()">Applicant Information</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.JustificationForRentIncrease, 'current' : !Ctrl.oPetionActiveStatus.JustificationForRentIncrease && Ctrl.oPetionCurrentStatus.JustificationForRentIncrease}"><a ng-click="Ctrl.ShowOwnerJustification()">Justification For Rent Increase</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOwnerRentalProperty()">Rental Property</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOwnerRentalHistory()">Rental History</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oPetionActiveStatus.AdditionalDocumentation && Ctrl.oPetionCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOwnerAdditionalDocuments()">Additional Documents</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Review, 'current' : !Ctrl.oPetionActiveStatus.Review && Ctrl.oPetionCurrentStatus.Review}"><a ng-click="Ctrl.ShowOwnerReview()">Review</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}"><a ng-click="Ctrl.ShowOwnerVerification()">Verification</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">
@@ -109,7 +117,7 @@
                     </div>
                 </div>
             </div>
-           
+
         </div><!-- #SkipToMainContent -->
 
         <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->
@@ -119,4 +127,4 @@
     <!--<script src='js/jquery.maskedinput.js'></script>-->
     <script src='js/tooltip.js'></script>
     <script src='js/functions.js'></script>
-    </body>
+    </div>

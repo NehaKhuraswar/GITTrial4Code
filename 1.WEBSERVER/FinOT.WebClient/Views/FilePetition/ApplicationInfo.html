@@ -296,17 +296,16 @@
 
             <div class="field-group">
                 <p class="input-label">Type of unit you rent</p>
-                <div class="radio">
+                <div class="form-group-radio vertical clearfix">
                     <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
-                        <input type="radio"
-                               class="input-field"
+                        <input type="radio" class="input-field"
                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId"
                                ng-value="unittype.UnitTypeID"
                                id="{{unittype.UnitTypeID}}"
-                               name="units">{{unittype.UnitDescription}}
+                               name="UnitType"><i></i><span>{{unittype.UnitDescription}}</span>
                     </label>
-                    <div class="clear"></div>
                 </div>
+
             </div>
 
             <div class="field-group">
@@ -331,8 +330,9 @@
         </div>
 
 
-
-        <button class="btn-primary" ng-click="Ctrl.ContinueToGroundsforPetition()">Continue</button>
+        <div class="step-footer">
+            <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToGroundsforPetition()" />
+        </div>
     </div>
 </div>
 <!--</div>-->

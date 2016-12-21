@@ -4,7 +4,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
     //   self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.SubmitPetition = function (model) {
+    self.SubmitPetition = function () {
 
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.CaseFileBy = self.custDetails.custID;

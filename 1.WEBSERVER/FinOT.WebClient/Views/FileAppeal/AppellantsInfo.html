@@ -48,14 +48,15 @@
 
     <div class="subhead">
         <h4>Applicant’s name and address</h4>
+        <a ng-click="Ctrl.EditApplicantName()" class="btn-link btn-edit">Edit</a>
     </div>
-    <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+    <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditApplicant == false">
         <p>{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName}}  </p>
         <p>{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip}}  </p>
-        <p>Tel: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.email}}</p>
+        <p>Tel: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email}}</p>
     </div>
 
-    <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+    <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.bEditApplicant == true">
         <div class="field-group">
             <label for="Applicant_firstname">Name</label>
             <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName" required />
