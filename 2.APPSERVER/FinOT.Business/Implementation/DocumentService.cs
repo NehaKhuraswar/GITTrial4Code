@@ -92,14 +92,15 @@ namespace RAP.Business.Implementation
               GetFileService.GetFileSoapClient getFileService = new GetFileService.GetFileSoapClient(myBinding, ea);
               getFileService.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["WebcenterUserName"];
               getFileService.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["WebcenterPassword"];
-              GetFileService.GetFileByIDResult serviceResult = getFileService.GetFileByID(doc.DocID, null, null);
+              GetFileService.GetFileByIDResult serviceResult = getFileService.GetFileByID(doc.DocThirdPartyID, null, null);
 
-              if (serviceResult.downloadFile != null)
+              if (serviceResult == null || serviceResult.downloadFile == null)
               {
                   throw new Exception("Download document failed " + doc.DocName);
-                  var content = serviceResult.downloadFile.fileContent;
-                  doc.Base64Content = Convert.ToBase64String(content);
-              }              
+              }
+              var content = serviceResult.downloadFile.fileContent;
+              doc.Base64Content = Convert.ToBase64String(content);
+                            
               result.result = doc;
               result.status = new OperationStatus() { Status = StatusEnum.Success };
               return result;

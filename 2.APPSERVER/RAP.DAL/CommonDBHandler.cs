@@ -259,6 +259,7 @@ namespace RAP.DAL
                         document.CustomerID = doc.CustomerID;
                         document.DocCategory = doc.DocCategory;
                         document.DocDescription = string.IsNullOrEmpty(doc.DocDescription) ? null : doc.DocDescription;
+                        document.IsPetitionFiled = false;
                         db.Documents.InsertOnSubmit(document);
                         db.SubmitChanges();
                         doc.DocID = document.DocID;

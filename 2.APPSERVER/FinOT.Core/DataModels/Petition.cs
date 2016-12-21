@@ -15,6 +15,7 @@ namespace RAP.Core.DataModels
             OwnerPetitionTenantInfo = new OwnerPetitionTenantInfoM();
             OwnerPetitionRentalIncrementInfo = new OwnerPetitionRentalIncrementInfoM();
             Document = new DocumentM();
+            OwnerResponseInfo = new OwnerResponseInfoM();
            
         }
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
@@ -26,6 +27,7 @@ namespace RAP.Core.DataModels
         private List<RAPNoticeStausM> _rapStatus = new List<RAPNoticeStausM>();
         private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         private List<DocumentM> _documents = new List<DocumentM>();
+
         public string CaseID { get; set; }
         public int C_ID { get; set; }
         public bool Selected { get; set; }
@@ -57,6 +59,8 @@ namespace RAP.Core.DataModels
 
         public OwnerPetitionTenantInfoM OwnerPetitionTenantInfo { get; set; }
         public OwnerPetitionRentalIncrementInfoM OwnerPetitionRentalIncrementInfo { get; set; }
+
+        public OwnerResponseInfoM OwnerResponseInfo { get; set; }
         public TenantAppealInfoM TenantAppealInfo
         {
             get

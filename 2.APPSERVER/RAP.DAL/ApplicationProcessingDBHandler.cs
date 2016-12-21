@@ -18,6 +18,7 @@ namespace RAP.DAL
         private ICommonDBHandler _commondbHandler;
         private IDashboardDBHandler _dashboarddbHandler;
         private IExceptionHandler _eHandler;
+
         public ApplicationProcessingDBHandler(ICommonDBHandler commondbHandler, IDashboardDBHandler dashboarddbHandler, IExceptionHandler eHandler)
         {
             this._commondbHandler = commondbHandler;
@@ -2786,6 +2787,69 @@ namespace RAP.DAL
         }
         #endregion
 
+       #region Owner Response Get Functions
+       public ReturnResult<CaseInfoM> GetOwnerResponseApplicantInfo(CaseInfoM model)
+       {
+           ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           try
+           {
+               var applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.CustomerID == model.OwnerResponseInfo.ApplicantInfo.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
+               if (applicantInfo == null)
+               {
+                   applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.CustomerID == model.OwnerResponseInfo.ApplicantInfo.CustomerID && r.bPetitionFiled == true).OrderByDescending(c => c.CreatedDate).FirstOrDefault();
+               }
+
+               if (applicantInfo != null)
+               {
+                   OwnerPetitionApplicantInfoM _applicantInfo = new OwnerPetitionApplicantInfoM();
+                   _applicantInfo.OwnerPetitionApplicantInfoID = applicantInfo.OwnerResponseApplicantInfoID;
+                   var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                   if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                   {
+                       result.status = applicantUserInforesult.status;
+                       return result;
+                   }
+                   _applicantInfo.ApplicantUserInfo = applicantUserInforesult.result;
+                   _applicantInfo.bThirdPartyRepresentation = (applicantInfo.bThirdPartyRepresentation != null) ? Convert.ToBoolean(applicantInfo.bThirdPartyRepresentation) : false;
+                   var thirdPartyUserInforesult = 
+                   
+                   //if (_applicantInfo.bThirdPartyRepresentation)
+                   //{
+                   //    var thirdPartyUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ThirdPartyUserID);
+                   //    if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)
+                   //    {
+                   //        result.status = thirdPartyUserInforesult.status;
+                   //        return result;
+                   //    }
+                   //    _applicantInfo.ThirdPartyUser = thirdPartyUserInforesult.result;
+                   //}
+                   _applicantInfo.bBusinessLicensePaid = (applicantInfo.bBusinessLicensePaid != null) ? Convert.ToBoolean(applicantInfo.bBusinessLicensePaid) : false;
+                   _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
+                   _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
+                   _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
+                   _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
+                   _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
+                   _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
+                 //  _applicantInfo.bPetitionFiled = applicantInfo.bPetitionFiled;
+                   model.OwnerPetitionInfo.ApplicantInfo = _applicantInfo;
+                   result.result = model;
+               }
+               else
+               {
+                   result.result = model;
+               }
+
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
+       #endregion
        private List<UnitTypeM> getUnitTypes()
        {
            List<UnitTypeM> _units = new List<UnitTypeM>();

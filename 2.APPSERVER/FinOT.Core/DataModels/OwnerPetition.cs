@@ -6,109 +6,40 @@ using System.Threading.Tasks;
 
 namespace RAP.Core.DataModels
 {
-    //public class OwnerPetitionInfoM
-    //{
-    //    private List<OwnerPropertInfoM> _ownerPropertInfo = new List<OwnerPropertInfoM>();
-    //    public int OwnerPetitionID { get; set; }
-    //    public int ApplicantUserID { get; set; }
-    //    public bool bThirdPartyRepresentation { get; set; }
-    //    public int ThirdPartyUserID { get; set; }
-    //    public DateTime BuildingAcquiredDate { get; set; }
-    //    public int NumberOfUnits { get; set; }
-    //    public string BusinessLicenseNumber { get; set; }
-    //    public bool bDebitServiceCosts { get; set; }
-    //    public bool bIncreasedHousingCost { get; set; }
-    //    public bool bPetitionFiledByThirdParty { get; set; }
-    //    public bool bAgreeToCityMediation { get; set; }
-    //    public int LanguageID { get; set; }
-    //    public int PetitionFiledBy { get; set; }
-    //    public DateTime CreatedDate { get; set; }
-    //    public string LastModifiedBy { get; set; }
-    //    public DateTime LastModifiedDate { get; set; }
-    //    public bool bIsPetitionSubmitted { get; set; }
-    //    public List<OwnerPropertInfoM> OwnerPropertInfo
-    //    {
-    //        get
-    //        {
-    //            return _ownerPropertInfo;
-    //        }
-    //        set
-    //        {
-    //            _ownerPropertInfo = value;
-    //        }
-    //    }
-    //}
-    //public class OwnerPropertInfoM
-    //{
-    //    private List<OwnerRentIncreaseInfoM> _rentIncrease = new List<OwnerRentIncreaseInfoM>();
-    //    public int OwnerPropertyID { get; set; }
-    //    public int OwnerPetitionID { get; set; }
-    //    public int UnitTypeID { get; set; }
-    //    public int TenantUserID { get; set; }
-    //    public DateTime MovedInDate { get; set; }
-    //    public decimal InitialRent { get; set; }
-    //    public bool bRAPNoticeGiven { get; set; }
-    //    public DateTime RAPNoticeGivenDate { get; set; }
-    //    public int RentStatusID { get; set; }
-    //    public bool bBanking { get; set; }
-    //    public bool bDebitServiceCosts { get; set; }
-    //    public bool bIncreasedHousingCost { get; set; }
-    //    public List<OwnerRentIncreaseInfoM> RentIncrease
-    //    {
-    //        get
-    //        {
-    //            return _rentIncrease;
-    //        }
-    //        set
-    //        {
-    //            _rentIncrease = value;
-    //        }
-    //    }
 
-    //}
-    //public class OwnerRentIncreaseInfoM
-    //{
-    //    public int RentalIncreaseInfoID { get; set; }
-    //    public int OwnerPropertyID { get; set; }
-    //    public bool bRentIncreaseNoticeGiven { get; set; }
-    //    public DateTime RentIncreaseNoticeDate { get; set; }
-    //    public decimal RentIncreasedFrom { get; set; }
-    //    public decimal RentIncreasedTo { get; set; }
-    //    public DateTime RentIncreaseEffectiveDate { get; set; }
-    //}
 
-    #region New changes
-  public class OwnerPetitionInfoM
-  {
-      public OwnerPetitionInfoM()
-      {
-          ApplicantInfo = new OwnerPetitionApplicantInfoM();
-          PropertyInfo = new OwnerPetitionPropertyInfoM();
-      }
-      private List<OwnerRentIncreaseReasonsM> _rentIncreaseReasons = new List<OwnerRentIncreaseReasonsM>();
-      public int OwnerPetitionID { get; set; }
-      public OwnerPetitionApplicantInfoM ApplicantInfo { get; set; }
-      public OwnerPetitionPropertyInfoM PropertyInfo { get; set; }
-      public bool bPetitionFiledByThirdParty { get; set; }
-      public bool bAgreeToCityMediation { get; set; }
-      public int PetitionFiledBy { get; set; }
-      public DateTime CreatedDate { get; set; }
-      public string LastModifiedBy { get; set; }
-      public DateTime LastModifiedDate { get; set; }
-      public List<OwnerRentIncreaseReasonsM> RentIncreaseReasons
-      {
-          get
-          {
-              return _rentIncreaseReasons;
-          }
-          set
-          {
-              _rentIncreaseReasons = value;
-          }
-      }
+    #region Owner Petition
+    public class OwnerPetitionInfoM
+    {
+        public OwnerPetitionInfoM()
+        {
+            ApplicantInfo = new OwnerPetitionApplicantInfoM();
+            PropertyInfo = new OwnerPetitionPropertyInfoM();
+        }
+        private List<OwnerRentIncreaseReasonsM> _rentIncreaseReasons = new List<OwnerRentIncreaseReasonsM>();
+        public int OwnerPetitionID { get; set; }
+        public OwnerPetitionApplicantInfoM ApplicantInfo { get; set; }
+        public OwnerPetitionPropertyInfoM PropertyInfo { get; set; }
+        public bool bPetitionFiledByThirdParty { get; set; }
+        public bool bAgreeToCityMediation { get; set; }
+        public int PetitionFiledBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
+        public List<OwnerRentIncreaseReasonsM> RentIncreaseReasons
+        {
+            get
+            {
+                return _rentIncreaseReasons;
+            }
+            set
+            {
+                _rentIncreaseReasons = value;
+            }
+        }
 
-  }
-    
+    }
+
     public class OwnerPetitionApplicantInfoM
     {
         public OwnerPetitionApplicantInfoM()
@@ -124,7 +55,7 @@ namespace RAP.Core.DataModels
         {
             get
             {
-               return _bThirdPartyRepresentation;
+                return _bThirdPartyRepresentation;
             }
             set
             {
@@ -155,11 +86,11 @@ namespace RAP.Core.DataModels
         private List<OwnerPetitionTenantInfoM> _tenantInfo = new List<OwnerPetitionTenantInfoM>();
         private List<OwnerPetitionRentalIncrementInfoM> _rentalInfo = new List<OwnerPetitionRentalIncrementInfoM>();
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
-        
+
         public int OwnerPropertyID { get; set; }
         public int UnitTypeID { get; set; }
         public CustomDate MovedInDate { get; set; }
-        public decimal? InitialRent { get; set; }      
+        public decimal? InitialRent { get; set; }
         public int? RAPNoticeStatusID { get; set; }
         public CustomDate RAPNoticeGivenDate { get; set; }
         public int? RentStatusID { get; set; }
@@ -199,8 +130,8 @@ namespace RAP.Core.DataModels
             }
         }
 
-       
-     
+
+
     }
 
     public class OwnerPetitionTenantInfoM
@@ -209,7 +140,7 @@ namespace RAP.Core.DataModels
         {
             TenantUserInfo = new UserInfoM();
         }
-     
+
         public int TenantInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public UserInfoM TenantUserInfo { get; set; }
@@ -235,7 +166,7 @@ namespace RAP.Core.DataModels
     }
 
     public class OwnerPetitionRentalIncrementInfoM
-    {        
+    {
         public int RentalIncreaseInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public bool bRentIncreaseNoticeGiven { get; set; }
@@ -243,11 +174,21 @@ namespace RAP.Core.DataModels
         public CustomDate RentIncreaseEffectiveDate { get; set; }
         public decimal? RentIncreasedFrom { get; set; }
         public decimal? RentIncreasedTo { get; set; }
-        public bool isDeleted { get; set; }        
-       
+        public bool isDeleted { get; set; }
+
     }
     #endregion
 
+    #region Owner response
+    public class OwnerResponseInfoM
+    {
+        public OwnerResponseInfoM()
+        {
+            ApplicantInfo = new OwnerPetitionApplicantInfoM();
+        }
+        public OwnerPetitionApplicantInfoM ApplicantInfo { get; set; }
+    }
+    #endregion
 
 }
 
