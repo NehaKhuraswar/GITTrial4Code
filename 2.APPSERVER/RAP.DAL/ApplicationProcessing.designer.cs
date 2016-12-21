@@ -6470,6 +6470,8 @@ namespace RAP.DAL
 		
 		private System.Nullable<int> _PropertyUserID;
 		
+		private System.Nullable<System.DateTime> _AppealDate;
+		
 		private EntitySet<CaseDetail> _CaseDetails;
 		
     #region Extensibility Method Definitions
@@ -6498,6 +6500,8 @@ namespace RAP.DAL
     partial void OnApplicantUserIDChanged();
     partial void OnPropertyUserIDChanging(System.Nullable<int> value);
     partial void OnPropertyUserIDChanged();
+    partial void OnAppealDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnAppealDateChanged();
     #endregion
 		
 		public TenantAppealDetail()
@@ -6722,6 +6726,26 @@ namespace RAP.DAL
 					this._PropertyUserID = value;
 					this.SendPropertyChanged("PropertyUserID");
 					this.OnPropertyUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> AppealDate
+		{
+			get
+			{
+				return this._AppealDate;
+			}
+			set
+			{
+				if ((this._AppealDate != value))
+				{
+					this.OnAppealDateChanging(value);
+					this.SendPropertyChanging();
+					this._AppealDate = value;
+					this.SendPropertyChanged("AppealDate");
+					this.OnAppealDateChanged();
 				}
 			}
 		}

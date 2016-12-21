@@ -9,7 +9,7 @@ namespace RAP.Core.Services
         string CorrelationId { get; set; }
         ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID);
         ReturnResult<CaseInfoM> GetCaseDetails();
-        ReturnResult<CaseInfoM> GetCaseInfo(string caseID);
+        ReturnResult<CaseInfoM> GetCaseInfo(string caseID, int CustomerID);
         ReturnResult<CaseInfoM> GetCaseDetails(int UserID);
         ReturnResult<CaseInfoM> SubmitAppeal(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);

@@ -31,16 +31,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         $location.path("/editcustomerinformation");
     }
     self.FileAppeal = function (C_ID) {
-        C_ID = 'RAP00013';
-        rapFactory.GetCaseInfoWithModel(C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-
-            self.caseinfo = response.data;
-            rapGlobalFactory.CaseDetails = self.caseinfo;
+       
             $location.path("/fileappeal");
-        });
+        
         
     }
 

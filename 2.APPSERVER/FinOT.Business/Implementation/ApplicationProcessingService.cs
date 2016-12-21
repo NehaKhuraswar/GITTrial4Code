@@ -60,12 +60,12 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<CaseInfoM> GetCaseInfo(string caseID)
+        public ReturnResult<CaseInfoM> GetCaseInfo(string caseID, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                result = _dbHandler.GetCaseInfo(caseID);
+                result = _dbHandler.GetCaseInfo(caseID,  CustomerID);
                 return result;
             }
             catch (Exception ex)

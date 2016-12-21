@@ -5,7 +5,7 @@
             <div class="application-step step-1">
                 <h3 class="step-heading">Create a City of Oakland Account</h3>
 
-                <form name="frmCreateAccount" id="frmCreateAccount" action="#" method="post" class="application-form create-account">
+                <form name="frmCreateAccount" id="frmCreateAccount" class="application-form create-account">
                     <div class="step-content step1">
                         <div class="field-group">
                             <p>All fields are required.</p>
@@ -13,7 +13,7 @@
 
                         <div class="field-group">
                             <label for="first_name">Name</label>
-                            <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.CustomerInfo.User.FirstName" />
+                            <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.CustomerInfo.User.FirstName" required/>
                         </div>
 
                         <div class="field-group no-bottom-margin">
@@ -186,7 +186,8 @@
                     </div>
 
                     <div class="step-footer no-top-margin">
-                        <input type="button" id="btn-create-account" name="btn-create-account" class="btn-primary" value="Create account" ng-click="Ctrl.Register(Ctrl.CustomerInfo)" />
+                        <button type="submit" class="btn btn-sm btn-primary" ng-click="Ctrl.Register(Ctrl.CustomerInfo)">Submit </button>
+                        <!--<input type="submit" id="btn-create-account" name="btn-create-account" class="btn-primary" value="Create account" ng-click="Ctrl.Register(Ctrl.CustomerInfo)" />-->
                     </div>
                 </form>
 

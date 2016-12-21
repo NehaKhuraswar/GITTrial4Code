@@ -26,9 +26,9 @@ namespace RAP.WebClient
 
         #region Get Methods
         [AllowAnonymous]
-        [Route("getcaseinfo/{caseID}")]
+        [Route("getcaseinfo/{caseID}/{CustomerID}")]
         [HttpGet]
-        public HttpResponseMessage GetCaseDetails(string caseID)
+        public HttpResponseMessage GetCaseDetails(string caseID, string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -36,7 +36,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "getcaseinfo/" + caseID;
+                string requestUri = _requestURI + "getcaseinfo/" + caseID + "/" + CustomerID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {
@@ -744,6 +744,38 @@ namespace RAP.WebClient
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 string requestUri = _requestURI + "saverentalhistoryinfo/" + CustomerID;
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+        [AllowAnonymous]
+        [Route("savetenantappealinfo/{CustomerID}")]
+        [HttpPost]
+        public HttpResponseMessage SaveTenantAppealInfo(string CustomerID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "savetenantappealinfo/" + CustomerID;
                 responseMessage = client.PostAsync(requestUri, Request.Content).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

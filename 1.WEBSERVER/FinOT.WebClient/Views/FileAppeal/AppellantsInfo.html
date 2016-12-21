@@ -8,8 +8,13 @@
     </div>
     <div class="field-group">
         <div class="info">
-            <div class="title">Case number</div>
-            <div class="text">{{Ctrl.caseinfo.CaseID}}; {{Ctrl.caseInfo.TenantPetitionInfo.OwnerInfo.LastName}} v. {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}} (Unit C)</div>
+            <div class="field-group">
+                <label for="CaseID">Case number</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.CaseID" required />
+            </div>
+            <button class="btn-primary" ng-click="Ctrl.GetCaseInfoWithModel(Ctrl.CaseID)">Case Info</button>
+            <!--TBD Remove below code-->
+            <!--<div class="text">{{Ctrl.caseinfo.CaseID}}; {{Ctrl.caseInfo.TenantPetitionInfo.OwnerInfo.LastName}} v. {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}} (Unit C)</div>-->
         </div>
 
         <div class="info">
@@ -44,16 +49,68 @@
     <div class="subhead">
         <h4>Applicant’s name and address</h4>
     </div>
-    <div class="field-group">
-        <p>{{Ctrl.custDetails.User.FirstName}} {{Ctrl.custDetails.User.LastName}}  </p>
-        <p>{{Ctrl.custDetails.User.AddressLine1}} {{Ctrl.custDetails.User.AddressLine2}} <br />{{Ctrl.custDetails.User.City}}, {{Ctrl.custDetails.User.State.StateName}} {{Ctrl.custDetails.User.Zip}}  </p>
-        <p>Tel: {{Ctrl.custDetails.User.PhoneNumber}}  <br />Email: {{Ctrl.custDetails.User.email}}</p>
+    <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+        <p>{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName}}  </p>
+        <p>{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip}}  </p>
+        <p>Tel: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.email}}</p>
     </div>
+
+    <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+        <div class="field-group">
+            <label for="Applicant_firstname">Name</label>
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName" required />
+        </div>
+
+        <div class="field-group">
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName" required />
+        </div>
+
+        <div class="field-group">
+            <label for="Applicant_address1">Mailing address 1</label>
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1" required />
+        </div>
+
+        <div class="field-group">
+            <label for="Applicant_address2">Mailing address 2 (optional)</label>
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2" required />
+        </div>
+
+        <div class="field-group">
+            <label for="Applicant_city">City</label>
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City" required />
+        </div>
+
+        <div class="field-group">
+            <label for="Applicant_state">State</label>
+            <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
+            <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                    ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"
+                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                <option value="" selected>Select state</option>
+            </select>
+        </div>
+
+        <div class="field-group">
+            <label for="Applicant_zip_code">Zip Code</label>
+            <input type="number" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip" required />
+        </div>
+
+        <div class="field-group">
+            <label for="Applicante_phone_number">Phone number</label>
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber" required />
+        </div>
+
+        <div class="field-group">
+            <label for="Applicant_email">Email Address</label>
+            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email" required />
+        </div>
+    </div>
+
 
     <div class="subhead">
         <h4>Property Address (Include Unit Number)</h4>
     </div>
-    <div class="field-group">
+    <div class="field-group" ng-show="Ctrl.bShowApplicantInfo">
         <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}  </p>
         <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}  </p>
         <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.email}}</p>

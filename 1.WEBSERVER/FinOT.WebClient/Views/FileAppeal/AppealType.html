@@ -17,7 +17,15 @@
             </div>
         </div>
     </div>
-
+    <div class="field-group">
+    <div class="form-group-checkbox vertical clearfix">
+        <div class="checkbox-wrapper">
+            <label for="by_third_party">
+                <input type="checkbox" class="checkbox" id="by_third_party" ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty"><i></i><span>This form is submitted by third-party representative on behalf of the petitioner</span>
+            </label>
+        </div>
+    </div>
+</div>
 
     <div class="step-footer">
         <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.ContinueToImportantInformation()" />

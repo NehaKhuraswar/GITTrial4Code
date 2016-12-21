@@ -120,9 +120,10 @@ namespace RAP.Core.DataModels
         public string CaseNumber;
         public ServeAppealM serveAppeal { get; set; }
         public CustomDate AppealDate { get; set; }
-
+        public UserInfoM ApplicantUserInfo { get; set; }
        // private UserInfoM _appealThirdPartyInfo = new UserInfoM();
         public UserInfoM AppealThirdPartyInfo = new UserInfoM();
+        public UserInfoM AppealPropertyUserInfo = new UserInfoM();
         public int thirdPartyUserID;
 
         public List<UserInfoM> AppealOpposingPartyInfo;
