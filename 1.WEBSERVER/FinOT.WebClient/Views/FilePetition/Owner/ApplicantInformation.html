@@ -166,14 +166,14 @@
                 <div class="field-addfile">
                     <div class="input-file-wrapper">
                         <span class="btn-link">Attach proof of payment of your business tax</span>
-                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelect($files)" accept=".doc,.docx,.pdf,.xls" multiple />
+                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onBusinessProofFileSelect($files)" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                     </div>
                     <div>
                         <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID"> {{doc.DocName}}
-                        &nbsp;&nbsp; <button ng-show="doc.isUploaded" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
+                        &nbsp;&nbsp; <button ng-show="doc.isUploaded && doc.DocTitle == OP_BusinessTaxProof" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
                          </label>
                     </div>                        
-</div>
+                  </div>
                 </div>
             </div>
 
@@ -192,6 +192,21 @@
                     <div class="clear"></div>
                 </div>
             </div>
+        <div class="field-group">
+            <div class="field-addfile">
+                <div class="input-file-wrapper">
+                    <span class="btn-link">Attach proof of payment of your rental property service fee</span>
+                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onPropertyServiceFeeFileSelect($files)" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                </div>
+                <div>
+                    <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID">
+                        {{doc.DocName}}
+                        &nbsp;&nbsp; <button ng-show="doc.isUploaded && doc.DocTitle == OP_PropertyServiceFee" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
+                    </label>
+                </div>
+            </div>
+        </div>
+
             <div class="field-group">
                 <p class="input-label">Date on which you acquired the building</p>
             </div>       

@@ -17,7 +17,31 @@
                     </div>
                 </div>
             </div>
-       
+        <div class="field-group mar-bottom-40">
+            <p>For each justification checked, you must submit organized documents demonstrating your entitlement to the increase. Please see the “Justifications” section in the attached Owner’s Guide for details on the type of documentation required.</p>
+            <p><strong>Your supporting documents do not need to be attached here. They can be sent to the RAP office no later than seven (7) days before the first scheduled Hearing date.</strong></p>
+        </div>
+
+        <div class="field-group subhead pad-t15">
+            <p><label for="attached_document_description">Description of the document that you are attaching</label></p>
+            <textarea name="attached_document_description" id="attached_document_description" class="field-input textarea" rows="8"></textarea>
+        </div>
+
+        <div class="field-group">
+            <p class="input-label fs-14">You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. The maximum file size limit for uploads is 25MB</p>
+            <div class="field-addfile">
+                <div class="input-file-wrapper">
+                    <span class="btn-link">Attach Document</span>
+                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onJustificationFileSelected($files)" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                </div>
+                <div>
+                    <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID">
+                        {{doc.DocName}}
+                        &nbsp;&nbsp; <button ng-show="doc.isUploaded && doc.DocTitle == OP_Justification" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
+                    </label>
+                </div>                        
+            </div>
+        </div><!-- .field-group -->
         <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
     </div>
 </div>
