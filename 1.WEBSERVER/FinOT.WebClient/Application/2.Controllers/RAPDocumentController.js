@@ -12,6 +12,43 @@ var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', 
         $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
        
     }
+    $scope.onAdditionalFileSelect = function ($files) {
+        if ($files && $files.length) {
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                popupateDocument(file, 'TP_AdditionalDocuments');
+            }
+        }
+    }
+
+
+    function popupateDocument(file, dicTitle) {
+        var filename = file.name;
+        var mimetype = file.type;
+        var filesize = ((file.size / 1024) / 1024).toFixed(4);
+        //if (filesize < 25) {
+        if (filesize < masterFactory.FileSize) {
+            var index = filename.lastIndexOf(".");
+            var ext = filename.substring(index, filename.length).toUpperCase();
+            //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
+            if (masterFactory.FileExtensons.indexOf(ext) > -1) {
+                var document = self.caseinfo.Document;
+                document.DocTitle = dicTitle;
+                document.DocName = filename;
+                document.MimeType = mimetype;
+                document.CustomerID = self.custDetails.custID;
+                var reader = new FileReader();
+                reader.readAsArrayBuffer(file);
+                reader.onload = function (e) {
+                    var arrayBuffer = e.target.result;
+                    var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+                    document.Base64Content = base64String;
+                }
+                self.caseinfo.Documents.push(document);
+            }
+        }
+
+    }
 
     //$scope.onFileSelect = function ($files) {
     //    if ($files && $files.length)
