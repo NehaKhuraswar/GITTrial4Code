@@ -5,7 +5,7 @@
         <div class="step-content create-new">
             <div class="subhead no-top-margin">
                 <h4>Applicant’s name and rental address</h4>
-                <a href="#" class="btn-link btn-edit">Edit</a>
+                <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
             </div>
             <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
                 <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
@@ -170,7 +170,7 @@
                     </div>
                     <div>
                         <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID"> {{doc.DocName}}
-                        &nbsp;&nbsp; <button ng-show="doc.isUploaded && doc.DocTitle == OP_BusinessTaxProof" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
+                        &nbsp;&nbsp; <button ng-show="doc.isUploaded" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
                          </label>
                     </div>                        
                   </div>
@@ -201,7 +201,7 @@
                 <div>
                     <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID">
                         {{doc.DocName}}
-                        &nbsp;&nbsp; <button ng-show="doc.isUploaded && doc.DocTitle == OP_PropertyServiceFee" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
+                        &nbsp;&nbsp; <button ng-show="doc.isUploaded" class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
                     </label>
                 </div>
             </div>

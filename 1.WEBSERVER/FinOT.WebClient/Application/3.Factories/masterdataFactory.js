@@ -96,6 +96,8 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         return ajax.Get(_routePrefix + '/statuslist/get');
     }
 
+    var _fileExtensons = ['.PDF', '.DOC', '.DOCX', '.XLS', '.JPEG', '.TIFF', '.PNG'];
+    var _fileSize = 25 ;
 
 
   var _getDocument = function (data) {        
@@ -220,6 +222,8 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.Calender = _Calender;
     factory.GetDocument = _getDocument;
     factory.ResendPin = _ResendPin;
-
+    factory.FileExtensons = _fileExtensons;
+    factory.FileSize = _fileSize;
+    factory.PopupateDocument = _popupateDocument;
     return factory;
 }];
