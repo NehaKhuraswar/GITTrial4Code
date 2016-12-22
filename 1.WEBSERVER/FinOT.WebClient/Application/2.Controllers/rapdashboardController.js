@@ -3,6 +3,7 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CustomerDetails;
+    self.btoggle = false;
     self.InviteThirdPartyUser = function () {
         $location.path("/invitethirdparty");
     }
@@ -26,6 +27,15 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     }
     self.Collaborator = function () {
         $location.path("/collaborator");
+    }
+    self.toggle = function () {
+        if (self.btoggle == false) {
+                self.btoggle = true;
+                }
+        else {
+            self.btoggle = false;
+                    }
+
     }
     self.ChangeAccountInformation = function () {
         rapGlobalFactory.IsEdit = true;

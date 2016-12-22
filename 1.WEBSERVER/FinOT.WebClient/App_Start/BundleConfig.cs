@@ -28,7 +28,13 @@ namespace RAP.WebClient
                     , "~/Scripts/pagination/dirPagination.js"
                     , "~/Scripts/angular-ui/ui-bootstrap.js"
                     , "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
+                    , "~/js/*.js"
+                    , "~/js/*.json"
             ));
+
+            //bundles.Add(new ScriptBundle("~/bundles/angularRAP").Include(
+            //        "~/js/*.js"));
+            
 
             bundles.Add(new PartialsBundle("RMS", "~/bundles/angularTemplates")
                 .IncludeDirectory("~/Templates", "*.tpl.html", true));

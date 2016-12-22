@@ -18,43 +18,46 @@
         sessionStorage.setItem("apibaseurl", "@Model.AppDetails.ApiBaseURL");
     </script>   
     <base href="/">
-</head>
-<body>
-    <div class="container outer-container">
-        <div class="header">
-            <div id="sitetitle-wrapper">
-                <h1 id="sitetitle">
-                    <a href="#">City of Oakland</a>
-                </h1>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
-                <div class="description">Rent Adjustment  <br />Program</div>
-            </div>
+    </head>
+    <body>
+        <div class="container outer-container">
+            <div class="header">
+                <div id="sitetitle-wrapper">
+                    <h1 id="sitetitle">
+                        <a href="#">City of Oakland</a>
+                    </h1>
 
-            <a href="javascript:void();" class="menu-toggle"><span></span></a>
-
-            <div id="navigation">
-                <div class="account-info">
-                    <ul>
-                        <li>Robert Wong</li>
-                        <li><a href="#">Log Out</a></li>
-                    </ul>
+                    <div class="description">Rent Adjustment      <br />Program</div>
                 </div>
-            </div>
-        </div><!-- .header -->
-    </div>
-    
-        @*modal dialog has z-index of 1050 so set the z-index of inform more than that to bring it to front.*@
-        <div inform class="inform-animate inform-fixed inform-shadow" style="z-index: 1051"></div>
-        <div id="body" ng-view class="container-fluid"></div>
-        <footer style="margin-top: 3em;">
-            @*<nav class="navbar navbar-fixed-bottom row-footer-finance" role="navigation">
+
+                <a href="javascript:void();" class="menu-toggle"><span></span></a>
+
+                <div id="navigation">
+                    <div class="account-info">
+                        <ul>
+                            <li>Robert Wong</li>
+                            <li><a href="#">Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- .header -->
+        </div>
+
+            @*modal dialog has z-index of 1050 so set the z-index of inform more than that to bring it to front.*@
+            <div inform class="inform-animate inform-fixed inform-shadow" style="z-index: 1051"></div>
+            <div id="body" ng-view class="container-fluid"></div>
+            <footer style="margin-top: 3em;">
+                @*<nav class="navbar navbar-fixed-bottom row-footer-finance" role="navigation">
                     <div class="container-fluid">
                         <span style="font-size: 0.8em; line-height: 2em;" class="pull-right">Rent Adjustment Program: Service Allocation | Deployment Date: @Model.AppDetails.DeploymentDate</span>
                     </div>
                 </nav>*@
-        </footer>
-        @Scripts.Render("~/bundles/angular")
-        @Scripts.Render("~/bundles/angularApp")
-        @Scripts.Render("~/bundles/angularTemplates")
-</body>
-</html>
+            </footer>
+            @Scripts.Render("~/bundles/angular")
+            @Scripts.Render("~/bundles/angularApp")
+            @Scripts.Render("~/bundles/angularTemplates")
+
+    </body>
+    </html>
