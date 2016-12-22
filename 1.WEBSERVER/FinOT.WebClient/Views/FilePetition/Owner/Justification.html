@@ -9,14 +9,13 @@
                 <div class="form-group-checkbox vertical clearfix">
                     <div class="checkbox-wrapper">
                         <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons">
-                            <label>
-                                <input type="checkbox" class="checkbox" ng-model="reason.IsSelected" id="reason.ReasonID">
-                                {{reason.ReasonDescription}}
+                            <label for="{{petitionground.PetitionGroundID}}">
+                                <input type="checkbox" name="rentcheckbox" class="checkbox" id="{{reason.ReasonID}}" ng-model="reason.IsSelected">
+                                <i></i><span>{{reason.ReasonDescription}}</span>
                             </label>
                         </div>
                     </div>
                 </div>
-            </div>
         <div class="field-group mar-bottom-40">
             <p>For each justification checked, you must submit organized documents demonstrating your entitlement to the increase. Please see the “Justifications” section in the attached Owner’s Guide for details on the type of documentation required.</p>
             <p><strong>Your supporting documents do not need to be attached here. They can be sent to the RAP office no later than seven (7) days before the first scheduled Hearing date.</strong></p>
@@ -44,4 +43,5 @@
         </div><!-- .field-group -->
         <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
     </div>
+</div>
 </div>
