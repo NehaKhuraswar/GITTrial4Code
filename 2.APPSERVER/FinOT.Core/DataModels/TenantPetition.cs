@@ -90,6 +90,7 @@ namespace RAP.Core.DataModels
         public UserInfoM()
         {
             State = new StateM();
+            City = "Oakland";
         }
         public int UserID { get; set; }
         public string FirstName { get; set; }

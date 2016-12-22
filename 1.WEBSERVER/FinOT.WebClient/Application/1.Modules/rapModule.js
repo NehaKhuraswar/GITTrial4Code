@@ -11,6 +11,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          var CustomerDetails;
          var CaseDetails;
          var CityUser;
+         var IsEdit = false;
 
          
         

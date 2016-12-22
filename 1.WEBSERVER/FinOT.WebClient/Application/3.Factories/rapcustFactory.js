@@ -13,9 +13,7 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     
     var _GetCustomer = function (custid) {
         blockUI.start();
-        var reqid = 1;
         var url = _routePrefix + '/get';
-        if (!(reqid == null || reqid == undefined)) { url = url + '/' + reqid; }
 
         return ajax.Get(url)        
         .finally(function () {

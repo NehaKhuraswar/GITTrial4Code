@@ -71,6 +71,7 @@ namespace RAP.Core.DataModels
         {
             FromDate = new DateTime(2016, 10 , 28);
             ToDate = DateTime.Now;
+            City = "Oakland";
         }
 
         public AccountType AccountType { get; set; }

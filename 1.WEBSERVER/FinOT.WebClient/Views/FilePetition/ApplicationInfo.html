@@ -1,9 +1,9 @@
 ﻿
 <h3 class="step-heading">Tenant Petition: <span>Applicant and Property Information</span></h3>
-<!--<div class="step-content create-new">-->
+<div class="step-content create-new">
 <div class="subhead no-top-margin">
     <h4>Applicant’s name and rental address</h4>
-    <a href="#" class="btn-link btn-edit">Edit</a>
+    <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
 </div>
 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
     <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}</p>
@@ -173,7 +173,7 @@
     <div class="field-group">
         <label for="owner_state">State</label>
         <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State" required />-->
-        <select name="owner_state" id="owner_state" class="custom-select" data-placeholder="Select"
+        <select ng-init="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State = Ctrl.StateList[0]" name="owner_state" id="owner_state" class="custom-select" data-placeholder="Select"
                 ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"
                 ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
             <option value="" selected>Select state</option>
@@ -335,4 +335,4 @@
         </div>
     </div>
 </div>
-<!--</div>-->
+</div>

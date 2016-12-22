@@ -23,6 +23,39 @@ namespace RAP.WebClient
         {
             _baseURL = ConfigurationManager.AppSettings["APIBASEURL"].ToString();
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("get")]
+        public HttpResponseMessage GetCustomer()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "get/";
+                responseMessage = client.GetAsync(requestUri).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else // error
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
         [AllowAnonymous]
         [HttpGet]
         [Route("getaccounttypes")]

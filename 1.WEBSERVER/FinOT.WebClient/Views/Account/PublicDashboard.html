@@ -12,9 +12,9 @@
                         <h4>Cases in progress</h4>
                     </div>
 
-                    <div class="field-group subhead case-wrapper mar-bottom-60" ng-repeat="caseinfo in Ctrl.Cases">
+                    <div class="field-group subhead case-wrapper mar-bottom-60" >
                         <!-- Case in progress -->
-                        <div class="case">
+                        <div class="case" ng-repeat="caseinfo in Ctrl.Cases">
                             <div class="row">
                                 <div class="col-md-9 col-sm-12 col-xs-12">
                                     <div class="case-heading">Case number</div>
@@ -38,58 +38,58 @@
 
                             <div class="accordion case-status">
                                 <div class="item expanded">
-                                    <div class="item-header"><a href="#" class="btn-toggle"></a> View case status</div>
+                                    <!--<div class="item-header"><a href="#" class="btn-toggle"></a> View case status</div>
 
-                                    <div class="item-content">
-                                        <div class="table">
-                                            <div class="tbl-row hidden-sm">
-                                                <div class="tbl-head activity">Activity</div>
-                                                <div class="tbl-head date">Date</div>
-                                                <div class="tbl-head status">Status</div>
-                                                <div class="tbl-head link"></div>
-                                            </div>
-                                            <div class="tbl-row" ng-repeat="activity in caseinfo.ActivityStatus">
-                                                <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> {{activity.Activity.ActivityDesc}}</div>
-                                                <div class="tbl-col date"><strong class="visible-sm">Date:</strong> {{activity.Date | date}}</div>
-                                                <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
-                                                <div class="tbl-col link"><a href="#" class="btn-link">View</a></div>
-                                            </div>
-                                            <!--<div class="tbl-row">
-                                <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Response to a petition</div>
-                                <div class="tbl-col date countdown"><strong class="visible-sm">Date:</strong> 30 days remaining</div>
-                                <div class="tbl-col status warning"><strong class="visible-sm">Status:</strong> <span>Action required</span></div>
-                                <div class="tbl-col link"><a href="#" class="btn-link">Submit response</a></div>
+                <div class="item-content">-->
+                                    <div class="table">
+                                        <div class="tbl-row hidden-sm">
+                                            <div class="tbl-head activity">Activity</div>
+                                            <div class="tbl-head date">Date</div>
+                                            <div class="tbl-head status">Status</div>
+                                            <div class="tbl-head link"></div>
+                                        </div>
+                                        <div class="tbl-row" ng-repeat="activity in caseinfo.ActivityStatus">
+                                            <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> {{activity.Activity.ActivityDesc}}</div>
+                                            <div class="tbl-col date"><strong class="visible-sm">Date:</strong> {{activity.Date | date}}</div>
+                                            <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
+                                            <div class="tbl-col link"><a href="#" class="btn-link">View</a></div>
+                                        </div>
+                                        <!--<div class="tbl-row">
+                        <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Response to a petition</div>
+                        <div class="tbl-col date countdown"><strong class="visible-sm">Date:</strong> 30 days remaining</div>
+                        <div class="tbl-col status warning"><strong class="visible-sm">Status:</strong> <span>Action required</span></div>
+                        <div class="tbl-col link"><a href="#" class="btn-link">Submit response</a></div>
+                    </div>
+                    <div class="tbl-row">
+                        <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Additional documentation</div>
+                        <div class="tbl-col date countdown"><strong class="visible-sm">Date:</strong> 20 days remaining</div>
+                        <div class="tbl-col status warning"><strong class="visible-sm">Status:</strong> <span>Action required</span></div>
+                        <div class="tbl-col link"><a href="#" class="btn-link">Upload documentation</a></div>
+                    </div>
+                    <div class="tbl-row">
+                        <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Mediation</div>
+                        <div class="tbl-col date"><strong class="visible-sm">Date:</strong> Dec 12, 2016</div>
+                        <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Scheduled</span></div>
+                        <div class="tbl-col link"><a href="#" class="btn-link">Request</a></div>
+                    </div>
+                    <div class="tbl-row">
+                        <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Hearing</div>
+                        <div class="tbl-col date"><strong class="visible-sm">Date:</strong> Dec 12, 2016</div>
+                        <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Scheduled</span></div>
+                        <div class="tbl-col link"><a href="#" class="btn-link">Reschedule</a></div>
+                    </div>
+                    <div class="tbl-row">
+                        <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Hearing decision</div>
+                        <div class="tbl-col date"><strong class="visible-sm">Date:</strong> June 30, 2017</div>
+                        <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Processed</span></div>
+                        <div class="tbl-col link"><a href="#" class="btn-link">View</a></div>
+                    </div>-->
+                                    </div><!-- .table -->
+                                    <!--</div>
+                </div>-->
+                                </div><!-- .accordion -->
                             </div>
-                            <div class="tbl-row">
-                                <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Additional documentation</div>
-                                <div class="tbl-col date countdown"><strong class="visible-sm">Date:</strong> 20 days remaining</div>
-                                <div class="tbl-col status warning"><strong class="visible-sm">Status:</strong> <span>Action required</span></div>
-                                <div class="tbl-col link"><a href="#" class="btn-link">Upload documentation</a></div>
-                            </div>
-                            <div class="tbl-row">
-                                <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Mediation</div>
-                                <div class="tbl-col date"><strong class="visible-sm">Date:</strong> Dec 12, 2016</div>
-                                <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Scheduled</span></div>
-                                <div class="tbl-col link"><a href="#" class="btn-link">Request</a></div>
-                            </div>
-                            <div class="tbl-row">
-                                <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Hearing</div>
-                                <div class="tbl-col date"><strong class="visible-sm">Date:</strong> Dec 12, 2016</div>
-                                <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Scheduled</span></div>
-                                <div class="tbl-col link"><a href="#" class="btn-link">Reschedule</a></div>
-                            </div>
-                            <div class="tbl-row">
-                                <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Hearing decision</div>
-                                <div class="tbl-col date"><strong class="visible-sm">Date:</strong> June 30, 2017</div>
-                                <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Processed</span></div>
-                                <div class="tbl-col link"><a href="#" class="btn-link">View</a></div>
-                            </div>-->
-                                        </div><!-- .table -->
-                                        <!--</div>
-                        </div>-->
-                                    </div><!-- .accordion -->
-                                </div>
-                            </div>
+                        </div>
                             <!-- End of case -->
 
 

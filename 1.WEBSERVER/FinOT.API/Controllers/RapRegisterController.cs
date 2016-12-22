@@ -69,8 +69,8 @@ namespace RAP.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("get/{custid:int?}")]
-        public HttpResponseMessage GetCustomer(string custid)
+        [Route("get")]
+        public HttpResponseMessage GetCustomer()
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();

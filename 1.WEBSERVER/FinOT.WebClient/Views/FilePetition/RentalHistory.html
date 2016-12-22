@@ -1,6 +1,5 @@
 ﻿
-    <div class="row">
-       
+         
 
         <div class="col-md-9 col-sm-12">
             <div class="application-step step-1">
@@ -101,7 +100,44 @@
                         </div>
 
                         <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later)  to contest the rent increase. (O.M.C. 8.22.090 A 2) If you never got the RAP Notice you can contest all past increases.</p>
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a rent program notice with the notice of increase?</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">Yes</div>
+                                <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">No</div>
+                            </div>
+                        </div><!-- .field-group -->
 
+                        <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                                    <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Are you contesting this increase in this petition?</div></div>
+                                    <div class="col-sm-6 col-xs-12" ng-show="item.bRentIncreaseContested">Yes</div>
+                                    <div class="col-sm-6 col-xs-12" ng-show="!item.bRentIncreaseContested">No</div>
+                                </div>
+                            </div><!-- .field-group -->
+                        </div>
 
                         <div class="field-group subhead">
                             <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>
@@ -201,54 +237,7 @@
                             <a class="btn-link" ng-click="Ctrl.AddAnotherRentIncrease(Ctrl.RentalIncreaseModel)">Add another rent increase record</a>
                         </div>
 
-                        <div ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length > 0">
-                            <table class="table table-condensed nopadding-bottom">
-                                <thead class="strong">
-                                    <tr>
-                                        <td>
-                                            <span>Rent Increase Notice Given</span>
-                                        </td>
-                                        <td>
-                                            <span>RentIncreaseNoticeDate</span>
-                                        </td>
-                                        <td>
-                                            <span>RentIncreaseEffectiveDate</span>
-                                        </td>
-                                        <td>
-                                            <span>RentIncreasedFrom</span>
-                                        </td>
-                                        <td>
-                                            <span>RentIncreasedTo</span>
-                                        </td>
-                                        <td>
-                                            <span>bRentIncreaseContested</span>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
-                                        <td class="nopadding-left">
-                                            {{item.bRentIncreaseNoticeGiven}}
-                                        </td>
-                                        <td>
-                                            {{item.RentIncreaseNoticeDate.Year}}/{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}
-                                        </td>
-                                        <td>
-                                            {{item.RentIncreaseEffectiveDate.Year}}/{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}
-                                        </td>
-                                        <td>
-                                            {{item.RentIncreasedFrom}}
-                                        </td>
-                                        <td>
-                                            {{item.RentIncreasedTo}}
-                                        </td>
-                                        <td>
-                                            {{item.bRentIncreaseContested}}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        
                         <div class="field-group subhead">
                             <p class="input-label">Have you ever filed a petition for your rental unit?</p>
                             <div class="form-group-radio vertical clearfix">

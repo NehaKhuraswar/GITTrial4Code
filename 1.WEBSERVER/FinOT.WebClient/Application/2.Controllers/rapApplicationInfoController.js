@@ -20,6 +20,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
                 self.caseinfo.TenantPetitionInfo.ThirdPartyUser = self.custDetails.User;
             }
             self.caseinfo.TenantPetitionInfo.CustomerID = self.custDetails.custID;
+            
         });
     }
     _GetTenantApplicationInfo(self.custDetails.custID);
@@ -31,6 +32,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
                 return;
             }
             self.StateList = response.data;
+            
         });
     }
     _GetStateList();
@@ -65,6 +67,11 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
 
     }
 
+    self.ChangeAccountInformation = function () {
+        rapGlobalFactory.IsEdit = true;
+        $location.path("/editcustomerinformation");
+    }
+
     self.ContinueToGroundsforPetition = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
@@ -75,6 +82,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
             $scope.model.tPetionActiveStatus.PetitionCategory = true;
             $scope.model.tPetionActiveStatus.ImportantInformation = true;
             $scope.model.tPetionActiveStatus.ApplicantInformation = true;
+           
          });     
     }
 }];

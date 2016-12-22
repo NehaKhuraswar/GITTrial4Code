@@ -34,6 +34,7 @@ namespace RAP.Core.DataModels
         public MailingAddress_M()
         {
             State = new StateM();
+            City = "Oakland";
         }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -63,6 +64,12 @@ namespace RAP.Core.DataModels
     }
     public class StateM
     {
+        public StateM()
+        {
+            StateID = 8;
+            StateCode = "CA";
+            StateName = "California";
+        }
         public int StateID { get; set; }
         public string StateCode { get; set; }
         public string StateName { get; set; }

@@ -5,10 +5,22 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.StateList = [];
     self.Password;
     self.ConfirmPassword;
+    self.Title = "Create a City of Oakland Account";
+
+    if (rapGlobalFactory.IsEdit == true)
+    {
+        self.Title = "Edit a City of Oakland Account";
+    }
+    else
+    {
+        rapGlobalFactory.CustomerDetails = null;
+    }
+
     if (rapGlobalFactory.CustomerDetails != null)
     {
         self.CustomerInfo = rapGlobalFactory.CustomerDetails;
     }
+
     var _GetCustomerModel = function () {
         return rapFactory.GetCustomer(null).then(function (response) {
                if (!alert.checkResponse(response)) { return; }

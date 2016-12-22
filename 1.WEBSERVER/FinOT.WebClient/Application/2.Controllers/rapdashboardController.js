@@ -28,6 +28,7 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         $location.path("/collaborator");
     }
     self.ChangeAccountInformation = function () {
+        rapGlobalFactory.IsEdit = true;
         $location.path("/editcustomerinformation");
     }
     self.FileAppeal = function (C_ID) {
