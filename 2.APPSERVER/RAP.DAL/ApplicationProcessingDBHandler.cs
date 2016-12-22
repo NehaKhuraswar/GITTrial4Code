@@ -1157,6 +1157,8 @@ namespace RAP.DAL
                     _dbContext.SubmitChanges();
                 }
 
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy);
+
                 var AppealDB = _dbContext.TenantAppealDetails.Where(x => x.AppealID == caseInfo.TenantAppealInfo.AppealID).FirstOrDefault();
                 if (AppealDB != null)
                 {
@@ -1323,6 +1325,24 @@ namespace RAP.DAL
                 _dbContext.SubmitChanges();
                 caseInfo.CaseID = caseDetailsDB.CaseID;
                 caseInfo.C_ID = caseDetailsDB.C_ID;
+
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy);
+
+                //using (DashboardDataContext db = new DashboardDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]))
+                //{
+                //    string errorMessage = "";
+                //    int? errorCode = 0;
+                //    //TBD
+                //    int returnCode = db.USP_NewActivityStatus_Save((int)ActivityDefaults.ActivityPetitionFiled, (int)StatusDefaults.StatusSubmitted,
+                //                     caseInfo.C_ID, "", DateTime.Now, caseInfo.CaseFileBy, ref errorMessage, ref errorCode);
+
+                //    if (errorCode != 0)
+                //    {
+                //        result.result = null;
+                //        result.status = new OperationStatus() { Status = StatusEnum.DatabaseMessage, StatusMessage = errorMessage };
+                //        return result;
+                //    }
+                //}
 
                 if (caseInfo.C_ID > 0)
                 {

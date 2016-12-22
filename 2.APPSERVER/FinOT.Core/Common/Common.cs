@@ -58,4 +58,13 @@ namespace RAP.Core.Common
         Cash = 1,
         Comp = 2
     }
+
+    public enum ActivityDefaults
+    {
+        ActivityPetitionFiled = 1
+    }
+    public enum StatusDefaults
+    {
+        StatusSubmitted = 1
+    }
 }

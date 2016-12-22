@@ -13,6 +13,7 @@ namespace RAP.DAL
        CustomDate GetDateFromDatabase(DateTime DatabaseDate);
        ReturnResult<DocumentM> SaveDocument(DocumentM doc);
        ReturnResult<DocumentM> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null);
+       ReturnResult<bool> PetitionFiledActivity(int C_ID, int CaseFileBy);
        
     }
 }
