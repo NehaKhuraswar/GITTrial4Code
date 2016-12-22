@@ -57,9 +57,9 @@ namespace RAP.Business.Implementation
              }
         }
 
-       public ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string[] docTitle = null)
+       public ReturnResult<DocumentM> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null)
        {
-           ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+           ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
            try
            {
                result = _dbHandler.GetDocuments(CustmerID, isPetitiofiled, docTitle);

@@ -12,7 +12,7 @@ namespace RAP.DAL
        void SaveErrorLog(OperationStatus status);
        CustomDate GetDateFromDatabase(DateTime DatabaseDate);
        ReturnResult<DocumentM> SaveDocument(DocumentM doc);
-       ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string[] docTitle = null);
+       ReturnResult<DocumentM> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null);
        
     }
 }

@@ -279,17 +279,17 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string[] docTitle = null)
+        public ReturnResult<DocumentM> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null)
         {
-            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
-            List<DocumentM> docs = new List<DocumentM>();
+            ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
+           
             try
             {
 
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
 
-                    if (docTitle == null)
+                    if (string.IsNullOrEmpty(docTitle))
                     {
                         var _documents = db.Documents.Where(r => r.CustomerID == CustmerID && r.IsPetitionFiled == isPetitiofiled);
                         if (_documents != null)
@@ -308,13 +308,14 @@ namespace RAP.DAL
                                 doc.MimeType = item.MimeType;
                                 doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
                                 doc.isUploaded = true;
-                                docs.Add(doc);
+                                result.result = doc;
+                                result.status = new OperationStatus() { Status = StatusEnum.Success };
                             }
                         }
                     }
                     else
                     {
-                        var _documents = db.Documents.Where(r => r.CustomerID == CustmerID && r.IsPetitionFiled == isPetitiofiled && docTitle.Contains(r.DocTitle));
+                        var _documents = db.Documents.Where(r => r.CustomerID == CustmerID && r.IsPetitionFiled == isPetitiofiled && r.DocTitle == docTitle);
                         if (_documents != null)
                         {
                             foreach (var item in _documents)
@@ -331,14 +332,13 @@ namespace RAP.DAL
                                 doc.MimeType = item.MimeType;
                                 doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
                                 doc.isUploaded = true;
-                                docs.Add(doc);
+                                result.result = doc;
+                                result.status = new OperationStatus() { Status = StatusEnum.Success };
                             }
                         }
                     }
 
-                }
-                result.result = docs;
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                }           
                 return result;
             }
             catch (Exception ex)
