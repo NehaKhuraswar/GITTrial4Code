@@ -11,6 +11,15 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         });
     }
 
+    var _ResendPin = function (model) {
+        blockUI.start();
+
+        return ajax.Post(model, 'api/accountmanagement' + '/resendpin')
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
     var _GetAccountTypes = function () {
         blockUI.start();
         var url = 'api/accountmanagement' + '/getaccounttypes'
@@ -210,6 +219,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.GetCustomer = _GetCustomer;
     factory.Calender = _Calender;
     factory.GetDocument = _getDocument;
+    factory.ResendPin = _ResendPin;
 
     return factory;
 }];

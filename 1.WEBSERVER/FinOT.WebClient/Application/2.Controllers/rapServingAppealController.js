@@ -62,7 +62,14 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
         }
 
    
-
+    self.ResendPin = function () {
+        masterFactory.ResendPin(self.custDetails).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            alert.Error("Pin is sent to your email");
+        });
+    }
     
     self.ContinueToReview = function (serveAppeal) {
         if (self.serveAppeal.OpposingParty.length == 0)

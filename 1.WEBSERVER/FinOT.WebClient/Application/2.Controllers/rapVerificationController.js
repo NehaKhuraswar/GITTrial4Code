@@ -1,9 +1,17 @@
 ﻿'use strict';
-var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverificationFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverificationFactory', '$location', 'rapGlobalFactory','masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     //   self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.ResendPin = function () {
+        masterFactory.ResendPin(self.custDetails).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            alert.Error("Pin is sent to your email");
+        });
+    }
     self.SubmitPetition = function () {
 
         rapGlobalFactory.CaseDetails = self.caseinfo;
