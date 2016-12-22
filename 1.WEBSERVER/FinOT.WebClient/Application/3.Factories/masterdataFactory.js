@@ -223,7 +223,6 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.GetDocument = _getDocument;
     factory.ResendPin = _ResendPin;
     factory.FileExtensons = _fileExtensons;
-    factory.FileSize = _fileSize;
-    factory.PopupateDocument = _popupateDocument;
+    factory.FileSize = _fileSize;   
     return factory;
 }];
