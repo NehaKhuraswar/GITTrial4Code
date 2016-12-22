@@ -22,10 +22,10 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             resolve: rapcollaboratorController_resolve
         })
         .when('/forgotpassword', {
-            templateUrl: 'views/account/ChangePassword.html',
-            controller: rapregisterController,
+            templateUrl: 'views/account/ForgetPassword.html',
+            controller: rapForgetPwdController,
             controllerAs: 'Ctrl',
-            resolve: rapregisterController_resolve
+            resolve: rapForgetPwdController_resolve
         })
         .when('/changepassword', {
             templateUrl: 'views/account/ChangePassword.html',

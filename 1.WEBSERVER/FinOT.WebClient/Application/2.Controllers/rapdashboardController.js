@@ -59,21 +59,7 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
        // $location.path("/fileappeal");
     }
 
-    var _GetCaseInfo = function () {
-
-        rapFactory.GetCaseInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-
-            self.caseinfo = response.data;
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-        });
-    }
-    // _getrent();
-    if (self.caseinfo == null) {
-        _GetCaseInfo();
-    }
+    
 
 }];
 var rapdashboardController_resolve = {

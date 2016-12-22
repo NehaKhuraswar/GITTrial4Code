@@ -24,6 +24,7 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
         self.bGrounds = false;
         self.bServingAppeal = false;
         self.bReview = false;
+        self.bAddDocs = false;
     };
     _DisableAll();
     self.bAppealType = true;
@@ -51,6 +52,10 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
     self.showReview = function () {
         _DisableAll();
         self.bReview = true;
+    };
+    self.showAddDoc = function () {
+        _DisableAll();
+        self.bAddDocs = true;
     };
 
 

@@ -33,6 +33,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('raploginFactory', raploginFactory)
     .factory('rapchangepwdFactory', rapchangepwdFactory)
     .factory('rapresendpinFactory', rapresendpinFactory)
+    .factory('rapforgetPasswordFactory', rapforgetPasswordFactory)
     .factory('rapdashboardFactory', rapdashboardFactory)
     .factory('rapstaffdashboardFactory', rapstaffdashboardFactory)
     .factory('rapadmindashboardFactory', rapadmindashboardFactory)
@@ -65,6 +66,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapcollaboratorController', rapcollaboratorController)
     .controller('rapChangePasswordController', rapChangePasswordController)
     .controller('rapResendPinController', rapResendPinController)
+    .controller('rapForgetPwdController', rapForgetPwdController)
     .controller('rapdashboardController', rapdashboardController)
     .controller('rapstaffdashboardController', rapstaffdashboardController)
     .controller('rapadmindashboardController', rapadmindashboardController)
@@ -84,6 +86,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapAppealImpInfoController', rapAppealImpInfoController)
     .controller('rapAppellantsInfoController', rapAppellantsInfoController)
     .controller('rapFileAppealController', rapFileAppealController)
+    .controller('rapAppealDocumentController', rapAppealDocumentController)
     .controller('rapGroundsOfAppealController', rapGroundsOfAppealController)
     .controller('rapServingAppealController', rapServingAppealController)
     .controller('rapReviewAppealController', rapReviewAppealController)
@@ -276,6 +279,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             },
             templateUrl: 'Views/FileAppeal/GroundsForAppeal.html',
             controller: 'rapGroundsOfAppealController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapAdddocsappeal', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FileAppeal/Document.html',
+            controller: 'rapAppealDocumentController',
             controllerAs: 'Ctrl'
         };
     })

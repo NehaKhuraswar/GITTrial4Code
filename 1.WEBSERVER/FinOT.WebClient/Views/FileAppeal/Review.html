@@ -1,182 +1,184 @@
 ﻿
-<div class="row">
+<!--<div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-danger font-small">
             <div class="panel-heading">
                 <strong>Appeal: Review</strong>
+            </div>-->
+<h3 class="step-heading">Appeal: <span>Review</span></h3>
+
+<div class="step-content step1">
+
+    <div class="field-group filled-info subhead no-top-margin hidden-xs">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Petition type</div></div>
+            <div class="col-sm-6 col-xs-12">Property type</div>
+        </div>
+    </div><!-- .field-group -->
+
+    <div class="subhead type2">
+        <h4>Applicant and property information</h4>
+        <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
+    </div>
+
+    <div class="field-group filled-info subhead">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
+            <div class="col-sm-6 col-xs-12">
+                {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}   <br />
+                T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.email}}
             </div>
-            
-        <div class="field-group filled-info subhead no-top-margin hidden-xs">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Petition type</div></div>                  
-                  <div class="col-sm-6 col-xs-12">Property type</div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="subhead type2">
-                <h4>Applicant and property information</h4>
-                  <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
-              </div>
-              
-              <div class="field-group filled-info subhead">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>                  
-                  <div class="col-sm-6 col-xs-12">
-                    {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}   <br />
-                      T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.email}} 
-                  </div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="field-group filled-info subhead">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>                 
-                    <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
-                        {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
-                        T {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}} 
-                    </div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="field-group filled-info subhead">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>                 
-                  <div class="col-sm-6 col-xs-12">
-                    {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
-                        T {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}} 
-                  </div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="field-group filled-info subhead">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>                 
-                  <div class="col-sm-6 col-xs-12">
-                    {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}   <br />
-                        T {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}} 
-                  </div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="field-group filled-info subhead">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>                 
-                  <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits}}</div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="field-group filled-info subhead no-top-margin">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>                 
-                    <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.UnitTypes[Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId].UnitDescription}}</div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="field-group filled-info subhead no-top-margin">
-                <div class="row">
-                  <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>                 
-                    <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">Yes</div>
-                    <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">No</div>
-                </div>
-              </div><!-- .field-group -->
-              
-              <div class="subhead type2 no-bottom-margin">
-                <h4>Grounds for appeal</h4>
-                  <a ng-click="Ctrl.EditGrounds()" class="btn-link btn-edit">Edit</a>
-              </div>
+        </div>
+    </div><!-- .field-group -->
 
-              <div class="field-group filled-info">
-                <div ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
-                    <div ng-show="item.Selected">
-                        {{item.AppealDescription}}
-                    </div>
-                    <!--<p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
-                    <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
-                </div>
-              </div>
+    <div class="field-group filled-info subhead">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
+            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
+                {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
+                T {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}}
+            </div>
+        </div>
+    </div><!-- .field-group -->
 
-              <!-- Additional Documentation -->
-              <div class="subhead type2 no-bottom-margin">
-                <h4>Additional Documentation</h4>
-                <a href="#" class="btn-link btn-edit">Edit</a>
-              </div>
-              
-              <div class="field-group filled-info no-top-margin no-bottom-margin">
-                <div class="row">
-                  <div class="col-md-4 col-sm-6 col-xs-8"><div class="info-title">File name</div></div>
-                  <div class="col-md-4 col-sm-6 col-xs-4"><div class="info-title">File type</div></div>
-                </div><!-- .row -->
-              </div>
-              
-              <div class="field-group no-top-margin mar-bottom-40">
-                <div class="accordion additional-docs">
-                  <div class="item expanded">
-                    <div class="item-header">
-                      <div class="row">
-                        <div class="col-md-4 col-sm-6 col-xs-8">
-                          <a href="#" class="btn-toggle"></a>
-                          <div class="file-name">Rental_expenses.xsl</div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-4">
-                          <div class="file-type">Excel</div>
-                        </div>
-                      </div><!-- .row -->
-                    </div>
+    <div class="field-group filled-info subhead">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
+            <div class="col-sm-6 col-xs-12">
+                {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
+                T {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}}
+            </div>
+        </div>
+    </div><!-- .field-group -->
 
-                    <div class="item-content">
-                      <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                    </div>
-                  </div>
-                
-                  <div class="item additional-doc">
-                    <div class="item-header">
-                      <div class="row">
-                        <div class="col-md-4 col-sm-6 col-xs-8">
-                          <a href="#" class="btn-toggle"></a>
-                          <div class="file-name">Rental_expenses.doc</div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-4">
-                          <div class="file-type">Word</div>
-                        </div>
-                      </div><!-- .row -->
-                    </div>
+    <div class="field-group filled-info subhead">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
+            <div class="col-sm-6 col-xs-12">
+                {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}   <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}   <br />
+                T {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}}
+            </div>
+        </div>
+    </div><!-- .field-group -->
 
-                    <div class="item-content">
-                      <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                    </div>
-                  </div>
-                </div><!-- .accordion -->
-              </div><!-- .field-group -->
-              
-              <!-- Serving of appeal to the opposing parties -->
-              <div class="subhead type2">
-                <h4>Serving of appeal to the opposing parties</h4>
-                  <a ng-click="Ctrl.EditServeAppeal()" class="btn-link btn-edit">Edit</a>
-              </div>
-              
-              <div class="field-group">
-                <div class="row">
-                  <div class="col-md-9 col-sm-12">
-                    <p>I placed a copy of this form, and all attached pages, in the United States mail or deposited it with a commercial carrier, using a service at least as expeditious as first class mail, with all postage or charges fully prepaid, addressed to each opposing party as follows:</p>
-                  </div>
-                </div>
-              </div>
-              
-            <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>
-                    <div class="col-sm-6 col-xs-12">
-                        {{item.FirstName}} {{item.LastName}}   <br />{{item.AddressLine1}} {{item.AddressLine2}}, <br />{{item.City}}, {{item.State.StateCode}} {{item.Zip}}
-                    </div>
-                </div>
-            </div><!-- .field-group -->              
-              
-            
+    <div class="field-group filled-info subhead">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
+            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits}}</div>
+        </div>
+    </div><!-- .field-group -->
 
+    <div class="field-group filled-info subhead no-top-margin">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>
+            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.UnitTypes[Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId].UnitDescription}}</div>
+        </div>
+    </div><!-- .field-group -->
 
-            <div class="step-footer">
-                <input type="button" id="submit-appeal" name="submit-appeal" class="btn-primary" value="Submit appeal" ng-click="Ctrl.SubmitAppeal()" />
-            </div>
+    <div class="field-group filled-info subhead no-top-margin">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>
+            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">Yes</div>
+            <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">No</div>
+        </div>
+    </div><!-- .field-group -->
+
+    <div class="subhead type2 no-bottom-margin">
+        <h4>Grounds for appeal</h4>
+        <a ng-click="Ctrl.EditGrounds()" class="btn-link btn-edit">Edit</a>
+    </div>
+
+    <div class="field-group filled-info">
+        <div ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
+            <div ng-show="item.Selected">
+                {{item.AppealDescription}}
+            </div>
+            <!--<p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
+            <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
         </div>
     </div>
+
+    <!-- Additional Documentation -->
+    <div class="subhead type2 no-bottom-margin">
+        <h4>Additional Documentation</h4>
+        <a href="#" class="btn-link btn-edit">Edit</a>
+    </div>
+
+    <div class="field-group filled-info no-top-margin no-bottom-margin">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-8"><div class="info-title">File name</div></div>
+            <div class="col-md-4 col-sm-6 col-xs-4"><div class="info-title">File type</div></div>
+        </div><!-- .row -->
+    </div>
+
+    <div class="field-group no-top-margin mar-bottom-40">
+        <div class="accordion additional-docs">
+            <div class="item expanded">
+                <div class="item-header">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-xs-8">
+                            <a href="#" class="btn-toggle"></a>
+                            <div class="file-name">Rental_expenses.xsl</div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-4">
+                            <div class="file-type">Excel</div>
+                        </div>
+                    </div><!-- .row -->
+                </div>
+
+                <div class="item-content">
+                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                </div>
+            </div>
+
+            <div class="item additional-doc">
+                <div class="item-header">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-xs-8">
+                            <a href="#" class="btn-toggle"></a>
+                            <div class="file-name">Rental_expenses.doc</div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-4">
+                            <div class="file-type">Word</div>
+                        </div>
+                    </div><!-- .row -->
+                </div>
+
+                <div class="item-content">
+                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                </div>
+            </div>
+        </div><!-- .accordion -->
+    </div><!-- .field-group -->
+    <!-- Serving of appeal to the opposing parties -->
+    <div class="subhead type2">
+        <h4>Serving of appeal to the opposing parties</h4>
+        <a ng-click="Ctrl.EditServeAppeal()" class="btn-link btn-edit">Edit</a>
+    </div>
+
+    <div class="field-group">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <p>I placed a copy of this form, and all attached pages, in the United States mail or deposited it with a commercial carrier, using a service at least as expeditious as first class mail, with all postage or charges fully prepaid, addressed to each opposing party as follows:</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>
+            <div class="col-sm-6 col-xs-12">
+                {{item.FirstName}} {{item.LastName}}   <br />{{item.AddressLine1}} {{item.AddressLine2}}, <br />{{item.City}}, {{item.State.StateCode}} {{item.Zip}}
+            </div>
+        </div>
+    </div><!-- .field-group -->
+
+
+
+
+    <div class="step-footer">
+        <input type="button" id="submit-appeal" name="submit-appeal" class="btn-primary" value="Submit appeal" ng-click="Ctrl.SubmitAppeal()" />
+    </div>
+
 </div>
+   

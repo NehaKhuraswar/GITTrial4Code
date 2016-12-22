@@ -25,6 +25,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         return rapFactory.GetCustomer(null).then(function (response) {
                if (!alert.checkResponse(response)) { return; }
                self.CustomerInfo = response.data;
+               rapGlobalFactory.CustomerDetails = self.CustomerInfo;
         });        
     }
 

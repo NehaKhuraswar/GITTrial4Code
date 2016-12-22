@@ -134,12 +134,14 @@
     <Content Include="Application\2.Controllers\rapadmindashboardController.js" />
     <Content Include="Application\2.Controllers\rapcollaboratorController.js" />
     <Content Include="Application\2.Controllers\rapAppealImpInfoController.js" />
+    <Content Include="Application\2.Controllers\RAPAppealDocumentController.js" />
     <Content Include="Application\2.Controllers\raploginURLController.js" />
     <Content Include="Application\2.Controllers\raploginCityUserController.js" />
     <Content Include="Application\2.Controllers\rapOResponseMainController.js" />
     <Content Include="Application\2.Controllers\rapOwnerDocumentsController.js" />
     <Content Include="Application\2.Controllers\rapOwnerReviewController.js" />
     <Content Include="Application\2.Controllers\rapOwnerVerificationController.js" />
+    <Content Include="Application\2.Controllers\rapForgetPwdController.js" />
     <Content Include="Application\2.Controllers\rapResendPinController.js" />
     <Content Include="Application\2.Controllers\rapChangePasswordController.js" />
     <Content Include="Application\2.Controllers\rapOwnerRentalHistoryController.js" />
@@ -179,6 +181,7 @@
     <Content Include="Application\3.Factories\rapappealtypeFactory.js" />
     <Content Include="Application\3.Factories\raploginCityUserFactory.js" />
     <Content Include="Application\3.Factories\rapOwnerVerificationFactory.js" />
+    <Content Include="Application\3.Factories\rapforgetPasswordFactory.js" />
     <Content Include="Application\3.Factories\rapresendpinFactory.js" />
     <Content Include="Application\3.Factories\rapcityuserregisterFactory.js" />
     <Content Include="Application\3.Factories\rapcustFactory.js" />
@@ -334,6 +337,7 @@
     <Content Include="Scripts\textcounter.js" />
     <Content Include="Scripts\tooltip.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
+    <Content Include="Views\Account\ForgetPassword.html" />
     <Content Include="Views\Account\ChangePassword.html" />
     <Content Include="Views\Account\Collaborator.html" />
     <Content Include="Views\Account\AdminDashboard.html" />
@@ -346,6 +350,7 @@
     <Content Include="Views\Account\TranslationRequestedServicesHearing.html" />
     <Content Include="Views\Account\TranslationServicesHearing.html" />
     <Content Include="Views\FileAppeal\AppellantsInfo.html" />
+    <Content Include="Views\FileAppeal\Document.html" />
     <Content Include="Views\FileAppeal\FileAppeal.html" />
     <Content Include="Views\FileAppeal\GroundsForAppeal.html" />
     <Content Include="Views\FileAppeal\AppealType.html" />

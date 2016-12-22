@@ -223,6 +223,47 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        /// <summary>
+        /// Forget Password
+        /// </summary>
+        /// <returns>Customer Info Object</returns>
+        public ReturnResult<string> ForgetPwd(string email)
+        {
+            ReturnResult<string> result = new ReturnResult<string>();
+            try
+            {
+                // CustomerInfo custinfo ;
+                //System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == email ).FirstOrDefault();
+                    if (custdetails != null)
+                    {
+                        result.result = custdetails.Password;
+                    }
+                    else
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
+                    }
+                }
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started");
+                // result.result = message;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
         /// <summary>
         /// Resend Pin
         /// </summary>

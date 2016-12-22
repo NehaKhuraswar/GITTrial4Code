@@ -46,6 +46,23 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.ChangePassword(message);
         }
+
+        public ReturnResult<bool> ForgetPwd(string email)
+        {
+            ReturnResult<string> result = new ReturnResult<string>();
+            ReturnResult<bool> resultFinal = new ReturnResult<bool>();
+            result = accDBHandler.ForgetPwd(email);
+            if (result != null)
+            {
+                EmailM emailMessage = new EmailM();
+                emailMessage.MessageBody = email + " Sending Password " + result.result;
+                emailMessage.Subject = "Your RAP Password";
+                EmailService emailservice = new EmailService();
+                resultFinal = emailservice.SendEmail(emailMessage);
+            }
+            return resultFinal;
+        }
+
         public ReturnResult<bool> ResendPin(CustomerInfo message)
         {
             ReturnResult<Int32> result = new ReturnResult<Int32>();

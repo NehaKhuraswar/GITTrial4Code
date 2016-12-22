@@ -292,6 +292,54 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("forgetpwd")]
+        [HttpPost]
+        public HttpResponseMessage ForgetPwd([FromBody] CustomerInfo customerInfo)
+        {
+            //System.Diagnostics.EventLog.WriteEntry("Application", "LoginCust started");
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+
+            try
+            {
+                result = accService.ForgetPwd(customerInfo.email);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    // transaction.warnings.Add(result.status.StatusMessage);
+
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                // transaction.AddException(ex.Message);
+                //ReturnCode = HttpStatusCode.InternalServerError;
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("logincityuser")]
         [HttpPost]
         public HttpResponseMessage LoginCityUser([FromBody] CityUserAccount_M loginInfo)
