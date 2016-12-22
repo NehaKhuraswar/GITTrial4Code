@@ -9,8 +9,6 @@ var rapadmindashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
 
         var url = 'api/applicationprocessing' + '/getcaseinfo';
 
-        //if (!(caseid == null || caseid == undefined)) { url = url + '/' + caseid; }
-
          return ajax.Post(model, url)
         .finally(function () {
             blockUI.stop();
@@ -27,22 +25,41 @@ var rapadmindashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
          });
     }
 
-    var _GetCaseInfo = function () {
+    var _GetAccountTypes = function () {
         blockUI.start();
-
-        var url = _routePrefix + '/getcaseinfo';
+        var url = _routePrefix + '/getaccounttypes/'
 
         return ajax.Get(url)
         .finally(function () {
             blockUI.stop();
         });
-      }
-    
-     
-    factory.GetCaseInfo = _GetCaseInfo;
+    }
+
+    var _GetEmptyAccountSearchModel = function () {
+        blockUI.start();
+        var url = _routePrefix + '/getemptyaccountsearchmodel/'
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
+    var _GetAccountSearch = function (model) {
+        blockUI.start();
+        var url = _routePrefix + '/getaccountsearch/'
+
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;
+    factory.GetAccountTypes = _GetAccountTypes;
+    factory.GetEmptyAccountSearchModel = _GetEmptyAccountSearchModel;
+    factory.GetAccountSearch = _GetAccountSearch;
 
 
     return factory;

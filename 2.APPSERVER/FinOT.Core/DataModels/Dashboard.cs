@@ -69,9 +69,10 @@ namespace RAP.Core.DataModels
     {
         public AccountSearch()
         {
-            FromDate = new DateTime(2016, 10 , 28);
-            ToDate = DateTime.Now;
-            City = "Oakland";
+            //FromDate = new DateTime(2016, 10 , 28);
+            //ToDate = DateTime.Now;
+            FromDate = null;
+            ToDate = null;
         }
 
         public AccountType AccountType { get; set; }
@@ -85,8 +86,8 @@ namespace RAP.Core.DataModels
         public string City { get; set; }
         public int Zip { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
         public int PageSize { get; set; }
         public string SortBy {get; set;} 
 		public bool SortReverse {get; set;}

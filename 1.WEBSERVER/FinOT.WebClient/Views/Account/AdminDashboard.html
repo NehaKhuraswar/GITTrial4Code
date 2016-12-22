@@ -1,26 +1,224 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="panel panel-danger font-small">
-                <div class="panel-heading">
-                    <strong>Admin Dashboard</strong>
-                </div>
-                <div class="panel-body">
-                    <p>Account : {{Ctrl.model.FirstName}} </p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.CaseID" required />
-                    <p>Enter C_ID </p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.caseinfo.C_ID" required />
-                    <button class="btn btn-default" ng-click="Ctrl.AccountSearch()">Account Search</button>
-                    <button class="btn btn-default" ng-click="Ctrl.CreateCityUserAccount()">Create City User Account</button>
-                    <button class="btn btn-default" ng-click="Ctrl.EditCityUserAccount()">Edit City User Account</button>
-                    <button class="btn btn-default" ng-click="Ctrl.EditPublicUserAccount()">Edit Public User Account</button>
-                    <div ng-repeat="activity in Ctrl.caseinfo.ActivityStatus">
-                        <p>{{activity.Activity.ActivityDesc}}</p>
-                        <p>{{activity.Status.StatusDesc}}</p>
-                        <p>{{activity.Date}}</p>
-                    </div>
-                </div>
-            </div>
+﻿<!-- Page Title -->
+<div class="page-title-wrapper">
+    <div class="container outer-container">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li class="active">Account management</li>
+            </ul>
         </div>
+
+        <h2 class="page-title">Account Management</h2>
     </div>
 </div>
+
+
+<!-- Page Content -->
+<div class="page-content">
+    <div class="container outer-container">
+
+        <div class="application-form-wrapper">
+            <div class="application-step step-1">
+
+                <div class="step-content step1 mar-bottom-40">
+                    <div class="subhead no-top-margin"><h4>Actions</h4></div>
+
+                    <div class="account-management">
+                        <div class="items">
+                            <div class="item">
+                                <div class="item-header"><a ng-click="Ctrl.CreateCityUserAccount()">Create city account</a></div>
+                            </div>
+
+                            <div class="item">
+                                <div class="item-header"><a ng-click="Ctrl.CreatePublicUserAccount()">Create public account</a></div>
+                            </div>
+                        </div><!-- .items -->
+                    </div><!-- .account-management -->
+                </div>
+
+                <form name="frmSearchAccounts" id="frmSearchAccounts" action="#" method="post" class="application-form">
+                    <div class="step-content step2">
+                        <div class="subhead type2"><h4>Search accounts</h4></div>
+
+                        <div class="row">
+                            <div class="col-sm-8 col-xs-12">
+                                <div class="field-group">
+                                    <label for="account_type" class="input-label">Account type</label>
+                                    <div class="full-width">
+                                        <select name="account_type" id="account_type" class="custom-select" data-placeholder="Select type"
+                                                ng-model="Ctrl.AccountSearchModel.AccountType"
+                                                ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID">                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <label class="input-label">Account creation date</label>
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="field-group">
+                                            <input type="text" name="create_date_start" id="create_date_start" class="field-input field-datepicker"
+                                                   ng-model="Ctrl.AccountSearchModel.FromDate" date='dd-MM-yyyy' />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="field-group">
+                                            <input type="text" name="create_date_end" id="create_date_end" class="field-input field-datepicker"
+                                                   ng-model="Ctrl.AccountSearchModel.ToDate" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .row -->
+
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="last_name" class="input-label">Last Name</label>
+                                    <input type="text" name="last_name" id="last_name" class="field-input" placeholder="" ng-model="Ctrl.AccountSearchModel.LastName" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="first_name" class="input-label">First Name</label>
+                                    <input type="text" name="first_name" id="first_name" class="field-input" placeholder="" ng-model="Ctrl.AccountSearchModel.FirstName" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="email" class="input-label">Email</label>
+                                    <input type="text" name="email" id="email" class="field-input email" placeholder="" ng-model="Ctrl.AccountSearchModel.Email" />
+                                </div>
+                            </div>
+                        </div><!-- .row -->
+
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="address_line1" class="input-label">Address line 1</label>
+                                    <input type="text" name="address_line1" id="address_line1" class="field-input" placeholder="" ng-model="Ctrl.AccountSearchModel.AddressLine1" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="address_line2" class="input-label">Address line 2</label>
+                                    <input type="text" name="address_line2" id="address_line2" class="field-input" placeholder="" ng-model="Ctrl.AccountSearchModel.AddressLine2" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="field-group">
+                                    <label for="phone_number" class="input-label">Phone number</label>
+                                    <input type="text" name="phone_number" id="phone_number" class="field-input" placeholder="" ng-model="Ctrl.AccountSearchModel.PhoneNumber" />
+                                </div>
+                            </div>
+                        </div><!-- .row -->
+
+                    </div>
+
+                    <div class="step-footer no-top-margin">
+                        <input type="button" id="btn-search" name="btn-search" class="btn-primary" value="Search"
+                               ng-disabled="Ctrl.AccountSearchModel.AccountType == null"
+                               ng-click="Ctrl.AccountSearch(Ctrl.AccountSearchModel)" />
+                        <input type="button" id="btn-clear-filters" name="btn-clear-filters" class="btn-primary" value="Clear filters"
+                               ng-click="Ctrl.OnClearFilter()" />
+                    </div>
+                </form>
+                <!-- Accounts List -->
+                <div class="custom-table acm-table mar-t60">
+                    <div class="tbl-header">
+                        <div class="tbl-row clearfix">
+                            <div class="col name col-20 pad-l40">Name <i class="sort"></a></div>
+                            <div class="col col-20 account-type">Account type <i class="sort"></a></div>
+                            <div class="col col-25 email">Email <i class="sort"></a></div>
+                            <div class="col col-20 created-on">Account created on <i class="sort"></a></div>
+                            <div class="col col-15 link"></div>
+                        </div>
+                    </div>
+
+                    <div class="tbl-body">
+                        <div class="tbl-row clearfix" ng-repeat="item in Ctrl.AccountSearchResult">
+                            <div class="item item-toggle">
+                                <div class="item-header clearfix">
+                                    <div class="col col-20 name pad-l40"><a href="#" class="btn-toggle"></a>{{item.Name}}</div>
+                                    <div class="col col-20 account-type">{{item.AccountType}}</div>
+                                    <div class="col col-25 email"><a href="mailto: johnsmith@gmail.com">{{item.email}}</a></div>
+                                    <div class="col col-20 created-on">{{item.CreatedDate | date}}</div>
+                                    <div class="col col-15 link"><a href="#" class="btn-link">Edit</a></div>
+                                </div>
+
+                                <div class="item-content clearfix pad-l40">
+                                    <div class="col-40">
+                                        <div class="small-title">Residential address</div>
+                                        <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                    </div>
+
+                                    <div class="col-40">
+                                        <div class="small-title">Residential address</div>
+                                        <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div><!-- item-toggle -->
+                        </div>
+
+                        <!--<div class="tbl-row clearfix">
+                            <div class="item item-toggle">
+                                <div class="item-header clearfix">
+                                    <div class="col col-20 name pad-l40"><a href="#" class="btn-toggle"></a> Bob Johnson</div>
+                                    <div class="col col-20 account-type">Public</div>
+                                    <div class="col col-25 email"><a href="mailto: bobjohnson@gmail.com">bobjohnson@gmail.com</a></div>
+                                    <div class="col col-20 created-on">Nov 20, 2016</div>
+                                    <div class="col col-15 link"><a href="#" class="btn-link">Edit</a></div>
+                                </div>
+
+                                <div class="item-content clearfix pad-l40">
+                                    <div class="col-40">
+                                        <div class="small-title">Residential address</div>
+                                        <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                    </div>
+
+                                    <div class="col-40">
+                                        <div class="small-title">Residential address</div>
+                                        <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div><!-- item-toggle -->
+                        <!--</div>
+
+                        <div class="tbl-row clearfix">
+                            <div class="item item-toggle expanded">
+                                <div class="item-header clearfix">
+                                    <div class="col col-20 name pad-l40"><a href="#" class="btn-toggle"></a> Kathi Gilkison</div>
+                                    <div class="col col-20 account-type">Public</div>
+                                    <div class="col col-25 email"><a href="mailto: kathigilkison@gmail.com">kathigilkison@gmail.com</a></div>
+                                    <div class="col col-20 created-on">Nov 20, 2016</div>
+                                    <div class="col col-15 link"><a href="#" class="btn-link">Edit</a></div>
+                                </div>
+
+                                <div class="item-content clearfix pad-l40">
+                                    <div class="col-40 align-left">
+                                        <div class="small-title">Residential address</div>
+                                        <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                    </div>
+
+                                    <div class="col-40 align-left">
+                                        <div class="small-title">Residential address</div>
+                                        <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>--><!-- item-toggle -->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <!-- .custom-table -->
+            </div>
+
+        </div><!-- .application-form-wrapper -->
+    </div><!-- .container -->
+</div><!-- .page-content -->
