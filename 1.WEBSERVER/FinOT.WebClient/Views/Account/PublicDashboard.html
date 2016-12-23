@@ -12,9 +12,9 @@
                             <h4>Cases in progress</h4>
                         </div>
 
-                        <div class="field-group subhead case-wrapper mar-bottom-60" ng-repeat="caseinfo in Ctrl.Cases">
+                        <div class="field-group subhead case-wrapper mar-bottom-60">
                             <!-- Case in progress -->
-                            <div class="case">
+                            <div class="case" ng-repeat="caseinfo in Ctrl.Cases">
                                 <div class="row">
                                     <div class="col-md-9 col-sm-12 col-xs-12">
                                         <div class="case-heading">Case number</div>
@@ -37,10 +37,10 @@
                                 </div>
 
                                 <div class="accordion case-status">
-                                    <div class="item expanded">
-                                        <div class="item-header"><a ng-click="Ctrl.toggle()" class="btn-toggle"></a> View case status</div>
+                                    <div class="item" ng-class="{'expanded':toggle}">
+                                        <div class="item-header"><a ng-click="toggle = !toggle" class="btn-toggle"></a> View case status</div>
 
-                                        <div class="item-content" ng-show="Ctrl.btoggle">
+                                        <div class="item-content" ng-show="toggle">
                                             <div class="table">
                                                 <div class="tbl-row">
                                                     <div class="tbl-head activity">Activity</div>
@@ -48,7 +48,7 @@
                                                     <div class="tbl-head status">Status</div>
                                                     <div class="tbl-head link"></div>
                                                 </div>
-                                               
+
                                                 <div class="tbl-row">
                                                     <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Response to a petition</div>
                                                     <div class="tbl-col date countdown"><strong class="visible-sm">Date:</strong> 30 days remaining</div>
@@ -79,192 +79,193 @@
                                                     <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Processed</span></div>
                                                     <div class="tbl-col link"><a href="#" class="btn-link">View</a></div>
                                                 </div>
-                                            <!--</div><!-- .table -->
-                                            <!--</div>
-        </div>-->
-                                        <!--</div>--><!-- .accordion -->
+                                                <!--</div><!-- .table -->
+                                                <!--</div>
+                                    </div>-->
+                                                <!--</div>--><!-- .accordion -->
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- End of case -->
                             </div>
-                        </div>
-                        <!-- End of case -->
 
 
-                        <div class="subhead type2">
-                            <h4>Forms</h4>
-                        </div>
-
-                        <div class="field-group mar-bottom-60">
-                            <div class="row">
-                                <div class="col-sm-9 col-xs-12">
-                                    Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.
-                                </div>
+                            <div class="subhead type2">
+                                <h4>Forms</h4>
                             </div>
-                        </div><!--field-group -->
 
-                        <div class="forms-list">
-                            <div class="subhead type2"><h4>For property owners</h4></div>
-
-                            <div class="items">
-                                <div class="item">
-                                    <div class="title">File new petition</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a ng-click="Ctrl.FilePetition()" class="btn-link">File online</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                                <div class="item">
-                                    <div class="title">Submit a response to a filed petition</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a href="#" class="btn-link">File online</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                                <div class="item">
-                                    <div class="title">File an appeal</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link">File online</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-                            </div><!-- items -->
-                        </div><!--.forms-list -->
-
-
-                        <div class="forms-list">
-                            <div class="subhead type2"><h4>For tenants</h4></div>
-
-                            <div class="items">
-                                <div class="item">
-                                    <div class="title">File new petition</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a ng-click="Ctrl.FilePetition()" class="btn-link">File online</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                                <div class="item">
-                                    <div class="title">Submit a response to a filed petition</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a ng-click="Ctrl.FilePetition()" class="btn-link">File online</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                                <div class="item">
-                                    <div class="title">File an appeal</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link">File online</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                                <div class="item">
-                                    <div class="title">Respond to a claim of permanent exemption</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a href="#" class="btn-link">File online</a></p>
-                                </div><!--item -->
-                            </div><!-- items -->
-                        </div><!--.forms-list -->
-
-
-                        <div class="forms-list">
-                            <div class="subhead type2"><h4>For everyone</h4></div>
-
-                            <div class="items">
-                                <div class="item">
-                                    <div class="title">Reschedule a hearing</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a href="#" class="link-download-form">Download form</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                                <div class="item">
-                                    <div class="title">Petition dismissal form</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a href="#" class="link-download-form">Download form</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                                <div class="item">
-                                    <div class="title">Translation services for the hearing</div>
-                                    <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
-                                    <p><a href="#" class="btn-link">Request</a></p>
-
-                                    <div class="related-info">
-                                        <div class="title">Related information</div>
-                                        <p><strong><a href="#">About RAP</a></strong></p>
-                                    </div>
-                                </div><!--item -->
-
-                            </div><!-- items -->
-                        </div><!--.forms-list -->
-
-
-                        <div class="account-management">
-                            <div class="subhead type2"><h4>Account management</h4></div>
-
-                            <div class="items">
-                                <div class="item">
-                                    <div class="item-header"><a ng-click="Ctrl.ChangeAccountInformation()">Change account information</a></div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="item-header"><a ng-click="Ctrl.ChangePassword()">Change password</a></div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="item-header"><a ng-click="Ctrl.ResendPin()">Resend PIN number</a></div>
-                                </div>
-
-                                <div class="item has-summary">
-                                    <div class="item-header"><a ng-click="Ctrl.Collaborator()">Invite an account collaborator</a></div>
-                                    <div class="item-content">
-                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id.</p>
+                            <div class="field-group mar-bottom-60">
+                                <div class="row">
+                                    <div class="col-sm-9 col-xs-12">
+                                        Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.
                                     </div>
                                 </div>
+                            </div><!--field-group -->
 
-                                <div class="item has-summary">
-                                    <div class="item-header"><a ng-click="Ctrl.InviteThirdPartyUser()">Your representative</a></div>
-                                    <div class="item-content">
-                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id.</p>
+                            <div class="forms-list">
+                                <div class="subhead type2"><h4>For property owners</h4></div>
+
+                                <div class="items">
+                                    <div class="item">
+                                        <div class="title">File new petition</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a ng-click="Ctrl.FilePetition()" class="btn-link">File online</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                    <div class="item">
+                                        <div class="title">Submit a response to a filed petition</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a href="#" class="btn-link">File online</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                    <div class="item">
+                                        <div class="title">File an appeal</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link">File online</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+                                </div><!-- items -->
+                            </div><!--.forms-list -->
+
+
+                            <div class="forms-list">
+                                <div class="subhead type2"><h4>For tenants</h4></div>
+
+                                <div class="items">
+                                    <div class="item">
+                                        <div class="title">File new petition</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a ng-click="Ctrl.FilePetition()" class="btn-link">File online</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                    <div class="item">
+                                        <div class="title">Submit a response to a filed petition</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a ng-click="Ctrl.FilePetition()" class="btn-link">File online</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                    <div class="item">
+                                        <div class="title">File an appeal</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link">File online</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                    <div class="item">
+                                        <div class="title">Respond to a claim of permanent exemption</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a href="#" class="btn-link">File online</a></p>
+                                    </div><!--item -->
+                                </div><!-- items -->
+                            </div><!--.forms-list -->
+
+
+                            <div class="forms-list">
+                                <div class="subhead type2"><h4>For everyone</h4></div>
+
+                                <div class="items">
+                                    <div class="item">
+                                        <div class="title">Reschedule a hearing</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a href="#" class="link-download-form">Download form</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                    <div class="item">
+                                        <div class="title">Petition dismissal form</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a href="#" class="link-download-form">Download form</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                    <div class="item">
+                                        <div class="title">Translation services for the hearing</div>
+                                        <div class="summary">Quo modo autem philosophus loquitur. Aliter enim explicari, quod quaeritur, non potest. Propter nos enim illam, non propter eam nosmet ipsos diligimus.</div>
+                                        <p><a href="#" class="btn-link">Request</a></p>
+
+                                        <div class="related-info">
+                                            <div class="title">Related information</div>
+                                            <p><strong><a href="#">About RAP</a></strong></p>
+                                        </div>
+                                    </div><!--item -->
+
+                                </div><!-- items -->
+                            </div><!--.forms-list -->
+
+
+                            <div class="account-management">
+                                <div class="subhead type2"><h4>Account management</h4></div>
+
+                                <div class="items">
+                                    <div class="item">
+                                        <div class="item-header"><a ng-click="Ctrl.ChangeAccountInformation()">Change account information</a></div>
                                     </div>
-                                </div>
-                            </div><!-- .items -->
-                        </div><!-- .account-management -->
 
-                    </div>
-                </div><!-- .application-form -->
+                                    <div class="item">
+                                        <div class="item-header"><a ng-click="Ctrl.ChangePassword()">Change password</a></div>
+                                    </div>
 
+                                    <div class="item">
+                                        <div class="item-header"><a ng-click="Ctrl.ResendPin()">Resend PIN number</a></div>
+                                    </div>
 
+                                    <div class="item has-summary">
+                                        <div class="item-header"><a ng-click="Ctrl.Collaborator()">Invite an account collaborator</a></div>
+                                        <div class="item-content">
+                                            <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="item has-summary">
+                                        <div class="item-header"><a ng-click="Ctrl.InviteThirdPartyUser()">Your representative</a></div>
+                                        <div class="item-content">
+                                            <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id.</p>
+                                        </div>
+                                    </div>
+                                </div><!-- .items -->
+                            </div><!-- .account-management -->
+
+                        </div>
+                    </div><!-- .application-form -->
+
+                </div>
             </div>
         </div>
     </div>

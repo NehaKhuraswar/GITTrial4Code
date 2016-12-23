@@ -11,7 +11,10 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $location.path("/publicdashboard");
+            //$scope.model.bServingAppeal = false;
+            $scope.model.bReview = false;
+            $scope.model.bConfirm = true;
+            //$location.path("/publicdashboard");
         });
     }
     self.EditApplicantInfo = function () {

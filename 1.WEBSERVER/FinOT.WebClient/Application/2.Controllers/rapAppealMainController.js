@@ -25,6 +25,7 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
         self.bServingAppeal = false;
         self.bReview = false;
         self.bAddDocs = false;
+        self.bConfirm = false;
     };
     _DisableAll();
     self.bAppealType = true;
