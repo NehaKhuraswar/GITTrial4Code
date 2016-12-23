@@ -18,7 +18,8 @@ namespace RAP.DAL
         private ICommonDBHandler _commondbHandler;
         private IDashboardDBHandler _dashboarddbHandler;
         private IExceptionHandler _eHandler;
-
+        //To be modified as dependency
+        IAccountManagementDBHandler _accountdbHandler = new AccountManagementDBHandler();
         public ApplicationProcessingDBHandler(ICommonDBHandler commondbHandler, IDashboardDBHandler dashboarddbHandler, IExceptionHandler eHandler)
         {
             this._commondbHandler = commondbHandler;
@@ -2218,15 +2219,21 @@ namespace RAP.DAL
                     }
                     _applicantInfo.ApplicantUserInfo = applicantUserInforesult.result;
                     _applicantInfo.bThirdPartyRepresentation =(applicantInfo.bThirdPartyRepresentation != null) ? Convert.ToBoolean(applicantInfo.bThirdPartyRepresentation) : false;
-                    if (_applicantInfo.bThirdPartyRepresentation)
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(model.OwnerPetitionInfo.ApplicantInfo.CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
                     {
-                        var thirdPartyUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ThirdPartyUserID);
-                        if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)
-                        {
-                            result.status = thirdPartyUserInforesult.status;
-                            return result;
-                        }
-                    _applicantInfo.ThirdPartyUser = thirdPartyUserInforesult.result;                  }
+                        _applicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                    }
+                    //if (_applicantInfo.bThirdPartyRepresentation)
+                    //{
+                    //    var thirdPartyUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ThirdPartyUserID);
+                    //    if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)
+                    //    {
+                    //        result.status = thirdPartyUserInforesult.status;
+                    //        return result;
+                    //    }
+                    //_applicantInfo.ThirdPartyUser = thirdPartyUserInforesult.result; 
+                    //}
                     _applicantInfo.bBusinessLicensePaid = (applicantInfo.bBusinessLicensePaid != null) ? Convert.ToBoolean(applicantInfo.bBusinessLicensePaid) : false; 
                     _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                     _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false; 
@@ -2424,12 +2431,18 @@ namespace RAP.DAL
                     }
                     else
                     {
-                        if (model.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation)
+                        if (model.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation )
                         {
                             var thirdpartyUserResult = _commondbHandler.SaveUserInfo(model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser);
                             if (thirdpartyUserResult.status.Status != StatusEnum.Success)
                             {
                                 result.status = thirdpartyUserResult.status;
+                                return result;
+                            }
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = model.OwnerPetitionInfo.ApplicantInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            if (saveThirdPartyResult.status.Status != StatusEnum.Success)
+                            {
+                                result.status = saveThirdPartyResult.status;
                                 return result;
                             }
                             thirdPartyUserID = thirdpartyUserResult.result.UserID;
@@ -2592,7 +2605,7 @@ namespace RAP.DAL
                                 result.status = userResult.status;
                                 return result;
                             }
-                            model.TenantInfo = tenantsInfoM;
+                           
                         }
                         else
                         {
@@ -2607,6 +2620,7 @@ namespace RAP.DAL
                             }
                         }
                     }
+                    model.TenantInfo = tenantsInfoM;
                 }
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };

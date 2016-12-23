@@ -9,7 +9,7 @@ using RAP.Core.Common;
 
 namespace RAP.DAL
 {
-    public class AccountManagementDBHandler
+    public class AccountManagementDBHandler : IAccountManagementDBHandler
     {
         private readonly string _connString;
         CommonDBHandler commondbHandler = new CommonDBHandler();
@@ -826,7 +826,7 @@ namespace RAP.DAL
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
                     var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
-                    if (thirdParty != null)
+                   if(thirdParty != null)
                     {
                         model.CustomerID = CustomerID;
                         model.ThirdPartyUser.UserID = thirdParty.ThirdPartyUserID;

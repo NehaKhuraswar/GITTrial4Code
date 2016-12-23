@@ -311,10 +311,10 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<DocumentM> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null)
+        public ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null)
         {
-            ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
-           
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> docs = new List<DocumentM>();
             try
             {
 
@@ -340,8 +340,7 @@ namespace RAP.DAL
                                 doc.MimeType = item.MimeType;
                                 doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
                                 doc.isUploaded = true;
-                                result.result = doc;
-                                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                                docs.Add(doc);
                             }
                         }
                     }
@@ -352,7 +351,7 @@ namespace RAP.DAL
                         {
                             foreach (var item in _documents)
                             {
-                                DocumentM doc = new DocumentM();
+                                DocumentM doc = new DocumentM();                             
                                 doc.C_ID = item.C_ID;
                                 doc.CustomerID = item.CustomerID;
                                 doc.DocCategory = item.DocCategory;
@@ -364,13 +363,14 @@ namespace RAP.DAL
                                 doc.MimeType = item.MimeType;
                                 doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
                                 doc.isUploaded = true;
-                                result.result = doc;
-                                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                                docs.Add(doc);
                             }
                         }
                     }
 
                 }
+                result.result = docs;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)

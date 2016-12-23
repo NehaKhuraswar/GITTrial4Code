@@ -6,18 +6,18 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.OwnerPetitionInfo.PropertyInfo.CustomerID = self.custDetails.custID;
     
-   
+    self.Calender = masterFactory.Calender;
 
-    var range = 10 / 2;
-    var currentYear = new Date().getFullYear();
-    self.years = [];
-    for (var i = range; i > 0 ; i--) {
+    //var range = 10 / 2;
+    //var currentYear = new Date().getFullYear();
+    //self.years = [];
+    //for (var i = range; i > 0 ; i--) {
 
-        self.years.push(currentYear - i);
-    }
-    for (var i = 0; i < range + 1; i++) {
-        self.years.push(currentYear + i);
-    }
+    //    self.years.push(currentYear - i);
+    //}
+    //for (var i = 0; i < range + 1; i++) {
+    //    self.years.push(currentYear + i);
+    //}
 
     rapFactory.GetOwnerRentIncreaseAndPropertyInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }

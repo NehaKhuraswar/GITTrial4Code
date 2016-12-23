@@ -4,7 +4,9 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.caseinfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
+
     self.StateList = [];
     
     var _GetStateList = function () {
@@ -33,6 +35,40 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
 
     self.Calender = masterFactory.Calender;
 
+
+    $scope.onFileSelected = function ($files, docTitle) {
+        if ($files && $files.length) {
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                var filename = file.name;
+                var mimetype = file.type;
+                var filesize = ((file.size / 1024) / 1024).toFixed(4);
+                //if (filesize < 25) {
+                if (filesize < masterFactory.FileSize) {
+                    var index = filename.lastIndexOf(".");
+                    var ext = filename.substring(index, filename.length).toUpperCase();
+                    //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
+                    if (masterFactory.FileExtensons.indexOf(ext) > -1) {
+                        var document = angular.copy(self.caseinfo.Document);
+                        document.DocTitle = docTitle;
+                        document.DocName = filename;
+                        document.MimeType = mimetype;
+                        document.CustomerID = self.custDetails.custID;
+                        var reader = new FileReader();
+                        reader.readAsArrayBuffer(file);
+                        reader.onload = function (e) {
+                            var arrayBuffer = e.target.result;
+                            var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+                            document.Base64Content = base64String;
+                        }
+                        self.caseinfo.Documents.push(document);
+                    }
+                }
+
+            }
+        }
+    }
+
     $scope.onBusinessProofFileSelect = function ($files) {
         if ($files && $files.length)
         {
@@ -43,7 +79,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
             }
         }
     }
-    $scope.onPropertyServiceFeeFileSelect = function ($files) {
+    $scope.onFileSelect = function ($files) {
         if ($files && $files.length) {
             for (var i = 0; i < $files.length; i++) {
                 var file = $files[i];
@@ -53,7 +89,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     }
 
 
-    function popupateDocument(file, dicTitle) {
+    function popupateDocument(file, docTitle) {
         var filename = file.name;
         var mimetype = file.type;
         var filesize = ((file.size / 1024) / 1024).toFixed(4);
@@ -63,8 +99,8 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
             var ext = filename.substring(index, filename.length).toUpperCase();
             //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
             if (masterFactory.FileExtensons.indexOf(ext) > -1) {
-                var document = self.caseinfo.Document;
-                document.DocTitle = dicTitle;
+                var document = angular.copy(self.caseinfo.Document);
+                document.DocTitle = docTitle;
                 document.DocName = filename;
                 document.MimeType = mimetype;
                 document.CustomerID = self.custDetails.custID;
@@ -137,9 +173,9 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         $scope.model.ownerJustification = true;
         $scope.model.DisableAllCurrent();
         $scope.model.oPetionCurrentStatus.JustificationForRentIncrease = true;
-        $scope.model.tPetionActiveStatus.PetitionCategory = true;
-        $scope.model.tPetionActiveStatus.ImportantInformation = true;
-        $scope.model.tPetionActiveStatus.ApplicantInformation = true;
+        $scope.model.oPetionActiveStatus.PetitionCategory = true;
+        $scope.model.oPetionActiveStatus.ImportantInformation = true;
+        $scope.model.oPetionActiveStatus.ApplicantInformation = true;
     }
  
 }];

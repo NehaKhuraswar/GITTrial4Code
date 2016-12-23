@@ -411,24 +411,26 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 dbResult.result.OwnerPetitionInfo.ApplicantInfo.RAPFee = string.IsNullOrEmpty(RAPFee) ? "69" : RAPFee;
+                model= GetUploadedDocuments(model, "OP_BusinessTaxProof");
+                model = GetUploadedDocuments(model, "OP_PropertyServiceFee");
 
-                if (model.Documents.Where(x => x.DocTitle == "OP_BusinessTaxProof").Count() == 0)
-                {
-                    var docsResult = _commonService.GetDocuments(model.OwnerPetitionInfo.ApplicantInfo.CustomerID, false, "OP_BusinessTaxProof");
-                    if (docsResult.status.Status == StatusEnum.Success)
-                    {
-                        model.Documents.Add(docsResult.result);
-                    }
-                }
-                if (model.Documents.Where(x => x.DocTitle == "OP_PropertyServiceFee").Count() == 0)
-                {
-                    var docsResult = _commonService.GetDocuments(model.OwnerPetitionInfo.ApplicantInfo.CustomerID, false, "OP_PropertyServiceFee");
-                    if (docsResult.status.Status == StatusEnum.Success)
-                    {
-                        model.Documents.Add(docsResult.result);
-                    }
-                }
-                //string[] titles = { "OP_BusinessTaxProof", "OP_PropertyServiceFee" };
+                //if (model.Documents.Where(x => x.DocTitle == "OP_BusinessTaxProof").Count() == 0)
+                //{
+                //    var docsResult = _commonService.GetDocuments(model.OwnerPetitionInfo.ApplicantInfo.CustomerID, false, "OP_BusinessTaxProof");
+                //    if (docsResult.status.Status == StatusEnum.Success && docsResult.result !=null)
+                //    {
+                //        model.Documents.Add(docsResult.result);
+                //    }
+                //}
+                //if (model.Documents.Where(x => x.DocTitle == "OP_PropertyServiceFee").Count() == 0)
+                //{
+                //    var docsResult = _commonService.GetDocuments(model.OwnerPetitionInfo.ApplicantInfo.CustomerID, false, "OP_PropertyServiceFee");
+                //    if (docsResult.status.Status == StatusEnum.Success && docsResult.result !=null)
+                //    {
+                //        model.Documents.Add(docsResult.result);
+                //    }
+                //}
+                ////string[] titles = { "OP_BusinessTaxProof", "OP_PropertyServiceFee" };
                 
                 //var docsResult = _commonService.GetDocuments(model.OwnerPetitionInfo.ApplicantInfo.CustomerID, false, titles);
                 //if (docsResult.status.Status == StatusEnum.Success)
@@ -473,6 +475,7 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 model.OwnerPetitionInfo.RentIncreaseReasons = dbResult.result;
+                model = GetUploadedDocuments(model, "OP_Justification");
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -550,6 +553,10 @@ namespace RAP.Business.Implementation
                         {
                             documents.Add(doc);
                         }
+                        else
+                        {
+                            documents.Add(doc);
+                        }
                     }
                 }
                 model.Documents = documents;
@@ -569,6 +576,7 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
                 var dbResult = _dbHandler.SaveRentIncreaseReasonInfo(model.OwnerPetitionInfo);  
@@ -577,6 +585,23 @@ namespace RAP.Business.Implementation
                     result.status = dbResult.status;
                     return result;
                 }
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.OwnerPetition.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                model.Documents = documents;
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -659,6 +684,26 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        private CaseInfoM GetUploadedDocuments(CaseInfoM model, string DocTitle)
+        {
+            if (model.Documents.Where(x => x.DocTitle == DocTitle).Count() == 0)
+            {
+                var docsResult = _commonService.GetDocuments(model.CustomerID, false, DocTitle);
+                if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                {
+                    foreach (var doc in docsResult.result)
+                    {
+                        if (doc != null)
+                        {
+                            model.Documents.Add(doc);
+                        }
+                    }
+                }
+            }
+            return model;
+        }
+        
         #endregion
     }
 }

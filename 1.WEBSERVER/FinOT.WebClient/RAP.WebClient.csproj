@@ -326,7 +326,6 @@
     <Content Include="Scripts\FileAPI.js" />
     <Content Include="Scripts\FileAPI.min.js" />
     <Content Include="Scripts\functions.js" />
-    <Content Include="js\tooltips.json" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -347,7 +346,6 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\textcounter.js" />
-    <Content Include="Scripts\tooltip.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
     <Content Include="Views\Account\ForgetPassword.html" />
     <Content Include="Views\Account\ChangePassword.html" />
@@ -430,7 +428,6 @@
     <Content Include="Views\Home\_MainMenu.cshtml" />
     <Content Include="Views\Home\_MenuItemDisplay.cshtml" />
     <Content Include="Views\Home\_UserMenu.cshtml" />
-    <Content Include="Scripts\tooltips.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
@@ -448,7 +445,6 @@
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Scripts\version.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

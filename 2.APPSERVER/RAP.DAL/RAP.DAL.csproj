@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Dashboard.dbml</DependentUpon>
     </Compile>
+    <Compile Include="IAccountManagementDBHandler.cs" />
     <Compile Include="IApplicationProcessingDBHandler.cs" />
     <Compile Include="IDashboardDBHandler.cs" />
     <Compile Include="ICommonDBHandler.cs">

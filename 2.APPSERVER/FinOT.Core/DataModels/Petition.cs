@@ -30,6 +30,7 @@ namespace RAP.Core.DataModels
 
         public string CaseID { get; set; }
         public int C_ID { get; set; }
+        public int CustomerID { get; set; }
         public bool Selected { get; set; }
         public int PetitionCategoryID { get; set; }
         public DateTime CreatedDate { get; set; }

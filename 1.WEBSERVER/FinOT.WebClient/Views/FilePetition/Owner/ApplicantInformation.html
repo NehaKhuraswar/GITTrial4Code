@@ -67,27 +67,34 @@
                 </div>
             </div>
 
-            <div class="subhead">
+            <div class="subhead no-top-margin">
                 <h4>Your representative</h4>
-            </div>
-            <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
-                <p class="input-label">Is anybody representing you?</p>
-                <div class="form-group-radio vertical clearfix">
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="true" /><i></i><span>Yes</span>
-                    </label>
+                <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
+                <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != '0'" class="btn-link btn-edit">Edit</a>
 
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="false" /><i></i> <span>No</span>
-                    </label>
-                    <div class="clear"></div>
-                </div>
             </div>
+            <div>
+                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == '0'">                   
+                        <p class=" input-label">
+                            Is anybody representing you?
+                        </p>
+                        <div class="form-group-radio vertical clearfix">
+                            <label>
+                                <input type="radio" class="input-field"
+                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label>
+                                <input type="radio" class="input-field"
+                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                            <div class="clear"></div>
+                        </div>                    
+                </div>
+                               
             <div id="representative-info">
                 <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
-                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}} && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation">
+                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == '0'" >
                     <div class="field-group">
                         <label for="representative_firstname">Name</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />
@@ -114,7 +121,9 @@
 
                     <div class="field-group">
                         <label for="representative_state">State</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State" required />
+                        <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                                ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State"
+                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                     </div>
 
                     <div class="field-group">
@@ -132,14 +141,25 @@
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                     </div>
                 </div>
+                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != '0'">
+                  
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
+                        <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
+                        <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                    </div>  
                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                    <a ng-click="" class="btn-link btn-edit">Edit</a>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
                     <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
                     <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
                 </div>
+               
             </div>
 
             <div class="field-group">
@@ -166,12 +186,21 @@
                 <div class="field-addfile">
                     <div class="input-file-wrapper">
                         <span class="btn-link">Attach proof of payment of your business tax</span>
-                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onBusinessProofFileSelect($files)" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_BusinessTaxProof')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                     </div>
-                    <div>
-                        <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID"> {{doc.DocName}}
-                        &nbsp;&nbsp; <button ng-show="doc.isUploaded class=" btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
-                         </label>
+                    <div class="field-group">
+                        <table class="table table-condensed nopadding-bottom">
+                            <tbody>
+                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'}">
+                                    <td class="nopadding-left">
+                                        {{item.DocName}}
+                                    </td>
+                                    <td>
+                                        <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>                        
                   </div>
                 </div>
@@ -196,14 +225,22 @@
             <div class="field-addfile">
                 <div class="input-file-wrapper">
                     <span class="btn-link">Attach proof of payment of your rental property service fee</span>
-                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onPropertyServiceFeeFileSelect($files)" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_PropertyServiceFee')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                 </div>
-                <!--<div>
-                    <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID">
-                        {{doc.DocName}}
-                        &nbsp;&nbsp; <button ng-show="doc.isUploaded && (doc.DocTitle == OP_PropertyServiceFee) " class="btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
-                    </label>
-                </div>-->
+                <div class="field-group">
+                    <table class="table table-condensed nopadding-bottom">
+                        <tbody>
+                            <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_PropertyServiceFee'}">
+                                <td class="nopadding-left">
+                                    {{item.DocName}}
+                                </td>
+                                <td>
+                                    <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
