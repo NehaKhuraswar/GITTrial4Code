@@ -74,7 +74,7 @@
 
             </div>
             <div>
-                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == '0'">                   
+                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser == null">                   
                         <p class=" input-label">
                             Is anybody representing you?
                         </p>
@@ -94,7 +94,7 @@
                                
             <div id="representative-info">
                 <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
-                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == '0'" >
+                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser == null" >
                     <div class="field-group">
                         <label for="representative_firstname">Name</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />
@@ -251,21 +251,21 @@
                 <div class="col-sm-4 col-xs-12">
                     <div class="field-group">
                         <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month"
-                                class="custom-select" data-placeholder="Month"
+                                data-placeholder="Month"
                                 ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
                     <div class="field-group">                      
                         <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day"
-                             class="custom-select" data-placeholder="Day"
-                                ng-options="day for day in  Ctrl.Calender.Days"></select>
+                             data-placeholder="Day"
+                             ng-options="day for day in  Ctrl.Calender.Days"></select>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
                     <div class="field-group">                                            
                         <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year"
-                               class="custom-select" data-placeholder="Year"
+                               data-placeholder="Year"
                                 ng-options="year for year in  Ctrl.Calender.Years"></select>
                     </div>
                 </div>

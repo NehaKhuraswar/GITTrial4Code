@@ -517,7 +517,16 @@ namespace RAP.Business.Implementation
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                result = _dbHandler.GetOwnerRentIncreaseAndPropertyInfo(model);
+                var dbResult = _dbHandler.GetOwnerRentIncreaseAndPropertyInfo(model);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model = dbResult.result;
+                model = GetUploadedDocuments(model, "OP_RAPNotice");
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
@@ -552,11 +561,11 @@ namespace RAP.Business.Implementation
                         if (docUploadResut.status.Status == StatusEnum.Success)
                         {
                             documents.Add(doc);
-                        }
-                        else
-                        {
-                            documents.Add(doc);
-                        }
+                        }                       
+                    }
+                    else
+                    {
+                        documents.Add(doc);
                     }
                 }
                 model.Documents = documents;
@@ -641,6 +650,7 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
                 var dbResult = _dbHandler.SaveOwnerRentIncreaseAndUpdatePropertyInfo(model.OwnerPetitionInfo.PropertyInfo);
@@ -648,6 +658,23 @@ namespace RAP.Business.Implementation
                 {
                     result.status = dbResult.status;
                     return result;
+                }
+
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.OwnerPetition.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }                       
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
                 }
                 model.OwnerPetitionInfo.PropertyInfo = dbResult.result;
                 result.result = model;
