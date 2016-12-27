@@ -5,7 +5,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.CaseID;
-
+    self.bCaseInfo = false;
 
     self.GetTenantResponseApplicationInfo = function (CaseNumber) {
         rapFactory.GetTenantResponseApplicationInfo(CaseNumber, self.custDetails.custID).then(function (response) {
@@ -20,6 +20,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
                 self.caseinfo.TenantResponseInfo.ThirdPartyUser = self.custDetails.User;
             }
             self.caseinfo.TenantResponseInfo.CustomerID = self.custDetails.custID;
+            self.bCaseInfo = true;
 
         });
     }

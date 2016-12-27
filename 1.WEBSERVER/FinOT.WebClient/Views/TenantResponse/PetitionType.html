@@ -11,7 +11,8 @@
         <div class="form-group-checkbox vertical full-width clearfix">
             <div class="checkbox-wrapper no-bottom-margin">
                 <label for="behalf_of_respondant">
-                    <input type="checkbox" name="behalf_of_respondant" id="behalf_of_respondant" value="Yes" /><i></i><span>This form is being submitted by the third-party representative on behalf of the respondant.</span>
+                    <input type="checkbox" name="behalf_of_respondant" id="behalf_of_respondant" value="true"
+                           ng-model="Ctrl.bCaseFiledByThirdParty" /><i></i><span>This form is being submitted by the third-party representative on behalf of the respondant.</span>
                 </label>
             </div>
         </div>
@@ -20,7 +21,5 @@
 
 
 <div class="step-footer">
-    <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" />
-</div>
-</form>
-                        
+    <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.Continue()" />
+</div>              

@@ -12,8 +12,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          var CaseDetails;
          var CityUser;
          var IsEdit = false;
-
-         
+         var bCaseFiledByThirdParty = false;
         
           // public
           return {
