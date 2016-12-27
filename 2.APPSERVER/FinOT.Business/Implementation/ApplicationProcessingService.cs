@@ -481,6 +481,35 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<bool> SaveTenantResponseRentalHistoryInfo(TenantResponseRentalHistoryM rentalHistory, int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.SaveTenantResponseRentalHistoryInfo(rentalHistory, CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID)
+        {
+            ReturnResult<TenantResponseRentalHistoryM> result = new ReturnResult<TenantResponseRentalHistoryM>();
+            try
+            {
+                result = _dbHandler.GetTenantResponseRentalHistoryInfo(TenantResponseID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         #endregion TenantResponseMethods
 
         #region Common File Petition methods

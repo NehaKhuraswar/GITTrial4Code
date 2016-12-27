@@ -35,14 +35,14 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
     }
     _GetRentalHistoryInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
 
-    self.ContinueToLostServices = function () {
+    self.ContinueToReview = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
         if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
             self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
         }
-        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
+        rapFactory.SaveTenantResponseRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bRentalHistory = false;
             $scope.model.bLostServices = true;

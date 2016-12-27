@@ -795,6 +795,44 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<TenantRentalHistoryM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("gettenantresponserentalhistoryinfo/{TenantResponseID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantResponseRentalHistoryInfo(int TenantResponseID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TenantResponseRentalHistoryM> transaction = new TranInfo<TenantResponseRentalHistoryM>();
+            ReturnResult<TenantResponseRentalHistoryM> result = new ReturnResult<TenantResponseRentalHistoryM>();
+            try
+            {
+
+                result = _service.GetTenantResponseRentalHistoryInfo(TenantResponseID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<TenantResponseRentalHistoryM>>(ReturnCode, transaction);
+        }
         [AllowAnonymous]
         [Route("gettenantlostservice/{PetitionId:int}/{CustomerID:int}")]
         [HttpGet]
@@ -1207,6 +1245,44 @@ namespace RAP.API.Controllers
                     transaction.status = false;
                     transaction.AddException(result.status.StatusMessage);  
                     
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("savetenantresponserentalhistoryinfo/{CustomerID:int}")]
+        [HttpPost]
+        public HttpResponseMessage SaveTenantResponseRentalHistoryInfo([FromBody] TenantResponseRentalHistoryM rentalHistory, [FromUri]int CustomerID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                result = _service.SaveTenantResponseRentalHistoryInfo(rentalHistory, CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
                 }
             }
             catch (Exception ex)

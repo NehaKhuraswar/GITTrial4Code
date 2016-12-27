@@ -3,21 +3,21 @@ var rapTRrentalhistoryFactory = ['blockUI', 'ajaxService', function (blockUI, aj
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
     
-      var _SaveTenantRentalHistoryInfo = function (model, custID) {
+      var _SaveTenantResponseRentalHistoryInfo = function (model, custID) {
           blockUI.start();
 
-          var url = _routePrefix + '/saverentalhistoryinfo/' + custID;
+          var url = _routePrefix + '/savetenantresponserentalhistoryinfo/' + custID;
 
           return ajax.Post(model, url)
           .finally(function () {
               blockUI.stop();
           });
       }
-      var _GetRentalHistoryInfo = function (petitionID) {
+      var _GetTenantResponseRentalHistoryInfo = function (TenantResponseID) {
           blockUI.start();
 
-          var url = _routePrefix + '/getrentalhistoryinfo';
-          if (!(petitionID == null || petitionID == undefined)) { url = url + '/' + petitionID; }
+          var url = _routePrefix + '/gettenantresponserentalhistoryinfo';
+          if (!(TenantResponseID == null || TenantResponseID == undefined)) { url = url + '/' + TenantResponseID; }
 
           return ajax.Get(url)
           .finally(function () {
@@ -34,8 +34,8 @@ var rapTRrentalhistoryFactory = ['blockUI', 'ajaxService', function (blockUI, aj
               blockUI.stop();
           });
       }
-      factory.SaveTenantRentalHistoryInfo = _SaveTenantRentalHistoryInfo;
-      factory.GetRentalHistoryInfo = _GetRentalHistoryInfo;
+      factory.SaveTenantResponseRentalHistoryInfo = _SaveTenantResponseRentalHistoryInfo;
+      factory.GetTenantResponseRentalHistoryInfo = _GetTenantResponseRentalHistoryInfo;
       factory.GetEmptyTenantRentalIncrementInfo = _GetEmptyTenantRentalIncrementInfo;
     return factory;
 }];

@@ -51,14 +51,14 @@ namespace RAP.Core.DataModels
     {
         public TenantResponseRentalHistoryM()
         {
-            RentIncreases = new List<TenantRentIncreaseInfoM>();
+            RentIncreases = new List<TenantResponseRentIncreaseInfoM>();
         }
         public int TenantResponseID { get; set; }
         public CustomDate MoveInDate { get; set; }
         public decimal InitialRent { get; set; }
         public bool bRAPNoticeGiven { get; set; }
         public CustomDate RAPNoticeGivenDate { get; set; }
-        public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
+        public List<TenantResponseRentIncreaseInfoM> RentIncreases { get; set; }
     }
 
     public class TenantResponseRentIncreaseInfoM

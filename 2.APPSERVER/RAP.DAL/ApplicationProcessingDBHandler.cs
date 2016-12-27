@@ -2276,6 +2276,48 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID)
+        {
+            ReturnResult<TenantResponseRentalHistoryM> result = new ReturnResult<TenantResponseRentalHistoryM>();
+            TenantResponseRentalHistoryM tenantResponseRentalHistory = new TenantResponseRentalHistoryM();
+            try
+            {
+                var TenantResponseRentalHistoryDB = _dbContext.TenantResponseRentalHistories.Where(x => x.TenantResponseID == TenantResponseID).FirstOrDefault();
+                if (TenantResponseRentalHistoryDB != null)
+                {
+                    tenantResponseRentalHistory.TenantResponseID = TenantResponseRentalHistoryDB.TenantResponseID;
+                    tenantResponseRentalHistory.InitialRent = TenantResponseRentalHistoryDB.InitialRent;
+                    tenantResponseRentalHistory.bRAPNoticeGiven = TenantResponseRentalHistoryDB.bRAPNoticeGiven;
+                    tenantResponseRentalHistory.RAPNoticeGivenDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantResponseRentalHistoryDB.RAPNoticeGivenDate));
+                    
+                    var TenantRentalIncrementInfoDB = _dbContext.TenantResponseRentalIncrementInfos.Where(x => x.TenantResponseID == TenantResponseID).ToList();
+                    foreach (var item in TenantRentalIncrementInfoDB)
+                    {
+                        TenantResponseRentIncreaseInfoM objTenantRentIncreaseInfoM = new TenantResponseRentIncreaseInfoM();
+                        objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
+                        objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
+                        objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
+                        objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
+                        objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
+
+                        tenantResponseRentalHistory.RentIncreases.Add(objTenantRentIncreaseInfoM);
+                    }
+                }
+
+                result.result = tenantResponseRentalHistory;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+
+        }
         #endregion "TenantResponseGet"
 
         #region "TenantResponseSave"
@@ -2495,6 +2537,92 @@ namespace RAP.DAL
                     PageStatusNew.TenantResponseID = message.TenantResponseID;
                     _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
                     _dbContext.SubmitChanges();
+                }
+
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+
+        }
+        public ReturnResult<bool> SaveTenantResponseRentalHistoryInfo(TenantResponseRentalHistoryM rentalHistory, int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var rentalHistoryRecord = _dbContext.TenantResponseRentalHistories.Where(x => x.TenantResponseID == rentalHistory.TenantResponseID).FirstOrDefault();
+                if (rentalHistoryRecord != null)
+                {
+                    rentalHistoryRecord.TenantResponseID = rentalHistory.TenantResponseID;
+                    rentalHistoryRecord.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    rentalHistoryRecord.InitialRent = rentalHistory.InitialRent;
+                    rentalHistoryRecord.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    rentalHistoryRecord.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
+                    rentalHistoryRecord.CreatedDate = DateTime.Now;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    TenantResponseRentalHistory rentalHistoryDB = new TenantResponseRentalHistory();
+                    rentalHistoryDB.TenantResponseID = rentalHistory.TenantResponseID;
+                    rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
+                    rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    rentalHistoryDB.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
+                    rentalHistoryDB.CreatedDate = DateTime.Now;
+                    _dbContext.TenantResponseRentalHistories.InsertOnSubmit(rentalHistoryDB);
+                    _dbContext.SubmitChanges();
+                }
+                var rentIncrementRecord = _dbContext.TenantResponseRentalIncrementInfos.Where(x => x.TenantResponseID == rentalHistory.TenantResponseID).ToList();
+                if (rentIncrementRecord != null)
+                {
+                    foreach (var item in rentIncrementRecord)
+                    {
+                        _dbContext.TenantResponseRentalIncrementInfos.DeleteOnSubmit(item);
+                        _dbContext.SubmitChanges();
+                    }
+                }
+
+                foreach (var item in rentalHistory.RentIncreases)
+                {
+                    TenantResponseRentalIncrementInfo rentIncrementDB = new TenantResponseRentalIncrementInfo();
+                    rentIncrementDB.TenantResponseID = rentalHistory.TenantResponseID;
+                    rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
+                    if (item.bRentIncreaseNoticeGiven)
+                    {
+                        rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
+                            item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
+
+                    }
+                    rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
+                            item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
+                    rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
+                    rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
+
+                    _dbContext.TenantResponseRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
+                    _dbContext.SubmitChanges();
+
+
+                    var PageStatus = _dbContext.TenantResponsePageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                    if (PageStatus != null)
+                    {
+                        PageStatus.RentHistory = true;
+                        _dbContext.SubmitChanges();
+                    }
+                    else
+                    {
+                        var PageStatusNew = new TenantResponsePageSubmissionStatus();
+                        PageStatusNew.CustomerID = CustomerID;
+                        PageStatusNew.RentHistory = true;
+                        _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                        _dbContext.SubmitChanges();
+                    }
                 }
 
                 result.result = true;
