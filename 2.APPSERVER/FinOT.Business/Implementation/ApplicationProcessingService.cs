@@ -279,6 +279,7 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
         public ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
@@ -421,6 +422,24 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        #region TenantResponseMethods
+
+        public ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetTenantResponseApplicationInfo(CaseNumber, CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        #endregion TenantResponseMethods
 
         #region Common File Petition methods
         public ReturnResult<CaseInfoM> GetPetitioncategory()

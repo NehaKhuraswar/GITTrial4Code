@@ -25,6 +25,7 @@ namespace RAP.Core.Services
        // ReturnResult<List<CaseInfoM>> GetCasesforPublicDashboard(int CustomerID);
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
+        ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
         ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);
         ReturnResult<CaseInfoM> GetAppealServe(int AppealID);

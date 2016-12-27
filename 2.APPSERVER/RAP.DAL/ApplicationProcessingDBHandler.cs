@@ -2151,8 +2151,108 @@ namespace RAP.DAL
         }
         #endregion   
       
-  
-        #region Petition category  
+        #region "TenantResponseGet"
+        public ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.CaseID == CaseNumber).FirstOrDefault();
+                if (CaseDetailsDB == null)
+                {
+                    result.result = null;
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                CaseInfoM caseInfo = new CaseInfoM();
+                caseInfo.C_ID = CaseDetailsDB.C_ID;
+                caseInfo.CaseID = CaseDetailsDB.CaseID;
+
+                List<UnitTypeM> _units = new List<UnitTypeM>();
+                List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
+
+                var units = _dbContext.UnitTypes;
+                if (units == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var unit in units)
+                    {
+                        UnitTypeM _unit = new UnitTypeM();
+                        _unit.UnitTypeID = unit.UnitTypeID;
+                        _unit.UnitDescription = unit.Description;
+                        _units.Add(_unit);
+                    }
+
+                }
+
+                var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                if (rangeDB == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var item in rangeDB)
+                    {
+                        NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                        obj.RangeID = item.RangeID;
+                        obj.RangeDesc = item.RangeDesc;
+                        _rangeOfUnits.Add(obj);
+                    }
+                }
+                var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
+                                                && x.IsSubmitted == false).FirstOrDefault();
+                TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
+                if (TenantResponseInfoDB != null)
+                {
+                    tenantResponseInfo.TenantResponseID = TenantResponseInfoDB.TenantResponseID;
+                    tenantResponseInfo.bThirdPartyRepresentation = (bool)TenantResponseInfoDB.bThirdPartyRepresentation;
+                    if (tenantResponseInfo.bThirdPartyRepresentation)
+                    {
+                        tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
+                    }
+                    tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
+                    tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
+                    tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                    if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
+                    {
+                        tenantResponseInfo.bSameAsOwnerInfo = true;
+                    }
+                    tenantResponseInfo.NumberOfUnits = (int)TenantResponseInfoDB.NumberOfUnits;
+                    tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
+                    tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
+                    tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
+                    tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
+                    tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
+                }
+                tenantResponseInfo.UnitTypes = _units;
+                tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
+
+                
+                caseInfo.TenantResponseInfo = tenantResponseInfo;
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        #endregion "TenantResponseGet"
+
+        #region "TenantResponseSave"
+        #endregion "TenantResponseSave"
+
+        #region Petition category
         public ReturnResult<CaseInfoM> GetPetitioncategory()
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();

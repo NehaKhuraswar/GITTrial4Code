@@ -4,26 +4,26 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    
-    
+    self.CaseID;
 
-    var _GetTenantApplicationInfo = function (custID) {
-        rapFactory.GetTenantApplicationInfo(custID).then(function (response) {
+
+    self.GetTenantResponseApplicationInfo = function (CaseNumber) {
+        rapFactory.GetTenantResponseApplicationInfo(CaseNumber, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            self.caseinfo.TenantPetitionInfo = response.data;
+            self.caseinfo = response.data;
             if (self.caseinfo.bCaseFiledByThirdParty == false) {
-                self.caseinfo.TenantPetitionInfo.ApplicantUserInfo = self.custDetails.User;
+                self.caseinfo.TenantResponseInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
             }
             else {
-                self.caseinfo.TenantPetitionInfo.ThirdPartyUser = self.custDetails.User;
+                self.caseinfo.TenantResponseInfo.ThirdPartyUser = self.custDetails.User;
             }
-            self.caseinfo.TenantPetitionInfo.CustomerID = self.custDetails.custID;
-            
+            self.caseinfo.TenantResponseInfo.CustomerID = self.custDetails.custID;
+
         });
     }
-    _GetTenantApplicationInfo(self.custDetails.custID);
+   // _GetTenantResponseApplicationInfo(self.custDetails.custID);
 
     self.StateList = [];
     var _GetStateList = function () {
@@ -32,15 +32,13 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
                 return;
             }
             self.StateList = response.data;
-            
+
         });
     }
     _GetStateList();
-    
-    self.ChangeSameAsPropertyOwner = function ()
-    {
-        if (self.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo == true)
-        {
+
+    self.ChangeSameAsPropertyOwner = function () {
+        if (self.caseinfo.TenantResponseInfo.bSameAsOwnerInfo == true) {
             //self.caseinfo.TenantPetitionInfo.PropertyManager.FirstName = self.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.LastName = self.caseinfo.TenantPetitionInfo.OwnerInfo.LastName;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1 = self.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1;
@@ -50,19 +48,18 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             //self.caseinfo.TenantPetitionInfo.PropertyManager.Zip = self.caseinfo.TenantPetitionInfo.OwnerInfo.Zip;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber = self.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.Email = self.caseinfo.TenantPetitionInfo.OwnerInfo.Email;
-            self.caseinfo.TenantPetitionInfo.PropertyManager = self.caseinfo.TenantPetitionInfo.OwnerInfo;
+            self.caseinfo.TenantResponseInfo.PropertyManager = self.caseinfo.TenantPetitionInfo.OwnerInfo;
         }
-        else
-        {
-            self.caseinfo.TenantPetitionInfo.PropertyManager.FirstName = "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.LastName = "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1 = "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2 = "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.State = "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.City = "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.Zip = "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber= "";
-            self.caseinfo.TenantPetitionInfo.PropertyManager.Email = "";
+        else {
+            self.caseinfo.TenantResponseInfo.PropertyManager.FirstName = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.LastName = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.AddressLine1 = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.AddressLine2 = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.State = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.City = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.Zip = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.PhoneNumber = "";
+            self.caseinfo.TenantResponseInfo.PropertyManager.Email = "";
         }
 
     }
@@ -72,7 +69,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
         $location.path("/editcustomerinformation");
     }
 
-    self.ContinueToGroundsforPetition = function () {
+    self.ContinueToExemptionContested = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
@@ -82,8 +79,8 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             $scope.model.tPetionActiveStatus.PetitionCategory = true;
             $scope.model.tPetionActiveStatus.ImportantInformation = true;
             $scope.model.tPetionActiveStatus.ApplicantInformation = true;
-           
-         });     
+
+        });
     }
 }];
 var rapTRApplicationInfoController_resolve = {

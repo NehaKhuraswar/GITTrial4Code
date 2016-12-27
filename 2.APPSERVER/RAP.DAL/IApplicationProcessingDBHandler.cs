@@ -17,6 +17,7 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
+        ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst();
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);
         ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId);

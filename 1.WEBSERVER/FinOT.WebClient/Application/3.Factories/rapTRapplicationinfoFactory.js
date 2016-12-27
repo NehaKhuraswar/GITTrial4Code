@@ -13,10 +13,10 @@ var rapTRapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, 
             blockUI.stop();
         });
     }
-    var _GetTenantApplicationInfo = function (customerid) {
+    var _GetTenantResponseApplicationInfo = function (CaseNumber, customerid) {
         blockUI.start();
 
-        var url = _routePrefix + '/getapplicationinfo';
+        var url = _routePrefix + '/gettenantresponseapplicationinfo/' + CaseNumber;
         if (!(customerid == null || customerid == undefined)) { url = url + '/' + customerid; }
 
         return ajax.Get(url)
@@ -39,7 +39,7 @@ var rapTRapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, 
 
     factory.GetCaseInfo = _GetCaseInfo;
     factory.SaveApplicationInfo = _SaveApplicationInfo;
-    factory.GetTenantApplicationInfo = _GetTenantApplicationInfo;
+    factory.GetTenantResponseApplicationInfo = _GetTenantResponseApplicationInfo;
     
     return factory;
 }];
