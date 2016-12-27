@@ -65,6 +65,7 @@
     <Compile Include="DataModels\OTRequest.cs" />
     <Compile Include="DataModels\OwnerPetition.cs" />
     <Compile Include="DataModels\Dashboard.cs" />
+    <Compile Include="DataModels\TenantResponse.cs" />
     <Compile Include="DataModels\TenantPetition.cs" />
     <Compile Include="FinServices\APIService.cs" />
     <Compile Include="FinServices\LogService.cs" />

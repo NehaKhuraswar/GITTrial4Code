@@ -16,7 +16,7 @@ namespace RAP.Core.DataModels
             OwnerPetitionRentalIncrementInfo = new OwnerPetitionRentalIncrementInfoM();
             Document = new DocumentM();
             OwnerResponseInfo = new OwnerResponseInfoM();
-           
+            TenantResponseInfo = new TenantResponseInfoM();           
         }
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
         private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();  
@@ -62,6 +62,7 @@ namespace RAP.Core.DataModels
         public OwnerPetitionRentalIncrementInfoM OwnerPetitionRentalIncrementInfo { get; set; }
 
         public OwnerResponseInfoM OwnerResponseInfo { get; set; }
+        public TenantResponseInfoM TenantResponseInfo { get; set; }
         public TenantAppealInfoM TenantAppealInfo
         {
             get
