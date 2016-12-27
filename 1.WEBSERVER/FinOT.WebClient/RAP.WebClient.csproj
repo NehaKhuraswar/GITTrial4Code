@@ -181,6 +181,7 @@
     <Content Include="Application\3.Factories\rapcollaboratorFactory.js" />
     <Content Include="Application\3.Factories\rapappealtypeFactory.js" />
     <Content Include="Application\3.Factories\raploginCityUserFactory.js" />
+    <Content Include="Application\3.Factories\rapOwnerDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapOwnerVerificationFactory.js" />
     <Content Include="Application\3.Factories\rapforgetPasswordFactory.js" />
     <Content Include="Application\3.Factories\rapresendpinFactory.js" />

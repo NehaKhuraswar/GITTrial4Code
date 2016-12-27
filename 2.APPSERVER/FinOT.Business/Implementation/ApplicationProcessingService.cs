@@ -395,6 +395,8 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        
         #endregion
 
         #region Get Owner Petition Methods
@@ -525,6 +527,25 @@ namespace RAP.Business.Implementation
                 }
                 model = dbResult.result;
                 model = GetUploadedDocuments(model, "OP_RAPNotice");
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<CaseInfoM> GetOwnerAdditionalDocuments(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                model = GetUploadedDocuments(model, "OP_AdditionalDocuments");
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -689,6 +710,40 @@ namespace RAP.Business.Implementation
             }
         }
 
+        public ReturnResult<CaseInfoM> SaveOwnerAdditionalDocuments(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
+            try
+            {
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.OwnerPetition.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                model.Documents = documents;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();

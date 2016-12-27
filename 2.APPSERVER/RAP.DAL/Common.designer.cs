@@ -42,6 +42,9 @@ namespace RAP.DAL
     partial void InsertDocument(Document instance);
     partial void UpdateDocument(Document instance);
     partial void DeleteDocument(Document instance);
+    partial void InsertDocDescription(DocDescription instance);
+    partial void UpdateDocDescription(DocDescription instance);
+    partial void DeleteDocDescription(DocDescription instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -103,6 +106,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<Document>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DocDescription> DocDescriptions
+		{
+			get
+			{
+				return this.GetTable<DocDescription>();
 			}
 		}
 	}
@@ -999,6 +1010,92 @@ namespace RAP.DAL
 					this._MimeType = value;
 					this.SendPropertyChanged("MimeType");
 					this.OnMimeTypeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DocDescriptions")]
+	public partial class DocDescription : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DescriptionID;
+		
+		private string _Description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDescriptionIDChanging(int value);
+    partial void OnDescriptionIDChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public DocDescription()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DescriptionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DescriptionID
+		{
+			get
+			{
+				return this._DescriptionID;
+			}
+			set
+			{
+				if ((this._DescriptionID != value))
+				{
+					this.OnDescriptionIDChanging(value);
+					this.SendPropertyChanging();
+					this._DescriptionID = value;
+					this.SendPropertyChanged("DescriptionID");
+					this.OnDescriptionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
 				}
 			}
 		}

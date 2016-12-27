@@ -72,6 +72,22 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
+
+       public ReturnResult<List<string>> GetDocDescription()
+       {
+           ReturnResult<List<string>> result = new ReturnResult<List<string>>();
+           try
+           {
+               result = _dbHandler.GetDocDescription();
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               LogError(result.status);
+               return result;
+           }
+       }
         
     }
 }

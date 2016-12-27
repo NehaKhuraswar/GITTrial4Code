@@ -141,7 +141,7 @@
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                     </div>
                 </div>
-                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != '0'">
+                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null">
                   
                         <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
                         <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>

@@ -14,6 +14,7 @@ namespace RAP.DAL
        ReturnResult<DocumentM> SaveDocument(DocumentM doc);
        ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null);
        ReturnResult<bool> PetitionFiledActivity(int C_ID, int CaseFileBy);
+       ReturnResult<List<string>> GetDocDescription();
        
     }
 }

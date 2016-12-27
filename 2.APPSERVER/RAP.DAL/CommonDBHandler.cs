@@ -382,5 +382,31 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<List<string>> GetDocDescription()
+        {
+            ReturnResult<List<string>> result = new ReturnResult<List<string>>();
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    var descriptions = db.DocDescriptions.Select(r => r.Description);
+
+                    if (descriptions != null && descriptions.Count() > 0)
+                    {
+                        result.result = descriptions.ToList();
+                    }
+                }
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
     }
 }

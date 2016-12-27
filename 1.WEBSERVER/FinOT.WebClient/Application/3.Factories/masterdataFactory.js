@@ -155,7 +155,14 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         return blob;
     }
 
-
+    var _GetDocDescription = function () {
+        blockUI.start();
+        var url = 'api/applicationprocessing' + '/GetDocDescription';
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     var _Years = function () {
         var range = 5;
         var currentYear = new Date().getFullYear();
@@ -223,6 +230,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.GetDocument = _getDocument;
     factory.ResendPin = _ResendPin;
     factory.FileExtensons = _fileExtensons;
-    factory.FileSize = _fileSize;   
+    factory.FileSize = _fileSize;
+    factory.DocDescription = _GetDocDescription;
     return factory;
 }];

@@ -13,9 +13,12 @@
                 <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
                     <div class="step-content step1">
 
-                        <div class="subhead no-top-margin">
-                            <h4>Boberta Johnson</h4>
-                            <p class="no-bottom-margin">1401 Jackson Street Unit C, Oakland, CA 94612</p>
+                        <div class="subhead no-top-margin">                             
+                                <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
+                                <p class="no-bottom-margin">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
+                                 {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}},
+                                 {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
+                                 {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>                              
                         </div>
 
                         <div class="subhead no-top-margin">
@@ -29,7 +32,7 @@
                         <div class="field-group">
                             <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
                             <div class="full-width">
-                                <select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
+                                <!--<select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
                                     <option value="Lease" selected>Lease</option>
                                     <option value="Notice">Notice</option>
                                     <option value="Paystub">Paystub</option>
@@ -41,13 +44,17 @@
                                     <option value="Letter">Letter</option>
                                     <option value="Email (s)">Email (s)</option>
                                     <option value="ext Message (s)">ext Message (s)</option>
-                                </select>
+                                </select>-->
+                       
+                                <select ng-model="Ctrl.description1"
+                                        data-placeholder="Description"
+                                        ng-options="desc for desc in Ctrl.DocDescriptions"></select>
                             </div>
                         </div>
 
-                        <div class="field-group mar-bottom-40">
+                        <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == '<--Select-->'">
                             <label for="document_description">If none of the above options apply, please provide a description of the file that you are uploading below:</label>
-                            <textarea name="document_description" id="document_description" class="field-input textarea" rows="8"></textarea>
+                            <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
                         </div>
 
                         <div class="field-group no-bottom-margin">
@@ -62,8 +69,22 @@
                             <div class="field-addfile">
                                 <div class="input-file-wrapper">
                                     <span class="btn-link">Attach document</span>
-                                    <input type="file" id="attach_documentation" name="attach_documentation" />
+                                    <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'OP_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                                 </div>
+                                <div class="field-group">
+                                    <table class="table table-condensed nopadding-bottom">
+                                        <tbody>
+                                            <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_AdditionalDocuments'}">
+                                                <td class="nopadding-left">
+                                                    {{item.DocName}}
+                                                </td>
+                                                <td>
+                                                    <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>            
                             </div>
                         </div><!-- .field-group -->
                     </div>
