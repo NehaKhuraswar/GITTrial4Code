@@ -1,0 +1,79 @@
+﻿<div class="container">
+
+    <div id="SkipToMainContent">
+
+        <div class="application-form-wrapper">
+
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div>
+                        <ul class="application-steps">
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.PetitionType, 'current' : !Ctrl.tPetionActiveStatus.PetitionType && Ctrl.bImpInfo}">
+                                <a ng-click="Ctrl.showPetitionType()">Petition Type</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bImpInfo}">
+                                <a ng-click="Ctrl.showImpInfo()">Important Information</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bAppInfo}">
+                                <a ng-click="Ctrl.showAppInfo()">Applicant Information</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ExemptionContested, 'current' : !Ctrl.tPetionActiveStatus.ExemptionContested && Ctrl.bExemptionContested}">
+                                <a ng-click="Ctrl.showExemptionContested()">Exemption Contested</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.RentHistory, 'current' : !Ctrl.tPetionActiveStatus.RentHistory && Ctrl.bRentalHistory}">
+                                <a ng-click="Ctrl.showRentalHistory()">Rental History</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.tPetionActiveStatus.AdditionalDocumentation && Ctrl.bAddDocuments}">
+                                <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Review, 'current' : !Ctrl.tPetionActiveStatus.Review && Ctrl.bReview}">
+                                <a ng-click="Ctrl.showReview()">Review</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Verification, 'current' : !Ctrl.tPetionActiveStatus.Verification && Ctrl.bVerification}">
+                                <a ng-click="Ctrl.showVerification()">Verification</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <div class="application-step step-1">
+                        <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">
+                            <div ng-if="Ctrl.bPetitionType">
+                                <rap-trpetitiontype model="Ctrl"></rap-trpetitiontype>
+                            </div>
+                            <div ng-if="Ctrl.bImpInfo">
+                                <rap-trimpinfo model="Ctrl"></rap-trimpinfo>
+                            </div>
+                            <div ng-if="Ctrl.bAppInfo">
+                                <rap-trapplicationinfo ng-show="Ctrl.bAppInfo" model="Ctrl" casedetails="Ctrl.model"></rap-trapplicationinfo>
+                            </div>
+                            <div ng-if="Ctrl.bExemptionContested">
+                                <rap-trexemptioncontested ng-show="Ctrl.bExemptionContested" model="Ctrl"></rap-trexemptioncontested>
+                            </div>
+                            <div ng-if="Ctrl.bRentalHistory">
+                                <rap-trrentalhistory ng-show="Ctrl.bRentalHistory" model="Ctrl"></rap-trrentalhistory>
+                            </div>
+                            <div ng-if="Ctrl.bAddDocuments">
+                                <rap-trdocument ng-show="Ctrl.bAddDocuments" model="Ctrl"></rap-trdocument>
+                            </div>
+                            <div ng-if="Ctrl.bReview">
+                                <rap-trreview ng-show="Ctrl.bReview" model="Ctrl"></rap-trreview>
+                            </div>
+                            <div ng-if="Ctrl.bVerification">
+                                <rap-trverification ng-show="Ctrl.bVerification" model="Ctrl"></rap-trverification>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- #SkipToMainContent -->
+
+        <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->
+    </div><!-- .container .outer-container -->
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!--<script src='js/jquery.maskedinput.js'></script>-->
+    <script src='js/tooltip.js'></script>
+    <script src='js/functions.js'></script>
+    </div>

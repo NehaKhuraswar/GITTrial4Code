@@ -60,6 +60,13 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapOwnerRentalHistoryFactory', rapOwnerRentalHistoryFactory)
     .factory('rapOwnerDocumentFactory', rapOwnerDocumentFactory)
     .factory('rapOwnerVerificationFactory', rapOwnerVerificationFactory)
+    .factory('rapTRPetitionTypeFactory', rapTRPetitionTypeFactory)
+    .factory('rapTRapplicationinfoFactory', rapTRapplicationinfoFactory)
+    .factory('rapTRDocumentFactory', rapTRDocumentFactory)
+    .factory('rapTRExemptContestedFactory', rapTRExemptContestedFactory)
+    .factory('rapTRrentalhistoryFactory', rapTRrentalhistoryFactory)
+    .factory('rapTRreviewFactory', rapTRreviewFactory)
+    .factory('rapTRverificationFactory', rapTRverificationFactory)
     .controller('raploginURLController', raploginURLController)
     .controller('raploginController', raploginController)
     .controller('raploginCityUserController', raploginCityUserController)
@@ -102,6 +109,15 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapOwnerDocumentsController', rapOwnerDocumentsController)
     .controller('rapOwnerReviewController', rapOwnerReviewController)
     .controller('rapOwnerVerificationController', rapOwnerVerificationController)
+    .controller('rapTRMainController', rapTRMainController)
+    .controller('rapTRPetitionTypeController', rapTRPetitionTypeController)
+    .controller('rapTRApplicationInfoController', rapTRApplicationInfoController)
+    .controller('rapTRDocumentController', rapTRDocumentController)
+    .controller('rapTRExemptContestedController', rapTRExemptContestedController)
+    .controller('rapTRRentalHistoryController', rapTRRentalHistoryController)
+    .controller('rapTRImpInfoController', rapTRImpInfoController)
+    .controller('rapTRReviewController', rapTRReviewController)
+    .controller('rapTRVerificationController', rapTRVerificationController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -430,3 +446,112 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         controllerAs: 'Ctrl'
     };
 })
+.directive('rapOwnerverification', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/FilePetition/Owner/Verification.html',
+        controller: 'rapOwnerVerificationController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapTrpetitiontype', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/TenantResponse/PetitionType.html',
+        controller: 'rapTRPetitionTypeController',
+        controllerAs: 'Ctrl'
+    };
+})
+    .directive('rapTrimpinfo', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/TenantResponse/ImportantInformation.html',
+            controller: 'rapTRImpInfoController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapTrapplicationinfo', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+
+            },
+            templateUrl: 'Views/TenantResponse/ApplicationInfo.html',
+            controller: 'rapTRApplicationInfoController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapTrexemptioncontested', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/TenantResponse/ExemptionContested.html',
+            controller: 'rapTRExemptContestedController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapTrrentalhistory', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/TenantResponse/RentalHistory.html',
+            controller: 'rapTRRentalHistoryController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapTrdocument', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/TenantResponse/Document.html',
+            controller: 'rapTRDocumentController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapTrreview', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/TenantResponse/Review.html',
+            controller: 'rapTRReviewController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapTrverification', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/TenantResponse/Verification.html',
+            controller: 'rapTRVerificationController',
+            controllerAs: 'Ctrl'
+        };
+    })

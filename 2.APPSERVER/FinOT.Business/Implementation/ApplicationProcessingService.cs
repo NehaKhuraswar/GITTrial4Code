@@ -325,9 +325,33 @@ namespace RAP.Business.Implementation
         public ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
                 result = _dbHandler.SaveTenantLostServiceInfo(message,  CustomerID);
+
+                if(result.status.Status != StatusEnum.Success)
+                {
+                    return result;
+                }
+
+                foreach (var doc in message.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.TenantPetition.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }                       
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                message.Documents = documents;
                 return result;
             }
             catch (Exception ex)
@@ -350,12 +374,31 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID)
+        public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID, int CustomerID)
         {
             ReturnResult<LostServicesPageM> result = new ReturnResult<LostServicesPageM>();
             try
             {
                 result = _dbHandler.GetTenantLostServiceInfo(PetitionID);
+                if(result.status.Status != StatusEnum.Success)
+                {
+                return result;
+            }
+                
+                if (result.result.Documents.Where(x => x.DocTitle == "TP_LostServive").Count() == 0)
+                {
+                    var docsResult = _commonService.GetDocuments(CustomerID, false, "TP_LostServive");
+                    if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                    {
+                        foreach (var doc in docsResult.result)
+                        {
+                            if (doc != null)
+                            {
+                                result.result.Documents.Add(doc);
+                            }
+                        }
+                    }
+                }
                 return result;
             }
             catch (Exception ex)
@@ -582,13 +625,13 @@ namespace RAP.Business.Implementation
                         if (docUploadResut.status.Status == StatusEnum.Success)
                         {
                             documents.Add(doc);
-                        }                       
+                        }
                     }
-                    else
-                    {
-                        documents.Add(doc);
+                        else
+                        {
+                            documents.Add(doc);
+                        }
                     }
-                }
                 model.Documents = documents;
                 result.result = dbResult.result;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };

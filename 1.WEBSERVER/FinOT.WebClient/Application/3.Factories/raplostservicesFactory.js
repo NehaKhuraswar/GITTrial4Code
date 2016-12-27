@@ -13,12 +13,12 @@ var raplostservicesFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
               blockUI.stop();
           });
       }
-     var _GetTenantLostServiceInfo = function (petitionID) {
+     var _GetTenantLostServiceInfo = function (petitionID, CustomerID) {
           blockUI.start();
 
           var url = _routePrefix + '/gettenantlostservice';
           if (!(petitionID == null || petitionID == undefined)) { url = url + '/' + petitionID; }
-
+          if (!(CustomerID == null || CustomerID == undefined)) { url = url + '/' + CustomerID; }
           return ajax.Get(url)
           .finally(function () {
               blockUI.stop();

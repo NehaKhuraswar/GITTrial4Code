@@ -47,6 +47,10 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         
         
     }
+    self.FileTenantResponse = function () {
+            $location.path("/filetenantresponse");
+    }
+    
 
     var __GetCasesForCustomer = function () {
         return masterFactory.GetCasesForCustomer(self.model.custID).then(function (response) {

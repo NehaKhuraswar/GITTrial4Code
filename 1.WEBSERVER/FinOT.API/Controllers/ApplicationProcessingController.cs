@@ -721,9 +721,9 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<TenantRentalHistoryM>>(ReturnCode, transaction);
         }
         [AllowAnonymous]
-        [Route("gettenantlostservice/{PetitionId:int}")]
+        [Route("gettenantlostservice/{PetitionId:int}/{CustomerID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetTenantLostServiceInfo(int PetitionId)
+        public HttpResponseMessage GetTenantLostServiceInfo(int PetitionId, int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -734,7 +734,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetTenantLostServiceInfo(PetitionId);
+                result = _service.GetTenantLostServiceInfo(PetitionId, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

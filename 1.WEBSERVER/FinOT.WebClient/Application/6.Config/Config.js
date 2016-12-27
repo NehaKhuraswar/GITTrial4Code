@@ -153,6 +153,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapAppealMainController_resolve
         })
+        .when('/filetenantresponse', {
+            templateUrl: 'views/TenantResponse/Index.html',
+            controller: rapTRMainController,
+            controllerAs: 'Ctrl',
+            resolve: rapTRMainController_resolve
+        })
         .when('/appellantsinfo', {
             templateUrl: 'views/fileAppeal/AppellantsInfo.html',
             controller: rapAppellantsInfoController,

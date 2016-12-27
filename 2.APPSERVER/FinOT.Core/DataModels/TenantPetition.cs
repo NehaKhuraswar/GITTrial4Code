@@ -262,13 +262,27 @@ namespace RAP.Core.DataModels
         {
             LostServices = new List<TenantLostServiceInfoM>();
             Problems = new List<TenantProblemInfoM>();
+            Document = new DocumentM();
         }
+        private List<DocumentM> _documents = new List<DocumentM>();
         public int PetitionID { get; set; }
         public bool bHouseServiceDecreased { get; set; }
         public bool bLostService { get; set; }
         public List<TenantLostServiceInfoM> LostServices{get; set;} 
         public bool bProblem { get; set; }
-        public List<TenantProblemInfoM> Problems { get; set; } 
+        public List<TenantProblemInfoM> Problems { get; set; }
+        public DocumentM Document { get; set; }
+        public List<DocumentM> Documents
+        {
+            get
+            {
+                return _documents;
+            }
+            set
+            {
+                _documents = value;
+            }
+        }
    
     }
     public class TenantRentalHistoryM

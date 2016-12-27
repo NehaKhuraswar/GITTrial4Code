@@ -346,9 +346,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("gettenantlostservice/{PetitionId}")]
+        [Route("gettenantlostservice/{PetitionId}/{CustomerID}")]
         [HttpGet]
-        public HttpResponseMessage GetTenantLostServiceInfo(string PetitionId)
+        public HttpResponseMessage GetTenantLostServiceInfo(string PetitionId, string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -356,7 +356,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "gettenantlostservice/" + PetitionId;
+                string requestUri = _requestURI + "gettenantlostservice/" + PetitionId + "/" + CustomerID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {
