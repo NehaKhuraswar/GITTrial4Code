@@ -2248,6 +2248,34 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            CaseInfoM caseInfo = new CaseInfoM();
+            TenantResponseExemptContestedInfoM exemptContested = new TenantResponseExemptContestedInfoM();
+            try
+            {
+                var exemptContestedDB = _dbContext.TenantResponseExemptContestedInfos.Where(x => x.TenantResponseID == TenantResponseID).FirstOrDefault();
+                if (exemptContestedDB != null)
+                {
+                    exemptContested.TenantResponseID = (int)exemptContestedDB.TenantResponseID;
+                    exemptContested.Explaination = exemptContestedDB.Explaination;
+                }
+                caseInfo.TenantResponseInfo.ExemptContestedInfo = exemptContested;
+
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         #endregion "TenantResponseGet"
 
         #region "TenantResponseSave"
@@ -2325,7 +2353,8 @@ namespace RAP.DAL
                     caseInfo.TenantResponseInfo.TenantResponseID = petitionDB.TenantResponseID;
 
                     var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
-                                            .Where(x => x.CustomerID == caseInfo.TenantResponseInfo.CustomerID).FirstOrDefault();
+                                            .Where(x => x.CustomerID == caseInfo.TenantResponseInfo.CustomerID
+                                            && x.TenantResponseID == caseInfo.TenantResponseInfo.TenantResponseID).FirstOrDefault();
                     if (PageStatus != null)
                     {
                         PageStatus.ApplicantInformation = true;
@@ -2336,6 +2365,8 @@ namespace RAP.DAL
                         var PageStatusNew = new TenantResponsePageSubmissionStatus();
                         PageStatusNew.CustomerID = caseInfo.TenantResponseInfo.CustomerID;
                         PageStatusNew.ApplicantInformation = true;
+                        PageStatusNew.TenantResponseID = caseInfo.TenantResponseInfo.TenantResponseID;
+
                         _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
                         _dbContext.SubmitChanges();
                     }
@@ -2427,6 +2458,56 @@ namespace RAP.DAL
                 result.status = eHandler.HandleException(ex);
                 return result;
             }
+        }
+
+        public ReturnResult<bool> SaveTenantResponseExemptContestedInfo(TenantResponseExemptContestedInfoM message, int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var exemptContestedDB = _dbContext.TenantResponseExemptContestedInfos.Where(x => x.TenantResponseID == message.TenantResponseID).FirstOrDefault();
+                if (exemptContestedDB != null)
+                {
+                    exemptContestedDB.Explaination = message.Explaination;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var exemptContestedNewDB = new TenantResponseExemptContestedInfo();
+                    exemptContestedNewDB.TenantResponseID = message.TenantResponseID;
+                    exemptContestedNewDB.Explaination = message.Explaination;
+                    _dbContext.TenantResponseExemptContestedInfos.InsertOnSubmit(exemptContestedNewDB);
+                    _dbContext.SubmitChanges();
+                }
+
+                var PageStatus = _dbContext.TenantResponsePageSubmissionStatus.Where(x => x.CustomerID == CustomerID
+                    && x.TenantResponseID == message.TenantResponseID).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.ExemptionContested = true;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var PageStatusNew = new TenantResponsePageSubmissionStatus();
+                    PageStatusNew.CustomerID = CustomerID;
+                    PageStatusNew.ExemptionContested = true;
+                    PageStatusNew.TenantResponseID = message.TenantResponseID;
+                    _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
+                }
+
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+
         }
         #endregion "TenantResponseSave"
 

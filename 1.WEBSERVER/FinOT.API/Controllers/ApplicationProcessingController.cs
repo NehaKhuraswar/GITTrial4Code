@@ -567,6 +567,45 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<List<PetitionGroundM>>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("gettenantresponseexemptcontestedinfo/{TenantResponseID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantResponseExemptContestedInfo(int TenantResponseID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                result = _service.GetTenantResponseExemptContestedInfo(TenantResponseID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
         [AllowAnonymous]
         [Route("gettenantresponseapplicationinfo/{CaseNumber}/{CustomerID:int}")]
         [HttpGet]
@@ -985,6 +1024,43 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }  
+        [AllowAnonymous]
+        [Route("savetenantresponseexemptcontested/{CustomerID:int}")]
+        [HttpPost]
+        public HttpResponseMessage SaveTenantResponseExemptContestedInfo([FromBody] TenantResponseExemptContestedInfoM message, [FromUri]int CustomerID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                result = _service.SaveTenantResponseExemptContestedInfo(message, CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
         [AllowAnonymous]
         [Route("savetenantresponseapplicationinfo")]

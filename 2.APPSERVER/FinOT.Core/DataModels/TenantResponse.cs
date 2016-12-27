@@ -20,6 +20,7 @@ namespace RAP.Core.DataModels
             Verification = new VerificationM();
             RangeOfUnits = new List<NumberRangeForUnitsM>();
             UnitTypes = new List<UnitTypeM>();
+            ExemptContestedInfo = new TenantResponseExemptContestedInfoM();
         }
         
         public bool bThirdPartyRepresentation { get; set; }
@@ -43,6 +44,7 @@ namespace RAP.Core.DataModels
         public int CustomerID { get; set; }
         public List<NumberRangeForUnitsM> RangeOfUnits{get;set;}
         public List<UnitTypeM> UnitTypes{get;set;}
+        public TenantResponseExemptContestedInfoM ExemptContestedInfo { get; set; }
     }
 
     public class TenantResponseRentalHistoryM

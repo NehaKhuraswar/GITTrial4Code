@@ -19,13 +19,14 @@
                                             The property owner has the burden of proving the right to exemption for the unit. Explain
                                             below why you believe your landlord’s claim that your unit is exempt is incorrect.
                                         </label>
-                                        <textarea name="exempt_description" id="exempt_description" class="field-input textarea" rows="8"></textarea>
+                                        <textarea name="exempt_description" id="exempt_description" class="field-input textarea" rows="8"
+                                                  ng-model="Ctrl.caseinfo.TenantResponseInfo.ExemptContestedInfo.Explaination"></textarea>
                                     </div>
 
                                 </div>
 
 
                                 <div class="step-footer">
-                                    <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" />
+                                    <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToRentalHistory()" />
                                 </div>
                             

@@ -401,19 +401,6 @@
       <Association Name="TenantResponseApplicationInfo_TenantResponseRentalIncrementInfo" Member="TenantResponseApplicationInfo" ThisKey="RentalIncreaseInfoID" OtherKey="TenantResponseID" Type="TenantResponseApplicationInfo" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TenantResponsePageSubmissionStatus" Member="TenantResponsePageSubmissionStatus">
-    <Type Name="TenantResponsePageSubmissionStatus">
-      <Column Name="NavigationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ImportantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ApplicantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ExemptionContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RentHistory" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="AdditionalDocumentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Review" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Verification" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.TenantResponseApplicationInfo" Member="TenantResponseApplicationInfos">
     <Type Name="TenantResponseApplicationInfo">
       <Column Name="TenantResponseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -438,6 +425,20 @@
       <Association Name="TenantResponseApplicationInfo_TenantResponseRentalIncrementInfo" Member="TenantResponseRentalIncrementInfo" ThisKey="TenantResponseID" OtherKey="RentalIncreaseInfoID" Type="TenantResponseRentalIncrementInfo" Cardinality="One" />
       <Association Name="CaseDetail_TenantResponseApplicationInfo" Member="CaseDetail" ThisKey="C_ID" OtherKey="C_ID" Type="CaseDetail" IsForeignKey="true" />
       <Association Name="NumberRangeForUnit_TenantResponseApplicationInfo" Member="NumberRangeForUnit" ThisKey="RangeID" OtherKey="RangeID" Type="NumberRangeForUnit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TenantResponsePageSubmissionStatus" Member="TenantResponsePageSubmissionStatus">
+    <Type Name="TenantResponsePageSubmissionStatus">
+      <Column Name="NavigationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenantResponseID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ImportantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ApplicantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ExemptionContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RentHistory" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AdditionalDocumentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Review" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Verification" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

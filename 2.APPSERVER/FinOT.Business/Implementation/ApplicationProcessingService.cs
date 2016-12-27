@@ -425,7 +425,20 @@ namespace RAP.Business.Implementation
         }
 
         #region TenantResponseMethods
-
+        public ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetTenantResponseExemptContestedInfo(TenantResponseID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -446,6 +459,20 @@ namespace RAP.Business.Implementation
             try
             {
                 result = _dbHandler.SaveTenantResponseApplicationInfo(caseInfo, UserID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<bool> SaveTenantResponseExemptContestedInfo(TenantResponseExemptContestedInfoM message, int CustomerID)            
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _dbHandler.SaveTenantResponseExemptContestedInfo(message, CustomerID);
                 return result;
             }
             catch (Exception ex)

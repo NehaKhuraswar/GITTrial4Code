@@ -2,10 +2,10 @@
 var rapTRExemptContestedFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
-      var _SavePetitionGroundInfo = function (model, custID) {
+      var _SaveTenantResponseExemptContestedInfo = function (model, custID) {
           blockUI.start();
 
-          var url = _routePrefix + '/savepetitiongroundinfo/' + custID;
+          var url = _routePrefix + '/savetenantresponseexemptcontested/' + custID;
 
           return ajax.Post(model, url)
           .finally(function () {
@@ -13,18 +13,18 @@ var rapTRExemptContestedFactory = ['blockUI', 'ajaxService', function (blockUI, 
           });
       }
 
-      var _GetPetitionGroundInfo = function (petitionID) {
+      var _GetTenantResponseExemptContestedInfo = function (TenantResponseID) {
           blockUI.start();
 
-          var url = _routePrefix + '/getgroundsinfo';
-          if (!(petitionID == null || petitionID == undefined)) { url = url + '/' + petitionID; }
+          var url = _routePrefix + '/gettenantresponseexemptcontestedinfo';
+          if (!(TenantResponseID == null || TenantResponseID == undefined)) { url = url + '/' + TenantResponseID; }
 
           return ajax.Get(url)
           .finally(function () {
               blockUI.stop();
           });
       }
-      factory.SavePetitionGroundInfo = _SavePetitionGroundInfo;
-      factory.GetPetitionGroundInfo = _GetPetitionGroundInfo;
+      factory.SaveTenantResponseExemptContestedInfo = _SaveTenantResponseExemptContestedInfo;
+      factory.GetTenantResponseExemptContestedInfo = _GetTenantResponseExemptContestedInfo;
     return factory;
 }];
