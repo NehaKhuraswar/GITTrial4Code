@@ -151,10 +151,12 @@
 
     <div class="field-group">
         <div class="form-group-radio vertical clearfix">
-            <label for="same_as_owner_info">
-                <input type="radio" name="same_as_owner_info" id="same_as_owner_info" class="input-field" value="true"
+            <label for="same_as_po_infor">
+                <input type="checkbox" name="same_as_po_infor" id="same_as_po_infor" class="input-field" ng-value="true"
                        ng-model="Ctrl.caseinfo.TenantResponseInfo.bSameAsOwnerInfo"
-                       ng-change="Ctrl.ChangeSameAsPropertyOwner()" checked="checked" /><i></i><span>Same as owner info</span>
+                       ng-change="Ctrl.ChangeSameAsPropertyOwner()" /><i></i><span>
+                    Same as property owner info
+                </span>
             </label>
             <div class="clear"></div>
         </div>
@@ -232,7 +234,7 @@
         <div class="input-wrapper">
             <select name="units_approx_range" id="units_approx_range" class="custom-select" data-placeholder="Select range"
                     ng-model="Ctrl.caseinfo.TenantResponseInfo.SelectedRangeOfUnits"
-                    ng-options="range as (range.RangeDesc) for range in Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits track by range.RangeID"></select>
+                    ng-options="range as (range.RangeDesc) for range in Ctrl.caseinfo.TenantResponseInfo.RangeOfUnits track by range.RangeID"></select>
         </div>
     </div>
 
@@ -252,7 +254,7 @@
 
     <div class="field-group">
         <p class="input-label">Are you current on your rent?</p>
-        <div class="form-group-radio vertical clearfix">
+        <div class="form-group-radio vertical clearfix" >
             <label for="pi_paying_rent_yes">
                 <input type="radio" name="pi_paying_rent_yes" id="pi_paying_rent_yes" ng-value="true"
                        ng-model="Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus"><i></i><span>Yes</span>
@@ -265,7 +267,7 @@
         </div>
     </div>
 
-    <div class="field-group">
+    <div class="field-group" ng-show="!Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">
         <label for="explanation">If you are not current on your rent, please provide an explanation.</label>
         <textarea name="explanation" id="explanation" class="field-input textarea" placeholder="" rows="6"
                   ng-model="Ctrl.caseinfo.TenantResponseInfo.ProvideExplanation"></textarea>

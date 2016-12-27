@@ -48,7 +48,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             //self.caseinfo.TenantPetitionInfo.PropertyManager.Zip = self.caseinfo.TenantPetitionInfo.OwnerInfo.Zip;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber = self.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.Email = self.caseinfo.TenantPetitionInfo.OwnerInfo.Email;
-            self.caseinfo.TenantResponseInfo.PropertyManager = self.caseinfo.TenantPetitionInfo.OwnerInfo;
+            self.caseinfo.TenantResponseInfo.PropertyManager = angular.copy(self.caseinfo.TenantResponseInfo.OwnerInfo);
         }
         else {
             self.caseinfo.TenantResponseInfo.PropertyManager.FirstName = "";
@@ -71,14 +71,14 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
 
     self.ContinueToExemptionContested = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
+        rapFactory.SaveTenantResponseApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.bAppInfo = false;
-            $scope.model.bGrounds = true;
-            $scope.model.tPetionActiveStatus.PetitionCategory = true;
-            $scope.model.tPetionActiveStatus.ImportantInformation = true;
-            $scope.model.tPetionActiveStatus.ApplicantInformation = true;
+            $scope.model.bExemptionContested = true;
+            //$scope.model.tPetionActiveStatus.PetitionCategory = true;
+            //$scope.model.tPetionActiveStatus.ImportantInformation = true;
+            //$scope.model.tPetionActiveStatus.ApplicantInformation = true;
 
         });
     }

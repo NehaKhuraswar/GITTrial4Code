@@ -117,9 +117,6 @@ namespace RAP.DAL
     partial void InsertTenantPetitionVerification(TenantPetitionVerification instance);
     partial void UpdateTenantPetitionVerification(TenantPetitionVerification instance);
     partial void DeleteTenantPetitionVerification(TenantPetitionVerification instance);
-    partial void InsertTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
-    partial void UpdateTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
-    partial void DeleteTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
     partial void InsertTenantResponseVerification(TenantResponseVerification instance);
     partial void UpdateTenantResponseVerification(TenantResponseVerification instance);
     partial void DeleteTenantResponseVerification(TenantResponseVerification instance);
@@ -132,6 +129,12 @@ namespace RAP.DAL
     partial void InsertTenantResponseRentalIncrementInfo(TenantResponseRentalIncrementInfo instance);
     partial void UpdateTenantResponseRentalIncrementInfo(TenantResponseRentalIncrementInfo instance);
     partial void DeleteTenantResponseRentalIncrementInfo(TenantResponseRentalIncrementInfo instance);
+    partial void InsertTenantResponsePageSubmissionStatus(TenantResponsePageSubmissionStatus instance);
+    partial void UpdateTenantResponsePageSubmissionStatus(TenantResponsePageSubmissionStatus instance);
+    partial void DeleteTenantResponsePageSubmissionStatus(TenantResponsePageSubmissionStatus instance);
+    partial void InsertTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
+    partial void UpdateTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
+    partial void DeleteTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -404,14 +407,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<TenantResponseApplicationInfo> TenantResponseApplicationInfos
-		{
-			get
-			{
-				return this.GetTable<TenantResponseApplicationInfo>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TenantResponseVerification> TenantResponseVerifications
 		{
 			get
@@ -441,6 +436,22 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantResponseRentalIncrementInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TenantResponsePageSubmissionStatus> TenantResponsePageSubmissionStatus
+		{
+			get
+			{
+				return this.GetTable<TenantResponsePageSubmissionStatus>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TenantResponseApplicationInfo> TenantResponseApplicationInfos
+		{
+			get
+			{
+				return this.GetTable<TenantResponseApplicationInfo>();
 			}
 		}
 	}
@@ -4309,6 +4320,8 @@ namespace RAP.DAL
 		
 		private System.Nullable<int> _CityAnalystUserID;
 		
+		private EntitySet<TenantResponseApplicationInfo> _TenantResponseApplicationInfos;
+		
 		private EntityRef<PetitionCategory> _PetitionCategory;
 		
 		private EntityRef<PetitionDetail> _PetitionDetail;
@@ -4353,6 +4366,7 @@ namespace RAP.DAL
 		
 		public CaseDetail()
 		{
+			this._TenantResponseApplicationInfos = new EntitySet<TenantResponseApplicationInfo>(new Action<TenantResponseApplicationInfo>(this.attach_TenantResponseApplicationInfos), new Action<TenantResponseApplicationInfo>(this.detach_TenantResponseApplicationInfos));
 			this._PetitionCategory = default(EntityRef<PetitionCategory>);
 			this._PetitionDetail = default(EntityRef<PetitionDetail>);
 			this._TenantAppealDetail = default(EntityRef<TenantAppealDetail>);
@@ -4671,6 +4685,19 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CaseDetail_TenantResponseApplicationInfo", Storage="_TenantResponseApplicationInfos", ThisKey="C_ID", OtherKey="C_ID")]
+		public EntitySet<TenantResponseApplicationInfo> TenantResponseApplicationInfos
+		{
+			get
+			{
+				return this._TenantResponseApplicationInfos;
+			}
+			set
+			{
+				this._TenantResponseApplicationInfos.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PetitionCategory_CaseDetail", Storage="_PetitionCategory", ThisKey="PetitionCategoryID", OtherKey="PetitionCategoryID", IsForeignKey=true)]
 		public PetitionCategory PetitionCategory
 		{
@@ -4791,6 +4818,18 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_TenantResponseApplicationInfos(TenantResponseApplicationInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.CaseDetail = this;
+		}
+		
+		private void detach_TenantResponseApplicationInfos(TenantResponseApplicationInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.CaseDetail = null;
 		}
 	}
 	
@@ -7608,561 +7647,6 @@ namespace RAP.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantResponseApplicationInfo")]
-	public partial class TenantResponseApplicationInfo : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TenantResponseID;
-		
-		private System.Nullable<int> _ApplicantUserID;
-		
-		private System.Nullable<int> _ThirdPartyUserID;
-		
-		private System.Nullable<bool> _bThirdPartyRepresentation;
-		
-		private System.Nullable<int> _OwnerUserID;
-		
-		private System.Nullable<int> _PropertyManagerUserID;
-		
-		private System.Nullable<int> _NumberOfUnits;
-		
-		private int _UnitTypeID;
-		
-		private System.Nullable<int> _RangeID;
-		
-		private bool _bRentStatus;
-		
-		private string _ProvideExplanation;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private System.Nullable<int> _ResponseFiledBy;
-		
-		private System.Nullable<System.DateTime> _ModifiedDate;
-		
-		private bool _IsSubmitted;
-		
-		private EntitySet<TenantResponseVerification> _TenantResponseVerifications;
-		
-		private EntitySet<TenantResponseExemptContestedInfo> _TenantResponseExemptContestedInfos;
-		
-		private EntitySet<TenantResponseRentalHistory> _TenantResponseRentalHistories;
-		
-		private EntityRef<TenantResponseRentalIncrementInfo> _TenantResponseRentalIncrementInfo;
-		
-		private EntityRef<NumberRangeForUnit> _NumberRangeForUnit;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTenantResponseIDChanging(int value);
-    partial void OnTenantResponseIDChanged();
-    partial void OnApplicantUserIDChanging(System.Nullable<int> value);
-    partial void OnApplicantUserIDChanged();
-    partial void OnThirdPartyUserIDChanging(System.Nullable<int> value);
-    partial void OnThirdPartyUserIDChanged();
-    partial void OnbThirdPartyRepresentationChanging(System.Nullable<bool> value);
-    partial void OnbThirdPartyRepresentationChanged();
-    partial void OnOwnerUserIDChanging(System.Nullable<int> value);
-    partial void OnOwnerUserIDChanged();
-    partial void OnPropertyManagerUserIDChanging(System.Nullable<int> value);
-    partial void OnPropertyManagerUserIDChanged();
-    partial void OnNumberOfUnitsChanging(System.Nullable<int> value);
-    partial void OnNumberOfUnitsChanged();
-    partial void OnUnitTypeIDChanging(int value);
-    partial void OnUnitTypeIDChanged();
-    partial void OnRangeIDChanging(System.Nullable<int> value);
-    partial void OnRangeIDChanged();
-    partial void OnbRentStatusChanging(bool value);
-    partial void OnbRentStatusChanged();
-    partial void OnProvideExplanationChanging(string value);
-    partial void OnProvideExplanationChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnResponseFiledByChanging(System.Nullable<int> value);
-    partial void OnResponseFiledByChanged();
-    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedDateChanged();
-    partial void OnIsSubmittedChanging(bool value);
-    partial void OnIsSubmittedChanged();
-    #endregion
-		
-		public TenantResponseApplicationInfo()
-		{
-			this._TenantResponseVerifications = new EntitySet<TenantResponseVerification>(new Action<TenantResponseVerification>(this.attach_TenantResponseVerifications), new Action<TenantResponseVerification>(this.detach_TenantResponseVerifications));
-			this._TenantResponseExemptContestedInfos = new EntitySet<TenantResponseExemptContestedInfo>(new Action<TenantResponseExemptContestedInfo>(this.attach_TenantResponseExemptContestedInfos), new Action<TenantResponseExemptContestedInfo>(this.detach_TenantResponseExemptContestedInfos));
-			this._TenantResponseRentalHistories = new EntitySet<TenantResponseRentalHistory>(new Action<TenantResponseRentalHistory>(this.attach_TenantResponseRentalHistories), new Action<TenantResponseRentalHistory>(this.detach_TenantResponseRentalHistories));
-			this._TenantResponseRentalIncrementInfo = default(EntityRef<TenantResponseRentalIncrementInfo>);
-			this._NumberRangeForUnit = default(EntityRef<NumberRangeForUnit>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantResponseID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TenantResponseID
-		{
-			get
-			{
-				return this._TenantResponseID;
-			}
-			set
-			{
-				if ((this._TenantResponseID != value))
-				{
-					this.OnTenantResponseIDChanging(value);
-					this.SendPropertyChanging();
-					this._TenantResponseID = value;
-					this.SendPropertyChanged("TenantResponseID");
-					this.OnTenantResponseIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantUserID", DbType="Int")]
-		public System.Nullable<int> ApplicantUserID
-		{
-			get
-			{
-				return this._ApplicantUserID;
-			}
-			set
-			{
-				if ((this._ApplicantUserID != value))
-				{
-					this.OnApplicantUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._ApplicantUserID = value;
-					this.SendPropertyChanged("ApplicantUserID");
-					this.OnApplicantUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThirdPartyUserID", DbType="Int")]
-		public System.Nullable<int> ThirdPartyUserID
-		{
-			get
-			{
-				return this._ThirdPartyUserID;
-			}
-			set
-			{
-				if ((this._ThirdPartyUserID != value))
-				{
-					this.OnThirdPartyUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._ThirdPartyUserID = value;
-					this.SendPropertyChanged("ThirdPartyUserID");
-					this.OnThirdPartyUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bThirdPartyRepresentation", DbType="Bit")]
-		public System.Nullable<bool> bThirdPartyRepresentation
-		{
-			get
-			{
-				return this._bThirdPartyRepresentation;
-			}
-			set
-			{
-				if ((this._bThirdPartyRepresentation != value))
-				{
-					this.OnbThirdPartyRepresentationChanging(value);
-					this.SendPropertyChanging();
-					this._bThirdPartyRepresentation = value;
-					this.SendPropertyChanged("bThirdPartyRepresentation");
-					this.OnbThirdPartyRepresentationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerUserID", DbType="Int")]
-		public System.Nullable<int> OwnerUserID
-		{
-			get
-			{
-				return this._OwnerUserID;
-			}
-			set
-			{
-				if ((this._OwnerUserID != value))
-				{
-					this.OnOwnerUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._OwnerUserID = value;
-					this.SendPropertyChanged("OwnerUserID");
-					this.OnOwnerUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyManagerUserID", DbType="Int")]
-		public System.Nullable<int> PropertyManagerUserID
-		{
-			get
-			{
-				return this._PropertyManagerUserID;
-			}
-			set
-			{
-				if ((this._PropertyManagerUserID != value))
-				{
-					this.OnPropertyManagerUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._PropertyManagerUserID = value;
-					this.SendPropertyChanged("PropertyManagerUserID");
-					this.OnPropertyManagerUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfUnits", DbType="Int")]
-		public System.Nullable<int> NumberOfUnits
-		{
-			get
-			{
-				return this._NumberOfUnits;
-			}
-			set
-			{
-				if ((this._NumberOfUnits != value))
-				{
-					this.OnNumberOfUnitsChanging(value);
-					this.SendPropertyChanging();
-					this._NumberOfUnits = value;
-					this.SendPropertyChanged("NumberOfUnits");
-					this.OnNumberOfUnitsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitTypeID", DbType="Int NOT NULL")]
-		public int UnitTypeID
-		{
-			get
-			{
-				return this._UnitTypeID;
-			}
-			set
-			{
-				if ((this._UnitTypeID != value))
-				{
-					this.OnUnitTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._UnitTypeID = value;
-					this.SendPropertyChanged("UnitTypeID");
-					this.OnUnitTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RangeID", DbType="Int")]
-		public System.Nullable<int> RangeID
-		{
-			get
-			{
-				return this._RangeID;
-			}
-			set
-			{
-				if ((this._RangeID != value))
-				{
-					if (this._NumberRangeForUnit.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRangeIDChanging(value);
-					this.SendPropertyChanging();
-					this._RangeID = value;
-					this.SendPropertyChanged("RangeID");
-					this.OnRangeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bRentStatus", DbType="Bit NOT NULL")]
-		public bool bRentStatus
-		{
-			get
-			{
-				return this._bRentStatus;
-			}
-			set
-			{
-				if ((this._bRentStatus != value))
-				{
-					this.OnbRentStatusChanging(value);
-					this.SendPropertyChanging();
-					this._bRentStatus = value;
-					this.SendPropertyChanged("bRentStatus");
-					this.OnbRentStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProvideExplanation", DbType="VarChar(MAX)")]
-		public string ProvideExplanation
-		{
-			get
-			{
-				return this._ProvideExplanation;
-			}
-			set
-			{
-				if ((this._ProvideExplanation != value))
-				{
-					this.OnProvideExplanationChanging(value);
-					this.SendPropertyChanging();
-					this._ProvideExplanation = value;
-					this.SendPropertyChanged("ProvideExplanation");
-					this.OnProvideExplanationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResponseFiledBy", DbType="Int")]
-		public System.Nullable<int> ResponseFiledBy
-		{
-			get
-			{
-				return this._ResponseFiledBy;
-			}
-			set
-			{
-				if ((this._ResponseFiledBy != value))
-				{
-					this.OnResponseFiledByChanging(value);
-					this.SendPropertyChanging();
-					this._ResponseFiledBy = value;
-					this.SendPropertyChanged("ResponseFiledBy");
-					this.OnResponseFiledByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmitted", DbType="Bit NOT NULL")]
-		public bool IsSubmitted
-		{
-			get
-			{
-				return this._IsSubmitted;
-			}
-			set
-			{
-				if ((this._IsSubmitted != value))
-				{
-					this.OnIsSubmittedChanging(value);
-					this.SendPropertyChanging();
-					this._IsSubmitted = value;
-					this.SendPropertyChanged("IsSubmitted");
-					this.OnIsSubmittedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseVerification", Storage="_TenantResponseVerifications", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
-		public EntitySet<TenantResponseVerification> TenantResponseVerifications
-		{
-			get
-			{
-				return this._TenantResponseVerifications;
-			}
-			set
-			{
-				this._TenantResponseVerifications.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo", Storage="_TenantResponseExemptContestedInfos", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
-		public EntitySet<TenantResponseExemptContestedInfo> TenantResponseExemptContestedInfos
-		{
-			get
-			{
-				return this._TenantResponseExemptContestedInfos;
-			}
-			set
-			{
-				this._TenantResponseExemptContestedInfos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseRentalHistory", Storage="_TenantResponseRentalHistories", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
-		public EntitySet<TenantResponseRentalHistory> TenantResponseRentalHistories
-		{
-			get
-			{
-				return this._TenantResponseRentalHistories;
-			}
-			set
-			{
-				this._TenantResponseRentalHistories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseRentalIncrementInfo", Storage="_TenantResponseRentalIncrementInfo", ThisKey="TenantResponseID", OtherKey="RentalIncreaseInfoID", IsUnique=true, IsForeignKey=false)]
-		public TenantResponseRentalIncrementInfo TenantResponseRentalIncrementInfo
-		{
-			get
-			{
-				return this._TenantResponseRentalIncrementInfo.Entity;
-			}
-			set
-			{
-				TenantResponseRentalIncrementInfo previousValue = this._TenantResponseRentalIncrementInfo.Entity;
-				if (((previousValue != value) 
-							|| (this._TenantResponseRentalIncrementInfo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TenantResponseRentalIncrementInfo.Entity = null;
-						previousValue.TenantResponseApplicationInfo = null;
-					}
-					this._TenantResponseRentalIncrementInfo.Entity = value;
-					if ((value != null))
-					{
-						value.TenantResponseApplicationInfo = this;
-					}
-					this.SendPropertyChanged("TenantResponseRentalIncrementInfo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NumberRangeForUnit_TenantResponseApplicationInfo", Storage="_NumberRangeForUnit", ThisKey="RangeID", OtherKey="RangeID", IsForeignKey=true)]
-		public NumberRangeForUnit NumberRangeForUnit
-		{
-			get
-			{
-				return this._NumberRangeForUnit.Entity;
-			}
-			set
-			{
-				NumberRangeForUnit previousValue = this._NumberRangeForUnit.Entity;
-				if (((previousValue != value) 
-							|| (this._NumberRangeForUnit.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._NumberRangeForUnit.Entity = null;
-						previousValue.TenantResponseApplicationInfos.Remove(this);
-					}
-					this._NumberRangeForUnit.Entity = value;
-					if ((value != null))
-					{
-						value.TenantResponseApplicationInfos.Add(this);
-						this._RangeID = value.RangeID;
-					}
-					else
-					{
-						this._RangeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("NumberRangeForUnit");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TenantResponseVerifications(TenantResponseVerification entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = this;
-		}
-		
-		private void detach_TenantResponseVerifications(TenantResponseVerification entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = null;
-		}
-		
-		private void attach_TenantResponseExemptContestedInfos(TenantResponseExemptContestedInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = this;
-		}
-		
-		private void detach_TenantResponseExemptContestedInfos(TenantResponseExemptContestedInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = null;
-		}
-		
-		private void attach_TenantResponseRentalHistories(TenantResponseRentalHistory entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = this;
-		}
-		
-		private void detach_TenantResponseRentalHistories(TenantResponseRentalHistory entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantResponseVerification")]
 	public partial class TenantResponseVerification : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -9076,6 +8560,880 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantResponsePageSubmissionStatus")]
+	public partial class TenantResponsePageSubmissionStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NavigationID;
+		
+		private int _CustomerID;
+		
+		private System.Nullable<bool> _ImportantInformation;
+		
+		private System.Nullable<bool> _ApplicantInformation;
+		
+		private System.Nullable<bool> _ExemptionContested;
+		
+		private System.Nullable<bool> _RentHistory;
+		
+		private System.Nullable<bool> _AdditionalDocumentation;
+		
+		private System.Nullable<bool> _Review;
+		
+		private System.Nullable<bool> _Verification;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNavigationIDChanging(int value);
+    partial void OnNavigationIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnImportantInformationChanging(System.Nullable<bool> value);
+    partial void OnImportantInformationChanged();
+    partial void OnApplicantInformationChanging(System.Nullable<bool> value);
+    partial void OnApplicantInformationChanged();
+    partial void OnExemptionContestedChanging(System.Nullable<bool> value);
+    partial void OnExemptionContestedChanged();
+    partial void OnRentHistoryChanging(System.Nullable<bool> value);
+    partial void OnRentHistoryChanged();
+    partial void OnAdditionalDocumentationChanging(System.Nullable<bool> value);
+    partial void OnAdditionalDocumentationChanged();
+    partial void OnReviewChanging(System.Nullable<bool> value);
+    partial void OnReviewChanged();
+    partial void OnVerificationChanging(System.Nullable<bool> value);
+    partial void OnVerificationChanged();
+    #endregion
+		
+		public TenantResponsePageSubmissionStatus()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NavigationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NavigationID
+		{
+			get
+			{
+				return this._NavigationID;
+			}
+			set
+			{
+				if ((this._NavigationID != value))
+				{
+					this.OnNavigationIDChanging(value);
+					this.SendPropertyChanging();
+					this._NavigationID = value;
+					this.SendPropertyChanged("NavigationID");
+					this.OnNavigationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImportantInformation", DbType="Bit")]
+		public System.Nullable<bool> ImportantInformation
+		{
+			get
+			{
+				return this._ImportantInformation;
+			}
+			set
+			{
+				if ((this._ImportantInformation != value))
+				{
+					this.OnImportantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ImportantInformation = value;
+					this.SendPropertyChanged("ImportantInformation");
+					this.OnImportantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantInformation", DbType="Bit")]
+		public System.Nullable<bool> ApplicantInformation
+		{
+			get
+			{
+				return this._ApplicantInformation;
+			}
+			set
+			{
+				if ((this._ApplicantInformation != value))
+				{
+					this.OnApplicantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicantInformation = value;
+					this.SendPropertyChanged("ApplicantInformation");
+					this.OnApplicantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExemptionContested", DbType="Bit")]
+		public System.Nullable<bool> ExemptionContested
+		{
+			get
+			{
+				return this._ExemptionContested;
+			}
+			set
+			{
+				if ((this._ExemptionContested != value))
+				{
+					this.OnExemptionContestedChanging(value);
+					this.SendPropertyChanging();
+					this._ExemptionContested = value;
+					this.SendPropertyChanged("ExemptionContested");
+					this.OnExemptionContestedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RentHistory", DbType="Bit")]
+		public System.Nullable<bool> RentHistory
+		{
+			get
+			{
+				return this._RentHistory;
+			}
+			set
+			{
+				if ((this._RentHistory != value))
+				{
+					this.OnRentHistoryChanging(value);
+					this.SendPropertyChanging();
+					this._RentHistory = value;
+					this.SendPropertyChanged("RentHistory");
+					this.OnRentHistoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalDocumentation", DbType="Bit")]
+		public System.Nullable<bool> AdditionalDocumentation
+		{
+			get
+			{
+				return this._AdditionalDocumentation;
+			}
+			set
+			{
+				if ((this._AdditionalDocumentation != value))
+				{
+					this.OnAdditionalDocumentationChanging(value);
+					this.SendPropertyChanging();
+					this._AdditionalDocumentation = value;
+					this.SendPropertyChanged("AdditionalDocumentation");
+					this.OnAdditionalDocumentationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Review", DbType="Bit")]
+		public System.Nullable<bool> Review
+		{
+			get
+			{
+				return this._Review;
+			}
+			set
+			{
+				if ((this._Review != value))
+				{
+					this.OnReviewChanging(value);
+					this.SendPropertyChanging();
+					this._Review = value;
+					this.SendPropertyChanged("Review");
+					this.OnReviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verification", DbType="Bit")]
+		public System.Nullable<bool> Verification
+		{
+			get
+			{
+				return this._Verification;
+			}
+			set
+			{
+				if ((this._Verification != value))
+				{
+					this.OnVerificationChanging(value);
+					this.SendPropertyChanging();
+					this._Verification = value;
+					this.SendPropertyChanged("Verification");
+					this.OnVerificationChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantResponseApplicationInfo")]
+	public partial class TenantResponseApplicationInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TenantResponseID;
+		
+		private System.Nullable<int> _C_ID;
+		
+		private System.Nullable<int> _ApplicantUserID;
+		
+		private System.Nullable<int> _ThirdPartyUserID;
+		
+		private System.Nullable<bool> _bThirdPartyRepresentation;
+		
+		private System.Nullable<int> _OwnerUserID;
+		
+		private System.Nullable<int> _PropertyManagerUserID;
+		
+		private System.Nullable<int> _NumberOfUnits;
+		
+		private int _UnitTypeID;
+		
+		private System.Nullable<int> _RangeID;
+		
+		private bool _bRentStatus;
+		
+		private string _ProvideExplanation;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<int> _ResponseFiledBy;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private bool _IsSubmitted;
+		
+		private EntitySet<TenantResponseVerification> _TenantResponseVerifications;
+		
+		private EntitySet<TenantResponseExemptContestedInfo> _TenantResponseExemptContestedInfos;
+		
+		private EntitySet<TenantResponseRentalHistory> _TenantResponseRentalHistories;
+		
+		private EntityRef<TenantResponseRentalIncrementInfo> _TenantResponseRentalIncrementInfo;
+		
+		private EntityRef<CaseDetail> _CaseDetail;
+		
+		private EntityRef<NumberRangeForUnit> _NumberRangeForUnit;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTenantResponseIDChanging(int value);
+    partial void OnTenantResponseIDChanged();
+    partial void OnC_IDChanging(System.Nullable<int> value);
+    partial void OnC_IDChanged();
+    partial void OnApplicantUserIDChanging(System.Nullable<int> value);
+    partial void OnApplicantUserIDChanged();
+    partial void OnThirdPartyUserIDChanging(System.Nullable<int> value);
+    partial void OnThirdPartyUserIDChanged();
+    partial void OnbThirdPartyRepresentationChanging(System.Nullable<bool> value);
+    partial void OnbThirdPartyRepresentationChanged();
+    partial void OnOwnerUserIDChanging(System.Nullable<int> value);
+    partial void OnOwnerUserIDChanged();
+    partial void OnPropertyManagerUserIDChanging(System.Nullable<int> value);
+    partial void OnPropertyManagerUserIDChanged();
+    partial void OnNumberOfUnitsChanging(System.Nullable<int> value);
+    partial void OnNumberOfUnitsChanged();
+    partial void OnUnitTypeIDChanging(int value);
+    partial void OnUnitTypeIDChanged();
+    partial void OnRangeIDChanging(System.Nullable<int> value);
+    partial void OnRangeIDChanged();
+    partial void OnbRentStatusChanging(bool value);
+    partial void OnbRentStatusChanged();
+    partial void OnProvideExplanationChanging(string value);
+    partial void OnProvideExplanationChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnResponseFiledByChanging(System.Nullable<int> value);
+    partial void OnResponseFiledByChanged();
+    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedDateChanged();
+    partial void OnIsSubmittedChanging(bool value);
+    partial void OnIsSubmittedChanged();
+    #endregion
+		
+		public TenantResponseApplicationInfo()
+		{
+			this._TenantResponseVerifications = new EntitySet<TenantResponseVerification>(new Action<TenantResponseVerification>(this.attach_TenantResponseVerifications), new Action<TenantResponseVerification>(this.detach_TenantResponseVerifications));
+			this._TenantResponseExemptContestedInfos = new EntitySet<TenantResponseExemptContestedInfo>(new Action<TenantResponseExemptContestedInfo>(this.attach_TenantResponseExemptContestedInfos), new Action<TenantResponseExemptContestedInfo>(this.detach_TenantResponseExemptContestedInfos));
+			this._TenantResponseRentalHistories = new EntitySet<TenantResponseRentalHistory>(new Action<TenantResponseRentalHistory>(this.attach_TenantResponseRentalHistories), new Action<TenantResponseRentalHistory>(this.detach_TenantResponseRentalHistories));
+			this._TenantResponseRentalIncrementInfo = default(EntityRef<TenantResponseRentalIncrementInfo>);
+			this._CaseDetail = default(EntityRef<CaseDetail>);
+			this._NumberRangeForUnit = default(EntityRef<NumberRangeForUnit>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantResponseID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TenantResponseID
+		{
+			get
+			{
+				return this._TenantResponseID;
+			}
+			set
+			{
+				if ((this._TenantResponseID != value))
+				{
+					this.OnTenantResponseIDChanging(value);
+					this.SendPropertyChanging();
+					this._TenantResponseID = value;
+					this.SendPropertyChanged("TenantResponseID");
+					this.OnTenantResponseIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int")]
+		public System.Nullable<int> C_ID
+		{
+			get
+			{
+				return this._C_ID;
+			}
+			set
+			{
+				if ((this._C_ID != value))
+				{
+					if (this._CaseDetail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnC_IDChanging(value);
+					this.SendPropertyChanging();
+					this._C_ID = value;
+					this.SendPropertyChanged("C_ID");
+					this.OnC_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantUserID", DbType="Int")]
+		public System.Nullable<int> ApplicantUserID
+		{
+			get
+			{
+				return this._ApplicantUserID;
+			}
+			set
+			{
+				if ((this._ApplicantUserID != value))
+				{
+					this.OnApplicantUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicantUserID = value;
+					this.SendPropertyChanged("ApplicantUserID");
+					this.OnApplicantUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThirdPartyUserID", DbType="Int")]
+		public System.Nullable<int> ThirdPartyUserID
+		{
+			get
+			{
+				return this._ThirdPartyUserID;
+			}
+			set
+			{
+				if ((this._ThirdPartyUserID != value))
+				{
+					this.OnThirdPartyUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._ThirdPartyUserID = value;
+					this.SendPropertyChanged("ThirdPartyUserID");
+					this.OnThirdPartyUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bThirdPartyRepresentation", DbType="Bit")]
+		public System.Nullable<bool> bThirdPartyRepresentation
+		{
+			get
+			{
+				return this._bThirdPartyRepresentation;
+			}
+			set
+			{
+				if ((this._bThirdPartyRepresentation != value))
+				{
+					this.OnbThirdPartyRepresentationChanging(value);
+					this.SendPropertyChanging();
+					this._bThirdPartyRepresentation = value;
+					this.SendPropertyChanged("bThirdPartyRepresentation");
+					this.OnbThirdPartyRepresentationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerUserID", DbType="Int")]
+		public System.Nullable<int> OwnerUserID
+		{
+			get
+			{
+				return this._OwnerUserID;
+			}
+			set
+			{
+				if ((this._OwnerUserID != value))
+				{
+					this.OnOwnerUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerUserID = value;
+					this.SendPropertyChanged("OwnerUserID");
+					this.OnOwnerUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyManagerUserID", DbType="Int")]
+		public System.Nullable<int> PropertyManagerUserID
+		{
+			get
+			{
+				return this._PropertyManagerUserID;
+			}
+			set
+			{
+				if ((this._PropertyManagerUserID != value))
+				{
+					this.OnPropertyManagerUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._PropertyManagerUserID = value;
+					this.SendPropertyChanged("PropertyManagerUserID");
+					this.OnPropertyManagerUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfUnits", DbType="Int")]
+		public System.Nullable<int> NumberOfUnits
+		{
+			get
+			{
+				return this._NumberOfUnits;
+			}
+			set
+			{
+				if ((this._NumberOfUnits != value))
+				{
+					this.OnNumberOfUnitsChanging(value);
+					this.SendPropertyChanging();
+					this._NumberOfUnits = value;
+					this.SendPropertyChanged("NumberOfUnits");
+					this.OnNumberOfUnitsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitTypeID", DbType="Int NOT NULL")]
+		public int UnitTypeID
+		{
+			get
+			{
+				return this._UnitTypeID;
+			}
+			set
+			{
+				if ((this._UnitTypeID != value))
+				{
+					this.OnUnitTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._UnitTypeID = value;
+					this.SendPropertyChanged("UnitTypeID");
+					this.OnUnitTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RangeID", DbType="Int")]
+		public System.Nullable<int> RangeID
+		{
+			get
+			{
+				return this._RangeID;
+			}
+			set
+			{
+				if ((this._RangeID != value))
+				{
+					if (this._NumberRangeForUnit.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRangeIDChanging(value);
+					this.SendPropertyChanging();
+					this._RangeID = value;
+					this.SendPropertyChanged("RangeID");
+					this.OnRangeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bRentStatus", DbType="Bit NOT NULL")]
+		public bool bRentStatus
+		{
+			get
+			{
+				return this._bRentStatus;
+			}
+			set
+			{
+				if ((this._bRentStatus != value))
+				{
+					this.OnbRentStatusChanging(value);
+					this.SendPropertyChanging();
+					this._bRentStatus = value;
+					this.SendPropertyChanged("bRentStatus");
+					this.OnbRentStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProvideExplanation", DbType="VarChar(MAX)")]
+		public string ProvideExplanation
+		{
+			get
+			{
+				return this._ProvideExplanation;
+			}
+			set
+			{
+				if ((this._ProvideExplanation != value))
+				{
+					this.OnProvideExplanationChanging(value);
+					this.SendPropertyChanging();
+					this._ProvideExplanation = value;
+					this.SendPropertyChanged("ProvideExplanation");
+					this.OnProvideExplanationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResponseFiledBy", DbType="Int")]
+		public System.Nullable<int> ResponseFiledBy
+		{
+			get
+			{
+				return this._ResponseFiledBy;
+			}
+			set
+			{
+				if ((this._ResponseFiledBy != value))
+				{
+					this.OnResponseFiledByChanging(value);
+					this.SendPropertyChanging();
+					this._ResponseFiledBy = value;
+					this.SendPropertyChanged("ResponseFiledBy");
+					this.OnResponseFiledByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmitted", DbType="Bit NOT NULL")]
+		public bool IsSubmitted
+		{
+			get
+			{
+				return this._IsSubmitted;
+			}
+			set
+			{
+				if ((this._IsSubmitted != value))
+				{
+					this.OnIsSubmittedChanging(value);
+					this.SendPropertyChanging();
+					this._IsSubmitted = value;
+					this.SendPropertyChanged("IsSubmitted");
+					this.OnIsSubmittedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseVerification", Storage="_TenantResponseVerifications", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
+		public EntitySet<TenantResponseVerification> TenantResponseVerifications
+		{
+			get
+			{
+				return this._TenantResponseVerifications;
+			}
+			set
+			{
+				this._TenantResponseVerifications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo", Storage="_TenantResponseExemptContestedInfos", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
+		public EntitySet<TenantResponseExemptContestedInfo> TenantResponseExemptContestedInfos
+		{
+			get
+			{
+				return this._TenantResponseExemptContestedInfos;
+			}
+			set
+			{
+				this._TenantResponseExemptContestedInfos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseRentalHistory", Storage="_TenantResponseRentalHistories", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
+		public EntitySet<TenantResponseRentalHistory> TenantResponseRentalHistories
+		{
+			get
+			{
+				return this._TenantResponseRentalHistories;
+			}
+			set
+			{
+				this._TenantResponseRentalHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseRentalIncrementInfo", Storage="_TenantResponseRentalIncrementInfo", ThisKey="TenantResponseID", OtherKey="RentalIncreaseInfoID", IsUnique=true, IsForeignKey=false)]
+		public TenantResponseRentalIncrementInfo TenantResponseRentalIncrementInfo
+		{
+			get
+			{
+				return this._TenantResponseRentalIncrementInfo.Entity;
+			}
+			set
+			{
+				TenantResponseRentalIncrementInfo previousValue = this._TenantResponseRentalIncrementInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._TenantResponseRentalIncrementInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TenantResponseRentalIncrementInfo.Entity = null;
+						previousValue.TenantResponseApplicationInfo = null;
+					}
+					this._TenantResponseRentalIncrementInfo.Entity = value;
+					if ((value != null))
+					{
+						value.TenantResponseApplicationInfo = this;
+					}
+					this.SendPropertyChanged("TenantResponseRentalIncrementInfo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CaseDetail_TenantResponseApplicationInfo", Storage="_CaseDetail", ThisKey="C_ID", OtherKey="C_ID", IsForeignKey=true)]
+		public CaseDetail CaseDetail
+		{
+			get
+			{
+				return this._CaseDetail.Entity;
+			}
+			set
+			{
+				CaseDetail previousValue = this._CaseDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._CaseDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CaseDetail.Entity = null;
+						previousValue.TenantResponseApplicationInfos.Remove(this);
+					}
+					this._CaseDetail.Entity = value;
+					if ((value != null))
+					{
+						value.TenantResponseApplicationInfos.Add(this);
+						this._C_ID = value.C_ID;
+					}
+					else
+					{
+						this._C_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("CaseDetail");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NumberRangeForUnit_TenantResponseApplicationInfo", Storage="_NumberRangeForUnit", ThisKey="RangeID", OtherKey="RangeID", IsForeignKey=true)]
+		public NumberRangeForUnit NumberRangeForUnit
+		{
+			get
+			{
+				return this._NumberRangeForUnit.Entity;
+			}
+			set
+			{
+				NumberRangeForUnit previousValue = this._NumberRangeForUnit.Entity;
+				if (((previousValue != value) 
+							|| (this._NumberRangeForUnit.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._NumberRangeForUnit.Entity = null;
+						previousValue.TenantResponseApplicationInfos.Remove(this);
+					}
+					this._NumberRangeForUnit.Entity = value;
+					if ((value != null))
+					{
+						value.TenantResponseApplicationInfos.Add(this);
+						this._RangeID = value.RangeID;
+					}
+					else
+					{
+						this._RangeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("NumberRangeForUnit");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TenantResponseVerifications(TenantResponseVerification entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = this;
+		}
+		
+		private void detach_TenantResponseVerifications(TenantResponseVerification entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = null;
+		}
+		
+		private void attach_TenantResponseExemptContestedInfos(TenantResponseExemptContestedInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = this;
+		}
+		
+		private void detach_TenantResponseExemptContestedInfos(TenantResponseExemptContestedInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = null;
+		}
+		
+		private void attach_TenantResponseRentalHistories(TenantResponseRentalHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = this;
+		}
+		
+		private void detach_TenantResponseRentalHistories(TenantResponseRentalHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = null;
 		}
 	}
 }

@@ -2206,6 +2206,7 @@ namespace RAP.DAL
                     }
                 }
                 var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
+                                                && x.C_ID == caseInfo.C_ID
                                                 && x.IsSubmitted == false).FirstOrDefault();
                 TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
                 if (TenantResponseInfoDB != null)
@@ -2250,6 +2251,183 @@ namespace RAP.DAL
         #endregion "TenantResponseGet"
 
         #region "TenantResponseSave"
+        public ReturnResult<CaseInfoM> SaveTenantResponseApplicationInfo(CaseInfoM caseInfo, int UserID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+
+            int ownerUserID = 0;
+            int thirdPartyUserID = 0;
+            int PropertyManagerUserID = 0;
+            int applicantUserID = 0;
+            try
+            {
+                CommonDBHandler _dbCommon = new CommonDBHandler();
+                if (caseInfo.TenantResponseInfo.TenantResponseID > 0)
+                {
+
+                    if (caseInfo.TenantResponseInfo.bThirdPartyRepresentation)
+                    {
+                        thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ThirdPartyInfo).result.UserID;
+                        if (thirdPartyUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
+
+                    applicantUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ApplicantUserInfo).result.UserID;
+                    if (applicantUserID == 0)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                        return result;
+                    }
+                    ownerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.OwnerInfo).result.UserID;
+                    if (ownerUserID == 0)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                        return result;
+                    }
+                    if (caseInfo.TenantResponseInfo.bSameAsOwnerInfo)
+                    {
+                        PropertyManagerUserID = ownerUserID;
+                    }
+                    else
+                    {
+                        PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.PropertyManager).result.UserID;
+                        if (PropertyManagerUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
+
+                    TenantResponseApplicationInfo petitionDB = _dbContext.TenantResponseApplicationInfos
+                                                        .Where(x => x.IsSubmitted == false
+                                                            && x.TenantResponseID == caseInfo.TenantResponseInfo.TenantResponseID).FirstOrDefault();
+                    petitionDB.bThirdPartyRepresentation = caseInfo.TenantResponseInfo.bThirdPartyRepresentation;
+
+                    petitionDB.ThirdPartyUserID = thirdPartyUserID;
+                    petitionDB.ApplicantUserID = applicantUserID;
+                    petitionDB.OwnerUserID = ownerUserID;
+                    petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    petitionDB.NumberOfUnits = caseInfo.TenantResponseInfo.NumberOfUnits;
+                    petitionDB.UnitTypeID = caseInfo.TenantResponseInfo.UnitTypeId;
+                    petitionDB.bRentStatus = caseInfo.TenantResponseInfo.bCurrentRentStatus;
+                    if (caseInfo.TenantResponseInfo.bCurrentRentStatus == false)
+                    {
+                        petitionDB.ProvideExplanation = caseInfo.TenantResponseInfo.ProvideExplanation;
+                    }
+                    petitionDB.CreatedDate = DateTime.Now;
+                    petitionDB.ResponseFiledBy = caseInfo.TenantResponseInfo.CustomerID;
+                    petitionDB.RangeID = caseInfo.TenantResponseInfo.SelectedRangeOfUnits.RangeID;
+                    petitionDB.IsSubmitted = false;
+                    _dbContext.SubmitChanges();
+                    caseInfo.TenantResponseInfo.TenantResponseID = petitionDB.TenantResponseID;
+
+                    var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
+                                            .Where(x => x.CustomerID == caseInfo.TenantResponseInfo.CustomerID).FirstOrDefault();
+                    if (PageStatus != null)
+                    {
+                        PageStatus.ApplicantInformation = true;
+                        _dbContext.SubmitChanges();
+                    }
+                    else
+                    {
+                        var PageStatusNew = new TenantResponsePageSubmissionStatus();
+                        PageStatusNew.CustomerID = caseInfo.TenantResponseInfo.CustomerID;
+                        PageStatusNew.ApplicantInformation = true;
+                        _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                        _dbContext.SubmitChanges();
+                    }
+                }
+                else
+                {
+                    if (caseInfo.TenantResponseInfo.bThirdPartyRepresentation)
+                    {
+                        thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ThirdPartyInfo).result.UserID;
+                        if (thirdPartyUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
+
+                    applicantUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ApplicantUserInfo).result.UserID;
+                    if (applicantUserID == 0)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                        return result;
+                    }
+                    ownerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.OwnerInfo).result.UserID;
+                    if (ownerUserID == 0)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                        return result;
+                    }
+                    if (caseInfo.TenantResponseInfo.bSameAsOwnerInfo)
+                    {
+                        PropertyManagerUserID = ownerUserID;
+                    }
+                    else
+                    {
+                        PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.PropertyManager).result.UserID;
+                        if (PropertyManagerUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                    }
+
+                    TenantResponseApplicationInfo responseDB = new TenantResponseApplicationInfo();
+                    responseDB.bThirdPartyRepresentation = caseInfo.TenantResponseInfo.bThirdPartyRepresentation;
+
+                    responseDB.ThirdPartyUserID = thirdPartyUserID;
+                    responseDB.ApplicantUserID = applicantUserID;
+                    responseDB.OwnerUserID = ownerUserID;
+                    responseDB.PropertyManagerUserID = PropertyManagerUserID;
+                    responseDB.NumberOfUnits = caseInfo.TenantResponseInfo.NumberOfUnits;
+                    responseDB.UnitTypeID = caseInfo.TenantResponseInfo.UnitTypeId;
+                    responseDB.bRentStatus = caseInfo.TenantResponseInfo.bCurrentRentStatus;
+                    responseDB.C_ID = caseInfo.C_ID;
+                    if (caseInfo.TenantResponseInfo.bCurrentRentStatus == false)
+                    {
+                        responseDB.ProvideExplanation = caseInfo.TenantResponseInfo.ProvideExplanation;
+                    }
+                    responseDB.CreatedDate = DateTime.Now;
+                    responseDB.ResponseFiledBy = caseInfo.TenantResponseInfo.CustomerID;
+                    responseDB.IsSubmitted = false;
+                    _dbContext.TenantResponseApplicationInfos.InsertOnSubmit(responseDB);
+                    _dbContext.SubmitChanges();
+                    caseInfo.TenantResponseInfo.TenantResponseID = responseDB.TenantResponseID;
+
+                    var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
+                                             .Where(x => x.CustomerID == caseInfo.TenantResponseInfo.CustomerID).FirstOrDefault();
+                    if (PageStatus != null)
+                    {
+                        PageStatus.ApplicantInformation = true;
+                        _dbContext.SubmitChanges();
+                    }
+                    else
+                    {
+                        var PageStatusNew = new TenantResponsePageSubmissionStatus();
+                        PageStatusNew.CustomerID = caseInfo.TenantResponseInfo.CustomerID;
+                        PageStatusNew.ApplicantInformation = true;
+                        _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                        _dbContext.SubmitChanges();
+                    }
+                }
+
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         #endregion "TenantResponseSave"
 
         #region Petition category

@@ -50,7 +50,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
             //self.caseinfo.TenantPetitionInfo.PropertyManager.Zip = self.caseinfo.TenantPetitionInfo.OwnerInfo.Zip;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber = self.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber;
             //self.caseinfo.TenantPetitionInfo.PropertyManager.Email = self.caseinfo.TenantPetitionInfo.OwnerInfo.Email;
-            self.caseinfo.TenantPetitionInfo.PropertyManager = self.caseinfo.TenantPetitionInfo.OwnerInfo;
+            self.caseinfo.TenantPetitionInfo.PropertyManager = angular.copy(self.caseinfo.TenantPetitionInfo.OwnerInfo);
         }
         else
         {

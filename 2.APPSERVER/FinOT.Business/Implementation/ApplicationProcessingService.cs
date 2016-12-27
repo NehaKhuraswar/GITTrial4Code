@@ -294,6 +294,7 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
         public ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -431,6 +432,20 @@ namespace RAP.Business.Implementation
             try
             {
                 result = _dbHandler.GetTenantResponseApplicationInfo(CaseNumber, CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<CaseInfoM> SaveTenantResponseApplicationInfo(CaseInfoM caseInfo, int UserID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.SaveTenantResponseApplicationInfo(caseInfo, UserID);
                 return result;
             }
             catch (Exception ex)

@@ -3,10 +3,10 @@ var rapTRapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, 
     var factory = {};
     var _routePrefix = 'api/applicationprocessing';
 
-    var _SaveApplicationInfo = function (model) {
+    var _SaveTenantResponseApplicationInfo = function (model) {
         blockUI.start();
 
-        var url = _routePrefix + '/saveapplicationinfo';
+        var url = _routePrefix + '/savetenantresponseapplicationinfo';
 
         return ajax.Post(model, url)
         .finally(function () {
@@ -38,7 +38,7 @@ var rapTRapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, 
 
 
     factory.GetCaseInfo = _GetCaseInfo;
-    factory.SaveApplicationInfo = _SaveApplicationInfo;
+    factory.SaveTenantResponseApplicationInfo = _SaveTenantResponseApplicationInfo;
     factory.GetTenantResponseApplicationInfo = _GetTenantResponseApplicationInfo;
     
     return factory;
