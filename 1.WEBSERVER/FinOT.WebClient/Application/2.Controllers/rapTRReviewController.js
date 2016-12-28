@@ -10,7 +10,8 @@ var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFac
             if (!alert.checkResponse(response)) {
                 return;
             }
-            self.caseinfo.TenantResponseInfo = response.data;
+            self.caseinfo.TenantResponseInfo = response.data.TenantResponseInfo;
+            self.caseinfo.Documents = response.data.Documents;
         });
     }
     _GetTenantResponseReviewInfo(self.caseinfo.CaseID, self.custDetails.custID);

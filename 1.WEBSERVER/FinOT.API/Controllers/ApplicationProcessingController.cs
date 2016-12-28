@@ -651,8 +651,8 @@ namespace RAP.API.Controllers
 
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<TenantResponseInfoM> transaction = new TranInfo<TenantResponseInfoM>();
-            ReturnResult<TenantResponseInfoM> result = new ReturnResult<TenantResponseInfoM>();
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
 
@@ -677,7 +677,7 @@ namespace RAP.API.Controllers
                 result.status = _eHandler.HandleException(ex);
                 _commonService.LogError(result.status);
             }
-            return Request.CreateResponse<TranInfo<TenantResponseInfoM>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]

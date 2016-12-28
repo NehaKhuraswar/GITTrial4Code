@@ -528,12 +528,29 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID)
+        public ReturnResult<CaseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID)
         {
-            ReturnResult<TenantResponseInfoM> result = new ReturnResult<TenantResponseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            ReturnResult<TenantResponseInfoM> responseResult = new ReturnResult<TenantResponseInfoM>();
             try
             {
-                result = _dbHandler.GetTenantResponseReviewInfo(CaseNumber, CustomerID);
+                responseResult = _dbHandler.GetTenantResponseReviewInfo(CaseNumber, CustomerID);
+
+                
+                CaseInfoM caseInfo = new CaseInfoM();
+
+                if (responseResult.status.Status == StatusEnum.Success)
+                {
+                    caseInfo.CustomerID = CustomerID;
+                    caseInfo = GetTRAdditionalDocuments(caseInfo).result;
+                    caseInfo.TenantResponseInfo = responseResult.result;
+                }
+                else
+                {
+                    result.result = null;
+                    result.status = responseResult.status;
+                }
+                result.result = caseInfo;
                 return result;
             }
             catch (Exception ex)

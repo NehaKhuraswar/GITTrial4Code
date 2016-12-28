@@ -225,7 +225,7 @@
                                     <!-- Additional Documentation -->
                                     <div class="subhead type2">
                                         <h4>Additional Documentation</h4>
-                                        <a href="#" class="btn-link btn-edit">Edit</a>
+                                        <a ng-click="Ctrl.EditDocumentsInfo()" class="btn-link btn-edit">Edit</a>
                                     </div>
 
                                     <div class="field-group">
@@ -239,17 +239,17 @@
                                             </div>
 
                                             <div class="tbl-body">
-                                                <div class="tbl-row clearfix">
+                                                <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
                                                     <div class="item item-toggle expanded">
                                                         <div class="item-header clearfix">
-                                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> Rental_expenses.xsl</div>
-                                                            <div class="col col-35 type">Excel</div>
+                                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> {{item.DocName}}</div>
+                                                            <!--<div class="col col-35 type">Excel</div>-->
                                                         </div>
 
                                                         <div class="item-content clearfix">
                                                             <div class="row">
                                                                 <div class="col-md-10 col-sm-12">
-                                                                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                                    <p>{{item.DocDescription}}</p>
                                                                 </div>
                                                             </div>
                                                         </div>

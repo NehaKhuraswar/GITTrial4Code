@@ -30,7 +30,7 @@ namespace RAP.Core.Services
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID);
-        ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
+        ReturnResult<CaseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
         ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID);
         ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
