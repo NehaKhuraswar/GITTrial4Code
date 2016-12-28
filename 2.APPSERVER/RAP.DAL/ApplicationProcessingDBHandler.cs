@@ -3522,6 +3522,141 @@ namespace RAP.DAL
                return result;
            }
        }
+
+       public ReturnResult<CaseInfoM> GetOResponseRentIncreaseAndPropertyInfo(CaseInfoM model)
+       {
+           ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           try
+           {
+               model.RAPNoticeStatus = getRAPNoticeStatus();
+               if (model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID > 0)               
+               {
+                   var propertyInfo = (from r in _dbContext.OwnerResponsePropertyInfos
+                                       where r.PropertyID == model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID
+                                       select r).First();
+                   if (propertyInfo != null)
+                   {
+                       model.OwnerResponseInfo.PropertyInfo.MovedInDate = (propertyInfo.MovedInDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.MovedInDate));
+                       model.OwnerResponseInfo.PropertyInfo.InitialRent = propertyInfo.InitialRent;
+                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeStatusID = propertyInfo.RAPNoticeStatusID;
+                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeGivenDate = (propertyInfo.RAPNoticeGivenDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeGivenDate));
+                       model.OwnerResponseInfo.PropertyInfo.CurrentOnRent =Convert.ToBoolean(propertyInfo.CurrentOnRent);
+                       model.OwnerResponseInfo.PropertyInfo.bCapitalImprovementIncrease = Convert.ToBoolean(propertyInfo.bCapitalImprovementIncrease);
+                       model.OwnerResponseInfo.PropertyInfo.bCaptialImprovementContested = Convert.ToBoolean(propertyInfo.bCaptialImprovementContested);
+                       model.OwnerResponseInfo.PropertyInfo.CaseNumbers = propertyInfo.CaseNumber;
+                       model.OwnerResponseInfo.PropertyInfo.bRAPNoticeToRAPOffice = Convert.ToBoolean(propertyInfo.bRAPNoticeToRAPOffice);
+                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeToRAPOfficeDate = (propertyInfo.RAPNoticeToRAPOfficeDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeToRAPOfficeDate));                   
+                    
+                   }
+
+                   var rentIncreaseInfo = _dbContext.OwnerResponseRentalIncrementInfos.Where(r => r.PropertyID == model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID);
+                   var resaons = _dbContext.OwnerRentIncreaseReasons;
+                   if (rentIncreaseInfo.Any())
+                   {
+                       foreach (var item in rentIncreaseInfo)
+                       {
+                           OwnerResponseRentalIncrementInfoM _rentIncrease = new OwnerResponseRentalIncrementInfoM();
+                           _rentIncrease.bRentIncreaseNoticeGiven = (bool)item.bRentIncreaseNoticeGiven;
+                           _rentIncrease.RentIncreaseNoticeDate = (item.RentIncreaseNoticeDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
+                           _rentIncrease.RentIncreaseEffectiveDate = (item.RentIncreaseEffectiveDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
+                           _rentIncrease.RentIncreasedFrom = item.RentIncreasedFrom;
+                           _rentIncrease.RentIncreasedTo = item.RentIncreasedTo;
+
+                           if (resaons.Any())
+                           {
+                               foreach (var reason in resaons)
+                               {
+                                   OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
+                                   _reason.ReasonID = reason.ReasonID;
+                                   _reason.ReasonDescription = reason.Reason;
+                                   _reason.IsSelected = false;
+                                   _rentIncrease.RentIncreaseReasons.Add(_reason);
+                               }
+                           }
+                           var selectedReasons = _dbContext.OwnerResponseRentIncreaseReasonInfos.Where(x => x.RentalIncreaseInfoID == _rentIncrease.RentalIncreaseInfoID);
+                           if (selectedReasons.Any())
+                           {
+                               foreach (var reason in selectedReasons)
+                               {
+                                   _rentIncrease.RentIncreaseReasons.Where(r => r.ReasonID == reason.ReasonID).First().IsSelected = true;
+                               }
+                           }
+                           model.OwnerResponseInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
+                       }
+                   }               
+              }
+               else
+               {
+
+                   var propertyInfo = (from r in _dbContext.OwnerResponsePropertyInfos
+                                       where r.CustomerID == model.CustomerID && r.bPetitionFiled == false
+                                       select r).First();
+                 
+                   if (propertyInfo != null)
+                   {
+                       model.OwnerResponseInfo.PropertyInfo.MovedInDate = (propertyInfo.MovedInDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.MovedInDate));
+                       model.OwnerResponseInfo.PropertyInfo.InitialRent = propertyInfo.InitialRent;
+                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeStatusID = propertyInfo.RAPNoticeStatusID;
+                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeGivenDate = (propertyInfo.RAPNoticeGivenDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeGivenDate));
+                       model.OwnerResponseInfo.PropertyInfo.CurrentOnRent = Convert.ToBoolean(propertyInfo.CurrentOnRent);
+                       model.OwnerResponseInfo.PropertyInfo.bCapitalImprovementIncrease = Convert.ToBoolean(propertyInfo.bCapitalImprovementIncrease);
+                       model.OwnerResponseInfo.PropertyInfo.bCaptialImprovementContested = Convert.ToBoolean(propertyInfo.bCaptialImprovementContested);
+                       model.OwnerResponseInfo.PropertyInfo.CaseNumbers = propertyInfo.CaseNumber;
+                       model.OwnerResponseInfo.PropertyInfo.bRAPNoticeToRAPOffice = Convert.ToBoolean(propertyInfo.bRAPNoticeToRAPOffice);
+                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeToRAPOfficeDate = (propertyInfo.RAPNoticeToRAPOfficeDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeToRAPOfficeDate));
+
+                   }
+                   if (propertyInfo.PropertyID > 0)
+                   {
+                       var rentIncreaseInfo = _dbContext.OwnerResponseRentalIncrementInfos.Where(r => r.PropertyID == model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID);
+                       var resaons = _dbContext.OwnerRentIncreaseReasons;
+                       if (rentIncreaseInfo.Any())
+                       {
+                           foreach (var item in rentIncreaseInfo)
+                           {
+                               OwnerResponseRentalIncrementInfoM _rentIncrease = new OwnerResponseRentalIncrementInfoM();
+                               _rentIncrease.bRentIncreaseNoticeGiven = (bool)item.bRentIncreaseNoticeGiven;
+                               _rentIncrease.RentIncreaseNoticeDate = (item.RentIncreaseNoticeDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
+                               _rentIncrease.RentIncreaseEffectiveDate = (item.RentIncreaseEffectiveDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
+                               _rentIncrease.RentIncreasedFrom = item.RentIncreasedFrom;
+                               _rentIncrease.RentIncreasedTo = item.RentIncreasedTo;
+
+                               if (resaons.Any())
+                               {
+                                   foreach (var reason in resaons)
+                                   {
+                                       OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
+                                       _reason.ReasonID = reason.ReasonID;
+                                       _reason.ReasonDescription = reason.Reason;
+                                       _reason.IsSelected = false;
+                                       _rentIncrease.RentIncreaseReasons.Add(_reason);
+                                   }
+                               }
+                               var selectedReasons = _dbContext.OwnerResponseRentIncreaseReasonInfos.Where(x => x.RentalIncreaseInfoID == _rentIncrease.RentalIncreaseInfoID);
+                               if (selectedReasons.Any())
+                               {
+                                   foreach (var reason in selectedReasons)
+                                   {
+                                       _rentIncrease.RentIncreaseReasons.Where(r => r.ReasonID == reason.ReasonID).First().IsSelected = true;
+                                   }
+                               }
+                               model.OwnerResponseInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
+                           }
+                       }
+                   }
+               }
+
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }       
        #endregion
 
        #region Owner Response Save Functions
@@ -3814,58 +3949,58 @@ namespace RAP.DAL
                    }
                    model.RentalInfo = _rentalInfo;
 
-               //    foreach (var rentIncrease in model.RentalInfo)
-               //    {
-               //        if (rentIncrease.RentIncreaseReasons.Select(x => x.IsSelected == true).Any())
-               //        {
-               //            var rentIncreaseReasonDB = from r in _dbContext.OwnerResonseRentIncreaseReasonInfos
-               //                                       where r.RentalIncreaseInfoID == rentIncrease.RentalIncreaseInfoID
-               //                                       select r;
-               //            if (rentIncreaseReasonDB.Any())
-               //            {
-               //                foreach (var item in rentIncrease.RentIncreaseReasons)
-               //                {
-               //                    if (item.IsSelected)
-               //                    {
-               //                        if (!rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
-               //                        {
-               //                            OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-               //                            rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
-               //                            rentIncreaseReason.ReasonID = item.ReasonID;
-               //                            _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
-               //                            _dbContext.SubmitChanges();
-               //                        }
-               //                    }
-               //                    else
-               //                    {
-               //                        if (rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
-               //                        {
-               //                            OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-               //                            rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
-               //                            rentIncreaseReason.ReasonID = item.ReasonID;
-               //                            _dbContext.OwnerRentIncreaseReasonInfos.DeleteOnSubmit(rentIncreaseReason);
-               //                            _dbContext.SubmitChanges();
-               //                        }
-               //                    }
+                   foreach (var rentIncrease in model.RentalInfo)
+                   {
+                       if (rentIncrease.RentIncreaseReasons.Select(x => x.IsSelected == true).Any())
+                       {
+                           var rentIncreaseReasonDB = from r in _dbContext.OwnerResponseRentIncreaseReasonInfos
+                                                      where r.RentalIncreaseInfoID == rentIncrease.RentalIncreaseInfoID
+                                                      select r;
+                           if (rentIncreaseReasonDB.Any())
+                           {
+                               foreach (var item in rentIncrease.RentIncreaseReasons)
+                               {
+                                   if (item.IsSelected)
+                                   {
+                                       if (!rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
+                                       {
+                                           OwnerResponseRentIncreaseReasonInfo rentIncreaseReason = new OwnerResponseRentIncreaseReasonInfo();
+                                           rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
+                                           rentIncreaseReason.ReasonID = item.ReasonID;
+                                           _dbContext.OwnerResponseRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
+                                           _dbContext.SubmitChanges();
+                                       }
+                                   }
+                                   else
+                                   {
+                                       if (rentIncreaseReasonDB.Select(x => x.ReasonID == item.ReasonID).Any())
+                                       {
+                                           OwnerResponseRentIncreaseReasonInfo rentIncreaseReason = new OwnerResponseRentIncreaseReasonInfo();
+                                           rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
+                                           rentIncreaseReason.ReasonID = item.ReasonID;
+                                           _dbContext.OwnerResponseRentIncreaseReasonInfos.DeleteOnSubmit(rentIncreaseReason);
+                                           _dbContext.SubmitChanges();
+                                       }
+                                   }
 
-               //                }
-               //            }
-               //            else
-               //            {
-               //                foreach (var item in rentIncrease.RentIncreaseReasons)
-               //                {
-               //                    if (item.IsSelected)
-               //                    {
-               //                        OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-               //                        rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
-               //                        rentIncreaseReason.ReasonID = item.ReasonID;
-               //                        _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
-               //                        _dbContext.SubmitChanges();
-               //                    }
-               //                }
-               //            }
-               //        }
-               //    }
+                               }
+                           }
+                           else
+                           {
+                               foreach (var item in rentIncrease.RentIncreaseReasons)
+                               {
+                                   if (item.IsSelected)
+                                   {
+                                       OwnerResponseRentIncreaseReasonInfo rentIncreaseReason = new OwnerResponseRentIncreaseReasonInfo();
+                                       rentIncreaseReason.RentalIncreaseInfoID = rentIncrease.RentalIncreaseInfoID;
+                                       rentIncreaseReason.ReasonID = item.ReasonID;
+                                       _dbContext.OwnerResponseRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
+                                       _dbContext.SubmitChanges();
+                                   }
+                               }
+                           }
+                       }
+                   }
                }
 
                result.result = model;

@@ -973,6 +973,30 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<CaseInfoM> GetOResponseRentIncreaseAndPropertyInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.GetOResponseRentIncreaseAndPropertyInfo(model);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model = dbResult.result;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         #endregion
 
         #region Save Owner Response Methods
@@ -1024,6 +1048,30 @@ namespace RAP.Business.Implementation
             try
             {
                 var dbResult = _dbHandler.SaveOResponsePropertyAndTenantInfo(model.OwnerResponseInfo.PropertyInfo);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model.OwnerResponseInfo.PropertyInfo = dbResult.result;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<CaseInfoM> SaveOResponseRentIncreaseAndUpdatePropertyInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.SaveOResponseRentIncreaseAndUpdatePropertyInfo(model.OwnerResponseInfo.PropertyInfo);
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
                     result.status = dbResult.status;
