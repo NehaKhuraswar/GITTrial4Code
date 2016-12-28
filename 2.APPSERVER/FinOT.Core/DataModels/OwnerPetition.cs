@@ -185,8 +185,10 @@ namespace RAP.Core.DataModels
         public OwnerResponseInfoM()
         {
             ApplicantInfo = new OwnerResponseApplicantInfoM();
+            PropertyInfo = new OwnerResponsePropertyInfoM();
         }
         public OwnerResponseApplicantInfoM ApplicantInfo { get; set; }
+        public OwnerResponsePropertyInfoM PropertyInfo { get; set; }
     }
 
     public class OwnerResponseApplicantInfoM
@@ -224,6 +226,65 @@ namespace RAP.Core.DataModels
         public bool bPetitionFiled { get; set; }
         public string RAPFee { get; set; }
         public string CaseRespondingTo { get; set; }
+    }
+
+    public class OwnerResponsePropertyInfoM
+    {
+
+        public OwnerResponsePropertyInfoM()
+        {
+            MovedInDate = new CustomDate();
+            RAPNoticeGivenDate = new CustomDate();
+        }
+        private List<OwnerPetitionTenantInfoM> _tenantInfo = new List<OwnerPetitionTenantInfoM>();
+        private List<OwnerPetitionRentalIncrementInfoM> _rentalInfo = new List<OwnerPetitionRentalIncrementInfoM>();
+        private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
+
+        public int OwnerPropertyID { get; set; }
+        public int UnitTypeID { get; set; }
+        public CustomDate MovedInDate { get; set; }
+        public decimal? InitialRent { get; set; }
+        public int? RAPNoticeStatusID { get; set; }
+        public CustomDate RAPNoticeGivenDate { get; set; }
+        public int? RentStatusID { get; set; }
+        public int CustomerID { get; set; }
+        public bool bPetitionFiled { get; set; }
+        public List<OwnerPetitionTenantInfoM> TenantInfo
+        {
+            get
+            {
+                return _tenantInfo;
+            }
+            set
+            {
+                _tenantInfo = value;
+            }
+        }
+        public List<OwnerPetitionRentalIncrementInfoM> RentalInfo
+        {
+            get
+            {
+                return _rentalInfo;
+            }
+            set
+            {
+                _rentalInfo = value;
+            }
+        }
+        public List<UnitTypeM> UnitTypes
+        {
+            get
+            {
+                return _unitTypes;
+            }
+            set
+            {
+                _unitTypes = value;
+            }
+        }
+
+
+
     }
     #endregion
 

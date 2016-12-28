@@ -15,7 +15,7 @@
                             <li> <a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>                   
                             <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOresponseApplicantInfo()">Applicant Information</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOwnerRentalProperty()">Rental Property</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOresponseRentalProperty()">Rental Property</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOwnerRentalHistory()">Rental History</a></li>
                             
                             
@@ -39,13 +39,11 @@
                             <div ng-if="Ctrl.oresponseApplicantInfo">
                                 <rap-oresponsepeapplicantinfo ng-show="Ctrl.oresponseApplicantInfo" model="Ctrl"></rap-oresponsepeapplicantinfo>
                             </div>
-                            <!--<div ng-if="Ctrl.ownerJustification">
-                                <rap-ownerjustification ng-show="Ctrl.ownerJustification" model="Ctrl"></rap-ownerjustification>
+                         
+                            <div ng-if="Ctrl.oresponseRentalProperty">
+                                <rap-oresponserentalproperty ng-show="Ctrl.oresponseRentalProperty" model="Ctrl"></rap-oresponserentalproperty>
                             </div>
-                            <div ng-if="Ctrl.ownerRentalProperty">
-                                <rap-ownerrentalproperty ng-show="Ctrl.ownerRentalProperty" model="Ctrl"></rap-ownerrentalproperty>
-                            </div>
-                            <div ng-if="Ctrl.ownerRentalHistory">
+                            <!--<div ng-if="Ctrl.ownerRentalHistory">
                                 <rap-ownerrentalhistory ng-show="Ctrl.ownerRentalHistory" model="Ctrl"></rap-ownerrentalhistory>
                             </div>
                             <div ng-if="Ctrl.ownerAdditionalDocuments">

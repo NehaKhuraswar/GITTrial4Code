@@ -11,8 +11,7 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         self.petitionType = false;
         self.oresponseImpInfo = false;
         self.oresponseApplicantInfo = false;
-        self.ownerJustification = false;
-        self.ownerRentalProperty = false;
+        self.oresponseRentalProperty = false;
         self.ownerRentalHistory = false;
         self.ownerAdditionalDocuments = false;
         self.ownerReview = false;
@@ -43,14 +42,14 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
             //self.oPetionCurrentStatus.ApplicantInformation = true;
         //}
     };
-    //self.ShowOwnerJustification = function () {
+    self.ShowOresponseRentalProperty = function () {
     //    if (self.oPetionActiveStatus.JustificationForRentIncrease) {
-    //        _DisableAll();
+           _DisableAll();
     //        self.DisableAllCurrent();
-    //        self.ownerJustification = true;
+           self.oresponseRentalProperty = true;
     //        self.oPetionCurrentStatus.JustificationForRentIncrease = true;
     //    }
-    //};
+    };
     //self.ShowOwnerRentalProperty = function () {
     //    if (self.oPetionActiveStatus.RentalProperty) {
     //        _DisableAll();

@@ -3474,6 +3474,54 @@ namespace RAP.DAL
                return result;
            }
        }
+
+       public ReturnResult<OwnerResponsePropertyInfoM> GetOResponsePropertyAndTenantInfo(OwnerResponsePropertyInfoM model)
+       {
+           ReturnResult<OwnerResponsePropertyInfoM> result = new ReturnResult<OwnerResponsePropertyInfoM>();
+           try
+           {
+               if (!model.UnitTypes.Any())
+               {
+                   model.UnitTypes = getUnitTypes();
+               }
+
+                var propertyInfo = from r in _dbContext.OwnerResponsePropertyInfos
+                                  where r.CustomerID == model.CustomerID && r.bPetitionFiled == false
+                                  select r;
+               if (propertyInfo.Any())
+               {
+                   model.OwnerPropertyID = propertyInfo.First().PropertyID;
+                   model.UnitTypeID = propertyInfo.First().UnitTypeID;
+
+                   var tentantInfo = from r in _dbContext.OwnerResponseTenantInfos                                     
+                                     where r.PropertyID == model.OwnerPropertyID
+                                     select r;
+                   if (tentantInfo.Any())
+                   {
+                       foreach (var item in tentantInfo)
+                       {
+                           OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
+                           var userResult = _commondbHandler.GetUserInfo(item.TenantUserID);
+                           if (userResult.status.Status == StatusEnum.Success)
+                           {
+                               _tenant.TenantUserInfo = userResult.result;
+                               _tenant.TenantInfoID = item.TenantInfoID;
+                           }
+                           model.TenantInfo.Add(_tenant);
+                       }
+                   }
+               }
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
        #endregion
 
        #region Owner Response Save Functions
@@ -3574,6 +3622,97 @@ namespace RAP.DAL
                }
            }
        }
+
+       public ReturnResult<OwnerResponsePropertyInfoM> SaveOResponsePropertyAndTenantInfo(OwnerResponsePropertyInfoM model)
+       {
+           ReturnResult<OwnerResponsePropertyInfoM> result = new ReturnResult<OwnerResponsePropertyInfoM>();
+           try
+           {
+               if (model.OwnerPropertyID != 0)
+               {
+                   var propertyInfo = from r in _dbContext.OwnerPetitionPropertyInfos
+                                      where r.OwnerPropertyID == model.OwnerPropertyID
+                                      select r;
+                   if (propertyInfo.Any())
+                   {
+                       propertyInfo.First().UnitTypeID = model.UnitTypeID;
+                       _dbContext.SubmitChanges();
+                   }
+               }
+               else
+               {
+
+                   OwnerResponsePropertyInfo propertyInfo = new OwnerResponsePropertyInfo();
+                   propertyInfo.UnitTypeID = model.UnitTypeID;
+                   propertyInfo.CustomerID = model.CustomerID;
+                   propertyInfo.bPetitionFiled = false;
+                   _dbContext.OwnerResponsePropertyInfos.InsertOnSubmit(propertyInfo);
+                   _dbContext.SubmitChanges();
+                   model.OwnerPropertyID = propertyInfo.PropertyID;
+               }
+               if (model.TenantInfo.Any())
+               {
+                   OwnerResponseTenantInfo tenantInfo = new OwnerResponseTenantInfo();
+                   List<OwnerPetitionTenantInfoM> tenantsInfoM = new List<OwnerPetitionTenantInfoM>();
+                   foreach (var tenant in model.TenantInfo)
+                   {
+                       if (tenant.IsDeleted == false)
+                       {
+                           var userResult = _commondbHandler.SaveUserInfo(tenant.TenantUserInfo);
+                           if (userResult.status.Status == StatusEnum.Success)
+                           {
+                               var userinfo = from r in _dbContext.OwnerResponseTenantInfos
+                                              where r.TenantUserID == userResult.result.UserID
+                                              select r;
+                               if (!userinfo.Any())
+                               {
+
+                                   tenant.TenantUserInfo = userResult.result;
+                                   tenantInfo.TenantUserID = tenant.TenantUserInfo.UserID;
+                                   tenantInfo.PropertyID = model.OwnerPropertyID;
+                                   _dbContext.OwnerResponseTenantInfos.InsertOnSubmit(tenantInfo);
+                                   _dbContext.SubmitChanges();
+                                   tenant.TenantInfoID = tenantInfo.TenantInfoID;
+                                   tenantsInfoM.Add(tenant);
+                               }
+                               else
+                               {
+                                   tenantsInfoM.Add(tenant);
+                               }
+                           }
+                           else
+                           {
+                               result.status = userResult.status;
+                               return result;
+                           }
+
+                       }
+                       else
+                       {
+                           if (tenant.TenantInfoID > 0)
+                           {
+                               var _tenant = _dbContext.OwnerResponseTenantInfos.Where(r => r.TenantInfoID == tenant.TenantInfoID).FirstOrDefault();
+                               if (_tenant != null)
+                               {
+                                   _dbContext.OwnerResponseTenantInfos.DeleteOnSubmit(_tenant);
+                                   _dbContext.SubmitChanges();
+                               }
+                           }
+                       }
+                   }
+                   model.TenantInfo = tenantsInfoM;
+               }
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
        #endregion
        private List<UnitTypeM> getUnitTypes()
        {
@@ -3592,7 +3731,7 @@ namespace RAP.DAL
            return _units;
        }
 
-        private List<RAPNoticeStausM> getRAPNoticeStatus()
+       private List<RAPNoticeStausM> getRAPNoticeStatus()
         {
             List<RAPNoticeStausM> _rapStatus = new List<RAPNoticeStausM>();
             var rapStatus = _dbContext.RAPNoticeStatus;
@@ -3609,7 +3748,7 @@ namespace RAP.DAL
             return _rapStatus;
         }
 
-        private List<CurrentOnRentM> getCurrentRentStatus()
+       private List<CurrentOnRentM> getCurrentRentStatus()
         {
             List<CurrentOnRentM> _rentStatusItems = new List<CurrentOnRentM>();
             var rentStausItems = _dbContext.CurrentOnRentStatus;

@@ -49,6 +49,8 @@ namespace RAP.DAL
         ReturnResult<OwnerPetitionPropertyInfoM> SaveOwnerRentIncreaseAndUpdatePropertyInfo(OwnerPetitionPropertyInfoM model);
         ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model);
         ReturnResult<CaseInfoM> GetOResponseApplicantInfo(CaseInfoM model);
+        ReturnResult<OwnerResponsePropertyInfoM> GetOResponsePropertyAndTenantInfo(OwnerResponsePropertyInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseApplicantInfo(CaseInfoM model);
+        ReturnResult<OwnerResponsePropertyInfoM> SaveOResponsePropertyAndTenantInfo(OwnerResponsePropertyInfoM model);
     }
 }
