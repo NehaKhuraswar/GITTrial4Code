@@ -13,6 +13,8 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
                 return;
             }
             self.caseinfo = response.data;
+            self.caseinfo.bCaseFiledByThirdParty = rapGlobalFactory.bCaseFiledByThirdParty;
+            rapGlobalFactory.bCaseFiledByThirdParty = false;
             if (self.caseinfo.bCaseFiledByThirdParty == false) {
                 self.caseinfo.TenantResponseInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
             }

@@ -72,21 +72,19 @@ var rapTRMainController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTyp
     //}
 
     
-    var _getPageSubmission = function()
-    {
-        rapFactory.GetPageSubmissionStatus(self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+    var _getPetitionCategory = function () {
+        rapFactory.GetPetitionCategory().then(function (response) {
+            if(!alert.checkResponse(response)) {
                 return;
             }
-            self.PetitionSubmissionStatus = response.data;
-            self.oPetionActiveStatus = self.PetitionSubmissionStatus.OwnerPetition;
-            self.tPetionActiveStatus = self.PetitionSubmissionStatus.TenantPetition;
+            self.model = response.data;
+            self.caseinfo = self.model;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+            self.petitionType = true;
         });
-    }
-    
-    if (self.PetitionSubmissionStatus == null)
-    {
-        _getPageSubmission();
+        }
+    if (self.caseinfo == null) {
+        _getPetitionCategory();
     }
 
 }];

@@ -15,7 +15,7 @@
         <!-- Applicant’s name and address -->
         <div class="subhead no-top-margin">
             <h4>Applicant’s name and rental address</h4>
-            <a href="#" class="btn-link btn-edit">Edit</a>
+            <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
         </div>
         <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}      </p>
@@ -75,14 +75,17 @@
 
 
         <!-- Your Representative -->
-        <div class="subhead">
+        <div class="subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
             <h4>Your representative</h4>
             <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
         </div>
-        <div class="field-group">
-            <p>John Smith      </p>
-            <p>1543 Grand View Dr, <br />Oakland, CA 94611      </p>
-            <p>Tel: (510) 453-5461      <br />Email: johnsmith@gmail.com</p>
+        <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.TenantResponseInfo.ApplicantInfo.ThirdPartyUser != null">
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</p>
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}}</p>
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}</p>
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}</p>
+            <p>Tel: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}</p>
+            <p>Email : {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}</p>
         </div>
 
         <!-- Owner(s) name and mailing address -->
