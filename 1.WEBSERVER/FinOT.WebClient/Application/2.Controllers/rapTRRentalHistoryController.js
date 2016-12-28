@@ -5,74 +5,63 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.RentalIncreaseModel;
-    var range = 10 / 2;
-    var currentYear = new Date().getFullYear();
-    self.years = [];
-    for (var i = range; i > 0 ; i--) {
 
-        self.years.push(currentYear - i);
-    }
-    for (var i = 0; i < range + 1; i++) {
-        self.years.push(currentYear + i);
-    }
     self.Calender = masterFactory.Calender;
-    var _GetEmptyTenantRentalIncrementInfo = function () {
-        rapFactory.GetEmptyTenantRentalIncrementInfo().then(function (response) {
+    var _GetEmptyTenantResponseRentalIncrementInfo = function () {
+        rapFactory.GetEmptyTenantResponseRentalIncrementInfo().then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
             self.RentalIncreaseModel = response.data;
         });
     }
-    _GetEmptyTenantRentalIncrementInfo();
-    var _GetRentalHistoryInfo = function (petitionId) {
-        rapFactory.GetRentalHistoryInfo(petitionId).then(function (response) {
+    _GetEmptyTenantResponseRentalIncrementInfo();
+    var _GetTenantResponseRentalHistoryInfo = function (tenantresponseID) {
+        rapFactory.GetTenantResponseRentalHistoryInfo(tenantresponseID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            self.caseinfo.TenantPetitionInfo.TenantRentalHistory = response.data;
+            self.caseinfo.TenantResponseInfo.TenantRentalHistory = response.data;
         });
     }
-    _GetRentalHistoryInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
+    _GetTenantResponseRentalHistoryInfo(self.caseinfo.TenantResponseInfo.TenantResponseID);
 
     self.ContinueToReview = function () {
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
-        if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
-            self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+        rapGlobalFactory.CaseDetails.TenantResponseInfo.TenantRentalHistory.TenantResponseID = self.caseinfo.TenantResponseInfo.TenantResponseID;
+        if (self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.length == 0) {
+            self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
         }
-        rapFactory.SaveTenantResponseRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
+        rapFactory.SaveTenantResponseRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantResponseInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bRentalHistory = false;
-            $scope.model.bLostServices = true;
-            $scope.model.tPetionActiveStatus.RentHistory = true;
+            $scope.model.bAddDocuments = true;
+           // $scope.model.tPetionActiveStatus.RentHistory = true;
         });
         
     }
 
     self.AddAnotherRentIncrease = function (rentalIncrease) {
         var _rentalIncrease = angular.copy(rentalIncrease);
-        self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(_rentalIncrease);
+        self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(_rentalIncrease);
         rentalIncrease.bRentIncreaseNoticeGiven = 0;
         rentalIncrease.RentIncreaseNoticeDate = null;
         rentalIncrease.RentIncreaseEffectiveDate = null;
         rentalIncrease.RentIncreasedFrom = 0;
         rentalIncrease.RentIncreasedTo = 0;
-        rentalIncrease.bRentIncreaseContested = 0;
-
     }
 
-    self.Save = function () {
-        var a = self.selectedObj;
-        rapGlobalFactory.CaseDetails = self.caseinfo;
-        if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
-            self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
-        }
-        rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo, self.caseinfo.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }          
-        });
+    //self.Save = function () {
+    //    var a = self.selectedObj;
+    //    rapGlobalFactory.CaseDetails = self.caseinfo;
+    //    if (self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.length == 0) {
+    //        self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+    //    }
+    //    rapFactory.SaveTenantResponseRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantResponseInfo, self.caseinfo.custID).then(function (response) {
+    //        if (!alert.checkResponse(response)) { return; }          
+    //    });
 
-    }
+    //}
     
 }];

@@ -4,17 +4,17 @@ var rapTRverificationFactory = ['blockUI', 'ajaxService', function (blockUI, aja
       var _routePrefix = 'api/applicationprocessing';
     
     
-      var _SubmitTenantPetition = function (model) {
+      var _SubmitTenantResponse = function (model) {
           blockUI.start();
 
-          var url = _routePrefix + '/submittenantpetition';
+          var url = _routePrefix + '/submittenantresponse';
 
           return ajax.Post(model, url)
           .finally(function () {
               blockUI.stop();
           });
       }
-      factory.SubmitTenantPetition = _SubmitTenantPetition;
+      factory.SubmitTenantResponse = _SubmitTenantResponse;
     
     return factory;
 }];

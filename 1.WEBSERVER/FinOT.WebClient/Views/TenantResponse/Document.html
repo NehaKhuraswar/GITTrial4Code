@@ -67,19 +67,10 @@
                         <div class="field-group">
                             <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
                             <div class="full-width">
-                                <select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
-                                    <option value="Lease" selected>Lease</option>
-                                    <option value="Notice">Notice</option>
-                                    <option value="Paystub">Paystub</option>
-                                    <option value="Receipt">Receipt</option>
-                                    <option value="Invoice">Invoice</option>
-                                    <option value="Photo/Image">Photo/Image</option>
-                                    <option value="Inspection Checklist">Inspection Checklist</option>
-                                    <option value="Report">Report</option>
-                                    <option value="Letter">Letter</option>
-                                    <option value="Email (s)">Email (s)</option>
-                                    <option value="ext Message (s)">ext Message (s)</option>
-                                </select>
+                                <select ng-model="Ctrl.description1"
+                                        data-placeholder="Description"
+                                        ng-options="desc for desc in Ctrl.DocDescriptions" class="custom-select"></select>
+                                
                             </div>
                         </div>
 
@@ -109,6 +100,6 @@
 
 
                     <div class="step-footer">
-                        <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" />
+                        <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToReview()" />
                     </div>
                            

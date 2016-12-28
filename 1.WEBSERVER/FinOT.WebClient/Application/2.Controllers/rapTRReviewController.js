@@ -5,23 +5,23 @@ var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFac
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
 
-    var _GetTenantReviewInfo = function (custID) {
-        rapFactory.GetTenantReviewInfo(custID).then(function (response) {
+    var _GetTenantResponseReviewInfo = function (CaseNumber,custID) {
+        rapFactory.GetTenantResponseReviewInfo(CaseNumber, custID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            self.caseinfo.TenantPetitionInfo = response.data;
+            self.caseinfo.TenantResponseInfo = response.data;
         });
     }
-    _GetTenantReviewInfo(self.custDetails.custID);
+    _GetTenantResponseReviewInfo(self.caseinfo.CaseID, self.custDetails.custID);
 
     self.EditApplicantInfo = function () {
         $scope.model.bReview = false;
         $scope.model.bAppInfo = true;
     }
-    self.EditGroundsInfo = function () {
+    self.EditExemptContested = function () {
         $scope.model.bReview = false;
-        $scope.model.bGrounds = true;
+        $scope.model.bExemptionContested = true;
     }
     self.EditRentalHistoryInfo = function () {
         $scope.model.bReview = false;
@@ -34,7 +34,7 @@ var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFac
     self.ContinueToVerification = function () {
         $scope.model.bReview = false;
         $scope.model.bVerification = true;
-        $scope.model.tPetionActiveStatus.Review = true;
+      //  $scope.model.tPetionActiveStatus.Review = true;
     }
 
 }];

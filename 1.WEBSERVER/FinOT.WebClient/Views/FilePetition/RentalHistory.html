@@ -183,14 +183,20 @@
                     </div><!-- .field-group -->
 
 
-                        <div class="field-group">
-                            <label for="rentincreasefrom">Monthly Rent Increase</label>
-                            <input type="text" name="rentincreasefrom" id="rentincreasefrom" class="field-input"
-                                   ng-model="Ctrl.RentalIncreaseModel.RentIncreasedFrom" placeholder="From" />
-                            <input type="text" name="rentincreaseto" id="rentincreaseto" class="field-input"
-                                   ng-model="Ctrl.RentalIncreaseModel.RentIncreasedTo" placeholder="To" />
+                    <div class="field-group">
+                        <label>Monthly rent increase</label>
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <input type="text" name="monthly_rent_increase_from" id="monthly_rent_increase_from" class="field-input"
+                                       placeholder="From" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedFrom" />
+                            </div>
 
-                        </div><!-- .field-group -->
+                            <div class="col-sm-6 col-xs-12">
+                                <input type="text" name="monthly_rent_increase_to" id="monthly_rent_increase_to" class="field-input"
+                                       placeholder="To" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedTo" />
+                            </div>
+                        </div>
+                    </div><!-- .field-group -->
 
                         <div class="field-group">
                             <label for="date_increase_effective_month">Date increase effective</label>

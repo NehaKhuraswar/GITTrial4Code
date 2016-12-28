@@ -1306,6 +1306,7 @@ namespace RAP.DAL
                 verificationDB.bThirdParty = caseInfo.TenantPetitionInfo.Verification.bThirdParty;
                 verificationDB.bThirdPartyMediation = caseInfo.TenantPetitionInfo.Verification.bThirdPartyMediation;
                 verificationDB.PetitionID = caseInfo.TenantPetitionInfo.PetitionID;
+                verificationDB.CreatedDate = DateTime.Now;
                 _dbContext.TenantPetitionVerifications.InsertOnSubmit(verificationDB);
                 _dbContext.SubmitChanges();
 
@@ -1654,25 +1655,22 @@ namespace RAP.DAL
                     rentIncrementDB.bRentIncreaseContested = item.bRentIncreaseContested;
 
                     _dbContext.TenantRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
-                    _dbContext.SubmitChanges();
-
-
-                    var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
-                    if (PageStatus != null)
-                    {
-                        PageStatus.RentHistory = true;
-                        _dbContext.SubmitChanges();
-                    }
-                    else
-                    {
-                        var PageStatusNew = new TenantPetitionPageSubmissionStatus();
-                        PageStatusNew.CustomerID = CustomerID;
-                        PageStatusNew.RentHistory = true;
-                        _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
-                        _dbContext.SubmitChanges();
-                    } 
+                    _dbContext.SubmitChanges();                    
                 }
-                
+                var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.RentHistory = true;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var PageStatusNew = new TenantPetitionPageSubmissionStatus();
+                    PageStatusNew.CustomerID = CustomerID;
+                    PageStatusNew.RentHistory = true;
+                    _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
+                } 
                 result.result = true;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -2287,8 +2285,10 @@ namespace RAP.DAL
                 if (TenantResponseRentalHistoryDB != null)
                 {
                     tenantResponseRentalHistory.TenantResponseID = TenantResponseRentalHistoryDB.TenantResponseID;
-                    tenantResponseRentalHistory.InitialRent = TenantResponseRentalHistoryDB.InitialRent;
-                    tenantResponseRentalHistory.bRAPNoticeGiven = TenantResponseRentalHistoryDB.bRAPNoticeGiven;
+                    tenantResponseRentalHistory.RentalAgreementDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantResponseRentalHistoryDB.RentalAgreementDate));
+                    tenantResponseRentalHistory.MoveInDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantResponseRentalHistoryDB.MoveInDate));
+                    tenantResponseRentalHistory.InitialRent = Convert.ToDecimal(TenantResponseRentalHistoryDB.InitialRent);
+                    tenantResponseRentalHistory.bRAPNoticeGiven = Convert.ToBoolean(TenantResponseRentalHistoryDB.bRAPNoticeGiven);
                     tenantResponseRentalHistory.RAPNoticeGivenDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantResponseRentalHistoryDB.RAPNoticeGivenDate));
                     
                     var TenantRentalIncrementInfoDB = _dbContext.TenantResponseRentalIncrementInfos.Where(x => x.TenantResponseID == TenantResponseID).ToList();
@@ -2318,6 +2318,50 @@ namespace RAP.DAL
             }
 
         }
+        
+        //Get Review Tenant Respomse
+        public ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID)
+        {
+            ReturnResult<TenantResponseInfoM> tenantResponseResult = new ReturnResult<TenantResponseInfoM>();
+            ReturnResult<CaseInfoM> ApplicationInfoResult = new ReturnResult<CaseInfoM>();
+            ReturnResult<CaseInfoM> ExemptContestedInfoResult = new ReturnResult<CaseInfoM>();
+            ReturnResult<TenantResponseRentalHistoryM> RentalHistoryResult = new ReturnResult<TenantResponseRentalHistoryM>();
+            
+            
+            try
+            {
+                ApplicationInfoResult = GetTenantResponseApplicationInfo(CaseNumber, CustomerID);
+                tenantResponseResult.result = ApplicationInfoResult.result.TenantResponseInfo;
+                if (ApplicationInfoResult.status.Status != StatusEnum.Success)
+                    return tenantResponseResult;
+
+                ExemptContestedInfoResult = GetTenantResponseExemptContestedInfo((int)tenantResponseResult.result.TenantResponseID);
+                if (ExemptContestedInfoResult != null)
+                {
+                    tenantResponseResult.result.ExemptContestedInfo = ExemptContestedInfoResult.result.TenantResponseInfo.ExemptContestedInfo;
+                    tenantResponseResult.status = ExemptContestedInfoResult.status;
+                    if (ExemptContestedInfoResult.status.Status != StatusEnum.Success)
+                        return tenantResponseResult;
+                }
+                RentalHistoryResult = GetTenantResponseRentalHistoryInfo((int)tenantResponseResult.result.TenantResponseID);
+                if (RentalHistoryResult != null)
+                {
+                    tenantResponseResult.result.TenantRentalHistory = RentalHistoryResult.result;
+                    tenantResponseResult.status = RentalHistoryResult.status;
+                    if (RentalHistoryResult.status.Status != StatusEnum.Success)
+                        return tenantResponseResult;
+                }
+
+                return tenantResponseResult;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                tenantResponseResult.status = eHandler.HandleException(ex);
+                return tenantResponseResult;
+            }
+        }
+        
         #endregion "TenantResponseGet"
 
         #region "TenantResponseSave"
@@ -2560,6 +2604,7 @@ namespace RAP.DAL
                 if (rentalHistoryRecord != null)
                 {
                     rentalHistoryRecord.TenantResponseID = rentalHistory.TenantResponseID;
+                    rentalHistoryRecord.RentalAgreementDate = new DateTime(rentalHistory.RentalAgreementDate.Year, rentalHistory.RentalAgreementDate.Month, rentalHistory.RentalAgreementDate.Day);
                     rentalHistoryRecord.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
                     rentalHistoryRecord.InitialRent = rentalHistory.InitialRent;
                     rentalHistoryRecord.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
@@ -2571,6 +2616,7 @@ namespace RAP.DAL
                 {
                     TenantResponseRentalHistory rentalHistoryDB = new TenantResponseRentalHistory();
                     rentalHistoryDB.TenantResponseID = rentalHistory.TenantResponseID;
+                    rentalHistoryDB.RentalAgreementDate = new DateTime(rentalHistory.RentalAgreementDate.Year, rentalHistory.RentalAgreementDate.Month, rentalHistory.RentalAgreementDate.Day);
                     rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
                     rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
                     rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
@@ -2606,23 +2652,22 @@ namespace RAP.DAL
                     rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
 
                     _dbContext.TenantResponseRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
+                    _dbContext.SubmitChanges();                    
+                }
+
+                var PageStatus = _dbContext.TenantResponsePageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.RentHistory = true;
                     _dbContext.SubmitChanges();
-
-
-                    var PageStatus = _dbContext.TenantResponsePageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
-                    if (PageStatus != null)
-                    {
-                        PageStatus.RentHistory = true;
-                        _dbContext.SubmitChanges();
-                    }
-                    else
-                    {
-                        var PageStatusNew = new TenantResponsePageSubmissionStatus();
-                        PageStatusNew.CustomerID = CustomerID;
-                        PageStatusNew.RentHistory = true;
-                        _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
-                        _dbContext.SubmitChanges();
-                    }
+                }
+                else
+                {
+                    var PageStatusNew = new TenantResponsePageSubmissionStatus();
+                    PageStatusNew.CustomerID = CustomerID;
+                    PageStatusNew.RentHistory = true;
+                    _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
                 }
 
                 result.result = true;
@@ -2636,6 +2681,72 @@ namespace RAP.DAL
                 return result;
             }
 
+        }
+
+        /// <summary>
+        /// Submit tenant petition
+        /// </summary>
+        /// <param name="caseInfo"></param>
+        /// <returns></returns>
+        public ReturnResult<CaseInfoM> SubmitTenantResponse(CaseInfoM caseInfo)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+
+            try
+            {
+                var CustDetails = _dbAccount.CustomerDetails.Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
+                if (CustDetails != null)
+                {
+                    if (CustDetails.CustomerIdentityKey != caseInfo.TenantResponseInfo.Verification.pinVerify)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                        return result;
+                    }
+                    if (CustDetails.CustomerIdentityKey != caseInfo.TenantResponseInfo.Verification.pinMediation)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                        return result;
+                    }
+                }
+                
+                TenantResponseVerification verificationDB = new TenantResponseVerification();
+                verificationDB.bCaseMediation = caseInfo.TenantResponseInfo.Verification.bCaseMediation;
+                verificationDB.bDeclarePenalty = caseInfo.TenantResponseInfo.Verification.bDeclarePenalty;
+                verificationDB.bThirdParty = caseInfo.TenantResponseInfo.Verification.bThirdParty;
+                verificationDB.bThirdPartyMediation = caseInfo.TenantResponseInfo.Verification.bThirdPartyMediation;
+                verificationDB.CreatedDate = DateTime.Now;
+                verificationDB.TenantResponseID = caseInfo.TenantResponseInfo.TenantResponseID;
+                _dbContext.TenantResponseVerifications.InsertOnSubmit(verificationDB);
+                _dbContext.SubmitChanges();
+
+                var CaseInfoDB = _dbContext.CaseDetails.Where(x => x.CaseID == caseInfo.CaseID).FirstOrDefault();
+                if (CaseInfoDB != null)
+                {
+                    CaseInfoDB.TenantResponseID = caseInfo.TenantResponseInfo.TenantResponseID;
+                    _dbContext.SubmitChanges();
+                }
+
+
+
+                var ResponseDB = _dbContext.TenantResponseApplicationInfos.Where(x => x.TenantResponseID == caseInfo.TenantResponseInfo.TenantResponseID).FirstOrDefault();
+                if (ResponseDB != null)
+                {
+                    ResponseDB.IsSubmitted = true;
+                    _dbContext.SubmitChanges();
+                }
+
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
         }
         #endregion "TenantResponseSave"
 

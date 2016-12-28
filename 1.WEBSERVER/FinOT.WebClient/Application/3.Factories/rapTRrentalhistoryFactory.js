@@ -24,10 +24,10 @@ var rapTRrentalhistoryFactory = ['blockUI', 'ajaxService', function (blockUI, aj
               blockUI.stop();
           });
       }
-      var _GetEmptyTenantRentalIncrementInfo = function () {
+      var _GetEmptyTenantResponseRentalIncrementInfo = function () {
           blockUI.start();
 
-          var url = _routePrefix + '/getemptyrentalhistoryinfo';
+          var url = _routePrefix + '/getemptytrrentalhistoryinfo';
 
           return ajax.Get(url)
           .finally(function () {
@@ -36,6 +36,6 @@ var rapTRrentalhistoryFactory = ['blockUI', 'ajaxService', function (blockUI, aj
       }
       factory.SaveTenantResponseRentalHistoryInfo = _SaveTenantResponseRentalHistoryInfo;
       factory.GetTenantResponseRentalHistoryInfo = _GetTenantResponseRentalHistoryInfo;
-      factory.GetEmptyTenantRentalIncrementInfo = _GetEmptyTenantRentalIncrementInfo;
+      factory.GetEmptyTenantResponseRentalIncrementInfo = _GetEmptyTenantResponseRentalIncrementInfo;
     return factory;
 }];

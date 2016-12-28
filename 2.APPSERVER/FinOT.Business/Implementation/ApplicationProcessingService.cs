@@ -510,6 +510,34 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID)
+        {
+            ReturnResult<TenantResponseInfoM> result = new ReturnResult<TenantResponseInfoM>();
+            try
+            {
+                result = _dbHandler.GetTenantResponseReviewInfo(CaseNumber, CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<CaseInfoM> SubmitTenantResponse(CaseInfoM caseInfo)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.SubmitTenantResponse(caseInfo);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         #endregion TenantResponseMethods
 
         #region Common File Petition methods

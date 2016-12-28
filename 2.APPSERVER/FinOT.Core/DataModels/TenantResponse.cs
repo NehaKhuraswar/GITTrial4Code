@@ -35,11 +35,10 @@ namespace RAP.Core.DataModels
         public int UnitTypeId { get; set; }
         public bool bCurrentRentStatus { get; set; }
         public string ProvideExplanation { get; set; }
-        public TenantRentalHistoryM TenantRentalHistory { get; set; }
+        public TenantResponseRentalHistoryM TenantRentalHistory { get; set; }
         public DocumentM Document { get; set; }
         public bool bPetitionFiledPrviously { get; set; }
         public string PreviousCaseIDs { get; set; }
-        public LostServicesPageM LostServicesPage { get; set; }
         public VerificationM Verification { get; set; }
         public int CustomerID { get; set; }
         public List<NumberRangeForUnitsM> RangeOfUnits{get;set;}
@@ -54,6 +53,7 @@ namespace RAP.Core.DataModels
             RentIncreases = new List<TenantResponseRentIncreaseInfoM>();
         }
         public int TenantResponseID { get; set; }
+        public CustomDate RentalAgreementDate { get; set; }
         public CustomDate MoveInDate { get; set; }
         public decimal InitialRent { get; set; }
         public bool bRAPNoticeGiven { get; set; }

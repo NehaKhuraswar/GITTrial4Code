@@ -11,16 +11,17 @@ var rapTRVerificationController = ['$scope', '$modal', 'alertService', 'rapTRver
             alert.Error("Pin is sent to your email");
         });
     }
-    self.SubmitPetition = function () {
+    self.SubmitResponse = function () {
 
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.CaseFileBy = self.custDetails.custID;
-        rapFactory.SubmitTenantPetition(rapGlobalFactory.CaseDetails).then(function (response) {
+        rapFactory.SubmitTenantResponse(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $scope.model.tPetionActiveStatus.Verification = true;
-            $location.path("/publicdashboard");
+            //$scope.model.tPetionActiveStatus.Verification = true;
+            $scope.model.bVerification = false;
+            $scope.model.bConfirm = true;
         });
     }
 }];

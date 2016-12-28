@@ -1,105 +1,111 @@
 ﻿
-        <div class="step-heading">Verification</div>
+<div class="step-heading">Verification</div>
 
-        <div class="step-content step1">
-                <div class="field-group filled-info subhead no-top-margin mar-bottom-30">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="info-title">Tenant’s signature</div>
-                            <strong>Bob Johnson</strong>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="info-title">Date</div>
-                            <strong>December 12, 2016</strong>
-                        </div>
-                    </div>
-                </div><!-- .field-group -->
+<div class="step-content step1">
+    <div class="field-group filled-info subhead no-top-margin mar-bottom-30">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div class="info-title">Tenant’s signature</div>
+                <strong>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}</strong>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <div class="info-title">Date</div>
+                <strong>{{Ctrl.caseinfo.TenantResponseInfo.Verification.date | date}}</strong>
+            </div>
+        </div>
+    </div><!-- .field-group -->
 
-                <div class="field-group">
-                    <label for="your_pin">Enter your PIN to verify your identity.</label>
-                    <input type="text" name="your_pin" id="your_pin" class="field-input" placeholder="" />
-                </div>
-
-                <div class="field-group">
-                    <p>This PIN number was emailed to you when you set up your account. You can have this PIN resent to you from the account management dashboard.</p>
-                    <div class="form-group-checkbox vertical clearfix">
-                        <div class="checkbox-wrapper">
-                            <label for="chk_condition1">
-                                <input type="checkbox" name="chk_condition1" id="chk_condition1" value="Yes" /><i></i><span>I acknowledge that the name, date and PIN represent me.</span>
-                            </label>
-                        </div>
-
-                        <div class="checkbox-wrapper">
-                            <label for="chk_condition2">
-                                <input type="checkbox" name="chk_condition2" id="chk_condition2" value="Yes" /><i></i><span>I declare under penalty of perjury pursuant to the laws of the State of California that everything I said in this petition is true and that all of the documents attached to the petition are true copies of the originals.</span>
-                            </label>
-                        </div>
-
-                        <div class="checkbox-wrapper">
-                            <label for="chk_condition3">
-                                <input type="checkbox" name="chk_condition3" id="chk_condition3" value="Yes" /><i></i><span>This form is being submitted by the third-party representative on behalf of the renter.</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="subhead type2 no-bottom-margin">
-                    <h4>Mediation</h4>
-                </div>
-
-                <div class="field-group filled-info">
-                    <p>Mediation is an entirely voluntary process to assist you in reaching an agreement with the owner. If both parties agree, you have the option to mediate your complaints before a hearing is held. If the parties do not reach an agreement in mediation, your case will go to a formal hearing before a Rent Adjustment Program Hearing Officer the same day.  </p>
-                    <p>You may choose to have the mediation conducted by a Rent Adjustment Program Hearing Officer or select an outside mediator. Rent Adjustment Program Hearing Officers conduct mediation sessions free of charge. If you and the owner agree to an outside mediator, please call (510) 238-3721 to make arrangements. Any fees charged by an outside mediator for mediation of rent disputes will be the responsibility of the parties requesting the use of their services.  </p>
-                    <p>Mediation will be scheduled only if both parties agree (after both your petition and the owner’s response have been filed with the Rent Adjustment Program). The Rent Adjustment Program will not schedule a mediation session if the owner does not file a response to the petition. Rent Board Regulation 8.22.100.A.</p>
-                </div><!-- .field-group -->
-
-                <div class="field-group filled-info mar-bottom-40">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="info-title">Tenant’s signature</div>
-                            <strong>Bob Johnson</strong>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="info-title">Date</div>
-                            <strong>December 12, 2016</strong>
-                        </div>
-                    </div>
-                </div><!-- .field-group -->
-
-
-                <div class="field-group">
-                    <label for="mediation_identity_pin">Enter your PIN to verify your identity.</label>
-                    <input type="text" name="mediation_identity_pin" id="mediation_identity_pin" class="field-input" placeholder="" />
-                </div>
-
-                <div class="field-group">
-                    <p>This PIN number was emailed to you when you set up your account. You can have this PIN resent to you from the account management dashboard.</p>
-                    <div class="form-group-checkbox vertical full-width clearfix">
-                        <div class="checkbox-wrapper">
-                            <label for="chk_mediation_condition1">
-                                <input type="checkbox" name="chk_mediation_condition1" id="chk_mediation_condition1" value="Yes" /><i></i><span>I acknowledge that the name, date and PIN represent me.</span>
-                            </label>
-                        </div>
-
-                        <div class="checkbox-wrapper">
-                            <label for="chk_mediation_condition2">
-                                <input type="checkbox" name="chk_mediation_condition2" id="chk_mediation_condition2" value="Yes" /><i></i><span>I agree to have my case mediated by a Rent Adjustment Program Staff Hearing Officer (no charge).</span>
-                            </label>
-                        </div>
-
-                        <div class="checkbox-wrapper">
-                            <label for="chk_mediation_condition3">
-                                <input type="checkbox" name="chk_mediation_condition3" id="chk_mediation_condition3" value="Yes" /><i></i><span>This form is being submitted by the third-party representative on behalf of the renter.</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
+    <div class="field-group">
+        <label for="your_pin">Enter your PIN to verify your identity.</label>
+        <input type="text" name="your_pin" id="your_pin" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.pinVerify" />
+    </div>
+    <a class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
+    <div class="field-group">
+        <p>This PIN number was emailed to you when you set up your account. You can have this PIN resent to you from the account management dashboard.</p>
+        <div class="form-group-checkbox vertical clearfix">
+            <div class="checkbox-wrapper">
+                <label for="chk_condition1">
+                    <input type="checkbox" name="chk_condition1" id="chk_condition1" value="true"
+                           ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.bAcknowledgePinName" /><i></i><span>I acknowledge that the name, date and PIN represent me.</span>
+                </label>
             </div>
 
-
-            <div class="step-footer">
-                <input type="button" id="submit-petition" name="submit-petition" class="btn-primary" value="Submit petition" />
+            <div class="checkbox-wrapper">
+                <label for="chk_condition2">
+                    <input type="checkbox" name="chk_condition2" id="chk_condition2" value="true"
+                           ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.bDeclarePenalty" /><i></i><span>I declare under penalty of perjury pursuant to the laws of the State of California that everything I said in this petition is true and that all of the documents attached to the petition are true copies of the originals.</span>
+                </label>
             </div>
-                            
+
+            <div class="checkbox-wrapper">
+                <label for="chk_condition3">
+                    <input type="checkbox" name="chk_condition3" id="chk_condition3" value="true"
+                           ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.bThirdParty" /><i></i><span>This form is being submitted by the third-party representative on behalf of the renter.</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="subhead type2">
+        <h4>Mediation</h4>
+    </div>
+
+    <div class="field-group">
+        <p>Mediation is an entirely voluntary process to assist you in reaching an agreement with the owner. If both parties agree, you have the option to mediate your complaints before a hearing is held. If the parties do not reach an agreement in mediation, your case will go to a formal hearing before a Rent Adjustment Program Hearing Officer the same day.  </p>
+        <p>You may choose to have the mediation conducted by a Rent Adjustment Program Hearing Officer or select an outside mediator. Rent Adjustment Program Hearing Officers conduct mediation sessions free of charge. If you and the owner agree to an outside mediator, please call (510) 238-3721 to make arrangements. Any fees charged by an outside mediator for mediation of rent disputes will be the responsibility of the parties requesting the use of their services.  </p>
+        <p>Mediation will be scheduled only if both parties agree (after both your petition and the owner’s response have been filed with the Rent Adjustment Program). The Rent Adjustment Program will not schedule a mediation session if the owner does not file a response to the petition. Rent Board Regulation 8.22.100.A.</p>
+    </div><!-- .field-group -->
+
+    <div class="field-group filled-info mar-bottom-40">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <div class="info-title">Tenant’s signature</div>
+                <strong>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}</strong>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <div class="info-title">Date</div>
+                <strong>{{Ctrl.caseinfo.TenantResponseInfo.Verification.date | date}}</strong>
+            </div>
+        </div>
+    </div><!-- .field-group -->
+
+
+    <div class="field-group">
+        <label for="mediation_identity_pin">Enter your PIN to verify your identity.</label>
+        <input type="text" name="mediation_identity_pin" id="mediation_identity_pin" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.pinMediation" />
+    </div>
+    <a class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
+    <div class="field-group">
+        <p>This PIN number was emailed to you when you set up your account. You can have this PIN resent to you from the account management dashboard.</p>
+        <div class="form-group-checkbox vertical clearfix">
+            <div class="checkbox-wrapper">
+                <label for="chk_mediation_condition1">
+                    <input type="checkbox" name="chk_mediation_condition1" id="chk_mediation_condition1" value="true"
+                           ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.bAcknowledgePinNameMediation" /><i></i><span>I acknowledge that the name, date and PIN represent me.</span>
+                </label>
+            </div>
+
+            <div class="checkbox-wrapper">
+                <label for="chk_mediation_condition2">
+                    <input type="checkbox" name="chk_mediation_condition2" id="chk_mediation_condition2" value="true"
+                           ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.bCaseMediation" /><i></i><span>I agree to have my case mediated by a Rent Adjustment Program Staff Hearing Officer (no charge).</span>
+                </label>
+            </div>
+
+            <div class="checkbox-wrapper">
+                <label for="chk_mediation_condition3">
+                    <input type="checkbox" name="chk_mediation_condition3" id="chk_mediation_condition3" value="true"
+                           ng-model="Ctrl.caseinfo.TenantResponseInfo.Verification.bThirdPartyMediation" /><i></i><span>This form is being submitted by the third-party representative on behalf of the renter.</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="step-footer">
+    <input type="button" id="submit-petition" name="submit-petition" class="btn-primary" value="Submit petition"
+           ng-click="Ctrl.SubmitResponse()" />
+</div>

@@ -3,10 +3,10 @@ var rapTRreviewFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
     var _routePrefix = 'api/applicationprocessing';
     
-    var _GetTenantReviewInfo = function (custId) {
+    var _GetTenantResponseReviewInfo = function (CaseNumber,custId) {
         blockUI.start();
 
-        var url = _routePrefix + '/gettenantreview';
+        var url = _routePrefix + '/gettenantresponsereviewinfo/' + CaseNumber;
         if (!(custId == null || custId == undefined)) { url = url + '/' + custId; }
 
         return ajax.Get(url)
@@ -14,7 +14,7 @@ var rapTRreviewFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
     }
-    factory.GetTenantReviewInfo = _GetTenantReviewInfo;
+    factory.GetTenantResponseReviewInfo = _GetTenantResponseReviewInfo;
 
     return factory;
 }];

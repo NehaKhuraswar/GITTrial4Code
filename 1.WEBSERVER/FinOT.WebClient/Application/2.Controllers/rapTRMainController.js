@@ -18,6 +18,7 @@ var rapTRMainController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTyp
         self.bAddDocuments = false;
         self.bReview = false;
         self.bVerification = false;
+        self.bConfirm = false;
     };
     _DisableAll();
     

@@ -14,12 +14,14 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> GetCaseInfo(string CaseID, int CustomerID);
         ReturnResult<CaseInfoM> SaveCaseDetails(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SubmitAppeal(CaseInfoM caseInfo);
+        ReturnResult<CaseInfoM> SubmitTenantResponse(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo);
         ReturnResult<CaseInfoM> SaveApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<CaseInfoM> SaveTenantResponseApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<bool> SaveTenantResponseExemptContestedInfo(TenantResponseExemptContestedInfoM message, int CustomerID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID);
+        ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst();
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);

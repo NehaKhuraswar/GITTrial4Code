@@ -9,7 +9,7 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
         rapGlobalFactory.CaseDetails = self.caseinfo;
         $scope.model.bAddDocuments = false;
         $scope.model.bReview = true;
-        $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
+      //  $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
        
     }
     $scope.onAdditionalFileSelect = function ($files) {

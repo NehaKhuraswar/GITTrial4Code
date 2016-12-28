@@ -13,13 +13,13 @@
 
                                     <div class="subhead type2">
                                         <h4>Applicant and property information</h4>
-                                        <a href="#" class="btn-link btn-edit">Edit</a>
+                                        <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
                                     </div>
 
                                     <div class="field-group filled-info subhead">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
-                                            <div class="col-sm-6 col-xs-12">T17-0238</div>
+                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.CaseID}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -27,8 +27,8 @@
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
                                             <div class="col-sm-6 col-xs-12">
-                                                Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                                                T (510) 453-5462  <br />bobjohnson@gmail.com 
+                                                {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Zip}}   <br />
+                                                T {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email}} 
                                             </div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -47,8 +47,8 @@
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
                                             <div class="col-sm-6 col-xs-12">
-                                                Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                                                T (510) 453-5462  <br />bobjohnson@gmail.com 
+                                               {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.LastName}}   <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Zip}}   <br />
+                                                T {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Email}} 
                                             </div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -57,8 +57,8 @@
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
                                             <div class="col-sm-6 col-xs-12">
-                                                Bob Johnson   <br />1401 Jackson Street, <br />Oakland, CA 94612   <br />
-                                                T (510) 453-5462  <br />bobjohnson@gmail.com 
+                                                {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.LastName}}   <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.Zip}}   <br />
+                                                T {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.Email}} 
                                             </div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -66,21 +66,22 @@
                                     <div class="field-group filled-info subhead">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
-                                            <div class="col-sm-6 col-xs-12">1-10</div>
+                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.NumberOfUnits}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>
-                                            <div class="col-sm-6 col-xs-12">Apartment, Room, or Live-work</div>
+                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.UnitTypes[Ctrl.caseinfo.TenantResponseInfo.UnitTypeId].UnitDescription}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>
-                                            <div class="col-sm-6 col-xs-12">Yes</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">Yes</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">No</div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -135,24 +136,24 @@
                                     <!-- Exemption contested -->
                                     <div class="subhead type2">
                                         <h4>Exemption contested</h4>
-                                        <a href="#" class="btn-link btn-edit">Edit</a>
+                                        <a ng-click="Ctrl.EditExemptContested()" class="btn-link btn-edit">Edit</a>
                                     </div>
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="info-title full-width">Explain below why you believe your landlord’s claim that your unit is exempt is incorrect.</div>
                                         <div class="row">
-                                            <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
+                                            <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.ExemptContestedInfo.Explaination}}</div>
                                         </div>
                                     </div><!-- .field-group -->
                                     <!-- Rent increases -->
                                     <div class="subhead type2">
                                         <h4>Rent increases</h4>
-                                        <a href="#" class="btn-link btn-edit">Edit</a>
+                                        <a ng-click="Ctrl.EditRentalHistoryInfo()" class="btn-link btn-edit">Edit</a>
                                     </div>
 
                                     <div class="field-group filled-info subhead">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date you entered into the Rental Agreement for this unit</div></div>
-                                            <div class="col-sm-6 col-xs-12">01/09/16</div>
+                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -166,28 +167,28 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into the unit?</div></div>
-                                            <div class="col-sm-6 col-xs-12">01/09/16</div>
+                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Initial monthly rent</div></div>
-                                            <div class="col-sm-6 col-xs-12">$2000</div>
+                                            <div class="col-sm-6 col-xs-12">${{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.InitialRent}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)?</div></div>
-                                            <div class="col-sm-6 col-xs-12">01/09/16</div>
+                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">I was never given a RAP NOTICE by my property owner.</div></div>
-                                            <div class="col-sm-6 col-xs-12">False</div>
+                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.bRAPNoticeGiven}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -198,26 +199,29 @@
                                         </div>
                                     </div><!-- .field-group -->
 
+                                <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
-                                            <div class="col-sm-6 col-xs-12">01/09/16</div>
+                                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
-                                            <div class="col-sm-6 col-xs-12">$200</div>
+                                            <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
-                                            <div class="col-sm-6 col-xs-12">01/09/16</div>
+                                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
+                                </div>
+
                                     <!-- Additional Documentation -->
                                     <div class="subhead type2">
                                         <h4>Additional Documentation</h4>
@@ -278,6 +282,6 @@
 
 
                                 <div class="step-footer">
-                                    <input type="button" id="save" name="save" class="btn-primary" value="Save and continue" />
+                                    <input type="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToVerification()" />
                                 </div>
                             

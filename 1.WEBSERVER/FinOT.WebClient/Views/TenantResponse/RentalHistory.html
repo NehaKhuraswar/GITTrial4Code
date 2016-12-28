@@ -1,472 +1,253 @@
-﻿
-                            <!-- Page Sub Title - Visible on desktop screens only -->
-                            <div class="step-heading">Rental History</div>
-
-                            
-                                <div class="step-content step1">
-                                    <div class="field-group subhead no-top-margin">
-                                        <label>Date you entered into the Rental Agreement for this unit</label>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="rental_agreement_month" class="hidden"></label>
-                                                <select name="rental_agreement_month" id="rental_agreement_month" class="custom-select" data-placeholder="Month">
-                                                    <option value="1">January</option>
-                                                    <option value="2">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">September</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="rental_agreement_day" class="hidden"></label>
-                                                <select name="rental_agreement_day" id="rental_agreement_day" class="custom-select" data-placeholder="Day">
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                    <option value="03">03</option>
-                                                    <option value="04">04</option>
-                                                    <option value="05">05</option>
-                                                    <option value="06">06</option>
-                                                    <option value="07">07</option>
-                                                    <option value="08">08</option>
-                                                    <option value="09">09</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="rental_agreement_year" class="hidden"></label>
-                                                <select name="rental_agreement_year" id="rental_agreement_year" class="custom-select" data-placeholder="Year">
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>
-                                                    <option value="2024">2024</option>
-                                                    <option value="2025">2025</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="no-bottom-margin">Copy of your lease agreement (Optional)</p>
-                                        <div class="field-addfile">
-                                            <div class="input-file-wrapper">
-                                                <span class="btn-link">Upload</span>
-                                                <input type="file" id="notice_signed_copy" name="notice_signed_copy" />
-                                            </div>
-                                        </div>
-                                    </div><!-- .field-group -->
-
-                                    <div class="field-group">
-                                        <label>Date you moved into the unit</label>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="moved_into_unit_month" class="hidden"></label>
-                                                <select name="moved_into_unit_month" id="moved_into_unit_month" class="custom-select" data-placeholder="Month">
-                                                    <option value="1">January</option>
-                                                    <option value="2">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">September</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="moved_into_unit_day" class="hidden"></label>
-                                                <select name="moved_into_unit_day" id="moved_into_unit_day" class="custom-select" data-placeholder="Day">
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                    <option value="03">03</option>
-                                                    <option value="04">04</option>
-                                                    <option value="05">05</option>
-                                                    <option value="06">06</option>
-                                                    <option value="07">07</option>
-                                                    <option value="08">08</option>
-                                                    <option value="09">09</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="moved_into_unit_year" class="hidden"></label>
-                                                <select name="moved_into_unit_year" id="moved_into_unit_year" class="custom-select" data-placeholder="Year">
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>
-                                                    <option value="2024">2024</option>
-                                                    <option value="2025">2025</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+﻿<!-- Page Sub Title - Visible on desktop screens only -->
+<div class="step-heading">Rental History</div>
 
 
-                                    <div class="field-group">
-                                        <label for="initial_monthly_rent">Initial monthly rent</label>
-                                        <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input" placeholder="" />
-                                    </div>
+<div class="step-content step1">
+    <div class="field-group subhead no-top-margin">
+        <label>Date you entered into the Rental Agreement for this unit</label>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Month"
+                            class="custom-select" data-placeholder="Month"
+                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Day"
+                            class="custom-select" data-placeholder="Day"
+                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Year"
+                            class="custom-select" data-placeholder="Year"
+                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                    <div class="field-group">
-                                        <label>When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)</label>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="rap_notice_month" class="hidden"></label>
-                                                <select name="rap_notice_month" id="rap_notice_month" class="custom-select" data-placeholder="Month">
-                                                    <option value="1">January</option>
-                                                    <option value="2">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">September</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                            </div>
+    <div class="field-group">
+        <p class="no-bottom-margin">Copy of your lease agreement (Optional)</p>
+        <div class="field-addfile">
+            <div class="input-file-wrapper">
+                <span class="btn-link">Upload</span>
+                <input type="file" id="notice_signed_copy" name="notice_signed_copy" />
+            </div>
+        </div>
+    </div><!-- .field-group -->
 
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="rap_notice_day" class="hidden"></label>
-                                                <select name="rap_notice_day" id="rap_notice_day" class="custom-select" data-placeholder="Day">
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                    <option value="03">03</option>
-                                                    <option value="04">04</option>
-                                                    <option value="05">05</option>
-                                                    <option value="06">06</option>
-                                                    <option value="07">07</option>
-                                                    <option value="08">08</option>
-                                                    <option value="09">09</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="rap_notice_year" class="hidden"></label>
-                                                <select name="rap_notice_year" id="rap_notice_year" class="custom-select" data-placeholder="Year">
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>
-                                                    <option value="2024">2024</option>
-                                                    <option value="2025">2025</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <div class="form-group-radio vertical clearfix">
-                                            <label for="never_given_rap_notice">
-                                                <input type="radio" name="never_given_rap_notice" id="never_given_rap_notice" class="input-field" value="True" /><i></i><span>I was never given a <u>RAP NOTICE</u> by my property owner.</span>
-                                            </label>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="no-bottom-margin">RAP Notice (Optional)</p>
-                                        <div class="field-addfile">
-                                            <div class="input-file-wrapper">
-                                                <span class="btn-link">Upload</span>
-                                                <input type="file" id="proof_of_rent_notice" name="proof_of_rent_notice" />
-                                            </div>
-                                        </div>
-                                    </div><!-- .field-group -->
-                                    <!-- Rent increases -->
-                                    <div class="subhead">
-                                        <h4>Rent increases</h4>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <div class="row">
-                                            <div class="col-md-11 col-sm-12"><p class="no-bottom-margin">List all rent increases that you want to challenge. Begin with the most recent and work backwards. You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later) to contest the rent increase. (O.M.C. 8.22.090 A 2) If you never got the RAP Notice you can contest all past increases.</p></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group subhead">
-                                        <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>
-                                        <div class="form-group-radio vertical clearfix">
-                                            <label for="rent_increase_notice_yes">
-                                                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_yes" class="input-field" value="Yes" checked="checked" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="rent_increase_notice_no">
-                                                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_no" class="input-field" value="No" /><i></i> <span>No</span>
-                                            </label>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </div>
+    <div class="field-group">
+        <label>Date you moved into the unit</label>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Month"
+                            class="custom-select" data-placeholder="Month"
+                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Day"
+                            class="custom-select" data-placeholder="Day"
+                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Year"
+                            class="custom-select" data-placeholder="Year"
+                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-                                    <div class="field-group">
-                                        <label>Date notice served</label>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="date_notice_served_month" class="hidden"></label>
-                                                <select name="date_notice_served_month" id="date_notice_served_month" class="custom-select" data-placeholder="Month">
-                                                    <option value="1">January</option>
-                                                    <option value="2">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">September</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                            </div>
+    <div class="field-group">
+        <label for="initial_monthly_rent">Initial monthly rent</label>
+        <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input"
+               ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.InitialRent" placeholder="" />
+    </div>
 
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="date_notice_served_day" class="hidden"></label>
-                                                <select name="date_notice_served_day" id="date_notice_served_day" class="custom-select" data-placeholder="Day">
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                    <option value="03">03</option>
-                                                    <option value="04">04</option>
-                                                    <option value="05">05</option>
-                                                    <option value="06">06</option>
-                                                    <option value="07">07</option>
-                                                    <option value="08">08</option>
-                                                    <option value="09">09</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                            </div>
+    <div class="field-group">
+        <label>When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)</label>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month"
+                            class="custom-select" data-placeholder="Month"
+                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day"
+                            class="custom-select" data-placeholder="Day"
+                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year"
+                            class="custom-select" data-placeholder="Year"
+                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="date_notice_served_year" class="hidden"></label>
-                                                <select name="date_notice_served_year" id="date_notice_served_year" class="custom-select" data-placeholder="Year">
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>
-                                                    <option value="2024">2024</option>
-                                                    <option value="2025">2025</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+    <div class="field-group">
+        <div class="form-group-radio vertical clearfix">
+            <label for="never_given_rap_notice">
+                <input type="radio" name="never_given_rap_notice" id="never_given_rap_notice" class="input-field"
+                       ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.bRAPNoticeGiven" value="True"
+                        /><i></i><span>I was never given a <u>RAP NOTICE</u> by my property owner.</span>
+            </label>
+            <div class="clear"></div>
+        </div>
+    </div>
 
+    <div class="field-group">
+        <p class="no-bottom-margin">RAP Notice (Optional)</p>
+        <div class="field-addfile">
+            <div class="input-file-wrapper">
+                <span class="btn-link">Upload</span>
+                <input type="file" id="proof_of_rent_notice" name="proof_of_rent_notice" />
+            </div>
+        </div>
+    </div><!-- .field-group -->
+    <!-- Rent increases -->
+    <div class="subhead">
+        <h4>Rent increases</h4>
+    </div>
 
-                                    <div class="field-group">
-                                        <label>Monthly rent increase</label>
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input type="text" name="monthly_rent_increase_from" id="monthly_rent_increase_from" class="field-input" placeholder="From" />
-                                            </div>
+    <div class="field-group">
+        <div class="row">
+            <div class="col-md-11 col-sm-12"><p class="no-bottom-margin">List all rent increases that you want to challenge. Begin with the most recent and work backwards. You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later) to contest the rent increase. (O.M.C. 8.22.090 A 2) If you never got the RAP Notice you can contest all past increases.</p></div>
+        </div>
+    </div>
+    <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
+        <div class="field-group filled-info subhead no-top-margin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+            </div>
+        </div><!-- .field-group -->
 
-                                            <div class="col-sm-6 col-xs-12">
-                                                <input type="text" name="monthly_rent_increase_to" id="monthly_rent_increase_to" class="field-input" placeholder="To" />
-                                            </div>
-                                        </div>
-                                    </div><!-- .field-group -->
+        <div class="field-group filled-info subhead no-top-margin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
+            </div>
+        </div><!-- .field-group -->
 
-                                    <div class="field-group">
-                                        <label>Date increase effective</label>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="date_increase_effective_month" class="hidden"></label>
-                                                <select name="date_increase_effective_month" id="date_increase_effective_month" class="custom-select" data-placeholder="Month">
-                                                    <option value="1">January</option>
-                                                    <option value="2">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">September</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                            </div>
+        <div class="field-group filled-info subhead no-top-margin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+            </div>
+        </div><!-- .field-group -->
+    </div>
+    <div class="field-group subhead">
+        <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>
+        <div class="form-group-radio vertical clearfix">
+            <label for="rent_increase_notice_yes">
+                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_yes" class="input-field" value="true"
+                       ng-model="Ctrl.RentalIncreaseModel.bRentIncreaseNoticeGiven" checked="checked" /><i></i><span>Yes</span>
+            </label>
 
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="date_increase_effective_day" class="hidden"></label>
-                                                <select name="date_increase_effective_day" id="date_increase_effective_day" class="custom-select" data-placeholder="Day">
-                                                    <option value="01">01</option>
-                                                    <option value="02">02</option>
-                                                    <option value="03">03</option>
-                                                    <option value="04">04</option>
-                                                    <option value="05">05</option>
-                                                    <option value="06">06</option>
-                                                    <option value="07">07</option>
-                                                    <option value="08">08</option>
-                                                    <option value="09">09</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-sm-4 col-xs-12">
-                                                <label for="date_increase_effective_year" class="hidden"></label>
-                                                <select name="date_increase_effective_year" id="date_increase_effective_year" class="custom-select" data-placeholder="Year">
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>
-                                                    <option value="2024">2024</option>
-                                                    <option value="2025">2025</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div><!-- .field-group -->
+            <label for="rent_increase_notice_no">
+                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_no" class="input-field" value="false"
+                       ng-model="Ctrl.RentalIncreaseModel.bRentIncreaseNoticeGiven" /><i></i> <span>No</span>
+            </label>
+            <div class="clear"></div>
+        </div>
+    </div>
 
 
-                                    <div class="field-group">
-                                        <a href="#" class="btn-link">Add another rent increase record</a>
-                                    </div><!-- .field-group -->
+    <div class="field-group">
+        <label>Date notice served</label>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Month"
+                            class="custom-select" data-placeholder="Month"
+                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Day"
+                            class="custom-select" data-placeholder="Day"
+                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseNoticeDate.Year"
+                            class="custom-select" data-placeholder="Year"
+                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                </div>
+
+    <div class="field-group">
+        <label>Monthly rent increase</label>
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <input type="text" name="monthly_rent_increase_from" id="monthly_rent_increase_from" class="field-input"
+                       placeholder="From" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedFrom" />
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <input type="text" name="monthly_rent_increase_to" id="monthly_rent_increase_to" class="field-input"
+                       placeholder="To" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedTo" />
+            </div>
+        </div>
+    </div><!-- .field-group -->
+
+    <div class="field-group">
+        <label>Date increase effective</label>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Month"
+                            class="custom-select" data-placeholder="Month"
+                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Day"
+                            class="custom-select" data-placeholder="Day"
+                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <div class="field-group">
+                    <select ng-model="Ctrl.RentalIncreaseModel.RentIncreaseEffectiveDate.Year"
+                            class="custom-select" data-placeholder="Year"
+                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                </div>
+            </div>
+        </div>
+    </div><!-- .field-group -->
 
 
-                                <div class="step-footer">
-                                    <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" />
-                                </div>
-                            
+    <div class="field-group">
+        <a ng-click="Ctrl.AddAnotherRentIncrease(Ctrl.RentalIncreaseModel)" class="btn-link">Add another rent increase record</a>
+    </div><!-- .field-group -->
+
+</div>
+
+
+<div class="step-footer">
+    <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToReview()" />
+</div>
