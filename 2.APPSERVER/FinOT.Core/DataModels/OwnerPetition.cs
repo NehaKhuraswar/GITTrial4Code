@@ -167,6 +167,11 @@ namespace RAP.Core.DataModels
 
     public class OwnerPetitionRentalIncrementInfoM
     {
+        public OwnerPetitionRentalIncrementInfoM()
+        {
+            RentIncreaseNoticeDate = new CustomDate();
+            RentIncreaseEffectiveDate = new CustomDate();
+        }
         public int RentalIncreaseInfoID { get; set; }
         public int OwnerPropertyID { get; set; }
         public bool bRentIncreaseNoticeGiven { get; set; }
@@ -235,9 +240,10 @@ namespace RAP.Core.DataModels
         {
             MovedInDate = new CustomDate();
             RAPNoticeGivenDate = new CustomDate();
+            RAPNoticeToRAPOfficeDate = new CustomDate();
         }
         private List<OwnerPetitionTenantInfoM> _tenantInfo = new List<OwnerPetitionTenantInfoM>();
-        private List<OwnerPetitionRentalIncrementInfoM> _rentalInfo = new List<OwnerPetitionRentalIncrementInfoM>();
+        private List<OwnerResponseRentalIncrementInfoM> _rentalInfo = new List<OwnerResponseRentalIncrementInfoM>();
         private List<UnitTypeM> _unitTypes = new List<UnitTypeM>();
 
         public int OwnerPropertyID { get; set; }
@@ -246,7 +252,12 @@ namespace RAP.Core.DataModels
         public decimal? InitialRent { get; set; }
         public int? RAPNoticeStatusID { get; set; }
         public CustomDate RAPNoticeGivenDate { get; set; }
-        public int? RentStatusID { get; set; }
+        public bool CurrentOnRent { get; set; }
+        public bool bCapitalImprovementIncrease { get; set; }
+        public bool bCaptialImprovementContested { get; set; }
+        public string CaseNumbers { get; set; }
+        public bool bRAPNoticeToRAPOffice { get; set; }
+        public CustomDate RAPNoticeToRAPOfficeDate { get; set; }
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }
         public List<OwnerPetitionTenantInfoM> TenantInfo
@@ -260,7 +271,7 @@ namespace RAP.Core.DataModels
                 _tenantInfo = value;
             }
         }
-        public List<OwnerPetitionRentalIncrementInfoM> RentalInfo
+        public List<OwnerResponseRentalIncrementInfoM> RentalInfo
         {
             get
             {
@@ -286,6 +297,37 @@ namespace RAP.Core.DataModels
 
 
     }
+
+    public class OwnerResponseRentalIncrementInfoM
+    {
+        public OwnerResponseRentalIncrementInfoM()
+        {
+            RentIncreaseNoticeDate = new CustomDate();
+            RentIncreaseEffectiveDate = new CustomDate();
+        }
+        private List<OwnerRentIncreaseReasonsM> _rentIncreaseReasons = new List<OwnerRentIncreaseReasonsM>();
+        public int RentalIncreaseInfoID { get; set; }
+        public int OwnerPropertyID { get; set; }
+        public bool bRentIncreaseNoticeGiven { get; set; }
+        public CustomDate RentIncreaseNoticeDate { get; set; }
+        public CustomDate RentIncreaseEffectiveDate { get; set; }
+        public decimal? RentIncreasedFrom { get; set; }
+        public decimal? RentIncreasedTo { get; set; }
+        public bool isDeleted { get; set; }
+        public List<OwnerRentIncreaseReasonsM> RentIncreaseReasons
+        {
+            get
+            {
+                return _rentIncreaseReasons;
+            }
+            set
+            {
+                _rentIncreaseReasons = value;
+            }
+        }
+
+    }
+
     #endregion
 
 }
