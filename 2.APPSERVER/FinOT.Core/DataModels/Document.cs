@@ -49,7 +49,7 @@ namespace RAP.Core.DataModels
          TenantPetition,
          OwnerPetition,
          OwnerPetitionResponse,
-         TenantPetitionResponse,
+         TenantResponse,
          Appeal
      }
 }

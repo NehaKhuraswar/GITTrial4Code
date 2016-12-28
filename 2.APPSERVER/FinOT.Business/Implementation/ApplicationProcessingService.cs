@@ -453,6 +453,24 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<CaseInfoM> GetTRAdditionalDocuments(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                model = GetUploadedDocuments(model, "TR_AdditionalDocuments");
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SaveTenantResponseApplicationInfo(CaseInfoM caseInfo, int UserID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -535,6 +553,40 @@ namespace RAP.Business.Implementation
             catch (Exception ex)
             {
                 result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<CaseInfoM> SaveTRAdditionalDocuments(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
+            try
+            {
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.TenantResponse.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                model.Documents = documents;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
                 return result;
             }
         }

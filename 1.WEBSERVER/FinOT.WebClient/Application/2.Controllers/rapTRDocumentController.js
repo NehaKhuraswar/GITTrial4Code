@@ -1,12 +1,25 @@
 ﻿'use strict';
-var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory) {
+var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapTRDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, ajaxService, $location, rapFactory, rapGlobalFactory, masterFactory) {
     var self = this;
 
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.caseinfo.CustomerID = self.custDetails.custID;
+    self.DocDescriptions = masterFactory.DocDescription();
+
+    masterFactory.DocDescription().then(function (response) {
+        if (!alert.checkResponse(response)) { return; }
+        self.DocDescriptions = response.data;
+    });
+    self.description1 = null;
+    self.description2 = null;
 
     self.ContinueToReview = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
+        rapFactory.SaveTRAdditionalDocuments(self.caseinfo).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            rapGlobalFactory.CaseDetails = response.data;
+        });
         $scope.model.bAddDocuments = false;
         $scope.model.bReview = true;
       //  $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
@@ -16,84 +29,56 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
         if ($files && $files.length) {
             for (var i = 0; i < $files.length; i++) {
                 var file = $files[i];
-                popupateDocument(file, 'TP_AdditionalDocuments');
+                popupateDocument(file, 'TR_AdditionalDocuments');
             }
         }
     }
 
+    rapFactory.GetTRAdditionalDocuments(self.caseinfo).then(function (response) {
+        if (!alert.checkResponse(response)) { return; }
+        rapGlobalFactory.CaseDetails = response.data;
+        self.caseinfo = response.data;
+    });
 
-    function popupateDocument(file, dicTitle) {
-        var filename = file.name;
-        var mimetype = file.type;
-        var filesize = ((file.size / 1024) / 1024).toFixed(4);
-        //if (filesize < 25) {
-        if (filesize < masterFactory.FileSize) {
-            var index = filename.lastIndexOf(".");
-            var ext = filename.substring(index, filename.length).toUpperCase();
-            //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
-            if (masterFactory.FileExtensons.indexOf(ext) > -1) {
-                var document = self.caseinfo.Document;
-                document.DocTitle = dicTitle;
-                document.DocName = filename;
-                document.MimeType = mimetype;
-                document.CustomerID = self.custDetails.custID;
-                var reader = new FileReader();
-                reader.readAsArrayBuffer(file);
-                reader.onload = function (e) {
-                    var arrayBuffer = e.target.result;
-                    var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
-                    document.Base64Content = base64String;
+    $scope.onFileSelected = function ($files, docTitle) {
+        if ($files && $files.length) {
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                var filename = file.name;
+                var mimetype = file.type;
+                var filesize = ((file.size / 1024) / 1024).toFixed(4);
+                //if (filesize < 25) {
+                if (filesize < masterFactory.FileSize)
+                    var index = filename.lastIndexOf(".");
+                var ext = filename.substring(index, filename.length).toUpperCase();
+                //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
+                if (masterFactory.FileExtensons.indexOf(ext) > -1) {
+                    var document = angular.copy(self.caseinfo.Document);
+                    document.DocTitle = docTitle;
+                    document.DocName = filename;
+                    document.MimeType = mimetype;
+                    document.CustomerID = self.custDetails.custID;
+                    var reader = new FileReader();
+                    reader.readAsArrayBuffer(file);
+                    reader.onload = function (e) {
+                        var arrayBuffer = e.target.result;
+                        var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+                        document.Base64Content = base64String;
+                    }
+                    //document.DocDescription = angular.copy(self.description2);
+                    var desc = angular.copy(self.description1);
+                    if (desc == null ||  (desc =='<--Select-->')) {
+                        desc = angular.copy(self.description2);
+                    }
+                    document.DocDescription = desc;
+                    self.caseinfo.Documents.push(document);
+                    self.description1 = null;
+                    self.description2 = null;
                 }
-                self.caseinfo.Documents.push(document);
             }
+
         }
-
     }
-
-    //$scope.onFileSelect = function ($files) {
-    //    if ($files && $files.length)
-    //    {
-    //        //var fileName = $files[0].name;
-    //        var file = $files[0];
-    //        self.caseinfo.TenantPetitionInfo.File = file;
-    //        var data = new FormData();
-    //        data.append(file);
-    //        blockUI.start();
-
-    //        var _routePrefix = 'api/applicationprocessing';
-    //        var url = _routePrefix + '/savecaseinfo';
-
-    //        return ajax.Post(data, url)
-    //        .finally(function () {
-    //            blockUI.stop();
-    //        });
-    //    }
-    //}
-
-            //var file = new java.io.RandomAccessFile(file, "r");
-            //var bArr = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, file.length());
-            //file.read(bArr)
-
-
-           //var reader = new FileReader();
-           // reader.readAsArrayBuffer(file);
-           // var arrayBuffer = null;
-           //reader.onload = function (e)
-           //{
-
-               //arrayBuffer = e.target.result;
-              //   array = new Uint8Array(arrayBuffer),
-              //   binaryString = String.fromCharCode.apply(null, array);
-
-              //console.log(binaryString);
-
-          // }
-          
-           // var file = $scope.createNewDocument();
-           // file.FileName = newFileName;
-            //self.editmodel.push(file);
-          //  $scope.newFiles.push($files[0].name);
-           // $scope.newFilesContent.push($files[0]);
         
     
     

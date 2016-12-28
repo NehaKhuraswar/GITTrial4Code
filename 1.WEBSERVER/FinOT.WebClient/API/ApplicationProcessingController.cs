@@ -1566,6 +1566,38 @@ namespace RAP.WebClient
             }
         }
 
+        [AllowAnonymous]
+        [Route("GetTRAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage GetTRAdditionalDocuments()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetTRAdditionalDocuments/";
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
 
         [AllowAnonymous]
         [Route("SaveOwnerAdditionalDocuments")]
@@ -1599,6 +1631,37 @@ namespace RAP.WebClient
             }
         }
 
+        [AllowAnonymous]
+        [Route("SaveTRAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveTRAdditionalDocuments()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "SaveTRAdditionalDocuments/";
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
 
         [AllowAnonymous]
         [Route("GetOResponseApplicantInfo")]

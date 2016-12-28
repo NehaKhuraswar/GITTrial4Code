@@ -11,7 +11,7 @@
     });
     self.description1 = null;
     self.description2 = null;
-
+    
     rapFactory.GetOwnerAdditionalDocuments(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
@@ -43,9 +43,15 @@
                             var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
                             document.Base64Content = base64String;
                         }
-                        document.DocDescription =angular.copy(self.description);
+                        var desc = angular.copy(self.description1);
+                        if(des == null)
+                        {
+                            desc = angular.copy(self.description2);
+                        }
+                        document.DocDescription =desc
                         self.caseinfo.Documents.push(document);
-                        self.description = null;
+                        self.description1 = null;
+                        self.description2 = null;
                     }
                 }
 

@@ -1711,6 +1711,39 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("GetTRAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage GetTRAdditionalDocuments([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _service.GetTRAdditionalDocuments(model);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
         
         [AllowAnonymous]
         [Route("SaveOwnerApplicantInfo")]
@@ -1858,6 +1891,39 @@ namespace RAP.API.Controllers
             try
             {
                 var dbResult = _service.SaveOwnerAdditionalDocuments(model);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveTRAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveTRAdditionalDocuments([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _service.SaveTRAdditionalDocuments(model);
                 if (dbResult.status.Status == StatusEnum.Success)
                 {
                     transaction.data = dbResult.result;

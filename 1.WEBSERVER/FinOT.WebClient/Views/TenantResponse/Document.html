@@ -20,41 +20,25 @@
                                 </div>
 
                                 <div class="tbl-body">
-                                    <div class="tbl-row clearfix">
+                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
                                         <div class="item item-toggle expanded">
                                             <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> Rental_expenses.xsl</div>
+                                                <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
                                                 <div class="col col-35 type">Excel</div>
-                                                <a href="#" class="btn-link btn-delete">Delete</a>
+                                                <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-edit">Delete</a>
                                             </div>
 
                                             <div class="item-content clearfix">
                                                 <div class="row">
                                                     <div class="col-md-10 col-sm-12">
-                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                        <p>{{item.DocDescription}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="tbl-row clearfix">
-                                        <div class="item item-toggle">
-                                            <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> Rental_expenses.doc</div>
-                                                <div class="col col-35 type">Word</div>
-                                                <a href="#" class="btn-link btn-delete">Delete</a>
-                                            </div>
-
-                                            <div class="item-content clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-sm-12">
-                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <!-- .custom-table -->
@@ -74,10 +58,10 @@
                             </div>
                         </div>
 
-                        <div class="field-group mar-bottom-40">
-                            <label for="document_description">If none of the above options apply, please provide a description of the file that you are uploading below:</label>
-                            <textarea name="document_description" id="document_description" class="field-input textarea full-width" rows="8"></textarea>
-                        </div>
+                    <div class="field-group mar-bottom-40" ng-show="(Ctrl.description1 == null) || (Ctrl.description1 =='<--Select-->')">
+                        <label for="document_description">If none of the above options apply, please provide a description of the file that you are uploading below:</label>
+                        <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
+                    </div>
 
                         <div class="field-group no-bottom-margin">
                             <div class="row">
@@ -91,8 +75,22 @@
                             <div class="field-addfile">
                                 <div class="input-file-wrapper">
                                     <span class="btn-link">Attach document</span>
-                                    <input type="file" id="attach_documentation" name="attach_documentation" />
+                                    <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'TR_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                                 </div>
+                                <div class="field-group">
+                                    <table class="table table-condensed nopadding-bottom">
+                                        <tbody>
+                                            <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
+                                                <td class="nopadding-left">
+                                                    {{item.DocName}}
+                                                </td>
+                                                <td>
+                                                    <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>    
                             </div>
                         </div><!-- .field-group -->
 
