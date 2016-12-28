@@ -184,9 +184,46 @@ namespace RAP.Core.DataModels
     {
         public OwnerResponseInfoM()
         {
-            ApplicantInfo = new OwnerPetitionApplicantInfoM();
+            ApplicantInfo = new OwnerResponseApplicantInfoM();
         }
-        public OwnerPetitionApplicantInfoM ApplicantInfo { get; set; }
+        public OwnerResponseApplicantInfoM ApplicantInfo { get; set; }
+    }
+
+    public class OwnerResponseApplicantInfoM
+    {
+        public OwnerResponseApplicantInfoM()
+        {
+            ThirdPartyUser = new UserInfoM();
+            ApplicantUserInfo = new UserInfoM();
+            BuildingAcquiredDate = new CustomDate();
+        }
+        private bool _bThirdPartyRepresentation = false;
+        public int OwnerResponseApplicantInfoID { get; set; }
+        public UserInfoM ApplicantUserInfo { get; set; }
+        public bool bThirdPartyRepresentation
+        {
+            get
+            {
+                return _bThirdPartyRepresentation;
+            }
+            set
+            {
+                _bThirdPartyRepresentation = value;
+            }
+        }
+        public UserInfoM ThirdPartyUser { get; set; }
+        public bool ThirdPartyEmailNotification { get; set; }
+        public bool ThirdPartyMailNotification { get; set; }
+        public bool bBusinessLicensePaid { get; set; }
+        public string BusinessLicenseNumber { get; set; }
+        public bool bRentAdjustmentProgramFeePaid { get; set; }
+        public CustomDate BuildingAcquiredDate { get; set; }
+        public int NumberOfUnits { get; set; }
+        public bool bMoreThanOneStreetOnParcel { get; set; }
+        public int CustomerID { get; set; }
+        public bool bPetitionFiled { get; set; }
+        public string RAPFee { get; set; }
+        public string CaseRespondingTo { get; set; }
     }
     #endregion
 

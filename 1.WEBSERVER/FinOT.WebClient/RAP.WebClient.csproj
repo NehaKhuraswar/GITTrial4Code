@@ -146,7 +146,10 @@
     <Content Include="Application\2.Controllers\rapTRPetitionTypeController.js" />
     <Content Include="Application\2.Controllers\raploginURLController.js" />
     <Content Include="Application\2.Controllers\raploginCityUserController.js" />
+    <Content Include="Application\2.Controllers\rapOResponseApplicantInfoController.js" />
+    <Content Include="Application\2.Controllers\rapOResponseImpInfoController.js" />
     <Content Include="Application\2.Controllers\rapOResponseMainController.js" />
+    <Content Include="Application\2.Controllers\rapOResponsePetitionTypeController.js" />
     <Content Include="Application\2.Controllers\rapOwnerDocumentsController.js" />
     <Content Include="Application\2.Controllers\rapOwnerReviewController.js" />
     <Content Include="Application\2.Controllers\rapOwnerVerificationController.js" />
@@ -188,6 +191,8 @@
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
+    <Content Include="Application\3.Factories\rapOResponseApplicantInfoFactory.js" />
+    <Content Include="Application\3.Factories\rapOResponsePetitionTypeFactory.js" />
     <Content Include="Application\3.Factories\rapTRrentalhistoryFactory.js" />
     <Content Include="Application\3.Factories\rapTRreviewFactory.js" />
     <Content Include="Application\3.Factories\rapTRDocumentFactory.js" />

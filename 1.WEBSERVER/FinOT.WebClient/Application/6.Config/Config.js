@@ -183,6 +183,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapServingAppealController_resolve
         })
+        .when('/ownerresponse', {
+              templateUrl: 'views/OwnerResponse/Index.html',
+              controller: rapOResponseMainController,
+              controllerAs: 'Ctrl',
+              resolve: rapOResponseMainController_resolve
+          })
        
         .when('/error', {
             templateUrl: 'views/shared/error.html',

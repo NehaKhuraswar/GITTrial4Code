@@ -1,26 +1,16 @@
 ﻿'use strict';
-var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', 'model', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, model) {
+var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'rapOResponsePetitionTypeFactory', 'model', function ($scope, $modal, alert, $location, rapGlobalFactory, rapFactory, model) {
     var self = this;
-    self.custDetails = rapGlobalFactory.CustomerDetails;
-   // self.caseinfo = rapGlobalFactory.CaseDetails;
-    //self.rent = [];
-    //self.selectedValue = 1;
-    //self.selectedObj = {};
+    //self.custDetails = rapGlobalFactory.CustomerDetails;
+
     self.PetitionSubmissionStatus = null;
     self.oPetionActiveStatus = null;
     self.tPetionActiveStatus = null;
 
-    //var _getrent = function () {
-    //    return rapFactory.GetRent().then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        self.rent = response.data;
-    //    });
-    //}
     var _DisableAll = function () {
-        self.ownerImpInfo = false;
-        self.ownerApplicantInfo = false;
+        self.petitionType = false;
+        self.oresponseImpInfo = false;
+        self.oresponseApplicantInfo = false;
         self.ownerJustification = false;
         self.ownerRentalProperty = false;
         self.ownerRentalHistory = false;
@@ -33,88 +23,101 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
 
     self.showPetitionType = function () {
         _DisableAll();
-        self.bPetitionType = true;
-        self.DisableAllCurrent();
-        self.oPetionCurrentStatus.PetitionCategory = true;
+        self.petitionType = true;
+        //self.DisableAllCurrent();
+        //self.oPetionCurrentStatus.PetitionCategory = true;
     };
-    
+
     self.ShowOwnerImpInfo = function () {
-        if (self.oPetionActiveStatus.ImportantInformation) {
+        //    if (self.oPetionActiveStatus.ImportantInformation) {
+        _DisableAll();
+        self.oresponseImpInfo = true;
+        //        self.oPetionCurrentStatus.ImportantInformation = true;
+    };
+    //};
+    self.ShowOresponseApplicantInfo = function () {
+        //if (self.oPetionActiveStatus.ApplicantInformation) {
             _DisableAll();
-            self.ownerImpInfo = true;
-            self.oPetionCurrentStatus.ImportantInformation = true;
-        }
-    }
-    self.ShowOwnerApplicantInfo = function () {
-        if (self.oPetionActiveStatus.ApplicantInformation) {
-            _DisableAll();
-            self.DisableAllCurrent();
-            self.ownerApplicantInfo = true;
-            self.oPetionCurrentStatus.ApplicantInformation = true;
-        }
-    }
-    self.ShowOwnerJustification = function () {
-        if (self.oPetionActiveStatus.JustificationForRentIncrease) {
-            _DisableAll();
-            self.DisableAllCurrent();
-            self.ownerJustification = true;
-            self.oPetionCurrentStatus.JustificationForRentIncrease = true;
-        }
-    }
-    self.ShowOwnerRentalProperty = function () {
-        if (self.oPetionActiveStatus.RentalProperty) {
-            _DisableAll();
-            self.DisableAllCurrent();
-            self.ownerRentalProperty = true;
-            self.oPetionCurrentStatus.RentalProperty = true;
-        }
-    }
-    self.ShowOwnerRentalHistory = function () {
-        if (self.oPetionActiveStatus.RentHistory) {
-            _DisableAll();
-            self.DisableAllCurrent();
-            self.ownerRentalHistory = true;
-            self.oPetionCurrentStatus.RentHistory = true;
-        }
-    }
-    self.ShowOwnerAdditionalDocuments = function () {
-        if (self.oPetionActiveStatus.AdditionalDocumentation) {
-            _DisableAll();
-            self.DisableAllCurrent();
-            self.ownerAdditionalDocuments = true;
-            self.oPetionCurrentStatus.AdditionalDocumentation = true;
-        }
-    }
-    self.ShowOwnerReview = function () {
-        if (self.oPetionActiveStatus.Review) {
-            _DisableAll();
-            self.DisableAllCurrent();
-            self.ownerReview = true;
-            self.oPetionCurrentStatus.Review = true;
-        }
-    }
-    self.ShowOwnerVerification = function () {
-        if (self.oPetionActiveStatus.Verification) {
-            _DisableAll();
-            self.DisableAllCurrent();
-            self.ownerVerification = true;
-            self.oPetionCurrentStatus.Verification = true;
-        }
-    }
-
-    var _GetCaseInfo = function () {
+            //self.DisableAllCurrent();
+            self.oresponseApplicantInfo = true;
+            //self.oPetionCurrentStatus.ApplicantInformation = true;
+        //}
+    };
+    //self.ShowOwnerJustification = function () {
+    //    if (self.oPetionActiveStatus.JustificationForRentIncrease) {
+    //        _DisableAll();
+    //        self.DisableAllCurrent();
+    //        self.ownerJustification = true;
+    //        self.oPetionCurrentStatus.JustificationForRentIncrease = true;
+    //    }
+    //};
+    //self.ShowOwnerRentalProperty = function () {
+    //    if (self.oPetionActiveStatus.RentalProperty) {
+    //        _DisableAll();
+    //        self.DisableAllCurrent();
+    //        self.ownerRentalProperty = true;
+    //        self.oPetionCurrentStatus.RentalProperty = true;
+    //    }
+    //};
+    //self.ShowOwnerRentalHistory = function () {
+    //    if (self.oPetionActiveStatus.RentHistory) {
+    //        _DisableAll();
+    //        self.DisableAllCurrent();
+    //        self.ownerRentalHistory = true;
+    //        self.oPetionCurrentStatus.RentHistory = true;
+    //    }
+    //};
+    //self.ShowOwnerAdditionalDocuments = function () {
+    //    if (self.oPetionActiveStatus.AdditionalDocumentation) {
+    //        _DisableAll();
+    //        self.DisableAllCurrent();
+    //        self.ownerAdditionalDocuments = true;
+    //        self.oPetionCurrentStatus.AdditionalDocumentation = true;
+    //    }
+    //};
+    //self.ShowOwnerReview = function () {
+    //    if (self.oPetionActiveStatus.Review) {
+    //        _DisableAll();
+    //        self.DisableAllCurrent();
+    //        self.ownerReview = true;
+    //        self.oPetionCurrentStatus.Review = true;
+    //    }
+    //};
+    //self.ShowOwnerVerification = function () {
+    //    if (self.oPetionActiveStatus.Verification) {
+    //        _DisableAll();
+    //        self.DisableAllCurrent();
+    //        self.ownerVerification = true;
+    //        self.oPetionCurrentStatus.Verification = true;
+    //    }
+    //};
 
 
-        rapFactory.GetCaseInfo(null, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-            self.model = response.data;
-            self.caseinfo = self.model;
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-            self.bPetitionType = true;
-        });
-    }
+    //self.oPetionCurrentStatus = {
+    //    PetitionCategory: false,
+    //    ImportantInformation: false,
+    //    ApplicantInformation: false,
+    //    JustificationForRentIncrease: false,
+    //    RentalProperty: false,
+    //    RentHistory: false,
+    //    AdditionalDocumentation: false,
+    //    Review: false,
+    //    Verification: false
+    //};
+
+    //self.DisableAllCurrent = function () {
+    //    self.oPetionCurrentStatus.PetitionCategory = false;
+    //    self.oPetionCurrentStatus.ImportantInformation = false;
+    //    self.oPetionCurrentStatus.ApplicantInformation = false;
+    //    self.oPetionCurrentStatus.JustificationForRentIncrease = false;
+    //    self.oPetionCurrentStatus.RentalProperty = false;
+    //    self.oPetionCurrentStatus.RentHistory = false;
+    //    self.oPetionCurrentStatus.AdditionalDocumentation = false;
+    //    self.oPetionCurrentStatus.Review = false;
+    //    self.oPetionCurrentStatus.Verification = false;
+    //};
+   // self.showPetitionType();
+   
 
     var _getPetitionCategory = function () {
         rapFactory.GetPetitionCategory().then(function (response) {
@@ -124,88 +127,14 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
             self.model = response.data;
             self.caseinfo = self.model;
             rapGlobalFactory.CaseDetails = self.caseinfo;
-            self.bPetitionType = true;
+            self.petitionType = true;
         });
     }
-
-
-    //var _getPageSubmission = function () {
-    //    rapFactory.GetPageSubmissionStatus(self.custDetails.custID).then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        self.PetitionSubmissionStatus = response.data;
-    //        self.oPetionActiveStatus = self.PetitionSubmissionStatus.OwnerPetition;
-    //        self.tPetionActieStatus = self.PetitionSubmissionStatus.TenantPetition;
-    //    });
-    //}
-    
-    //if (self.caseinfo == null) {
-    //    _getPetitionCategory();
-    //}
-    //if (self.PetitionSubmissionStatus == null) {
-    //    _getPageSubmission();
-    //}
-
-    self.oPetionCurrentStatus = {
-        PetitionCategory: false,
-        ImportantInformation: false,
-        ApplicantInformation: false,
-        JustificationForRentIncrease: false,
-        RentalProperty: false,
-        RentHistory: false,
-        AdditionalDocumentation: false,
-        Review: false,
-        Verification: false
+    if (self.caseinfo == null) {
+        _getPetitionCategory();
     }
-
-    self.DisableAllCurrent = function () {
-        self.oPetionCurrentStatus.PetitionCategory = false;
-        self.oPetionCurrentStatus.ImportantInformation = false;
-        self.oPetionCurrentStatus.ApplicantInformation = false;
-        self.oPetionCurrentStatus.JustificationForRentIncrease = false;
-        self.oPetionCurrentStatus.RentalProperty = false;
-        self.oPetionCurrentStatus.RentHistory = false;
-        self.oPetionCurrentStatus.AdditionalDocumentation = false;
-        self.oPetionCurrentStatus.Review = false;
-        self.oPetionCurrentStatus.Verification = false;
-    }
-
-
-    //self.Continue = function () {
-    //    $location.path("/applicationinfo");
-    //}
-    //self.ContinueToGroundsforPetition = function () {
-    //    $location.path("/groundsforpetition");
-    //}
-    //self.ContinueToRentalHistory = function () {
-    //    $location.path("/rentalhistory");
-    //}
-    //self.ContinueToLostServices = function () {
-    //    var a = self.selectedObj;
-    //    $location.path("/lostservices");
-    //}
-    //self.ContinueToReview  = function () {
-    //    $location.path("/review");
-    //}
-    //self.ContinueToVerification = function () {
-    //    $location.path("/verification");
-    //}
-    ////self.SubmitPetition = function () {
-    ////  //  $location.path("/verification");
-    ////}
-    //self.SubmitPetition = function (model) {
-
-
-    //    rapFactory.SaveCaseInfo(model).then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        $modalInstance.close(response.data);
-    //    });
-    //}
 }];
-var rapPetitionMainController_resolve = {
+var rapOResponseMainController_resolve = {
     model: ['$route', 'alertService', 'rapfilepetitionFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
         //rapFactory.GetCaseInfo().then(function (response) {
         //    if (!alert.checkResponse(response)) {
@@ -217,3 +146,4 @@ var rapPetitionMainController_resolve = {
         //});
     }]
 }
+

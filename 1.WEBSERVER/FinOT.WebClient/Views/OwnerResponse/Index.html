@@ -10,10 +10,11 @@
 
             <div class="row">
                 <div class="col-md-3 col-sm-12">                    
-                    <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 2">
-                        <ul class="application-steps">                      
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ImportantInformation}"><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOwnerApplicantInfo()">Applicant Information</a></li>
+                    <div>
+                        <ul class="application-steps">   
+                            <li> <a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>                   
+                            <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOresponseApplicantInfo()">Applicant Information</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOwnerRentalProperty()">Rental Property</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOwnerRentalHistory()">Rental History</a></li>
                             
@@ -27,18 +28,18 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">
-                        <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">
-                            <div ng-if="Ctrl.bPetitionType">
-                                <rap-petitiontype model="Ctrl"></rap-petitiontype>
+                        <form name="frmOwnerResponse" id="frmOwnerResponse" method="post" class="application-form">
+                            <div ng-if="Ctrl.petitionType">
+                                <rap-oresponsepetitiontype model="Ctrl"></rap-oresponsepetitiontype>
                             </div>
-                         
-                            <div ng-if="Ctrl.ownerImpInfo">
-                                <rap-ownerimpinfo ng-show="Ctrl.ownerImpInfo" model="Ctrl"></rap-ownerimpinfo>
+
+                            <div ng-if="Ctrl.oresponseImpInfo">
+                                <rap-oresponseimpinfo ng-show="Ctrl.oresponseImpInfo" model="Ctrl"></rap-oresponseimpinfo>
                             </div>
-                            <div ng-if="Ctrl.ownerApplicantInfo">
-                                <rap-ownerapplicantinfo ng-show="Ctrl.ownerApplicantInfo" model="Ctrl"></rap-ownerapplicantinfo>
+                            <div ng-if="Ctrl.oresponseApplicantInfo">
+                                <rap-oresponsepeapplicantinfo ng-show="Ctrl.oresponseApplicantInfo" model="Ctrl"></rap-oresponsepeapplicantinfo>
                             </div>
-                            <div ng-if="Ctrl.ownerJustification">
+                            <!--<div ng-if="Ctrl.ownerJustification">
                                 <rap-ownerjustification ng-show="Ctrl.ownerJustification" model="Ctrl"></rap-ownerjustification>
                             </div>
                             <div ng-if="Ctrl.ownerRentalProperty">
@@ -55,7 +56,7 @@
                             </div>
                             <div ng-if="Ctrl.ownerVerification">
                                 <rap-ownerverification ng-show="Ctrl.ownerVerification" model="Ctrl"></rap-ownerverification>
-                            </div>
+                            </div>-->
                         </form>
                     </div>
                 </div>

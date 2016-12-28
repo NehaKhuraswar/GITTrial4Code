@@ -28,6 +28,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     self.Collaborator = function () {
         $location.path("/collaborator");
     }
+    self.OwnerResponse = function () {
+        $location.path("/ownerresponse");
+    }
     self.toggle = function () {
         if (self.btoggle == false) {
                 self.btoggle = true;

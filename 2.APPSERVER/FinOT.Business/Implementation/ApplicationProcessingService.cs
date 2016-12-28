@@ -920,5 +920,79 @@ namespace RAP.Business.Implementation
         }
         
         #endregion
+
+        #region Get Owner Response Methods
+        public ReturnResult<CaseInfoM> GetOResponseApplicantInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                string RAPFee = ConfigurationManager.AppSettings["RAPFee"];
+                var dbResult = _dbHandler.GetOResponseApplicantInfo(model);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                dbResult.result.OwnerResponseInfo.ApplicantInfo.RAPFee = string.IsNullOrEmpty(RAPFee) ? "69" : RAPFee;
+                model = GetUploadedDocuments(model, "OR_BusinessTaxProof");
+                model = GetUploadedDocuments(model, "OR_PropertyServiceFee");
+              
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+        #endregion
+
+        #region Save Owner Response Methods
+        public ReturnResult<CaseInfoM> SaveOResponseApplicantInfo(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
+            try
+            {
+                var dbResult = _dbHandler.SaveOResponseApplicantInfo(model);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.OwnerPetition.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                model.Documents = documents;
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+        #endregion
     }
 }

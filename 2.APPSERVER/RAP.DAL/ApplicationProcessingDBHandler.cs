@@ -2734,7 +2734,13 @@ namespace RAP.DAL
                 }
                 else
                 {
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(model.OwnerResponseInfo.ApplicantInfo.CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
+                    {
+                        model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                    }
                     result.result = model;
+                    
                 }
 
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -3404,10 +3410,10 @@ namespace RAP.DAL
             ownerPetitionID = petitionInfo.OwnerPetitionID;
             return ownerPetitionID;
         }
-        #endregion
+       #endregion
 
        #region Owner Response Get Functions
-       public ReturnResult<CaseInfoM> GetOwnerResponseApplicantInfo(CaseInfoM model)
+       public ReturnResult<CaseInfoM> GetOResponseApplicantInfo(CaseInfoM model)
        {
            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
            try
@@ -3420,8 +3426,8 @@ namespace RAP.DAL
 
                if (applicantInfo != null)
                {
-                   OwnerPetitionApplicantInfoM _applicantInfo = new OwnerPetitionApplicantInfoM();
-                   _applicantInfo.OwnerPetitionApplicantInfoID = applicantInfo.OwnerResponseApplicantInfoID;
+                   OwnerResponseApplicantInfoM _applicantInfo = new OwnerResponseApplicantInfoM();
+                   _applicantInfo.OwnerResponseApplicantInfoID = applicantInfo.OwnerResponseApplicantInfoID;
                    var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
                    if (applicantUserInforesult.status.Status != StatusEnum.Success)
                    {
@@ -3430,18 +3436,12 @@ namespace RAP.DAL
                    }
                    _applicantInfo.ApplicantUserInfo = applicantUserInforesult.result;
                    _applicantInfo.bThirdPartyRepresentation = (applicantInfo.bThirdPartyRepresentation != null) ? Convert.ToBoolean(applicantInfo.bThirdPartyRepresentation) : false;
-                   var thirdPartyUserInforesult = 
+                   var accdbResult = _accountdbHandler.GetThirdPartyInfo(model.OwnerResponseInfo.ApplicantInfo.CustomerID);
+                   if (accdbResult.status.Status == StatusEnum.Success)
+                   {
+                       _applicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                   }
                    
-                   //if (_applicantInfo.bThirdPartyRepresentation)
-                   //{
-                   //    var thirdPartyUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ThirdPartyUserID);
-                   //    if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)
-                   //    {
-                   //        result.status = thirdPartyUserInforesult.status;
-                   //        return result;
-                   //    }
-                   //    _applicantInfo.ThirdPartyUser = thirdPartyUserInforesult.result;
-                   //}
                    _applicantInfo.bBusinessLicensePaid = (applicantInfo.bBusinessLicensePaid != null) ? Convert.ToBoolean(applicantInfo.bBusinessLicensePaid) : false;
                    _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                    _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
@@ -3449,12 +3449,18 @@ namespace RAP.DAL
                    _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
                    _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                    _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
-                 //  _applicantInfo.bPetitionFiled = applicantInfo.bPetitionFiled;
-                   model.OwnerPetitionInfo.ApplicantInfo = _applicantInfo;
+                   _applicantInfo.bPetitionFiled =Convert.ToBoolean(applicantInfo.bPetitionFiled);
+                   _applicantInfo.CaseRespondingTo = applicantInfo.CaseRespondingTo;
+                   model.OwnerResponseInfo.ApplicantInfo = _applicantInfo;
                    result.result = model;
                }
                else
                {
+                   var accdbResult = _accountdbHandler.GetThirdPartyInfo(model.OwnerResponseInfo.ApplicantInfo.CustomerID);
+                   if (accdbResult.status.Status == StatusEnum.Success)
+                   {
+                     model.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                   }
                    result.result = model;
                }
 
@@ -3466,6 +3472,106 @@ namespace RAP.DAL
                result.status = _eHandler.HandleException(ex);
                _commondbHandler.SaveErrorLog(result.status);
                return result;
+           }
+       }
+       #endregion
+
+       #region Owner Response Save Functions
+       public ReturnResult<CaseInfoM> SaveOResponseApplicantInfo(CaseInfoM model)
+       {
+           ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           int applicantUserID = 0;
+           int thirdPartyUserID = 0;
+           {
+               try
+               {
+                   if (model.bCaseFiledByThirdParty)
+                   {
+                       var applicantUserResult = _commondbHandler.SaveUserInfo(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo);
+                       if (applicantUserResult.status.Status != StatusEnum.Success)
+                       {
+                           result.status = applicantUserResult.status;
+                           return result;
+                       }
+                       applicantUserID = applicantUserResult.result.UserID;
+                       thirdPartyUserID = model.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID;
+                   }
+                   else
+                   {
+                       if (model.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation)
+                       {
+                           var thirdpartyUserResult = _commondbHandler.SaveUserInfo(model.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser);
+                           if (thirdpartyUserResult.status.Status != StatusEnum.Success)
+                           {
+                               result.status = thirdpartyUserResult.status;
+                               return result;
+                           }
+                           var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = model.OwnerResponseInfo.ApplicantInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                           if (saveThirdPartyResult.status.Status != StatusEnum.Success)
+                           {
+                               result.status = saveThirdPartyResult.status;
+                               return result;
+                           }
+                           thirdPartyUserID = thirdpartyUserResult.result.UserID;
+                       }
+                       applicantUserID = model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.UserID;
+                   }
+
+                   if (model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID != 0 && !model.OwnerResponseInfo.ApplicantInfo.bPetitionFiled)
+                   {
+                       var applicantInfo = from r in _dbContext.OwnerResponseApplicantInfos
+                                           where r.OwnerResponseApplicantInfoID == model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID
+                                           select r;
+                       if (applicantInfo.Any())
+                       {
+                           OwnerResponseApplicantInfoM _applicantInfo = new OwnerResponseApplicantInfoM();
+                           applicantInfo.First().ApplicantUserID = applicantUserID;
+                           applicantInfo.First().bThirdPartyRepresentation = model.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation;
+                           if (thirdPartyUserID > 0)
+                           {
+                               applicantInfo.First().ThirdPartyUserID = thirdPartyUserID;
+                           }
+                           applicantInfo.First().bBusinessLicensePaid = model.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid;
+                           applicantInfo.First().BusinessLicenseNumber = model.OwnerResponseInfo.ApplicantInfo.BusinessLicenseNumber;
+                           applicantInfo.First().bRentAdjustmentProgramFeePaid = model.OwnerResponseInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
+                           applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
+                           applicantInfo.First().NumberOfUnits = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnits;
+                           applicantInfo.First().bMoreThanOneStreetOnParcel = model.OwnerResponseInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
+                           _dbContext.SubmitChanges();
+                       }
+                   }
+                   else
+                   {
+                       OwnerResponseApplicantInfo applicantInfo = new OwnerResponseApplicantInfo();
+                       applicantInfo.ApplicantUserID = applicantUserID;
+                       applicantInfo.bThirdPartyRepresentation = model.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation;
+                       if (thirdPartyUserID > 0)
+                       {
+                           applicantInfo.ThirdPartyUserID = thirdPartyUserID;
+                       }
+                       applicantInfo.bBusinessLicensePaid = model.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid;
+                       applicantInfo.BusinessLicenseNumber = model.OwnerResponseInfo.ApplicantInfo.BusinessLicenseNumber;
+                       applicantInfo.bRentAdjustmentProgramFeePaid = model.OwnerResponseInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
+                       applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
+                       applicantInfo.NumberOfUnits = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnits;
+                       applicantInfo.bMoreThanOneStreetOnParcel = model.OwnerResponseInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
+                       applicantInfo.CustomerID = model.OwnerResponseInfo.ApplicantInfo.CustomerID;
+                       applicantInfo.CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
+                       applicantInfo.bPetitionFiled = false;
+                       _dbContext.OwnerResponseApplicantInfos.InsertOnSubmit(applicantInfo);
+                       _dbContext.SubmitChanges();
+                       model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID = applicantInfo.OwnerResponseApplicantInfoID;
+                   }
+                   result.result = model;
+                   result.status = new OperationStatus() { Status = StatusEnum.Success };
+                   return result;
+               }
+               catch (Exception ex)
+               {
+                   result.status = _eHandler.HandleException(ex);
+                   _commondbHandler.SaveErrorLog(result.status);
+                   return result;
+               }
            }
        }
        #endregion

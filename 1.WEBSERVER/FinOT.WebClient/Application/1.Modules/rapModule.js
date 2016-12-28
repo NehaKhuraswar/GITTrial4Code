@@ -66,6 +66,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapTRrentalhistoryFactory', rapTRrentalhistoryFactory)
     .factory('rapTRreviewFactory', rapTRreviewFactory)
     .factory('rapTRverificationFactory', rapTRverificationFactory)
+    .factory('rapOResponsePetitionTypeFactory', rapOResponsePetitionTypeFactory)
+    .factory('rapOResponseApplicantInfoFactory', rapOResponseApplicantInfoFactory)
     .controller('raploginURLController', raploginURLController)
     .controller('raploginController', raploginController)
     .controller('raploginCityUserController', raploginCityUserController)
@@ -117,6 +119,10 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapTRImpInfoController', rapTRImpInfoController)
     .controller('rapTRReviewController', rapTRReviewController)
     .controller('rapTRVerificationController', rapTRVerificationController)
+    .controller('rapOResponseMainController', rapOResponseMainController)
+    .controller('rapOResponsePetitionTypeController', rapOResponsePetitionTypeController)
+    .controller('rapOResponseImpInfoController', rapOResponseImpInfoController)
+    .controller('rapOResponseApplicantInfoController', rapOResponseApplicantInfoController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -554,3 +560,39 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             controllerAs: 'Ctrl'
         };
     })
+.directive('rapOresponsepetitiontype', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/OwnerResponse/PetitionType.html',
+        controller: 'rapOResponsePetitionTypeController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapOresponseimpinfo', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/OwnerResponse/ImportantIformation.html',
+        controller: 'rapOResponseImpInfoController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapOresponsepeapplicantinfo', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/OwnerResponse/ApplicantInformation.html',
+        controller: 'rapOResponseApplicantInfoController',
+        controllerAs: 'Ctrl'
+    };
+})
