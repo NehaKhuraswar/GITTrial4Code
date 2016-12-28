@@ -51,6 +51,8 @@ namespace RAP.Core.DataModels
         public TenantResponseRentalHistoryM()
         {
             RentIncreases = new List<TenantResponseRentIncreaseInfoM>();
+            Documents = new List<DocumentM>();
+            Document = new DocumentM();
         }
         public int TenantResponseID { get; set; }
         public CustomDate RentalAgreementDate { get; set; }
@@ -59,6 +61,8 @@ namespace RAP.Core.DataModels
         public bool bRAPNoticeGiven { get; set; }
         public CustomDate RAPNoticeGivenDate { get; set; }
         public List<TenantResponseRentIncreaseInfoM> RentIncreases { get; set; }
+        public List<DocumentM> Documents { get; set; }
+        public DocumentM Document { get; set; }
     }
 
     public class TenantResponseRentIncreaseInfoM

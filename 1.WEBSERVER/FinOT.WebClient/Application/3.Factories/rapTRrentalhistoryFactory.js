@@ -13,11 +13,12 @@ var rapTRrentalhistoryFactory = ['blockUI', 'ajaxService', function (blockUI, aj
               blockUI.stop();
           });
       }
-      var _GetTenantResponseRentalHistoryInfo = function (TenantResponseID) {
+      var _GetTenantResponseRentalHistoryInfo = function (TenantResponseID, custID) {
           blockUI.start();
 
           var url = _routePrefix + '/gettenantresponserentalhistoryinfo';
           if (!(TenantResponseID == null || TenantResponseID == undefined)) { url = url + '/' + TenantResponseID; }
+          if (!(custID == null || custID == undefined)) { url = url + '/' + custID; }
 
           return ajax.Get(url)
           .finally(function () {

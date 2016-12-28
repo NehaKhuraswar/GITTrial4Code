@@ -502,9 +502,32 @@ namespace RAP.Business.Implementation
         public ReturnResult<bool> SaveTenantResponseRentalHistoryInfo(TenantResponseRentalHistoryM rentalHistory, int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
                 result = _dbHandler.SaveTenantResponseRentalHistoryInfo(rentalHistory, CustomerID);
+                if (result.status.Status != StatusEnum.Success)
+                {
+                    return result;
+                }
+
+                foreach (var doc in rentalHistory.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.TenantResponse.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                rentalHistory.Documents = documents;
                 return result;
             }
             catch (Exception ex)
@@ -514,12 +537,46 @@ namespace RAP.Business.Implementation
             }
         }
 
-        public ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID)
+        public ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID, int CustomerID)
         {
             ReturnResult<TenantResponseRentalHistoryM> result = new ReturnResult<TenantResponseRentalHistoryM>();
             try
             {
                 result = _dbHandler.GetTenantResponseRentalHistoryInfo(TenantResponseID);
+                if (result.status.Status != StatusEnum.Success)
+                {
+                    return result;
+                }
+
+                if (result.result.Documents.Where(x => x.DocTitle == "TR_RentalHistoryNotice").Count() == 0)
+                {
+                    var docsResult = _commonService.GetDocuments(CustomerID, false, "TR_RentalHistoryNotice");
+                    if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                    {
+                        foreach (var doc in docsResult.result)
+                        {
+                            if (doc != null)
+                            {
+                                result.result.Documents.Add(doc);
+                            }
+                        }
+                    }
+                }
+
+                if (result.result.Documents.Where(x => x.DocTitle == "TR_RentalHistoryLease").Count() == 0)
+                {
+                    var docsResult = _commonService.GetDocuments(CustomerID, false, "TR_RentalHistoryLease");
+                    if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                    {
+                        foreach (var doc in docsResult.result)
+                        {
+                            if (doc != null)
+                            {
+                                result.result.Documents.Add(doc);
+                            }
+                        }
+                    }
+                }
                 return result;
             }
             catch (Exception ex)
@@ -536,7 +593,41 @@ namespace RAP.Business.Implementation
             {
                 responseResult = _dbHandler.GetTenantResponseReviewInfo(CaseNumber, CustomerID);
 
-                
+                if (responseResult.status.Status != StatusEnum.Success)
+                {
+                    return result;
+                }
+
+                if (responseResult.result.TenantRentalHistory.Documents.Where(x => x.DocTitle == "TR_RentalHistoryNotice").Count() == 0)
+                {
+                    var docsResult = _commonService.GetDocuments(CustomerID, false, "TR_RentalHistoryNotice");
+                    if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                    {
+                        foreach (var doc in docsResult.result)
+                        {
+                            if (doc != null)
+                            {
+                                responseResult.result.TenantRentalHistory.Documents.Add(doc);
+                            }
+                        }
+                    }
+                }
+
+                if (responseResult.result.TenantRentalHistory.Documents.Where(x => x.DocTitle == "TR_RentalHistoryLease").Count() == 0)
+                {
+                    var docsResult = _commonService.GetDocuments(CustomerID, false, "TR_RentalHistoryLease");
+                    if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                    {
+                        foreach (var doc in docsResult.result)
+                        {
+                            if (doc != null)
+                            {
+                                responseResult.result.TenantRentalHistory.Documents.Add(doc);
+                            }
+                        }
+                    }
+                }
+
                 CaseInfoM caseInfo = new CaseInfoM();
 
                 if (responseResult.status.Status == StatusEnum.Success)
@@ -550,7 +641,10 @@ namespace RAP.Business.Implementation
                     result.result = null;
                     result.status = responseResult.status;
                 }
+
+                
                 result.result = caseInfo;
+                result.status = responseResult.status;
                 return result;
             }
             catch (Exception ex)

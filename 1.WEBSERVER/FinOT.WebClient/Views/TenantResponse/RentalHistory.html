@@ -35,7 +35,9 @@
         <div class="field-addfile">
             <div class="input-file-wrapper">
                 <span class="btn-link">Upload</span>
-                <input type="file" id="notice_signed_copy" name="notice_signed_copy" />
+                <input type="file" id="notice_signed_copy" name="notice_signed_copy"
+                       ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryLease')"
+                       accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
             </div>
         </div>
     </div><!-- .field-group -->
@@ -117,7 +119,9 @@
         <div class="field-addfile">
             <div class="input-file-wrapper">
                 <span class="btn-link">Upload</span>
-                <input type="file" id="proof_of_rent_notice" name="proof_of_rent_notice" />
+                <input type="file" id="proof_of_rent_notice" name="proof_of_rent_notice"
+                       ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryNotice')"
+                       accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
             </div>
         </div>
     </div><!-- .field-group -->

@@ -17,7 +17,7 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
     }
     _GetEmptyTenantResponseRentalIncrementInfo();
     var _GetTenantResponseRentalHistoryInfo = function (tenantresponseID) {
-        rapFactory.GetTenantResponseRentalHistoryInfo(tenantresponseID).then(function (response) {
+        rapFactory.GetTenantResponseRentalHistoryInfo(tenantresponseID, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
@@ -52,16 +52,37 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
         rentalIncrease.RentIncreasedTo = 0;
     }
 
-    //self.Save = function () {
-    //    var a = self.selectedObj;
-    //    rapGlobalFactory.CaseDetails = self.caseinfo;
-    //    if (self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.length == 0) {
-    //        self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
-    //    }
-    //    rapFactory.SaveTenantResponseRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantResponseInfo, self.caseinfo.custID).then(function (response) {
-    //        if (!alert.checkResponse(response)) { return; }          
-    //    });
+    $scope.onFileSelected = function ($files, docTitle) {
+        if ($files && $files.length) {
+            for (var i = 0; i < $files.length; i++) {
+                var file = $files[i];
+                var filename = file.name;
+                var mimetype = file.type;
+                var filesize = ((file.size / 1024) / 1024).toFixed(4);
+                //if (filesize < 25) {
+                if (filesize < masterFactory.FileSize) {
+                    var index = filename.lastIndexOf(".");
+                    var ext = filename.substring(index, filename.length).toUpperCase();
+                    //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
+                    if (masterFactory.FileExtensons.indexOf(ext) > -1) {
+                        var document = angular.copy(self.caseinfo.TenantResponseInfo.TenantRentalHistory.Document);
+                        document.DocTitle = docTitle;
+                        document.DocName = filename;
+                        document.MimeType = mimetype;
+                        document.CustomerID = self.custDetails.custID;
+                        var reader = new FileReader();
+                        reader.readAsArrayBuffer(file);
+                        reader.onload = function (e) {
+                            var arrayBuffer = e.target.result;
+                            var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+                            document.Base64Content = base64String;
+                        }
+                        self.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents.push(document);
+                    }
+                }
 
-    //}
+            }
+        }
+    }
     
 }];

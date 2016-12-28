@@ -158,9 +158,9 @@
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
-                                        <div class="row">
+                                        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
-                                            <div class="col-sm-6 col-xs-12">lease_agreement.pdf</div>
+                                            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -193,9 +193,9 @@
                                     </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
-                                        <div class="row">
+                                        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
-                                            <div class="col-sm-6 col-xs-12">rap_notice.pdf</div>
+                                            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
