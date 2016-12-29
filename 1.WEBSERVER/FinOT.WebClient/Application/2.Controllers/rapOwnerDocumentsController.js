@@ -44,8 +44,7 @@
                             document.Base64Content = base64String;
                         }
                         var desc = angular.copy(self.description1);
-                        if(des == null)
-                        {
+                        if (desc == '<--Select-->') {
                             desc = angular.copy(self.description2);
                         }
                         document.DocDescription =desc

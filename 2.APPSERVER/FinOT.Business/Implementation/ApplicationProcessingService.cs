@@ -1268,6 +1268,25 @@ namespace RAP.Business.Implementation
             }
         }
 
+        public ReturnResult<CaseInfoM> GetOResponseAdditionalDocuments(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                model = GetUploadedDocuments(model, "OR_AdditionalDocuments");
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         #endregion
 
         #region Save Owner Response Methods

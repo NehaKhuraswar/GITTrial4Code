@@ -1,9 +1,108 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
+﻿
+<div class="application-form-wrapper">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">
+            <?php include('sidebar-owner-petition.html'); ?>
+        </div>
 
-</body>
-</html>
+
+        <div class="col-md-9 col-sm-12">
+            <div class="application-step step-1">
+                <h3 class="step-heading">Property Owner Petition for Approval of Rent Increase: <br /><span>Additional Documentation</span></h3>
+
+                <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
+                    <div class="step-content step1">
+
+                        <div class="subhead no-top-margin">
+                            <h4>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
+                            <p class="no-bottom-margin">
+                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
+                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.City}},
+                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
+                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
+                            </p>
+                        </div>
+
+                        <div class="subhead no-top-margin">
+                            <p class="no-bottom-margin">Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine as part of your petition.</p>
+                        </div>
+
+                        <div class="subhead">
+                            <h4>Upload document</h4>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
+                            <div class="full-width">
+                                <!--<select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
+                                    <option value="Lease" selected>Lease</option>
+                                    <option value="Notice">Notice</option>
+                                    <option value="Paystub">Paystub</option>
+                                    <option value="Receipt">Receipt</option>
+                                    <option value="Invoice">Invoice</option>
+                                    <option value="Photo/Image">Photo/Image</option>
+                                    <option value="Inspection Checklist">Inspection Checklist</option>
+                                    <option value="Report">Report</option>
+                                    <option value="Letter">Letter</option>
+                                    <option value="Email (s)">Email (s)</option>
+                                    <option value="ext Message (s)">ext Message (s)</option>
+                                </select>-->
+
+                                <select ng-model="Ctrl.description1"
+                                        data-placeholder="Description"
+                                        ng-options="desc for desc in Ctrl.DocDescriptions"></select>
+                            </div>
+                        </div>
+
+                        <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == '<--Select-->'">
+                            <label for="document_description">If none of the above options apply, please provide a description of the file that you are uploading below:</label>
+                            <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
+                        </div>
+
+                        <div class="field-group no-bottom-margin">
+                            <div class="row">
+                                <div class="col-sm-10 col-xs-12">
+                                    <p class="fs-14"><strong>You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. The maximum file size limit for uploads is 25MB</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <div class="field-addfile">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach document</span>
+                                    <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'OR_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                                </div>
+                                <div class="field-group">
+                                    <table class="table table-condensed nopadding-bottom">
+                                        <tbody>
+                                            <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
+                                                <td class="nopadding-left">
+                                                    {{item.DocName}}
+                                                </td>
+                                                <td>
+                                                    <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+                    </div>
+
+
+                    <div class="step-footer">
+                        <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

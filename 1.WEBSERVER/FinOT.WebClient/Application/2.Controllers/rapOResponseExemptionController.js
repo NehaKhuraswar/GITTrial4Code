@@ -20,8 +20,8 @@ var rapOResponseExemptionController = ['$scope', '$modal', 'alertService', 'rapO
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
         });
-        $scope.model.oresponseRentalHistory = false;
-        $scope.model.oresponseDecreasedHousing = true;
+        $scope.model.oresponseException = false;
+        $scope.model.oresponseDocument = true;
         //$scope.model.ownerRentalHistory = false;
         //$scope.model.ownerAdditionalDocuments = true;
         //$scope.model.DisableAllCurrent();
