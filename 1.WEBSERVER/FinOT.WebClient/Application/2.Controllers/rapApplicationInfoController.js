@@ -56,6 +56,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
         {
             self.caseinfo.TenantPetitionInfo.PropertyManager.FirstName = "";
             self.caseinfo.TenantPetitionInfo.PropertyManager.LastName = "";
+            self.caseinfo.TenantPetitionInfo.PropertyManager.BusinessName = "";
             self.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1 = "";
             self.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2 = "";
             self.caseinfo.TenantPetitionInfo.PropertyManager.State = "";

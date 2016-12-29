@@ -57,6 +57,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
         else {
             self.caseinfo.TenantResponseInfo.PropertyManager.FirstName = "";
             self.caseinfo.TenantResponseInfo.PropertyManager.LastName = "";
+            self.caseinfo.TenantPetitionInfo.PropertyManager.BusinessName = "";
             self.caseinfo.TenantResponseInfo.PropertyManager.AddressLine1 = "";
             self.caseinfo.TenantResponseInfo.PropertyManager.AddressLine2 = "";
             self.caseinfo.TenantResponseInfo.PropertyManager.State = "";

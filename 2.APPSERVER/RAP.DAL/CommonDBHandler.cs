@@ -68,6 +68,7 @@ namespace RAP.DAL
                         var userDB = db.UserInfos.Where(x => x.UserID == userInfo.UserID).FirstOrDefault();
                         userDB.FirstName = userInfo.FirstName;
                         userDB.LastName = userInfo.LastName;
+                        userDB.BusinessName = userInfo.BusinessName;
                         userDB.AddressLine1 = userInfo.AddressLine1;
                         userDB.AddressLine2 = userInfo.AddressLine2;
                         userDB.City = userInfo.City;
@@ -101,6 +102,7 @@ namespace RAP.DAL
                         UserInfo userInfoDB = new UserInfo();
                         userInfoDB.FirstName = userInfo.FirstName;
                         userInfoDB.LastName = userInfo.LastName;
+                        userInfoDB.BusinessName = userInfo.BusinessName;
                         userInfoDB.AddressLine1 = userInfo.AddressLine1;
                         userInfoDB.AddressLine2 = userInfo.AddressLine2;
                         userInfoDB.City = userInfo.City;
@@ -145,6 +147,7 @@ namespace RAP.DAL
 
                     userInfoDB.FirstName = userInfo.FirstName;
                     userInfoDB.LastName = userInfo.LastName;
+                    userInfoDB.BusinessName = userInfo.BusinessName;
                     userInfoDB.AddressLine1 = userInfo.AddressLine1;
                     userInfoDB.AddressLine2 = userInfo.AddressLine2;
                     userInfoDB.City = userInfo.City;
@@ -197,6 +200,7 @@ namespace RAP.DAL
                         _userinfo.UserID = userinfo.UserID;
                         _userinfo.FirstName = userinfo.FirstName;
                         _userinfo.LastName = userinfo.LastName;
+                        _userinfo.BusinessName = userinfo.BusinessName;
                         _userinfo.AddressLine1 = userinfo.AddressLine1;
                         _userinfo.AddressLine2 = userinfo.AddressLine2;
                         _userinfo.City = userinfo.City;

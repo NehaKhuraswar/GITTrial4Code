@@ -59,11 +59,16 @@
     <div ng-show="(Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.bEditApplicant == true) && Ctrl.bShowApplicantInfo">
         <div class="field-group">
             <label for="Applicant_firstname">Name</label>
-            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName" required />
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName" placeholder="First" />
         </div>
 
         <div class="field-group">
-            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName" required />
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName" placeholder="Last" />
+        </div>
+
+        <div class="field-group">
+            <label for="businessname">Business name</label>
+            <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.BusinessName" />
         </div>
 
         <div class="field-group">

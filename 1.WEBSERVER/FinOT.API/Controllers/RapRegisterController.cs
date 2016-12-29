@@ -16,7 +16,6 @@ using RAP.Core.Services;
 using Ninject;
 using System.Net.Mail;
 using RAP.Core.Common;
-using RAP.Core.Services;
 using RAP.Business.Binding;
 
 namespace RAP.API.Controllers
@@ -27,8 +26,7 @@ namespace RAP.API.Controllers
     {
         string Username, CorrelationID, ExceptionMessage, InnerExceptionMessage;
         private readonly ICommonService _commonService;
-        private readonly IExceptionHandler _eHandler;
-        private readonly string errorCode = "5555";       
+        private readonly IExceptionHandler _eHandler;    
       
         public RapRegisterController()
         {

@@ -18,7 +18,7 @@
             <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
         </div>
         <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
-            <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}      </p>
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}                 {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName}}     </p>
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Zip}}      </p>
             <p>Tel: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber}}      <br />Email: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email}}</p>
         </div>
@@ -30,6 +30,11 @@
 
             <div class="field-group">
                 <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName" required />
+            </div>
+
+            <div class="field-group">
+                <label for="businessname">Business name</label>
+                <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName" />
             </div>
 
             <div class="field-group">
@@ -80,7 +85,8 @@
             <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
         </div>
         <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.TenantResponseInfo.ApplicantInfo.ThirdPartyUser != null">
-            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</p>
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</p>            
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}</p>
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}}</p>
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}</p>
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}</p>
@@ -99,6 +105,11 @@
         </div>
         <div class="field-group">
             <input type="text" name="owner_last_name" id="owner_last_name" class="field-input" placeholder="Last" ng-model="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.LastName" />
+        </div>
+
+        <div class="field-group">
+            <label for="businessname">Business name</label>
+            <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.BusinessName" />
         </div>
 
         <div class="field-group">
@@ -174,6 +185,11 @@
         <div class="field-group">
             <input type="text" name="manager_last_name" id="manager_last_name" class="field-input" placeholder="Last"
                    ng-model="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.LastName" />
+        </div>
+
+        <div class="field-group">
+            <label for="businessname">Business name</label>
+            <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.BusinessName" />
         </div>
 
         <div class="field-group">
