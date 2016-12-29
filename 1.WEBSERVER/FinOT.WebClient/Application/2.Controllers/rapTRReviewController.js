@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -36,6 +36,11 @@ var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFac
         $scope.model.bReview = false;
         $scope.model.bVerification = true;
         $scope.model.TRSubmissionStatus.Review = true;
+    }
+
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+
     }
 
 }];

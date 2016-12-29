@@ -30,6 +30,13 @@
         </div>
     </div>
 
+    <div class="field-group filled-info subhead no-top-margin">
+        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
+            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
+            <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+        </div>
+    </div><!-- .field-group -->
     <div class="field-group">
         <p class="no-bottom-margin">Copy of your lease agreement (Optional)</p>
         <div class="field-addfile">
@@ -114,6 +121,13 @@
         </div>
     </div>
 
+    <div class="field-group filled-info subhead no-top-margin">
+        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
+            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
+            <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+        </div>
+    </div><!-- .field-group -->
     <div class="field-group">
         <p class="no-bottom-margin">RAP Notice (Optional)</p>
         <div class="field-addfile">
@@ -140,8 +154,7 @@
             <div class="field-group filled-info subhead no-top-margin">
                 <div class="row">
                     <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
-                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
-                    <div class="col-sm-12 col-xs-12"> <button class="btn-link" ng-click="item.IsDeleted = true">Delete</button> </div>
+                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>                   
                 </div>
             </div><!-- .field-group -->
 
@@ -156,6 +169,12 @@
                 <div class="row">
                     <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
                     <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                </div>
+            </div><!-- .field-group -->
+
+            <div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <button class="btn-link btn-delete" ng-click="item.IsDeleted = true">Delete</button>
                 </div>
             </div><!-- .field-group -->
         </div>

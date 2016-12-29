@@ -41,7 +41,10 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
         });
         
     }
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
 
+    }
     self.AddAnotherRentIncrease = function (rentalIncrease) {
         var _rentalIncrease = angular.copy(rentalIncrease);
         self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(_rentalIncrease);

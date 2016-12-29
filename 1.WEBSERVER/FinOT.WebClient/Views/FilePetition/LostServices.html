@@ -37,26 +37,33 @@
                     </div>
 
                     <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.LostServices">
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Your estimated dollar value of the lost service(s) or problem(s)</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.EstimatedLoss}}</div>
-                            </div>
-                        </div><!-- .field-group -->
+                        <div ng-if="item.IsDeleted == false">
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Your estimated dollar value of the lost service(s) or problem(s)</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.EstimatedLoss}}</div>
+                                </div>
+                            </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Reduced Service description</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.ReducedServiceDescription}}</div>
-                            </div>
-                        </div><!-- .field-group -->
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Reduced Service description</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.ReducedServiceDescription}}</div>
+                                </div>
+                            </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date loss began</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
-                            </div>
-                        </div><!-- .field-group -->
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date loss began</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <button class="btn-link btn-delete" ng-click="item.IsDeleted = true">Delete</button>
+                                </div>
+                            </div><!-- .field-group -->
+                        </div>
                     </div>
                     <div class="field-group">
                         <label for="list_reduced_services">Describe the reduced service(s) including 1) a list of the lost housing service(s) 2) How you calculate the dollar value of lost service(s). Please attach documentary evidence  if available.</label>
@@ -143,26 +150,33 @@
                         </div>
                     </div>
                     <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Problems">
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Your estimated dollar value of incurred monetary loss as a result these problem(s)</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.EstimatedLoss}}</div>
-                            </div>
-                        </div><!-- .field-group -->
+                        <div ng-if="item.IsDeleted == false">
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Your estimated dollar value of incurred monetary loss as a result these problem(s)</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.EstimatedLoss}}</div>
+                                </div>
+                            </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Problem description</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.ProblemDescription}}</div>
-                            </div>
-                        </div><!-- .field-group -->
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Problem description</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.ProblemDescription}}</div>
+                                </div>
+                            </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date problem(s) began</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}</div>
-                            </div>
-                        </div><!-- .field-group -->                        
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date problem(s) began</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <button  class="btn-link btn-delete" ng-click="item.IsDeleted = true">Delete</button>
+                                </div>
+                            </div><!-- .field-group -->
+                        </div>
                     </div>
 
                     <div class="field-group">

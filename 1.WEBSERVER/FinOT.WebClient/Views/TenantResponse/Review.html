@@ -161,6 +161,7 @@
                                         <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
                                             <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
+                                            <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -196,6 +197,7 @@
                                         <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
                                             <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
+                                            <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -242,7 +244,7 @@
                                                 <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
                                                     <div class="item item-toggle expanded">
                                                         <div class="item-header clearfix">
-                                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> {{item.DocName}}</div>
+                                                            <div class="col col-35 name pad-l30"><a ng-click="Ctrl.Download(item)" class="btn-toggle"></a> {{item.DocName}}</div>
                                                             <!--<div class="col col-35 type">Excel</div>-->
                                                         </div>
 
@@ -250,28 +252,12 @@
                                                             <div class="row">
                                                                 <div class="col-md-10 col-sm-12">
                                                                     <p>{{item.DocDescription}}</p>
+                                                                    <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="tbl-row clearfix">
-                                                    <div class="item item-toggle">
-                                                        <div class="item-header clearfix">
-                                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> Rental_expenses.doc</div>
-                                                            <div class="col col-35 type">Word</div>
-                                                        </div>
-
-                                                        <div class="item-content clearfix">
-                                                            <div class="row">
-                                                                <div class="col-md-10 col-sm-12">
-                                                                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </div>                                               
                                             </div>
                                         </div>
                                         <!-- .custom-table -->

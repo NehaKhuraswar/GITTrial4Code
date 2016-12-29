@@ -1674,23 +1674,26 @@ namespace RAP.DAL
 
                 foreach (var item in rentalHistory.RentIncreases)
                 {
-                    TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
-                    rentIncrementDB.TenantPetitionID = rentalHistory.PetitionID;
-                    rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
-                    if (item.bRentIncreaseNoticeGiven)
+                    if (item.IsDeleted == false)
                     {
-                        rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
-                            item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
+                        TenantRentalIncrementInfo rentIncrementDB = new TenantRentalIncrementInfo();
+                        rentIncrementDB.TenantPetitionID = rentalHistory.PetitionID;
+                        rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
+                        if (item.bRentIncreaseNoticeGiven)
+                        {
+                            rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
+                                item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
 
-                    }                    
-                    rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
-                            item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
-                    rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
-                    rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
-                    rentIncrementDB.bRentIncreaseContested = item.bRentIncreaseContested;
+                        }
+                        rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
+                                item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
+                        rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
+                        rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
+                        rentIncrementDB.bRentIncreaseContested = item.bRentIncreaseContested;
 
-                    _dbContext.TenantRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
-                    _dbContext.SubmitChanges();                    
+                        _dbContext.TenantRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
+                        _dbContext.SubmitChanges();
+                    }
                 }
                 var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
                 if (PageStatus != null)
@@ -1737,17 +1740,21 @@ namespace RAP.DAL
                 {
                     foreach (var item in message.LostServices)
                     {
-                        TenantLostServiceInfo lostServiceDB = new TenantLostServiceInfo();
-                        lostServiceDB.TenantPetitionID = message.PetitionID;
-                        lostServiceDB.ReducedServiceDescription = item.ReducedServiceDescription;
-                        lostServiceDB.EstimatedLoss = item.EstimatedLoss;
-                        lostServiceDB.LossBeganDate = new DateTime(item.LossBeganDate.Year,
-                            item.LossBeganDate.Month, item.LossBeganDate.Day);
-                        //lostServiceDB.PayingToServiceBeganDate = new DateTime(item.PayingToServiceBeganDate.Year,
-                        //    item.PayingToServiceBeganDate.Month, item.PayingToServiceBeganDate.Day);
+                        if (item.IsDeleted == false)
+                        {
+                            TenantLostServiceInfo lostServiceDB = new TenantLostServiceInfo();
+                            lostServiceDB.TenantPetitionID = message.PetitionID;
+                            lostServiceDB.ReducedServiceDescription = item.ReducedServiceDescription;
+                            lostServiceDB.EstimatedLoss = item.EstimatedLoss;
+                            lostServiceDB.LossBeganDate = new DateTime(item.LossBeganDate.Year,
+                                item.LossBeganDate.Month, item.LossBeganDate.Day);
+                            //lostServiceDB.PayingToServiceBeganDate = new DateTime(item.PayingToServiceBeganDate.Year,
+                            //    item.PayingToServiceBeganDate.Month, item.PayingToServiceBeganDate.Day);
 
-                        _dbContext.TenantLostServiceInfos.InsertOnSubmit(lostServiceDB);
-                        _dbContext.SubmitChanges();
+                            _dbContext.TenantLostServiceInfos.InsertOnSubmit(lostServiceDB);
+                            _dbContext.SubmitChanges();
+                        }
+
                     }
 
                 }
@@ -1800,19 +1807,22 @@ namespace RAP.DAL
 
                 foreach (var item in message.Problems)
                     {
-                        TenantProblemInfo problemDB = new TenantProblemInfo();
-                        problemDB.TenantPetitionID = message.PetitionID;
-                        problemDB.ProblemDescription = item.ProblemDescription;
-                        problemDB.EstimatedLoss = item.EstimatedLoss;
-                        //TBD
-                        //  problemDB.ProblemBeganDate = item.ProblemBeganDate;
-                        problemDB.ProblemBeganDate = new DateTime(item.ProblemBeganDate.Year,
-                            item.ProblemBeganDate.Month, item.ProblemBeganDate.Day);
-                    
-                        
+                        if (item.IsDeleted == false)
+                        {
+                            TenantProblemInfo problemDB = new TenantProblemInfo();
+                            problemDB.TenantPetitionID = message.PetitionID;
+                            problemDB.ProblemDescription = item.ProblemDescription;
+                            problemDB.EstimatedLoss = item.EstimatedLoss;
+                            //TBD
+                            //  problemDB.ProblemBeganDate = item.ProblemBeganDate;
+                            problemDB.ProblemBeganDate = new DateTime(item.ProblemBeganDate.Year,
+                                item.ProblemBeganDate.Month, item.ProblemBeganDate.Day);
 
-                        _dbContext.TenantProblemInfos.InsertOnSubmit(problemDB);
-                        _dbContext.SubmitChanges();
+
+
+                            _dbContext.TenantProblemInfos.InsertOnSubmit(problemDB);
+                            _dbContext.SubmitChanges();
+                        }
                     }
                 
             }

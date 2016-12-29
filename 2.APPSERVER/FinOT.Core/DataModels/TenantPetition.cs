@@ -309,6 +309,7 @@ namespace RAP.Core.DataModels
         public decimal RentIncreasedTo { get; set; }
         public CustomDate RentIncreaseEffectiveDate { get; set; }
         public bool bRentIncreaseContested { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
     public class TenantLostServiceInfoM
@@ -317,6 +318,7 @@ namespace RAP.Core.DataModels
         public decimal EstimatedLoss { get; set; }
         public CustomDate LossBeganDate { get; set; }
         public CustomDate PayingToServiceBeganDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
     public class TenantProblemInfoM
@@ -325,6 +327,7 @@ namespace RAP.Core.DataModels
         public decimal EstimatedLoss { get; set; }
         public CustomDate ProblemBeganDate { get; set; }
         public CustomDate PayingToProblemBeganDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
    
     public class UnitTypeM
