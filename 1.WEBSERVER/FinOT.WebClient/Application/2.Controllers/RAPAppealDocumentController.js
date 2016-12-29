@@ -9,6 +9,7 @@ var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxServ
         rapGlobalFactory.CaseDetails = self.caseinfo;
         $scope.model.bAddDocs = false;
         $scope.model.bServingAppeal = true;
+        $scope.model.AppealSubmissionStatus.AdditionalDocumentation = true;
        // $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
        
     }

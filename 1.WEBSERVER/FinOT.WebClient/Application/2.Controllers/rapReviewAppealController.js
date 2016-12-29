@@ -14,7 +14,7 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
             //$scope.model.bServingAppeal = false;
             $scope.model.bReview = false;
             $scope.model.bConfirm = true;
-            //$location.path("/publicdashboard");
+            $scope.model.AppealSubmissionStatus.Review = true;
         });
     }
     self.EditApplicantInfo = function () {

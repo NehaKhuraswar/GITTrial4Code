@@ -82,6 +82,7 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
             }
             $scope.model.bServingAppeal = false;
             $scope.model.bReview = true;
+            $scope.model.AppealSubmissionStatus.ServingAppeal = true;
         });
        // $location.path("/reviewappeal");
     }

@@ -109,6 +109,38 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<AppealPageSubnmissionStatusM> GetAppealPageSubmissionStatus(int CustomerID)
+        {
+            ReturnResult<AppealPageSubnmissionStatusM> result = new ReturnResult<AppealPageSubnmissionStatusM>();
+            AppealPageSubnmissionStatusM model = new AppealPageSubnmissionStatusM();
+            try
+            {
+                var appealPageDB = _dbContext.AppealPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                if (appealPageDB != null)
+                {
+                    model.ImportantInformation = Convert.ToBoolean(appealPageDB.ImportantInformation);
+                    model.ApplicantInformation = Convert.ToBoolean(appealPageDB.ApplicantInformation);
+                    model.GroundsOfAppeal = Convert.ToBoolean(appealPageDB.GroundsOfAppeal);
+                    model.AdditionalDocumentation = Convert.ToBoolean(appealPageDB.AdditionalDocumentation);
+                    model.Review = Convert.ToBoolean(appealPageDB.Review);
+                    model.ServingAppeal = Convert.ToBoolean(appealPageDB.ServingAppeal);
+                    if (model.ImportantInformation == true)
+                    {
+                        model.AppealType = true;
+                    }
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
         
 
         /// <summary>
@@ -1200,6 +1232,14 @@ namespace RAP.DAL
                     _dbContext.SubmitChanges();
                 }
 
+                var PageStatus = _dbContext.AppealPageSubmissionStatus
+                                            .Where(x => x.CustomerID == caseInfo.TenantAppealInfo.AppealFiledBy).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    _dbContext.AppealPageSubmissionStatus.DeleteOnSubmit(PageStatus);
+                    _dbContext.SubmitChanges();
+                }
+
                 result.result = caseInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -2002,6 +2042,25 @@ namespace RAP.DAL
                 //caseDB.LastModifiedDate = DateTime.Now;
                 //_dbContext.SubmitChanges();
 
+                var PageStatus = _dbContext.AppealPageSubmissionStatus
+                                            .Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.ApplicantInformation = true;
+                    PageStatus.ImportantInformation = true;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var PageStatusNew = new AppealPageSubmissionStatus();
+                    PageStatusNew.CustomerID = CustomerID;
+                    PageStatusNew.ApplicantInformation = true;
+                    PageStatusNew.ImportantInformation = true;
+
+                    _dbContext.AppealPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
+                }
+
                 result.result = caseInfo.TenantAppealInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -2072,7 +2131,22 @@ namespace RAP.DAL
                     }
                    
                 }
+                var PageStatus = _dbContext.AppealPageSubmissionStatus
+                                            .Where(x => x.CustomerID == tenantAppealInfo.AppealFiledBy).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.GroundsOfAppeal = true;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var PageStatusNew = new AppealPageSubmissionStatus();
+                    PageStatusNew.CustomerID = tenantAppealInfo.AppealFiledBy;
+                    PageStatusNew.GroundsOfAppeal = true;
 
+                    _dbContext.AppealPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
+                }
 
                 result.result = tenantAppealInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -2127,6 +2201,22 @@ namespace RAP.DAL
 
                 AddAnotherOpposingParty(tenantAppealInfo);
 
+                var PageStatus = _dbContext.AppealPageSubmissionStatus
+                                            .Where(x => x.CustomerID == tenantAppealInfo.AppealFiledBy).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    PageStatus.ServingAppeal = true;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var PageStatusNew = new AppealPageSubmissionStatus();
+                    PageStatusNew.CustomerID = tenantAppealInfo.AppealFiledBy;
+                    PageStatusNew.ServingAppeal = true;
+
+                    _dbContext.AppealPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
+                    _dbContext.SubmitChanges();
+                }
                 result.result = tenantAppealInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -2788,6 +2878,13 @@ namespace RAP.DAL
                     _dbContext.SubmitChanges();
                 }
 
+                var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
+                                            .Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
+                if (PageStatus != null)
+                {
+                    _dbContext.TenantResponsePageSubmissionStatus.DeleteOnSubmit(PageStatus);
+                    _dbContext.SubmitChanges();
+                }
                 result.result = caseInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

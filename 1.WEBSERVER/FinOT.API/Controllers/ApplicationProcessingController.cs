@@ -339,7 +339,41 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<PetitionPageSubnmissionStatusM>>(ReturnCode, transaction);
         }
+      
 
+        [AllowAnonymous]
+        [Route("GetAppealPageSubmissionStatus/{CustomerID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetAppealPageSubmissionStatus(int CustomerID)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<AppealPageSubnmissionStatusM> transaction = new TranInfo<AppealPageSubnmissionStatusM>();
+            ReturnResult<AppealPageSubnmissionStatusM> result = new ReturnResult<AppealPageSubnmissionStatusM>();
+            try
+            {
+
+                result = _service.GetAppealPageSubmissionStatus(CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<AppealPageSubnmissionStatusM>>(ReturnCode, transaction);
+        }
         [AllowAnonymous]
         [Route("GetTRPageSubmissionStatus/{CustomerID:int}")]
         [HttpGet]

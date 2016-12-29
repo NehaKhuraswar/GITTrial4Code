@@ -9,6 +9,7 @@ namespace RAP.DAL
     {
         ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID);
         ReturnResult<TenantResponsePageSubnmissionStatusM> GetTRPageSubmissionStatus(int CustomerID);
+        ReturnResult<AppealPageSubnmissionStatusM> GetAppealPageSubmissionStatus(int CustomerID);
         ReturnResult<CaseInfoM> GetCaseDetails();
         // ReturnResult<CaseInfoM> GetCaseDetails(string caseID);
         ReturnResult<CaseInfoM> GetCaseDetails(int UserID);

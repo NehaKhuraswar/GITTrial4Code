@@ -26,6 +26,7 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
             rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;
             $scope.model.bGrounds = false;
             $scope.model.bAddDocs = true;
+            $scope.model.AppealSubmissionStatus.GroundsOfAppeal = true;
             //if (response.data == true) {
             //    $location.path("/servingappeal");
             //}

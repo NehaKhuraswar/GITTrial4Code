@@ -55,6 +55,9 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
             self.caseinfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
             $scope.model.bAppellantInfo = false;
             $scope.model.bGrounds = true;
+            $scope.model.AppealSubmissionStatus.ApplicantInformation = true;
+            $scope.model.AppealSubmissionStatus.ImportantInformation = true;
+            $scope.model.AppealSubmissionStatus.PetitionType = true;
         });
        // rapGlobalFactory.CaseDetails = self.caseinfo;
         

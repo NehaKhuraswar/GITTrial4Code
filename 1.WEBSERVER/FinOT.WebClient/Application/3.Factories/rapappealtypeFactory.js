@@ -23,9 +23,11 @@ var rapappealtypeFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
           });
       }
 
+      
+
       factory.GetPetitionCategory = _GetPetitionCategory;
-     
-    factory.GetCaseInfo = _GetCaseInfo;
+      
+      factory.GetCaseInfo = _GetCaseInfo;
     
     return factory;
 }];

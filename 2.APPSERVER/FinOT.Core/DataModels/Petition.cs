@@ -217,6 +217,19 @@ namespace RAP.Core.DataModels
         public bool Verification { get; set; }
     }
 
+    public class AppealPageSubnmissionStatusM
+    {
+        public int CustomerID { get; set; }
+        public bool AppealType { get; set; }
+        public bool ImportantInformation { get; set; }
+        public bool ApplicantInformation { get; set; }
+        public bool GroundsOfAppeal { get; set; }
+        public bool AdditionalDocumentation { get; set; }
+        public bool ServingAppeal { get; set; }
+        public bool Review { get; set; }
+        
+    }
+
     public class ServeAppealM
     {
         public ServeAppealM()

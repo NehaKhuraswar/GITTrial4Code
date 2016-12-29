@@ -6,6 +6,7 @@ var rapAppealImpInfoController = ['$scope', '$modal', 'alertService',  '$locatio
     self.Continue = function () {
         $scope.model.bImpInfoAppeal = false;
         $scope.model.bAppellantInfo = true;
+        $scope.model.AppealSubmissionStatus.ImportantInformation = true;
     }
 }];
 var rapAppealImpInfoController_resolve = {
