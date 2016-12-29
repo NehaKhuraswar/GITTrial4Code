@@ -93,7 +93,7 @@ var tooltips;
     
     
     //Set Sidebar Steps Nav
-    setApplicationSteps();
+  //  setApplicationSteps();
     
     //Application Steps - Mobile Toggle
     if($('.application-steps-toggle').length > 0){
