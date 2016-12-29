@@ -2637,22 +2637,25 @@ namespace RAP.DAL
 
                 foreach (var item in rentalHistory.RentIncreases)
                 {
-                    TenantResponseRentalIncrementInfo rentIncrementDB = new TenantResponseRentalIncrementInfo();
-                    rentIncrementDB.TenantResponseID = rentalHistory.TenantResponseID;
-                    rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
-                    if (item.bRentIncreaseNoticeGiven)
+                    if (item.IsDeleted == false)
                     {
-                        rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
-                            item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
+                        TenantResponseRentalIncrementInfo rentIncrementDB = new TenantResponseRentalIncrementInfo();
+                        rentIncrementDB.TenantResponseID = rentalHistory.TenantResponseID;
+                        rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
+                        if (item.bRentIncreaseNoticeGiven)
+                        {
+                            rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
+                                item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
 
+                        }
+                        rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
+                                item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
+                        rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
+                        rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
+
+                        _dbContext.TenantResponseRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
+                        _dbContext.SubmitChanges();
                     }
-                    rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
-                            item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
-                    rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
-                    rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
-
-                    _dbContext.TenantResponseRentalIncrementInfos.InsertOnSubmit(rentIncrementDB);
-                    _dbContext.SubmitChanges();                    
                 }
 
                 var PageStatus = _dbContext.TenantResponsePageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();

@@ -23,6 +23,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             }
             self.caseinfo.TenantResponseInfo.CustomerID = self.custDetails.custID;
             self.bCaseInfo = true;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
 
         });
     }

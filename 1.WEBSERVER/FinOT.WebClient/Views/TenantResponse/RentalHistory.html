@@ -136,26 +136,29 @@
         </div>
     </div>
     <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
-        <div class="field-group filled-info subhead no-top-margin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
-                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
-            </div>
-        </div><!-- .field-group -->
+        <div ng-if="item.IsDeleted == false">
+            <div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                    <div class="col-sm-12 col-xs-12"> <button class="btn-link" ng-click="item.IsDeleted = true">Delete</button> </div>
+                </div>
+            </div><!-- .field-group -->
 
-        <div class="field-group filled-info subhead no-top-margin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
-                <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
-            </div>
-        </div><!-- .field-group -->
+            <div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                    <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
+                </div>
+            </div><!-- .field-group -->
 
-        <div class="field-group filled-info subhead no-top-margin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
-                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
-            </div>
-        </div><!-- .field-group -->
+            <div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                </div>
+            </div><!-- .field-group -->
+        </div>
     </div>
     <div class="field-group subhead">
         <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>

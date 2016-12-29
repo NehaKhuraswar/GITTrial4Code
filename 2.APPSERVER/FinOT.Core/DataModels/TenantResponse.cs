@@ -72,6 +72,7 @@ namespace RAP.Core.DataModels
         public decimal RentIncreasedFrom { get; set; }
         public decimal RentIncreasedTo { get; set; }
         public CustomDate RentIncreaseEffectiveDate { get; set; }
+        public bool IsDeleted { get; set; }
     }   
 
     public class TenantResponseExemptContestedInfoM

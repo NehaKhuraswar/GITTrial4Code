@@ -52,7 +52,7 @@ namespace RAP.Business.Implementation
             ReturnResult<string> result = new ReturnResult<string>();
             ReturnResult<bool> resultFinal = new ReturnResult<bool>();
             result = accDBHandler.ForgetPwd(email);
-            if (result != null)
+            if (result.status.Status == StatusEnum.Success)
             {
                 EmailM emailMessage = new EmailM();
                 emailMessage.MessageBody = email + " Sending Password " + result.result;
@@ -60,6 +60,7 @@ namespace RAP.Business.Implementation
                 EmailService emailservice = new EmailService();
                 resultFinal = emailservice.SendEmail(emailMessage);
             }
+
             return resultFinal;
         }
 
