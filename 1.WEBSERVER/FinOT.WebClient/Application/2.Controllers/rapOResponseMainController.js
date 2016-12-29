@@ -14,9 +14,8 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         self.oresponseRentalProperty = false;
         self.oresponseRentalHistory = false;
         self.oresponseDecreasedHousing = false;
-        self.ownerAdditionalDocuments = false;
-        self.ownerReview = false;
-        self.ownerVerification = false;
+        self.oresponseException= false;
+      
     };
     _DisableAll();
 
@@ -68,6 +67,15 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         //        self.oPetionCurrentStatus.RentHistory = true;
         //    }
     };
+    self.ShowOresponseException = function () {
+        //    if (self.oPetionActiveStatus.RentHistory) {
+        _DisableAll();
+        //        self.DisableAllCurrent();
+        self.oresponseException = true;
+        //        self.oPetionCurrentStatus.RentHistory = true;
+        //    }
+    };
+
     //self.ShowOwnerAdditionalDocuments = function () {
     //    if (self.oPetionActiveStatus.AdditionalDocumentation) {
     //        _DisableAll();

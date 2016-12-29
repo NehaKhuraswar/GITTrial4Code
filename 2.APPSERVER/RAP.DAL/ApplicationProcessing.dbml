@@ -380,43 +380,6 @@
       <Association Name="OwnerResponsePropertyInfo_OwnerResponseRentalIncrementInfo" Member="OwnerResponsePropertyInfo" ThisKey="PropertyID" OtherKey="PropertyID" Type="OwnerResponsePropertyInfo" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.OwnerResponsePropertyInfo" Member="OwnerResponsePropertyInfos">
-    <Type Name="OwnerResponsePropertyInfo">
-      <Column Name="PropertyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MovedInDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="InitialRent" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
-      <Column Name="RAPNoticeGivenDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="bCapitalImprovementIncrease" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="bCaptialImprovementContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CaseNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="bRAPNoticeToRAPOffice" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RAPNoticeToRAPOfficeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="bExemptFromRentAdjustment" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="bPriorTenantLeftAfteQuitNotice" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="PriorTenantLeftAfteQuitNotice" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="bPriorTenantLeftAfteRentIncreaseNotice" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="PriorTenantLeftAfteRentIncreaseNotice" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="bPriorTenantEvicted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="PriorTenantEvicted" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="bSingleFamilyUnitOrCondominium" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="SingleFamilyUnitOrCondominium" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="bRoommatesWhenMoviedIN" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RoommatesWhenMoviedIN" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="bUnitPruchased" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="UnitPruchased" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="PurchasedFrom" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="bEntireBuildingPurchased" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="EntireBuildingPurchased" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="bPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="UnitTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CurrentOnRent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="RAPNoticeStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="OwnerResponsePropertyInfo_OwnerResponseTenantInfo" Member="OwnerResponseTenantInfos" ThisKey="PropertyID" OtherKey="PropertyID" Type="OwnerResponseTenantInfo" />
-      <Association Name="OwnerResponsePropertyInfo_OwnerResponseRentalIncrementInfo" Member="OwnerResponseRentalIncrementInfos" ThisKey="PropertyID" OtherKey="PropertyID" Type="OwnerResponseRentalIncrementInfo" />
-      <Association Name="UnitType_OwnerResponsePropertyInfo" Member="UnitType" ThisKey="UnitTypeID" OtherKey="UnitTypeID" Type="UnitType" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.OwnerResponseRentIncreaseReasonInfo" Member="OwnerResponseRentIncreaseReasonInfos">
     <Type Name="OwnerResponseRentIncreaseReasonInfo">
       <Column Name="RentIncreaseReasonInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -548,6 +511,51 @@
       <Column Name="AdditionalDocumentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="ServingAppeal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Review" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OwnerResponsePropertyInfo" Member="OwnerResponsePropertyInfos">
+    <Type Name="OwnerResponsePropertyInfo">
+      <Column Name="PropertyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MovedInDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InitialRent" Type="System.Decimal" DbType="Decimal(8,2)" CanBeNull="true" />
+      <Column Name="RAPNoticeGivenDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="bCapitalImprovementIncrease" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bCaptialImprovementContested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CaseNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="bRAPNoticeToRAPOffice" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RAPNoticeToRAPOfficeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="bExemptFromRentAdjustment" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bPriorTenantLeftAfteQuitNotice" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PriorTenantLeftAfteQuitNoticeExplenation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bPriorTenantLeftAfteRentIncreaseNotice" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PriorTenantLeftAfteRentIncreaseNoticeExplenation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bPriorTenantEvicted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PriorTenantEvictedExplenation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bSingleFamilyUnitOrCondominium" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SingleFamilyUnitOrCondominiumExplenation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bRoommatesWhenMoviedIN" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RoommatesWhenMoviedINExplenation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bUnitPruchased" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UnitPruchasedExplenation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PurchasedFrom" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bEntireBuildingPurchased" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="EntireBuildingPurchasedExplenation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UnitTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CurrentOnRent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RAPNoticeStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bOutstandingViolations" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OutstandingViolationsExplenation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bRentControlledOtherThanRAP" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bUnitNewlyConstructed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bTenantWasResidentOfHotelWhileFiling" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bUnitWasRehabilitated" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bUnitIsAccommodation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bHasUnitOccupiedByOwner" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="OwnerResponsePropertyInfo_OwnerResponseTenantInfo" Member="OwnerResponseTenantInfos" ThisKey="PropertyID" OtherKey="PropertyID" Type="OwnerResponseTenantInfo" />
+      <Association Name="OwnerResponsePropertyInfo_OwnerResponseRentalIncrementInfo" Member="OwnerResponseRentalIncrementInfos" ThisKey="PropertyID" OtherKey="PropertyID" Type="OwnerResponseRentalIncrementInfo" />
+      <Association Name="UnitType_OwnerResponsePropertyInfo" Member="UnitType" ThisKey="UnitTypeID" OtherKey="UnitTypeID" Type="UnitType" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

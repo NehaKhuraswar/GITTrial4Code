@@ -71,6 +71,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapOResponseRentalPropertyFactory', rapOResponseRentalPropertyFactory)
     .factory('rapOResponseRentalHistoryFactory', rapOResponseRentalHistoryFactory)
     .factory('rapOResponseDecreasedHousingFactory', rapOResponseDecreasedHousingFactory)
+    .factory('rapOResponseExemptionFactory', rapOResponseExemptionFactory)
     .controller('raploginURLController', raploginURLController)
     .controller('raploginController', raploginController)
     .controller('raploginCityUserController', raploginCityUserController)
@@ -131,6 +132,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapOResponseRentalPropertyController', rapOResponseRentalPropertyController)
     .controller('rapOResponseRentalHistoryController', rapOResponseRentalHistoryController)
     .controller('rapOResponseDecreasedHousingController', rapOResponseDecreasedHousingController)
+    .controller('rapOResponseExemptionController', rapOResponseExemptionController)
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -661,6 +663,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         },
         templateUrl: 'Views/OwnerResponse/DecreasedHousingService.html',
         controller: 'rapOResponseDecreasedHousingController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapOresponseexemption', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/OwnerResponse/Exemption.html',
+        controller: 'rapOResponseExemptionController',
         controllerAs: 'Ctrl'
     };
 })

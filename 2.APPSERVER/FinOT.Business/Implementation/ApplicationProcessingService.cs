@@ -1228,6 +1228,31 @@ namespace RAP.Business.Implementation
             }
         }
 
+        public ReturnResult<CaseInfoM> GetOResponseExemption(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.GetOResponseExemption(model.OwnerResponseInfo.PropertyInfo);
+
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model.OwnerResponseInfo.PropertyInfo = dbResult.result;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         #endregion
 
         #region Save Owner Response Methods
@@ -1363,6 +1388,31 @@ namespace RAP.Business.Implementation
                     }
                 }
                 model.Documents = documents;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<CaseInfoM> SaveOResponseExemption(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.SaveOResponseExemption(model.OwnerResponseInfo.PropertyInfo);
+              
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model.OwnerResponseInfo.PropertyInfo = dbResult.result;               
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

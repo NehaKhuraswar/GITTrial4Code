@@ -3835,7 +3835,93 @@ namespace RAP.DAL
                _commondbHandler.SaveErrorLog(result.status);
                return result;
            }
-       }       
+       }
+
+       public ReturnResult<OwnerResponsePropertyInfoM> GetOResponseExemption(OwnerResponsePropertyInfoM model)
+       {
+           ReturnResult<OwnerResponsePropertyInfoM> result = new ReturnResult<OwnerResponsePropertyInfoM>();
+           try
+           {
+               if (model.OwnerPropertyID > 0)
+               {
+                   var propertyInfo = (from r in _dbContext.OwnerResponsePropertyInfos
+                                       where r.PropertyID == model.OwnerPropertyID
+                                       select r).First();
+                   if (propertyInfo != null)
+                   {
+
+                       model.bExemptFromRentAdjustment =Convert.ToBoolean(propertyInfo.bExemptFromRentAdjustment);
+                       model.bPriorTenantLeftAfteQuitNotice =Convert.ToBoolean( propertyInfo.bPriorTenantLeftAfteQuitNotice);
+                       model.PriorTenantLeftAfteQuitNoticeExplenation = propertyInfo.PriorTenantLeftAfteQuitNoticeExplenation;
+                       model.bPriorTenantLeftAfteRentIncreaseNotice = Convert.ToBoolean(propertyInfo.bPriorTenantLeftAfteRentIncreaseNotice);
+                       model.PriorTenantLeftAfteRentIncreaseNoticeExplenation = propertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation;
+                       model.bPriorTenantEvicted = Convert.ToBoolean(propertyInfo.bPriorTenantEvicted);
+                       model.PriorTenantEvictedExplenation = propertyInfo.PriorTenantEvictedExplenation;
+                       model.bOutstandingViolations = Convert.ToBoolean(propertyInfo.bOutstandingViolations);
+                       model.OutstandingViolationsExplenation = propertyInfo.OutstandingViolationsExplenation;
+                       model.bSingleFamilyUnitOrCondominium = Convert.ToBoolean(propertyInfo.bSingleFamilyUnitOrCondominium);
+                       model.SingleFamilyUnitOrCondominiumExplenation = propertyInfo.SingleFamilyUnitOrCondominiumExplenation;
+                       model.bRoommatesWhenMoviedIN = Convert.ToBoolean(propertyInfo.bRoommatesWhenMoviedIN);
+                       model.RoommatesWhenMoviedINExplenation = propertyInfo.RoommatesWhenMoviedINExplenation;
+                       model.bUnitPruchased = Convert.ToBoolean(propertyInfo.bUnitPruchased);
+                       model.UnitPruchasedExplenation = propertyInfo.UnitPruchasedExplenation;
+                       model.PurchasedFrom = propertyInfo.PurchasedFrom;
+                       model.bEntireBuildingPurchased = Convert.ToBoolean(propertyInfo.bEntireBuildingPurchased);
+                       model.EntireBuildingPurchasedExplenation = propertyInfo.EntireBuildingPurchasedExplenation;
+                       model.bRentControlledOtherThanRAP = Convert.ToBoolean(propertyInfo.bRentControlledOtherThanRAP);
+                       model.bUnitNewlyConstructed = Convert.ToBoolean(propertyInfo.bUnitNewlyConstructed);
+                       model.bTenantWasResidentOfHotelWhileFiling = Convert.ToBoolean(propertyInfo.bTenantWasResidentOfHotelWhileFiling);
+                       model.bUnitWasRehabilitated = Convert.ToBoolean(propertyInfo.bUnitWasRehabilitated);
+                       model.bUnitIsAccommodation = Convert.ToBoolean(propertyInfo.bUnitIsAccommodation);
+                       model.bHasUnitOccupiedByOwner = Convert.ToBoolean(propertyInfo.bHasUnitOccupiedByOwner);
+
+                   }
+
+               }
+               else
+               {
+                   var propertyInfo = (from r in _dbContext.OwnerResponsePropertyInfos
+                                       where r.CustomerID == model.CustomerID && r.bPetitionFiled == false
+                                       select r).First();
+                   if (propertyInfo != null)
+                   {
+                       model.bExemptFromRentAdjustment = Convert.ToBoolean(propertyInfo.bExemptFromRentAdjustment);
+                       model.bPriorTenantLeftAfteQuitNotice = Convert.ToBoolean(propertyInfo.bPriorTenantLeftAfteQuitNotice);
+                       model.PriorTenantLeftAfteQuitNoticeExplenation = propertyInfo.PriorTenantLeftAfteQuitNoticeExplenation;
+                       model.bPriorTenantLeftAfteRentIncreaseNotice = Convert.ToBoolean(propertyInfo.bPriorTenantLeftAfteRentIncreaseNotice);
+                       model.PriorTenantLeftAfteRentIncreaseNoticeExplenation = propertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation;
+                       model.bPriorTenantEvicted = Convert.ToBoolean(propertyInfo.bPriorTenantEvicted);
+                       model.PriorTenantEvictedExplenation = propertyInfo.PriorTenantEvictedExplenation;
+                       model.bOutstandingViolations = Convert.ToBoolean(propertyInfo.bOutstandingViolations);
+                       model.OutstandingViolationsExplenation = propertyInfo.OutstandingViolationsExplenation;
+                       model.bSingleFamilyUnitOrCondominium = Convert.ToBoolean(propertyInfo.bSingleFamilyUnitOrCondominium);
+                       model.SingleFamilyUnitOrCondominiumExplenation = propertyInfo.SingleFamilyUnitOrCondominiumExplenation;
+                       model.bRoommatesWhenMoviedIN = Convert.ToBoolean(propertyInfo.bRoommatesWhenMoviedIN);
+                       model.RoommatesWhenMoviedINExplenation = propertyInfo.RoommatesWhenMoviedINExplenation;
+                       model.bUnitPruchased = Convert.ToBoolean(propertyInfo.bUnitPruchased);
+                       model.UnitPruchasedExplenation = propertyInfo.UnitPruchasedExplenation;
+                       model.PurchasedFrom = propertyInfo.PurchasedFrom;
+                       model.bEntireBuildingPurchased = Convert.ToBoolean(propertyInfo.bEntireBuildingPurchased);
+                       model.EntireBuildingPurchasedExplenation = propertyInfo.EntireBuildingPurchasedExplenation;
+                       model.bRentControlledOtherThanRAP = Convert.ToBoolean(propertyInfo.bRentControlledOtherThanRAP);
+                       model.bUnitNewlyConstructed = Convert.ToBoolean(propertyInfo.bUnitNewlyConstructed);
+                       model.bTenantWasResidentOfHotelWhileFiling = Convert.ToBoolean(propertyInfo.bTenantWasResidentOfHotelWhileFiling);
+                       model.bUnitWasRehabilitated = Convert.ToBoolean(propertyInfo.bUnitWasRehabilitated);
+                       model.bUnitIsAccommodation = Convert.ToBoolean(propertyInfo.bUnitIsAccommodation);
+                       model.bHasUnitOccupiedByOwner = Convert.ToBoolean(propertyInfo.bHasUnitOccupiedByOwner);
+                   }
+               }
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
        #endregion
 
        #region Owner Response Save Functions
@@ -4211,7 +4297,93 @@ namespace RAP.DAL
                _commondbHandler.SaveErrorLog(result.status);
                return result;
            }
-       }        
+       }
+
+       public ReturnResult<OwnerResponsePropertyInfoM> SaveOResponseExemption(OwnerResponsePropertyInfoM model)
+       {
+           ReturnResult<OwnerResponsePropertyInfoM> result = new ReturnResult<OwnerResponsePropertyInfoM>();
+           try
+           {
+               if (model.OwnerPropertyID > 0)
+               {
+                   var propertyInfo = (from r in _dbContext.OwnerResponsePropertyInfos
+                                       where r.PropertyID == model.OwnerPropertyID
+                                       select r).First();
+                   if (propertyInfo != null)
+                   {
+                       propertyInfo.bExemptFromRentAdjustment = model.bExemptFromRentAdjustment;
+                       propertyInfo.bPriorTenantLeftAfteQuitNotice = model.bPriorTenantLeftAfteQuitNotice;
+                       propertyInfo.PriorTenantLeftAfteQuitNoticeExplenation = model.PriorTenantLeftAfteQuitNoticeExplenation;
+                       propertyInfo.bPriorTenantLeftAfteRentIncreaseNotice = model.bPriorTenantLeftAfteRentIncreaseNotice;
+                       propertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation = model.PriorTenantLeftAfteRentIncreaseNoticeExplenation;
+                       propertyInfo.bPriorTenantEvicted = model.bPriorTenantEvicted;
+                       propertyInfo.PriorTenantEvictedExplenation = model.PriorTenantEvictedExplenation;
+                       propertyInfo.bOutstandingViolations = model.bOutstandingViolations;
+                       propertyInfo.OutstandingViolationsExplenation = model.OutstandingViolationsExplenation;
+                       propertyInfo.bSingleFamilyUnitOrCondominium = model.bSingleFamilyUnitOrCondominium;
+                       propertyInfo.SingleFamilyUnitOrCondominiumExplenation = model.SingleFamilyUnitOrCondominiumExplenation;
+                       propertyInfo.bRoommatesWhenMoviedIN = model.bRoommatesWhenMoviedIN;
+                       propertyInfo.RoommatesWhenMoviedINExplenation = model.RoommatesWhenMoviedINExplenation;
+                       propertyInfo.bUnitPruchased = model.bUnitPruchased;
+                       propertyInfo.UnitPruchasedExplenation = model.UnitPruchasedExplenation;
+                       propertyInfo.PurchasedFrom = model.PurchasedFrom;
+                       propertyInfo.bEntireBuildingPurchased = model.bEntireBuildingPurchased;
+                       propertyInfo.EntireBuildingPurchasedExplenation = model.EntireBuildingPurchasedExplenation;
+                       propertyInfo.bRentControlledOtherThanRAP = model.bRentControlledOtherThanRAP;
+                       propertyInfo.bUnitNewlyConstructed = model.bUnitNewlyConstructed;
+                       propertyInfo.bTenantWasResidentOfHotelWhileFiling = model.bTenantWasResidentOfHotelWhileFiling;
+                       propertyInfo.bUnitWasRehabilitated = model.bUnitWasRehabilitated;
+                       propertyInfo.bUnitIsAccommodation = model.bUnitIsAccommodation;
+                       propertyInfo.bHasUnitOccupiedByOwner = model.bHasUnitOccupiedByOwner;
+                       _dbContext.SubmitChanges();
+                   }
+
+               }
+               else
+               {
+                   var propertyInfo = (from r in _dbContext.OwnerResponsePropertyInfos
+                                       where r.CustomerID == model.CustomerID && r.bPetitionFiled == false
+                                       select r).First();
+                   if (propertyInfo != null)
+                   {
+                       propertyInfo.bExemptFromRentAdjustment = model.bExemptFromRentAdjustment;
+                       propertyInfo.bPriorTenantLeftAfteQuitNotice = model.bPriorTenantLeftAfteQuitNotice;
+                       propertyInfo.PriorTenantLeftAfteQuitNoticeExplenation = model.PriorTenantLeftAfteQuitNoticeExplenation;
+                       propertyInfo.bPriorTenantLeftAfteRentIncreaseNotice = model.bPriorTenantLeftAfteRentIncreaseNotice;
+                       propertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation = model.PriorTenantLeftAfteRentIncreaseNoticeExplenation;
+                       propertyInfo.bPriorTenantEvicted = model.bPriorTenantEvicted;
+                       propertyInfo.PriorTenantEvictedExplenation = model.PriorTenantEvictedExplenation;
+                       propertyInfo.bOutstandingViolations = model.bOutstandingViolations;
+                       propertyInfo.OutstandingViolationsExplenation = model.OutstandingViolationsExplenation;
+                       propertyInfo.bSingleFamilyUnitOrCondominium = model.bSingleFamilyUnitOrCondominium;
+                       propertyInfo.SingleFamilyUnitOrCondominiumExplenation = model.SingleFamilyUnitOrCondominiumExplenation;
+                       propertyInfo.bRoommatesWhenMoviedIN = model.bRoommatesWhenMoviedIN;
+                       propertyInfo.RoommatesWhenMoviedINExplenation = model.RoommatesWhenMoviedINExplenation;
+                       propertyInfo.bUnitPruchased = model.bUnitPruchased;
+                       propertyInfo.UnitPruchasedExplenation = model.UnitPruchasedExplenation;
+                       propertyInfo.PurchasedFrom = model.PurchasedFrom;
+                       propertyInfo.bEntireBuildingPurchased = model.bEntireBuildingPurchased;
+                       propertyInfo.EntireBuildingPurchasedExplenation = model.EntireBuildingPurchasedExplenation;
+                       propertyInfo.bRentControlledOtherThanRAP = model.bRentControlledOtherThanRAP;
+                       propertyInfo.bUnitNewlyConstructed = model.bUnitNewlyConstructed;
+                       propertyInfo.bTenantWasResidentOfHotelWhileFiling = model.bTenantWasResidentOfHotelWhileFiling;
+                       propertyInfo.bUnitWasRehabilitated = model.bUnitWasRehabilitated;
+                       propertyInfo.bUnitIsAccommodation = model.bUnitIsAccommodation;
+                       propertyInfo.bHasUnitOccupiedByOwner = model.bHasUnitOccupiedByOwner;
+                       _dbContext.SubmitChanges();
+                   }
+               }
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
        #endregion
        private List<UnitTypeM> getUnitTypes()
        {

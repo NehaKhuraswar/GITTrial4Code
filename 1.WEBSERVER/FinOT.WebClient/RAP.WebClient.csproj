@@ -128,6 +128,7 @@
     <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
     <Content Include="Application\2.Controllers\rapOResponseDecreasedHousingController.js" />
+    <Content Include="Application\2.Controllers\rapOResponseExemptionController.js" />
     <Content Include="Application\2.Controllers\rapOResponseRentalHistoryController.js" />
     <Content Include="Application\2.Controllers\rapTPConfirmationController.js" />
     <Content Include="Application\2.Controllers\rapResponseConfirmationController.js" />
@@ -198,6 +199,7 @@
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseApplicantInfoFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseDecreasedHousingFactory.js" />
+    <Content Include="Application\3.Factories\rapOResponseExemptionFactory.js" />
     <Content Include="Application\3.Factories\rapOResponsePetitionTypeFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseRentalHistoryFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseRentalPropertyFactory.js" />

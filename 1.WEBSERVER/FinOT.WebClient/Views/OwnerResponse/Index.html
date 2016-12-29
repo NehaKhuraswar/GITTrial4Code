@@ -16,7 +16,9 @@
                             <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOresponseApplicantInfo()">Applicant Information</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOresponseRentalProperty()">Rental Property</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseRentalHistory()">Rental History</a></li>                        
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseRentalHistory()">Rental History</a></li> 
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseException()">Exemption</a></li> 
+                                                   
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oPetionActiveStatus.AdditionalDocumentation && Ctrl.oPetionCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOwnerAdditionalDocuments()">Additional Documents</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Review, 'current' : !Ctrl.oPetionActiveStatus.Review && Ctrl.oPetionCurrentStatus.Review}"><a ng-click="Ctrl.ShowOwnerReview()">Review</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}"><a ng-click="Ctrl.ShowOwnerVerification()">Verification</a></li>
@@ -45,6 +47,9 @@
                             </div>
                             <div ng-if="Ctrl.oresponseDecreasedHousing">
                                 <rap-oresponsedecreasedhousing ng-show="Ctrl.oresponseDecreasedHousing" model="Ctrl"></rap-oresponsedecreasedhousing>
+                            </div>
+                            <div ng-if="Ctrl.oresponseException">
+                                <rap-oresponseexemption ng-show="Ctrl.oresponseException" model="Ctrl"></rap-oresponseexemption>
                             </div>
                             <!--<div ng-if="Ctrl.ownerAdditionalDocuments">
                                 <rap-owneradditionaldocuments ng-show="Ctrl.ownerAdditionalDocuments" model="Ctrl"></rap-owneradditionaldocuments>

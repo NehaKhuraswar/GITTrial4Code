@@ -60,6 +60,8 @@
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
         });
+        $scope.model.oresponseDecreasedHousing = false;
+        $scope.model.oresponseException = true;
         //$scope.model.ownerAdditionalDocuments = false;
         //$scope.model.ownerReview = true;
         //$scope.model.DisableAllCurrent();

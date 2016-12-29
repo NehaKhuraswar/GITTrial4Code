@@ -261,6 +261,30 @@ namespace RAP.Core.DataModels
         public CustomDate RAPNoticeToRAPOfficeDate { get; set; }
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }
+        public bool bExemptFromRentAdjustment { get; set; }
+        public bool bPriorTenantLeftAfteQuitNotice { get; set; }
+        public string PriorTenantLeftAfteQuitNoticeExplenation { get; set; }
+        public bool bPriorTenantLeftAfteRentIncreaseNotice { get; set; }
+        public string PriorTenantLeftAfteRentIncreaseNoticeExplenation { get; set; }
+        public bool bPriorTenantEvicted { get; set; }
+        public string PriorTenantEvictedExplenation { get; set; }
+        public bool bOutstandingViolations { get; set; }
+        public string OutstandingViolationsExplenation { get; set; }
+        public bool bSingleFamilyUnitOrCondominium { get; set; }
+        public string SingleFamilyUnitOrCondominiumExplenation { get; set; }
+        public bool bRoommatesWhenMoviedIN { get; set; }
+        public string RoommatesWhenMoviedINExplenation { get; set; }
+        public bool bUnitPruchased { get; set; }
+        public string UnitPruchasedExplenation { get; set; }
+        public string PurchasedFrom { get; set; }
+        public bool bEntireBuildingPurchased { get; set; }
+        public string EntireBuildingPurchasedExplenation { get; set; }
+        public bool bRentControlledOtherThanRAP { get; set; }
+        public bool bUnitNewlyConstructed { get; set; }
+        public bool bTenantWasResidentOfHotelWhileFiling { get; set; }
+        public bool bUnitWasRehabilitated { get; set; }
+        public bool bUnitIsAccommodation { get; set; }
+        public bool bHasUnitOccupiedByOwner { get; set; }
         public OwnerResponseRentalIncrementInfoM Rent { get; set; }
         public List<OwnerPetitionTenantInfoM> TenantInfo
         {
@@ -295,8 +319,6 @@ namespace RAP.Core.DataModels
                 _unitTypes = value;
             }
         }
-
-
 
     }
 
