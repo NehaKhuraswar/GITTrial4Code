@@ -76,6 +76,39 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        public ReturnResult<TenantResponsePageSubnmissionStatusM> GetTRPageSubmissionStatus(int CustomerID)
+        {
+            ReturnResult<TenantResponsePageSubnmissionStatusM> result = new ReturnResult<TenantResponsePageSubnmissionStatusM>();
+            TenantResponsePageSubnmissionStatusM model = new TenantResponsePageSubnmissionStatusM();
+            try
+            {
+                var tResponse= _dbContext.TenantResponsePageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                if (tResponse != null)
+                {
+                    model.ImportantInformation = Convert.ToBoolean(tResponse.ImportantInformation);
+                    model.ApplicantInformation = Convert.ToBoolean(tResponse.ApplicantInformation);
+                    model.ExemptionContested = Convert.ToBoolean(tResponse.ExemptionContested);
+                    model.RentHistory = Convert.ToBoolean(tResponse.RentHistory);
+                    model.AdditionalDocumentation = Convert.ToBoolean(tResponse.AdditionalDocumentation);
+                    model.Review = Convert.ToBoolean(tResponse.Review);
+                    model.Verification = Convert.ToBoolean(tResponse.Verification);
+                    if(model.ImportantInformation == true)
+                    {
+                        model.PetitionType = true;
+                    }
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
         
 
         /// <summary>
@@ -1452,6 +1485,7 @@ namespace RAP.DAL
                     if (PageStatus != null)
                     {
                         PageStatus.ApplicantInformation = true;
+                        PageStatus.ImportantInformation = true;
                         _dbContext.SubmitChanges();
                     }
                     else
@@ -1459,6 +1493,7 @@ namespace RAP.DAL
                         var PageStatusNew = new TenantPetitionPageSubmissionStatus();
                         PageStatusNew.CustomerID = caseInfo.TenantPetitionInfo.CustomerID;
                         PageStatusNew.ApplicantInformation = true;
+                        PageStatusNew.ImportantInformation = true;
                         _dbContext.TenantPetitionPageSubmissionStatus.InsertOnSubmit(PageStatusNew);
                         _dbContext.SubmitChanges();
                     }

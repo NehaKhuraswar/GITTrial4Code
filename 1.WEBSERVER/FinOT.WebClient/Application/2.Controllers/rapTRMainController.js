@@ -6,8 +6,7 @@ var rapTRMainController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTyp
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.selectedObj = {};
-    self.PetitionSubmissionStatus = null;
-    self.tPetionActiveStatus = null;
+    self.TRSubmissionStatus = null;
 
     var _DisableAll = function () {
         self.bPetitionType = false;
@@ -71,7 +70,18 @@ var rapTRMainController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTyp
     //    });
     //}
 
-    
+    var _getPageSubmission = function () {
+        rapFactory.GetTRPageSubmission(self.custDetails.custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.TRSubmissionStatus = response.data;
+        });
+    }
+    if (self.TRSubmissionStatus == null) {
+        _getPageSubmission();
+    }
+
     var _getPetitionCategory = function () {
         rapFactory.GetPetitionCategory().then(function (response) {
             if(!alert.checkResponse(response)) {

@@ -22,7 +22,7 @@ var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTR
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bExemptionContested = false;
             $scope.model.bRentalHistory = true;
-           // $scope.model.tPetionActiveStatus.ExemptionContested = true;
+            $scope.model.TRSubmissionStatus.ExemptionContested = true;
         });
         
     }

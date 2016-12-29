@@ -25,10 +25,10 @@ var rapTRPetitionTypeFactory = ['blockUI', 'ajaxService', function (blockUI, aja
           });
       }
 
-      var _getPageSubmission = function (custId)
+      var _getTRPageSubmission = function (custId)
       {
           blockUI.start();
-          var url = _routePrefix + '/GetPageSubmissionStatus/';
+          var url = _routePrefix + '/GetTRPageSubmissionStatus/';
           if (!(custId == null || custId == undefined)) { url = url + '/' + custId; }
           return ajax.Get(url)
         .finally(function () {
@@ -38,7 +38,7 @@ var rapTRPetitionTypeFactory = ['blockUI', 'ajaxService', function (blockUI, aja
 
       factory.GetPetitionCategory = _getPetitionCategory;
       factory.GetCaseInfo = _GetCaseInfo;
-      factory.GetPageSubmissionStatus = _getPageSubmission;
+      factory.GetTRPageSubmission = _getTRPageSubmission;
     
     return factory;
 }];

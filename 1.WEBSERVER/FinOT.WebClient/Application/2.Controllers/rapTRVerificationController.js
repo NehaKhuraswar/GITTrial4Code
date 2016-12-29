@@ -19,7 +19,7 @@ var rapTRVerificationController = ['$scope', '$modal', 'alertService', 'rapTRver
             if (!alert.checkResponse(response)) {
                 return;
             }
-            //$scope.model.tPetionActiveStatus.Verification = true;
+            $scope.model.TRSubmissionStatus.Verification = true;
             $scope.model.bVerification = false;
             $scope.model.bConfirm = true;
         });

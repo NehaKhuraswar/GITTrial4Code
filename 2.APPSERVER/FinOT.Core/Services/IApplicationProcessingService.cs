@@ -8,6 +8,7 @@ namespace RAP.Core.Services
     {
         string CorrelationId { get; set; }
         ReturnResult<PetitionPageSubnmissionStatusM> GetPageSubmissionStatus(int CustomerID);
+        ReturnResult<TenantResponsePageSubnmissionStatusM> GetTRPageSubmissionStatus(int CustomerID);
         ReturnResult<CaseInfoM> GetCaseDetails();
         ReturnResult<CaseInfoM> GetCaseInfo(string caseID, int CustomerID);
         ReturnResult<CaseInfoM> GetCaseDetails(int UserID);

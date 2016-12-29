@@ -80,9 +80,9 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.bAppInfo = false;
             $scope.model.bExemptionContested = true;
-            //$scope.model.tPetionActiveStatus.PetitionCategory = true;
-            //$scope.model.tPetionActiveStatus.ImportantInformation = true;
-            //$scope.model.tPetionActiveStatus.ApplicantInformation = true;
+            $scope.model.TRSubmissionStatus.PetitionType = true;
+            $scope.model.TRSubmissionStatus.ImportantInformation = true;
+            $scope.model.TRSubmissionStatus.ApplicantInformation = true;
 
         });
     }

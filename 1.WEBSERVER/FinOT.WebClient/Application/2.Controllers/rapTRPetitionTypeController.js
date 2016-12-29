@@ -7,13 +7,16 @@ var rapTRPetitionTypeController = ['$scope', '$modal', 'alertService', 'rapTRPet
     self.selectedObj = {};
     self.model = $scope.model;
     self.bCaseFiledByThirdParty = false;
+    self.TRSubmissionStatus = null;
 
+    
 
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         $scope.model.bPetitionType = false;
         $scope.model.bImpInfo = true;
         rapGlobalFactory.bCaseFiledByThirdParty = self.bCaseFiledByThirdParty;
+        $scope.model.TRSubmissionStatus.PetitionType = true;
                  
     }
 }];

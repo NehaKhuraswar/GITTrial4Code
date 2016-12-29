@@ -37,7 +37,7 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bRentalHistory = false;
             $scope.model.bAddDocuments = true;
-           // $scope.model.tPetionActiveStatus.RentHistory = true;
+            $scope.model.TRSubmissionStatus.RentHistory = true;
         });
         
     }

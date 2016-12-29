@@ -8,28 +8,28 @@
                 <div class="col-md-3 col-sm-12">
                     <div>
                         <ul class="application-steps">
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.PetitionType, 'current' : !Ctrl.tPetionActiveStatus.PetitionType && Ctrl.bImpInfo}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.PetitionType, 'current' : !Ctrl.TRSubmissionStatus.PetitionType && Ctrl.bImpInfo}">
                                 <a ng-click="Ctrl.showPetitionType()">Petition Type</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bImpInfo}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.ImportantInformation, 'current' : !Ctrl.TRSubmissionStatus.ImportantInformation && Ctrl.bImpInfo}">
                                 <a ng-click="Ctrl.showImpInfo()">Important Information</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.tPetionActiveStatus.ApplicantInformation && Ctrl.bAppInfo}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.ApplicantInformation, 'current' : !Ctrl.TRSubmissionStatus.ApplicantInformation && Ctrl.bAppInfo}">
                                 <a ng-click="Ctrl.showAppInfo()">Applicant Information</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.ExemptionContested, 'current' : !Ctrl.tPetionActiveStatus.ExemptionContested && Ctrl.bExemptionContested}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.ExemptionContested, 'current' : !Ctrl.TRSubmissionStatus.ExemptionContested && Ctrl.bExemptionContested}">
                                 <a ng-click="Ctrl.showExemptionContested()">Exemption Contested</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.RentHistory, 'current' : !Ctrl.tPetionActiveStatus.RentHistory && Ctrl.bRentalHistory}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.RentHistory, 'current' : !Ctrl.TRSubmissionStatus.RentHistory && Ctrl.bRentalHistory}">
                                 <a ng-click="Ctrl.showRentalHistory()">Rental History</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.tPetionActiveStatus.AdditionalDocumentation && Ctrl.bAddDocuments}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.AdditionalDocumentation, 'current' : !Ctrl.TRSubmissionStatus.AdditionalDocumentation && Ctrl.bAddDocuments}">
                                 <a ng-click="Ctrl.showAddDocuments()">Additional Documentation</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Review, 'current' : !Ctrl.tPetionActiveStatus.Review && Ctrl.bReview}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.Review, 'current' : !Ctrl.TRSubmissionStatus.Review && Ctrl.bReview}">
                                 <a ng-click="Ctrl.showReview()">Review</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.tPetionActiveStatus.Verification, 'current' : !Ctrl.tPetionActiveStatus.Verification && Ctrl.bVerification}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.Verification, 'current' : !Ctrl.TRSubmissionStatus.Verification && Ctrl.bVerification}">
                                 <a ng-click="Ctrl.showVerification()">Verification</a>
                             </li>
                         </ul>
@@ -72,7 +72,7 @@
 
         </div><!-- #SkipToMainContent -->
 
-        <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->
+        
     </div><!-- .container .outer-container -->
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>

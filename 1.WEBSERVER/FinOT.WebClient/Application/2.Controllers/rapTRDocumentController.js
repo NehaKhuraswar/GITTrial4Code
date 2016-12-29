@@ -22,7 +22,7 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
         });
         $scope.model.bAddDocuments = false;
         $scope.model.bReview = true;
-      //  $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
+        $scope.model.TRSubmissionStatus.AdditionalDocumentation = true;
        
     }
     $scope.onAdditionalFileSelect = function ($files) {

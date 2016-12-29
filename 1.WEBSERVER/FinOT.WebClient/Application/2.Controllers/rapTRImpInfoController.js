@@ -5,6 +5,8 @@ var rapTRImpInfoController = ['$scope', '$modal', 'alertService', 'rapTRPetition
     self.Continue = function () {
         $scope.model.bImpInfo = false;
         $scope.model.bAppInfo = true;
+        $scope.model.TRSubmissionStatus.PetitionType = true;
+        $scope.model.TRSubmissionStatus.ImportantInformation = true;
     }
 }];
 var rapTRImpInfoController_resolve = {
