@@ -127,6 +127,7 @@
   <ItemGroup>
     <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
+    <Content Include="Application\2.Controllers\rapNewRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseDecreasedHousingController.js" />
     <Content Include="Application\2.Controllers\rapOresponseDocumentsController.js" />
     <Content Include="Application\2.Controllers\rapOResponseExemptionController.js" />
@@ -198,6 +199,7 @@
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
+    <Content Include="Application\3.Factories\rapnewrepresentativeFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseApplicantInfoFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseDecreasedHousingFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseDocumentFactory.js" />
@@ -384,6 +386,7 @@
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\textcounter.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
+    <Content Include="Views\Account\AddNewRepresentative.html" />
     <Content Include="Views\Account\ForgetPassword.html" />
     <Content Include="Views\Account\ChangePassword.html" />
     <Content Include="Views\Account\Collaborator.html" />

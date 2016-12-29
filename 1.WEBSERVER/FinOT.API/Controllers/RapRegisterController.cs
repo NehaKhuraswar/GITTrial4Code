@@ -194,6 +194,41 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("GetThirdPartyInfo/{CustomerID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetThirdPartyInfo(int CustomerID)
+        {
+            AccountManagementService accService = new AccountManagementService();         
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<ThirdPartyInfoM> transaction = new TranInfo<ThirdPartyInfoM>();
+            ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
+            try
+            {
+
+                result = accService.GetThirdPartyInfo(CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<ThirdPartyInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("changepwd")]
         [HttpPost]
         public HttpResponseMessage ChangePassword([FromBody] CustomerInfo custInfo)
@@ -737,6 +772,43 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveOrUpdateThirdPartyInfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveOrUpdateThirdPartyInfo([FromBody] ThirdPartyInfoM model)
+        {
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Save Customer started");
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<Boolean> transaction = new TranInfo<Boolean>();
+            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+
+            try
+            {
+                result = accService.SaveOrUpdateThirdPartyInfo(model);
+                if (result.status.Status == StatusEnum.Success)
+                {                    
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<Boolean>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]

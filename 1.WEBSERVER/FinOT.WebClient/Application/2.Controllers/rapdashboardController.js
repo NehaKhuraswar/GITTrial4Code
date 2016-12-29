@@ -4,8 +4,8 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CustomerDetails;
     self.btoggle = false;
-    self.InviteThirdPartyUser = function () {
-        $location.path("/invitethirdparty");
+    self.ThirdPartyRepresentative = function () {
+        $location.path("/AddNewRepresentative");
     }
     self.FilePetition = function () {
         $location.path("/filePetition");

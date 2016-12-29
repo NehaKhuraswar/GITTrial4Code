@@ -120,6 +120,8 @@ namespace RAP.WebClient
             }
         }
 
+        
+
         [AllowAnonymous]
         [Route("changepwd")]
         [HttpPost]
@@ -203,6 +205,39 @@ namespace RAP.WebClient
                     return responseMessage;
                 }
                 else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+
+        [AllowAnonymous]
+        [Route("GetThirdPartyInfo/{CustomerID}")]
+        [HttpGet]
+        public HttpResponseMessage GetThirdPartyInfo(string CustomerID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetThirdPartyInfo/" + CustomerID;
+                responseMessage = client.GetAsync(requestUri).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else // error
                 {
                     responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
                     responseMessage.ReasonPhrase = _errorMessage;
@@ -453,6 +488,38 @@ namespace RAP.WebClient
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 string requestUri = _requestURI + "saveCust/";
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+        [AllowAnonymous]
+        [Route("SaveOrUpdateThirdPartyInfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveOrUpdateThirdPartyInfo()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "SaveOrUpdateThirdPartyInfo/";
                 responseMessage = client.PostAsync(requestUri, Request.Content).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

@@ -93,6 +93,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapNewCaseStatusController_resolve
         })
+        .when('/AddNewRepresentative', {
+            templateUrl: 'views/account/AddNewRepresentative.html',
+            controller: rapNewRepresentativeController,
+            controllerAs: 'Ctrl',
+            resolve: rapNewRepresentativeController_resolve
+        })
         .when('/accountSearch', {
             templateUrl: 'views/account/AccountSearch.html',
             controller: rapSearchAccountController,

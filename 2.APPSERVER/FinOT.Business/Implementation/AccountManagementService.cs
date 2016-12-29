@@ -30,6 +30,15 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.SaveCustomer(message);
         }
+
+        public ReturnResult<ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID)
+        {
+            return accDBHandler.GetThirdPartyInfo(CustomerID);
+        }
+        public ReturnResult<bool> SaveOrUpdateThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model)
+        {
+            return accDBHandler.SaveOrUpdateThirdPartyInfo(model);
+        }
         public ReturnResult<CustomerInfo> EditCustomer(CustomerInfo message)
         {
             return accDBHandler.EditCustomer(message);
