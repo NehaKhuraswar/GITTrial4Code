@@ -129,6 +129,7 @@
     <Content Include="Application\2.Controllers\mainController.js" />
     <Content Include="Application\2.Controllers\rapOResponseDecreasedHousingController.js" />
     <Content Include="Application\2.Controllers\rapOResponseRentalHistoryController.js" />
+    <Content Include="Application\2.Controllers\rapTPConfirmationController.js" />
     <Content Include="Application\2.Controllers\rapResponseConfirmationController.js" />
     <Content Include="Application\2.Controllers\rapAppealConfirmationController.js" />
     <Content Include="Application\2.Controllers\rapAppealMainController.js" />
@@ -404,6 +405,7 @@
     <Content Include="Views\FilePetition\ApplicationInfo.html" />
     <Content Include="Views\Account\CreateUser.html" />
     <Content Include="Views\Account\PublicDashboard.html" />
+    <Content Include="Views\FilePetition\ConfirmationPage.html" />
     <Content Include="Views\FilePetition\Document.html" />
     <Content Include="Views\FilePetition\FilePetition.html" />
     <Content Include="Views\FilePetition\ImportantInformation.html" />

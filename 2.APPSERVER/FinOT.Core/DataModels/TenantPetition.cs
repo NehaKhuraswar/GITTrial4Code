@@ -102,6 +102,7 @@ namespace RAP.Core.DataModels
         public int Zip { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
     public class TenantAppealInfoM

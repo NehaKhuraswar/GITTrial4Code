@@ -45,6 +45,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         self.bAddDocuments = false;
         self.bReview = false;
         self.bVerification = false;
+        self.bConfirm = false;
         self.ownerImpInfo = false;
         self.ownerApplicantInfo = false;
         self.ownerJustification = false;

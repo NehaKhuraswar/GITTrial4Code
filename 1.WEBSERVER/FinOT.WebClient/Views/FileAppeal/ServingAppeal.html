@@ -86,11 +86,18 @@
         <p>I placed a copy of this form, and all attached pages, in the United States mail or deposited it with a commercial carrier, using a service at least as expeditious as first class mail, with all postage or charges fully prepaid, addressed to each opposing party as follows:</p>
     </div>
 
-    <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty">
-        <div class="row">
-            <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>
-            <div class="col-sm-6 col-xs-12">
-                {{item.FirstName}} {{item.LastName}}   <br />{{item.AddressLine1}} {{item.AddressLine2}}, <br />{{item.City}}, {{item.State.StateCode}} {{item.Zip}}
+    <div ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty">
+        <div ng-if="item.IsDeleted == false">
+            <div class="field-group filled-info subhead">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>
+                    <div class="col-sm-6 col-xs-12">
+                        {{item.FirstName}} {{item.LastName}}   <br />{{item.AddressLine1}} {{item.AddressLine2}}, <br />{{item.City}}, {{item.State.StateCode}} {{item.Zip}}
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn-link btn-delete" ng-click="item.IsDeleted = true">Delete</button>
+                </div>
             </div>
         </div>
     </div><!-- .field-group -->

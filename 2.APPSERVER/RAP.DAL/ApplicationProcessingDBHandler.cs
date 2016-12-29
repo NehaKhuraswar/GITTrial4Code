@@ -2161,23 +2161,26 @@ namespace RAP.DAL
 
                 foreach (var item in tenantAppealInfo.serveAppeal.OpposingParty)
                 {
-                    opposingPartyUserID = _commondbHandler.SaveUserInfo(item).result.UserID;
-                    if (opposingPartyUserID == 0)
+                    if (item.IsDeleted == false)
                     {
-                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                        return result;
+                        opposingPartyUserID = _commondbHandler.SaveUserInfo(item).result.UserID;
+                        if (opposingPartyUserID == 0)
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            return result;
+                        }
+                        tenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
+
+                        AppealOpposingParty appealOpposingDB = new AppealOpposingParty();
+                        appealOpposingDB.AppealID = tenantAppealInfo.AppealID;
+                        appealOpposingDB.OpposingPartyID = opposingPartyUserID;
+                        appealOpposingDB.CreatedDate = DateTime.Now;
+                        appealOpposingDB.IsDeleted = false;
+                        appealOpposingDB.ModifiedDate = DateTime.Now;
+
+                        _dbContext.AppealOpposingParties.InsertOnSubmit(appealOpposingDB);
+                        _dbContext.SubmitChanges();
                     }
-                    tenantAppealInfo.opposingPartyUserID.Add(opposingPartyUserID);
-
-                    AppealOpposingParty appealOpposingDB = new AppealOpposingParty();
-                    appealOpposingDB.AppealID = tenantAppealInfo.AppealID;
-                    appealOpposingDB.OpposingPartyID = opposingPartyUserID;
-                    appealOpposingDB.CreatedDate = DateTime.Now;
-                    appealOpposingDB.IsDeleted = false;
-                    appealOpposingDB.ModifiedDate = DateTime.Now;
-
-                    _dbContext.AppealOpposingParties.InsertOnSubmit(appealOpposingDB);
-                    _dbContext.SubmitChanges();
                 }
 
 

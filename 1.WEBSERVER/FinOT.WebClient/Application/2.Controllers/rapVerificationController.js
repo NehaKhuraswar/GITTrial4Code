@@ -21,7 +21,9 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
                 return;
             }
             $scope.model.tPetionActiveStatus.Verification = true;
-            $location.path("/publicdashboard");
+             $scope.model.bVerification = false;
+             $scope.model.bConfirm = true;
+          //  $location.path("/publicdashboard");
         });
     }
 }];

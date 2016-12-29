@@ -84,6 +84,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapadmindashboardController', rapadmindashboardController)
     .controller('rapNewCaseStatusController', rapNewCaseStatusController)
     .controller('rapAppealConfirmationController', rapAppealConfirmationController)
+    .controller('rapTPConfirmationController', rapTPConfirmationController)
     .controller('rapSearchAccountController', rapSearchAccountController)
     .controller('rapCityUserAcctController', rapCityUserAcctController)
     .controller('rapinvitethirdpartyController', rapinvitethirdpartyController)
@@ -247,6 +248,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
             },
             templateUrl: 'Views/FilePetition/Review.html',
             controller: 'rapReviewController',
+            controllerAs: 'Ctrl'
+        };
+    })
+    .directive('rapTpconfirmation', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/ConfirmationPage.html',
+            controller: 'rapTPConfirmationController',
             controllerAs: 'Ctrl'
         };
     })
