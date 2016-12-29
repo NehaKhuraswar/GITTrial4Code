@@ -241,6 +241,7 @@ namespace RAP.Core.DataModels
             MovedInDate = new CustomDate();
             RAPNoticeGivenDate = new CustomDate();
             RAPNoticeToRAPOfficeDate = new CustomDate();
+            Rent = new OwnerResponseRentalIncrementInfoM();
         }
         private List<OwnerPetitionTenantInfoM> _tenantInfo = new List<OwnerPetitionTenantInfoM>();
         private List<OwnerResponseRentalIncrementInfoM> _rentalInfo = new List<OwnerResponseRentalIncrementInfoM>();
@@ -260,6 +261,7 @@ namespace RAP.Core.DataModels
         public CustomDate RAPNoticeToRAPOfficeDate { get; set; }
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }
+        public OwnerResponseRentalIncrementInfoM Rent { get; set; }
         public List<OwnerPetitionTenantInfoM> TenantInfo
         {
             get

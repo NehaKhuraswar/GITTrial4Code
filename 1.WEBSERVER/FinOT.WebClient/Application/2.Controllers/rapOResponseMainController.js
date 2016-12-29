@@ -12,7 +12,7 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         self.oresponseImpInfo = false;
         self.oresponseApplicantInfo = false;
         self.oresponseRentalProperty = false;
-        self.ownerRentalHistory = false;
+        self.oresponseRentalHistory = false;
         self.ownerAdditionalDocuments = false;
         self.ownerReview = false;
         self.ownerVerification = false;
@@ -50,22 +50,15 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
     //        self.oPetionCurrentStatus.JustificationForRentIncrease = true;
     //    }
     };
-    //self.ShowOwnerRentalProperty = function () {
-    //    if (self.oPetionActiveStatus.RentalProperty) {
-    //        _DisableAll();
-    //        self.DisableAllCurrent();
-    //        self.ownerRentalProperty = true;
-    //        self.oPetionCurrentStatus.RentalProperty = true;
-    //    }
-    //};
-    //self.ShowOwnerRentalHistory = function () {
+
+    self.ShowOresponseRentalHistory = function () {
     //    if (self.oPetionActiveStatus.RentHistory) {
-    //        _DisableAll();
+           _DisableAll();
     //        self.DisableAllCurrent();
-    //        self.ownerRentalHistory = true;
+         self.oresponseRentalHistory = true;
     //        self.oPetionCurrentStatus.RentHistory = true;
     //    }
-    //};
+    };
     //self.ShowOwnerAdditionalDocuments = function () {
     //    if (self.oPetionActiveStatus.AdditionalDocumentation) {
     //        _DisableAll();

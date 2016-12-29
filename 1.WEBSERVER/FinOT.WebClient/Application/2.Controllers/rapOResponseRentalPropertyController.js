@@ -31,11 +31,13 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
         });
-        $scope.model.ownerRentalProperty = false;
-        $scope.model.ownerRentalHistory = true;
-        $scope.model.DisableAllCurrent();
-        $scope.model.oPetionCurrentStatus.RentHistory = true;
-        $scope.model.oPetionActiveStatus.RentalProperty = true;
+        $scope.model.oresponseRentalProperty = false;
+        $scope.model.oresponseRentalHistory = true;
+        //$scope.model.ownerRentalProperty = false;
+        //$scope.model.ownerRentalHistory = true;
+        //$scope.model.DisableAllCurrent();
+        //$scope.model.oPetionCurrentStatus.RentHistory = true;
+        //$scope.model.oPetionActiveStatus.RentalProperty = true;
     }
     self.AddTenant = function (_userInfo) {
         if (self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo.length > 0) {
