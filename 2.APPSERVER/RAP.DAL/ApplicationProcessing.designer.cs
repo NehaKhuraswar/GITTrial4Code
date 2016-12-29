@@ -153,6 +153,9 @@ namespace RAP.DAL
     partial void InsertTenantResponseVerification(TenantResponseVerification instance);
     partial void UpdateTenantResponseVerification(TenantResponseVerification instance);
     partial void DeleteTenantResponseVerification(TenantResponseVerification instance);
+    partial void InsertAppealPageSubmissionStatus(AppealPageSubmissionStatus instance);
+    partial void UpdateAppealPageSubmissionStatus(AppealPageSubmissionStatus instance);
+    partial void DeleteAppealPageSubmissionStatus(AppealPageSubmissionStatus instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -518,6 +521,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantResponseVerification>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AppealPageSubmissionStatus> AppealPageSubmissionStatus
+		{
+			get
+			{
+				return this.GetTable<AppealPageSubmissionStatus>();
 			}
 		}
 	}
@@ -11608,6 +11619,236 @@ namespace RAP.DAL
 						this._TenantResponseID = default(int);
 					}
 					this.SendPropertyChanged("TenantResponseApplicationInfo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AppealPageSubmissionStatus")]
+	public partial class AppealPageSubmissionStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NavigationID;
+		
+		private int _CustomerID;
+		
+		private System.Nullable<bool> _ImportantInformation;
+		
+		private System.Nullable<bool> _ApplicantInformation;
+		
+		private System.Nullable<bool> _GroundsOfAppeal;
+		
+		private System.Nullable<bool> _AdditionalDocumentation;
+		
+		private System.Nullable<bool> _ServingAppeal;
+		
+		private System.Nullable<bool> _Review;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNavigationIDChanging(int value);
+    partial void OnNavigationIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnImportantInformationChanging(System.Nullable<bool> value);
+    partial void OnImportantInformationChanged();
+    partial void OnApplicantInformationChanging(System.Nullable<bool> value);
+    partial void OnApplicantInformationChanged();
+    partial void OnGroundsOfAppealChanging(System.Nullable<bool> value);
+    partial void OnGroundsOfAppealChanged();
+    partial void OnAdditionalDocumentationChanging(System.Nullable<bool> value);
+    partial void OnAdditionalDocumentationChanged();
+    partial void OnServingAppealChanging(System.Nullable<bool> value);
+    partial void OnServingAppealChanged();
+    partial void OnReviewChanging(System.Nullable<bool> value);
+    partial void OnReviewChanged();
+    #endregion
+		
+		public AppealPageSubmissionStatus()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NavigationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NavigationID
+		{
+			get
+			{
+				return this._NavigationID;
+			}
+			set
+			{
+				if ((this._NavigationID != value))
+				{
+					this.OnNavigationIDChanging(value);
+					this.SendPropertyChanging();
+					this._NavigationID = value;
+					this.SendPropertyChanged("NavigationID");
+					this.OnNavigationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImportantInformation", DbType="Bit")]
+		public System.Nullable<bool> ImportantInformation
+		{
+			get
+			{
+				return this._ImportantInformation;
+			}
+			set
+			{
+				if ((this._ImportantInformation != value))
+				{
+					this.OnImportantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ImportantInformation = value;
+					this.SendPropertyChanged("ImportantInformation");
+					this.OnImportantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantInformation", DbType="Bit")]
+		public System.Nullable<bool> ApplicantInformation
+		{
+			get
+			{
+				return this._ApplicantInformation;
+			}
+			set
+			{
+				if ((this._ApplicantInformation != value))
+				{
+					this.OnApplicantInformationChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicantInformation = value;
+					this.SendPropertyChanged("ApplicantInformation");
+					this.OnApplicantInformationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GroundsOfAppeal", DbType="Bit")]
+		public System.Nullable<bool> GroundsOfAppeal
+		{
+			get
+			{
+				return this._GroundsOfAppeal;
+			}
+			set
+			{
+				if ((this._GroundsOfAppeal != value))
+				{
+					this.OnGroundsOfAppealChanging(value);
+					this.SendPropertyChanging();
+					this._GroundsOfAppeal = value;
+					this.SendPropertyChanged("GroundsOfAppeal");
+					this.OnGroundsOfAppealChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalDocumentation", DbType="Bit")]
+		public System.Nullable<bool> AdditionalDocumentation
+		{
+			get
+			{
+				return this._AdditionalDocumentation;
+			}
+			set
+			{
+				if ((this._AdditionalDocumentation != value))
+				{
+					this.OnAdditionalDocumentationChanging(value);
+					this.SendPropertyChanging();
+					this._AdditionalDocumentation = value;
+					this.SendPropertyChanged("AdditionalDocumentation");
+					this.OnAdditionalDocumentationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServingAppeal", DbType="Bit")]
+		public System.Nullable<bool> ServingAppeal
+		{
+			get
+			{
+				return this._ServingAppeal;
+			}
+			set
+			{
+				if ((this._ServingAppeal != value))
+				{
+					this.OnServingAppealChanging(value);
+					this.SendPropertyChanging();
+					this._ServingAppeal = value;
+					this.SendPropertyChanged("ServingAppeal");
+					this.OnServingAppealChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Review", DbType="Bit")]
+		public System.Nullable<bool> Review
+		{
+			get
+			{
+				return this._Review;
+			}
+			set
+			{
+				if ((this._Review != value))
+				{
+					this.OnReviewChanging(value);
+					this.SendPropertyChanging();
+					this._Review = value;
+					this.SendPropertyChanged("Review");
+					this.OnReviewChanged();
 				}
 			}
 		}

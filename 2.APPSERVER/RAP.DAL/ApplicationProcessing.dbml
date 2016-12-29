@@ -538,4 +538,16 @@
       <Association Name="TenantResponseApplicationInfo_TenantResponseVerification" Member="TenantResponseApplicationInfo" ThisKey="TenantResponseID" OtherKey="TenantResponseID" Type="TenantResponseApplicationInfo" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.AppealPageSubmissionStatus" Member="AppealPageSubmissionStatus">
+    <Type Name="AppealPageSubmissionStatus">
+      <Column Name="NavigationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ImportantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ApplicantInformation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="GroundsOfAppeal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AdditionalDocumentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ServingAppeal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Review" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>
