@@ -1914,6 +1914,39 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("SaveOResponseAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveOResponseAdditionalDocuments([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _service.SaveOResponseAdditionalDocuments(model);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("SaveTRAdditionalDocuments")]
         [HttpPost]
         public HttpResponseMessage SaveTRAdditionalDocuments([FromBody] CaseInfoM model)
@@ -2060,6 +2093,40 @@ namespace RAP.API.Controllers
             try
             {
                 result = _service.GetOResponseRentIncreaseAndPropertyInfo(model);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("GetOResponseDecreasedHousing")]
+        [HttpPost]
+        public HttpResponseMessage GetOResponseDecreasedHousing([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _service.GetOResponseDecreasedHousing(model);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

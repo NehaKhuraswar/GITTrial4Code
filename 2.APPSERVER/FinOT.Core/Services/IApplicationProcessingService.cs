@@ -57,8 +57,10 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetOResponseApplicantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> GetOResponsePropertyAndTenantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> GetOResponseRentIncreaseAndPropertyInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> GetOResponseDecreasedHousing(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseApplicantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponsePropertyAndTenantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseRentIncreaseAndUpdatePropertyInfo(CaseInfoM model);
+        ReturnResult<CaseInfoM> SaveOResponseAdditionalDocuments(CaseInfoM model);
     }
 }

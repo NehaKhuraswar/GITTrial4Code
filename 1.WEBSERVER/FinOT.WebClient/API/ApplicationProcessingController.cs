@@ -1631,6 +1631,7 @@ namespace RAP.WebClient
             }
         }
 
+
         [AllowAnonymous]
         [Route("SaveTRAdditionalDocuments")]
         [HttpPost]
@@ -1761,6 +1762,38 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
+        [Route("GetOResponseDecreasedHousing")]
+        [HttpPost]
+        public HttpResponseMessage GetOResponseDecreasedHousing()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetOResponseDecreasedHousing/";
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+        [AllowAnonymous]
         [Route("SaveOResponseApplicantInfo")]
         [HttpPost]
         public HttpResponseMessage SaveOResponseApplicantInfo()
@@ -1856,6 +1889,38 @@ namespace RAP.WebClient
             }
         }
 
+
+        [AllowAnonymous]
+        [Route("SaveOResponseAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveOResponseAdditionalDocuments()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "SaveOResponseAdditionalDocuments/";
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
 
         #endregion
 

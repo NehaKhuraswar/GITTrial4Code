@@ -1068,6 +1068,8 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+       
         public ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -1126,10 +1128,10 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 dbResult.result.OwnerResponseInfo.ApplicantInfo.RAPFee = string.IsNullOrEmpty(RAPFee) ? "69" : RAPFee;
+                model = dbResult.result;
                 model = GetUploadedDocuments(model, "OR_BusinessTaxProof");
-                model = GetUploadedDocuments(model, "OR_PropertyServiceFee");
-              
-                result.result = dbResult.result;
+                model = GetUploadedDocuments(model, "OR_PropertyServiceFee");              
+                result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
@@ -1176,6 +1178,28 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 model = dbResult.result;
+                model = GetUploadedDocuments(model, "OR_RAPNotice1");
+                model = GetUploadedDocuments(model, "OR_RAPNotice2");
+                model = GetUploadedDocuments(model, "OR_Justification");            
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<CaseInfoM> GetOResponseDecreasedHousing(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                model = GetUploadedDocuments(model, "OR_DecreasedHousing");
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -1208,7 +1232,7 @@ namespace RAP.Business.Implementation
                 {
                     if (!doc.isUploaded)
                     {
-                        doc.DocCategory = DocCategory.OwnerPetition.ToString();
+                        doc.DocCategory = DocCategory.OwnerResponse.ToString();
                         var docUploadResut = _documentService.UploadDocument(doc);
                         if (docUploadResut.status.Status == StatusEnum.Success)
                         {
@@ -1263,12 +1287,66 @@ namespace RAP.Business.Implementation
             try
             {
                 var dbResult = _dbHandler.SaveOResponseRentIncreaseAndUpdatePropertyInfo(model.OwnerResponseInfo.PropertyInfo);
+                List<DocumentM> documents = new List<DocumentM>();
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
                     result.status = dbResult.status;
                     return result;
                 }
                 model.OwnerResponseInfo.PropertyInfo = dbResult.result;
+
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.OwnerResponse.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                model.Documents = documents;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<CaseInfoM> SaveOResponseAdditionalDocuments(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
+            try
+            {
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.OwnerResponse.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                model.Documents = documents;
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

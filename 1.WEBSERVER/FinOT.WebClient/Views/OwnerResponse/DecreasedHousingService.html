@@ -16,23 +16,38 @@
 
                         <div class="field-group subhead">
                             <label for="attached_document_description">Description of the document that you are attaching</label>
-                            <textarea name="attached_document_description" id="attached_document_description" class="field-input textarea" rows="8"></textarea>
+                            <textarea name="attached_document_description" id="attached_document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description"></textarea>
                         </div>
 
                         <div class="field-group">
                             <div class="field-addfile">
                                 <div class="input-file-wrapper">
                                     <span class="btn-link">Attach document</span>
-                                    <input type="file" id="attached_document" name="attached_document" />
+                                    <input type="file" id="attached_document" name="attached_document" ngf-select ngf-change="onFileSelected($files,'OR_DecreasedHousing')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                                 </div>
                             </div>
+                            <div class="field-group">
+                                <table class="table table-condensed nopadding-bottom">
+                                    <tbody>
+                                        <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_DecreasedHousing'}">
+                                            <td class="nopadding-left">
+                                                {{item.DocName}}
+                                            </td>
+                                            <td>
+                                                <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         </div><!-- .field-group -->
 
                     </div>
 
 
                     <div class="step-footer">
-                        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" />
+                        <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>
                     </div>
                 </form>
             </div>
