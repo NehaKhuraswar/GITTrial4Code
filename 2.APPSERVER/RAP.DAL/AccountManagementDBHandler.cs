@@ -843,8 +843,7 @@ namespace RAP.DAL
                     }
                     else
                     {
-                        model.CustomerID = CustomerID;
-                        model.ThirdPartyUser = null;
+                        model.CustomerID = CustomerID;                       
                     }
                 }
                 result.result = model;

@@ -76,11 +76,11 @@
                 <div class="subhead no-top-margin">
                     <h4>Your representative</h4>
                     <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
-                    <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != '0'" class="btn-link btn-edit">Edit</a>
+                    <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
 
                 </div>
                 <div>
-                    <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser == null">
+                    <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
                         <p class=" input-label">
                             Is anybody representing you?
                         </p>
@@ -100,7 +100,7 @@
 
                     <div id="representative-info">
                         <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
-                        <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser == null">
+                        <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
                             <div class="field-group">
                                 <label for="representative_firstname">Name</label>
                                 <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />
@@ -147,7 +147,7 @@
                                 <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                             </div>
                         </div>
-                        <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser != null">
+                        <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
 
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>

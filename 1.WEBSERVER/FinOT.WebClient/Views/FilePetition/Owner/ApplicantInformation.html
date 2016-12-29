@@ -70,31 +70,31 @@
             <div class="subhead no-top-margin">
                 <h4>Your representative</h4>
                 <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
-                <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != '0'" class="btn-link btn-edit">Edit</a>
+                <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
 
-            </div>
+            </div>            
             <div>
-                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser == null">                   
-                        <p class=" input-label">
-                            Is anybody representing you?
-                        </p>
-                        <div class="form-group-radio vertical clearfix">
-                            <label>
-                                <input type="radio" class="input-field"
-                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="true" /><i></i><span>Yes</span>
-                            </label>
+                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
+                    <p class=" input-label">
+                        Is anybody representing you?
+                    </p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label>
+                            <input type="radio" class="input-field"
+                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="true" /><i></i><span>Yes</span>
+                        </label>
 
-                            <label>
-                                <input type="radio" class="input-field"
-                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="false" /><i></i> <span>No</span>
-                            </label>
-                            <div class="clear"></div>
-                        </div>                    
+                        <label>
+                            <input type="radio" class="input-field"
+                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation" ng-value="false" /><i></i> <span>No</span>
+                        </label>
+                        <div class="clear"></div>
+                    </div>
                 </div>
                                
             <div id="representative-info">
                 <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
-                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser == null" >
+                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
                     <div class="field-group">
                         <label for="representative_firstname">Name</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />
@@ -141,15 +141,15 @@
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                     </div>
                 </div>
-                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null">
-                  
-                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
-                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
-                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
-                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
-                        <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
-                        <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
-                    </div>  
+                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
+
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
+                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
+                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                </div>  
                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                     <a ng-click="" class="btn-link btn-edit">Edit</a>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
