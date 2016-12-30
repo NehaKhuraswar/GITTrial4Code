@@ -4210,7 +4210,7 @@ namespace RAP.DAL
                }
                if (model.TenantInfo.Any())
                {
-                   OwnerResponseTenantInfo tenantInfo = new OwnerResponseTenantInfo();
+                   
                    List<OwnerPetitionTenantInfoM> tenantsInfoM = new List<OwnerPetitionTenantInfoM>();
                    foreach (var tenant in model.TenantInfo)
                    {
@@ -4224,7 +4224,7 @@ namespace RAP.DAL
                                               select r;
                                if (!userinfo.Any())
                                {
-
+                                   OwnerResponseTenantInfo tenantInfo = new OwnerResponseTenantInfo();
                                    tenant.TenantUserInfo = userResult.result;
                                    tenantInfo.TenantUserID = tenant.TenantUserInfo.UserID;
                                    tenantInfo.PropertyID = model.OwnerPropertyID;
