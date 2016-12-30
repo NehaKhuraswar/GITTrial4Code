@@ -20,31 +20,45 @@ namespace RAP.Business.Implementation
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                string hostAddress = ConfigurationManager.AppSettings["HostServer"];
-                int portNumber = Convert.ToInt32(ConfigurationManager.AppSettings["PortNumber"]);
-                bool enableSSL = string.IsNullOrEmpty(ConfigurationManager.AppSettings["EnableSSL"]) ? true : (ConfigurationManager.AppSettings["EnableSSL"] == "true" ? true : false);
-                string emailFrom = ConfigurationManager.AppSettings["SenderAddress"];
+                string hostServer = ConfigurationManager.AppSettings["HostServer"];
+                int portNumber = Convert.ToInt32(ConfigurationManager.AppSettings["PortNumber"]);               
+                string senderAddress = ConfigurationManager.AppSettings["SenderAddress"];
                 string password = ConfigurationManager.AppSettings["SenderPassword"];
+                string bcc = ConfigurationManager.AppSettings["BCC"];
+                bool enableSSL = string.IsNullOrEmpty(ConfigurationManager.AppSettings["EnableSSL"]) ? false : (ConfigurationManager.AppSettings["EnableSSL"] == "true" ? true : false);
+                bool defaultAuthentication = string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultAuthentication"]) ? false : (ConfigurationManager.AppSettings["DefaultAuthentication"] == "true" ? true : false);
+                bool includeBCC = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IncludeBCC"]) ? false : (ConfigurationManager.AppSettings["IncludeBCC"] == "true" ? true : false);
+                
                 using (MailMessage mail = new MailMessage())
                 {
-                    mail.From = new MailAddress(emailFrom);
+                    mail.From = new MailAddress(senderAddress);
                     mail.To.Add("venky.soundar@gcomsoft.com,neha.bhandari@gcomsoft.com,sanjay@gcomsoft.com");
                     mail.Subject = message.Subject;
                     mail.Body = message.MessageBody;
-                    //mail.CC.Add(string.Join(",", message.CC.Select(a => string.Concat("'", a, "'"))));
-                    //mail.Bcc.Add(string.Join(",", message.BCC.Select(a => string.Concat("'", a, "'"))));
+                    if (includeBCC)
+                    {
+                        mail.Bcc.Add(bcc);
+                    }          
                     mail.IsBodyHtml = false;
-                    if (message.Attachments != null)
-                    {
-                        foreach (string attahment in message.Attachments)
-                        {
-                            mail.Attachments.Add(new Attachment(attahment));
-                        }
-                    }
+                    //if (message.Attachments != null)
+                    //{
+                    //    foreach (string attahment in message.Attachments)
+                    //    {
+                    //        mail.Attachments.Add(new Attachment(attahment));
+                    //    }
+                    //}
 
-                    using (SmtpClient smtp = new SmtpClient(hostAddress, portNumber))
+                    using (SmtpClient smtp = new SmtpClient(hostServer, portNumber))
                     {
-                        smtp.Credentials = new NetworkCredential(emailFrom.Trim(), password.Trim());
+                        if(defaultAuthentication)
+                        {
+                            smtp.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;
+                        }
+                        else
+                        {
+                            smtp.Credentials = new NetworkCredential(senderAddress.Trim(), password.Trim());
+                        }
+                        
                         smtp.EnableSsl = enableSSL;
                         smtp.Send(mail);
                     }
