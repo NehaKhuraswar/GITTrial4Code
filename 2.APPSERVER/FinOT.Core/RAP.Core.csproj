@@ -51,9 +51,19 @@
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\ExceptionHandler.cs" />
     <Compile Include="Common\IExceptionHandler.cs" />
+    <Compile Include="Common\NotificationMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationMessage.resx</DependentUpon>
+    </Compile>
     <Compile Include="Common\OperationStatus.cs" />
     <Compile Include="Common\ReturnResult.cs" />
     <Compile Include="Common\StatusEnum.cs" />
+    <Compile Include="Common\Message.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Message.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataModels\Audit.cs" />
     <Compile Include="DataModels\Petition.cs" />
     <Compile Include="DataModels\CodeDescription.cs" />
@@ -83,7 +93,16 @@
     <Compile Include="Services\IApplicationProcessingService.cs" />
     <Compile Include="Services\INotificationService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Common\Message.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Message.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\NotificationMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -99,7 +99,7 @@ namespace RAP.Core.DataModels
         public int CustomerID { get; set; }
         public UserInfoM ThirdPartyUser { get; set; }
         public bool EmailNotification { get; set; }
-        public bool MailNotificaton { get; set; }
+        public bool MailNotification { get; set; }
     }
     public class Collaborator
     {

@@ -5,6 +5,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.StateList = [];
     self.Password;
     self.ConfirmPassword;
+    $scope.required = true;
     self.Title = "Create a City of Oakland Account";
 
     if (rapGlobalFactory.IsEdit == true)

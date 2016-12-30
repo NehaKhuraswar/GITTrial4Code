@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Resources;
 
 namespace RAP.Core.Common
 {
@@ -28,6 +29,7 @@ namespace RAP.Core.Common
         
         private void GetStatusDetails()
         {
+           
             switch (_status)
             {
                 case StatusEnum.Success:
@@ -83,7 +85,7 @@ namespace RAP.Core.Common
 
                 case StatusEnum.AuthenticationFailed:
                     StatusCode = "0106";
-                    StatusMessage = "Authentication failed";
+                    StatusMessage =  Message.ResourceManager.GetString("ID_0106");
                     break;
 
                 case StatusEnum.NullArgumentException:

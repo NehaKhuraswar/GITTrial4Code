@@ -781,12 +781,20 @@ namespace RAP.DAL
             {
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
+                    ReturnResult<UserInfoM> thirdPartySaveResult = new ReturnResult<UserInfoM>();
+                    thirdPartySaveResult = commondbHandler.SaveUserInfo(model.ThirdPartyUser);
+                    if (thirdPartySaveResult.status.Status != StatusEnum.Success)
+                    {
+                        result.status.Status = thirdPartySaveResult.status.Status;
+                        return result;
+                    }
+
                     var thirdParty = db.ThirdPartyRepresentations.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
 
                     if (thirdParty != null)
                     {
-                        thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
-                        thirdParty.MailNotification = model.MailNotificaton;
+                        thirdParty.ThirdPartyUserID = thirdPartySaveResult.result.UserID;
+                        thirdParty.MailNotification = model.MailNotification;
                         thirdParty.EmailNotification = model.EmailNotification;
                         thirdParty.ModifiedDate = DateTime.Now;
                         db.SubmitChanges();
@@ -795,8 +803,8 @@ namespace RAP.DAL
                     {
                         ThirdPartyRepresentation _thirdParty = new ThirdPartyRepresentation();
                         _thirdParty.CustomerID = model.CustomerID;
-                        _thirdParty.ThirdPartyUserID = model.ThirdPartyUser.UserID;
-                        _thirdParty.MailNotification = model.MailNotificaton;
+                        _thirdParty.ThirdPartyUserID = thirdPartySaveResult.result.UserID;
+                        _thirdParty.MailNotification = model.MailNotification;
                         _thirdParty.EmailNotification = model.EmailNotification;
                         _thirdParty.CreatedDate = DateTime.Now;
                         db.ThirdPartyRepresentations.InsertOnSubmit(_thirdParty);
@@ -831,7 +839,7 @@ namespace RAP.DAL
                         model.CustomerID = CustomerID;
                         model.ThirdPartyUser.UserID = thirdParty.ThirdPartyUserID;
                         model.EmailNotification = (thirdParty.EmailNotification == null) ? false : Convert.ToBoolean(thirdParty.EmailNotification);
-                        model.MailNotificaton = (thirdParty.MailNotification == null) ? false : Convert.ToBoolean(thirdParty.MailNotification);
+                        model.MailNotification = (thirdParty.MailNotification == null) ? false : Convert.ToBoolean(thirdParty.MailNotification);
 
                         var thirdPartyUserInforesult = commondbHandler.GetUserInfo(model.ThirdPartyUser.UserID);
                         if (thirdPartyUserInforesult.status.Status != StatusEnum.Success)

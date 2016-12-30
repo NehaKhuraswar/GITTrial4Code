@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>  
+
+<div class="container">
     <div class="application-form-wrapper">
         <div class="row">
 
@@ -13,7 +15,7 @@
                             </div>
 
                             <div class="field-group">
-                                <label for="first_name">Name</label>
+                                <label for="first_name">Name <span style="color:red">*</span></label>
                                 <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.CustomerInfo.User.FirstName" required />
                             </div>
 
@@ -28,7 +30,7 @@
                             </div>
 
                             <div class="field-group">
-                                <label for="email">Email</label>
+                                <label for="email">Email <span style="color:red">*</span></label>
                                 <input type="text" name="email" id="email" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.email" />
                             </div>
 
@@ -45,151 +47,153 @@
 
                             <div class="field-group">
                                 <label for="password">Create a Password</label>
-                                <input type="text" name="password" id="password" class="field-input" ng-model="Ctrl.Password" placeholder="" />
+                                <input type="password" name="password" id="password" class="field-input" ng-model="Ctrl.Password" placeholder="" />
                             </div>
+                            
+                                <div class="field-group mar-bottom-60">
+                                    <label for="confirm_password">Confirm your password</label>
+                                    <input type="password" name="confirm_password" id="confirm_password" class="field-input" ng-model="Ctrl.ConfirmPassword" placeholder="" required/>
+                                    <span ng-show="frmCreateAccount.confirm_password.$touched && frmCreateAccount.confirm_password.$invalid" style="color:red">The password is required.</span>
+                                    
+                                </div>
+                               
+                                <!-- Residential address -->
+                                <div class="subhead type2 ">
+                                    <h4>Residential address</h4>
+                                </div>
+                                <div class="field-group">
+                                    <label for="residential_street_address1">Street address 1</label>
+                                    <input type="text" name="residential_street_address1" id="residential_street_address1" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.AddressLine1" />
+                                </div>
 
-                            <div class="field-group mar-bottom-60">
-                                <label for="confirm_password">Confirm your password</label>
-                                <input type="text" name="confirm_password" id="confirm_password" class="field-input" ng-model="Ctrl.ConfirmPassword" placeholder="" />
-                            </div>
+                                <div class="field-group">
+                                    <label for="residential_street_address2">Street address 2(optional)</label>
+                                    <input type="text" name="residential_street_address2" id="residential_street_address2" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.AddressLine2" />
+                                </div>
 
-                            <!-- Residential address -->
-                            <div class="subhead type2 ">
-                                <h4>Residential address</h4>
-                            </div>
-                            <div class="field-group">
-                                <label for="residential_street_address1">Street address 1</label>
-                                <input type="text" name="residential_street_address1" id="residential_street_address1" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.AddressLine1" />
-                            </div>
+                                <div class="field-group">
+                                    <label for="residential_city">City</label>
+                                    <input type="text" name="residential_city" id="residential_city" class="field-input" placeholder=""
+                                           ng-model="Ctrl.CustomerInfo.User.City" />
+                                </div>
 
-                            <div class="field-group">
-                                <label for="residential_street_address2">Street address 2(optional)</label>
-                                <input type="text" name="residential_street_address2" id="residential_street_address2" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.AddressLine2" />
-                            </div>
-
-                            <div class="field-group">
-                                <label for="residential_city">City</label>
-                                <input type="text" name="residential_city" id="residential_city" class="field-input" placeholder=""
-                                       ng-model="Ctrl.CustomerInfo.User.City" />
-                            </div>
-
-                            <div class="field-group">
-                                <label for="residential_state">State</label>
-                                <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select"
-                                        ng-model="Ctrl.CustomerInfo.User.State"
-                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
-                                    <option value="" selected>Select state</option>
-                                </select>
-                                <!--<div class="input-wrapper">
-                                    <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select" ng-model="Ctrl.CustomerInfo.User.State">
-                                        <option value="option_01">Option 01</option>
-                                        <option value="option_02">Option 02</option>
-                                        <option value="option_03">Option 03</option>
+                                <div class="field-group">
+                                    <label for="residential_state">State</label>
+                                    <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select"
+                                            ng-model="Ctrl.CustomerInfo.User.State"
+                                            ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                        <option value="" selected>Select state</option>
                                     </select>
-                                </div>-->
-                            </div>
-
-                            <div class="field-group">
-                                <label for="residential_zipcode">Zip code</label>
-                                <input type="text" name="residential_zipcode" id="residential_zipcode" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.Zip" />
-                            </div>
-
-                            <div class="field-group mar-bottom-60">
-                                <label for="residential_phone">Phone Number</label>
-                                <input type="text" name="residential_phone" id="residential_phone" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.PhoneNumber" />
-                            </div>
-
-                            <!-- Mailing address -->
-                            <div class="subhead type2 ">
-                                <h4>Mailing address</h4>
-                            </div>
-
-                            <div class="field-group">
-                                <div class="checkbox">
-                                    <label for="same_as_residential_address">
-                                        <input type="checkbox" name="same_as_residential_address" id="same_as_residential_address" class="input-field"
-                                               n
-                                               ng-change="Ctrl.ChangeIsMailing()"
-                                               ng-model="Ctrl.CustomerInfo.IsSameMailingAddress" /><i></i><span>My mailing address is the same as my residential address.</span>
-                                    </label>
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                            <div ng-show="!Ctrl.CustomerInfo.IsSameMailingAddress">
-                                <div class="field-group">
-                                    <label for="mailing_street_address1">Street address 1</label>
-                                    <input type="text" name="mailing_street_address1" id="mailing_street_address1" class="field-input"
-                                           ng-model="Ctrl.CustomerInfo.MailingAddress.AddressLine1" placeholder="" />
+                                    <!--<div class="input-wrapper">
+                <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select" ng-model="Ctrl.CustomerInfo.User.State">
+                    <option value="option_01">Option 01</option>
+                    <option value="option_02">Option 02</option>
+                    <option value="option_03">Option 03</option>
+                </select>
+            </div>-->
                                 </div>
 
                                 <div class="field-group">
-                                    <label for="mailing_street_address2">Street address 2(optional)</label>
-                                    <input type="text" name="mailing_street_address2" id="mailing_street_address2" class="field-input"
-                                           ng-model="Ctrl.CustomerInfo.MailingAddress.AddressLine2" placeholder="" />
-                                </div>
-
-                                <div class="field-group">
-                                    <label for="mailing_city">City</label>
-                                    <input type="text" name="mailing_city" id="mailing_city" class="field-input" placeholder=""
-                                           ng-model="Ctrl.CustomerInfo.MailingAddress.City" />
-                                </div>
-
-                                <div class="field-group">
-                                    <label for="mailing_state">State</label>
-                                    <div class="input-wrapper">
-                                        <select name="mailing_state" id="mailing_state" class="custom-select" data-placeholder="Select"
-                                                ng-model="Ctrl.CustomerInfo.MailingAddress.State"
-                                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
-                                            <option value="" selected>Select state</option>
-                                        </select>
-                                        <!--<select name="mailing_state" id="mailing_state" class="custom-select" data-placeholder="Select">
-                                            <option value="option_01">Option 01</option>
-                                            <option value="option_02">Option 02</option>
-                                            <option value="option_03">Option 03</option>
-                                        </select>-->
-                                    </div>
-                                </div>
-
-                                <div class="field-group">
-                                    <label for="mailing_zipcode">Zip code</label>
-                                    <input type="text" name="mailing_zipcode" id="mailing_zipcode" class="field-input" placeholder=""
-                                           ng-model="Ctrl.CustomerInfo.MailingAddress.Zip" />
+                                    <label for="residential_zipcode">Zip code</label>
+                                    <input type="text" name="residential_zipcode" id="residential_zipcode" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.Zip" />
                                 </div>
 
                                 <div class="field-group mar-bottom-60">
-                                    <label for="mailing_phone">Phone number</label>
-                                    <input type="text" name="mailing_phone" id="mailing_phone" class="field-input"
-                                           ng-model="Ctrl.CustomerInfo.MailingAddress.PhoneNumber" placeholder="" />
+                                    <label for="residential_phone">Phone Number</label>
+                                    <input type="text" name="residential_phone" id="residential_phone" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.PhoneNumber" />
                                 </div>
-                            </div>
 
-                            <!-- Your preferred way of receiving notifications -->
-                            <div class="subhead type2 ">
-                                <h4>Your preferred way of receiving notifications</h4>
-                            </div>
+                                <!-- Mailing address -->
+                                <div class="subhead type2 ">
+                                    <h4>Mailing address</h4>
+                                </div>
 
-                            <div class="field-group no-bottom-margin">
-                                <div class="row">
-                                    <div class="col-sm-9 col-xs-12">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <div class="field-group">
+                                    <div class="checkbox">
+                                        <label for="same_as_residential_address">
+                                            <input type="checkbox" name="same_as_residential_address" id="same_as_residential_address" class="input-field"
+                                                   n
+                                                   ng-change="Ctrl.ChangeIsMailing()"
+                                                   ng-model="Ctrl.CustomerInfo.IsSameMailingAddress" /><i></i><span>My mailing address is the same as my residential address.</span>
+                                        </label>
+                                        <div class="clear"></div>
                                     </div>
                                 </div>
-                            </div>
+                                <div ng-show="!Ctrl.CustomerInfo.IsSameMailingAddress">
+                                    <div class="field-group">
+                                        <label for="mailing_street_address1">Street address 1</label>
+                                        <input type="text" name="mailing_street_address1" id="mailing_street_address1" class="field-input"
+                                               ng-model="Ctrl.CustomerInfo.MailingAddress.AddressLine1" placeholder="" />
+                                    </div>
 
-                            <div class="form-group-checkbox vertical clearfix">
-                                <div class="checkbox-wrapper">
-                                    <label for="notification_service_proof_mail">
-                                        <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail"  ng-model="Ctrl.CustomerInfo.MailNotificationFlag"   /><i></i><span>Proof of service by mail Email</span>
-                                    </label>
+                                    <div class="field-group">
+                                        <label for="mailing_street_address2">Street address 2(optional)</label>
+                                        <input type="text" name="mailing_street_address2" id="mailing_street_address2" class="field-input"
+                                               ng-model="Ctrl.CustomerInfo.MailingAddress.AddressLine2" placeholder="" />
+                                    </div>
 
-                                    <label for="notification_by_email">
-                                        <input type="checkbox" name="notification_by_email" id="notification_by_email"
-                                               ng-model="Ctrl.CustomerInfo.EmailNotificationFlag" /><i></i><span>Email</span>
-                                    </label>
+                                    <div class="field-group">
+                                        <label for="mailing_city">City</label>
+                                        <input type="text" name="mailing_city" id="mailing_city" class="field-input" placeholder=""
+                                               ng-model="Ctrl.CustomerInfo.MailingAddress.City" />
+                                    </div>
+
+                                    <div class="field-group">
+                                        <label for="mailing_state">State</label>
+                                        <div class="input-wrapper">
+                                            <select name="mailing_state" id="mailing_state" class="custom-select" data-placeholder="Select"
+                                                    ng-model="Ctrl.CustomerInfo.MailingAddress.State"
+                                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                                <option value="" selected>Select state</option>
+                                            </select>
+                                            <!--<select name="mailing_state" id="mailing_state" class="custom-select" data-placeholder="Select">
+                        <option value="option_01">Option 01</option>
+                        <option value="option_02">Option 02</option>
+                        <option value="option_03">Option 03</option>
+                    </select>-->
+                                        </div>
+                                    </div>
+
+                                    <div class="field-group">
+                                        <label for="mailing_zipcode">Zip code</label>
+                                        <input type="text" name="mailing_zipcode" id="mailing_zipcode" class="field-input" placeholder=""
+                                               ng-model="Ctrl.CustomerInfo.MailingAddress.Zip" />
+                                    </div>
+
+                                    <div class="field-group mar-bottom-60">
+                                        <label for="mailing_phone">Phone number</label>
+                                        <input type="text" name="mailing_phone" id="mailing_phone" class="field-input"
+                                               ng-model="Ctrl.CustomerInfo.MailingAddress.PhoneNumber" placeholder="" />
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
+                                <!-- Your preferred way of receiving notifications -->
+                                <div class="subhead type2 ">
+                                    <h4>Your preferred way of receiving notifications</h4>
+                                </div>
+
+                                <div class="field-group no-bottom-margin">
+                                    <div class="row">
+                                        <div class="col-sm-9 col-xs-12">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-checkbox vertical clearfix">
+                                    <div class="checkbox-wrapper">
+                                        <label for="notification_service_proof_mail">
+                                            <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail"  ng-model="Ctrl.CustomerInfo.MailNotificationFlag"   /><i></i><span>Proof of service by mail Email</span>
+                                        </label>
+
+                                        <label for="notification_by_email">
+                                            <input type="checkbox" name="notification_by_email" id="notification_by_email"
+                                                   ng-model="Ctrl.CustomerInfo.EmailNotificationFlag" /><i></i><span>Email</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+</div>
 
                         <div class="step-footer no-top-margin">
                             <button type="submit" class="btn btn-sm btn-primary" ng-click="Ctrl.Register(Ctrl.CustomerInfo)">Submit</button>
@@ -203,39 +207,4 @@
     </div>
 </div>
 
-    <!--<div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="panel panel-danger font-small">
-                <div class="panel-heading">
-                    <strong>User</strong>
-                </div>
-                <div class="panel-body">
-                    <p>Create Account</p>
-                    <p>First Name</p>
-                    <input type="text" class="form-control input-sm"  ng-trim="false" ng-model="Ctrl.CustomerInfo.User.FirstName" required/>
-                    <p>Last Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CustomerInfo.User.LastName" required />
-                    <p>Phone Number</p>
-                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CustomerInfo.User.PhoneNumber" required />
-                    <p>Email</p>
-                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CustomerInfo.email" required />
-                    <p>Address Line 1</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CustomerInfo.User.AddressLine1" required />
-                    <p>Address Line 2</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CustomerInfo.User.AddressLine2" required />
-                    <p>City</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CustomerInfo.User.City" required />
-                    <p>State</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CustomerInfo.User.State" required />
-                    <p>Zip Code</p>
-                    <input type="number" class="form-control input-sm" maxlength="5" ng-trim="false" ng-model="Ctrl.CustomerInfo.User.Zip" required />
-                    <p>Password</p>
-                    <input type="password" class="form-control input-sm" maxlength="24" ng-trim="false" ng-model="Ctrl.CustomerInfo.Password" required />
-
-                    <label><input type="checkbox" ng-model="Ctrl.CustomerInfo.EmailNotificationFlag" required/>    Email Notification</label>
-                    <label><input type="checkbox" ng-model="Ctrl.CustomerInfo.MailNotificationFlag" required />   Mail Notification</label>
-                    <button ng-click="Ctrl.Register(Ctrl.CustomerInfo)">Register user</button>
-                </div>
-            </div>
-        </div>
-    </div>-->
+ 

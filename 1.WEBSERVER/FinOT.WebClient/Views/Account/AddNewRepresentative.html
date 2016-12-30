@@ -19,7 +19,7 @@
 
             <div class="field-group">
                 <label for="business_name">Business name</label>
-                <input type="text" name="business_name" id="business_name" class="field-input" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.BusinuessName" />
+                <input type="text" name="business_name" id="business_name" class="field-input" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.BusinessName" />
             </div>
 
             <div class="field-group">
@@ -35,7 +35,7 @@
             <div class="field-group">
                 <label for="residential_state">State</label>
                 <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select"
-                        ng-model="Ctrl.CustomerInfo.User.State"
+                        ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.State"
                         ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
                     <option value="" selected>Select state</option>
                 </select>
@@ -63,14 +63,10 @@
 
             <div class="field-group subhead">
                 <p>Select all cases that you would like your representative to have access to</p>
-                <div class="form-group-checkbox vertical clearfix">
+                <div class="form-group-checkbox vertical clearfix" ng-repeat="caseinfo in Ctrl.Cases">
                     <div class="checkbox-wrapper">
-                        <label for="chk_case1">
-                            <input type="checkbox" name="chk_case1" id="chk_case1" value="T17-0451" /><i></i><span>T17-0451</span>
-                        </label>
-
-                        <label for="chk_case2">
-                            <input type="checkbox" name="chk_case2" id="chk_case2" value="T17-0416" /><i></i><span>T17-0416</span>
+                        <label for="{{caseinfo.CaseID}}">
+                            <input type="checkbox" name="{{caseinfo.CaseID}}" id="{{caseinfo.CaseID}}" value="{{caseinfo.CaseID}}" /><i></i><span>{{caseinfo.CaseID}}</span>
                         </label>
                     </div>
                 </div>
@@ -92,12 +88,12 @@
             <div class="field-group no-bottom-margin">
                 <div class="form-group-checkbox vertical clearfix">
                     <div class="checkbox-wrapper">
-                        <label for="chk_service_proof">
-                            <input type="checkbox" name="chk_service_proof" id="chk_service_proof" ng-model="Ctrl.ThirdPartyInfo.MailNotification"  value="true" /><i></i><span>Proof of service by mail                             </span>
+                        <label for="chk_mailNotify">
+                            <input type="checkbox" name="chk_mailNotify" id="chk_mailNotify" ng-model="Ctrl.ThirdPartyInfo.MailNotification"  value="true" /><i></i><span>Proof of service by mail                             </span>
                         </label>
 
-                        <label for="chk_case2">
-                            <input type="checkbox" name="chk_email" id="chk_email" value="true" ng-model="Ctrl.ThirdPartyInfo.EmailNotification" /><i></i><span>Email</span>
+                        <label for="chk_emailNotify">
+                            <input type="checkbox" name="chk_emailNotify" id="chk_emailNotify" value="true" ng-model="Ctrl.ThirdPartyInfo.EmailNotification" /><i></i><span>Email</span>
                         </label>
                         <br />
 

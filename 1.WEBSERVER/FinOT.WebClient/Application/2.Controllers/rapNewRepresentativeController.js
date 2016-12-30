@@ -6,6 +6,7 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.ThirdPartyInfo = null;
     self.bAcknowledge = false;
+    self.Cases = null;
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -39,6 +40,13 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
             $location.path("/publicdashboard");
         });        
     }
+    var __GetCasesForCustomer = function () {
+        return masterFactory.GetCasesForCustomer(self.custDetails.custID).then(function (response) {
+            self.Cases = response.data;
+        });
+    }
+    __GetCasesForCustomer();
+
     self.Cancel = function()
     {
         $location.path("/publicdashboard");
