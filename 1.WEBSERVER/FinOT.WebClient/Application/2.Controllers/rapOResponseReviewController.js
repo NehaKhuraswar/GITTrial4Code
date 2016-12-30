@@ -1,28 +1,33 @@
 ﻿'use strict';
-var rapOResponseExemptionController = ['$scope', '$modal', 'alertService', 'rapOResponseExemptionFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapOResponseReviewFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
-    self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;  
+    self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;
 
     self.Calender = masterFactory.Calender;
 
-    rapFactory.GetOResponseExemption(self.caseinfo).then(function (response) {
+
+    rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
-        self.caseinfo = response.data;     
+        self.caseinfo = response.data;       
     });
 
-    self.Continue = function () {   
+   
+    self.Continue = function () {
+        if (self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.length == 0) {
+            self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(self.Rent);
+        }
+
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveOResponseExemption(self.caseinfo).then(function (response) {
+        rapFactory.SaveOResponseRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
         });
-        $scope.model.oresponseException = false;
-        $scope.model.oresponseDocument = true;
+        
         //$scope.model.ownerRentalHistory = false;
         //$scope.model.ownerAdditionalDocuments = true;
         //$scope.model.DisableAllCurrent();
@@ -30,7 +35,7 @@ var rapOResponseExemptionController = ['$scope', '$modal', 'alertService', 'rapO
         //$scope.model.oPetionActiveStatus.RentHistory = true;
     }
 }];
-var rapOResponseExemptionController_resolve = {
+var rapOResponseReviewController_resolve = {
     model: ['$route', 'alertService', 'rapOwnerRentalHistoryFactory', function ($route, alert, rapFactory) {
         ////return auth.fetchToken().then(function (response) {
         //return rapFactory.GetTenantPetetionFormInfo().then(function (response) {

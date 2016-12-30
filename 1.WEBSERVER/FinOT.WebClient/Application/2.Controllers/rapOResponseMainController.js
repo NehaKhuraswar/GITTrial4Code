@@ -16,7 +16,7 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         self.oresponseDecreasedHousing = false;
         self.oresponseException = false;
         self.oresponseDocument = false;
-      
+        self.oresponseReview = false;      
     };
     _DisableAll();
 
@@ -81,6 +81,14 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         _DisableAll();
         //        self.DisableAllCurrent();
         self.oresponseDocument = true;
+        //        self.oPetionCurrentStatus.RentHistory = true;
+        //    }
+    };
+    self.ShowOresponseReview = function () {
+        //    if (self.oPetionActiveStatus.RentHistory) {
+        _DisableAll();
+        //        self.DisableAllCurrent();
+        self.oresponseReview = true;
         //        self.oPetionCurrentStatus.RentHistory = true;
         //    }
     };
