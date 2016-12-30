@@ -16,6 +16,7 @@ namespace RAP.Core.Common
         AccountAlreadyExist,
         DatabaseMessage,
         PinError,
+        OwnerResponseSubmissionFailed,
         #endregion
         
         #region Exceptions

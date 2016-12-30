@@ -48,6 +48,12 @@ namespace RAP.Core.Common
                     StatusCode = "0002";
                     StatusMessage = "PIN doesnot match, please renter the pin ";
                     break;
+                case StatusEnum.OwnerResponseSubmissionFailed:
+                    StatusCode = "0003";
+                    StatusMessage = "Owner Resonponse petition submit failed";
+                    break;
+
+
 
                 #region Generic Unhandled Exceptions
                 case StatusEnum.InvalidArgumentException:

@@ -357,6 +357,7 @@
       <Column Name="bPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="ResponseFiledByThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="CaseRespondingTo" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Association Name="OwnerResponseApplicantInfo_OwnerResponseInfo" Member="OwnerResponseInfos" ThisKey="OwnerResponseApplicantInfoID" OtherKey="OwnerResponseApplicantInfoID" Type="OwnerResponseInfo" />
     </Type>
   </Table>
   <Table Name="dbo.OwnerResponseTenantInfo" Member="OwnerResponseTenantInfos">
@@ -555,7 +556,20 @@
       <Column Name="bHasUnitOccupiedByOwner" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="OwnerResponsePropertyInfo_OwnerResponseTenantInfo" Member="OwnerResponseTenantInfos" ThisKey="PropertyID" OtherKey="PropertyID" Type="OwnerResponseTenantInfo" />
       <Association Name="OwnerResponsePropertyInfo_OwnerResponseRentalIncrementInfo" Member="OwnerResponseRentalIncrementInfos" ThisKey="PropertyID" OtherKey="PropertyID" Type="OwnerResponseRentalIncrementInfo" />
+      <Association Name="OwnerResponsePropertyInfo_OwnerResponseInfo" Member="OwnerResponseInfos" ThisKey="PropertyID" OtherKey="OwnerResponsePropertyID" Type="OwnerResponseInfo" />
       <Association Name="UnitType_OwnerResponsePropertyInfo" Member="UnitType" ThisKey="UnitTypeID" OtherKey="UnitTypeID" Type="UnitType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OwnerResponseInfo" Member="OwnerResponseInfos">
+    <Type Name="OwnerResponseInfo">
+      <Column Name="OwnerResponseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OwnerResponseApplicantInfoID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OwnerResponsePropertyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bAgreeToCityMediation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="OwnerResponseApplicantInfo_OwnerResponseInfo" Member="OwnerResponseApplicantInfo" ThisKey="OwnerResponseApplicantInfoID" OtherKey="OwnerResponseApplicantInfoID" Type="OwnerResponseApplicantInfo" IsForeignKey="true" />
+      <Association Name="OwnerResponsePropertyInfo_OwnerResponseInfo" Member="OwnerResponsePropertyInfo" ThisKey="OwnerResponsePropertyID" OtherKey="PropertyID" Type="OwnerResponsePropertyInfo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -156,6 +156,9 @@ namespace RAP.DAL
     partial void InsertOwnerResponsePropertyInfo(OwnerResponsePropertyInfo instance);
     partial void UpdateOwnerResponsePropertyInfo(OwnerResponsePropertyInfo instance);
     partial void DeleteOwnerResponsePropertyInfo(OwnerResponsePropertyInfo instance);
+    partial void InsertOwnerResponseInfo(OwnerResponseInfo instance);
+    partial void UpdateOwnerResponseInfo(OwnerResponseInfo instance);
+    partial void DeleteOwnerResponseInfo(OwnerResponseInfo instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -529,6 +532,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<OwnerResponsePropertyInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OwnerResponseInfo> OwnerResponseInfos
+		{
+			get
+			{
+				return this.GetTable<OwnerResponseInfo>();
 			}
 		}
 	}
@@ -7346,6 +7357,8 @@ namespace RAP.DAL
 		
 		private string _CaseRespondingTo;
 		
+		private EntitySet<OwnerResponseInfo> _OwnerResponseInfos;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7384,6 +7397,7 @@ namespace RAP.DAL
 		
 		public OwnerResponseApplicantInfo()
 		{
+			this._OwnerResponseInfos = new EntitySet<OwnerResponseInfo>(new Action<OwnerResponseInfo>(this.attach_OwnerResponseInfos), new Action<OwnerResponseInfo>(this.detach_OwnerResponseInfos));
 			OnCreated();
 		}
 		
@@ -7687,6 +7701,19 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerResponseApplicantInfo_OwnerResponseInfo", Storage="_OwnerResponseInfos", ThisKey="OwnerResponseApplicantInfoID", OtherKey="OwnerResponseApplicantInfoID")]
+		public EntitySet<OwnerResponseInfo> OwnerResponseInfos
+		{
+			get
+			{
+				return this._OwnerResponseInfos;
+			}
+			set
+			{
+				this._OwnerResponseInfos.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -7705,6 +7732,18 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_OwnerResponseInfos(OwnerResponseInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerResponseApplicantInfo = this;
+		}
+		
+		private void detach_OwnerResponseInfos(OwnerResponseInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerResponseApplicantInfo = null;
 		}
 	}
 	
@@ -11105,6 +11144,8 @@ namespace RAP.DAL
 		
 		private EntitySet<OwnerResponseRentalIncrementInfo> _OwnerResponseRentalIncrementInfos;
 		
+		private EntitySet<OwnerResponseInfo> _OwnerResponseInfos;
+		
 		private EntityRef<UnitType> _UnitType;
 		
     #region Extensibility Method Definitions
@@ -11193,6 +11234,7 @@ namespace RAP.DAL
 		{
 			this._OwnerResponseTenantInfos = new EntitySet<OwnerResponseTenantInfo>(new Action<OwnerResponseTenantInfo>(this.attach_OwnerResponseTenantInfos), new Action<OwnerResponseTenantInfo>(this.detach_OwnerResponseTenantInfos));
 			this._OwnerResponseRentalIncrementInfos = new EntitySet<OwnerResponseRentalIncrementInfo>(new Action<OwnerResponseRentalIncrementInfo>(this.attach_OwnerResponseRentalIncrementInfos), new Action<OwnerResponseRentalIncrementInfo>(this.detach_OwnerResponseRentalIncrementInfos));
+			this._OwnerResponseInfos = new EntitySet<OwnerResponseInfo>(new Action<OwnerResponseInfo>(this.attach_OwnerResponseInfos), new Action<OwnerResponseInfo>(this.detach_OwnerResponseInfos));
 			this._UnitType = default(EntityRef<UnitType>);
 			OnCreated();
 		}
@@ -11987,6 +12029,19 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerResponsePropertyInfo_OwnerResponseInfo", Storage="_OwnerResponseInfos", ThisKey="PropertyID", OtherKey="OwnerResponsePropertyID")]
+		public EntitySet<OwnerResponseInfo> OwnerResponseInfos
+		{
+			get
+			{
+				return this._OwnerResponseInfos;
+			}
+			set
+			{
+				this._OwnerResponseInfos.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UnitType_OwnerResponsePropertyInfo", Storage="_UnitType", ThisKey="UnitTypeID", OtherKey="UnitTypeID", IsForeignKey=true)]
 		public UnitType UnitType
 		{
@@ -12063,6 +12118,282 @@ namespace RAP.DAL
 		{
 			this.SendPropertyChanging();
 			entity.OwnerResponsePropertyInfo = null;
+		}
+		
+		private void attach_OwnerResponseInfos(OwnerResponseInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerResponsePropertyInfo = this;
+		}
+		
+		private void detach_OwnerResponseInfos(OwnerResponseInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerResponsePropertyInfo = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OwnerResponseInfo")]
+	public partial class OwnerResponseInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _OwnerResponseID;
+		
+		private int _OwnerResponseApplicantInfoID;
+		
+		private System.Nullable<int> _OwnerResponsePropertyID;
+		
+		private System.Nullable<bool> _bAgreeToCityMediation;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.DateTime> _LastModifiedDate;
+		
+		private EntityRef<OwnerResponseApplicantInfo> _OwnerResponseApplicantInfo;
+		
+		private EntityRef<OwnerResponsePropertyInfo> _OwnerResponsePropertyInfo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOwnerResponseIDChanging(int value);
+    partial void OnOwnerResponseIDChanged();
+    partial void OnOwnerResponseApplicantInfoIDChanging(int value);
+    partial void OnOwnerResponseApplicantInfoIDChanged();
+    partial void OnOwnerResponsePropertyIDChanging(System.Nullable<int> value);
+    partial void OnOwnerResponsePropertyIDChanged();
+    partial void OnbAgreeToCityMediationChanging(System.Nullable<bool> value);
+    partial void OnbAgreeToCityMediationChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastModifiedDateChanged();
+    #endregion
+		
+		public OwnerResponseInfo()
+		{
+			this._OwnerResponseApplicantInfo = default(EntityRef<OwnerResponseApplicantInfo>);
+			this._OwnerResponsePropertyInfo = default(EntityRef<OwnerResponsePropertyInfo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerResponseID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int OwnerResponseID
+		{
+			get
+			{
+				return this._OwnerResponseID;
+			}
+			set
+			{
+				if ((this._OwnerResponseID != value))
+				{
+					this.OnOwnerResponseIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerResponseID = value;
+					this.SendPropertyChanged("OwnerResponseID");
+					this.OnOwnerResponseIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerResponseApplicantInfoID", DbType="Int NOT NULL")]
+		public int OwnerResponseApplicantInfoID
+		{
+			get
+			{
+				return this._OwnerResponseApplicantInfoID;
+			}
+			set
+			{
+				if ((this._OwnerResponseApplicantInfoID != value))
+				{
+					if (this._OwnerResponseApplicantInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOwnerResponseApplicantInfoIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerResponseApplicantInfoID = value;
+					this.SendPropertyChanged("OwnerResponseApplicantInfoID");
+					this.OnOwnerResponseApplicantInfoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerResponsePropertyID", DbType="Int")]
+		public System.Nullable<int> OwnerResponsePropertyID
+		{
+			get
+			{
+				return this._OwnerResponsePropertyID;
+			}
+			set
+			{
+				if ((this._OwnerResponsePropertyID != value))
+				{
+					if (this._OwnerResponsePropertyInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOwnerResponsePropertyIDChanging(value);
+					this.SendPropertyChanging();
+					this._OwnerResponsePropertyID = value;
+					this.SendPropertyChanged("OwnerResponsePropertyID");
+					this.OnOwnerResponsePropertyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bAgreeToCityMediation", DbType="Bit")]
+		public System.Nullable<bool> bAgreeToCityMediation
+		{
+			get
+			{
+				return this._bAgreeToCityMediation;
+			}
+			set
+			{
+				if ((this._bAgreeToCityMediation != value))
+				{
+					this.OnbAgreeToCityMediationChanging(value);
+					this.SendPropertyChanging();
+					this._bAgreeToCityMediation = value;
+					this.SendPropertyChanged("bAgreeToCityMediation");
+					this.OnbAgreeToCityMediationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this.OnLastModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedDate = value;
+					this.SendPropertyChanged("LastModifiedDate");
+					this.OnLastModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerResponseApplicantInfo_OwnerResponseInfo", Storage="_OwnerResponseApplicantInfo", ThisKey="OwnerResponseApplicantInfoID", OtherKey="OwnerResponseApplicantInfoID", IsForeignKey=true)]
+		public OwnerResponseApplicantInfo OwnerResponseApplicantInfo
+		{
+			get
+			{
+				return this._OwnerResponseApplicantInfo.Entity;
+			}
+			set
+			{
+				OwnerResponseApplicantInfo previousValue = this._OwnerResponseApplicantInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._OwnerResponseApplicantInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OwnerResponseApplicantInfo.Entity = null;
+						previousValue.OwnerResponseInfos.Remove(this);
+					}
+					this._OwnerResponseApplicantInfo.Entity = value;
+					if ((value != null))
+					{
+						value.OwnerResponseInfos.Add(this);
+						this._OwnerResponseApplicantInfoID = value.OwnerResponseApplicantInfoID;
+					}
+					else
+					{
+						this._OwnerResponseApplicantInfoID = default(int);
+					}
+					this.SendPropertyChanged("OwnerResponseApplicantInfo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerResponsePropertyInfo_OwnerResponseInfo", Storage="_OwnerResponsePropertyInfo", ThisKey="OwnerResponsePropertyID", OtherKey="PropertyID", IsForeignKey=true)]
+		public OwnerResponsePropertyInfo OwnerResponsePropertyInfo
+		{
+			get
+			{
+				return this._OwnerResponsePropertyInfo.Entity;
+			}
+			set
+			{
+				OwnerResponsePropertyInfo previousValue = this._OwnerResponsePropertyInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._OwnerResponsePropertyInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OwnerResponsePropertyInfo.Entity = null;
+						previousValue.OwnerResponseInfos.Remove(this);
+					}
+					this._OwnerResponsePropertyInfo.Entity = value;
+					if ((value != null))
+					{
+						value.OwnerResponseInfos.Add(this);
+						this._OwnerResponsePropertyID = value.PropertyID;
+					}
+					else
+					{
+						this._OwnerResponsePropertyID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("OwnerResponsePropertyInfo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

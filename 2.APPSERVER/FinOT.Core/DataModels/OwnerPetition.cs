@@ -192,8 +192,10 @@ namespace RAP.Core.DataModels
             ApplicantInfo = new OwnerResponseApplicantInfoM();
             PropertyInfo = new OwnerResponsePropertyInfoM();
         }
+        public int OwnerResponseID { get; set; }
         public OwnerResponseApplicantInfoM ApplicantInfo { get; set; }
         public OwnerResponsePropertyInfoM PropertyInfo { get; set; }
+        public bool bAgreeToCityMediation { get; set; }
     }
 
     public class OwnerResponseApplicantInfoM

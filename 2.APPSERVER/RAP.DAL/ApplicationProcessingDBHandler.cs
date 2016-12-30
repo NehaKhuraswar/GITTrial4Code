@@ -4481,6 +4481,63 @@ namespace RAP.DAL
                return result;
            }
        }
+
+       public ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model)
+       {
+           ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();     
+          try
+           {
+             
+               OwnerResponseInfo oResponse = new OwnerResponseInfo();
+               oResponse.OwnerResponseApplicantInfoID = model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID;
+               oResponse.OwnerResponsePropertyID = model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID;
+               oResponse.bAgreeToCityMediation = model.OwnerResponseInfo.bAgreeToCityMediation;
+               oResponse.CreatedDate = DateTime.Now;
+               _dbContext.OwnerResponseInfos.InsertOnSubmit(oResponse);
+               _dbContext.SubmitChanges();
+               model.OwnerResponseInfo.OwnerResponseID = oResponse.OwnerResponseID;
+
+               if (model.OwnerResponseInfo.OwnerResponseID > 0)
+               {
+                   var caseinfo = _dbContext.CaseDetails.Where(r => r.CaseID == model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo).First();
+
+                   if(caseinfo != null)
+                   {
+                       caseinfo.OwnerResponseID = model.OwnerResponseInfo.OwnerResponseID;
+                       _dbContext.SubmitChanges();
+                   }
+                   else
+                   {
+                       result.status = new OperationStatus() { Status = StatusEnum.OwnerResponseSubmissionFailed };
+                       _commondbHandler.SaveErrorLog(result.status);
+                       return result;
+                   }
+               }
+               else
+               {
+
+                   result.status = new OperationStatus() { Status = StatusEnum.OwnerResponseSubmissionFailed };
+                   _commondbHandler.SaveErrorLog(result.status);
+                   return result;
+               }
+
+               var applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.OwnerResponseApplicantInfoID == model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID).FirstOrDefault();
+               applicantInfo.bPetitionFiled = true;
+               _dbContext.SubmitChanges();
+               var propertyInfo = _dbContext.OwnerResponsePropertyInfos.Where(r => r.PropertyID == model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID).FirstOrDefault();
+               propertyInfo.bPetitionFiled = true;
+               _dbContext.SubmitChanges();             
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
        #endregion
        private List<UnitTypeM> getUnitTypes()
        {

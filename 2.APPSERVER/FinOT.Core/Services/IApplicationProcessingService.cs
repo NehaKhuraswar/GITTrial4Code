@@ -67,5 +67,6 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> SaveOResponseRentIncreaseAndUpdatePropertyInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseAdditionalDocuments(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseExemption(CaseInfoM model);
+        ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model);
     }
 }
