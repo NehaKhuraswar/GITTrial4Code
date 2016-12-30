@@ -1,24 +1,19 @@
-﻿<div class="container outer-container">
-    <div class="header">
-        <h1 id="sitetitle"><a href="#">City of Oakland</a></h1>
-        <div class="description">Rent Adjustment  <br />Program</div>
-    </div><!-- .header -->
-
+﻿<div class="container">
     <div id="SkipToMainContent">
 
         <div class="application-form-wrapper">
 
             <div class="row">
-                <div class="col-md-3 col-sm-12">                    
+                <div class="col-md-3 col-sm-12">
                     <div>
-                        <ul class="application-steps">   
-                            <li> <a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>                   
+                        <ul class="application-steps">
+                            <li> <a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
                             <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOresponseApplicantInfo()">Applicant Information</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOresponseRentalProperty()">Rental Property</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseRentalHistory()">Rental History</a></li> 
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseDecrasedHousing()">Decreased Housing Service</a></li> 
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseException()">Exemption</a></li>                                                   
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseRentalHistory()">Rental History</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseDecrasedHousing()">Decreased Housing Service</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseException()">Exemption</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oPetionActiveStatus.AdditionalDocumentation && Ctrl.oPetionCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOresponseDocument()">Additional Documents</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Review, 'current' : !Ctrl.oPetionActiveStatus.Review && Ctrl.oPetionCurrentStatus.Review}"><a ng-click="Ctrl.ShowOresponseReview()">Review</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}">Verification</li>
@@ -38,7 +33,7 @@
                             <div ng-if="Ctrl.oresponseApplicantInfo">
                                 <rap-oresponsepeapplicantinfo ng-show="Ctrl.oresponseApplicantInfo" model="Ctrl"></rap-oresponsepeapplicantinfo>
                             </div>
-                         
+
                             <div ng-if="Ctrl.oresponseRentalProperty">
                                 <rap-oresponserentalproperty ng-show="Ctrl.oresponseRentalProperty" model="Ctrl"></rap-oresponserentalproperty>
                             </div>
@@ -74,17 +69,15 @@
                 </div>
             </div>
 
-        </div><!-- #SkipToMainContent -->
-
-        <footer class="footer" role="contentinfo"></footer><!-- .row .footer -->
+        </div><!-- #SkipToMainContent -->     
     </div><!-- .container .outer-container -->
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <!--<script src='js/jquery.maskedinput.js'></script>-->
     <script src='js/tooltip.js'></script>
     <script src='js/functions.js'></script>
-    </body>
+  </div>
 
 
 
-   
+
