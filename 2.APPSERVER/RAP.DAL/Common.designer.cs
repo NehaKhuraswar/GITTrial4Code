@@ -800,7 +800,7 @@ namespace RAP.DAL
 		
 		private int _StateID;
 		
-		private int _Zip;
+		private string _Zip;
 		
 		private string _PhoneNumber;
 		
@@ -830,7 +830,7 @@ namespace RAP.DAL
     partial void OnCityChanged();
     partial void OnStateIDChanging(int value);
     partial void OnStateIDChanged();
-    partial void OnZipChanging(int value);
+    partial void OnZipChanging(string value);
     partial void OnZipChanged();
     partial void OnPhoneNumberChanging(string value);
     partial void OnPhoneNumberChanged();
@@ -1010,8 +1010,8 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="Int NOT NULL")]
-		public int Zip
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string Zip
 		{
 			get
 			{

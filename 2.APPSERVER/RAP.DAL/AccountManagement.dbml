@@ -55,26 +55,12 @@
       <Column Name="bMailingAddress" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="bParcelAddress" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="CustomerDetail_CustomerDetail" Member="CustomerDetail2" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" Cardinality="One" />
-      <Association Name="CustomerDetail_MailingAddress" Member="MailingAddresses" ThisKey="CustomerID" OtherKey="CustomerID" Type="MailingAddress" />
       <Association Name="CustomerDetail_ThirdPartyRepresentation" Member="ThirdPartyRepresentation" ThisKey="CustomerID" OtherKey="CustomerID" Type="ThirdPartyRepresentation" Cardinality="One" />
       <Association Name="CustomerDetail_ThirdPartyCaseAssignment" Member="ThirdPartyCaseAssignments" ThisKey="CustomerID" OtherKey="CustomerID" Type="ThirdPartyCaseAssignment" />
       <Association Name="CustomerDetail_CollaboratorAccess" Member="CollaboratorAccesses" ThisKey="CustomerID" OtherKey="CustomerID" Type="CollaboratorAccess" />
       <Association Name="CustomerDetail_CollaboratorAccess1" Member="CollaboratorAccesses1" ThisKey="CustomerID" OtherKey="CollaboratorCustID" Type="CollaboratorAccess" />
+      <Association Name="CustomerDetail_MailingAddress" Member="MailingAddresses" ThisKey="CustomerID" OtherKey="CustomerID" Type="MailingAddress" />
       <Association Name="CustomerDetail_CustomerDetail" Member="CustomerDetail1" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.MailingAddress" Member="MailingAddresses">
-    <Type Name="MailingAddress">
-      <Column Name="MailingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="AddressLine1" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="AddressLine2" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
-      <Column Name="City" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="StateID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Zip" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="CustomerDetail_MailingAddress" Member="CustomerDetail" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.NotificationPreference" Member="NotificationPreferences">
@@ -119,6 +105,20 @@
       <Association Name="CustomerDetail_CollaboratorAccess1" Member="CustomerDetail1" ThisKey="CollaboratorCustID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.MailingAddress" Member="MailingAddresses">
+    <Type Name="MailingAddress">
+      <Column Name="MailingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine1" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine2" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="StateID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Zip" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="CustomerDetail_MailingAddress" Member="CustomerDetail" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.USP_SearchAccount_Get" Method="USP_SearchAccount_Get">
     <Parameter Name="AcctType" Parameter="acctType" Type="System.Int32" DbType="Int" />
     <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(25)" />
@@ -130,7 +130,7 @@
     <Parameter Name="AddressLine1" Parameter="addressLine1" Type="System.String" DbType="VarChar(25)" />
     <Parameter Name="AddressLine2" Parameter="addressLine2" Type="System.String" DbType="VarChar(25)" />
     <Parameter Name="City" Parameter="city" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="Zip" Parameter="zip" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Zip" Parameter="zip" Type="System.String" DbType="VarChar(5)" />
     <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(15)" />
     <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="SortReverse" Parameter="sortReverse" Type="System.Boolean" DbType="Bit" />

@@ -42,9 +42,6 @@ namespace RAP.DAL
     partial void InsertCustomerDetail(CustomerDetail instance);
     partial void UpdateCustomerDetail(CustomerDetail instance);
     partial void DeleteCustomerDetail(CustomerDetail instance);
-    partial void InsertMailingAddress(MailingAddress instance);
-    partial void UpdateMailingAddress(MailingAddress instance);
-    partial void DeleteMailingAddress(MailingAddress instance);
     partial void InsertNotificationPreference(NotificationPreference instance);
     partial void UpdateNotificationPreference(NotificationPreference instance);
     partial void DeleteNotificationPreference(NotificationPreference instance);
@@ -57,6 +54,9 @@ namespace RAP.DAL
     partial void InsertCollaboratorAccess(CollaboratorAccess instance);
     partial void UpdateCollaboratorAccess(CollaboratorAccess instance);
     partial void DeleteCollaboratorAccess(CollaboratorAccess instance);
+    partial void InsertMailingAddress(MailingAddress instance);
+    partial void UpdateMailingAddress(MailingAddress instance);
+    partial void DeleteMailingAddress(MailingAddress instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -129,14 +129,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<MailingAddress> MailingAddresses
-		{
-			get
-			{
-				return this.GetTable<MailingAddress>();
-			}
-		}
-		
 		public System.Data.Linq.Table<NotificationPreference> NotificationPreferences
 		{
 			get
@@ -169,6 +161,14 @@ namespace RAP.DAL
 			}
 		}
 		
+		public System.Data.Linq.Table<MailingAddress> MailingAddresses
+		{
+			get
+			{
+				return this.GetTable<MailingAddress>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_SearchAccount_Get")]
 		public ISingleResult<ReturnAccountSearch> USP_SearchAccount_Get(
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AcctType", DbType="Int")] System.Nullable<int> acctType, 
@@ -181,7 +181,7 @@ namespace RAP.DAL
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine1", DbType="VarChar(25)")] string addressLine1, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine2", DbType="VarChar(25)")] string addressLine2, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="City", DbType="VarChar(20)")] string city, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Zip", DbType="Int")] System.Nullable<int> zip, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Zip", DbType="VarChar(5)")] string zip, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PhoneNumber", DbType="VarChar(15)")] string phoneNumber, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortBy", DbType="VarChar(50)")] string sortBy, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortReverse", DbType="Bit")] System.Nullable<bool> sortReverse, 
@@ -979,8 +979,6 @@ namespace RAP.DAL
 		
 		private EntityRef<CustomerDetail> _CustomerDetail2;
 		
-		private EntitySet<MailingAddress> _MailingAddresses;
-		
 		private EntityRef<ThirdPartyRepresentation> _ThirdPartyRepresentation;
 		
 		private EntitySet<ThirdPartyCaseAssignment> _ThirdPartyCaseAssignments;
@@ -988,6 +986,8 @@ namespace RAP.DAL
 		private EntitySet<CollaboratorAccess> _CollaboratorAccesses;
 		
 		private EntitySet<CollaboratorAccess> _CollaboratorAccesses1;
+		
+		private EntitySet<MailingAddress> _MailingAddresses;
 		
 		private EntityRef<CustomerDetail> _CustomerDetail1;
 		
@@ -1018,11 +1018,11 @@ namespace RAP.DAL
 		public CustomerDetail()
 		{
 			this._CustomerDetail2 = default(EntityRef<CustomerDetail>);
-			this._MailingAddresses = new EntitySet<MailingAddress>(new Action<MailingAddress>(this.attach_MailingAddresses), new Action<MailingAddress>(this.detach_MailingAddresses));
 			this._ThirdPartyRepresentation = default(EntityRef<ThirdPartyRepresentation>);
 			this._ThirdPartyCaseAssignments = new EntitySet<ThirdPartyCaseAssignment>(new Action<ThirdPartyCaseAssignment>(this.attach_ThirdPartyCaseAssignments), new Action<ThirdPartyCaseAssignment>(this.detach_ThirdPartyCaseAssignments));
 			this._CollaboratorAccesses = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses));
 			this._CollaboratorAccesses1 = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses1), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses1));
+			this._MailingAddresses = new EntitySet<MailingAddress>(new Action<MailingAddress>(this.attach_MailingAddresses), new Action<MailingAddress>(this.detach_MailingAddresses));
 			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
 			OnCreated();
 		}
@@ -1240,19 +1240,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_MailingAddress", Storage="_MailingAddresses", ThisKey="CustomerID", OtherKey="CustomerID")]
-		public EntitySet<MailingAddress> MailingAddresses
-		{
-			get
-			{
-				return this._MailingAddresses;
-			}
-			set
-			{
-				this._MailingAddresses.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation", Storage="_ThirdPartyRepresentation", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
 		public ThirdPartyRepresentation ThirdPartyRepresentation
 		{
@@ -1321,6 +1308,19 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_MailingAddress", Storage="_MailingAddresses", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<MailingAddress> MailingAddresses
+		{
+			get
+			{
+				return this._MailingAddresses;
+			}
+			set
+			{
+				this._MailingAddresses.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail1", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
 		public CustomerDetail CustomerDetail1
 		{
@@ -1375,18 +1375,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		private void attach_MailingAddresses(MailingAddress entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = this;
-		}
-		
-		private void detach_MailingAddresses(MailingAddress entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = null;
-		}
-		
 		private void attach_ThirdPartyCaseAssignments(ThirdPartyCaseAssignment entity)
 		{
 			this.SendPropertyChanging();
@@ -1422,300 +1410,17 @@ namespace RAP.DAL
 			this.SendPropertyChanging();
 			entity.CustomerDetail1 = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MailingAddress")]
-	public partial class MailingAddress : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _MailingID;
-		
-		private int _CustomerID;
-		
-		private string _AddressLine1;
-		
-		private string _AddressLine2;
-		
-		private string _City;
-		
-		private int _StateID;
-		
-		private int _Zip;
-		
-		private string _PhoneNumber;
-		
-		private System.Nullable<System.DateTime> _LastModifiedDate;
-		
-		private EntityRef<CustomerDetail> _CustomerDetail;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMailingIDChanging(int value);
-    partial void OnMailingIDChanged();
-    partial void OnCustomerIDChanging(int value);
-    partial void OnCustomerIDChanged();
-    partial void OnAddressLine1Changing(string value);
-    partial void OnAddressLine1Changed();
-    partial void OnAddressLine2Changing(string value);
-    partial void OnAddressLine2Changed();
-    partial void OnCityChanging(string value);
-    partial void OnCityChanged();
-    partial void OnStateIDChanging(int value);
-    partial void OnStateIDChanged();
-    partial void OnZipChanging(int value);
-    partial void OnZipChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
-    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnLastModifiedDateChanged();
-    #endregion
-		
-		public MailingAddress()
+		private void attach_MailingAddresses(MailingAddress entity)
 		{
-			this._CustomerDetail = default(EntityRef<CustomerDetail>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.CustomerDetail = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailingID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int MailingID
+		private void detach_MailingAddresses(MailingAddress entity)
 		{
-			get
-			{
-				return this._MailingID;
-			}
-			set
-			{
-				if ((this._MailingID != value))
-				{
-					this.OnMailingIDChanging(value);
-					this.SendPropertyChanging();
-					this._MailingID = value;
-					this.SendPropertyChanged("MailingID");
-					this.OnMailingIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
-		public int CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					if (this._CustomerDetail.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine1", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string AddressLine1
-		{
-			get
-			{
-				return this._AddressLine1;
-			}
-			set
-			{
-				if ((this._AddressLine1 != value))
-				{
-					this.OnAddressLine1Changing(value);
-					this.SendPropertyChanging();
-					this._AddressLine1 = value;
-					this.SendPropertyChanged("AddressLine1");
-					this.OnAddressLine1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine2", DbType="VarChar(25)")]
-		public string AddressLine2
-		{
-			get
-			{
-				return this._AddressLine2;
-			}
-			set
-			{
-				if ((this._AddressLine2 != value))
-				{
-					this.OnAddressLine2Changing(value);
-					this.SendPropertyChanging();
-					this._AddressLine2 = value;
-					this.SendPropertyChanged("AddressLine2");
-					this.OnAddressLine2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string City
-		{
-			get
-			{
-				return this._City;
-			}
-			set
-			{
-				if ((this._City != value))
-				{
-					this.OnCityChanging(value);
-					this.SendPropertyChanging();
-					this._City = value;
-					this.SendPropertyChanged("City");
-					this.OnCityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateID", DbType="Int NOT NULL")]
-		public int StateID
-		{
-			get
-			{
-				return this._StateID;
-			}
-			set
-			{
-				if ((this._StateID != value))
-				{
-					this.OnStateIDChanging(value);
-					this.SendPropertyChanging();
-					this._StateID = value;
-					this.SendPropertyChanged("StateID");
-					this.OnStateIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="Int NOT NULL")]
-		public int Zip
-		{
-			get
-			{
-				return this._Zip;
-			}
-			set
-			{
-				if ((this._Zip != value))
-				{
-					this.OnZipChanging(value);
-					this.SendPropertyChanging();
-					this._Zip = value;
-					this.SendPropertyChanged("Zip");
-					this.OnZipChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(15)")]
-		public string PhoneNumber
-		{
-			get
-			{
-				return this._PhoneNumber;
-			}
-			set
-			{
-				if ((this._PhoneNumber != value))
-				{
-					this.OnPhoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> LastModifiedDate
-		{
-			get
-			{
-				return this._LastModifiedDate;
-			}
-			set
-			{
-				if ((this._LastModifiedDate != value))
-				{
-					this.OnLastModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._LastModifiedDate = value;
-					this.SendPropertyChanged("LastModifiedDate");
-					this.OnLastModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_MailingAddress", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public CustomerDetail CustomerDetail
-		{
-			get
-			{
-				return this._CustomerDetail.Entity;
-			}
-			set
-			{
-				CustomerDetail previousValue = this._CustomerDetail.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerDetail.Entity = null;
-						previousValue.MailingAddresses.Remove(this);
-					}
-					this._CustomerDetail.Entity = value;
-					if ((value != null))
-					{
-						value.MailingAddresses.Add(this);
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(int);
-					}
-					this.SendPropertyChanged("CustomerDetail");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.CustomerDetail = null;
 		}
 	}
 	
@@ -2538,6 +2243,301 @@ namespace RAP.DAL
 						this._CollaboratorCustID = default(int);
 					}
 					this.SendPropertyChanged("CustomerDetail1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MailingAddress")]
+	public partial class MailingAddress : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MailingID;
+		
+		private int _CustomerID;
+		
+		private string _AddressLine1;
+		
+		private string _AddressLine2;
+		
+		private string _City;
+		
+		private int _StateID;
+		
+		private string _Zip;
+		
+		private string _PhoneNumber;
+		
+		private System.Nullable<System.DateTime> _LastModifiedDate;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMailingIDChanging(int value);
+    partial void OnMailingIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnAddressLine1Changing(string value);
+    partial void OnAddressLine1Changed();
+    partial void OnAddressLine2Changing(string value);
+    partial void OnAddressLine2Changed();
+    partial void OnCityChanging(string value);
+    partial void OnCityChanged();
+    partial void OnStateIDChanging(int value);
+    partial void OnStateIDChanged();
+    partial void OnZipChanging(string value);
+    partial void OnZipChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastModifiedDateChanged();
+    #endregion
+		
+		public MailingAddress()
+		{
+			this._CustomerDetail = default(EntityRef<CustomerDetail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailingID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MailingID
+		{
+			get
+			{
+				return this._MailingID;
+			}
+			set
+			{
+				if ((this._MailingID != value))
+				{
+					this.OnMailingIDChanging(value);
+					this.SendPropertyChanging();
+					this._MailingID = value;
+					this.SendPropertyChanged("MailingID");
+					this.OnMailingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._CustomerDetail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine1", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string AddressLine1
+		{
+			get
+			{
+				return this._AddressLine1;
+			}
+			set
+			{
+				if ((this._AddressLine1 != value))
+				{
+					this.OnAddressLine1Changing(value);
+					this.SendPropertyChanging();
+					this._AddressLine1 = value;
+					this.SendPropertyChanged("AddressLine1");
+					this.OnAddressLine1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine2", DbType="VarChar(25)")]
+		public string AddressLine2
+		{
+			get
+			{
+				return this._AddressLine2;
+			}
+			set
+			{
+				if ((this._AddressLine2 != value))
+				{
+					this.OnAddressLine2Changing(value);
+					this.SendPropertyChanging();
+					this._AddressLine2 = value;
+					this.SendPropertyChanged("AddressLine2");
+					this.OnAddressLine2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this.OnCityChanging(value);
+					this.SendPropertyChanging();
+					this._City = value;
+					this.SendPropertyChanged("City");
+					this.OnCityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateID", DbType="Int NOT NULL")]
+		public int StateID
+		{
+			get
+			{
+				return this._StateID;
+			}
+			set
+			{
+				if ((this._StateID != value))
+				{
+					this.OnStateIDChanging(value);
+					this.SendPropertyChanging();
+					this._StateID = value;
+					this.SendPropertyChanged("StateID");
+					this.OnStateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string Zip
+		{
+			get
+			{
+				return this._Zip;
+			}
+			set
+			{
+				if ((this._Zip != value))
+				{
+					this.OnZipChanging(value);
+					this.SendPropertyChanging();
+					this._Zip = value;
+					this.SendPropertyChanged("Zip");
+					this.OnZipChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(15)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this.OnLastModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedDate = value;
+					this.SendPropertyChanged("LastModifiedDate");
+					this.OnLastModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_MailingAddress", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public CustomerDetail CustomerDetail
+		{
+			get
+			{
+				return this._CustomerDetail.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail.Entity = null;
+						previousValue.MailingAddresses.Remove(this);
+					}
+					this._CustomerDetail.Entity = value;
+					if ((value != null))
+					{
+						value.MailingAddresses.Add(this);
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(int);
+					}
+					this.SendPropertyChanged("CustomerDetail");
 				}
 			}
 		}
