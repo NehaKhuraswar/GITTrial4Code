@@ -4019,6 +4019,61 @@ namespace RAP.DAL
                return result;
            }
        }
+
+       public ReturnResult<CaseInfoM> GetOResponseReview(CaseInfoM model)
+       {
+           ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+           try
+           {
+               var applicantInfoResult = GetOResponseApplicantInfo(model);
+               if (applicantInfoResult.status.Status != StatusEnum.Success)
+               {
+                   result.status = applicantInfoResult.status;
+                   return result;
+               }
+               model = applicantInfoResult.result;
+
+               var PropertyAndTenantInfoResult = GetOResponsePropertyAndTenantInfo(model.OwnerResponseInfo.PropertyInfo);
+               if (PropertyAndTenantInfoResult.status.Status != StatusEnum.Success)
+               {
+                   result.status = PropertyAndTenantInfoResult.status;
+                   return result;
+               }
+               model.OwnerResponseInfo.PropertyInfo = PropertyAndTenantInfoResult.result;
+
+               var RentIncreaseAndPropertyInfoResult = GetOResponseRentIncreaseAndPropertyInfo(model);
+               if (RentIncreaseAndPropertyInfoResult.status.Status != StatusEnum.Success)
+               {
+                   result.status = RentIncreaseAndPropertyInfoResult.status;
+                   return result;
+               }
+               model.OwnerResponseInfo.PropertyInfo = RentIncreaseAndPropertyInfoResult.result.OwnerResponseInfo.PropertyInfo;
+
+               var exemptionResult = GetOResponseExemption(model.OwnerResponseInfo.PropertyInfo);
+               if (exemptionResult.status.Status != StatusEnum.Success)
+               {
+                   result.status = exemptionResult.status;
+                   return result;
+               }
+               model.OwnerResponseInfo.PropertyInfo = exemptionResult.result;
+
+               var documentResult = _commondbHandler.GetDocumentsByCategory(model.CustomerID, false, DocCategory.OwnerResponse.ToString());
+               if (documentResult.status.Status == StatusEnum.Success)
+               {
+                   model.Documents = documentResult.result;
+               }
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
+
        #endregion
 
        #region Owner Response Save Functions
@@ -4487,6 +4542,7 @@ namespace RAP.DAL
            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();     
           try
            {
+              int c_id = 0;
              
                OwnerResponseInfo oResponse = new OwnerResponseInfo();
                oResponse.OwnerResponseApplicantInfoID = model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID;
@@ -4502,7 +4558,8 @@ namespace RAP.DAL
                    var caseinfo = _dbContext.CaseDetails.Where(r => r.CaseID == model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo).First();
 
                    if(caseinfo != null)
-                   {
+                   {   
+                       c_id = caseinfo.C_ID;
                        caseinfo.OwnerResponseID = model.OwnerResponseInfo.OwnerResponseID;
                        _dbContext.SubmitChanges();
                    }
@@ -4526,7 +4583,14 @@ namespace RAP.DAL
                _dbContext.SubmitChanges();
                var propertyInfo = _dbContext.OwnerResponsePropertyInfos.Where(r => r.PropertyID == model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID).FirstOrDefault();
                propertyInfo.bPetitionFiled = true;
-               _dbContext.SubmitChanges();             
+               _dbContext.SubmitChanges();
+
+               var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(model.CustomerID, c_id, DocCategory.OwnerResponse.ToString());
+               if (updateDocumentResult.status.Status != StatusEnum.Success)
+               {
+                   result.status = updateDocumentResult.status;
+                   return result;
+               }
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;

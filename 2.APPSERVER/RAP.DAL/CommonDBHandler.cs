@@ -386,6 +386,84 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<List<DocumentM>> GetDocumentsByCategory(int CustmerID, bool isPetitiofiled, string docCategory)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> docs = new List<DocumentM>();
+            try
+            {
+
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+
+                    var _documents = db.Documents.Where(r => r.CustomerID == CustmerID && r.IsPetitionFiled == isPetitiofiled && r.DocCategory == docCategory);
+                    if (_documents != null)
+                    {
+                        foreach (var item in _documents)
+                        {
+                            DocumentM doc = new DocumentM();
+                            doc.C_ID = item.C_ID;
+                            doc.CustomerID = item.CustomerID;
+                            doc.DocCategory = item.DocCategory;
+                            doc.DocName = item.DocName;
+                            doc.DocID = item.DocID;
+                            doc.DocThirdPartyID = item.DocThirdPartyID;
+                            doc.DocDescription = item.DocDescription;
+                            doc.DocTitle = item.DocTitle;
+                            doc.MimeType = item.MimeType;
+                            doc.IsPetitonFiled = (bool)item.IsPetitionFiled;
+                            doc.isUploaded = true;
+                            docs.Add(doc);
+                        }
+                    }
+
+                }
+                result.result = docs;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> UpdateDocumentCaseInfo(int CustmerID, int C_ID, string docCategory)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+
+                    var _documents = db.Documents.Where(r => r.CustomerID == CustmerID && r.IsPetitionFiled == false && r.DocCategory == docCategory);
+                    if (_documents.Any())
+                    {
+                        foreach (var doc in _documents)
+                        {
+                            doc.C_ID = C_ID;
+                            doc.IsPetitionFiled = true;
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+
+        }
+
         public ReturnResult<List<string>> GetDocDescription()
         {
             ReturnResult<List<string>> result = new ReturnResult<List<string>>();
