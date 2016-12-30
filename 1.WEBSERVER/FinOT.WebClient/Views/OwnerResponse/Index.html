@@ -21,7 +21,7 @@
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseException()">Exemption</a></li>                                                   
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oPetionActiveStatus.AdditionalDocumentation && Ctrl.oPetionCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOresponseDocument()">Additional Documents</a></li>
                             <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Review, 'current' : !Ctrl.oPetionActiveStatus.Review && Ctrl.oPetionCurrentStatus.Review}"><a ng-click="Ctrl.ShowOresponseReview()">Review</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}"><a ng-click="Ctrl.ShowOwnerVerification()">Verification</a></li>
+                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}">Verification</li>
                         </ul>
                     </div>
                 </div>
@@ -56,6 +56,9 @@
                             </div>
                             <div ng-if="Ctrl.oresponseReview">
                                 <rap-oresponsereview ng-show="Ctrl.oresponseReview" model="Ctrl"></rap-oresponsereview>
+                            </div>
+                            <div ng-if="Ctrl.oresponseVerification">
+                                <rap-oresponseverification ng-show="Ctrl.oresponseVerification" model="Ctrl"></rap-oresponseverification>
                             </div>
                             <!--<div ng-if="Ctrl.ownerAdditionalDocuments">
                                 <rap-owneradditionaldocuments ng-show="Ctrl.ownerAdditionalDocuments" model="Ctrl"></rap-owneradditionaldocuments>

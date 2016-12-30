@@ -18,16 +18,8 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
 
    
     self.Continue = function () {
-        if (self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.length == 0) {
-            self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(self.Rent);
-        }
-
-        rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveOResponseRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
-            rapGlobalFactory.CaseDetails = response.data;
-        });
-        
+        $scope.model.oresponseReview = false;
+        $scope.model.oresponseVerification = true;
         //$scope.model.ownerRentalHistory = false;
         //$scope.model.ownerAdditionalDocuments = true;
         //$scope.model.DisableAllCurrent();

@@ -196,6 +196,13 @@ namespace RAP.Core.DataModels
         public OwnerResponseApplicantInfoM ApplicantInfo { get; set; }
         public OwnerResponsePropertyInfoM PropertyInfo { get; set; }
         public bool bAgreeToCityMediation { get; set; }
+        public DateTime VerificationDate
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
     }
 
     public class OwnerResponseApplicantInfoM

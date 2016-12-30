@@ -16,7 +16,8 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         self.oresponseDecreasedHousing = false;
         self.oresponseException = false;
         self.oresponseDocument = false;
-        self.oresponseReview = false;      
+        self.oresponseReview = false;
+        self.oresponseVerification = false;
     };
     _DisableAll();
 
