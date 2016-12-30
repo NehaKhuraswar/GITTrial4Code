@@ -652,6 +652,48 @@ namespace RAP.DAL
                 return result;
             }
         }
+        private ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfoForView(int PetitionID)
+        {
+            ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            try
+            {
+
+                var TenantPetitionInfoDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == PetitionID).FirstOrDefault();
+                TenantPetitionInfoM tenantPetitionInfo = new TenantPetitionInfoM();
+                if (TenantPetitionInfoDB != null)
+                {
+                    tenantPetitionInfo.PetitionID = TenantPetitionInfoDB.TenantPetitionID;
+                    tenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionInfoDB.bThirdPartyRepresentation;
+                    if (tenantPetitionInfo.bThirdPartyRepresentation)
+                    {
+                        tenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
+                    }
+                    tenantPetitionInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ApplicantUserID).result;
+                    tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
+                    tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                    if (tenantPetitionInfo.OwnerInfo.UserID == tenantPetitionInfo.PropertyManager.UserID)
+                    {
+                        tenantPetitionInfo.bSameAsOwnerInfo = true;
+                    }
+                    tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                    tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
+                    tenantPetitionInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantPetitionInfoDB.RangeID);
+                    tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
+                    tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
+                    tenantPetitionInfo.CustomerID =(int) TenantPetitionInfoDB.PetitionFiledBy;                    
+                }
+                result.result = tenantPetitionInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
@@ -717,7 +759,7 @@ namespace RAP.DAL
                     tenantPetitionInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantPetitionInfoDB.RangeID);
                     tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
                     tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
-                    tenantPetitionInfo.CustomerID =(int) TenantPetitionInfoDB.PetitionFiledBy;                    
+                    tenantPetitionInfo.CustomerID = (int)TenantPetitionInfoDB.PetitionFiledBy;
                 }
                 tenantPetitionInfo.UnitTypes = _units;
                 tenantPetitionInfo.RangeOfUnits = _rangeOfUnits;
@@ -733,6 +775,7 @@ namespace RAP.DAL
                 return result;
             }
         }
+
         public ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId)
         {
             ReturnResult<TenantRentalHistoryM> result = new ReturnResult<TenantRentalHistoryM>();
@@ -878,6 +921,65 @@ namespace RAP.DAL
                 tenantPetitionResult.status = eHandler.HandleException(ex);
                 return tenantPetitionResult;
             }        
+        }
+
+        public ReturnResult<CaseInfoM> GetPetitionViewInfo(int C_ID)
+        {
+            ReturnResult<CaseInfoM> caseInfoResult = new ReturnResult<CaseInfoM>();
+            ReturnResult<TenantPetitionInfoM> tenantPetitionResult = new ReturnResult<TenantPetitionInfoM>();
+            ReturnResult<List<PetitionGroundM>> GroundsResult = new ReturnResult<List<PetitionGroundM>>();
+            ReturnResult<TenantRentalHistoryM> RentalHistoryResult = new ReturnResult<TenantRentalHistoryM>();
+            ReturnResult<LostServicesPageM> LostServicesResult = new ReturnResult<LostServicesPageM>();
+            CaseInfoM caseInfo = new CaseInfoM();
+            try
+            {                
+                var caseDB = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).FirstOrDefault();
+                var PetitionDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
+                if (PetitionDB.TenantPetitionID != 0)
+                {
+                    tenantPetitionResult = GetTenantApplicationInfoForView((int)PetitionDB.TenantPetitionID);
+                    if (tenantPetitionResult.status.Status != StatusEnum.Success)
+                        return caseInfoResult;
+
+                    GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
+                    if (GroundsResult != null)
+                    {
+                        tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
+                        tenantPetitionResult.status = GroundsResult.status;
+                        if (GroundsResult.status.Status != StatusEnum.Success)
+                            return caseInfoResult;
+                    }
+
+                    RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
+                    if (RentalHistoryResult != null)
+                    {
+                        tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
+                        tenantPetitionResult.status = RentalHistoryResult.status;
+                        if (RentalHistoryResult.status.Status != StatusEnum.Success)
+                            return caseInfoResult;
+                    }
+
+                    LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
+                    if (LostServicesResult != null)
+                    {
+                        tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
+                        tenantPetitionResult.status = LostServicesResult.status;
+                        if (LostServicesResult.status.Status != StatusEnum.Success)
+                            return caseInfoResult;
+                    }
+
+                    caseInfo.TenantPetitionInfo = tenantPetitionResult.result;
+                }
+                caseInfoResult.result = caseInfo;
+                caseInfoResult.status = new OperationStatus() { Status = StatusEnum.Success };
+                return caseInfoResult;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                tenantPetitionResult.status = eHandler.HandleException(ex);
+                return caseInfoResult;
+            }
         }
         private ReturnResult<List<TenantProblemInfoM>> GetTenantProblemInfo(int PetitionID)
         {

@@ -13,7 +13,6 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          var CityUser;
          var IsEdit = false;
          var bCaseFiledByThirdParty = false;
-        
           // public
           return {
 
@@ -86,6 +85,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapResendPinController', rapResendPinController)
     .controller('rapForgetPwdController', rapForgetPwdController)
     .controller('rapdashboardController', rapdashboardController)
+    .controller('rapViewPetitionController', rapViewPetitionController)
     .controller('rapstaffdashboardController', rapstaffdashboardController)
     .controller('rapadmindashboardController', rapadmindashboardController)
     .controller('rapNewCaseStatusController', rapNewCaseStatusController)

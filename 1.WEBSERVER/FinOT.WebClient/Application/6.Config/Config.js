@@ -111,6 +111,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapCityUserAcctController_resolve
         })
+        .when('/ViewPetition', {
+            templateUrl: 'views/account/ViewPetition.html',
+            controller: rapViewPetitionController,
+            controllerAs: 'Ctrl',
+            resolve: rapViewPetitionController_resolve
+        })
         .when('/applicationinfo', {
             templateUrl: 'views/filepetition/ApplicationInfo.html',
             controller: rapApplicationInfoController,

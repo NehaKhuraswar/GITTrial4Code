@@ -25,7 +25,8 @@ namespace RAP.Core.Services
         ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory, int CustomerID);
         ReturnResult<bool> SaveTenantLostServiceInfo(LostServicesPageM message, int CustomerID);
         ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID, int CustomerID);
-        ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID);        
+        ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID);
+        ReturnResult<CaseInfoM> GetPetitionViewInfo(int C_ID); 
         ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst();
        // ReturnResult<List<CaseInfoM>> GetCasesforPublicDashboard(int CustomerID);

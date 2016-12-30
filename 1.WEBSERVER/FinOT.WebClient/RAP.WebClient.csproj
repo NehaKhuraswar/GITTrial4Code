@@ -127,6 +127,7 @@
   <ItemGroup>
     <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
+    <Content Include="Application\2.Controllers\rapViewPetitionController.js" />
     <Content Include="Application\2.Controllers\rapNewRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseDecreasedHousingController.js" />
     <Content Include="Application\2.Controllers\rapOresponseDocumentsController.js" />
@@ -396,6 +397,7 @@
     <Content Include="Views\Account\Collaborator.html" />
     <Content Include="Views\Account\AdminDashboard.html" />
     <Content Include="Views\Account\LoginURL.html" />
+    <Content Include="Views\Account\ViewPetition.html" />
     <Content Include="Views\Account\StaffDashboard.html" />
     <Content Include="Views\Account\ResendPIN.html" />
     <Content Include="Views\Account\AccountSearch.html" />

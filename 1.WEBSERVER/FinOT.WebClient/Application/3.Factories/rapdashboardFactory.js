@@ -38,12 +38,21 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
         });
       }
     
-     
-    factory.GetCaseInfo = _GetCaseInfo;
+    var _GetPetitionViewInfo = function (CID) {
+        blockUI.start();
 
+        var url = 'api/applicationprocessing' + '/GetPetitionViewInfo';
+        if (!(CID == null || CID == undefined)) { url = url + '/' + CID; }
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
+    factory.GetPetitionViewInfo = _GetPetitionViewInfo;
+    factory.GetCaseInfo = _GetCaseInfo;
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;
-
-
     return factory;
 }];

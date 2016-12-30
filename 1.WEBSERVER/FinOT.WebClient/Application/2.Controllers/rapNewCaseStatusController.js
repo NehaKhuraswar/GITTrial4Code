@@ -47,6 +47,7 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
         model.EmployeeID = self.CityUser.EmployeeID;
         rapFactory.SaveNewActivityStatus(model, 2).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
+            $location.path("/staffdashboard");
         });        
     }
     self.Cancel = function (model, C_ID) {

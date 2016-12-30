@@ -77,8 +77,6 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         
         var d = new Date(date);
         var day =  d.getDate();
-    //   // var today = new Date();
-    ////    var diff = Math.abs(new Date() - date);
 
         var start = Math.floor(d.getTime() / (3600 * 24 * 1000)); //days as integer from..
         var end = Math.floor(new Date().getTime() / (3600 * 24 * 1000)); //days as integer from..
@@ -88,11 +86,22 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         {
             return 20-daysDiff;
         }
-        //var Remaining = date - today;
-        alert.Error("");
     }
 
-
+    self.ViewPage = function(activity,caseinfo)
+    {
+        if (activity.Activity.ActivityID == 1) {
+            rapFactory.GetPetitionViewInfo(caseinfo.C_ID).then(function (response) {
+                if (!alert.checkResponse(response)) {
+                    return;
+                }
+                self.caseinfo = response.data;
+                rapGlobalFactory.CaseDetails = self.caseinfo;
+                $location.path("/ViewPetition");
+            });
+        }
+       
+    }
 
     
 
