@@ -48,8 +48,18 @@
                                                     <div class="tbl-head status">Status</div>
                                                     <div class="tbl-head link"></div>
                                                 </div>
-
-                                                <div class="tbl-row">
+                                                <div class="tbl-row" ng-repeat="activity in caseinfo.ActivityStatus">
+                                                    <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> {{activity.Activity.ActivityDesc}}</div>
+                                                    
+                                                    <div class="tbl-col date countdown" ng-if="activity.Status.StatusID == 17" ng-click="Ctrl.CalculateRemainingDays(activity.Date)"><strong class="visible-sm">Date:</strong> {{Ctrl.CalculateRemainingDays(activity.Date, activity.Status.StatusID)}}  days remaining</div>
+                                                    <div class="tbl-col status warning" ng-if="activity.Status.StatusID == 17"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
+                                                    
+                                                    <div class="tbl-col date" ng-if="activity.Status.StatusID != 17"><strong class="visible-sm">Date:</strong> {{activity.Date | date}}</div>
+                                                    <div class="tbl-col status" ng-if="activity.Status.StatusID != 17"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
+                                                    
+                                                    <div class="tbl-col link"><a href="#" class="btn-link">View</a></div>
+                                                </div>
+                                                <!--<div class="tbl-row">
                                                     <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Response to a petition</div>
                                                     <div class="tbl-col date countdown"><strong class="visible-sm">Date:</strong> 30 days remaining</div>
                                                     <div class="tbl-col status warning"><strong class="visible-sm">Status:</strong> <span>Action required</span></div>
@@ -78,7 +88,7 @@
                                                     <div class="tbl-col date"><strong class="visible-sm">Date:</strong> June 30, 2017</div>
                                                     <div class="tbl-col status"><strong class="visible-sm">Status:</strong> <span>Processed</span></div>
                                                     <div class="tbl-col link"><a href="#" class="btn-link">View</a></div>
-                                                </div>
+                                                </div>-->
                                                 <!--</div><!-- .table -->
                                                 <!--</div>
                                     </div>-->

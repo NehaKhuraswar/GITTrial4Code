@@ -17,7 +17,8 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     self.AccountTypesList = [];
     self.AccountSearchModel = [];
     self.AccountSearchResult = [];
-    self.model = {        
+    self.model = {
+        List:[],
         TotalCount: 0,
         PageSize: null,
         CurrentPage: 1,
@@ -61,6 +62,9 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             self.AccountSearchResult = response.data.List;
             self.AccountSearchModel.TotalCount = response.data.TotalCount;
             self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
+            self.AccountSearchModel.CurrentPage = 1;
+            self.AccountSearchModel.SortBy = "Name";
+            self.AccountSearchModel.SortReverse = 0;
         });
     }
     self.OnClearFilter = function () {
@@ -95,7 +99,20 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
         });
     }
-
+    $scope.onSort = function (_sortBy, model) {
+        if (model.SortBy == _sortBy) {
+            model.SortReverse = !model.SortReverse;
+        } else {
+            model.SortBy = _sortBy;
+            model.SortReverse = false;
+        }
+        rapFactory.GetAccountSearch(model).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.AccountSearchResult = response.data.List;
+            self.AccountSearchModel.TotalCount = response.data.TotalCount;
+            self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
+        });
+    }
     self.GetCaseActivityStatus = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseActivityStatus(model).then(function (response) {

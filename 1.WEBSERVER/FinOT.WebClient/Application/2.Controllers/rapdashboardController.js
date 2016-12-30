@@ -69,12 +69,30 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
                 return;
             }
             self.caseinfo.ActivityStatus = response.data;
-
-           // self.caseinfo = response.data;
-            //rapGlobalFactory.CaseDetails = self.caseinfo;
+           
         });
-       // $location.path("/fileappeal");
     }
+
+    self.CalculateRemainingDays = function (date, statusID) {
+        
+        var d = new Date(date);
+        var day =  d.getDate();
+    //   // var today = new Date();
+    ////    var diff = Math.abs(new Date() - date);
+
+        var start = Math.floor(d.getTime() / (3600 * 24 * 1000)); //days as integer from..
+        var end = Math.floor(new Date().getTime() / (3600 * 24 * 1000)); //days as integer from..
+        var daysDiff = end - start; // exact dates start = Math.floor( date1.getTime() / (3600*24*1000)); //days as integer from..
+
+        if (statusID == 17)
+        {
+            return 20-daysDiff;
+        }
+        //var Remaining = date - today;
+        alert.Error("");
+    }
+
+
 
     
 
