@@ -134,7 +134,9 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit</div></div>
                                                     <div class="col-sm-6 col-xs-12">
-                                                    {{Ctrl.caseinfo.OwnerResponseInfo.UnitTypes[Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID].UnitDescription}}
+                                                        <label ng-repeat="unittype in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypes | filter: {UnitTypeID: Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID}">
+                                                            <i></i><span>{{unittype.UnitDescription}}</span>
+                                                        </label>
                                                    </div>
                                                 </div>
                                             </div><!-- .field-group -->
@@ -151,7 +153,7 @@
                                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Rental property</div></div>
                                                     <div class="col-sm-6 col-xs-12">
                                                         {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine2}} <br/>
-                                                        {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}} , {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}} ,{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}}
+                                                        {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}} , {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.State.StateName}} ,{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip}}
                                                        
                                                     </div>
                                                 </div>
@@ -242,7 +244,7 @@
                                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
                                                             <div class="col-sm-6 col-xs-12">T17-0238</div>
                                                         </div>
-                                                    </div>--><!-- .field-group -->-->-->
+                                                    </div>--><!-- .field-group -->
                                                 <!--<div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
                                                     <div class="field-group filled-info subhead no-top-margin">
                                                         <div class="row">
@@ -390,9 +392,8 @@
                                             </div><!-- .field-group -->
 
                                             <div class="field-group filled-info subhead no-top-margin">
-                                                <div class="info-title full-width">Explanation</div>
-
                                                 <div class="row">
+                                                    <div class="info-title full-width">Explanation</div>
                                                     <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteQuitNoticeExplenation}}</div>
                                                 </div>
                                             </div><!-- .field-group -->

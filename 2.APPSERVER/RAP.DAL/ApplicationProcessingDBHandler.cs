@@ -3828,6 +3828,7 @@ namespace RAP.DAL
                    
                    if (rentIncreaseInfo.Any())
                    {
+                       List<OwnerResponseRentalIncrementInfoM> _rentalInfo = new List<OwnerResponseRentalIncrementInfoM>();
                        foreach (var item in rentIncreaseInfo)
                        {
                            OwnerResponseRentalIncrementInfoM _rentIncrease = new OwnerResponseRentalIncrementInfoM();
@@ -3856,8 +3857,10 @@ namespace RAP.DAL
                                    _rentIncrease.RentIncreaseReasons.Where(r => r.ReasonID == reason.ReasonID).First().IsSelected = true;
                                }
                            }
-                           model.OwnerResponseInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
+                           _rentalInfo.Add(_rentIncrease);
+                           //model.OwnerResponseInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
                        }
+                       model.OwnerResponseInfo.PropertyInfo.RentalInfo = _rentalInfo;
                    }               
               }
                else
@@ -3887,6 +3890,7 @@ namespace RAP.DAL
                       
                        if (rentIncreaseInfo.Any())
                        {
+                           List<OwnerResponseRentalIncrementInfoM> _rentalInfo = new List<OwnerResponseRentalIncrementInfoM>();
                            foreach (var item in rentIncreaseInfo)
                            {
                                OwnerResponseRentalIncrementInfoM _rentIncrease = new OwnerResponseRentalIncrementInfoM();
@@ -3916,8 +3920,10 @@ namespace RAP.DAL
                                        _rentIncrease.RentIncreaseReasons.Where(r => r.ReasonID == reason.ReasonID).First().IsSelected = true;
                                    }
                                }
-                               model.OwnerResponseInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
+                               _rentalInfo.Add(_rentIncrease);
+                               //model.OwnerResponseInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
                            }
+                           model.OwnerResponseInfo.PropertyInfo.RentalInfo = _rentalInfo;
                        }
                    }
                }
