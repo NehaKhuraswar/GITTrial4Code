@@ -191,6 +191,20 @@ namespace RAP.Core.DataModels
         public bool Verification { get; set; }
     }
 
+    public class OwnerResponsePageSubnmissionStatusM
+    {
+        public int CustomerID { get; set; }
+        public bool ImportantInformation { get; set; }
+        public bool ApplicantInformation { get; set; }
+        public bool RentalProperty { get; set; }
+        public bool RentHistory { get; set; }
+        public bool DecreasedHousingServices { get; set; }
+        public bool Exeption { get; set; }
+        public bool AdditionalDocumentation { get; set; }
+        public bool Review { get; set; }
+        public bool Verification { get; set; }
+    }
+
     public class TenantPetitionPageSubnmissionStatusM
     {
         public int CustomerID { get; set; }

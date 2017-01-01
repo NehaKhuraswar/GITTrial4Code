@@ -110,6 +110,10 @@ namespace RAP.DAL
             }
         }
 
+        
+
+  
+
         public ReturnResult<AppealPageSubnmissionStatusM> GetAppealPageSubmissionStatus(int CustomerID)
         {
             ReturnResult<AppealPageSubnmissionStatusM> result = new ReturnResult<AppealPageSubnmissionStatusM>();
@@ -4182,6 +4186,38 @@ namespace RAP.DAL
            }
        }
 
+       public ReturnResult<OwnerResponsePageSubnmissionStatusM> GetOResponseSubmissionStatus(int CustomerID)
+       {
+           ReturnResult<OwnerResponsePageSubnmissionStatusM> result = new ReturnResult<OwnerResponsePageSubnmissionStatusM>();
+           OwnerResponsePageSubnmissionStatusM model = new OwnerResponsePageSubnmissionStatusM();
+           try
+           {
+               var oResponse = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+               if (oResponse != null)
+               {
+
+                   model.ImportantInformation = Convert.ToBoolean(oResponse.ImportantInformation);
+                   model.ApplicantInformation = Convert.ToBoolean(oResponse.ApplicantInformation);
+                   model.RentalProperty = Convert.ToBoolean(oResponse.RentalProperty);
+                   model.RentHistory = Convert.ToBoolean(oResponse.RentHistory);
+                   model.DecreasedHousingServices = Convert.ToBoolean(oResponse.DecreasedHousingServices);
+                   model.Exeption = Convert.ToBoolean(oResponse.Exeption);
+                   model.AdditionalDocumentation = Convert.ToBoolean(oResponse.AdditionalDocumentation);
+                   model.Review = Convert.ToBoolean(oResponse.Review);
+                   model.Verification = Convert.ToBoolean(oResponse.Verification);
+               }
+               result.result = model;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
+
        #endregion
 
        #region Owner Response Save Functions
@@ -4710,6 +4746,7 @@ namespace RAP.DAL
                return result;
            }
        }
+
        #endregion
        private List<UnitTypeM> getUnitTypes()
        {
