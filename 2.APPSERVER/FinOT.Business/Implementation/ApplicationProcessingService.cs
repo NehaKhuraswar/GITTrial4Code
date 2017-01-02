@@ -17,17 +17,19 @@ namespace RAP.Business.Implementation
         private readonly IExceptionHandler _eHandler;
         private readonly ICommonService _commonService;
         private readonly IDocumentService _documentService;
+        private readonly IEmailService _emilService;
         //TBD
         //public ApplicationProcessingService()
         //{
         //    _dbHandler = new ApplicationProcessingDBHandler();
         //}
-        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler, IExceptionHandler eHandler, ICommonService commonService, IDocumentService documentService)
+        public ApplicationProcessingService(IApplicationProcessingDBHandler dbHandler, IExceptionHandler eHandler, ICommonService commonService, IDocumentService documentService, IEmailService emailService)
         {
             this._dbHandler = dbHandler;
             this._eHandler = eHandler;
             this._commonService = commonService;
             this._documentService = documentService;
+            this._emilService = emailService;
         }
 
         public ReturnResult<TenantResponsePageSubnmissionStatusM> GetTRPageSubmissionStatus(int CustomerID)
@@ -1324,6 +1326,23 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<OwnerResponsePageSubnmissionStatusM> GetOResponseSubmissionStatus(int CustomerID)
+        {
+            ReturnResult<OwnerResponsePageSubnmissionStatusM> result = new ReturnResult<OwnerResponsePageSubnmissionStatusM>();
+            try
+            {
+                result = _dbHandler.GetOResponseSubmissionStatus(CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
        
 
         #endregion
@@ -1460,6 +1479,42 @@ namespace RAP.Business.Implementation
                         documents.Add(doc);
                     }
                 }
+                _dbHandler.OResponseUpdateAdditionalDocumentsPageSubmission(model.CustomerID);
+                model.Documents = documents;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+        public ReturnResult<CaseInfoM> SaveOResponseDecreasedHousing(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
+            try
+            {
+                foreach (var doc in model.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.OwnerResponse.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                _dbHandler.OResponseUpdateDecreasedHousingPageSubmission(model.CustomerID);
                 model.Documents = documents;
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -1498,6 +1553,23 @@ namespace RAP.Business.Implementation
             }
         }
 
+        public ReturnResult<bool> SaveOResponseReviewPageSubmission(int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                
+               result = _dbHandler.OResponseUpdateDecreasedHousingPageSubmission(CustomerID);          
+               return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         public ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -1510,6 +1582,9 @@ namespace RAP.Business.Implementation
                     result.status = dbResult.status;
                     return result;
                 }
+                EmailM message = new EmailM();
+                message.Subject = "Owner Resonse Successfully Filed for the Case -" + model.CaseID;
+                _emilService.SendEmail(message);
                 model = dbResult.result;
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };

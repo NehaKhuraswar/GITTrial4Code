@@ -441,6 +441,42 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<DocumentM>>(ReturnCode, transaction);
         }
 
+
+        [AllowAnonymous]
+        [Route("GetOResponseSubmissionStatus/{CustomerID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetOResponseSubmissionStatus(int CustomerID)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<OwnerResponsePageSubnmissionStatusM> transaction = new TranInfo<OwnerResponsePageSubnmissionStatusM>();
+            ReturnResult<OwnerResponsePageSubnmissionStatusM> result = new ReturnResult<OwnerResponsePageSubnmissionStatusM>();
+            try
+            {
+
+                result = _service.GetOResponseSubmissionStatus(CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<OwnerResponsePageSubnmissionStatusM>>(ReturnCode, transaction);
+        }
+
+
         [AllowAnonymous]
         [Route("GetDocDescription")]
         [HttpGet]
@@ -2021,39 +2057,6 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("SaveOResponseAdditionalDocuments")]
-        [HttpPost]
-        public HttpResponseMessage SaveOResponseAdditionalDocuments([FromBody] CaseInfoM model)
-        {
-            HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
-            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
-            try
-            {
-                var dbResult = _service.SaveOResponseAdditionalDocuments(model);
-                if (dbResult.status.Status == StatusEnum.Success)
-                {
-                    transaction.data = dbResult.result;
-                    transaction.status = true;
-                }
-                else
-                {
-                    transaction.status = false;
-                    transaction.AddException(dbResult.status.StatusMessage);
-                }
-            }
-            catch (Exception ex)
-            {
-                transaction.status = false;
-                transaction.AddException(ex.Message);
-                ReturnCode = HttpStatusCode.InternalServerError;
-                result.status = _eHandler.HandleException(ex);
-                _commonService.LogError(result.status);
-            }
-            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
-        }
-
-        [AllowAnonymous]
         [Route("SaveTRAdditionalDocuments")]
         [HttpPost]
         public HttpResponseMessage SaveTRAdditionalDocuments([FromBody] CaseInfoM model)
@@ -2464,6 +2467,39 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("SaveOResponseDecreasedHousing")]
+        [HttpPost]
+        public HttpResponseMessage SaveOResponseDecreasedHousing([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _service.SaveOResponseDecreasedHousing(model);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("SaveOResponseExemption")]
         [HttpPost]
         public HttpResponseMessage SaveOResponseExemption([FromBody] CaseInfoM model)
@@ -2495,6 +2531,73 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveOResponseAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveOResponseAdditionalDocuments([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _service.SaveOResponseAdditionalDocuments(model);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveOResponseReviewPageSubmission/{CustomerID:int}")]
+        [HttpPost]
+        public HttpResponseMessage SaveOResponseReviewPageSubmission([FromUri]int CustomerID)
+        {
+
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var dbResult = _service.SaveOResponseReviewPageSubmission(CustomerID);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]

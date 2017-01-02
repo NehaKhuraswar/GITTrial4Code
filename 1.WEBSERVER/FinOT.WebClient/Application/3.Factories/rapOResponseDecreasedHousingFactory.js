@@ -14,7 +14,7 @@ var rapOResponseDecreasedHousingFactory = ['blockUI', 'ajaxService', function (b
     }
     var _saveOResponseDecreasedHousing = function (model) {
         blockUI.start();
-        var url = _routePrefix + '/SaveOResponseAdditionalDocuments';
+        var url = _routePrefix + '/SaveOResponseDecreasedHousing';
 
         return ajax.Post(model, url)
         .finally(function () {

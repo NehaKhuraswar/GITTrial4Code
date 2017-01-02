@@ -58,10 +58,15 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> GetOResponseRentIncreaseAndPropertyInfo(CaseInfoM model);
         ReturnResult<OwnerResponsePropertyInfoM> GetOResponseExemption(OwnerResponsePropertyInfoM model);
         ReturnResult<CaseInfoM> GetOResponseReview(CaseInfoM model);
+        ReturnResult<OwnerResponsePageSubnmissionStatusM> GetOResponseSubmissionStatus(int CustomerID);
         ReturnResult<CaseInfoM> SaveOResponseApplicantInfo(CaseInfoM model);
         ReturnResult<OwnerResponsePropertyInfoM> SaveOResponsePropertyAndTenantInfo(OwnerResponsePropertyInfoM model);
         ReturnResult<OwnerResponsePropertyInfoM> SaveOResponseRentIncreaseAndUpdatePropertyInfo(OwnerResponsePropertyInfoM model);
         ReturnResult<OwnerResponsePropertyInfoM> SaveOResponseExemption(OwnerResponsePropertyInfoM model);
         ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model);
+        ReturnResult<bool> OResponseUpdateDecreasedHousingPageSubmission(int CustomerID);
+        ReturnResult<bool> OResponseUpdateReviewPageSubmission(int CustomerID);
+        ReturnResult<bool> OResponseUpdateAdditionalDocumentsPageSubmission(int CustomerID);
+       
     }
 }

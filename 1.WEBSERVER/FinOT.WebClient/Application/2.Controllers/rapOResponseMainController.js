@@ -1,11 +1,10 @@
 ﻿'use strict';
 var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'rapOResponsePetitionTypeFactory', 'model', function ($scope, $modal, alert, $location, rapGlobalFactory, rapFactory, model) {
     var self = this;
-    //self.custDetails = rapGlobalFactory.CustomerDetails;
+    self.custDetails = rapGlobalFactory.CustomerDetails;
 
-    self.PetitionSubmissionStatus = null;
-    self.oPetionActiveStatus = null;
-    self.tPetionActiveStatus = null;
+    self.oResponseActiveStatus = null;
+
 
     var _DisableAll = function () {
         self.petitionType = false;
@@ -21,77 +20,88 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
     };
     _DisableAll();
 
+    self.oResponseCurrentStatus = {
+        petitionType: false,
+        ImportantInformation: false,
+        ApplicantInformation: false,
+        RentalProperty: false,
+        RentHistory: false,
+        DecreasedHousingServices: false,
+        Exeption: false,
+        AdditionalDocumentation: false,
+        Review: false,
+        Verification: false
+    };
 
+
+    self.DisableAllCurrent = function () {
+        self.oResponseCurrentStatus.petitionType = false;
+        self.oResponseCurrentStatus.ImportantInformation = false;
+        self.oResponseCurrentStatus.ApplicantInformation = false;
+        self.oResponseCurrentStatus.RentalProperty = false;
+        self.oResponseCurrentStatus.RentHistory = false;
+        self.oResponseCurrentStatus.DecreasedHousingServices = false;
+        self.oResponseCurrentStatus.Exeption = false;
+        self.oResponseCurrentStatus.AdditionalDocumentation = false;
+        self.oResponseCurrentStatus.Review = false;
+        self.oResponseCurrentStatus.Verification = false;
+    };
     self.showPetitionType = function () {
         _DisableAll();
         self.petitionType = true;
-        //self.DisableAllCurrent();
-        //self.oPetionCurrentStatus.PetitionCategory = true;
+        self.DisableAllCurrent();
+        self.oResponseCurrentStatus.petitionType = true;
     };
 
-    self.ShowOwnerImpInfo = function () {
-        //    if (self.oPetionActiveStatus.ImportantInformation) {
-        _DisableAll();
-        self.oresponseImpInfo = true;
-        //        self.oPetionCurrentStatus.ImportantInformation = true;
-    };
-    //};
-    self.ShowOresponseApplicantInfo = function () {
-        //if (self.oPetionActiveStatus.ApplicantInformation) {
+    self.ShowOresponseImpInfo = function () {
+        if (self.oResponseActiveStatus.ImportantInformation) {
             _DisableAll();
-            //self.DisableAllCurrent();
-            self.oresponseApplicantInfo = true;
-            //self.oPetionCurrentStatus.ApplicantInformation = true;
-        //}
+            self.oresponseImpInfo = true;
+        }
+    };
+   
+    self.ShowOresponseApplicantInfo = function () {
+        if (self.oResponseActiveStatus.ApplicantInformation) {
+            _DisableAll();          
+            self.oresponseApplicantInfo = true; 
+        }
     };
     self.ShowOresponseRentalProperty = function () {
-    //    if (self.oPetionActiveStatus.JustificationForRentIncrease) {
-           _DisableAll();
-    //        self.DisableAllCurrent();
-           self.oresponseRentalProperty = true;
-    //        self.oPetionCurrentStatus.JustificationForRentIncrease = true;
-    //    }
+        if (self.oResponseActiveStatus.RentalProperty) {
+            _DisableAll();   
+            self.oresponseRentalProperty = true;
+        }
     };
 
     self.ShowOresponseRentalHistory = function () {
-    //    if (self.oPetionActiveStatus.RentHistory) {
-           _DisableAll();
-    //        self.DisableAllCurrent();
-         self.oresponseRentalHistory = true;
-    //        self.oPetionCurrentStatus.RentHistory = true;
-    //    }
+        if (self.oResponseActiveStatus.RentHistory) {
+            _DisableAll();   
+            self.oresponseRentalHistory = true;   
+        }
     };
     self.ShowOresponseDecrasedHousing = function () {
-        //    if (self.oPetionActiveStatus.RentHistory) {
-        _DisableAll();
-        //        self.DisableAllCurrent();
-        self.oresponseDecreasedHousing = true;
-        //        self.oPetionCurrentStatus.RentHistory = true;
-        //    }
+        if (self.oResponseActiveStatus.DecreasedHousingServices) {
+            _DisableAll();        
+            self.oresponseDecreasedHousing = true;        
+        }
     };
     self.ShowOresponseException = function () {
-        //    if (self.oPetionActiveStatus.RentHistory) {
-        _DisableAll();
-        //        self.DisableAllCurrent();
-        self.oresponseException = true;
-        //        self.oPetionCurrentStatus.RentHistory = true;
-        //    }
+        if (self.oResponseActiveStatus.Review) {
+            _DisableAll();
+            self.oresponseException = true;
+        }
     };
     self.ShowOresponseDocument = function () {
-        //    if (self.oPetionActiveStatus.RentHistory) {
-        _DisableAll();
-        //        self.DisableAllCurrent();
-        self.oresponseDocument = true;
-        //        self.oPetionCurrentStatus.RentHistory = true;
-        //    }
+        if (self.oResponseActiveStatus.RentHisAdditionalDocumentationtory) {
+            _DisableAll();
+            self.oresponseDocument = true;
+        }        
     };
     self.ShowOresponseReview = function () {
-        //    if (self.oPetionActiveStatus.RentHistory) {
-        _DisableAll();
-        //        self.DisableAllCurrent();
-        self.oresponseReview = true;
-        //        self.oPetionCurrentStatus.RentHistory = true;
-        //    }
+        if (self.oResponseActiveStatus.Review) {
+            _DisableAll();
+            self.oresponseReview = true;
+        }        
     };
 
     //self.ShowOwnerAdditionalDocuments = function () {
@@ -144,7 +154,18 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
     //    self.oPetionCurrentStatus.Verification = false;
     //};
    // self.showPetitionType();
-   
+
+    var _getPageSubmission = function () {
+        rapFactory.GetOResponseSubmissionStatus(self.custDetails.custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.oResponseActiveStatus = response.data;
+        });
+    }
+    if (self.oResponseActiveStatus == null) {
+        _getPageSubmission();
+    }
 
     var _getPetitionCategory = function () {
         rapFactory.GetPetitionCategory().then(function (response) {
@@ -161,6 +182,7 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         _getPetitionCategory();
     }
 }];
+
 var rapOResponseMainController_resolve = {
     model: ['$route', 'alertService', 'rapfilepetitionFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
         //rapFactory.GetCaseInfo().then(function (response) {

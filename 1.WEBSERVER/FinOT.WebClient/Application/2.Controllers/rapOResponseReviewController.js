@@ -13,18 +13,24 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
     rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
-        self.caseinfo = response.data;       
+        self.caseinfo = response.data;
+        
     });
 
    
     self.Continue = function () {
+        rapGlobalFactory.CaseDetails = self.caseinfo;
+        rapFactory.SaveOResponseReviewPageSubmission(self.custDetails.custID).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }            
+            MoveNext();
+        });
+    }
+    function MoveNext() {
         $scope.model.oresponseReview = false;
         $scope.model.oresponseVerification = true;
-        //$scope.model.ownerRentalHistory = false;
-        //$scope.model.ownerAdditionalDocuments = true;
-        //$scope.model.DisableAllCurrent();
-        //$scope.model.oPetionCurrentStatus.AdditionalDocumentation = true;
-        //$scope.model.oPetionActiveStatus.RentHistory = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oResponseCurrentStatus.Verification = true;
+        $scope.model.oResponseActiveStatus.Review = true;
     }
 }];
 var rapOResponseReviewController_resolve = {

@@ -3783,6 +3783,28 @@ namespace RAP.DAL
            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
            try
            {
+
+               if(model.NumberOfUnitsRange == null ||model.NumberOfUnitsRange.Count == 0)
+               
+               {
+                   var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                   if (rangeDB == null)
+                   {
+                       result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                       return result;
+                   }
+                   else
+                   {
+                       foreach (var item in rangeDB)
+                       {
+                           NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                           obj.RangeID = item.RangeID;
+                           obj.RangeDesc = item.RangeDesc;
+                           model.NumberOfUnitsRange.Add(obj);
+                       }
+                   }
+               }
+
                var applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.CustomerID == model.OwnerResponseInfo.ApplicantInfo.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
                if (applicantInfo == null)
                {
@@ -3816,6 +3838,7 @@ namespace RAP.DAL
                    _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
                    _applicantInfo.bPetitionFiled =Convert.ToBoolean(applicantInfo.bPetitionFiled);
                    _applicantInfo.CaseRespondingTo = applicantInfo.CaseRespondingTo;
+                   model.NumberOfUnitsRangeID = (applicantInfo.RangeID != null) ? Convert.ToInt32(applicantInfo.RangeID) : 0; 
                    model.OwnerResponseInfo.ApplicantInfo = _applicantInfo;
                    result.result = model;
                }
@@ -3863,6 +3886,7 @@ namespace RAP.DAL
                                      select r;
                    if (tentantInfo.Any())
                    {
+                       List<OwnerPetitionTenantInfoM> tenants = new List<OwnerPetitionTenantInfoM>();
                        foreach (var item in tentantInfo)
                        {
                            OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
@@ -3872,9 +3896,33 @@ namespace RAP.DAL
                                _tenant.TenantUserInfo = userResult.result;
                                _tenant.TenantInfoID = item.TenantInfoID;
                            }
-                           model.TenantInfo.Add(_tenant);
+                           tenants.Add(_tenant);                          
+                       }
+                       model.TenantInfo = tenants;
+                   }
+               }
+               else
+               {
+                   
+                   var applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.CustomerID == model.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
+                   if (applicantInfo != null)
+                   {
+                       string  caseid = applicantInfo.CaseRespondingTo;
+                       var caseinfo = _dbContext.CaseDetails.Where(r => r.CaseID == caseid).FirstOrDefault();
+                       if (caseinfo != null && caseinfo.PetitionCategoryID == 1)
+                       {
+                           var tenantPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == caseinfo.PetitionID).Select(x => x.TenantPetitionID).FirstOrDefault();
+                           var userid = Convert.ToInt32(_dbContext.TenantPetitionInfos.Where(r => r.TenantPetitionID == tenantPetitionID).Select(x => x.ApplicantUserID).FirstOrDefault());
+                           var tenantInfo = _commondbHandler.GetUserInfo(userid);
+                           if (tenantInfo.status.Status == StatusEnum.Success)
+                           {
+                               OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
+                               _tenant.TenantUserInfo = tenantInfo.result;
+                               model.TenantInfo.Add(_tenant);
+                           }
                        }
                    }
+                   
                }
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -4174,6 +4222,8 @@ namespace RAP.DAL
                {
                    model.Documents = documentResult.result;
                }
+
+               model.OwnerResponseInfo.CustomerIdentityKey = Convert.ToInt32(_dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CustomerID).Select(x => x.CustomerIdentityKey).FirstOrDefault());
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;
@@ -4278,8 +4328,13 @@ namespace RAP.DAL
                            applicantInfo.First().bBusinessLicensePaid = model.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid;
                            applicantInfo.First().BusinessLicenseNumber = model.OwnerResponseInfo.ApplicantInfo.BusinessLicenseNumber;
                            applicantInfo.First().bRentAdjustmentProgramFeePaid = model.OwnerResponseInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
+                           applicantInfo.First().CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
                            applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                            applicantInfo.First().NumberOfUnits = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnits;
+                           if (model.NumberOfUnitsRangeID != 0)
+                           {
+                               applicantInfo.First().RangeID = model.NumberOfUnitsRangeID;
+                           }
                            applicantInfo.First().bMoreThanOneStreetOnParcel = model.OwnerResponseInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
                            _dbContext.SubmitChanges();
                        }
@@ -4298,6 +4353,10 @@ namespace RAP.DAL
                        applicantInfo.bRentAdjustmentProgramFeePaid = model.OwnerResponseInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
                        applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                        applicantInfo.NumberOfUnits = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnits;
+                       if (model.NumberOfUnitsRangeID != 0)
+                       {
+                           applicantInfo.RangeID = model.NumberOfUnitsRangeID;
+                       }
                        applicantInfo.bMoreThanOneStreetOnParcel = model.OwnerResponseInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
                        applicantInfo.CustomerID = model.OwnerResponseInfo.ApplicantInfo.CustomerID;
                        applicantInfo.CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
@@ -4305,7 +4364,15 @@ namespace RAP.DAL
                        _dbContext.OwnerResponseApplicantInfos.InsertOnSubmit(applicantInfo);
                        _dbContext.SubmitChanges();
                        model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID = applicantInfo.OwnerResponseApplicantInfoID;
+
+                       OwnerResponsePageSubmissionStatus oResponseSubmission = new OwnerResponsePageSubmissionStatus();
+                       oResponseSubmission.ImportantInformation = true;
+                       oResponseSubmission.ApplicantInformation = true;
+                       oResponseSubmission.CustomerID = model.CustomerID;
+                       _dbContext.OwnerResponsePageSubmissionStatus.InsertOnSubmit(oResponseSubmission);
+                       _dbContext.SubmitChanges();
                    }
+
                    result.result = model;
                    result.status = new OperationStatus() { Status = StatusEnum.Success };
                    return result;
@@ -4397,6 +4464,12 @@ namespace RAP.DAL
                        }
                    }
                    model.TenantInfo = tenantsInfoM;
+               }
+               var oResponseSubmission = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+               if (oResponseSubmission != null)
+               {
+                   oResponseSubmission.RentalProperty = true;                   
+                   _dbContext.SubmitChanges();
                }
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -4582,7 +4655,12 @@ namespace RAP.DAL
                        }
                    }
                }
-
+               var oResponseSubmission = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+               if (oResponseSubmission != null)
+               {
+                   oResponseSubmission.RentHistory = true;
+                   _dbContext.SubmitChanges();
+               }
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;
@@ -4669,6 +4747,13 @@ namespace RAP.DAL
                        _dbContext.SubmitChanges();
                    }
                }
+
+               var oResponseSubmission = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+               if (oResponseSubmission != null)
+               {
+                   oResponseSubmission.Exeption = true;
+                   _dbContext.SubmitChanges();
+               }
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;
@@ -4680,6 +4765,7 @@ namespace RAP.DAL
                return result;
            }
        }
+
 
        public ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model)
        {
@@ -4735,6 +4821,14 @@ namespace RAP.DAL
                    result.status = updateDocumentResult.status;
                    return result;
                }
+
+               var oResponseSubmission = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+               if (oResponseSubmission != null)
+               {
+                   _dbContext.OwnerResponsePageSubmissionStatus.DeleteOnSubmit(oResponseSubmission);
+                   _dbContext.SubmitChanges();
+               }
+              
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;
@@ -4747,6 +4841,77 @@ namespace RAP.DAL
            }
        }
 
+       public ReturnResult<bool> OResponseUpdateDecreasedHousingPageSubmission(int CustomerID)
+       {
+           ReturnResult<bool> result = new ReturnResult<bool>();
+           try
+           {
+               var oResponseSubmission = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+               if (oResponseSubmission != null)
+               {
+                   oResponseSubmission.DecreasedHousingServices = true;
+                   _dbContext.SubmitChanges();
+               }
+
+               result.result = true;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
+
+       public ReturnResult<bool> OResponseUpdateAdditionalDocumentsPageSubmission(int CustomerID)
+       {
+           ReturnResult<bool> result = new ReturnResult<bool>();
+           try
+           {
+               var oResponseSubmission = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+               if (oResponseSubmission != null)
+               {
+                   oResponseSubmission.AdditionalDocumentation = true;
+                   _dbContext.SubmitChanges();
+               }
+
+               result.result = true;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
+        
+       public ReturnResult<bool> OResponseUpdateReviewPageSubmission(int CustomerID)
+       {
+           ReturnResult<bool> result = new ReturnResult<bool>();
+           try
+           {
+               var oResponseSubmission = _dbContext.OwnerResponsePageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+               if (oResponseSubmission != null)
+               {
+                   oResponseSubmission.Review = true;
+                   _dbContext.SubmitChanges();
+               }
+
+               result.result = true;
+               result.status = new OperationStatus() { Status = StatusEnum.Success };
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
        #endregion
        private List<UnitTypeM> getUnitTypes()
        {

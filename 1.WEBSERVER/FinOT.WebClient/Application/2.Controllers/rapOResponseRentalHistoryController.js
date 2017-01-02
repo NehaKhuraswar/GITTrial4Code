@@ -91,15 +91,17 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
         rapFactory.SaveOResponseRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
-        });
-        $scope.model.oresponseRentalHistory = false;
-        $scope.model.oresponseDecreasedHousing = true; 
-        //$scope.model.ownerRentalHistory = false;
-        //$scope.model.ownerAdditionalDocuments = true;
-        //$scope.model.DisableAllCurrent();
-        //$scope.model.oPetionCurrentStatus.AdditionalDocumentation = true;
-        //$scope.model.oPetionActiveStatus.RentHistory = true;
+            MoveNext()
+        });       
     }
+    function MoveNext() {
+        $scope.model.oresponseRentalHistory = false;
+        $scope.model.oresponseDecreasedHousing = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oResponseCurrentStatus.DecreasedHousingServices = true;
+        $scope.model.oResponseActiveStatus.RentHistory = true;
+    }
+
 }];
 var rapOResponseRentalHistoryControllerr_resolve = {
     model: ['$route', 'alertService', 'rapOwnerRentalHistoryFactory', function ($route, alert, rapFactory) {

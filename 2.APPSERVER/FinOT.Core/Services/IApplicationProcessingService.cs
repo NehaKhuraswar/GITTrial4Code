@@ -64,11 +64,14 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetOResponseExemption(CaseInfoM model);
         ReturnResult<CaseInfoM> GetOResponseAdditionalDocuments(CaseInfoM model);
         ReturnResult<CaseInfoM> GetOResponseReview(CaseInfoM model);
+        ReturnResult<OwnerResponsePageSubnmissionStatusM> GetOResponseSubmissionStatus(int CustomerID);
         ReturnResult<CaseInfoM> SaveOResponseApplicantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponsePropertyAndTenantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseRentIncreaseAndUpdatePropertyInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseAdditionalDocuments(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOResponseExemption(CaseInfoM model);
+        ReturnResult<CaseInfoM> SaveOResponseDecreasedHousing(CaseInfoM model);
+        ReturnResult<bool> SaveOResponseReviewPageSubmission(int CustomerID);   
         ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model);
     }
 }

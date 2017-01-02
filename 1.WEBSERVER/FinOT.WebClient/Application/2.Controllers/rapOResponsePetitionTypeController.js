@@ -37,7 +37,8 @@ var rapOResponsePetitionTypeController = ['$scope', '$modal', 'alertService', '$
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;       
         $scope.model.petitionType = false;
-        $scope.model.oresponseImpInfo = true;        
+        $scope.model.oresponseImpInfo = true;
+        $scope.model.oResponseCurrentStatus.ImportantInformation = true;
         //$location.path("/applicationinfo");
     }
     //self.ContinueToGroundsforPetition = function () {

@@ -20,14 +20,16 @@ var rapOResponseExemptionController = ['$scope', '$modal', 'alertService', 'rapO
         rapFactory.SaveOResponseExemption(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
-        });
+            MoveNext();
+        });   
+    }
+
+    function MoveNext() {
         $scope.model.oresponseException = false;
         $scope.model.oresponseDocument = true;
-        //$scope.model.ownerRentalHistory = false;
-        //$scope.model.ownerAdditionalDocuments = true;
-        //$scope.model.DisableAllCurrent();
-        //$scope.model.oPetionCurrentStatus.AdditionalDocumentation = true;
-        //$scope.model.oPetionActiveStatus.RentHistory = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oResponseCurrentStatus.AdditionalDocumentation = true;
+        $scope.model.oResponseActiveStatus.Exeption = true;
     }
 }];
 var rapOResponseExemptionController_resolve = {

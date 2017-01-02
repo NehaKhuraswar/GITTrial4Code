@@ -281,6 +281,14 @@
                     <label>Total Number Of Units</label>
                     <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.NumberOfUnits" required />
                 </div>
+                <div class="field-group">
+                    <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
+                    <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range"
+                            ng-model=" Ctrl.caseinfo.NumberOfUnitsRangeID"
+                            ng-options="range.RangeID as range.RangeDesc for range in Ctrl.caseinfo.NumberOfUnitsRange">
+                        <option value="" selected>Select range</option>
+                    </select>
+                </div>
 
                 <div class="field-group">
                     <p class="input-label">Is there more than one street address on the Parcel?</p>

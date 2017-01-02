@@ -90,7 +90,40 @@
                             </div>
                         </div><!-- .field-group -->
                     </div>
+                    <div class="subhead type2">
+                        <h4>Additional Documentation</h4>
+                        <a href="#" class="btn-link btn-edit">Edit</a>
+                    </div>
 
+                    <div class="field-group">
+                        <!-- Custom Table -->
+                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
+                            <div class="tbl-header">
+                                <div class="tbl-row clearfix">
+                                    <div class="col col-35 name">File name</div>
+                                </div>
+                            </div>
+
+                            <div class="tbl-body">
+                                <div class="tbl-row clearfix">
+                                    <div class="item item-toggle expanded">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
+                                        </div>
+
+                                        <div class="item-content clearfix">
+                                            <div class="row">
+                                                <div class="col-md-10 col-sm-12">
+                                                    <p>{{item.DocDescription}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .custom-table -->
+                    </div>
 
                     <div class="step-footer">
                         <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>

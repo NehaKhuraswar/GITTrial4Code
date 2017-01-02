@@ -296,65 +296,69 @@
                                     </div>
                                     <div class="field-group" ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.length > 0">
                                         <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
-                                            <div class="field-group subhead no-top-margin pad-t15">
-                                                <p class="input-label">Did you provide rent program notice with the notice of rent increase?</p>
-                                                <div class="form-group-radio vertical clearfix">
-                                                    <label ng-if="item.bRentIncreaseNoticeGiven">
-                                                        <i></i><span>Yes</span>
-                                                    </label>
-                                                    <label ng-if="!item.bRentIncreaseNoticeGiven">
-                                                        <i></i><span>No</span>
-                                                    </label>
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="field-group">
-                                                <label>Date notice served</label>
-                                                {{item.RentIncreaseNoticeDate.Month}} / {{item.RentIncreaseNoticeDate.Day}} / {{item.RentIncreaseNoticeDate.Year}}
-                                            </div>
-                                            <div class="field-group">
-                                                <label>Monthly rent increase</label>
+                                            <div class="field-group filled-info subhead no-top-margin">
                                                 <div class="row">
+                                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
                                                     <div class="col-sm-6 col-xs-12">
-                                                        <span> From : {{item.RentIncreasedFrom}}</span>
-                                                        <span> To : {{item.RentIncreasedTo}}</span>
+                                                        <div class="col-sm-6 col-xs-12">
+                                                            <label ng-if="item.bRentIncreaseNoticeGiven">
+                                                                <i></i><span>Yes</span>
+                                                            </label>
+                                                            <label ng-if="!item.bRentIncreaseNoticeGiven">
+                                                                <i></i><span>No</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="field-group">
-                                                <label>Date increase effective</label>
-                                                {{item.RentIncreaseEffectiveDate.Month}} / {{item.RentIncreaseEffectiveDate.Day}} / {{item.RentIncreaseEffectiveDate.Year}}
-                                            </div>
-                                            <div class="field-group">
 
-                                                <strong>Justification for Rent Increase</strong>
-
-                                                <div ng-repeat="reason in item.RentIncreaseReasons  | filter: {IsSelected: true} ">
-                                                    <label for="{{reason.ReasonID}}">
-                                                        <i></i><span>{{reason.ReasonDescription}}</span>
-                                                    </label>
+                                            <div class="field-group filled-info subhead no-top-margin">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                                                 </div>
                                             </div>
-                                            <div class="field-group">
-                                                <button class="btn-link btn-edit" ng-click="Ctrl.RemoveRecord(item)">Remove</button>
+                                            <div class="field-group filled-info subhead no-top-margin">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreasedTo - item.RentIncreasedFrom}}</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                            <div class="field-group">
-                                                <table class="table table-condensed nopadding-bottom">
-                                                    <tbody>
-                                                        <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2' || 'OR_Justification'}">
-                                                            <td class="nopadding-left">
-                                                                {{item.DocName}}
-                                                            </td>
-                                                            <td>
-                                                                <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>                                       
-                                    </div> 
+                                            <div class="field-group filled-info subhead no-top-margin">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="field-group filled-info subhead no-top-margin">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Justification for rent increase</div></div>
+                                                    <div class="col-sm-6 col-xs-12" ng-repeat="reason in item.RentIncreaseReasons  | filter: {IsSelected: true}">
+                                                        <label for="{{reason.ReasonID}}">
+                                                            <i></i><span>{{reason.ReasonDescription}}</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="field-group">
+                                              <button class="btn-link btn-edit" ng-click="Ctrl.RemoveRecord(item)">Remove</button>
+                                             </div>
+                                              </div>
+                                                    <div class="field-group">
+                                                        <table class="table table-condensed nopadding-bottom">
+                                                            <tbody>
+                                                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2'}">
+                                                                    <td class="nopadding-left">
+                                                                        {{item.DocName}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div> 
 
                                         <!-- .field-group -->
 

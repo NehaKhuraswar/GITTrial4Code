@@ -59,9 +59,9 @@
         rapFactory.SaveOResponseDecreasedHousing(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
+            MoveNext();
         });
-        $scope.model.oresponseDecreasedHousing = false;
-        $scope.model.oresponseException = true;
+       
         //$scope.model.ownerAdditionalDocuments = false;
         //$scope.model.ownerReview = true;
         //$scope.model.DisableAllCurrent();
@@ -69,6 +69,13 @@
         //$scope.model.oPetionActiveStatus.AdditionalDocumentation = true;
     }
 
+    function MoveNext() {
+        $scope.model.oresponseDecreasedHousing = false;
+        $scope.model.oresponseException = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oResponseCurrentStatus.Exeption = true;
+        $scope.model.oResponseActiveStatus.DecreasedHousingServices = true;
+    }
 }];
 
 var rapOwnerDocumentsController_resolve = {

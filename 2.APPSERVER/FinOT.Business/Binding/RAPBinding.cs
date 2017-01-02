@@ -24,6 +24,7 @@ namespace RAP.Business.Binding
            Bind<IAccountManagementDBHandler>().To<AccountManagementDBHandler>();
            Bind<IDashboardDBHandler>().To<DashboardDBHandler>();
            Bind<IDashboardService>().To<DashboardService>();
+           Bind<IEmailService>().To<EmailService>();
        }
     }
 }

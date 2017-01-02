@@ -4,20 +4,19 @@
 
         <div class="field-group">
             <p class="input-label">Type of unit you rent</p>
-            <div class="radio">
+            <div class="form-group-radio vertical clearfix">
                 <label ng-repeat="unittype in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
                     <input type="radio"
                            class="input-field"
                            ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID"
                            ng-value="unittype.UnitTypeID"
                            id="{{unittype.UnitTypeID}}"
-                           name="units">{{unittype.UnitDescription}}
-                </label>
-                <div class="clear"></div>
+                           name="units"><i></i><span>{{unittype.UnitDescription}}</span>
+                     </label>
+              
             </div>
-        </div>
-
-
+        </div>     
+       
         <div class="field-group">
             <label for="Applicant_firstname">Tenant's Name</label>
             <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName" required />
@@ -67,16 +66,16 @@
         <div>
             <button class="btn-primary" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant</button>
         </div>
-        <div class="field-group filled-info subhead no-top-margin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
-                    <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}</p>               <p>{{item.TenantUserInfo.AddressLine1}}</p>
+        <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
+            <div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}</p>                 <p>{{item.TenantUserInfo.AddressLine1}}</p>
                     <p> {{item.TenantUserInfo.AddressLine2}}</p>
                     <p>{{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}</p>
                     <button class="btn-link btn-edit" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
                 </div>
                 </div>
-            </div>
+        </div>
             </div>
 
             <div class="step-footer">

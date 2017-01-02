@@ -31,14 +31,18 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
+            MoveNext();
         });
+       
+    }
+
+    function MoveNext() {
+
         $scope.model.oresponseRentalProperty = false;
         $scope.model.oresponseRentalHistory = true;
-        //$scope.model.ownerRentalProperty = false;
-        //$scope.model.ownerRentalHistory = true;
-        //$scope.model.DisableAllCurrent();
-        //$scope.model.oPetionCurrentStatus.RentHistory = true;
-        //$scope.model.oPetionActiveStatus.RentalProperty = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oResponseCurrentStatus.RentHistory = true;
+        $scope.model.oResponseActiveStatus.RentalProperty = true;
     }
     self.AddTenant = function (_userInfo) {
         if (self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo.length > 0) {
@@ -49,7 +53,7 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
             _userInfo.TenantUserInfo.Zip = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip;
             _userInfo.TenantUserInfo.PhoneNumber = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.PhoneNumber;
             _userInfo.TenantUserInfo.Email = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Email;
-        }
+    }
         var _userInfo1 = angular.copy(_userInfo);
         //  var _userInfo = self.caseinfo.OwnerPetitionTenantInfo;
         self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo.push(_userInfo1);

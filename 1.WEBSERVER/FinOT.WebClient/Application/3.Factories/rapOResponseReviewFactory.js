@@ -13,7 +13,16 @@ var rapOResponseReviewFactory = ['blockUI', 'ajaxService', function (blockUI, aj
         });
     }
    
-
+    var _saveOResponseReviewPageSubmission = function (custId) {
+        blockUI.start();
+        var url = _routePrefix + '/SaveOResponseReviewPageSubmission';
+        if (!(custId == null || custId == undefined)) { url = url + '/' + custId; }
+        return ajax.Post(null, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     factory.GetOResponseReview = _getOResponseReview;
+    factory.SaveOResponseReviewPageSubmission = _saveOResponseReviewPageSubmission;
     return factory;
 }];

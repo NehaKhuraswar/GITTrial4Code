@@ -186,6 +186,38 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
+        [Route("GetOResponseSubmissionStatus/{CustomerID}")]
+        [HttpGet]
+        public HttpResponseMessage GetOResponseSubmissionStatus(string CustomerID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetOResponseSubmissionStatus/" + CustomerID;
+                responseMessage = client.GetAsync(requestUri).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else // error
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+        [AllowAnonymous]
         [Route("GetTRPageSubmissionStatus/{CustomerID}")]
         [HttpGet]
         public HttpResponseMessage GetTRPageSubmissionStatus(string CustomerID)
@@ -1984,6 +2016,39 @@ namespace RAP.WebClient
             }
         }
 
+        //[AllowAnonymous]
+        //[Route("GetOResponseSubmissionStatus/{CustomerID}")]
+        //[HttpGet]
+        //public HttpResponseMessage GetOResponseSubmissionStatus(string CustomerID)
+        //{
+        //    HttpResponseMessage responseMessage;
+        //    try
+        //    {
+        //        HttpClient client = new HttpClient();
+        //        client.BaseAddress = new Uri(_baseURL);
+        //        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+        //        string requestUri = _requestURI + "GetOResponseSubmissionStatus/" + CustomerID;
+        //        responseMessage = client.GetAsync(requestUri).Result;
+        //        if (responseMessage.IsSuccessStatusCode)
+        //        {
+        //            return responseMessage;
+        //        }
+        //        else // error
+        //        {
+        //            responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //            responseMessage.ReasonPhrase = _errorMessage;
+        //        }
+        //        return responseMessage;
+        //    }
+        //    catch
+        //    {
+        //        responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+        //        responseMessage.ReasonPhrase = _exception;
+        //        return responseMessage;
+        //    }
+        //}
+
+
         [AllowAnonymous]
         [Route("SaveOResponseApplicantInfo")]
         [HttpPost]
@@ -2082,9 +2147,9 @@ namespace RAP.WebClient
 
 
         [AllowAnonymous]
-        [Route("SaveOResponseAdditionalDocuments")]
+        [Route("SaveOResponseDecreasedHousing")]
         [HttpPost]
-        public HttpResponseMessage SaveOResponseAdditionalDocuments()
+        public HttpResponseMessage SaveOResponseDecreasedHousing()
         {
             HttpResponseMessage responseMessage;
             try
@@ -2092,7 +2157,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "SaveOResponseAdditionalDocuments/";
+                string requestUri = _requestURI + "SaveOResponseDecreasedHousing/";
                 responseMessage = client.PostAsync(requestUri, Request.Content).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {
@@ -2144,6 +2209,72 @@ namespace RAP.WebClient
                 return responseMessage;
             }
         }
+
+        [AllowAnonymous]
+        [Route("SaveOResponseAdditionalDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveOResponseAdditionalDocuments()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "SaveOResponseAdditionalDocuments/";
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+        [AllowAnonymous]
+        [Route("SaveOResponseReviewPageSubmission/{CustomerID}")]
+        [HttpPost]
+        public HttpResponseMessage SaveOResponseReviewPageSubmission(string CustomerID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "SaveOResponseReviewPageSubmission/" + CustomerID;
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+
 
         [AllowAnonymous]
         [Route("SubmitOwnerResponse")]

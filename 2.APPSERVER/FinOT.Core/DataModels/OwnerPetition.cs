@@ -42,6 +42,7 @@ namespace RAP.Core.DataModels
 
     public class OwnerPetitionApplicantInfoM
     {
+        private List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
         public OwnerPetitionApplicantInfoM()
         {
             ThirdPartyUser = new UserInfoM();
@@ -74,6 +75,18 @@ namespace RAP.Core.DataModels
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }
         public string RAPFee { get; set; }
+        public List<NumberRangeForUnitsM> NumberOfUnitsRange
+        {
+            get
+            {
+                return _rangeOfUnits;
+            }
+            set
+            {
+                _rangeOfUnits = value;
+            }
+        }
+        public int NumberOfUnitsRangeID { get; set; }
     }
 
     public class OwnerPetitionPropertyInfoM
@@ -203,10 +216,12 @@ namespace RAP.Core.DataModels
                 return DateTime.Now;
             }
         }
+        public Int32 CustomerIdentityKey { get; set; }
     }
 
     public class OwnerResponseApplicantInfoM
     {
+        
         public OwnerResponseApplicantInfoM()
         {
             ThirdPartyUser = new UserInfoM();
@@ -216,6 +231,7 @@ namespace RAP.Core.DataModels
         private bool _bThirdPartyRepresentation = false;
         public int OwnerResponseApplicantInfoID { get; set; }
         public UserInfoM ApplicantUserInfo { get; set; }
+        
         public bool bThirdPartyRepresentation
         {
             get
@@ -240,6 +256,7 @@ namespace RAP.Core.DataModels
         public bool bPetitionFiled { get; set; }
         public string RAPFee { get; set; }
         public string CaseRespondingTo { get; set; }
+       
     }
 
     public class OwnerResponsePropertyInfoM

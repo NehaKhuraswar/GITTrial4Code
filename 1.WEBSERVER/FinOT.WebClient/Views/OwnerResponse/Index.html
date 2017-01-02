@@ -7,16 +7,16 @@
                 <div class="col-md-3 col-sm-12">
                     <div>
                         <ul class="application-steps">
-                            <li> <a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
-                            <li><a ng-click="Ctrl.ShowOwnerImpInfo()">Important Information</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation, 'current' : !Ctrl.oPetionActiveStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOresponseApplicantInfo()">Applicant Information</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentalProperty, 'current' : !Ctrl.oPetionActiveStatus.RentalProperty && Ctrl.oPetionCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOresponseRentalProperty()">Rental Property</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseRentalHistory()">Rental History</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseDecrasedHousing()">Decreased Housing Service</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.RentHistory, 'current' : !Ctrl.oPetionActiveStatus.RentHistory && Ctrl.oPetionCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseException()">Exemption</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oPetionActiveStatus.AdditionalDocumentation && Ctrl.oPetionCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOresponseDocument()">Additional Documents</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Review, 'current' : !Ctrl.oPetionActiveStatus.Review && Ctrl.oPetionCurrentStatus.Review}"><a ng-click="Ctrl.ShowOresponseReview()">Review</a></li>
-                            <li ng-class="{'active' : Ctrl.oPetionActiveStatus.Verification, 'current' : !Ctrl.oPetionActiveStatus.Verification && Ctrl.oPetionCurrentStatus.Verification}">Verification</li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.ApplicantInformation, 'current' : !Ctrl.oResponseActiveStatus.ApplicantInformation && Ctrl.oResponseCurrentStatus.petitionType}"> <a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.ApplicantInformation, 'current' : !Ctrl.oResponseActiveStatus.ApplicantInformation && Ctrl.oResponseCurrentStatus.ImportantInformation}"><a ng-click="Ctrl.ShowOresponseImpInfo()">Important Information</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.ApplicantInformation, 'current' : !Ctrl.oResponseActiveStatus.ApplicantInformation && Ctrl.oResponseCurrentStatus.ApplicantInformation}"><a ng-click="Ctrl.ShowOresponseApplicantInfo()">Applicant Information</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.RentalProperty, 'current' : !Ctrl.oResponseActiveStatus.RentalProperty && Ctrl.oResponseCurrentStatus.RentalProperty}"><a ng-click="Ctrl.ShowOresponseRentalProperty()">Rental Property</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.RentHistory, 'current' : !Ctrl.oResponseActiveStatus.RentHistory && Ctrl.oResponseCurrentStatus.RentHistory}"><a ng-click="Ctrl.ShowOresponseRentalHistory()">Rental History</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.DecreasedHousingServices, 'current' : !Ctrl.oResponseActiveStatus.DecreasedHousingServices && Ctrl.oResponseCurrentStatus.DecreasedHousingServices}"><a ng-click="Ctrl.ShowOresponseDecrasedHousing()">Decreased Housing Service</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.Exeption, 'current' : !Ctrl.oResponseActiveStatus.Exeption && Ctrl.oResponseCurrentStatus.Exeption}"><a ng-click="Ctrl.ShowOresponseException()">Exemption</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.AdditionalDocumentation, 'current' : !Ctrl.oResponseActiveStatus.AdditionalDocumentation && Ctrl.oResponseCurrentStatus.AdditionalDocumentation}"><a ng-click="Ctrl.ShowOresponseDocument()">Additional Documents</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.Review, 'current' : !Ctrl.oResponseActiveStatus.Review && Ctrl.oResponseCurrentStatus.Review}"><a ng-click="Ctrl.ShowOresponseReview()">Review</a></li>
+                            <li ng-class="{'active' : Ctrl.oResponseActiveStatus.Verification, 'current' : !Ctrl.oResponseActiveStatus.Verification && Ctrl.oResponseCurrentStatus.Verification}">Verification</li>
                         </ul>
                     </div>
                 </div>

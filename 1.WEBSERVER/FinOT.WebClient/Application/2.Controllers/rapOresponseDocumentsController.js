@@ -68,16 +68,15 @@
         rapFactory.SaveOResponseAdditionalDocuments(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
-        });
-
+            MoveNext();
+        });      
+    }
+    function MoveNext() {
         $scope.model.oresponseDocument = false;
         $scope.model.oresponseReview = true;
-
-        //$scope.model.ownerAdditionalDocuments = false;
-        //$scope.model.ownerReview = true;
-        //$scope.model.DisableAllCurrent();
-        //$scope.model.oPetionCurrentStatus.Review = true;
-        //$scope.model.oPetionActiveStatus.AdditionalDocumentation = true;
+        $scope.model.DisableAllCurrent();
+        $scope.model.oResponseCurrentStatus.Review = true;
+        $scope.model.oResponseActiveStatus.AdditionalDocumentation = true;
     }
 
 }];

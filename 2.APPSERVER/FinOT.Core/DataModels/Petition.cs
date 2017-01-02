@@ -27,6 +27,7 @@ namespace RAP.Core.DataModels
         private List<RAPNoticeStausM> _rapStatus = new List<RAPNoticeStausM>();
         private List<CurrentOnRentM> _currentOnRent = new List<CurrentOnRentM>();
         private List<DocumentM> _documents = new List<DocumentM>();
+        private List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
 
         public string CaseID { get; set; }
         public int C_ID { get; set; }
@@ -126,6 +127,18 @@ namespace RAP.Core.DataModels
                 _activityStatus = value;
             }
         }
+        public List<NumberRangeForUnitsM> NumberOfUnitsRange
+        {
+            get
+            {
+                return _rangeOfUnits;
+            }
+            set
+            {
+                _rangeOfUnits = value;
+            }
+        }
+        public int NumberOfUnitsRangeID { get; set; }
         public DocumentM Document { get; set; }
         public List<DocumentM> Documents
         {
@@ -139,6 +152,12 @@ namespace RAP.Core.DataModels
             }
         }
 
+    }
+
+    public class NumberRangeForUnitsM
+    {
+        public int RangeID { get; set; }
+        public string RangeDesc { get; set; }
     }
 
     public class CityUser

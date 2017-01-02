@@ -343,11 +343,7 @@ namespace RAP.Core.DataModels
         public int StatusID { get; set; }
         public string Status { get; set; }
     }
-    public class NumberRangeForUnitsM
-    {
-        public int RangeID { get; set; }
-        public string RangeDesc { get; set; }
-    }
+   
     public class PetitionGroundM
     {
         private bool _selected = false;
