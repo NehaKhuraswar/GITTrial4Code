@@ -127,6 +127,7 @@
   <ItemGroup>
     <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
+    <Content Include="Application\2.Controllers\rapOResponseConfirmController.js" />
     <Content Include="Application\2.Controllers\rapOwnerConfirmationController.js" />
     <Content Include="Application\2.Controllers\rapViewPetitionController.js" />
     <Content Include="Application\2.Controllers\rapNewRepresentativeController.js" />
@@ -445,6 +446,7 @@
     </Content>
     <Content Include="Views\OwnerResponse\AdditionalDocuments.html" />
     <Content Include="Views\OwnerResponse\ApplicantInformation.html" />
+    <Content Include="Views\OwnerResponse\ConfirmationPage.html" />
     <Content Include="Views\OwnerResponse\DecreasedHousingService.html" />
     <Content Include="Views\OwnerResponse\Exemption.html" />
     <Content Include="Views\OwnerResponse\ImportantIformation.html" />

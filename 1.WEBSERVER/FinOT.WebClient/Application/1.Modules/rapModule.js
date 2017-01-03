@@ -143,6 +143,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapOresponseDocumentsController', rapOresponseDocumentsController)
     .controller('rapOResponseReviewController', rapOResponseReviewController)
     .controller('rapOResponseVerificationController', rapOResponseVerificationController)
+    .controller('rapOResponseConfirmationController', rapOResponseConfirmationController)
+
     .directive('yearDrop',function(){
         function getYears(offset, range) {
             var range = range / 2;
@@ -722,6 +724,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         },
         templateUrl: 'Views/OwnerResponse/Verification.html',
         controller: 'rapOResponseVerificationController',
+        controllerAs: 'Ctrl'
+    };
+})
+.directive('rapOresponseconfirmation', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            reqid: '=',
+            model: '=model',
+        },
+        templateUrl: 'Views/OwnerResponse/ConfirmationPage.html',
+        controller: 'rapOResponseConfirmationController',
         controllerAs: 'Ctrl'
     };
 })

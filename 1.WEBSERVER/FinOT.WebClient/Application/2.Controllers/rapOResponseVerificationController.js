@@ -18,8 +18,12 @@
         rapFactory.SubmitOwnerResponse(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
+            $scope.model.oresponseVerification = false;
+            $scope.model.DisableAllCurrent();
+            $scope.model.oResponseActiveStatus.Verification = true;
+            $scope.model.oresponseConfirmation = true;
         });
-        $scope.model.oPetionActiveStatus.Verification = true;
+     
     }
 }];
 

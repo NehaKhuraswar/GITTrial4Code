@@ -15,6 +15,7 @@
                 </div>
                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
                     <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}</p>
                     <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
                     <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
                     <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
@@ -30,7 +31,10 @@
                     <div class="field-group">
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName" required />
                     </div>
-
+                    <div class="field-group">
+                        <label for="businessname">Business name</label>
+                        <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.BusinessName" />
+                    </div>
                     <div class="field-group">
                         <label for="Applicant_address1">Mailing address 1</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1" required />
@@ -109,6 +113,10 @@
                             <div class="field-group">
                                 <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.LastName" required />
                             </div>
+                            <div class="field-group">
+                                <label for="businessname">Business name</label>
+                                <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.BusinessName" />
+                            </div>
 
                             <div class="field-group">
                                 <label for="representative_address1">Mailing address 1</label>
@@ -150,6 +158,7 @@
                         <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
 
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
@@ -159,6 +168,7 @@
                         <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                             <a ng-click="" class="btn-link btn-edit">Edit</a>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>

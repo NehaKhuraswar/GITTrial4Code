@@ -17,6 +17,7 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         self.oresponseDocument = false;
         self.oresponseReview = false;
         self.oresponseVerification = false;
+        self.oresponseConfirmation = false;
     };
     _DisableAll();
 

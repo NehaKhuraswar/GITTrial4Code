@@ -1632,7 +1632,11 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 EmailM message = new EmailM();
-                message.Subject = "Owner Resonse Successfully Filed for the Case -" + model.CaseID;
+                message.Subject = "Owner Resonse Successfully Filed for the Case -" + model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
+                if(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
+                {
+                    message.RecipientAddress = new string[] { model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email };
+                }
                 _emilService.SendEmail(message);
                 model = dbResult.result;
                 result.result = model;
