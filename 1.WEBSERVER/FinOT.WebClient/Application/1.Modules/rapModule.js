@@ -482,18 +482,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         controllerAs: 'Ctrl'
     };
 })
-.directive('rapOwnerverification', function () {
-    return {
-        restrict: 'E',
-        scope: {
-            reqid: '=',
-            model: '=model',
-        },
-        templateUrl: 'Views/FilePetition/Owner/Verification.html',
-        controller: 'rapOwnerVerificationController',
-        controllerAs: 'Ctrl'
-    };
-})
+
 .directive('rapTrpetitiontype', function () {
     return {
         restrict: 'E',
