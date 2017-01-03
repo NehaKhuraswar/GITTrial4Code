@@ -1,6 +1,6 @@
 ﻿@model RAP.WebClient.Models.AppModel
 <!DOCTYPE html>
-<html ng-controller="mainController">
+<html ng-controller="mainController as Ctrl">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
@@ -58,12 +58,12 @@
                         </div>
 
                         <div class="account-details-wrapper">
-                            <a href="#logout" class="logout">Log out</a>
+                            <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout">Log out</a>
 
                             <ul class="account-details clearfix">
                                 <li class="search"><a href="#" title="Search">Search</a></li>
                                 <li class="translate"><a href="#" title="Translate">Translate</a></li>
-                                <li class="signedin"><a href="#">Hi, Sharon</a></li>
+                                <li class="signedin" ng-show="Ctrl.UserName !=''"><a href="#">Hi, {{Ctrl.GetUserName()}}</a></li>
                             </ul>
                         </div>
 
