@@ -87,6 +87,10 @@ namespace RAP.Core.Common
                     StatusCode = "0106";
                     StatusMessage =  Message.ResourceManager.GetString("ID_0106");
                     break;
+                case StatusEnum.EmailDoesnotExist:
+                    StatusCode = "0107";
+                    StatusMessage = Message.ResourceManager.GetString("ID_0107");
+                    break;
 
                 case StatusEnum.NullArgumentException:
                     StatusCode = "0107";

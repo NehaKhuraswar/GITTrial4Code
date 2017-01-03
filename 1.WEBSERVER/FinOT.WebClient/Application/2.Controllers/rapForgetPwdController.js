@@ -9,7 +9,7 @@ var rapForgetPwdController = ['$scope', '$modal', 'alertService', 'rapforgetPass
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $location.path("/publicdashboard");
+            $location.path("/loginURL");
         });        
     }
 }];

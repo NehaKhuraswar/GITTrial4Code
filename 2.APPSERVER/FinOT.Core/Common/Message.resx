@@ -120,4 +120,7 @@
   <data name="ID_0106" xml:space="preserve">
     <value>Invalid login</value>
   </data>
+  <data name="ID_0107" xml:space="preserve">
+    <value>Invalid email</value>
+  </data>
 </root>

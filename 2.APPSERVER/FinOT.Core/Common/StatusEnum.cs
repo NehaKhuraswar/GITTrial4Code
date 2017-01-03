@@ -27,6 +27,7 @@ namespace RAP.Core.Common
         FaultException,
         CommunicationException,
         AuthenticationFailed,
+        EmailDoesnotExist,
         #endregion
         #region System
         UploadFailed,

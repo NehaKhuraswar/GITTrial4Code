@@ -68,5 +68,14 @@ namespace RAP.Core.Common {
                 return ResourceManager.GetString("ID_0106", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid email.
+        /// </summary>
+        internal static string ID_0107 {
+            get {
+                return ResourceManager.GetString("ID_0107", resourceCulture);
+            }
+        }
     }
 }

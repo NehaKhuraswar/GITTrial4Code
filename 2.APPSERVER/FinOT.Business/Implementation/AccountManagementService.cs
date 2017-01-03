@@ -70,7 +70,7 @@ namespace RAP.Business.Implementation
                 EmailService emailservice = new EmailService();
                 resultFinal = emailservice.SendEmail(emailMessage);
             }
-
+            resultFinal.status = result.status;
             return resultFinal;
         }
 

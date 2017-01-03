@@ -239,14 +239,19 @@ namespace RAP.DAL
                 {
 
                     var custdetails = db.CustomerDetails.Where(x => x.Email == email ).FirstOrDefault();
+                    var cityDetails = db.CityUserAccounts.Where(x => x.Email == email).FirstOrDefault();
                     if (custdetails != null)
                     {
                         result.result = custdetails.Password;
                     }
+                    else if(cityDetails != null)
+                    {
+                        result.result = cityDetails.Password;
+                    }
                     else
                     {
                         result.result = null;
-                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        result.status = new OperationStatus() { Status = StatusEnum.EmailDoesnotExist };
                         return result;
                     }
                 }
