@@ -2,6 +2,7 @@
 var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', 'model',function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, model) {
     var self = this;
     self.model = [];
+    self.PageTitle = 'Petition';
     //self.indexModel = {
     //    bPetitionType: false,
     //    bImpInfo: false,
@@ -27,6 +28,14 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.oPetionActiveStatus = null;
     self.tPetionActiveStatus = null;
     
+    self.ChangeTitle = function () {
+        if (self.caseinfo.PetitionCategoryID == 1) {
+            self.PageTitle = 'Tenant Petition';
+        }
+        else if (self.caseinfo.PetitionCategoryID == 2) {
+            self.PageTitle = 'Owner Petition';
+        }
+    }
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {
