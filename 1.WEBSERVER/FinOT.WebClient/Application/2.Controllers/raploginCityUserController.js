@@ -4,6 +4,7 @@ var raploginCityUserController = ['$scope', '$modal', 'alertService', 'raploginC
     self.model = [];
     self.AccountTypesList = [];
     self.SelectedAccountType;
+    self.bCityUser = true;
     var _getAccountTypes = function () {
         masterFactory.GetAccountTypes().then(function (response) {
             if (!alert.checkResponse(response)) { return; }
