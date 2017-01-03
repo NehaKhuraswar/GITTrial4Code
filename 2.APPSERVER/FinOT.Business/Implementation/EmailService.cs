@@ -32,7 +32,7 @@ namespace RAP.Business.Implementation
                 using (MailMessage mail = new MailMessage())
                 {
                     mail.From = new MailAddress(senderAddress);
-                    mail.To.Add("venky.soundar@gcomsoft.com,neha.bhandari@gcomsoft.com,sanjay@gcomsoft.com");
+                    mail.To.Add("neha.bhandari@gcomsoft.com,sanjay@gcomsoft.com");
                     mail.Subject = message.Subject;
                     mail.Body = message.MessageBody;
                     if (includeBCC)
