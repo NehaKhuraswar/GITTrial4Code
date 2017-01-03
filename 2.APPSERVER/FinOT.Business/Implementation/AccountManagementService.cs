@@ -66,6 +66,7 @@ namespace RAP.Business.Implementation
                 EmailM emailMessage = new EmailM();
                 emailMessage.MessageBody = email + " Sending Password " + result.result;
                 emailMessage.Subject = "Your RAP Password";
+                emailMessage.RecipientAddress = new string[] { email };
                 EmailService emailservice = new EmailService();
                 resultFinal = emailservice.SendEmail(emailMessage);
             }
