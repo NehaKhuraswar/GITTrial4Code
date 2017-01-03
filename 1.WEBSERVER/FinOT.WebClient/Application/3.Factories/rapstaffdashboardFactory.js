@@ -3,10 +3,11 @@ var rapstaffdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
   
-    var _GetCasesNoAnalyst = function () {
+    var _GetCasesNoAnalyst = function (UserID) {
         blockUI.start();
 
         var url = 'api/applicationprocessing' + '/getcasesnoanalyst';
+        if (!(UserID == null || UserID == undefined)) { url = url + '/' + UserID; }
 
         return ajax.Get(url)
        .finally(function () {

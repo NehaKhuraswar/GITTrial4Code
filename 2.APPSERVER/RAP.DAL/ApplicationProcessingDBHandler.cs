@@ -472,62 +472,203 @@ namespace RAP.DAL
             }
         }
         // Get cases for the staff dashboard which doesnot have analyst or the hearing officer assigned
-        public ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst()
+        public ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID)
         {
             ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();
             try 
             {
+                AccountManagementDataContext db = new AccountManagementDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
                 List<CaseInfoM> cases = new List<CaseInfoM>();
-                var casesDB = _dbContext.CaseDetails.Where(x => x.CityAnalystUserID == null || x.HearingOfficerUserID == null).ToList();
-                foreach(var item in casesDB)
+
+                var CityUserDB = db.CityUserAccounts.Where(x => x.CityUserID == UserID).FirstOrDefault();
+                if(CityUserDB.IsAnalyst == true)
                 {
-                    CaseInfoM caseinfo = new CaseInfoM();
-                    caseinfo.CaseID = item.CaseID;
-                    caseinfo.C_ID = item.C_ID;
-                    if (item.CityAnalystUserID != null)
+                    var casesDB = _dbContext.CaseDetails.Where(x => x.CityAnalystUserID == UserID).ToList();
+                    foreach (var item in casesDB)
                     {
-                        caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
-                    }
-                    if (item.HearingOfficerUserID != null)
-                    {
-                        caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
-                    }
-                    caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
-                    caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
-                    
+                        CaseInfoM caseinfo = new CaseInfoM();
+                        caseinfo.CaseID = item.CaseID;
+                        caseinfo.C_ID = item.C_ID;
 
-                    // Get the petition applicant info
-                    var petitionDetailsDb =  _dbContext.PetitionDetails.Where(x => x.PetitionID == item.PetitionID).FirstOrDefault();
+                        if (item.CityAnalystUserID != null)
+                        {
+                            var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == item.CityAnalystUserID).FirstOrDefault();
 
-                    if(petitionDetailsDb.TenantPetitionID != null)
-                    {
-                        var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
-                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
-                        if(applicantUser != null)
-                        {
-                            caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                            caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
+                            caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
+                            caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
                         }
-                    }
-                    else if(petitionDetailsDb.OwnerPetitionID != null)
-                    {
-                        var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
-                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
-                        if (applicantUser != null)
+                        if (item.HearingOfficerUserID != null)
                         {
-                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
-                        }
-                    }
+                            var CityDB = db.CityUserAccounts.Where(x => x.CityUserID == item.HearingOfficerUserID).FirstOrDefault();
 
-                    var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID ).OrderByDescending(y=>y.LastModifiedDate).FirstOrDefault();
-                    if (caseActivityStatusDb != null)
-                    {
-                        var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
-                        if (ActivityDb != null)
-                        {
-                            caseinfo.LastActivity = ActivityDb.ActivityName;
+                            caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
+                            caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
+                            caseinfo.HearingOfficer.LastName = CityDB.LastName;
                         }
+                        caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                        caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
+
+
+                        // Get the petition applicant info
+                        var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == item.PetitionID).FirstOrDefault();
+
+                        if (petitionDetailsDb.TenantPetitionID != null)
+                        {
+                            var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
+                            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
+                            if (applicantUser != null)
+                            {
+                                caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                            }
+                        }
+                        else if (petitionDetailsDb.OwnerPetitionID != null)
+                        {
+                            var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
+                            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
+                            if (applicantUser != null)
+                            {
+                                caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
+                            }
+                        }
+
+                        var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
+                        if (caseActivityStatusDb != null)
+                        {
+                            var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
+                            if (ActivityDb != null)
+                            {
+                                caseinfo.LastActivity = ActivityDb.ActivityName;
+                            }
+                        }
+                        cases.Add(caseinfo);
                     }
-                    cases.Add(caseinfo);
+                }
+                else if(CityUserDB.IsHearingOfficer == true)
+                {
+                    var casesDB = _dbContext.CaseDetails.Where(x => x.HearingOfficerUserID == UserID).ToList();
+                    foreach (var item in casesDB)
+                    {
+                        CaseInfoM caseinfo = new CaseInfoM();
+                        caseinfo.CaseID = item.CaseID;
+                        caseinfo.C_ID = item.C_ID;
+
+                        if (item.CityAnalystUserID != null)
+                        {
+                            var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == item.CityAnalystUserID).FirstOrDefault();
+
+                            caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
+                            caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
+                            caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
+                        }
+                        if (item.HearingOfficerUserID != null)
+                        {
+                            var CityDB = db.CityUserAccounts.Where(x => x.CityUserID == item.HearingOfficerUserID).FirstOrDefault();
+
+                            caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
+                            caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
+                            caseinfo.HearingOfficer.LastName = CityDB.LastName;
+                        }
+                        caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                        caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
+
+
+                        // Get the petition applicant info
+                        var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == item.PetitionID).FirstOrDefault();
+
+                        if (petitionDetailsDb.TenantPetitionID != null)
+                        {
+                            var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
+                            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
+                            if (applicantUser != null)
+                            {
+                                caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                            }
+                        }
+                        else if (petitionDetailsDb.OwnerPetitionID != null)
+                        {
+                            var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
+                            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
+                            if (applicantUser != null)
+                            {
+                                caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
+                            }
+                        }
+
+                        var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
+                        if (caseActivityStatusDb != null)
+                        {
+                            var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
+                            if (ActivityDb != null)
+                            {
+                                caseinfo.LastActivity = ActivityDb.ActivityName;
+                            }
+                        }
+                        cases.Add(caseinfo);
+                    }
+                }
+                else if(CityUserDB.IsHearingOfficer == false && CityUserDB.IsAnalyst == false )
+                { 
+                    var casesDB = _dbContext.CaseDetails.Where(x => x.CityAnalystUserID == null || x.HearingOfficerUserID == null).ToList();
+                    foreach (var item in casesDB)
+                    {
+                        CaseInfoM caseinfo = new CaseInfoM();
+                        caseinfo.CaseID = item.CaseID;
+                        caseinfo.C_ID = item.C_ID;
+
+                        if (item.CityAnalystUserID != null)
+                        {
+                            var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == item.CityAnalystUserID).FirstOrDefault();
+
+                            caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
+                            caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
+                            caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
+                        }
+                        if (item.HearingOfficerUserID != null)
+                        {
+                            var CityDB = db.CityUserAccounts.Where(x => x.CityUserID == item.HearingOfficerUserID).FirstOrDefault();
+
+                            caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
+                            caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
+                            caseinfo.HearingOfficer.LastName = CityDB.LastName;
+                        }
+                        caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                        caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
+
+
+                        // Get the petition applicant info
+                        var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == item.PetitionID).FirstOrDefault();
+
+                        if (petitionDetailsDb.TenantPetitionID != null)
+                        {
+                            var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
+                            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
+                            if (applicantUser != null)
+                            {
+                                caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                            }
+                        }
+                        else if (petitionDetailsDb.OwnerPetitionID != null)
+                        {
+                            var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
+                            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
+                            if (applicantUser != null)
+                            {
+                                caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
+                            }
+                        }
+
+                        var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
+                        if (caseActivityStatusDb != null)
+                        {
+                            var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
+                            if (ActivityDb != null)
+                            {
+                                caseinfo.LastActivity = ActivityDb.ActivityName;
+                            }
+                        }
+                        cases.Add(caseinfo);
+                    }
                 }
                 result.result = cases;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -557,13 +698,22 @@ namespace RAP.DAL
                     caseinfo.CaseID = item.CaseID;
                     caseinfo.C_ID = item.C_ID;
                     caseinfo.PetitionCategoryID = (int) item.PetitionCategoryID;
+                    AccountManagementDataContext db = new AccountManagementDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
                     if (item.CityAnalystUserID != null)
                     {
+                        var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == item.CityAnalystUserID).FirstOrDefault();
+
                         caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
+                        caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
+                        caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
                     }
                     if (item.HearingOfficerUserID != null)
                     {
+                        var CityDB = db.CityUserAccounts.Where(x => x.CityUserID == item.HearingOfficerUserID).FirstOrDefault();
+
                         caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
+                        caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
+                        caseinfo.HearingOfficer.LastName = CityDB.LastName;
                     }
                     caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
                     caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);

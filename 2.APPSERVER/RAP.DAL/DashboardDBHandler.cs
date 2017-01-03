@@ -169,6 +169,7 @@ namespace RAP.DAL
                     if (caseDB != null)
                     {
                         caseDB.CityAnalystUserID = AnalystUserID;
+                        db.SubmitChanges();
                     }
 
                     result.result = true;
@@ -196,6 +197,7 @@ namespace RAP.DAL
                     if (caseDB != null)
                     {
                         caseDB.HearingOfficerUserID = HearingOfficerUserID;
+                        db.SubmitChanges();
                     }
 
                     result.result = true;

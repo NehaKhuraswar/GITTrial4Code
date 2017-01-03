@@ -18,6 +18,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.AccountSearch = function () {
         $location.path("/accountSearch");
     }
+    self.ManageAccounts = function () {
+        $location.path("/admindashboard");
+    }
    
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
@@ -45,15 +48,15 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         });
        // $location.path("/fileappeal");
     }
-    var _GetCasesNoAnalyst = function () {
-        rapFactory.GetCasesNoAnalyst().then(function (response) {
+    var _GetCasesNoAnalyst = function (userID) {
+        rapFactory.GetCasesNoAnalyst(userID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
             self.CaseList = response.data;
         });
     }
-    _GetCasesNoAnalyst();
+    _GetCasesNoAnalyst(self.model.UserID);
 
     var _GetAnalysts = function () {
         masterFactory.GetAnalysts().then(function (response) {
@@ -90,23 +93,23 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         _GetCaseInfo();
     }
 
-    self.AssignAnalyst = function (C_ID, AnalystUserID) {
+    self.AssignAnalyst = function (C_ID, Analyst) {
 
-        rapFactory.AssignAnalyst(C_ID, AnalystUserID).then(function (response) {
+        masterFactory.AssignAnalyst(C_ID, Analyst.UserID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            _GetCasesNoAnalyst();
+            _GetCasesNoAnalyst(self.model.UserID);
         });
     }
 
-    self.AssignHearingOfficer = function (C_ID, HearingOfficerUserID) {
+    self.AssignHearingOfficer = function (C_ID, HearingOfficer) {
 
-        rapFactory.AssignHearingOfficer(C_ID, HearingOfficerUserID).then(function (response) {
+        masterFactory.AssignHearingOfficer(C_ID, HearingOfficer.UserID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            _GetCasesNoAnalyst();
+            _GetCasesNoAnalyst(self.model.UserID);
         });
     }
     

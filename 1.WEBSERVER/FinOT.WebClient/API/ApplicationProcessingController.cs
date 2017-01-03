@@ -443,9 +443,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("getcasesnoanalyst")]
+        [Route("getcasesnoanalyst/{UserID}")]
         [HttpGet]
-        public HttpResponseMessage GetCasesNoAnalyst()
+        public HttpResponseMessage GetCasesNoAnalyst(string UserID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -453,7 +453,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "getcasesnoanalyst/";
+                string requestUri = _requestURI + "getcasesnoanalyst/" + UserID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

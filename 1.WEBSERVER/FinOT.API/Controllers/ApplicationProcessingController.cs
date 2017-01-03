@@ -861,9 +861,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("getcasesnoanalyst")]
+        [Route("getcasesnoanalyst/{UserID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetCasesNoAnalyst()
+        public HttpResponseMessage GetCasesNoAnalyst(int UserID)
         {
             ExtractClaimDetails();
 
@@ -874,7 +874,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetCasesNoAnalyst();
+                result = _service.GetCasesNoAnalyst(UserID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

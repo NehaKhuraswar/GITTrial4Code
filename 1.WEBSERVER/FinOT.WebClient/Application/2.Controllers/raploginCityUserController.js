@@ -58,10 +58,10 @@ var raploginCityUserController = ['$scope', '$modal', 'alertService', 'raploginC
                     return;
                 }                
                 rapGlobalFactory.CityUser = response.data;
-                if (rapGlobalFactory.CityUser.AccountType.AccountTypeID == 1)
-                    $location.path("/staffdashboard");
-                else if (rapGlobalFactory.CityUser.AccountType.AccountTypeID == 2)
-                    $location.path("/admindashboard");
+                //if (rapGlobalFactory.CityUser.AccountType.AccountTypeID == 1)
+                //    $location.path("/staffdashboard");
+                //else if (rapGlobalFactory.CityUser.AccountType.AccountTypeID == 2)
+                $location.path("/staffdashboard");
             });
         }
         //else if (accounttype.AccountTypeID == 2) {

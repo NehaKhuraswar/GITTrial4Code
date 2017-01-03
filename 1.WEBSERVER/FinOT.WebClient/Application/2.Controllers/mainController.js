@@ -11,6 +11,10 @@
         {
             self.UserName =  rapGlobalFactory.CustomerDetails.User.FirstName;
         }
+        else if (rapGlobalFactory.CityUser != null)
+        {
+            self.UserName = rapGlobalFactory.CityUser.FirstName;
+        }
        // self.UserName = 'Neha';
         return self.UserName;
     }

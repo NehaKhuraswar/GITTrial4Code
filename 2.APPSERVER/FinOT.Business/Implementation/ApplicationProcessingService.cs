@@ -296,14 +296,14 @@ namespace RAP.Business.Implementation
                 result.status = _eHandler.HandleException(ex);
                 return result;
             }
-        }        
+        }
 
-        public ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst()
+        public ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID)
         {
             ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();
             try
             {
-                result = _dbHandler.GetCasesNoAnalyst();
+                result = _dbHandler.GetCasesNoAnalyst(UserID);
                 return result;
             }
             catch (Exception ex)

@@ -14,10 +14,10 @@
         <div class="application-form-wrapper">
             <div class="application-step step-1">
 
-                <div class="account-management">
+                <div class="account-management" ng-hide="Ctrl.model.AccountType.AccountTypeID != 2">
                     <div class="items">
                         <div class="item">
-                            <div class="item-header"><a href="#">Manage accounts</a></div>
+                            <div class="item-header"><a ng-click="Ctrl.ManageAccounts()">Manage accounts</a></div>
                         </div>
                     </div><!-- .items -->
                 </div><!-- .account-management -->
@@ -44,7 +44,7 @@
                                 <div class="tbl-row clearfix" ng-repeat="item in Ctrl.CaseList">
                                     <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
-                                            <div class="col col-45 pad-l40 case-number"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a href="#">{{item.CaseID}}; Peterson v. Johnson (Unit B)</a></strong><br />{{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}</div>
+                                            <div class="col col-45 pad-l40 case-number"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a href="#">{{item.CaseID}}</a></strong><br />{{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}</div>
                                             <div class="col col-20 filling-date">{{item.CreatedDate | date}}</div>
                                             <div class="col col-20 ast-activity">{{item.LastModifiedDate | date}}</div>
                                             <div class="col col-15 activity">{{item.LastActivity}}</div>
@@ -63,45 +63,41 @@
                                                 </div>
                                             </div>
 
-                                            <div class="item-row clearfix">
+                                            <div class="item-row clearfix" >
                                                 <div class="item-col col-45  pad-l40 align-left">
                                                     <div class="small-title">Analyst</div>
-                                                    <p>Alejandra Roberts</p>
+                                                    <p>{{item.CityAnalyst.FirstName}} {{item.CityAnalyst.LastName}}</p>
                                                 </div>
 
-                                                <div class="item-col col-42 pad-l10 align-left">
+                                                <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                                     <div>
-                                                        <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst">
-                                                            <option value="Option 1">Option 1</option>
-                                                            <option value="Option 2">Option 2</option>
-                                                            <option value="Option 3">Option 3</option>
-                                                        </select>
+                                                        <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
+                                                                ng-model="Analyst"
+                                                                ng-options="analyst as (analyst.FirstName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
                                                     </div>
                                                 </div>
 
-                                                <div class="item-col col-10 align-left">
-                                                    <a href="#" class="btn-link btn-assign">Assign</a>
+                                                <div class="item-col col-10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
+                                                    <a ng-click="Ctrl.AssignAnalyst(item.C_ID, Analyst)" class="btn-link btn-assign">Assign</a>
                                                 </div>
                                             </div>
 
                                             <div class="item-row clearfix">
                                                 <div class="item-col col-45  pad-l40 align-left">
                                                     <div class="small-title">Hearing Officer</div>
-                                                    <p class="alert-error-msg">assignment required</p>
+                                                    <p>{{item.HearingOfficer.FirstName}} {{item.HearingOfficer.LastName}}</p>
                                                 </div>
 
-                                                <div class="item-col col-42 pad-l10 align-left">
+                                                <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                                     <div>
-                                                        <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Hearing Officer">
-                                                            <option value="Montgomery Washington" selected>Montgomery Washington</option>
-                                                            <option value="Option 2">Option 2</option>
-                                                            <option value="Option 3">Option 3</option>
-                                                        </select>
+                                                        <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Hearing Officer"
+                                                                ng-model="HearingOfficer"
+                                                                ng-options="hearingofficer as (hearingofficer.FirstName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
                                                     </div>
                                                 </div>
 
-                                                <div class="item-col col-10 align-left">
-                                                    <a href="#" class="btn-link btn-assign">Assign</a>
+                                                <div class="item-col col-10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
+                                                    <a ng-click="Ctrl.AssignHearingOfficer(item.C_ID, HearingOfficer)" class="btn-link btn-assign">Assign</a>
                                                 </div>
                                             </div>
 
