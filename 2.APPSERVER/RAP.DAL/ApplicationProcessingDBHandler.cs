@@ -14,7 +14,8 @@ namespace RAP.DAL
         private readonly string _connString;
         private readonly ApplicationProcessingDataContext _dbContext;
         private readonly AccountManagementDataContext _dbAccount;
-       
+        private readonly DashboardDataContext _dbDashboard;
+
         private ICommonDBHandler _commondbHandler;
         private IDashboardDBHandler _dashboarddbHandler;
         private IExceptionHandler _eHandler;
@@ -27,6 +28,7 @@ namespace RAP.DAL
             this._eHandler = eHandler;
             _dbContext = new ApplicationProcessingDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
             _dbAccount = new AccountManagementDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
+            _dbDashboard = new DashboardDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
         }
       
         #region "Get"
@@ -513,6 +515,16 @@ namespace RAP.DAL
                         if (applicantUser != null)
                         {
                             caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
+                        }
+                    }
+
+                    var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID ).OrderByDescending(y=>y.LastModifiedDate).FirstOrDefault();
+                    if (caseActivityStatusDb != null)
+                    {
+                        var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
+                        if (ActivityDb != null)
+                        {
+                            caseinfo.LastActivity = ActivityDb.ActivityName;
                         }
                     }
                     cases.Add(caseinfo);

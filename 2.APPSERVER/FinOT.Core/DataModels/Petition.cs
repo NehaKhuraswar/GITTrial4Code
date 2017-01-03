@@ -137,7 +137,7 @@ namespace RAP.Core.DataModels
             {
                 _rangeOfUnits = value;
             }
-        }       
+        }
         public DocumentM Document { get; set; }
         public List<DocumentM> Documents
         {
@@ -150,7 +150,7 @@ namespace RAP.Core.DataModels
                 _documents = value; 
             }
         }
-
+        public string LastActivity { get; set; }
     }
 
     public class NumberRangeForUnitsM
