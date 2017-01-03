@@ -1856,6 +1856,40 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("GetOwnerReview")]
+        [HttpPost]
+        public HttpResponseMessage GetOwnerReview([FromBody] CaseInfoM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _service.GetOwnerReview(model);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("GetTRAdditionalDocuments")]
         [HttpPost]
         public HttpResponseMessage GetTRAdditionalDocuments([FromBody] CaseInfoM model)
@@ -2054,6 +2088,40 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveOwnerReviewPageSubmission/{CustomerID:int}")]
+        [HttpPost]
+        public HttpResponseMessage SaveOwnerReviewPageSubmission([FromUri]int CustomerID)
+        {
+
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var dbResult = _service.SaveOwnerReviewPageSubmission(CustomerID);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]

@@ -4,14 +4,14 @@
 
         <div class="field-group">
             <p class="input-label">Type of unit you rent</p>
-            <div class="radio">
+            <div class="form-group-radio vertical clearfix">
                 <label ng-repeat="unittype in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
                     <input type="radio"
-       class="input-field"
-       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypeID"
-       ng-value="unittype.UnitTypeID"
-       id="{{unittype.UnitTypeID}}"
-       name="units">{{unittype.UnitDescription}}
+                           class="input-field"
+                           ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypeID"
+                           ng-value="unittype.UnitTypeID"
+                           id="{{unittype.UnitTypeID}}"
+                           name="units"><i></i><span>{{unittype.UnitDescription}}</span>
                 </label>
                 <div class="clear"></div>
             </div>
@@ -67,63 +67,17 @@
         <div>
             <button class="btn-primary" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant</button>
         </div>
-        <div ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length > 0">
-            <table class="table table-condensed nopadding-bottom">
-                <thead class="strong">
-                    <tr>
-                        <td>
-                            <span>First Name</span>
-                        </td>
-                        <td>
-                            <span>Last Name Type</span>
-                        </td>
-                        <td>
-                            <span>Mailing address 1</span>
-                        </td>
-                        <td>
-                            <span>Mailing address 2</span>
-                        </td>
-                        <td>
-                            <span>City</span>
-                        </td>
-                        <td>
-                            <span>State</span>
-                        </td>
-                        <td>
-                            <span>Zip</span>
-                        </td>
-                        <td>
-                            <span>Remove</span>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
-                        <td class="nopadding-left">
-                            {{item.TenantUserInfo.FirstName}}
-                        </td>
-                        <td>
-                            {{item.TenantUserInfo.LastName}}
-                        </td>
-                        <td>
-                            {{item.TenantUserInfo.AddressLine1}}
-                        </td>
-                        <td>
-                            {{item.TenantUserInfo.AddressLine2}}
-                        </td>
-                        <td>
-                            {{item.TenantUserInfo.City}}
-                        </td>
-                        <td>
-                            {{item.TenantUserInfo.State.StateName}}
-                        </td>
-                        <td>
-                            {{item.TenantUserInfo.Zip}}
-                        </td>
-                        <td><button class="btn-link btn-edit" ng-click="Ctrl.RemoveTenant(item)">Remove</button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
+            <div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}</p>                         <p>{{item.TenantUserInfo.AddressLine1}}</p>
+                        <p> {{item.TenantUserInfo.AddressLine2}}</p>
+                        <p>{{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}</p>
+                        <button class="btn-link btn-edit" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
+                    </div>
+                </div>
+            </div>
         </div>
             <button class="btn-primary" ng-click="Ctrl.Continue()">Continue</button>
         </div>

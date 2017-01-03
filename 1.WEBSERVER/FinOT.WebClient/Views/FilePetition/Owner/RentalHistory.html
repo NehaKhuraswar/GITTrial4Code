@@ -116,16 +116,16 @@
                                 <div class="clear"></div>
                             </div>
                         </div>-->
-                    <div class="field-group">
+                    <div class="field-group">   
                         <p class="input-label">Is the tenant current on the rent?</p>
                         <div class="form-group-radio vertical clearfix">
                             <label for="pi_paying_rent_yes">
-                                <input type="radio" name="pi_paying_rent_yes" id="pi_paying_rent_yes" ng-value="9"
-                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID"><i></i><span>Yes</span>
+                                <input type="radio" name="pi_paying_rent_yes" id="pi_paying_rent_yes" ng-value="true"
+                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.CurrentOnRent"><i></i><span>Yes</span>
                             </label>
                             <label for="pi_paying_rent_no">
-                                <input type="radio" name="pi_paying_rent_no" id="pi_paying_rent_no" ng-value="10"
-                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID" /><i></i> <span>No</span>
+                                <input type="radio" name="pi_paying_rent_no" id="pi_paying_rent_no" ng-value="false"
+                                       ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.CurrentOnRent" /><i></i> <span>No</span>
                             </label>
                             <div class="clear"></div>
                         </div>
@@ -151,12 +151,12 @@
                             <div class="form-group-radio vertical clearfix">
                                 <label for="rent_program_notice_yes">
                                     <input type="radio" name="rent_program_notice" id="rent_program_notice_yes" class="input-field"
-                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.bRentIncreaseNoticeGiven" ng-view="true" /><i></i><span>Yes</span>
+                                           ng-model="Ctrl.Rent.bRentIncreaseNoticeGiven" ng-view="true" /><i></i><span>Yes</span>
                                 </label>
 
                                 <label for="rent_program_notice_no">
                                     <input type="radio" name="rent_program_notice" id="rent_program_notice_no" class="input-field"
-                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.bRentIncreaseNoticeGiven" ng-view="false" /><i></i> <span>No</span>
+                                           ng-model="Ctrl.Rent.bRentIncreaseNoticeGiven" ng-view="false" /><i></i> <span>No</span>
                                 </label>
                                 <div class="clear"></div>
                             </div>
@@ -167,22 +167,22 @@
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <select ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseNoticeDate.Month"
+                                        <select ng-model="Ctrl.Rent.RentIncreaseNoticeDate.Month"
                                                 data-placeholder="Month"
                                                 ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <select ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseNoticeDate.Day"
-                                               data-placeholder="Day"
+                                        <select ng-model="Ctrl.Rent.RentIncreaseNoticeDate.Day"
+                                                data-placeholder="Day"
                                                 ng-options="day for day in  Ctrl.Calender.Days"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <select ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseNoticeDate.Year"
-                                               data-placeholder="Year"
+                                        <select ng-model="Ctrl.Rent.RentIncreaseNoticeDate.Year"
+                                                data-placeholder="Year"
                                                 ng-options="year for year in  Ctrl.Calender.Years"></select>
                                     </div>
                                 </div>
@@ -196,13 +196,13 @@
                                 <div class="col-sm-6 col-xs-12">
                                     <label for="monthly_increase_from" class="hidden"></label>
                                     <input type="text" name="monthly_increase_from" id="monthly_increase_from" class="field-input" placeholder="From"
-                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreasedFrom" />
+                                           ng-model="Ctrl.Rent.RentIncreasedFrom" />
                                 </div>
 
                                 <div class="col-sm-6 col-xs-12">
                                     <label for="monthly_increase_to" class="hidden"></label>
                                     <input type="text" name="monthly_increase_to" id="monthly_increase_to" class="field-input" placeholder="To"
-                                           ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreasedTo" />
+                                           ng-model="Ctrl.Rent.RentIncreasedTo" />
                                 </div>
                             </div>
                         </div><!-- .field-group -->
@@ -212,28 +212,96 @@
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <select ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseEffectiveDate.Month"
+                                        <select ng-model="Ctrl.Rent.RentIncreaseEffectiveDate.Month"
                                                 data-placeholder="Month"
                                                 ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <select ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseEffectiveDate.Day"
+                                        <select ng-model="Ctrl.Rent.RentIncreaseEffectiveDate.Day"
                                                 data-placeholder="Day"
                                                 ng-options="day for day in  Ctrl.Calender.Days"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
-                                        <select ng-model="Ctrl.caseinfo.OwnerPetitionRentalIncrementInfo.RentIncreaseEffectiveDate.Year"
+                                        <select ng-model="Ctrl.Rent.RentIncreaseEffectiveDate.Year"
                                                 data-placeholder="Year"
                                                 ng-options="year for year in  Ctrl.Calender.Years"></select>
                                     </div>
                                 </div>
                             </div>                          
                         </div><!-- .field-group -->
+                    <div class="field-group">
+                        <button class="btn-link" ng-click="Ctrl.AddRecord(Ctrl.Rent)">Add another rent increase record</button>
+                    </div>
 
+                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length > 0">
+                        <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <label ng-if="item.bRentIncreaseNoticeGiven">
+                                                <i></i><span>Yes</span>
+                                            </label>
+                                            <label ng-if="!item.bRentIncreaseNoticeGiven">
+                                                <i></i><span>No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                                </div>
+                            </div>
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreasedTo - item.RentIncreasedFrom}}</div>
+                                </div>
+                            </div>
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                                </div>
+                            </div>
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Justification for rent increase</div></div>
+                                    <div class="col-sm-6 col-xs-12" ng-repeat="reason in item.RentIncreaseReasons  | filter: {IsSelected: true}">
+                                        <label for="{{reason.ReasonID}}">
+                                            <i></i><span>{{reason.ReasonDescription}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <button class="btn-link btn-edit" ng-click="Ctrl.RemoveRecord(item)">Remove</button>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <table class="table table-condensed nopadding-bottom">
+                                <tbody>
+                                    <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2'}">
+                                        <td class="nopadding-left">
+                                            {{item.DocName}}
+                                        </td>
+                                        <td>
+                                            <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
                     </div>                    
 
 

@@ -5,7 +5,8 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.OwnerPetitionInfo.PropertyInfo.CustomerID = self.custDetails.custID;
-    
+    self.caseinfo.CustomerID = self.custDetails.custID;
+    self.showUploadedFile = false;
     self.Calender = masterFactory.Calender;
 
     //var range = 10 / 2;
@@ -23,9 +24,10 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
-        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length > 0) {
-            self.caseinfo.OwnerPetitionRentalIncrementInfo = self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo[0];
-        }
+        self.Rent = angular.copy(self.caseinfo.OwnerPetitionRentalIncrementInfo);
+        //if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length > 0) {
+        //    self.caseinfo.OwnerPetitionRentalIncrementInfo = self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo[0];
+        //}
     });
 
     $scope.onFileSelected = function ($files, docTitle) {
@@ -54,6 +56,7 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
                             document.Base64Content = base64String;
                         }
                         self.caseinfo.Documents.push(document);
+                        self.showUploadedFile = true;
                     }
                 }
 
@@ -67,9 +70,17 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
 
     }
 
+    self.AddRecord = function (_rent) {
+        self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(_rent);
+        self.Rent = new Object();
+        self.Rent = self.caseinfo.OwnerPetitionRentalIncrementInfo;
+        self.showUploadedFile = false;
+    }
 
     self.Continue = function () {
-        self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(self.caseinfo.OwnerPetitionRentalIncrementInfo);
+        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length == 0) {
+            self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(self.Rent);
+        }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }

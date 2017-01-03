@@ -1597,6 +1597,38 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
+        [Route("SaveOwnerReviewPageSubmission/{CustomerID}")]
+        [HttpPost]
+        public HttpResponseMessage SaveOwnerReviewPageSubmission(string CustomerID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "SaveOwnerReviewPageSubmission/" + CustomerID;
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
+        [AllowAnonymous]
         [Route("SubmitOwnerPetition")]
         [HttpPost]
         public HttpResponseMessage SubmitOwnerPetition()
@@ -1692,6 +1724,39 @@ namespace RAP.WebClient
                 return responseMessage;
             }
         }
+
+        [AllowAnonymous]
+        [Route("GetOwnerReview")]
+        [HttpPost]
+        public HttpResponseMessage GetOwnerReview()
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetOwnerReview/";
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
 
         [AllowAnonymous]
         [Route("GetTRAdditionalDocuments")]

@@ -212,6 +212,7 @@
     <Content Include="Application\3.Factories\rapOResponseRentalPropertyFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseReviewFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseVerificationFactory.js" />
+    <Content Include="Application\3.Factories\rapOwnerReviewFactory.js" />
     <Content Include="Application\3.Factories\rapTRrentalhistoryFactory.js" />
     <Content Include="Application\3.Factories\rapTRreviewFactory.js" />
     <Content Include="Application\3.Factories\rapTRDocumentFactory.js" />

@@ -5,6 +5,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
+    self.caseinfo.OwnerPetitionInfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
 
     self.StateList = [];

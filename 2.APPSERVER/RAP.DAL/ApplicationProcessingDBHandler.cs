@@ -3053,6 +3053,25 @@ namespace RAP.DAL
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
+                if (model.NumberOfUnitsRange == null || model.NumberOfUnitsRange.Count == 0)
+                {
+                    var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                    if (rangeDB == null)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    else
+                    {
+                        foreach (var item in rangeDB)
+                        {
+                            NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                            obj.RangeID = item.RangeID;
+                            obj.RangeDesc = item.RangeDesc;
+                            model.NumberOfUnitsRange.Add(obj);
+                        }
+                    }
+                }
                 var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.CustomerID == model.OwnerPetitionInfo.ApplicantInfo.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
                 if(applicantInfo == null) 
                 {
@@ -3092,8 +3111,9 @@ namespace RAP.DAL
                     _applicantInfo.BuildingAcquiredDate =_commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
                     _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
                     _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
-                    _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
+                    _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0;
                     _applicantInfo.bPetitionFiled = applicantInfo.bPetitionFiled;
+                    _applicantInfo.NumberOfUnitsRangeID = (applicantInfo.RangeID != null) ? Convert.ToInt32(applicantInfo.RangeID) : 0; 
                     model.OwnerPetitionInfo.ApplicantInfo = _applicantInfo;
                     result.result = model;
                 }
@@ -3131,8 +3151,12 @@ namespace RAP.DAL
             try
             {
                 var resaons = _dbContext.OwnerRentIncreaseReasons;
-
-                var selectedReasons = _dbContext.OwnerRentIncreaseReasonInfos.Where(x => x.OwnerPetitionApplicantInfoID == petition.ApplicantInfo.OwnerPetitionApplicantInfoID);
+                int applicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
+                if (applicantInfoID == 0)
+                {
+                    applicantInfoID = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.CustomerID == petition.CustomerID && r.bPetitionFiled == false).Select(x => x.OwnerPetitionApplicantInfoID).FirstOrDefault();
+                }
+                var selectedReasons = _dbContext.OwnerRentIncreaseReasonInfos.Where(x => x.OwnerPetitionApplicantInfoID == applicantInfoID);
 
                 if (resaons.Any())
                 {
@@ -3218,10 +3242,15 @@ namespace RAP.DAL
             {
                 model.RAPNoticeStatus = getRAPNoticeStatus();
                 model.CurrentOnRent = getCurrentRentStatus();
-                if (model.OwnerPetitionInfo.PropertyInfo.OwnerPropertyID > 0)
+                int propertyID = model.OwnerPetitionInfo.PropertyInfo.OwnerPropertyID;
+                if (propertyID == 0)
+                {
+                    propertyID = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.CustomerID == model.CustomerID && r.bPetitionFiled == false).Select(x => x.OwnerPropertyID).First();
+                }
+                if (propertyID > 0)
                 {
                     var propertyInfo = (from r in _dbContext.OwnerPetitionPropertyInfos
-                                        where r.OwnerPropertyID == model.OwnerPetitionInfo.PropertyInfo.OwnerPropertyID
+                                        where r.OwnerPropertyID == propertyID
                                         select r).First();
                     if (propertyInfo !=null)
                     {
@@ -3229,10 +3258,10 @@ namespace RAP.DAL
                         model.OwnerPetitionInfo.PropertyInfo.InitialRent = propertyInfo.InitialRent;
                         model.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID = propertyInfo.RAPNoticeStatusID;
                         model.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate = (propertyInfo.RAPNoticeGivenDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeGivenDate));
-                        model.OwnerPetitionInfo.PropertyInfo.RentStatusID = propertyInfo.RentStatusID;
+                        model.OwnerPetitionInfo.PropertyInfo.CurrentOnRent = Convert.ToBoolean(propertyInfo.CurrentOnRent);
                     }
 
-                    var rentIncreaseInfo = _dbContext.OwnerPetitionRentalIncrementInfos.Where(r => r.OwnerPropertyID == model.OwnerPetitionInfo.PropertyInfo.OwnerPropertyID);
+                    var rentIncreaseInfo = _dbContext.OwnerPetitionRentalIncrementInfos.Where(r => r.OwnerPropertyID == propertyID);
                     if (rentIncreaseInfo.Any())
                     {
                         foreach (var item in rentIncreaseInfo)
@@ -3257,8 +3286,62 @@ namespace RAP.DAL
                 _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
-        }       
+        }
 
+        public ReturnResult<CaseInfoM> GetOwnerReview(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var applicantInfoResult = GetOwnerApplicantInfo(model);
+                if (applicantInfoResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = applicantInfoResult.status;
+                    return result;
+                }
+                model = applicantInfoResult.result;
+                var justificationResult = GetRentIncreaseReasonInfo(model.OwnerPetitionInfo);
+                if (justificationResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = justificationResult.status;
+                    return result;
+                }
+                model.OwnerPetitionInfo.RentIncreaseReasons = justificationResult.result;
+                var PropertyAndTenantInfoResult = GetOwnerPropertyAndTenantInfo(model.OwnerPetitionInfo.PropertyInfo);
+                if (PropertyAndTenantInfoResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = PropertyAndTenantInfoResult.status;
+                    return result;
+                }
+                model.OwnerPetitionInfo.PropertyInfo = PropertyAndTenantInfoResult.result;
+
+                var RentIncreaseAndPropertyInfoResult = GetOwnerRentIncreaseAndPropertyInfo(model);
+                if (RentIncreaseAndPropertyInfoResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = RentIncreaseAndPropertyInfoResult.status;
+                    return result;
+                }
+                model = RentIncreaseAndPropertyInfoResult.result;
+
+               
+                var documentResult = _commondbHandler.GetDocumentsByCategory(model.CustomerID, false, DocCategory.OwnerPetition.ToString());
+                if (documentResult.status.Status == StatusEnum.Success)
+                {
+                    model.Documents = documentResult.result;
+                }
+
+                model.OwnerPetitionInfo.CustomerIdentityKey = Convert.ToInt32(_dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CustomerID).Select(x => x.CustomerIdentityKey).FirstOrDefault());
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
 
         #endregion
         
@@ -3327,6 +3410,10 @@ namespace RAP.DAL
                             applicantInfo.First().bRentAdjustmentProgramFeePaid = model.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
                             applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                             applicantInfo.First().NumberOfUnits = model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits;
+                            if (model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID != 0)
+                            {
+                                applicantInfo.First().RangeID = model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID;
+                            }
                             applicantInfo.First().bMoreThanOneStreetOnParcel = model.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
                             _dbContext.SubmitChanges();
                         }
@@ -3345,12 +3432,23 @@ namespace RAP.DAL
                         applicantInfo.bRentAdjustmentProgramFeePaid = model.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
                         applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                         applicantInfo.NumberOfUnits = model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits;
+                        if (model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID != 0)
+                        {
+                            applicantInfo.RangeID = model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID;
+                        }
                         applicantInfo.bMoreThanOneStreetOnParcel = model.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
                         applicantInfo.CustomerID = model.OwnerPetitionInfo.ApplicantInfo.CustomerID;
                         applicantInfo.bPetitionFiled = false;
                         _dbContext.OwnerPetitionApplicantInfos.InsertOnSubmit(applicantInfo);
                         _dbContext.SubmitChanges();
-                        model.OwnerPetitionInfo.ApplicantInfo.OwnerPetitionApplicantInfoID = applicantInfo.OwnerPetitionApplicantInfoID;                      
+                        model.OwnerPetitionInfo.ApplicantInfo.OwnerPetitionApplicantInfoID = applicantInfo.OwnerPetitionApplicantInfoID;
+
+                        OwnerPetitionPageSubmissionStatus oPetitionSubmission = new OwnerPetitionPageSubmissionStatus();
+                        oPetitionSubmission.ImportantInformation = true;
+                        oPetitionSubmission.ApplicantInformation = true;
+                        oPetitionSubmission.CustomerID = model.CustomerID;
+                        _dbContext.OwnerPetitionPageSubmissionStatus.InsertOnSubmit(oPetitionSubmission);
+                        _dbContext.SubmitChanges();
                     }
                     result.result = model;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -3365,37 +3463,6 @@ namespace RAP.DAL
             }
         }
        
-        /// <summary>
-        /// Save Owner petition information
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        //public ReturnResult<OwnerPetitionInfoM> SaveOwnerPetitionInfo(OwnerPetitionInfoM model)
-        //{
-        //    ReturnResult<OwnerPetitionInfoM> result = new ReturnResult<OwnerPetitionInfoM>();
-        //    try
-        //    {
-        //        OwnerPetitionInfo petitionInfo = new OwnerPetitionInfo();
-        //        petitionInfo.OwnerPetitionApplicantInfoID = model.ApplicantInfo.ApplicantUserID;
-        //        petitionInfo.OwnerPropertyID = model.PropertyInfo.OwnerPropertyID;
-        //        petitionInfo.bPetitionFiledByThirdParty = model.bPetitionFiledByThirdParty;
-        //        petitionInfo.bAgreeToCityMediation = model.bAgreeToCityMediation;
-        //        petitionInfo.PetitionFiledBy = model.PetitionFiledBy;
-        //        petitionInfo.CreatedDate = DateTime.Now;
-        //        _dbContext.OwnerPetitionInfos.InsertOnSubmit(petitionInfo);
-        //        _dbContext.SubmitChanges();
-        //        model.PropertyInfo.OwnerPropertyID = petitionInfo.OwnerPetitionID;
-        //        result.result = model;
-        //        result.status = new OperationStatus() { Status = StatusEnum.Success };
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.status = _eHandler.HandleException(ex);
-        //        _commondbHandler.SaveErrorLog(result.status);
-        //        return result;
-        //    }
-        //}
         /// <summary>
         /// Save Owner property information (Rental Property page on Owner ptition) and addes Tenant information
         /// </summary>
@@ -3427,6 +3494,14 @@ namespace RAP.DAL
                     _dbContext.OwnerPetitionPropertyInfos.InsertOnSubmit(propertyInfo);
                     _dbContext.SubmitChanges();
                     model.OwnerPropertyID = propertyInfo.OwnerPropertyID;
+
+                    var propertySubmission = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+                    if (propertySubmission !=null)
+                    {
+                        propertySubmission.RentalProperty = true;
+                        _dbContext.SubmitChanges();
+                    }
+
                 }
                 if (model.TenantInfo.Any())
                 {
@@ -3502,8 +3577,14 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                int applicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
+                if (applicantInfoID == 0)
+                {
+                    applicantInfoID = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.CustomerID == petition.CustomerID && r.bPetitionFiled == false).Select(x => x.OwnerPetitionApplicantInfoID).FirstOrDefault();
+                }
+
                 var rentIncreaseReasonDB = from r in _dbContext.OwnerRentIncreaseReasonInfos
-                                           where r.OwnerPetitionApplicantInfoID == petition.ApplicantInfo.OwnerPetitionApplicantInfoID
+                                           where r.OwnerPetitionApplicantInfoID == applicantInfoID
                                            select r;
                 if (rentIncreaseReasonDB.Any())
                 {
@@ -3514,7 +3595,7 @@ namespace RAP.DAL
                             if (!rentIncreaseReasonDB.Where(x => x.ReasonID == item.ReasonID).Any())
                             {
                                 OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-                                rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
+                                rentIncreaseReason.OwnerPetitionApplicantInfoID = applicantInfoID;
                                 rentIncreaseReason.ReasonID = item.ReasonID;
                                 _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
                                 _dbContext.SubmitChanges();
@@ -3541,14 +3622,20 @@ namespace RAP.DAL
                         if (item.IsSelected)
                         {
                             OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
-                            rentIncreaseReason.OwnerPetitionApplicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
+                            rentIncreaseReason.OwnerPetitionApplicantInfoID = applicantInfoID;
                             rentIncreaseReason.ReasonID = item.ReasonID;
                             _dbContext.OwnerRentIncreaseReasonInfos.InsertOnSubmit(rentIncreaseReason);
                             _dbContext.SubmitChanges();
                         }
                     }
                 }
-                
+
+                var justtificationStatus = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == petition.CustomerID).Select(x => x.JustificationForRentIncrease).FirstOrDefault();
+                if (!Convert.ToBoolean(justtificationStatus))
+                {
+                    justtificationStatus = true;
+                    _dbContext.SubmitChanges();
+                }
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
@@ -3570,10 +3657,15 @@ namespace RAP.DAL
             ReturnResult<OwnerPetitionPropertyInfoM> result = new ReturnResult<OwnerPetitionPropertyInfoM>();
             try
             {
-                if (model.OwnerPropertyID > 0)
+                int propertyID = model.OwnerPropertyID;
+                if(propertyID == 0)
+                {
+                    propertyID = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.CustomerID == model.CustomerID && r.bPetitionFiled == false).Select(x => x.OwnerPropertyID).First();                    
+                }
+                if (propertyID > 0)
                 {
                     var propertyInfo = from r in _dbContext.OwnerPetitionPropertyInfos
-                                       where r.OwnerPropertyID == model.OwnerPropertyID
+                                       where r.OwnerPropertyID == propertyID
                                        select r;
                     if (propertyInfo.Any())
                     {
@@ -3581,8 +3673,15 @@ namespace RAP.DAL
                         propertyInfo.First().InitialRent = model.InitialRent;
                         propertyInfo.First().RAPNoticeStatusID = model.RAPNoticeStatusID;
                         propertyInfo.First().RAPNoticeGivenDate = new DateTime(model.RAPNoticeGivenDate.Year, model.RAPNoticeGivenDate.Month, model.RAPNoticeGivenDate.Day);
-                        propertyInfo.First().RentStatusID = model.RentStatusID;
+                        propertyInfo.First().CurrentOnRent = model.CurrentOnRent;
                         _dbContext.SubmitChanges();
+
+                        var historySubmission = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+                        if (historySubmission != null)
+                        {
+                            historySubmission.RentHistory = true;
+                            _dbContext.SubmitChanges();
+                        }
                     }
                 }
 
@@ -3612,7 +3711,7 @@ namespace RAP.DAL
                             else
                             {
                                 OwnerPetitionRentalIncrementInfo rentIncreaseInfo = new OwnerPetitionRentalIncrementInfo();
-                                rentIncreaseInfo.OwnerPropertyID = model.OwnerPropertyID;
+                                rentIncreaseInfo.OwnerPropertyID = propertyID;
                                 rentIncreaseInfo.bRentIncreaseNoticeGiven = rent.bRentIncreaseNoticeGiven;
                                 rentIncreaseInfo.RentIncreaseNoticeDate = new DateTime(rent.RentIncreaseNoticeDate.Year, rent.RentIncreaseNoticeDate.Month, rent.RentIncreaseNoticeDate.Day);
                                 rentIncreaseInfo.RentIncreaseEffectiveDate = new DateTime(rent.RentIncreaseEffectiveDate.Year, rent.RentIncreaseEffectiveDate.Month, rent.RentIncreaseEffectiveDate.Day);
@@ -3717,8 +3816,7 @@ namespace RAP.DAL
             CaseDetail caseDetails = new CaseDetail();
             int ownerPetitionID = 0;
             int petitionID = 0;
-            try
-            
+            try            
             {                
                 ownerPetitionID = SaveOwnerPetitionInfo(model.OwnerPetitionInfo);
                 if(ownerPetitionID == 0)
@@ -3751,11 +3849,74 @@ namespace RAP.DAL
                 propertyInfo.bPetitionFiled = true;
                 _dbContext.SubmitChanges();
 
+                var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(model.CustomerID, model.C_ID, DocCategory.OwnerPetition.ToString());
+                if (updateDocumentResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = updateDocumentResult.status;
+                    return result;
+                }
+
+                var oPetitionSubmission = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+                if (oPetitionSubmission != null)
+                {
+                    _dbContext.OwnerPetitionPageSubmissionStatus.DeleteOnSubmit(oPetitionSubmission);
+                    _dbContext.SubmitChanges();
+                }
+
+
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch(Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> OwnerUpdateAdditionalDocumentsPageSubmission(int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var oPetitionSubmission = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                if (oPetitionSubmission != null)
+                {
+                    oPetitionSubmission.AdditionalDocumentation = true;
+                    _dbContext.SubmitChanges();
+                }
+
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> OwnerUpdateReviewPageSubmission(int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var ownerubmission = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                if (ownerubmission != null)
+                {
+                    ownerubmission.Review = true;
+                    _dbContext.SubmitChanges();
+                }
+
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
             {
                 result.status = _eHandler.HandleException(ex);
                 _commondbHandler.SaveErrorLog(result.status);
@@ -3774,7 +3935,7 @@ namespace RAP.DAL
             _dbContext.SubmitChanges();
             ownerPetitionID = petitionInfo.OwnerPetitionID;
             return ownerPetitionID;
-        }
+        }       
        #endregion
 
        #region Owner Response Get Functions
@@ -3784,8 +3945,7 @@ namespace RAP.DAL
            try
            {
 
-               if(model.NumberOfUnitsRange == null ||model.NumberOfUnitsRange.Count == 0)
-               
+               if(model.NumberOfUnitsRange == null ||model.NumberOfUnitsRange.Count == 0)               
                {
                    var rangeDB = _dbContext.NumberRangeForUnits.ToList();
                    if (rangeDB == null)
@@ -3838,7 +3998,7 @@ namespace RAP.DAL
                    _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
                    _applicantInfo.bPetitionFiled =Convert.ToBoolean(applicantInfo.bPetitionFiled);
                    _applicantInfo.CaseRespondingTo = applicantInfo.CaseRespondingTo;
-                   model.NumberOfUnitsRangeID = (applicantInfo.RangeID != null) ? Convert.ToInt32(applicantInfo.RangeID) : 0; 
+                   model.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID = (applicantInfo.RangeID != null) ? Convert.ToInt32(applicantInfo.RangeID) : 0; 
                    model.OwnerResponseInfo.ApplicantInfo = _applicantInfo;
                    result.result = model;
                }
@@ -4331,9 +4491,9 @@ namespace RAP.DAL
                            applicantInfo.First().CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
                            applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                            applicantInfo.First().NumberOfUnits = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnits;
-                           if (model.NumberOfUnitsRangeID != 0)
+                           if (model.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID != 0)
                            {
-                               applicantInfo.First().RangeID = model.NumberOfUnitsRangeID;
+                               applicantInfo.First().RangeID = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID;
                            }
                            applicantInfo.First().bMoreThanOneStreetOnParcel = model.OwnerResponseInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
                            _dbContext.SubmitChanges();
@@ -4353,9 +4513,9 @@ namespace RAP.DAL
                        applicantInfo.bRentAdjustmentProgramFeePaid = model.OwnerResponseInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
                        applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                        applicantInfo.NumberOfUnits = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnits;
-                       if (model.NumberOfUnitsRangeID != 0)
+                       if (model.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID != 0)
                        {
-                           applicantInfo.RangeID = model.NumberOfUnitsRangeID;
+                           applicantInfo.RangeID = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID;
                        }
                        applicantInfo.bMoreThanOneStreetOnParcel = model.OwnerResponseInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
                        applicantInfo.CustomerID = model.OwnerResponseInfo.ApplicantInfo.CustomerID;

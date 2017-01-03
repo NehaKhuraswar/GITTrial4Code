@@ -928,6 +928,32 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<CaseInfoM> GetOwnerReview(CaseInfoM model)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.GetOwnerReview(model);
+
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                model = dbResult.result;
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         #endregion
 
         #region Save Owner Petition Methods
@@ -1103,6 +1129,7 @@ namespace RAP.Business.Implementation
                         documents.Add(doc);
                     }
                 }
+                _dbHandler.OwnerUpdateAdditionalDocumentsPageSubmission(model.CustomerID);
                 model.Documents = documents;
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -1116,7 +1143,22 @@ namespace RAP.Business.Implementation
             }
         }
 
-       
+        public ReturnResult<bool> SaveOwnerReviewPageSubmission(int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+
+                result = _dbHandler.OwnerUpdateReviewPageSubmission(CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> SubmitOwnerPetition(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -1127,7 +1169,10 @@ namespace RAP.Business.Implementation
                 {
                     result.status = dbResult.status;
                     return result;
-                }               
+                }
+                EmailM message = new EmailM();
+                message.Subject = "Owner Petition Filed Successfully : Case No -" + model.CaseID;
+                _emilService.SendEmail(message);
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

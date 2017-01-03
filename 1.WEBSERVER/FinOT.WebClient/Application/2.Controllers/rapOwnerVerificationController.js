@@ -3,7 +3,7 @@
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-
+    self.caseinfo.CustomerID = self.custDetails.custID;
     self.ResendPin = function () {
         masterFactory.ResendPin(self.custDetails).then(function (response) {
             if (!alert.checkResponse(response)) {

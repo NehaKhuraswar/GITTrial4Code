@@ -4,6 +4,7 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.caseinfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerPetitionInfo.PropertyInfo.CustomerID = self.custDetails.custID;
     self.StateList = [];
     var _GetStateList = function () {

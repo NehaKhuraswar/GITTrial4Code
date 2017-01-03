@@ -37,7 +37,15 @@ namespace RAP.Core.DataModels
                 _rentIncreaseReasons = value;
             }
         }
-
+       public int CustomerID { get; set; }
+       public DateTime VerificationDate
+       {
+           get
+           {
+               return DateTime.Now;
+           }
+       }
+       public Int32 CustomerIdentityKey { get; set; }
     }
 
     public class OwnerPetitionApplicantInfoM
@@ -74,23 +82,12 @@ namespace RAP.Core.DataModels
         public bool bMoreThanOneStreetOnParcel { get; set; }
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }
-        public string RAPFee { get; set; }
-        public List<NumberRangeForUnitsM> NumberOfUnitsRange
-        {
-            get
-            {
-                return _rangeOfUnits;
-            }
-            set
-            {
-                _rangeOfUnits = value;
-            }
-        }
+        public string RAPFee { get; set; } 
         public int NumberOfUnitsRangeID { get; set; }
     }
 
     public class OwnerPetitionPropertyInfoM
-    {
+        {
         public OwnerPetitionPropertyInfoM()
         {
             MovedInDate = new CustomDate();
@@ -106,7 +103,7 @@ namespace RAP.Core.DataModels
         public decimal? InitialRent { get; set; }
         public int? RAPNoticeStatusID { get; set; }
         public CustomDate RAPNoticeGivenDate { get; set; }
-        public int? RentStatusID { get; set; }
+        public bool CurrentOnRent { get; set; }
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }
         public List<OwnerPetitionTenantInfoM> TenantInfo
@@ -256,6 +253,7 @@ namespace RAP.Core.DataModels
         public bool bPetitionFiled { get; set; }
         public string RAPFee { get; set; }
         public string CaseRespondingTo { get; set; }
+        public int NumberOfUnitsRangeID { get; set; }
        
     }
 

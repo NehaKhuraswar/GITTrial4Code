@@ -3,6 +3,7 @@
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.caseinfo.CustomerID = self.custDetails.custID;
     self.DocDescriptions = masterFactory.DocDescription();
 
     masterFactory.DocDescription().then(function (response) {

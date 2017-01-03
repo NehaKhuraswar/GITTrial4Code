@@ -137,8 +137,7 @@ namespace RAP.Core.DataModels
             {
                 _rangeOfUnits = value;
             }
-        }
-        public int NumberOfUnitsRangeID { get; set; }
+        }       
         public DocumentM Document { get; set; }
         public List<DocumentM> Documents
         {
