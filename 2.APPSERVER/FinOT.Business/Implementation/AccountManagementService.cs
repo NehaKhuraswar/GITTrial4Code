@@ -84,6 +84,7 @@ namespace RAP.Business.Implementation
                 EmailM emailMessage = new EmailM();
                 emailMessage.MessageBody = message.email + " Sending Pin " + result.result;
                 emailMessage.Subject = "Your RAP Pin";
+                emailMessage.RecipientAddress = new string[] { message.email };
                 EmailService emailservice = new EmailService();
                 resultFinal = emailservice.SendEmail(emailMessage);
             }

@@ -1853,6 +1853,7 @@ namespace RAP.DAL
                     petitionDB.PropertyManagerUserID = PropertyManagerUserID;
                     petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
                     petitionDB.UnitTypeID =  caseInfo.TenantPetitionInfo.UnitTypeId;
+                    petitionDB.RangeID = caseInfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID;
                     petitionDB.bRentStatus = caseInfo.TenantPetitionInfo.bCurrentRentStatus;
                     if (caseInfo.TenantPetitionInfo.bCurrentRentStatus == false)
                     {
