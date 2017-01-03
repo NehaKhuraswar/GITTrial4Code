@@ -127,6 +127,7 @@
   <ItemGroup>
     <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
+    <Content Include="Application\2.Controllers\rapOwnerConfirmationController.js" />
     <Content Include="Application\2.Controllers\rapViewPetitionController.js" />
     <Content Include="Application\2.Controllers\rapNewRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseDecreasedHousingController.js" />
@@ -430,6 +431,7 @@
     <Content Include="Views\FilePetition\LostServices.html" />
     <Content Include="Views\FilePetition\Owner\AdditionalDocuments.html" />
     <Content Include="Views\FilePetition\Owner\ApplicantInformation.html" />
+    <Content Include="Views\FilePetition\Owner\ConfirmationPage.html" />
     <Content Include="Views\FilePetition\Owner\ImportantInformation.html" />
     <Content Include="Views\FilePetition\Owner\Justification.html" />
     <Content Include="Views\FilePetition\Owner\RentalHistory.html" />

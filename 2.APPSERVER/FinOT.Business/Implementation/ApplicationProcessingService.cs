@@ -1172,6 +1172,10 @@ namespace RAP.Business.Implementation
                 }
                 EmailM message = new EmailM();
                 message.Subject = "Owner Petition Filed Successfully : Case No -" + model.CaseID;
+                if (model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
+                {
+                    message.RecipientAddress = new string[] { model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email };
+                }
                 _emilService.SendEmail(message);
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };

@@ -17,8 +17,12 @@
         rapFactory.SubmitOwnerPetition(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
+            $scope.model.ownerVerification = false;
+            $scope.model.ownerConfirmation = true;
+            $scope.model.oPetionActiveStatus.Verification = true;
+            $scope.model.DisableAllCurrent();
         });
-        $scope.model.oPetionActiveStatus.Verification = true;
+       
     }
 }];
 

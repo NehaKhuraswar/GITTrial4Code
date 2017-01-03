@@ -13,12 +13,13 @@
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerReviewPageSubmission(self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkResponse(response)) { return; }           
             $scope.model.ownerReview = false;
             $scope.model.ownerVerification = true;
             $scope.model.DisableAllCurrent();
             $scope.model.oPetionCurrentStatus.Verification = true;
             $scope.model.oPetionActiveStatus.Review = true;
+            
         });
     }
   

@@ -121,6 +121,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapOwnerDocumentsController', rapOwnerDocumentsController)
     .controller('rapOwnerReviewController', rapOwnerReviewController)
     .controller('rapOwnerVerificationController', rapOwnerVerificationController)
+    .controller('rapOwnerConfirmationController', rapOwnerConfirmationController)
     .controller('rapTRMainController', rapTRMainController)
     .controller('rapTRPetitionTypeController', rapTRPetitionTypeController)
     .controller('rapTRApplicationInfoController', rapTRApplicationInfoController)
@@ -481,6 +482,18 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         controller: 'rapOwnerVerificationController',
         controllerAs: 'Ctrl'
     };
+})
+.directive('rapOwnerconfirmation', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                reqid: '=',
+                model: '=model',
+            },
+            templateUrl: 'Views/FilePetition/Owner/ConfirmationPage.html',
+            controller: 'rapOwnerConfirmationController',
+            controllerAs: 'Ctrl'
+        };
 })
 
 .directive('rapTrpetitiontype', function () {

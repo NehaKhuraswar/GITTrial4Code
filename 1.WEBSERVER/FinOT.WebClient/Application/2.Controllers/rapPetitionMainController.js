@@ -54,6 +54,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         self.ownerAdditionalDocuments = false;
         self.ownerReview = false;
         self.ownerVerification = false;
+        self.ownerConfirmation = false;
     };
     _DisableAll();
     

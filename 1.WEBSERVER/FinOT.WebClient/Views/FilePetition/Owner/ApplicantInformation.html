@@ -9,6 +9,7 @@
             </div>
             <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
                 <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
+                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}</p>
                 <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
                 <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
                 <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
@@ -23,6 +24,10 @@
 
                 <div class="field-group">
                     <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName" required />
+                </div>
+                <div class="field-group">
+                    <label for="businessname">Business name</label>
+                    <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName" />
                 </div>
 
                 <div class="field-group">
@@ -103,7 +108,10 @@
                     <div class="field-group">
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName" required />
                     </div>
-
+                    <div class="field-group">
+                        <label for="businessname">Business name</label>
+                        <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName" />
+                    </div>
                     <div class="field-group">
                         <label for="representative_address1">Mailing address 1</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1" required />
@@ -144,6 +152,7 @@
                 <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
 
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
@@ -153,7 +162,8 @@
                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                     <a ng-click="" class="btn-link btn-edit">Edit</a>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
+                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
                     <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
