@@ -9,7 +9,7 @@
                 <div class="form-group-checkbox vertical clearfix">
                     <div class="checkbox-wrapper">
                         <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons">
-                            <label for="{{petitionground.PetitionGroundID}}">
+                            <label for="{{reason.ReasonID}}">
                                 <input type="checkbox" name="rentcheckbox" class="checkbox" id="{{reason.ReasonID}}" ng-model="reason.IsSelected">
                                 <i></i><span>{{reason.ReasonDescription}}</span>
                             </label>

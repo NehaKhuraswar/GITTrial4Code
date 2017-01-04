@@ -3180,7 +3180,7 @@ button.close {
 /* line 376, ../sass/styles.scss */
 .accordion .item .item-content {
   margin: 0 0 30px 0;
-  display: none;
+  /*display: none;*/
   font-size: 16px;
   line-height: 1.4;
   max-width: 545px;
