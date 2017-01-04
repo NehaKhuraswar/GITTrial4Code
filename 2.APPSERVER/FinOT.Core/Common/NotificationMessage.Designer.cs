@@ -22,7 +22,7 @@ namespace RAP.Core.Common {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class NotificationMessage {
+    public class NotificationMessage {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace RAP.Core.Common {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAP.Core.Common.NotificationMessage", typeof(NotificationMessage).Assembly);
@@ -57,6 +57,17 @@ namespace RAP.Core.Common {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your petition has been submitted to the City of Oakland Rent Adjustment Program. Your case number is CASEID.
+        ///
+        ///A confirmation has been sent to your email. If you have not received it, be sure to check your spam box. A copy of your petition will be sent to the other party and they will have 35 days to respond. You may submit any additional documentation up till 7 days before the hearing, and may also review the other party&apos;s submitted documents. Pay close attention to your email and your mail for informatio [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PetitionMsg {
+            get {
+                return ResourceManager.GetString("PetitionMsg", resourceCulture);
             }
         }
     }

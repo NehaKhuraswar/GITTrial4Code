@@ -3378,6 +3378,7 @@ namespace RAP.DAL
                                       select r;
                     if (tentantInfo.Any())
                     {
+                        List<OwnerPetitionTenantInfoM> _tenants = new List<OwnerPetitionTenantInfoM>();
                         foreach (var item in tentantInfo)
                         {
                             OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
@@ -3387,8 +3388,10 @@ namespace RAP.DAL
                                 _tenant.TenantUserInfo = userResult.result;
                                 _tenant.TenantInfoID = item.TenantInfoID;
                             }
-                            model.TenantInfo.Add(_tenant);
+                            _tenants.Add(_tenant);
+                            //model.TenantInfo.Add(_tenant);
                         }
+                        model.TenantInfo = _tenants;
                     }
                 }
                 result.result = model;
@@ -3432,6 +3435,7 @@ namespace RAP.DAL
                     var rentIncreaseInfo = _dbContext.OwnerPetitionRentalIncrementInfos.Where(r => r.OwnerPropertyID == propertyID);
                     if (rentIncreaseInfo.Any())
                     {
+                        List<OwnerPetitionRentalIncrementInfoM> _rentIncreases = new List<OwnerPetitionRentalIncrementInfoM>();
                         foreach (var item in rentIncreaseInfo)
                         {
                             OwnerPetitionRentalIncrementInfoM _rentIncrease = new OwnerPetitionRentalIncrementInfoM();
@@ -3440,8 +3444,10 @@ namespace RAP.DAL
                             _rentIncrease.RentIncreaseEffectiveDate = (item.RentIncreaseEffectiveDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
                             _rentIncrease.RentIncreasedFrom = item.RentIncreasedFrom;
                             _rentIncrease.RentIncreasedTo = item.RentIncreasedTo;
-                            model.OwnerPetitionInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
+                            _rentIncreases.Add(_rentIncrease);
+                           // model.OwnerPetitionInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
                         }
+                        model.OwnerPetitionInfo.PropertyInfo.RentalInfo = _rentIncreases;
                     }
                 }
                 result.result = model;
@@ -3798,11 +3804,14 @@ namespace RAP.DAL
                     }
                 }
 
-                var justtificationStatus = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == petition.CustomerID).Select(x => x.JustificationForRentIncrease).FirstOrDefault();
-                if (!Convert.ToBoolean(justtificationStatus))
+                var justtificationStatus = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == petition.CustomerID).FirstOrDefault();
+                if (justtificationStatus != null)
                 {
-                    justtificationStatus = true;
-                    _dbContext.SubmitChanges();
+                    if (!Convert.ToBoolean(justtificationStatus.JustificationForRentIncrease))
+                    {
+                        justtificationStatus.JustificationForRentIncrease = true;
+                        _dbContext.SubmitChanges();
+                    }
                 }
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -4006,6 +4015,8 @@ namespace RAP.DAL
                 caseDetails.CaseFiledBy = model.CaseFileBy;
                 caseDetails.bCaseFiledByThirdParty = model.bCaseFiledByThirdParty;
                 caseDetails.CreatedDate = DateTime.Now;
+                caseDetails.LastModifiedDate = DateTime.Now;
+                caseDetails.LastModifiedBy = model.CaseFileBy;
                 _dbContext.CaseDetails.InsertOnSubmit(caseDetails);
                 _dbContext.SubmitChanges();
                 model.C_ID = caseDetails.C_ID;
@@ -4015,6 +4026,8 @@ namespace RAP.DAL
                 caseinfo.CaseID = caseid;
                 _dbContext.SubmitChanges();
                 model.CaseID = caseid;
+
+                _commondbHandler.PetitionFiledActivity(model.C_ID, model.CaseFileBy);
 
                 var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == model.OwnerPetitionInfo.ApplicantInfo.OwnerPetitionApplicantInfoID).FirstOrDefault();
                 applicantInfo.bPetitionFiled = true;             
@@ -5124,6 +5137,8 @@ namespace RAP.DAL
                    {   
                        c_id = caseinfo.C_ID;
                        caseinfo.OwnerResponseID = model.OwnerResponseInfo.OwnerResponseID;
+                       caseinfo.LastModifiedDate = DateTime.Now;
+                       caseinfo.LastModifiedBy = model.CustomerID;
                        _dbContext.SubmitChanges();
                    }
                    else

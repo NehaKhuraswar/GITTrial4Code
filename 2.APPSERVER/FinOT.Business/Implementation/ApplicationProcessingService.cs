@@ -8,6 +8,7 @@ using RAP.Core.DataModels;
 using RAP.Business.Helper;
 using RAP.DAL;
 using System.Configuration;
+using System.Resources;
 namespace RAP.Business.Implementation
 {
     public class ApplicationProcessingService : IApplicationProcessingService
@@ -1172,6 +1173,7 @@ namespace RAP.Business.Implementation
                 }
                 EmailM message = new EmailM();
                 message.Subject = "Owner Petition Filed Successfully : Case No -" + model.CaseID;
+                message.MessageBody = NotificationMessage.ResourceManager.GetString("PetitionMsg").Replace("CASEID",model.CaseID);
                 if (model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
                 {
                     message.RecipientAddress = new string[] { model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email };
