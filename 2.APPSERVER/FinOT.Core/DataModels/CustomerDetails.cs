@@ -25,7 +25,7 @@ namespace RAP.Core.DataModels
         public ThirdPartyDetails thirdpartyDetails { get; set; }
         public UserInfoM User { get; set; }
         public MailingAddress_M MailingAddress { get; set; }
-        public Int32 CustomerIdentityKey { get; set; }
+        public string CustomerIdentityKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool IsSameMailingAddress { get; set; }
     }

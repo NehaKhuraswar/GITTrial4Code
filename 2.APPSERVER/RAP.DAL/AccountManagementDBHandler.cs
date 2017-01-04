@@ -273,9 +273,9 @@ namespace RAP.DAL
         /// Resend Pin
         /// </summary>
         /// <returns>Customer Info Object</returns>
-        public ReturnResult<Int32> ResendPin(CustomerInfo message)
+        public ReturnResult<string> ResendPin(CustomerInfo message)
         {
-            ReturnResult<Int32> result = new ReturnResult<Int32>();
+            ReturnResult<string> result = new ReturnResult<string>();
             try
             {
                 // CustomerInfo custinfo ;
@@ -286,11 +286,11 @@ namespace RAP.DAL
                     var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.CustomerID == message.custID).FirstOrDefault();
                     if (custdetails != null)
                     {
-                        result.result = (int)custdetails.CustomerIdentityKey;
+                        result.result = custdetails.CustomerIdentityKey;
                     }
                     else
                     {
-                        result.result = 0;
+                        result.result = "";
                         result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
                         return result;
                     }
@@ -1110,7 +1110,7 @@ namespace RAP.DAL
                 return result;
             }
         }
-        private Int32 getCustomerIdentityKey()
+        private string getCustomerIdentityKey()
         {
             int randomNo = 0;
             int CustomerIdentityKeyFrom = string.IsNullOrEmpty(ConfigurationManager.AppSettings["CustomerIdentityKeyFrom"]) ? 100000000 : Convert.ToInt32(ConfigurationManager.AppSettings["CustomerIdentityKeyFrom"]);
@@ -1123,7 +1123,7 @@ namespace RAP.DAL
                     for (int i = 0; i < CustomerIdentityKeys.Count(); i++)
                     {
                         randomNo = random.Next(CustomerIdentityKeyFrom, CustomerIdentityKeyTo);
-                        if (CustomerIdentityKeys.Contains(randomNo))
+                        if (CustomerIdentityKeys.Contains(Convert.ToString(randomNo)))
                         {
                             continue;
                         }
@@ -1134,7 +1134,7 @@ namespace RAP.DAL
                     }
                 }
             }
-            return randomNo;
+            return Convert.ToString(randomNo);
         }
         #endregion
 

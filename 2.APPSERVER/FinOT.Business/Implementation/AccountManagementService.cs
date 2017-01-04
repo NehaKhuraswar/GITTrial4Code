@@ -76,7 +76,7 @@ namespace RAP.Business.Implementation
 
         public ReturnResult<bool> ResendPin(CustomerInfo message)
         {
-            ReturnResult<Int32> result = new ReturnResult<Int32>();
+            ReturnResult<string> result = new ReturnResult<string>();
             ReturnResult<bool> resultFinal = new ReturnResult<bool>();
             result = accDBHandler.ResendPin(message);
             if(result != null)

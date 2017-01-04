@@ -3498,7 +3498,7 @@ namespace RAP.DAL
                     model.Documents = documentResult.result;
                 }
 
-                model.OwnerPetitionInfo.CustomerIdentityKey = Convert.ToInt32(_dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CustomerID).Select(x => x.CustomerIdentityKey).FirstOrDefault());
+                model.OwnerPetitionInfo.CustomerIdentityKey = _dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CustomerID).Select(x => x.CustomerIdentityKey).FirstOrDefault();
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -4556,7 +4556,7 @@ namespace RAP.DAL
                    model.Documents = documentResult.result;
                }
 
-               model.OwnerResponseInfo.CustomerIdentityKey = Convert.ToInt32(_dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CustomerID).Select(x => x.CustomerIdentityKey).FirstOrDefault());
+               model.OwnerResponseInfo.CustomerIdentityKey = _dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CustomerID).Select(x => x.CustomerIdentityKey).FirstOrDefault();
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;

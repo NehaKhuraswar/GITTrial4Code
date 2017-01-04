@@ -272,7 +272,7 @@ namespace RAP.Core.DataModels
         
         public int CustomerID { get; set; }
         public int AppealID { get; set; }
-        public int pin { get; set; }
+        public string pin { get; set; }
         public bool bAcknowledgeNamePin { get; set; }
         public bool bThirdParty { get; set; }
         public bool bDeclaration { get; set; }

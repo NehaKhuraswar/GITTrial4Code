@@ -167,11 +167,11 @@ namespace RAP.Core.DataModels
             date = DateTime.Now;
         }
         public DateTime date { get; set; }
-        public int pinVerify { get; set; }
+        public string pinVerify { get; set; }
         public bool bAcknowledgePinName { get; set; }
         public bool bDeclarePenalty { get; set; }
         public bool bThirdParty { get; set; }
-        public int pinMediation { get; set; }
+        public string pinMediation { get; set; }
         public bool bAcknowledgePinNameMediation { get; set; }
         public bool bCaseMediation { get; set; }
         public bool bThirdPartyMediation { get; set; }

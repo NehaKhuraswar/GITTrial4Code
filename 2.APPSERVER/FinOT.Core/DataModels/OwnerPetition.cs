@@ -45,7 +45,7 @@ namespace RAP.Core.DataModels
                return DateTime.Now;
            }
        }
-       public Int32 CustomerIdentityKey { get; set; }
+       public string CustomerIdentityKey { get; set; }
     }
 
     public class OwnerPetitionApplicantInfoM
@@ -213,7 +213,7 @@ namespace RAP.Core.DataModels
                 return DateTime.Now;
             }
         }
-        public Int32 CustomerIdentityKey { get; set; }
+        public string CustomerIdentityKey { get; set; }
     }
 
     public class OwnerResponseApplicantInfoM
