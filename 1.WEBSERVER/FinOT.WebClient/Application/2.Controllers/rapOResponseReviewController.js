@@ -10,12 +10,12 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
     self.Calender = masterFactory.Calender;
 
 
-    rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
-        rapGlobalFactory.CaseDetails = response.data;
-        self.caseinfo = response.data;
+    //rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
+    //    if (!alert.checkResponse(response)) { return; }
+    //    rapGlobalFactory.CaseDetails = response.data;
+    //    self.caseinfo = response.data;
         
-    });
+    //});
 
    
     self.Continue = function () {
