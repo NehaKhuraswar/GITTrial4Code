@@ -332,31 +332,6 @@
       <Association Name="OwnerResponseRentalIncrementInfo_OwnerResponseRentIncreaseReasonInfo" Member="OwnerResponseRentalIncrementInfo" ThisKey="RentalIncreaseInfoID" OtherKey="RentalIncreaseInfoID" Type="OwnerResponseRentalIncrementInfo" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.CaseDetails" Member="CaseDetails">
-    <Type Name="CaseDetail">
-      <Column Name="C_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CaseID" Type="System.String" DbType="VarChar(8)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="PetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TenantAppealID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PetitionCategoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TenantResponseID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="OwnerResponseID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CaseFiledBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="bCaseFiledByThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="LastModifiedByType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LastModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="HearingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="AppealDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="HearingOfficerUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CityAnalystUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="CaseDetail_TenantResponseApplicationInfo" Member="TenantResponseApplicationInfos" ThisKey="C_ID" OtherKey="C_ID" Type="TenantResponseApplicationInfo" />
-      <Association Name="TenantAppealDetail_CaseDetail" Member="TenantAppealDetail" ThisKey="TenantAppealID" OtherKey="AppealID" Type="TenantAppealDetail" IsForeignKey="true" />
-      <Association Name="PetitionCategory_CaseDetail" Member="PetitionCategory" ThisKey="PetitionCategoryID" OtherKey="PetitionCategoryID" Type="PetitionCategory" IsForeignKey="true" />
-      <Association Name="PetitionDetail_CaseDetail" Member="PetitionDetail" ThisKey="PetitionID" OtherKey="PetitionID" Type="PetitionDetail" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.TenantResponseApplicationInfo" Member="TenantResponseApplicationInfos">
     <Type Name="TenantResponseApplicationInfo">
       <Column Name="TenantResponseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -380,8 +355,8 @@
       <Association Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1" Member="TenantResponseExemptContestedInfo1s" ThisKey="TenantResponseID" OtherKey="TenantResponseID" Type="TenantResponseExemptContestedInfo1" />
       <Association Name="TenantResponseApplicationInfo_TenantResponseRentalHistory" Member="TenantResponseRentalHistories" ThisKey="TenantResponseID" OtherKey="TenantResponseID" Type="TenantResponseRentalHistory" />
       <Association Name="TenantResponseApplicationInfo_TenantResponseVerification" Member="TenantResponseVerifications" ThisKey="TenantResponseID" OtherKey="TenantResponseID" Type="TenantResponseVerification" />
-      <Association Name="CaseDetail_TenantResponseApplicationInfo" Member="CaseDetail" ThisKey="C_ID" OtherKey="C_ID" Type="CaseDetail" IsForeignKey="true" />
       <Association Name="NumberRangeForUnit_TenantResponseApplicationInfo" Member="NumberRangeForUnit" ThisKey="RangeID" OtherKey="RangeID" Type="NumberRangeForUnit" IsForeignKey="true" />
+      <Association Name="CaseDetail_TenantResponseApplicationInfo" Member="CaseDetail" ThisKey="C_ID" OtherKey="C_ID" Type="CaseDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TenantResponseRentalIncrementInfo" Member="TenantResponseRentalIncrementInfos">
@@ -585,6 +560,31 @@
       <Column Name="RangeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="OwnerPetitionApplicantInfo_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReasonInfos" ThisKey="OwnerPetitionApplicantInfoID" OtherKey="OwnerPetitionApplicantInfoID" Type="OwnerRentIncreaseReasonInfo" />
       <Association Name="OwnerPetitionApplicantInfo_OwnerPetitionInfo" Member="OwnerPetitionInfos" ThisKey="OwnerPetitionApplicantInfoID" OtherKey="OwnerPetitionApplicantInfoID" Type="OwnerPetitionInfo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CaseDetails" Member="CaseDetails">
+    <Type Name="CaseDetail">
+      <Column Name="C_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenantAppealID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PetitionCategoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TenantResponseID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OwnerResponseID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CaseFiledBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bCaseFiledByThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastModifiedByType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HearingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AppealDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HearingOfficerUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CityAnalystUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CaseID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="CaseDetail_TenantResponseApplicationInfo" Member="TenantResponseApplicationInfos" ThisKey="C_ID" OtherKey="C_ID" Type="TenantResponseApplicationInfo" />
+      <Association Name="TenantAppealDetail_CaseDetail" Member="TenantAppealDetail" ThisKey="TenantAppealID" OtherKey="AppealID" Type="TenantAppealDetail" IsForeignKey="true" />
+      <Association Name="PetitionCategory_CaseDetail" Member="PetitionCategory" ThisKey="PetitionCategoryID" OtherKey="PetitionCategoryID" Type="PetitionCategory" IsForeignKey="true" />
+      <Association Name="PetitionDetail_CaseDetail" Member="PetitionDetail" ThisKey="PetitionID" OtherKey="PetitionID" Type="PetitionDetail" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

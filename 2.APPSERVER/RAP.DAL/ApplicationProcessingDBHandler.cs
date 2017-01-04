@@ -1666,8 +1666,13 @@ namespace RAP.DAL
                 caseDetailsDB.LastModifiedDate = DateTime.Now;  
                 _dbContext.CaseDetails.InsertOnSubmit(caseDetailsDB);
                 _dbContext.SubmitChanges();
-                caseInfo.CaseID = caseDetailsDB.CaseID;
                 caseInfo.C_ID = caseDetailsDB.C_ID;
+
+                string caseid = "T" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + caseInfo.C_ID.ToString().PadLeft(4, '0');
+                var _caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == caseInfo.C_ID).First();
+                _caseinfo.CaseID = caseid;
+                _dbContext.SubmitChanges();
+                caseInfo.CaseID = caseid;
 
                 _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy);
 
@@ -4004,7 +4009,12 @@ namespace RAP.DAL
                 _dbContext.CaseDetails.InsertOnSubmit(caseDetails);
                 _dbContext.SubmitChanges();
                 model.C_ID = caseDetails.C_ID;
-                model.CaseID = caseDetails.CaseID;
+
+                string caseid = "L" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + model.C_ID.ToString().PadLeft(4, '0');
+                var caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == model.C_ID).First();
+                caseinfo.CaseID = caseid;
+                _dbContext.SubmitChanges();
+                model.CaseID = caseid;
 
                 var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == model.OwnerPetitionInfo.ApplicantInfo.OwnerPetitionApplicantInfoID).FirstOrDefault();
                 applicantInfo.bPetitionFiled = true;             
