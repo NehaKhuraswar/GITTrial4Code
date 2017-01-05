@@ -386,6 +386,86 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> docs = new List<DocumentM>();
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    var _documents = db.Documents.Where(r => r.C_ID == c_id && r.IsPetitionFiled == true);
+                        if (_documents != null)
+                        {
+                            foreach (var item in _documents)
+                            {
+                                DocumentM doc = new DocumentM();
+                                doc.C_ID = item.C_ID;
+                                doc.CustomerID = item.CustomerID;
+                                doc.DocCategory = item.DocCategory;
+                                doc.DocName = item.DocName;
+                                doc.DocID = item.DocID;
+                                doc.DocThirdPartyID = item.DocThirdPartyID;
+                                doc.DocDescription = item.DocDescription;
+                                doc.DocTitle = item.DocTitle;
+                                doc.MimeType = item.MimeType;
+                                doc.IsPetitonFiled = Convert.ToBoolean(item.IsPetitionFiled);
+                                doc.isUploaded = true;
+                                docs.Add(doc);
+                            }
+                        }
+                    }
+                result.result = docs;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<DocumentM> SaveCaseDocument(DocumentM doc)
+        {
+            ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
+            try
+            {
+                if (doc != null)
+                {
+                    using (CommonDataContext db = new CommonDataContext(_connString))
+                    {
+                        Document document = new Document();
+                        document.DocName = doc.DocName;
+                        document.DocTitle = doc.DocTitle;
+                        document.DocThirdPartyID = doc.DocThirdPartyID;
+                        document.CustomerID = doc.CustomerID;
+                        doc.C_ID = doc.C_ID;
+                        document.DocCategory = doc.DocCategory;
+                        document.DocDescription = string.IsNullOrEmpty(doc.DocDescription) ? null : doc.DocDescription;
+                        document.IsPetitionFiled = true;
+                        document.MimeType = doc.MimeType;
+                        db.Documents.InsertOnSubmit(document);
+                        db.SubmitChanges();
+                        doc.DocID = document.DocID;
+                    }
+                    result.result = doc;
+                }
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+
         public ReturnResult<List<DocumentM>> GetDocumentsByCategory(int CustmerID, bool isPetitiofiled, string docCategory)
         {
             ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();

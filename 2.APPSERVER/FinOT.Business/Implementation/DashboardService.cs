@@ -14,15 +14,19 @@ namespace RAP.Business.Implementation
     {
         public string CorrelationId { get; set; }
         private readonly IDashboardDBHandler _dbHandler;
+        private readonly IDocumentService _documentService;
+        private readonly ICommonService _commonService;
         private readonly IExceptionHandler _eHandler = new ExceptionHandler();
         //TBD
         //public ApplicationProcessingService()
         //{
         //    _dbHandler = new ApplicationProcessingDBHandler();
         //}
-        public DashboardService(IDashboardDBHandler dbHandler)
+        public DashboardService(IDashboardDBHandler dbHandler, IDocumentService documentService, ICommonService commonService)
         {
             this._dbHandler = dbHandler;
+            this._documentService = documentService;
+            this._commonService = commonService;
         }
 
         public ReturnResult<bool> SaveNewActivityStatus(ActivityStatus_M activityStatus, int C_ID)
@@ -141,6 +145,58 @@ namespace RAP.Business.Implementation
             }
         }
 
+
+        public ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            try
+            {
+                result = _commonService.GetCaseDocuments(c_id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+        public ReturnResult<List<DocumentM>> SaveCaseDocuments(List<DocumentM> documents)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> _documents = new List<DocumentM>();
+            try
+            {
+                if (documents != null && documents.Any())
+                {
+                    foreach (var doc in documents)
+                    {
+                        if (!doc.isUploaded)
+                        {
+                            doc.DocCategory = DocCategory.AdditionalStaffDocument.ToString();
+                            var docUploadResut = _documentService.UploadDocument(doc);
+                            if (docUploadResut.status.Status == StatusEnum.Success)
+                            {
+                                _documents.Add(doc);
+                            }
+                        }
+                        else
+                        {
+                            _documents.Add(doc);
+                        }
+                    }
+                }
+                result.result = _documents;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         //implements all methods from IDashboardService
     }
 }

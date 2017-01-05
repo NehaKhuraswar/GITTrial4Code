@@ -15,6 +15,8 @@ namespace RAP.Core.Services
         ReturnResult<List<CityUserAccount_M>> GetAnalysts();
         ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID);
         ReturnResult<bool> AssignHearingOfficer(int cID, int HearingOfficerUserID);
+        ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id);
+        ReturnResult<List<DocumentM>> SaveCaseDocuments(List<DocumentM> documents);
 
     }
 }

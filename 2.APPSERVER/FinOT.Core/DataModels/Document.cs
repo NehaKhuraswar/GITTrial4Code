@@ -50,6 +50,7 @@ namespace RAP.Core.DataModels
          OwnerPetition,
          OwnerResponse,
          TenantResponse,
-         Appeal
+         Appeal,
+         AdditionalStaffDocument
      }
 }

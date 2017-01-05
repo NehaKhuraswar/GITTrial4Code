@@ -372,6 +372,74 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
+
+        [AllowAnonymous]
+        [Route("GetCaseDocuments/{cid:int}")]
+        [HttpPost]
+        public HttpResponseMessage GetCaseDocuments(int cid)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<DocumentM>> transaction = new TranInfo<List<DocumentM>>();
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            try
+            {
+                var dbResult = _service.GetCaseDocuments(cid);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveCaseDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveCaseDocuments([FromBody] List<DocumentM> documents)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<DocumentM>> transaction = new TranInfo<List<DocumentM>>();
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            try
+            {
+                var dbResult = _service.SaveCaseDocuments(documents);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
+        }
+
+        
         #endregion
     }
 }

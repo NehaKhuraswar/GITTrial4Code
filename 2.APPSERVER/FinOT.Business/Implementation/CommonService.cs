@@ -72,6 +72,37 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
+      public ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id)
+       {
+           ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+           try
+           {
+               result = _dbHandler.GetCaseDocuments(c_id);
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               LogError(result.status);
+               return result;
+           }
+       }
+
+      public ReturnResult<DocumentM> SaveCaseDocument(DocumentM doc)
+        {
+            ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
+            try
+            {
+                result = _dbHandler.SaveCaseDocument(doc);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                LogError(result.status);
+                return result;
+            }
+        }
 
        public ReturnResult<List<string>> GetDocDescription()
        {

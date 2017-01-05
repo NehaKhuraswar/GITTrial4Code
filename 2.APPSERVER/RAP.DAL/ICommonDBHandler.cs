@@ -15,6 +15,8 @@ namespace RAP.DAL
        ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null);
        ReturnResult<bool> PetitionFiledActivity(int C_ID, int CaseFileBy);
        ReturnResult<List<string>> GetDocDescription();
+       ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id);
+       ReturnResult<DocumentM> SaveCaseDocument(DocumentM doc);
        ReturnResult<List<DocumentM>> GetDocumentsByCategory(int CustmerID, bool isPetitiofiled, string docCategory);
        ReturnResult<bool> UpdateDocumentCaseInfo(int CustmerID, int C_ID, string docCategory);
     }

@@ -55,12 +55,24 @@ namespace RAP.Business.Implementation
               if (doc.DocThirdPartyID > 0)
               {
                   doc.isUploaded = true;
-                 var saveDocumentResult = _commonService.SaveDocument(doc);
-                  if(saveDocumentResult.status.Status != StatusEnum.Success)
+                  if (doc.C_ID != null && doc.IsPetitonFiled == true)
                   {
-                      throw new Exception("Save document for the document" + doc.DocName);
+                      var saveDocumentResult = _commonService.SaveCaseDocument(doc);
+                      if (saveDocumentResult.status.Status != StatusEnum.Success)
+                      {
+                          throw new Exception("SaveCaseDocument for the document" + doc.DocName);
+                      }
+                      doc.DocID = saveDocumentResult.result.DocID;
                   }
-                  doc.DocID = saveDocumentResult.result.DocID;
+                  else
+                  {
+                      var saveDocumentResult = _commonService.SaveDocument(doc);
+                      if (saveDocumentResult.status.Status != StatusEnum.Success)
+                      {
+                          throw new Exception("Save document for the document" + doc.DocName);
+                      }
+                      doc.DocID = saveDocumentResult.result.DocID;
+                  }
               }
               doc.Base64Content = string.Empty;
               doc.Content = null;
