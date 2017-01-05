@@ -59,7 +59,7 @@
                                                     <div class="tbl-row" ng-repeat="activity in caseinfo.ActivityStatus">
                                                         <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> {{activity.Activity.ActivityDesc}}</div>
 
-                                                        <div class="tbl-col date countdown" ng-if="activity.Status.StatusID == 17" ng-click="Ctrl.CalculateRemainingDays(activity.Date)"><strong class="visible-sm">Date:</strong> {{Ctrl.CalculateRemainingDays(activity.Date, activity.Status.StatusID)}}  days remaining</div>
+                                                        <div class="tbl-col date countdown" ng-if="activity.Status.StatusID == 17" ><strong class="visible-sm">Date:</strong> {{Ctrl.CalculateRemainingDays(activity.Date, activity.Status.StatusID)}}  days remaining</div>
                                                         <div class="tbl-col status warning" ng-if="activity.Status.StatusID == 17"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
 
                                                         <div class="tbl-col date" ng-if="activity.Status.StatusID != 17"><strong class="visible-sm">Date:</strong> {{activity.Date | date}}</div>

@@ -103,6 +103,12 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
        
     }
 
+    self.OpenSelectedCase = function (caseinfo)
+    {
+        rapGlobalFactory.SelectedCase = caseinfo;
+        $location.path("/selectedcase");
+    }
+
     
 
 }];

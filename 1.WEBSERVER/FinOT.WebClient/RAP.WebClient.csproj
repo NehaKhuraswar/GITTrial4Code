@@ -131,6 +131,7 @@
     <Content Include="Application\2.Controllers\rapRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseConfirmController.js" />
     <Content Include="Application\2.Controllers\rapOwnerConfirmationController.js" />
+    <Content Include="Application\2.Controllers\rapSelectedCaseController.js" />
     <Content Include="Application\2.Controllers\rapViewPetitionController.js" />
     <Content Include="Application\2.Controllers\rapNewRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseDecreasedHousingController.js" />
@@ -219,6 +220,7 @@
     <Content Include="Application\3.Factories\rapOResponseReviewFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseVerificationFactory.js" />
     <Content Include="Application\3.Factories\rapOwnerReviewFactory.js" />
+    <Content Include="Application\3.Factories\rapSelectedCaseFactory.js" />
     <Content Include="Application\3.Factories\rapTRrentalhistoryFactory.js" />
     <Content Include="Application\3.Factories\rapTRreviewFactory.js" />
     <Content Include="Application\3.Factories\rapTRDocumentFactory.js" />
@@ -398,6 +400,7 @@
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\textcounter.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
+    <Content Include="Views\Account\SelectedCase.html" />
     <Content Include="Views\Account\YourRepresentative.html" />
     <Content Include="Views\Account\AddNewRepresentative.html" />
     <Content Include="Views\Account\ForgetPassword.html" />

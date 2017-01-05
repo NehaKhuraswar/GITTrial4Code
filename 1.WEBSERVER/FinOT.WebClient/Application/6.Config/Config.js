@@ -69,6 +69,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
                     controllerAs: 'Ctrl',
                     resolve: rapstaffdashboardController_resolve
         })
+        .when('/selectedcase', {
+            templateUrl: 'views/account/SelectedCase.html',
+            controller: rapSelectedCaseController,
+            controllerAs: 'Ctrl',
+            resolve: rapSelectedCaseController_resolve
+        })
         .when('/admindashboard', {
                     templateUrl: 'views/account/AdminDashboard.html',
                     controller: rapadmindashboardController,

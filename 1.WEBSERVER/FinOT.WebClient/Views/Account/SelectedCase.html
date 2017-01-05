@@ -1,0 +1,388 @@
+﻿<div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">Staff Dashboard</h2>
+        </div>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="page-content full-width">
+        <div class="container">
+
+            <div class="breadcrumb border-bottom-green">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
+                </ul>
+            </div>
+
+
+            <div class="application-form-wrapper">
+                <div class="application-step step-1">
+
+                    <form name="frmSelectedCase" id="frmSelectedCase" action="#" method="post" class="application-form">
+                        <div class="step-content step1">
+
+                            <div class="field-group">
+                                <div class="case-wrapper pad-t5">
+                                    <div class="case">
+                                        <div class="case-heading">Case number</div>
+                                        <div class="case-number">{{Ctrl.caseinfo.CaseID}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="field-group">
+                                <div class="small-title">Property address</div>
+                                <p>1401 Jackson Street Unit C, Oakland, CA 94612</p>
+                            </div>
+
+                            <!-- Accounts List -->
+                            <div class="custom-table selected-case mar-bottom-40">
+                                <div class="tbl-body">
+                                    <div class="tbl-row clearfix">
+                                        <div class="item highlighted">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-100  pad-l20 pad-r20"><strong>Edit APN address</strong></div>
+                                            </div>
+
+                                            <div class="item-content pad-l20 pad-r20 clearfix">
+                                                <div class="item-row clearfix">
+                                                    <div class="item-col col-100 align-left">
+                                                        <div class="field-group">
+                                                            <label for="mailing_address1">Mailing address 1</label>
+                                                            <input type="text" name="mailing_address1" id="mailing_address1" class="field-input" placeholder="" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="item-col col-100 align-left">
+                                                        <div class="field-group">
+                                                            <label for="mailing_address2">Mailing address 2 (optional)</label>
+                                                            <input type="text" name="mailing_address2" id="mailing_address2" class="field-input" placeholder="" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="item-col col-100 align-left">
+                                                        <div class="field-group">
+                                                            <label for="zip_code">Zip code</label>
+                                                            <input type="text" name="zip_code" id="zip_code" class="field-input" placeholder="" />
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="btn-link btn-abs">Save</a>
+                                                </div>
+
+                                            </div>
+                                        </div><!-- item-toggle -->
+                                    </div><!-- item-row -->
+                                </div>
+                            </div>
+                            <!-- .custom-table -->
+
+
+                            <div class="field-group selected-case mar-b10">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="small-title">APN number</div>
+                                        <p class="no-bottom-margin">44-4965-12</p>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="field-group has-btn">
+                                            <label for="apn_number" class="hidden">APN Number</label>
+                                            <input type="text" name="apn_number" id="apn_number" class="field-input" placeholder="Enter APN number" />
+                                            <a href="#" class="btn-link">Save</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="field-group mar-b10">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="small-title">Analyst</div>
+                                        <p class="no-bottom-margin">{{Ctrl.caseinfo.CityAnalyst.FirstName}}</p>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="field-group has-btn">
+                                            <label for="analyst" class="hidden">Select analyst</label>
+                                            <div class="cmb-wrapper">
+                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Analyst">
+                                                    <option value="Option 1">Option 1</option>
+                                                    <option value="Option 2">Option 2</option>
+                                                    <option value="Option 3">Option 3</option>
+                                                </select>
+                                            </div>
+                                            <a href="#" class="btn-link">Assign</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-group mar-b10">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="small-title">Hearing officer</div>
+                                        <p class="no-bottom-margin">{{Ctrl.caseinfo.HearingOfficer.FirstName}}</p>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="field-group has-btn">
+                                            <label for="hearing_officer" class="hidden">Select hearing officer</label>
+                                            <div class="cmb-wrapper">
+                                                <select name="hearing_officer" id="hearing_officer" class="custom-select" data-placeholder="Select hearing officer">
+                                                    <option value="Option 1">Option 1</option>
+                                                    <option value="Option 2">Option 2</option>
+                                                    <option value="Option 3">Option 3</option>
+                                                </select>
+                                            </div>
+                                            <a href="#" class="btn-link">Assign</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="field-group subhead type2 pad-t15">
+                                <h4>Actions</h4>
+                            </div>
+
+                            <div class="field-group mar-bottom-60">
+                                <div class="account-management">
+                                    <div class="items">
+                                        <div class="item">
+                                            <div class="item-header mar-b0"><a href="new-case-status.php">New case status</a></div>
+                                        </div>
+
+                                        <div class="item">
+                                            <div class="item-header mar-b0"><a href="send-email-notification.php">Send email notification</a></div>
+                                        </div>
+
+                                        <div class="item">
+                                            <div class="item-header mar-b0"><a href="US-mail-notification.php">Add U.S. mail notification</a></div>
+                                        </div>
+
+                                        <div class="item">
+                                            <div class="item-header mar-b0"><a href="additional-case-documentation.php">Upload additional case materials</a></div>
+                                        </div>
+                                    </div><!-- .items -->
+                                </div><!-- .account-management -->
+                            </div>
+
+
+                            <div class="field-group subhead type2 pad-t15">
+                                <h4>Case status</h4>
+                            </div>
+
+                            <div class="field-group mar-bottom-10">
+                                <div class="account-management">
+                                    <div class="items">
+                                        <div class="item">
+                                            <div class="item-header mar-b0"><a href="new-case-status.php">New case status</a></div>
+                                        </div>
+                                    </div><!-- .items -->
+                                </div><!-- .account-management -->
+                            </div>
+
+                            <!-- Accounts List -->
+                            <div class="custom-table selected-case-status">
+                                <div class="tbl-header">
+                                    <div class="tbl-row clearfix">
+                                        <div class="col col-30 pad-l0 activity">Activity</div>
+                                        <div class="col col-20 date">Date</div>
+                                        <div class="col col-25 initiated-by">Initiated by</div>
+                                        <div class="col col-15 status">Status</div>
+                                        <div class="col col-10  pad-r0 link"></div>
+                                    </div>
+                                </div>
+
+                                <div class="tbl-body">
+                                    <div class="tbl-row clearfix" ng-repeat="activity in Ctrl.caseinfo.ActivityStatus">
+                                        <div class="item item-toggle">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-30 pad-l0 activity">{{activity.Activity.ActivityDesc}}</div>
+                                                <div class="col col-20 date">{{activity.Date | date}}</div>
+                                                <div class="col col-25 initiated-by">{{activity.CreatedBy}}</div>
+                                                <div class="col col-15 status">{{activity.Status.StatusDesc}}</div>
+                                                <div class="col col-10  pad-r0 link" ng-if="activity.Activity.ActivityID == 1"><a ng-click="Ctrl.ViewPage(activity,caseinfo)" class="btn-link">View</a></div>
+                                            </div>
+                                        </div><!-- item-toggle -->
+                                    </div><!-- item-row -->  
+                                </div>
+                            </div>
+                            <!-- .custom-table -->
+
+                            <div class="field-group subhead type2 pad-t15">
+                                <h4>Case Documentation</h4>
+                            </div>
+
+                            <div class="field-group mar-bottom-10">
+                                <div class="account-management">
+                                    <div class="items">
+                                        <div class="item">
+                                            <div class="item-header mar-b0"><a href="additional-case-documentation.php">Upload additional case materials</a></div>
+                                        </div>
+                                    </div><!-- .items -->
+                                </div><!-- .account-management -->
+                            </div>
+
+                            <!-- Case Documentations -->
+                            <div class="custom-table selected-case-documentation">
+                                <div class="tbl-header">
+                                    <div class="tbl-row clearfix">
+                                        <div class="col col-35 pad-l0 file-name">File name</div>
+                                        <div class="col col-30 date">Date of upload</div>
+                                        <div class="col col-30 uploaded-by">Uploaded by</div>
+                                        <div class="col col-5 pad-r0 download"></div>
+                                    </div>
+                                </div>
+
+                                <div class="tbl-body">
+                                    <div class="tbl-row clearfix">
+                                        <div class="item item-toggle">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 pad-l30 file-name"><a href="#" class="btn-toggle"></a> Rental_expenses.xsl</div>
+                                                <div class="col col-30 date">Nov 20, 2016</div>
+                                                <div class="col col-30 uploaded-by">Tenant (Bob Smith)</div>
+                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
+                                            </div>
+
+                                            <div class="item-content clearfix">
+                                                <div class="row">
+                                                    <div class="col-md-9 col-sm-12">
+                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .item-toggle -->
+                                    </div><!-- .item-row -->
+
+                                    <div class="tbl-row clearfix">
+                                        <div class="item item-toggle">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 pad-l30 file-name"><a href="#" class="btn-toggle"></a> floor_damage_01.jpg</div>
+                                                <div class="col col-30 date">Nov 20, 2016</div>
+                                                <div class="col col-30 uploaded-by">Tenant (Bob Smith)</div>
+                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
+                                            </div>
+
+                                            <div class="item-content clearfix">
+                                                <div class="row">
+                                                    <div class="col-md-9 col-sm-12">
+                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .item-toggle -->
+                                    </div><!-- .item-row -->
+
+                                    <div class="tbl-row clearfix">
+                                        <div class="item item-toggle">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 pad-l30 file-name"><a href="#" class="btn-toggle"></a> floor_damage_02.jpg</div>
+                                                <div class="col col-30 date">Nov 20, 2016</div>
+                                                <div class="col col-30 uploaded-by">Tenant (Bob Smith)</div>
+                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
+                                            </div>
+
+                                            <div class="item-content clearfix">
+                                                <div class="row">
+                                                    <div class="col-md-9 col-sm-12">
+                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .item-toggle -->
+                                    </div><!-- .item-row -->
+
+                                    <div class="tbl-row clearfix">
+                                        <div class="item item-toggle">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 pad-l30 file-name"><a href="#" class="btn-toggle"></a> Appeals_draft.doc</div>
+                                                <div class="col col-30 date">Nov 20, 2016</div>
+                                                <div class="col col-30 uploaded-by">Montgomery Washington</div>
+                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
+                                            </div>
+
+                                            <div class="item-content clearfix">
+                                                <div class="row">
+                                                    <div class="col-md-9 col-sm-12">
+                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .item-toggle -->
+                                    </div><!-- .item-row -->
+
+                                </div><!-- .tbl-body -->
+                            </div><!-- .custom-table -->
+
+
+                            <div class="field-group subhead type2 pad-t15">
+                                <h4>Parties</h4>
+                            </div>
+
+                            <div class="field-group subhead pad-t15">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="small-title">Property owner</div>
+                                        <div class="fs20-title">Bob Smith</div>
+                                        <p>1401 Jackson Street,<br />Oakland, CA 94612  </p>
+                                        <p>Tel: (510) 453-5462 <br />Email: bobsmith@gmail.com </p>
+                                        <div class="small-title">Notifications</div>
+                                        <p>Mail</p>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="small-title">Property manager</div>
+                                        <div class="fs20-title">n/a</div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="small-title">Property owner’s representative</div>
+                                        <div class="fs20-title">Jennifer Davis</div>
+                                        <p>1401 Jackson Street,<br />Oakland, CA 94612  </p>
+                                        <p>Tel: (510) 453-5462 <br />Email: bobsmith@gmail.com </p>
+                                        <div class="small-title">Notifications</div>
+                                        <p>Mail</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-group subhead pad-t15">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="small-title">Tenant</div>
+                                        <div class="fs20-title">Peter Johnson</div>
+                                        <p>1401 Jackson Street,<br />Oakland, CA 94612  </p>
+                                        <p>Tel: (510) 453-5462 <br />Email: bobsmith@gmail.com </p>
+                                        <div class="small-title">Notifications</div>
+                                        <p>Mail</p>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="small-title">Tenant representative</div>
+                                        <div class="fs20-title">n/a</div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="step-footer">
+                        </div>
+                    </form>
+                </div>
+
+            </div><!-- .application-form-wrapper -->
+        </div><!-- .container -->
+    </div><!-- .page-content -->
+</div><!-- #content -->

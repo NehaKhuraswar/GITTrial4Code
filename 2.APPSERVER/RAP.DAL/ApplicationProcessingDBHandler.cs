@@ -532,6 +532,7 @@ namespace RAP.DAL
                             }
                         }
 
+                        caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
                         var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
                         if (caseActivityStatusDb != null)
                         {
@@ -595,6 +596,7 @@ namespace RAP.DAL
                             }
                         }
 
+                        caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
                         var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
                         if (caseActivityStatusDb != null)
                         {
@@ -658,6 +660,7 @@ namespace RAP.DAL
                             }
                         }
 
+                        caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
                         var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
                         if (caseActivityStatusDb != null)
                         {

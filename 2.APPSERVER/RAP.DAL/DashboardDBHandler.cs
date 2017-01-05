@@ -54,6 +54,14 @@ namespace RAP.DAL
                         objActivityStatus.Status.StatusID = item.StatusID;
                         objActivityStatus.Status.StatusDesc = item.StatusDesc;
                         objActivityStatus.Date = item.CreatedDate;
+                        if (item.CityName != null)
+                        {
+                            objActivityStatus.CreatedBy = item.CityName;
+                        }
+                        if (item.CustName != null)
+                        {
+                            objActivityStatus.CreatedBy = item.CustName;
+                        }
                         ActivityStatusList.Add(objActivityStatus);
 
                     }
@@ -307,7 +315,7 @@ namespace RAP.DAL
 
                     //TBD
                     int returnCode =  db.USP_NewActivityStatus_Save(activityStatus.Activity.ActivityID, activityStatus.Status.StatusID,
-                                    C_ID, activityStatus.Notes, DateTime.Now, activityStatus.EmployeeID, ref errorMessage, ref errorCode);
+                                    C_ID, activityStatus.Notes, DateTime.Now, activityStatus.EmployeeID, 1, ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
                     {

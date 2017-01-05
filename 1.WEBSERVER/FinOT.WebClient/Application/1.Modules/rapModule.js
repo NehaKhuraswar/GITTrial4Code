@@ -13,6 +13,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          var CityUser;
          var IsEdit = false;
          var bCaseFiledByThirdParty = false;
+         var SelectedCase = null;
           // public
           return {
 
@@ -36,6 +37,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapforgetPasswordFactory', rapforgetPasswordFactory)
     .factory('rapdashboardFactory', rapdashboardFactory)
     .factory('rapstaffdashboardFactory', rapstaffdashboardFactory)
+    .factory('rapSelectedCaseFactory', rapSelectedCaseFactory)
     .factory('rapadmindashboardFactory', rapadmindashboardFactory)
     .factory('rapnewcasestatusFactory', rapnewcasestatusFactory)
     .factory('rapSearchAccountFactory', rapSearchAccountFactory)
@@ -96,6 +98,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapAppealConfirmationController', rapAppealConfirmationController)
     .controller('rapTPConfirmationController', rapTPConfirmationController)
     .controller('rapSearchAccountController', rapSearchAccountController)
+    .controller('rapSelectedCaseController', rapSelectedCaseController)
     .controller('rapCityUserAcctController', rapCityUserAcctController)
     .controller('rapinvitethirdpartyController', rapinvitethirdpartyController)
     .controller('rapFilePetitionController', rapFilePetitionController)

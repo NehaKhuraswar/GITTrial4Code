@@ -106,15 +106,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_ActivityStatusForCase_Get")]
-		public ISingleResult<USP_ActivityStatusForCase_GetResult> USP_ActivityStatusForCase_Get([global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), c_ID, message, errorCode);
-			message = ((string)(result.GetParameterValue(1)));
-			errorCode = ((System.Nullable<int>)(result.GetParameterValue(2)));
-			return ((ISingleResult<USP_ActivityStatusForCase_GetResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_Status_Get")]
 		public ISingleResult<USP_Status_GetResult> USP_Status_Get([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
 		{
@@ -124,12 +115,21 @@ namespace RAP.DAL
 			return ((ISingleResult<USP_Status_GetResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_NewActivityStatus_Save")]
-		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="VarChar(250)")] string notes, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_ActivityStatusForCase_Get")]
+		public ISingleResult<USP_ActivityStatusForCase_GetResult> USP_ActivityStatusForCase_Get([global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, notes, createdDate, createdBy, message, errorCode);
-			message = ((string)(result.GetParameterValue(6)));
-			errorCode = ((System.Nullable<int>)(result.GetParameterValue(7)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), c_ID, message, errorCode);
+			message = ((string)(result.GetParameterValue(1)));
+			errorCode = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			return ((ISingleResult<USP_ActivityStatusForCase_GetResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_NewActivityStatus_Save")]
+		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="VarChar(250)")] string notes, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedByAcctType", DbType="Int")] System.Nullable<int> createdByAcctType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, notes, createdDate, createdBy, createdByAcctType, message, errorCode);
+			message = ((string)(result.GetParameterValue(7)));
+			errorCode = ((System.Nullable<int>)(result.GetParameterValue(8)));
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -970,6 +970,50 @@ namespace RAP.DAL
 		}
 	}
 	
+	public partial class USP_Status_GetResult
+	{
+		
+		private int _StatusID;
+		
+		private string _StatusDesc;
+		
+		public USP_Status_GetResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int NOT NULL")]
+		public int StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					this._StatusID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusDesc", DbType="VarChar(50)")]
+		public string StatusDesc
+		{
+			get
+			{
+				return this._StatusDesc;
+			}
+			set
+			{
+				if ((this._StatusDesc != value))
+				{
+					this._StatusDesc = value;
+				}
+			}
+		}
+	}
+	
 	public partial class USP_ActivityStatusForCase_GetResult
 	{
 		
@@ -982,6 +1026,10 @@ namespace RAP.DAL
 		private string _StatusDesc;
 		
 		private System.DateTime _CreatedDate;
+		
+		private string _CityName;
+		
+		private string _CustName;
 		
 		public USP_ActivityStatusForCase_GetResult()
 		{
@@ -1051,7 +1099,7 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
 		public System.DateTime CreatedDate
 		{
 			get
@@ -1066,47 +1114,35 @@ namespace RAP.DAL
 				}
 			}
 		}
-	}
-	
-	public partial class USP_Status_GetResult
-	{
 		
-		private int _StatusID;
-		
-		private string _StatusDesc;
-		
-		public USP_Status_GetResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int NOT NULL")]
-		public int StatusID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityName", DbType="VarChar(51)")]
+		public string CityName
 		{
 			get
 			{
-				return this._StatusID;
+				return this._CityName;
 			}
 			set
 			{
-				if ((this._StatusID != value))
+				if ((this._CityName != value))
 				{
-					this._StatusID = value;
+					this._CityName = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusDesc", DbType="VarChar(50)")]
-		public string StatusDesc
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustName", DbType="VarChar(51)")]
+		public string CustName
 		{
 			get
 			{
-				return this._StatusDesc;
+				return this._CustName;
 			}
 			set
 			{
-				if ((this._StatusDesc != value))
+				if ((this._CustName != value))
 				{
-					this._StatusDesc = value;
+					this._CustName = value;
 				}
 			}
 		}
