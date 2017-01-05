@@ -127,6 +127,7 @@
   <ItemGroup>
     <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
+    <Content Include="Application\2.Controllers\rapAdditionalCaseDocumentController.js" />
     <Content Include="Application\2.Controllers\rapRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseConfirmController.js" />
     <Content Include="Application\2.Controllers\rapOwnerConfirmationController.js" />
@@ -204,6 +205,7 @@
     <Content Include="Application\3.Factories\authInterceptorService.js" />
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
+    <Content Include="Application\3.Factories\rapAdditionalCaseDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\raprepresentativeFactory.js" />
     <Content Include="Application\3.Factories\rapnewrepresentativeFactory.js" />
