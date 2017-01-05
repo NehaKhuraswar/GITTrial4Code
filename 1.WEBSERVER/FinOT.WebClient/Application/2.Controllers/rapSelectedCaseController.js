@@ -10,7 +10,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.NewCaseStatus = function () {
         $location.path("/newCaseStatus");
     }
-    
+    self.AdditionalDocs = function () {
+        $location.path("/additionaldocuments");
+    }
    
   
 

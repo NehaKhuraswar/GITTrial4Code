@@ -21,6 +21,8 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.ManageAccounts = function () {
         $location.path("/admindashboard");
     }
+
+    
    
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
