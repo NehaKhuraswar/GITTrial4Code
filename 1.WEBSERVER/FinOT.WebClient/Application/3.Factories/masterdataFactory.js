@@ -80,7 +80,23 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
             blockUI.stop();
         });
     }
+    var _UpdateThirdPartyAccessPrivilege = function (model, custID) {
+        blockUI.start();
 
+        return ajax.Post(model, 'api/applicationprocessing' + '/UpdateThirdPartyAccessPrivilege/' + custID)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+    var _GetThirdPartyCasesForCustomer = function (custID) {
+        blockUI.start();
+        var url = 'api/applicationprocessing' + '/GetThirdPartyCasesForCustomer/' + custID;
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     var _GetCasesForCustomer = function (custID) {
         blockUI.start();
         var url = 'api/applicationprocessing' + '/getcasesforcustomer/' + custID;
@@ -90,7 +106,6 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
             blockUI.stop();
         });
     }
-
 
     var _GetStatusList = function (reqid) {
         return ajax.Get(_routePrefix + '/statuslist/get');
@@ -225,6 +240,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.AssignAnalyst = _AssignAnalyst;
     factory.AssignHearingOfficer = _AssignHearingOfficer;
     factory.GetCasesForCustomer = _GetCasesForCustomer;
+    factory.GetThirdPartyCasesForCustomer = _GetThirdPartyCasesForCustomer;
     factory.GetCustomer = _GetCustomer;
     factory.Calender = _Calender;
     factory.GetDocument = _getDocument;
@@ -232,5 +248,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.FileExtensons = _fileExtensons;
     factory.FileSize = _fileSize;
     factory.DocDescription = _GetDocDescription;
+    factory.UpdateThirdPartyAccessPrivilege = _UpdateThirdPartyAccessPrivilege;
+
     return factory;
 }];

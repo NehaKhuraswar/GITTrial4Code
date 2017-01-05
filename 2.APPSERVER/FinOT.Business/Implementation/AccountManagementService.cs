@@ -38,6 +38,10 @@ namespace RAP.Business.Implementation
         public ReturnResult<bool> SaveOrUpdateThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model)
         {
             return accDBHandler.SaveOrUpdateThirdPartyInfo(model);
+        }        
+        public ReturnResult<ThirdPartyInfoM> RemoveThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model)
+        {
+            return accDBHandler.RemoveThirdPartyInfo(model);
         }
         public ReturnResult<CustomerInfo> EditCustomer(CustomerInfo message)
         {

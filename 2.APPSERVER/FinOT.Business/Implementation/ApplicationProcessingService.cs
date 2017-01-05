@@ -283,7 +283,34 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-
+        public ReturnResult<List<ThirdPartyCaseInfo>> GetThirdPartyCasesForCustomer(int CustomerID)
+        {
+            ReturnResult<List<ThirdPartyCaseInfo>> result = new ReturnResult<List<ThirdPartyCaseInfo>>();
+            try
+            {
+                result = _dbHandler.GetThirdPartyCasesForCustomer(CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<List<ThirdPartyCaseInfo>> UpdateThirdPartyAccessPrivilege(List<ThirdPartyCaseInfo> ThirdPartyCaseInfo, int CustomerID)
+        {
+            ReturnResult<List<ThirdPartyCaseInfo>> result = new ReturnResult<List<ThirdPartyCaseInfo>>();
+            try
+            {
+                result = _dbHandler.UpdateThirdPartyAccessPrivilege(ThirdPartyCaseInfo, CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID)
         {
             ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();

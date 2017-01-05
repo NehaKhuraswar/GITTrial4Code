@@ -152,7 +152,15 @@ namespace RAP.Core.DataModels
         }
         public string LastActivity { get; set; }
     }
-
+    public class ThirdPartyCaseInfo
+    {   
+        public string CaseID { get; set; }
+        public int C_ID { get; set; }
+        public int CustomerID { get; set; }
+        public bool Selected { get; set; }        
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
+    }
     public class NumberRangeForUnitsM
     {
         public int RangeID { get; set; }

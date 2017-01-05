@@ -830,6 +830,36 @@ namespace RAP.DAL
 
         }
 
+        public ReturnResult<ThirdPartyInfoM> RemoveThirdPartyInfo(ThirdPartyInfoM model)
+        {
+            ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var thirdPartydb = db.ThirdPartyRepresentations.Where(r => r.CustomerID == model.CustomerID && r.ThirdPartyUserID == model.ThirdPartyUser.UserID).FirstOrDefault();
+
+                    if (thirdPartydb != null)
+                    {
+                        db.ThirdPartyRepresentations.DeleteOnSubmit(thirdPartydb);
+                        db.SubmitChanges();
+                    }
+                    
+                }
+                result = GetThirdPartyInfo(model.CustomerID);
+                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+
+        }
+
         public ReturnResult<ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID)
         {
             ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
@@ -871,6 +901,8 @@ namespace RAP.DAL
                 return result;
             }
         }
+
+        
                
         #region "Save"
         /// <summary>

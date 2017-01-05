@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapnewrepresentativeFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapRepresentativeController = ['$scope', '$modal', 'alertService', 'raprepresentativeFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = [];
     self.StateList = [];
@@ -7,6 +7,9 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     self.ThirdPartyInfo = null;
     self.bAcknowledge = false;
     self.Cases = null;
+    self.AddNewRepresentative = function () {
+        $location.path("/AddNewRepresentative");
+    }
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -26,43 +29,45 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     }
     _GetThirdPartyInfo();
 
-    var _UpdateThirdPartyAccessPrivilege = function (cases) {
-        return masterFactory.UpdateThirdPartyAccessPrivilege(cases, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-            self.Cases = response.data;
-            $location.path("/YourRepresentative");
-        });
-    }
     self.SaveOrUpdateThirdPartyInfo = function (model) {
         if (self.bAcknowledge == false)
         {
             alert.Error("Please acknowledge");
             return;
         }
-        return rapFactory.SaveOrUpdateThirdPartyInfo(model).then(function (response) {
+        rapFactory.SaveOrUpdateThirdPartyInfo(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            _UpdateThirdPartyAccessPrivilege(self.Cases);           
-            
+            self.custDetails = response.data;
+            $location.path("/publicdashboard");
         });        
     }
-    var __GetCasesForCustomer = function () {
+    var __GetThirdPartyCasesForCustomer = function () {
         return masterFactory.GetThirdPartyCasesForCustomer(self.custDetails.custID).then(function (response) {
             self.Cases = response.data;
         });
     }
-    __GetCasesForCustomer();
+    __GetThirdPartyCasesForCustomer();
 
+    self.RemoveRepresentative = function () {
+        return rapFactory.RemoveThirdPartyInfo(self.ThirdPartyInfo).then(function (response) {
+            self.ThirdPartyInfo = response.data;
+        });
+    }
+
+    self.UpdateThirdPartyAccessPrivilege = function (cases) {
+        return masterFactory.UpdateThirdPartyAccessPrivilege(cases, self.custDetails.custID).then(function (response) {
+            self.Cases = response.data;
+        });
+    }
     self.Cancel = function()
     {
-        $location.path("/YourRepresentative");
+        $location.path("/publicdashboard");
     }
 }];
-var rapNewRepresentativeController_resolve = {
-    model: ['$route', 'alertService', 'rapnewrepresentativeFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
+var rapRepresentativeController_resolve = {
+    model: ['$route', 'alertService', 'raprepresentativeFactory', 'rapGlobalFactory', function ($route, alert, rapFactory, rapGlobalFactory) {
         //return auth.fetchToken().then(function (response) {
         //return rapFactory.GetCustomer(null).then(function (response) {
         //       if (!alert.checkResponse(response)) { return; }

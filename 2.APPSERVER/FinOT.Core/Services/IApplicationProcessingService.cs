@@ -31,6 +31,7 @@ namespace RAP.Core.Services
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID);
        // ReturnResult<List<CaseInfoM>> GetCasesforPublicDashboard(int CustomerID);
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);
+        ReturnResult<List<ThirdPartyCaseInfo>> GetThirdPartyCasesForCustomer(int CustomerID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
@@ -75,5 +76,6 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> SaveOResponseDecreasedHousing(CaseInfoM model);
         ReturnResult<bool> SaveOResponseReviewPageSubmission(int CustomerID);   
         ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model);
+        ReturnResult<List<ThirdPartyCaseInfo>> UpdateThirdPartyAccessPrivilege(List<ThirdPartyCaseInfo> ThirdPartyCaseInfo, int CustomerID);
     }
 }

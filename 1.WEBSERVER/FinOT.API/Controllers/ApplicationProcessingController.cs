@@ -937,6 +937,81 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("GetThirdPartyCasesForCustomer/{CustomerID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetThirdPartyCasesForCustomer(int CustomerID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<ThirdPartyCaseInfo>> transaction = new TranInfo<List<ThirdPartyCaseInfo>>();
+            ReturnResult<List<ThirdPartyCaseInfo>> result = new ReturnResult<List<ThirdPartyCaseInfo>>();
+            try
+            {
+
+                result = _service.GetThirdPartyCasesForCustomer(CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<ThirdPartyCaseInfo>>>(ReturnCode, transaction);
+        }
+        [AllowAnonymous]
+        [Route("UpdateThirdPartyAccessPrivilege/{CustomerID:int}")]
+        [HttpPost]
+        public HttpResponseMessage UpdateThirdPartyAccessPrivilege([FromBody]List<ThirdPartyCaseInfo> ThirdPartyCaseInfo, [FromUri] int CustomerID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<ThirdPartyCaseInfo>> transaction = new TranInfo<List<ThirdPartyCaseInfo>>();
+            ReturnResult<List<ThirdPartyCaseInfo>> result = new ReturnResult<List<ThirdPartyCaseInfo>>();
+            try
+            {
+
+                result = _service.UpdateThirdPartyAccessPrivilege(ThirdPartyCaseInfo, CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<ThirdPartyCaseInfo>>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("getrentalhistoryinfo/{PetitionId:int}")]
         [HttpGet]
         public HttpResponseMessage GetRentalHistoryInfo(int PetitionId)

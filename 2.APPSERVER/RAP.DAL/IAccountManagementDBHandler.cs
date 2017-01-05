@@ -23,6 +23,7 @@ namespace RAP.DAL
         ReturnResult<string> ResendPin(RAP.Core.DataModels.CustomerInfo message);
         ReturnResult<RAP.Core.DataModels.CustomerInfo> SaveCustomer(RAP.Core.DataModels.CustomerInfo message);
        ReturnResult<bool> SaveOrUpdateThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model);
+       ReturnResult<RAP.Core.DataModels.ThirdPartyInfoM> RemoveThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model);
         ReturnResult<RAP.Core.DataModels.CustomerInfo> SearchInviteCollaborator(string message);
     }
 }

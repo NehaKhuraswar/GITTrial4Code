@@ -757,6 +757,85 @@ namespace RAP.DAL
             }
 
         }
+
+        public ReturnResult<List<ThirdPartyCaseInfo>> GetThirdPartyCasesForCustomer(int CustomerID)
+        {
+            ReturnResult<List<ThirdPartyCaseInfo>> result = new ReturnResult<List<ThirdPartyCaseInfo>>();
+            try
+            {
+                List<ThirdPartyCaseInfo> cases = new List<ThirdPartyCaseInfo>();
+                var casesDB = _dbContext.CaseDetails.Where(x => x.CaseFiledBy == CustomerID).ToList();
+                foreach (var item in casesDB)
+                {
+                    ThirdPartyCaseInfo caseinfo = new ThirdPartyCaseInfo();
+                    caseinfo.CaseID = item.CaseID;
+                    caseinfo.C_ID = item.C_ID;                    
+                    caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                    caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
+
+                    var thirdPartydb = _dbAccount.ThirdPartyCaseAssignments.Where(x => x.CustomerID == CustomerID && x.CaseAssignedToThirdParty == caseinfo.C_ID).FirstOrDefault();
+                    if (thirdPartydb != null)
+                    {
+                        if(thirdPartydb.CaseAssignedToThirdParty == caseinfo.C_ID)
+                        {
+                            caseinfo.Selected = true;
+                        }
+                    }
+                    cases.Add(caseinfo);
+                }
+                result.result = cases;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+
+        }
+
+        public ReturnResult<List<ThirdPartyCaseInfo>> UpdateThirdPartyAccessPrivilege(List<ThirdPartyCaseInfo> ThirdPartyCaseInfo, int CustomerID)
+        {
+            ReturnResult<List<ThirdPartyCaseInfo>> result = new ReturnResult<List<ThirdPartyCaseInfo>>();
+            ThirdPartyCaseInfo model = new ThirdPartyCaseInfo();
+            try
+            {
+                
+                var thirdPartyRowsDB = _dbAccount.ThirdPartyCaseAssignments.Where(x => x.CustomerID == CustomerID).ToList();
+                if(thirdPartyRowsDB != null)
+                {
+                    foreach(var item in thirdPartyRowsDB)
+                    {
+                        _dbAccount.ThirdPartyCaseAssignments.DeleteOnSubmit(item);
+                        _dbAccount.SubmitChanges();
+                    }
+                }
+
+                foreach(var caseInfo in ThirdPartyCaseInfo)
+                {
+                    if (caseInfo.Selected == true)
+                    {
+                        var ThirdPartyDB = new ThirdPartyCaseAssignment();
+                        ThirdPartyDB.CustomerID = CustomerID;
+                        ThirdPartyDB.CaseAssignedToThirdParty = caseInfo.C_ID;
+                        _dbAccount.ThirdPartyCaseAssignments.InsertOnSubmit(ThirdPartyDB);
+                        _dbAccount.SubmitChanges();
+                    }
+                }                   
+                
+                result = GetThirdPartyCasesForCustomer(CustomerID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
         private ReturnResult<TenantPetitionInfoM> GetCaseTenantApplicationInfo(int PetitionID)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();

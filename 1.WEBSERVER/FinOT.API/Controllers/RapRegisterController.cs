@@ -810,13 +810,49 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<Boolean>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
+        [Route("RemoveThirdPartyInfo")]
+        [HttpPost]
+        public HttpResponseMessage RemoveThirdPartyInfo([FromBody] ThirdPartyInfoM model)
+        {
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Remove Third Party started");
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<ThirdPartyInfoM> transaction = new TranInfo<ThirdPartyInfoM>();
+            ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
+
+            try
+            {
+                result = accService.RemoveThirdPartyInfo(model);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<ThirdPartyInfoM>>(ReturnCode, transaction);
+        }
 
         [AllowAnonymous]
         [Route("editCust")]
         [HttpPost]
         public HttpResponseMessage EditCustomer([FromBody] CustomerInfo custModel)
         {
-            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Save Customer started");
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller edit Customer started");
             AccountManagementService accService = new AccountManagementService();
             IEmailService emailService = new EmailService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;

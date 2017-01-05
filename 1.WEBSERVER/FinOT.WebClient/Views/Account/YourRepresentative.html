@@ -1,0 +1,60 @@
+﻿<div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">Your Representative</h2>
+        </div>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="page-content full-width">
+        <div class="container">
+
+            <div class="application-form-wrapper">
+                <div class="application-step step-1">
+
+                    <div id="frmYourRepresentative" class="application-form">
+                        <div class="step-content step1" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
+                            <div class="subhead no-top-margin no-bottom-margin">
+                                <p><strong>Representatives will receive notifications about your cases from the City of Oakland</strong></p>
+                            </div>
+
+                            <div class="field-group mar-bottom-40">
+                                <p><strong>{{Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName}} {{Ctrl.ThirdPartyInfo.ThirdPartyUser.LastName}} </strong> <br />{{Ctrl.ThirdPartyInfo.ThirdPartyUser.BusinessName}}  </p>
+                                <p>{{Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine1}} {{Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine2}}, <br />{{Ctrl.ThirdPartyInfo.ThirdPartyUser.City}}, {{Ctrl.ThirdPartyInfo.ThirdPartyUser.State.StateCode}} {{Ctrl.ThirdPartyInfo.ThirdPartyUser.Zip}}  </p>
+                                <p>Tel: {{Ctrl.ThirdPartyInfo.ThirdPartyUser.PhoneNumber}} <br />Email: {{Ctrl.ThirdPartyInfo.ThirdPartyUser.Email}}</p>
+                                <p><a ng-click="Ctrl.RemoveRepresentative()" class="btn-link btn-link-red">Remove representative</a></p>
+                            </div>
+                        </div>
+
+                        <div class="step-content step2" >
+                            <div class="subhead no-bottom-margin" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
+                                <label>Select all cases that you would like your representative to have access to</label>
+                            </div>
+
+                            <div class="form-group-checkbox vertical clearfix" ng-repeat="caseinfo in Ctrl.Cases" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
+                                <div class="checkbox-wrapper">
+                                    <label for="{{caseinfo.CaseID}}">
+                                        <input type="checkbox" name="{{caseinfo.CaseID}}" id="{{caseinfo.CaseID}}" value="{{caseinfo.CaseID}}"
+                                               ng-model="caseinfo.Selected" /><i></i><span>{{caseinfo.CaseID}}</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="field-group mar-bottom-40" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
+                                <a ng-click="Ctrl.UpdateThirdPartyAccessPrivilege(Ctrl.Cases)" class="btn-link">Update access privileges</a>
+                            </div>
+
+                            <div class="subhead step-footer no-top-margin pad-t60">
+                                <a ng-click="Ctrl.AddNewRepresentative()" ng class="btn-primary">Add new representative</a>
+                            </div>
+                        </div>
+                    </div><!-- .application-form -->
+                </div>
+
+
+            </div><!-- .application-form-wrapper -->
+        </div><!-- .container -->
+    </div><!-- .page-content -->
+</div><!-- #content -->
