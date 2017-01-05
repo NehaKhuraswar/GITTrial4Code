@@ -489,6 +489,7 @@ namespace RAP.DAL
                         CaseInfoM caseinfo = new CaseInfoM();
                         caseinfo.CaseID = item.CaseID;
                         caseinfo.C_ID = item.C_ID;
+                        caseinfo.PetitionCategoryID = Convert.ToInt32(item.PetitionCategoryID);
 
                         if (item.CityAnalystUserID != null)
                         {

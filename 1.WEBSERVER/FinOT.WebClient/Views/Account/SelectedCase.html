@@ -37,7 +37,8 @@
 
                             <div class="field-group">
                                 <div class="small-title">Property address</div>
-                                <p>1401 Jackson Street Unit C, Oakland, CA 94612</p>
+                                <p ng-show="Ctrl.caseinfo.PetitionCategoryID == 1">{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}</p>
+                                <p ng-show="Ctrl.caseinfo.PetitionCategoryID == 2">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
                             </div>
 
                             <!-- Accounts List -->
@@ -224,7 +225,7 @@
                                 <div class="account-management">
                                     <div class="items">
                                         <div class="item">
-                                            <div class="item-header mar-b0"><a href="additional-case-documentation.php">Upload additional case materials</a></div>
+                                            <div class="item-header mar-b0"><a ng-click="Ctrl.AdditionalDocs()">Upload additional case materials</a></div>
                                         </div>
                                     </div><!-- .items -->
                                 </div><!-- .account-management -->
