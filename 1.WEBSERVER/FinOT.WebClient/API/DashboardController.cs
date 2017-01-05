@@ -252,7 +252,7 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("GetCaseDocuments/{cid:string}")]
+        [Route("GetCaseDocuments/{cid}")]
         [HttpGet]
         public HttpResponseMessage GetCaseDocuments(string cid)
         {
