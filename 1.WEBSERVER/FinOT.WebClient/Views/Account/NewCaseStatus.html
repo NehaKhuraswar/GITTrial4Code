@@ -26,9 +26,9 @@
                     <div class="field-group">
                         <div class="row">
                             <div class="col-md-9 col-sm-12">
-                                <label for="{{activity.ActivityID}}">Activity</label>
+                                <label for="activity">Activity</label>
                                 <div class="full-width">
-                                    <select name="activity" id="{{activity.ActivityID}}" class="custom-select" data-placeholder="Select type"
+                                    <select name="activity" id="activity"  data-placeholder="Select type"
                                             ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
                                             ng-model="Ctrl.ActivityStatus.Activity"
                                             ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"></select>
@@ -42,7 +42,7 @@
                             <div class="col-md-9 col-sm-12">
                                 <label for="{{status.StatusID}}">Status</label>
                                 <div class="full-width">
-                                    <select name="status" id="{{status.StatusID}}" class="custom-select" data-placeholder="Select type"
+                                    <select name="status" id="{{status.StatusID}}"  data-placeholder="Select type"
                                             ng-options="status as (status.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
                                             ng-model="Ctrl.ActivityStatus.Status"></select>
                                 </div>
@@ -52,7 +52,7 @@
 
                     <div class="field-group">
                         <label for="activity_date">Activity date</label>
-                        <input type="text" name="activity_date" id="activity_date" class="field-input field-datepicker" />
+                        <input type="text" name="activity_date" id="activity_date" class="field-input field-datepicker" ng-model="Ctrl.ActivityStatus.Date"/>
                     </div>
 
                     <div class="field-group">
@@ -71,4 +71,7 @@
             </form>
         </div>
     </div>
+    
+    <script src='js/functions.js'></script>
+   
 </div>

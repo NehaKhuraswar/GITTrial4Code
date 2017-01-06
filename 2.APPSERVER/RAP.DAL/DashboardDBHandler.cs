@@ -315,7 +315,7 @@ namespace RAP.DAL
 
                     //TBD
                     int returnCode =  db.USP_NewActivityStatus_Save(activityStatus.Activity.ActivityID, activityStatus.Status.StatusID,
-                                    C_ID, activityStatus.Notes, DateTime.Now, activityStatus.EmployeeID, 1, ref errorMessage, ref errorCode);
+                                    C_ID, activityStatus.Notes, activityStatus.Date, activityStatus.EmployeeID, 1, ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
                     {

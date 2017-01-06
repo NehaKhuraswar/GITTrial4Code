@@ -94,7 +94,7 @@ var tooltips;
     
     
     //Set Sidebar Steps Nav
-   // setApplicationSteps();
+  //  setApplicationSteps();
     
     //Application Steps - Mobile Toggle
     if($('.application-steps-toggle').length > 0){
@@ -133,19 +133,46 @@ var tooltips;
           $hasNav = true;
           $(this).toggleClass('open');
         }
-      });
-
-
-      $(document).on('click', function closeMenu(e){
-        if( !$(e.target).hasClass('open') ) {
-          closeToggleMenu();
+        
+        //Mobile Nav Accordian
+        if($pageSlide.hasClass('open')){
+          $('li.menu-item-has-children', $pageSlide).each(function(){
+            var $item = $(this);
+            var $btnToggle = $('<a href="#" class="btn-toggle"></a>');
+            $item.append($btnToggle);
+            
+            $btnToggle.on('click', function(e){
+              e.preventDefault();
+              var $subMenu = $('.sub-menu', $item);
+              $('.menu-item-has-children').not($item).removeClass('active');
+              $subMenu.slideToggle();
+              $item.toggleClass('active');
+            });
+          });
         }
       });
+
+//      $(document).on('click', function closeMenu(e){
+//        if( !$(e.target).hasClass('open') ) {
+//          closeToggleMenu();
+//        }
+//      });
 
       $('.close-menu').on('click', function(){
         closeToggleMenu();
       });
     }
+    
+    //Site Search Button Click
+    if($('.account-details .search').length > 0){
+      $('.account-details .search').bind('click', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        $this.toggleClass('active');
+        $('#site-header .site-search-wrapper').toggleClass('show');
+      });
+    }
+    
 
 
     if($('.accordion').length > 0) {
@@ -157,7 +184,6 @@ var tooltips;
         
         if($container.hasClass('expanded')){
           $itemContent.stop().slideToggle();
-          $container.toggleClass('collapsed');
         }
         
         if($('.btn-toggle', $itemHeader).length > 0){
@@ -169,7 +195,7 @@ var tooltips;
         $itemToggle.click(function(e) {
           e.preventDefault();
           $itemContent.stop().slideToggle();
-          $container.toggleClass('collapsed');
+          $container.toggleClass('expanded');
         });
       });
     }
@@ -184,15 +210,33 @@ var tooltips;
         
         if($('.btn-toggle', $itemHeader).length > 0){
           $itemToggle = $('.btn-toggle', $itemHeader);
-        } else {
-          $itemToggle = $itemHeader;
+          
+          $itemToggle.click(function(e) {
+            e.preventDefault();
+            $itemContent.stop().slideToggle();
+            $item.toggleClass('expanded');
+          });
         }
+      });
+    }
+    
+    //Case in Progress form - Related Info Toogle
+    if($('.info-toggle').length > 0) {
+      $('.info-toggle').each(function() {
+        var $item = $(this);
+        var $itemHeader = $('.info-header', $item);
+        var $itemContent = $('.info-content', $item);
+        var $itemToggle;
         
-        $itemToggle.click(function(e) {
-          e.preventDefault();
-          $itemContent.stop().slideToggle();
-          $item.toggleClass('expanded');
-        });
+        if($('.btn-toggle', $itemHeader).length > 0){
+          $itemToggle = $('.btn-toggle', $itemHeader);
+          
+          $itemToggle.click(function(e) {
+            e.preventDefault();
+            $itemContent.stop().slideToggle();
+            $item.toggleClass('expanded');
+          });
+        }
       });
     }
     
@@ -268,6 +312,7 @@ var tooltips;
       });
     }
     
+   
     
 //    if($('#frmCreateAccount').length > 0) {
 //      $("#phone_number").mask("(999) 999-9999");
@@ -468,7 +513,7 @@ var tooltips;
     
     if($( ".field-datepicker" ).length > 0) {
       $( ".field-datepicker" ).datepicker({
-        dateFormat: "d/m/y",
+        dateFormat: "m/d/y",
         dayNamesMin: ['S', 'M', 'T', 'W', 'TH', 'F', 'S'],
         showOtherMonths: true,
         selectOtherMonths: false,

@@ -46,11 +46,12 @@ namespace RAP.Core.DataModels
         {
             Activity = new Activity_M();
             Status = new Status_M();
+            Date = null;
             
         }
         public Activity_M Activity { get; set; }
         public Status_M Status { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public string CreatedBy { get; set; }
         public string Notes { get; set; }
         public int EmployeeID { get; set; }
