@@ -385,6 +385,48 @@
     <Content Include="Scripts\FileAPI.flash.swf" />
     <Content Include="Scripts\FileAPI.js" />
     <Content Include="Scripts\FileAPI.min.js" />
+    <Content Include="sass\.csscomb.json" />
+    <Content Include="sass\.scss-lint.yml" />
+    <Content Include="sass\styles.scss" />
+    <Content Include="sass\_alert.scss" />
+    <Content Include="sass\_animation.scss" />
+    <Content Include="sass\_breadcrumb.scss" />
+    <Content Include="sass\_button-group.scss" />
+    <Content Include="sass\_buttons.scss" />
+    <Content Include="sass\_card.scss" />
+    <Content Include="sass\_carousel.scss" />
+    <Content Include="sass\_close.scss" />
+    <Content Include="sass\_code.scss" />
+    <Content Include="sass\_custom-forms.scss" />
+    <Content Include="sass\_dropdown.scss" />
+    <Content Include="sass\_forms.scss" />
+    <Content Include="sass\_grid.scss" />
+    <Content Include="sass\_images.scss" />
+    <Content Include="sass\_input-group.scss" />
+    <Content Include="sass\_jumbotron.scss" />
+    <Content Include="sass\_labels.scss" />
+    <Content Include="sass\_list-group.scss" />
+    <Content Include="sass\_media.scss" />
+    <Content Include="sass\_mixins.scss" />
+    <Content Include="sass\_modal.scss" />
+    <Content Include="sass\_nav.scss" />
+    <Content Include="sass\_navbar.scss" />
+    <Content Include="sass\_normalize.scss" />
+    <Content Include="sass\_pager.scss" />
+    <Content Include="sass\_pagination.scss" />
+    <Content Include="sass\_popover.scss" />
+    <Content Include="sass\_print.scss" />
+    <Content Include="sass\_progress.scss" />
+    <Content Include="sass\_reboot.scss" />
+    <Content Include="sass\_responsive-embed.scss" />
+    <Content Include="sass\_tables.scss" />
+    <Content Include="sass\_tooltip.scss" />
+    <Content Include="sass\_type.scss" />
+    <Content Include="sass\_utilities-background.scss" />
+    <Content Include="sass\_utilities-responsive.scss" />
+    <Content Include="sass\_utilities-spacing.scss" />
+    <Content Include="sass\_utilities.scss" />
+    <Content Include="sass\_variables.scss" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -602,7 +644,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gateways\" />
-    <Folder Include="sass\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
