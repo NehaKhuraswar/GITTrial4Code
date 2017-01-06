@@ -22,6 +22,19 @@
             
         });
     }
+
+    self.Print = function () {
+        var doc = document.getElementById('printable');
+        //var doc = $("#printable");
+                   // $('body').html2canvas({
+        // html2canvas($("#printable"), {
+         html2canvas(doc, {
+              onrendered: function (canvas) {
+                var img = canvas.toDataURL("image/jpeg");
+                window.print(img);
+            }
+        });
+    }
   
 }];
 
