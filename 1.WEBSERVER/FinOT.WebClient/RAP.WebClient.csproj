@@ -301,10 +301,16 @@
     <Content Include="Images\chevron-left.svg" />
     <Content Include="Images\chevron-right.svg" />
     <Content Include="Images\drop-down-triangle.png" />
+    <Content Include="Images\icon-arrow-down-medium.png" />
+    <Content Include="Images\icon-arrow-down-small.png" />
+    <Content Include="Images\icon-arrow-right-medium.png" />
+    <Content Include="Images\icon-arrow-right-small.png" />
     <Content Include="Images\icon-arrow-right.png" />
     <Content Include="Images\icon-calender.png" />
     <Content Include="Images\icon-collapse%402x.png" />
     <Content Include="Images\icon-collapse.png" />
+    <Content Include="Images\icon-download-blue.png" />
+    <Content Include="Images\icon-download.png" />
     <Content Include="Images\icon-error.png" />
     <Content Include="Images\icon-exclamation-sign%402x.png" />
     <Content Include="Images\icon-expand-blue%402x.png" />
