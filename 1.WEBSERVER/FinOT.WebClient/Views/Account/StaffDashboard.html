@@ -73,7 +73,7 @@
                                                     <div>
                                                         <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
                                                                 ng-model="Analyst"
-                                                                ng-options="analyst as (analyst.FirstName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
+                                                                ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
                                                     </div>
                                                 </div>
 
@@ -92,7 +92,7 @@
                                                     <div>
                                                         <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Hearing Officer"
                                                                 ng-model="HearingOfficer"
-                                                                ng-options="hearingofficer as (hearingofficer.FirstName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
+                                                                ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
                                                     </div>
                                                 </div>
 

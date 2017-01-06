@@ -112,20 +112,18 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="small-title">Analyst</div>
-                                        <p class="no-bottom-margin">{{Ctrl.caseinfo.CityAnalyst.FirstName}}</p>
+                                        <p class="no-bottom-margin">{{Ctrl.caseinfo.CityAnalyst.FirstName}} {{Ctrl.caseinfo.CityAnalyst.LastName}}</p>
                                     </div>
 
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                         <div class="field-group has-btn">
                                             <label for="analyst" class="hidden">Select analyst</label>
                                             <div class="cmb-wrapper">
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Analyst">
-                                                    <option value="Option 1">Option 1</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
+                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Analyst"
+                                                        ng-model="Analyst"
+                                                        ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
                                             </div>
-                                            <a href="#" class="btn-link">Assign</a>
+                                            <a ng-click="Ctrl.AssignAnalyst(Ctrl.caseinfo.C_ID, Analyst)" class="btn-link">Assign</a>
                                         </div>
                                     </div>
                                 </div>
@@ -135,20 +133,18 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="small-title">Hearing officer</div>
-                                        <p class="no-bottom-margin">{{Ctrl.caseinfo.HearingOfficer.FirstName}}</p>
+                                        <p class="no-bottom-margin">{{Ctrl.caseinfo.HearingOfficer.FirstName}} {{Ctrl.caseinfo.HearingOfficer.LastName}}</p>
                                     </div>
 
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                         <div class="field-group has-btn">
                                             <label for="hearing_officer" class="hidden">Select hearing officer</label>
                                             <div class="cmb-wrapper">
-                                                <select name="hearing_officer" id="hearing_officer" class="custom-select" data-placeholder="Select hearing officer">
-                                                    <option value="Option 1">Option 1</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
+                                                <select name="hearing_officer" id="hearing_officer" class="custom-select" data-placeholder="Select hearing officer"
+                                                        ng-model="HearingOfficer"
+                                                        ng-options="hearingofficer as (hearingofficer.FirstName + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
                                             </div>
-                                            <a href="#" class="btn-link">Assign</a>
+                                            <a ng-click="Ctrl.AssignHearingOfficer(Ctrl.caseinfo.C_ID, HearingOfficer)" class="btn-link">Assign</a>
                                         </div>
                                     </div>
                                 </div>

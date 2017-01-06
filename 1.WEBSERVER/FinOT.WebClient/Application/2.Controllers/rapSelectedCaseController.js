@@ -76,7 +76,8 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
             if (!alert.checkResponse(response)) {
                 return;
             }
-            _GetCasesNoAnalyst(self.model.UserID);
+            self.caseinfo.CityAnalyst.FirstName = Analyst.FirstName;
+            self.caseinfo.CityAnalyst.LastName = Analyst.LastName;
         });
     }
 
@@ -86,7 +87,8 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
             if (!alert.checkResponse(response)) {
                 return;
             }
-            _GetCasesNoAnalyst(self.model.UserID);
+            self.caseinfo.HearingOfficer.FirstName = HearingOfficer.FirstName;
+            self.caseinfo.HearingOfficer.LastName = HearingOfficer.LastName;
         });
     }
 
