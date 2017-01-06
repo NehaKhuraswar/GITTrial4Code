@@ -759,7 +759,121 @@ namespace RAP.DAL
             }
 
         }
+        public ReturnResult<CaseInfoM> GetSelectedCase(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                AccountManagementDataContext db = new AccountManagementDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]);
+                CaseInfoM caseinfo = new CaseInfoM();
+                
+                var caseDB = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).FirstOrDefault();
+                if (caseDB != null)
+                {
+                    caseinfo.CaseID = caseDB.CaseID;
+                    caseinfo.C_ID = caseDB.C_ID;
+                    caseinfo.PetitionCategoryID = Convert.ToInt32(caseDB.PetitionCategoryID);
 
+                    if (caseDB.CityAnalystUserID != null)
+                    {
+                        var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == caseDB.CityAnalystUserID).FirstOrDefault();
+
+                        caseinfo.CityAnalyst.UserID = (int)caseDB.CityAnalystUserID;
+                        caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
+                        caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
+                    }
+                    if (caseDB.HearingOfficerUserID != null)
+                    {
+                        var CityDB = db.CityUserAccounts.Where(x => x.CityUserID == caseDB.HearingOfficerUserID).FirstOrDefault();
+
+                        caseinfo.HearingOfficer.UserID = (int)caseDB.HearingOfficerUserID;
+                        caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
+                        caseinfo.HearingOfficer.LastName = CityDB.LastName;
+                    }
+                    caseinfo.CreatedDate = Convert.ToDateTime(caseDB.CreatedDate);
+                    caseinfo.LastModifiedDate = Convert.ToDateTime(caseDB.LastModifiedDate);
+
+
+                    // Get the petition applicant info
+                    var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
+
+                    if (petitionDetailsDb.TenantPetitionID != null)
+                    {
+                        var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
+
+                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
+                        if (applicantUser != null)
+                        {
+                            if (applicantUser.result.IsAPNAddress == true)
+                            {
+                                applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                            }
+                            else
+                            {
+                                applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                            }
+                            caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                        }
+                        caseinfo.TenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionDB.bThirdPartyRepresentation;
+                        if (caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                        {
+                            caseinfo.TenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ThirdPartyUserID).result;
+                        }
+                        caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID).result;
+                        caseinfo.TenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionDB.PropertyManagerUserID).result;
+                    }
+                    else if (petitionDetailsDb.OwnerPetitionID != null)
+                    {
+                        var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
+                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
+                        if (applicantUser != null)
+                        {
+                            if (applicantUser.result.IsAPNAddress == true)
+                            {
+                                applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                            }
+                            else
+                            {
+                                applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                            }
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
+                        }
+                    }
+
+                    caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
+                    var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
+                    if (caseActivityStatusDb != null)
+                    {
+                        var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
+                        if (ActivityDb != null)
+                        {
+                            caseinfo.LastActivity = ActivityDb.ActivityName;
+                        }
+                    }
+                }
+
+
+                result.result = caseinfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+
+        }
         // Get cases for the individual customer ID
         public ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID)
         {

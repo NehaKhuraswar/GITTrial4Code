@@ -18,7 +18,15 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
         $location.path("/additionaldocuments");
     }
    
-  
+    var _GetSelectedCase = function (C_ID) {
+        rapFactory.GetSelectedCase(C_ID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo = response.data;
+        });
+    }
+    _GetSelectedCase(self.caseinfo.C_ID);
 
     self.GetCaseActivityStatus = function (model) {
         //self.caseinfo.CaseID = 

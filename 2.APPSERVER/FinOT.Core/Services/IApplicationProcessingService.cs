@@ -29,6 +29,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetPetitionViewInfo(int C_ID); 
         ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID);
+        ReturnResult<CaseInfoM> GetSelectedCase(int C_ID);
        // ReturnResult<List<CaseInfoM>> GetCasesforPublicDashboard(int CustomerID);
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);
         ReturnResult<List<ThirdPartyCaseInfo>> GetThirdPartyCasesForCustomer(int CustomerID);

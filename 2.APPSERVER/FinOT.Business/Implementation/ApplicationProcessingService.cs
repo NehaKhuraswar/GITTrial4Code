@@ -325,7 +325,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-
+        public ReturnResult<CaseInfoM> GetSelectedCase(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetSelectedCase(C_ID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID)
         {
             ReturnResult<List<CaseInfoM>> result = new ReturnResult<List<CaseInfoM>>();

@@ -3,11 +3,11 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
   
-    var _GetCasesNoAnalyst = function (UserID) {
+    var _GetSelectedCase = function (C_ID) {
         blockUI.start();
 
-        var url = 'api/applicationprocessing' + '/getcasesnoanalyst';
-        if (!(UserID == null || UserID == undefined)) { url = url + '/' + UserID; }
+        var url = 'api/applicationprocessing' + '/GetSelectedCase';
+        if (!(C_ID == null || C_ID == undefined)) { url = url + '/' + C_ID; }
 
         return ajax.Get(url)
        .finally(function () {
@@ -62,7 +62,7 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
 
     factory.GetPetitionViewInfo = _GetPetitionViewInfo;
     factory.GetCaseInfo = _GetCaseInfo;
-    factory.GetCasesNoAnalyst = _GetCasesNoAnalyst;
+    factory.GetSelectedCase = _GetSelectedCase;
 
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;

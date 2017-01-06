@@ -334,25 +334,23 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Property owner</div>
-                                        <div class="fs20-title">Bob Smith</div>
-                                        <p>1401 Jackson Street,<br />Oakland, CA 94612  </p>
-                                        <p>Tel: (510) 453-5462 <br />Email: bobsmith@gmail.com </p>
+                                        <div class="fs20-title">{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}</div>
+                                        <p>{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}  </p>
+                                        <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}} </p>
                                         <div class="small-title">Notifications</div>
                                         <p>Mail</p>
                                     </div>
 
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Property manager</div>
-                                        <div class="fs20-title">n/a</div>
+                                        <div class="fs20-title">{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}</div>
+                                        <p>{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}  </p>
+                                        <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}} </p>
                                     </div>
 
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Property owner’s representative</div>
-                                        <div class="fs20-title">Jennifer Davis</div>
-                                        <p>1401 Jackson Street,<br />Oakland, CA 94612  </p>
-                                        <p>Tel: (510) 453-5462 <br />Email: bobsmith@gmail.com </p>
-                                        <div class="small-title">Notifications</div>
-                                        <p>Mail</p>
+                                        <div class="fs20-title">n/a</div>
                                     </div>
                                 </div>
                             </div>
@@ -361,16 +359,19 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Tenant</div>
-                                        <div class="fs20-title">Peter Johnson</div>
-                                        <p>1401 Jackson Street,<br />Oakland, CA 94612  </p>
-                                        <p>Tel: (510) 453-5462 <br />Email: bobsmith@gmail.com </p>
+                                        <div class="fs20-title">{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}</div>
+                                        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}  </p>
+                                        <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email}} </p>
                                         <div class="small-title">Notifications</div>
                                         <p>Mail</p>
                                     </div>
 
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Tenant representative</div>
-                                        <div class="fs20-title">n/a</div>
+                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName == null">n/a</div>
+                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null">{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}</div>
+                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null">{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}  </p>
+                                        <p ng-show ="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null">Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}} </p>
                                     </div>
 
                                     <div class="col-md-4 col-sm-12">

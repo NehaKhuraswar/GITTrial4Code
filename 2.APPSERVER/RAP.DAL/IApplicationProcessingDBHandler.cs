@@ -26,6 +26,7 @@ namespace RAP.DAL
         ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID);
+        ReturnResult<CaseInfoM> GetSelectedCase(int C_ID);
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);
         ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId);
         ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID);
