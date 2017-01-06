@@ -520,6 +520,18 @@ namespace RAP.DAL
                             ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
                             if (applicantUser != null)
                             {
+                                if(applicantUser.result.IsAPNAddress== true)
+                                {
+                                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                                }
+                                else
+                                {
+                                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                    applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                                }
                                 caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
                             }
                         }
@@ -529,6 +541,18 @@ namespace RAP.DAL
                             ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
                             if (applicantUser != null)
                             {
+                                if (applicantUser.result.IsAPNAddress == true)
+                                {
+                                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                                }
+                                else
+                                {
+                                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                    applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                                }
                                 caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
                             }
                         }
@@ -584,6 +608,18 @@ namespace RAP.DAL
                             ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
                             if (applicantUser != null)
                             {
+                                if (applicantUser.result.IsAPNAddress == true)
+                                {
+                                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                                }
+                                else
+                                {
+                                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                    applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                                }
                                 caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
                             }
                         }
@@ -593,6 +629,18 @@ namespace RAP.DAL
                             ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
                             if (applicantUser != null)
                             {
+                                if ( applicantUser.result.IsAPNAddress == true)
+                                {
+                                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                                }
+                                else
+                                {
+                                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                    applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                                }
                                 caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
                             }
                         }
@@ -648,6 +696,18 @@ namespace RAP.DAL
                             ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
                             if (applicantUser != null)
                             {
+                                if (applicantUser.result.IsAPNAddress == true)
+                                {
+                                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                                }
+                                else
+                                {
+                                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                    applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                                }
                                 caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
                             }
                         }
@@ -657,6 +717,18 @@ namespace RAP.DAL
                             ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
                             if (applicantUser != null)
                             {
+                                if ( applicantUser.result.IsAPNAddress == true)
+                                {
+                                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                                }
+                                else
+                                {
+                                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                                    applicantUser.result.apnAddress.City = applicantUser.result.City;
+                                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                                }
                                 caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
                             }
                         }

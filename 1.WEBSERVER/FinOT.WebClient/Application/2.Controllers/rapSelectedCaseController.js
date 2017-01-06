@@ -6,6 +6,10 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.CaseList = [];
     self.Analysts = [];
     self.HearingOfficers = [];
+    self.apnAddress = null;
+    self.EditAPNAddress = false;
+    self.EditAPNNumber = false;
+    self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
     
     self.NewCaseStatus = function () {
         $location.path("/newCaseStatus");
@@ -64,6 +68,7 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     //if (self.caseinfo == null) {
     //    _GetCaseInfo();
     //}
+    
 
     self.AssignAnalyst = function (C_ID, Analyst) {
 
@@ -82,6 +87,25 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
                 return;
             }
             _GetCasesNoAnalyst(self.model.UserID);
+        });
+    }
+
+    self.UpdateAPNAddress = function (apnAddress) {
+        apnAddress.APNNumber = self.APNNumber;
+        masterFactory.UpdateAPNAddress(apnAddress).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.EditAPNAddress = false;           
+        });
+    }
+    self.UpdateAPNNumber = function (apnAddress) {
+        masterFactory.UpdateAPNAddress(apnAddress).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.EditAPNNumber = false;
+            self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
         });
     }
     

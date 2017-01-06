@@ -19,6 +19,14 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
             blockUI.stop();
         });
     }
+    var _UpdateAPNAddress = function (model) {
+        blockUI.start();
+
+        return ajax.Post(model, 'api/dashboard' + '/UpdateAPNAddress')
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     var _GetAccountTypes = function () {
         blockUI.start();
@@ -68,6 +76,8 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
             blockUI.stop();
         });
     }
+
+    
 
     var _GetCustomer = function (custid) {
         blockUI.start();
@@ -249,6 +259,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.FileSize = _fileSize;
     factory.DocDescription = _GetDocDescription;
     factory.UpdateThirdPartyAccessPrivilege = _UpdateThirdPartyAccessPrivilege;
+    factory.UpdateAPNAddress = _UpdateAPNAddress;
 
     return factory;
 }];

@@ -9,6 +9,7 @@ namespace RAP.DAL
     {
        ReturnResult<UserInfoM> SaveUserInfo(UserInfoM userInfo);
        ReturnResult<UserInfoM> GetUserInfo(int UserId);
+       ReturnResult<APNAddress> UpdateAPNAddress(APNAddress apnAddress);
        void SaveErrorLog(OperationStatus status);
        CustomDate GetDateFromDatabase(DateTime DatabaseDate);
        ReturnResult<DocumentM> SaveDocument(DocumentM doc);
@@ -19,5 +20,6 @@ namespace RAP.DAL
        ReturnResult<DocumentM> SaveCaseDocument(DocumentM doc);
        ReturnResult<List<DocumentM>> GetDocumentsByCategory(int CustmerID, bool isPetitiofiled, string docCategory);
        ReturnResult<bool> UpdateDocumentCaseInfo(int CustmerID, int C_ID, string docCategory);
+       ReturnResult<APNAddress> GetAPNAddress(int UserID);
     }
 }

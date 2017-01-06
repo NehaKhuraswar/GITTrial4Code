@@ -12,5 +12,6 @@ namespace RAP.Core.Services
         ReturnResult<List<string>> GetDocDescription();
         ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id);
         ReturnResult<DocumentM> SaveCaseDocument(DocumentM doc);
+        ReturnResult<APNAddress> UpdateAPNAddress(APNAddress apnAddress);
     }
 }

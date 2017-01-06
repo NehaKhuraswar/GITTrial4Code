@@ -366,6 +366,47 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("UpdateAPNAddress")]
+        [HttpPost]
+        public HttpResponseMessage UpdateAPNAddress(APNAddress apnAddress)
+        {
+
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<APNAddress> transaction = new TranInfo<APNAddress>();
+            ReturnResult<APNAddress> result = new ReturnResult<APNAddress>();
+            try
+            {
+                result = _commonService.UpdateAPNAddress(apnAddress);
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse <TranInfo<APNAddress>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("savenewactivitystatus/{cid:int}")]
         [HttpPost]
         public HttpResponseMessage SaveNewActivityStatus(ActivityStatus_M activityStatus, int CID)

@@ -49,6 +49,7 @@ namespace RAP.DAL
 
             }
         }
+
         /// <summary>
         /// Gets the data needed to to display on the tenant petition form
         /// </summary>
@@ -208,6 +209,7 @@ namespace RAP.DAL
                         _userinfo.State.StateID = userinfo.StateID;
                         _userinfo.Zip = userinfo.Zip;
                         _userinfo.Email = userinfo.ContactEmail;
+                        _userinfo.IsAPNAddress = Convert.ToBoolean(userinfo.bParcelAddress);                  
 
                     }
                     var state = db.States.Where(x => x.StateID == _userinfo.State.StateID).FirstOrDefault();
@@ -220,6 +222,102 @@ namespace RAP.DAL
             }
             catch (Exception ex)
             {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Update the APN Address
+        /// </summary>
+        /// <returns></returns>
+        public ReturnResult<APNAddress> UpdateAPNAddress(APNAddress apnAddress)
+        {
+            ReturnResult<APNAddress> result = new ReturnResult<APNAddress>();
+            try
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL APNAddress started");
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {                   
+                    
+                    var parcelDB = db.ParcelAddresses.Where(x => x.UserID == apnAddress.UserID).FirstOrDefault();
+
+                    if (parcelDB != null)
+                    {
+                        parcelDB.AddressLine1 = apnAddress.AddressLine1;
+                        parcelDB.AddressLine2 = apnAddress.AddressLine2;
+                        parcelDB.City = apnAddress.City;
+                        parcelDB.Zip = apnAddress.Zip;
+                        parcelDB.APNNumber = apnAddress.APNNumber;
+
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        ParcelAddress parcelAddressDB = new ParcelAddress();
+                        parcelAddressDB.AddressLine1 = apnAddress.AddressLine1;
+                        parcelAddressDB.AddressLine2 = apnAddress.AddressLine2;
+                        parcelAddressDB.City = apnAddress.City;
+                        parcelAddressDB.Zip = apnAddress.Zip;
+                        parcelAddressDB.APNNumber = apnAddress.APNNumber;
+                        parcelAddressDB.UserID = apnAddress.UserID;
+
+                        db.ParcelAddresses.InsertOnSubmit(parcelAddressDB);
+                        db.SubmitChanges();
+                    }
+                    var UserInfodb = db.UserInfos.Where(x => x.UserID == apnAddress.UserID).FirstOrDefault();
+                    if (UserInfodb != null)
+                    {
+                        UserInfodb.bParcelAddress = true;
+                        db.SubmitChanges();
+                    }
+                    System.Diagnostics.EventLog.WriteEntry("Application", "DAL APNAddress completed");
+                    result.result = apnAddress;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<APNAddress> GetAPNAddress(int UserID)
+        {
+            ReturnResult<APNAddress> result = new ReturnResult<APNAddress>();
+            try
+            {
+                APNAddress apnAddress = new APNAddress();
+                System.Diagnostics.EventLog.WriteEntry("Application", "DAL APNAddress started");
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+
+                    var parcelDB = db.ParcelAddresses.Where(x => x.UserID == UserID).FirstOrDefault();
+
+                    if (parcelDB != null)
+                    {
+                        apnAddress.AddressLine1 = parcelDB.AddressLine1;
+                        apnAddress.AddressLine2 = parcelDB.AddressLine2;
+                        apnAddress.City = parcelDB.City;
+                        apnAddress.Zip = parcelDB.Zip;
+                        apnAddress.APNNumber = parcelDB.APNNumber;
+                        apnAddress.UserID = UserID;
+                    }
+
+                    System.Diagnostics.EventLog.WriteEntry("Application", "DAL APNAddress completed");
+                    result.result = apnAddress;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
                 return result;

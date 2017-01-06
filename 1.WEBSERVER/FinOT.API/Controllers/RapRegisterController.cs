@@ -193,6 +193,8 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
         }
 
+        
+
         [AllowAnonymous]
         [Route("GetThirdPartyInfo/{CustomerID:int}")]
         [HttpGet]

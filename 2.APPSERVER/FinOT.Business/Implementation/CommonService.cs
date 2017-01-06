@@ -72,6 +72,21 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
+       public ReturnResult<APNAddress> UpdateAPNAddress(APNAddress apnAddress)
+       {
+           ReturnResult<APNAddress> result = new ReturnResult<APNAddress>();
+           try
+           {
+               result = _dbHandler.UpdateAPNAddress(apnAddress);
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               LogError(result.status);
+               return result;
+           }
+       }
       public ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id)
        {
            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();

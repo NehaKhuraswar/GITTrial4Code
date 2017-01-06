@@ -45,6 +45,9 @@ namespace RAP.DAL
     partial void InsertUserInfo(UserInfo instance);
     partial void UpdateUserInfo(UserInfo instance);
     partial void DeleteUserInfo(UserInfo instance);
+    partial void InsertParcelAddress(ParcelAddress instance);
+    partial void UpdateParcelAddress(ParcelAddress instance);
+    partial void DeleteParcelAddress(ParcelAddress instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -114,6 +117,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<UserInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ParcelAddress> ParcelAddresses
+		{
+			get
+			{
+				return this.GetTable<ParcelAddress>();
 			}
 		}
 	}
@@ -806,7 +817,11 @@ namespace RAP.DAL
 		
 		private string _ContactEmail;
 		
+		private System.Nullable<bool> _bParcelAddress;
+		
 		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private EntitySet<ParcelAddress> _ParcelAddresses;
 		
 		private EntityRef<State> _State;
 		
@@ -836,12 +851,15 @@ namespace RAP.DAL
     partial void OnPhoneNumberChanged();
     partial void OnContactEmailChanging(string value);
     partial void OnContactEmailChanged();
+    partial void OnbParcelAddressChanging(System.Nullable<bool> value);
+    partial void OnbParcelAddressChanged();
     partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCreatedDateChanged();
     #endregion
 		
 		public UserInfo()
 		{
+			this._ParcelAddresses = new EntitySet<ParcelAddress>(new Action<ParcelAddress>(this.attach_ParcelAddresses), new Action<ParcelAddress>(this.detach_ParcelAddresses));
 			this._State = default(EntityRef<State>);
 			OnCreated();
 		}
@@ -1070,6 +1088,26 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bParcelAddress", DbType="Bit")]
+		public System.Nullable<bool> bParcelAddress
+		{
+			get
+			{
+				return this._bParcelAddress;
+			}
+			set
+			{
+				if ((this._bParcelAddress != value))
+				{
+					this.OnbParcelAddressChanging(value);
+					this.SendPropertyChanging();
+					this._bParcelAddress = value;
+					this.SendPropertyChanged("bParcelAddress");
+					this.OnbParcelAddressChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> CreatedDate
 		{
@@ -1087,6 +1125,19 @@ namespace RAP.DAL
 					this.SendPropertyChanged("CreatedDate");
 					this.OnCreatedDateChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfo_ParcelAddress", Storage="_ParcelAddresses", ThisKey="UserID", OtherKey="UserID")]
+		public EntitySet<ParcelAddress> ParcelAddresses
+		{
+			get
+			{
+				return this._ParcelAddresses;
+			}
+			set
+			{
+				this._ParcelAddresses.Assign(value);
 			}
 		}
 		
@@ -1120,6 +1171,265 @@ namespace RAP.DAL
 						this._StateID = default(int);
 					}
 					this.SendPropertyChanged("State");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ParcelAddresses(ParcelAddress entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserInfo = this;
+		}
+		
+		private void detach_ParcelAddresses(ParcelAddress entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserInfo = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ParcelAddress")]
+	public partial class ParcelAddress : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ParcelAddressID;
+		
+		private System.Nullable<int> _UserID;
+		
+		private string _APNNumber;
+		
+		private string _AddressLine1;
+		
+		private string _AddressLine2;
+		
+		private string _City;
+		
+		private string _Zip;
+		
+		private EntityRef<UserInfo> _UserInfo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnParcelAddressIDChanging(int value);
+    partial void OnParcelAddressIDChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
+    partial void OnAPNNumberChanging(string value);
+    partial void OnAPNNumberChanged();
+    partial void OnAddressLine1Changing(string value);
+    partial void OnAddressLine1Changed();
+    partial void OnAddressLine2Changing(string value);
+    partial void OnAddressLine2Changed();
+    partial void OnCityChanging(string value);
+    partial void OnCityChanged();
+    partial void OnZipChanging(string value);
+    partial void OnZipChanged();
+    #endregion
+		
+		public ParcelAddress()
+		{
+			this._UserInfo = default(EntityRef<UserInfo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParcelAddressID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ParcelAddressID
+		{
+			get
+			{
+				return this._ParcelAddressID;
+			}
+			set
+			{
+				if ((this._ParcelAddressID != value))
+				{
+					this.OnParcelAddressIDChanging(value);
+					this.SendPropertyChanging();
+					this._ParcelAddressID = value;
+					this.SendPropertyChanged("ParcelAddressID");
+					this.OnParcelAddressIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		public System.Nullable<int> UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._UserInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APNNumber", DbType="VarChar(10)")]
+		public string APNNumber
+		{
+			get
+			{
+				return this._APNNumber;
+			}
+			set
+			{
+				if ((this._APNNumber != value))
+				{
+					this.OnAPNNumberChanging(value);
+					this.SendPropertyChanging();
+					this._APNNumber = value;
+					this.SendPropertyChanged("APNNumber");
+					this.OnAPNNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine1", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string AddressLine1
+		{
+			get
+			{
+				return this._AddressLine1;
+			}
+			set
+			{
+				if ((this._AddressLine1 != value))
+				{
+					this.OnAddressLine1Changing(value);
+					this.SendPropertyChanging();
+					this._AddressLine1 = value;
+					this.SendPropertyChanged("AddressLine1");
+					this.OnAddressLine1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddressLine2", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string AddressLine2
+		{
+			get
+			{
+				return this._AddressLine2;
+			}
+			set
+			{
+				if ((this._AddressLine2 != value))
+				{
+					this.OnAddressLine2Changing(value);
+					this.SendPropertyChanging();
+					this._AddressLine2 = value;
+					this.SendPropertyChanged("AddressLine2");
+					this.OnAddressLine2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this.OnCityChanging(value);
+					this.SendPropertyChanging();
+					this._City = value;
+					this.SendPropertyChanged("City");
+					this.OnCityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string Zip
+		{
+			get
+			{
+				return this._Zip;
+			}
+			set
+			{
+				if ((this._Zip != value))
+				{
+					this.OnZipChanging(value);
+					this.SendPropertyChanging();
+					this._Zip = value;
+					this.SendPropertyChanged("Zip");
+					this.OnZipChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserInfo_ParcelAddress", Storage="_UserInfo", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		public UserInfo UserInfo
+		{
+			get
+			{
+				return this._UserInfo.Entity;
+			}
+			set
+			{
+				UserInfo previousValue = this._UserInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._UserInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserInfo.Entity = null;
+						previousValue.ParcelAddresses.Remove(this);
+					}
+					this._UserInfo.Entity = value;
+					if ((value != null))
+					{
+						value.ParcelAddresses.Add(this);
+						this._UserID = value.UserID;
+					}
+					else
+					{
+						this._UserID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("UserInfo");
 				}
 			}
 		}

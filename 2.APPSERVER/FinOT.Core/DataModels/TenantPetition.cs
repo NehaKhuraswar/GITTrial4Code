@@ -91,6 +91,7 @@ namespace RAP.Core.DataModels
         {
             State = new StateM();
             City = "Oakland";
+            apnAddress = new APNAddress();
         }
         public int UserID { get; set; }
         public string BusinessName { get; set; }
@@ -104,6 +105,23 @@ namespace RAP.Core.DataModels
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsAPNAddress { get; set; }
+        public APNAddress apnAddress { get; set; }
+    }
+
+    public class APNAddress
+    {
+        public APNAddress()
+        {
+            State = new StateM();
+        }
+        public int UserID { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public StateM State { get; set; }
+        public string Zip { get; set; }
+        public string APNNumber { get; set; }
 
     }
     public class TenantAppealInfoM
