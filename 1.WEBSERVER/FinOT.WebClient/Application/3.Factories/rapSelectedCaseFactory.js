@@ -48,7 +48,19 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
         });
       }
     
-     
+    var _GetPetitionViewInfo = function (CID) {
+        blockUI.start();
+
+        var url = 'api/applicationprocessing' + '/GetPetitionViewInfo';
+        if (!(CID == null || CID == undefined)) { url = url + '/' + CID; }
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
+    factory.GetPetitionViewInfo = _GetPetitionViewInfo;
     factory.GetCaseInfo = _GetCaseInfo;
     factory.GetCasesNoAnalyst = _GetCasesNoAnalyst;
 

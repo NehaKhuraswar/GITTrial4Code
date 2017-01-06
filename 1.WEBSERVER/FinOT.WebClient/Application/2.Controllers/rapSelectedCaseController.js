@@ -81,6 +81,21 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
         });
     }
 
+    self.ViewPage = function (activity, caseinfo) {
+        if (activity.Activity.ActivityID == 1) {
+            rapFactory.GetPetitionViewInfo(caseinfo.C_ID).then(function (response) {
+                if (!alert.checkResponse(response)) {
+                    return;
+                }
+                //self.caseinfo = response.data;
+                rapGlobalFactory.CaseDetails = response.data;
+                rapGlobalFactory.FromSelectedCase = true;
+                $location.path("/ViewPetition");
+            });
+        }
+
+    }
+
     self.AssignHearingOfficer = function (C_ID, HearingOfficer) {
 
         masterFactory.AssignHearingOfficer(C_ID, HearingOfficer.UserID).then(function (response) {

@@ -2,9 +2,16 @@
 var rapViewPetitionController = ['$scope', '$modal', 'alertService',  '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert,  $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.FromSelectedCase = rapGlobalFactory.FromSelectedCase;
     self.Back = function()
     {
-        $location.path("publicdashboard");
+        if (rapGlobalFactory.FromSelectedCase == true) {
+            rapGlobalFactory.FromSelectedCase = false;
+            $location.path("/selectedcase");
+        }
+        else {
+            $location.path("publicdashboard");
+        }
     }
 }];
 var rapViewPetitionController_resolve = {

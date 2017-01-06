@@ -14,6 +14,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
          var IsEdit = false;
          var bCaseFiledByThirdParty = false;
          var SelectedCase = null;
+         var FromSelectedCase = false;
           // public
           return {
 
