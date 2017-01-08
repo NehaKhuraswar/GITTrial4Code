@@ -100,16 +100,17 @@
                         </div>
 
                         <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later)  to contest the rent increase. (O.M.C. 8.22.090 A 2) If you never got the RAP Notice you can contest all past increases.</p>
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a rent program notice with the notice of increase?</div></div>
-                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">Yes</div>
-                                <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">No</div>
-                            </div>
-                        </div><!-- .field-group -->
+                        
 
                         <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
                             <div ng-if="item.IsDeleted == false">
+                                <div class="field-group filled-info subhead no-top-margin">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a rent program notice with the notice of increase?</div></div>
+                                        <div class="col-sm-6 col-xs-12" ng-show="item.bRentIncreaseNoticeGiven">Yes</div>
+                                        <div class="col-sm-6 col-xs-12" ng-show="!item.bRentIncreaseNoticeGiven">No</div>
+                                    </div>
+                                </div><!-- .field-group -->
                                 <div class="field-group filled-info subhead no-top-margin">
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>

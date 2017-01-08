@@ -36,6 +36,46 @@
                             </div>
                         </div>
                     </div>
+                    <div class="field-group">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <label for="activity">Activity2</label>
+                                <div class="full-width">
+                                    <select name="activity" id="activity" data-placeholder="Select type"
+                                            ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
+                                            ng-model="Ctrl.ActivityStatus.Activity"
+                                            ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"
+                                            class="custom-select"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <label for="activity">Activity</label>
+                                <div class="full-width">
+                                    <select name="activity" id="activity" data-placeholder="Select type" class="custom-select">
+                                        <option data-ng-repeat="activity in Ctrl.ActivityList" value="{{activity.ActivityID}}">{{activity.ActivityDesc}}</option>
+                                            </select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <label for="activity">Activity</label>
+                                <div class="full-width">
+                                    <select name="activity" id="activity" data-placeholder="Select type" >
+                                        <option data-ng-repeat="activity in Ctrl.ActivityList" value="{{activity.ActivityID}}">{{activity.ActivityDesc}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="field-group">
                         <div class="row">

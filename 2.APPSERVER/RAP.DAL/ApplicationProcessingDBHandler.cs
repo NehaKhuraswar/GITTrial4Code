@@ -1178,9 +1178,14 @@ namespace RAP.DAL
                 {
                     tenantPetitionInfo.PetitionID = TenantPetitionInfoDB.TenantPetitionID;
                     tenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionInfoDB.bThirdPartyRepresentation;
-                    if (tenantPetitionInfo.bThirdPartyRepresentation)
+                    //if (tenantPetitionInfo.bThirdPartyRepresentation)
+                    //{
+                    //    tenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
+                    //}
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
                     {
-                        tenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ThirdPartyUserID).result;
+                        tenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
                     }
                     tenantPetitionInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ApplicantUserID).result;
                     tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
@@ -1195,6 +1200,14 @@ namespace RAP.DAL
                     tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
                     tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
                     tenantPetitionInfo.CustomerID = (int)TenantPetitionInfoDB.PetitionFiledBy;
+                }
+                else
+                {
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
+                    {
+                        tenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                    }
                 }
                 tenantPetitionInfo.UnitTypes = _units;
                 tenantPetitionInfo.RangeOfUnits = _rangeOfUnits;
@@ -1226,7 +1239,11 @@ namespace RAP.DAL
                     tenantRentalHistory.bRentControlledByAgency = TenantRentalHistoryDB.bRentControlledByAgency;
                     tenantRentalHistory.MoveInDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantRentalHistoryDB.MoveInDate));
                     tenantRentalHistory.RAPNoticeGivenDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantRentalHistoryDB.RAPNoticeGivenDate));
-                    //tenantRentalHistory.PreviousCaseIDs = TenantRentalHistoryDB.P;
+                    tenantRentalHistory.bPetitionFiledPrviously = Convert.ToBoolean(TenantRentalHistoryDB.bPetitionFiledPrviously);
+                    if (tenantRentalHistory.bPetitionFiledPrviously)
+                    {
+                        tenantRentalHistory.PreviousCaseIDs = TenantRentalHistoryDB.PreviousCaseIDs;
+                    }     
 
                     var TenantRentalIncrementInfoDB = _dbContext.TenantRentalIncrementInfos.Where(x => x.TenantPetitionID == PetitionId).ToList();
                     foreach (var item in TenantRentalIncrementInfoDB)
@@ -2004,14 +2021,34 @@ namespace RAP.DAL
                 CommonDBHandler _dbCommon = new CommonDBHandler();
                 if (caseInfo.TenantPetitionInfo.PetitionID > 0)
                 {
-
-                    if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                    if (caseInfo.bCaseFiledByThirdParty)
                     {
-                        thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo).result.UserID;
-                        if (thirdPartyUserID == 0)
+                        var applicantUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantPetitionInfo.ApplicantUserInfo);
+                        if (applicantUserResult.status.Status != StatusEnum.Success)
                         {
-                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            result.status = applicantUserResult.status;
                             return result;
+                        }
+                        applicantUserID = applicantUserResult.result.UserID;
+                        thirdPartyUserID = caseInfo.TenantPetitionInfo.ThirdPartyInfo.UserID;
+                    }
+                    else
+                    {
+                        if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                        {
+                            var thirdpartyUserResult = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo);
+                            if (thirdpartyUserResult.status.Status != StatusEnum.Success)
+                            {
+                                result.status = thirdpartyUserResult.status;
+                                return result;
+                            }
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = caseInfo.TenantPetitionInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            if (saveThirdPartyResult.status.Status != StatusEnum.Success)
+                            {
+                                result.status = saveThirdPartyResult.status;
+                                return result;
+                            }
+                            thirdPartyUserID = thirdpartyUserResult.result.UserID;
                         }
                     }
 
@@ -2082,13 +2119,34 @@ namespace RAP.DAL
                 }
                 else
                 {
-                    if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                    if (caseInfo.bCaseFiledByThirdParty)
                     {
-                        thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo).result.UserID;
-                        if (thirdPartyUserID == 0)
+                        var applicantUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantPetitionInfo.ApplicantUserInfo);
+                        if (applicantUserResult.status.Status != StatusEnum.Success)
                         {
-                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                            result.status = applicantUserResult.status;
                             return result;
+                        }
+                        applicantUserID = applicantUserResult.result.UserID;
+                        thirdPartyUserID = caseInfo.TenantPetitionInfo.ThirdPartyInfo.UserID;
+                    }
+                    else
+                    {
+                        if (caseInfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                        {
+                            var thirdpartyUserResult = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.ThirdPartyInfo);
+                            if (thirdpartyUserResult.status.Status != StatusEnum.Success)
+                            {
+                                result.status = thirdpartyUserResult.status;
+                                return result;
+                            }
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = caseInfo.TenantPetitionInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            if (saveThirdPartyResult.status.Status != StatusEnum.Success)
+                            {
+                                result.status = saveThirdPartyResult.status;
+                                return result;
+                            }
+                            thirdPartyUserID = thirdpartyUserResult.result.UserID;                            
                         }
                     }
 
@@ -2229,6 +2287,11 @@ namespace RAP.DAL
                     rentalHistoryRecord.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
                     rentalHistoryRecord.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
                     rentalHistoryRecord.bRentControlledByAgency = rentalHistory.bRentControlledByAgency;
+                    rentalHistoryRecord.bPetitionFiledPrviously = rentalHistory.bPetitionFiledPrviously;
+                    if (rentalHistory.bPetitionFiledPrviously)
+                    {
+                        rentalHistoryRecord.PreviousCaseIDs = rentalHistory.PreviousCaseIDs;
+                    }                    
                     rentalHistoryRecord.CreatedDate = DateTime.Now;
                     _dbContext.SubmitChanges();
                 }
@@ -2241,6 +2304,11 @@ namespace RAP.DAL
                     rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
                     rentalHistoryDB.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
                     rentalHistoryDB.bRentControlledByAgency = rentalHistory.bRentControlledByAgency;
+                    rentalHistoryDB.bPetitionFiledPrviously = rentalHistory.bPetitionFiledPrviously;
+                    if (rentalHistory.bPetitionFiledPrviously)
+                    {
+                        rentalHistoryDB.PreviousCaseIDs = rentalHistory.PreviousCaseIDs;
+                    }       
                     rentalHistoryDB.CreatedDate = DateTime.Now;
                     _dbContext.TenantRentalHistories.InsertOnSubmit(rentalHistoryDB);
                     _dbContext.SubmitChanges();
