@@ -17,6 +17,8 @@ namespace RAP.Core.Services
         ReturnResult<bool> AssignHearingOfficer(int cID, int HearingOfficerUserID);
         ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id);
         ReturnResult<List<DocumentM>> SaveCaseDocuments(List<DocumentM> documents);
+        ReturnResult<CustomEmailM> GetCustomEmail(int c_id);
+        ReturnResult<bool> SubmitCustomEmail(CustomEmailM cMail);
 
     }
 }

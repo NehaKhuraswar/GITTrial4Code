@@ -1216,7 +1216,7 @@ namespace RAP.Business.Implementation
                 message.MessageBody = NotificationMessage.ResourceManager.GetString("PetitionMsg").Replace("CASEID",model.CaseID);
                 if (model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
                 {
-                    message.RecipientAddress = new string[] { model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email };
+                    message.RecipientAddress.Add(model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email);
                 }
                 _emilService.SendEmail(message);
                 result.result = model;
@@ -1677,7 +1677,7 @@ namespace RAP.Business.Implementation
                 message.Subject = "Owner Resonse Successfully Filed for the Case -" + model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
                 if(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
                 {
-                    message.RecipientAddress = new string[] { model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email };
+                    message.RecipientAddress.Add(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email);
                 }
                 _emilService.SendEmail(message);
                 model = dbResult.result;

@@ -128,6 +128,7 @@
     <Content Include="Application\1.Modules\rapModule.js" />
     <Content Include="Application\2.Controllers\mainController.js" />
     <Content Include="Application\2.Controllers\rapAdditionalCaseDocumentController.js" />
+    <Content Include="Application\2.Controllers\rapCustomEmailController.js" />
     <Content Include="Application\2.Controllers\rapRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseConfirmController.js" />
     <Content Include="Application\2.Controllers\rapOwnerConfirmationController.js" />
@@ -208,6 +209,7 @@
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapAdditionalCaseDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
+    <Content Include="Application\3.Factories\rapCustomEmailFactory.js" />
     <Content Include="Application\3.Factories\raprepresentativeFactory.js" />
     <Content Include="Application\3.Factories\rapnewrepresentativeFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseApplicantInfoFactory.js" />
@@ -448,6 +450,7 @@
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\textcounter.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
+    <Content Include="Views\Account\SendEmailNotification.html" />
     <Content Include="Views\Account\SelectedCase.html" />
     <Content Include="Views\Account\YourRepresentative.html" />
     <Content Include="Views\Account\AddNewRepresentative.html" />

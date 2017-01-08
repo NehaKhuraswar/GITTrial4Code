@@ -293,6 +293,39 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
         }
 
+        [AllowAnonymous]
+        [Route("GetCustomEmail/{cid:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetCustomEmail(int cid)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CustomEmailM> transaction = new TranInfo<CustomEmailM>();
+            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
+            try
+            {
+                var dbResult = _service.GetCustomEmail(cid);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CustomEmailM>>(ReturnCode, transaction);
+        }
+
         #endregion
 
         #region "POST REQUEST"
@@ -480,6 +513,39 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SubmitCustomEmail")]
+        [HttpPost]
+        public HttpResponseMessage SubmitCustomEmail([FromBody] CustomEmailM documents)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var dbResult = _service.SubmitCustomEmail(documents);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
 
         

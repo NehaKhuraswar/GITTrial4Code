@@ -963,7 +963,7 @@ namespace RAP.API.Controllers
         {
             EmailM model = new EmailM();
             model.Subject = "RAP Account registered successfully. CustomerIDentityKey :" + customer.CustomerIdentityKey.ToString();
-            model.RecipientAddress = new string[] { customer.email };
+            model.RecipientAddress.Add(customer.email);
             //string[] toAddresses = { "venky.soundar@gcomsoft.com", "neha.bhandari@gcomsoft.com", "sanjay@gcomsoft.com" };
             //model.RecipientAddress = toAddresses;
             model.MessageBody = "Hello" + customer.User.FirstName + " " + customer.User.LastName + ",  Your account created successfully";

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Net;
+using System.Net.Mime;
 using System.Net.Mail;
 using RAP.Core.Common;
 using RAP.Core.DataModels;
@@ -28,46 +30,56 @@ namespace RAP.Business.Implementation
                 bool enableSSL = string.IsNullOrEmpty(ConfigurationManager.AppSettings["EnableSSL"]) ? false : (ConfigurationManager.AppSettings["EnableSSL"] == "true" ? true : false);
                 bool defaultAuthentication = string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultAuthentication"]) ? false : (ConfigurationManager.AppSettings["DefaultAuthentication"] == "true" ? true : false);
                 bool includeBCC = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IncludeBCC"]) ? false : (ConfigurationManager.AppSettings["IncludeBCC"] == "true" ? true : false);
-                
-                using (MailMessage mail = new MailMessage())
+                if (message.RecipientAddress != null && message.RecipientAddress.Any())
                 {
-                    mail.From = new MailAddress(senderAddress);
-                    if (message.RecipientAddress != null)
+                    using (MailMessage mail = new MailMessage())
                     {
+                        mail.From = new MailAddress(senderAddress);
                         mail.To.Add(String.Concat(message.RecipientAddress));
-                    }
-                    mail.To.Add("RAP.Oakland@gmail.com");
-                    mail.Subject = message.Subject;
-                    mail.Body = message.MessageBody;
-                    if (includeBCC)
-                    {
-                        mail.Bcc.Add(bcc);
-                    }          
-                    mail.IsBodyHtml = false;
-                    //if (message.Attachments != null)
-                    //{
-                    //    foreach (string attahment in message.Attachments)
-                    //    {
-                    //        mail.Attachments.Add(new Attachment(attahment));
-                    //    }
-                    //}
+                        mail.To.Add("RAP.Oakland@gmail.com");
+                        mail.Subject = message.Subject;
+                        mail.Body = message.MessageBody;
+                        if (includeBCC)
+                        {
+                            mail.Bcc.Add(bcc);
+                        }
+                        mail.IsBodyHtml = false;
+                        if (message.Attachments != null && message.Attachments.Any())
+                        {
+                            foreach (var attahment in message.Attachments)
+                            {
+                                var byteArray = Convert.FromBase64String(attahment.Base64Content);
+                                MemoryStream ms = new MemoryStream(byteArray);
+                                ContentType ct = new ContentType(System.Net.Mime.MediaTypeNames.Text.Plain);
+                                Attachment at = new Attachment(ms, ct);
+                                at.ContentDisposition.FileName = attahment.DocName;
+                                mail.Attachments.Add(at);              
 
-                    using (SmtpClient smtp = new SmtpClient(hostServer, portNumber))
-                    {
-                        if(defaultAuthentication)
-                        {
-                            smtp.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;
+                            }
                         }
-                        else
+
+                        using (SmtpClient smtp = new SmtpClient(hostServer, portNumber))
                         {
-                            smtp.Credentials = new NetworkCredential(senderAddress.Trim(), password.Trim());
+                            if (defaultAuthentication)
+                            {
+                                smtp.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;
+                            }
+                            else
+                            {
+                                smtp.Credentials = new NetworkCredential(senderAddress.Trim(), password.Trim());
+                            }
+
+                            smtp.EnableSsl = enableSSL;
+                            smtp.Send(mail);
                         }
-                        
-                        smtp.EnableSsl = enableSSL;
-                        smtp.Send(mail);
                     }
-                }
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
+                }
+                else
+                {
+                    throw new Exception("Email Recipient not found");
+                }
+                    
                 return result;
             }
             catch (Exception ex)

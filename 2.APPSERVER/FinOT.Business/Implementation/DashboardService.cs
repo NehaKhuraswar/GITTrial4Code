@@ -17,16 +17,18 @@ namespace RAP.Business.Implementation
         private readonly IDocumentService _documentService;
         private readonly ICommonService _commonService;
         private readonly IExceptionHandler _eHandler = new ExceptionHandler();
+        private readonly IEmailService _emailService;
         //TBD
         //public ApplicationProcessingService()
         //{
         //    _dbHandler = new ApplicationProcessingDBHandler();
         //}
-        public DashboardService(IDashboardDBHandler dbHandler, IDocumentService documentService, ICommonService commonService)
+        public DashboardService(IDashboardDBHandler dbHandler, IDocumentService documentService, ICommonService commonService, IEmailService emailService)
         {
             this._dbHandler = dbHandler;
             this._documentService = documentService;
             this._commonService = commonService;
+            this._emailService = emailService;
         }
 
         public ReturnResult<bool> SaveNewActivityStatus(ActivityStatus_M activityStatus, int C_ID)
@@ -196,6 +198,31 @@ namespace RAP.Business.Implementation
                 _commonService.LogError(result.status);
                 return result;
             }
+        }
+
+        public ReturnResult<CustomEmailM> GetCustomEmail(int c_id)
+        {
+            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
+            result.result = new CustomEmailM();
+            return result;
+        }
+
+        public ReturnResult<bool> SubmitCustomEmail(CustomEmailM cMail)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                result = _emailService.SendEmail(cMail.Message);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+
+
         }
         //implements all methods from IDashboardService
     }

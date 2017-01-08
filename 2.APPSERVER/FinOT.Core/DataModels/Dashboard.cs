@@ -101,6 +101,16 @@ namespace RAP.Core.DataModels
         public int AccountTypeID { get; set; }
         public string AccountTypeDesc { get; set; }
     }
+    public class CustomEmailM
+    {
+        public CustomEmailM()
+        {
+            Recipients = new List<string>();
+            Message = new EmailM();
+        }
+        public List<string> Recipients { get; set; }
+        public EmailM Message { get; set; }
+    }
     //public class CaseStatusActivity_M
     //{
     //    public int ActivityID { get; set; }

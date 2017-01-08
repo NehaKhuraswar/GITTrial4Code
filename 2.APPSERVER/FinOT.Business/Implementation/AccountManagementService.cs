@@ -70,7 +70,7 @@ namespace RAP.Business.Implementation
                 EmailM emailMessage = new EmailM();
                 emailMessage.MessageBody = email + " Sending Password " + result.result;
                 emailMessage.Subject = "Your RAP Password";
-                emailMessage.RecipientAddress = new string[] { email };
+                emailMessage.RecipientAddress.Add(email);
                 EmailService emailservice = new EmailService();
                 resultFinal = emailservice.SendEmail(emailMessage);
             }
@@ -88,7 +88,7 @@ namespace RAP.Business.Implementation
                 EmailM emailMessage = new EmailM();
                 emailMessage.MessageBody = message.email + " Sending Pin " + result.result;
                 emailMessage.Subject = "Your RAP Pin";
-                emailMessage.RecipientAddress = new string[] { message.email };
+                emailMessage.RecipientAddress.Add(message.email);
                 EmailService emailservice = new EmailService();
                 resultFinal = emailservice.SendEmail(emailMessage);
             }

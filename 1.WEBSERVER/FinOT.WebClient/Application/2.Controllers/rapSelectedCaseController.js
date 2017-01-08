@@ -17,7 +17,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.AdditionalDocs = function () {
         $location.path("/additionaldocuments");
     }
-   
+    self.SendEmailNotification = function () {
+        $location.path("/sendemailnotification");
+    }
     var _GetSelectedCase = function (C_ID) {
         rapFactory.GetSelectedCase(C_ID).then(function (response) {
             if (!alert.checkResponse(response)) {
