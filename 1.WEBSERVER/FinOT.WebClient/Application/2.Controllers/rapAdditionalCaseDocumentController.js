@@ -1,9 +1,7 @@
 ﻿var rapAdditionalCaseDocumentController = ['$scope', '$modal', 'alertService', '$location', 'rapAdditionalCaseDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
     var self = this;
-    //self.model = $scope.model;
-    self.custDetails = rapGlobalFactory.CustomerDetails;
-    //self.caseinfo = rapGlobalFactory.CaseDetails;
-    //self.caseinfo.CustomerID = self.custDetails.custID;
+    self.custDetails = rapGlobalFactory.CityUser;
+    self.c_id = rapGlobalFactory.SelectedCase.C_ID;   
     self.DocDescriptions = masterFactory.DocDescription();
 
     masterFactory.DocDescription().then(function (response) {
@@ -12,7 +10,7 @@
     });
     self.description1 = null;
     self.description2 = null;
-    self.c_id = '1032';
+ 
     self.Documents = null;
     rapFactory.GetCaseDocuments(self.c_id).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
@@ -32,13 +30,14 @@
                 var ext = filename.substring(index, filename.length).toUpperCase();
                 //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
                 if (masterFactory.FileExtensons.indexOf(ext) > -1) {
-                    var document = angular.copy(self.caseinfo.Document);
+                    var document = {}; // angular.copy(self.caseinfo.Document);
                     document.DocTitle = docTitle;
                     document.DocName = filename;
                     document.MimeType = mimetype;
-                    document.CustomerID = self.custDetails.custID;
+                    document.EmployeeID = self.custDetails.EmployeeID;
                     document.C_ID = self.c_id;
-                    document.isUploaded = true;
+                    document.isUploaded = false;
+                    document.IsPetitonFiled = true;
                     var reader = new FileReader();
                     reader.readAsArrayBuffer(file);
                     reader.onload = function (e) {
@@ -66,10 +65,11 @@
 
     }
     self.Submit = function () {
-        rapFactory.SaveCaseDocuments(self.Documents).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
-            self.Documents = response.data;
-        });   
+        var d = '';
+        //rapFactory.SaveCaseDocuments(self.Documents).then(function (response) {
+        //    if (!alert.checkResponse(response)) { return; }
+        //    self.Documents = response.data;
+        //});   
     }
 
 }];

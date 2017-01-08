@@ -6,7 +6,7 @@ var rapAdditionalCaseDocumentFactory = ['blockUI', 'ajaxService', function (bloc
     var _getCaseDocuments = function (cid) {
         blockUI.start();
         var url = _routePrefix + '/GetCaseDocuments';
-        if (!(cid == null || custId == cid)) { url = url + '/' + cid; }
+        if (!(cid == null || cid == undefined)) { url = url + '/' + cid; }
         return ajax.Get(url)
         .finally(function () {
             blockUI.stop();

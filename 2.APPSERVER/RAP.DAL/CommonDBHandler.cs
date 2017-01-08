@@ -358,11 +358,19 @@ namespace RAP.DAL
                         document.DocName = doc.DocName;
                         document.DocTitle = doc.DocTitle;
                         document.DocThirdPartyID = doc.DocThirdPartyID;
-                        document.CustomerID = doc.CustomerID;
+                        if (doc.CustomerID > 0)
+                        {
+                            document.CustomerID = doc.CustomerID;
+                        }
+                        if (doc.EmployeeID > 0)
+                        {
+                            document.EmployeeID = doc.EmployeeID;
+                        }
                         document.DocCategory = doc.DocCategory;
                         document.DocDescription = string.IsNullOrEmpty(doc.DocDescription) ? null : doc.DocDescription;
                         document.IsPetitionFiled = false;
                         document.MimeType = doc.MimeType;
+                        document.CreatedDate = DateTime.Now;
                         db.Documents.InsertOnSubmit(document);
                         db.SubmitChanges();
                         doc.DocID = document.DocID;
@@ -432,7 +440,8 @@ namespace RAP.DAL
                             {
                                 DocumentM doc = new DocumentM();
                                 doc.C_ID = item.C_ID;
-                                doc.CustomerID = item.CustomerID;
+                                doc.CustomerID =(item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
+                                doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
                                 doc.DocCategory = item.DocCategory;
                                 doc.DocName = item.DocName;
                                 doc.DocID = item.DocID;
@@ -455,7 +464,8 @@ namespace RAP.DAL
                             {
                                 DocumentM doc = new DocumentM();                             
                                 doc.C_ID = item.C_ID;
-                                doc.CustomerID = item.CustomerID;
+                                doc.CustomerID =(item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
+                                doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
                                 doc.DocCategory = item.DocCategory;
                                 doc.DocName = item.DocName;
                                 doc.DocID = item.DocID;
@@ -499,7 +509,8 @@ namespace RAP.DAL
                             {
                                 DocumentM doc = new DocumentM();
                                 doc.C_ID = item.C_ID;
-                                doc.CustomerID = item.CustomerID;
+                                doc.CustomerID = (item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
+                                doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
                                 doc.DocCategory = item.DocCategory;
                                 doc.DocName = item.DocName;
                                 doc.DocID = item.DocID;
@@ -539,12 +550,20 @@ namespace RAP.DAL
                         document.DocName = doc.DocName;
                         document.DocTitle = doc.DocTitle;
                         document.DocThirdPartyID = doc.DocThirdPartyID;
-                        document.CustomerID = doc.CustomerID;
-                        doc.C_ID = doc.C_ID;
+                        if (doc.CustomerID > 0)
+                        {
+                            document.CustomerID = doc.CustomerID;
+                        }
+                        if (doc.EmployeeID > 0)
+                        {
+                            document.EmployeeID = doc.EmployeeID;
+                        }
+                        document.C_ID = doc.C_ID;
                         document.DocCategory = doc.DocCategory;
                         document.DocDescription = string.IsNullOrEmpty(doc.DocDescription) ? null : doc.DocDescription;
                         document.IsPetitionFiled = true;
                         document.MimeType = doc.MimeType;
+                        document.CreatedDate = DateTime.Now;
                         db.Documents.InsertOnSubmit(document);
                         db.SubmitChanges();
                         doc.DocID = document.DocID;
@@ -581,7 +600,8 @@ namespace RAP.DAL
                         {
                             DocumentM doc = new DocumentM();
                             doc.C_ID = item.C_ID;
-                            doc.CustomerID = item.CustomerID;
+                            doc.CustomerID = (item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
+                            doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
                             doc.DocCategory = item.DocCategory;
                             doc.DocName = item.DocName;
                             doc.DocID = item.DocID;

@@ -19,6 +19,7 @@ namespace RAP.Core.DataModels
          public string Base64Content { get; set; }
          public int DocThirdPartyID { get; set; }
          public int CustomerID { get; set; }
+         public int EmployeeID { get; set; }
          public int? C_ID { get; set; }
          public bool IsPetitonFiled { get; set; }
          public bool isUploaded { get; set; }
