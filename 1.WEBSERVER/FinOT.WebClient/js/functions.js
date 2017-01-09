@@ -94,7 +94,7 @@ var tooltips;
     
     
     //Set Sidebar Steps Nav
-   //setApplicationSteps();
+  //  setApplicationSteps();
     
     //Application Steps - Mobile Toggle
     if($('.application-steps-toggle').length > 0){
@@ -648,12 +648,9 @@ var tooltips;
     
     
     
-    if ($(".custom-selectNEWCASE").length > 0) {
-        alert($(".custom-selectNEWCASE").length);
+    if($(".custom-select").length > 0){
       
-        $(".custom-selectNEWCASE").each(function () {
-            alert($(this).children('options').length);
-            alert($(this).children('option').length);
+      $(".custom-select").each(function () {
         var $this = $(this), numberOfOptions = $(this).children('option').length;
         var selected = $this.find("option[selected]");
         var placeholder = $this.data('placeholder');
@@ -690,7 +687,7 @@ var tooltips;
 
         // Insert an unordered list after the styled div and also cache the list
         var $list = $('<ul />', {'class': 'options'}).insertAfter($styledSelect);
-        
+
         // Insert a list item into the unordered list for each select option
         for (var i = 0; i < numberOfOptions; i++) {
           $('<li />', {text: $this.children('option').eq(i).text(), rel: $this.children('option').eq(i).val()}).appendTo($list);
