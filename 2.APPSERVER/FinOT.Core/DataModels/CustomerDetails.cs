@@ -60,6 +60,9 @@ namespace RAP.Core.DataModels
         public string MobilePhoneNumber { get; set; }
         public bool IsHearingOfficer { get; set; }
         public bool IsAnalyst { get; set; }
+        public bool IsNonRAPStaff { get; set; }
+        public bool IsAdminAssistant { get; set; }
+        public bool IsCityAdmin { get; set; }
         public DateTime CreatedDate { get; set; }
     }
     public class StateM

@@ -3,8 +3,13 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
     var self = this;
    // self.CityUserAccount = [];
     self.AccountTypesList = [];
+    self.confirmPwd = "";
     self.CreateAccount = function (model) {
-
+        if (model.Password != self.confirmPwd)
+        {
+            alert.Error("Please enter same password in password fields.");
+            return;
+        }
         rapFactory.CreateCityUserAccount(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

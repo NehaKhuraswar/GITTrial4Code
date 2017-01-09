@@ -1111,7 +1111,7 @@ namespace RAP.DAL
                 {
 
                     CityUserAccount cityUserTable = new CityUserAccount();
-                    cityUserTable.CityAccountTypeID = (int)message.AccountType.AccountTypeID;
+                    //cityUserTable.CityAccountTypeID = (int)message.AccountType.AccountTypeID;
                     cityUserTable.FirstName = message.FirstName;
                     cityUserTable.LastName = message.LastName;
                     cityUserTable.Password = message.Password;
@@ -1119,6 +1119,17 @@ namespace RAP.DAL
                     cityUserTable.EmployeeID = (int)message.EmployeeID;
                     cityUserTable.IsAnalyst = Convert.ToBoolean(message.IsAnalyst);
                     cityUserTable.IsHearingOfficer = Convert.ToBoolean(message.IsHearingOfficer);
+                    cityUserTable.IsAdminAssistant = Convert.ToBoolean(message.IsAdminAssistant);
+                    cityUserTable.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
+                    if (message.IsCityAdmin == true)
+                    {
+                        cityUserTable.CityAccountTypeID = 3; //City Admin type
+                    }
+                    else
+                    {
+                        cityUserTable.CityAccountTypeID = 2;
+                    }
+                    cityUserTable.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
                     cityUserTable.Title = message.Title;
                     cityUserTable.Department = message.Department;
                     cityUserTable.OfficePhoneNumber = message.OfficePhoneNumber;

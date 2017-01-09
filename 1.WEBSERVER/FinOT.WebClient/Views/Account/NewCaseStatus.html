@@ -28,29 +28,31 @@
                             <div class="col-md-9 col-sm-12">
                                 <label for="activity">Activity</label>
                                 <div class="full-width">
-                                    <select name="activity" id="activity"  data-placeholder="Select type"
+                                    <select name="activity" id="activity" data-placeholder="Select type"
                                             ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
                                             ng-model="Ctrl.ActivityStatus.Activity"
-                                            ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"></select>
+                                            ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID" 
+                                            
+                                            ></select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="field-group">
+                    <!--<div class="field-group">
                         <div class="row">
                             <div class="col-md-9 col-sm-12">
                                 <label for="activity">Activity2</label>
-                                <div class="full-width">
+                                <div class="full-width styledSelect">
                                     <select name="activity" id="activity" data-placeholder="Select type"
                                             ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
                                             ng-model="Ctrl.ActivityStatus.Activity"
                                             ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"
-                                            class="custom-select"></select>
+                                            ></select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="field-group">
+                    </div>-->
+                    <!--<div class="field-group">
                         <div class="row">
                             <div class="col-md-9 col-sm-12">
                                 <label for="activity">Activity</label>
@@ -62,8 +64,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="field-group">
+                    </div>-->
+                    <!--<div class="field-group">
                         <div class="row">
                             <div class="col-md-9 col-sm-12">
                                 <label for="activity">Activity</label>
@@ -75,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="field-group">
                         <div class="row">
@@ -92,7 +94,7 @@
 
                     <div class="field-group">
                         <label for="activity_date">Activity date</label>
-                        <input type="text" name="activity_date" id="activity_date" class="field-input field-datepicker" ng-model="Ctrl.ActivityStatus.Date"/>
+                        <input type="text" name="activity_date" id="activity_date" class="field-input field-datepicker" ng-model="Ctrl.ActivityStatus.Date |date"/>
                     </div>
 
                     <div class="field-group">

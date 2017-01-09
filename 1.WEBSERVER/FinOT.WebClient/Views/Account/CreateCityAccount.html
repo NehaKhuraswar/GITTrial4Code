@@ -1,47 +1,144 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="panel panel-danger font-small">
-                <div class="panel-heading">
-                    <strong>User</strong>
-                </div>
-                <div class="panel-body">
-                    <p>Create Account</p>
-                    <div class="field-group">
-                        <label for="account_types">Account types</label>
-                        <select class="form-control"
-                                ng-model="Ctrl.CityUserAccount.AccountType"
-                                ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID"
-                                required>
-                            <option value="" selected>Select Account Type</option>
-                        </select>
-                    </div>
-                    <p>First Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.FirstName" required />
-                    <p>Last Name</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.LastName" required />
-                    <p>Email</p>
-                    <input type="email" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.Email" required />
-                    <p>Employee ID</p>
-                    <input type="number" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.EmployeeID" required />
-                    <p>Password</p>
-                    <input type="password" class="form-control input-sm" maxlength="8" ng-trim="false" ng-model="Ctrl.CityUserAccount.Password" required />
-                    <p>Title</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.Title" required />
-                    <p>Department</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.Department" required />
-                    <p>OfficeLocation</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.OfficeLocation" required />
-                    <p>OfficePhoneNumber</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.OfficePhoneNumber" required />
-                    <p>MobilePhoneNumber</p>
-                    <input type="text" class="form-control input-sm" ng-trim="false" ng-model="Ctrl.CityUserAccount.MobilePhoneNumber" required />
-
-                    <label><input type="checkbox" ng-model="Ctrl.CityUserAccount.IsHearingOfficer" required />Is Hearing Officer?</label>
-                    <label><input type="checkbox" ng-model="Ctrl.CityUserAccount.IsAnalyst" required /> Is Analyst</label>
-                    <button ng-click="Ctrl.CreateAccount(Ctrl.CityUserAccount)">Create Account</button>
-                </div>
-            </div>
+﻿<div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">Create a City User Account</h2>
         </div>
     </div>
-</div>
+
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Account management</a></li>
+                    <li class="active">Create a city user account</li>
+                </ul>
+            </div>
+
+            <div class="application-form-wrapper">
+                <div class="application-step step-1">
+
+                    <form name="frmCreateCityUserAccount" id="frmCreateCityUserAccount"  class="application-form">
+                        <div class="step-content step1">
+                            <div class="subhead no-top-margin no-bottom-margin">
+                                <p>Fields marked with an asterisk (*) are required</p>
+                            </div>
+
+
+                            <div class="field-group">
+                                <p>Account type</p>
+                                <div class="form-group-radio vertical clearfix">
+                                    <label for="account_type1">
+                                        <input type="radio" name="account_type" id="account_type1" class="input-field" value="Non RAP staff" ng-model="Ctrl.CityUserAccount.IsNonRAPStaff" /><i></i><span>Non RAP staff</span>
+                                    </label>
+
+                                    <label for="account_type2">
+                                        <input type="radio" name="account_type" id="account_type2" class="input-field" value="Admin assistant" ng-model="Ctrl.CityUserAccount.IsAdminAssistant" /><i></i> <span>Admin assistant</span>
+                                    </label>
+                                    <label for="account_type3">
+                                        <input type="radio" name="account_type" id="account_type3" class="input-field" value="Analyst" ng-model="Ctrl.CityUserAccount.IsCityAdmin" /><i></i> <span> Analyst</span>
+                                    </label>
+                                    <label for="account_type4">
+                                        <input type="radio" name="account_type" id="account_type4" class="input-field" value="Hearing officer" ng-model="Ctrl.CityUserAccount.IsHearingOfficer" /><i></i> <span> Hearing officer</span>
+                                    </label>
+                                    <label for="account_type5">
+                                        <input type="radio" name="account_type" id="account_type5" class="input-field" value="City admin" ng-model="Ctrl.CityUserAccount.IsAnalyst" /><i></i> <span> City admin</span>
+                                    </label>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+
+                            <div class="field-group">
+                                <label for="first_name">Name <span>*</span></label>
+                                <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.CityUserAccount.FirstName" />
+                            </div>
+
+                            <div class="field-group">
+                                <input type="text" name="last_name" id="last_name" class="field-input" placeholder="Last" ng-model="Ctrl.CityUserAccount.LastName" />
+                            </div>
+
+                            <div class="field-group">
+                                <label for="email">Email <span>*</span></label>
+                                <input type="text" name="email" id="email" class="field-input" placeholder="" ng-model="Ctrl.CityUserAccount.Email" />
+                            </div>
+
+                            <div class="field-group password-requirements">
+                                <p>Password requirements </p>
+                                <ul>
+                                    <li>Must be 6-24 characters</li>
+                                    <li>May not be all letters</li>
+                                    <li>May not be all numbers</li>
+                                    <li>May not be the same as your User ID</li>
+                                    <li>May contain uppercase and lowercase letters, numbers, underscores ( _ ), or hyphens (–)</li>
+                                </ul>
+                            </div>
+
+                            <div class="field-group">
+                                <label for="password">Password <span>*</span></label>
+                                <input type="password" name="password" id="password" class="field-input" placeholder="" ng-model="Ctrl.CityUserAccount.Password" />
+                            </div>
+
+                            <div class="field-group mar-bottom-60">
+                                <label for="confirm_password">Confirm your password <span>*</span></label>
+                                <input type="password" name="confirm_password" id="confirm_password" class="field-input" placeholder="" ng-model="Ctrl.confirmPwd" />
+                            </div>
+
+                            <!-- Staff contact information -->
+                            <div class="subhead type2 ">
+                                <h4>Staff contact information</h4>
+                            </div>
+                            <div class="field-group">
+                                <label for="job_title">Job title <span>*</span></label>
+                                <input type="text" name="job_title" id="job_title" class="field-input" placeholder="" ng-model="Ctrl.CityUserAccount.Title" />
+                            </div>
+
+                            <div class="field-group">
+                                <label for="department">Department <span>*</span></label>
+                                <input type="text" name="job_department" id="job_department" class="field-input" placeholder="" ng-model="Ctrl.CityUserAccount.Department" />
+                                <!--<div>
+                                    <select name="department" id="department" class="custom-select" data-placeholder="Select">
+                                        <option value="option_01">Option 01</option>
+                                        <option value="option_02">Option 02</option>
+                                        <option value="option_03">Option 03</option>
+                                    </select>
+                                </div>-->
+                            </div>
+
+                            <div class="field-group">
+                                <label for="office_location">Office location <span>*</span></label>
+                                <input type="text" name="office_location" id="office_location" class="field-input" placeholder="" ng-model="Ctrl.CityUserAccount.OfficeLocation" />
+                            </div>
+
+                            <div class="field-group">
+                                <label for="office_phone">Office Phone Number <span>*</span></label>
+                                <input type="text" name="office_phone" id="office_phone" class="field-input" placeholder="" ng-model="Ctrl.CityUserAccount.OfficePhoneNumber" />
+                            </div>
+
+                        </div>
+
+                        <div class="step-footer no-top-margin">
+                            <input type="button" id="btn-create-account" name="btn-create-account" class="btn-primary" value="Create account" ng-click="Ctrl.CreateAccount(Ctrl.CityUserAccount)" />
+                            <input type="button" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
+
+                            <input type="button" id="btn-delete" name="btn-delete" class="btn-primary btn-delete" value="Delete account" ng-click="bDelete=true" />
+                        </div>
+
+                        <div class="delete-confirmation mar-t40 mar-bottom-40" ng-show="bDelete== true">
+                            <strong>Are you sure that you want to delete this user?</strong>
+                            <div class="action-links">
+                                <a ng-click="Ctrl.DeleteAccount(Ctrl.CityUserAccount)" class="btn-link btn-delete">Delete</a>
+                                <a ng-click="bDelete=false" class="btn-link btn-cancel">Cancel</a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div><!-- .application-form-wrapper -->
+        </div><!-- .container -->
+    </div><!-- .page-content -->
+</div><!-- #content -->
