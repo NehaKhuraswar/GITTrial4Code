@@ -18,6 +18,7 @@ namespace RAP.Business.Implementation
         private readonly ICommonService _commonService;
         private readonly IExceptionHandler _eHandler = new ExceptionHandler();
         private readonly IEmailService _emailService;
+        
         //TBD
         //public ApplicationProcessingService()
         //{
@@ -211,9 +212,28 @@ namespace RAP.Business.Implementation
         public ReturnResult<bool> SubmitCustomEmail(CustomEmailM cMail)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
+            List<DocumentM> _documents = new List<DocumentM>();
             try
             {
                 result = _emailService.SendEmail(cMail.Message);
+                if(result.status.Status == StatusEnum.Success)
+                {
+                    if (cMail.Message.Attachments != null && cMail.Message.Attachments.Any())
+                    {
+                        foreach (var doc in cMail.Message.Attachments)
+                        {
+                            doc.DocCategory = DocCategory.EmailAttachment.ToString();
+                            var docUploadResut = _documentService.UploadDocument(doc);
+                            if (docUploadResut.status.Status == StatusEnum.Success)
+                            {
+                                _documents.Add(doc);
+                            }
+                        }
+                    }
+                    cMail.Message.Attachments = _documents;
+                    
+                }
+
                 return result;
             }
             catch (Exception ex)

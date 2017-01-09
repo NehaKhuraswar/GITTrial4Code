@@ -134,6 +134,22 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
+
+       public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id)
+       {
+           ReturnResult<bool> result = new ReturnResult<bool>();
+           try
+           {
+               result = _dbHandler.SaveCustomEmailNotification(message, employeeID, c_id);
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               LogError(result.status);
+               return result;
+           }
+       }
         
     }
 }

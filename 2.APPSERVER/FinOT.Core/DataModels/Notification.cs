@@ -14,6 +14,7 @@ namespace RAP.Core.DataModels
            CC = new List<string>();           
        }
       private List<DocumentM> _attachments = new List<DocumentM>();
+      public int NotificationID { get; set; }
       public List<string> RecipientAddress { get; set; }
       public string Subject { get; set; }
       public string MessageBody { get; set; }

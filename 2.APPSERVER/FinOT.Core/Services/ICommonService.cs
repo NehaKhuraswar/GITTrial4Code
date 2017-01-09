@@ -13,5 +13,6 @@ namespace RAP.Core.Services
         ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id);
         ReturnResult<DocumentM> SaveCaseDocument(DocumentM doc);
         ReturnResult<APNAddress> UpdateAPNAddress(APNAddress apnAddress);
+        ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id);
     }
 }

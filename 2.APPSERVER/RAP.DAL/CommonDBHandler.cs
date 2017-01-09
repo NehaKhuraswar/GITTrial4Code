@@ -688,5 +688,67 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    if(message != null)
+                    {
+                        CustomEmailNotification notification = new CustomEmailNotification();
+                        notification.Subject = message.Subject;
+                        notification.MessageBody = message.MessageBody;
+                        notification.Recipient = String.Concat(message.RecipientAddress);
+                        if(message.CC !=null && message.CC.Any())
+                        {
+                            notification.CC = String.Concat(message.CC);
+                        }
+                        if(message.BCC !=null)
+                        {
+                            notification.BCC = message.BCC;
+                        }
+                        notification.CreatedDate = DateTime.Now;
+                        notification.CreatedBy = employeeID;
+                        notification.C_ID = c_id;
+
+                        db.CustomEmailNotifications.InsertOnSubmit(notification);
+                        db.SubmitChanges();
+                        message.NotificationID = notification.NotificationID;
+
+                        if(message.NotificationID > 0)
+                        {
+                            if(message.Attachments != null && message.Attachments.Any())
+                            {
+                                foreach(var item in message.Attachments)
+                                {
+                                    CustomEmailNotificationAttachment notificationAttachment = new CustomEmailNotificationAttachment();
+                                    notificationAttachment.NotificationID = message.NotificationID;
+                                    notificationAttachment.DocumentID = item.DocID;
+                                    db.CustomEmailNotificationAttachments.InsertOnSubmit(notificationAttachment);
+                                    db.SubmitChanges();
+                                }
+                            }
+                        }
+                        result.result = true;
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                        return result;
+                    }
+                    else
+                    {
+                        throw new Exception("Email model is empty");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
     }
 }

@@ -31,6 +31,7 @@ namespace RAP.Core.DataModels
          OwnerResponse,
          TenantResponse,
          Appeal,
-         AdditionalStaffDocument
+         AdditionalStaffDocument,
+         EmailAttachment
      }
 }

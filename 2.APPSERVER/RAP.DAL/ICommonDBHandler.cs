@@ -21,5 +21,6 @@ namespace RAP.DAL
        ReturnResult<List<DocumentM>> GetDocumentsByCategory(int CustmerID, bool isPetitiofiled, string docCategory);
        ReturnResult<bool> UpdateDocumentCaseInfo(int CustmerID, int C_ID, string docCategory);
        ReturnResult<APNAddress> GetAPNAddress(int UserID);
+       ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id);
     }
 }
