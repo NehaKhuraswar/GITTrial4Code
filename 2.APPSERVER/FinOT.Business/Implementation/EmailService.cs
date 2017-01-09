@@ -30,13 +30,16 @@ namespace RAP.Business.Implementation
                 bool enableSSL = string.IsNullOrEmpty(ConfigurationManager.AppSettings["EnableSSL"]) ? false : (ConfigurationManager.AppSettings["EnableSSL"] == "true" ? true : false);
                 bool defaultAuthentication = string.IsNullOrEmpty(ConfigurationManager.AppSettings["DefaultAuthentication"]) ? false : (ConfigurationManager.AppSettings["DefaultAuthentication"] == "true" ? true : false);
                 bool includeBCC = string.IsNullOrEmpty(ConfigurationManager.AppSettings["IncludeBCC"]) ? false : (ConfigurationManager.AppSettings["IncludeBCC"] == "true" ? true : false);
-                if (message.RecipientAddress != null && message.RecipientAddress.Any())
-                {
+               // if (message.RecipientAddress != null && message.RecipientAddress.Any())
+                //{
                     using (MailMessage mail = new MailMessage())
                     {
                         mail.From = new MailAddress(senderAddress);
-                        mail.To.Add(String.Concat(message.RecipientAddress));
                         mail.To.Add("RAP.Oakland@gmail.com");
+                        if (message.RecipientAddress != null && message.RecipientAddress.Any())
+                        {
+                           mail.To.Add(String.Concat(message.RecipientAddress));
+                        }                      
                         mail.Subject = message.Subject;
                         mail.Body = message.MessageBody;
                         if (includeBCC)
@@ -74,11 +77,11 @@ namespace RAP.Business.Implementation
                         }
                     }
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
-                }
-                else
-                {
-                    throw new Exception("Email Recipient not found");
-                }
+                //}
+                //else
+                //{
+                //    throw new Exception("Email Recipient not found");
+                //}
                     
                 return result;
             }
