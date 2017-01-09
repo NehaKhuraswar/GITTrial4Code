@@ -121,7 +121,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         return ajax.Get(_routePrefix + '/statuslist/get');
     }
 
-    var _fileExtensons = ['.PDF', '.DOC', '.DOCX', '.XLS', '.JPEG', '.TIFF', '.PNG'];
+    var _fileExtensons = ['.PDF', '.DOC', '.DOCX', '.XLSX', '.JPEG', '.TIFF', '.PNG'];
     var _fileSize = 25 ;
 
 

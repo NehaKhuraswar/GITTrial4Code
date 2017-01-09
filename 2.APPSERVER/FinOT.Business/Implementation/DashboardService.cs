@@ -204,6 +204,7 @@ namespace RAP.Business.Implementation
         {
             ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
             result.result = new CustomEmailM();
+            result.status = new OperationStatus() { Status = StatusEnum.Success };
             return result;
         }
 

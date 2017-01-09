@@ -61,7 +61,7 @@
 
 
     self.Download = function (doc) {
-        masterFactory.GetDocument(doc);
+       masterFactory.GetDocument(doc);
 
     }
     self.Submit = function () {

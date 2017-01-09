@@ -7,7 +7,8 @@ var rapCustomEmailFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) 
         blockUI.start();
         var url = _routePrefix + '/GetCustomEmail';
         if (!(cid == null || cid == undefined)) { url = url + '/' + cid; }
-        return ajax.Get(url)
+        var model = null;
+        return ajax.Get(url, model)
         .finally(function () {
             blockUI.stop();
         });

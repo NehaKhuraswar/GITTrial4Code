@@ -37,6 +37,7 @@
                         var arrayBuffer = e.target.result;
                         var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
                         document.Base64Content = base64String;
+        
                     }                  
                     self.model.Message.Attachments.push(document);
                     
