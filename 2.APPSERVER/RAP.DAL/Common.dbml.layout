@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 12.625" name="Common">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 13.375" name="Common">
   <DataContextMoniker Name="/CommonDataContext" />
   <nestedChildShapes>
     <classShape Id="9e4aacf8-98bd-411e-8721-006a8b407229" absoluteBounds="4.125, 1, 2, 1.3862939453125">
@@ -52,30 +52,30 @@
         <elementListCompartment Id="afe75162-8ecd-4ff4-88aa-a648d9f6b632" absoluteBounds="2.265, 4.835, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5fd16298-e1d0-44a8-87c0-c9b7c5dc4b58" absoluteBounds="0.875, 11, 2, 1.3862939453125">
-      <DataClassMoniker Name="/CommonDataContext/CustomEmailNotificationAttachment" />
+    <classShape Id="f824845e-a5eb-4801-9431-c240f2cf81b5" absoluteBounds="0.75, 8.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/CommonDataContext/CustomEmailNotification" />
       <nestedChildShapes>
-        <elementListCompartment Id="a556736c-8af4-4186-9e93-ef290f1af49f" absoluteBounds="0.89000000000000012, 11.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3b6ac298-eb54-4784-b122-00c0d3a9ca9a" absoluteBounds="0.76500000000000012, 8.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.71875 : 7.4920068359375); (2.71875 : 11)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" absoluteBounds="0.75, 11.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CommonDataContext/CustomEmailNotificationAttachment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="833ffc1d-8b55-4f8b-97c2-d1656edf77b2" absoluteBounds="0.76500000000000012, 12.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 11.0401025390625); (1.75 : 11.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CommonDataContext/CustomEmailNotification/CustomEmailNotification_CustomEmailNotificationAttachment" />
+      <nodes>
+        <classShapeMoniker Id="f824845e-a5eb-4801-9431-c240f2cf81b5" />
+        <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.25153746153846 : 7.4920068359375); (1.87653746153846 : 7.8670068359375); (0.375 : 7.8670068359375); (0.375 : 11.375); (0.75 : 11.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CommonDataContext/Document/Document_CustomEmailNotificationAttachment" />
       <nodes>
         <classShapeMoniker Id="db074159-2a4d-4aa0-910f-a938d9c3db22" />
-        <classShapeMoniker Id="5fd16298-e1d0-44a8-87c0-c9b7c5dc4b58" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="30971f48-7674-4033-aeb4-4fafc6a9a854" absoluteBounds="0.5, 7.875, 2, 2.5401025390625">
-      <DataClassMoniker Name="/CommonDataContext/CustomEmailNotification" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6004a775-2822-4c50-9cd5-87a712c5b540" absoluteBounds="0.515, 8.335, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(1.6875 : 10.4151025390625); (1.6875 : 11)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/CommonDataContext/CustomEmailNotification/CustomEmailNotification_CustomEmailNotificationAttachment" />
-      <nodes>
-        <classShapeMoniker Id="30971f48-7674-4033-aeb4-4fafc6a9a854" />
-        <classShapeMoniker Id="5fd16298-e1d0-44a8-87c0-c9b7c5dc4b58" />
+        <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -216,7 +216,7 @@ namespace RAP.Business.Implementation
             try
             {
                 result = _emailService.SendEmail(cMail.Message);
-                if(result.status.Status == StatusEnum.Success)
+                if (result.status.Status == StatusEnum.Success)
                 {
                     if (cMail.Message.Attachments != null && cMail.Message.Attachments.Any())
                     {
@@ -231,7 +231,7 @@ namespace RAP.Business.Implementation
                         }
                     }
                     cMail.Message.Attachments = _documents;
-                    
+                    _commonService.SaveCustomEmailNotification(cMail.Message, cMail.EmployeeID, cMail.C_ID);
                 }
 
                 return result;
@@ -242,8 +242,6 @@ namespace RAP.Business.Implementation
                 _commonService.LogError(result.status);
                 return result;
             }
-
-
         }
         //implements all methods from IDashboardService
     }
