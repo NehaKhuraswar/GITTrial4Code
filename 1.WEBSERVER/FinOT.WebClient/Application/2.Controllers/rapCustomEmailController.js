@@ -1,8 +1,9 @@
-﻿var rapCustomEmailController = ['$scope', 'alertService', '$location', 'rapCustomEmailFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
+﻿var rapCustomEmailController = ['$scope', 'alertService', '$location', 'rapCustomEmailFactory', 'rapGlobalFactory', 'masterdataFactory', 'rapnewcasestatusFactory', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory, rapnewcasestatusFactory) {
     var self = this;
     self.custDetails = rapGlobalFactory.CityUser;
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     self.model = null;
+    self.ActivityList = [];
       
   
     rapFactory.GetCustomEmail(self.c_id).then(function (response) {
@@ -10,6 +11,11 @@
         self.model = response.data;
     });
 
+    rapnewcasestatusFactory.GetActivity().then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.ActivityList = response.data;
+        });
+    
     $scope.onFileSelected = function ($files, docTitle) {
         if ($files && $files.length) {
             for (var i = 0; i < $files.length; i++) {
@@ -47,11 +53,6 @@
         }
     }
 
-
-    self.Download = function (doc) {
-        masterFactory.GetDocument(doc);
-
-    }
     self.Submit = function () {
         self.model.C_ID = self.c_id;
         self.model.EmployeeID = self.custDetails.EmployeeID;
