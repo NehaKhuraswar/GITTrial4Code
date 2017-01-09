@@ -469,17 +469,17 @@ var tooltips;
     });
     
     
-    if(window.location.hash) {
-      hash = window.location.hash.replace(/^.*#/, ''); 
-      if(hash != ''){
-        if($("."+hash).length > 0){
-          scrollToElement($("."+hash), 800, 0);
-        }
-        if($("#"+hash).length > 0){
-          scrollToElement($("#"+hash), 800, 0);
-        }
-      }
-    }
+    //if(window.location.hash) {
+    //  hash = window.location.hash.replace(/^.*#/, ''); 
+    //  if(hash != ''){
+    //    if($("."+hash).length > 0){
+    //      scrollToElement($("."+hash), 800, 0);
+    //    }
+    //    if($("#"+hash).length > 0){
+    //      scrollToElement($("#"+hash), 800, 0);
+    //    }
+    //  }
+    //}
     
     if($('.add-upload-document').length > 0) {
       $('.add-upload-document').click(function(e) {

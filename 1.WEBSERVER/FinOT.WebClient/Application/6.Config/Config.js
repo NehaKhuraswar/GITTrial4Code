@@ -240,7 +240,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
         })
         .otherwise({ redirectTo: '/' });
 
-   // $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
     //Enable cross domain calls
     $httpProvider.defaults.useXDomain = true;
     //Remove the header used to identify ajax call  that would prevent CORS from working
