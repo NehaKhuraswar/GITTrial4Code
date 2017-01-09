@@ -700,7 +700,7 @@ namespace RAP.DAL
                         CustomEmailNotification notification = new CustomEmailNotification();
                         notification.Subject = message.Subject;
                         notification.MessageBody = message.MessageBody;
-                        notification.Recipient = String.Concat(message.RecipientAddress);
+                        notification.Recipient = String.Join(",", message.RecipientAddress);
                         if(message.CC !=null && message.CC.Any())
                         {
                             notification.CC = String.Concat(message.CC);

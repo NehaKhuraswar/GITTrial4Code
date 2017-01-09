@@ -38,7 +38,7 @@ namespace RAP.Business.Implementation
                         mail.To.Add("RAP.Oakland@gmail.com");
                         if (message.RecipientAddress != null && message.RecipientAddress.Any())
                         {
-                           mail.To.Add(String.Concat(message.RecipientAddress));
+                           mail.To.Add(String.Join(",",message.RecipientAddress));
                         }                      
                         mail.Subject = message.Subject;
                         mail.Body = message.MessageBody;

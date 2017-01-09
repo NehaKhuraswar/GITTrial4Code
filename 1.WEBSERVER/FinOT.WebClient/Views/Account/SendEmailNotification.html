@@ -47,21 +47,21 @@
                             <div class="field-group">
                                 <label>Recipient</label>
                                 <div class="form-group-checkbox vertical clearfix">
-                                    <div class="checkbox-wrapper no-bottom-margin">
+                                    <div class="checkbox-wrapper no-bottom-margin" ng-show="Ctrl.TenantEmail != null">
                                         <label for="recipient1">
-                                            <input type="checkbox" name="recipient1" id="recipient1" value="Tenant (Bob Smith)" /><i></i><span>Tenant (Bob Smith)</span>
+                                            <input type="checkbox" name="recipient1" id="recipient1" ng-model="Ctrl.bTenant" /><i></i><span>Tenant ({{Ctrl.TenantEmail}})</span>
                                         </label>
                                     </div>
 
-                                    <div class="checkbox-wrapper no-bottom-margin">
+                                    <div class="checkbox-wrapper no-bottom-margin" ng-show="Ctrl.OwnerEmail != null">
                                         <label for="recipient2">
-                                            <input type="checkbox" name="recipient2" id="recipient2" value="Property Owner (Jennifer Smith)" /><i></i><span>Property Owner (Jennifer Smith)</span>
+                                            <input type="checkbox" name="recipient2" id="recipient2" ng-model="Ctrl.bOwner" /><i></i><span>Property Owner ({{Ctrl.OwnerEmail}})</span>
                                         </label>
                                     </div>
 
-                                    <div class="checkbox-wrapper no-bottom-margin">
+                                    <div class="checkbox-wrapper no-bottom-margin" ng-show="Ctrl.ThirdPartyEmail != null">
                                         <label for="recipient3">
-                                            <input type="checkbox" name="recipient3" id="recipient3" value="Property Owner’s Representative (Peter Johnson)" /><i></i><span>Property Owner’s Representative (Peter Johnson)</span>
+                                            <input type="checkbox" name="recipient3" id="recipient3" ng-model="Ctrl.bThirdParty" /><i></i><span>Property Owner’s Representative ({{Ctrl.ThirdPartyEmail}})</span>
                                         </label>
                                     </div>
                                 </div>
