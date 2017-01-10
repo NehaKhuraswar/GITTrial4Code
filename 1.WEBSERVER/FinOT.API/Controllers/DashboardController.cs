@@ -292,7 +292,34 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetEmptyCaseSearchModel")]
+        public HttpResponseMessage GetEmptyCaseSearchModel()
+        {
 
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseSearch> transaction = new TranInfo<CaseSearch>();
+            ReturnResult<CaseSearch> result = new ReturnResult<CaseSearch>();
+
+            try
+            {
+
+
+                transaction.data = new CaseSearch();
+                transaction.status = true;
+
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<CaseSearch>>(ReturnCode, transaction);
+        }
         [AllowAnonymous]
         [Route("GetCustomEmail/{cid:int}")]
         [HttpGet]
@@ -430,6 +457,49 @@ namespace RAP.API.Controllers
             }
 
             return Request.CreateResponse<TranInfo<List<ActivityStatus_M>>>(ReturnCode, transaction);
+        }
+
+
+
+        [AllowAnonymous]
+        [Route("GetCaseSearch")]
+        [HttpPost]
+        public HttpResponseMessage GetCaseSearch(CaseSearch caseSearch)
+        {
+
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<SearchCaseResult> transaction = new TranInfo<SearchCaseResult>();
+            ReturnResult<SearchCaseResult> result = new ReturnResult<SearchCaseResult>();
+            try
+            {
+                result = _service.GetCaseSearch(caseSearch);
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<SearchCaseResult>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]

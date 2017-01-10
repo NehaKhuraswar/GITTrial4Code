@@ -149,14 +149,45 @@ namespace RAP.Core.DataModels
         public int CurrentPage;
         public int TotalCount;
     }
-
     public class SearchResultCustomerInfo
     {
-        public string AccountType { get; set; }       
+        public string AccountType { get; set; }
         public int custID { get; set; }
         public string email { get; set; }
         public string Name { get; set; }
         public int RankNo { get; set; }
         public DateTime CreatedDate { get; set; }
+    }
+
+    public class SearchCaseResult
+    {
+        public SearchCaseResult()
+        {
+            List = new List<SearchResultCaseInfo>();
+        }
+        public List<SearchResultCaseInfo> List;
+        public string SortBy;
+        public bool SortReverse;
+        public int PageSize;
+        public int CurrentPage;
+        public int TotalCount;
+    }    
+    public class SearchResultCaseInfo
+    {
+        public int RankNo { get; set; }
+        public int C_ID {get;set;}
+        public string CaseID {get;set;}
+        public int ActivityID {get;set;}
+        public string ActivityName {get;set;}
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
+        public string Analyst {get;set;}
+        public string HearingOfficer {get;set;}
+        public string ApplicantAddressLine1 {get;set;}
+        public string ApplicantAddressLine2 {get;set;}
+        public string ApplicantCity {get;set;}
+        public int ApplicantStateID {get;set;}
+        public string ApplicantStateCode {get;set;}
+        public string ApplicantZip {get;set;}
     }
 }

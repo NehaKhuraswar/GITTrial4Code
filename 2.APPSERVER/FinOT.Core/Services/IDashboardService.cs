@@ -21,6 +21,7 @@ namespace RAP.Core.Services
         ReturnResult<bool> SubmitCustomEmail(CustomEmailM cMail);
         ReturnResult<MailM> GetMail();
         ReturnResult<bool> SubmitMail(MailM mail);
+        ReturnResult<SearchCaseResult> GetCaseSearch(CaseSearch caseSearch);
 
     }
 }

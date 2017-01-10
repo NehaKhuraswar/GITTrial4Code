@@ -90,7 +90,7 @@
 
                                                 <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                                     <div>
-                                                        <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Hearing Officer"
+                                                        <select name="hearing" id="hearing" class="custom-select" data-placeholder="Select Hearing Officer"
                                                                 ng-model="HearingOfficer"
                                                                 ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
                                                     </div>
@@ -140,21 +140,21 @@
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <label for="last_name" class="small-title">Last name</label>
-                                        <input type="text" name="last_name" id="last_name" class="field-input" value="" />
+                                        <input type="text" name="last_name" id="last_name" class="field-input" value="" ng-model="Ctrl.CaseSearchModel.LastName" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <label for="first_name" class="small-title">First name</label>
-                                        <input type="text" name="first_name" id="first_name" class="field-input" value="" />
+                                        <input type="text" name="first_name" id="first_name" class="field-input" value="" ng-model="Ctrl.CaseSearchModel.FirstName" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <label for="apn_number" class="small-title">APN number</label>
-                                        <input type="text" name="apn_number" id="apn_number" class="field-input" value="" />
+                                        <input type="text" name="apn_number" id="apn_number" class="field-input" value="" ng-model="Ctrl.CaseSearchModel.APNNumber" />
                                     </div>
                                 </div>
                             </div>
@@ -165,21 +165,21 @@
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <label for="address_line1" class="small-title">Address line 1</label>
-                                        <input type="text" name="address_line1" id="address_line1" class="field-input" value="" />
+                                        <input type="text" name="address_line1" id="address_line1" ng-model="Ctrl.CaseSearchModel.AddressLine1" class="field-input" value="" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <label for="address_line2" class="small-title">Address line 2</label>
-                                        <input type="text" name="address_line2" id="address_line2" class="field-input" value="" />
+                                        <input type="text" name="address_line2" id="address_line2" ng-model="Ctrl.CaseSearchModel.AddressLine2" class="field-input" value="" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <label for="zip_code" class="small-title">Zip code</label>
-                                        <input type="text" name="zip_code" id="zip_code" class="field-input" value="" />
+                                        <input type="text" name="zip_code" id="zip_code" class="field-input" ng-model="Ctrl.CaseSearchModel.Zip" value="" />
                                     </div>
                                 </div>
                             </div>
@@ -194,13 +194,15 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="field-group">
-                                                <input type="text" name="date_range_start" id="date_range_start" class="field-input full-width field-datepicker" value="" />
+                                                <input type="text" name="date_range_start" id="date_range_start" class="field-input full-width field-datepicker"
+                                                       ng-model="Ctrl.CaseSearchModel.FromDate" value="" />
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="field-group">
-                                                <input type="text" name="date_range_end" id="date_range_end" class="field-input full-width field-datepicker" value="" />
+                                                <input type="text" name="date_range_end" id="date_range_end" class="field-input full-width field-datepicker"
+                                                       ng-model="Ctrl.CaseSearchModel.ToDate" value="" />
                                             </div>
                                         </div>
                                     </div>
@@ -210,11 +212,9 @@
                                     <div class="field-group">
                                         <label for="analyst" class="small-title">Analyst</label>
                                         <div class="full-width">
-                                            <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select name">
-                                                <option value="Option 1" selected>Option 1</option>
-                                                <option value="Option 2">Option 2</option>
-                                                <option value="Option 3">Option 3</option>
-                                            </select>
+                                            <select name="analyst" id="analyst" data-placeholder="Select analyst"
+                                                    ng-model="Ctrl.CaseSearchModel.Analyst"
+                                                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -223,11 +223,9 @@
                                     <div class="field-group">
                                         <label for="hearing_officer" class="small-title">Hearing officer</label>
                                         <div class="full-width">
-                                            <select name="hearing_officer" id="hearing_officer" class="custom-select" data-placeholder="Select name">
-                                                <option value="Option 1" selected>Option 1</option>
-                                                <option value="Option 2">Option 2</option>
-                                                <option value="Option 3">Option 3</option>
-                                            </select>
+                                            <select name="hearing_officer" id="hearing_officer" data-placeholder="Select Hearing Officer"
+                                                    ng-model="Ctrl.CaseSearchModel.HearingOfficer"
+                                                    ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -238,8 +236,8 @@
 
 
                     <div class="step-footer">
-                        <input type="button" id="search" name="search" class="btn-primary alt" value="Search" />
-                        <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Clear filters" />
+                        <input type="button" id="search" name="search" class="btn-primary alt" value="Search" ng-click="Ctrl.CaseSearch(Ctrl.CaseSearchModel)" />
+                        <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Clear filters" ng-click="Ctrl.OnClearFilter()" />
                     </div>
                 </form>
 
@@ -255,16 +253,16 @@
                     </div>
 
                     <div class="tbl-body">
-                        <div class="tbl-row clearfix">
-                            <div class="item item-toggle">
+                        <div class="tbl-row clearfix" ng-repeat="result in Ctrl.CaseSearchResult">
+                            <div class="item" ng-class="{'expanded':toggle}">
                                 <div class="item-header clearfix">
-                                    <div class="col col-45 pad-l40 case-number"><a href="#" class="btn-toggle"></a> <strong><a href="#">T17-0238; Peterson v. Johnson (Unit B)</a></strong><br />1401 Jackson Street Unit B, Oakland, CA 94612</div>
-                                    <div class="col col-20 filling-date">Nov 20, 2016</div>
-                                    <div class="col col-20 ast-activity">Dec 20, 2016</div>
-                                    <div class="col col-15 activity">Petition filed</div>
+                                    <div class="col col-45 pad-l40 case-number"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a href="#">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
+                                    <div class="col col-20 filling-date">{{result.CreatedDate | date}}</div>
+                                    <div class="col col-20 ast-activity">{{result.LastModifiedDate |date}}</div>
+                                    <div class="col col-15 activity">{{result.ActivityName}}</div>
                                 </div>
 
-                                <div class="item-content clearfix">
+                                <div class="item-content clearfix" ng-show="toggle">
                                     <div class="item-row clearfix">
                                         <div class="item-col col-45 pad-l40 align-left">
                                             <div class="small-title">Tenant</div>
@@ -280,8 +278,9 @@
                                     <div class="item-row clearfix">
                                         <div class="item-col col-45  pad-l40 align-left">
                                             <div class="small-title">Analyst</div>
-                                            <p>Alejandra Roberts</p>
-                                        </div>
+                                            <p class="alert-error-msg" ng-show="result.Analyst==null">assignment required</p>
+                                            <p ng-show="result.Analyst!=null">{{result.Analyst}}</p>
+</div>
 
                                         <div class="item-col col-42 pad-l10 align-left">
                                             <div>
@@ -294,14 +293,15 @@
                                         </div>
 
                                         <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>
+                                            <a href="#" class="btn-link btn-assign">Assign</a>                                            
                                         </div>
                                     </div>
 
                                     <div class="item-row clearfix">
                                         <div class="item-col col-45  pad-l40 align-left">
                                             <div class="small-title">Hearing Officer</div>
-                                            <p class="alert-error-msg">assignment required</p>
+                                            <p class="alert-error-msg" ng-show="result.HearingOfficer==null">assignment required</p>
+                                            <p ng-show="result.HearingOfficer!=null">{{result.HearingOfficer}}</p>
                                         </div>
 
                                         <div class="item-col col-42 pad-l10 align-left">
@@ -322,144 +322,6 @@
                                 </div>
                             </div><!-- item-toggle -->
                         </div><!-- item-row -->
-
-
-                        <div class="tbl-row clearfix">
-                            <div class="item item-toggle">
-                                <div class="item-header clearfix">
-                                    <div class="col col-45 pad-l40 case-number"><a href="#" class="btn-toggle"></a> <strong><a href="#">T17-0239; Davis v. Johnson (Unit C)</a></strong><br />1401 Jackson Street Unit B, Oakland, CA 94612</div>
-                                    <div class="col col-20 filling-date">Nov 20, 2016</div>
-                                    <div class="col col-20 ast-activity">Dec 20, 2016</div>
-                                    <div class="col col-15 activity">Petition filed</div>
-                                </div>
-
-                                <div class="item-content clearfix">
-                                    <div class="item-row clearfix">
-                                        <div class="item-col col-45 pad-l40 align-left">
-                                            <div class="small-title">Tenant</div>
-                                            <p>Bob Smith</p>
-                                        </div>
-
-                                        <div class="item-col col-55 pad-l10 align-left">
-                                            <div class="small-title">Property Owner</div>
-                                            <p>Peter Johnson</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item-row clearfix">
-                                        <div class="item-col col-45  pad-l40 align-left">
-                                            <div class="small-title">Analyst</div>
-                                            <p>Alejandra Roberts</p>
-                                        </div>
-
-                                        <div class="item-col col-42 pad-l10 align-left">
-                                            <div>
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst">
-                                                    <option value="Option 1">Option 1</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="item-row clearfix">
-                                        <div class="item-col col-45  pad-l40 align-left">
-                                            <div class="small-title">Hearing Officer</div>
-                                            <p class="alert-error-msg">assignment required</p>
-                                        </div>
-
-                                        <div class="item-col col-42 pad-l10 align-left">
-                                            <div>
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Hearing Officer">
-                                                    <option value="Montgomery Washington" selected>Montgomery Washington</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div><!-- item-toggle -->
-                        </div><!-- item-row -->
-
-                        <div class="tbl-row clearfix">
-                            <div class="item item-toggle">
-                                <div class="item-header clearfix">
-                                    <div class="col col-45 pad-l40 case-number"><a href="#" class="btn-toggle"></a> <strong><a href="#">T17-0240; Smith v. Johnson (Unit D)</a></strong><br />1401 Jackson Street Unit B, Oakland, CA 94612</div>
-                                    <div class="col col-20 filling-date">Nov 20, 2016</div>
-                                    <div class="col col-20 ast-activity">Dec 20, 2016</div>
-                                    <div class="col col-15 activity">Petition filed</div>
-                                </div>
-
-                                <div class="item-content clearfix">
-                                    <div class="item-row clearfix">
-                                        <div class="item-col col-45 pad-l40 align-left">
-                                            <div class="small-title">Tenant</div>
-                                            <p>Bob Smith</p>
-                                        </div>
-
-                                        <div class="item-col col-55 pad-l10 align-left">
-                                            <div class="small-title">Property Owner</div>
-                                            <p>Peter Johnson</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="item-row clearfix">
-                                        <div class="item-col col-45  pad-l40 align-left">
-                                            <div class="small-title">Analyst</div>
-                                            <p>Alejandra Roberts</p>
-                                        </div>
-
-                                        <div class="item-col col-42 pad-l10 align-left">
-                                            <div>
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst">
-                                                    <option value="Option 1">Option 1</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="item-row clearfix">
-                                        <div class="item-col col-45  pad-l40 align-left">
-                                            <div class="small-title">Hearing Officer</div>
-                                            <p class="alert-error-msg">assignment required</p>
-                                        </div>
-
-                                        <div class="item-col col-42 pad-l10 align-left">
-                                            <div>
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Hearing Officer">
-                                                    <option value="Montgomery Washington" selected>Montgomery Washington</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div><!-- item-toggle -->
-                        </div><!-- item-row -->
-
                     </div>
                 </div>
                 <!-- .custom-table -->
@@ -483,3 +345,4 @@
     </div><!-- .container -->
 </div><!-- .page-content -->
 </div><!-- #content -->
+<script src='../js/functions.js'></script>

@@ -36,6 +36,16 @@ var rapstaffdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
          });
     }
+    var _GetEmptyCaseSearchModel = function () {
+        blockUI.start();
+
+        var url = 'api/dashboard' + '/GetEmptyCaseSearchModel';
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     var _GetCaseInfo = function () {
         blockUI.start();
@@ -47,13 +57,22 @@ var rapstaffdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
         });
       }
-    
+    var _GetCaseSearch = function (model) {
+        blockUI.start();
+        var url = 'api/dashboard' + '/GetCaseSearch/'
+
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
      
     factory.GetCaseInfo = _GetCaseInfo;
     factory.GetCasesNoAnalyst = _GetCasesNoAnalyst;
-
+    factory.GetCaseSearch = _GetCaseSearch;
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;
+    factory.GetEmptyCaseSearchModel = _GetEmptyCaseSearchModel;
 
 
     return factory;

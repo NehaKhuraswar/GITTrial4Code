@@ -95,7 +95,35 @@ namespace RAP.Core.DataModels
 		public bool SortReverse {get; set;}
         public int CurrentPage { get; set; }
     }
-
+    public class CaseSearch
+    {
+        public CaseSearch()
+        {
+            Analyst = new CityUserAccount_M();
+            HearingOfficer = new CityUserAccount_M();
+            FromDate = null;
+            ToDate = null;
+        }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int APNNumber { get; set; }
+        public CityUserAccount_M Analyst { get; set; }
+        public CityUserAccount_M HearingOfficer { get; set; }
+        public int AnalystID { get; set; }
+        public int HearingOfficerID { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string Zip { get; set; }
+        public string PhoneNumber { get; set; }
+        public string CaseNumber { get; set; }
+       
+        public int PageSize { get; set; }
+        public string SortBy { get; set; }
+        public bool SortReverse { get; set; }
+        public int CurrentPage { get; set; }
+    }
     public class AccountType
     {
         public int AccountTypeID { get; set; }

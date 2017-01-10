@@ -15,7 +15,6 @@
         {
             self.UserName = rapGlobalFactory.CityUser.FirstName;
         }
-       // self.UserName = 'Neha';
         return self.UserName;
     }
 
@@ -29,6 +28,5 @@
         rapGlobalFactory.CityUser = null;
         $location.path("/loginURL");
     }
-    $location.path("/loginURL");
  
 }];

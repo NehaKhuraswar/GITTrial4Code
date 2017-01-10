@@ -106,6 +106,14 @@ namespace RAP.DAL
 			}
 		}
 		
+		public System.Data.Linq.Table<ReturnCaseSearch> ReturnCaseSearches
+		{
+			get
+			{
+				return this.GetTable<ReturnCaseSearch>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_Status_Get")]
 		public ISingleResult<USP_Status_GetResult> USP_Status_Get([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
 		{
@@ -131,6 +139,33 @@ namespace RAP.DAL
 			message = ((string)(result.GetParameterValue(7)));
 			errorCode = ((System.Nullable<int>)(result.GetParameterValue(8)));
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_SearchCase_Get")]
+		public ISingleResult<ReturnCaseSearch> USP_SearchCase_Get(
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="VarChar(25)")] string firstName, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastName", DbType="VarChar(25)")] string lastName, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="APNNumber", DbType="Int")] System.Nullable<int> aPNNumber, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AnalystID", DbType="Int")] System.Nullable<int> analystID, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="HearingOfficerID", DbType="Int")] System.Nullable<int> hearingOfficerID, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FromDate", DbType="DateTime")] System.Nullable<System.DateTime> fromDate, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="ToDate", DbType="DateTime")] System.Nullable<System.DateTime> toDate, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine1", DbType="VarChar(25)")] string addressLine1, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AddressLine2", DbType="VarChar(25)")] string addressLine2, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Zip", DbType="VarChar(5)")] string zip, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PhoneNumber", DbType="VarChar(15)")] string phoneNumber, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CaseNumber", DbType="VarChar(25)")] string caseNumber, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortBy", DbType="VarChar(50)")] string sortBy, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortReverse", DbType="Bit")] System.Nullable<bool> sortReverse, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PageSize", DbType="Int")] System.Nullable<int> pageSize, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CurrentPage", DbType="Int")] System.Nullable<int> currentPage, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalCount", DbType="Int")] ref System.Nullable<int> totalCount, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), firstName, lastName, aPNNumber, analystID, hearingOfficerID, fromDate, toDate, addressLine1, addressLine2, zip, phoneNumber, caseNumber, sortBy, sortReverse, pageSize, currentPage, totalCount, message);
+			totalCount = ((System.Nullable<int>)(result.GetParameterValue(16)));
+			message = ((string)(result.GetParameterValue(17)));
+			return ((ISingleResult<ReturnCaseSearch>)(result.ReturnValue));
 		}
 	}
 	
@@ -966,6 +1001,285 @@ namespace RAP.DAL
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReturnCaseSearch")]
+	public partial class ReturnCaseSearch
+	{
+		
+		private System.Nullable<int> _RankNo;
+		
+		private System.Nullable<int> _C_ID;
+		
+		private string _CaseID;
+		
+		private System.Nullable<int> _ActivityID;
+		
+		private string _ActivityName;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.DateTime> _LastModifiedDate;
+		
+		private string _Analyst;
+		
+		private string _HearingOfficer;
+		
+		private string _ApplicantAddressLine1;
+		
+		private string _ApplicantAddressLine2;
+		
+		private string _ApplicantCity;
+		
+		private System.Nullable<int> _ApplicantStateID;
+		
+		private string _ApplicantStateCode;
+		
+		private string _ApplicantZip;
+		
+		public ReturnCaseSearch()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RankNo", DbType="Int")]
+		public System.Nullable<int> RankNo
+		{
+			get
+			{
+				return this._RankNo;
+			}
+			set
+			{
+				if ((this._RankNo != value))
+				{
+					this._RankNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int")]
+		public System.Nullable<int> C_ID
+		{
+			get
+			{
+				return this._C_ID;
+			}
+			set
+			{
+				if ((this._C_ID != value))
+				{
+					this._C_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseID", DbType="VarChar(20)")]
+		public string CaseID
+		{
+			get
+			{
+				return this._CaseID;
+			}
+			set
+			{
+				if ((this._CaseID != value))
+				{
+					this._CaseID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityID", DbType="Int")]
+		public System.Nullable<int> ActivityID
+		{
+			get
+			{
+				return this._ActivityID;
+			}
+			set
+			{
+				if ((this._ActivityID != value))
+				{
+					this._ActivityID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityName", DbType="VarChar(50)")]
+		public string ActivityName
+		{
+			get
+			{
+				return this._ActivityName;
+			}
+			set
+			{
+				if ((this._ActivityName != value))
+				{
+					this._ActivityName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this._LastModifiedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Analyst", DbType="VarChar(100)")]
+		public string Analyst
+		{
+			get
+			{
+				return this._Analyst;
+			}
+			set
+			{
+				if ((this._Analyst != value))
+				{
+					this._Analyst = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HearingOfficer", DbType="VarChar(100)")]
+		public string HearingOfficer
+		{
+			get
+			{
+				return this._HearingOfficer;
+			}
+			set
+			{
+				if ((this._HearingOfficer != value))
+				{
+					this._HearingOfficer = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantAddressLine1", DbType="VarChar(100)")]
+		public string ApplicantAddressLine1
+		{
+			get
+			{
+				return this._ApplicantAddressLine1;
+			}
+			set
+			{
+				if ((this._ApplicantAddressLine1 != value))
+				{
+					this._ApplicantAddressLine1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantAddressLine2", DbType="VarChar(100)")]
+		public string ApplicantAddressLine2
+		{
+			get
+			{
+				return this._ApplicantAddressLine2;
+			}
+			set
+			{
+				if ((this._ApplicantAddressLine2 != value))
+				{
+					this._ApplicantAddressLine2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantCity", DbType="VarChar(100)")]
+		public string ApplicantCity
+		{
+			get
+			{
+				return this._ApplicantCity;
+			}
+			set
+			{
+				if ((this._ApplicantCity != value))
+				{
+					this._ApplicantCity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantStateID", DbType="Int")]
+		public System.Nullable<int> ApplicantStateID
+		{
+			get
+			{
+				return this._ApplicantStateID;
+			}
+			set
+			{
+				if ((this._ApplicantStateID != value))
+				{
+					this._ApplicantStateID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantStateCode", DbType="VarChar(10)")]
+		public string ApplicantStateCode
+		{
+			get
+			{
+				return this._ApplicantStateCode;
+			}
+			set
+			{
+				if ((this._ApplicantStateCode != value))
+				{
+					this._ApplicantStateCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantZip", DbType="VarChar(10)")]
+		public string ApplicantZip
+		{
+			get
+			{
+				return this._ApplicantZip;
+			}
+			set
+			{
+				if ((this._ApplicantZip != value))
+				{
+					this._ApplicantZip = value;
+				}
 			}
 		}
 	}

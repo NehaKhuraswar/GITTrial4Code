@@ -3,6 +3,16 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CityUser;
+    self.CaseSearchModel = [];
+    self.CaseSearchResult = [];
+    self.SearchModel = {
+        TotalCount: 0,
+        PageSize: null,
+        CurrentPage: 1,
+        SortBy: 'Name',
+        SortReverse: true
+    };
+    self.pagesizeOptions = [5, 10, 20, 50];
     self.CaseList = [];
     self.Analysts = [];
     self.HearingOfficers = [];
@@ -38,17 +48,12 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     }
 
     self.GetCaseActivityStatus = function (model) {
-        //self.caseinfo.CaseID = 
         rapFactory.GetCaseActivityStatus(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
             self.caseinfo.ActivityStatus = response.data;
-
-           // self.caseinfo = response.data;
-            //rapGlobalFactory.CaseDetails = self.caseinfo;
         });
-       // $location.path("/fileappeal");
     }
     var _GetCasesNoAnalyst = function (userID) {
         rapFactory.GetCasesNoAnalyst(userID).then(function (response) {
@@ -90,7 +95,14 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             rapGlobalFactory.CaseDetails = self.caseinfo;
         });
     }
-    // _getrent();
+    var _getEmptyCaseSearchModel = function () {
+        rapFactory.GetEmptyCaseSearchModel().then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CaseSearchModel = response.data;
+            self.CaseSearchModel.PageSize = 5;
+        });
+    }
+    _getEmptyCaseSearchModel();
     if (self.caseinfo == null) {
         _GetCaseInfo();
     }
@@ -118,6 +130,25 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     {
         rapGlobalFactory.SelectedCase = caseinfo;
         $location.path("/selectedcase");
+    }
+
+    self.OnClearFilter = function () {
+        _getEmptyCaseSearchModel();
+        self.CaseSearchResult = [];
+    }
+
+    self.CaseSearch = function (model) {
+
+        model.CurrentPage = 1;
+        model.SortBy = "CreatedDate";
+        model.SortReverse = 0;
+        
+        rapFactory.GetCaseSearch(model).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CaseSearchResult = response.data.List;
+            self.CaseSearchModel.TotalCount = response.data.TotalCount;
+            self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
+        });
     }
 
 }];

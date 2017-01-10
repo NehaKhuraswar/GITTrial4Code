@@ -118,7 +118,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-
+        public ReturnResult<SearchCaseResult> GetCaseSearch(CaseSearch caseSearch)
+        {
+            ReturnResult<SearchCaseResult> result = new ReturnResult<SearchCaseResult>();
+            try
+            {
+                result = _dbHandler.GetCaseSearch(caseSearch);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();

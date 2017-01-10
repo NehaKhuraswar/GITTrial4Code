@@ -15,6 +15,7 @@ namespace RAP.DAL
         ReturnResult<List<CityUserAccount_M>> GetAnalysts();
         ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID);
         ReturnResult<bool> AssignHearingOfficer(int cID, int HearingOfficerUserID);
+        ReturnResult<SearchCaseResult> GetCaseSearch(CaseSearch caseSearch);
 
     }
 }
