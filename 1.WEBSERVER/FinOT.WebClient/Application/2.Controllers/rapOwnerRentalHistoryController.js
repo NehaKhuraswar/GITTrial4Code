@@ -66,8 +66,12 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
 
 
     self.Download = function (doc) {
-        masterFactory.GetDocument(doc);       
+        masterFactory.GetDocument(doc);    
+    }
 
+    self.Delete = function (doc) {
+        var index = self.caseinfo.Documents.indexOf(doc);
+        self.caseinfo.Documents.splice(index, 1);
     }
 
     self.AddRecord = function (_rent) {

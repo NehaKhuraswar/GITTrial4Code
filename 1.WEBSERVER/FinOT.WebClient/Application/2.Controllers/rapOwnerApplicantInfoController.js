@@ -134,6 +134,10 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
       
      }
 
+    self.Delete = function (doc) {
+        var index = self.caseinfo.Documents.indexOf(doc);
+        self.caseinfo.Documents.splice(index, 1);
+    }
     //function b64toBlob(b64Data, contentType, sliceSize) {
     //    contentType = contentType || '';
     //    sliceSize = sliceSize || 512;

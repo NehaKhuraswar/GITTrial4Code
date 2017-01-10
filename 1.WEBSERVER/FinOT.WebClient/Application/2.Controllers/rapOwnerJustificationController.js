@@ -43,6 +43,12 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
             }
         }
     }
+
+    self.Delete = function (doc) {
+        var index = self.caseinfo.Documents.indexOf(doc);
+        self.caseinfo.Documents.splice(index, 1);
+    }
+
   
     self.Download = function (doc) {
         masterFactory.GetDocument(doc);
