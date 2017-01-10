@@ -1,0 +1,108 @@
+﻿<script src='js/functions.js'></script>
+<div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">U.S. Mail Notification</h2>
+        </div>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="page-content full-width">
+        <div class="container">
+
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">T17-0238; Smith v. Johnson (Unit C)</a></li>
+                    <li class="active">U.S. mail notifications</li>
+                </ul>
+            </div>
+
+            <div class="application-form-wrapper">
+                <div class="application-step step-1">
+
+                    <form name="frmUSMailNotification" id="frmUSMailNotification" action="#" method="post" class="application-form">
+                        <div class="step-content step1">
+
+                            <div class="field-group subhead no-top-margin no-bottom-margin">
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-12 col-xs-12">
+                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="field-group">
+                                <label for="notification_type">Notification type</label>
+                                <div>
+                                    <select name="activity" id="activity" data-placeholder="Select type"
+                                            ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
+                                            ng-model="Ctrl.model.Activity"
+                                            ng-options="activity.ActivityDesc as activity.ActivityDesc for activity in Ctrl.ActivityList"></select>
+                                </div>
+                            </div>
+
+                            <div class="field-group">
+                                <label>Recipient</label>
+                                <div class="form-group-checkbox vertical clearfix">
+                                    <div class="checkbox-wrapper no-bottom-margin">
+                                        <label for="recipient1">
+                                            <input type="checkbox" name="recipient1" id="recipient1" ng-model="Ctrl.bTenant" /><i></i><span>Tenant ({{Ctrl.Tenant}})</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-wrapper no-bottom-margin">
+                                        <label for="recipient2">
+                                            <input type="checkbox" name="recipient2" id="recipient2" ng-model="Ctrl.bOwner" /><i></i><span>Property Owner ({{Ctrl.Owner}})</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox-wrapper no-bottom-margin">
+                                        <label for="recipient3">
+                                            <input type="checkbox" name="recipient3" id="recipient3" ng-model="Ctrl.bThirdParty" /><i></i><span>Property Owner’s Representative ({{Ctrl.ThirdParty}})</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-group">
+                                <label for="mailing_date">Mailing date</label>
+                                <input type="text" name="mailing_date" id="mailing_date" class="field-input field-datepicker" ng-model="Ctrl.model.MailingDate" />
+                            </div>
+
+                            <div class="field-group">
+                                <label for="notes">Notes</label>
+                                <textarea name="notes" id="notes" class="field-input textarea" rows="14" ng-model="Ctrl.model.Notes"></textarea>
+                            </div>
+
+                            <div class="field-group">
+                                <div class="row">
+                                    <div class="col-md-9 col-sm-12">
+                                        <p class="input-label fs-14">You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG.  The maximum file size limit for uploads is 25MB</p>
+                                    </div>
+                                </div>
+
+                                <div class="field-addfile">
+                                    <div class="input-file-wrapper">
+                                        <span class="btn-link">Attach document</span>
+                                        <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'SD_MailAttachment')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                                    </div>
+                                </div>                      
+
+                        </div>
+
+
+                        <div class="step-footer">
+                            <input type="button" id="submit" name="submit" class="btn-primary btn-gray" value="Submit" ng-click="Ctrl.Submit()" />
+                            <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" />
+                        </div>
+                    </form>
+                </div>
+
+            </div><!-- .application-form-wrapper -->
+        </div><!-- .container -->
+    </div><!-- .page-content -->
+</div><!-- #content -->

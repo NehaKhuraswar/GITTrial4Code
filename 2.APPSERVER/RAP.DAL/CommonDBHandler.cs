@@ -750,5 +750,60 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<bool> SaveMailNotification(MailM message)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    if (message != null)
+                    {
+                        MailNotification notification = new MailNotification();
+                        notification.Activity = message.Activity;
+                        notification.Notes = message.Notes;
+                        notification.Recipient = String.Join(",", message.Recipient);
+                        notification.MailingDate = message.MailingDate;
+                        notification.CreatedDate = DateTime.Now;
+                        notification.CreatedBy = message.EmployeeID;
+                        notification.C_ID = message.C_ID;
+                        db.MailNotifications.InsertOnSubmit(notification);
+                        db.SubmitChanges();
+                        message.NotificationID = notification.NotificationID;
+
+                        if (message.NotificationID > 0)
+                        {
+                            if (message.Attachments != null && message.Attachments.Any())
+                            {
+                                foreach (var item in message.Attachments)
+                                {
+                                    MailNotificationAttachment notificationAttachment = new MailNotificationAttachment();
+                                    notificationAttachment.NotificationID = message.NotificationID;
+                                    notificationAttachment.DocumentID = item.DocID;
+                                    db.MailNotificationAttachments.InsertOnSubmit(notificationAttachment);
+                                    db.SubmitChanges();
+                                }
+                            }
+                        }
+                        result.result = true;
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                        return result;
+                    }
+                    else
+                    {
+                        throw new Exception("Mail model is empty");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+
     }
 }

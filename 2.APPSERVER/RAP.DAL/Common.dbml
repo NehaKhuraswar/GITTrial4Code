@@ -69,6 +69,7 @@
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Document_CustomEmailNotificationAttachment" Member="CustomEmailNotificationAttachments" ThisKey="DocID" OtherKey="DocumentID" Type="CustomEmailNotificationAttachment" />
+      <Association Name="Document_MailNotificationAttachment" Member="MailNotificationAttachments" ThisKey="DocID" OtherKey="DocumentID" Type="MailNotificationAttachment" />
     </Type>
   </Table>
   <Table Name="dbo.CustomEmailNotification" Member="CustomEmailNotifications">
@@ -92,6 +93,28 @@
       <Column Name="DocumentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="CustomEmailNotification_CustomEmailNotificationAttachment" Member="CustomEmailNotification" ThisKey="NotificationID" OtherKey="NotificationID" Type="CustomEmailNotification" IsForeignKey="true" />
       <Association Name="Document_CustomEmailNotificationAttachment" Member="Document" ThisKey="DocumentID" OtherKey="DocID" Type="Document" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MailNotificationAttachments" Member="MailNotificationAttachments">
+    <Type Name="MailNotificationAttachment">
+      <Column Name="NotificationAttachmentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NotificationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Document_MailNotificationAttachment" Member="Document" ThisKey="DocumentID" OtherKey="DocID" Type="Document" IsForeignKey="true" />
+      <Association Name="MailNotification_MailNotificationAttachment" Member="MailNotification" ThisKey="NotificationID" OtherKey="NotificationID" Type="MailNotification" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MailNotification" Member="MailNotifications">
+    <Type Name="MailNotification">
+      <Column Name="NotificationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Activity" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Recipient" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="MailingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="C_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="MailNotification_MailNotificationAttachment" Member="MailNotificationAttachments" ThisKey="NotificationID" OtherKey="NotificationID" Type="MailNotificationAttachment" />
     </Type>
   </Table>
 </Database>

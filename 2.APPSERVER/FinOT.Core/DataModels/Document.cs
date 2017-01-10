@@ -32,6 +32,7 @@ namespace RAP.Core.DataModels
          TenantResponse,
          Appeal,
          AdditionalStaffDocument,
-         EmailAttachment
+         EmailAttachment,
+         MailAttachment
      }
 }

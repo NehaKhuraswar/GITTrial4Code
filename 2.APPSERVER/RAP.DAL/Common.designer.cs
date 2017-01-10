@@ -54,6 +54,12 @@ namespace RAP.DAL
     partial void InsertCustomEmailNotificationAttachment(CustomEmailNotificationAttachment instance);
     partial void UpdateCustomEmailNotificationAttachment(CustomEmailNotificationAttachment instance);
     partial void DeleteCustomEmailNotificationAttachment(CustomEmailNotificationAttachment instance);
+    partial void InsertMailNotificationAttachment(MailNotificationAttachment instance);
+    partial void UpdateMailNotificationAttachment(MailNotificationAttachment instance);
+    partial void DeleteMailNotificationAttachment(MailNotificationAttachment instance);
+    partial void InsertMailNotification(MailNotification instance);
+    partial void UpdateMailNotification(MailNotification instance);
+    partial void DeleteMailNotification(MailNotification instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -147,6 +153,22 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<CustomEmailNotificationAttachment>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MailNotificationAttachment> MailNotificationAttachments
+		{
+			get
+			{
+				return this.GetTable<MailNotificationAttachment>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MailNotification> MailNotifications
+		{
+			get
+			{
+				return this.GetTable<MailNotification>();
 			}
 		}
 	}
@@ -1231,6 +1253,8 @@ namespace RAP.DAL
 		
 		private EntitySet<CustomEmailNotificationAttachment> _CustomEmailNotificationAttachments;
 		
+		private EntitySet<MailNotificationAttachment> _MailNotificationAttachments;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1264,6 +1288,7 @@ namespace RAP.DAL
 		public Document()
 		{
 			this._CustomEmailNotificationAttachments = new EntitySet<CustomEmailNotificationAttachment>(new Action<CustomEmailNotificationAttachment>(this.attach_CustomEmailNotificationAttachments), new Action<CustomEmailNotificationAttachment>(this.detach_CustomEmailNotificationAttachments));
+			this._MailNotificationAttachments = new EntitySet<MailNotificationAttachment>(new Action<MailNotificationAttachment>(this.attach_MailNotificationAttachments), new Action<MailNotificationAttachment>(this.detach_MailNotificationAttachments));
 			OnCreated();
 		}
 		
@@ -1520,6 +1545,19 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_MailNotificationAttachment", Storage="_MailNotificationAttachments", ThisKey="DocID", OtherKey="DocumentID")]
+		public EntitySet<MailNotificationAttachment> MailNotificationAttachments
+		{
+			get
+			{
+				return this._MailNotificationAttachments;
+			}
+			set
+			{
+				this._MailNotificationAttachments.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1547,6 +1585,18 @@ namespace RAP.DAL
 		}
 		
 		private void detach_CustomEmailNotificationAttachments(CustomEmailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Document = null;
+		}
+		
+		private void attach_MailNotificationAttachments(MailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Document = this;
+		}
+		
+		private void detach_MailNotificationAttachments(MailNotificationAttachment entity)
 		{
 			this.SendPropertyChanging();
 			entity.Document = null;
@@ -2024,6 +2074,456 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MailNotificationAttachments")]
+	public partial class MailNotificationAttachment : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NotificationAttachmentID;
+		
+		private int _NotificationID;
+		
+		private int _DocumentID;
+		
+		private EntityRef<Document> _Document;
+		
+		private EntityRef<MailNotification> _MailNotification;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNotificationAttachmentIDChanging(int value);
+    partial void OnNotificationAttachmentIDChanged();
+    partial void OnNotificationIDChanging(int value);
+    partial void OnNotificationIDChanged();
+    partial void OnDocumentIDChanging(int value);
+    partial void OnDocumentIDChanged();
+    #endregion
+		
+		public MailNotificationAttachment()
+		{
+			this._Document = default(EntityRef<Document>);
+			this._MailNotification = default(EntityRef<MailNotification>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationAttachmentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NotificationAttachmentID
+		{
+			get
+			{
+				return this._NotificationAttachmentID;
+			}
+			set
+			{
+				if ((this._NotificationAttachmentID != value))
+				{
+					this.OnNotificationAttachmentIDChanging(value);
+					this.SendPropertyChanging();
+					this._NotificationAttachmentID = value;
+					this.SendPropertyChanged("NotificationAttachmentID");
+					this.OnNotificationAttachmentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationID", DbType="Int NOT NULL")]
+		public int NotificationID
+		{
+			get
+			{
+				return this._NotificationID;
+			}
+			set
+			{
+				if ((this._NotificationID != value))
+				{
+					if (this._MailNotification.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnNotificationIDChanging(value);
+					this.SendPropertyChanging();
+					this._NotificationID = value;
+					this.SendPropertyChanged("NotificationID");
+					this.OnNotificationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentID", DbType="Int NOT NULL")]
+		public int DocumentID
+		{
+			get
+			{
+				return this._DocumentID;
+			}
+			set
+			{
+				if ((this._DocumentID != value))
+				{
+					if (this._Document.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDocumentIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentID = value;
+					this.SendPropertyChanged("DocumentID");
+					this.OnDocumentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_MailNotificationAttachment", Storage="_Document", ThisKey="DocumentID", OtherKey="DocID", IsForeignKey=true)]
+		public Document Document
+		{
+			get
+			{
+				return this._Document.Entity;
+			}
+			set
+			{
+				Document previousValue = this._Document.Entity;
+				if (((previousValue != value) 
+							|| (this._Document.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Document.Entity = null;
+						previousValue.MailNotificationAttachments.Remove(this);
+					}
+					this._Document.Entity = value;
+					if ((value != null))
+					{
+						value.MailNotificationAttachments.Add(this);
+						this._DocumentID = value.DocID;
+					}
+					else
+					{
+						this._DocumentID = default(int);
+					}
+					this.SendPropertyChanged("Document");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MailNotification_MailNotificationAttachment", Storage="_MailNotification", ThisKey="NotificationID", OtherKey="NotificationID", IsForeignKey=true)]
+		public MailNotification MailNotification
+		{
+			get
+			{
+				return this._MailNotification.Entity;
+			}
+			set
+			{
+				MailNotification previousValue = this._MailNotification.Entity;
+				if (((previousValue != value) 
+							|| (this._MailNotification.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MailNotification.Entity = null;
+						previousValue.MailNotificationAttachments.Remove(this);
+					}
+					this._MailNotification.Entity = value;
+					if ((value != null))
+					{
+						value.MailNotificationAttachments.Add(this);
+						this._NotificationID = value.NotificationID;
+					}
+					else
+					{
+						this._NotificationID = default(int);
+					}
+					this.SendPropertyChanged("MailNotification");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MailNotification")]
+	public partial class MailNotification : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _NotificationID;
+		
+		private string _Activity;
+		
+		private string _Recipient;
+		
+		private System.Nullable<System.DateTime> _MailingDate;
+		
+		private string _Notes;
+		
+		private System.Nullable<int> _CreatedBy;
+		
+		private System.Nullable<int> _C_ID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private EntitySet<MailNotificationAttachment> _MailNotificationAttachments;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNotificationIDChanging(int value);
+    partial void OnNotificationIDChanged();
+    partial void OnActivityChanging(string value);
+    partial void OnActivityChanged();
+    partial void OnRecipientChanging(string value);
+    partial void OnRecipientChanged();
+    partial void OnMailingDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnMailingDateChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    partial void OnCreatedByChanging(System.Nullable<int> value);
+    partial void OnCreatedByChanged();
+    partial void OnC_IDChanging(System.Nullable<int> value);
+    partial void OnC_IDChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    #endregion
+		
+		public MailNotification()
+		{
+			this._MailNotificationAttachments = new EntitySet<MailNotificationAttachment>(new Action<MailNotificationAttachment>(this.attach_MailNotificationAttachments), new Action<MailNotificationAttachment>(this.detach_MailNotificationAttachments));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int NotificationID
+		{
+			get
+			{
+				return this._NotificationID;
+			}
+			set
+			{
+				if ((this._NotificationID != value))
+				{
+					this.OnNotificationIDChanging(value);
+					this.SendPropertyChanging();
+					this._NotificationID = value;
+					this.SendPropertyChanged("NotificationID");
+					this.OnNotificationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Activity", DbType="VarChar(250)")]
+		public string Activity
+		{
+			get
+			{
+				return this._Activity;
+			}
+			set
+			{
+				if ((this._Activity != value))
+				{
+					this.OnActivityChanging(value);
+					this.SendPropertyChanging();
+					this._Activity = value;
+					this.SendPropertyChanged("Activity");
+					this.OnActivityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Recipient", DbType="VarChar(250)")]
+		public string Recipient
+		{
+			get
+			{
+				return this._Recipient;
+			}
+			set
+			{
+				if ((this._Recipient != value))
+				{
+					this.OnRecipientChanging(value);
+					this.SendPropertyChanging();
+					this._Recipient = value;
+					this.SendPropertyChanged("Recipient");
+					this.OnRecipientChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailingDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> MailingDate
+		{
+			get
+			{
+				return this._MailingDate;
+			}
+			set
+			{
+				if ((this._MailingDate != value))
+				{
+					this.OnMailingDateChanging(value);
+					this.SendPropertyChanging();
+					this._MailingDate = value;
+					this.SendPropertyChanged("MailingDate");
+					this.OnMailingDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(MAX)")]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int")]
+		public System.Nullable<int> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int")]
+		public System.Nullable<int> C_ID
+		{
+			get
+			{
+				return this._C_ID;
+			}
+			set
+			{
+				if ((this._C_ID != value))
+				{
+					this.OnC_IDChanging(value);
+					this.SendPropertyChanging();
+					this._C_ID = value;
+					this.SendPropertyChanged("C_ID");
+					this.OnC_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MailNotification_MailNotificationAttachment", Storage="_MailNotificationAttachments", ThisKey="NotificationID", OtherKey="NotificationID")]
+		public EntitySet<MailNotificationAttachment> MailNotificationAttachments
+		{
+			get
+			{
+				return this._MailNotificationAttachments;
+			}
+			set
+			{
+				this._MailNotificationAttachments.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_MailNotificationAttachments(MailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.MailNotification = this;
+		}
+		
+		private void detach_MailNotificationAttachments(MailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.MailNotification = null;
 		}
 	}
 }

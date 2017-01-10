@@ -243,6 +243,43 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<MailM> GetMail()
+        {
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
+            result.result = new MailM();
+            result.status = new OperationStatus() { Status = StatusEnum.Success };
+            return result;
+        }
+        public ReturnResult<bool> SubmitMail(MailM mail)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            List<DocumentM> _documents = new List<DocumentM>();
+            try
+            {
+                if (mail.Attachments != null && mail.Attachments.Any())
+                    {
+                        foreach (var doc in mail.Attachments)
+                        {
+                            doc.DocCategory = DocCategory.MailAttachment.ToString();
+                            var docUploadResut = _documentService.UploadDocument(doc);
+                            if (docUploadResut.status.Status == StatusEnum.Success)
+                            {
+                                _documents.Add(doc);
+                            }
+                        }
+                    }
+                    mail.Attachments = _documents;
+                  result =  _commonService.SaveMailNotification(mail);              
+                  return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         //implements all methods from IDashboardService
     }
 }

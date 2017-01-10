@@ -32,4 +32,31 @@ namespace RAP.Core.DataModels
           }
       }
     }
+
+   public class MailM
+   {
+       public MailM()
+       {
+           Recipient = new List<string>();           
+       }
+       private List<DocumentM> _attachments = new List<DocumentM>();
+       public int NotificationID { get; set; }
+       public string Activity { get; set; }
+       public List<string> Recipient { get; set; }
+       public string Notes { get; set; }
+       public int EmployeeID { get; set; }
+       public int C_ID { get; set; }
+       public DateTime MailingDate { get; set; }
+       public List<DocumentM> Attachments
+       {
+           get
+           {
+               return _attachments;
+           }
+           set
+           {
+               _attachments = value;
+           }
+       }
+   }
 }

@@ -150,6 +150,22 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
+
+       public ReturnResult<bool> SaveMailNotification(MailM message)
+       {
+           ReturnResult<bool> result = new ReturnResult<bool>();
+           try
+           {
+               result = _dbHandler.SaveMailNotification(message);
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               LogError(result.status);
+               return result;
+           }
+       }
         
     }
 }

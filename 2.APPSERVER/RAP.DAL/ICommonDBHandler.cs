@@ -22,5 +22,6 @@ namespace RAP.DAL
        ReturnResult<bool> UpdateDocumentCaseInfo(int CustmerID, int C_ID, string docCategory);
        ReturnResult<APNAddress> GetAPNAddress(int UserID);
        ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id);
+       ReturnResult<bool> SaveMailNotification(MailM message);
     }
 }

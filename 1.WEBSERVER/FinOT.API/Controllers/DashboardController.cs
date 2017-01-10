@@ -326,6 +326,40 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomEmailM>>(ReturnCode, transaction);
         }
 
+        [AllowAnonymous]
+        [Route("GetMail")]
+        [HttpGet]
+        public HttpResponseMessage GetMail()
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<MailM> transaction = new TranInfo<MailM>();
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
+            try
+            {
+                var dbResult = _service.GetMail();
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<MailM>>(ReturnCode, transaction);
+        }
+
+
         #endregion
 
         #region "POST REQUEST"
@@ -526,6 +560,39 @@ namespace RAP.API.Controllers
             try
             {
                 var dbResult = _service.SubmitCustomEmail(documents);
+                if (dbResult.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = dbResult.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(dbResult.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SubmitMail")]
+        [HttpPost]
+        public HttpResponseMessage SubmitMail([FromBody] MailM model)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var dbResult = _service.SubmitMail(model);
                 if (dbResult.status.Status == StatusEnum.Success)
                 {
                     transaction.data = dbResult.result;
