@@ -150,6 +150,36 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<List<DocumentM>> GetAppealDocuments(int CustomerID,string DocTitle)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> documents = new List<DocumentM>();
+            try
+            {
+                var docsResult = _commonService.GetDocuments(CustomerID, false, DocTitle);
+                if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                {
+                    foreach (var doc in docsResult.result)
+                    {
+                        if (doc != null)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                }
+                result.result = documents;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+      
         //TBD - to be removed as we dont need to save the APpeal info
         public ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo, int CustomerID)
         {
@@ -198,11 +228,37 @@ namespace RAP.Business.Implementation
         }
         public ReturnResult<TenantAppealInfoM> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo)
         {
-
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
-                result = _dbHandler.SaveAppealGroundInfo(tenantAppealInfo);
+                var dbResult = _dbHandler.SaveAppealGroundInfo(tenantAppealInfo);
+
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+
+                foreach (var doc in tenantAppealInfo.Documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.Appeal.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        documents.Add(doc);
+                    }
+                }
+                dbResult.result.Documents = documents;
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
@@ -225,6 +281,41 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+
+        public ReturnResult<List<DocumentM>> SaveAppeallDocuments(List<DocumentM> documents)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> _documents = new List<DocumentM>();
+            try
+            {
+                foreach (var doc in documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.Appeal.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            _documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        _documents.Add(doc);
+                    }
+                }
+                result.result = _documents;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         public ReturnResult<CaseInfoM> SubmitAppeal(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -1028,7 +1119,7 @@ namespace RAP.Business.Implementation
                             documents.Add(doc);
                         }
                     }
-                model.Documents = documents;
+                dbResult.result.Documents = documents;
                 result.result = dbResult.result;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

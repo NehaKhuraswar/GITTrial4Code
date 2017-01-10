@@ -271,6 +271,46 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
 
+        [AllowAnonymous]
+        [Route("GetAppealDocuments/{CustomerID:int}/{DocumentTitle}")]
+        [HttpGet]
+        public HttpResponseMessage GetAppealDocuments(int CustomerID, string DocumentTitle)
+        {
+
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<DocumentM>> transaction = new TranInfo<List<DocumentM>>();
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            try
+            {
+
+                result = _service.GetAppealDocuments(CustomerID, DocumentTitle);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+            return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
+        }
         #region Common File Petition method      
         [AllowAnonymous]
         [Route("GetPetitioncategory")]
@@ -1795,6 +1835,42 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<TenantAppealInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveAppeallDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveAppeallDocuments([FromBody] List<DocumentM> documents)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<DocumentM>> transaction = new TranInfo<List<DocumentM>>();
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            try
+            {
+
+                result = _service.SaveAppeallDocuments(documents);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
         }
 
         #region Owner Petition Methods

@@ -40,15 +40,31 @@
                     </div>                       
                 </div>
 
-                        <div class="field-group">
-                            <p><strong>The maximum file size limit for uploads is 25MB</strong></p>
-                            <div class="field-addfile">
-                                <div class="input-file-wrapper">
-                                    <span class="btn-link">Attach explanation</span>
-                                    <input type="file" id="explanation_file" name="explanation_file" ng-click="Ctrl.AttachExplaination()" />
-                                </div>
-                            </div>
-                        </div>
+                       
+            <div class="field-group">
+                <div class="field-addfile">
+                    <div class="input-file-wrapper">
+                        <span class="btn-link">Attach explanation</span>
+                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'A_Grounds')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
+                    </div>
+                    <div class="field-group">
+                        <table class="table table-condensed nopadding-bottom">
+                            <tbody>
+                                <tr ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'}">
+                                    <td class="nopadding-left">
+                                        {{item.DocName}}
+                                    </td>
+                                    <td>
+                                        &nbsp;<input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
+                                        <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
 
                     </div>
 

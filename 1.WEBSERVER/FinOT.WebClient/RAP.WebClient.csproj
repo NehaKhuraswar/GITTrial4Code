@@ -209,6 +209,7 @@
     <Content Include="Application\3.Factories\masterdataFactory.js" />
     <Content Include="Application\3.Factories\pageFactory.js" />
     <Content Include="Application\3.Factories\rapAdditionalCaseDocumentFactory.js" />
+    <Content Include="Application\3.Factories\rapAppealDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapCustomEmailFactory.js" />
     <Content Include="Application\3.Factories\rapMailFactory.js" />

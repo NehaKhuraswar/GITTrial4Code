@@ -78,5 +78,7 @@ namespace RAP.Core.Services
         ReturnResult<bool> SaveOResponseReviewPageSubmission(int CustomerID);   
         ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model);
         ReturnResult<List<ThirdPartyCaseInfo>> UpdateThirdPartyAccessPrivilege(List<ThirdPartyCaseInfo> ThirdPartyCaseInfo, int CustomerID);
+        ReturnResult<List<DocumentM>> GetAppealDocuments(int CustomerID, string DocTitle);
+        ReturnResult<List<DocumentM>> SaveAppeallDocuments(List<DocumentM> documents);
     }
 }
