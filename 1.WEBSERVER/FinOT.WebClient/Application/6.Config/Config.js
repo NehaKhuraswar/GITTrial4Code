@@ -45,13 +45,13 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: raploginURLController_resolve
         })
-        .when('/loginPublic', {
+        .when('/Login', {
             templateUrl: 'views/account/Login.html',
             controller: raploginController,
             controllerAs: 'Ctrl',
             resolve: raploginController_resolve
         })
-        .when('/loginCity', {
+        .when('/CityLogin', {
             templateUrl: 'views/account/Login.html',
             controller: raploginCityUserController,
             controllerAs: 'Ctrl',

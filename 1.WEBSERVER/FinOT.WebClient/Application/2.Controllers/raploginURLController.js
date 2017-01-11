@@ -3,10 +3,10 @@ var raploginURLController = ['$scope', '$modal', 'alertService', '$location', fu
     var self = this;
    
     self.LoginPublic = function () {
-        $location.path("/loginPublic");
+        $location.path("/Login");
     }
     self.LoginCity = function () {
-        $location.path("/loginCity");
+        $location.path("/CityLogin");
     }
 
 }];

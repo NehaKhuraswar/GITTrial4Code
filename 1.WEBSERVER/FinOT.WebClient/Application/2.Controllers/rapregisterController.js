@@ -77,7 +77,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $location.path("/loginPublic");
+            $location.path("/Login");
         });
     }    
 
