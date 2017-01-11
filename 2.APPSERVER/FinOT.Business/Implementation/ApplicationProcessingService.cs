@@ -716,6 +716,7 @@ namespace RAP.Business.Implementation
             }
         }
 
+
         public ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID, int CustomerID)
         {
             ReturnResult<TenantResponseRentalHistoryM> result = new ReturnResult<TenantResponseRentalHistoryM>();
@@ -829,6 +830,40 @@ namespace RAP.Business.Implementation
             catch (Exception ex)
             {
                 result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        public ReturnResult<List<DocumentM>> SaveTenantDocuments(List<DocumentM> documents)
+        {
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            List<DocumentM> _documents = new List<DocumentM>();
+            try
+            {
+                foreach (var doc in documents)
+                {
+                    if (!doc.isUploaded)
+                    {
+                        doc.DocCategory = DocCategory.TenantResponse.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
+                        {
+                            _documents.Add(doc);
+                        }
+                    }
+                    else
+                    {
+                        _documents.Add(doc);
+                    }
+                }
+                result.result = _documents;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
                 return result;
             }
         }

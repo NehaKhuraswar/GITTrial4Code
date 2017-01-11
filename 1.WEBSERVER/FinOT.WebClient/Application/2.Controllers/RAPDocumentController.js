@@ -1,101 +1,86 @@
-﻿'use strict';
-var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory) {
-    var self = this;
+﻿    'use strict';
+    var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', 'masterdataFactory', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory, rapFactory, masterFactory) {
+        var self = this;
+        self.model = $scope.model;
+        self.custDetails = rapGlobalFactory.CustomerDetails;
+        self.caseinfo = rapGlobalFactory.CaseDetails;
+        self.caseinfo.CustomerID = self.custDetails.custID;
+        self.DocDescriptions = masterFactory.DocDescription();
 
-    self.custDetails = rapGlobalFactory.CustomerDetails;
-    self.caseinfo = rapGlobalFactory.CaseDetails;
+        masterFactory.DocDescription().then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.DocDescriptions = response.data;
+        });
+        self.description1 = null;
+        self.description2 = null;
+        self.Documents = null;
+        rapFactory.GetTenantDocuments(self.custDetails.custID, 'TP_AdditionalDocuments').then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.Documents = response.data;
+        });
+
+        $scope.onFileSelected = function ($files, docTitle) {
+            if ($files && $files.length) {
+                for (var i = 0; i < $files.length; i++) {
+                    var file = $files[i];
+                    var filename = file.name;
+                    var mimetype = file.type;
+                    var filesize = ((file.size / 1024) / 1024).toFixed(4);
+                    if (filesize < masterFactory.FileSize)
+                        var index = filename.lastIndexOf(".");
+                    var ext = filename.substring(index, filename.length).toUpperCase();
+                    if (masterFactory.FileExtensons.indexOf(ext) > -1) {
+                        var document = {};
+                        document.DocTitle = docTitle;
+                        document.DocName = filename;
+                        document.MimeType = mimetype;
+                        document.CustomerID = self.custDetails.custID;                       
+                        document.isUploaded = false;
+                        document.IsPetitonFiled = false;
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function (e) {
+                            var base64 = e.target.result;
+                            if (base64 != null) {
+                                document.Base64Content = base64.substring(base64.indexOf('base64') + 7)
+                            }
+                        }
+                        var desc = angular.copy(self.description1);
+                        if (desc == '<--Select-->') {
+                            desc = angular.copy(self.description2);
+                        }
+                        document.DocDescription = desc
+                        self.Documents.push(document);
+                        self.description1 = null;
+                        self.description2 = null;
+                    }
+                }
+
+            }
+        }
+
+
+        self.Download = function (doc) {
+            masterFactory.GetDocument(doc);
+
+        }
+
+        self.Delete = function (doc) {
+            var index = self.Documents.indexOf(doc);
+            self.Documents.splice(index, 1);
+        }
 
     self.ContinueToReview = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        $scope.model.bAddDocuments = false;
-        $scope.model.bReview = true;
-        $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
+        rapFactory.SaveTenantDocuments(self.Documents).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            $scope.model.bAddDocuments = false;
+            $scope.model.bReview = true;
+            $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;
+        });      
        
     }
-    $scope.onAdditionalFileSelect = function ($files) {
-        if ($files && $files.length) {
-            for (var i = 0; i < $files.length; i++) {
-                var file = $files[i];
-                popupateDocument(file, 'TP_AdditionalDocuments');
-            }
-        }
-    }
-
-
-    function popupateDocument(file, dicTitle) {
-        var filename = file.name;
-        var mimetype = file.type;
-        var filesize = ((file.size / 1024) / 1024).toFixed(4);
-        //if (filesize < 25) {
-        if (filesize < masterFactory.FileSize) {
-            var index = filename.lastIndexOf(".");
-            var ext = filename.substring(index, filename.length).toUpperCase();
-            //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
-            if (masterFactory.FileExtensons.indexOf(ext) > -1) {
-                var document = self.caseinfo.Document;
-                document.DocTitle = dicTitle;
-                document.DocName = filename;
-                document.MimeType = mimetype;
-                document.CustomerID = self.custDetails.custID;
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function (e) {
-                    var base64 = e.target.result;
-                    if (base64 != null) {
-                        document.Base64Content = base64.substring(base64.indexOf('base64') + 7)
-                    }
-                }
-                self.caseinfo.Documents.push(document);
-            }
-        }
-
-    }
-
-    //$scope.onFileSelect = function ($files) {
-    //    if ($files && $files.length)
-    //    {
-    //        //var fileName = $files[0].name;
-    //        var file = $files[0];
-    //        self.caseinfo.TenantPetitionInfo.File = file;
-    //        var data = new FormData();
-    //        data.append(file);
-    //        blockUI.start();
-
-    //        var _routePrefix = 'api/applicationprocessing';
-    //        var url = _routePrefix + '/savecaseinfo';
-
-    //        return ajax.Post(data, url)
-    //        .finally(function () {
-    //            blockUI.stop();
-    //        });
-    //    }
-    //}
-
-            //var file = new java.io.RandomAccessFile(file, "r");
-            //var bArr = java.lang.reflect.Array.newInstance(java.lang.Byte.TYPE, file.length());
-            //file.read(bArr)
-
-
-           //var reader = new FileReader();
-           // reader.readAsArrayBuffer(file);
-           // var arrayBuffer = null;
-           //reader.onload = function (e)
-           //{
-
-               //arrayBuffer = e.target.result;
-              //   array = new Uint8Array(arrayBuffer),
-              //   binaryString = String.fromCharCode.apply(null, array);
-
-              //console.log(binaryString);
-
-          // }
-          
-           // var file = $scope.createNewDocument();
-           // file.FileName = newFileName;
-            //self.editmodel.push(file);
-          //  $scope.newFiles.push($files[0].name);
-           // $scope.newFilesContent.push($files[0]);
-        
+   
     
     
 }];

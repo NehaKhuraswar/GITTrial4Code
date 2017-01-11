@@ -1536,6 +1536,41 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("SaveTenantDocuments")]
+        [HttpPost]
+        public HttpResponseMessage SaveTenantDocuments([FromBody] List<DocumentM> documents)
+        {
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<List<DocumentM>> transaction = new TranInfo<List<DocumentM>>();
+            ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
+            try
+            {
+
+                result = _service.SaveTenantDocuments(documents);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<List<DocumentM>>>(ReturnCode, transaction);
+        }
+        [AllowAnonymous]
         [Route("savetenantlostserviceinfo/{CustomerID:int}")]
         [HttpPost]
         public HttpResponseMessage SaveTenantLostServiceInfo([FromBody] LostServicesPageM message, [FromUri] int CustomerID)

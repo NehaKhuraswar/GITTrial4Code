@@ -247,7 +247,7 @@
     <Content Include="Application\3.Factories\rapOwnerRentalHistoryFactory.js" />
     <Content Include="Application\3.Factories\rapstaffdashboardFactory.js" />
     <Content Include="Application\3.Factories\rapdashboardFactory.js" />
-    <Content Include="Application\3.Factories\RapDocumentFactory.js" />
+    <Content Include="Application\3.Factories\rapTenantlDocumentFactory.js" />
     <Content Include="Application\3.Factories\rapfileappealFactory.js" />
     <Content Include="Application\3.Factories\rapOwnerApplicantInfoFactory.js" />
     <Content Include="Application\3.Factories\rapOwnerJustificationFactory.js" />
