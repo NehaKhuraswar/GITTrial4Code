@@ -11,6 +11,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
         SortBy: 'Name',
         SortReverse: true
     };
+    
     self.pagesizeOptions = [5, 10, 20, 50];
     
     //self.model.PageSize = 10;
@@ -69,6 +70,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
             });
         }
     }
+    
     self.TotalPage = function () {
         if (self.AccountSearchModel == null || self.AccountSearchModel == undefined) { return 0; }
         return (Math.floor(self.AccountSearchModel.TotalCount / self.AccountSearchModel.PageSize) + (((self.AccountSearchModel.TotalCount % self.AccountSearchModel.PageSize) != 0) ? 1 : 0))

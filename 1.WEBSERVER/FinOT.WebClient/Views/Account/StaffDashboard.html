@@ -327,15 +327,11 @@
                 <!-- .custom-table -->
 
                 <div class="results-paging mar-t60">
-                    <div class="show-records">Showing 1-4 of 896 records</div>
+                    <div class="show-records">Showing {{Ctrl.FromRecord}}-{{Ctrl.ToRecord}} of {{Ctrl.CaseSearchModel.TotalCount}} records</div>
                     <div class="pages">
-                        <a href="#" class="link active">1</a>
-                        <a href="#" class="link">2</a>
-                        <a href="#" class="link">3</a>
-                        <a href="#" class="link">4</a>
-                        <a href="#" class="link">5</a>
-                        <a href="#" class="link">6</a>
-                        <a href="#" class="link next">Next <span>&#8250;</span></a>
+                        <a ng-click="Ctrl.GetPreviousPage()" class="link next">Previous <span>&#8249;</span></a>
+                        <a ng-click="Ctrl.GetPage(pageNumber.text, Ctrl.CaseSearchModel)" ng-class="link 'active':pageNumber.active" ng-repeat="pageNumber in Ctrl.pageNumberList">{{pageNumber.text}}</a>                        
+                        <a ng-click="Ctrl.GetNextPage()" class="link next">Next <span>&#8250;</span></a>
                     </div>
                 </div>
 

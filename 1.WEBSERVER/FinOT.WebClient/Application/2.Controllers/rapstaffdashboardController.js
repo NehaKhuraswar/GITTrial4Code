@@ -12,9 +12,12 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         SortBy: 'Name',
         SortReverse: true
     };
+    self.pageNumberList = [];
     self.pagesizeOptions = [5, 10, 20, 50];
     self.CaseList = [];
     self.Analysts = [];
+    self.FromRecord = 1;
+    self.ToRecord = 5;
     self.HearingOfficers = [];
     self.InviteThirdPartyUser = function () {
         $location.path("/invitethirdparty");
@@ -137,6 +140,8 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         self.CaseSearchResult = [];
     }
 
+    
+
     self.CaseSearch = function (model) {
 
         model.CurrentPage = 1;
@@ -148,6 +153,73 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             self.CaseSearchResult = response.data.List;
             self.CaseSearchModel.TotalCount = response.data.TotalCount;
             self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
+            self.FromRecord = self.CaseSearchResult[0].RankNo;
+            self.ToRecord = self.CaseSearchResult[(self.CaseSearchResult.length-1)].RankNo;
+            self.GeneratePageNumberList();
+        });
+    }
+    self.GeneratePageNumberList = function()
+    {
+        var TotalPages = Math.ceil(self.CaseSearchModel.TotalCount / self.CaseSearchModel.PageSize);
+        for (var i = 1; i <= TotalPages; i++)
+        {
+            self.pageNumberList.push({ text: i, active: true });
+        }
+         
+    }
+    
+    self.isLastPage = function () {
+        return (self.CaseSearchModel.TotalCount - (self.CaseSearchModel.CurrentPage * self.CaseSearchModel.PageSize) <= 0);
+    };
+    self.GetPage = function (newPage, model) {
+
+        //if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
+            self.CaseSearchModel.CurrentPage = newPage;
+            rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
+                if (!alert.checkResponse(response)) { return; }
+                self.CaseSearchResult = response.data.List;
+                self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecord = self.CaseSearchResult[0].RankNo;
+                self.ToRecord = self.CaseSearchResult[(self.CaseSearchResult.length - 1)].RankNo;
+            });
+       // }
+    }
+    self.GetNextPage = function (model) {
+        var newPage = self.CaseSearchModel.CurrentPage + 1;
+        if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
+            self.CaseSearchModel.CurrentPage = self.CaseSearchModel.CurrentPage+1;
+            rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
+                if (!alert.checkResponse(response)) { return; }
+                self.CaseSearchResult = response.data.List;
+                self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecord = self.CaseSearchResult[0].RankNo;
+                self.ToRecord = self.CaseSearchResult[(self.CaseSearchResult.length - 1)].RankNo;
+            });
+        }
+    }
+    self.GetPreviousPage = function (model) {
+        var newPage = self.CaseSearchModel.CurrentPage - 1;
+        if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
+            self.CaseSearchModel.CurrentPage = self.CaseSearchModel.CurrentPage - 1;
+            rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
+                if (!alert.checkResponse(response)) { return; }
+                self.CaseSearchResult = response.data.List;
+                self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecord = self.CaseSearchResult[0].RankNo;
+                self.ToRecord = self.CaseSearchResult[(self.CaseSearchResult.length - 1)].RankNo;
+            });
+        }
+    }
+    self.OnPageSizeChange = function () {
+        self.CaseSearchModel.CurrentPage = 1;
+
+        rapFactory.GetAccountSearch(self.CaseSearchModel).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CaseSearchResult = response.data.List;
+            self.CaseSearchModel.TotalCount = response.data.TotalCount;
+            self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
+            self.FromRecord = self.CaseSearchResult[0].RankNo;
+            self.ToRecord = self.CaseSearchResult[(self.CaseSearchResult.length - 1)].RankNo;
         });
     }
 
