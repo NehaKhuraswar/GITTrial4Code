@@ -122,9 +122,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("GetAppealDocuments/{CustomerID}/{DocumentTitle}")]
+        [Route("GetUploadedDocuments/{CustomerID}/{DocumentTitle}")]
         [HttpGet]
-        public HttpResponseMessage GetAppealDocuments(int CustomerID, string DocumentTitle)
+        public HttpResponseMessage GetUploadedDocuments(int CustomerID, string DocumentTitle)
         {
             HttpResponseMessage responseMessage;
             try
@@ -132,7 +132,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "GetAppealDocuments/" + CustomerID + "/" + DocumentTitle;
+                string requestUri = _requestURI + "GetUploadedDocuments/" + CustomerID + "/" + DocumentTitle;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

@@ -28,7 +28,7 @@ var rapgroundsofappealFactory = ['blockUI', 'ajaxService', function (blockUI, aj
     var _GetAppealDocuments = function (CustomerID, DocumentTitle) {
         blockUI.start();
 
-        var url = _routePrefix + '/GetAppealDocuments/' + CustomerID + '/' + DocumentTitle;
+        var url = _routePrefix + '/GetUploadedDocuments/' + CustomerID + '/' + DocumentTitle;
 
         return ajax.Get(url)
         .finally(function () {

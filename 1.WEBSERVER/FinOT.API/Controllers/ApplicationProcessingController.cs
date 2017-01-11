@@ -272,9 +272,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("GetAppealDocuments/{CustomerID:int}/{DocumentTitle}")]
+        [Route("GetUploadedDocuments/{CustomerID:int}/{DocumentTitle}")]
         [HttpGet]
-        public HttpResponseMessage GetAppealDocuments(int CustomerID, string DocumentTitle)
+        public HttpResponseMessage GetUploadedDocuments(int CustomerID, string DocumentTitle)
         {
 
             //Appl accService = new AccountManagementService();
@@ -284,7 +284,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetAppealDocuments(CustomerID, DocumentTitle);
+                result = _service.GetUploadedDocuments(CustomerID, DocumentTitle);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

@@ -151,7 +151,7 @@ namespace RAP.Business.Implementation
             }
         }
 
-        public ReturnResult<List<DocumentM>> GetAppealDocuments(int CustomerID,string DocTitle)
+        public ReturnResult<List<DocumentM>> GetUploadedDocuments(int CustomerID, string DocTitle)
         {
             ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
             List<DocumentM> documents = new List<DocumentM>();
