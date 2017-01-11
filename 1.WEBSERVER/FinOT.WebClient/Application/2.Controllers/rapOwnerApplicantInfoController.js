@@ -56,11 +56,12 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
                         document.MimeType = mimetype;
                         document.CustomerID = self.custDetails.custID;
                         var reader = new FileReader();
-                        reader.readAsArrayBuffer(file);
+                        reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            var arrayBuffer = e.target.result;
-                            var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
-                            document.Base64Content = base64String;
+                            var base64 = e.target.result;                            
+                            if (base64 != null) {
+                                document.Base64Content = base64.substring(base64.indexOf('base64') + 7)
+                            }                           
                         }
                         self.caseinfo.Documents.push(document);
                     }
@@ -70,67 +71,12 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         }
     }
 
-    $scope.onBusinessProofFileSelect = function ($files) {
-        if ($files && $files.length)
-        {
-            for (var i = 0; i < $files.length; i++) {          
-                var file = $files[i];
-                popupateDocument(file, 'OP_BusinessTaxProof');             
-           
-            }
-        }
-    }
-    $scope.onFileSelect = function ($files) {
-        if ($files && $files.length) {
-            for (var i = 0; i < $files.length; i++) {
-                var file = $files[i];
-                popupateDocument(file, 'OP_PropertyServiceFee');       
-            }
-        }
-    }
+   
 
-
-    function popupateDocument(file, docTitle) {
-        var filename = file.name;
-        var mimetype = file.type;
-        var filesize = ((file.size / 1024) / 1024).toFixed(4);
-        //if (filesize < 25) {
-        if (filesize < masterFactory.FileSize) {
-            var index = filename.lastIndexOf(".");
-            var ext = filename.substring(index, filename.length).toUpperCase();
-            //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
-            if (masterFactory.FileExtensons.indexOf(ext) > -1) {
-                var document = angular.copy(self.caseinfo.Document);
-                document.DocTitle = docTitle;
-                document.DocName = filename;
-                document.MimeType = mimetype;
-                document.CustomerID = self.custDetails.custID;
-                var reader = new FileReader();
-                reader.readAsArrayBuffer(file);
-                reader.onload = function (e) {
-                    var arrayBuffer = e.target.result;
-                    var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
-                    document.Base64Content = base64String;
-                }
-                self.caseinfo.Documents.push(document);
-            }
-        }
-
-    }
 
     self.Download = function(doc)
     {
-        masterFactory.GetDocument(doc);
-        //var blob = b64toBlob(doc.Base64Content, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        //var blobUrl = URL.createObjectURL(blob);
-        //// window.location = blobUrl;
-        //if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-        //    window.navigator.msSaveOrOpenBlob(blob);
-        //}
-        //else {
-            
-        //    window.open(blobUrl);
-        //}      
+        masterFactory.GetDocument(doc);      
       
      }
 
@@ -138,29 +84,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         var index = self.caseinfo.Documents.indexOf(doc);
         self.caseinfo.Documents.splice(index, 1);
     }
-    //function b64toBlob(b64Data, contentType, sliceSize) {
-    //    contentType = contentType || '';
-    //    sliceSize = sliceSize || 512;
-
-    //    var byteCharacters = atob(b64Data);
-    //    var byteArrays = [];
-
-    //    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    //        var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    //        var byteNumbers = new Array(slice.length);
-    //        for (var i = 0; i < slice.length; i++) {
-    //            byteNumbers[i] = slice.charCodeAt(i);
-    //        }
-
-    //        var byteArray = new Uint8Array(byteNumbers);
-
-    //        byteArrays.push(byteArray);
-    //    }
-
-    //    var blob = new Blob(byteArrays, { type: contentType });
-    //    return blob;
-    //}
+    
 
     self.ChangeAccountInformation = function () {
         rapGlobalFactory.IsEdit = true;

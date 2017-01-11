@@ -53,11 +53,12 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
                         document.MimeType = mimetype;
                         document.CustomerID = self.custDetails.custID;
                         var reader = new FileReader();
-                        reader.readAsArrayBuffer(file);
+                        reader.readAsDataURL(file);
                         reader.onload = function (e) {
-                            var arrayBuffer = e.target.result;
-                            var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
-                            document.Base64Content = base64String;
+                            var base64 = e.target.result;
+                            if (base64 != null) {
+                                document.Base64Content = base64.substring(base64.indexOf('base64') + 7);
+                            }
                         }
                         self.caseinfo.Documents.push(document);
                     }
@@ -84,11 +85,12 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
                 document.MimeType = mimetype;
                 document.CustomerID = self.custDetails.custID;
                 var reader = new FileReader();
-                reader.readAsArrayBuffer(file);
+                reader.readAsDataURL(file);
                 reader.onload = function (e) {
-                    var arrayBuffer = e.target.result;
-                    var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
-                    document.Base64Content = base64String;
+                    var base64 = e.target.result;
+                    if (base64 != null) {
+                        document.Base64Content = base64.substring(base64.indexOf('base64') + 7);
+                    }
                 }
                 self.caseinfo.Documents.push(document);
             }

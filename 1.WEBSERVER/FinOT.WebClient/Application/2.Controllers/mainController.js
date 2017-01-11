@@ -28,5 +28,5 @@
         rapGlobalFactory.CityUser = null;
         $location.path("/loginURL");
     }
- 
+    $location.path("/loginURL");
 }];
