@@ -2978,6 +2978,21 @@ namespace RAP.DAL
                     tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
                     tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
                 }
+                else
+                {
+                    //Venky Owner Petition information
+                    var PropertyInfo = GetOwnerPropertyInfo(CaseNumber);
+                    if (PropertyInfo.status.Status == StatusEnum.Success)
+                    {
+                        tenantResponseInfo.ApplicantUserInfo = PropertyInfo.result;
+                    }
+                    //tenantResponseInfo.NumberOfUnits = (int)TenantResponseInfoDB.NumberOfUnits;
+                    //tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
+                    //tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
+                    //tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
+                    //tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
+                    //tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
+                }
                 tenantResponseInfo.UnitTypes = _units;
                 tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
 
@@ -3126,7 +3141,7 @@ namespace RAP.DAL
 
                         if (applicantInfo != null)
                         {
-                            var propertyInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == Convert.ToInt32(applicantInfo)).Select(x => x.ApplicantUserID);
+                            var propertyInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == Convert.ToInt32(applicantInfo)).Select(x => x.ApplicantUserID).First();
                             if (propertyInfo != null)
                             {
                                 var userInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(propertyInfo));
