@@ -3110,7 +3110,65 @@ namespace RAP.DAL
                 return tenantResponseResult;
             }
         }
-        
+        public ReturnResult<UserInfoM> GetOwnerPropertyInfo(string caseID)
+        {
+            ReturnResult<UserInfoM> result = new ReturnResult<UserInfoM>();
+            try
+            {
+                var caseInfo = _dbContext.CaseDetails.Where(r => r.CaseID == caseID).Select(x => x.PetitionID).First();
+                if (caseInfo != null)
+                {
+                    var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == Convert.ToInt32(caseInfo)).Select(x => x.OwnerPetitionID).First();
+
+                    if (ownerPetitionID != null)
+                    {
+                        var applicantInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == Convert.ToInt32(ownerPetitionID)).Select(x => x.OwnerPetitionApplicantInfoID).First();
+
+                        if (applicantInfo != null)
+                        {
+                            var propertyInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == Convert.ToInt32(applicantInfo)).Select(x => x.ApplicantUserID);
+                            if (propertyInfo != null)
+                            {
+                                var userInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(propertyInfo));
+                                if (userInfo.status.Status == StatusEnum.Success)
+                                {
+                                    result.result = userInfo.result;
+                                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                                }
+                                else
+                                {
+                                    result.status = userInfo.status;
+                                }
+                            }
+                            else
+                            {
+                                result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                            }
+                        }
+                        else
+                        {
+                            result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        }
+                    }
+                    else
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    }
+                }
+                else
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
         #endregion "TenantResponseGet"
 
         #region "TenantResponseSave"
