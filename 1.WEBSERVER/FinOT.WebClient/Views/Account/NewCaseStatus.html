@@ -28,62 +28,17 @@
                             <div class="col-md-9 col-sm-12">
                                 <label for="activity">Activity</label>
                                 <div class="full-width">
-                                    <select name="activity" id="activity"  data-placeholder="Select type"
-                                            ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
-                                            ng-model="Ctrl.ActivityStatus.Activity"
-                                            ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"></select>
+                                    <dropdown placeholder="Activities" list="Ctrl.ActivityList" property="ActivityDesc" selected="Ctrl.ActivityStatus.Activity"></dropdown>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="field-group">
-                        <div class="row">
-                            <div class="col-md-9 col-sm-12">
-                                <label for="activity">Activity</label>
-                                <div class="full-width">
-                                    <select name="activity" id="activity" data-placeholder="Select type" class="custom-select"
-                                            ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
-                                            ng-model="Ctrl.ActivityStatus.Activity"
-                                            ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"></select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <div class="row">
-                            <div class="col-md-9 col-sm-12">
-                                <label for="activity">Activity</label>
-                                <div class="full-width">
-                                    <select name="activity" id="activity" data-placeholder="Select type" class="custom-select">
-                                        <option ng-repeat="activity in Ctrl.ActivityList" value="{{activity.ActivityID}}">{{activity.ActivityDesc}}</option>
-                                            </select>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <div class="row">
-                            <div class="col-md-9 col-sm-12">
-                                <label for="activity">Activity</label>
-                                <div class="full-width">
-                                    <select name="activity" id="activity" data-placeholder="Select type" >
-                                        <option ng-repeat="activity in Ctrl.ActivityList" value="{{activity.ActivityID}}">{{activity.ActivityDesc}}</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="field-group">
                         <div class="row">
                             <div class="col-md-9 col-sm-12">
                                 <label for="{{status.StatusID}}">Status</label>
                                 <div class="full-width">
-                                    <select name="status" id="{{status.StatusID}}"  data-placeholder="Select type"
-                                            ng-options="status as (status.StatusDesc) for status in Ctrl.StatusList track by status.StatusID"
-                                            ng-model="Ctrl.ActivityStatus.Status"></select>
+                                    <dropdown placeholder="Status" list="Ctrl.StatusList" property="StatusDesc" selected="Ctrl.ActivityStatus.Status"></dropdown>                                    
                                 </div>
                             </div>
                         </div>

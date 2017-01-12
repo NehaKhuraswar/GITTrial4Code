@@ -518,6 +518,7 @@
     <Content Include="Views\OwnerResponse\RentalProperty.html" />
     <Content Include="Views\OwnerResponse\Review.html" />
     <Content Include="Views\OwnerResponse\Verification.html" />
+    <Content Include="Views\Shared\dropdown.html" />
     <Content Include="Views\TenantResponse\ApplicationInfo.html" />
     <Content Include="Views\TenantResponse\ConfirmationPage.html" />
     <Content Include="Views\TenantResponse\ExemptionContested.html" />

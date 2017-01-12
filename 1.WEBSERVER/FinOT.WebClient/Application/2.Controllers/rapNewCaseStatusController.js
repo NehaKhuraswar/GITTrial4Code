@@ -36,12 +36,14 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
     
     
 
-    self.ActivityChanged = function (model) {
-        return rapFactory.GetStatus(model.ActivityID).then(function (response) {
+    var _getStatus = function () {
+        return rapFactory.GetStatus(1).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.StatusList = response.data;
         });               
     }
+    _getStatus();
+
     self.Submit = function (model, C_ID) {
         //TBD remove C_ID hardcoding
         model.EmployeeID = self.CityUser.EmployeeID;

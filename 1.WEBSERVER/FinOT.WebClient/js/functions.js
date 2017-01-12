@@ -88,6 +88,7 @@ var tooltips;
   }
   
   
+  
   ( function() {
     $(window).load(loadWindow);
     $(window).resize(resizeWindow);
@@ -109,9 +110,10 @@ var tooltips;
     
     //Toggle Menu
     if($('.menu-toggle').length > 0){
-      $navigation = $('.navigation-wrapper');
-      var isOpen = 0;
+      var $navigation = $('.navigation-wrapper');
+      var mobNavInCache = 0;
       var $pageSlide = $('.pageSlide');
+      var $toggleContainer;
 
       $('.menu-toggle').on('click', function(e){
         e.preventDefault();
@@ -126,13 +128,15 @@ var tooltips;
         $pageSlide.toggleClass('open');
 
         //Appened Navigation Links
-        $hasNav = false;
-        if($hasNav===false){
-          $toggleContainer = '<div class="toggle-container">'+$navigation.html()+'</div>';
+        if(mobNavInCache===0){
+          $toggleContainer = $('<div class="toggle-container">'+$navigation.html()+'</div>');
           $pageSlide.html($toggleContainer);
-          $hasNav = true;
-          $(this).toggleClass('open');
+          mobNavInCache = 1;
         }
+        
+        //Toggle Menu Class
+        $(this).toggleClass('open');
+        
         
         //Mobile Nav Accordian
         if($pageSlide.hasClass('open')){
@@ -163,18 +167,29 @@ var tooltips;
       });
     }
     
-    //Site Search Button Click
-    if($('.account-details .search').length > 0){
-      $('.account-details .search').bind('click', function(e){
-        e.preventDefault();
-        var $this = $(this);
-        $this.toggleClass('active');
-        $('#site-header .site-search-wrapper').toggleClass('show');
+    
+    //Toggle - Search and Choose Language
+    if($('.account-details .toggle-link').length > 0){
+      $('.account-details .toggle-link').each(function(){
+        var $item = $(this);
+        var $itemToggle = $('.'+$item.data('toggle'));
+        
+        if($itemToggle.length > 0){
+          $item.on('click', function(e){
+            e.preventDefault();
+            $('.account-details .toggle-link').not($item).removeClass('active');
+            $('.navigation-wrapper .toggle-nav-element').not($itemToggle).removeClass('show');
+            
+            $item.toggleClass('active');
+            $itemToggle.toggleClass('show');
+          });
+        }
+        
       });
     }
     
-
-
+    
+    
     if($('.accordion').length > 0) {
       $('.accordion .item').each(function() {
         var $container = $(this);
@@ -312,6 +327,30 @@ var tooltips;
       });
     }
     
+    
+    //Icon Info - Toggle Box (on i icon click)
+    if($('.icon-info-toggle').length > 0) {
+      $('.icon-info-toggle').each(function() {
+        var $item = $(this);
+        var $itemParent = $item.parents('.field-group');
+        var $itemContent = $('.info-box-toggle', $itemParent);
+        
+        
+        if($itemContent.length > 0){
+          $item.on('click', function(e) {
+            e.preventDefault();
+            $itemContent.fadeIn();
+            $itemContent.toggleClass('hidden');
+          });
+          
+          $('.btn-close', $itemContent).on('click', function(e) {
+            e.preventDefault();
+            $itemContent.fadeOut();
+            $itemContent.toggleClass('hidden');
+          });
+        }
+      });
+    }
    
     
 //    if($('#frmCreateAccount').length > 0) {
@@ -342,13 +381,6 @@ var tooltips;
     
     
     
-//    if($('#business_phone').length > 0) {
-//      $('#business_phone').mask("999-9999-9999");
-//    }
-//    if($('#phone_number').length > 0) {
-//      $('#phone_number').mask("999-9999-9999");
-//    }
-    
     $('.application-form').each(function() {
       var $form = $(this);
       var err_msg;
@@ -367,7 +399,7 @@ var tooltips;
           $alert.empty().addClass('hidden');
         }
 
-        /* Global validation check for required fields and email */
+        /* Global validation for required radio fields*/
         $('.form-group-radio.required', $form).each(function() {
           var $parent = $(this);
           if($parent.hasClass('hidden') || $parent.parents('.hidden').length > 0) {
@@ -390,6 +422,28 @@ var tooltips;
           }
         });
         
+        /* Global validation for required checkbox fields */
+        $('.form-group-checkbox.required', $form).each(function() {
+          var $parent = $(this);
+          if($parent.hasClass('hidden') || $parent.parents('.hidden').length > 0) {
+            // do nothing if field is hidden
+          } else {
+            if($('input', $parent).length > 0) {
+              var inputName = $('input:eq(0)', $parent).attr('name');
+              if(!($('input[name='+inputName+']:checked').val())) {
+                $parent.addClass('has-checkbox-error');
+                err_msg += '<strong><a href="javascript:void();" data-scrollto="'+$parent.attr('id')+'">'+$parent.data('error')+'</a></strong>  is a required field<br />';
+                isValid=false;
+              }
+            }
+          }
+
+          if($parent.hasClass('has-checkbox-error')){
+            $('.input-error-msg', $parent).empty().append('This is a required field').removeClass('hidden');
+          } else {
+            $('.input-error-msg', $parent).empty().addClass('hidden');
+          }
+        });
         
         $('.field-input.required', $form).each(function() {
           var $fieldGroup = $(this).parents('.field-group');
@@ -434,7 +488,6 @@ var tooltips;
           $alert.html(err_msg).removeClass('hidden');
           scrollToElement($alert, 800, -100);
           
-          
           if($('a', $alert).length > 0){
             $('a', $alert).each(function() {
               var $item = $(this);
@@ -467,6 +520,23 @@ var tooltips;
 //        }
 //      }
     });
+    
+    //Form Validation error field scroll and focus on field link click
+    if($('.application-form-wrapper .alert a').length > 0){
+      $('.application-form-wrapper .alert a').on('click', function(e) {
+        e.preventDefault();
+        var $item = $(this);
+        var scrollTo = $('#'+$item.data('scrollto'));
+        var focusOn = $('#'+$item.data('id'));
+
+        if(focusOn.length > 0) {
+          $('#'+$item.data('id')).focus();
+        }
+        if(scrollTo.length > 0) {
+          scrollToElement(scrollTo, 800, -60); 
+        }
+      });
+    }
     
     
     //if(window.location.hash) {
@@ -519,142 +589,17 @@ var tooltips;
         selectOtherMonths: false,
         maxDate: new Date()
       });
-      
     
-//      var $btnReserve = $('.btn-reserve', $appointmentForm);
-//          
-//      $btnReserve.click(function(e){
-//        e.preventDefault();
-//        $('.available-dates.btn-link-gray').each(function() {
-//          $(this).text('View available dates').removeClass('btn-link-gray');
-//        });
-//        $('.address-reserved').removeClass('address-reserved');
-//
-//        $item = $appointmentForm.parents('.address-item');
-//        $item.addClass('address-reserved');
-//        $('.street-address', $appointment).text($('#address1').val());
-//        $('.address-location', $appointment).text($('#address2').val());
-//        $('.appointment-date', $appointment).text($("#inspection_date").val());
-//        $('.appointment-time', $appointment).text($("#inspection_time").val());
-//        
-//        $appointment.show();
-//        scrollToElement($appointment, 400, -100);
-//      });
-    }
-    
-    /*
-    if($('.add-production-facility').length > 0) {
-      $('.add-production-facility').click(function(e) {
-        e.preventDefault();
-        var $facilities = $('.production-facilities');
-        var $faclities_wrapper = $('.production-facilities-blank');
-        
-        if($('.production-facility', $faclities_wrapper).length > 0) {
-          $facilities.append($('.production-facility:eq(0)', $faclities_wrapper));
-        }
-        if($('.production-facility', $faclities_wrapper).length <= 0) {
-          $(this).hide();
-        }
-      });
-      
-      $('.btn-remove').click(function(e) {
-        e.preventDefault();
-        var $faclities_wrapper = $('.production-facilities-blank');
-        var $facility = $(this).parents('.production-facility');
-        $faclities_wrapper.append($facility);
-      });
     }
     
     
-    
-    if($('#available-inspection-dates').length > 0) {
-      var $appointmentForm = $('#available-inspection-dates');
-      var $appointment = $('#appointment');
-      $appointment.hide();
-      
-      $( ".field-datepicker" ).datepicker({
-        dateFormat: "DD, MM d, yy",
-        dayNamesMin: ['S', 'M', 'T', 'W', 'TH', 'F', 'S'],
-        showOtherMonths: true,
-        selectOtherMonths: false,
-        minDate: new Date()
-      });
-    
-      var $btnReserve = $('.btn-reserve', $appointmentForm);
-          
-      $btnReserve.click(function(e){
-        e.preventDefault();
-        $('.available-dates.btn-link-gray').each(function() {
-          $(this).text('View available dates').removeClass('btn-link-gray');
-        });
-        $('.address-reserved').removeClass('address-reserved');
-
-        $item = $appointmentForm.parents('.address-item');
-        $item.addClass('address-reserved');
-        $('.street-address', $appointment).text($('#address1').val());
-        $('.address-location', $appointment).text($('#address2').val());
-        $('.appointment-date', $appointment).text($("#inspection_date").val());
-        $('.appointment-time', $appointment).text($("#inspection_time").val());
-        
-        $appointment.show();
-        scrollToElement($appointment, 400, -100);
-      });
-    }
-  
-    
-    if($('.taxonomic-listing').length > 0) {
-      $('.taxonomic-
-  
-    
-    if($(listing').each(function() {
-        var $wrapper = $(this);
-        var $wapperSelected = $('.selected-items');
-        var $listSelected = $('ul', $wapperSelected);
-        $('input[type="checkbox"]', $wrapper).each(function() {
-          var $item = $(this);
-          $item.change(function(e) {
-            if($item.prop('checked')) {
-              var $selectedItem = $('<li data-id="'+$item.attr('id')+'">');
-              var $removeItem = $('<a class="remove-item">x</a>');
-              $removeItem.click(function(e) {
-                $('#'+$item.attr('id'), $wrapper).prop('checked', false);
-                $selectedItem.remove();
-              });
-              $selectedItem.text($item.val());
-              $selectedItem.append($removeItem);
-              
-              $listSelected.append($selectedItem);
-            } else {
-              if($('li[data-id="'+$item.attr('id')+'"]', $listSelected).length > 0) {
-                $('li[data-id="'+$item.attr('id')+'"]', $listSelected).remove();
-              }
-            }
-          });
-        });
-        
-        $('.save-taxonomic-listing').click(function(e) {
-          $('.anticipated-production-list').empty();
-          $('input[type="checkbox"]', $wrapper).each(function() {
-            var $item = $(this);
-            if($item.prop('checked')) {
-              $('.anticipated-production-list').append('<li>'+$item.val()+'</li>');
-            }
-          });
-          $('#modalTaxonomicListing').modal('hide');
-        });
-        
-      });
-    }*/
-    
-    
-    
+    //Implement Custom Select Box
     if($(".custom-select").length > 0){
-      
       $(".custom-select").each(function () {
         var $this = $(this), numberOfOptions = $(this).children('option').length;
         var selected = $this.find("option[selected]");
         var placeholder = $this.data('placeholder');
-          
+
         // Hides the select element
         $this.addClass('s-hidden');
 
@@ -674,7 +619,7 @@ var tooltips;
           } else {
             $styledSelect.text(selected.text());//$this.children('option').eq(0).text());
           }
-          
+
         } else if (placeholder && placeholder.length > 0){
           $styledSelect.text($this.data('placeholder'));
         } else {
@@ -697,11 +642,11 @@ var tooltips;
         var $listItems = $list.children('li');
 
         // Show the unordered list when the styled div is clicked (also hides it if the div is clicked again)
-        $styledSelect.click(function (e) {
+        $styledSelect.on('click', function (e) {
           e.stopPropagation();
           var $item = $(this);
           var $list = $(this).next('ul.options').hide();
-          
+
           if($item.hasClass('active')) {
             $item.removeClass('active');
             $list.stop().hide();
@@ -713,7 +658,7 @@ var tooltips;
 
         // Hides the unordered list when a list item is clicked and updates the styled div to show the selected list item
         // Updates the select element to have the value of the equivalent option
-        $listItems.click(function (e) {
+        $listItems.on('click', function (e) {
           e.stopPropagation();
           if($this.hasClass('show-values') && $(window).width() < 480) {
             $styledSelect.text($(this).attr('rel')).removeClass('active');
@@ -725,12 +670,14 @@ var tooltips;
         });
 
         // Hides the unordered list when clicking outside of it
-        $(document).click(function () {
+        $(document).on('click', function () {
            $styledSelect.removeClass('active');
            $list.hide();
         });
       });
     }
+    
+    
   } )();
   
 } )( jQuery );

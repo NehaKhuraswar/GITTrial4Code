@@ -483,7 +483,8 @@ strong {
   line-height: $line-height;
   font-family: $FaktPro-Blond;
 }
-.icon-info {
+.icon-info,
+.icon-info-toggle {
   display: block;
   width: 20px; height: 20px;
   background: url(../img/icon-info-blue.png) no-repeat 0 0;
@@ -491,6 +492,39 @@ strong {
   font-size: 0; line-height: 0;
   text-indent: -999em;
 }
+.has-info-btn {
+  .icon-info, .icon-info-toggle {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.4;
+    margin-left: 5px;
+  }
+}
+
+.info-box-toggle{
+  background: #e9eae7;
+  padding: 20px 60px 5px 25px;
+  border-left: 3px solid $green-dark;
+/*  position: absolute;
+  top: 45%; left: 0;
+  z-index: 99;*/
+  margin: 10px 0 15px 0;
+  position: relative;
+  
+  
+  p{ margin: 0 0 15px 0; }
+  .btn-close{
+    display: block;
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 14px; height: 14px;
+    background: url(../img/icon-close.png) no-repeat 0 0;
+    background-size: 14px 14px;
+    font-size: 0; line-height: 0;
+    text-indent: -999em;
+  }
+}
+  
 .error-msg{
   padding: 0 0 0 40px;
   background: url(../img/icon-error.png) no-repeat 0 3px;
@@ -826,7 +860,7 @@ $btn-green: #004d06;
             padding: 18px 15px 10px 15px;
             border-bottom: 5px solid transparent;;
             
-            &:hover{
+            &:hover,&.active{
               border-color: $green-dark;
             }
           }
@@ -839,7 +873,7 @@ $btn-green: #004d06;
               text-indent: -999em;
             }
           }
-          &.translate{
+          &.language{
             a{ 
               display: block;
               background: url(../img/icon-translate@2x.png) no-repeat center center;
@@ -869,8 +903,6 @@ $btn-green: #004d06;
 
 
 #site-header {
-  .mb-translation-wrapper,
-  .mb-site-search-wrapper,
   .mb-account-details-wrapper{
     display: none;
   }
@@ -936,8 +968,9 @@ $btn-green: #004d06;
   }
 }
 
-//Header - Site Search Wrapper
-.site-search-wrapper{
+//Header - Site Choose Language Wrapper
+
+.toggle-nav-element{
   position: absolute;
   top: 100%; left: 0;
   width: 100%; max-width: 100%;
@@ -946,6 +979,21 @@ $btn-green: #004d06;
   display: none;
   z-index: 99;
   
+  &.show{
+    display: block;
+  }
+}
+
+.site-language-wrapper{
+  .select{
+   .styledSelect {
+     border: transparent
+   }
+  }
+}
+
+//Header - Site Search Wrapper
+.site-search-wrapper{
   .search-form{
     display: block;
     background: #fff;
@@ -975,10 +1023,6 @@ $btn-green: #004d06;
       font-size: 0;
       text-indent: -999em;
     }
-  }
-  
-  &.show{
-    display: block;
   }
 }
 
@@ -3259,8 +3303,6 @@ Toggle Menu Button
     z-index: 999;
     .top-header{ font-size: 10px; }
     
-    .mb-translation-wrapper,
-    .mb-site-search-wrapper,
     .mb-account-details-wrapper{
       display: block;
     }
@@ -3312,21 +3354,37 @@ Toggle Menu Button
   }
   
   
-  .site-search-wrapper{
+  .toggle-nav-element{
     position: relative;
     top: none; left: none;
     display: block;
-    margin: 10px 0 20px 0;
+    margin: 0;
     max-width: 100%;
     padding: 0 25px;
+  }
+  
+  .site-language-wrapper{
+    background: url(../img/icon-translate@2x.png) no-repeat 25px center;
+    background-size: 22px 20px;
+    padding: 0 25px 0 45px;
+    margin: 0;
     
+    .select{
+      max-width: 245px;
+      margin: 0;
+      z-index: 999999;
+      font-size: 16px;
+    }
+  }
+  
+  .site-search-wrapper{
+    margin: 0 0 20px 0;
     .search-form{  
       padding-left: 32px;
       border: 1px solid #cfd0ce;
       
-      .btn-search{
-        top: 13px;
-      }
+      .input-field{ width: 100%; }
+      .btn-search{ top: 13px; }
     }
   }
 
@@ -3369,12 +3427,10 @@ Toggle Menu Button
           padding: 16px 85px 20px 52px;
           min-height: 80px;
           margin: 0 0 60px 0; 
-
           font-family: $FaktPro-Blond;
           font-size: 16px;
           font-weight: normal;
           line-height: 1.38;
-
 
           &.alert-error{
             color: #810300;
