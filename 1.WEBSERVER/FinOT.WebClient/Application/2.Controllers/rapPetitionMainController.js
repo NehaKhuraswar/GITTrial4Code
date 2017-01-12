@@ -33,7 +33,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
             self.PageTitle = 'Tenant Petition';
         }
         else if (self.caseinfo.PetitionCategoryID == 2) {
-            self.PageTitle = 'Owner Petition';
+            self.PageTitle = 'Owner Petition for Approval of Rent Increase';
         }
     }
     //var _getrent = function () {
