@@ -1,26 +1,26 @@
 ﻿
-<h3 class="step-heading">Tenant Petition: <span>Applicant and Property Information</span></h3>
+<h3 class="step-heading">Applicant and Property Information</span></h3>
 <div class="step-content create-new">
     <div class="subhead no-top-margin">
-        <h4>Applicant’s name and rental address</h4>
+        <h4>Tenant information</h4>
         <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
     </div>
     <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
-        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}</p>
-        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}</p>
-        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}</p>
-        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}</p>
+        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}<br/>
+        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}<br/>
+        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}<br/>
+        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}
     </div>
     <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
         <div class="field-group">
             <label for="Applicant_firstname">Name</label>
-            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName" required />
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName" placeholder="First" required />
         </div>
 
         <div class="field-group">
-            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName" required />
+            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName" placeholder="Last" required />
         </div>
-
+		<p>&nbsp;</p>
         <div class="field-group">
             <label for="businessname">Business name</label>
             <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName" />
@@ -52,7 +52,7 @@
         </div>
 
         <div class="field-group">
-            <label for="Applicant_zip_code">Zip Code</label>
+            <label for="Applicant_zip_code">Zip code</label>
             <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip" required />
         </div>
 
@@ -62,14 +62,14 @@
         </div>
 
         <div class="field-group">
-            <label for="Applicant_email">Email Address</label>
+            <label for="Applicant_email">Email address</label>
             <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email" required />
         </div>
     </div>
 
 
     <div class="subhead">
-        <h4>Your representative</h4>
+        <h4>Your representative’s information</h4>
     </div>
     <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
         <p class="input-label">Is anybody representing you?</p>
@@ -85,7 +85,7 @@
         </div>
     </div>
     <div id="representative-info">
-        <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
+        <p class="input-label">We will use this information to send notifications about your case to your representative.</p>
         <div ng-show="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)">
             <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
                 <label for="representative_firstname">Name</label>
@@ -95,7 +95,7 @@
             <div class="field-group">
                 <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName" required />
             </div>
-
+			<p>&nbsp;</p>
             <div class="field-group">
                 <label for="businessname">Business name</label>
                 <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.BusinessName" />
@@ -127,7 +127,7 @@
             </div>
 
             <div class="field-group">
-                <label for="representative_zip_code">Zip Code</label>
+                <label for="representative_zip_code">Zip code</label>
                 <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip" required />
             </div>
 
@@ -137,7 +137,7 @@
             </div>
 
             <div class="field-group">
-                <label for="representative_email">Email Address</label>
+                <label for="representative_email">Email address</label>
                 <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email" required />
             </div>
         </div>
@@ -152,7 +152,7 @@
     </div>
 
     <div class="subhead">
-        <h4>Property owner(s) name and mailing address</h4>
+        <h4>Property owner information</h4>
     </div>
     <div id="property-owner-info">
 
@@ -196,7 +196,7 @@
         </div>
 
         <div class="field-group">
-            <label for="representative_zip_code">Zip Code</label>
+            <label for="representative_zip_code">Zip code</label>
             <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip" required />
         </div>
         <div class="field-group">
@@ -215,7 +215,7 @@
 
 
     <div class="subhead">
-        <h4>Property manager(s) name and mailing address</h4>
+        <h4>Property manager information</h4>
     </div>
     <div id="property-manager-info">
         <div class="field-group">
@@ -223,7 +223,7 @@
                 <div class="checkbox-wrapper">
                     <label for="same_as_po_info">
                         <input type="checkbox" class="checkbox" id="same_as_po_info" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo"
-                               value="Yes" ng-change="Ctrl.ChangeSameAsPropertyOwner()"><i></i><span>Same as property owner info</span>
+                               value="Yes" ng-change="Ctrl.ChangeSameAsPropertyOwner()"><i></i><span>Same as property owner</span>
                     </label>
                 </div>
             </div>
@@ -236,7 +236,7 @@
         </div>
 
         <div class="field-group">
-            <input type="text" name="pm_lastname" id="pm_lastname" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName" placeholder=" last" />
+            <input type="text" name="pm_lastname" id="pm_lastname" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName" placeholder="Last" />
         </div>
         <p>&nbsp;</p>
 
@@ -275,7 +275,7 @@
         </div>
 
         <div class="field-group">
-            <label for="pm_zip_code">Zip Code</label>
+            <label for="pm_zip_code">Zip code</label>
             <input type="text" name="pm_zip_code" id="pm_zip_code" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip" class="field-input" />
         </div>
         <div class="field-group">
@@ -284,7 +284,7 @@
         </div>
 
         <div class="field-group">
-            <label for="pm_email">Email Address</label>
+            <label for="pm_email">Email address</label>
             <input type="text" name="pm_email" id="pm_email" class="field-input email" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email" />
         </div>
     </div>
@@ -323,7 +323,7 @@
         </div>
 
         <div class="field-group">
-            <p class="input-label">Are you current on paying your rent?</p>
+            <p class="input-label">Are you current on your rent?</p>
             <div class="form-group-radio vertical clearfix">
                 <label for="pi_paying_rent_yes">
                     <input type="radio" name="pi_paying_rent_yes" id="pi_paying_rent_yes" ng-value="true"
@@ -339,13 +339,13 @@
     </div>
 
     <div id="explanation" class="field-group" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">
-        <label for="pi_explanation">If you are not current on paying your rent, please provide an explanation.</label>
+        <label for="pi_explanation">If you are not current on your rent, please explain.</label>
         <textarea name="pi_explanation" id="pi_explanation" class="field-input textarea" rows="8" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ProvideExplanation"></textarea>
     </div>
 
 
     <div class="step-footer">
-        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToGroundsforPetition()" />
+        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToGroundsforPetition()" />
     </div>
 </div>
     

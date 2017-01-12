@@ -3,7 +3,7 @@
 <div class="row">  
     <div class="col-md-9 col-sm-12">
         <div class="application-step step-1">
-            <h3 class="step-heading">Tenant Petition: <span>Description of Lost Services and Problems</span></h3>
+            <h3 class="step-heading">Description of loss of service and problems</span></h3>
 
             <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
                 <div class="step-content step1">
@@ -11,17 +11,17 @@
                     <div class="field-group subhead no-top-margin">
                         <div class="form-group-checkbox vertical clearfix">
                             <label for="housing_services_decreased">
-                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" ng-value="true" /><i></i><span><strong>The housing services I am being provided have decreased.</strong></span>
+                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" ng-value="true" /><i></i><span><strong>My housing services have decreased.</strong><a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rap_notice">Info</a></span>
                             </label>
                         </div>
                     </div>
 
                     <div class="subhead no-top-margin">
-                        <h4>Lost Service</h4>
+                        <h4>Loss of Services</h4>
                     </div>
 
                     <div class="field-group">
-                        <p class="input-label">Have you lost services or are you being charged for services originally provided by the property owner?</p>
+                        <p class="input-label">Are you being charged for a service originally provided to you by the property owner?</p>
                         <div class="form-group-radio vertical clearfix">
                             <label for="charged_for_services_yes">
                                 <input type="radio" name="charged_for_services" id="charged_for_services_yes" class="input-field" ng-value="true"
@@ -40,7 +40,7 @@
                         <div ng-if="item.IsDeleted == false">
                             <div class="field-group filled-info subhead no-top-margin">
                                 <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Your estimated dollar value of the lost service(s) or problem(s)</div></div>
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">What is the estimated dollar value of the lost service or problem?<a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rap_notice">Info</a></div></div>
                                     <div class="col-sm-6 col-xs-12">{{item.EstimatedLoss}}</div>
                                 </div>
                             </div><!-- .field-group -->
@@ -54,7 +54,7 @@
 
                             <div class="field-group filled-info subhead no-top-margin">
                                 <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date loss began</div></div>
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date loss of this service began</div></div>
                                     <div class="col-sm-6 col-xs-12">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
                                 </div>
                             </div><!-- .field-group -->
@@ -66,19 +66,19 @@
                         </div>
                     </div>
                     <div class="field-group">
-                        <label for="list_reduced_services">Describe the reduced service(s) including 1) a list of the lost housing service(s) 2) How you calculate the dollar value of lost service(s). Please attach documentary evidence  if available.</label>
+                        <label for="list_reduced_services">Provide 1) A description of each lost service 2) an explanation of how you calculate the dollar value of each  lost service.</label>
                         <textarea name="list_reduced_services" id="list_reduced_services" class="field-input textarea" rows="8"
                                   ng-model="Ctrl.LostServices.ReducedServiceDescription"></textarea>
                     </div>
 
                     <div class="field-group">
-                        <label for="estimated_dollar_value">Your estimated dollar value of the lost service(s) or problem(s)</label>
+                        <label for="estimated_dollar_value">What is the estimated dollar value of the lost service or problem?</label>
                         <input type="text" name="estimated_dollar_value" id="estimated_dollar_value" class="field-input"
                                ng-model="Ctrl.LostServices.EstimatedLoss" placeholder="" />
                     </div>
 
                     <div class="field-group no-top-margin">                        
-                        <label for="date_loss_began_month">Date loss began</label>
+                        <label for="date_loss_began_month">Date loss of this service began</label>
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
@@ -105,7 +105,7 @@
 
                         <div class="field-addfile">
                             <div class="input-file-wrapper">
-                                <span class="btn-link">Attach additional documentation</span>
+                                <span class="btn-link">Add additional documentation</span>
                                 <input type="file" id="lost_services_documentation" name="lost_services_documentation"
                                         ngf-select ngf-change="onFileSelected($files,'TP_LostServive')"
                                         accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
@@ -126,7 +126,7 @@
                             </div>             
                         </div>
 
-                        <a class="btn-link" ng-click="Ctrl.AddAnotherLostServices(Ctrl.LostServices)">Add another lost service description</a>
+                        <a class="btn-link" ng-click="Ctrl.AddAnotherLostServices(Ctrl.LostServices)">Add another lost service</a>
                         <p>&nbsp;</p>                       
                     </div><!-- .field-group -->
 
@@ -153,7 +153,7 @@
                         <div ng-if="item.IsDeleted == false">
                             <div class="field-group filled-info subhead no-top-margin">
                                 <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Your estimated dollar value of incurred monetary loss as a result these problem(s)</div></div>
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">What is the estimated dollar value of the lost service?</div></div>
                                     <div class="col-sm-6 col-xs-12">{{item.EstimatedLoss}}</div>
                                 </div>
                             </div><!-- .field-group -->
@@ -180,7 +180,7 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="describe_problems">Describe problem(s) with your unit including 1) a list of the problem(s); 2) How you calculate the dollar value of incurred monetary loss as a result of these problem(s). Please attach documentary evidence if available.</label>
+                        <label for="describe_problems">Provide 1) A description of the one problem 2) an explanation of how you calculate the dollar value of this problem</label>
                         <textarea name="describe_problems" id="describe_problems" class="field-input textarea" rows="8"
                                   ng-model="Ctrl.Problems.ProblemDescription"></textarea>
                     </div>
@@ -218,21 +218,21 @@
 
                         <div class="field-addfile">
                             <div class="input-file-wrapper">
-                                <span class="btn-link">Attach additional documentation</span>
+                                <span class="btn-link">Add additional documentation</span>
                                 <input type="file" id="problem_documentation" name="problem_documentation" />
                             </div>
                         </div>
 
-                        <a class="btn-link" ng-click="Ctrl.AddAnotherProblem(Ctrl.Problems)">Add another problem description</a>
+                        <a class="btn-link" ng-click="Ctrl.AddAnotherProblem(Ctrl.Problems)">Add another problem</a>
                     </div><!-- .field-group -->
                     
                     <div class="field-group">
-                        <p><br />To have a unit inspected and code violations cited, contact the City of Oakland, Code Compliance Unit, 250 Frank H. Ogawa Plaza, 2nd Floor, Oakland, CA 94612. Phone: (510) 238-3381</p>
+                        <p><br />You have the option to have a City inspector come to your unit and inspect for any code violation. To make an appointment, call the City of Oakland, Code of Compliance Unit at (510) 238-3381</p>
                     </div>
                 </div>
 
                 <div class="step-footer">
-                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToDocument()" />
+                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToDocument()" />
                 </div>
             </form>
         </div>

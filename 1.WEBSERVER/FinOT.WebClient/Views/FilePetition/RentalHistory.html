@@ -3,30 +3,30 @@
 
         <div class="col-md-9 col-sm-12">
             <div class="application-step step-1">
-                <h3 class="step-heading">Tenant Petition: <span>Rental History</span></h3>
+                <h3 class="step-heading">Rental History</h3>
 
                 <div class="step-content step1">
                         <div class="field-group subhead no-top-margin">
-                            <p class="input-label">When did you move into the unit?</p>
+                            <p class="input-label">When did you move into this unit?</p>
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month"
-                                                class="custom-select" data-placeholder="Month"
+                                                class="custom-select" placeholder="Month" data-placeholder="Month"
                                                 ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day"
-                                                class="custom-select" data-placeholder="Day"
+                                                class="custom-select" placeholder="Day" data-placeholder="Day"
                                                 ng-options="day for day in  Ctrl.Calender.Days"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Year"
-                                                class="custom-select" data-placeholder="Year"
+                                                class="custom-select" placeholder="Year" data-placeholder="Year"
                                                 ng-options="year for year in  Ctrl.Calender.Years"></select>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
 
 
                         <div class="field-group">
-                            <p class="input-label">When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)?</p>
+                            <p class="input-label">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</p>
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
@@ -99,21 +99,21 @@
                             <h4>Rent Increases</h4>
                         </div>
 
-                        <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later)  to contest the rent increase. (O.M.C. 8.22.090 A 2) If you never got the RAP Notice you can contest all past increases.</p>
+                        <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never received the RAP Notice you can contest all past increases.<a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
                         
 
                         <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
                             <div ng-if="item.IsDeleted == false">
                                 <div class="field-group filled-info subhead no-top-margin">
                                     <div class="row">
-                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a rent program notice with the notice of increase?</div></div>
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a RAP Notice with the notice of rent increase?</div></div>
                                         <div class="col-sm-6 col-xs-12" ng-show="item.bRentIncreaseNoticeGiven">Yes</div>
                                         <div class="col-sm-6 col-xs-12" ng-show="!item.bRentIncreaseNoticeGiven">No</div>
                                     </div>
                                 </div><!-- .field-group -->
                                 <div class="field-group filled-info subhead no-top-margin">
                                     <div class="row">
-                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
                                         <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                                     </div>
                                 </div><!-- .field-group -->
@@ -127,7 +127,7 @@
 
                                 <div class="field-group filled-info subhead no-top-margin">
                                     <div class="row">
-                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
                                         <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
                                     </div>
                                 </div><!-- .field-group -->
@@ -148,7 +148,7 @@
                         </div>
 
                         <div class="field-group subhead">
-                            <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>
+                            <p class="input-label">Did you receive a RAP Notice with the notice of rent increase?</p>
                             <div class="form-group-radio vertical clearfix">
                                 <label for="receive_rent_increase_notice_yes">
                                     <input type="radio" name="receive_rent_increase_notice" id="receive_rent_increase_notice_yes" class="input-field" ng-value="true"
@@ -164,7 +164,7 @@
                         </div>
 
                     <div class="field-group">
-                        <label for="date_increase_effective_month">Date notice served</label>
+                        <label for="date_increase_effective_month">Date you received the notice</label>
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
@@ -207,7 +207,7 @@
                     </div><!-- .field-group -->
 
                         <div class="field-group">
-                            <label for="date_increase_effective_month">Date increase effective</label>
+                            <label for="date_increase_effective_month">Date increase goes into effect</label>
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
@@ -253,7 +253,7 @@
 
                         
                         <div class="field-group subhead">
-                            <p class="input-label">Have you ever filed a petition for your rental unit?</p>
+                            <p class="input-label">Have you ever filed a petition for this rental unit?</p>
                             <div class="form-group-radio vertical clearfix">
                                 <label for="filed_rental_unit_petition_yes">
                                     <input type="radio" name="filed_rental_unit_petition" id="filed_rental_unit_petition_yes"
@@ -269,7 +269,7 @@
                         </div>
 
                         <div class="field-group">
-                            <label for="all_petitions_no">List case number of all Petition(s) you have ever filed for this rental unit.</label>
+                            <label for="all_petitions_no">List the case numbers of all the petitions you have ever filed for this rental unit.</label>
                             <textarea name="all_petitions_no" id="all_petitions_no" class="field-input textarea" rows="2"
                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.PreviousCaseIDs"></textarea>
                             <br />                            
@@ -278,7 +278,7 @@
                     </div>
 
                     <div class="step-footer">
-                        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToLostServices(Ctrl.selectedValue)" />
+                        <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToLostServices(Ctrl.selectedValue)" />
                     </div>
             </div>
         </div>

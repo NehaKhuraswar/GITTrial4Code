@@ -1,6 +1,6 @@
 ﻿<div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
-        <h3 class="step-heading">Tenant Petition: <span>Review</span></h3>
+        <h3 class="step-heading">Review</h3>
 
         <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
             <div class="step-content step1">
@@ -12,16 +12,16 @@
                 </div><!-- .field-group -->
 
                 <div class="subhead type2">
-                    <h4>Applicant and Property Information</h4>
+                    <h4>Tenant and Property Information</h4>
                     <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
                 </div>
 
                 <div class="field-group filled-info">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant</div></div>
                         <div class="col-sm-6 col-xs-12">
-                            {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}                             {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}   <br />
-                            T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}} 
+                            {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}                           {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}} <br />
+                            T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -58,7 +58,7 @@
 
                 <div class="field-group filled-info subhead">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units in the building</div></div>
                         <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits}}</div>
                     </div>
                 </div><!-- .field-group -->
@@ -103,7 +103,7 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into the unit?</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into this unit?</div></div>
                         <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Year}}</div>
                     </div>
                 </div><!-- .field-group -->
@@ -117,14 +117,14 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)?</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
                         <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Is you rent subsidized or controlled by any government agency including HUD (Section 8)?</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">Yes</div>
                         <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">No</div>
                     </div>
@@ -132,7 +132,7 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a rent program notice with the notice of increase?</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a RAP Notice with the notice of rent increase?</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">Yes</div>
                         <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">No</div>
                     </div>
@@ -141,7 +141,7 @@
                 <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                         </div>
                     </div><!-- .field-group -->
@@ -155,7 +155,7 @@
 
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
                         </div>
                     </div><!-- .field-group -->
@@ -245,7 +245,7 @@
             </div>
 
             <div class="step-footer">
-                <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToVerification()" />
+                <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToVerification()" />
             </div>
         </form>
     </div>
