@@ -6833,9 +6833,15 @@ Toggle Menu Button
     display: none;
   }
 }
+
+
 #selected {
         width: 100%;
         margin-top: 20px;
+      }
+.border-box {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
       }
 /* 
 * Following styles are used for dropdown
