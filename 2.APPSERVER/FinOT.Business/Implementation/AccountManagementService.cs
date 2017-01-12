@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using System.Configuration;
 using RAP.Core.DataModels;
 using RAP.Core.Services;
 using RAP.Core.Persisters;
@@ -25,10 +26,36 @@ namespace RAP.Business.Implementation
         //implements all methods from IMasterDataService
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
+        EmailService emailservice = new EmailService();
+        ExceptionHandler _eHandler = new ExceptionHandler();
 
         public ReturnResult<CustomerInfo> SaveCustomer(CustomerInfo message)
         {
-            return accDBHandler.SaveCustomer(message);
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
+            string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            try
+            {
+                var dbResult = accDBHandler.SaveCustomer(message);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                EmailM emailMessage = new EmailM();
+                emailMessage.Subject = "RAP Account created Successfully";
+                emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("AccountCreatedMsg").Replace("PIN", dbResult.result.CustomerIdentityKey.ToString()).Replace("LOGIN", _loginURL);
+                emailMessage.RecipientAddress.Add(dbResult.result.email);
+                emailservice.SendEmail(emailMessage);
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch(Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+               // _commonService.LogError(result.status);
+                return result;
+            }
         }
 
         public ReturnResult<ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID)
@@ -48,8 +75,35 @@ namespace RAP.Business.Implementation
             return accDBHandler.EditCustomer(message);
         }
         public ReturnResult<CityUserAccount_M> CreateCityUserAccount(CityUserAccount_M message)
-        {
-            return accDBHandler.CreateCityUserAccount(message);
+        {          
+           ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
+            string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            try
+            {
+                var dbResult = accDBHandler.CreateCityUserAccount(message);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                EmailM emailMessage = new EmailM();
+                emailMessage.Subject = "RAP Account created Successfully";
+                emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("CityAccountCreatedMsg").Replace("LOGIN", _loginURL);
+                if (dbResult.result.Email != null)
+                {
+                    emailMessage.RecipientAddress.Add(dbResult.result.Email);
+                }
+                emailservice.SendEmail(emailMessage);
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                // _commonService.LogError(result.status);
+                return result;
+            }
         }
         public ReturnResult<CustomerInfo> GetCustomer(CustomerInfo message)
         {
@@ -68,8 +122,8 @@ namespace RAP.Business.Implementation
             if (result.status.Status == StatusEnum.Success)
             {
                 EmailM emailMessage = new EmailM();
-                emailMessage.MessageBody = email + " Sending Password " + result.result;
-                emailMessage.Subject = "Your RAP Password";
+                emailMessage.Subject = "RAP Login Password";
+                emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("ForgotPasswordMsg").Replace("PASSWORD", result.result);
                 emailMessage.RecipientAddress.Add(email);
                 EmailService emailservice = new EmailService();
                 resultFinal = emailservice.SendEmail(emailMessage);
@@ -86,11 +140,14 @@ namespace RAP.Business.Implementation
             if(result != null)
             {
                 EmailM emailMessage = new EmailM();
-                emailMessage.MessageBody = message.email + " Sending Pin " + result.result;
-                emailMessage.Subject = "Your RAP Pin";
-                emailMessage.RecipientAddress.Add(message.email);
+                emailMessage.Subject = "RAP Security PIN";
+                emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("ResendPinMsg").Replace("PIN", result.result);
+                if (message.email != null)
+                {
+                    emailMessage.RecipientAddress.Add(message.email);
+                }
                 EmailService emailservice = new EmailService();
-                resultFinal = emailservice.SendEmail(emailMessage);
+                resultFinal = emailservice.SendEmail(emailMessage);              
             }
             return resultFinal;
         }

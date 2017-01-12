@@ -19,6 +19,7 @@ namespace RAP.Business.Implementation
         private readonly ICommonService _commonService;
         private readonly IDocumentService _documentService;
         private readonly IEmailService _emilService;
+        
         //TBD
         //public ApplicationProcessingService()
         //{
@@ -270,9 +271,35 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> SubmitTenantPetition(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            List<string> _receipients = new List<string>();
             try
             {
-                result = _dbHandler.SubmitTenantPetition(caseInfo);
+                var dbResult = _dbHandler.SubmitTenantPetition(caseInfo);
+
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                EmailM message = new EmailM();
+                message.Subject = "Tenant Petition Filed Successfully : Case No -" + caseInfo.CaseID;
+                message.MessageBody = NotificationMessage.ResourceManager.GetString("PetitionMsg").Replace("CASEID", caseInfo.CaseID).Replace("LOGIN", _loginURL);
+                if (caseInfo.TenantPetitionInfo.ApplicantUserInfo.Email != null)
+                {
+                    _receipients.Add(caseInfo.TenantPetitionInfo.ApplicantUserInfo.Email);
+                }
+                if (caseInfo.bCaseFiledByThirdParty)
+                {
+                    if (caseInfo.TenantPetitionInfo.ThirdPartyInfo.Email != null)
+                    {
+                        _receipients.Add(caseInfo.TenantPetitionInfo.ThirdPartyInfo.Email);
+                    }
+                }
+                message.RecipientAddress = _receipients;
+                _emilService.SendEmail(message);
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
@@ -319,9 +346,34 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> SubmitAppeal(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            List<string> _receipients = new List<string>();
             try
             {
-                result = _dbHandler.SubmitAppeal(caseInfo);
+                var dbResult = _dbHandler.SubmitAppeal(caseInfo);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                EmailM message = new EmailM();
+                message.Subject = "Appeal Filed Successfully : Case No -" + caseInfo.CaseID;
+                message.MessageBody = NotificationMessage.ResourceManager.GetString("AppealMsg").Replace("CASEID", caseInfo.CaseID).Replace("LOGIN", _loginURL);
+                if (caseInfo.TenantAppealInfo.ApplicantUserInfo.Email != null)
+                {
+                    _receipients.Add(caseInfo.TenantAppealInfo.ApplicantUserInfo.Email);
+                }
+                if (caseInfo.bCaseFiledByThirdParty)
+                {
+                    if (caseInfo.TenantAppealInfo.AppealThirdPartyInfo.Email != null)
+                    {
+                        _receipients.Add(caseInfo.TenantAppealInfo.AppealThirdPartyInfo.Email);
+                    }
+                }
+                message.RecipientAddress = _receipients;
+                _emilService.SendEmail(message);
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
@@ -870,9 +922,34 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> SubmitTenantResponse(CaseInfoM caseInfo)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            List<string> _receipients = new List<string>();
             try
             {
-                result = _dbHandler.SubmitTenantResponse(caseInfo);
+               var dbResult = _dbHandler.SubmitTenantResponse(caseInfo);
+               if (dbResult.status.Status != StatusEnum.Success)
+               {
+                   result.status = dbResult.status;
+                   return result;
+               }
+                EmailM message = new EmailM();
+                message.Subject = "Tenant Response Filed Successfully : Case No -" + caseInfo.CaseID;
+                message.MessageBody = NotificationMessage.ResourceManager.GetString("ResponseMsg").Replace("CASEID", caseInfo.CaseID).Replace("LOGIN", _loginURL);
+                if (caseInfo.TenantResponseInfo.ApplicantUserInfo.Email!= null)
+                {
+                    _receipients.Add(caseInfo.TenantResponseInfo.ApplicantUserInfo.Email);
+                }
+                if (caseInfo.bCaseFiledByThirdParty)
+                {
+                    if (caseInfo.TenantResponseInfo.ThirdPartyInfo.Email != null)
+                    {
+                        _receipients.Add(caseInfo.TenantResponseInfo.ThirdPartyInfo.Email);
+                    }
+                }
+                message.RecipientAddress = _receipients;
+                _emilService.SendEmail(message);
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
@@ -1332,6 +1409,8 @@ namespace RAP.Business.Implementation
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
+                string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+                List<string> _receipients = new List<string>();
                 var dbResult = _dbHandler.SubmitOwnerPetition(model);
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
@@ -1340,11 +1419,19 @@ namespace RAP.Business.Implementation
                 }
                 EmailM message = new EmailM();
                 message.Subject = "Owner Petition Filed Successfully : Case No -" + model.CaseID;
-                message.MessageBody = NotificationMessage.ResourceManager.GetString("PetitionMsg").Replace("CASEID",model.CaseID);
+                message.MessageBody = NotificationMessage.ResourceManager.GetString("PetitionMsg").Replace("CASEID",model.CaseID).Replace("LOGIN",_loginURL);
                 if (model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
                 {
-                    message.RecipientAddress.Add(model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email);
+                   _receipients.Add(model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email);
                 }
+                if(model.bCaseFiledByThirdParty)
+                {
+                    if(model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email !=null)
+                    {
+                        _receipients.Add(model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email);
+                    }
+                }
+                message.RecipientAddress = _receipients;
                 _emilService.SendEmail(message);
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
@@ -1791,6 +1878,8 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            List<string> _receipients = new List<string>();
             try
             {
                 var dbResult = _dbHandler.SubmitOwnerResponse(model);
@@ -1801,11 +1890,20 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 EmailM message = new EmailM();
-                message.Subject = "Owner Resonse Successfully Filed for the Case -" + model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
-                if(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
+                message.Subject = "Owner Response Filed Successfully : Case No -" + model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
+                message.MessageBody = NotificationMessage.ResourceManager.GetString("ResponseMsg").Replace("CASEID", model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo).Replace("LOGIN", _loginURL);
+                if (model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
                 {
-                    message.RecipientAddress.Add(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email);
+                    _receipients.Add(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email);
                 }
+                if (model.bCaseFiledByThirdParty)
+                {
+                    if (model.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.Email != null)
+                    {
+                        _receipients.Add(model.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.Email);
+                    }
+                }
+                message.RecipientAddress = _receipients;
                 _emilService.SendEmail(message);
                 model = dbResult.result;
                 result.result = model;
