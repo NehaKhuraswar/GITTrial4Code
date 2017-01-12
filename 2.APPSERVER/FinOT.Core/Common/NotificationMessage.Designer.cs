@@ -61,13 +61,265 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your petition has been submitted to the City of Oakland Rent Adjustment Program. Your case number is CASEID.
+        ///   Looks up a localized string similar to Dear NAME,
         ///
-        ///A confirmation has been sent to your email. If you have not received it, be sure to check your spam box. A copy of your petition will be sent to the other party and they will have 35 days to respond. You may submit any additional documentation up till 7 days before the hearing, and may also review the other party&apos;s submitted documents. Pay close attention to your email and your mail for informatio [rest of string was truncated]&quot;;.
+        ///Thank you for creating an account with the Rent Adjustment Program.
+        ///
+        ///To electronically sign your petition or response form you must use the following 5 digit-pin number: PIN
+        ///
+        ///This pin allows the City and RAP Staff to verify that you and only you have electronically signed a petition or a response with the Rent Adjustment Program. Please keep this pin number secure and do not share this pin number with anyone.
+        ///
+        ///To reset your PIN please follow this link: LOGIN
+        ///
+        ///If a third-party is filing [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AccountCreatedMsg {
+            get {
+                return ResourceManager.GetString("AccountCreatedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dear NAME,
+        ///
+        ///Your appeal has been filed successfully. As a reminder, your Case Number is: CASEID
+        ///
+        ///If you need to request translation services please do so here:
+        ///
+        ///RAP will evaluate your appeal and reach out with next steps. If your appeal required a hearing before the Rent Board someone from RAP staff will reach out regarding scheduling. 
+        ///
+        ///If you have any questions please contact RAP staff at Phone: (510) 238-3721 
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland.
+        /// </summary>
+        internal static string AppealMsg {
+            get {
+                return ResourceManager.GetString("AppealMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dear NAME
+        ///
+        ///Thank you for creating an CIty account with the Rent Adjustment Program.
+        ///
+        ///You can access your account here: &lt;Link to Online Petition&gt;
+        ///
+        ///If you feel you have received this email in error, or you did have not created an account. Please contact RAP Staff immediately at 510.238.3721
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;&quot;&quot;.
+        /// </summary>
+        internal static string CityAccountCreatedMsg {
+            get {
+                return ResourceManager.GetString("CityAccountCreatedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dear NAME,
+        ///
+        ///You have requested the RAP resend your password to the RAP Online Petitioning system. 
+        ///
+        ///Your password is:  PASSWORD
+        ///
+        ///If you feel have received this message in error, please call RAP Staff immediately at (510) 238-3721
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string ForgotPasswordMsg {
+            get {
+                return ResourceManager.GetString("ForgotPasswordMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dear NAME
+        ///
+        ///Your petition has been filed successfully. Your Case Number is: CASEID
+        ///
+        ///You have selected to receive notification through the following methods:
+        ///
+        ///NOTIFICATIONS
+        ///
+        ///If you would like to change these settings please do so in the user dashboard here:
+        ///
+        ///If you need to request translation services please do through the user dashboard: LOGIN
+        ///
+        ///Please continue to check your user dashboard for updates on your petition including your assigned hearing date, submitted response forms, and scheduling o [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PetitionMsg {
             get {
                 return ResourceManager.GetString("PetitionMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dear NAME
+        ///
+        ///You have requested the RAP resend your 5-Digit pin. Your pin is: PIN
+        ///
+        ///This pin allows the City and RAP Staff to verify that you and only you have electronically signed a petition or a response with the Rent Adjustment Program. Please keep this pin number secure and do not share this pin number with anyone.
+        ///
+        ///If you feel have received this message in error, please call RAP Staff immediately at (510) 238-3721
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string ResendPinMsg {
+            get {
+                return ResourceManager.GetString("ResendPinMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your petition response has been filed successfully. Your Case Number is: CASEID
+        ///
+        ///You have selected to receive notification through the following methods:
+        ///
+        ///NOTIFICATIONS
+        ///
+        ///If you would like to change these settings please do so in the user dashboard here:
+        ///
+        ///If you need to request translation services please do so here:
+        ///
+        ///Please continue to check your user dashboard for updates on this petition including your assigned hearing date, submitted case evidence, and scheduling of hearing date. Additionally,  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ResponseMsg {
+            get {
+                return ResourceManager.GetString("ResponseMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Dear &lt;Name&gt;, 
+        ///
+        ///The following changes have been made to your account:
+        ///
+        ///&lt;Enter in changes made&gt;
+        ///
+        ///If you feel have received this message in error, please call RAP Staff immediately at (510) 238-3721
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Dear &lt;Name&gt;, 
+        ///
+        ///The following Representative has been added/authorized to access your case, Case Number- &lt;Enter Case Number&gt;:
+        ///[name]
+        ///[email address]
+        ///[phone number] (if available)
+        ///
+        ///If you feel have received this message in error, please call RAP Staff immediately at (510) 238-3721
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string String2 {
+            get {
+                return ResourceManager.GetString("String2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;&quot;&quot;Dear &lt;Name&gt;, 
+        ///
+        ///The following changes have been made to a representative in your case, Case Number &lt;Enter Case Number&gt;:
+        ///
+        ///&lt;Enter in changes made&gt;
+        ///
+        ///If you feel have received this message in error, please call RAP Staff immediately at (510) 238-3721
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string String3 {
+            get {
+                return ResourceManager.GetString("String3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Dear &lt;User&gt;,
+        /// 
+        ///This email is to notify you that for case &lt;Case Number&gt;, the status of  &lt;Activity Name&gt;  has been changed from &lt;Status 1&gt; to &lt;Status 2&gt;. To see this change please access your account here: &lt;link&gt;
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string String4 {
+            get {
+                return ResourceManager.GetString("String4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Dear &lt;User&gt;,
+        /// 
+        ///This email is to notify you that  case  &lt;Case Number&gt;  has been changed from &lt;Status 1&gt; to &lt;Status 2&gt;. To see this change please access your account here: &lt;link&gt;
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string String5 {
+            get {
+                return ResourceManager.GetString("String5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Dear &lt;User&gt;,
+        /// 
+        ///This email is to notify you that the following documents have been added to case &lt;Case Number&gt;:
+        ///
+        ///&lt;List of Attachments &amp; Descriptions&gt;
+        ///
+        ///To access this case please go here: &lt;Link to Online Portal&gt;
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        /// </summary>
+        internal static string String6 {
+            get {
+                return ResourceManager.GetString("String6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Dear &lt;Name&gt;,
+        ///
+        ///Thank you for creating an CIty account with the Rent Adjustment Program.
+        ///
+        ///You can access your account here: &lt;Link to Online Petition&gt;
+        ///
+        ///If you feel you have received this email in error, or you did have not created an account. Please contact RAP Staff immediately at 510.238.3721
+        ///
+        ///Thank you,
+        ///
+        ///The Rent Adjustment Program, The City of Oakland&quot;&quot;&quot;.
+        /// </summary>
+        internal static string String7 {
+            get {
+                return ResourceManager.GetString("String7", resourceCulture);
             }
         }
     }
