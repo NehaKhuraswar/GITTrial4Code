@@ -32,8 +32,8 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
             {
                 self.TenantAppealInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
                 self.TenantAppealInfo.ApplicantUserInfo.Email = angular.copy(self.custDetails.email);
-                self.TenantAppealInfo.AppealPropertyUserInfo = angular.copy(self.custDetails.User);
-                self.TenantAppealInfo.AppealPropertyUserInfo.Email = angular.copy(self.custDetails.email);
+                self.TenantAppealInfo.AppealPropertyUserInfo = angular.copy(rapGlobalFactory.CaseDetails.TenantPetitionInfo.ApplicantUserInfo);
+              //  self.TenantAppealInfo.AppealPropertyUserInfo.Email = angular.copy(self.custDetails.email);
             }
             self.bShowApplicantInfo = true;
             self.caseinfo.bCaseFiledByThirdParty = self.bCaseFiledByThirdParty;
