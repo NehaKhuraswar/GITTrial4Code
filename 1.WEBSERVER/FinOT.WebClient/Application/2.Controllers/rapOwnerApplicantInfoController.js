@@ -8,9 +8,9 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.caseinfo.OwnerPetitionInfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
 
-    self.StateList = [];
-    
-    var _GetStateList = function () {
+    self.StateList = [];   
+
+     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
@@ -20,20 +20,39 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     }
     _GetStateList();
     self.caseinfo.CaseFileBy = self.custDetails.custID;
-    if (self.caseinfo.bCaseFiledByThirdParty == false)
-    {
-        self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = self.custDetails.User;        
-    }
-    else
-    {
-        self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = self.custDetails.User;
-    }
+   
     rapFactory.GetApplicationInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
+        if (self.caseinfo.bCaseFiledByThirdParty == false) {
+            self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = self.custDetails.User;
+        }
+        else {
+            self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = self.custDetails.User;
+            
+        }
+        RestrictUpload();
     });
 
+    function RestrictUpload() {
+        self.bBusinessTaxProofUpload = true;
+        self.bPropertyServiceFeeUpload = true;
+        for(var i= 0 ; i< self.caseinfo.Documents.length; i++)
+        {
+            if (self.caseinfo.Documents[i].DocTitle == 'OP_BusinessTaxProof')
+            {
+                self.bBusinessTaxProofUpload = false;
+            }
+            if (self.caseinfo.Documents[i].DocTitle == 'OP_PropertyServiceFee')
+            {
+                self.bPropertyServiceFeeUpload = false;
+            }
+        }
+    }
+
+
+    
     self.Calender = masterFactory.Calender;
 
 
@@ -64,6 +83,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
                             }                           
                         }
                         self.caseinfo.Documents.push(document);
+                        RestrictUpload();
                     }
                 }
 
@@ -83,6 +103,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.Delete = function (doc) {
         var index = self.caseinfo.Documents.indexOf(doc);
         self.caseinfo.Documents.splice(index, 1);
+        RestrictUpload();
     }
     
 

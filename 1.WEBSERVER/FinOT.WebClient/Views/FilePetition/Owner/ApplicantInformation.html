@@ -1,84 +1,83 @@
 ﻿<div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
         <h3 class="step-heading">Owner Petition for Approval of Rent Increase: <span>Applicant and Property Information</span></h3>
+        <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form">
+            <div class="step-content create-new">
+                <div class="subhead no-top-margin">
+                    <h4>Applicant’s name and rental address</h4>
+                    <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
+                </div>
+                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
+                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}</p>
+                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
+                </div>
+                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                    <div class="field-group">
+                        <label for="Applicant_firstname">Name</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName" required />
+                    </div>
 
-        <div class="step-content create-new">
-            <div class="subhead no-top-margin">
-                <h4>Applicant’s name and rental address</h4>
-                <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
-            </div>
-            <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
-                <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}</p>
-                <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
-            </div>
-            <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
-                <div class="field-group">
-                    <label for="Applicant_firstname">Name</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName" required />
+                    <div class="field-group">
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="businessname">Business name</label>
+                        <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName" />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="Applicant_address1">Mailing address 1</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1" required />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="Applicant_address2">Mailing address 2 (optional)</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2" required />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="Applicant_city">City</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City" required />
+                    </div>
+                    <div class="field-group">
+                        <label for="Applicant_state">State</label>
+                        <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
+                        <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                                ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State"
+                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                    </div>
+                    <!--<div class="field-group">
+                <label for="Applicant_state">State</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State" required />
+            </div>-->
+
+                    <div class="field-group">
+                        <label for="Applicant_zip_code">Zip Code</label>
+                        <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip" required />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="Applicante_phone_number">Phone number</label>
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber" required />
+                    </div>
+
+                    <div class="field-group">
+                        <label for="Applicant_email">Email Address</label>
+                        <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                    </div>
                 </div>
 
-                <div class="field-group">
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName" required />
-                </div>
-                <div class="field-group">
-                    <label for="businessname">Business name</label>
-                    <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName" />
-                </div>
+                <div class="subhead">
+                    <h4>Your representative</h4>
+                    <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
+                    <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
 
-                <div class="field-group">
-                    <label for="Applicant_address1">Mailing address 1</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1" required />
                 </div>
-
-                <div class="field-group">
-                    <label for="Applicant_address2">Mailing address 2 (optional)</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2" required />
-                </div>
-
-                <div class="field-group">
-                    <label for="Applicant_city">City</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City" required />
-                </div>
-                <div class="field-group">
-                    <label for="Applicant_state">State</label>
-                    <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                    <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
-                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State"
-                            ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
-                </div>
-                <!--<div class="field-group">
-                    <label for="Applicant_state">State</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State" required />
-                </div>-->
-
-                <div class="field-group">
-                    <label for="Applicant_zip_code">Zip Code</label>
-                    <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip" required />
-                </div>
-
-                <div class="field-group">
-                    <label for="Applicante_phone_number">Phone number</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber" required />
-                </div>
-
-                <div class="field-group">
-                    <label for="Applicant_email">Email Address</label>
-                    <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
-                </div>
-            </div>
-
-            <div class="subhead no-top-margin">
-                <h4>Your representative</h4>
-                <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
-                <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
-
-            </div>            
-            <div>
                 <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
                     <p class=" input-label">
                         Is anybody representing you?
@@ -96,223 +95,232 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-                               
-            <div id="representative-info">
-                <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
-                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
-                    <div class="field-group">
-                        <label for="representative_firstname">Name</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />
+
+                <div id="representative-info">
+                    <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
+                    <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
+                        <div class="field-group">
+                            <label for="representative_firstname">Name</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" required />
+                        </div>
+
+                        <div class="field-group">
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName" required />
+                        </div>
+                        <div class="field-group">
+                            <label for="businessname">Business name</label>
+                            <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName" />
+                        </div>
+                        <div class="field-group">
+                            <label for="representative_address1">Mailing address 1</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_address2">Mailing address 2 (optional)</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_city">City</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_state">State</label>
+                            <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                                    ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_zip_code">Zip Code</label>
+                            <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_phone_number">Phone number</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_email">Email Address</label>
+                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                        </div>
+                    </div>
+                    <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
+
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
+                        <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
+                        <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                    </div>
+                    <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                        <a ng-click="" class="btn-link btn-edit">Edit</a>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
+                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
+                        <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
+                        <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
                     </div>
 
-                    <div class="field-group">
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName" required />
-                    </div>
-                    <div class="field-group">
-                        <label for="businessname">Business name</label>
-                        <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName" />
-                    </div>
-                    <div class="field-group">
-                        <label for="representative_address1">Mailing address 1</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1" required />
-                    </div>
+                </div>
 
-                    <div class="field-group">
-                        <label for="representative_address2">Mailing address 2 (optional)</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2" required />
-                    </div>
+                <div class="field-group subhead">
+                    <p class="input-label has-info-btn">Have you paid your business license? <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label for="paid_business_license_yes">
+                            <input type="radio" name="paid_business_license" id="paid_business_license_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid" ng-value="true" checked="checked" /><i></i><span>Yes</span>
+                        </label>
 
-                    <div class="field-group">
-                        <label for="representative_city">City</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City" required />
-                    </div>
-
-                    <div class="field-group">
-                        <label for="representative_state">State</label>
-                        <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
-                                ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State"
-                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
-                    </div>
-
-                    <div class="field-group">
-                        <label for="representative_zip_code">Zip Code</label>
-                        <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip" required />
-                    </div>
-
-                    <div class="field-group">
-                        <label for="representative_phone_number">Phone number</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber" required />
-                    </div>
-
-                    <div class="field-group">
-                        <label for="representative_email">Email Address</label>
-                        <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                        <label for="paid_business_license_no">
+                            <input type="radio" name="paid_business_license" id="paid_business_license_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid" ng-value="false" /><i></i> <span>No</span>
+                        </label>
+                        <div class="clear"></div>
                     </div>
                 </div>
-                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
 
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
-                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
-                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
-                </div>  
-                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
-                    <a ng-click="" class="btn-link btn-edit">Edit</a>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
-                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
-                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
-                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
-                </div>
-               
-            </div>
-
-            <div class="field-group">
-                <p class="input-label">Have you paid your business license?</p>
-                <div class="form-group-radio vertical clearfix">
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid" ng-value="true" checked="checked" /><i></i><span>Yes</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid" ng-value="false" /><i></i> <span>No</span>
-                    </label>
-                    <div class="clear"></div>
-                </div>
-            </div>
-            <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid">
-                <label for="Business_license">Oakland Business License Number</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber" required />
-            </div>
-
-            <div class="field-group">
-                <div class="field-addfile">
-                    <div class="input-file-wrapper">
-                        <span class="btn-link">Attach proof of payment of your business tax</span>
-                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_BusinessTaxProof')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
-                    </div>
-                    <div class="field-group">
-                        <table class="table table-condensed nopadding-bottom">
-                            <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'}">
-                                    <td class="nopadding-left">
-                                        {{item.DocName}}
-                                    </td>
-                                    <td>
-                                       &nbsp; 
-                                        <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
-                                        <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>                        
-                  </div>
-                </div>
-            </div>
-
-            <div class="field-group">
-                <p class="input-label">Have you paid the Rent Adjustment Progrm service fee(${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)?</p>
-                <div class="form-group-radio vertical clearfix">
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid" ng-value="true" checked="checked" /><i></i><span>Yes</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid" ng-value="false" /><i></i> <span>No</span>
-                    </label>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        <div class="field-group">
-            <div class="field-addfile">
-                <div class="input-file-wrapper">
-                    <span class="btn-link">Attach proof of payment of your rental property service fee</span>
-                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_PropertyServiceFee')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid">
+                    <label for="business_license_number">Oakland business license number:</label>
+                    <input type="text" name="business_license_number" id="business_license_number" class="field-input" placeholder=""
+                           ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber" />
                 </div>
                 <div class="field-group">
-                    <table class="table table-condensed nopadding-bottom">
-                        <tbody>
-                            <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_PropertyServiceFee'}">
-                                <td class="nopadding-left">
-                                    {{item.DocName}}
-                                </td>
-                                <td>
-                                    &nbsp;<input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
-                                    <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-            <div class="field-group">
-                <p class="input-label">Date on which you acquired the building</p>
-            </div>       
-            <div class="row">
-                <div class="col-sm-4 col-xs-12">
-                    <div class="field-group">
-                        <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month"
-                                data-placeholder="Month"
-                                ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                    <label>Proof of payment of your business tax:</label>
+                    <div class="field-addfile no-top-margin">
+                        <div class="input-file-wrapper" ng-show="Ctrl.bBusinessTaxProofUpload">
+                            <span class="btn-link">Attach</span>
+                            <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_BusinessTaxProof')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                        </div>
+                        <div class="field-group">
+                            <table class="table table-condensed nopadding-bottom">
+                                <tbody>
+                                    <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'}">
+                                        <td class="nopadding-left">
+                                            {{item.DocName}}
+                                        </td>
+                                        <td>
+                                         
+                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                 
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12">
-                    <div class="field-group">                      
-                        <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day"
-                             data-placeholder="Day"
-                             ng-options="day for day in  Ctrl.Calender.Days"></select>
+
+
+                <div class="field-group no-bottom-margin">
+                    <p class="input-label has-info-btn">Have you paid the Rent Adjustment Progrm service fee(${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)? <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label for="paid_rap_service_fee_yes">
+                            <input type="radio" name="paid_rap_service_fee" id="paid_rap_service_fee_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid" ng-value="true" checked="checked" /><i></i><span>Yes</span>
+                        </label>
+
+                        <label for="paid_rap_service_fee_no">
+                            <input type="radio" name="paid_rap_service_fee" id="paid_rap_service_fee_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid" ng-value="false" /><i></i> <span>No</span>
+                        </label>
+                        <div class="clear"></div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12">
-                    <div class="field-group">                                            
-                        <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year"
-                               data-placeholder="Year"
-                                ng-options="year for year in  Ctrl.Calender.Years"></select>
+
+                <div class="field-group no-top-margin mar-bottom-40">
+                    <label>Proof of payment of your rental property service fee:</label>
+                    <div class="field-addfile no-top-margin ">
+                        <div class="input-file-wrapper" ng-show="Ctrl.bPropertyServiceFeeUpload">
+                            <span class="btn-link">Attach</span>
+                            <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_PropertyServiceFee')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                        </div>
+                        <div class="field-group">
+                            <table class="table table-condensed nopadding-bottom">
+                                <tbody>
+                                    <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_PropertyServiceFee'}">
+                                        <td class="nopadding-left">
+                                            {{item.DocName}}
+                                        </td>
+                                        <td>
+                                           <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                  <div class="col col-35 type" ng-show="item.isUploaded == false"> &nbsp; <a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <p class="input-label">Date on which you acquired the building</p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="field-group">
+                            <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month"
+                                    data-placeholder="Month"
+                                    ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="field-group">
+                            <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day"
+                                    data-placeholder="Day"
+                                    ng-options="day for day in  Ctrl.Calender.Days"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="field-group">
+                            <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year"
+                                    data-placeholder="Year"
+                                    ng-options="year for year in  Ctrl.Calender.Years"></select>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="field-group">
+                    <div class="has-info-btn"><label for="total_residential_units">Total number of residential units</label> <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></div>
+                    <input type="text" name="total_residential_units" id="total_residential_units" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits" />
+                </div>
+
+                <div class="field-group">
+                    <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
+                    <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range"
+                            ng-model=" Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID"
+                            ng-options="range.RangeID as range.RangeDesc for range in Ctrl.caseinfo.NumberOfUnitsRange">
+                        <option value="" selected>Select range</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <p class="input-label">Is there more than one street address on the Parcel?</p>
+                    <div class="form-group-radio vertical clearfix">
+                        <label>
+                            <input type="radio" class="input-field"
+                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel" ng-value="true" checked="checked" /><i></i><span>Yes</span>
+                        </label>
+
+                        <label>
+                            <input type="radio" class="input-field"
+                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel" ng-value="false" /><i></i> <span>No</span>
+                        </label>
+                        <div class="clear"></div>
                     </div>
                 </div>
             </div>
-          
-            <div class="field-group">
-                <label>Total Number Of Units</label>
-                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits" required />
-            </div>
-            <div class="field-group">
-                <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
-                <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range"
-                        ng-model=" Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID"
-                        ng-options="range.RangeID as range.RangeDesc for range in Ctrl.caseinfo.NumberOfUnitsRange">
-                    <option value="" selected>Select range</option>
-                </select>
-            </div>
 
-            <div class="field-group">
-                <p class="input-label">Is there more than one street address on the Parcel?</p>
-                <div class="form-group-radio vertical clearfix">
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel" ng-value="true" checked="checked" /><i></i><span>Yes</span>
-                    </label>
-
-                    <label>
-                        <input type="radio" class="input-field"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel" ng-value="false" /><i></i> <span>No</span>
-                    </label>
-                    <div class="clear"></div>
-                </div>
+            <div class="step-footer">
+                <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
             </div>
-        </div>
-        <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>
-    </div>
+            
+            </form>
+</div>
 </div>
