@@ -1,8 +1,9 @@
-﻿<div class="col-md-9 col-sm-12">
+﻿<!--<div class="col-md-9 col-sm-12">-->
     <div class="application-form-wrapper">
         <div class="application-step step-1">
+            <div class="alert alert-error"></div>
             <div class="step-heading">Applicant and Property Information</div>
-            <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form">
+            <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" novalidate class="application-form">
                 <div class="step-content create-new">
                     <div class="subhead no-top-margin">
                         <h4>Applicant’s name and rental address</h4>
@@ -20,7 +21,8 @@
                     <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                         <div class="field-group">
                             <label for="Applicant_firstname">Name</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName" required />
+                            <input type="text" class="field-input required" name="Applicant_firstname" id="Applicant_firstname" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName"
+                                   data-error="Name" required />
                         </div>
 
                         <div class="field-group">
@@ -318,11 +320,11 @@
                     </div>
                 </div>
 
-                <div class="step-footer">
-                    <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
+                <div class="step-footer">                   
+                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="(!frmOwnerPetition.Applicant_firstname.$error.required) && Ctrl.Continue()" />
                 </div>
 
             </form>
         </div>
       </div>
-    </div>
+    
