@@ -98,6 +98,10 @@
         }
     }
 
+    self.BackToCase = function () {
+        rapGlobalFactory.Notification = null;
+        $location.path("/selectedcase");
+    }
     self.Submit = function () {
         self.model.C_ID = self.c_id;
         self.model.EmployeeID = self.custDetails.EmployeeID;
@@ -116,7 +120,10 @@
 
         rapFactory.SubmitCustomEmail(self.model).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
-            self.Documents = response.data;
+            if (response.data) {
+                rapGlobalFactory.Notification = self.model;              
+                $location.path("/emailnotificationsent");
+            }
         });   
     }
 

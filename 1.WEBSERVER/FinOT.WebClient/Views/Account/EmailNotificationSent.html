@@ -1,0 +1,86 @@
+﻿<div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">Dashboard</h2>
+        </div>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="page-content full-width">
+        <div class="container">
+
+            <!--<div class="breadcrumb border-bottom-grey">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">T17-0238; Smith v. Johnson</a></li>
+                    <li class="active">Email notifications</li>
+                </ul>
+            </div>-->
+
+            <!-- Page Sub Title - Visible on mobile screens only -->
+            <div class="page-sub-title">Email Notification</div>
+
+            <div class="application-form-wrapper">
+                <div class="application-step step-1">
+
+                    <form name="frmUSMailNotification" id="frmUSMailNotification" action="#" method="post" class="application-form">
+                        <div class="step-content step1">
+                            <!-- Page Sub Title - Visible on desktop screens only -->
+                            <div class="step-heading mar-t30">Email Notification</div>
+
+                            <div class="field-group no-top-margin no-bottom-margin mar-bottom-20">
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-12 col-xs-12">
+                                        <p>The following notification has been sent to</p>
+                                        <div ng-repeat="item in Ctrl.model.Message.RecipientAddress">
+                                            <p><strong> {{item}} </strong><br /></p>
+                                        </div>                                       
+                                       <p>at <strong> {{Ctrl.Date}} </strong></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="table-list mar-b0">
+                                <div class="small-title pad-b5">{{Ctrl.model.Message.MessageBody}}</div>
+
+                                <div class="table-row clearfix pad-t15">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>This is an official notice from the City of Oakland Rent Adjustment Program. Please check the attached files promptly.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- File Name -->
+                            <div class="table-list mar-t20" ng-show="Ctrl.model.Message.Attachments.length > 0">
+                                <div class="small-title pad-b5">File name</div>
+
+                                <div ng-repeat="item in Ctrl.model.Message.Attachments">
+                                    <p><strong> {{item.DocName}} </strong><br /></p>
+                                </div>
+                            </div>
+
+
+                            <div class="field-group">
+                                <p>Notification was sent by <strong>{{Ctrl.SentBy}}</strong>.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="step-footer">
+                            <input type="button" id="back-to-case" name="back-to-case" class="btn-primary alt" value="Back to case" ng-click="Ctrl.BackToCase()" />
+                        </div>
+                    </form>
+                </div>
+
+            </div><!-- .application-form-wrapper -->
+        </div><!-- .container -->
+    </div><!-- .page-content -->
+</div><!-- #content -->
+<?php
+  include('../include/footer.html');
+?>

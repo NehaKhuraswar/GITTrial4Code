@@ -93,6 +93,10 @@
 
         }
     }
+    self.BackToCase = function () {
+        rapGlobalFactory.Notification = null;
+        $location.path("/selectedcase");
+    }
 
     self.Submit = function () {
         self.model.C_ID = self.c_id;

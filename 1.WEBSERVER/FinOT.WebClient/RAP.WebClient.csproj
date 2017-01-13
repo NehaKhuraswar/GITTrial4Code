@@ -129,6 +129,7 @@
     <Content Include="Application\2.Controllers\mainController.js" />
     <Content Include="Application\2.Controllers\rapAdditionalCaseDocumentController.js" />
     <Content Include="Application\2.Controllers\rapCustomEmailController.js" />
+    <Content Include="Application\2.Controllers\rapEmailNotificationSentController.js" />
     <Content Include="Application\2.Controllers\rapMailController.js" />
     <Content Include="Application\2.Controllers\rapRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseConfirmController.js" />
@@ -453,6 +454,7 @@
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\textcounter.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
+    <Content Include="Views\Account\EmailNotificationSent.html" />
     <Content Include="Views\Account\SendEmailNotification.html" />
     <Content Include="Views\Account\SelectedCase.html" />
     <Content Include="Views\Account\USMailNotification.html" />

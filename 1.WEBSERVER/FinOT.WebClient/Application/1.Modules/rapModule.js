@@ -6,29 +6,30 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapcollaboratorFactory', rapcollaboratorFactory)
     .factory('rapGlobalFactory', function () {
 
-          // public
-         var CustID = 0;
-         var CustomerDetails;
-         var CaseDetails;
-         var CityUser;
-         var IsEdit = false;
-         var bCaseFiledByThirdParty = false;
-         var SelectedCase = null;
-         var FromSelectedCase = false;
-         var SelectedForEdit = null;
-          // public
-          return {
+        // public
+        var CustID = 0;
+        var CustomerDetails;
+        var CaseDetails;
+        var CityUser;
+        var IsEdit = false;
+        var bCaseFiledByThirdParty = false;
+        var SelectedCase = null;
+        var FromSelectedCase = false;
+        var SelectedForEdit = null;
+        var Notification = null;
+        // public
+        return {
 
-              get: function () {
-                  return CustomerDetails;
-              },
+            get: function () {
+                return CustomerDetails;
+            },
 
-              set: function (val) {
-                  CustomerDetails = val;
-              }
+            set: function (val) {
+                CustomerDetails = val;
+            }
 
-          };
-      })
+        };
+    })
 
     .factory('raploginCityUserFactory', raploginCityUserFactory)
     .factory('raploginFactory', raploginFactory)
@@ -158,6 +159,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapOResponseConfirmationController', rapOResponseConfirmationController)
     .controller('rapAdditionalCaseDocumentController', rapAdditionalCaseDocumentController)
     .controller('rapCustomEmailController', rapCustomEmailController)
+    .controller('rapEmailNotificationSentController', rapEmailNotificationSentController)
     .controller('rapMailController', rapMailController)
 
     .directive('yearDrop',function(){

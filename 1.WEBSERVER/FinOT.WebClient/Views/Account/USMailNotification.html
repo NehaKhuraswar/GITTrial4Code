@@ -14,8 +14,8 @@
 
             <div class="breadcrumb">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">T17-0238; Smith v. Johnson (Unit C)</a></li>
+                    <li>Home</li>
+                    <li>{{Ctrl.c_id}}</li>
                     <li class="active">U.S. mail notifications</li>
                 </ul>
             </div>
@@ -97,7 +97,7 @@
 
                         <div class="step-footer">
                             <input type="button" id="submit" name="submit" class="btn-primary btn-gray" value="Submit" ng-click="Ctrl.Submit()" />
-                            <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" />
+                            <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.BackToCase()" />
                         </div>
                     </form>
                 </div>

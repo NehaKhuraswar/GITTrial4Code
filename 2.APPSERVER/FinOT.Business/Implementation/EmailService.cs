@@ -76,6 +76,7 @@ namespace RAP.Business.Implementation
                             smtp.Send(mail);
                         }
                     }
+                    result.result = true;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
                 //}
                 //else
