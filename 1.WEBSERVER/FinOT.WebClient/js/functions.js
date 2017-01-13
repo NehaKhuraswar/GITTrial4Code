@@ -359,25 +359,25 @@ var tooltips;
 //      $("#ar_number").mask("999-999-9999");
 //    }
 
-    tooltipFileUrl = siteURL+'/js/tooltips.json';
-    $.getJSON(tooltipFileUrl, function(results) {
-      if(results){
-        tooltips = results;
-        $('[data-toggle="tooltip"]').each(function() {
-          var $item = $(this);
-          var $itemText = tooltips[$item.data('tooltip-id')];
-          if(tooltips[$item.data('tooltip-id')]) {
-            $item.tooltip({
-              title: $itemText,
-              html: true,
-              placement: 'top'
-            });
-          }
-        });
-      } else {
-        alert('Tooltip data not found');
-      }
-    });
+    //tooltipFileUrl = siteURL+'/js/tooltips.json';
+    //$.getJSON(tooltipFileUrl, function(results) {
+    //  if(results){
+    //    tooltips = results;
+    //    $('[data-toggle="tooltip"]').each(function() {
+    //      var $item = $(this);
+    //      var $itemText = tooltips[$item.data('tooltip-id')];
+    //      if(tooltips[$item.data('tooltip-id')]) {
+    //        $item.tooltip({
+    //          title: $itemText,
+    //          html: true,
+    //          placement: 'top'
+    //        });
+    //      }
+    //    });
+    //  } else {
+    //    alert('Tooltip data not found');
+    //  }
+    //});
     
     
     

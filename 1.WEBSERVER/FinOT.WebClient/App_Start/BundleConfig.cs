@@ -29,7 +29,6 @@ namespace RAP.WebClient
                     , "~/Scripts/angular-ui/ui-bootstrap.js"
                     , "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
                     , "~/js/*.js"
-                    , "~/js/*.json"
             ));
 
             //bundles.Add(new ScriptBundle("~/bundles/angularRAP").Include(
