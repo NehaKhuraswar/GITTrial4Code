@@ -242,13 +242,13 @@
                 </form>
 
                 <!-- Accounts List -->
-                <div class="custom-table active-cases-table">
+                <div class="custom-table active-cases-table" ng-show="Ctrl.CaseSearchResult.length > 0">
                     <div class="tbl-header">
                         <div class="tbl-row clearfix">
-                            <div class="col col-45 case-number">Case number</div>
-                            <div class="col col-20 filling-date">Date of filing <i class="sort"></i></div>
-                            <div class="col col-20 last-activity">Last activity <i class="sort"></i></div>
-                            <div class="col col-15 activity">Activity <i class="sort"></i></div>
+                            <div class="col col-45 case-number">Case number <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" class="sort"></a></div>
+                            <div class="col col-20 filling-date">Date of filing <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" class="sort"></a></div>
+                            <div class="col col-20 last-activity">Last activity <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" class="sort"></a></div>
+                            <div class="col col-15 activity">Activity</div>
                         </div>
                     </div>
 
@@ -280,7 +280,7 @@
                                             <div class="small-title">Analyst</div>
                                             <p class="alert-error-msg" ng-show="result.Analyst==null">assignment required</p>
                                             <p ng-show="result.Analyst!=null">{{result.Analyst}}</p>
-</div>
+                                        </div>
 
                                         <div class="item-col col-42 pad-l10 align-left">
                                             <div>
@@ -293,7 +293,7 @@
                                         </div>
 
                                         <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>                                            
+                                            <a href="#" class="btn-link btn-assign">Assign</a>
                                         </div>
                                     </div>
 
@@ -325,13 +325,13 @@
                     </div>
                 </div>
                 <!-- .custom-table -->
-
-                <div class="results-paging mar-t60">
+                
+                <div class="results-paging mar-t60" ng-show="Ctrl.CaseSearchResult.length > 0">
                     <div class="show-records">Showing {{Ctrl.FromRecord}}-{{Ctrl.ToRecord}} of {{Ctrl.CaseSearchModel.TotalCount}} records</div>
                     <div class="pages">
-                        <a ng-click="Ctrl.GetPreviousPage()" class="link next">Previous <span>&#8249;</span></a>
-                        <a ng-click="Ctrl.GetPage(pageNumber.text, Ctrl.CaseSearchModel)" ng-class="link 'active':pageNumber.active" ng-repeat="pageNumber in Ctrl.pageNumberList">{{pageNumber.text}}</a>                        
-                        <a ng-click="Ctrl.GetNextPage()" class="link next">Next <span>&#8250;</span></a>
+                        <a ng-click="Ctrl.GetPreviousPage()" ng-hide="Ctrl.isFirstPage()" class="link next"><span>&#8249;</span>Previous</span></a>
+                        <a ng-click="Ctrl.GetPage(pageNumber.text, Ctrl.CaseSearchModel)" ng-class="link 'active':pageNumber.active" ng-repeat="pageNumber in Ctrl.pageNumberList">{{pageNumber.text}}</a>
+                        <a ng-click="Ctrl.GetNextPage()" ng-hide="Ctrl.isLastPage()" class="link next">Next <span>&#8250;</span></a>
                     </div>
                 </div>
 

@@ -88,7 +88,7 @@
 
                                     <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
                                         <p class="input-label">Is anybody representing you?</p>
-                                        <div id="anybody_representing_you" class="form-group-radio vertical clearfix required has-radio-error" data-error="Is anybody representing you">
+                                        <div id="anybody_representing_you" class="form-group-radio vertical clearfix required" data-error="Is anybody representing you">
                                             <label for="anybody_representing_you_yes">
                                                 <input type="radio" name="anybody_representing_you" id="anybody_representing_you_yes" class="input-field" ng-value="true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation" data-toggle="show" data-toggle-id="representative-info" /><i></i><span>Yes</span>
                                             </label>
@@ -97,7 +97,6 @@
                                                 <input type="radio" name="anybody_representing_you" id="anybody_representing_you_no" class="input-field" ng-value="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation" data-toggle="hide" data-toggle-id="representative-info" /><i></i> <span>No</span>
                                             </label>
                                             <div class="clear"></div>
-                                            <span class="input-error-msg">This is a required field</span>
                                         </div>
                                     </div>
 
@@ -107,7 +106,7 @@
 
                                             <div class="field-group">
                                                 <label for="representative_firstname">Name</label>
-                                                <input type="text" name="representative_firstname" id="representative_firstname" class="field-input required input-error"
+                                                <input type="text" name="representative_firstname" id="representative_firstname" class="field-input  input-error"
                                                        ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName" placeholder="First" data-error="Name" required/>
                                                 <span class="input-error-msg">This is a required field</span>
                                             </div>
@@ -366,10 +365,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- File Upload warning -->
-                                    <div class="alert alert-warning">
-                                        <p>Once you click <strong>save and continue</strong>, you will not be able to delete files that you have uploaded. To add new files to your case, use “add additional documentation form” on the dashboard. You can upload additional documentation up to 7 days from scheduled hearing or mediation date.</p>
-                                    </div>
+                                  
 
                                 </div>
 
@@ -377,8 +373,8 @@
                                     
                                     <!--<input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
                                            ng-click="(!((frmTenentPetition.po_firstname.$error.required) || (frmTenentPetition.po_address1.$error.required))) &&Ctrl.ContinueToGroundsforPetition()" />-->
-                                    <input type="submit" id="continue" name="continue" class="btn-primary" value="Save and Continue"
-                                           ng-click="(Hide=true) ;( (!frmTenentPetition.po_firstname.$error.required) && Ctrl.ContinueToGroundsforPetition())" />
+                                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue"
+                                           ng-click=" Ctrl.ContinueToGroundsforPetition()" />
                                 </div>
                             </form>
                         </div>

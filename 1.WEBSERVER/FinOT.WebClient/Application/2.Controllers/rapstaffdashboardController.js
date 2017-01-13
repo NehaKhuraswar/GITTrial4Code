@@ -138,6 +138,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.OnClearFilter = function () {
         _getEmptyCaseSearchModel();
         self.CaseSearchResult = [];
+         self.pageNumberList =[];
     }
 
     
@@ -170,6 +171,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     
     self.isLastPage = function () {
         return (self.CaseSearchModel.TotalCount - (self.CaseSearchModel.CurrentPage * self.CaseSearchModel.PageSize) <= 0);
+    };
+    self.isFirstPage = function () {
+        return (self.CaseSearchModel.CurrentPage == 1);
     };
     self.GetPage = function (newPage, model) {
 
@@ -213,7 +217,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.OnPageSizeChange = function () {
         self.CaseSearchModel.CurrentPage = 1;
 
-        rapFactory.GetAccountSearch(self.CaseSearchModel).then(function (response) {
+        rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.CaseSearchResult = response.data.List;
             self.CaseSearchModel.TotalCount = response.data.TotalCount;
@@ -222,6 +226,25 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             self.ToRecord = self.CaseSearchResult[(self.CaseSearchResult.length - 1)].RankNo;
         });
     }
+
+    self.onSort = function (_sortBy, model) {
+       
+        if (model.SortBy == _sortBy) {
+            model.SortReverse = !model.SortReverse;
+        } else {
+            model.SortBy = _sortBy;
+            model.SortReverse = false;
+            }
+        rapFactory.GetCaseSearch(model).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CaseSearchResult = response.data.List;
+            self.CaseSearchModel.TotalCount = response.data.TotalCount;
+            self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
+            self.CaseSearchModel.SortBy = model.SortBy;
+            self.CaseSearchModel.SortReverse = model.SortReverse;
+
+        });
+}
 
 }];
 var rapstaffdashboardController_resolve = {

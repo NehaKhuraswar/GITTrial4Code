@@ -5,6 +5,7 @@ var raploginCityUserController = ['$scope', '$modal', 'alertService', 'raploginC
     self.AccountTypesList = [];
     self.SelectedAccountType;
     self.bCityUser = true;
+    self.Error = "";
     var _getAccountTypes = function () {
         masterFactory.GetAccountTypes().then(function (response) {
             if (!alert.checkResponse(response)) { return; }
@@ -54,10 +55,13 @@ var raploginCityUserController = ['$scope', '$modal', 'alertService', 'raploginC
         //{
            // model.AccountType = accounttype;
             rapFactory.LoginCity(model).then(function (response) {
-                if (!alert.checkResponse(response)) {
-                    alert.Error(response.warnings[0]);
-                    return;
-                }                
+                if (response != null && response != undefined) {
+                    if (response.exceptions != null && response.exceptions.length) {
+                        self.Error = response.exceptions[0];
+                        // alert.Error(response.warnings[0]);
+                        return;
+                    }
+                }
                 rapGlobalFactory.CityUser = response.data;
                 //if (rapGlobalFactory.CityUser.AccountType.AccountTypeID == 1)
                 //    $location.path("/staffdashboard");

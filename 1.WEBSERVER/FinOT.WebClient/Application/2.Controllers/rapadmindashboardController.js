@@ -3,7 +3,7 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CustomerDetails;
-    
+    self.pageNumberList = [];
     self.CreateCityUserAccount = function () {
         $location.path("/createCityUserAccount");
     }
@@ -25,7 +25,10 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
         SortBy: 'Name',
         SortReverse: true
     };
+    self.pageNumberList = [];
     self.pagesizeOptions = [5, 10, 20, 50];
+    self.FromRecord = 1;
+    self.ToRecord = 5;
     
     //self.model.PageSize = 10;
     //self.isLastPage = function () {
@@ -50,7 +53,13 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     }
     _getAccountTypes();
     _getEmptyAccountSearchModel();
-    
+    self.GeneratePageNumberList = function () {
+        var TotalPages = Math.ceil(self.AccountSearchModel.TotalCount / self.AccountSearchModel.PageSize);
+        for (var i = 1; i <= TotalPages; i++) {
+            self.pageNumberList.push({ text: i, active: true });
+        }
+
+    }
     self.AccountSearch = function (model) {
         //model.PageSize = 10;
        
@@ -65,14 +74,21 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             self.AccountSearchModel.CurrentPage = 1;
             self.AccountSearchModel.SortBy = "Name";
             self.AccountSearchModel.SortReverse = 0;
+            self.FromRecord = self.AccountSearchResult[0].RankNo;
+            self.ToRecord = self.AccountSearchResult[(self.AccountSearchResult.length - 1)].RankNo;
+            self.GeneratePageNumberList();
         });
     }
     self.OnClearFilter = function () {
         _getEmptyAccountSearchModel();
         self.AccountSearchResult = [];
+        self.pageNumberList = [];
     }
     self.isLastPage = function () {
         return (self.AccountSearchModel.TotalCount - (self.AccountSearchModel.CurrentPage * self.AccountSearchModel.PageSize) <= 0);
+    };
+    self.isFirstPage = function () {
+        return (self.AccountSearchModel.CurrentPage == 1);
     };
     self.GetPage = function (newPage, model) {
         
@@ -82,6 +98,34 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
                 if (!alert.checkResponse(response)) { return; }
                 self.AccountSearchResult = response.data.List;
                 self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecord = self.AccountSearchResult[0].RankNo;
+                self.ToRecord = self.AccountSearchResult[(self.AccountSearchResult.length - 1)].RankNo;
+            });
+        }
+    }
+    self.GetNextPage = function (model) {
+        var newPage = self.AccountSearchModel.CurrentPage + 1;
+        if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.AccountSearchModel.CurrentPage)) {
+            self.AccountSearchModel.CurrentPage = self.AccountSearchModel.CurrentPage + 1;
+            rapFactory.GetAccountSearch(self.AccountSearchModel).then(function (response) {
+                if (!alert.checkResponse(response)) { return; }
+                self.AccountSearchResult = response.data.List;
+                self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecord = self.AccountSearchResult[0].RankNo;
+                self.ToRecord = self.AccountSearchResult[(self.AccountSearchResult.length - 1)].RankNo;
+            });
+        }
+    }
+    self.GetPreviousPage = function (model) {
+        var newPage = self.AccountSearchModel.CurrentPage - 1;
+        if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.AccountSearchModel.CurrentPage)) {
+            self.AccountSearchModel.CurrentPage = self.AccountSearchModel.CurrentPage - 1;
+            rapFactory.GetAccountSearch(self.AccountSearchModel).then(function (response) {
+                if (!alert.checkResponse(response)) { return; }
+                self.AccountSearchResult = response.data.List;
+                self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecord = self.AccountSearchResult[0].RankNo;
+                self.ToRecord = self.AccountSearchResult[(self.AccountSearchResult.length - 1)].RankNo;
             });
         }
     }
@@ -99,7 +143,7 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
         });
     }
-    $scope.onSort = function (_sortBy, model) {
+    self.onSort = function (_sortBy, model) {
         if (model.SortBy == _sortBy) {
             model.SortReverse = !model.SortReverse;
         } else {
@@ -111,6 +155,9 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             self.AccountSearchResult = response.data.List;
             self.AccountSearchModel.TotalCount = response.data.TotalCount;
             self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
+            self.AccountSearchModel.SortBy = model.SortBy;
+            self.AccountSearchModel.SortReverse = model.SortReverse;
+
         });
     }
     self.GetCaseActivityStatus = function (model) {
