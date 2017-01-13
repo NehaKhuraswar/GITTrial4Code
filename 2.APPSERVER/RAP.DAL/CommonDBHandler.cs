@@ -214,6 +214,7 @@ namespace RAP.DAL
                     }
                     var state = db.States.Where(x => x.StateID == _userinfo.State.StateID).FirstOrDefault();
                     _userinfo.State.StateName = state.StateName;
+                    _userinfo.State.StateCode = state.StateCode;
 
                     result.result = _userinfo;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };

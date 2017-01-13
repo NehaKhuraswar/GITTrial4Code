@@ -1197,6 +1197,11 @@ namespace RAP.DAL
                     tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
                     tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
                     tenantPetitionInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantPetitionInfoDB.RangeID);
+                    if (tenantPetitionInfo.SelectedRangeOfUnits.RangeID > 0)
+                    { 
+                        var RangeDb =_dbContext.NumberRangeForUnits.Where(x=>x.RangeID == tenantPetitionInfo.SelectedRangeOfUnits.RangeID).FirstOrDefault();
+                        tenantPetitionInfo.SelectedRangeOfUnits.RangeDesc = RangeDb.RangeDesc;
+                    }
                     tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
                     tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
                     tenantPetitionInfo.CustomerID = (int)TenantPetitionInfoDB.PetitionFiledBy;

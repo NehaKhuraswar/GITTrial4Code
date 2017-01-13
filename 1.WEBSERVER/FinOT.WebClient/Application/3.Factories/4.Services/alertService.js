@@ -4,7 +4,7 @@ var alertService = ['inform', function (inform) {
    // self.isAuthenticated = false;
     self.checkResponse = function (res) {
         if (res != null && res != undefined) {
-            if (res.exceptions != null && res.exceptions.length) { } //self.Error(res.exceptions); }
+            if (res.exceptions != null && res.exceptions.length) {  self.Error(res.exceptions); }
             if (res.warnings != null && res.warnings.length) { self.Warning(res.warnings); }
             if (res.errors != null) { self.ModelError(res.errors); }
             return res.status;

@@ -139,11 +139,10 @@
                                             
                                             <div class="field-group">
                                                 <label for="representative_state">State</label>
-                                                <div class="full-width">
+                                                <div class="row">
                                                     <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State"></dropdown>
-                                                </div>                                                
+                                                </div>
                                             </div>
-
                                             <div class="field-group">
                                                 <label for="representative_city">City</label>
                                                 <input type="text" name="representative_city" id="representative_city" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City" />
@@ -212,8 +211,10 @@
 
                                         <div class="field-group">
                                             <label for="po_state">State <span>*</span></label>
-                                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"></dropdown>                                                
-                                            <span class="input-error-msg hidden"></span>
+                                            <div class="row">
+                                                <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"></dropdown>
+                                                
+                                            </div>
                                         </div>
 
                                         <div class="field-group">
@@ -284,9 +285,10 @@
 
                                         <div class="field-group">
                                             <label for="pm_state">State</label>
-                                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State"></dropdown> 
+                                            <div class="row">
+                                                <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State"></dropdown>
+                                            </div>
                                         </div>
-
                                         <div class="field-group">
                                             <label for="pm_city">City</label>
                                             <input type="text" name="pm_city" id="pm_city" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City" />
@@ -321,9 +323,10 @@
 
                                         <div class="field-group">
                                             <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
-                                            <dropdown placeholder="Select range" list="Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits" property="RangeDesc" selected="Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits"></dropdown>                                             
+                                            <div class="row">
+                                                <dropdown placeholder="Select range" list="Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits" property="RangeDesc" selected="Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits"></dropdown>
+                                            </div>
                                         </div>
-
 
                                         <div class="field-group">
                                             <p class="input-label">Type of unit you rent</p>
