@@ -1,7 +1,7 @@
 ﻿<!--<div class="col-md-9 col-sm-12">-->
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            <div class="alert alert-error"></div>
+            <div class="alert alert-error" ng-show="Hide==true"></div>
             <div class="step-heading">Applicant and Property Information</div>
             <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" novalidate class="application-form">
                 <div class="step-content create-new">
@@ -321,7 +321,7 @@
                 </div>
 
                 <div class="step-footer">                   
-                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="(!frmOwnerPetition.Applicant_firstname.$error.required) && Ctrl.Continue()" />
+                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="(Hide=true); (!frmOwnerPetition.Applicant_firstname.$error.required) && Ctrl.Continue()" />
                 </div>
 
             </form>

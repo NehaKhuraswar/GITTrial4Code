@@ -32,12 +32,13 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
+            $scope.model.ownerRentalProperty = false;
+            $scope.model.ownerRentalHistory = true;
+            $scope.model.DisableAllCurrent();
+            $scope.model.oPetionCurrentStatus.RentHistory = true;
+            $scope.model.oPetionActiveStatus.RentalProperty = true;
         });
-        $scope.model.ownerRentalProperty = false;
-        $scope.model.ownerRentalHistory = true;
-        $scope.model.DisableAllCurrent();
-        $scope.model.oPetionCurrentStatus.RentHistory = true;
-        $scope.model.oPetionActiveStatus.RentalProperty = true;
+    
     }
     self.AddTenant = function (_userInfo)
     {

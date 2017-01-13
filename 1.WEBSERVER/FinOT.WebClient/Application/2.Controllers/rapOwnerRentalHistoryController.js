@@ -90,12 +90,13 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         rapFactory.SaveOwnerRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
+            $scope.model.ownerRentalHistory = false;
+            $scope.model.ownerAdditionalDocuments = true;
+            $scope.model.DisableAllCurrent();
+            $scope.model.oPetionCurrentStatus.AdditionalDocumentation = true;
+            $scope.model.oPetionActiveStatus.RentHistory = true;
         });
-        $scope.model.ownerRentalHistory = false;
-        $scope.model.ownerAdditionalDocuments = true;
-        $scope.model.DisableAllCurrent();
-        $scope.model.oPetionCurrentStatus.AdditionalDocumentation = true;
-        $scope.model.oPetionActiveStatus.RentHistory = true;
+  
     }
 }];
 var rapOwnerRentalHistoryController_resolve = {

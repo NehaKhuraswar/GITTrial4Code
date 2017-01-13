@@ -70,12 +70,13 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
         rapFactory.SaveRentIncreaseReasonInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.CaseDetails = response.data;
-        });
+        
         $scope.model.ownerJustification = false;
         $scope.model.ownerRentalProperty = true;
         $scope.model.DisableAllCurrent();
         $scope.model.oPetionCurrentStatus.RentalProperty = true;
         $scope.model.oPetionActiveStatus.JustificationForRentIncrease = true;
+        });
     }
 
 }];

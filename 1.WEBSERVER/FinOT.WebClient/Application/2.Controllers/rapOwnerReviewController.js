@@ -23,6 +23,28 @@
         });
     }
 
+    self.EditApplicantInfo = function()
+    {
+        $scope.model.ownerReview = false;
+        $scope.model.ownerApplicantInfo = true;
+    }
+    self.EditJustification = function () {
+        $scope.model.ownerReview = false;
+        $scope.model.ownerJustification = true;
+    }
+    self.EditRentalProperty = function () {
+        $scope.model.ownerReview = false;
+        $scope.model.ownerRentalProperty = true;
+    }
+    self.EditRentalHistory = function () {
+        $scope.model.ownerReview = false;
+        $scope.model.ownerRentalHistory = true;
+    }
+    self.EditAdditionalDocuments = function () {
+        $scope.model.ownerReview = false;
+        $scope.model.ownerAdditionalDocuments = true;
+    }
+
     self.Print = function () {
         var doc = document.getElementById('printable');
         //var doc = $("#printable");

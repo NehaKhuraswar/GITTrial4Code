@@ -117,15 +117,16 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
-            rapGlobalFactory.CaseDetails = response.data;            
+            rapGlobalFactory.CaseDetails = response.data;
+            $scope.model.ownerApplicantInfo = false;
+            $scope.model.ownerJustification = true;
+            $scope.model.DisableAllCurrent();
+            $scope.model.oPetionCurrentStatus.JustificationForRentIncrease = true;
+            $scope.model.oPetionActiveStatus.PetitionCategory = true;
+            $scope.model.oPetionActiveStatus.ImportantInformation = true;
+            $scope.model.oPetionActiveStatus.ApplicantInformation = true;
         });
-        $scope.model.ownerApplicantInfo = false;
-        $scope.model.ownerJustification = true;
-        $scope.model.DisableAllCurrent();
-        $scope.model.oPetionCurrentStatus.JustificationForRentIncrease = true;
-        $scope.model.oPetionActiveStatus.PetitionCategory = true;
-        $scope.model.oPetionActiveStatus.ImportantInformation = true;
-        $scope.model.oPetionActiveStatus.ApplicantInformation = true;
+       
     }
  
 }];
