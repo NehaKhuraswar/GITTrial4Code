@@ -73,14 +73,15 @@
                             <div class="form-group-radio vertical clearfix">
                                 <label for="rap_notice" class="has-info-btn">
                                     <input type="radio" name="rap_notice" id="rap_notice" class="input-field" ng-value="true"
-                                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven" /><i></i><span>I was never given a <u>RAP NOTICE</u> by my property owner. <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rap_notice">Info</a></span>
+                                           ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven" /><i></i><span>I was never given a <u>RAP NOTICE</u> by my property owner. 
+                                        <a href="#info" class="icon-info"   data-toggle="tooltip" tooltip="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." tooltip-placement="left">Info</a></span>
                                 </label>
                                 <div class="clear"></div>
                             </div>
                         </div>
 
                         <div class="field-group">
-                            <p class="input-label has-info-btn">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?  <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
+                            <p class="input-label has-info-btn">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?  <a href="#info" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
                             <div class="form-group-radio vertical clearfix">
                                 <label for="rent_subsidized_yes">
                                     <input type="radio" name="rent_subsidized" id="rent_subsidized_yes" class="input-field" ng-value="true"
@@ -99,7 +100,7 @@
                             <h4>Rent Increases</h4>
                         </div>
 
-                        <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never received the RAP Notice you can contest all past increases.<a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
+                        <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never received the RAP Notice you can contest all past increases.<a href="#info" class="icon-info" data-toggle="tooltip" tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
                         
 
                         <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
@@ -282,4 +283,7 @@
                     </div>
             </div>
         </div>
+<script src='js/tooltip.js'></script>
+
+<script src='js/tooltips.json'></script>
     <!--</div>-->

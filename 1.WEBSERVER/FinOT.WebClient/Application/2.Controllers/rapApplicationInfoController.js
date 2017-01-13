@@ -4,7 +4,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    
+    self.Hide = true;
     
 
     var _GetTenantApplicationInfo = function (custID) {

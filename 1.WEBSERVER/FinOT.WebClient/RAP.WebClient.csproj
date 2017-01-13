@@ -431,6 +431,7 @@
     <Content Include="sass\_utilities-spacing.scss" />
     <Content Include="sass\_utilities.scss" />
     <Content Include="sass\_variables.scss" />
+    <Content Include="js\tooltips.json" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

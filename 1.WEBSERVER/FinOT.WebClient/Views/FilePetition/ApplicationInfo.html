@@ -3,11 +3,11 @@
 
                     <div class="application-form-wrapper">
                         <div class="application-step step-1">
-                            <div class="alert alert-error">
-                                <strong><a href="javascript:void();" data-scrollto="anybody_representing_you">Is anybody representing you</a></strong>  is a required field<br />
-                                <strong><a href="javascript:void();" data-scrollto="rao_exemption_contest">I wish to contest an exemption from the Rent Adjustment Ordinance</a></strong>  is a required field<br />
-                                <strong><a href="javascript:void();" data-id="representative_firstname">Name</a></strong> is a required field<br />
-                                <strong><a href="javascript:void();" data-id="business_name">Business name</a></strong> is a required field
+                            <div class="alert alert-error" ng-show="Hide==true">
+                                <!--<strong><a href="javascript:void();" data-scrollto="anybody_representing_you">Is anybody representing you</a></strong>  is a required field<br />
+        <strong><a href="javascript:void();" data-scrollto="rao_exemption_contest">I wish to contest an exemption from the Rent Adjustment Ordinance</a></strong>  is a required field<br />
+        <strong><a href="javascript:void();" data-id="representative_firstname">Name</a></strong> is a required field<br />
+        <strong><a href="javascript:void();" data-id="business_name">Business name</a></strong> is a required field-->
                             </div>
 
                             <!-- Page Sub Title - Visible on desktop screens only -->
@@ -371,11 +371,11 @@
                                 </div>
 
                                 <div class="step-footer">
-                                    {{frmTenentPetition.po_firstname.$error.required}}
+                                    
                                     <!--<input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
                                            ng-click="(!((frmTenentPetition.po_firstname.$error.required) || (frmTenentPetition.po_address1.$error.required))) &&Ctrl.ContinueToGroundsforPetition()" />-->
                                     <input type="submit" id="continue" name="continue" class="btn-primary" value="Save and Continue"
-                                           ng-click="(!((frmTenentPetition.po_firstname.$error.required) || (frmTenentPetition.po_city.$error.required) || (frmTenentPetition.po_zip_code.$error.required) || (frmTenentPetition.po_phone_number.$error.required))) && Ctrl.ContinueToGroundsforPetition()" />
+                                           ng-click="(Hide=true) ;( (!frmTenentPetition.po_firstname.$error.required) && Ctrl.ContinueToGroundsforPetition())" />
                                 </div>
                             </form>
                         </div>

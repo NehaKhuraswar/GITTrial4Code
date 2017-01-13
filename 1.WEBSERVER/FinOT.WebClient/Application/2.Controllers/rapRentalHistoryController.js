@@ -1,10 +1,13 @@
 ﻿'use strict';
-var rapRentalHistoryController = ['$scope', '$modal', 'alertService', 'raprentalhistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', 'raprentalhistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $http, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.RentalIncreaseModel;
+    $http.get('..js/tooltips.json').success(function (data) {
+        $scope.tooltips = data;
+    });
     var range = 10 / 2;
     var currentYear = new Date().getFullYear();
     self.years = [];
