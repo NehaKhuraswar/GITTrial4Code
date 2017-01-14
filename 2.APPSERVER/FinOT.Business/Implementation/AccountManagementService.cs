@@ -120,22 +120,30 @@ namespace RAP.Business.Implementation
         {          
            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
             string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            bool bEdit = false;
             try
             {
+                if (message.UserID != 0)
+                {
+                    bEdit = true;
+                }
                 var dbResult = accDBHandler.CreateCityUserAccount(message);
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
                     result.status = dbResult.status;
                     return result;
                 }
-                EmailM emailMessage = new EmailM();
-                emailMessage.Subject = "RAP Account created Successfully";
-                emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("CityAccountCreatedMsg").Replace("LOGIN", _loginURL);
-                if (dbResult.result.Email != null)
+                if (bEdit == false)
                 {
-                    emailMessage.RecipientAddress.Add(dbResult.result.Email);
+                    EmailM emailMessage = new EmailM();
+                    emailMessage.Subject = "RAP Account created Successfully";
+                    emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("CityAccountCreatedMsg").Replace("LOGIN", _loginURL).Replace("NAME", dbResult.result.FirstName + " " + dbResult.result.LastName); 
+                    if (dbResult.result.Email != null)
+                    {
+                        emailMessage.RecipientAddress.Add(dbResult.result.Email);
+                    }
+                    emailservice.SendEmail(emailMessage);
                 }
-                emailservice.SendEmail(emailMessage);
                 result.result = dbResult.result;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

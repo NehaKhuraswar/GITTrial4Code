@@ -1253,11 +1253,11 @@ namespace RAP.DAL
                         CityUserExists.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
                         if (message.IsCityAdmin == true)
                         {
-                            CityUserExists.CityAccountTypeID = 3; //City Admin type
+                            CityUserExists.CityAccountTypeID = 2; //City Admin type
                         }
                         else
                         {
-                            CityUserExists.CityAccountTypeID = 2;
+                            CityUserExists.CityAccountTypeID = 1;
                         }
                         CityUserExists.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
                         CityUserExists.Title = message.Title;
@@ -1282,11 +1282,11 @@ namespace RAP.DAL
                         cityUserTable.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
                         if (message.IsCityAdmin == true)
                         {
-                            cityUserTable.CityAccountTypeID = 3; //City Admin type
+                            cityUserTable.CityAccountTypeID = 2; //City Admin type
                         }
                         else
                         {
-                            cityUserTable.CityAccountTypeID = 2;
+                            cityUserTable.CityAccountTypeID = 1;
                         }
                         cityUserTable.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
                         cityUserTable.Title = message.Title;

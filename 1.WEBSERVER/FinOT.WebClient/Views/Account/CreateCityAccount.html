@@ -123,7 +123,7 @@
                             <input type="button" id="btn-create-account" name="btn-create-account" class="btn-primary" value="{{Ctrl.SubmitText}}" ng-click="Ctrl.CreateAccount(Ctrl.CityUserAccount)" />
                             <input type="button" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
 
-                            <input type="button" id="btn-delete" name="btn-delete" class="btn-primary btn-delete" value="Delete account" ng-click="bDelete=true" />
+                            <input type="button" id="btn-delete" name="btn-delete" class="btn-primary btn-delete" value="Delete account" ng-show="Ctrl.bEdit" ng-click="bDelete=true" />
                         </div>
 
                         <div class="delete-confirmation mar-t40 mar-bottom-40" ng-show="bDelete== true">

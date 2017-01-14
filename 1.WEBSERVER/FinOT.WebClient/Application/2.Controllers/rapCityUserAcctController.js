@@ -30,9 +30,16 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
             if (!alert.checkResponse(response)) {
                 return;
             }
-            rapGlobalFactory.IsEdit = false;
-            rapGlobalFactory.SelectedForEdit = null;
-            $location.path("/CityLogin");
+            if (rapGlobalFactory.IsEdit == true) {
+                rapGlobalFactory.SelectedForEdit = null;
+                rapGlobalFactory.IsEdit = false;
+                $location.path("/admindashboard");
+            }
+            else {
+                $location.path("/CityLogin");
+            }
+            
+            
         });
     }
     self.DeleteCityUser = function (UserID) {
