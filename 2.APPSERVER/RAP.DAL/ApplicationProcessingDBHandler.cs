@@ -827,27 +827,13 @@ namespace RAP.DAL
                         caseinfo.TenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionDB.PropertyManagerUserID).result;
                     }
                     else if (petitionDetailsDb.OwnerPetitionID != null)
-                    {
-                        var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
-                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
-                        if (applicantUser != null)
+                    {                    
+                        var ownerPetitionResult = GetOwnerPetition(Convert.ToInt32(petitionDetailsDb.OwnerPetitionID));
+                        if(ownerPetitionResult.status.Status == StatusEnum.Success)
                         {
-                            if (applicantUser.result.IsAPNAddress == true)
-                            {
-                                applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
-                            }
-                            else
-                            {
-                                applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
-                                applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
-                                applicantUser.result.apnAddress.City = applicantUser.result.City;
-                                applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
-                                applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
-                            }
-                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
-                        }
+                            caseinfo.OwnerPetitionInfo = ownerPetitionResult.result;
+                        }                     
                     }
-
                     caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
                     var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
                     if (caseActivityStatusDb != null)
@@ -5726,7 +5712,99 @@ namespace RAP.DAL
             }
            return _rentStatusItems;
         }
-    
+
+       private ReturnResult<OwnerPetitionInfoM> GetOwnerPetition(int petitionID)
+       {
+           ReturnResult<OwnerPetitionInfoM> result = new ReturnResult<OwnerPetitionInfoM>();
+           OwnerPetitionInfoM model = new OwnerPetitionInfoM();
+           try
+           {
+               var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == petitionID).First();
+               if (petitionInfo != null)
+               {
+                   var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == petitionInfo.OwnerPetitionApplicantInfoID).First();
+
+                   if (applicantInfo != null)
+                   {
+                       OwnerPetitionApplicantInfoM _applicantInfo = new OwnerPetitionApplicantInfoM();
+                       _applicantInfo.OwnerPetitionApplicantInfoID = applicantInfo.OwnerPetitionApplicantInfoID;
+                       var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                       if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                       {
+                           result.status = applicantUserInforesult.status;
+                           return result;
+                       }
+                       _applicantInfo.ApplicantUserInfo = applicantUserInforesult.result;
+                       _applicantInfo.bThirdPartyRepresentation = (applicantInfo.bThirdPartyRepresentation != null) ? Convert.ToBoolean(applicantInfo.bThirdPartyRepresentation) : false;
+                       var thirdpartyResult = _commondbHandler.GetUserInfo(applicantInfo.ThirdPartyUserID);
+                       if (thirdpartyResult.status.Status == StatusEnum.Success)
+                       {
+                           _applicantInfo.ThirdPartyUser = thirdpartyResult.result;
+                       }
+                       _applicantInfo.bBusinessLicensePaid = (applicantInfo.bBusinessLicensePaid != null) ? Convert.ToBoolean(applicantInfo.bBusinessLicensePaid) : false;
+                       _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
+                       _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
+                       _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
+                       _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
+                       _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
+                       _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0;
+                       _applicantInfo.bPetitionFiled = applicantInfo.bPetitionFiled;
+                       _applicantInfo.NumberOfUnitsRangeID = (applicantInfo.RangeID != null) ? Convert.ToInt32(applicantInfo.RangeID) : 0;
+                       model.ApplicantInfo = _applicantInfo;
+                   }
+
+                   var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == petitionInfo.OwnerPropertyID).First();
+
+                   if (propertyInfo != null)
+                   {
+                       OwnerPetitionPropertyInfoM _propertyInfo = new OwnerPetitionPropertyInfoM();
+                       _propertyInfo.OwnerPropertyID = propertyInfo.OwnerPropertyID;
+                       _propertyInfo.UnitTypeID = propertyInfo.UnitTypeID;
+                       _propertyInfo.MovedInDate = (propertyInfo.MovedInDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.MovedInDate));
+                       _propertyInfo.InitialRent = propertyInfo.InitialRent;
+                       _propertyInfo.RAPNoticeStatusID = propertyInfo.RAPNoticeStatusID;
+                       _propertyInfo.RAPNoticeGivenDate = (propertyInfo.RAPNoticeGivenDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeGivenDate));
+                       _propertyInfo.CurrentOnRent = Convert.ToBoolean(propertyInfo.CurrentOnRent);
+
+                       var tentantInfo = from r in _dbContext.OwnerPetitionTenantInfos
+                                         where r.OwnerPropertyID == _propertyInfo.OwnerPropertyID
+                                         select r;
+                       if (tentantInfo.Any())
+                       {
+                           List<OwnerPetitionTenantInfoM> _tenants = new List<OwnerPetitionTenantInfoM>();
+                           foreach (var item in tentantInfo)
+                           {
+                               OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
+                               var userResult = _commondbHandler.GetUserInfo(item.TenantUserID);
+                               if (userResult.status.Status == StatusEnum.Success)
+                               {
+                                   _tenant.TenantUserInfo = userResult.result;
+                                   _tenant.TenantInfoID = item.TenantInfoID;
+                               }
+                               _tenants.Add(_tenant);
+                               //model.TenantInfo.Add(_tenant);
+                           }
+                           _propertyInfo.TenantInfo = _tenants;
+                       }
+                       model.PropertyInfo = _propertyInfo;
+                   }
+                   result.result = model;
+                   result.status = new OperationStatus() { Status = StatusEnum.Success };
+               }
+               else
+               {
+                   result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+               }
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               _commondbHandler.SaveErrorLog(result.status);
+               return result;
+           }
+       }
+
     
     }
 }
