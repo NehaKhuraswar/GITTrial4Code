@@ -4778,8 +4778,8 @@ namespace RAP.DAL
                        model.OwnerResponseInfo.PropertyInfo.bCaptialImprovementContested = Convert.ToBoolean(propertyInfo.bCaptialImprovementContested);
                        model.OwnerResponseInfo.PropertyInfo.CaseNumbers = propertyInfo.CaseNumber;
                        model.OwnerResponseInfo.PropertyInfo.bRAPNoticeToRAPOffice = Convert.ToBoolean(propertyInfo.bRAPNoticeToRAPOffice);
-                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeToRAPOfficeDate = (propertyInfo.RAPNoticeToRAPOfficeDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeToRAPOfficeDate));                   
-                    
+                       model.OwnerResponseInfo.PropertyInfo.RAPNoticeToRAPOfficeDate = (propertyInfo.RAPNoticeToRAPOfficeDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeToRAPOfficeDate));
+         
                    }
 
                    var rentIncreaseInfo = _dbContext.OwnerResponseRentalIncrementInfos.Where(r => r.PropertyID == model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID);
@@ -5308,7 +5308,7 @@ namespace RAP.DAL
                        propertyInfo.First().bCaptialImprovementContested = model.bCaptialImprovementContested;
                        propertyInfo.First().CaseNumber = model.CaseNumbers;
                        propertyInfo.First().bRAPNoticeToRAPOffice = model.bRAPNoticeToRAPOffice;
-                      // propertyInfo.First().RAPNoticeToRAPOfficeDate = new DateTime(model.RAPNoticeToRAPOfficeDate.Year, model.RAPNoticeToRAPOfficeDate.Month, model.RAPNoticeToRAPOfficeDate.Day);
+                       propertyInfo.First().RAPNoticeToRAPOfficeDate = new DateTime(model.RAPNoticeToRAPOfficeDate.Year, model.RAPNoticeToRAPOfficeDate.Month, model.RAPNoticeToRAPOfficeDate.Day);
                        _dbContext.SubmitChanges();
                    }
                }

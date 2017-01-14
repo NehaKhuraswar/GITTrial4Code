@@ -1,7 +1,7 @@
 ﻿
         <div class="col-md-9 col-sm-12">
             <div class="application-step step-1">
-                <h3 class="step-heading">Property Owner Petition for Approval of Rent Increase: <br /><span>Additional Documentation</span></h3>
+                <div class="step-heading">Additional Documentation</div>
 
                 <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
                     <div class="step-content step1">
@@ -20,26 +20,39 @@
                             <p class="no-bottom-margin">Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine as part of your petition.</p>
                         </div>
 
-                        <div class="subhead">
-                            <h4>Upload document</h4>
+
+                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
+                            <div class="tbl-header">
+                                <div class="tbl-row clearfix">
+                                    <div class="col col-35 name">File name</div>
+                                </div>
+                            </div>
+
+                            <div class="tbl-body">
+                                <div class="tbl-row clearfix">
+                                    <div class="item" ng-class="{'expanded':toggle}">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                            <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                            <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-delete">Download</a>
+                                        </div>
+
+                                        <div class="item-content clearfix" ng-show="toggle">
+                                            <div class="row">
+                                                <div class="col-md-10 col-sm-12">
+                                                    <p>{{item.DocDescription}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                        
                         <div class="field-group">
                             <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
-                            <div class="full-width">
-                                <!--<select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
-                    <option value="Lease" selected>Lease</option>
-                    <option value="Notice">Notice</option>
-                    <option value="Paystub">Paystub</option>
-                    <option value="Receipt">Receipt</option>
-                    <option value="Invoice">Invoice</option>
-                    <option value="Photo/Image">Photo/Image</option>
-                    <option value="Inspection Checklist">Inspection Checklist</option>
-                    <option value="Report">Report</option>
-                    <option value="Letter">Letter</option>
-                    <option value="Email (s)">Email (s)</option>
-                    <option value="ext Message (s)">ext Message (s)</option>
-                </select>-->
+                            <div class="full-width">                               
 
                                 <select ng-model="Ctrl.description1"
                                         data-placeholder="Description"
@@ -64,63 +77,15 @@
                             <div class="field-addfile">
                                 <div class="input-file-wrapper">
                                     <span class="btn-link">Attach document</span>
-                                    <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'OR_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
-                                </div>
-                                <div class="field-group">
-                                    <table class="table table-condensed nopadding-bottom">
-                                        <tbody>
-                                            <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
-                                                <td class="nopadding-left">
-                                                    {{item.DocName}}
-                                                </td>
-                                                <td>
-                                                    <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'OR_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
+                                </div>                               
                             </div>
-                        </div><!-- .field-group -->
-
-                        <div class="subhead type2">
-                            <h4>Additional Documentation</h4>
-                            <a href="#" class="btn-link btn-edit">Edit</a>
-                        </div>
-
-                        <div class="field-group">
-                            <!-- Custom Table -->
-                            <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
-                                <div class="tbl-header">
-                                    <div class="tbl-row clearfix">
-                                        <div class="col col-35 name">File name</div>
-                                    </div>
-                                </div>
-
-                                <div class="tbl-body">
-                                    <div class="tbl-row clearfix">
-                                        <div class="item item-toggle expanded">
-                                            <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
-                                            </div>
-
-                                            <div class="item-content clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-sm-12">
-                                                        <p>{{item.DocDescription}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .custom-table -->
-                        </div>
+                        </div><!-- .field-group -->                  
+                                               
                     </div>
 
                     <div class="step-footer">
-                        <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>
+                        <input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
                     </div>
                 </form>
             </div>

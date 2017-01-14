@@ -55,6 +55,11 @@
         masterFactory.GetDocument(doc);
 
     }
+
+    self.Delete = function (doc) {
+        var index = self.caseinfo.Documents.indexOf(doc);
+        self.caseinfo.Documents.splice(index, 1);        
+    }
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOResponseDecreasedHousing(self.caseinfo).then(function (response) {

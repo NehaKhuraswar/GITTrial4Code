@@ -17,6 +17,7 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
         self.Rent = angular.copy(self.caseinfo.OwnerResponseInfo.PropertyInfo.Rent);
+        RestrictUpload()
         //if (self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.length > 0) {
         //    self.caseinfo.OwnerPetitionRentalIncrementInfo = self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo[0];
         //}
@@ -55,6 +56,7 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
                         }
                         self.caseinfo.Documents.push(document);
                         self.showUploadedFile = true;
+                        RestrictUpload()
                     }
                 }
 
@@ -67,7 +69,21 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
         masterFactory.GetDocument(doc);
 
     }
-
+    self.Delete = function (doc) {
+        var index = self.caseinfo.Documents.indexOf(doc);
+        self.caseinfo.Documents.splice(index, 1);
+        RestrictUpload();
+    }
+    function RestrictUpload() {
+   
+        self.bRAPNotice1 = true;
+        for (var i = 0 ; i < self.caseinfo.Documents.length; i++) {
+              if (self.caseinfo.Documents[i].DocTitle == 'OR_RAPNotice1') {
+                self.bRAPNotice1 = false;
+            }
+        }
+    }
+        
     self.AddRecord = function (_rent)
     {
         self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(_rent);

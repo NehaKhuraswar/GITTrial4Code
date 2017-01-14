@@ -16,6 +16,30 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
     //    self.caseinfo = response.data;
         
     //});
+    self.EditApplicantInfo = function () {
+        $scope.model.oresponseReview = false;
+        $scope.model.oresponseApplicantInfo = true;
+    }
+      self.EditRentalProperty = function () {
+          $scope.model.oresponseReview = false;
+        $scope.model.oresponseRentalProperty = true;
+    }
+    self.EditRentalHistory = function () {
+        $scope.model.oresponseReview = false;
+        $scope.model.oresponseRentalHistory = true;
+    }
+    self.EditDecreasedHousing = function () {
+        $scope.model.oresponseReview = false;
+        $scope.model.oresponseDecreasedHousing = true;
+    }
+    self.EditExemption = function () {
+        $scope.model.oresponseReview = false;
+        $scope.model.oresponseException = true;
+    }
+    self.EditAdditionalDocuments = function () {
+        $scope.model.oresponseReview = false;
+        $scope.model.oresponseDocument = true;
+    }
 
    
     self.Continue = function () {

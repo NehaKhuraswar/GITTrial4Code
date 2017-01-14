@@ -15,7 +15,7 @@
 
                                     <div class="subhead type2">
                                         <h4>Applicant and property information</h4>
-                                        <a href="#" class="btn-link btn-edit">Edit</a>
+                                        <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
                                     </div>
 
                                     <div class="field-group filled-info subhead">
@@ -127,7 +127,7 @@
                                             <!-- Rental property -->
                                             <div class="subhead type2">
                                                 <h4>Rental property</h4>
-                                                <a href="#" class="btn-link btn-edit">Edit</a>
+                                                <a ng-click="Ctrl.EditRentalProperty()" class="btn-link btn-edit">Edit</a>
                                             </div>
 
                                             <div class="field-group filled-info subhead">
@@ -161,7 +161,7 @@
                                             <!-- Rental history -->
                                             <div class="subhead type2">
                                                 <h4>Rent history</h4>
-                                                <a href="#" class="btn-link btn-edit">Edit</a>
+                                                <a ng-click="Ctrl.EditRentalHistory()" class="btn-link btn-edit">Edit</a>
                                             </div>
                                         <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
                                             <div class="field-group filled-info subhead">
@@ -347,7 +347,7 @@
                                             <!-- Decreased housing services -->
                                             <div class="subhead type2">
                                                 <h4>Decreased housing services</h4>
-                                                <a href="#" class="btn-link btn-edit">Edit</a>
+                                                <a ng-click="Ctrl.EditDecreasedHousing()" class="btn-link btn-edit">Edit</a>
                                             </div>
 
                                             <div class="field-group filled-info subhead no-top-margin">
@@ -360,7 +360,7 @@
                                             <!-- Exemptions -->
                                             <div class="subhead type2">
                                                 <h4>Exemptions</h4>
-                                                <a href="#" class="btn-link btn-edit">Edit</a>
+                                                <a ng-click="Ctrl.EditExemption()" class="btn-link btn-edit">Edit</a>
                                             </div>
 
                                             <div class="field-group filled-info subhead no-top-margin">
@@ -400,7 +400,7 @@
                                             <!-- Additional Documentation -->
                                             <div class="subhead type2">
                                                 <h4>Additional Documentation</h4>
-                                                <a href="#" class="btn-link btn-edit">Edit</a>
+                                                <a ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
                                             </div>
 
                                             <div class="field-group">
@@ -438,7 +438,7 @@
 
 
                                 <div class="step-footer">
-                                    <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>
+                                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
                                 </div>
                             </form>
                         </div>

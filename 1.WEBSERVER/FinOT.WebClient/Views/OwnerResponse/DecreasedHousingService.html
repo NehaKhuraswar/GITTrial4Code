@@ -1,7 +1,6 @@
-﻿
-        <div class="col-md-9 col-sm-12">
+﻿        <div class="col-md-9 col-sm-12">
             <div class="application-step step-1">
-                <h3 class="step-heading">Owner Response: <span>Decreased Housing Services</span></h3>
+                <div class="step-heading">Decreased Housing Services</div>
 
                 <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form">
                     <div class="step-content step1">
@@ -29,22 +28,23 @@
                                                 {{item.DocName}}
                                             </td>
                                             <td>
-                                                <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        </div><!-- .field-group -->
-                    <div class="subhead type2">
+                       <!-- .field-group -->
+                    <!--<div class="subhead type2">
                         <h4>Additional Documentation</h4>
                         <a href="#" class="btn-link btn-edit">Edit</a>
-                    </div>
+                    </div>-->
 
-                    <div class="field-group">
-                        <!-- Custom Table -->
-                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_DecreasedHousing'}">
+                    <!--<div class="field-group">
+                        <!-- Custom Table -->                      
+                        <!--<div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_DecreasedHousing'}">
                             <div class="tbl-header">
                                 <div class="tbl-row clearfix">
                                     <div class="col col-35 name">File name</div>
@@ -53,12 +53,14 @@
 
                             <div class="tbl-body">
                                 <div class="tbl-row clearfix">
-                                    <div class="item item-toggle expanded">
+                                    <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
-                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
+                                            <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                         </div>
 
-                                        <div class="item-content clearfix">
+                                        <div class="item-content clearfix" ng-show="toggle">
                                             <div class="row">
                                                 <div class="col-md-10 col-sm-12">
                                                     <p>{{item.DocDescription}}</p>
@@ -68,13 +70,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- .custom-table -->
-                    </div>                   
+                    </div>                  
 
 
                     <div class="step-footer">
-                        <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>
+                        <input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
                     </div>
                 </form>
             </div>
