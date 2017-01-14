@@ -33,7 +33,8 @@ namespace RAP.DAL
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
-                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password && x.IsDeleted!=true).FirstOrDefault();
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password 
+                                                && (x.IsDeleted == null || x.IsDeleted == false)).FirstOrDefault();
 
 
                     if (custdetails != null)
@@ -326,7 +327,7 @@ namespace RAP.DAL
 
                     
                     var cityDetails = db.CityUserAccounts.Where(x => x.Email == message.Email && x.Password == message.Password
-                                                                    && x.IsDeleted != true
+                                                                    && (x.IsDeleted == null || x.IsDeleted == false)
                                                                     ).FirstOrDefault();
 
 
