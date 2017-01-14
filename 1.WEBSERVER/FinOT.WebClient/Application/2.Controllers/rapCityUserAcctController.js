@@ -35,6 +35,11 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
                 rapGlobalFactory.IsEdit = false;
                 $location.path("/admindashboard");
             }
+            else if(rapGlobalFactory.IsAdmin == true)
+            {
+                rapGlobalFactory.IsAdmin = false;
+                $location.path("/admindashboard");
+            }
             else {
                 $location.path("/CityLogin");
             }
@@ -58,7 +63,20 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
 
         });
     }
-
+    self.Cancel = function () {
+        if (rapGlobalFactory.IsEdit == true) {
+            rapGlobalFactory.SelectedForEdit = null;
+            rapGlobalFactory.IsEdit = false;
+            $location.path("/admindashboard");
+        }
+        else if (rapGlobalFactory.IsAdmin == true) {
+            rapGlobalFactory.IsAdmin = false;
+            $location.path("/admindashboard");
+        }
+        else {
+            $location.path("/CityLogin");
+        }
+    }
     var _getAccountTypes = function () {
         masterFactory.GetAccountTypes().then(function (response) {
             if (!alert.checkResponse(response)) { return; }

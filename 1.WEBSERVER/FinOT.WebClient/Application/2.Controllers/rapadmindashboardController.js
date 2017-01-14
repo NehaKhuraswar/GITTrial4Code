@@ -5,9 +5,11 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     self.model = rapGlobalFactory.CustomerDetails;
     self.pageNumberList = [];
     self.CreateCityUserAccount = function () {
+        rapGlobalFactory.IsAdmin = true;
         $location.path("/createCityUserAccount");
     }
     self.CreatePublicUserAccount = function () {
+        rapGlobalFactory.IsAdmin = true;
         $location.path("/register");
     }
     self.EditPublicUserAccount = function () {

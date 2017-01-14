@@ -134,7 +134,7 @@ If you feel you have received this email in error, or you did have not created a
 
 Thank you,
 
-The Rent Adjustment Program, The City of Oakland"</value>
+The Rent Adjustment Program, The City of Oakland</value>
     <comment>New account created</comment>
   </data>
   <data name="AppealMsg" xml:space="preserve">
@@ -154,7 +154,7 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>Appeal submitted</comment>
   </data>
   <data name="CityAccountCreatedMsg" xml:space="preserve">
-    <value>Dear NAME
+    <value>Dear NAME,
 
 Thank you for creating an CIty account with the Rent Adjustment Program.
 
@@ -164,7 +164,7 @@ If you feel you have received this email in error, or you did have not created a
 
 Thank you,
 
-The Rent Adjustment Program, The City of Oakland"""</value>
+The Rent Adjustment Program, The City of Oakland</value>
     <comment>New City account created</comment>
   </data>
   <data name="ForgotPasswordMsg" xml:space="preserve">
@@ -178,11 +178,11 @@ If you feel have received this message in error, please call RAP Staff immediate
 
 Thank you,
 
-The Rent Adjustment Program, The City of Oakland"</value>
+The Rent Adjustment Program, The City of Oakland</value>
     <comment>Forgot my password</comment>
   </data>
   <data name="PetitionMsg" xml:space="preserve">
-    <value>Dear NAME
+    <value>Dear NAME,
 
 Your petition has been filed successfully. Your Case Number is: CASEID
 
@@ -210,7 +210,7 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>[Petition name] submitted</comment>
   </data>
   <data name="ResendPinMsg" xml:space="preserve">
-    <value>Dear NAME
+    <value>Dear NAME,
 
 You have requested the RAP resend your 5-Digit pin. Your pin is: PIN
 
@@ -220,7 +220,7 @@ If you feel have received this message in error, please call RAP Staff immediate
 
 Thank you,
 
-The Rent Adjustment Program, The City of Oakland"</value>
+The Rent Adjustment Program, The City of Oakland</value>
     <comment>Resend PIN</comment>
   </data>
   <data name="ResponseMsg" xml:space="preserve">
@@ -285,7 +285,7 @@ If you feel have received this message in error, please call RAP Staff immediate
 
 Thank you,
 
-The Rent Adjustment Program, The City of Oakland"</value>
+The Rent Adjustment Program, The City of Oakland</value>
     <comment>Representative information updated</comment>
   </data>
   <data name="String4" xml:space="preserve">

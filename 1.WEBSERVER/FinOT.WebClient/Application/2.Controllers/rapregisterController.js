@@ -78,6 +78,11 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             rapGlobalFactory.IsEdit = false;
             $location.path("/admindashboard");
         }
+        else if(rapGlobalFactory.IsAdmin == true)
+        {
+                rapGlobalFactory.IsAdmin = false;
+                $location.path("/admindashboard");
+        }
         else {
             $location.path("/Login");
         }
@@ -110,6 +115,10 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             {
                 rapGlobalFactory.SelectedForEdit = null;
                 rapGlobalFactory.IsEdit = false;
+                $location.path("/admindashboard");
+            }
+            else if(rapGlobalFactory.IsAdmin == true) {
+                rapGlobalFactory.IsAdmin = false;
                 $location.path("/admindashboard");
             }
             else {

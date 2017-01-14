@@ -101,7 +101,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME
+        ///   Looks up a localized string similar to Dear NAME,
         ///
         ///Thank you for creating an CIty account with the Rent Adjustment Program.
         ///
@@ -111,7 +111,7 @@ namespace RAP.Core.Common {
         ///
         ///Thank you,
         ///
-        ///The Rent Adjustment Program, The City of Oakland&quot;&quot;&quot;.
+        ///The Rent Adjustment Program, The City of Oakland.
         /// </summary>
         internal static string CityAccountCreatedMsg {
             get {
@@ -130,7 +130,7 @@ namespace RAP.Core.Common {
         ///
         ///Thank you,
         ///
-        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        ///The Rent Adjustment Program, The City of Oakland.
         /// </summary>
         internal static string ForgotPasswordMsg {
             get {
@@ -139,7 +139,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME
+        ///   Looks up a localized string similar to Dear NAME,
         ///
         ///Your petition has been filed successfully. Your Case Number is: CASEID
         ///
@@ -151,7 +151,7 @@ namespace RAP.Core.Common {
         ///
         ///If you need to request translation services please do through the user dashboard: LOGIN
         ///
-        ///Please continue to check your user dashboard for updates on your petition including your assigned hearing date, submitted response forms, and scheduling o [rest of string was truncated]&quot;;.
+        ///Please continue to check your user dashboard for updates on your petition including your assigned hearing date, submitted response forms, and scheduling  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PetitionMsg {
             get {
@@ -160,7 +160,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME
+        ///   Looks up a localized string similar to Dear NAME,
         ///
         ///You have requested the RAP resend your 5-Digit pin. Your pin is: PIN
         ///
@@ -170,7 +170,7 @@ namespace RAP.Core.Common {
         ///
         ///Thank you,
         ///
-        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        ///The Rent Adjustment Program, The City of Oakland.
         /// </summary>
         internal static string ResendPinMsg {
             get {
@@ -247,7 +247,7 @@ namespace RAP.Core.Common {
         ///
         ///Thank you,
         ///
-        ///The Rent Adjustment Program, The City of Oakland&quot;.
+        ///The Rent Adjustment Program, The City of Oakland.
         /// </summary>
         internal static string String3 {
             get {

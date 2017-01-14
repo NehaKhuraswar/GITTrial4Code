@@ -17,6 +17,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         var FromSelectedCase = false;
         var SelectedForEdit = null;
         var Notification = null;
+        var IsAdmin = false;
         // public
         return {
 
