@@ -365,9 +365,9 @@ namespace RAP.Business.Implementation
                 }
                 if (caseInfo.bCaseFiledByThirdParty)
                 {
-                    if (caseInfo.TenantAppealInfo.AppealThirdPartyInfo.Email != null)
+                    if (caseInfo.TenantAppealInfo.ThirdPartyInfo.Email != null)
                     {
-                        _receipients.Add(caseInfo.TenantAppealInfo.AppealThirdPartyInfo.Email);
+                        _receipients.Add(caseInfo.TenantAppealInfo.ThirdPartyInfo.Email);
                     }
                 }
                 message.RecipientAddress = _receipients;

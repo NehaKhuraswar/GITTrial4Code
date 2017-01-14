@@ -144,7 +144,7 @@ namespace RAP.Core.DataModels
         public CustomDate AppealDate { get; set; }
         public UserInfoM ApplicantUserInfo { get; set; }
         // private UserInfoM _appealThirdPartyInfo = new UserInfoM();
-        public UserInfoM AppealThirdPartyInfo = new UserInfoM();
+        public UserInfoM ThirdPartyInfo = new UserInfoM();
         public UserInfoM AppealPropertyUserInfo = new UserInfoM();
         public int thirdPartyUserID;
 

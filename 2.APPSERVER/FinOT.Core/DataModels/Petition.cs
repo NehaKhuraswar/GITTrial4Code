@@ -276,6 +276,7 @@ namespace RAP.Core.DataModels
         {
             OpposingParty = new List<UserInfoM>();
             PenaltyDate = new CustomDate();
+            Date = DateTime.Now;
         }
         
         public int CustomerID { get; set; }
@@ -285,6 +286,7 @@ namespace RAP.Core.DataModels
         public bool bThirdParty { get; set; }
         public bool bDeclaration { get; set; }
         public CustomDate PenaltyDate { get; set; }
+        public DateTime Date { get; set; }
         public List<UserInfoM> OpposingParty { get; set; }
     }
 }
