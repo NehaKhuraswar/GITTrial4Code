@@ -147,9 +147,9 @@
                                     <div class="item-header clearfix">
                                         <div class="col col-20 name pad-l40"><a href="#" class="btn-toggle"></a>{{item.Name}}</div>
                                         <div class="col col-20 account-type">{{item.AccountType}}</div>
-                                        <div class="col col-25 email"><a href="mailto: johnsmith@gmail.com">{{item.email}}</a></div>
+                                        <div class="col col-25 email"><a href="mailto: {{item.email}}">{{item.email}}</a></div>
                                         <div class="col col-20 created-on">{{item.CreatedDate | date}}</div>
-                                        <div class="col col-15 link"><a href="#" class="btn-link">Edit</a></div>
+                                        <div class="col col-15 link"><a ng-click="Ctrl.EditAccount(item)" class="btn-link">Edit</a></div>
                                     </div>
 
                                     <div class="item-content clearfix pad-l40">

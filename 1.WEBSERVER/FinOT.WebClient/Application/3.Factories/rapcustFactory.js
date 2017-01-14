@@ -19,11 +19,31 @@ var rapcustFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
         .finally(function () {
             blockUI.stop();
         });
-    }  
+    }
+    var _GetCustomerFromID = function (custid) {
+        blockUI.start();
+        var url = _routePrefix + '/getCustomer/' + custid;
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+
+
+    var _DeleteCustomer = function (model) {
+        blockUI.start();
+        return ajax.Post(model, _routePrefix + '/DeleteCustomer')
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     
    
     factory.SaveCustomer = _SaveCustomer;
-    factory.GetCustomer = _GetCustomer
+    factory.GetCustomer = _GetCustomer;
+    factory.GetCustomerFromID = _GetCustomerFromID;
+    factory.DeleteCustomer = _DeleteCustomer;
     
     return factory;
 }];

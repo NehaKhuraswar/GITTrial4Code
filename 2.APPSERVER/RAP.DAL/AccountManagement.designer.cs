@@ -51,12 +51,12 @@ namespace RAP.DAL
     partial void InsertMailingAddress(MailingAddress instance);
     partial void UpdateMailingAddress(MailingAddress instance);
     partial void DeleteMailingAddress(MailingAddress instance);
-    partial void InsertCustomerDetail(CustomerDetail instance);
-    partial void UpdateCustomerDetail(CustomerDetail instance);
-    partial void DeleteCustomerDetail(CustomerDetail instance);
     partial void InsertCityUserAccount(CityUserAccount instance);
     partial void UpdateCityUserAccount(CityUserAccount instance);
     partial void DeleteCityUserAccount(CityUserAccount instance);
+    partial void InsertCustomerDetail(CustomerDetail instance);
+    partial void UpdateCustomerDetail(CustomerDetail instance);
+    partial void DeleteCustomerDetail(CustomerDetail instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -153,19 +153,19 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<CustomerDetail> CustomerDetails
-		{
-			get
-			{
-				return this.GetTable<CustomerDetail>();
-			}
-		}
-		
 		public System.Data.Linq.Table<CityUserAccount> CityUserAccounts
 		{
 			get
 			{
 				return this.GetTable<CityUserAccount>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CustomerDetail> CustomerDetails
+		{
+			get
+			{
+				return this.GetTable<CustomerDetail>();
 			}
 		}
 		
@@ -1653,477 +1653,6 @@ namespace RAP.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CustomerDetails")]
-	public partial class CustomerDetail : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _CustomerID;
-		
-		private string _Email;
-		
-		private System.Nullable<int> _UserID;
-		
-		private string _Password;
-		
-		private System.DateTime _CreatedDate;
-		
-		private System.Nullable<System.DateTime> _ModifiedDate;
-		
-		private string _CustomerIdentityKey;
-		
-		private System.Nullable<bool> _bMailingAddress;
-		
-		private System.Nullable<bool> _bParcelAddress;
-		
-		private EntityRef<ThirdPartyRepresentation> _ThirdPartyRepresentation;
-		
-		private EntitySet<ThirdPartyCaseAssignment> _ThirdPartyCaseAssignments;
-		
-		private EntitySet<CollaboratorAccess> _CollaboratorAccesses;
-		
-		private EntitySet<CollaboratorAccess> _CollaboratorAccesses1;
-		
-		private EntitySet<MailingAddress> _MailingAddresses;
-		
-		private EntityRef<CustomerDetail> _CustomerDetail2;
-		
-		private EntityRef<CustomerDetail> _CustomerDetail1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCustomerIDChanging(int value);
-    partial void OnCustomerIDChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnUserIDChanging(System.Nullable<int> value);
-    partial void OnUserIDChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnCreatedDateChanging(System.DateTime value);
-    partial void OnCreatedDateChanged();
-    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnModifiedDateChanged();
-    partial void OnCustomerIdentityKeyChanging(string value);
-    partial void OnCustomerIdentityKeyChanged();
-    partial void OnbMailingAddressChanging(System.Nullable<bool> value);
-    partial void OnbMailingAddressChanged();
-    partial void OnbParcelAddressChanging(System.Nullable<bool> value);
-    partial void OnbParcelAddressChanged();
-    #endregion
-		
-		public CustomerDetail()
-		{
-			this._ThirdPartyRepresentation = default(EntityRef<ThirdPartyRepresentation>);
-			this._ThirdPartyCaseAssignments = new EntitySet<ThirdPartyCaseAssignment>(new Action<ThirdPartyCaseAssignment>(this.attach_ThirdPartyCaseAssignments), new Action<ThirdPartyCaseAssignment>(this.detach_ThirdPartyCaseAssignments));
-			this._CollaboratorAccesses = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses));
-			this._CollaboratorAccesses1 = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses1), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses1));
-			this._MailingAddresses = new EntitySet<MailingAddress>(new Action<MailingAddress>(this.attach_MailingAddresses), new Action<MailingAddress>(this.detach_MailingAddresses));
-			this._CustomerDetail2 = default(EntityRef<CustomerDetail>);
-			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					if (this._CustomerDetail1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
-		public System.DateTime CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ModifiedDate
-		{
-			get
-			{
-				return this._ModifiedDate;
-			}
-			set
-			{
-				if ((this._ModifiedDate != value))
-				{
-					this.OnModifiedDateChanging(value);
-					this.SendPropertyChanging();
-					this._ModifiedDate = value;
-					this.SendPropertyChanged("ModifiedDate");
-					this.OnModifiedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerIdentityKey", DbType="VarChar(5)")]
-		public string CustomerIdentityKey
-		{
-			get
-			{
-				return this._CustomerIdentityKey;
-			}
-			set
-			{
-				if ((this._CustomerIdentityKey != value))
-				{
-					this.OnCustomerIdentityKeyChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerIdentityKey = value;
-					this.SendPropertyChanged("CustomerIdentityKey");
-					this.OnCustomerIdentityKeyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bMailingAddress", DbType="Bit")]
-		public System.Nullable<bool> bMailingAddress
-		{
-			get
-			{
-				return this._bMailingAddress;
-			}
-			set
-			{
-				if ((this._bMailingAddress != value))
-				{
-					this.OnbMailingAddressChanging(value);
-					this.SendPropertyChanging();
-					this._bMailingAddress = value;
-					this.SendPropertyChanged("bMailingAddress");
-					this.OnbMailingAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bParcelAddress", DbType="Bit")]
-		public System.Nullable<bool> bParcelAddress
-		{
-			get
-			{
-				return this._bParcelAddress;
-			}
-			set
-			{
-				if ((this._bParcelAddress != value))
-				{
-					this.OnbParcelAddressChanging(value);
-					this.SendPropertyChanging();
-					this._bParcelAddress = value;
-					this.SendPropertyChanged("bParcelAddress");
-					this.OnbParcelAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation", Storage="_ThirdPartyRepresentation", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
-		public ThirdPartyRepresentation ThirdPartyRepresentation
-		{
-			get
-			{
-				return this._ThirdPartyRepresentation.Entity;
-			}
-			set
-			{
-				ThirdPartyRepresentation previousValue = this._ThirdPartyRepresentation.Entity;
-				if (((previousValue != value) 
-							|| (this._ThirdPartyRepresentation.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ThirdPartyRepresentation.Entity = null;
-						previousValue.CustomerDetail = null;
-					}
-					this._ThirdPartyRepresentation.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerDetail = this;
-					}
-					this.SendPropertyChanged("ThirdPartyRepresentation");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyCaseAssignment", Storage="_ThirdPartyCaseAssignments", ThisKey="CustomerID", OtherKey="CustomerID")]
-		public EntitySet<ThirdPartyCaseAssignment> ThirdPartyCaseAssignments
-		{
-			get
-			{
-				return this._ThirdPartyCaseAssignments;
-			}
-			set
-			{
-				this._ThirdPartyCaseAssignments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess", Storage="_CollaboratorAccesses", ThisKey="CustomerID", OtherKey="CustomerID")]
-		public EntitySet<CollaboratorAccess> CollaboratorAccesses
-		{
-			get
-			{
-				return this._CollaboratorAccesses;
-			}
-			set
-			{
-				this._CollaboratorAccesses.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess1", Storage="_CollaboratorAccesses1", ThisKey="CustomerID", OtherKey="CollaboratorCustID")]
-		public EntitySet<CollaboratorAccess> CollaboratorAccesses1
-		{
-			get
-			{
-				return this._CollaboratorAccesses1;
-			}
-			set
-			{
-				this._CollaboratorAccesses1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_MailingAddress", Storage="_MailingAddresses", ThisKey="CustomerID", OtherKey="CustomerID")]
-		public EntitySet<MailingAddress> MailingAddresses
-		{
-			get
-			{
-				return this._MailingAddresses;
-			}
-			set
-			{
-				this._MailingAddresses.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail2", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
-		public CustomerDetail CustomerDetail2
-		{
-			get
-			{
-				return this._CustomerDetail2.Entity;
-			}
-			set
-			{
-				CustomerDetail previousValue = this._CustomerDetail2.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerDetail2.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerDetail2.Entity = null;
-						previousValue.CustomerDetail1 = null;
-					}
-					this._CustomerDetail2.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerDetail1 = this;
-					}
-					this.SendPropertyChanged("CustomerDetail2");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail1", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public CustomerDetail CustomerDetail1
-		{
-			get
-			{
-				return this._CustomerDetail1.Entity;
-			}
-			set
-			{
-				CustomerDetail previousValue = this._CustomerDetail1.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerDetail1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerDetail1.Entity = null;
-						previousValue.CustomerDetail2 = null;
-					}
-					this._CustomerDetail1.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerDetail2 = this;
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(int);
-					}
-					this.SendPropertyChanged("CustomerDetail1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ThirdPartyCaseAssignments(ThirdPartyCaseAssignment entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = this;
-		}
-		
-		private void detach_ThirdPartyCaseAssignments(ThirdPartyCaseAssignment entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = null;
-		}
-		
-		private void attach_CollaboratorAccesses(CollaboratorAccess entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = this;
-		}
-		
-		private void detach_CollaboratorAccesses(CollaboratorAccess entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = null;
-		}
-		
-		private void attach_CollaboratorAccesses1(CollaboratorAccess entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail1 = this;
-		}
-		
-		private void detach_CollaboratorAccesses1(CollaboratorAccess entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail1 = null;
-		}
-		
-		private void attach_MailingAddresses(MailingAddress entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = this;
-		}
-		
-		private void detach_MailingAddresses(MailingAddress entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CityUserAccount")]
 	public partial class CityUserAccount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2632,6 +2161,501 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CustomerDetails")]
+	public partial class CustomerDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CustomerID;
+		
+		private string _Email;
+		
+		private System.Nullable<int> _UserID;
+		
+		private string _Password;
+		
+		private System.DateTime _CreatedDate;
+		
+		private System.Nullable<System.DateTime> _ModifiedDate;
+		
+		private string _CustomerIdentityKey;
+		
+		private System.Nullable<bool> _bMailingAddress;
+		
+		private System.Nullable<bool> _bParcelAddress;
+		
+		private System.Nullable<bool> _IsDeleted;
+		
+		private EntityRef<ThirdPartyRepresentation> _ThirdPartyRepresentation;
+		
+		private EntitySet<ThirdPartyCaseAssignment> _ThirdPartyCaseAssignments;
+		
+		private EntitySet<CollaboratorAccess> _CollaboratorAccesses;
+		
+		private EntitySet<CollaboratorAccess> _CollaboratorAccesses1;
+		
+		private EntitySet<MailingAddress> _MailingAddresses;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail2;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnCreatedDateChanging(System.DateTime value);
+    partial void OnCreatedDateChanged();
+    partial void OnModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedDateChanged();
+    partial void OnCustomerIdentityKeyChanging(string value);
+    partial void OnCustomerIdentityKeyChanged();
+    partial void OnbMailingAddressChanging(System.Nullable<bool> value);
+    partial void OnbMailingAddressChanged();
+    partial void OnbParcelAddressChanging(System.Nullable<bool> value);
+    partial void OnbParcelAddressChanged();
+    partial void OnIsDeletedChanging(System.Nullable<bool> value);
+    partial void OnIsDeletedChanged();
+    #endregion
+		
+		public CustomerDetail()
+		{
+			this._ThirdPartyRepresentation = default(EntityRef<ThirdPartyRepresentation>);
+			this._ThirdPartyCaseAssignments = new EntitySet<ThirdPartyCaseAssignment>(new Action<ThirdPartyCaseAssignment>(this.attach_ThirdPartyCaseAssignments), new Action<ThirdPartyCaseAssignment>(this.detach_ThirdPartyCaseAssignments));
+			this._CollaboratorAccesses = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses));
+			this._CollaboratorAccesses1 = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses1), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses1));
+			this._MailingAddresses = new EntitySet<MailingAddress>(new Action<MailingAddress>(this.attach_MailingAddresses), new Action<MailingAddress>(this.detach_MailingAddresses));
+			this._CustomerDetail2 = default(EntityRef<CustomerDetail>);
+			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._CustomerDetail1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
+		public System.Nullable<int> UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifiedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifiedDate
+		{
+			get
+			{
+				return this._ModifiedDate;
+			}
+			set
+			{
+				if ((this._ModifiedDate != value))
+				{
+					this.OnModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ModifiedDate = value;
+					this.SendPropertyChanged("ModifiedDate");
+					this.OnModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerIdentityKey", DbType="VarChar(5)")]
+		public string CustomerIdentityKey
+		{
+			get
+			{
+				return this._CustomerIdentityKey;
+			}
+			set
+			{
+				if ((this._CustomerIdentityKey != value))
+				{
+					this.OnCustomerIdentityKeyChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerIdentityKey = value;
+					this.SendPropertyChanged("CustomerIdentityKey");
+					this.OnCustomerIdentityKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bMailingAddress", DbType="Bit")]
+		public System.Nullable<bool> bMailingAddress
+		{
+			get
+			{
+				return this._bMailingAddress;
+			}
+			set
+			{
+				if ((this._bMailingAddress != value))
+				{
+					this.OnbMailingAddressChanging(value);
+					this.SendPropertyChanging();
+					this._bMailingAddress = value;
+					this.SendPropertyChanged("bMailingAddress");
+					this.OnbMailingAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bParcelAddress", DbType="Bit")]
+		public System.Nullable<bool> bParcelAddress
+		{
+			get
+			{
+				return this._bParcelAddress;
+			}
+			set
+			{
+				if ((this._bParcelAddress != value))
+				{
+					this.OnbParcelAddressChanging(value);
+					this.SendPropertyChanging();
+					this._bParcelAddress = value;
+					this.SendPropertyChanged("bParcelAddress");
+					this.OnbParcelAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsDeleted", DbType="Bit")]
+		public System.Nullable<bool> IsDeleted
+		{
+			get
+			{
+				return this._IsDeleted;
+			}
+			set
+			{
+				if ((this._IsDeleted != value))
+				{
+					this.OnIsDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDeleted = value;
+					this.SendPropertyChanged("IsDeleted");
+					this.OnIsDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyRepresentation", Storage="_ThirdPartyRepresentation", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
+		public ThirdPartyRepresentation ThirdPartyRepresentation
+		{
+			get
+			{
+				return this._ThirdPartyRepresentation.Entity;
+			}
+			set
+			{
+				ThirdPartyRepresentation previousValue = this._ThirdPartyRepresentation.Entity;
+				if (((previousValue != value) 
+							|| (this._ThirdPartyRepresentation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ThirdPartyRepresentation.Entity = null;
+						previousValue.CustomerDetail = null;
+					}
+					this._ThirdPartyRepresentation.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerDetail = this;
+					}
+					this.SendPropertyChanged("ThirdPartyRepresentation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_ThirdPartyCaseAssignment", Storage="_ThirdPartyCaseAssignments", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<ThirdPartyCaseAssignment> ThirdPartyCaseAssignments
+		{
+			get
+			{
+				return this._ThirdPartyCaseAssignments;
+			}
+			set
+			{
+				this._ThirdPartyCaseAssignments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess", Storage="_CollaboratorAccesses", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<CollaboratorAccess> CollaboratorAccesses
+		{
+			get
+			{
+				return this._CollaboratorAccesses;
+			}
+			set
+			{
+				this._CollaboratorAccesses.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CollaboratorAccess1", Storage="_CollaboratorAccesses1", ThisKey="CustomerID", OtherKey="CollaboratorCustID")]
+		public EntitySet<CollaboratorAccess> CollaboratorAccesses1
+		{
+			get
+			{
+				return this._CollaboratorAccesses1;
+			}
+			set
+			{
+				this._CollaboratorAccesses1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_MailingAddress", Storage="_MailingAddresses", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<MailingAddress> MailingAddresses
+		{
+			get
+			{
+				return this._MailingAddresses;
+			}
+			set
+			{
+				this._MailingAddresses.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail2", ThisKey="CustomerID", OtherKey="CustomerID", IsUnique=true, IsForeignKey=false)]
+		public CustomerDetail CustomerDetail2
+		{
+			get
+			{
+				return this._CustomerDetail2.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail2.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail2.Entity = null;
+						previousValue.CustomerDetail1 = null;
+					}
+					this._CustomerDetail2.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerDetail1 = this;
+					}
+					this.SendPropertyChanged("CustomerDetail2");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail1", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public CustomerDetail CustomerDetail1
+		{
+			get
+			{
+				return this._CustomerDetail1.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail1.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail1.Entity = null;
+						previousValue.CustomerDetail2 = null;
+					}
+					this._CustomerDetail1.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerDetail2 = this;
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(int);
+					}
+					this.SendPropertyChanged("CustomerDetail1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ThirdPartyCaseAssignments(ThirdPartyCaseAssignment entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = this;
+		}
+		
+		private void detach_ThirdPartyCaseAssignments(ThirdPartyCaseAssignment entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = null;
+		}
+		
+		private void attach_CollaboratorAccesses(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = this;
+		}
+		
+		private void detach_CollaboratorAccesses(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = null;
+		}
+		
+		private void attach_CollaboratorAccesses1(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail1 = this;
+		}
+		
+		private void detach_CollaboratorAccesses1(CollaboratorAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail1 = null;
+		}
+		
+		private void attach_MailingAddresses(MailingAddress entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = this;
+		}
+		
+		private void detach_MailingAddresses(MailingAddress entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = null;
 		}
 	}
 }

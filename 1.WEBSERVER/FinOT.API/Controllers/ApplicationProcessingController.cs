@@ -70,12 +70,7 @@ namespace RAP.API.Controllers
                 //  ExtractClaimDetails();
 
                 List<Rent> obj;
-                //if (custid.HasValue)
-                //{
-                //  //  obj = service.GetCustomer((int)reqid, fy, Username);
-                //}
-                //else
-                //{
+                
                 obj = new List<Rent>();
                 //}
                 Rent obj1 = new Rent() { id = 1, name = "Yes" };

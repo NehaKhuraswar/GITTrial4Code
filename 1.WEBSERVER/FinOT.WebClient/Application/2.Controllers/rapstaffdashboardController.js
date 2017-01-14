@@ -161,6 +161,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     }
     self.GeneratePageNumberList = function()
     {
+        self.pageNumberList =[];
         var TotalPages = Math.ceil(self.CaseSearchModel.TotalCount / self.CaseSearchModel.PageSize);
         for (var i = 1; i <= TotalPages; i++)
         {

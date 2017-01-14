@@ -33,19 +33,27 @@ namespace RAP.Business.Implementation
         {
             ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
             string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+            bool bEdit = false;
             try
-            {
+            {     
+                if(message.custID !=0)
+                {
+                    bEdit = true;
+                }
                 var dbResult = accDBHandler.SaveCustomer(message);
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
                     result.status = dbResult.status;
                     return result;
                 }
-                EmailM emailMessage = new EmailM();
-                emailMessage.Subject = "RAP Account created Successfully";
-                emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("AccountCreatedMsg").Replace("PIN", dbResult.result.CustomerIdentityKey.ToString()).Replace("LOGIN", _loginURL);
-                emailMessage.RecipientAddress.Add(dbResult.result.email);
-                emailservice.SendEmail(emailMessage);
+                if (bEdit == false)
+                {
+                    EmailM emailMessage = new EmailM();
+                    emailMessage.Subject = "RAP Account created Successfully";
+                    emailMessage.MessageBody = NotificationMessage.ResourceManager.GetString("AccountCreatedMsg").Replace("PIN", dbResult.result.CustomerIdentityKey.ToString()).Replace("LOGIN", _loginURL).Replace("NAME", dbResult.result.User.FirstName + " " + dbResult.result.User.LastName);
+                    emailMessage.RecipientAddress.Add(dbResult.result.email);
+                    emailservice.SendEmail(emailMessage);
+                }
                 result.result = dbResult.result;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -54,6 +62,23 @@ namespace RAP.Business.Implementation
             {
                 result.status = _eHandler.HandleException(ex);
                // _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
+        public ReturnResult<bool> DeleteCustomer(CustomerInfo message)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            
+            try
+            {
+                result = accDBHandler.DeleteCustomer(message);                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                // _commonService.LogError(result.status);
                 return result;
             }
         }
@@ -108,6 +133,10 @@ namespace RAP.Business.Implementation
         public ReturnResult<CustomerInfo> GetCustomer(CustomerInfo message)
         {
            return accDBHandler.GetCustomer(message);
+        }
+        public ReturnResult<CustomerInfo> GetCustomer(int custID)
+        {
+            return accDBHandler.GetCustomer(custID);
         }
         public ReturnResult<CustomerInfo> ChangePassword(CustomerInfo message)
         {

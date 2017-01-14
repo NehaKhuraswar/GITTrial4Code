@@ -54,6 +54,7 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     _getAccountTypes();
     _getEmptyAccountSearchModel();
     self.GeneratePageNumberList = function () {
+        self.pageNumberList = [];
         var TotalPages = Math.ceil(self.AccountSearchModel.TotalCount / self.AccountSearchModel.PageSize);
         for (var i = 1; i <= TotalPages; i++) {
             self.pageNumberList.push({ text: i, active: true });
@@ -172,6 +173,15 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             //rapGlobalFactory.CaseDetails = self.caseinfo;
         });
        // $location.path("/fileappeal");
+    }
+
+    self.EditAccount = function (model) {
+        rapGlobalFactory.SelectedForEdit = model;
+        if(self.AccountSearchModel.AccountType.AccountTypeID == 3)
+        {
+            rapGlobalFactory.IsEdit = true;
+            $location.path("/editcustomerinformation");
+        }
     }
     
 

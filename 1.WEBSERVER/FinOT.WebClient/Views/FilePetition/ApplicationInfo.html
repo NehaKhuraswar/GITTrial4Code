@@ -107,7 +107,7 @@
                                             <div class="field-group">
                                                 <label for="representative_firstname">Name</label>
                                                 <input type="text" name="representative_firstname" id="representative_firstname" class="field-input  input-error"
-                                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName" placeholder="First" data-error="Name" required/>
+                                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName" placeholder="First" data-error="Name" />
                                                 <span class="input-error-msg">This is a required field</span>
                                             </div>
 
@@ -180,7 +180,7 @@
                                         <div class="field-group">
                                             <label for="po_firstname">Name <span>*</span></label>
                                             <input type="text" name="po_firstname" id="po_firstname" class="field-input required" placeholder="First"
-                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName" data-error="Name" required/>
+                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName" data-error="Name" />
                                             <span class="input-error-msg hidden"></span>
                                         </div>
 
@@ -231,7 +231,7 @@
                                         <div class="field-group">
                                             <label for="po_phone_number">Phone number <span>*</span></label>
                                             <input type="text" name="po_phone_number" id="po_phone_number" class="field-input required" data-error="Phone number"
-                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber" required />
+                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber"  />
                                             <span class="input-error-msg hidden"></span>
                                         </div>
 
@@ -373,7 +373,7 @@
                                     
                                     <!--<input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
                                            ng-click="(!((frmTenentPetition.po_firstname.$error.required) || (frmTenentPetition.po_address1.$error.required))) &&Ctrl.ContinueToGroundsforPetition()" />-->
-                                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue"
+                                    <input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
                                            ng-click=" Ctrl.ContinueToGroundsforPetition()" />
                                 </div>
                             </form>

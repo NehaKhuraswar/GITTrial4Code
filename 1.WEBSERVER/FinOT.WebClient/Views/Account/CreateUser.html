@@ -4,7 +4,7 @@
     <!-- Page Title -->
     <div class="page-title-wrapper">
         <div class="container">
-            <h2 class="page-title">Create a City of Oakland Account</h2>
+            <h2 class="page-title">{{Ctrl.Title}}</h2>
         </div>
     </div>
 
@@ -118,18 +118,16 @@
                                     <div class="subhead type2 ">
                                         <h4>Mailing address</h4>
                                     </div>
-
                                     <div class="field-group">
-                                        <div class="checkbox">
-                                            <label for="same_as_residential_address">
-                                                <input type="checkbox" name="same_as_residential_address" id="same_as_residential_address" class="input-field"
-                                                       n
-                                                       ng-change="Ctrl.ChangeIsMailing()"
-                                                       ng-model="Ctrl.CustomerInfo.IsSameMailingAddress" /><i></i><span>My mailing address is the same as my residential address.</span>
-                                            </label>
-                                            <div class="clear"></div>
+                                        <div class="form-group-checkbox vertical clearfix">
+                                            <div class="checkbox-wrapper">
+                                                <label for="same_as_residential_address">
+                                                    <input type="checkbox" class="checkbox" id="same_as_residential_address"
+                                                           ng-change="Ctrl.ChangeIsMailing()" ng-model="Ctrl.CustomerInfo.IsSameMailingAddress"><i></i><span>My mailing address is the same as my residential address.</span>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div ng-show="!Ctrl.CustomerInfo.IsSameMailingAddress">
                                         <div class="field-group">
                                             <label for="mailing_street_address1">Street address 1</label>
@@ -205,11 +203,20 @@
                                     </div>
 
                                 </div>
-
                                 <div class="step-footer no-top-margin">
-                                    <button type="submit" class="btn btn-sm btn-primary" ng-click="Ctrl.Register(Ctrl.CustomerInfo)">Submit</button>
-                                    <!--<input type="submit" id="btn-create-account" name="btn-create-account" class="btn-primary" value="Create account" ng-click="Ctrl.Register(Ctrl.CustomerInfo)" />-->
+                                    <input type="submit" id="btn-create-account" name="btn-create-account" class="btn-primary" value="{{Ctrl.SubmitText}}" ng-click="Ctrl.Register(Ctrl.CustomerInfo)" />
+                                    <input type="button" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()"/>
+
+                                    <input type="button" id="btn-delete" name="btn-cancel" class="btn-primary btn-delete" value="Delete account" ng-show="Ctrl.bEdit" ng-click="bDelete = true"/>
                                 </div>
+
+                                <div class="delete-confirmation mar-t40 mar-bottom-40" ng-show="bDelete== true">
+                                    <strong>Are you sure that you want to delete this user?</strong>
+                                    <div class="action-links">
+                                        <a ng-click="Ctrl.DeleteCustomer(Ctrl.CustomerInfo); bDelete=false" class="btn-link btn-delete">Delete</a>
+                                        <a ng-click="bDelete = false" class="btn-link btn-cancel">Cancel</a>
+                                    </div>
+                                </div>                                
                             </form>
 
                         </div>

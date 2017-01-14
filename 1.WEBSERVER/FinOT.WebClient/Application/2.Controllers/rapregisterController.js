@@ -6,27 +6,44 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.Password;
     self.ConfirmPassword;
     $scope.required = true;
+    self.bEdit =  rapGlobalFactory.IsEdit;
     self.Title = "Create a City of Oakland Account";
+    self.SubmitText = "Create account"
 
     if (rapGlobalFactory.IsEdit == true)
     {
         self.Title = "Edit a City of Oakland Account";
+        self.SubmitText = "Update account";
     }
     else
     {
         rapGlobalFactory.CustomerDetails = null;
     }
 
+    var _GetCustomerFromID = function(custID)
+    {
+        return rapFactory.GetCustomerFromID(custID).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CustomerInfo = response.data;
+        });
+    }
     if (rapGlobalFactory.CustomerDetails != null)
     {
         self.CustomerInfo = rapGlobalFactory.CustomerDetails;
+    }
+    else {
+        if (self.bEdit == true) {
+            
+            _GetCustomerFromID(rapGlobalFactory.SelectedForEdit.custID);
+            
+        }
     }
 
     var _GetCustomerModel = function () {
         return rapFactory.GetCustomer(null).then(function (response) {
                if (!alert.checkResponse(response)) { return; }
                self.CustomerInfo = response.data;
-               rapGlobalFactory.CustomerDetails = self.CustomerInfo;
+               //rapGlobalFactory.CustomerDetails = self.CustomerInfo;
         });        
     }
 
@@ -54,7 +71,17 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         return strongRegex.test(phoneNumber);
     }
 
-    
+    self.Cancel = function ()
+    {
+        if (rapGlobalFactory.IsEdit == true) {
+            rapGlobalFactory.SelectedForEdit = null;
+            rapGlobalFactory.IsEdit = false;
+            $location.path("/admindashboard");
+        }
+        else {
+            $location.path("/Login");
+        }
+    }
 
     self.Register = function (model) {
         if (self.Password != self.ConfirmPassword)
@@ -63,6 +90,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             return;
             }
         model.Password = self.Password;
+        
         //if (!checkPassword(model.Password, model.email))
         //    {
         //        alert.Error("The password you have entered is not valid! ")
@@ -73,13 +101,40 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         //        alert.Error("Phone number is not valid")
         //    return;
         //}
+       
         rapFactory.SaveCustomer(null, model).then(function(response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $location.path("/Login");
+            if (rapGlobalFactory.IsEdit == true)
+            {
+                rapGlobalFactory.SelectedForEdit = null;
+                rapGlobalFactory.IsEdit = false;
+                $location.path("/admindashboard");
+            }
+            else {
+                $location.path("/Login");
+            }
+            
         });
-    }    
+    }
+
+    self.DeleteCustomer = function (model) {
+        rapFactory.DeleteCustomer(model).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            if (rapGlobalFactory.IsEdit == true) {
+                rapGlobalFactory.SelectedForEdit = null;
+                rapGlobalFactory.IsEdit = false;
+                $location.path("/admindashboard");
+            }
+            else {
+                $location.path("/Login");
+            }
+
+        });
+    }
 
 }];
 var rapregisterController_resolve = {

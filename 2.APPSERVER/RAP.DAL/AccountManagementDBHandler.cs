@@ -101,6 +101,7 @@ namespace RAP.DAL
             }
         }
 
+
         /// <summary>
         /// Get customer information
         /// </summary>
@@ -124,7 +125,7 @@ namespace RAP.DAL
                         message.User.UserID = (int)custdetails.UserID;
                         message.email = custdetails.Email;
                         message.custID = custdetails.CustomerID;
-                        message.IsSameMailingAddress = !(bool)custdetails.bMailingAddress;
+                        message.IsSameMailingAddress = !Convert.ToBoolean(custdetails.bMailingAddress);
 
                         if(!message.IsSameMailingAddress)
                         {
@@ -941,6 +942,7 @@ namespace RAP.DAL
                        var custTableEdit = db.CustomerDetails.Where(x => x.CustomerID == message.custID).FirstOrDefault();
                        if(custTableEdit != null)
                        {
+                           message.CustomerIdentityKey = custTableEdit.CustomerIdentityKey;
                            custTableEdit.Email = message.email;
                            custTableEdit.Password = message.Password;
                            custTableEdit.UserID = message.User.UserID;
@@ -1082,6 +1084,39 @@ namespace RAP.DAL
                 //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 result.result = message;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Delete cutomer 
+        /// </summary>
+        /// <returns>true or false</returns>
+        public ReturnResult<bool> DeleteCustomer(CustomerInfo message)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    CustomerDetail custTable = db.CustomerDetails.Where(x => x.CustomerID == message.custID).FirstOrDefault();
+                    if (custTable != null)
+                    {
+                        custTable.IsDeleted = true;
+                        db.SubmitChanges();
+                        
+                    }
+                }
+                //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                result.result = true;
                 return result;
             }
             catch (Exception ex)

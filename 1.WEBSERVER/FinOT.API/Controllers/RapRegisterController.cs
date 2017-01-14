@@ -76,21 +76,53 @@ namespace RAP.API.Controllers
 
             try
             {
-              //  ExtractClaimDetails();
+              
 
-                CustomerInfo obj;
-                //if (custid.HasValue)
-                
-                //{
-                //  //  obj = service.GetCustomer((int)reqid, fy, Username);
-                //}
-                //else
-                //{
-                obj = new CustomerInfo();
-                //}
+                CustomerInfo obj;                
+                obj = new CustomerInfo();                
 
                 transaction.data = obj;
                 transaction.status = true;
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //  LogHelper.Instance.Error(service.CorrelationId, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getCustomer/{custID:int}")]
+        public HttpResponseMessage GetCustomer(int custID)
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CustomerInfo> transaction = new TranInfo<CustomerInfo>();
+            ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
+
+            try
+            {
+                result = accService.GetCustomer(custID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    // transaction.warnings.Add(result.status.StatusMessage);
+
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
+                }
             }
             catch (Exception ex)
             {
@@ -118,16 +150,9 @@ namespace RAP.API.Controllers
             {
                 //  ExtractClaimDetails();
 
-                CityUserAccount_M obj;
-                //if (custid.HasValue)
-
-                //{
-                //  //  obj = service.GetCustomer((int)reqid, fy, Username);
-                //}
-                //else
-                //{
+                CityUserAccount_M obj;                
                 obj = new CityUserAccount_M();
-                //}
+                
 
                 transaction.data = obj;
                 transaction.status = true;
@@ -754,7 +779,7 @@ namespace RAP.API.Controllers
                 result = accService.SaveCustomer(custModel);
                 if (result.status.Status == StatusEnum.Success)
                 {
-                    emailService.SendEmail(getRegisterCustomerEmailModel(result.result));
+                    
                     transaction.status = true;
                 }
                 else
@@ -774,6 +799,43 @@ namespace RAP.API.Controllers
                 _commonService.LogError(result.status);
             }
             return Request.CreateResponse<TranInfo<CustomerInfo>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("DeleteCustomer")]
+        [HttpPost]
+        public HttpResponseMessage DeleteCustomer([FromBody] CustomerInfo custModel)
+        {
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Delete Customer started");
+            AccountManagementService accService = new AccountManagementService();           
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+
+            try
+            {
+                result = accService.DeleteCustomer(custModel);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]
@@ -958,17 +1020,7 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
 
-        //TBD to be removed
-        private EmailM getRegisterCustomerEmailModel(CustomerInfo customer)
-        {
-            EmailM model = new EmailM();
-            model.Subject = "RAP Account registered successfully. CustomerIDentityKey :" + customer.CustomerIdentityKey.ToString();
-            model.RecipientAddress.Add(customer.email);
-            //string[] toAddresses = { "venky.soundar@gcomsoft.com", "neha.bhandari@gcomsoft.com", "sanjay@gcomsoft.com" };
-            //model.RecipientAddress = toAddresses;
-            model.MessageBody = "Hello" + customer.User.FirstName + " " + customer.User.LastName + ",  Your account created successfully";
-            return model;
-        }
+        
 
     }
 }
