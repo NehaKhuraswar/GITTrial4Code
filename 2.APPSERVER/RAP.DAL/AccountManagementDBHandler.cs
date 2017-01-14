@@ -33,7 +33,7 @@ namespace RAP.DAL
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
-                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password).FirstOrDefault();
+                    var custdetails = db.CustomerDetails.Where(x => x.Email == message.email && x.Password == message.Password && x.IsDeleted!=true).FirstOrDefault();
 
 
                     if (custdetails != null)
@@ -326,6 +326,7 @@ namespace RAP.DAL
 
                     
                     var cityDetails = db.CityUserAccounts.Where(x => x.Email == message.Email && x.Password == message.Password
+                                                                    && x.IsDeleted != true
                                                                     ).FirstOrDefault();
 
 
@@ -407,6 +408,63 @@ namespace RAP.DAL
                         cityUser.EmployeeID = (int)cityDetails.EmployeeID;
                         cityUser.IsAnalyst = cityDetails.IsAnalyst;
                         cityUser.IsHearingOfficer = cityDetails.IsHearingOfficer;
+
+                    }
+                    else
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.AuthenticationFailed };
+                        return result;
+                    }
+                }
+                // System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetCustomer started"); 
+                result.result = cityUser;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Get City user information
+        /// </summary>
+        /// <returns>Customer Info Object</returns>
+        public ReturnResult<CityUserAccount_M> GetCityUserFromID(int CityUserID)
+        {
+            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
+            try
+            {
+
+                CityUserAccount_M cityUser = new CityUserAccount_M();
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var cityDetails = db.CityUserAccounts.Where(x => x.CityUserID == CityUserID).FirstOrDefault();
+
+                    if (cityDetails != null)
+                    {
+                        cityUser.UserID = (int)cityDetails.CityUserID;
+                        //cityUser.AccountType = cityDetails.AccountType;
+                        cityUser.FirstName = cityDetails.FirstName;
+                        cityUser.LastName = cityDetails.LastName;
+                        cityUser.MobilePhoneNumber = cityDetails.MobilePhoneNumber;
+                        cityUser.OfficePhoneNumber = cityDetails.OfficePhoneNumber;
+                        cityUser.OfficeLocation = cityDetails.OfficeLocation;
+                        cityUser.Title = cityDetails.Title;
+                        cityUser.Department = cityDetails.Department;
+                        cityUser.CreatedDate = cityDetails.CreatedDate;
+                        cityUser.Email = cityDetails.Email;
+                        cityUser.EmployeeID = (int)cityDetails.EmployeeID;
+                        cityUser.IsAnalyst = Convert.ToBoolean(cityDetails.IsAnalyst);
+                        cityUser.IsHearingOfficer = Convert.ToBoolean(cityDetails.IsHearingOfficer);
+                        cityUser.IsAdminAssistant = Convert.ToBoolean(cityDetails.IsAdminAssistant);
+                        cityUser.IsCityAdmin = Convert.ToBoolean(cityDetails.IsCityAdmin);
+                        cityUser.IsNonRAPStaff = Convert.ToBoolean(cityDetails.IsNonRAPStaff);
 
                     }
                     else
@@ -1128,6 +1186,39 @@ namespace RAP.DAL
             }
         }
 
+        /// <summary>
+        /// Delete cutomer 
+        /// </summary>
+        /// <returns>true or false</returns>
+        public ReturnResult<bool> DeleteCityUser(int UserID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    CityUserAccount cityTable = db.CityUserAccounts.Where(x => x.CityUserID == UserID).FirstOrDefault();
+                    if (cityTable != null)
+                    {
+                        cityTable.IsDeleted = true;
+                        db.SubmitChanges();
+
+                    }
+                }
+                //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                result.result = true;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                return result;
+            }
+        }
+
         public ReturnResult<CityUserAccount_M> CreateCityUserAccount(CityUserAccount_M message)
         {
             ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
@@ -1136,44 +1227,77 @@ namespace RAP.DAL
             {
                 //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer started");
                 // Account already exists
-                if (CheckCityUser(message.Email))
+                if ((int)(message.UserID) == 0)
                 {
-                    result.status = new OperationStatus() { Status = StatusEnum.AccountAlreadyExist };
-                    return result;
+                    if (CheckCityUser(message.Email))
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.AccountAlreadyExist };
+                        return result;
+                    }
                 }
 
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-
-                    CityUserAccount cityUserTable = new CityUserAccount();
-                    //cityUserTable.CityAccountTypeID = (int)message.AccountType.AccountTypeID;
-                    cityUserTable.FirstName = message.FirstName;
-                    cityUserTable.LastName = message.LastName;
-                    cityUserTable.Password = message.Password;
-                    cityUserTable.Email = message.Email;
-                    cityUserTable.EmployeeID = (int)message.EmployeeID;
-                    cityUserTable.IsAnalyst = Convert.ToBoolean(message.IsAnalyst);
-                    cityUserTable.IsHearingOfficer = Convert.ToBoolean(message.IsHearingOfficer);
-                    cityUserTable.IsAdminAssistant = Convert.ToBoolean(message.IsAdminAssistant);
-                    cityUserTable.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
-                    if (message.IsCityAdmin == true)
+                    var CityUserExists = db.CityUserAccounts.Where(x => x.CityUserID == message.UserID).FirstOrDefault();
+                    if (CityUserExists != null)
                     {
-                        cityUserTable.CityAccountTypeID = 3; //City Admin type
+                        CityUserExists.FirstName = message.FirstName;
+                        CityUserExists.LastName = message.LastName;
+                        CityUserExists.Password = message.Password;
+                        CityUserExists.Email = message.Email;
+                        CityUserExists.EmployeeID = (int)message.EmployeeID;
+                        CityUserExists.IsAnalyst = Convert.ToBoolean(message.IsAnalyst);
+                        CityUserExists.IsHearingOfficer = Convert.ToBoolean(message.IsHearingOfficer);
+                        CityUserExists.IsAdminAssistant = Convert.ToBoolean(message.IsAdminAssistant);
+                        CityUserExists.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
+                        if (message.IsCityAdmin == true)
+                        {
+                            CityUserExists.CityAccountTypeID = 3; //City Admin type
+                        }
+                        else
+                        {
+                            CityUserExists.CityAccountTypeID = 2;
+                        }
+                        CityUserExists.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
+                        CityUserExists.Title = message.Title;
+                        CityUserExists.Department = message.Department;
+                        CityUserExists.OfficePhoneNumber = message.OfficePhoneNumber;
+                        CityUserExists.MobilePhoneNumber = message.MobilePhoneNumber;
+                        CityUserExists.OfficeLocation = message.OfficeLocation;                        
+                        db.SubmitChanges();
                     }
                     else
                     {
-                        cityUserTable.CityAccountTypeID = 2;
+                        CityUserAccount cityUserTable = new CityUserAccount();
+                        //cityUserTable.CityAccountTypeID = (int)message.AccountType.AccountTypeID;
+                        cityUserTable.FirstName = message.FirstName;
+                        cityUserTable.LastName = message.LastName;
+                        cityUserTable.Password = message.Password;
+                        cityUserTable.Email = message.Email;
+                        cityUserTable.EmployeeID = (int)message.EmployeeID;
+                        cityUserTable.IsAnalyst = Convert.ToBoolean(message.IsAnalyst);
+                        cityUserTable.IsHearingOfficer = Convert.ToBoolean(message.IsHearingOfficer);
+                        cityUserTable.IsAdminAssistant = Convert.ToBoolean(message.IsAdminAssistant);
+                        cityUserTable.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
+                        if (message.IsCityAdmin == true)
+                        {
+                            cityUserTable.CityAccountTypeID = 3; //City Admin type
+                        }
+                        else
+                        {
+                            cityUserTable.CityAccountTypeID = 2;
+                        }
+                        cityUserTable.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
+                        cityUserTable.Title = message.Title;
+                        cityUserTable.Department = message.Department;
+                        cityUserTable.OfficePhoneNumber = message.OfficePhoneNumber;
+                        cityUserTable.MobilePhoneNumber = message.MobilePhoneNumber;
+                        cityUserTable.OfficeLocation = message.OfficeLocation;
+                        cityUserTable.CreatedDate = DateTime.Now;
+                        db.CityUserAccounts.InsertOnSubmit(cityUserTable);
+                        db.SubmitChanges();
+                        message.UserID = cityUserTable.CityUserID;
                     }
-                    cityUserTable.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
-                    cityUserTable.Title = message.Title;
-                    cityUserTable.Department = message.Department;
-                    cityUserTable.OfficePhoneNumber = message.OfficePhoneNumber;
-                    cityUserTable.MobilePhoneNumber = message.MobilePhoneNumber;
-                    cityUserTable.OfficeLocation = message.OfficeLocation;
-                    cityUserTable.CreatedDate = DateTime.Now;
-                    db.CityUserAccounts.InsertOnSubmit(cityUserTable);
-                    db.SubmitChanges();
-                    message.UserID = cityUserTable.CityUserID;                  
                 }
                 //  System.Diagnostics.EventLog.WriteEntry("Application", "DAL SaveCustomer completed");
                 result.status = new OperationStatus() { Status = StatusEnum.Success };

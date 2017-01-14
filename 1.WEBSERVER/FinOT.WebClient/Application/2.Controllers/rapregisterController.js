@@ -7,12 +7,12 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.ConfirmPassword;
     $scope.required = true;
     self.bEdit =  rapGlobalFactory.IsEdit;
-    self.Title = "Create a City of Oakland Account";
+    self.Title = "Create a city user account";
     self.SubmitText = "Create account"
 
     if (rapGlobalFactory.IsEdit == true)
     {
-        self.Title = "Edit a City of Oakland Account";
+        self.Title = "Edit a city user account";
         self.SubmitText = "Update account";
     }
     else

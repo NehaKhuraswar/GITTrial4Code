@@ -177,10 +177,14 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
 
     self.EditAccount = function (model) {
         rapGlobalFactory.SelectedForEdit = model;
+         rapGlobalFactory.IsEdit = true;
         if(self.AccountSearchModel.AccountType.AccountTypeID == 3)
-        {
-            rapGlobalFactory.IsEdit = true;
+        {           
             $location.path("/editcustomerinformation");
+        }
+        else 
+        {
+            $location.path("/createCityUserAccount");
         }
     }
     

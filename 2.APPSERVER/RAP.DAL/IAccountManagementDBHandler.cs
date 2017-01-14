@@ -15,6 +15,7 @@ namespace RAP.DAL
        ReturnResult<RAP.Core.DataModels.Collaborator> GetAuthorizedUsers(int custID);
         ReturnResult<RAP.Core.DataModels.CityUserAccount_M> GetCityUser(RAP.Core.DataModels.CityUserAccount_M message);
         ReturnResult<RAP.Core.DataModels.CityUserAccount_M> GetCityUser(int UserID);
+        ReturnResult<RAP.Core.DataModels.CityUserAccount_M> GetCityUserFromID(int CityUserID);
        ReturnResult<RAP.Core.DataModels.CustomerInfo> GetCustomer(RAP.Core.DataModels.CustomerInfo message);
         ReturnResult<RAP.Core.DataModels.CustomerInfo> GetCustomer(int CustomerID);
         ReturnResult<System.Collections.Generic.List<RAP.Core.DataModels.StateM>> GetStateList();

@@ -1,12 +1,28 @@
 ﻿'use strict';
-var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuserregisterFactory', 'masterdataFactory', '$location', function ($scope, $modal, alert, rapFactory, masterFactory, $location) {
+var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuserregisterFactory', 'rapGlobalFactory', 'masterdataFactory', '$location', function ($scope, $modal, alert, rapFactory,rapGlobalFactory, masterFactory, $location) {
     var self = this;
-   // self.CityUserAccount = [];
+    // self.CityUserAccount = [];
     self.AccountTypesList = [];
     self.confirmPwd = "";
+    self.bEdit = rapGlobalFactory.IsEdit;
+    self.Title = "Create a City of Oakland Account";
+    self.SubmitText = "Create account";
+
+    var _GetCityUserFromID = function (CityUserID) {
+        return rapFactory.GetCityUserFromID(CityUserID).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CityUserAccount = response.data;
+        });
+    }
+    if (rapGlobalFactory.IsEdit == true) {
+        self.Title = "Edit a City of Oakland Account";
+        self.SubmitText = "Update account";
+        _GetCityUserFromID(rapGlobalFactory.SelectedForEdit.custID);
+    }
+
+
     self.CreateAccount = function (model) {
-        if (model.Password != self.confirmPwd)
-        {
+        if (model.Password != self.confirmPwd) {
             alert.Error("Please enter same password in password fields.");
             return;
         }
@@ -14,19 +30,28 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
             if (!alert.checkResponse(response)) {
                 return;
             }
-            $location.path("/admindashboard");
+            rapGlobalFactory.IsEdit = false;
+            rapGlobalFactory.SelectedForEdit = null;
+            $location.path("/CityLogin");
+        });
+    }
+    self.DeleteCityUser = function (UserID) {
+        rapFactory.DeleteCityUser(UserID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            if (rapGlobalFactory.IsEdit == true) {
+                rapGlobalFactory.SelectedForEdit = null;
+                rapGlobalFactory.IsEdit = false;
+                $location.path("/admindashboard");
+            }
+            else {
+                $location.path("/CityLogin");
+            }
+
         });
     }
 
-    //self.GetCityUserAcctEmpty = function () {
-    //    rapFactory.GetCityUserAcctEmpty().then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        self.CityUserAccount = response.data;
-    //    });
-    //}   
-    
     var _getAccountTypes = function () {
         masterFactory.GetAccountTypes().then(function (response) {
             if (!alert.checkResponse(response)) { return; }
@@ -34,22 +59,6 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
         });
     }
     _getAccountTypes();
-    //self.Login = function (model) {
-    //    var plainBodyText = "";
-
-    //    rapFactory.LoginCustomer(null, model).then(function (response) {
-    //            if (!alert.checkResponse(response)) {
-    //                return;
-    //            }
-    //            $modalInstance.close(response.data);
-    //        });
-    //    //otFactory.SaveCustDetails(custID, self.model).then(function (response) {
-    //    //    if (!alert.checkResponse(response)) {
-    //    //        return;
-    //    //    }
-    //    //    $modalInstance.close(response.data);
-    //    //});
-    //}
 
 }];
 var rapCityUserAcctController_resolve = {

@@ -448,6 +448,54 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("GetCityUserFromID/{CityUserID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetCityUserFromID([FromUri] int CityUserID)
+        {
+            //System.Diagnostics.EventLog.WriteEntry("Application", "LoginCust started");
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CityUserAccount_M> transaction = new TranInfo<CityUserAccount_M>();
+            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
+
+            try
+            {
+                result = accService.GetCityUserFromID(CityUserID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    // transaction.warnings.Add(result.status.StatusMessage);
+
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                // transaction.AddException(ex.Message);
+                //ReturnCode = HttpStatusCode.InternalServerError;
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<CityUserAccount_M>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [HttpGet]
         [Route("getaccounttypes")]
         public HttpResponseMessage GetAccountTypes()
@@ -815,6 +863,43 @@ namespace RAP.API.Controllers
             try
             {
                 result = accService.DeleteCustomer(custModel);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("DeleteCityUser/{UserID:int}")]
+        [HttpGet]
+        public HttpResponseMessage DeleteCityUser([FromUri] int UserID)
+        {
+            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Delete Customer started");
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<bool> transaction = new TranInfo<bool>();
+            ReturnResult<bool> result = new ReturnResult<bool>();
+
+            try
+            {
+                result = accService.DeleteCityUser(UserID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.status = true;

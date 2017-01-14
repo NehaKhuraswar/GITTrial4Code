@@ -83,6 +83,23 @@ namespace RAP.Business.Implementation
             }
         }
 
+        public ReturnResult<bool> DeleteCityUser(int UserID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+
+            try
+            {
+                result = accDBHandler.DeleteCityUser(UserID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                // _commonService.LogError(result.status);
+                return result;
+            }
+        }
+
         public ReturnResult<ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID)
         {
             return accDBHandler.GetThirdPartyInfo(CustomerID);
@@ -183,6 +200,10 @@ namespace RAP.Business.Implementation
         public ReturnResult<CityUserAccount_M> GetCityUser(CityUserAccount_M message)
         {
             return accDBHandler.GetCityUser(message);
+        }
+        public ReturnResult<CityUserAccount_M> GetCityUserFromID(int CityUserID)
+        {
+            return accDBHandler.GetCityUserFromID(CityUserID);
         }
         public ReturnResult<CustomerInfo> SearchInviteCollaborator(String message)
         {
