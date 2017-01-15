@@ -34,14 +34,14 @@
     <div class="field-group filled-info subhead">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
-            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
-                {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}                 {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
-                T {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}}
+            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation== true && Ctrl.caseinfo.bCaseFiledByThirdParty == false">
+                {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.LastName}}                 {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip}}   <br />
+                T {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email}}
             </div>
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead">
+    <div class="field-group filled-info subhead" ng-hide="Ctrl.caseinfo.PetitionCategoryID == 2">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
             <div class="col-sm-6 col-xs-12">
@@ -51,7 +51,7 @@
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead">
+    <div class="field-group filled-info subhead" ng-hide="Ctrl.caseinfo.PetitionCategoryID == 2">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
             <div class="col-sm-6 col-xs-12">
@@ -61,21 +61,21 @@
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead">
+    <div class="field-group filled-info subhead" ng-hide="Ctrl.caseinfo.PetitionCategoryID == 2">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
             <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits}}</div>
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead no-top-margin">
+    <div class="field-group filled-info subhead no-top-margin" ng-hide="Ctrl.caseinfo.PetitionCategoryID == 2">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>
             <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.UnitTypes[Ctrl.caseinfo.TenantPetitionInfo.UnitTypeId].UnitDescription}}</div>
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead no-top-margin">
+    <div class="field-group filled-info subhead no-top-margin" ng-hide="Ctrl.caseinfo.PetitionCategoryID == 2">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>
             <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">Yes</div>

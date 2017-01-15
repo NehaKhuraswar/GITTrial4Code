@@ -5,6 +5,16 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
    
+    //var _GetCaseInfoWithModel = function (CaseID) {
+    //    rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
+    //        if (!alert.checkResponse(response)) {
+    //            return;
+    //        }
+    //        self.caseinfo.TenantAppealInfo = response.data.TenantAppealInfo;
+    //    });
+    //}
+    //_GetCaseInfoWithModel(rapGlobalFactory.CaseDetails.CaseID);
+
     self.SubmitAppeal = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SubmitAppeal(rapGlobalFactory.CaseDetails).then(function (response) {

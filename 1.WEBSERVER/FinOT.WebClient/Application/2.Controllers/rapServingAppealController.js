@@ -72,7 +72,7 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     }
     
     self.ContinueToReview = function (serveAppeal) {
-        if (self.serveAppeal.OpposingParty.length == 0)
+        if (self.serveAppeal.OpposingParty.length == 0 && self.OpposingParty.FirstName!=null)
         {
             self.serveAppeal.OpposingParty.push(self.OpposingParty);
         }

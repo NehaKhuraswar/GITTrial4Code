@@ -355,33 +355,33 @@ namespace RAP.DAL
                     if (tenantPetitionResult.status.Status != StatusEnum.Success)
                         return result;
 
-                    
-                    //GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
-                    //if (GroundsResult != null)
-                    //{
-                    //    tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
-                    //    tenantPetitionResult.status = GroundsResult.status;
-                    //    if (GroundsResult.status.Status != StatusEnum.Success)
-                    //        return result;
-                    //}
 
-                    //RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
-                    //if (RentalHistoryResult != null)
-                    //{
-                    //    tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
-                    //    tenantPetitionResult.status = RentalHistoryResult.status;
-                    //    if (RentalHistoryResult.status.Status != StatusEnum.Success)
-                    //        return result;
-                    //}
+                    GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
+                    if (GroundsResult != null)
+                    {
+                        tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
+                        tenantPetitionResult.status = GroundsResult.status;
+                        if (GroundsResult.status.Status != StatusEnum.Success)
+                            return result;
+                    }
 
-                    //LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
-                    //if (LostServicesResult != null)
-                    //{
-                    //    tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
-                    //    tenantPetitionResult.status = LostServicesResult.status;
-                    //    if (LostServicesResult.status.Status != StatusEnum.Success)
-                    //        return result;
-                    //}
+                    RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
+                    if (RentalHistoryResult != null)
+                    {
+                        tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
+                        tenantPetitionResult.status = RentalHistoryResult.status;
+                        if (RentalHistoryResult.status.Status != StatusEnum.Success)
+                            return result;
+                    }
+
+                    LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
+                    if (LostServicesResult != null)
+                    {
+                        tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
+                        tenantPetitionResult.status = LostServicesResult.status;
+                        if (LostServicesResult.status.Status != StatusEnum.Success)
+                            return result;
+                    }
                     caseInfo.TenantPetitionInfo = tenantPetitionResult.result;                   
                     
                 }
