@@ -527,7 +527,7 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<List<AccountType>> GetAccountTypes()
+        public ReturnResult<List<AccountType>> GetAccountTypes(int AccountTypeID)
         {
             System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetAccountTypes started");
             ReturnResult<List<AccountType>> result = new ReturnResult<List<AccountType>>();
@@ -543,16 +543,32 @@ namespace RAP.DAL
                         result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                         return result;
                     }
-                    var accountTypesDB = db.CityAccountTypes.ToList();
 
-
-                    foreach (var item in accountTypesDB)
+                    if (AccountTypeID == 1)
                     {
-                        AccountType obj = new AccountType();
-                        obj.AccountTypeID = item.CityAccountTypeID;
-                        obj.AccountTypeDesc = item.CityAccountTypeDesc;
-                        accountTypes.Add(obj);                        
+                        var accountTypesDB = db.CityAccountTypes.Where(x=>x.PermissionToAccountTypeID==1).ToList();
+                        foreach (var item in accountTypesDB)
+                        {
+                            AccountType obj = new AccountType();
+                            obj.AccountTypeID = item.CityAccountTypeID;
+                            obj.AccountTypeDesc = item.CityAccountTypeDesc;
+                            accountTypes.Add(obj);
+                        }
                     }
+                    else
+                    {
+                        var accountTypesDB = db.CityAccountTypes.ToList();
+                        foreach (var item in accountTypesDB)
+                        {
+                            AccountType obj = new AccountType();
+                            obj.AccountTypeID = item.CityAccountTypeID;
+                            obj.AccountTypeDesc = item.CityAccountTypeDesc;
+                            accountTypes.Add(obj);
+                        }
+                    }
+
+
+                    
                 }
                 result.result = accountTypes;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };

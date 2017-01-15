@@ -90,8 +90,8 @@ namespace RAP.WebClient
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("getaccounttypes")]
-        public HttpResponseMessage GetAccountTypes()
+        [Route("getaccounttypes/{AccountTypeID}")]
+        public HttpResponseMessage GetAccountTypes(string AccountTypeID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -99,7 +99,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "getaccounttypes/";
+                string requestUri = _requestURI + "getaccounttypes/" + AccountTypeID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

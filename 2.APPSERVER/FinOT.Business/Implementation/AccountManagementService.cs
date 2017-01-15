@@ -230,9 +230,9 @@ namespace RAP.Business.Implementation
             return accDBHandler.GetAuthorizedUsers(custID);
         }
 
-        public ReturnResult<List<AccountType>> GetAccountTypes()
+        public ReturnResult<List<AccountType>> GetAccountTypes(int AccountTypeID)
         {
-            return accDBHandler.GetAccountTypes();
+            return accDBHandler.GetAccountTypes(AccountTypeID);
         }
         public ReturnResult<List<StateM>> GetStateList()
         {

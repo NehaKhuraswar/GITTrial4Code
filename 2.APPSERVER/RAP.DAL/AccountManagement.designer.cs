@@ -33,9 +33,6 @@ namespace RAP.DAL
     partial void InsertUserType(UserType instance);
     partial void UpdateUserType(UserType instance);
     partial void DeleteUserType(UserType instance);
-    partial void InsertCityAccountType(CityAccountType instance);
-    partial void UpdateCityAccountType(CityAccountType instance);
-    partial void DeleteCityAccountType(CityAccountType instance);
     partial void InsertNotificationPreference(NotificationPreference instance);
     partial void UpdateNotificationPreference(NotificationPreference instance);
     partial void DeleteNotificationPreference(NotificationPreference instance);
@@ -57,6 +54,9 @@ namespace RAP.DAL
     partial void InsertCityUserAccount(CityUserAccount instance);
     partial void UpdateCityUserAccount(CityUserAccount instance);
     partial void DeleteCityUserAccount(CityUserAccount instance);
+    partial void InsertCityAccountType(CityAccountType instance);
+    partial void UpdateCityAccountType(CityAccountType instance);
+    partial void DeleteCityAccountType(CityAccountType instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -94,14 +94,6 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<UserType>();
-			}
-		}
-		
-		public System.Data.Linq.Table<CityAccountType> CityAccountTypes
-		{
-			get
-			{
-				return this.GetTable<CityAccountType>();
 			}
 		}
 		
@@ -166,6 +158,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<CityUserAccount>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CityAccountType> CityAccountTypes
+		{
+			get
+			{
+				return this.GetTable<CityAccountType>();
 			}
 		}
 		
@@ -280,120 +280,6 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CityAccountType")]
-	public partial class CityAccountType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _CityAccountTypeID;
-		
-		private string _CityAccountTypeDesc;
-		
-		private EntitySet<CityUserAccount> _CityUserAccounts;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCityAccountTypeIDChanging(int value);
-    partial void OnCityAccountTypeIDChanged();
-    partial void OnCityAccountTypeDescChanging(string value);
-    partial void OnCityAccountTypeDescChanged();
-    #endregion
-		
-		public CityAccountType()
-		{
-			this._CityUserAccounts = new EntitySet<CityUserAccount>(new Action<CityUserAccount>(this.attach_CityUserAccounts), new Action<CityUserAccount>(this.detach_CityUserAccounts));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityAccountTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CityAccountTypeID
-		{
-			get
-			{
-				return this._CityAccountTypeID;
-			}
-			set
-			{
-				if ((this._CityAccountTypeID != value))
-				{
-					this.OnCityAccountTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._CityAccountTypeID = value;
-					this.SendPropertyChanged("CityAccountTypeID");
-					this.OnCityAccountTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityAccountTypeDesc", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CityAccountTypeDesc
-		{
-			get
-			{
-				return this._CityAccountTypeDesc;
-			}
-			set
-			{
-				if ((this._CityAccountTypeDesc != value))
-				{
-					this.OnCityAccountTypeDescChanging(value);
-					this.SendPropertyChanging();
-					this._CityAccountTypeDesc = value;
-					this.SendPropertyChanged("CityAccountTypeDesc");
-					this.OnCityAccountTypeDescChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CityAccountType_CityUserAccount", Storage="_CityUserAccounts", ThisKey="CityAccountTypeID", OtherKey="CityAccountTypeID")]
-		public EntitySet<CityUserAccount> CityUserAccounts
-		{
-			get
-			{
-				return this._CityUserAccounts;
-			}
-			set
-			{
-				this._CityUserAccounts.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_CityUserAccounts(CityUserAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.CityAccountType = this;
-		}
-		
-		private void detach_CityUserAccounts(CityUserAccount entity)
-		{
-			this.SendPropertyChanging();
-			entity.CityAccountType = null;
 		}
 	}
 	
@@ -2680,6 +2566,144 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CityAccountType")]
+	public partial class CityAccountType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CityAccountTypeID;
+		
+		private string _CityAccountTypeDesc;
+		
+		private System.Nullable<int> _PermissionToAccountTypeID;
+		
+		private EntitySet<CityUserAccount> _CityUserAccounts;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCityAccountTypeIDChanging(int value);
+    partial void OnCityAccountTypeIDChanged();
+    partial void OnCityAccountTypeDescChanging(string value);
+    partial void OnCityAccountTypeDescChanged();
+    partial void OnPermissionToAccountTypeIDChanging(System.Nullable<int> value);
+    partial void OnPermissionToAccountTypeIDChanged();
+    #endregion
+		
+		public CityAccountType()
+		{
+			this._CityUserAccounts = new EntitySet<CityUserAccount>(new Action<CityUserAccount>(this.attach_CityUserAccounts), new Action<CityUserAccount>(this.detach_CityUserAccounts));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityAccountTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CityAccountTypeID
+		{
+			get
+			{
+				return this._CityAccountTypeID;
+			}
+			set
+			{
+				if ((this._CityAccountTypeID != value))
+				{
+					this.OnCityAccountTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._CityAccountTypeID = value;
+					this.SendPropertyChanged("CityAccountTypeID");
+					this.OnCityAccountTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityAccountTypeDesc", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CityAccountTypeDesc
+		{
+			get
+			{
+				return this._CityAccountTypeDesc;
+			}
+			set
+			{
+				if ((this._CityAccountTypeDesc != value))
+				{
+					this.OnCityAccountTypeDescChanging(value);
+					this.SendPropertyChanging();
+					this._CityAccountTypeDesc = value;
+					this.SendPropertyChanged("CityAccountTypeDesc");
+					this.OnCityAccountTypeDescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PermissionToAccountTypeID", DbType="Int")]
+		public System.Nullable<int> PermissionToAccountTypeID
+		{
+			get
+			{
+				return this._PermissionToAccountTypeID;
+			}
+			set
+			{
+				if ((this._PermissionToAccountTypeID != value))
+				{
+					this.OnPermissionToAccountTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._PermissionToAccountTypeID = value;
+					this.SendPropertyChanged("PermissionToAccountTypeID");
+					this.OnPermissionToAccountTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CityAccountType_CityUserAccount", Storage="_CityUserAccounts", ThisKey="CityAccountTypeID", OtherKey="CityAccountTypeID")]
+		public EntitySet<CityUserAccount> CityUserAccounts
+		{
+			get
+			{
+				return this._CityUserAccounts;
+			}
+			set
+			{
+				this._CityUserAccounts.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CityUserAccounts(CityUserAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.CityAccountType = this;
+		}
+		
+		private void detach_CityUserAccounts(CityUserAccount entity)
+		{
+			this.SendPropertyChanging();
+			entity.CityAccountType = null;
 		}
 	}
 }

@@ -497,8 +497,8 @@ namespace RAP.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("getaccounttypes")]
-        public HttpResponseMessage GetAccountTypes()
+        [Route("getaccounttypes/{AccountTypeID:int}")]
+        public HttpResponseMessage GetAccountTypes(int AccountTypeID)
         {
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -506,7 +506,7 @@ namespace RAP.API.Controllers
             ReturnResult<List<AccountType>> result = new ReturnResult<List<AccountType>>();
             try
             {
-                result = accService.GetAccountTypes();
+                result = accService.GetAccountTypes(AccountTypeID);
 
                 if (result.status.Status == StatusEnum.Success)
                 {

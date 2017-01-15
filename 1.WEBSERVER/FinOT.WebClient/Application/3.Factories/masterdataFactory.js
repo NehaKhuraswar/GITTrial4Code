@@ -28,9 +28,9 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         });
     }
 
-    var _GetAccountTypes = function () {
+    var _GetAccountTypes = function (AccountTypeID) {
         blockUI.start();
-        var url = 'api/accountmanagement' + '/getaccounttypes'
+        var url = 'api/accountmanagement' + '/getaccounttypes/' + AccountTypeID;
 
         return ajax.Get(url)
         .finally(function () {

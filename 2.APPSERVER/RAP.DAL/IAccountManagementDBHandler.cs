@@ -11,7 +11,7 @@ namespace RAP.DAL
         ReturnResult<RAP.Core.DataModels.CustomerInfo> EditCustomer(RAP.Core.DataModels.CustomerInfo message);
        ReturnResult<string> ForgetPwd(string email);
         ReturnResult<RAP.Core.DataModels.SearchResult> GetAccountSearch(RAP.Core.DataModels.AccountSearch accountSearch);
-        ReturnResult<System.Collections.Generic.List<RAP.Core.DataModels.AccountType>> GetAccountTypes();
+        ReturnResult<System.Collections.Generic.List<RAP.Core.DataModels.AccountType>> GetAccountTypes(int AccountTypeID);
        ReturnResult<RAP.Core.DataModels.Collaborator> GetAuthorizedUsers(int custID);
         ReturnResult<RAP.Core.DataModels.CityUserAccount_M> GetCityUser(RAP.Core.DataModels.CityUserAccount_M message);
         ReturnResult<RAP.Core.DataModels.CityUserAccount_M> GetCityUser(int UserID);

@@ -2,7 +2,7 @@
 var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmindashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.model = rapGlobalFactory.CustomerDetails;
+    self.CityUser = rapGlobalFactory.CityUser;
     self.pageNumberList = [];
     self.CreateCityUserAccount = function () {
         rapGlobalFactory.IsAdmin = true;
@@ -40,8 +40,8 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     //    if (self.model == null || self.model == undefined) { return 0; }
     //    return (Math.floor(self.model.TotalCount / self.model.PageSize) + (((self.model.TotalCount % self.model.PageSize) != 0) ? 1 : 0))
     //};
-    var _getAccountTypes = function () {        
-        masterFactory.GetAccountTypes().then(function (response) {
+    var _getAccountTypes = function (AccountTypeID) {        
+        masterFactory.GetAccountTypes(AccountTypeID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.AccountTypesList = response.data;
         });
@@ -53,7 +53,7 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             self.AccountSearchModel.PageSize = 5;
         });
     }
-    _getAccountTypes();
+    _getAccountTypes(self.CityUser.AccountType.AccountTypeID);
     _getEmptyAccountSearchModel();
     self.GeneratePageNumberList = function () {
         self.pageNumberList = [];

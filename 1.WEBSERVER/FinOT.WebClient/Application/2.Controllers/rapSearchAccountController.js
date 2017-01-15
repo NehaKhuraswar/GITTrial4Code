@@ -22,8 +22,8 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
     //    if (self.model == null || self.model == undefined) { return 0; }
     //    return (Math.floor(self.model.TotalCount / self.model.PageSize) + (((self.model.TotalCount % self.model.PageSize) != 0) ? 1 : 0))
     //};
-    var _getAccountTypes = function () {        
-        masterFactory.GetAccountTypes().then(function (response) {
+    var _getAccountTypes = function (AccountTypeID) {
+        masterFactory.GetAccountTypes(AccountTypeID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.AccountTypesList = response.data;
         });
@@ -35,7 +35,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
             self.AccountSearchModel.PageSize = 5;
         });
     }
-    _getAccountTypes();
+    _getAccountTypes(self.model.AccountType.AccountTypeID);
     _getEmptyAccountSearchModel();
     
     self.AccountSearch = function (model) {

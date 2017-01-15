@@ -6,13 +6,13 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     self.SelectedAccountType;
     self.bCityUser = false;
     self.Error = "";
-    var _getAccountTypes = function () {
-        masterFactory.GetAccountTypes().then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
-            self.AccountTypesList = response.data;
-        });
-    }
-    _getAccountTypes();
+    //var _getAccountTypes = function () {
+    //    masterFactory.GetAccountTypes().then(function (response) {
+    //        if (!alert.checkResponse(response)) { return; }
+    //        self.AccountTypesList = response.data;
+    //    });
+    //}
+    //_getAccountTypes();
     self.ForgotPassword = function () {
         $location.path("/forgotpassword");
     }

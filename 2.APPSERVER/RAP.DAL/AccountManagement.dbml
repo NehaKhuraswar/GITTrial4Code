@@ -6,13 +6,6 @@
       <Column Name="Description" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.CityAccountType" Member="CityAccountTypes">
-    <Type Name="CityAccountType">
-      <Column Name="CityAccountTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CityAccountTypeDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="CityAccountType_CityUserAccount" Member="CityUserAccounts" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityUserAccount" />
-    </Type>
-  </Table>
   <Table Name="dbo.ReturnAccountSearch" Member="ReturnAccountSearches">
     <Type Name="ReturnAccountSearch" Id="ID1">
       <Column Name="RankNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -122,6 +115,14 @@
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="CityAccountType_CityUserAccount" Member="CityAccountType" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityAccountType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CityAccountType" Member="CityAccountTypes">
+    <Type Name="CityAccountType">
+      <Column Name="CityAccountTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CityAccountTypeDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PermissionToAccountTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CityAccountType_CityUserAccount" Member="CityUserAccounts" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityUserAccount" />
     </Type>
   </Table>
   <Function Name="dbo.USP_SearchAccount_Get" Method="USP_SearchAccount_Get">
