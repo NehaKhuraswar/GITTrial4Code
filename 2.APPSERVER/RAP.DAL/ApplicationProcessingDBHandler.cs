@@ -287,6 +287,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -405,6 +406,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 tenantPetitionResult.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(tenantPetitionResult.status);
                 return result;
             }
         }
@@ -447,6 +449,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -488,6 +491,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -775,6 +779,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -876,6 +881,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -949,6 +955,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -988,6 +995,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -1029,6 +1037,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1090,6 +1099,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1132,6 +1142,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1231,6 +1242,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1280,6 +1292,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -1331,6 +1344,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1382,6 +1396,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 tenantPetitionResult.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(tenantPetitionResult.status);
                 return tenantPetitionResult;
             }        
         }
@@ -1441,6 +1456,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 tenantPetitionResult.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(tenantPetitionResult.status);
                 return caseInfoResult;
             }
         }
@@ -1471,6 +1487,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1523,6 +1540,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1563,6 +1581,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1627,6 +1646,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1675,6 +1695,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1733,6 +1754,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1766,6 +1788,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 tenantAppealResult.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(tenantAppealResult.status);
                 return tenantAppealResult;
             }
         }
@@ -1813,6 +1836,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1883,6 +1907,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -2015,6 +2040,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -2233,6 +2259,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -2379,6 +2406,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -2457,6 +2485,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
            
@@ -2728,6 +2757,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -2815,6 +2845,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -2884,6 +2915,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -2941,6 +2973,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -3055,6 +3088,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -3083,6 +3117,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -3126,6 +3161,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -3170,6 +3206,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 tenantResponseResult.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(tenantResponseResult.status);
                 return tenantResponseResult;
             }
         }
@@ -3412,6 +3449,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -3461,6 +3499,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -3551,6 +3590,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
 
@@ -3625,6 +3665,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }

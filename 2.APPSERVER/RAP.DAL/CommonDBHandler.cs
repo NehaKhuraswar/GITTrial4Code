@@ -128,6 +128,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -168,6 +169,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -225,6 +227,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -284,6 +287,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -321,6 +325,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "| StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
                 return result;
             }
         }
