@@ -12,7 +12,16 @@ var rapOwnerReviewFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) 
             blockUI.stop();
         });
     }
-
+    var _getOwnerReviewByCaseID = function (cid) {
+        blockUI.start();
+        var url = _routePrefix + '/GetOwnerReviewByCaseID';
+        if (!(cid == null || cid == undefined)) { url = url + '/' + cid; }
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+    
     var _saveOwnerReviewPageSubmission = function (custId) {
         blockUI.start();
         var url = _routePrefix + '/SaveOwnerReviewPageSubmission';
@@ -24,5 +33,6 @@ var rapOwnerReviewFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) 
     }
     factory.GetOwnerReview = _getOwnerReview;
     factory.SaveOwnerReviewPageSubmission = _saveOwnerReviewPageSubmission;
+    factory.GetOwnerReviewByCaseID = _getOwnerReviewByCaseID;
     return factory;
 }];

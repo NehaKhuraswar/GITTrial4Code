@@ -52,6 +52,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetOwnerRentIncreaseAndPropertyInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> GetOwnerAdditionalDocuments(CaseInfoM model);
         ReturnResult<CaseInfoM> GetOwnerReview(CaseInfoM model);
+        ReturnResult<CaseInfoM> GetOwnerReviewByCaseID(int C_ID);
         ReturnResult<CaseInfoM> GetTRAdditionalDocuments(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveOwnerApplicantInfo(CaseInfoM model);
         ReturnResult<CaseInfoM> SaveRentIncreaseReasonInfo(CaseInfoM model);

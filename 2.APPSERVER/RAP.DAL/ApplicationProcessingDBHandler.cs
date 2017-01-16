@@ -3975,9 +3975,52 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<CaseInfoM> GetOwnerReviewByCaseID(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                CaseInfoM caseinfo = new CaseInfoM();
+
+                var caseDB = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).FirstOrDefault();
+                if (caseDB != null)
+                {
+                    caseinfo.CaseID = caseDB.CaseID;
+                    caseinfo.C_ID = caseDB.C_ID;
+                    caseinfo.PetitionCategoryID = Convert.ToInt32(caseDB.PetitionCategoryID);
+
+                    var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
+
+                    if (petitionDetailsDb.OwnerPetitionID != null)
+                    {
+                        var ownerPetitionResult = GetOwnerPetition(Convert.ToInt32(petitionDetailsDb.OwnerPetitionID));
+                        if (ownerPetitionResult.status.Status == StatusEnum.Success)
+                        {
+                            caseinfo.OwnerPetitionInfo = ownerPetitionResult.result;
+                        }
+                    }
+                    var documentResult = _commondbHandler.GetCaseDocuments(C_ID);
+                    if (documentResult.status.Status == StatusEnum.Success)
+                    {
+                        caseinfo.Documents = documentResult.result;
+                    }
+                }
+                result.result = caseinfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+
         #endregion
         
-        #region Owner petition Save Functions
+       #region Owner petition Save Functions
         /// <summary>
         /// Save or Update Applicant Information page of Owners petition.
         /// </summary>
@@ -5843,6 +5886,25 @@ namespace RAP.DAL
                            }
                            _propertyInfo.TenantInfo = _tenants;
                        }
+
+                       var rentIncreaseInfo = _dbContext.OwnerPetitionRentalIncrementInfos.Where(r => r.OwnerPropertyID == _propertyInfo.OwnerPropertyID);
+                       if (rentIncreaseInfo.Any())
+                       {
+                           List<OwnerPetitionRentalIncrementInfoM> _rentIncreases = new List<OwnerPetitionRentalIncrementInfoM>();
+                           foreach (var item in rentIncreaseInfo)
+                           {
+                               OwnerPetitionRentalIncrementInfoM _rentIncrease = new OwnerPetitionRentalIncrementInfoM();
+                               _rentIncrease.bRentIncreaseNoticeGiven = (bool)item.bRentIncreaseNoticeGiven;
+                               _rentIncrease.RentIncreaseNoticeDate = (item.RentIncreaseNoticeDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
+                               _rentIncrease.RentIncreaseEffectiveDate = (item.RentIncreaseEffectiveDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
+                               _rentIncrease.RentIncreasedFrom = item.RentIncreasedFrom;
+                               _rentIncrease.RentIncreasedTo = item.RentIncreasedTo;
+                               _rentIncreases.Add(_rentIncrease);
+                               // model.OwnerPetitionInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
+                           }
+                           _propertyInfo.RentalInfo = _rentIncreases;
+                       }
+
                        model.PropertyInfo = _propertyInfo;
                    }
                    result.result = model;

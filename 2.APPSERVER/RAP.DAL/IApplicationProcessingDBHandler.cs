@@ -73,6 +73,6 @@ namespace RAP.DAL
         ReturnResult<bool> OResponseUpdateAdditionalDocumentsPageSubmission(int CustomerID);
         ReturnResult<List<ThirdPartyCaseInfo>> UpdateThirdPartyAccessPrivilege(List<ThirdPartyCaseInfo> ThirdPartyCaseInfo, int CustomerID);
         ReturnResult<List<ThirdPartyCaseInfo>> GetThirdPartyCasesForCustomer(int CustomerID);
-       
+        ReturnResult<CaseInfoM> GetOwnerReviewByCaseID(int C_ID);
     }
 }
