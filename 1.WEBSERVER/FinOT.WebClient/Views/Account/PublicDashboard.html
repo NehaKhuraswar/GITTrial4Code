@@ -43,7 +43,7 @@
                                             <p>{{caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}</p>
                                         </div>
                                     </div>
-
+                                   
                                     <div class="accordion case-status">
                                         <div class="item" ng-class="{'expanded':toggle}">
                                             <div class="item-header"><a ng-click="toggle = !toggle" class="btn-toggle"></a> View case status</div>
@@ -59,13 +59,16 @@
                                                     <div class="tbl-row" ng-repeat="activity in caseinfo.ActivityStatus">
                                                         <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> {{activity.Activity.ActivityDesc}}</div>
 
-                                                        <div class="tbl-col date countdown" ng-if="activity.Status.StatusID == 17" ><strong class="visible-sm">Date:</strong> {{Ctrl.CalculateRemainingDays(activity.Date, activity.Status.StatusID)}}  days remaining</div>
-                                                        <div class="tbl-col status warning" ng-if="activity.Status.StatusID == 17"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
+                                                        <div class="tbl-col date countdown" ng-if="activity.Status.StatusID == 3" ><strong class="visible-sm">Date:</strong> {{Ctrl.CalculateRemainingDays(activity.Date, activity.Status.StatusID)}}  days remaining</div>
+                                                        <div class="tbl-col status warning" ng-if="activity.Status.StatusID == 3"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
 
-                                                        <div class="tbl-col date" ng-if="activity.Status.StatusID != 17"><strong class="visible-sm">Date:</strong> {{activity.Date | date}}</div>
-                                                        <div class="tbl-col status" ng-if="activity.Status.StatusID != 17"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
+                                                        <div class="tbl-col date" ng-if="activity.Status.StatusID != 3"><strong class="visible-sm">Date:</strong> {{activity.Date | date}}</div>
+                                                        <div class="tbl-col status" ng-if="activity.Status.StatusID != 3"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
 
                                                         <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 1"><a ng-click="Ctrl.ViewPage(activity,caseinfo)" class="btn-link">View</a></div>
+                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 22 && activity.Status.StatusID == 3 && caseinfo.PetitionCategoryID == 1"><a ng-click="Ctrl.OwnerResponse()" class="btn-link">File online</a></div>
+                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 22 && activity.Status.StatusID == 3 && caseinfo.PetitionCategoryID == 2"><a ng-click="Ctrl.FileTenantResponse()" class="btn-link">File online</a></div>
+                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 23 && activity.Status.StatusID == 3"><a ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link">File online</a></div>
                                                     </div>
                                                     <!--<div class="tbl-row">
                                                         <div class="tbl-col activity"><strong class="visible-sm">Activity:</strong> Response to a petition</div>

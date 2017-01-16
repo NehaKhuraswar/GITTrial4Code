@@ -82,7 +82,7 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         var end = Math.floor(new Date().getTime() / (3600 * 24 * 1000)); //days as integer from..
         var daysDiff = end - start; // exact dates start = Math.floor( date1.getTime() / (3600*24*1000)); //days as integer from..
 
-        if (statusID == 17)
+        if (statusID == 3)
         {
             return 20-daysDiff;
         }
