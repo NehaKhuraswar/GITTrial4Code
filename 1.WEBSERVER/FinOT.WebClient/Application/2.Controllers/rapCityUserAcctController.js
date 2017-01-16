@@ -77,13 +77,13 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
             $location.path("/CityLogin");
         }
     }
-    var _getAccountTypes = function (AccountTypeID) {
-        masterFactory.GetAccountTypes(AccountTypeID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
-            self.AccountTypesList = response.data;
-        });
-    }
-    _getAccountTypes(self.model.AccountType.AccountTypeID);
+    //var _getAccountTypes = function (AccountTypeID) {
+    //    masterFactory.GetAccountTypes(AccountTypeID).then(function (response) {
+    //        if (!alert.checkResponse(response)) { return; }
+    //        self.AccountTypesList = response.data;
+    //    });
+    //}
+    //_getAccountTypes(self.model.AccountType.AccountTypeID);
 
 }];
 var rapCityUserAcctController_resolve = {
