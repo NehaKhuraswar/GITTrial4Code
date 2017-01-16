@@ -118,7 +118,7 @@
                                 <div class="col-md-8 col-sm-8 col-xs-12">
                                     <div class="field-group">
                                         <label for="case_number" class="small-title">Case number</label>
-                                        <input type="text" name="case_number" id="case_number" class="field-input full-width" value="" />
+                                        <input type="text" name="case_number" id="case_number" class="field-input full-width" value="" ng-model="Ctrl.CaseSearchModel.CaseNumber" />
                                     </div>
                                 </div>
 
@@ -256,7 +256,7 @@
                         <div class="tbl-row clearfix" ng-repeat="result in Ctrl.CaseSearchResult">
                             <div class="item" ng-class="{'expanded':toggle}">
                                 <div class="item-header clearfix">
-                                    <div class="col col-45 pad-l40 case-number"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a href="#">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
+                                    <div class="col col-45 pad-l40 case-number"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
                                     <div class="col col-20 filling-date">{{result.CreatedDate | date}}</div>
                                     <div class="col col-20 ast-activity">{{result.LastModifiedDate |date}}</div>
                                     <div class="col col-15 activity">{{result.ActivityName}}</div>

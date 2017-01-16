@@ -9,7 +9,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.apnAddress = null;
     self.EditAPNAddress = false;
     self.EditAPNNumber = false;
-    self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
+    if (self.caseinfo.TenantPetitionInfo != null) {
+        self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
+    }
     
     self.NewCaseStatus = function () {
         $location.path("/newCaseStatus");
