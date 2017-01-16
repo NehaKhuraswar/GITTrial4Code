@@ -3061,19 +3061,39 @@ namespace RAP.DAL
                 }
                 else
                 {
-                    //Venky Owner Petition information
-                    var PropertyInfo = GetOwnerPropertyInfo(CaseNumber);
-                    if (PropertyInfo.status.Status == StatusEnum.Success)
+                    
+                    var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
+
+                    if (ownerPetitionID != null)
                     {
-                        tenantResponseInfo.ApplicantUserInfo = PropertyInfo.result;
+                        var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == Convert.ToInt32(ownerPetitionID)).First();
+                        if (petitionInfo != null)
+                        {
+                            var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == petitionInfo.OwnerPetitionApplicantInfoID).First();
+
+                            if (applicantInfo != null)
+                            {
+                                var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                                if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                                {
+                                    result.status = applicantUserInforesult.status;
+                                    return result;
+                                }
+                                tenantResponseInfo.OwnerInfo = applicantUserInforesult.result;
+                                tenantResponseInfo.NumberOfUnits = Convert.ToInt32(applicantInfo.NumberOfUnits);
+                                tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(applicantInfo.RangeID);
+                            }
+                            var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == petitionInfo.OwnerPropertyID).First();
+
+                            if (propertyInfo != null)
+                            {
+                                tenantResponseInfo.UnitTypeId = propertyInfo.UnitTypeID;
+                                tenantResponseInfo.bCurrentRentStatus = Convert.ToBoolean(propertyInfo.CurrentOnRent);
+                            }
+                        }
                     }
-                    //tenantResponseInfo.NumberOfUnits = (int)TenantResponseInfoDB.NumberOfUnits;
-                    //tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
-                    //tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
-                    //tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
-                    //tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
-                    //tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
-                }
+                }   
+                
                 tenantResponseInfo.UnitTypes = _units;
                 tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
 
