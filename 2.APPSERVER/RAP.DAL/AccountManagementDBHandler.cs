@@ -98,6 +98,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -182,6 +183,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -222,6 +224,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -267,6 +270,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -307,6 +311,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -320,17 +325,16 @@ namespace RAP.DAL
             try
             {
                 
-
                 CityUserAccount_M cityUser = new CityUserAccount_M();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-
+                    
                     
                     var cityDetails = db.CityUserAccounts.Where(x => x.Email == message.Email && x.Password == message.Password
                                                                     && (x.IsDeleted == null || x.IsDeleted == false)
                                                                     ).FirstOrDefault();
 
-
+                    
                     if (cityDetails != null)
                     {
                         AccountType accountType = new AccountType();
@@ -393,6 +397,7 @@ namespace RAP.DAL
                 //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -473,6 +478,7 @@ namespace RAP.DAL
                 //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -550,6 +556,7 @@ namespace RAP.DAL
                 //System.Diagnostics.EventLog.WriteEntry("Application", "Error Occured" + "Message" + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -588,6 +595,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -645,6 +653,7 @@ namespace RAP.DAL
                 IExceptionHandler eHandler = new ExceptionHandler();
                 //result.status = eHandler.HandleException(ex);
                 result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -680,6 +689,7 @@ namespace RAP.DAL
                 System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetStateList exception : " + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -736,6 +746,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -795,6 +806,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -829,6 +841,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -864,6 +877,7 @@ namespace RAP.DAL
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1170,6 +1184,7 @@ namespace RAP.DAL
               // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
               IExceptionHandler eHandler = new ExceptionHandler();
                result.status = eHandler.HandleException(ex);
+               commondbHandler.SaveErrorLog(result.status);
                return result;
            }
        }
@@ -1231,6 +1246,7 @@ namespace RAP.DAL
                 // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1264,6 +1280,7 @@ namespace RAP.DAL
                 // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1297,6 +1314,7 @@ namespace RAP.DAL
                 // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
@@ -1449,6 +1467,7 @@ namespace RAP.DAL
                 // System.Diagnostics.EventLog.WriteEntry("Application", "Error : " + ex.Message + "StackTrace" + ex.StackTrace.ToString());
                 IExceptionHandler eHandler = new ExceptionHandler();
                 result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
                 return result;
             }
         }
