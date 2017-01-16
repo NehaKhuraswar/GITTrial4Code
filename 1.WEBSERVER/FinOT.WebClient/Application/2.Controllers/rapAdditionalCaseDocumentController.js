@@ -1,6 +1,7 @@
 ﻿var rapAdditionalCaseDocumentController = ['$scope', '$modal', 'alertService', '$location', 'rapAdditionalCaseDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
     var self = this;
     self.custDetails = rapGlobalFactory.CityUser;
+    self.customerDetails = rapGlobalFactory.CustomerDetails;
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;   
     self.DocDescriptions = masterFactory.DocDescription();
 
@@ -34,7 +35,14 @@
                     document.DocTitle = docTitle;
                     document.DocName = filename;
                     document.MimeType = mimetype;
-                    document.EmployeeID = self.custDetails.EmployeeID;
+                    if (self.custDetails != null)
+                    {
+                        document.EmployeeID = self.custDetails.EmployeeID;
+                    }
+                    else if (self.customerDetails != null)
+                    {
+                        document.CustomerID = self.customerDetails.custID;
+                    }
                     document.C_ID = self.c_id;
                     document.isUploaded = false;
                     document.IsPetitonFiled = true;
@@ -69,7 +77,25 @@
          rapFactory.SaveCaseDocuments(self.Documents).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.Documents = response.data;
+            if(self.customerDetails != null){
+                 $location.path("/publicdashboard");
+            }
+            else {
+             $location.path("/staffdashboard");
+            }
+
         });   
+    }
+        self.Cancel = function () {
+         
+            if(self.customerDetails != null){
+                 $location.path("/publicdashboard");
+            }
+            else {
+             $location.path("/staffdashboard");
+            }
+
+        
     }
 
 }];

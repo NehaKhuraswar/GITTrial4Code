@@ -108,7 +108,10 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         rapGlobalFactory.SelectedCase = caseinfo;
         $location.path("/selectedcase");
     }
-
+    self.UploadDocumentation = function (caseinfo) {
+        rapGlobalFactory.SelectedCase = caseinfo;
+        $location.path("/additionaldocuments");
+    }
     
 
 }];
