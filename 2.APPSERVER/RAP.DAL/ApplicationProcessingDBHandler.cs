@@ -5926,6 +5926,7 @@ namespace RAP.DAL
        {
            ReturnResult<OwnerPetitionInfoM> result = new ReturnResult<OwnerPetitionInfoM>();
            OwnerPetitionInfoM model = new OwnerPetitionInfoM();
+           List<OwnerRentIncreaseReasonsM> _reasons = new List<OwnerRentIncreaseReasonsM>();
            try
            {
                var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == petitionID).First();
@@ -5962,10 +5963,34 @@ namespace RAP.DAL
                        model.ApplicantInfo = _applicantInfo;
                    }
 
+                   var resaons = _dbContext.OwnerRentIncreaseReasons;               
+                   var selectedReasons = _dbContext.OwnerRentIncreaseReasonInfos.Where(x => x.OwnerPetitionApplicantInfoID == applicantInfo.OwnerPetitionApplicantInfoID);
+
+                   if (resaons.Any())
+                   {
+                       foreach (var item in resaons)
+                       {
+                           OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
+                           _reason.ReasonID = item.ReasonID;
+                           _reason.ReasonDescription = item.Reason;
+                           _reason.IsSelected = false;
+                           _reasons.Add(_reason);
+                       }
+                   }
+                   if (selectedReasons.Any())
+                   {
+                       foreach (var item in selectedReasons)
+                       {
+                           _reasons.Where(r => r.ReasonID == item.ReasonID).First().IsSelected = true;
+                       }
+                   }
+                    model.RentIncreaseReasons = _reasons;
+
                    var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == petitionInfo.OwnerPropertyID).First();
 
                    if (propertyInfo != null)
                    {
+                      
                        OwnerPetitionPropertyInfoM _propertyInfo = new OwnerPetitionPropertyInfoM();
                        _propertyInfo.OwnerPropertyID = propertyInfo.OwnerPropertyID;
                        _propertyInfo.UnitTypeID = propertyInfo.UnitTypeID;
@@ -5975,6 +6000,9 @@ namespace RAP.DAL
                        _propertyInfo.RAPNoticeGivenDate = (propertyInfo.RAPNoticeGivenDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(propertyInfo.RAPNoticeGivenDate));
                        _propertyInfo.CurrentOnRent = Convert.ToBoolean(propertyInfo.CurrentOnRent);
 
+                      
+                       _propertyInfo.UnitTypes = getUnitTypes();
+                      
                        var tentantInfo = from r in _dbContext.OwnerPetitionTenantInfos
                                          where r.OwnerPropertyID == _propertyInfo.OwnerPropertyID
                                          select r;
