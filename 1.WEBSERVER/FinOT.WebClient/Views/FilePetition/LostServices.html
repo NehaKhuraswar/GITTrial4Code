@@ -103,28 +103,32 @@
                             </div>
                         </div>
 
-                        <div class="field-addfile">
-                            <div class="input-file-wrapper">
-                                <span class="btn-link">Add additional documentation</span>
-                                <input type="file" id="lost_services_documentation" name="lost_services_documentation"
-                                        ngf-select ngf-change="onFileSelected($files,'TP_LostServive')"
-                                        accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
+                      
+                        <div class="field-group">
+                            <label>Please attach documentary evidence if available</label>
+                            <div class="field-addfile no-top-margin">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach</span>
+                                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TP_LostServive')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
+                                </div>
+                                <div class="field-group">
+                                    <table class="table table-condensed nopadding-bottom">
+                                        <tbody>
+                                            <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostServive'}">
+                                                <td class="nopadding-left">
+                                                    {{item.DocName}}
+                                                </td>
+                                                <td>
+                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="field-group">
-                                <table class="table table-condensed nopadding-bottom">
-                                    <tbody>
-                                        <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TP_LostServive'}">
-                                            <td class="nopadding-left">
-                                                {{item.DocName}}
-                                            </td>
-                                            <td>
-                                                <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>             
                         </div>
+
 
                         <a class="btn-link" ng-click="Ctrl.AddAnotherLostServices(Ctrl.LostServices)">Add another lost service</a>
                         <p>&nbsp;</p>                       
@@ -216,10 +220,28 @@
                             </div>
                         </div>
 
-                        <div class="field-addfile">
-                            <div class="input-file-wrapper">
-                                <span class="btn-link">Add additional documentation</span>
-                                <input type="file" id="problem_documentation" name="problem_documentation" />
+                        <div class="field-group">
+                            <label>Please attach documentary evidence if available</label>
+                            <div class="field-addfile no-top-margin">
+                                <div class="input-file-wrapper">
+                                    <span class="btn-link">Attach</span>
+                                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TP_Problem')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
+                                </div>
+                                <div class="field-group">
+                                    <table class="table table-condensed nopadding-bottom">
+                                        <tbody>
+                                            <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_Problem'}">
+                                                <td class="nopadding-left">
+                                                    {{item.DocName}}
+                                                </td>
+                                                <td>
+                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 

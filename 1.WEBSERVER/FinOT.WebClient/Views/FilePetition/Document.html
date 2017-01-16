@@ -1,4 +1,5 @@
-﻿<div class="application-form-wrapper">
+﻿<script src='js/functions.js'></script>
+<div class="application-form-wrapper">
     <div class="row">
         <div class="col-md-9 col-sm-12">
             <div class="application-step step-1">
@@ -11,45 +12,28 @@
                             <p>Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine.</p>
                         </div>
 
-                        <div class="custom-table docs-list">
+                      
+                        <!-- .custom-table -->
+                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.Documents | filter: {DocTitle: 'TP_AdditionalDocuments'}">
                             <div class="tbl-header">
                                 <div class="tbl-row clearfix">
                                     <div class="col col-35 name">File name</div>
-                                   
                                 </div>
                             </div>
 
                             <div class="tbl-body">
                                 <div class="tbl-row clearfix">
-                                    <div class="item item-toggle expanded">
+                                    <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
-                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> Rental_expenses.xsl</div>
-                                           
-                                            <a href="#" class="btn-link btn-delete">Delete</a>
+                                            <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                            <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                            <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-delete">Download</a>
                                         </div>
 
-                                        <div class="item-content clearfix">
+                                        <div class="item-content clearfix" ng-show="toggle">
                                             <div class="row">
                                                 <div class="col-md-10 col-sm-12">
-                                                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tbl-row clearfix">
-                                    <div class="item item-toggle">
-                                        <div class="item-header clearfix">
-                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a> Rental_expenses.xsl</div>
-                                            <div class="col col-35 type">Excel</div>
-                                            <a href="#" class="btn-link btn-delete">Delete</a>
-                                        </div>
-
-                                        <div class="item-content clearfix">
-                                            <div class="row">
-                                                <div class="col-md-10 col-sm-12">
-                                                    <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                    <p>{{item.DocDescription}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,29 +41,16 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- .custom-table -->
 
 
-                        <div class="subhead">
-                            <h4>Upload document</h4>
-                        </div>
-
+                      
                         <div class="field-group">
-                            <label for="preset_description">Select one of the preset descriptions from the drop-down menu.</label>
+                            <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
                             <div class="full-width">
-                                <select name="dd_preset_description" id="dd_preset_description" class="custom-select" data-placeholder="Select type">
-                                    <option value="Lease" selected>Lease</option>
-                                    <option value="Notice">Notice</option>
-                                    <option value="Paystub">Paystub</option>
-                                    <option value="Receipt">Receipt</option>
-                                    <option value="Invoice">Invoice</option>
-                                    <option value="Photo/Image">Photo/Image</option>
-                                    <option value="Inspection Checklist">Inspection Checklist</option>
-                                    <option value="Report">Report</option>
-                                    <option value="Letter">Letter</option>
-                                    <option value="Email(s)">Email (s)</option>
-                                    <option value="Text Message(s)">Text Message(s)</option>
-                                </select>
+
+                                <select ng-model="Ctrl.description1"
+                                        data-placeholder="Description"
+                                        ng-options="desc for desc in Ctrl.DocDescriptions"></select>
                             </div>
                         </div>
 
@@ -94,16 +65,10 @@
                             <div class="field-addfile">
                                 <div class="input-file-wrapper">
                                     <span class="btn-link">Attach document</span>
-                                    <input type="file" id="attach_document" name="attach_document" ngf-select ngf-change="onAdditionalFileSelect($files)" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
-                                </div>
-                                <div>
-                                    <label ng-repeat="doc in Ctrl.caseinfo.Documents" for="doc.DocID">
-                                        {{doc.DocName}}
-                                        &nbsp;&nbsp; <button ng-show="doc.isUploaded class=" btn-primary" ng-click="Ctrl.Download(doc)">Download</button>
-                                    </label>
+                                    <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'TP_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
                                 </div>
                             </div>
-                        </div><!-- .field-group -->
+                        </div><!-- .field-group -->   
 
                     </div>
 

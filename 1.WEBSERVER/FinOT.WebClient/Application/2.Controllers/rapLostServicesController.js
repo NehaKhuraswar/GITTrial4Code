@@ -49,28 +49,6 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     }
     _GetTenantLostServiceInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
 
-    
-    self.onFileSelect = function ($files) {
-        if ($files && $files.length) {
-            var fileName = $files[0].name;
-            var file = $files[0];
-            var reader = new FileReader();
-            reader.fileName = file.name;
-            self.caseinfo.TenantPetitionInfo.Document.DocName = file.name;
-            reader.readAsDataURL(file);
-           
-            reader.onload = function (e)
-            {
-                var base64 = e.target.result;
-                if (base64 != null) {
-                    self.caseinfo.TenantPetitionInfo.Document.Base64Content = base64.substring(base64.indexOf('base64') + 7);
-                }          
-             
-            }
-           
-        }
-    }
-
     self.AddAnotherLostServices = function (lostservice) {
         var _lostservice = angular.copy(lostservice);
         self.caseinfo.TenantPetitionInfo.LostServicesPage.LostServices.push(_lostservice);
@@ -139,22 +117,15 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
         }
     }
 
-    //self.ContinueToVerification = function () {
-    //    $location.path("/verification");
-    //}
-    ////self.SubmitPetition = function () {
-    ////  //  $location.path("/verification");
-    ////}
-    //self.SubmitPetition = function (model) {
-     
 
-    //    rapFactory.SaveCaseInfo(model).then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        $modalInstance.close(response.data);
-    //    });
-    //}
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+    }
+
+    self.Delete = function (doc) {
+        var index = self.caseinfo.Documents.indexOf(doc);
+        self.caseinfo.TenantPetitionInfo.LostServicesPage.Documents.splice(index, 1);
+    }
 }];
 var rapLostServicesController_resolve = {
     model: ['$route', 'alertService', 'raplostservicesFactory', function ($route, alert, rapFactory) {

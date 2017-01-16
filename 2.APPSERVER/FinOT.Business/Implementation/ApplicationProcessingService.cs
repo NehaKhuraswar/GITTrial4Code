@@ -610,28 +610,45 @@ namespace RAP.Business.Implementation
         public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID, int CustomerID)
         {
             ReturnResult<LostServicesPageM> result = new ReturnResult<LostServicesPageM>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
-                result = _dbHandler.GetTenantLostServiceInfo(PetitionID);
-                if(result.status.Status != StatusEnum.Success)
+                var dbResult = _dbHandler.GetTenantLostServiceInfo(PetitionID);
+                if (dbResult.status.Status != StatusEnum.Success)
                 {
-                return result;
-            }
-                
-                if (result.result.Documents.Where(x => x.DocTitle == "TP_LostServive").Count() == 0)
+                    result = dbResult;
+                    return result;
+                }
+
+                //if (result.result.Documents.Where(x => x.DocTitle == "TP_LostServive").Count() == 0)
+                //{
+                var lostdocsResult = _commonService.GetDocuments(CustomerID, false, "TP_LostServive");
+                if (lostdocsResult.status.Status == StatusEnum.Success && lostdocsResult.result != null)
                 {
-                    var docsResult = _commonService.GetDocuments(CustomerID, false, "TP_LostServive");
-                    if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                    foreach (var doc in lostdocsResult.result)
                     {
-                        foreach (var doc in docsResult.result)
+                        if (doc != null)
                         {
-                            if (doc != null)
-                            {
-                                result.result.Documents.Add(doc);
-                            }
+                            documents.Add(doc);
                         }
                     }
                 }
+                var problemdocsResult = _commonService.GetDocuments(CustomerID, false, "TP_Problem");
+                if (problemdocsResult.status.Status == StatusEnum.Success && problemdocsResult.result != null)
+                {
+                    foreach (var doc in problemdocsResult.result)
+                    {
+                        if (doc != null)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                }
+                dbResult.result.Documents = documents;
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                //}
                 return result;
             }
             catch (Exception ex)
@@ -1471,8 +1488,8 @@ namespace RAP.Business.Implementation
 
         private CaseInfoM GetUploadedDocuments(CaseInfoM model, string DocTitle)
         {
-            if (model.Documents.Where(x => x.DocTitle == DocTitle).Count() == 0)
-            {
+            //if (model.Documents.Where(x => x.DocTitle == DocTitle).Count() == 0)
+            //{
                 var docsResult = _commonService.GetDocuments(model.CustomerID, false, DocTitle);
                 if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
                 {
@@ -1484,7 +1501,7 @@ namespace RAP.Business.Implementation
                         }
                     }
                 }
-            }
+            //}
             return model;
         }
         
