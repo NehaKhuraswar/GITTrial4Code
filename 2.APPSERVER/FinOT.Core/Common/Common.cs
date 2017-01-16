@@ -67,4 +67,12 @@ namespace RAP.Core.Common
     {
         StatusSubmitted = 1
     }
+    public enum CityUserRoles
+    {
+        NonRapStaff = 1,
+        AdminAssistant = 2,
+        Analyst = 3,
+        HearingOfficer = 4,
+        CityAdmin = 5
+    }
 }

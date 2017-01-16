@@ -42,7 +42,7 @@
                             </div>
                             <div class="field-group" ng-show="Ctrl.EditAPNAddress== false">
                                 <div class="small-title">APN address</div>
-                                <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine2}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.Zip}} &nbsp;&nbsp;<a ng-click="Ctrl.EditAPNAddress=true" class="btn-link">Edit</a></p>
+                                <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine2}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.Zip}} &nbsp;&nbsp;<a ng-click="Ctrl.EditAPNAddress=true" ng-hide="Ctrl.model.IsNonRAPStaff == true" class="btn-link">Edit</a></p>
                             </div>
                             <!-- Accounts List -->
                             <div class="custom-table selected-case mar-bottom-40" ng-show="Ctrl.EditAPNAddress==true">
@@ -96,7 +96,7 @@
                                         <p class="no-bottom-margin">{{Ctrl.APNNumber}}</p>
                                     </div>
 
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsNonRAPStaff == true">
                                         <div class="field-group has-btn">
                                             <label for="apn_number" class="hidden">APN Number</label>
                                             <input type="text" name="apn_number" id="apn_number" class="field-input" placeholder="Enter APN number"
@@ -115,7 +115,7 @@
                                         <p class="no-bottom-margin">{{Ctrl.caseinfo.CityAnalyst.FirstName}} {{Ctrl.caseinfo.CityAnalyst.LastName}}</p>
                                     </div>
 
-                                    <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
+                                    <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true || Ctrl.model.IsNonRAPStaff == true">
                                         <div class="field-group has-btn">
                                             <label for="analyst" class="hidden">Select analyst</label>
                                             <div class="cmb-wrapper">
@@ -136,7 +136,7 @@
                                         <p class="no-bottom-margin">{{Ctrl.caseinfo.HearingOfficer.FirstName}} {{Ctrl.caseinfo.HearingOfficer.LastName}}</p>
                                     </div>
 
-                                    <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
+                                    <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true || Ctrl.model.IsNonRAPStaff == true">
                                         <div class="field-group has-btn">
                                             <label for="hearing_officer" class="hidden">Select hearing officer</label>
                                             <div class="cmb-wrapper">
@@ -151,11 +151,11 @@
                             </div>
 
 
-                            <div class="field-group subhead type2 pad-t15">
+                            <div class="field-group subhead type2 pad-t15" ng-hide="Ctrl.model.IsNonRAPStaff == true">
                                 <h4>Actions</h4>
                             </div>
 
-                            <div class="field-group mar-bottom-60">
+                            <div class="field-group mar-bottom-60" ng-hide="Ctrl.model.IsNonRAPStaff == true">
                                 <div class="account-management">
                                     <div class="items">
                                         <div class="item">
@@ -182,7 +182,7 @@
                                 <h4>Case status</h4>
                             </div>
 
-                            <div class="field-group mar-bottom-10">
+                            <div class="field-group mar-bottom-10" ng-hide="Ctrl.model.IsNonRAPStaff == true">
                                 <div class="account-management">
                                     <div class="items">
                                         <div class="item">
@@ -224,7 +224,7 @@
                                 <h4>Case Documentation</h4>
                             </div>
 
-                            <div class="field-group mar-bottom-10">
+                            <div class="field-group mar-bottom-10" ng-hide="Ctrl.model.IsNonRAPStaff == true">
                                 <div class="account-management">
                                     <div class="items">
                                         <div class="item">

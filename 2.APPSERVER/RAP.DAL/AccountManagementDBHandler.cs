@@ -349,8 +349,31 @@ namespace RAP.DAL
                         cityUser.CreatedDate = cityDetails.CreatedDate;
                         cityUser.Email = cityDetails.Email;
                         cityUser.EmployeeID =(int) cityDetails.EmployeeID;
-                        cityUser.IsAnalyst = cityDetails.IsAnalyst;
-                        cityUser.IsHearingOfficer = cityDetails.IsHearingOfficer;
+                        cityUser.IsAnalyst = Convert.ToBoolean(cityDetails.IsAnalyst);
+                        if (cityUser.IsAnalyst == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.Analyst;
+                        }
+                        cityUser.IsHearingOfficer = Convert.ToBoolean(cityDetails.IsHearingOfficer);
+                        if (cityUser.IsHearingOfficer == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.HearingOfficer;
+                        }
+                        cityUser.IsAdminAssistant = Convert.ToBoolean(cityDetails.IsAdminAssistant);
+                        if (cityUser.IsAdminAssistant == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.AdminAssistant;
+                        }
+                        cityUser.IsCityAdmin = Convert.ToBoolean(cityDetails.IsCityAdmin);
+                        if (cityUser.IsCityAdmin == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.CityAdmin;
+                        }
+                        cityUser.IsNonRAPStaff = Convert.ToBoolean(cityDetails.IsNonRAPStaff);
+                        if (cityUser.IsNonRAPStaff == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.NonRapStaff;
+                        }
                         
                     }
                     else
@@ -407,8 +430,30 @@ namespace RAP.DAL
                         cityUser.CreatedDate = cityDetails.CreatedDate;
                         cityUser.Email = cityDetails.Email;
                         cityUser.EmployeeID = (int)cityDetails.EmployeeID;
-                        cityUser.IsAnalyst = cityDetails.IsAnalyst;
-                        cityUser.IsHearingOfficer = cityDetails.IsHearingOfficer;
+                        if (cityUser.IsAnalyst == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.Analyst;
+                        }
+                        cityUser.IsHearingOfficer = Convert.ToBoolean(cityDetails.IsHearingOfficer);
+                        if (cityUser.IsHearingOfficer == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.HearingOfficer;
+                        }
+                        cityUser.IsAdminAssistant = Convert.ToBoolean(cityDetails.IsAdminAssistant);
+                        if (cityUser.IsAdminAssistant == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.AdminAssistant;
+                        }
+                        cityUser.IsCityAdmin = Convert.ToBoolean(cityDetails.IsCityAdmin);
+                        if (cityUser.IsCityAdmin == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.CityAdmin;
+                        }
+                        cityUser.IsNonRAPStaff = Convert.ToBoolean(cityDetails.IsNonRAPStaff);
+                        if (cityUser.IsNonRAPStaff == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.NonRapStaff;
+                        }
 
                     }
                     else
@@ -462,10 +507,30 @@ namespace RAP.DAL
                         cityUser.Email = cityDetails.Email;
                         cityUser.EmployeeID = (int)cityDetails.EmployeeID;
                         cityUser.IsAnalyst = Convert.ToBoolean(cityDetails.IsAnalyst);
+                        if (cityUser.IsAnalyst == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.Analyst;
+                        }
                         cityUser.IsHearingOfficer = Convert.ToBoolean(cityDetails.IsHearingOfficer);
+                        if (cityUser.IsHearingOfficer == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.HearingOfficer;
+                        }
                         cityUser.IsAdminAssistant = Convert.ToBoolean(cityDetails.IsAdminAssistant);
+                        if (cityUser.IsAdminAssistant == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.AdminAssistant;
+                        }
                         cityUser.IsCityAdmin = Convert.ToBoolean(cityDetails.IsCityAdmin);
+                        if (cityUser.IsCityAdmin == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.CityAdmin;
+                        }
                         cityUser.IsNonRAPStaff = Convert.ToBoolean(cityDetails.IsNonRAPStaff);
+                        if (cityUser.IsNonRAPStaff == true)
+                        {
+                            cityUser.SelectedRole = (int)CityUserRoles.NonRapStaff;
+                        }
 
                     }
                     else
@@ -1263,19 +1328,48 @@ namespace RAP.DAL
                         CityUserExists.Password = message.Password;
                         CityUserExists.Email = message.Email;
                         CityUserExists.EmployeeID = (int)message.EmployeeID;
-                        CityUserExists.IsAnalyst = Convert.ToBoolean(message.IsAnalyst);
-                        CityUserExists.IsHearingOfficer = Convert.ToBoolean(message.IsHearingOfficer);
-                        CityUserExists.IsAdminAssistant = Convert.ToBoolean(message.IsAdminAssistant);
-                        CityUserExists.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
-                        if (message.IsCityAdmin == true)
+                        if (message.SelectedRole == (int)CityUserRoles.Analyst)
                         {
+                            CityUserExists.IsAnalyst = true;
+                        }
+                        else
+                        {
+                            CityUserExists.IsAnalyst = false;
+                        }
+                        if (message.SelectedRole == (int)CityUserRoles.HearingOfficer)
+                        {
+                            CityUserExists.IsHearingOfficer = true;
+                        }
+                        else
+                        {
+                            CityUserExists.IsHearingOfficer = false;
+                        }
+                        if (message.SelectedRole == (int)CityUserRoles.AdminAssistant)
+                        {
+                            CityUserExists.IsAdminAssistant = true;
+                        }
+                        else
+                        {
+                            CityUserExists.IsAdminAssistant = false;
+                        }
+                        if (message.SelectedRole == (int)CityUserRoles.CityAdmin)
+                        {
+                            CityUserExists.IsCityAdmin = true;
                             CityUserExists.CityAccountTypeID = 2; //City Admin type
                         }
                         else
                         {
-                            CityUserExists.CityAccountTypeID = 1;
+                            CityUserExists.IsCityAdmin = false;
+                            CityUserExists.CityAccountTypeID = 1; 
                         }
-                        CityUserExists.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
+                        if (message.SelectedRole == (int)CityUserRoles.NonRapStaff)
+                        {
+                            CityUserExists.IsNonRAPStaff = true;
+                        }
+                        else
+                        {
+                            CityUserExists.IsNonRAPStaff = false;
+                        }
                         CityUserExists.Title = message.Title;
                         CityUserExists.Department = message.Department;
                         CityUserExists.OfficePhoneNumber = message.OfficePhoneNumber;
@@ -1292,19 +1386,48 @@ namespace RAP.DAL
                         cityUserTable.Password = message.Password;
                         cityUserTable.Email = message.Email;
                         cityUserTable.EmployeeID = (int)message.EmployeeID;
-                        cityUserTable.IsAnalyst = Convert.ToBoolean(message.IsAnalyst);
-                        cityUserTable.IsHearingOfficer = Convert.ToBoolean(message.IsHearingOfficer);
-                        cityUserTable.IsAdminAssistant = Convert.ToBoolean(message.IsAdminAssistant);
-                        cityUserTable.IsCityAdmin = Convert.ToBoolean(message.IsCityAdmin);
-                        if (message.IsCityAdmin == true)
+                        if (message.SelectedRole == (int)CityUserRoles.Analyst)
                         {
-                            cityUserTable.CityAccountTypeID = 2; //City Admin type
+                            CityUserExists.IsAnalyst = true;
                         }
                         else
                         {
-                            cityUserTable.CityAccountTypeID = 1;
+                            CityUserExists.IsAnalyst = false;
                         }
-                        cityUserTable.IsNonRAPStaff = Convert.ToBoolean(message.IsNonRAPStaff);
+                        if (message.SelectedRole == (int)CityUserRoles.HearingOfficer)
+                        {
+                            CityUserExists.IsHearingOfficer = true;
+                        }
+                        else
+                        {
+                            CityUserExists.IsHearingOfficer = false;
+                        }
+                        if (message.SelectedRole == (int)CityUserRoles.AdminAssistant)
+                        {
+                            CityUserExists.IsAdminAssistant = true;
+                        }
+                        else
+                        {
+                            CityUserExists.IsAdminAssistant = false;
+                        }
+                        if (message.SelectedRole == (int)CityUserRoles.CityAdmin)
+                        {
+                            CityUserExists.IsCityAdmin = true;
+                            CityUserExists.CityAccountTypeID = 2; //City Admin type
+                        }
+                        else
+                        {
+                            CityUserExists.IsCityAdmin = false;
+                            CityUserExists.CityAccountTypeID = 1;
+                        }
+                        if (message.SelectedRole == (int)CityUserRoles.NonRapStaff)
+                        {
+                            CityUserExists.IsNonRAPStaff = true;
+                        }
+                        else
+                        {
+                            CityUserExists.IsNonRAPStaff = false;
+                        }
                         cityUserTable.Title = message.Title;
                         cityUserTable.Department = message.Department;
                         cityUserTable.OfficePhoneNumber = message.OfficePhoneNumber;

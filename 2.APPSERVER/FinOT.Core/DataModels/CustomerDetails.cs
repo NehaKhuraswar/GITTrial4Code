@@ -63,6 +63,7 @@ namespace RAP.Core.DataModels
         public bool IsNonRAPStaff { get; set; }
         public bool IsAdminAssistant { get; set; }
         public bool IsCityAdmin { get; set; }
+        public int SelectedRole { get; set; }
         public DateTime CreatedDate { get; set; }
     }
     public class StateM

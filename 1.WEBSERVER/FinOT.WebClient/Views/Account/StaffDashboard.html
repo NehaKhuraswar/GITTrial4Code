@@ -12,9 +12,9 @@
     <div class="container">
 
         <div class="application-form-wrapper">
-            <div class="application-step step-1"> <!--ng-hide="Ctrl.model.AccountType.AccountTypeID != 2"-->
+            <div class="application-step step-1" >
 
-                <div class="account-management"> 
+                <div class="account-management" ng-hide="Ctrl.model.IsNonRAPStaff == true">
                     <div class="items">
                         <div class="item">
                             <div class="item-header"><a ng-click="Ctrl.ManageAccounts()">Manage accounts</a></div>
@@ -22,7 +22,7 @@
                     </div><!-- .items -->
                 </div><!-- .account-management -->
 
-                <form name="frmNewCaseStatus" id="frmNewCaseStatus"  class="application-form">
+                <form name="frmNewCaseStatus" id="frmNewCaseStatus" class="application-form">
                     <div class="step-content step1">
 
                         <div class="subhead type2">
@@ -63,7 +63,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="item-row clearfix" >
+                                            <div class="item-row clearfix">
                                                 <div class="item-col col-45  pad-l40 align-left">
                                                     <div class="small-title">Analyst</div>
                                                     <p>{{item.CityAnalyst.FirstName}} {{item.CityAnalyst.LastName}}</p>
@@ -103,7 +103,7 @@
 
                                         </div>
                                     </div><!-- item-toggle -->
-                                </div><!-- item-row -->                              
+                                </div><!-- item-row -->
                             </div>
                         </div>
                         <!-- .custom-table -->
@@ -325,7 +325,7 @@
                     </div>
                 </div>
                 <!-- .custom-table -->
-                
+
                 <div class="results-paging mar-t60" ng-show="Ctrl.CaseSearchResult.length > 0">
                     <div class="show-records">Showing {{Ctrl.FromRecord}}-{{Ctrl.ToRecord}} of {{Ctrl.CaseSearchModel.TotalCount}} records</div>
                     <div class="pages">
