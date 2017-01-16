@@ -3060,6 +3060,16 @@ namespace RAP.DAL
                     {
                         tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
                     }
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
+                    {
+                        tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                        if(tenantResponseInfo.ThirdPartyInfo != null)
+                        {
+                            tenantResponseInfo.bThirdPartyRepresentation = true;
+                        }
+                    }
+                    
                     tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
                     tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
                     tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
@@ -3076,7 +3086,15 @@ namespace RAP.DAL
                 }
                 else
                 {
-                    
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
+                    {
+                        tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                        if(tenantResponseInfo.ThirdPartyInfo != null)
+                        {
+                            tenantResponseInfo.bThirdPartyRepresentation = true;
+                        }
+                    }
                     var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
 
                     if (ownerPetitionID != null)
@@ -3323,13 +3341,20 @@ namespace RAP.DAL
 
                     if (caseInfo.TenantResponseInfo.bThirdPartyRepresentation)
                     {
-                        thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ThirdPartyInfo).result.UserID;
-                        if (thirdPartyUserID == 0)
+                        var thirdPartyUser = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ThirdPartyInfo);
+                        if (thirdPartyUser.status.Status != StatusEnum.Success)
                         {
                             result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                             return result;
                         }
-                    }
+                        var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = UserID, ThirdPartyUser = thirdPartyUser.result });
+                        if (saveThirdPartyResult.status.Status != StatusEnum.Success)
+                        {
+                            result.status = saveThirdPartyResult.status;
+                            return result;
+                        }
+                        thirdPartyUserID = thirdPartyUser.result.UserID;
+                    }                    
 
                     applicantUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ApplicantUserInfo).result.UserID;
                     if (applicantUserID == 0)
@@ -3403,12 +3428,19 @@ namespace RAP.DAL
                 {
                     if (caseInfo.TenantResponseInfo.bThirdPartyRepresentation)
                     {
-                        thirdPartyUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ThirdPartyInfo).result.UserID;
-                        if (thirdPartyUserID == 0)
+                        var thirdPartyUser = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ThirdPartyInfo);
+                        if (thirdPartyUser.status.Status != StatusEnum.Success)
                         {
                             result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                             return result;
                         }
+                        var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = UserID, ThirdPartyUser = thirdPartyUser.result });
+                        if (saveThirdPartyResult.status.Status != StatusEnum.Success)
+                        {
+                            result.status = saveThirdPartyResult.status;
+                            return result;
+                        }
+                        thirdPartyUserID = thirdPartyUser.result.UserID;
                     }
 
                     applicantUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.ApplicantUserInfo).result.UserID;
@@ -3454,6 +3486,7 @@ namespace RAP.DAL
                     }
                     responseDB.CreatedDate = DateTime.Now;
                     responseDB.ResponseFiledBy = caseInfo.TenantResponseInfo.CustomerID;
+                    responseDB.RangeID = caseInfo.TenantResponseInfo.SelectedRangeOfUnits.RangeID;
                     responseDB.IsSubmitted = false;
                     _dbContext.TenantResponseApplicationInfos.InsertOnSubmit(responseDB);
                     _dbContext.SubmitChanges();

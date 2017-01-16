@@ -82,10 +82,60 @@
         <!-- Your Representative -->
         <div class="subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
             <h4>Your representative</h4>
-            <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
+            <a ng-click="Ctrl.bEditRepresentative = true; Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation = true" class="btn-link btn-edit">Edit</a>            
         </div>
-        <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.TenantResponseInfo.ApplicantInfo.ThirdPartyUser != null">
-            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</p>            
+        <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditRepresentative== true">
+            <div class="field-group">
+                <label for="representative_firstname">Name</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName" required />
+            </div>
+
+            <div class="field-group">
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName" required />
+            </div>
+            <div class="field-group">
+                <label for="businessname">Business name</label>
+                <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName" />
+            </div>
+            <div class="field-group">
+                <label for="representative_address1">Mailing address 1</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_address2">Mailing address 2 (optional)</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_city">City</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_state">State</label>
+                <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                        ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State"
+                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+            </div>
+
+            <div class="field-group">
+                <label for="representative_zip_code">Zip Code</label>
+                <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_phone_number">Phone number</label>
+                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber" required />
+            </div>
+
+            <div class="field-group">
+                <label for="representative_email">Email Address</label>
+                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email" required />
+            </div>
+        </div>
+        <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo != null && Ctrl.bEditRepresentative == false">
+            <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</p>
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}</p>
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}}</p>
             <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}</p>

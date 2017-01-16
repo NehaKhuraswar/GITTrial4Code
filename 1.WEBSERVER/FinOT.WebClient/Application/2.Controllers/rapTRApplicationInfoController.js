@@ -4,9 +4,15 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.CaseID;
     self.bCaseInfo = false;
-
+    self.CaseID;
+    if (self.caseinfo != null) {
+        self.CaseID = self.caseinfo.CaseID;
+        self.bCaseInfo = true;
+    }
+    
+    
+    self.bEditRepresentative = false;
     self.GetTenantResponseApplicationInfo = function (CaseNumber) {
         rapFactory.GetTenantResponseApplicationInfo(CaseNumber, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -17,16 +23,18 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             rapGlobalFactory.bCaseFiledByThirdParty = false;
             if (self.caseinfo.bCaseFiledByThirdParty == false) {
                 self.caseinfo.TenantResponseInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
+                self.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email = angular.copy(self.custDetails.email);
             }
-            else {
-                self.caseinfo.TenantResponseInfo.ThirdPartyUser = self.custDetails.User;
-            }
+            //else {
+            //   // self.caseinfo.TenantResponseInfo.ThirdPartyUser = self.custDetails.User;
+            //}
             self.caseinfo.TenantResponseInfo.CustomerID = self.custDetails.custID;
             self.bCaseInfo = true;
             rapGlobalFactory.CaseDetails = self.caseinfo;
 
         });
     }
+    if (self.caseinfo)
    // _GetTenantResponseApplicationInfo(self.custDetails.custID);
 
     self.StateList = [];
