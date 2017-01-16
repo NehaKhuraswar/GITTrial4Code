@@ -72,10 +72,10 @@
                             <div ng-if="Ctrl.bVerification">
                                 <rap-trverification ng-show="Ctrl.bVerification" model="Ctrl"></rap-trverification>
                             </div>
-                            <div>
+                            <div ng-if="Ctrl.bConfirm">
                                 <rap-trconfirmationresponse ng-show="Ctrl.bConfirm" model="Ctrl"></rap-trconfirmationresponse>
-                            </div>
-                        </form>
+                             </div>
+</form>
                     </div>
                 </div>
             </div>
