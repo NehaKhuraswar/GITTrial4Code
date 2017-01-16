@@ -103,7 +103,15 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
                 //self.caseinfo = response.data;
                 rapGlobalFactory.CaseDetails = response.data;
                 rapGlobalFactory.FromSelectedCase = true;
-                $location.path("/ViewPetition");
+                if (rapGlobalFactory.CaseDetails.PetitionCategoryID == 1)
+                {
+                    $location.path("/ViewPetition");
+                }
+                else
+                {
+                    $location.path("/ViewownerPetition");
+                }
+                
             });
         }
 

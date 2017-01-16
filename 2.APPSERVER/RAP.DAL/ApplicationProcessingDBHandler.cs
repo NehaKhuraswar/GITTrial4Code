@@ -1413,7 +1413,7 @@ namespace RAP.DAL
             {                
                 var caseDB = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).FirstOrDefault();
                 var PetitionDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
-                if (PetitionDB.TenantPetitionID != 0)
+                if (PetitionDB.TenantPetitionID != null)
                 {
                     tenantPetitionResult = GetTenantApplicationInfoForView((int)PetitionDB.TenantPetitionID);
                     if (tenantPetitionResult.status.Status != StatusEnum.Success)
@@ -1448,6 +1448,21 @@ namespace RAP.DAL
 
                     caseInfo.TenantPetitionInfo = tenantPetitionResult.result;
                 }
+
+                if (PetitionDB.OwnerPetitionID != null)
+                {
+                    var ownerPetitionResult = GetOwnerPetition(Convert.ToInt32(PetitionDB.OwnerPetitionID));
+                    if (ownerPetitionResult.status.Status == StatusEnum.Success)
+                    {
+                        caseInfo.OwnerPetitionInfo = ownerPetitionResult.result;
+                    }
+                }
+                var documentResult = _commondbHandler.GetCaseDocuments(C_ID);
+                if (documentResult.status.Status == StatusEnum.Success)
+                {
+                    caseInfo.Documents = documentResult.result;
+                }
+
                 caseInfoResult.result = caseInfo;
                 caseInfoResult.status = new OperationStatus() { Status = StatusEnum.Success };
                 return caseInfoResult;

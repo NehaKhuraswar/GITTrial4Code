@@ -1,7 +1,7 @@
 ﻿<div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            <!--<div class="alert alert-error" ng-show="Hide==true"></div>-->
+            <div class="alert alert-error" ng-show="Hide==true"></div>
             <div class="step-heading">Applicant and Property Information</div>
             <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" novalidate>
                 <div class="step-content step1">
@@ -335,6 +335,8 @@
                             <div class="clear"></div>
                         </div>
                     </div>
+                   thirdparty firstname validation :  {{frmOwnerResponse.Thirdparty_firstname.$error.required}}
+                    thirdparty lastname validation :  {{frmOwnerResponse.Thirdparty_lastname.$error.required}}
                 </div>
                 <div class="step-footer">
                     <!--<input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue"
@@ -350,7 +352,13 @@
                                    (!frmOwnerResponse.Thirdparty_zip.$error.required)&&
                                    (!frmOwnerResponse.business_license_number.$error.required) && Ctrl.Continue()" />-->
                   
-                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
+                    <!--<input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue"
+                           ng-click="(Hide=true);(!frmOwnerResponse.Thirdparty_firstname.$error.required) &&
+                          (!frmOwnerResponse.Thirdparty_lastname.$error.required) && Ctrl.Continue()" />-->
+
+                     
+                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue"
+                           ng-click="Ctrl.Continue()" />
                 </div>
             </form>
         </div>
