@@ -108,6 +108,7 @@
     <Parameter Name="Zip" Parameter="zip" Type="System.String" DbType="VarChar(5)" />
     <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(15)" />
     <Parameter Name="CaseNumber" Parameter="caseNumber" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="CaseStatus" Parameter="caseStatus" Type="System.Int32" DbType="Int" />
     <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="SortReverse" Parameter="sortReverse" Type="System.Boolean" DbType="Bit" />
     <Parameter Name="PageSize" Parameter="pageSize" Type="System.Int32" DbType="Int" />

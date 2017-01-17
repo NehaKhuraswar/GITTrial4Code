@@ -155,6 +155,7 @@ namespace RAP.DAL
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Zip", DbType="VarChar(5)")] string zip, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PhoneNumber", DbType="VarChar(15)")] string phoneNumber, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CaseNumber", DbType="VarChar(25)")] string caseNumber, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="CaseStatus", DbType="Int")] System.Nullable<int> caseStatus, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortBy", DbType="VarChar(50)")] string sortBy, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="SortReverse", DbType="Bit")] System.Nullable<bool> sortReverse, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="PageSize", DbType="Int")] System.Nullable<int> pageSize, 
@@ -162,9 +163,9 @@ namespace RAP.DAL
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalCount", DbType="Int")] ref System.Nullable<int> totalCount, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), firstName, lastName, aPNNumber, analystID, hearingOfficerID, fromDate, toDate, addressLine1, addressLine2, zip, phoneNumber, caseNumber, sortBy, sortReverse, pageSize, currentPage, totalCount, message);
-			totalCount = ((System.Nullable<int>)(result.GetParameterValue(16)));
-			message = ((string)(result.GetParameterValue(17)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), firstName, lastName, aPNNumber, analystID, hearingOfficerID, fromDate, toDate, addressLine1, addressLine2, zip, phoneNumber, caseNumber, caseStatus, sortBy, sortReverse, pageSize, currentPage, totalCount, message);
+			totalCount = ((System.Nullable<int>)(result.GetParameterValue(17)));
+			message = ((string)(result.GetParameterValue(18)));
 			return ((ISingleResult<ReturnCaseSearch>)(result.ReturnValue));
 		}
 	}

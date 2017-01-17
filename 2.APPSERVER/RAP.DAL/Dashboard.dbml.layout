@@ -14,7 +14,7 @@
         <elementListCompartment Id="8cc70d1d-2b4e-49d2-904e-a15f02b4a137" absoluteBounds="3.39, 0.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 1.56814697265625); (3.375 : 1.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 1.56814697265625); (3.375 : 1.56814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DashboardDataContext/Activity/Activity_ActivityStatus" />
       <nodes>
         <classShapeMoniker Id="1ff660e7-8f92-4f17-bbfe-7c2b52910421" />
@@ -40,7 +40,7 @@
         <elementListCompartment Id="4f41bc43-9d39-44bf-817e-d311daa3e5c1" absoluteBounds="1.5150000000000001, 3.335, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2 : 2.44399251302083); (2 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2 : 2.44399251302083); (2 : 2.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DashboardDataContext/Activity/Activity_CaseActivityStatus" />
       <nodes>
         <classShapeMoniker Id="1ff660e7-8f92-4f17-bbfe-7c2b52910421" />

@@ -184,7 +184,7 @@ namespace RAP.DAL
 
                     var Resultdb = db.USP_SearchCase_Get(caseSearch.FirstName, caseSearch.LastName, caseSearch.APNNumber,
                         caseSearch.Analyst.UserID, caseSearch.HearingOfficer.UserID, caseSearch.FromDate, caseSearch.ToDate, caseSearch.AddressLine1,
-                        caseSearch.AddressLine2, caseSearch.Zip, caseSearch.PhoneNumber, caseSearch.CaseNumber,
+                        caseSearch.AddressLine2, caseSearch.Zip, caseSearch.PhoneNumber, caseSearch.CaseNumber, caseSearch.CaseStatus,
                          caseSearch.SortBy, caseSearch.SortReverse,
                         caseSearch.PageSize, caseSearch.CurrentPage, ref TotalCount, ref errorMessage);
 

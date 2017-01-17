@@ -121,15 +121,10 @@
                                         <input type="text" name="case_number" id="case_number" class="field-input full-width" value="" ng-model="Ctrl.CaseSearchModel.CaseNumber" />
                                     </div>
                                 </div>
-
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <label for="case-status" class="small-title">Case status</label>
                                     <div class="full-width">
-                                        <select name="case-status" id="case-status" class="custom-select" data-placeholder="Select">
-                                            <option value="All" selected>All</option>
-                                            <option value="Option 2">Option 2</option>
-                                            <option value="Option 3">Option 3</option>
-                                        </select>
+                                        <dropdown placeholder="Case Status" list="Ctrl.CaseStatusList" property="StatusName" selected="Ctrl.CaseSearchModel.CaseStatus"></dropdown>                                        
                                     </div>
                                 </div>
                             </div>

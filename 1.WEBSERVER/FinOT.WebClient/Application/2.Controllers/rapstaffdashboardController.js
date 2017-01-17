@@ -14,6 +14,8 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     };
     self.pageNumberList = [];
     self.pagesizeOptions = [5, 10, 20, 50];
+    self.CaseStatusList =[{ "StatusID": "1", "StatusName": "All" }, { "StatusID": "2", "StatusName": "Open"}, { "StatusID": "3", "StatusName": "Closed"}]
+
     self.CaseList = [];
     self.Analysts = [];
     self.FromRecord = 1;

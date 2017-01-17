@@ -118,6 +118,7 @@ namespace RAP.Core.DataModels
         public string Zip { get; set; }
         public string PhoneNumber { get; set; }
         public string CaseNumber { get; set; }
+        public int CaseStatus { get; set; }
        
         public int PageSize { get; set; }
         public string SortBy { get; set; }
