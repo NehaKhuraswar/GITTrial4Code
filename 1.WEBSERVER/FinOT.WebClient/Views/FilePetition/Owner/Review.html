@@ -1,358 +1,358 @@
 ﻿
-        <div class="col-md-9 col-sm-12">
-            <div class="application-step step-1">
-                <h3 class="step-heading">Property Owner Petition for Approval of Rent Increase: <br /><span>Review</span></h3>
+<div class="col-md-9 col-sm-12">
+    <div class="application-step step-1">
+        <h3 class="step-heading">Property Owner Petition for Approval of Rent Increase: <br /><span>Review</span></h3>
 
-                <form name="frmOwnerResponseReview" id="frmOwnerResponseReview" action="#" method="post" class="application-form">
-                    <div class="step-content step1"id="printable" >
-
-
-                        <div class="subhead no-top-margin">
-                            <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
-                            <p class="no-bottom-margin">
-                                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
-                                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}},
-                                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
-                                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
-                            </p>
-                        </div>
-
-                        <div class="field-group filled-info subhead no-top-margin hidden-sm">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Petition type</div></div>
-                                <div class="col-sm-6 col-xs-12">Property owner</div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="subhead type2">
-                            <h4>Applicant and property information</h4>
-                            <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
-                        </div>
+        <form name="frmOwnerResponseReview" id="frmOwnerResponseReview" action="#" method="post" class="application-form">
+            <div class="step-content step1" id="printable">
 
 
-
-                        <div class="field-group filled-info subhead  no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
-                                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}</p>
-                                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead">
-                            <div class="row" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
-                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null">
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
-                                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
-                                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
-                                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid your business license</div></div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid">
-                                        <i></i><span>Yes</span>
-                                    </label>
-                                    <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid">
-                                        <i></i><span>No</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber != 0">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Business license number</div></div>
-                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber}}</div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Proof of payment</div></div>
-                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'}">
-                                    {{item.DocName}}
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid the Rent Adjustment Progrm service fee(${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)?</div></div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid">
-                                        <i></i><span>Yes</span>
-                                    </label>
-                                    <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid">
-                                        <i></i><span>No</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date of which you aquired the building</div></div>
-                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year}}</div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Total number of units</div></div>
-                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits}}</div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Is there more than one street address on the parcel</div></div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel">
-                                        <i></i><span>Yes</span>
-                                    </label>
-                                    <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel">
-                                        <i></i><span>No</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-                        <!-- Justification for Rent Increase -->
-                        <div class="subhead type2">
-                            <h4>Justification for rent increase</h4>
-                            <a ng-click="Ctrl.EditJustification()" class="btn-link btn-edit">Edit</a>
-                        </div>
-
-
-                        <div class="field-group filled-info subhead">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">I (we) petition for approval of one or more rent increases on the grounds that the increase(es) is/are justified by:</div></div>
-                                <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons | filter: {IsSelected: true}">
-                                    <label for="{{petitionground.PetitionGroundID}}">
-                                        <i></i><span>{{reason.ReasonDescription}}</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-                        <!--<div class="field-group filled-info subhead no-top-margin">
-            <div class="info-title full-width">Description of the document that you are attaching</div>
-            <div class="row">
-                <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
-            </div>
-        </div>-->
-                        <!-- .field-group -->
-
-                        <div class="field-group filled-info subhead">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Attached document</div></div>
-                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
-                                    {{item.DocName}}
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-                        <!-- Rental property -->
-                        <div class="subhead type2">
-                            <h4>Rental property</h4>
-                            <a ng-click="Ctrl.EditRentalProperty()" class="btn-link btn-edit">Edit</a>
-                        </div>
-
-                        <div class="field-group filled-info subhead">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit</div></div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <label ng-repeat="unittype in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypes | filter: {UnitTypeID: Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypeID}">
-                                        <i></i><span>{{unittype.UnitDescription}}</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Tenant’s names</div></div>
-                                    <div class="col-sm-6 col-xs-12">
-
-                                        {{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}
-                                    </div>
-                                </div>
-                            </div><!-- .field-group -->
-
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Rental property</div></div>
-                                    <div class="col-sm-6 col-xs-12">
-                                        {{item.TenantUserInfo.AddressLine1}}  {{item.TenantUserInfo.AddressLine2}}
-                                        <br />                                    {{item.TenantUserInfo.City}}, {{item.TenantUserInfo.State.StateName}}, {{item.TenantUserInfo.Zip}}
-                                    </div>
-                                </div>
-                            </div><!-- .field-group -->
-                        </div>
-
-                        <!-- Rental history -->
-
-                        <div class="subhead type2">
-                            <h4>Rent history</h4>
-                            <a ng-click="Ctrl.EditRentalHistory()" class="btn-link btn-edit">Edit</a>
-                        </div>
-
-                        <div class="field-group filled-info subhead">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">The tenant moved into the rental unit on</div></div>
-                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Year}}</div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">The tenant’s initial monthly rent including all services provided was</div></div>
-                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.InitialRent}}$</div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Have you (or a previous Owner) given the City of Oakland’s form entitled NOTICE TO TENANTS OF RESIDENTIAL RENT ADJUSTMENT PROGRAM (“RAP Notice”) to all of the petitioning tenants?</div></div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus | filter: {RAPNoticeStatusID: Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID}">
-                                        <i></i><span>{{item.RAPNoticeStatus}}</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">On what date was the Notice first given?</div></div>
-                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Year}}</div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Upload signed copy of notice</div></div>
-                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'}">
-                                    {{item.DocName}}
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Is the tenant current on the rent?</div></div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.CurrentOnRent">
-                                        <i></i><span>Yes</span>
-                                    </label>
-                                    <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.CurrentOnRent">
-                                        <i></i><span>No</span>
-                                    </label>
-                                </div>
-                                <div class="col-sm-6 col-xs-12">
-                                    <label ng-repeat="item in Ctrl.caseinfo.CurrentOnRent | filter: {StatusID: 'Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID'}">
-                                        <i></i><span>{{item.Status}}</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div><!-- .field-group -->
-                        <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
-                                    <div class="col-sm-6 col-xs-12">
-                                        <div class="col-sm-6 col-xs-12">
-                                            <label ng-if="item.bRentIncreaseNoticeGiven">
-                                                <i></i><span>Yes</span>
-                                            </label>
-                                            <label ng-if="!item.bRentIncreaseNoticeGiven">
-                                                <i></i><span>No</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                <div class="row">
-                    <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
-                    <div class="col-sm-6 col-xs-12">Yes</div>
+                <div class="subhead no-top-margin">
+                    <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
+                    <p class="no-bottom-margin">
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}},
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
+                    </p>
                 </div>
-            </div>-->
-                            <!-- .field-group -->
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
-                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
-                                </div>
-                            </div><!-- .field-group -->
 
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
-                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreasedTo - item.RentIncreasedFrom}}</div>
-                                </div>
-                            </div><!-- .field-group -->
+                <div class="field-group filled-info subhead no-top-margin hidden-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Petition type</div></div>
+                        <div class="col-sm-6 col-xs-12">Property owner</div>
+                    </div>
+                </div><!-- .field-group -->
 
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
-                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
-                                </div>
-                            </div><!-- .field-group -->
+                <div class="subhead type2">
+                    <h4>Applicant and property information</h4>
+                    <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
+                </div>
+
+
+
+                <div class="field-group filled-info subhead  no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
+                            <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}</p>
+                            <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
                         </div>
-                        <div class="subhead type2">
-                            <h4>Additional Documentation</h4>
-                            <a ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead">
+                    <div class="row" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null">
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
+                            <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
+                            <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
+                            <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid your business license</div></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid">
+                                <i></i><span>Yes</span>
+                            </label>
+                            <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid">
+                                <i></i><span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber != 0">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Business license number</div></div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber}}</div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Proof of payment</div></div>
+                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'}">
+                            {{item.DocName}}
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid the Rent Adjustment Progrm service fee(${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)?</div></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid">
+                                <i></i><span>Yes</span>
+                            </label>
+                            <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid">
+                                <i></i><span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Date of which you aquired the building</div></div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year}}</div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Total number of units</div></div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits}}</div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Is there more than one street address on the parcel</div></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel">
+                                <i></i><span>Yes</span>
+                            </label>
+                            <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel">
+                                <i></i><span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+                <!-- Justification for Rent Increase -->
+                <div class="subhead type2">
+                    <h4>Justification for rent increase</h4>
+                    <a ng-click="Ctrl.EditJustification()" class="btn-link btn-edit">Edit</a>
+                </div>
+
+
+                <div class="field-group filled-info subhead">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">I (we) petition for approval of one or more rent increases on the grounds that the increase(es) is/are justified by:</div></div>
+                        <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons | filter: {IsSelected: true}">
+                            <label for="{{petitionground.PetitionGroundID}}">
+                                <i></i><span>{{reason.ReasonDescription}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+                <!--<div class="field-group filled-info subhead no-top-margin">
+                    <div class="info-title full-width">Description of the document that you are attaching</div>
+                    <div class="row">
+                        <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
+                    </div>
+                </div>-->
+                <!-- .field-group -->
+
+                <div class="field-group filled-info subhead">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Attached document</div></div>
+                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
+                            {{item.DocName}}
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+                <!-- Rental property -->
+                <div class="subhead type2">
+                    <h4>Rental property</h4>
+                    <a ng-click="Ctrl.EditRentalProperty()" class="btn-link btn-edit">Edit</a>
+                </div>
+
+                <div class="field-group filled-info subhead">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit</div></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label ng-repeat="unittype in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypes | filter: {UnitTypeID: Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypeID}">
+                                <i></i><span>{{unittype.UnitDescription}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Tenant’s names</div></div>
+                            <div class="col-sm-6 col-xs-12">
+
+                                {{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}
+                            </div>
+                        </div>
+                    </div><!-- .field-group -->
+
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Rental property</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                {{item.TenantUserInfo.AddressLine1}}  {{item.TenantUserInfo.AddressLine2}}
+                                <br />                                    {{item.TenantUserInfo.City}}, {{item.TenantUserInfo.State.StateName}}, {{item.TenantUserInfo.Zip}}
+                            </div>
+                        </div>
+                    </div><!-- .field-group -->
+                </div>
+
+                <!-- Rental history -->
+
+                <div class="subhead type2">
+                    <h4>Rent history</h4>
+                    <a ng-click="Ctrl.EditRentalHistory()" class="btn-link btn-edit">Edit</a>
+                </div>
+
+                <div class="field-group filled-info subhead">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">The tenant moved into the rental unit on</div></div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.MovedInDate.Year}}</div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">The tenant’s initial monthly rent including all services provided was</div></div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.InitialRent}}$</div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you (or a previous Owner) given the City of Oakland’s form entitled NOTICE TO TENANTS OF RESIDENTIAL RENT ADJUSTMENT PROGRAM (“RAP Notice”) to all of the petitioning tenants?</div></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus | filter: {RAPNoticeStatusID: Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID}">
+                                <i></i><span>{{item.RAPNoticeStatus}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">On what date was the Notice first given?</div></div>
+                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Year}}</div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Upload signed copy of notice</div></div>
+                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'}">
+                            {{item.DocName}}
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
+                <div class="field-group filled-info subhead no-top-margin">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Is the tenant current on the rent?</div></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.CurrentOnRent">
+                                <i></i><span>Yes</span>
+                            </label>
+                            <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.CurrentOnRent">
+                                <i></i><span>No</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <label ng-repeat="item in Ctrl.caseinfo.CurrentOnRent | filter: {StatusID: 'Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID'}">
+                                <i></i><span>{{item.Status}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+                <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="col-sm-6 col-xs-12">
+                                    <label ng-if="item.bRentIncreaseNoticeGiven">
+                                        <i></i><span>Yes</span>
+                                    </label>
+                                    <label ng-if="!item.bRentIncreaseNoticeGiven">
+                                        <i></i><span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .field-group -->
+                    <!--<div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
+                            <div class="col-sm-6 col-xs-12">Yes</div>
+                        </div>
+                    </div>-->
+                    <!-- .field-group -->
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                        </div>
+                    </div><!-- .field-group -->
+
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                            <div class="col-sm-6 col-xs-12">{{item.RentIncreasedTo - item.RentIncreasedFrom}}</div>
+                        </div>
+                    </div><!-- .field-group -->
+
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                        </div>
+                    </div><!-- .field-group -->
+                </div>
+                <div class="subhead type2">
+                    <h4>Additional Documentation</h4>
+                    <a ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
+                </div>
+
+                <div class="field-group">
+                    <!-- Custom Table -->
+                    <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_AdditionalDocuments'}">
+                        <div class="tbl-header">
+                            <div class="tbl-row clearfix">
+                                <div class="col col-35 name">File name</div>
+                            </div>
                         </div>
 
-                        <div class="field-group">
-                            <!-- Custom Table -->
-                            <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_AdditionalDocuments'}">
-                                <div class="tbl-header">
-                                    <div class="tbl-row clearfix">
-                                        <div class="col col-35 name">File name</div>
+                        <div class="tbl-body">
+                            <div class="tbl-row clearfix">
+                                <div class="item item-toggle expanded">
+                                    <div class="item-header clearfix">
+                                        <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
                                     </div>
-                                </div>
 
-                                <div class="tbl-body">
-                                    <div class="tbl-row clearfix">
-                                        <div class="item item-toggle expanded">
-                                            <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
-                                            </div>
-
-                                            <div class="item-content clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-sm-12">
-                                                        <p>{{item.DocDescription}}</p>
-                                                    </div>
-                                                </div>
+                                    <div class="item-content clearfix">
+                                        <div class="row">
+                                            <div class="col-md-10 col-sm-12">
+                                                <p>{{item.DocDescription}}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- .custom-table -->
                         </div>
                     </div>
-                    <div class="step-footer">
-                       <button class="btn-primary" ng-click="Ctrl.Continue()">Save and continue</button> &nbsp;&nbsp;
-                        <!--<button class="btn-primary" ng-click="Ctrl.Print()">Print</button>-->
-                    </div>
-                </form>
+                    <!-- .custom-table -->
+                </div>
             </div>
-        </div>
-  
+            <div class="step-footer">
+                <button class="btn-primary" ng-click="Ctrl.Continue()">Save and continue</button> &nbsp;&nbsp;
+                <!--<button class="btn-primary" ng-click="Ctrl.Print()">Print</button>-->
+            </div>
+        </form>
+    </div>
+</div>
+
 

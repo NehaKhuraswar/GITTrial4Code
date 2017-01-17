@@ -74,21 +74,21 @@
                                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_Justification')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                             </div>
                             <!--<div class="field-group">
-                        <table class="table table-condensed nopadding-bottom">
-                            <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
-                                    <td class="nopadding-left">
-                                        {{item.DocName}}
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                        <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
-                                        <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>-->
+                                <table class="table table-condensed nopadding-bottom">
+                                    <tbody>
+                                        <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
+                                            <td class="nopadding-left">
+                                                {{item.DocName}}
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                                <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
+                                                <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>-->
                         </div>
                     </div><!-- .field-group -->
                 </div>
@@ -98,7 +98,7 @@
                 </div>
             </form>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
