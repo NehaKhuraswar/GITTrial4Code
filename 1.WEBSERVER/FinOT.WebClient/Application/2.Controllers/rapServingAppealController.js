@@ -7,11 +7,13 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     self.Calender = masterFactory.Calender;
     self.StateList = [];
     self.serveAppeal;
+    self.Error="";
     var _GetStateList = function () {
     masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            return;
+         }
             self.StateList = response.data;
         });
      }
@@ -19,9 +21,10 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     self.OpposingParty;
     var _GetOpposingParty = function() {
     rapFactory.GetOpposingParty ().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-                }
+            }
             self.OpposingParty = response.data;
             });
     }
@@ -29,7 +32,8 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
 
     var _GetAppealServe = function (appealID) {
         rapFactory.GetAppealServe(appealID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             // self.caseinfo = response.data;
@@ -64,7 +68,8 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
    
     self.ResendPin = function () {
         masterFactory.ResendPin(self.custDetails).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             alert.Error("Pin is sent to your email");
@@ -77,7 +82,8 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
             self.serveAppeal.OpposingParty.push(self.OpposingParty);
         }
         rapFactory.SaveTenantServingAppeal(self.caseinfo.TenantAppealInfo, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             $scope.model.bServingAppeal = false;

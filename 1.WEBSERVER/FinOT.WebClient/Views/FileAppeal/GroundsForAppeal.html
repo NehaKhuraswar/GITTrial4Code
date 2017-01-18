@@ -1,19 +1,25 @@
 ﻿
-        <h3 class="step-heading">Grounds for Appeal</h3>
+    <div class="application-form-wrapper">
+        <div class="application-step step-1">
+            <div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>
+            <div class="step-heading">Grounds for Appeal</div>
 
-        <div class="step-content create-new">
+            <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
+                <div class="step-content create-new">
 
-                <div class="subhead no-top-margin">
-                    <p>
-					
-					Please select your ground(s) for appeal from the list below. You must provide an explanation for each ground that you are appealing. Each ground for appeal listed below clearly states what you should include in the explanation. Each ground for appeal listed below includes direction as what should be included in the explanation. 
-					
-					
-					</p>
-                </div>
+                    <div class="subhead no-top-margin">
+                        <p>
 
-                <div class="field-group">
-                    <!--<div class="form-group-checkbox vertical clearfix">-->
+                            Please select your ground(s) for appeal from the list below. You must provide an explanation for each ground that you are appealing. Each ground for appeal listed below clearly states what you should include in the explanation. Each ground for appeal listed below includes direction as what should be included in the explanation.
+
+
+                        </p>
+                    </div>
+
+                    <div class="field-group">
+                        <!--<div class="form-group-checkbox vertical clearfix">-->
                         <!--<div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds | limitTo:3">-->
                         <!--<div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds.slice(0, 3) track by $index">-->
                         <!--<div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
@@ -41,41 +47,43 @@
                                     </label>
                                 </div>
                             </div>
-                        <!--</div>-->   
-                    </div>                       
-                </div>
-
-                       
-            <div class="field-group">
-                <div class="field-addfile">
-                    <div class="input-file-wrapper">
-                        <span class="btn-link">Attach explanation</span>
-                        <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'A_Grounds')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
+                            <!--</div>-->
+                        </div>
                     </div>
+
+
                     <div class="field-group">
-                        <table class="table table-condensed nopadding-bottom">
-                            <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'}">
-                                    <td class="nopadding-left">
-                                        {{item.DocName}}
-                                    </td>
-                                    <td>
-                                        &nbsp;<input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
-                                        <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="field-addfile">
+                            <div class="input-file-wrapper">
+                                <span class="btn-link">Attach explanation</span>
+                                <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'A_Grounds')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
+                            </div>
+                            <div class="field-group">
+                                <table class="table table-condensed nopadding-bottom">
+                                    <tbody>
+                                        <tr ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'}">
+                                            <td class="nopadding-left">
+                                                {{item.DocName}}
+                                            </td>
+                                            <td>
+                                                &nbsp;<input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
+                                                <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+
+
                 </div>
-            </div>
 
+                <div class="step-footer">
+                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToRentalHistory(Ctrl.caseinfo.TenantAppealInfo)" />
+                </div>
+            </form>
+        </div>
 
-                    </div>
-
-            <div class="step-footer">
-                <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToRentalHistory(Ctrl.caseinfo.TenantAppealInfo)" />
-            </div>
-       
-
+    </div><!-- .application-form-wrapper -->
 

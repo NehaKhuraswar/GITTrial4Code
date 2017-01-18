@@ -4,11 +4,12 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-
+    self.Error = "";
 
     var _GetAppealDocs = function (CustomerID, DocTitle) {
         rapFactory.GetAppealDocuments(CustomerID, DocTitle).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.caseinfo.TenantAppealInfo.Documents = response.data;
@@ -16,7 +17,8 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
     }
     var _GetAppealGroundInfo = function (CaseNumber, appealFiledBy) {
         rapFactory.GetAppealGroundInfo(CaseNumber, appealFiledBy).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.caseinfo.TenantAppealInfo.AppealGrounds = response.data;
@@ -72,11 +74,28 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
     }
 
     self.ContinueToRentalHistory = function (model) {
+        var selected = false;
+        model.AppealGrounds.forEach(function(appealGround)
+        {
+            if(appealGround.Selected == true)
+            {
+                selected = true;
+            }
+        });
+        if (selected == false)
+        {
+            self.Error = "Grounds of appeal is a required field";
+            return;
+        }
+
+
+
         model.AppealCategoryID = self.caseinfo.PetitionCategoryID;
         model.CaseNumber = self.caseinfo.CaseID;
         model.AppealFiledBy = self.custDetails.custID;
         rapFactory.SaveAppealGroundInfo(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;

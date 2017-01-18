@@ -6,16 +6,22 @@ var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxServ
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
     self.DocDescriptions = masterFactory.DocDescription();
-
+    self.Error = "";
     masterFactory.DocDescription().then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            return;
+        }
         self.DocDescriptions = response.data;
     });
     self.description1 = null;
     self.description2 = null;
     self.Documents = null;
     rapFactory.GetAppealDocuments(self.custDetails.custID, 'A_AdditionalDocuments').then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            return;
+        }
         self.Documents = response.data;
     });
 
@@ -74,7 +80,10 @@ var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxServ
     self.ContinueToServeAppeal = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveAppeallDocuments(self.Documents).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             $scope.model.bAddDocs = false;
             $scope.model.bServingAppeal = true;
             $scope.model.AppealSubmissionStatus.AdditionalDocumentation = true;

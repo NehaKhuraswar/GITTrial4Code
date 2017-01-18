@@ -42,14 +42,11 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     //}
     self.Login = function (model, accounttype) {
         rapFactory.Login(model).then(function (response) {
-            // if (!alert.checkResponse(response)) {
-            if (response != null && response != undefined) {
-                if (response.exceptions != null && response.exceptions.length) {
-                    self.Error = response.exceptions[0];
-                    // alert.Error(response.warnings[0]);
+            if (!alert.checkForResponse(response)) {
+                 self.Error = rapGlobalFactory.Error;
                     return;
-                }
-            }                
+            }
+                         
             rapGlobalFactory.CustomerDetails = response.data;                    
             $location.path("/publicdashboard");    
         });          

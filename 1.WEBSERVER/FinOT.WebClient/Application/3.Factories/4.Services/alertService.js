@@ -1,10 +1,19 @@
 ﻿'use strict';
-var alertService = ['inform', function (inform) {
+var alertService = ['inform', 'rapGlobalFactory', function (inform, rapGlobalFactory) {
     var self = this;
-   // self.isAuthenticated = false;
+    // self.isAuthenticated = false;
     self.checkResponse = function (res) {
         if (res != null && res != undefined) {
-            if (res.exceptions != null && res.exceptions.length) {  self.Error(res.exceptions); }
+            if (res.exceptions != null && res.exceptions.length) { self.Error(res.exceptions); }
+            if (res.warnings != null && res.warnings.length) { self.Warning(res.warnings); }
+            if (res.errors != null) { self.ModelError(res.errors); }
+            return res.status;
+        }
+        return false;
+    }
+    self.checkForResponse = function (res) {
+        if (res != null && res != undefined) {
+            if (res.exceptions != null && res.exceptions.length) { self.GetError(res.exceptions); }
             if (res.warnings != null && res.warnings.length) { self.Warning(res.warnings); }
             if (res.errors != null) { self.ModelError(res.errors); }
             return res.status;
@@ -43,9 +52,16 @@ var alertService = ['inform', function (inform) {
     self.Success = function (messages) {
         showMessage(messages, 'success');
     }
-
     self.Error = function (messages) {
         showMessage(messages, 'danger');
+    }
+    self.GetError = function (messages) {
+        //showMessage(messages, 'danger');
+        var message = '';
+        angular.forEach(messages, function (msg) {
+            message +=  msg  ;
+        });
+        rapGlobalFactory.Error = message;
     }
 
     self.Warning = function (messages) {

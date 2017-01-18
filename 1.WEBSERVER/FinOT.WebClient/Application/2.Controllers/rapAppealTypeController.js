@@ -3,10 +3,12 @@ var rapAppealTypeController = ['$scope', '$modal', 'alertService', 'rapappealtyp
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
+    self.Error = "";
     //self.caseinfo = rapGlobalFactory.CaseDetails;
     var _getPetitionCategory = function () {
         rapFactory.GetPetitionCategory().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.caseinfo = response.data;

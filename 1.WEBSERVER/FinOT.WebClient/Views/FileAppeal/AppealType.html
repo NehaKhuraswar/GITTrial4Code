@@ -1,32 +1,52 @@
-﻿<h3 class="step-heading">Appeal</h3>
+﻿<div class="col-md-9 col-sm-12">
+    <div class="application-form-wrapper">
+        <div class="application-step step-1">
+            <div class="alert alert-error" ng-show="Hide==true">
+            </div>
+            <!--<div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>-->
+            <div class="step-heading">Appeal</div>
 
-<div class="step-content step1">
+            <form name="frmAppeal" id="frmAppeal" novalidate class="application-form" onsubmit="return false;">
+                <div class="step-content step1">
 
-    <div class="field-group subhead no-top-margin">
-        <p class="input-label fs-18">Are you filing as a tenant or as a property owner?</p>
+                    <div class="field-group subhead no-top-margin">
+                        <p class="input-label">Are you filing as a tenant or as a property owner?</p>
+                        <div class="form-group-radio vertical clearfix required" data-error="Filing category" >
+                            <label ng-repeat="category in Ctrl.caseinfo.PetitionCategory" for="{{category.PetitionCategoryID}}" required>
+                                <input type="radio" class="input-field"
+                                       ng-model="Ctrl.caseinfo.PetitionCategoryID"
+                                       ng-value="category.PetitionCategoryID"
+                                       id="{{category.PetitionCategoryID}}"
+                                       name="PetitionCategory"><i></i><span>{{category.PetitionCategory}}</span>
 
-        <div class="form-group-radio vertical clearfix">
-            <label ng-repeat="category in Ctrl.caseinfo.PetitionCategory" for="{{category.PetitionCategoryID}}">
-                <input type="radio" class="input-field"
-                       ng-model="Ctrl.caseinfo.PetitionCategoryID"
-                       ng-value="category.PetitionCategoryID"
-                       id="{{category.PetitionCategoryID}}"
-                       name="PetitionCategory"><i></i><span>{{category.PetitionCategory}}</span>
+                            </label>
+                            <div class="clear"></div>
+                        </div>
+                        
+                    </div>
 
-            </label>
+                    <div class="field-group">
+                        <div class="form-group-checkbox vertical full-width clearfix">
+                            <div class="checkbox-wrapper no-bottom-margin">
+                                <label for="behalf_of_petitioner">
+                                    <input type="checkbox" name="behalf_of_petitioner" id="behalf_of_petitioner"
+                                           ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty" /><i></i><span>This form is being submitted by the third-party representative on behalf of the petitioner.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="step-footer">
+                    <input type="submit" id="continue" name="continue" class="btn-primary" value="Continue"
+                           ng-click="(Hide=true); (Ctrl.caseinfo.PetitionCategoryID!=0) && Ctrl.ContinueToImportantInformation()" />
+                </div>
+            </form>
         </div>
-    </div>
-</div>
-<div class="field-group">
-    <div class="form-group-checkbox vertical clearfix">
-        <div class="checkbox-wrapper">
-            <label for="by_third_party">
-                <input type="checkbox" class="checkbox" id="by_third_party" ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty"><i></i><span>This form is submitted by third-party representative on behalf of the petitioner</span>
-            </label>
-        </div>
-    </div>
-</div>
 
-<div class="step-footer">
-    <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.ContinueToImportantInformation()" />
-</div>
+    </div><!-- .application-form-wrapper -->
+</div><!-- .col-md-9 -->
+
