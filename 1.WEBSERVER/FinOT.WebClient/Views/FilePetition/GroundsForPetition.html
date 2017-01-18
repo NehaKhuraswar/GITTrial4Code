@@ -14,7 +14,7 @@
                 <div class="field-group subhead no-top-margin">
                     <p class="input-label">I (we) contest one or more rent increases on one or more of the following grounds:</p>
 
-                    <div class="form-group-checkbox vertical clearfix " data-error="Contesting ground">
+                    <div class="form-group-checkbox vertical clearfix required" data-error="Contesting ground">
                         <div class="checkbox-wrapper" ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds" required>
                             <label for="{{petitionground.PetitionGroundID}}">
                                 <input type="checkbox" name="petitiongroundcheckbox" class="checkbox" id="{{petitionground.PetitionGroundID}}"
@@ -25,8 +25,8 @@
                     </div>
                 </div>
                 <div class="step-footer">
-                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue"
-                           ng-click="(Hide=true); (!frmTenentPetition.petitiongroundcheckbox.$error.required) && Ctrl.ContinueToRentalHistory()" />
+                    <input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
+                           ng-click="(Hide=true); Ctrl.ContinueToRentalHistory()" />
                 </div>
 </div>
             </form>

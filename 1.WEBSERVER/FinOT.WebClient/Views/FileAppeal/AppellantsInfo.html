@@ -12,13 +12,13 @@
                 <label for="CaseID">Case number</label>
                 <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.CaseID" required />
             </div>
-            <button class="btn-primary" ng-click="Ctrl.GetCaseInfoWithModel(Ctrl.CaseID)">Case Info</button>
+            <button class="btn-link" ng-click="Ctrl.GetCaseInfoWithModel(Ctrl.CaseID)">Load case info</button>
             <!--TBD Remove below code-->
             <!--<div class="text">{{Ctrl.caseinfo.CaseID}}; {{Ctrl.caseInfo.TenantPetitionInfo.OwnerInfo.LastName}} v. {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}} (Unit C)</div>-->
         </div>
 
         <div class="info" ng-show="Ctrl.bShowApplicantInfo">
-            <div class="title">Date of the decision that you are appealing</div>
+            <div class="title">Date of the hearing decision you are appealing</div>
             <div class="row">
                 <div class="col-sm-4 col-xs-12">
                     <div class="field-group">
@@ -47,13 +47,13 @@
 
 
     <div class="subhead" ng-show="Ctrl.bShowApplicantInfo">
-        <h4>Applicant’s name and address</h4>
+        <h4>Applicant information</h4>
         <a ng-click="Ctrl.EditApplicantName()" class="btn-link btn-edit" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditApplicant == false && Ctrl.bShowApplicantInfo == true">Edit</a>
     </div>
     <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditApplicant == false && Ctrl.bShowApplicantInfo == true">
-        <p>{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName}}  </p>
-        <p>{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip}}  </p>
-        <p>Tel: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email}}</p>
+        {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName}}</br>
+        {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip}}<br/>
+        Tel: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email}}
     </div>
 
     <div ng-show="(Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.bEditApplicant == true) && Ctrl.bShowApplicantInfo">
@@ -97,7 +97,7 @@
         </div>
 
         <div class="field-group">
-            <label for="Applicant_zip_code">Zip Code</label>
+            <label for="Applicant_zip_code">Zip code</label>
             <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip" required />
         </div>
 
@@ -107,7 +107,7 @@
         </div>
 
         <div class="field-group">
-            <label for="Applicant_email">Email Address</label>
+            <label for="Applicant_email">Email address</label>
             <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email" required />
         </div>
     </div>
@@ -117,9 +117,9 @@
         <h4>Property Address (Include Unit Number)</h4>
     </div>
     <div class="field-group" ng-show="Ctrl.bShowApplicantInfo">
-        <p>{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.LastName}}  </p>
-        <p>{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.Zip}}  </p>
-        <p>Tel: {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.email}}</p>
+        {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.LastName}}<br/>
+        {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.Zip}}<br/>
+        Tel: {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.email}}
     </div>
 
     <div class="subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bShowApplicantInfo">
@@ -162,7 +162,7 @@
         </div>
 
         <div class="field-group">
-            <label for="representative_zip_code">Zip Code</label>
+            <label for="representative_zip_code">Zip code</label>
             <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip" required />
         </div>
 
@@ -172,19 +172,19 @@
         </div>
 
         <div class="field-group">
-            <label for="representative_email">Email Address</label>
+            <label for="representative_email">Email address</label>
             <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email" required />
         </div>
     </div>
     <div class="field-group" ng-show="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation== true && Ctrl.bEditRepresentative == false
                                 && Ctrl.bShowApplicantInfo == true && Ctrl.caseinfo.bCaseFiledByThirdParty == false">
-        <p>{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.LastName}}  </p>
-        <p>{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip}}  </p>
-        <p>Tel: {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber}}  <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email}}</p>
+        {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.LastName}}<br/>
+        {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip}}<br/>
+        Tel: {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email}}<br/>
     </div>
 </div>
 
 
 <div class="step-footer">
-    <input type="button" id="continue" name="continue" class="btn-primary" value="Continue" ng-click="Ctrl.ContinueToGroundsforAppeal(Ctrl.caseinfo)" />
+    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToGroundsforAppeal(Ctrl.caseinfo)" />
 </div>
