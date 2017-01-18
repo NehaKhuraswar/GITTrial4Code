@@ -1685,6 +1685,7 @@ namespace RAP.DAL
                 {
                     appealServe.AppealID = (int)appealServeDB.AppealID;
                     appealServe.bAcknowledgeNamePin = (bool)appealServeDB.bAcknowledgeNamePin;
+                    appealServe.bDeclartionOfOriginalDocs = Convert.ToBoolean(appealServeDB.bDeclartionOfOriginalDocs);
                     appealServe.bDeclaration = (bool)appealServeDB.bDeclaration;
                     appealServe.bThirdParty = (bool)appealServeDB.bThirdParty;
                     appealServe.PenaltyDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(appealServeDB.PenaltyDate));
@@ -2906,6 +2907,7 @@ namespace RAP.DAL
                     appealDB.bAcknowledgeNamePin = tenantAppealInfo.serveAppeal.bAcknowledgeNamePin;
                     appealDB.bDeclaration = tenantAppealInfo.serveAppeal.bDeclaration;
                     appealDB.bThirdParty = tenantAppealInfo.serveAppeal.bThirdParty;
+                    appealDB.bDeclartionOfOriginalDocs = tenantAppealInfo.serveAppeal.bDeclartionOfOriginalDocs;
                     appealDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Year, tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day);
                     appealDB.CreatedDate = DateTime.Now;                   
                 }
@@ -2916,6 +2918,7 @@ namespace RAP.DAL
                     appealNewDB.bAcknowledgeNamePin = tenantAppealInfo.serveAppeal.bAcknowledgeNamePin;
                     appealNewDB.bDeclaration = tenantAppealInfo.serveAppeal.bDeclaration;
                     appealNewDB.bThirdParty = tenantAppealInfo.serveAppeal.bThirdParty;
+                    appealNewDB.bDeclartionOfOriginalDocs = tenantAppealInfo.serveAppeal.bDeclartionOfOriginalDocs;
                     appealNewDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Year,tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day);
                     appealNewDB.CreatedDate = DateTime.Now;
                     _dbContext.ServeAppeals.InsertOnSubmit(appealNewDB);

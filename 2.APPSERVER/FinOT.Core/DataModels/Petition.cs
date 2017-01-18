@@ -283,6 +283,7 @@ namespace RAP.Core.DataModels
         public int AppealID { get; set; }
         public string pin { get; set; }
         public bool bAcknowledgeNamePin { get; set; }
+        public bool bDeclartionOfOriginalDocs { get; set; }
         public bool bThirdParty { get; set; }
         public bool bDeclaration { get; set; }
         public CustomDate PenaltyDate { get; set; }

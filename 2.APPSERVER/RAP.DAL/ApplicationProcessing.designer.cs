@@ -87,9 +87,6 @@ namespace RAP.DAL
     partial void InsertTenantPetitionPageSubmissionStatus(TenantPetitionPageSubmissionStatus instance);
     partial void UpdateTenantPetitionPageSubmissionStatus(TenantPetitionPageSubmissionStatus instance);
     partial void DeleteTenantPetitionPageSubmissionStatus(TenantPetitionPageSubmissionStatus instance);
-    partial void InsertServeAppeal(ServeAppeal instance);
-    partial void UpdateServeAppeal(ServeAppeal instance);
-    partial void DeleteServeAppeal(ServeAppeal instance);
     partial void InsertAppealOpposingParty(AppealOpposingParty instance);
     partial void UpdateAppealOpposingParty(AppealOpposingParty instance);
     partial void DeleteAppealOpposingParty(AppealOpposingParty instance);
@@ -162,6 +159,9 @@ namespace RAP.DAL
     partial void InsertTenantRentalHistory(TenantRentalHistory instance);
     partial void UpdateTenantRentalHistory(TenantRentalHistory instance);
     partial void DeleteTenantRentalHistory(TenantRentalHistory instance);
+    partial void InsertServeAppeal(ServeAppeal instance);
+    partial void UpdateServeAppeal(ServeAppeal instance);
+    partial void DeleteServeAppeal(ServeAppeal instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -354,14 +354,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<ServeAppeal> ServeAppeals
-		{
-			get
-			{
-				return this.GetTable<ServeAppeal>();
-			}
-		}
-		
 		public System.Data.Linq.Table<AppealOpposingParty> AppealOpposingParties
 		{
 			get
@@ -551,6 +543,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantRentalHistory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ServeAppeal> ServeAppeals
+		{
+			get
+			{
+				return this.GetTable<ServeAppeal>();
 			}
 		}
 	}
@@ -4133,212 +4133,6 @@ namespace RAP.DAL
 					this._Verification = value;
 					this.SendPropertyChanged("Verification");
 					this.OnVerificationChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServeAppeal")]
-	public partial class ServeAppeal : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _AppealServeID;
-		
-		private System.Nullable<int> _AppealID;
-		
-		private System.Nullable<bool> _bAcknowledgeNamePin;
-		
-		private System.Nullable<bool> _bThirdParty;
-		
-		private System.Nullable<bool> _bDeclaration;
-		
-		private System.Nullable<System.DateTime> _PenaltyDate;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAppealServeIDChanging(int value);
-    partial void OnAppealServeIDChanged();
-    partial void OnAppealIDChanging(System.Nullable<int> value);
-    partial void OnAppealIDChanged();
-    partial void OnbAcknowledgeNamePinChanging(System.Nullable<bool> value);
-    partial void OnbAcknowledgeNamePinChanged();
-    partial void OnbThirdPartyChanging(System.Nullable<bool> value);
-    partial void OnbThirdPartyChanged();
-    partial void OnbDeclarationChanging(System.Nullable<bool> value);
-    partial void OnbDeclarationChanged();
-    partial void OnPenaltyDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnPenaltyDateChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    #endregion
-		
-		public ServeAppeal()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealServeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int AppealServeID
-		{
-			get
-			{
-				return this._AppealServeID;
-			}
-			set
-			{
-				if ((this._AppealServeID != value))
-				{
-					this.OnAppealServeIDChanging(value);
-					this.SendPropertyChanging();
-					this._AppealServeID = value;
-					this.SendPropertyChanged("AppealServeID");
-					this.OnAppealServeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealID", DbType="Int")]
-		public System.Nullable<int> AppealID
-		{
-			get
-			{
-				return this._AppealID;
-			}
-			set
-			{
-				if ((this._AppealID != value))
-				{
-					this.OnAppealIDChanging(value);
-					this.SendPropertyChanging();
-					this._AppealID = value;
-					this.SendPropertyChanged("AppealID");
-					this.OnAppealIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bAcknowledgeNamePin", DbType="Bit")]
-		public System.Nullable<bool> bAcknowledgeNamePin
-		{
-			get
-			{
-				return this._bAcknowledgeNamePin;
-			}
-			set
-			{
-				if ((this._bAcknowledgeNamePin != value))
-				{
-					this.OnbAcknowledgeNamePinChanging(value);
-					this.SendPropertyChanging();
-					this._bAcknowledgeNamePin = value;
-					this.SendPropertyChanged("bAcknowledgeNamePin");
-					this.OnbAcknowledgeNamePinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bThirdParty", DbType="Bit")]
-		public System.Nullable<bool> bThirdParty
-		{
-			get
-			{
-				return this._bThirdParty;
-			}
-			set
-			{
-				if ((this._bThirdParty != value))
-				{
-					this.OnbThirdPartyChanging(value);
-					this.SendPropertyChanging();
-					this._bThirdParty = value;
-					this.SendPropertyChanged("bThirdParty");
-					this.OnbThirdPartyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bDeclaration", DbType="Bit")]
-		public System.Nullable<bool> bDeclaration
-		{
-			get
-			{
-				return this._bDeclaration;
-			}
-			set
-			{
-				if ((this._bDeclaration != value))
-				{
-					this.OnbDeclarationChanging(value);
-					this.SendPropertyChanging();
-					this._bDeclaration = value;
-					this.SendPropertyChanged("bDeclaration");
-					this.OnbDeclarationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PenaltyDate", DbType="Date")]
-		public System.Nullable<System.DateTime> PenaltyDate
-		{
-			get
-			{
-				return this._PenaltyDate;
-			}
-			set
-			{
-				if ((this._PenaltyDate != value))
-				{
-					this.OnPenaltyDateChanging(value);
-					this.SendPropertyChanging();
-					this._PenaltyDate = value;
-					this.SendPropertyChanged("PenaltyDate");
-					this.OnPenaltyDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="Date")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
 				}
 			}
 		}
@@ -12688,6 +12482,236 @@ namespace RAP.DAL
 						this._PetitionID = default(int);
 					}
 					this.SendPropertyChanged("TenantPetitionInfo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ServeAppeal")]
+	public partial class ServeAppeal : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AppealServeID;
+		
+		private System.Nullable<int> _AppealID;
+		
+		private System.Nullable<bool> _bAcknowledgeNamePin;
+		
+		private System.Nullable<bool> _bThirdParty;
+		
+		private System.Nullable<bool> _bDeclaration;
+		
+		private System.Nullable<System.DateTime> _PenaltyDate;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<bool> _bDeclartionOfOriginalDocs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAppealServeIDChanging(int value);
+    partial void OnAppealServeIDChanged();
+    partial void OnAppealIDChanging(System.Nullable<int> value);
+    partial void OnAppealIDChanged();
+    partial void OnbAcknowledgeNamePinChanging(System.Nullable<bool> value);
+    partial void OnbAcknowledgeNamePinChanged();
+    partial void OnbThirdPartyChanging(System.Nullable<bool> value);
+    partial void OnbThirdPartyChanged();
+    partial void OnbDeclarationChanging(System.Nullable<bool> value);
+    partial void OnbDeclarationChanged();
+    partial void OnPenaltyDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPenaltyDateChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnbDeclartionOfOriginalDocsChanging(System.Nullable<bool> value);
+    partial void OnbDeclartionOfOriginalDocsChanged();
+    #endregion
+		
+		public ServeAppeal()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealServeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AppealServeID
+		{
+			get
+			{
+				return this._AppealServeID;
+			}
+			set
+			{
+				if ((this._AppealServeID != value))
+				{
+					this.OnAppealServeIDChanging(value);
+					this.SendPropertyChanging();
+					this._AppealServeID = value;
+					this.SendPropertyChanged("AppealServeID");
+					this.OnAppealServeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AppealID", DbType="Int")]
+		public System.Nullable<int> AppealID
+		{
+			get
+			{
+				return this._AppealID;
+			}
+			set
+			{
+				if ((this._AppealID != value))
+				{
+					this.OnAppealIDChanging(value);
+					this.SendPropertyChanging();
+					this._AppealID = value;
+					this.SendPropertyChanged("AppealID");
+					this.OnAppealIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bAcknowledgeNamePin", DbType="Bit")]
+		public System.Nullable<bool> bAcknowledgeNamePin
+		{
+			get
+			{
+				return this._bAcknowledgeNamePin;
+			}
+			set
+			{
+				if ((this._bAcknowledgeNamePin != value))
+				{
+					this.OnbAcknowledgeNamePinChanging(value);
+					this.SendPropertyChanging();
+					this._bAcknowledgeNamePin = value;
+					this.SendPropertyChanged("bAcknowledgeNamePin");
+					this.OnbAcknowledgeNamePinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bThirdParty", DbType="Bit")]
+		public System.Nullable<bool> bThirdParty
+		{
+			get
+			{
+				return this._bThirdParty;
+			}
+			set
+			{
+				if ((this._bThirdParty != value))
+				{
+					this.OnbThirdPartyChanging(value);
+					this.SendPropertyChanging();
+					this._bThirdParty = value;
+					this.SendPropertyChanged("bThirdParty");
+					this.OnbThirdPartyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bDeclaration", DbType="Bit")]
+		public System.Nullable<bool> bDeclaration
+		{
+			get
+			{
+				return this._bDeclaration;
+			}
+			set
+			{
+				if ((this._bDeclaration != value))
+				{
+					this.OnbDeclarationChanging(value);
+					this.SendPropertyChanging();
+					this._bDeclaration = value;
+					this.SendPropertyChanged("bDeclaration");
+					this.OnbDeclarationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PenaltyDate", DbType="Date")]
+		public System.Nullable<System.DateTime> PenaltyDate
+		{
+			get
+			{
+				return this._PenaltyDate;
+			}
+			set
+			{
+				if ((this._PenaltyDate != value))
+				{
+					this.OnPenaltyDateChanging(value);
+					this.SendPropertyChanging();
+					this._PenaltyDate = value;
+					this.SendPropertyChanged("PenaltyDate");
+					this.OnPenaltyDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="Date")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bDeclartionOfOriginalDocs", DbType="Bit")]
+		public System.Nullable<bool> bDeclartionOfOriginalDocs
+		{
+			get
+			{
+				return this._bDeclartionOfOriginalDocs;
+			}
+			set
+			{
+				if ((this._bDeclartionOfOriginalDocs != value))
+				{
+					this.OnbDeclartionOfOriginalDocsChanging(value);
+					this.SendPropertyChanging();
+					this._bDeclartionOfOriginalDocs = value;
+					this.SendPropertyChanged("bDeclartionOfOriginalDocs");
+					this.OnbDeclartionOfOriginalDocsChanged();
 				}
 			}
 		}

@@ -190,17 +190,6 @@
       <Column Name="Verification" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ServeAppeal" Member="ServeAppeals">
-    <Type Name="ServeAppeal">
-      <Column Name="AppealServeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AppealID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="bAcknowledgeNamePin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="bThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="bDeclaration" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="PenaltyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.AppealOpposingParty" Member="AppealOpposingParties">
     <Type Name="AppealOpposingParty">
       <Column Name="AppealOpposingPartyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -586,6 +575,18 @@
       <Column Name="PreviousCaseIDs" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="TenantPetitionInfo_TenantRentalHistory" Member="TenantPetitionInfo" ThisKey="PetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServeAppeal" Member="ServeAppeals">
+    <Type Name="ServeAppeal">
+      <Column Name="AppealServeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AppealID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bAcknowledgeNamePin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bDeclaration" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PenaltyDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="bDeclartionOfOriginalDocs" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
