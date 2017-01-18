@@ -4690,6 +4690,29 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<bool> TenantUpdateAdditionalDocumentsPageSubmission(int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var tPetitionSubmission = _dbContext.TenantPetitionPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).First();
+                if (tPetitionSubmission != null)
+                {
+                    tPetitionSubmission.AdditionalDocumentation = true;
+                    _dbContext.SubmitChanges();
+                }
+
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
         public ReturnResult<bool> OwnerUpdateAdditionalDocumentsPageSubmission(int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();

@@ -75,36 +75,52 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         self.oPetionCurrentStatus.PetitionCategory = true;
     };
     self.showImpInfo = function () {
-        _DisableAll();
-        self.bImpInfo = true;
+        if (self.tPetionActiveStatus.ImportantInformation) {
+            _DisableAll();
+            self.bImpInfo = true;
+        }
     };
     self.showAppInfo = function () {
-        _DisableAll();
-        self.bAppInfo = true;
+        if (self.tPetionActiveStatus.ApplicantInformation) {
+            _DisableAll();
+            self.bAppInfo = true;
+        }
     };
     self.showGrounds = function () {
-        _DisableAll();
-        self.bGrounds = true;
+        if (self.tPetionActiveStatus.GroundsForPetition) {
+            _DisableAll();
+            self.bGrounds = true;
+        }
     };
     self.showRentalHistory = function () {
-        _DisableAll();
-        self.bRentalHistory = true;
+        if (self.tPetionActiveStatus.RentHistory) {
+            _DisableAll();
+            self.bRentalHistory = true;
+        }
     };
     self.showLostServices = function () {
-        _DisableAll();
-        self.bLostServices = true;
+        if (self.tPetionActiveStatus.LostService) {
+            _DisableAll();
+            self.bLostServices = true;
+        }
     };
     self.showAddDocuments = function () {
-        _DisableAll();
-        self.bAddDocuments = true;
+        if (self.tPetionActiveStatus.AdditionalDocumentation) {
+            _DisableAll();
+            self.bAddDocuments = true;
+        }
     };
     self.showReview = function () {
-        _DisableAll();
-        self.bReview = true;
+        if (self.tPetionActiveStatus.Review) {
+            _DisableAll();
+            self.bReview = true;
+        }
     };
     self.showVerification = function () {
-        _DisableAll();
-        self.bVerification = true;
+        if (self.tPetionActiveStatus.Verification) {
+            _DisableAll();
+            self.bVerification = true;
+        }
     };
     self.ShowOwnerImpInfo = function () {
         if (self.oPetionActiveStatus.ImportantInformation) {

@@ -72,7 +72,7 @@
 
     self.ContinueToReview = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveTenantDocuments(self.Documents).then(function (response) {
+        rapFactory.SaveTenantDocuments(self.Documents, self.caseinfo.CustomerID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $scope.model.bAddDocuments = false;
             $scope.model.bReview = true;

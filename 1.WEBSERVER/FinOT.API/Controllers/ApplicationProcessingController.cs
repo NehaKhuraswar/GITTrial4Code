@@ -1531,9 +1531,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("SaveTenantDocuments")]
+        [Route("SaveTenantDocuments/{CustomerID:int}")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantDocuments([FromBody] List<DocumentM> documents)
+        public HttpResponseMessage SaveTenantDocuments([FromBody] List<DocumentM> documents, [FromUri]int CustomerID)
         {
             //AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -1542,7 +1542,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantDocuments(documents);
+                result = _service.SaveTenantDocuments(documents, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

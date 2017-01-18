@@ -13,9 +13,9 @@ var rapTenantlDocumentFactory = ['blockUI', 'ajaxService', function (blockUI, aj
             blockUI.stop();
         });
     }
-    var _SaveTenantDocuments = function (model) {
+    var _SaveTenantDocuments = function (model,customerID) {
         blockUI.start();
-        var url = _routePrefix + '/SaveTenantDocuments';
+        var url = _routePrefix + '/SaveTenantDocuments/' + customerID;
 
         return ajax.Post(model, url)
         .finally(function () {

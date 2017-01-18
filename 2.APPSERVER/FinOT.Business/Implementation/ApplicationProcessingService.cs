@@ -903,7 +903,7 @@ namespace RAP.Business.Implementation
             }
         }
 
-        public ReturnResult<List<DocumentM>> SaveTenantDocuments(List<DocumentM> documents)
+        public ReturnResult<List<DocumentM>> SaveTenantDocuments(List<DocumentM> documents, int customerID)
         {
             ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
             List<DocumentM> _documents = new List<DocumentM>();
@@ -913,7 +913,7 @@ namespace RAP.Business.Implementation
                 {
                     if (!doc.isUploaded)
                     {
-                        doc.DocCategory = DocCategory.TenantResponse.ToString();
+                        doc.DocCategory = DocCategory.TenantPetition.ToString();
                         var docUploadResut = _documentService.UploadDocument(doc);
                         if (docUploadResut.status.Status == StatusEnum.Success)
                         {
@@ -925,6 +925,7 @@ namespace RAP.Business.Implementation
                         _documents.Add(doc);
                     }
                 }
+                _dbHandler.TenantUpdateAdditionalDocumentsPageSubmission(customerID);
                 result.result = _documents;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
