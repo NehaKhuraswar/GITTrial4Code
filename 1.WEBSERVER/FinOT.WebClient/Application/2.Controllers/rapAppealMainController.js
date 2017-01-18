@@ -48,28 +48,40 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
     };
 
     self.showAppellantInfo = function () {
-        _DisableAll();
-        self.bAppellantInfo = true;
+        if (self.AppealSubmissionStatus.ApplicantInformation) {
+            _DisableAll();
+            self.bAppellantInfo = true;
+        }
     };
     self.showImpInfo = function () {
-        _DisableAll();
-        self.bImpInfoAppeal = true;
+        if (self.AppealSubmissionStatus.ImportantInformation) {
+            _DisableAll();
+            self.bImpInfoAppeal = true;
+        }
     };
     self.showGrounds = function () {
-        _DisableAll();
-        self.bGrounds = true;
+        if (self.AppealSubmissionStatus.GroundsOfAppeal) {
+            _DisableAll();
+            self.bGrounds = true;
+        }
     };
     self.showServingAppeal = function () {
-        _DisableAll();
-        self.bServingAppeal = true;
+        if (self.AppealSubmissionStatus.ServingAppeal) {
+            _DisableAll();
+            self.bServingAppeal = true;
+        }
     };
     self.showReview = function () {
-        _DisableAll();
-        self.bReview = true;
+        if (self.AppealSubmissionStatus.Review) {
+            _DisableAll();
+            self.bReview = true;
+        }
     };
     self.showAddDoc = function () {
-        _DisableAll();
-        self.bAddDocs = true;
+        if (self.AppealSubmissionStatus.AdditionalDocumentation) {
+            _DisableAll();
+            self.bAddDocs = true;
+        }
     };
 
 

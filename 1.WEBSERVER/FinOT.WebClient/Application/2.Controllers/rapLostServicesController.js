@@ -6,6 +6,7 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.LostServices;
     self.Problems;
+    self.Error = "";
 
     var range = 10 / 2;
     var currentYear = new Date().getFullYear();
@@ -20,7 +21,8 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     self.Calender = masterFactory.Calender;
     var _GetEmptyLostServicesInfo = function () {
         rapFactory.GetEmptyLostServicesInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.LostServices = response.data;
@@ -30,7 +32,8 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
 
     var _GetEmptyProblemsInfo = function() {
         rapFactory.GetEmptyProblemsInfo().then(function (response) {
-            if(!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.Problems = response.data;
@@ -41,9 +44,10 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
 
      var _GetTenantLostServiceInfo = function (petitionId) {
          rapFactory.GetTenantLostServiceInfo(petitionId, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-        }
+             if (!alert.checkForResponse(response)) {
+                 self.Error = rapGlobalFactory.Error;
+                 return;
+             }
         self.caseinfo.TenantPetitionInfo.LostServicesPage = response.data;
         });
     }

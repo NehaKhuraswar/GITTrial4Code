@@ -4,10 +4,11 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    
+    self.Error = "";
     var _GetPetitionGroundInfo = function (petitionId) {
         rapFactory.GetPetitionGroundInfo(petitionId).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.caseinfo.TenantPetitionInfo.PetitionGrounds = response.data;
@@ -47,7 +48,10 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
     self.ContinueToRentalHistory = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SavePetitionGroundInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             $scope.model.bGrounds = false;
             $scope.model.bRentalHistory = true;
             $scope.model.tPetionActiveStatus.GroundsForPetition = true;

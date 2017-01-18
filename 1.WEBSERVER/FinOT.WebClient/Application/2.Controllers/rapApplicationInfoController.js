@@ -5,13 +5,14 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Hide = true;
-    
+    self.Error = "";
 
     var _GetTenantApplicationInfo = function (custID) {
         rapFactory.GetTenantApplicationInfo(custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+                }
             self.caseinfo.TenantPetitionInfo = response.data;
             if (self.caseinfo.bCaseFiledByThirdParty == false) {
                 self.caseinfo.TenantPetitionInfo.ApplicantUserInfo = self.custDetails.User;
@@ -30,9 +31,10 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     self.StateList = [];
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+    }
             self.StateList = response.data;
             
         });
@@ -78,7 +80,10 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     self.ContinueToGroundsforPetition = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.bAppInfo = false;
             $scope.model.bGrounds = true;

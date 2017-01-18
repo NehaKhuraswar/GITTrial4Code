@@ -4,10 +4,11 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-
+    self.Error = "";
     var _GetTenantReviewInfo = function (custID) {
         rapFactory.GetTenantReviewInfo(custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.caseinfo.TenantPetitionInfo = response.data;

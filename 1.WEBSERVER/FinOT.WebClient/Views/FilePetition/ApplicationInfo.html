@@ -9,6 +9,9 @@
         <strong><a href="javascript:void();" data-id="representative_firstname">Name</a></strong> is a required field<br />
         <strong><a href="javascript:void();" data-id="business_name">Business name</a></strong> is a required field-->
                             </div>
+                            <div class="alert" ng-show="Ctrl.Error!=''">
+                                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                            </div>
 
                             <!-- Page Sub Title - Visible on desktop screens only -->
                             <div class="step-heading">Applicant and Property Information</div>
@@ -60,12 +63,10 @@
 
                                     <div class="field-group">
                                         <label for="Applicant_state">State</label>
-                                        <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                                        <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
-                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State"
-                                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
-                                            <option value="" selected>Select state</option>
-                                        </select>
+                                        <div class="row">
+                                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State"></dropdown>
+                                        </div>
+                                        
                                     </div>
 
                                     <div class="field-group">
@@ -240,7 +241,6 @@
                                         <label for="po_state">State <span>*</span></label>
                                         <div class="row">
                                             <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"></dropdown>
-
                                         </div>
                                     </div>
 

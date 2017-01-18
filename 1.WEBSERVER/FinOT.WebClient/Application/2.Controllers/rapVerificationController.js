@@ -4,12 +4,14 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
     //   self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.Error = "";
     self.ResendPin = function () {
         masterFactory.ResendPin(self.custDetails).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
-            alert.Error("Pin is sent to your email");
+            self.Error= "Pin is sent to your email";
         });
     }
     self.SubmitPetition = function () {
@@ -17,9 +19,10 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.CaseFileBy = self.custDetails.custID;
         rapFactory.SubmitTenantPetition(rapGlobalFactory.CaseDetails).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            } 
+            }
             $scope.model.tPetionActiveStatus.Verification = true;
              $scope.model.bVerification = false;
              $scope.model.bConfirm = true;

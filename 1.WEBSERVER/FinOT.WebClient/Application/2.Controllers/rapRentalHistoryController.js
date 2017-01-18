@@ -5,6 +5,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.RentalIncreaseModel;
+    self.Error = "";
     $http.get('..js/tooltips.json').success(function (data) {
         $scope.tooltips = data;
     });
@@ -21,16 +22,18 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
     self.Calender = masterFactory.Calender;
     var _GetEmptyTenantRentalIncrementInfo = function () {
         rapFactory.GetEmptyTenantRentalIncrementInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+        }
             self.RentalIncreaseModel = response.data;
         });
     }
     _GetEmptyTenantRentalIncrementInfo();
     var _GetRentalHistoryInfo = function (petitionId) {
         rapFactory.GetRentalHistoryInfo(petitionId).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.caseinfo.TenantPetitionInfo.TenantRentalHistory = response.data;
@@ -73,7 +76,10 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
             self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
         }
         rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo, self.caseinfo.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }          
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+                }
         });
 
     }

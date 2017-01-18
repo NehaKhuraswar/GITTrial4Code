@@ -3,6 +3,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     var self = this;
     self.model = [];
     self.PageTitle = 'Petition';
+    self.Error = "";
     //self.indexModel = {
     //    bPetitionType: false,
     //    bImpInfo: false,
@@ -193,7 +194,8 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
 
         
         rapFactory.GetCaseInfo(null, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.model = response.data;
@@ -205,7 +207,8 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
 
     var _getPetitionCategory = function () {
         rapFactory.GetPetitionCategory().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.model = response.data;
@@ -219,7 +222,8 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     var _getPageSubmission = function()
     {
         rapFactory.GetPageSubmissionStatus(self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.PetitionSubmissionStatus = response.data;

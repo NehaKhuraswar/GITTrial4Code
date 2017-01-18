@@ -5,6 +5,9 @@
         <div class="application-step step-1">
             <div class="alert alert-error" ng-show="Hide==true">
             </div>
+            <div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>
             <!-- Page Sub Title - Visible on desktop screens only -->
             <div class="step-heading">Grounds for Petition</div>
 
