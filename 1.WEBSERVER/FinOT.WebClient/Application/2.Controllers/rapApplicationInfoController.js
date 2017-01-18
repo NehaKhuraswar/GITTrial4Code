@@ -15,9 +15,11 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
             self.caseinfo.TenantPetitionInfo = response.data;
             if (self.caseinfo.bCaseFiledByThirdParty == false) {
                 self.caseinfo.TenantPetitionInfo.ApplicantUserInfo = self.custDetails.User;
+                self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email = self.custDetails.email;
             }
             else {
                 self.caseinfo.TenantPetitionInfo.ThirdPartyUser = self.custDetails.User;
+                self.caseinfo.TenantPetitionInfo.ThirdPartyUser.Email = self.custDetails.email;
             }
             self.caseinfo.TenantPetitionInfo.CustomerID = self.custDetails.custID;
             

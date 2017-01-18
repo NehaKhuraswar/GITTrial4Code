@@ -12404,15 +12404,15 @@ namespace RAP.DAL
 		
 		private int _PetitionID;
 		
-		private System.DateTime _MoveInDate;
+		private System.Nullable<System.DateTime> _MoveInDate;
 		
-		private decimal _InitialRent;
+		private System.Nullable<decimal> _InitialRent;
 		
-		private bool _bRAPNoticeGiven;
+		private System.Nullable<bool> _bRAPNoticeGiven;
 		
-		private System.DateTime _RAPNoticeGivenDate;
+		private System.Nullable<System.DateTime> _RAPNoticeGivenDate;
 		
-		private bool _bRentControlledByAgency;
+		private System.Nullable<bool> _bRentControlledByAgency;
 		
 		private System.Nullable<bool> _bPetitionFiledPrviously;
 		
@@ -12430,15 +12430,15 @@ namespace RAP.DAL
     partial void OnTenantRentalHistoryIDChanged();
     partial void OnPetitionIDChanging(int value);
     partial void OnPetitionIDChanged();
-    partial void OnMoveInDateChanging(System.DateTime value);
+    partial void OnMoveInDateChanging(System.Nullable<System.DateTime> value);
     partial void OnMoveInDateChanged();
-    partial void OnInitialRentChanging(decimal value);
+    partial void OnInitialRentChanging(System.Nullable<decimal> value);
     partial void OnInitialRentChanged();
-    partial void OnbRAPNoticeGivenChanging(bool value);
+    partial void OnbRAPNoticeGivenChanging(System.Nullable<bool> value);
     partial void OnbRAPNoticeGivenChanged();
-    partial void OnRAPNoticeGivenDateChanging(System.DateTime value);
+    partial void OnRAPNoticeGivenDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRAPNoticeGivenDateChanged();
-    partial void OnbRentControlledByAgencyChanging(bool value);
+    partial void OnbRentControlledByAgencyChanging(System.Nullable<bool> value);
     partial void OnbRentControlledByAgencyChanged();
     partial void OnbPetitionFiledPrviouslyChanging(System.Nullable<bool> value);
     partial void OnbPetitionFiledPrviouslyChanged();
@@ -12498,8 +12498,8 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MoveInDate", DbType="DateTime NOT NULL")]
-		public System.DateTime MoveInDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MoveInDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> MoveInDate
 		{
 			get
 			{
@@ -12518,8 +12518,8 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InitialRent", DbType="Decimal(9,2) NOT NULL")]
-		public decimal InitialRent
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InitialRent", DbType="Decimal(9,2)")]
+		public System.Nullable<decimal> InitialRent
 		{
 			get
 			{
@@ -12538,8 +12538,8 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bRAPNoticeGiven", DbType="Bit NOT NULL")]
-		public bool bRAPNoticeGiven
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bRAPNoticeGiven", DbType="Bit")]
+		public System.Nullable<bool> bRAPNoticeGiven
 		{
 			get
 			{
@@ -12558,8 +12558,8 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RAPNoticeGivenDate", DbType="DateTime NOT NULL")]
-		public System.DateTime RAPNoticeGivenDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RAPNoticeGivenDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RAPNoticeGivenDate
 		{
 			get
 			{
@@ -12578,8 +12578,8 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bRentControlledByAgency", DbType="Bit NOT NULL")]
-		public bool bRentControlledByAgency
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bRentControlledByAgency", DbType="Bit")]
+		public System.Nullable<bool> bRentControlledByAgency
 		{
 			get
 			{

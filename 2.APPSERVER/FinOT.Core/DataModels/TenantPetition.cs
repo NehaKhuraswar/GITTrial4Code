@@ -326,10 +326,10 @@ namespace RAP.Core.DataModels
         }
         public int PetitionID { get; set; }
         public CustomDate MoveInDate { get; set; }
-        public decimal InitialRent { get; set; }
-        public bool bRAPNoticeGiven { get; set; }
+        public decimal ?InitialRent { get; set; }
+        public bool ?bRAPNoticeGiven { get; set; }
         public CustomDate RAPNoticeGivenDate { get; set; }
-        public bool bRentControlledByAgency { get; set; }
+        public bool ?bRentControlledByAgency { get; set; }
         public string PreviousCaseIDs { get; set; }
         public bool bPetitionFiledPrviously { get; set; }
         public List<TenantRentIncreaseInfoM> RentIncreases { get; set; }
