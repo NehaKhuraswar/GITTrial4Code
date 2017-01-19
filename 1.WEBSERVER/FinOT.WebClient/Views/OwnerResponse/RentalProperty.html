@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="Applicant_firstname">Tenant's Name</label>
+                        <label for="Applicant_firstname">Tenant's name</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName" required />
                     </div>
 
@@ -38,7 +38,7 @@
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2" required />
                     </div>
 
-                    <div class="field-group" >
+                    <div class="field-group">
                         <label for="Applicant_city">City</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City" required />
                     </div>
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="Applicant_zip_code">Zip Code</label>
+                        <label for="Applicant_zip_code">Zip code</label>
                         <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip" required />
                     </div>
 
@@ -66,14 +66,15 @@
                     </div>
 
                     <div>
-                        <button class="btn-link btn-edit" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant</button>
+                        <button class="btn-link btn-edit" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant’s name</button>
                     </div>
                     <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
                         <div class="field-group filled-info subhead no-top-margin">
                             <div class="row">
-                                <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}</p>                 <p>{{item.TenantUserInfo.AddressLine1}}</p>
-                                <p> {{item.TenantUserInfo.AddressLine2}}</p>
-                                <p>{{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}</p>
+                                {{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br />
+                                {{item.TenantUserInfo.AddressLine1}}<br />
+                                {{item.TenantUserInfo.AddressLine2}}<br />
+                                {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}<br />
                                 <button class="btn-link btn-edit" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
                             </div>
                         </div>
@@ -81,7 +82,7 @@
                 </div>
 
                 <div class="step-footer">
-                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
+                    <input aria-label="Save and continue" role="button" type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
                 </div>
             </form>
         </div>

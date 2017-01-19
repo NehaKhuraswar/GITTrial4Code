@@ -1,96 +1,96 @@
 ﻿
-        <div class="col-md-9 col-sm-12">
-            <div class="application-step step-1">
-                <div class="step-heading">Additional Documentation</div>
+<div class="col-md-9 col-sm-12">
+    <div class="application-step step-1">
+        <div class="step-heading">Additional Documentation</div>
 
-                <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
-                    <div class="step-content step1">
+        <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form">
+            <div class="step-content step1">
 
-                        <div class="subhead no-top-margin">
-                            <h4>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
-                            <p class="no-bottom-margin">
-                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
-                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.City}},
-                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
-                                {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
-                            </p>
+                <div class="subhead no-top-margin">
+                    <h4>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
+                    <p class="no-bottom-margin">
+                        {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
+                        {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.City}},
+                        {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
+                        {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
+                    </p>
+                </div>
+
+                <div class="subhead no-top-margin">
+                    <p class="no-bottom-margin">Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine as part of your petition.</p>
+                </div>
+
+
+                <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
+                    <div class="tbl-header">
+                        <div class="tbl-row clearfix">
+                            <div class="col col-35 name">File name</div>
                         </div>
+                    </div>
 
-                        <div class="subhead no-top-margin">
-                            <p class="no-bottom-margin">Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine as part of your petition.</p>
-                        </div>
-
-
-                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
-                            <div class="tbl-header">
-                                <div class="tbl-row clearfix">
-                                    <div class="col col-35 name">File name</div>
+                    <div class="tbl-body">
+                        <div class="tbl-row clearfix">
+                            <div class="item" ng-class="{'expanded':toggle}">
+                                <div class="item-header clearfix">
+                                    <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                    <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                    <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-delete">Download</a>
                                 </div>
-                            </div>
 
-                            <div class="tbl-body">
-                                <div class="tbl-row clearfix">
-                                    <div class="item" ng-class="{'expanded':toggle}">
-                                        <div class="item-header clearfix">
-                                            <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
-                                            <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                            <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-delete">Download</a>
-                                        </div>
-
-                                        <div class="item-content clearfix" ng-show="toggle">
-                                            <div class="row">
-                                                <div class="col-md-10 col-sm-12">
-                                                    <p>{{item.DocDescription}}</p>
-                                                </div>
-                                            </div>
+                                <div class="item-content clearfix" ng-show="toggle">
+                                    <div class="row">
+                                        <div class="col-md-10 col-sm-12">
+                                            <p>{{item.DocDescription}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        
-                        <div class="field-group">
-                            <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
-                            <div class="full-width">                               
-
-                                <select ng-model="Ctrl.description1"
-                                        data-placeholder="Description"
-                                        ng-options="desc for desc in Ctrl.DocDescriptions"></select>
-                            </div>
-                        </div>
-
-                        <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == '<--Select-->'">
-                            <label for="document_description">If none of the above options apply, please provide a description of the file that you are uploading below:</label>
-                            <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
-                        </div>
-
-                        <div class="field-group no-bottom-margin">
-                            <div class="row">
-                                <div class="col-sm-10 col-xs-12">
-                                    <p class="fs-14"><strong>You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. The maximum file size limit for uploads is 25MB</strong></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field-group">
-                            <div class="field-addfile">
-                                <div class="input-file-wrapper">
-                                    <span class="btn-link">Attach document</span>
-                                    <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'OR_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
-                                </div>                               
-                            </div>
-                        </div><!-- .field-group -->                  
-                                               
                     </div>
+                </div>
 
-                    <div class="step-footer">
-                        <input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
+
+                <div class="field-group">
+                    <label for="preset_description">Select one of the preset descriptions from the drop-down menu.</label>
+                    <div class="full-width">
+
+                        <select ng-model="Ctrl.description1"
+                                data-placeholder="Description"
+                                ng-options="desc for desc in Ctrl.DocDescriptions"></select>
                     </div>
-                </form>
+                </div>
+
+                <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == '<--Select-->'">
+                    <label for="document_description">If none of the above apply, please describe the document you’re attaching.</label>
+                    <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
+                </div>
+
+                <div class="field-group no-bottom-margin">
+                    <div class="row">
+                        <div class="col-sm-10 col-xs-12">
+                            <p class="fs-14"><strong>You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. The maximum file size limit for uploads is 25MB</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <div class="field-addfile">
+                        <div class="input-file-wrapper">
+                            <span class="btn-link">Attach document</span>
+                            <input type="file" id="attach_documentation" name="attach_documentation" ngf-select ngf-change="onFileSelected($files,'OR_AdditionalDocuments')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
+                        </div>
+                    </div>
+                </div><!-- .field-group -->
+
             </div>
-        </div>
-   
+
+            <div class="step-footer">
+                <input type="submit" aria-label="Save and continue" role="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
+            </div>
+        </form>
+    </div>
+</div>
+
 
 
 

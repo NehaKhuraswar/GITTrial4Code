@@ -1,227 +1,226 @@
-﻿                <div class="col-md-9 col-sm-12">
-                    <div class="application-form-wrapper">
-                        <div class="application-step step-1">
-                            <div class="step-heading">Exemption</div>
+﻿<div class="col-md-9 col-sm-12">
+    <div class="application-form-wrapper">
+        <div class="application-step step-1">
+            <div class="step-heading">Exemption</div>
 
-                            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form">
-                                <div class="step-content step1">
+            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form">
+                <div class="step-content step1">
 
-                                    <div class="subhead no-top-margin no-bottom-margin">
-                                        <p><strong>If you claim that your property is exempt from Rent Adjustment (Oakland Municipal Code Chapter 8.22), please check one or more of the grounds:</<strong></p>
+                    <div class="subhead no-top-margin no-bottom-margin">
+                        <p><strong>If you claim that your property is exempt from Rent Adjustment (Oakland Municipal Code Chapter 8.22)<link to laws page>, please check one or more of the grounds:</<strong></p>
 
-                                        <div class="form-group-checkbox vertical clearfix">
-                                            <div class="checkbox-wrapper has-info-btn no-bottom-margin">
-                                                <label for="exempt_rent_adjustment">
-                                                    <input type="checkbox" name="exempt_rent_adjustment" id="exempt_rent_adjustment" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bExemptFromRentAdjustment" /><i></i><span>The unit is a single family residence or condominium exempted by the Costa Hawkins Rental Housing Act (California Civil Code 1954.50, et seq.). If claiming exemption under Costa-Hawkins, please answer the following questions:</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="form-group-checkbox vertical clearfix">
+                            <div class="checkbox-wrapper has-info-btn no-bottom-margin">
+                                <label for="exempt_rent_adjustment">
+                                    <input type="checkbox" name="exempt_rent_adjustment" id="exempt_rent_adjustment" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bExemptFromRentAdjustment" /><i></i><span>The unit is a single family residence or condominium exempted by the Costa Hawkins Rental Housing Act (California Civil Code 1954.50, et seq.)<link to laws page>. If claiming exemption under Costa-Hawkins, please answer the following questions:</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <div class="field-group">
-                                        <p class="input-label full-width">1. Did the prior tenant leave after being given a notice to quit (Civil Code Section 1946)?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="quit_notice_yes">
-                                                <input type="radio" name="quit_notice" id="quit_notice_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteQuitNotice" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
+                    <div class="field-group">
+                        <p class="input-label full-width">1. Did the prior tenant leave after being given a notice to quit (Civil Code Section 1946)?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="quit_notice_yes">
+                                <input type="radio" name="quit_notice" id="quit_notice_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteQuitNotice" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
 
-                                            <label for="quit_notice_no">
-                                                <input type="radio" name="quit_notice" id="quit_notice_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteQuitNotice" ng-value="false" data-toggle="hide" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="quit_notice_explanation">Explain:</label>
-                                        <textarea name="quit_notice_explanation" id="quit_notice_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteQuitNoticeExplenation"></textarea>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="input-label full-width">2. Did the prior tenant leave after being given a notice of rent increase (Civil Code Section 827)?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="rent_increase_notice_yes">
-                                                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteRentIncreaseNotice" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="rent_increase_notice_no">
-                                                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteRentIncreaseNotice" ng-value="false" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="rent_increase_notice_explanation">Explain:</label>
-                                        <textarea name="rent_increase_notice_explanation" id="rent_increase_notice_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation"></textarea>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="input-label">3. Was the prior tenant evicted for cause?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="tenant_evicted_prior_yes">
-                                                <input type="radio" name="tenant_evicted_prior" id="tenant_evicted_prior_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantEvicted" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="tenant_evicted_prior_no">
-                                                <input type="radio" name="tenant_evicted_prior" id="tenant_evicted_prior_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantEvicted" ng-value="false" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="tenant_evicted_prior_explanation">Explain:</label>
-                                        <textarea name="tenant_evicted_prior_explanation" id="tenant_evicted_prior_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantEvictedExplenation"></textarea>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="input-label">4. Are there any outstanding violations of building housing, fire or safety codes in the unit or building?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="outstanding_violations_yes">
-                                                <input type="radio" name="outstanding_violations" id="outstanding_violations_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bOutstandingViolations" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="outstanding_violations_no">
-                                                <input type="radio" name="outstanding_violations" id="outstanding_violations_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bOutstandingViolations" ng-value="false" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="outstanding_violations_explanation">Explain:</label>
-                                        <textarea name="outstanding_violations_explanation" id="outstanding_violations_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.OutstandingViolationsExplenation"></textarea>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="input-label">5. Is the unit a single family dwelling or condominium that can be sold separately?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="single_family_dwelling_yes">
-                                                <input type="radio" name="single_family_dwelling" id="single_family_dwelling_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bSingleFamilyUnitOrCondominium" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="single_family_dwelling_no">
-                                                <input type="radio" name="single_family_dwelling" id="single_family_dwelling_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bSingleFamilyUnitOrCondominium" ng-value="false" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="single_family_dwelling_explanation">Explain:</label>
-                                        <textarea name="single_family_dwelling_explanation" id="single_family_dwelling_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.SingleFamilyUnitOrCondominiumExplenation"></textarea>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="input-label">6. Did the petitioning tenant have roommates when he/she moved in?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="tenant_have_roommates_yes">
-                                                <input type="radio" name="tenant_have_roommates" id="tenant_have_roommates_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRoommatesWhenMoviedIN" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="tenant_have_roommates_no">
-                                                <input type="radio" name="tenant_have_roommates" id="tenant_have_roommates_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRoommatesWhenMoviedIN" ng-value="false" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="tenant_have_roommates_explanation">Explain:</label>
-                                        <textarea name="tenant_have_roommates_explanation" id="tenant_have_roommates_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RoommatesWhenMoviedINExplenation"></textarea>
-                                    </div>
-
-                                    <div class="field-group">
-                                        <p class="input-label">7. If the unit is a condominium, did you purchase it?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="purchased_condominium_yes">
-                                                <input type="radio" name="purchased_condominium" id="purchased_condominium_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="purchased_condominium_no">
-                                                <input type="radio" name="purchased_condominium" id="purchased_condominium_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased" ng-value="false" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="purchased_condominium_explanation">Explain:</label>
-                                        <textarea name="purchased_condominium_explanation" id="purchased_condominium_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitPruchasedExplenation"></textarea>
-                                    </div>
-
-                                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased">
-                                        <label for="unit_seller_name"><strong>8. From whom did you purchase it?</strong></label>
-                                        <input type="text" name="unit_seller_name" id="unit_seller_name" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PurchasedFrom" />
-                                    </div>
-
-
-                                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased">
-                                        <p class="input-label">9. Did you purchase the entire building?</p>
-                                        <div class="form-group-radio vertical no-bottom-margin clearfix">
-                                            <label for="purchased_entire_building_yes">
-                                                <input type="radio" name="purchased_entire_building" id="purchased_entire_building_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bEntireBuildingPurchased" ng-value="true" /><i></i><span>Yes</span>
-                                            </label>
-
-                                            <label for="purchased_entire_building_no">
-                                                <input type="radio" name="purchased_entire_building" id="purchased_entire_building_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bEntireBuildingPurchased" ng-value="false" /><i></i> <span>No</span>
-                                            </label>
-                                        </div>
-
-                                        <label for="purchased_entire_building_explanation">Explain:</label>
-                                        <textarea name="purchased_entire_building_explanation" id="purchased_entire_building_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.EntireBuildingPurchasedExplenation"></textarea>
-                                    </div>
-
-
-                                    <div class="field-group subhead no-bottom-margin">
-                                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                            <div class="checkbox-wrapper">
-                                                <label for="chk_box1">
-                                                    <input type="checkbox" name="chk_box1" id="chk_box1" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRentControlledOtherThanRAP" /><i></i><span>The rent for the unit is controlled, regulated or subsidized by a governmental unit, agency or authority other than the City of Oakland Rent Adjustment Ordinance.</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group subhead no-top-margin no-bottom-margin">
-                                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                            <div class="checkbox-wrapper">
-                                                <label for="chk_box2">
-                                                    <input type="checkbox" name="chk_box2" id="chk_box2" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitNewlyConstructed" /><i></i><span>The unit was newly constructed and a certificate of occupancy was issued for it on or after January 1, 1983.</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group subhead no-top-margin no-bottom-margin">
-                                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                            <div class="checkbox-wrapper">
-                                                <label for="chk_box3">
-                                                    <input type="checkbox" name="chk_box3" id="chk_box3" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bTenantWasResidentOfHotelWhileFiling" /><i></i><span>On the day the petition was filed, the tenant petitioner was a resident of a motel, hotel, or boarding house for less than 30 days.</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group subhead no-top-margin no-bottom-margin">
-                                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                            <div class="checkbox-wrapper">
-                                                <label for="chk_box4">
-                                                    <input type="checkbox" name="chk_box4" id="chk_box4" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitWasRehabilitated" /><i></i><span>The subject unit is in a building that was rehabilitated at a cost of 50% or more of the average basic cost of new construction.</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group subhead no-top-margin no-bottom-margin">
-                                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                            <div class="checkbox-wrapper">
-                                                <label for="chk_box5">
-                                                    <input type="checkbox" name="chk_box5" id="chk_box5" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitIsAccommodation" /><i></i><span>The unit is an accommodation in a hospital, convent, monastery, extended care facility, convalescent home, non-profit home for aged, or dormitory owned and operated by an educational institution.</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field-group subhead no-top-margin no-bottom-margin">
-                                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
-                                            <div class="checkbox-wrapper">
-                                                <label for="chk_box6">
-                                                    <input type="checkbox" name="chk_box6" id="chk_box6" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bHasUnitOccupiedByOwner" /><i></i><span>The unit is located in a building with three or fewer units. The owner occupies one of the units continuously as his or her principal residence and has done so for at least one year.</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="step-footer">
-                                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
-                                </div>
-                            </form>
+                            <label for="quit_notice_no">
+                                <input type="radio" name="quit_notice" id="quit_notice_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteQuitNotice" ng-value="false" data-toggle="hide" /><i></i> <span>No</span>
+                            </label>
                         </div>
 
-                    </div><!-- .application-form-wrapper -->
-                </div><!-- .col-md-9 -->
-           
+                        <label for="quit_notice_explanation">Explain:</label>
+                        <textarea name="quit_notice_explanation" id="quit_notice_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteQuitNoticeExplenation"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="input-label full-width">2. Did the prior tenant leave after being given a notice of rent increase (Civil Code Section 827)?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="rent_increase_notice_yes">
+                                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteRentIncreaseNotice" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label for="rent_increase_notice_no">
+                                <input type="radio" name="rent_increase_notice" id="rent_increase_notice_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteRentIncreaseNotice" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                        </div>
+
+                        <label for="rent_increase_notice_explanation">Explain:</label>
+                        <textarea name="rent_increase_notice_explanation" id="rent_increase_notice_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="input-label">3. Was the prior tenant evicted for cause?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="tenant_evicted_prior_yes">
+                                <input type="radio" name="tenant_evicted_prior" id="tenant_evicted_prior_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantEvicted" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label for="tenant_evicted_prior_no">
+                                <input type="radio" name="tenant_evicted_prior" id="tenant_evicted_prior_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantEvicted" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                        </div>
+
+                        <label for="tenant_evicted_prior_explanation">Explain:</label>
+                        <textarea name="tenant_evicted_prior_explanation" id="tenant_evicted_prior_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantEvictedExplenation"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="input-label">4. Are there any outstanding violations of building housing, fire or safety codes in the unit or building?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="outstanding_violations_yes">
+                                <input type="radio" name="outstanding_violations" id="outstanding_violations_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bOutstandingViolations" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label for="outstanding_violations_no">
+                                <input type="radio" name="outstanding_violations" id="outstanding_violations_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bOutstandingViolations" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                        </div>
+
+                        <label for="outstanding_violations_explanation">Explain:</label>
+                        <textarea name="outstanding_violations_explanation" id="outstanding_violations_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.OutstandingViolationsExplenation"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="input-label">5. Is the unit a single family dwelling or condominium that can be sold separately?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="single_family_dwelling_yes">
+                                <input type="radio" name="single_family_dwelling" id="single_family_dwelling_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bSingleFamilyUnitOrCondominium" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label for="single_family_dwelling_no">
+                                <input type="radio" name="single_family_dwelling" id="single_family_dwelling_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bSingleFamilyUnitOrCondominium" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                        </div>
+
+                        <label for="single_family_dwelling_explanation">Explain:</label>
+                        <textarea name="single_family_dwelling_explanation" id="single_family_dwelling_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.SingleFamilyUnitOrCondominiumExplenation"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="input-label">6. Did the petitioning tenant have roommates when he/she moved in?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="tenant_have_roommates_yes">
+                                <input type="radio" name="tenant_have_roommates" id="tenant_have_roommates_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRoommatesWhenMoviedIN" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label for="tenant_have_roommates_no">
+                                <input type="radio" name="tenant_have_roommates" id="tenant_have_roommates_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRoommatesWhenMoviedIN" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                        </div>
+
+                        <label for="tenant_have_roommates_explanation">Explain:</label>
+                        <textarea name="tenant_have_roommates_explanation" id="tenant_have_roommates_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RoommatesWhenMoviedINExplenation"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <p class="input-label">7. If the unit is a condominium, did you purchase it?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="purchased_condominium_yes">
+                                <input type="radio" name="purchased_condominium" id="purchased_condominium_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label for="purchased_condominium_no">
+                                <input type="radio" name="purchased_condominium" id="purchased_condominium_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                        </div>
+
+                        <label for="purchased_condominium_explanation">Explain:</label>
+                        <textarea name="purchased_condominium_explanation" id="purchased_condominium_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitPruchasedExplenation"></textarea>
+                    </div>
+
+                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased">
+                        <label for="unit_seller_name"><strong>8. From whom did you purchase it?</strong></label>
+                        <input type="text" name="unit_seller_name" id="unit_seller_name" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PurchasedFrom" />
+                    </div>
+
+
+                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased">
+                        <p class="input-label">9. Did you purchase the entire building?</p>
+                        <div class="form-group-radio vertical no-bottom-margin clearfix">
+                            <label for="purchased_entire_building_yes">
+                                <input type="radio" name="purchased_entire_building" id="purchased_entire_building_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bEntireBuildingPurchased" ng-value="true" /><i></i><span>Yes</span>
+                            </label>
+
+                            <label for="purchased_entire_building_no">
+                                <input type="radio" name="purchased_entire_building" id="purchased_entire_building_no" class="input-field" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bEntireBuildingPurchased" ng-value="false" /><i></i> <span>No</span>
+                            </label>
+                        </div>
+
+                        <label for="purchased_entire_building_explanation">Explain:</label>
+                        <textarea name="purchased_entire_building_explanation" id="purchased_entire_building_explanation" class="field-input textarea" rows="3" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.EntireBuildingPurchasedExplenation"></textarea>
+                    </div>
+
+
+                    <div class="field-group subhead no-bottom-margin">
+                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                            <div class="checkbox-wrapper">
+                                <label for="chk_box1">
+                                    <input type="checkbox" name="chk_box1" id="chk_box1" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRentControlledOtherThanRAP" /><i></i><span>The rent for the unit is controlled, regulated or subsidized by a governmental unit, agency or authority other than the City of Oakland Rent Adjustment Ordinance.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group subhead no-top-margin no-bottom-margin">
+                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                            <div class="checkbox-wrapper">
+                                <label for="chk_box2">
+                                    <input type="checkbox" name="chk_box2" id="chk_box2" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitNewlyConstructed" /><i></i><span>The unit was newly constructed and a certificate of occupancy was issued for it on or after January 1, 1983.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group subhead no-top-margin no-bottom-margin">
+                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                            <div class="checkbox-wrapper">
+                                <label for="chk_box3">
+                                    <input type="checkbox" name="chk_box3" id="chk_box3" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bTenantWasResidentOfHotelWhileFiling" /><i></i><span>On the day the petition was filed, the tenant petitioner was a resident of a motel, hotel, or boarding house for less than 30 days.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group subhead no-top-margin no-bottom-margin">
+                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                            <div class="checkbox-wrapper">
+                                <label for="chk_box4">
+                                    <input type="checkbox" name="chk_box4" id="chk_box4" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitWasRehabilitated" /><i></i><span>The subject unit is in a building that was rehabilitated at a cost of 50% or more of the average basic cost of new construction.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group subhead no-top-margin no-bottom-margin">
+                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                            <div class="checkbox-wrapper">
+                                <label for="chk_box5">
+                                    <input type="checkbox" name="chk_box5" id="chk_box5" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitIsAccommodation" /><i></i><span>The unit is an accommodation in a hospital, convent, monastery, extended care facility, convalescent home, non-profit home for aged, or dormitory owned and operated by an educational institution.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group subhead no-top-margin no-bottom-margin">
+                        <div class="form-group-checkbox vertical clearfix no-bottom-margin">
+                            <div class="checkbox-wrapper">
+                                <label for="chk_box6">
+                                    <input type="checkbox" name="chk_box6" id="chk_box6" value="Yes" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bHasUnitOccupiedByOwner" /><i></i><span>The unit is located in a building with three or fewer units. The owner occupies one of the units continuously as his or her principal residence and has done so for at least one year.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="step-footer">
+                    <input aria-label="Save and continue" role="button" type="submit" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
+                </div>
+            </form>
+        </div>
+
+    </div><!-- .application-form-wrapper -->
+</div><!-- .col-md-9 -->
