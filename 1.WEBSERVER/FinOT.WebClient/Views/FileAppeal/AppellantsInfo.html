@@ -2,13 +2,13 @@
 
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            
+            <div class="alert alert-error" ng-show="Hide==true"></div>
             <div class="alert" ng-show="Ctrl.Error!=''">
                 <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
             </div>
             <div class="step-heading">Applicant and Property Information</div>
 
-            <form name="frmAppeal" id="frmAppeal" novalidate class="application-form" >
+            <form name="frmAppeal" id="frmAppeal" novalidate class="application-form" onsubmit="return false;">
                 <div class="step-content step1">
 
                     <div class="subhead no-top-margin">
@@ -18,12 +18,17 @@
                         <div class="info">
                             <div class="field-group">
                                 <label for="CaseID">Case number</label>
-                                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.CaseID"  />
+                                <input type="text" ng-click="Ctrl.Error =''" class="field-input" ng-trim="false" ng-model="Ctrl.CaseID" />
                             </div>
                             <button class="btn-link" ng-click="Ctrl.GetCaseInfoWithModel(Ctrl.CaseID)">Load case info</button>
                             <!--TBD Remove below code-->
                             <!--<div class="text">{{Ctrl.caseinfo.CaseID}}; {{Ctrl.caseInfo.TenantPetitionInfo.OwnerInfo.LastName}} v. {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}} (Unit C)</div>-->
+                   </div>
+                        <div c
+                            la
                         </div>
+
+                        la
 
                         <div class="info" ng-show="Ctrl.bShowApplicantInfo">
                             <div class="title">Date of the hearing decision you are appealing</div>
@@ -81,21 +86,21 @@
 
                         <div class="field-group">
                             <label for="Applicant_address1">Mailing address 1</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1" />
                         </div>
 
                         <div class="field-group">
                             <label for="Applicant_address2">Mailing address 2 (optional)</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2" />
                         </div>
 
                         <div class="field-group">
                             <label for="Applicant_city">City</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City" />
                         </div>
 
                         <div class="field-group">
-                            <label for="Applicant_state">State</label>                            
+                            <label for="Applicant_state">State</label>
                             <div class="row">
                                 <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
                                           selected="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"></dropdown>
@@ -104,17 +109,17 @@
 
                         <div class="field-group">
                             <label for="Applicant_zip_code">Zip code</label>
-                            <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip"  />
+                            <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip" />
                         </div>
 
                         <div class="field-group">
                             <label for="Applicante_phone_number">Phone number</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber" />
                         </div>
 
                         <div class="field-group">
                             <label for="Applicant_email">Email address</label>
-                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email"  />
+                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email" />
                         </div>
                     </div>
 
@@ -135,11 +140,11 @@
                     <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditRepresentative== true">
                         <div class="field-group">
                             <label for="representative_firstname">Name</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.FirstName"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.FirstName" />
                         </div>
 
                         <div class="field-group">
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.LastName"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.LastName" />
                         </div>
                         <div class="field-group">
                             <label for="businessname">Business name</label>
@@ -147,17 +152,17 @@
                         </div>
                         <div class="field-group">
                             <label for="representative_address1">Mailing address 1</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine1"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine1" />
                         </div>
 
                         <div class="field-group">
                             <label for="representative_address2">Mailing address 2 (optional)</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine2"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine2" />
                         </div>
 
                         <div class="field-group">
                             <label for="representative_city">City</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.City"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.City" />
                         </div>
 
                         <div class="field-group">
@@ -170,17 +175,17 @@
 
                         <div class="field-group">
                             <label for="representative_zip_code">Zip code</label>
-                            <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip"  />
+                            <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip" />
                         </div>
 
                         <div class="field-group">
                             <label for="representative_phone_number">Phone number</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber"  />
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber" />
                         </div>
 
                         <div class="field-group">
                             <label for="representative_email">Email address</label>
-                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email"  />
+                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email" />
                         </div>
                     </div>
                     <div class="field-group" ng-show="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation== true && Ctrl.bEditRepresentative == false
@@ -193,7 +198,8 @@
 
 
                 <div class="step-footer">
-                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToGroundsforAppeal(Ctrl.caseinfo)" />
+                    <input type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" 
+                           ng-click="Ctrl.ContinueToGroundsforAppeal(Ctrl.caseinfo)" />
                 </div>
             </form>
         </div>

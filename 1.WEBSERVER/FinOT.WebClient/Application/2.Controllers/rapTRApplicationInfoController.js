@@ -5,6 +5,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.bCaseInfo = false;
+    self.Error = "";
     self.CaseID;
     if (self.caseinfo != null) {
         self.CaseID = self.caseinfo.CaseID;
@@ -15,9 +16,10 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.bEditRepresentative = false;
     self.GetTenantResponseApplicationInfo = function (CaseNumber) {
         rapFactory.GetTenantResponseApplicationInfo(CaseNumber, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+             if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+                }
             self.caseinfo = response.data;
             self.caseinfo.bCaseFiledByThirdParty = rapGlobalFactory.bCaseFiledByThirdParty;
             rapGlobalFactory.bCaseFiledByThirdParty = false;
@@ -40,9 +42,10 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.StateList = [];
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+             if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+                }
             self.StateList = response.data;
 
         });
@@ -85,7 +88,10 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.ContinueToExemptionContested = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveTenantResponseApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+             if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+        }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.bAppInfo = false;
             $scope.model.bExemptionContested = true;

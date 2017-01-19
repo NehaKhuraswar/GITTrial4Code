@@ -71,9 +71,11 @@
 
                                                 <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                                     <div>
-                                                        <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
+                                                        <dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName"
+                                                                  selected="Analyst"></dropdown>
+                                                        <!--<select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
                                                                 ng-model="Analyst"
-                                                                ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
+                                                                ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
                                                     </div>
                                                 </div>
 
@@ -90,9 +92,11 @@
 
                                                 <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                                     <div>
-                                                        <select name="hearing" id="hearing" class="custom-select" data-placeholder="Select Hearing Officer"
+                                                        <dropdown placeholder="Select analyst" list="Ctrl.HearingOfficers" property="FirstName"
+                                                                  selected="HearingOfficer"></dropdown>
+                                                        <!--<select name="hearing" id="hearing" class="custom-select" data-placeholder="Select Hearing Officer"
                                                                 ng-model="HearingOfficer"
-                                                                ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
+                                                                ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>-->
                                                     </div>
                                                 </div>
 
@@ -194,15 +198,13 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="field-group">
-                                                <input type="text" name="date_range_start" id="date_range_start" class="field-input full-width field-datepicker"
-                                                       ng-model="Ctrl.CaseSearchModel.FromDate" value="" />
+                                                <input type="text" name="date_range_start" id="date_range_start" class="field-input field-datepicker" ng-model="Ctrl.CaseSearchModel.FromDate" />
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="field-group">
-                                                <input type="text" name="date_range_end" id="date_range_end" class="field-input full-width field-datepicker"
-                                                       ng-model="Ctrl.CaseSearchModel.ToDate" value="" />
+                                                <input type="text" name="date_range_end" id="date_range_end" class="field-input field-datepicker" ng-model="Ctrl.CaseSearchModel.ToDate" />
                                             </div>
                                         </div>
                                     </div>
@@ -212,9 +214,10 @@
                                     <div class="field-group">
                                         <label for="analyst" class="small-title">Analyst</label>
                                         <div class="full-width">
-                                            <select name="analyst" id="analyst" data-placeholder="Select analyst"
+                                            <dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName" selected="Ctrl.CaseSearchModel.Analyst"></dropdown>                                       
+                                            <!--<select name="analyst" id="analyst" data-placeholder="Select analyst"
                                                     ng-model="Ctrl.CaseSearchModel.Analyst"
-                                                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
+                                                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
                                         </div>
                                     </div>
                                 </div>
@@ -223,9 +226,10 @@
                                     <div class="field-group">
                                         <label for="hearing_officer" class="small-title">Hearing officer</label>
                                         <div class="full-width">
-                                            <select name="hearing_officer" id="hearing_officer" data-placeholder="Select Hearing Officer"
+                                            <dropdown placeholder="Select hearing officer" list="Ctrl.HearingOfficers" property="FirstName" selected="Ctrl.CaseSearchModel.HearingOfficer"></dropdown>                                       
+                                            <!--<select name="hearing_officer" id="hearing_officer" data-placeholder="Select Hearing Officer"
                                                     ng-model="Ctrl.CaseSearchModel.HearingOfficer"
-                                                    ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
+                                                    ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>-->
                                         </div>
                                     </div>
                                 </div>
@@ -340,5 +344,5 @@
         </div><!-- .application-form-wrapper -->
     </div><!-- .container -->
 </div><!-- .page-content -->
+    <script src='../js/functions.js'></script>
 </div><!-- #content -->
-<script src='../js/functions.js'></script>

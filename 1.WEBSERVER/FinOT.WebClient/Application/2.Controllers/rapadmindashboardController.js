@@ -15,6 +15,9 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     self.EditPublicUserAccount = function () {
         $location.path("/editpublicuser");
     }
+    self.Home = function () {
+        $location.path("/staffdashboard");
+    }
 
     self.AccountTypesList = [];
     self.AccountSearchModel = [];

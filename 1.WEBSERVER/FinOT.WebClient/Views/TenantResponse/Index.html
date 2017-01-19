@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">
-                        <form name="frmTenentPetition" id="frmTenentPetition" method="post" class="application-form">
+                        <form name="frmTenentResponse" id="frmTenentResponse" method="post" class="application-form">
                             <div ng-if="Ctrl.bPetitionType">
                                 <rap-trpetitiontype model="Ctrl"></rap-trpetitiontype>
                             </div>
@@ -74,8 +74,8 @@
                             </div>
                             <div ng-if="Ctrl.bConfirm">
                                 <rap-trconfirmationresponse ng-show="Ctrl.bConfirm" model="Ctrl"></rap-trconfirmationresponse>
-                             </div>
-</form>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -63,7 +63,7 @@
                             <ul class="account-details clearfix">
                                 <li class="search"><a href="#" title="Search">Search</a></li>
                                 <li class="translate"><a href="#" title="Translate">Translate</a></li>
-                                <li class="signedin" ng-show="Ctrl.UserName !=''"><a href="#">Hi, {{Ctrl.GetUserName()}}</a></li>
+                                <li class="signedin" ng-show="Ctrl.UserName !=''"><a ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
                             </ul>
                         </div>
 

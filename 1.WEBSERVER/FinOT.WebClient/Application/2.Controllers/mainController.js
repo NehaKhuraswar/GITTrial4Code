@@ -4,7 +4,16 @@
     var self = this;
     self.UserName = '';
     
-    
+    self.Home =function()
+    {
+        if (rapGlobalFactory.CustomerDetails != null) {
+            $location.path("/publicdashboard");
+        }
+        else if (rapGlobalFactory.CityUser != null)
+        {
+            $location.path("/staffdashboard");
+        }
+    }   
     self.GetUserName = function ()
     {
         if (rapGlobalFactory.CustomerDetails != null)

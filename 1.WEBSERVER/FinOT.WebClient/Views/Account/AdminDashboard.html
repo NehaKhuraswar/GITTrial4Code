@@ -12,7 +12,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a ng-click="Ctrl.Home()">Home</a></li>
                     <li class="active">Account management</li>
                 </ul>
             </div>
@@ -45,9 +45,8 @@
                                     <div class="field-group">
                                         <label for="account_type" class="input-label">Account type</label>
                                         <div class="full-width">
-                                            <select name="account_type" id="account_type" class="custom-select" data-placeholder="Select type"
-                                                    ng-model="Ctrl.AccountSearchModel.AccountType"
-                                                    ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID"></select>
+                                            <dropdown placeholder="Account Type" list="Ctrl.AccountTypesList" property="AccountTypeDesc"
+                                                      selected="Ctrl.AccountSearchModel.AccountType"></dropdown>
                                         </div>
                                     </div>
                                 </div>
@@ -58,15 +57,14 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-12">
                                             <div class="field-group">
-                                                <input type="text" name="create_date_start" id="create_date_start" ng-class="field-datepicker"
-                                                       ng-model="Ctrl.AccountSearchModel.FromDate" date='dd-MM-yyyy' />
+                                                <input type="text" name="create_date_start" id="create_date_start" class="field-input field-datepicker" ng-model="Ctrl.AccountSearchModel.FromDate" />
+                                                
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6 col-xs-12">
                                             <div class="field-group">
-                                                <input type="text" name="create_date_end" id="create_date_end" ng-class="field-input field-datepicker"
-                                                       ng-model="Ctrl.AccountSearchModel.ToDate" />
+                                                <input type="text" name="create_date_end" id="create_date_end" class="field-input field-datepicker" ng-model="Ctrl.AccountSearchModel.ToDate" />                                                
                                             </div>
                                         </div>
                                     </div>
@@ -183,3 +181,4 @@
         </div><!-- .container -->
     </div><!-- .page-content -->
 </div>
+<script src='js/functions.js'></script>

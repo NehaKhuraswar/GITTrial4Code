@@ -120,9 +120,6 @@ namespace RAP.DAL
     partial void InsertTenantResponseRentalIncrementInfo(TenantResponseRentalIncrementInfo instance);
     partial void UpdateTenantResponseRentalIncrementInfo(TenantResponseRentalIncrementInfo instance);
     partial void DeleteTenantResponseRentalIncrementInfo(TenantResponseRentalIncrementInfo instance);
-    partial void InsertTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
-    partial void UpdateTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
-    partial void DeleteTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
     partial void InsertTenantResponsePageSubmissionStatus1(TenantResponsePageSubmissionStatus1 instance);
     partial void UpdateTenantResponsePageSubmissionStatus1(TenantResponsePageSubmissionStatus1 instance);
     partial void DeleteTenantResponsePageSubmissionStatus1(TenantResponsePageSubmissionStatus1 instance);
@@ -162,6 +159,9 @@ namespace RAP.DAL
     partial void InsertServeAppeal(ServeAppeal instance);
     partial void UpdateServeAppeal(ServeAppeal instance);
     partial void DeleteServeAppeal(ServeAppeal instance);
+    partial void InsertTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
+    partial void UpdateTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
+    partial void DeleteTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -442,14 +442,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<TenantResponseExemptContestedInfo1> TenantResponseExemptContestedInfo1s
-		{
-			get
-			{
-				return this.GetTable<TenantResponseExemptContestedInfo1>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TenantResponsePageSubmissionStatus1> TenantResponsePageSubmissionStatus1s
 		{
 			get
@@ -551,6 +543,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<ServeAppeal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TenantResponseExemptContestedInfo1> TenantResponseExemptContestedInfo1s
+		{
+			get
+			{
+				return this.GetTable<TenantResponseExemptContestedInfo1>();
 			}
 		}
 	}
@@ -6637,11 +6637,11 @@ namespace RAP.DAL
 		
 		private EntityRef<TenantResponseRentalIncrementInfo> _TenantResponseRentalIncrementInfo;
 		
-		private EntitySet<TenantResponseExemptContestedInfo1> _TenantResponseExemptContestedInfo1s;
-		
 		private EntitySet<TenantResponseRentalHistory> _TenantResponseRentalHistories;
 		
 		private EntitySet<TenantResponseVerification> _TenantResponseVerifications;
+		
+		private EntitySet<TenantResponseExemptContestedInfo1> _TenantResponseExemptContestedInfo1s;
 		
 		private EntityRef<NumberRangeForUnit> _NumberRangeForUnit;
 		
@@ -6689,9 +6689,9 @@ namespace RAP.DAL
 		{
 			this._TenantResponseExemptContestedInfos = new EntitySet<TenantResponseExemptContestedInfo>(new Action<TenantResponseExemptContestedInfo>(this.attach_TenantResponseExemptContestedInfos), new Action<TenantResponseExemptContestedInfo>(this.detach_TenantResponseExemptContestedInfos));
 			this._TenantResponseRentalIncrementInfo = default(EntityRef<TenantResponseRentalIncrementInfo>);
-			this._TenantResponseExemptContestedInfo1s = new EntitySet<TenantResponseExemptContestedInfo1>(new Action<TenantResponseExemptContestedInfo1>(this.attach_TenantResponseExemptContestedInfo1s), new Action<TenantResponseExemptContestedInfo1>(this.detach_TenantResponseExemptContestedInfo1s));
 			this._TenantResponseRentalHistories = new EntitySet<TenantResponseRentalHistory>(new Action<TenantResponseRentalHistory>(this.attach_TenantResponseRentalHistories), new Action<TenantResponseRentalHistory>(this.detach_TenantResponseRentalHistories));
 			this._TenantResponseVerifications = new EntitySet<TenantResponseVerification>(new Action<TenantResponseVerification>(this.attach_TenantResponseVerifications), new Action<TenantResponseVerification>(this.detach_TenantResponseVerifications));
+			this._TenantResponseExemptContestedInfo1s = new EntitySet<TenantResponseExemptContestedInfo1>(new Action<TenantResponseExemptContestedInfo1>(this.attach_TenantResponseExemptContestedInfo1s), new Action<TenantResponseExemptContestedInfo1>(this.detach_TenantResponseExemptContestedInfo1s));
 			this._NumberRangeForUnit = default(EntityRef<NumberRangeForUnit>);
 			this._CaseDetail = default(EntityRef<CaseDetail>);
 			OnCreated();
@@ -7067,19 +7067,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1", Storage="_TenantResponseExemptContestedInfo1s", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
-		public EntitySet<TenantResponseExemptContestedInfo1> TenantResponseExemptContestedInfo1s
-		{
-			get
-			{
-				return this._TenantResponseExemptContestedInfo1s;
-			}
-			set
-			{
-				this._TenantResponseExemptContestedInfo1s.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseRentalHistory", Storage="_TenantResponseRentalHistories", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
 		public EntitySet<TenantResponseRentalHistory> TenantResponseRentalHistories
 		{
@@ -7103,6 +7090,19 @@ namespace RAP.DAL
 			set
 			{
 				this._TenantResponseVerifications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1", Storage="_TenantResponseExemptContestedInfo1s", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
+		public EntitySet<TenantResponseExemptContestedInfo1> TenantResponseExemptContestedInfo1s
+		{
+			get
+			{
+				return this._TenantResponseExemptContestedInfo1s;
+			}
+			set
+			{
+				this._TenantResponseExemptContestedInfo1s.Assign(value);
 			}
 		}
 		
@@ -7206,18 +7206,6 @@ namespace RAP.DAL
 			entity.TenantResponseApplicationInfo = null;
 		}
 		
-		private void attach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = this;
-		}
-		
-		private void detach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = null;
-		}
-		
 		private void attach_TenantResponseRentalHistories(TenantResponseRentalHistory entity)
 		{
 			this.SendPropertyChanging();
@@ -7237,6 +7225,18 @@ namespace RAP.DAL
 		}
 		
 		private void detach_TenantResponseVerifications(TenantResponseVerification entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = null;
+		}
+		
+		private void attach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = this;
+		}
+		
+		private void detach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
 		{
 			this.SendPropertyChanging();
 			entity.TenantResponseApplicationInfo = null;
@@ -7487,157 +7487,6 @@ namespace RAP.DAL
 					else
 					{
 						this._RentalIncreaseInfoID = default(int);
-					}
-					this.SendPropertyChanged("TenantResponseApplicationInfo");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantResponseExemptContestedInfo")]
-	public partial class TenantResponseExemptContestedInfo1 : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ExemptContestedID;
-		
-		private int _TenantResponseID;
-		
-		private string _Explaination;
-		
-		private EntityRef<TenantResponseApplicationInfo> _TenantResponseApplicationInfo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnExemptContestedIDChanging(int value);
-    partial void OnExemptContestedIDChanged();
-    partial void OnTenantResponseIDChanging(int value);
-    partial void OnTenantResponseIDChanged();
-    partial void OnExplainationChanging(string value);
-    partial void OnExplainationChanged();
-    #endregion
-		
-		public TenantResponseExemptContestedInfo1()
-		{
-			this._TenantResponseApplicationInfo = default(EntityRef<TenantResponseApplicationInfo>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExemptContestedID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ExemptContestedID
-		{
-			get
-			{
-				return this._ExemptContestedID;
-			}
-			set
-			{
-				if ((this._ExemptContestedID != value))
-				{
-					this.OnExemptContestedIDChanging(value);
-					this.SendPropertyChanging();
-					this._ExemptContestedID = value;
-					this.SendPropertyChanged("ExemptContestedID");
-					this.OnExemptContestedIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantResponseID", DbType="Int NOT NULL")]
-		public int TenantResponseID
-		{
-			get
-			{
-				return this._TenantResponseID;
-			}
-			set
-			{
-				if ((this._TenantResponseID != value))
-				{
-					if (this._TenantResponseApplicationInfo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTenantResponseIDChanging(value);
-					this.SendPropertyChanging();
-					this._TenantResponseID = value;
-					this.SendPropertyChanged("TenantResponseID");
-					this.OnTenantResponseIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Explaination", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Explaination
-		{
-			get
-			{
-				return this._Explaination;
-			}
-			set
-			{
-				if ((this._Explaination != value))
-				{
-					this.OnExplainationChanging(value);
-					this.SendPropertyChanging();
-					this._Explaination = value;
-					this.SendPropertyChanged("Explaination");
-					this.OnExplainationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1", Storage="_TenantResponseApplicationInfo", ThisKey="TenantResponseID", OtherKey="TenantResponseID", IsForeignKey=true)]
-		public TenantResponseApplicationInfo TenantResponseApplicationInfo
-		{
-			get
-			{
-				return this._TenantResponseApplicationInfo.Entity;
-			}
-			set
-			{
-				TenantResponseApplicationInfo previousValue = this._TenantResponseApplicationInfo.Entity;
-				if (((previousValue != value) 
-							|| (this._TenantResponseApplicationInfo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TenantResponseApplicationInfo.Entity = null;
-						previousValue.TenantResponseExemptContestedInfo1s.Remove(this);
-					}
-					this._TenantResponseApplicationInfo.Entity = value;
-					if ((value != null))
-					{
-						value.TenantResponseExemptContestedInfo1s.Add(this);
-						this._TenantResponseID = value.TenantResponseID;
-					}
-					else
-					{
-						this._TenantResponseID = default(int);
 					}
 					this.SendPropertyChanged("TenantResponseApplicationInfo");
 				}
@@ -12712,6 +12561,157 @@ namespace RAP.DAL
 					this._bDeclartionOfOriginalDocs = value;
 					this.SendPropertyChanged("bDeclartionOfOriginalDocs");
 					this.OnbDeclartionOfOriginalDocsChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantResponseExemptContestedInfo")]
+	public partial class TenantResponseExemptContestedInfo1 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ExemptContestedID;
+		
+		private int _TenantResponseID;
+		
+		private string _Explaination;
+		
+		private EntityRef<TenantResponseApplicationInfo> _TenantResponseApplicationInfo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnExemptContestedIDChanging(int value);
+    partial void OnExemptContestedIDChanged();
+    partial void OnTenantResponseIDChanging(int value);
+    partial void OnTenantResponseIDChanged();
+    partial void OnExplainationChanging(string value);
+    partial void OnExplainationChanged();
+    #endregion
+		
+		public TenantResponseExemptContestedInfo1()
+		{
+			this._TenantResponseApplicationInfo = default(EntityRef<TenantResponseApplicationInfo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExemptContestedID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ExemptContestedID
+		{
+			get
+			{
+				return this._ExemptContestedID;
+			}
+			set
+			{
+				if ((this._ExemptContestedID != value))
+				{
+					this.OnExemptContestedIDChanging(value);
+					this.SendPropertyChanging();
+					this._ExemptContestedID = value;
+					this.SendPropertyChanged("ExemptContestedID");
+					this.OnExemptContestedIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantResponseID", DbType="Int NOT NULL")]
+		public int TenantResponseID
+		{
+			get
+			{
+				return this._TenantResponseID;
+			}
+			set
+			{
+				if ((this._TenantResponseID != value))
+				{
+					if (this._TenantResponseApplicationInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTenantResponseIDChanging(value);
+					this.SendPropertyChanging();
+					this._TenantResponseID = value;
+					this.SendPropertyChanged("TenantResponseID");
+					this.OnTenantResponseIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Explaination", DbType="VarChar(MAX)")]
+		public string Explaination
+		{
+			get
+			{
+				return this._Explaination;
+			}
+			set
+			{
+				if ((this._Explaination != value))
+				{
+					this.OnExplainationChanging(value);
+					this.SendPropertyChanging();
+					this._Explaination = value;
+					this.SendPropertyChanged("Explaination");
+					this.OnExplainationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1", Storage="_TenantResponseApplicationInfo", ThisKey="TenantResponseID", OtherKey="TenantResponseID", IsForeignKey=true)]
+		public TenantResponseApplicationInfo TenantResponseApplicationInfo
+		{
+			get
+			{
+				return this._TenantResponseApplicationInfo.Entity;
+			}
+			set
+			{
+				TenantResponseApplicationInfo previousValue = this._TenantResponseApplicationInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._TenantResponseApplicationInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TenantResponseApplicationInfo.Entity = null;
+						previousValue.TenantResponseExemptContestedInfo1s.Remove(this);
+					}
+					this._TenantResponseApplicationInfo.Entity = value;
+					if ((value != null))
+					{
+						value.TenantResponseExemptContestedInfo1s.Add(this);
+						this._TenantResponseID = value.TenantResponseID;
+					}
+					else
+					{
+						this._TenantResponseID = default(int);
+					}
+					this.SendPropertyChanged("TenantResponseApplicationInfo");
 				}
 			}
 		}

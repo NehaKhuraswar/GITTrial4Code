@@ -4,6 +4,7 @@ var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTR
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.Error = "";
     
     var _GetTenantResponseExemptContestedInfo = function (TenantResponseID) {
         rapFactory.GetTenantResponseExemptContestedInfo(TenantResponseID).then(function (response) {
