@@ -61,7 +61,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME,
+        ///   Looks up a localized string similar to Dear User,
         ///
         ///Thank you for creating an account with the Rent Adjustment Program.
         ///
@@ -80,7 +80,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME,
+        ///   Looks up a localized string similar to Dear  Applicant,
         ///
         ///Your appeal has been filed successfully. As a reminder, your Case Number is: CASEID
         ///
@@ -101,7 +101,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME,
+        ///   Looks up a localized string similar to Dear User,
         ///
         ///Thank you for creating an CIty account with the Rent Adjustment Program.
         ///
@@ -120,7 +120,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME,
+        ///   Looks up a localized string similar to Dear User,
         ///
         ///You have requested the RAP resend your password to the RAP Online Petitioning system. 
         ///
@@ -139,19 +139,15 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME,
+        ///   Looks up a localized string similar to Dear Applicant,
         ///
         ///Your petition has been filed successfully. Your Case Number is: CASEID
         ///
-        ///You have selected to receive notification through the following methods:
-        ///
-        ///NOTIFICATIONS
-        ///
-        ///If you would like to change these settings please do so in the user dashboard here:
-        ///
         ///If you need to request translation services please do through the user dashboard: LOGIN
         ///
-        ///Please continue to check your user dashboard for updates on your petition including your assigned hearing date, submitted response forms, and scheduling  [rest of string was truncated]&quot;;.
+        ///Please continue to check your user dashboard for updates on your petition including your assigned hearing date, submitted response forms, and scheduling of hearing date. Additionally, all case information can be accessed and new information can be submitted through the user dashboards.
+        ///
+        ///You have until 7 days before your hear [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PetitionMsg {
             get {
@@ -160,7 +156,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear NAME,
+        ///   Looks up a localized string similar to Dear User,
         ///
         ///You have requested the RAP resend your 5-Digit pin. Your pin is: PIN
         ///
@@ -179,17 +175,15 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your petition response has been filed successfully. Your Case Number is: CASEID
+        ///   Looks up a localized string similar to Dear Applicant,
         ///
-        ///You have selected to receive notification through the following methods:
+        ///Your petition response has been filed successfully. Your Case Number is: CASEID
         ///
-        ///NOTIFICATIONS
+        ///If you need to request translation services please do so here: LOGIN
         ///
-        ///If you would like to change these settings please do so in the user dashboard here:
+        ///Please continue to check your user dashboard for updates on this petition including your assigned hearing date, submitted case evidence, and scheduling of hearing date. Additionally, all case information can be accessed and new information can be submitted through the user dashboards.
         ///
-        ///If you need to request translation services please do so here:
-        ///
-        ///Please continue to check your user dashboard for updates on this petition including your assigned hearing date, submitted case evidence, and scheduling of hearing date. Additionally,  [rest of string was truncated]&quot;;.
+        ///You have until 7 days before your hearing date to [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ResponseMsg {
             get {

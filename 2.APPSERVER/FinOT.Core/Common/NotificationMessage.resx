@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountCreatedMsg" xml:space="preserve">
-    <value>Dear NAME,
+    <value>Dear User,
 
 Thank you for creating an account with the Rent Adjustment Program.
 
@@ -138,7 +138,7 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>New account created</comment>
   </data>
   <data name="AppealMsg" xml:space="preserve">
-    <value>Dear NAME,
+    <value>Dear  Applicant,
 
 Your appeal has been filed successfully. As a reminder, your Case Number is: CASEID
 
@@ -154,7 +154,7 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>Appeal submitted</comment>
   </data>
   <data name="CityAccountCreatedMsg" xml:space="preserve">
-    <value>Dear NAME,
+    <value>Dear User,
 
 Thank you for creating an CIty account with the Rent Adjustment Program.
 
@@ -168,7 +168,7 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>New City account created</comment>
   </data>
   <data name="ForgotPasswordMsg" xml:space="preserve">
-    <value>Dear NAME,
+    <value>Dear User,
 
 You have requested the RAP resend your password to the RAP Online Petitioning system. 
 
@@ -182,15 +182,9 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>Forgot my password</comment>
   </data>
   <data name="PetitionMsg" xml:space="preserve">
-    <value>Dear NAME,
+    <value>Dear Applicant,
 
 Your petition has been filed successfully. Your Case Number is: CASEID
-
-You have selected to receive notification through the following methods:
-
-NOTIFICATIONS
-
-If you would like to change these settings please do so in the user dashboard here:
 
 If you need to request translation services please do through the user dashboard: LOGIN
 
@@ -210,7 +204,7 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>[Petition name] submitted</comment>
   </data>
   <data name="ResendPinMsg" xml:space="preserve">
-    <value>Dear NAME,
+    <value>Dear User,
 
 You have requested the RAP resend your 5-Digit pin. Your pin is: PIN
 
@@ -224,15 +218,11 @@ The Rent Adjustment Program, The City of Oakland</value>
     <comment>Resend PIN</comment>
   </data>
   <data name="ResponseMsg" xml:space="preserve">
-    <value>Your petition response has been filed successfully. Your Case Number is: CASEID
+    <value>Dear Applicant,
 
-You have selected to receive notification through the following methods:
+Your petition response has been filed successfully. Your Case Number is: CASEID
 
-NOTIFICATIONS
-
-If you would like to change these settings please do so in the user dashboard here:
-
-If you need to request translation services please do so here:
+If you need to request translation services please do so here: LOGIN
 
 Please continue to check your user dashboard for updates on this petition including your assigned hearing date, submitted case evidence, and scheduling of hearing date. Additionally, all case information can be accessed and new information can be submitted through the user dashboards.
 
@@ -241,7 +231,6 @@ You have until 7 days before your hearing date to file to submit new evidence fo
 If there is any information missing or if the City has any questions, a RAP staff person will reach out.
 
 If you have any questions please contact RAP staff at Phone: (510) 238-3721 
-
 </value>
     <comment>Petition response submitted</comment>
   </data>
