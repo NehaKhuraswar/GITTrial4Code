@@ -1,8 +1,9 @@
-﻿<div class="col-md-9 col-sm-12">
+﻿<script src='js/functions.js'></script>
+<div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
         <div class="step-heading">Decreased Housing Services</div>
 
-        <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form">
+        <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" onsubmit="return false;">
             <div class="step-content step1">
                 <div class="field-group subhead no-top-margin">
                     <p>If the petition filed by your renter claims decreased housing services, state your position regarding the renter’s claim(s) of decreased housing services and upload your statement below. Submit any documents, photographs or other tangible evidence that support your position.</p>
@@ -38,38 +39,38 @@
                 </div>
                 <!-- .field-group -->
                 <!--<div class="subhead type2">
-                    <h4>Additional Documentation</h4>
-                    <a href="#" class="btn-link btn-edit">Edit</a>
-                </div>-->
+                <h4>Additional Documentation</h4>
+                <a href="#" class="btn-link btn-edit">Edit</a>
+            </div>-->
                 <!--<div class="field-group">
-                    <!-- Custom Table -->
+                <!-- Custom Table -->
                 <!--<div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_DecreasedHousing'}">
-                    <div class="tbl-header">
-                        <div class="tbl-row clearfix">
-                            <div class="col col-35 name">File name</div>
-                        </div>
+                <div class="tbl-header">
+                    <div class="tbl-row clearfix">
+                        <div class="col col-35 name">File name</div>
                     </div>
+                </div>
 
-                    <div class="tbl-body">
-                        <div class="tbl-row clearfix">
-                            <div class="item" ng-class="{'expanded':toggle}">
-                                <div class="item-header clearfix">
-                                    <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
-                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                                </div>
+                <div class="tbl-body">
+                    <div class="tbl-row clearfix">
+                        <div class="item" ng-class="{'expanded':toggle}">
+                            <div class="item-header clearfix">
+                                <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                            </div>
 
-                                <div class="item-content clearfix" ng-show="toggle">
-                                    <div class="row">
-                                        <div class="col-md-10 col-sm-12">
-                                            <p>{{item.DocDescription}}</p>
-                                        </div>
+                            <div class="item-content clearfix" ng-show="toggle">
+                                <div class="row">
+                                    <div class="col-md-10 col-sm-12">
+                                        <p>{{item.DocDescription}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>-->
+                </div>
+            </div>-->
                 <!-- .custom-table -->
             </div>
 

@@ -1,10 +1,10 @@
-﻿
+﻿<script src='js/functions.js'></script>
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
             <div class="step-heading">Review</div>
 
-            <form name="frmOwnerResponseReview" id="frmOwnerResponseReview" action="#" method="post" class="application-form">
+            <form name="frmOwnerResponseReview" id="frmOwnerResponseReview" action="#" method="post" class="application-form" onsubmit="return false;">
                 <div class="step-content step1">
                     <div class="field-group filled-info subhead no-top-margin hidden-sm">
                         <div class="row">
@@ -218,53 +218,53 @@
                                 </div>
                             </div><!-- .field-group -->
                             <!--<!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Proof</div></div>
-                                    <div class="col-sm-6 col-xs-12">copy_of_notice.pdf</div>
-                                </div>
-                            </div><!-- .field-group -->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Proof</div></div>
+                            <div class="col-sm-6 col-xs-12">copy_of_notice.pdf</div>
+                        </div>
+                    </div><!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Is the contested increase a Capital Improvements increase?</div></div>
-                                    <div class="col-sm-6 col-xs-12">Yes</div>
-                                </div>
-                            </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Is the contested increase a Capital Improvements increase?</div></div>
+                            <div class="col-sm-6 col-xs-12">Yes</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you submit a petition for rent increase for Capital Improvements?</div></div>
-                                    <div class="col-sm-6 col-xs-12">Yes</div>
-                                </div>
-                            </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you submit a petition for rent increase for Capital Improvements?</div></div>
+                            <div class="col-sm-6 col-xs-12">Yes</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
-                                    <div class="col-sm-6 col-xs-12">T17-0238</div>
-                                </div>
-                            </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
+                            <div class="col-sm-6 col-xs-12">T17-0238</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
                             <!--<div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
-                                <div class="field-group filled-info subhead no-top-margin">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Did you submit a copy of the Enhanced Notice to the RAP office within 10 days of serving the tenant?</div></div>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <label ng-if="item.bRentIncreaseNoticeGiven">
-                                                <i></i><span>Yes</span>
-                                            </label>
-                                            <label ng-if="!item.bRentIncreaseNoticeGiven">
-                                                <i></i><span>No</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>-->
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Did you submit a copy of the Enhanced Notice to the RAP office within 10 days of serving the tenant?</div></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <label ng-if="item.bRentIncreaseNoticeGiven">
+                                        <i></i><span>Yes</span>
+                                    </label>
+                                    <label ng-if="!item.bRentIncreaseNoticeGiven">
+                                        <i></i><span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>-->
                             <!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
-                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
-                                </div>
-                            </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
 
                             <div class="field-group filled-info subhead no-top-margin">
@@ -290,18 +290,18 @@
                                 </div>
                             </div><!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
-                                    <div class="col-sm-6 col-xs-12">Yes</div>
-                                </div>
-                            </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                            <div class="col-sm-6 col-xs-12">Yes</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
-                                    <div class="col-sm-6 col-xs-12">01/09/16</div>
-                                </div>
-                            </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                            <div class="col-sm-6 col-xs-12">01/09/16</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
 
                             <div class="field-group filled-info subhead no-top-margin">
@@ -329,18 +329,18 @@
                                 </div>
                             </div><!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="info-title full-width">Description of the document that you are attaching</div>
-                                <div class="row">
-                                    <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
-                                </div>
-                            </div>-->
+                        <div class="info-title full-width">Description of the document that you are attaching</div>
+                        <div class="row">
+                            <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
                             <!--<div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Justification document</div></div>
-                                    <div class="col-sm-6 col-xs-12">justification_document.pdf</div>
-                                </div>
-                            </div>-->
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Justification document</div></div>
+                            <div class="col-sm-6 col-xs-12">justification_document.pdf</div>
+                        </div>
+                    </div>-->
                             <!-- .field-group -->
                         </div>
                     </div>
