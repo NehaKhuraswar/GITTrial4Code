@@ -1,9 +1,10 @@
-﻿<div class="col-md-9 col-sm-12">
+﻿<script src='js/functions.js'></script>
+<div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
             <div class="alert alert-error" ng-show="Hide==true"></div>
             <div class="step-heading">Applicant and Property Information</div>
-            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" novalidate>
+            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" onsubmit="return false;" novalidate>
                 <div class="step-content step1">
                     <div class="field-group subhead no-top-margin">
                         <div class="info">
@@ -321,7 +322,7 @@
                     </div>
                     <div class="field-group">
                         <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
-                        <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range"
+                        <select name="pi_approx_units" id="pi_approx_units" data-placeholder="Select range"
                                 ng-model=" Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID"
                                 ng-options="range.RangeID as range.RangeDesc for range in Ctrl.caseinfo.NumberOfUnitsRange">
                             <option value="" selected>Select range</option>
@@ -348,25 +349,24 @@
                             <div class="clear"></div>
                         </div>
                     </div>
-                    thirdparty firstname validation :  {{frmOwnerResponse.Thirdparty_firstname.$error.required}}
-                    thirdparty lastname validation :  {{frmOwnerResponse.Thirdparty_lastname.$error.required}}
+                
                 </div>
                 <div class="step-footer">
                     <!--<input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue"
-                           ng-click="(Hide=true); (!frmOwnerResponse.Applicant_firstname.$error.required)&&
-                                   (!frmOwnerResponse.Applicant_lastname.$error.required)&&
-                                   (!frmOwnerResponse.Applicant_address1.$error.required)&&
-                                   (!frmOwnerResponse.Applicant_city.$error.required)&&
-                                   (!frmOwnerResponse.Applicant_zip.$error.required)&&
-                                   (!frmOwnerResponse.Thirdparty_firstname.$error.required)&&
-                                   (!frmOwnerResponse.Thirdparty_lastname.$error.required)&&
-                                   (!frmOwnerResponse.Thirdparty_address1.$error.required)&&
-                                   (!frmOwnerResponse.Thirdparty_city.$error.required)&&
-                                   (!frmOwnerResponse.Thirdparty_zip.$error.required)&&
-                                   (!frmOwnerResponse.business_license_number.$error.required) && Ctrl.Continue()" />-->
+                   ng-click="(Hide=true); (!frmOwnerResponse.Applicant_firstname.$error.required)&&
+                           (!frmOwnerResponse.Applicant_lastname.$error.required)&&
+                           (!frmOwnerResponse.Applicant_address1.$error.required)&&
+                           (!frmOwnerResponse.Applicant_city.$error.required)&&
+                           (!frmOwnerResponse.Applicant_zip.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_firstname.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_lastname.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_address1.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_city.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_zip.$error.required)&&
+                           (!frmOwnerResponse.business_license_number.$error.required) && Ctrl.Continue()" />-->
                     <!--<input type="submit" id="save" name="save" class="btn-primary" value="Save and Continue"
-                           ng-click="(Hide=true);(!frmOwnerResponse.Thirdparty_firstname.$error.required) &&
-                          (!frmOwnerResponse.Thirdparty_lastname.$error.required) && Ctrl.Continue()" />-->
+                   ng-click="(Hide=true);(!frmOwnerResponse.Thirdparty_firstname.$error.required) &&
+                  (!frmOwnerResponse.Thirdparty_lastname.$error.required) && Ctrl.Continue()" />-->
 
 
                     <input aria-label="Save and continue" role="button" type="submit" id="save" name="save" class="btn-primary" value="Save and continue"

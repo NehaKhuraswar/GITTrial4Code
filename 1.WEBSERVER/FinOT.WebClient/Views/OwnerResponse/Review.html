@@ -353,8 +353,30 @@
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="info-title full-width">Your position regarding the tenant’s claim(s) of decreased housing services</div>
 
-                        <div class="row">
-                            <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
+                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_DecreasedHousing'}">
+                            <div class="tbl-header">
+                                <div class="tbl-row clearfix">
+                                    <div class="col col-35 name">File name</div>
+                                </div>
+                            </div>
+
+                            <div class="tbl-body">
+                                <div class="tbl-row clearfix">
+                                    <div class="item item-toggle expanded">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
+                                        </div>
+
+                                        <div class="item-content clearfix">
+                                            <div class="row">
+                                                <div class="col-md-10 col-sm-12">
+                                                    <p>{{item.DocDescription}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div><!-- .field-group -->
                     <!-- Exemptions -->
