@@ -908,6 +908,8 @@ namespace RAP.DAL
                         caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
                         caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
                         caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
+                        caseinfo.CityAnalyst.Email = CityAnalystDB.Email;
+                        caseinfo.CityAnalyst.OfficePhoneNumber = CityAnalystDB.OfficePhoneNumber;
                     }
                     if (item.HearingOfficerUserID != null)
                     {
@@ -916,6 +918,8 @@ namespace RAP.DAL
                         caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
                         caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
                         caseinfo.HearingOfficer.LastName = CityDB.LastName;
+                        caseinfo.HearingOfficer.Email = CityDB.Email;
+                        caseinfo.HearingOfficer.OfficePhoneNumber = CityDB.OfficePhoneNumber;
                     }
                     caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
                     caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
@@ -936,10 +940,24 @@ namespace RAP.DAL
                     else if (petitionDetailsDb.OwnerPetitionID != null)
                     {
                         var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
-                        ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)OwnerPetitionDB.OwnerPetitionApplicantInfoID);
-                        if (applicantUser != null)
+                        if (OwnerPetitionDB != null)
                         {
-                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUser.result;
+                            var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == OwnerPetitionDB.OwnerPetitionID).First();
+                            if (petitionInfo != null)
+                            {
+                                var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == petitionInfo.OwnerPetitionApplicantInfoID).First();
+
+                                if (applicantInfo != null)
+                                {
+                                    var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                                    if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                                    {
+                                        result.status = applicantUserInforesult.status;
+                                        return result;
+                                    }
+                                    caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUserInforesult.result;
+                                }
+                            }
                         }
                     }
                     caseinfo.ActivityStatus =  _dashboarddbHandler.GetActivityStatusForCase(item.C_ID).result;

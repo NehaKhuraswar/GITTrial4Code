@@ -29,13 +29,30 @@
 
     //TBD clear the cache
     self.LogOut = function ()
-    {
-        self.UserName = '';
+    { 
+        var publiclogin = false;
+        var stafflogin = false;
+        
+        if (rapGlobalFactory.CustomerDetails != null) {
+            publiclogin = true;            
+        }
+        else if (rapGlobalFactory.CityUser != null)
+        {
+            stafflogin = true;
+        }
+                self.UserName = '';
         rapGlobalFactory.CustomerDetails = null;
         rapGlobalFactory.CustID = 0;
         rapGlobalFactory.CaseDetails = null;
         rapGlobalFactory.CityUser = null;
-        $location.path("/loginURL");
+        if (publiclogin == true)
+        {
+           $location.path("/Login");
+        }
+        else if (stafflogin == true)
+        {
+            $location.path("/CityLogin");
+        }
     }
   //  $location.path("/loginURL");
 }];

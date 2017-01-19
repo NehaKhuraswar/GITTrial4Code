@@ -57,6 +57,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
 
     var __GetCasesForCustomer = function () {
         return masterFactory.GetCasesForCustomer(self.model.custID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
             self.Cases = response.data;
         });
     }
