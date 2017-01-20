@@ -1,8 +1,9 @@
-﻿<div class="col-md-9 col-sm-12">
+﻿<script src='js/functions.js'></script>
+<div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
         <h3 class="step-heading">Review</h3>
 
-        <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
+        <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form" onsubmit="return false;">
             <div class="step-content step1">
                 <div class="alert" ng-show="Ctrl.Error!=''">
                     <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
@@ -29,7 +30,7 @@
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead" >
+                <div class="field-group filled-info subhead">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
@@ -44,7 +45,7 @@
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
                         <div class="col-sm-6 col-xs-12">
                             {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}                             {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
-                            T {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}} 
+                            T {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}}
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -54,7 +55,7 @@
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
                         <div class="col-sm-6 col-xs-12">
                             {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}                             {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}   <br />
-                            T {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}} 
+                            T {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}}
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -92,7 +93,7 @@
                             {{item.PetitionGroundDescription}}
                         </div>
                         <!--<p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
-                        <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
+                    <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
                     </div>
 
                 </div>
@@ -175,7 +176,7 @@
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Have you ever filed a petition for your rental unit?</div></div>
-                        <div class="col-sm-6 col-xs-12" 
+                        <div class="col-sm-6 col-xs-12"
                              ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bPetitionFiledPrviously">Yes</div>
                         <div class="col-sm-6 col-xs-12"
                              ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bPetitionFiledPrviously">No</div>
