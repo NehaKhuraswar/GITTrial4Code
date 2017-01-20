@@ -331,8 +331,15 @@ namespace RAP.DAL
                 var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
                 if (accdbResult.status.Status == StatusEnum.Success)
                 {
+                    if (accdbResult.result.ThirdPartyUser.UserID > 0)
+                    {                       
+                      caseInfo.TenantAppealInfo.bThirdPartyRepresentation = true;
+                    }
+                    else
+                    {
+                        caseInfo.TenantAppealInfo.bThirdPartyRepresentation = false;
+                    }
                     caseInfo.TenantAppealInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                    caseInfo.TenantAppealInfo.bThirdPartyRepresentation = true;
                 }
                 //}
                 //else
