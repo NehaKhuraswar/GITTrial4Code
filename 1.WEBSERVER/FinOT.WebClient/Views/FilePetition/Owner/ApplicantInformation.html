@@ -51,7 +51,7 @@
                 <div class="field-group">
                     <label for="Applicant_state">State</label>
                     <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                    <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                    <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
                             ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State"
                             ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                 </div>
@@ -144,7 +144,7 @@
 
                     <div class="field-group">
                         <label for="representative_state">State</label>
-                        <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                        <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
                                 ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State"
                                 ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                     </div>
