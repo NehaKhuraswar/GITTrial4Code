@@ -1,4 +1,5 @@
-﻿<div class="application-form-wrapper">
+﻿<script src='js/functions.js'></script>
+<div class="application-form-wrapper">
     <div class="application-step step-1">
         <div class="alert alert-error" ng-show="Hide==true">
         </div>
@@ -77,21 +78,21 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.serveAppeal.PenaltyDate.Month"
-                                            class="custom-select" data-placeholder="Month"
+                                            data-placeholder="Month"
                                             ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.serveAppeal.PenaltyDate.Day"
-                                            class="custom-select" data-placeholder="Day"
+                                            data-placeholder="Day"
                                             ng-options="day for day in  Ctrl.Calender.Days"></select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.serveAppeal.PenaltyDate.Year"
-                                            class="custom-select" data-placeholder="Year"
+                                            data-placeholder="Year"
                                             ng-options="year for year in  Ctrl.Calender.Years"></select>
                                 </div>
                             </div>

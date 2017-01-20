@@ -1,4 +1,5 @@
-﻿<div class="application-form-wrapper">
+﻿<script src='js/functions.js'></script>
+<div class="application-form-wrapper">
     <div class="application-step step-1">
         <div class="alert" ng-show="Ctrl.Error!=''">
             <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
@@ -50,7 +51,7 @@
                             <dropdown placeholder="States" list="Ctrl.DocDescriptions" property="StateName"
                                       selected="Ctrl.description1"></dropdown>
                         </div>-->
-                        <select ng-model="Ctrl.description1" class="custom-select"
+                        <select ng-model="Ctrl.description1" 
                                 data-placeholder="Description"
                                 ng-options="desc for desc in Ctrl.DocDescriptions"></select>
                     </div>
