@@ -62,11 +62,11 @@ a {
 
 /* line 99, ../sass/_normalize.scss */
 a:active {
-  outline: 0;
+  /*outline: 0;*/
 }
 /* line 102, ../sass/_normalize.scss */
 a:hover {
-  outline: 0;
+  /*outline: 0;*/
 }
 
 /* line 114, ../sass/_normalize.scss */
@@ -309,7 +309,7 @@ body {
 
 /* line 85, ../sass/_reboot.scss */
 [tabindex="-1"]:focus {
-  outline: none !important;
+  /*outline: none !important;*/
 }
 
 /* line 98, ../sass/_reboot.scss */
@@ -543,8 +543,8 @@ output {
 .container-fluid {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
+ /* padding-left: 0.625rem;
+  padding-right: 0.625rem;*/
 }
 /* line 2, ../sass/mixins/_clearfix.scss */
 .container-fluid::after {
@@ -2383,7 +2383,7 @@ button.close {
   z-index: 1050;
   display: none;
   overflow: hidden;
-  outline: 0;
+ /* outline: 0;*/
   -webkit-overflow-scrolling: touch;
 }
 /* line 28, ../sass/_modal.scss */
@@ -2417,7 +2417,7 @@ button.close {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  outline: 0;
+  /*outline: 0;*/
 }
 
 /* line 59, ../sass/_modal.scss */
@@ -2640,7 +2640,7 @@ button.close {
   background-color: rgba(0, 0, 0, 0.5);
   text-indent: -9999px;
   display: none;
-  outline: none !important;
+ /* outline: none !important;*/
   z-index: 999;
 }
 /* line 17, ../sass/components/_button-top.scss */
@@ -2709,7 +2709,7 @@ button.close {
 /* line 129, ../sass/styles.scss */
 * {
   font-weight: normal !important;
-  outline: none !important;
+  /*outline: none !important;*/
 }
 
 /* line 133, ../sass/styles.scss */
@@ -3765,7 +3765,7 @@ strong {
   padding: 0;
   cursor: pointer;
   border: none;
-  outline: none;
+  /*outline: none;*/
   background: transparent;
 }
 /* line 920, ../sass/styles.scss */
@@ -4542,7 +4542,7 @@ Toggle Menu Button
   height: 30px;
   cursor: pointer;
   background: none;
-  outline: none;
+  /*outline: none;*/
 }
 /* line 1652, ../sass/styles.scss */
 .application-form .input-file-wrapper input {

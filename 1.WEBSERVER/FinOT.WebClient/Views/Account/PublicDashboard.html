@@ -113,16 +113,16 @@
                             </div><!--field-group -->
 
                             <div class="forms-groups-wrapper">
-                                <div class="forms-group item-toggle expanded">
-                                    <div class="group-header item-header">For property owners <a href="#" class="btn-toggle"></a></div>
+                                <div class="forms-group" ng-class="{'expanded':Ownertoggle}">
+                                    <div class="group-header item-header">For property owners <a ng-click="Ownertoggle = !Ownertoggle" class="btn-toggle"></a></div>
 
-                                    <div class="group-content item-content">
+                                    <div class="group-content item-content" ng-show="Ownertoggle">
                                         <div class="form-section">
                                             <div class="row">
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Property Owner Petition Form</div>
                                                     <div class="summary">Provides form for property owner to apply for Rent Adjustment Program pre-approval of increases that would exceed the annual allowable rate</div>
-                                                    <p><a  ng-click="Ctrl.FilePetition()" class="btn-link" role="button" aria-label="File online">File online</a></p>
+                                                    <p><a ng-click="Ctrl.FilePetition()" class="btn-link" role="button" aria-label="File online">File online</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
@@ -158,7 +158,7 @@
                                                                 <li><a href="#">Loss of Service</a></li>
                                                                 <li><a href="#">Rent Increase</a></li>
                                                                 <li><a href="#">Petition Process</a></li>
-																<li><a href="#">Online Portal</a></li>
+                                                                <li><a href="#">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -166,17 +166,17 @@
                                             </div><!-- .row -->
                                         </div><!--item -->
 
-										
-										
-										
-										
-										
+
+
+
+
+
                                         <div class="form-section">
                                             <div class="row">
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Enhanced Notice to Tenants for Grandparented Capital Improvements</div>
                                                     <div class="summary">Enhanced Notice form for owners with grandfathered Capital Improvements. Note: Effective 2/1/17, all rent increases above the annual CPI increase will require an owner petition for pre-approval of increase. </div>
-                                                     <p><a href="http://www2.oaklandnet.com/government/o/hcd/s/LandlordResources/OAK048808" class="link-download-form">Download Form</a></p>
+                                                    <p><a href="http://www2.oaklandnet.com/government/o/hcd/s/LandlordResources/OAK048808" class="link-download-form">Download Form</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
@@ -185,23 +185,23 @@
                                                         <div class="info-content">
                                                             <ul>
                                                                 <li><a href="#">Rent Adjustment Program</a></li>
-                                                               
+
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div><!-- .col-md-3 -->
                                             </div><!-- .row -->
                                         </div><!--item -->
-										
-                                 
+
+
                                     </div><!-- .forms-group-content -->
                                 </div><!-- .forms-group -->
 
 
-                                <div class="forms-group item-toggle expanded">
-                                    <div class="group-header item-header">For tenants <a href="#" class="btn-toggle"></a></div>
+                                <div class="forms-group" ng-class="{'expanded':Tenanttoggle}">
+                                    <div class="group-header item-header">For tenants <a ng-click="Tenanttoggle = !Tenanttoggle" class="btn-toggle"></a></div>
 
-                                    <div class="group-content item-content">
+                                    <div class="group-content item-content" ng-show="Tenanttoggle">
                                         <div class="form-section">
                                             <div class="row">
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
@@ -219,7 +219,7 @@
                                                                 <li><a href="#">Loss of Service</a></li>
                                                                 <li><a href="#">Rent Increase</a></li>
                                                                 <li><a href="#">Petition Process</a></li>
-																<li><a href="#">Online Portal</a></li>
+                                                                <li><a href="#">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -244,7 +244,7 @@
                                                                 <li><a href="#">Loss of Service</a></li>
                                                                 <li><a href="#">Rent Increase</a></li>
                                                                 <li><a href="#">Petition Process</a></li>
-																 <li><a href="#">Online Portal</a></li>
+                                                                <li><a href="#">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -252,20 +252,20 @@
                                             </div><!-- .row -->
                                         </div><!--.form-section -->
 
-                                        
 
-                                       
+
+
                                     </div><!-- .forms-group-content -->
                                 </div><!-- .forms-group -->
 
 
-                                <div class="forms-group item-toggle expanded">
-                                    <div class="group-header item-header">For everyone <a href="#" class="btn-toggle"></a></div>
+                                <div class="forms-group" ng-class="{'expanded':EveryOnetoggle}">
+                                    <div class="group-header item-header">For everyone <a ng-click="EveryOnetoggle = !EveryOnetoggle" class="btn-toggle"></a></div>
 
-                                    <div class="group-content item-content">
-									
-									
-									<div class="form-section">
+                                    <div class="group-content item-content" ng-show="EveryOnetoggle">
+
+
+                                        <div class="form-section">
                                             <div class="row">
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Appeal Form</div>
@@ -282,17 +282,17 @@
                                                                 <li><a href="#">Loss of Service</a></li>
                                                                 <li><a href="#">Rent Increase</a></li>
                                                                 <li><a href="#">Petition Process</a></li>
-																<li><a href="#">Online Portal</a></li>
+                                                                <li><a href="#">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div><!-- .col-md-3 -->
                                             </div><!-- .row -->
                                         </div><!--item -->
-									
-									
-									
-									
+
+
+
+
                                         <div class="form-section">
                                             <div class="row">
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
@@ -306,7 +306,7 @@
                                                         <div class="info-header">Related information <a href="#" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                             
+
                                                                 <li><a href="#">Petition Process</a></li>
                                                             </ul>
                                                         </div>
@@ -349,7 +349,7 @@
                                                         <div class=" info-header">Related information <a href="#" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                               
+
                                                                 <li><a href="#">Petition process</a></li>
                                                             </ul>
                                                         </div>
@@ -357,8 +357,8 @@
                                                 </div><!-- .col-md-3 -->
                                             </div><!-- .row -->
                                         </div><!-- .form-section -->
-										
-										  <div class="form-section">
+
+                                        <div class="form-section">
                                             <div class="row">
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Request for Copies</div>
@@ -371,7 +371,7 @@
                                                         <div class=" info-header">Related information <a href="#" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                               
+
                                                                 <li><a href="#">Petition process</a></li>
                                                             </ul>
                                                         </div>
@@ -379,8 +379,8 @@
                                                 </div><!-- .col-md-3 -->
                                             </div><!-- .row -->
                                         </div><!-- .form-section -->
-										
-										
+
+
                                     </div><!--.item-content -->
                                 </div><!-- .forms-group -->
                             </div><!--.forms-group-wrapper -->
