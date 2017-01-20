@@ -16,18 +16,19 @@
                             <label for="CaseID">Case number</label>
                             <input type="text" class="field-input required" data-error="Case number" ng-trim="false" ng-model="Ctrl.CaseID" required />
                         </div>
-                        <button class="btn-link" ng-click="Ctrl.GetTenantResponseApplicationInfo(Ctrl.CaseID)">Load case info</button>
+                        <button class="btn-link" role="button" aria-label="Load case info" ng-click="Ctrl.GetTenantResponseApplicationInfo(Ctrl.CaseID)">Load case info</button>
                     </div>
                     <div ng-show="Ctrl.bCaseInfo">
                         <!-- Applicant’s name and address -->
                         <div class="subhead no-top-margin">
-                            <h4>Applicant’s name and rental address</h4>
+                            <h4>Applicant information</h4>
                             <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
                         </div>
                         <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
-                            <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}                 {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName}}     </p>
-                            <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Zip}}      </p>
-                            <p>Tel: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber}}      <br />Email: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email}}</p>
+                            <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}<br/>
+							{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName}}<br/>
+                            {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Zip}}<br/>
+                            Tel: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber}}     <br />Email: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email}}</p>
                         </div>
                         <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">
                             <div class="field-group">
@@ -83,7 +84,7 @@
                             </div>
 
                             <div class="field-group">
-                                <label for="Applicant_zip_code">Zip Code</label>
+                                <label for="Applicant_zip_code">Zip code</label>
                                 <input type="text" name="Applicant_zip_code" id="Applicant_zip_code"
                                        ng-class="{'field-input required' :(Ctrl.caseinfo.bCaseFiledByThirdParty == true) ,
                                                    'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == true) }"
@@ -97,7 +98,7 @@
                             </div>
 
                             <div class="field-group">
-                                <label for="Applicant_email">Email Address</label>
+                                <label for="Applicant_email">Email address</label>
                                 <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email" />
                             </div>
                         </div>
@@ -168,7 +169,7 @@
                             </div>
 
                             <div class="field-group">
-                                <label for="representative_email">Email Address</label>
+                                <label for="representative_email">Email address</label>
                                 <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email" />
                             </div>
                         </div>
@@ -184,7 +185,7 @@
 
                         <!-- Owner(s) name and mailing address -->
                         <div class="subhead">
-                            <h4>Owner(s) name and mailing address</h4>
+                            <h4>Property owner information</h4>
                         </div>
 
                         <div class="field-group">
@@ -214,7 +215,7 @@
                         </div>
 
                         <div class="field-group">
-                            <label for="owner_mailing_address2">Mailing address 2(optional)</label>
+                            <label for="owner_mailing_address2">Mailing address 2 (optional)</label>
                             <input type="text" name="owner_mailing_address2" id="owner_mailing_address2" class="field-input" placeholder=""
                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine2" />
                         </div>
@@ -260,7 +261,7 @@
 
                         <!-- Property manager(s) name and mailing address -->
                         <div class="subhead">
-                            <h4>Property manager(s) name and mailing address</h4>
+                            <h4>Property manager information</h4>
                         </div>
 
                         <div class="field-group">
@@ -359,7 +360,7 @@
                         </div>
 
                         <div class="field-group">
-                            <label for="number_of_units">Number of Units</label>
+                            <label for="number_of_units">Number of units</label>
                             <input type="text" name="number_of_units" id="number_of_units" class="field-input" placeholder=""
                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.NumberOfUnits" />
                         </div>
@@ -405,7 +406,7 @@
                         </div>
 
                         <div class="field-group" ng-show="!Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">
-                            <label for="explanation">If you are not current on your rent, please provide an explanation.</label>
+                            <label for="explanation">If you are not current on your rent, please explain.</label>
                             <textarea name="explanation" id="explanation" class="field-input textarea" placeholder="" rows="6"
                                       ng-model="Ctrl.caseinfo.TenantResponseInfo.ProvideExplanation"></textarea>
                         </div>
@@ -415,7 +416,7 @@
 
 
                 <div class="step-footer">
-                    <input type="submit" id="save" name="save" class="btn-primary" value="Save and continue"
+                    <input role="button" aria-label="Save and continue" type="submit" id="save" name="save" class="btn-primary" value="Save and continue"
                            ng-click="(Hide=true); (!((frmTenantResponse.Applicant_firstname.$error.required)
                                         ||(frmTenantResponse.Applicant_address1.$error.required)
                                         ||(frmTenantResponse.Applicant_city.$error.required)

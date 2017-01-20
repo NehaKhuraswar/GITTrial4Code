@@ -17,12 +17,12 @@
 
                     <div class="col-md-12 col-sm-12">
                         <div class="application-step step-1">
-                            <h3 class="step-heading">{{Ctrl.Title}}</h3>
+                            
 
                             <form name="frmCreateAccount" id="frmCreateAccount" class="application-form create-account">
                                 <div class="step-content step1">
                                     <div class="field-group">
-                                        <p>All fields are required.</p>
+                                        <p>Fields marked with an asterisk (*) are required</p>
                                     </div>
 
                                     <div class="field-group">
@@ -46,7 +46,7 @@
                                     </div>
 
                                     <div class="field-group password-requirements">
-                                        <p>Password requirements </p>
+                                        <p>Password requirements</p>
                                         <ul>
                                             <li>Must be 6-24 characters</li>
                                             <li>May not be all letters</li>
@@ -57,7 +57,7 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="password">Create a Password</label>
+                                        <label for="password">Create a password</label>
                                         <input type="password" name="password" id="password" class="field-input" ng-model="Ctrl.Password" placeholder="" />
                                     </div>
 
@@ -78,7 +78,7 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="residential_street_address2">Street address 2(optional)</label>
+                                        <label for="residential_street_address2">Street address 2 (optional)</label>
                                         <input type="text" name="residential_street_address2" id="residential_street_address2" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.AddressLine2" />
                                     </div>
 
@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div class="field-group mar-bottom-60">
-                                        <label for="residential_phone">Phone Number</label>
+                                        <label for="residential_phone">Phone number</label>
                                         <input type="text" name="residential_phone" id="residential_phone" class="field-input" placeholder="" ng-model="Ctrl.CustomerInfo.User.PhoneNumber" />
                                     </div>
 
@@ -136,7 +136,7 @@
                                         </div>
 
                                         <div class="field-group">
-                                            <label for="mailing_street_address2">Street address 2(optional)</label>
+                                            <label for="mailing_street_address2">Street address 2 (optional)</label>
                                             <input type="text" name="mailing_street_address2" id="mailing_street_address2" class="field-input"
                                                    ng-model="Ctrl.CustomerInfo.MailingAddress.AddressLine2" placeholder="" />
                                         </div>
@@ -184,7 +184,7 @@
                                     <div class="field-group no-bottom-margin">
                                         <div class="row">
                                             <div class="col-sm-9 col-xs-12">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                                <p>Please select how you would like to receive official notifications about your case from the Rent Adjustment Board.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +192,7 @@
                                     <div class="form-group-checkbox vertical clearfix">
                                         <div class="checkbox-wrapper">
                                             <label for="notification_service_proof_mail">
-                                                <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail"  ng-model="Ctrl.CustomerInfo.MailNotificationFlag"   /><i></i><span>Proof of service by mail Email</span>
+                                                <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail" ng-model="Ctrl.CustomerInfo.MailNotificationFlag"  /><i></i><span>Proof of service by mail</span>
                                             </label>
 
                                             <label for="notification_by_email">
@@ -204,8 +204,8 @@
 
                                 </div>
                                 <div class="step-footer no-top-margin">
-                                    <input type="submit" id="btn-create-account" name="btn-create-account" class="btn-primary" value="{{Ctrl.SubmitText}}" ng-click="Ctrl.Register(Ctrl.CustomerInfo)" />
-                                    <input type="button" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()"/>
+                                    <input type="submit" role="button" aria-label="Cancel" id="btn-create-account" name="btn-create-account" class="btn-primary" value="{{Ctrl.SubmitText}}" ng-click="Ctrl.Register(Ctrl.CustomerInfo)" />
+                                    <input type="button" role="button" aria-label="Cancel" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()"/>
 
                                     <input type="button" id="btn-delete" name="btn-cancel" class="btn-primary btn-delete" value="Delete account" ng-show="Ctrl.bEdit" ng-click="bDelete = true"/>
                                 </div>

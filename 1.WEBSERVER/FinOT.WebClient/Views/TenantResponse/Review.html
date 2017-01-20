@@ -48,7 +48,7 @@
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
                                             <div class="col-sm-6 col-xs-12">
                                                {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.LastName}}                                                {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Zip}}   <br />
-                                                T {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Email}} 
+                                                T {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Email}}
                                             </div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -139,7 +139,7 @@
                                         <a ng-click="Ctrl.EditExemptContested()" class="btn-link btn-edit">Edit</a>
                                     </div>
                                     <div class="field-group filled-info subhead no-top-margin">
-                                        <div class="info-title full-width">Explain below why you believe your landlord’s claim that your unit is exempt is incorrect.</div>
+                                        <div class="info-title full-width">Please attach a brief statement explaining why the property owner is not entitled to the proposed increase.</div>
                                         <div class="row">
                                             <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.ExemptContestedInfo.Explaination}}</div>
                                         </div>
@@ -152,7 +152,7 @@
 
                                     <div class="field-group filled-info subhead">
                                         <div class="row">
-                                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date you entered into the Rental Agreement for this unit</div></div>
+                                            <div class="col-sm-6 col-xs-12"><div class="info-title">When did you enter into the rental agreement for this unit?</div></div>
                                             <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -181,7 +181,7 @@
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
-                                            <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)?</div></div>
+                                            <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
                                             <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -204,7 +204,7 @@
                                 <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
-                                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
                                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -218,7 +218,7 @@
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
-                                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
                                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
@@ -268,6 +268,6 @@
 
 
                                 <div class="step-footer">
-                                    <input type="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToVerification()" />
+                                    <input role="button" aria-label="Save and continue" type="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToVerification()" />
                                 </div>
                             

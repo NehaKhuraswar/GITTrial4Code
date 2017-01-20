@@ -5,7 +5,7 @@
                 <div class="step-content step1">
 
                         <div class="field-group subhead no-top-margin">
-                            <p>Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine as part of your petition.</p>
+                            <p>Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine.</p>
                         </div>
 
 
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="field-group">
-                            <label for="preset_description">Select one of the preset descriptions from the drop down menu</label>
+                            <label for="preset_description">Select one of the preset descriptions from the drop down menu.</label>
                             <div class="full-width">
                                 <select ng-model="Ctrl.description1"
                                         data-placeholder="Description"
@@ -59,14 +59,14 @@
                         </div>
 
                     <div class="field-group mar-bottom-40" ng-show="(Ctrl.description1 == null) || (Ctrl.description1 =='<--Select-->')">
-                        <label for="document_description">If none of the above options apply, please provide a description of the file that you are uploading below:</label>
+                        <label for="document_description">If none of the above descriptions apply, please provide a description of the document you’re attaching.</label>
                         <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
                     </div>
 
                         <div class="field-group no-bottom-margin">
                             <div class="row">
                                 <div class="col-sm-10 col-xs-12">
-                                    <p class="fs-14"><strong>You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. The maximum file size limit for uploads is 25MB</strong></p>
+                                    <p class="fs-14"><strong>You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG.The maximum file size limit for uploads is 25MB</strong></p>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +84,6 @@
 
 
                     <div class="step-footer">
-                        <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToReview()" />
+                        <input role="button" aria-label="Save and continue" type="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToReview()" />
                     </div>
                            

@@ -5,7 +5,7 @@
 
         <div class="step-content step1">
             <div class="subhead no-top-margin no-bottom-margin">
-                <p><strong>This information will be used to send notifications about your case to your representative.</strong></p>
+                <p><strong>This contact information will be used to send notifications about your case to your representative.</strong></p>
             </div>
 
             <div class="field-group">
@@ -52,7 +52,7 @@
             </div>
 
             <div class="field-group">
-                <label for="phone">Phone Number</label>
+                <label for="phone">Phone number</label>
                 <input type="text" name="phone" id="phone" class="field-input" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.PhoneNumber" />
             </div>
 
@@ -81,7 +81,7 @@
             <div class="field-group">
                 <div class="row">
                     <div class="col-md-8 col-sm-12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Please select how you would like your representative to receive official notifications about your case from the Rent Adjustment Board.</p>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 <div class="form-group-checkbox vertical clearfix">
                     <div class="checkbox-wrapper">
                         <label for="chk_mailNotify">
-                            <input type="checkbox" name="chk_mailNotify" id="chk_mailNotify" ng-model="Ctrl.ThirdPartyInfo.MailNotification"  value="true" /><i></i><span>Proof of service by mail                             </span>
+                            <input type="checkbox" name="chk_mailNotify" id="chk_mailNotify" ng-model="Ctrl.ThirdPartyInfo.MailNotification" value="true" /><i></i><span>Proof of service by mail                            </span>
                         </label>
 
                         <label for="chk_emailNotify">
@@ -108,8 +108,8 @@
         </div>
 
         <div class="step-footer no-top-margin">
-            <input type="button" id="btn-save" name="btn-save" class="btn-primary" value="Save" ng-click="Ctrl.SaveOrUpdateThirdPartyInfo(Ctrl.ThirdPartyInfo)" />
-            <input type="button" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
+            <input type="button" role="button" aria-label="Save" id="btn-save" name="btn-save" class="btn-primary" value="Save" ng-click="Ctrl.SaveOrUpdateThirdPartyInfo(Ctrl.ThirdPartyInfo)" />
+            <input type="button" role="button" aria-label="Cancel" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
         </div>
     </div>
 </div>

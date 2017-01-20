@@ -4,7 +4,7 @@
 
 <div class="step-content step1">
     <div class="field-group subhead no-top-margin">
-        <label>Date you entered into the Rental Agreement for this unit</label>
+        <label>When did you enter into the rental agreement for this unit?</label>
         <div class="row">
             <div class="col-sm-4 col-xs-12">
                 <div class="field-group">
@@ -38,7 +38,7 @@
         </div>
     </div><!-- .field-group -->
     <div class="field-group">
-        <p class="no-bottom-margin">Copy of your lease agreement (Optional)</p>
+        <p class="no-bottom-margin">Your lease agreement (Optional)</p>
         <div class="field-addfile">
             <div class="input-file-wrapper">
                 <span class="btn-link">Upload</span>
@@ -50,7 +50,7 @@
     </div><!-- .field-group -->
 
     <div class="field-group">
-        <label>Date you moved into the unit</label>
+        <label>When did you move into this unit?</label>
         <div class="row">
             <div class="col-sm-4 col-xs-12">
                 <div class="field-group">
@@ -84,7 +84,7 @@
     </div>
 
     <div class="field-group">
-        <label>When did the property owner first provide you with a written NOTICE TO TENANTS of the  existence of the Rent Adjustment Program (RAP NOTICE)</label>
+        <label>When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</label>
         <div class="row">
             <div class="col-sm-4 col-xs-12">
                 <div class="field-group">
@@ -115,8 +115,14 @@
             <label for="never_given_rap_notice">
                 <input type="radio" name="never_given_rap_notice" id="never_given_rap_notice" class="input-field"
                        ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.bRAPNoticeGiven" value="True"
-                        /><i></i><span>I was never given a <u>RAP NOTICE</u> by my property owner.</span>
+                        /><i></i><span>I was never given a RAP NOTICE by my property owner.<a ng-click="section_rap_notice=!section_rap_notice" class="icon-info" data-toggle="tooltip" tooltip>Info</a></span>
+						
+						
             </label>
+			<div class="info-box-toggle" ng-show="section_rap_notice">
+                                <a  class="btn-close"></a>
+                                <p>Owners must give tenants the "Notice to Tenants of the Residential Rent Adjustment Program," also known as the "RAP Notice."The RAP Notice notifies tenants of the Rent Adjustment Program and their rights as tenants. This notice must be given to tenants when they first move in and with any change of terms of tenancy, including notices of rent increase.  The RAP Notice can be found here [LINK]</p>
+                            </div>
             <div class="clear"></div>
         </div>
     </div>
@@ -146,14 +152,22 @@
 
     <div class="field-group">
         <div class="row">
-            <div class="col-md-11 col-sm-12"><p class="no-bottom-margin">List all rent increases that you want to challenge. Begin with the most recent and work backwards. You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later) to contest the rent increase. (O.M.C. 8.22.090 A 2) If you never got the RAP Notice you can contest all past increases.</p></div>
-        </div>
+            <div class="col-md-11 col-sm-12"><p class="no-bottom-margin">List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never got the RAP Notice you can contest all past increases.<a ng-click="section_increase=!section_increase" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p></div>
+			
+	
+		</div>
+		
+		<div class="info-box-toggle" ng-show="section_increase">
+                                <a  class="btn-close"></a>
+                                <p>You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later) to contest the rent increase. (O.M.C. 8.22.090 A 2)
+</p>
+                            </div>
     </div>
     <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
         <div ng-if="item.IsDeleted == false">
             <div class="field-group filled-info subhead no-top-margin">
                 <div class="row">
-                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
                     <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>                   
                 </div>
             </div><!-- .field-group -->
@@ -180,7 +194,7 @@
         </div>
     </div>
     <div class="field-group subhead">
-        <p class="input-label">Did you receive a rent program notice with the notice of increase?</p>
+        <p class="input-label">Did you receive a RAP Notice with the notice of rent increase?</p>
         <div class="form-group-radio vertical clearfix">
             <label for="rent_increase_notice_yes">
                 <input type="radio" name="rent_increase_notice" id="rent_increase_notice_yes" class="input-field" value="true"
@@ -197,7 +211,7 @@
 
 
     <div class="field-group">
-        <label>Date notice served</label>
+        <label>Date you received the notice</label>
         <div class="row">
             <div class="col-sm-4 col-xs-12">
                 <div class="field-group">
@@ -240,7 +254,7 @@
     </div><!-- .field-group -->
 
     <div class="field-group">
-        <label>Date increase effective</label>
+        <label>Date increase goes into effect</label>
         <div class="row">
             <div class="col-sm-4 col-xs-12">
                 <div class="field-group">
@@ -268,12 +282,12 @@
 
 
     <div class="field-group">
-        <a ng-click="Ctrl.AddAnotherRentIncrease(Ctrl.RentalIncreaseModel)" class="btn-link">Add another rent increase record</a>
+        <a ng-click="Ctrl.AddAnotherRentIncrease(Ctrl.RentalIncreaseModel)" class="btn-link">Add another rent increase</a>
     </div><!-- .field-group -->
 
 </div>
 
 
 <div class="step-footer">
-    <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.ContinueToReview()" />
+    <input role="button" aria-label="Save and continue" type="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.ContinueToReview()" />
 </div>
