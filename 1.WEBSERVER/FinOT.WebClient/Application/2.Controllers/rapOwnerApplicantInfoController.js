@@ -6,10 +6,10 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerPetitionInfo.CustomerID = self.custDetails.custID;
-    self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
-
+    self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;  
     self.StateList = [];   
-
+    self.Hide = false;
+    self.Error = '';
      var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -116,7 +116,10 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;               
+            }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.ownerApplicantInfo = false;
             $scope.model.ownerJustification = true;
