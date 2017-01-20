@@ -6,7 +6,7 @@
         self.caseinfo = rapGlobalFactory.CaseDetails;
         self.caseinfo.CustomerID = self.custDetails.custID;
         self.DocDescriptions = masterFactory.DocDescription();
-
+        self.Error = '';
         masterFactory.DocDescription().then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             self.DocDescriptions = response.data;
