@@ -2583,6 +2583,7 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                bool bSelected = false;
                 var groundsDb = from r in _dbContext.TenantPetitionGroundInfos
                                            where r.TenantPetitionID == petition.PetitionID
                                            select r;
@@ -2592,6 +2593,7 @@ namespace RAP.DAL
                     {
                         if (item.Selected)
                         {
+                            bSelected = true;
                             if (!groundsDb.Where(x => x.PetitionGroundID == item.PetitionGroundID).Any())
                             {
                                 TenantPetitionGroundInfo petitionGroundsDB = new TenantPetitionGroundInfo();
@@ -2619,6 +2621,7 @@ namespace RAP.DAL
                     {
                         if (item.Selected)
                         {
+                            bSelected = true;
                             TenantPetitionGroundInfo petitionGroundsDB = new TenantPetitionGroundInfo();
                             petitionGroundsDB.TenantPetitionID = petition.PetitionID;
                             petitionGroundsDB.PetitionGroundID = item.PetitionGroundID;
@@ -2627,6 +2630,11 @@ namespace RAP.DAL
                             _dbContext.SubmitChanges();
                         }
                     }
+                }
+                if(bSelected == false)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.PetitionGroundRequired };
+                    return result;
                 }
                 var PageStatus = _dbContext.TenantPetitionPageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
                 if (PageStatus != null)

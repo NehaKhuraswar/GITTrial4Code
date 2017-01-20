@@ -15,7 +15,16 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
         });
     }
     self.SubmitPetition = function () {
-
+        if (self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinName != true || Ctrl.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinNameMediation != true)
+        {
+            self.Error = "Please acknowledge the consent to conduct business";
+                return;
+    }
+        if (self.caseinfo.TenantPetitionInfo.Verification.bDeclarePenalty != true)
+        {
+            self.Error = "Please declare that all the entered information true to your knowledge";
+                return;
+        }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.CaseFileBy = self.custDetails.custID;
         rapFactory.SubmitTenantPetition(rapGlobalFactory.CaseDetails).then(function (response) {

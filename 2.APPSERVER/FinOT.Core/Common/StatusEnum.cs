@@ -17,6 +17,7 @@ namespace RAP.Core.Common
         DatabaseMessage,
         PinError,
         OwnerResponseSubmissionFailed,
+        PetitionGroundRequired,
         #endregion
         
         #region Exceptions
@@ -28,6 +29,7 @@ namespace RAP.Core.Common
         CommunicationException,
         AuthenticationFailed,
         EmailDoesnotExist,
+
         #endregion
         #region System
         UploadFailed,

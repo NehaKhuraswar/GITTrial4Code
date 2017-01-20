@@ -54,6 +54,10 @@ namespace RAP.Core.Common
                     StatusCode = "0003";
                     StatusMessage = "Owner Resonponse petition submit failed";
                     break;
+                case StatusEnum.PetitionGroundRequired:
+                    StatusCode = "0004";
+                    StatusMessage = Message.ResourceManager.GetString("ID_0004");
+                    break;
 
 
 

@@ -6,6 +6,7 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     self.SelectedAccountType;
     self.bCityUser = false;
     self.Error = "";
+    self.Hide = false;
     //var _getAccountTypes = function () {
     //    masterFactory.GetAccountTypes().then(function (response) {
     //        if (!alert.checkResponse(response)) { return; }
@@ -41,6 +42,7 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
     //    });
     //}
     self.Login = function (model, accounttype) {
+        self.Hide = false;
         rapFactory.Login(model).then(function (response) {
             if (!alert.checkForResponse(response)) {
                  self.Error = rapGlobalFactory.Error;

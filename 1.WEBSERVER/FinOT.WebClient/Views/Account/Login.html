@@ -17,7 +17,7 @@
                     <!--<div class="alert alert-warning" ng-show="Ctrl.Error!=''">
                         <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
                     </div>-->
-                    <div class="alert alert-error" ng-show="Hide==true">
+                    <div class="alert alert-error" ng-show="Ctrl.Hide==true">
                         
                     </div>
                     <div class="alert" ng-show="Ctrl.Error!=''">
@@ -52,7 +52,7 @@
 
                         <div class="step-footer no-top-margin">                            
                             <input type="submit" id="btn-login" name="btn-login" class="btn-primary" value="Log in"
-                                   ng-click="(Hide=true) ;(!((frmLogin.login_email.$error.required) || (frmLogin.login_password.$error.required))) && Ctrl.Login(Ctrl.model.CustomerInfo, Ctrl.SelectedAccountType)" />
+                                   ng-click="(Ctrl.Hide=true) ;(!((frmLogin.login_email.$error.required) || (frmLogin.login_password.$error.required))) && Ctrl.Login(Ctrl.model.CustomerInfo, Ctrl.SelectedAccountType)" />
                             <input type="button" id="btn-create" name="btn-create" class="btn-primary" value="Create account" ng-show="Ctrl.bCityUser == false" ng-click="Ctrl.CreateAccount()" />
                         </div>
 

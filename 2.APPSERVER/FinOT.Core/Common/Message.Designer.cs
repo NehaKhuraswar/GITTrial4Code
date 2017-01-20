@@ -61,6 +61,15 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Petition grounds is a required field.
+        /// </summary>
+        internal static string ID_0004 {
+            get {
+                return ResourceManager.GetString("ID_0004", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login.
         /// </summary>
         internal static string ID_0106 {
