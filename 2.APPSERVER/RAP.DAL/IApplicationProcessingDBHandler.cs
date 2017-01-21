@@ -22,6 +22,7 @@ namespace RAP.DAL
         ReturnResult<CaseInfoM> SaveTenantResponseApplicationInfo(CaseInfoM caseInfo, int UserID);
         ReturnResult<bool> SaveTenantResponseExemptContestedInfo(TenantResponseExemptContestedInfoM message, int CustomerID);
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
+        ReturnResult<CaseInfoM> GetTenantResponseViewInfo(int C_ID);
         ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID);
         ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID);
@@ -38,6 +39,7 @@ namespace RAP.DAL
         ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID);
         ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID);
         ReturnResult<CaseInfoM> GetPetitionViewInfo(int C_ID);
+        ReturnResult<CaseInfoM> GetTenantAppealInfoForView(int C_ID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo, int CustomerID);
         ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);
         ReturnResult<CaseInfoM> GetAppealServe(int AppealID);

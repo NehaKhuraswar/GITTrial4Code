@@ -758,6 +758,68 @@ namespace RAP.WebClient
                 return responseMessage;
             }
         }
+        [AllowAnonymous]
+        [Route("GetTenantAppealInfoForView/{CID}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantAppealInfoForView(string CID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetTenantAppealInfoForView/" + CID;
+                responseMessage = client.GetAsync(requestUri).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else // error
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+        [AllowAnonymous]
+        [Route("GetTenantResponseViewInfo/{CID}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantResponseViewInfo(string CID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetTenantResponseViewInfo/" + CID;
+                responseMessage = client.GetAsync(requestUri).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else // error
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
 
         [AllowAnonymous]
         [Route("getemptyrentalhistoryinfo")]

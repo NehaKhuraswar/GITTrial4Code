@@ -61,7 +61,9 @@ namespace RAP.Core.Common
 
     public enum ActivityDefaults
     {
-        ActivityPetitionFiled = 1
+        ActivityPetitionFiled = 1,
+        AppealFiled = 22,
+        ResponseFiled = 23
     }
     public enum StatusDefaults
     {

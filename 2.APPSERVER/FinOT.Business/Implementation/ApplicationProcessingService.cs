@@ -579,12 +579,40 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public  ReturnResult<CaseInfoM> GetTenantAppealInfoForView(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetTenantAppealInfoForView(C_ID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<CaseInfoM> GetPetitionViewInfo(int C_ID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
                 result = _dbHandler.GetPetitionViewInfo(C_ID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
+        public ReturnResult<CaseInfoM> GetTenantResponseViewInfo(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                result = _dbHandler.GetTenantResponseViewInfo(C_ID);
                 return result;
             }
             catch (Exception ex)

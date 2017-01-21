@@ -1271,6 +1271,80 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
+        [Route("GetTenantAppealInfoForView/{CID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantAppealInfoForView(int CID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                result = _service.GetTenantAppealInfoForView(CID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+        [AllowAnonymous]
+        [Route("GetTenantResponseViewInfo/{CID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantResponseViewInfo(int CID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                result = _service.GetTenantResponseViewInfo(CID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
 
         [AllowAnonymous]
         [Route("getemptytrrentalhistoryinfo")]

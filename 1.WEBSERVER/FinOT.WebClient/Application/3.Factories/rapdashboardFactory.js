@@ -49,10 +49,34 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
     }
+    var _GetTenantAppealInfoForView = function (CID) {
+        blockUI.start();
+
+        var url = 'api/applicationprocessing' + '/GetTenantAppealInfoForView';
+        if (!(CID == null || CID == undefined)) { url = url + '/' + CID; }
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+    var _GetTenantResponseViewInfo = function (CID) {
+        blockUI.start();
+
+        var url = 'api/applicationprocessing' + '/GetTenantResponseViewInfo';
+        if (!(CID == null || CID == undefined)) { url = url + '/' + CID; }
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     factory.GetPetitionViewInfo = _GetPetitionViewInfo;
     factory.GetCaseInfo = _GetCaseInfo;
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;
+    factory.GetTenantAppealInfoForView = _GetTenantAppealInfoForView;
+    factory.GetTenantResponseViewInfo = _GetTenantResponseViewInfo;
     return factory;
 }];

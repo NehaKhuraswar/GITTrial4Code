@@ -1626,6 +1626,47 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<TenantAppealInfoM> GetAppealApplicantInfoForView(string CaseNumber)
+        {
+            ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
+            TenantAppealInfoM appealInfo = new TenantAppealInfoM();
+            try
+            {
+
+                var appealInfoDB = _dbContext.TenantAppealDetails.Where(x => x.CaseNumber == CaseNumber).FirstOrDefault();
+                if (appealInfoDB == null)
+                {
+                    result.result = appealInfo;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    return result;
+                }
+                else
+                {
+                    appealInfo.AppealID = appealInfoDB.AppealID;
+                    appealInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(appealInfoDB.ApplicantUserID)).result;
+                    appealInfo.bThirdPartyRepresentation = Convert.ToBoolean(appealInfoDB.bThirdPartyRepresentation);
+                    if (appealInfoDB.bThirdPartyRepresentation == true)
+                    {
+                        appealInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)appealInfoDB.ThirdPartyUserID).result;
+                    }
+                    appealInfo.AppealPropertyUserInfo = _commondbHandler.GetUserInfo((int)appealInfoDB.PropertyUserID).result;
+                    appealInfo.AppealDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(appealInfoDB.AppealDate));
+                }
+
+                result.result = appealInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
         public ReturnResult<CaseInfoM> GetCaseDetails(int UserID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
@@ -1799,6 +1840,63 @@ namespace RAP.DAL
                 return result;
             }
         }
+        ///<summary>
+        ///Get appeal ground info based upon appealID
+        ///</summary>
+        ///<param name="appealID"></param>
+        /// <returns></returns>
+        public ReturnResult<List<AppealGroundM>> GetAppealGroundInfoForView(int AppealID)
+        {
+            ReturnResult<List<AppealGroundM>> result = new ReturnResult<List<AppealGroundM>>();
+            List<AppealGroundM> AppealGroundInfo = new List<AppealGroundM>();
+            try
+            {
+
+                var appealGrounds = _dbContext.AppealGrounds;
+                if (appealGrounds == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var appealGround in appealGrounds)
+                    {
+                        AppealGroundM _appealGround = new AppealGroundM();
+                        _appealGround.AppealGroundID = appealGround.AppealGroundID;
+                        _appealGround.AppealDescription = appealGround.AppealDescription;
+                        AppealGroundInfo.Add(_appealGround);
+                    }
+                }
+                
+                var TenantAppealGroundInfoDB = _dbContext.TenantAppealGroundInfos
+                                                        .Where(x => x.AppealID == AppealID).ToList();
+                foreach (var item in TenantAppealGroundInfoDB)
+                {
+                    foreach (var item1 in AppealGroundInfo)
+                    {
+                        if (item1.AppealGroundID == item.AppealGroundID)
+                        {
+                            item1.Selected = true;
+                        }
+                    }
+                }
+                
+                result.result = AppealGroundInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+
+
 
         //Get Review Tenant Petition
         public ReturnResult<TenantAppealInfoM> GetTenantAppealReviewInfo(string CaseNumber, int AppealFiledBy)
@@ -1833,7 +1931,45 @@ namespace RAP.DAL
                 return tenantAppealResult;
             }
         }
+        //Get View Tenant Appeal
+        public ReturnResult<CaseInfoM> GetTenantAppealInfoForView(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            ReturnResult<TenantAppealInfoM> tenantAppealResult = new ReturnResult<TenantAppealInfoM>();
+            ReturnResult<ServeAppealM> ServeAppealResult = new ReturnResult<ServeAppealM>();
+            CaseInfoM caseinfo = new CaseInfoM();
+            try
+            {
+                var CaseNumber = _dbContext.CaseDetails.Where(x=>x.C_ID==C_ID).Select(x => x.CaseID).First();
+                tenantAppealResult = GetAppealApplicantInfoForView(CaseNumber);
+                if (tenantAppealResult.status.Status != StatusEnum.Success)
+                    return result;
 
+                tenantAppealResult.result.AppealGrounds = GetAppealGroundInfoForView(tenantAppealResult.result.AppealID).result;
+                if (tenantAppealResult.status.Status != StatusEnum.Success)
+                    return result;
+
+                ServeAppealResult.result = GetAppealServe((int)tenantAppealResult.result.AppealID).result.TenantAppealInfo.serveAppeal;
+                if (ServeAppealResult != null)
+                {
+                    tenantAppealResult.result.serveAppeal = ServeAppealResult.result;
+                    tenantAppealResult.status = ServeAppealResult.status;
+                    if (ServeAppealResult.status.Status != StatusEnum.Success)
+                        return result;
+                }
+                caseinfo.TenantAppealInfo = tenantAppealResult.result;
+                result.result = caseinfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                tenantAppealResult.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(tenantAppealResult.status);
+                return result;
+            }
+        }
         /// <summary>
         /// Files the petition details
         /// </summary>
@@ -1852,7 +1988,7 @@ namespace RAP.DAL
                     _dbContext.SubmitChanges();
                 }
 
-                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy);
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.AppealFiled);
 
                 var AppealDB = _dbContext.TenantAppealDetails.Where(x => x.AppealID == caseInfo.TenantAppealInfo.AppealID).FirstOrDefault();
                 if (AppealDB != null)
@@ -2037,7 +2173,7 @@ namespace RAP.DAL
                 _dbContext.SubmitChanges();
                 caseInfo.CaseID = caseid;
 
-                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy);
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ActivityPetitionFiled);
 
                 //using (DashboardDataContext db = new DashboardDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]))
                 //{
@@ -3118,9 +3254,13 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                        if(tenantResponseInfo.ThirdPartyInfo != null)
+                        if(tenantResponseInfo.ThirdPartyInfo.UserID != 0)
                         {
                             tenantResponseInfo.bThirdPartyRepresentation = true;
+                        }
+                        else
+                        {
+                            tenantResponseInfo.bThirdPartyRepresentation = false;
                         }
                     }
                     
@@ -3144,9 +3284,13 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                        if(tenantResponseInfo.ThirdPartyInfo != null)
+                        if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
                         {
                             tenantResponseInfo.bThirdPartyRepresentation = true;
+                        }
+                        else
+                        {
+                            tenantResponseInfo.bThirdPartyRepresentation = false;
                         }
                     }
                     var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
@@ -3315,6 +3459,186 @@ namespace RAP.DAL
                 tenantResponseResult.status = eHandler.HandleException(ex);
                 _commondbHandler.SaveErrorLog(tenantResponseResult.status);
                 return tenantResponseResult;
+            }
+        }
+        public ReturnResult<CaseInfoM> GetTenantResponseApplicationInfoForView(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).FirstOrDefault();
+                if (CaseDetailsDB == null)
+                {
+                    result.result = null;
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                CaseInfoM caseInfo = new CaseInfoM();
+                caseInfo.C_ID = CaseDetailsDB.C_ID;
+                caseInfo.CaseID = CaseDetailsDB.CaseID;
+
+                List<UnitTypeM> _units = new List<UnitTypeM>();
+                List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
+
+                var units = _dbContext.UnitTypes;
+                if (units == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var unit in units)
+                    {
+                        UnitTypeM _unit = new UnitTypeM();
+                        _unit.UnitTypeID = unit.UnitTypeID;
+                        _unit.UnitDescription = unit.Description;
+                        _units.Add(_unit);
+                    }
+
+                }
+
+                var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                if (rangeDB == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var item in rangeDB)
+                    {
+                        NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                        obj.RangeID = item.RangeID;
+                        obj.RangeDesc = item.RangeDesc;
+                        _rangeOfUnits.Add(obj);
+                    }
+                }
+                var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(
+                                                x=>x.C_ID == caseInfo.C_ID
+                                                ).FirstOrDefault();
+                TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
+                if (TenantResponseInfoDB != null)
+                {
+                    tenantResponseInfo.TenantResponseID = TenantResponseInfoDB.TenantResponseID;
+                    tenantResponseInfo.bThirdPartyRepresentation = (bool)TenantResponseInfoDB.bThirdPartyRepresentation;
+                    if (tenantResponseInfo.bThirdPartyRepresentation)
+                    {
+                        tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
+                    }
+
+                    tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
+                    tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
+                    tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                    if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
+                    {
+                        tenantResponseInfo.bSameAsOwnerInfo = true;
+                    }
+                    tenantResponseInfo.NumberOfUnits = (int)TenantResponseInfoDB.NumberOfUnits;
+                    tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
+                    tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
+                    tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
+                    tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
+                    tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
+                }
+                else
+                {
+                    
+                    var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
+
+                    if (ownerPetitionID != null)
+                    {
+                        var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == Convert.ToInt32(ownerPetitionID)).First();
+                        if (petitionInfo != null)
+                        {
+                            var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == petitionInfo.OwnerPetitionApplicantInfoID).First();
+
+                            if (applicantInfo != null)
+                            {
+                                var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                                if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                                {
+                                    result.status = applicantUserInforesult.status;
+                                    return result;
+                                }
+                                tenantResponseInfo.OwnerInfo = applicantUserInforesult.result;
+                                tenantResponseInfo.NumberOfUnits = Convert.ToInt32(applicantInfo.NumberOfUnits);
+                                tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(applicantInfo.RangeID);
+                            }
+                            var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == petitionInfo.OwnerPropertyID).First();
+
+                            if (propertyInfo != null)
+                            {
+                                tenantResponseInfo.UnitTypeId = propertyInfo.UnitTypeID;
+                                tenantResponseInfo.bCurrentRentStatus = Convert.ToBoolean(propertyInfo.CurrentOnRent);
+                            }
+                        }
+                    }
+                }
+
+                tenantResponseInfo.UnitTypes = _units;
+                tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
+
+
+                caseInfo.TenantResponseInfo = tenantResponseInfo;
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+        //Get Review Tenant Respomse
+        public ReturnResult<CaseInfoM> GetTenantResponseViewInfo(int C_ID )
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            ReturnResult<TenantResponseInfoM> tenantResponseResult = new ReturnResult<TenantResponseInfoM>();
+            ReturnResult<CaseInfoM> ApplicationInfoResult = new ReturnResult<CaseInfoM>();
+            ReturnResult<CaseInfoM> ExemptContestedInfoResult = new ReturnResult<CaseInfoM>();
+            ReturnResult<TenantResponseRentalHistoryM> RentalHistoryResult = new ReturnResult<TenantResponseRentalHistoryM>();
+            CaseInfoM caseInfo = new CaseInfoM();
+
+            try
+            {
+                ApplicationInfoResult = GetTenantResponseApplicationInfoForView(C_ID);
+                tenantResponseResult.result = ApplicationInfoResult.result.TenantResponseInfo;
+                if (ApplicationInfoResult.status.Status != StatusEnum.Success)
+                    return result;
+
+                ExemptContestedInfoResult = GetTenantResponseExemptContestedInfo((int)tenantResponseResult.result.TenantResponseID);
+                if (ExemptContestedInfoResult != null)
+                {
+                    tenantResponseResult.result.ExemptContestedInfo = ExemptContestedInfoResult.result.TenantResponseInfo.ExemptContestedInfo;
+                    tenantResponseResult.status = ExemptContestedInfoResult.status;
+                    if (ExemptContestedInfoResult.status.Status != StatusEnum.Success)
+                        return result;
+                }
+                RentalHistoryResult = GetTenantResponseRentalHistoryInfo((int)tenantResponseResult.result.TenantResponseID);
+                if (RentalHistoryResult != null)
+                {
+                    tenantResponseResult.result.TenantRentalHistory = RentalHistoryResult.result;
+                    tenantResponseResult.status = RentalHistoryResult.status;
+                    if (RentalHistoryResult.status.Status != StatusEnum.Success)
+                        return result;
+                }
+                caseInfo.TenantResponseInfo = tenantResponseResult.result;
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                tenantResponseResult.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(tenantResponseResult.status);
+                return result;
             }
         }
         public ReturnResult<UserInfoM> GetOwnerPropertyInfo(string caseID)
@@ -3771,7 +4095,7 @@ namespace RAP.DAL
                     ResponseDB.IsSubmitted = true;
                     _dbContext.SubmitChanges();
                 }
-
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ResponseFiled);
                 var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
                                             .Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
                 if (PageStatus != null)
@@ -4691,7 +5015,7 @@ namespace RAP.DAL
                 _dbContext.SubmitChanges();
                 model.CaseID = caseid;
 
-                _commondbHandler.PetitionFiledActivity(model.C_ID, model.CaseFileBy);
+                _commondbHandler.PetitionFiledActivity(model.C_ID, model.CaseFileBy,(int)ActivityDefaults.ActivityPetitionFiled);
 
                 var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == model.OwnerPetitionInfo.ApplicantInfo.OwnerPetitionApplicantInfoID).FirstOrDefault();
                 applicantInfo.bPetitionFiled = true;             
@@ -5863,7 +6187,8 @@ namespace RAP.DAL
                    _dbContext.OwnerResponsePageSubmissionStatus.DeleteOnSubmit(oResponseSubmission);
                    _dbContext.SubmitChanges();
                }
-              
+
+               _commondbHandler.PetitionFiledActivity(c_id, model.CustomerID, (int)ActivityDefaults.ResponseFiled);
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;
