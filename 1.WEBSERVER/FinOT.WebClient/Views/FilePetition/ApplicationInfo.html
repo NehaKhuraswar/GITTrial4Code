@@ -1,7 +1,7 @@
 ﻿<script src='js/functions.js'></script>
                     <div class="application-form-wrapper">
                         <div class="application-step step-1">
-                            <div class="alert alert-error" ng-show="Hide==true">
+                            <div class="alert alert-error" ng-show="Ctrl.Hide==true">
                                 <!--<strong><a href="javascript:void();" data-scrollto="anybody_representing_you">Is anybody representing you</a></strong>  is a required field<br />
         <strong><a href="javascript:void();" data-scrollto="rao_exemption_contest">I wish to contest an exemption from the Rent Adjustment Ordinance</a></strong>  is a required field<br />
         <strong><a href="javascript:void();" data-id="representative_firstname">Name</a></strong> is a required field<br />
@@ -424,7 +424,7 @@
                                     <!--<input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
                                            ng-click="(!((frmTenentPetition.po_firstname.$error.required) || (frmTenentPetition.po_address1.$error.required))) &&Ctrl.ContinueToGroundsforPetition()" />-->
                                     <input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
-                                           ng-click="(Hide=true);
+                                           ng-click="(Ctrl.Hide=true);
                                                         (!(frmTenentPetition.Applicant_firstname.$error.required
                                                             || frmTenentPetition.Applicant_address1.$error.required
                                                             || frmTenentPetition.Applicant_city.$error.required
