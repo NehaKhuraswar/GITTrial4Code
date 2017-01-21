@@ -81,7 +81,7 @@ namespace RAP.Core.DataModels
         public DateTime AccountCreationDate { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int APNNumber { get; set; }
+        public int? APNNumber { get; set; }
         public string Email { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -106,7 +106,7 @@ namespace RAP.Core.DataModels
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int APNNumber { get; set; }
+        public int? APNNumber { get; set; }
         public CityUserAccount_M Analyst { get; set; }
         public CityUserAccount_M HearingOfficer { get; set; }
         public int AnalystID { get; set; }
