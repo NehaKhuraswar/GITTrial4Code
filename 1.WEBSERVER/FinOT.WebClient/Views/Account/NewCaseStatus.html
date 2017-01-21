@@ -1,23 +1,35 @@
-﻿<div class="container">
+﻿  <div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">Staff Dashboard</h2>
+        </div>
+    </div>
+	
+<!-- Page Content -->
+    <div class="page-content full-width">
+<div class="container">
     <div class="application-form-wrapper">
-        <div class="breadcrumb">
+        <div class="breadcrumb border-bottom-grey">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">T17-0238; Smith v. Johnson (Unit C)</a></li>
+                 <li><a ng-click="Ctrl.Home()" href="#">Home</a></li>
+                <li><a href="#">{{Ctrl.caseinfo.CaseID}}</a></li>
                 <li class="active">New case status</li>
             </ul>
         </div>
 
         <div class="application-step step-1">
-            <h3 class="step-heading">New Case Status</h3>
+            <h3 class="step-heading mar-t30">New Case Status</h3>
 
             <form name="frmNewCaseStatus" id="frmNewCaseStatus" action="#" method="post" class="application-form">
                 <div class="step-content step1">
 
-                    <div class="field-group subhead no-top-margin no-bottom-margin">
+                    <div class="field-group no-top-margin no-bottom-margin">
                         <div class="row">
                             <div class="col-md-8 col-sm-12 col-xs-12">
-                                <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.</p>
+                                <p>This pages allows you to create a new case status. Please select the correct Activity from the drop down menu below and the corresponding Activity Status.</p>
+								<p>When you are finished, please click submit to save your work.</p>
+								<p>When a case status is marked as complete an email will be sent automatically to the parties attached to the case notifying them of the new case status.</p>
                             </div>
                         </div>
                     </div>
@@ -66,7 +78,7 @@
         </div>
     </div>
     
-   
+   </div>
    
 </div>
 <script src='js/functions.js'></script>

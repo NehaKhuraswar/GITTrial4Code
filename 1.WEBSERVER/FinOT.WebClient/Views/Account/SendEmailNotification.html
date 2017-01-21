@@ -2,7 +2,7 @@
     <!-- Page Title -->
     <div class="page-title-wrapper">
         <div class="container">
-            <h2 class="page-title">Send Email Notification</h2>
+            <h2 class="page-title">Staff Dashboard</h2>
         </div>
     </div>
 
@@ -11,7 +11,7 @@
     <div class="page-content full-width">
         <div class="container">
 
-            <div class="breadcrumb">
+            <div class="breadcrumb border-bottom-grey">
                 <ul>
                     <li>Home</li>
                     <li>{{Ctrl.c_id}}</li>
@@ -24,8 +24,8 @@
 
                     <form name="frmSendEmailNotification" id="frmSendEmailNotification" action="#" method="post" class="application-form">
                         <div class="step-content step1">
-
-                            <div class="field-group subhead no-top-margin no-bottom-margin">
+							<h3 class="step-heading mar-t30">Send Email Notification</h3>
+                            <div class="field-group no-top-margin no-bottom-margin">
                                 <div class="row">
                                     <div class="col-md-8 col-sm-12 col-xs-12">
                                         <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.</p>
@@ -88,27 +88,14 @@
                             </div>
 
 
-                            <!-- Proof of service -->
-                            <div class="subhead type2">
-                                <h4>Proof of service</h4>
-                            </div>
-
-                            <div class="field-group">
-                                <div class="form-group-checkbox vertical clearfix">
-                                    <div class="checkbox-wrapper no-bottom-margin">
-                                        <label for="service_proof">
-                                            <input type="checkbox" name="service_proof" id="service_proof" value="Yes" /><i></i><span>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.<br /><br />Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.<br /><br />Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                           
 
                         </div>
 
 
                         <div class="step-footer">                            
-                            <input type="button" id="submit" name="submit" class="btn-primary btn-gray" value="Submit" ng-click="Ctrl.Submit()" />
-                            <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.BackToCase()" />
+                            <input role="button" aria-label="Submit" type="button" id="submit" name="submit" class="btn-primary" value="Submit" ng-click="Ctrl.Submit()" />
+                            <input role="button" aria-label="Cancel" type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.BackToCase()" />
                         </div>
                     </form>
                 </div>

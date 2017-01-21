@@ -1,7 +1,30 @@
-﻿<div class="container">
+﻿  <div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">Staff Dashboard</h2>
+        </div>
+    </div>
+  
+  
+  
+  
+  
+  <!-- Page Content -->
+    <div class="page-content full-width">
+<div class="container">
+
+ <div class="breadcrumb border-bottom-grey">
+                <ul>
+                    <li><a ng-click="Ctrl.Home()" href="#">Home</a></li>
+                    <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
+                </ul>
+            </div>
+
+
     <div class="col-md-9 col-sm-12">
         <div class="application-step step-1">
-            <h3 class="step-heading">View Case</h3>
+            <h3 class="step-heading mar-t30">View Case</h3>
 
             <form name="frmOwnerResponseReview" id="frmOwnerResponseReview" action="#" method="post" class="application-form">
                 <div class="step-content step1">
@@ -32,7 +55,7 @@
 
                     <div class="field-group filled-info subhead  no-top-margin">
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant information</div></div>
                             <div class="col-sm-6 col-xs-12">
                                 <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
                                 <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
@@ -193,7 +216,7 @@
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Rental property</div></div>
                                 <div class="col-sm-6 col-xs-12">
                                     {{item.TenantUserInfo.AddressLine1}}  {{item.TenantUserInfo.AddressLine2}}
-                                    <br />                                    {{item.TenantUserInfo.City}}, {{item.TenantUserInfo.State.StateName}}, {{item.TenantUserInfo.Zip}}
+                                    <br />                                   {{item.TenantUserInfo.City}}, {{item.TenantUserInfo.State.StateName}}, {{item.TenantUserInfo.Zip}}
                                 </div>
                             </div>
                         </div><!-- .field-group -->
@@ -309,7 +332,7 @@
                         </div><!-- .field-group -->
                     </div>
                     <div class="subhead type2">
-                        <h4>Additional Documentation</h4>                       
+                        <h4>Additional documentation</h4>                       
                     </div>
 
                     <div class="field-group">
@@ -343,11 +366,11 @@
                     </div>
                 </div>
                 <div class="step-footer">
-                    <button class="btn-primary" ng-click="Ctrl.Continue()">Save and continue</button> &nbsp;&nbsp;
+                    <button role="button" aria-label="Back to case" class="btn-primary" ng-click="Ctrl.Continue()">Back to case</button> &nbsp;&nbsp;
                     <!--<button class="btn-primary" ng-click="Ctrl.Print()">Print</button>-->
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+</div>

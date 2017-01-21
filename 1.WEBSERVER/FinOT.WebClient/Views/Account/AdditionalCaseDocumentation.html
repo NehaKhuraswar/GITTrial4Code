@@ -11,7 +11,7 @@
     <div class="page-content full-width">
         <div class="container">
 
-            <div class="breadcrumb">
+            <div class="breadcrumb border-bottom-grey">
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">T17-0238; Smith v. Johnson (Unit C)</a></li>
@@ -24,8 +24,8 @@
 
                     <form name="frmCaseDocumentation" id="frmCaseDocumentation" action="#" method="post" class="application-form">
                         <div class="step-content step1">
-
-                            <div class="field-group subhead no-top-margin no-bottom-margin">
+							<h3 class="step-heading mar-t30">Additional Case Documentation</h3>
+                            <div class="field-group no-top-margin no-bottom-margin">
                                 <div class="row">
                                     <div class="col-md-8 col-sm-12 col-xs-12">
                                         <p>Please use the form below to include any additional documents that should be associated with the case.</p>
@@ -92,7 +92,7 @@
                             <div class="field-group">
                                 <div class="row">
                                     <div class="col-md-9 col-sm-12">
-                                        <p class="input-label fs-14">You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG.  The maximum file size limit for uploads is 25MB</p>
+                                        <p class="input-label fs-14">You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. The maximum file size limit for uploads is 25MB</p>
                                     </div>
                                 </div>
 
@@ -109,9 +109,9 @@
 
                         <div class="step-footer">
                           
-                            <input type="button" id="submit" name="submit" class="btn-primary btn-gray" value="Submit" ng-click="Ctrl.Submit()" />
-                        </div>
-                        <input type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
+                            <input role="button" aria-label="Submit" type="button" id="submit" name="submit" class="btn-primary" value="Submit" ng-click="Ctrl.Submit()" />
+                       
+                        <input type="button" aria-label="Cancel" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
                         </div>
                     </form>
                 </div>

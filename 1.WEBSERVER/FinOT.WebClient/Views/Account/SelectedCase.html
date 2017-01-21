@@ -13,7 +13,7 @@
 
             <div class="breadcrumb border-bottom-green">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a ng-click="Ctrl.Home()" href="#">Home</a></li>
                     <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
                 </ul>
             </div>
@@ -179,7 +179,7 @@
 
 
                             <div class="field-group subhead type2 pad-t15">
-                                <h4>Case status</h4>
+                                <h4>Case progress</h4>
                             </div>
 
                             <div class="field-group mar-bottom-10" ng-hide="Ctrl.model.IsNonRAPStaff == true">
@@ -221,7 +221,7 @@
                             <!-- .custom-table -->
 
                             <div class="field-group subhead type2 pad-t15">
-                                <h4>Case Documentation</h4>
+                                <h4>Case documentation</h4>
                             </div>
 
                             <div class="field-group mar-bottom-10" ng-hide="Ctrl.model.IsNonRAPStaff == true">
