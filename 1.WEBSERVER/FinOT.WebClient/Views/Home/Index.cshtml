@@ -24,11 +24,11 @@
     <body>
         <div id="site-header">
             <div class="top-header">
-                <div class="container outer-container">OAKLAND HOUSING & COMMUNITY DEVELOPMENT</div>
+                <div class="container">OAKLAND HOUSING & COMMUNITY DEVELOPMENT</div>
             </div>
 
             <div class="bottom-header">
-                <div class="container outer-container">
+                <div class="container">
                     <div id="sitetitle-wrapper">
                         <h1 id="sitetitle"><a href="#">City of Oakland</a></h1>
                         <div class="description">Rent Adjustment  <br />Program</div>
@@ -39,19 +39,40 @@
 
                     <a href="javascript:void();" class="menu-toggle"><span></span></a>
                     <div class="navigation-wrapper">
-                        <div class="mb-translation-wrapper">
-                            Choose language
+                        <!-- Site Choose Language -->
+                        <div class="site-language-wrapper toggle-nav-element">
+                            <div class="full-width">
+                                <select class="custom-select" id="choose-language" name="choose-language">
+                                    <option value="">Choose language</option>
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                    <option value="">Option 3</option>
+                                    <option value="">Option 4</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="mb-site-search-wrapper">
-                            Search
+                        <!-- Site Search -->
+                        <div class="site-search-wrapper toggle-nav-element">
+                            <form name="site-search-form" id="site-search-form" method="post" action="#" class="search-form">
+                                <input type="text" name="txt-site-search" id="txt-site-search" class="input-field" value="" placeholder="Search" />
+                                <input type="submit" name="btn-site-search" id="btn-site-search" class="btn-search" value="" />
+                            </form>
                         </div>
 
                         <div class="site-navigation">
                             <ul>
                                 <li><a href="#about">About</a></li>
                                 <li><a href="#issues">Issues</a></li>
-                                <li><a href="#resources">Resources</a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="#resources">Resources</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Loss of Service</a></li>
+                                        <li><a href="#">Rent Increase</a></li>
+                                        <li><a href="#">Eviction</a></li>
+                                        <li><a href="#">Exemptions</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="#petition Forms">Petition Forms</a></li>
                                 <li><a href="#cases-database">Cases Database</a></li>
                             </ul>
@@ -62,7 +83,7 @@
 
                             <ul class="account-details clearfix">
                                 <li class="search"><a href="#" title="Search">Search</a></li>
-                                <li class="translate"><a href="#" title="Translate">Translate</a></li>
+                                <li class="language"><a href="#" title="Choose language" class="toggle-link" data-toggle="site-language-wrapper">Language</a></li>
                                 <li class="signedin" ng-show="Ctrl.UserName !=''"><a ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
                             </ul>
                         </div>
