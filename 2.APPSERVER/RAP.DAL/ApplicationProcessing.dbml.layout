@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 16.5, 43.875" name="ApplicationProcessing">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 16.75, 43.875" name="ApplicationProcessing">
   <DataContextMoniker Name="/ApplicationProcessingDataContext" />
   <nestedChildShapes>
     <classShape Id="cbcf5511-cea7-4209-9675-87f1bff2df51" absoluteBounds="2.75, 0.5, 2, 1.1939925130208333">
@@ -189,7 +189,7 @@
         <classShapeMoniker Id="84b8a50a-f5c9-4d59-8bd8-d78c37017622" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.71875 : 15.375); (6.71875 : 7.16909912109375); (6.375 : 7.16909912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.71875 : 15.375); (6.71875 : 7.16909912109375); (6.70833333333333 : 7.16909912109375 : JumpStart); (6.54166666666667 : 7.16909912109375 : JumpEnd); (6.375 : 7.16909912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ApplicationProcessingDataContext/NumberRangeForUnit/NumberRangeForUnit_TenantPetitionInfo" />
       <nodes>
         <classShapeMoniker Id="26fb935a-bc3a-436f-9790-0f0c24446307" />
@@ -202,7 +202,7 @@
         <elementListCompartment Id="3ea734a5-e876-4a8a-bc28-d1413ed7b10c" absoluteBounds="8.515, 19.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.375 : 7.58455206054687); (9.3125 : 7.58455206054687); (9.3125 : 18.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.375 : 7.58455206054687); (6.54166666666667 : 7.58455206054687 : JumpStart); (6.70833333333333 : 7.58455206054687 : JumpEnd); (9.3125 : 7.58455206054687); (9.3125 : 18.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ApplicationProcessingDataContext/TenantPetitionInfo/TenantPetitionInfo_TenantPetitionVerification" />
       <nodes>
         <classShapeMoniker Id="b7241305-74c0-49c0-8ffd-c24d9affe6fd" />
@@ -490,17 +490,17 @@
         <elementListCompartment Id="533407d0-263f-4ddf-8757-c33ebcf3d240" absoluteBounds="9.515, 15.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="73e95da7-61c3-474a-83bd-19103e43d0e7" absoluteBounds="14.25, 7, 2, 1.3862939453125">
+    <classShape Id="ad2cbcf8-7b03-43a1-9062-9dff90b225d4" absoluteBounds="14.5, 7, 2, 1.3862939453125">
       <DataClassMoniker Name="/ApplicationProcessingDataContext/TenantResponseExemptContestedInfo1" />
       <nestedChildShapes>
-        <elementListCompartment Id="1bdff927-a705-4dfe-bf74-add764d44ad1" absoluteBounds="14.265, 7.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="771ef756-3ffe-4ab7-8375-78a6dddeebd0" absoluteBounds="14.515, 7.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(12.125 : 9.875); (12.125 : 7.69314697265625); (14.25 : 7.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(12.125 : 9.875); (12.125 : 7.69314697265625); (14.5 : 7.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ApplicationProcessingDataContext/TenantResponseApplicationInfo/TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1" />
       <nodes>
         <classShapeMoniker Id="4de262d6-b384-4985-a4e3-5eae71be7ecb" />
-        <classShapeMoniker Id="73e95da7-61c3-474a-83bd-19103e43d0e7" />
+        <classShapeMoniker Id="ad2cbcf8-7b03-43a1-9062-9dff90b225d4" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

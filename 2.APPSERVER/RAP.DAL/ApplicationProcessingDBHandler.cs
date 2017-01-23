@@ -1953,9 +1953,7 @@ namespace RAP.DAL
                 if (ServeAppealResult != null)
                 {
                     tenantAppealResult.result.serveAppeal = ServeAppealResult.result;
-                    tenantAppealResult.status = ServeAppealResult.status;
-                    if (ServeAppealResult.status.Status != StatusEnum.Success)
-                        return result;
+                   
                 }
                 caseinfo.TenantAppealInfo = tenantAppealResult.result;
                 result.result = caseinfo;
@@ -3606,6 +3604,7 @@ namespace RAP.DAL
 
             try
             {
+                caseInfo.CaseID = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).Select(x => x.CaseID).First();
                 ApplicationInfoResult = GetTenantResponseApplicationInfoForView(C_ID);
                 tenantResponseResult.result = ApplicationInfoResult.result.TenantResponseInfo;
                 if (ApplicationInfoResult.status.Status != StatusEnum.Success)

@@ -137,6 +137,8 @@
     <Content Include="Application\2.Controllers\rapOResponseConfirmController.js" />
     <Content Include="Application\2.Controllers\rapOwnerConfirmationController.js" />
     <Content Include="Application\2.Controllers\rapSelectedCaseController.js" />
+    <Content Include="Application\2.Controllers\rapViewResponseController.js" />
+    <Content Include="Application\2.Controllers\rapViewAppealController.js" />
     <Content Include="Application\2.Controllers\rapViewPetitionController.js" />
     <Content Include="Application\2.Controllers\rapNewRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseDecreasedHousingController.js" />
@@ -457,6 +459,8 @@
     <Content Include="Scripts\textcounter.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
     <Content Include="Views\Account\EmailNotificationSent.html" />
+    <Content Include="Views\Account\ViewTenantResponse.html" />
+    <Content Include="Views\Account\ViewAppeal.html" />
     <Content Include="Views\Account\SendEmailNotification.html" />
     <Content Include="Views\Account\SelectedCase.html" />
     <Content Include="Views\Account\USMailNotification.html" />

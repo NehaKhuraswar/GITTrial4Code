@@ -77,6 +77,11 @@ namespace RAP.Core.DataModels
 
     public class TenantResponseExemptContestedInfoM
     {
+        public TenantResponseExemptContestedInfoM()
+        {
+            Explaination = string.Empty;
+        }
+
         public int TenantResponseID { get; set; }
         public string Explaination { get; set; }
     }
