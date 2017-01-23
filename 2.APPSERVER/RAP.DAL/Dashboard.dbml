@@ -52,12 +52,22 @@
       <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Analyst" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="HearingOfficer" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TenantName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="ApplicantAddressLine1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="ApplicantAddressLine2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="ApplicantCity" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="ApplicantStateID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ApplicantStateCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="ApplicantZip" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="OwnerName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OPOwnerName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OPAddressLine1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OPAddressLine2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OPCity" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OPStateCode" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="OPOwnerZip" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="OwnerTenantName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PetitionCategoryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.USP_Status_Get" Method="USP_Status_Get">

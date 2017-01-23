@@ -121,7 +121,23 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             _GetCasesNoAnalyst(self.model.UserID);
         });
     }
+    self.AssignAnalystSearch = function (C_ID, Analyst) {
 
+        masterFactory.AssignAnalyst(C_ID, Analyst.UserID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            _GetCaseSearch();
+            
+        });
+    }
+    var _GetCaseSearch = function()
+    {
+        rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CaseSearchResult = response.data.List;
+        })
+    }
     self.AssignHearingOfficer = function (C_ID, HearingOfficer) {
 
         masterFactory.AssignHearingOfficer(C_ID, HearingOfficer.UserID).then(function (response) {
@@ -129,6 +145,15 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
                 return;
             }
             _GetCasesNoAnalyst(self.model.UserID);
+        });
+    }
+    self.AssignHearingOfficerSearch = function (C_ID, HearingOfficer) {
+
+        masterFactory.AssignHearingOfficer(C_ID, HearingOfficer.UserID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            _GetCaseSearch();
         });
     }
     self.OpenSelectedCase = function (caseinfo)

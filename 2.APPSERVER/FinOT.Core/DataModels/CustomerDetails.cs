@@ -184,11 +184,21 @@ namespace RAP.Core.DataModels
         public DateTime LastModifiedDate { get; set; }
         public string Analyst {get;set;}
         public string HearingOfficer {get;set;}
+        public string TenantName { get; set; }
         public string ApplicantAddressLine1 {get;set;}
         public string ApplicantAddressLine2 {get;set;}
         public string ApplicantCity {get;set;}
         public int ApplicantStateID {get;set;}
         public string ApplicantStateCode {get;set;}
         public string ApplicantZip {get;set;}
+        public string OwnerName { get; set; }
+        public string OPOwnerName { get; set; }
+        public string OPAddressLine1 { get; set; }
+        public string OPAddressLine2 { get; set; }
+        public string OPStateCode { get; set; }
+        public string OPOwnerZip { get; set; }
+        public string OPCity { get; set; }
+        public string OwnerTenantName { get; set; }
+        public int PetitionCategoryID { get; set; }
     }
 }

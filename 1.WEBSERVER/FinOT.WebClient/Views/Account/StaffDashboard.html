@@ -44,22 +44,34 @@
                                 <div class="tbl-row clearfix" ng-repeat="item in Ctrl.CaseList">
                                     <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
-                                            <div class="col col-45 pad-l40 case-number"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}</div>
+                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 1"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}</div>
+                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 2"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.StateName}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</div>
                                             <div class="col col-20 filling-date">{{item.CreatedDate | date}}</div>
                                             <div class="col col-20 ast-activity">{{item.LastModifiedDate | date}}</div>
                                             <div class="col col-15 activity">{{item.LastActivity}}</div>
                                         </div>
-
+                                            
                                         <div class="item-content clearfix" ng-show="toggle">
-                                            <div class="item-row clearfix">
+                                            <div class="item-row clearfix" ng-show="item.PetitionCategoryID == 2">
                                                 <div class="item-col col-45 pad-l40 align-left">
                                                     <div class="small-title">Tenant</div>
-                                                    <p>Bob Smith</p>
+                                                    <p>{{item.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.FirstName}} {{item.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.LastName}}</p>
                                                 </div>
 
                                                 <div class="item-col col-55 pad-l10 align-left">
                                                     <div class="small-title">Property Owner</div>
-                                                    <p>Peter Johnson</p>
+                                                    <p>{{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="item-row clearfix" ng-show="item.PetitionCategoryID == 1">
+                                                <div class="item-col col-45 pad-l40 align-left">
+                                                    <div class="small-title">Tenant</div>
+                                                    <p>{{item.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{item.TenantPetitionInfo.ApplicantUserInfo.LastName}}</p>
+                                                </div>
+
+                                                <div class="item-col col-55 pad-l10 align-left">
+                                                    <div class="small-title">Property Owner</div>
+                                                    <p>{{item.TenantPetitionInfo.OwnerInfo.FirstName}} {{item.TenantPetitionInfo.OwnerInfo.LastName}}</p>
                                                 </div>
                                             </div>
 
@@ -90,7 +102,7 @@
                                                     <p>{{item.HearingOfficer.FirstName}} {{item.HearingOfficer.LastName}}</p>
                                                 </div>
 
-                                                <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
+                                                <div class="item-col col-42 pad-l10 align-left" ><!--ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">-->
                                                     <div>
                                                         <dropdown placeholder="Select analyst" list="Ctrl.HearingOfficers" property="FirstName"
                                                                   selected="HearingOfficer"></dropdown>
@@ -260,22 +272,34 @@
                         <div class="tbl-row clearfix" ng-repeat="result in Ctrl.CaseSearchResult">
                             <div class="item" ng-class="{'expanded':toggle}">
                                 <div class="item-header clearfix">
-                                    <div class="col col-45 pad-l40 case-number"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
+                                    <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==1"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
+                                    <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==2"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.OPAddressLine1}} {{result.OPAddressLine2}}, {{result.OPCity}}, {{result.OPStateCode}} {{result.OPOwnerZip}}</div>
                                     <div class="col col-20 filling-date">{{result.CreatedDate | date}}</div>
                                     <div class="col col-20 ast-activity">{{result.LastModifiedDate |date}}</div>
                                     <div class="col col-15 activity">{{result.ActivityName}}</div>
                                 </div>
 
                                 <div class="item-content clearfix" ng-show="toggle">
-                                    <div class="item-row clearfix">
+                                    <div class="item-row clearfix" ng-show="result.PetitionCategoryID ==2">
                                         <div class="item-col col-45 pad-l40 align-left">
                                             <div class="small-title">Tenant</div>
-                                            <p>Bob Smith</p>
+                                            <p>{{result.OwnerTenantName}}</p>
                                         </div>
 
                                         <div class="item-col col-55 pad-l10 align-left">
                                             <div class="small-title">Property Owner</div>
-                                            <p>Peter Johnson</p>
+                                            <p>{{result.OPOwnerName}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="item-row clearfix" ng-show="result.PetitionCategoryID ==1">
+                                        <div class="item-col col-45 pad-l40 align-left">
+                                            <div class="small-title">Tenant</div>
+                                            <p>{{result.TenantName}}</p>
+                                        </div>
+
+                                        <div class="item-col col-55 pad-l10 align-left">
+                                            <div class="small-title">Property Owner</div>
+                                            <p>{{result.OwnerName}}</p>
                                         </div>
                                     </div>
 
@@ -288,16 +312,16 @@
 
                                         <div class="item-col col-42 pad-l10 align-left">
                                             <div>
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst">
-                                                    <option value="Option 1">Option 1</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
+                                                <dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName"
+                                                          selected="AnalystSearch"></dropdown>
+                                                <!--<select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
+                    ng-model="Analyst"
+                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
                                             </div>
                                         </div>
 
-                                        <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>
+                                        <div class="item-col col-10 align-left" >
+                                            <a ng-click="Ctrl.AssignAnalystSearch(result.C_ID, AnalystSearch)" class="btn-link btn-assign">Assign</a>
                                         </div>
                                     </div>
 
@@ -307,19 +331,15 @@
                                             <p class="alert-error-msg" ng-show="result.HearingOfficer==null">assignment required</p>
                                             <p ng-show="result.HearingOfficer!=null">{{result.HearingOfficer}}</p>
                                         </div>
-
                                         <div class="item-col col-42 pad-l10 align-left">
                                             <div>
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Hearing Officer">
-                                                    <option value="Montgomery Washington" selected>Montgomery Washington</option>
-                                                    <option value="Option 2">Option 2</option>
-                                                    <option value="Option 3">Option 3</option>
-                                                </select>
-                                            </div>
+                                                <dropdown placeholder="Select Hearing Officer" list="Ctrl.HearingOfficers" property="FirstName"
+                                                          selected="HearingOfficerSearch"></dropdown>
+                                             </div>
                                         </div>
 
                                         <div class="item-col col-10 align-left">
-                                            <a href="#" class="btn-link btn-assign">Assign</a>
+                                            <a ng-click="Ctrl.AssignHearingOfficerSearch(result.C_ID, HearingOfficerSearch)" class="btn-link btn-assign">Assign</a>
                                         </div>
                                     </div>
 

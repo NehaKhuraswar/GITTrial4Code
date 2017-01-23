@@ -1028,6 +1028,8 @@ namespace RAP.DAL
 		
 		private string _HearingOfficer;
 		
+		private string _TenantName;
+		
 		private string _ApplicantAddressLine1;
 		
 		private string _ApplicantAddressLine2;
@@ -1039,6 +1041,24 @@ namespace RAP.DAL
 		private string _ApplicantStateCode;
 		
 		private string _ApplicantZip;
+		
+		private string _OwnerName;
+		
+		private string _OPOwnerName;
+		
+		private string _OPAddressLine1;
+		
+		private string _OPAddressLine2;
+		
+		private string _OPCity;
+		
+		private string _OPStateCode;
+		
+		private string _OPOwnerZip;
+		
+		private string _OwnerTenantName;
+		
+		private System.Nullable<int> _PetitionCategoryID;
 		
 		public ReturnCaseSearch()
 		{
@@ -1188,6 +1208,22 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenantName", DbType="VarChar(100)")]
+		public string TenantName
+		{
+			get
+			{
+				return this._TenantName;
+			}
+			set
+			{
+				if ((this._TenantName != value))
+				{
+					this._TenantName = value;
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicantAddressLine1", DbType="VarChar(100)")]
 		public string ApplicantAddressLine1
 		{
@@ -1280,6 +1316,150 @@ namespace RAP.DAL
 				if ((this._ApplicantZip != value))
 				{
 					this._ApplicantZip = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerName", DbType="VarChar(100)")]
+		public string OwnerName
+		{
+			get
+			{
+				return this._OwnerName;
+			}
+			set
+			{
+				if ((this._OwnerName != value))
+				{
+					this._OwnerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OPOwnerName", DbType="VarChar(100)")]
+		public string OPOwnerName
+		{
+			get
+			{
+				return this._OPOwnerName;
+			}
+			set
+			{
+				if ((this._OPOwnerName != value))
+				{
+					this._OPOwnerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OPAddressLine1", DbType="VarChar(100)")]
+		public string OPAddressLine1
+		{
+			get
+			{
+				return this._OPAddressLine1;
+			}
+			set
+			{
+				if ((this._OPAddressLine1 != value))
+				{
+					this._OPAddressLine1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OPAddressLine2", DbType="VarChar(100)")]
+		public string OPAddressLine2
+		{
+			get
+			{
+				return this._OPAddressLine2;
+			}
+			set
+			{
+				if ((this._OPAddressLine2 != value))
+				{
+					this._OPAddressLine2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OPCity", DbType="VarChar(100)")]
+		public string OPCity
+		{
+			get
+			{
+				return this._OPCity;
+			}
+			set
+			{
+				if ((this._OPCity != value))
+				{
+					this._OPCity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OPStateCode", DbType="VarChar(2)")]
+		public string OPStateCode
+		{
+			get
+			{
+				return this._OPStateCode;
+			}
+			set
+			{
+				if ((this._OPStateCode != value))
+				{
+					this._OPStateCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OPOwnerZip", DbType="VarChar(5)")]
+		public string OPOwnerZip
+		{
+			get
+			{
+				return this._OPOwnerZip;
+			}
+			set
+			{
+				if ((this._OPOwnerZip != value))
+				{
+					this._OPOwnerZip = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OwnerTenantName", DbType="VarChar(100)")]
+		public string OwnerTenantName
+		{
+			get
+			{
+				return this._OwnerTenantName;
+			}
+			set
+			{
+				if ((this._OwnerTenantName != value))
+				{
+					this._OwnerTenantName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PetitionCategoryID", DbType="Int")]
+		public System.Nullable<int> PetitionCategoryID
+		{
+			get
+			{
+				return this._PetitionCategoryID;
+			}
+			set
+			{
+				if ((this._PetitionCategoryID != value))
+				{
+					this._PetitionCategoryID = value;
 				}
 			}
 		}

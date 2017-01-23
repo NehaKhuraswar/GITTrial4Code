@@ -201,18 +201,25 @@ namespace RAP.DAL
                         caseInfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
                         caseInfo.Analyst = Convert.ToString(item.Analyst);
                         caseInfo.HearingOfficer = Convert.ToString(item.HearingOfficer);
+                        caseInfo.TenantName = Convert.ToString(item.TenantName);
                         caseInfo.ApplicantAddressLine1 = Convert.ToString(item.ApplicantAddressLine1);
                         caseInfo.ApplicantAddressLine2 = Convert.ToString(item.ApplicantAddressLine2);
                         caseInfo.ApplicantCity = Convert.ToString(item.ApplicantCity);
                         caseInfo.ApplicantStateID = Convert.ToInt32(item.ApplicantStateID);
                         caseInfo.ApplicantStateCode = Convert.ToString(item.ApplicantStateCode);
-                        caseInfo.ApplicantZip = Convert.ToString(item.ApplicantZip);                       
-                       
+                        caseInfo.ApplicantZip = Convert.ToString(item.ApplicantZip);
+                        caseInfo.OwnerName = Convert.ToString(item.OwnerName);
+                        caseInfo.OPOwnerName = Convert.ToString(item.OPOwnerName);
+                        caseInfo.OPAddressLine1 = Convert.ToString(item.OPAddressLine1);
+                        caseInfo.OPAddressLine2 = Convert.ToString(item.OPAddressLine2);
+                        caseInfo.OPStateCode = Convert.ToString(item.OPStateCode);
+                        caseInfo.OPCity = Convert.ToString(item.OPCity);
+                        caseInfo.OPOwnerZip = Convert.ToString(item.OPOwnerZip);
+                        caseInfo.OwnerTenantName = Convert.ToString(item.OwnerTenantName);
+                        caseInfo.PetitionCategoryID = Convert.ToInt32(item.PetitionCategoryID);
+
                         searchResult.List.Add(caseInfo);
-
                     }
-
-
                     searchResult.PageSize = caseSearch.PageSize;
                     searchResult.SortBy = caseSearch.SortBy;
                     searchResult.SortReverse = caseSearch.SortReverse;
