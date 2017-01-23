@@ -7,6 +7,8 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     self.ThirdPartyInfo = null;
     self.bAcknowledge = false;
     self.Cases = null;
+    self.Hide = false;
+    self.Error = "";
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -18,7 +20,7 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     _GetStateList();
     var _GetThirdPartyInfo = function () {        
         rapFactory.GetThirdPartyInfo(self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
                 return;
             }
             self.ThirdPartyInfo = response.data;
