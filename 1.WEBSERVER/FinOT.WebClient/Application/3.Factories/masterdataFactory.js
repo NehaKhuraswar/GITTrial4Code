@@ -82,7 +82,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     var _GetCustomer = function (custid) {
         blockUI.start();
 
-        var url = 'api/accountmanagement' + '/get';
+        var url = 'api/accountmanagement' + '/getCustomer';
         if (!(custid == null || custid == undefined)) { url = url + '/' + custid; }
 
         return ajax.Get(url)

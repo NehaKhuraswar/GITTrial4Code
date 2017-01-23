@@ -3,6 +3,20 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CustomerDetails;
+    //if (self.model == null || self.model == undefined)
+    //{
+    //    var custID = rapGlobalFactory.GetCustomer();
+    //    masterFactory.GetCustomer(custID).then(function (response) {
+    //        if (!alert.checkResponse(response)) {
+    //            return;
+    //        }
+    //        self.model = response.data;
+    //        rapGlobalFactory.CustomerDetails = response.data;
+    //        __GetCasesForCustomer();
+    //    });
+    //}
+  //  self.model = rapGlobalFactory.GetCustomer();
+
     self.btoggle = false;
     self.ThirdPartyRepresentative = function () {
         $location.path("/YourRepresentative");
@@ -56,6 +70,10 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     
 
     var __GetCasesForCustomer = function () {
+        if (self.model == null)
+        {
+            return;
+        }
         return masterFactory.GetCasesForCustomer(self.model.custID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

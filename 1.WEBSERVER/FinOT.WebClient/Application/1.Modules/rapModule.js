@@ -4,8 +4,8 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     
     .factory('rapcustFactory', rapcustFactory)
     .factory('rapcollaboratorFactory', rapcollaboratorFactory)
-    .factory('rapGlobalFactory', function () {
-
+    .factory('rapGlobalFactory', ['$cookies', function ($cookies) {
+        var factory = {};
         // public
         var CustID = 0;
         var CustomerDetails;
@@ -18,19 +18,95 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         var SelectedForEdit = null;
         var Notification = null;
         var IsAdmin = false;
-        // public
-        return {
+        
+        var _getCustomer = function () {
+            //if (!(CustomerDetails == null || CustomerDetails == undefined)) {
+            //    return CustomerDetails;
+            //}
+            //else {
+                var _customer;
+                var customer_obj = sessionStorage.getItem("Customer");
+                if (customer_obj != null) {
+                    _customer = JSON.parse(customer_obj);
+                }
+                else {
+                    _customer = $cookies.getObject("Customer");
+                }
+                return _customer;
+           // }
+        }
 
-            get: function () {
-                return CustomerDetails;
-            },
-
-            set: function (val) {
-                CustomerDetails = val;
+        var _saveCustomer = function (customer) {
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem("Customer", JSON.stringify(customer));
             }
+            else {
+                $cookies.putObject("Customer", customer);
+            }
+        }
 
-        };
-    })
+        var _getUserType = function () {           
+            var _userType;
+            var userType_obj = sessionStorage.getItem("userType");
+            if (userType_obj != null) {
+                _userType = JSON.parse(userType_obj);
+            }
+            else {
+                _userType = $cookies.getObject("userType");
+            }
+            return _userType;            
+        }
+
+        var _saveUserType = function (userType) {
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem("userType", JSON.stringify(userType));
+            }
+            else {
+                $cookies.putObject("userType", userType);
+            }
+        }
+        
+        var _getCityUser= function () {
+            var _cityUser;
+            var user_obj = sessionStorage.getItem("CityUser");
+            if (user_obj != null) {
+                _cityUser = JSON.parse(user_obj);
+            }
+            else {
+                _cityUser = $cookies.getObject("CityUser");
+            }
+            return _cityUser;
+        }
+        var _saveCityUser = function (CityUser) {
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem("CityUser", JSON.stringify(CityUser));
+            }
+            else {
+                $cookies.putObject("CityUser", CityUser);
+            }
+        }
+
+        factory.SaveCustomer = _saveCustomer;
+        factory.GetCustomer = _getCustomer;
+        factory.GetCityUser = _getCityUser;
+        factory.SaveCityUser = _saveCityUser;
+        factory.GetUserType = _getUserType;
+        factory.SaveUserType = _saveUserType;
+
+            return factory;
+            // public
+            //return {
+
+            //    get: function () {
+            //        return 'Test cust data';
+            //    },
+
+            //    set: function (val) {
+            //        CustomerDetails = val;
+            //    }
+
+            //};
+    }])
 
     .factory('raploginCityUserFactory', raploginCityUserFactory)
     .factory('raploginFactory', raploginFactory)

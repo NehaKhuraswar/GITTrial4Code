@@ -63,6 +63,8 @@ var raploginCityUserController = ['$scope', '$modal', 'alertService', 'raploginC
                     }
                 }
                 rapGlobalFactory.CityUser = response.data;
+                rapGlobalFactory.SaveCityUser(response.data);
+                rapGlobalFactory.SaveUserType('CityUser');
                 //if (rapGlobalFactory.CityUser.AccountType.AccountTypeID == 1)
                 //    $location.path("/staffdashboard");
                 //else if (rapGlobalFactory.CityUser.AccountType.AccountTypeID == 2)

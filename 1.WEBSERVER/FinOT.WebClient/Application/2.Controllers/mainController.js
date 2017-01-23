@@ -3,6 +3,61 @@
   
     var self = this;
     self.UserName = '';
+    var _getCustomer = function (custid) {
+        var url = '/api/accountmanagement' + '/getCustomer';
+        if (!(custid == null || custid == undefined)) { url = url + '/' + custid; }
+        var deferred = $q.defer();
+        $http({
+            method: 'GET',
+            url: url,
+            headers: { 'Authorization': 'Bearer ' + sessionStorage.getItem('token') }
+        }).then(function (response) {
+            deferred.resolve(response.data);           
+        },
+        function(reason)
+        {
+            deferred.reject(reason);
+        })
+         return deferred.promise;
+    }
+
+
+    //    masterFactory.GetCustomer(custID).then(function (response) {
+    //        if (!alert.checkResponse(response)) {
+    //            deferred.reject(response);
+    //        }
+    //        deferred.resolve(response.data);
+    //    });
+    //    return deferred.promise;
+    //}
+    //if (rapGlobalFactory.CustomerDetails == null || rapGlobalFactory.CustomerDetails == undefined) {
+    //    var custID = rapGlobalFactory.GetCustomer();
+    //    if (custID != null)
+    //        rapGlobalFactory.CustomerDetails = _getCustomer(custID);
+    //}
+    var userType = rapGlobalFactory.GetUserType();
+    if (userType == 'PublicUser')
+    {
+        if (rapGlobalFactory.CustomerDetails == null || rapGlobalFactory.CustomerDetails == undefined) {
+            rapGlobalFactory.CustomerDetails = rapGlobalFactory.GetCustomer();
+        }
+    }
+    else if (userType == 'CityUser')
+    {
+        if (rapGlobalFactory.CityUser == null || rapGlobalFactory.CityUser == undefined) {
+            rapGlobalFactory.CityUser = rapGlobalFactory.GetCityUser();
+        }
+    }
+        //var custID = rapGlobalFactory.GetCustomer();
+        //masterFactory.GetCustomer(custID).then(function (response) {
+        //    if (!alert.checkResponse(response)) {
+        //        return;
+        //    }
+        //    self.model = response.data;
+        //    rapGlobalFactory.CustomerDetails = response.data;
+            
+        //});
+    
     
     self.Home =function()
     {

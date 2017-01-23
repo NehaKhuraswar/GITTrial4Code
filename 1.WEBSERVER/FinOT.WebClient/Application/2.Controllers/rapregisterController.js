@@ -6,6 +6,12 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.Password;
     self.ConfirmPassword;
     $scope.required = true;
+
+    //if (rapGlobalFactory.IsEdit == null || rapGlobalFactory.IsEdit == undefined)
+    //{
+    //    $location.path("/publicdashboard");
+    //}
+
     self.bEdit =  rapGlobalFactory.IsEdit;
     self.Title = "Create a city user account";
     self.SubmitText = "Create account"

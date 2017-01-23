@@ -48,8 +48,10 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
                  self.Error = rapGlobalFactory.Error;
                     return;
             }
-                         
-            rapGlobalFactory.CustomerDetails = response.data;                    
+          
+            rapGlobalFactory.CustomerDetails = response.data;
+            rapGlobalFactory.SaveCustomer(response.data);
+            rapGlobalFactory.SaveUserType('PublicUser');        
             $location.path("/publicdashboard");    
         });          
     }

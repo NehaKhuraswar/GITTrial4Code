@@ -20,6 +20,7 @@ namespace RAP.WebClient
                     , "~/Scripts/angular-sanitize.min.js"
                     , "~/Scripts/angular-animate.min.js"
                     , "~/Scripts/angular-block-ui.min.js"
+                    , "~/Scripts/angular-cookies.min.js"
                     , "~/Scripts/angular-inform.min.js" //,"~/Scripts/angular-showdown.js"
                     , "~/Scripts/ng-file-upload.min.js"
                     , "~/Scripts/select.js"

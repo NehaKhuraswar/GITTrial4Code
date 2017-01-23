@@ -1,6 +1,10 @@
 ﻿var rapEmailNotificationSentController = ['$scope', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, alert, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.custDetails = rapGlobalFactory.CityUser;
+    if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)
+    {
+        $location.path("/staffdashboard");
+    }
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     self.caseinfo = rapGlobalFactory.SelectedCase;
     self.model = rapGlobalFactory.Notification;

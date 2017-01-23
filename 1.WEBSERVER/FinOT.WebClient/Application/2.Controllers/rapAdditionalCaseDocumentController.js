@@ -2,6 +2,9 @@
     var self = this;
     self.custDetails = rapGlobalFactory.CityUser;
     self.customerDetails = rapGlobalFactory.CustomerDetails;
+    if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
+        $location.path("/staffdashboard");
+    }
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;   
     self.DocDescriptions = masterFactory.DocDescription();
 

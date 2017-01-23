@@ -221,6 +221,9 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     
     var _getPageSubmission = function()
     {
+        if (self.custDetails == null || self.custDetails == undefined) {
+            return;
+        }
         rapFactory.GetPageSubmissionStatus(self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
