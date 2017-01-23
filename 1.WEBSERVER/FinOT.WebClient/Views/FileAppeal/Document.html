@@ -14,14 +14,14 @@
                 </div>
 
                 <!-- Custom Table -->
-                <div class="custom-table docs-list" ng-repeat="item in Ctrl.Documents">
+                <div class="custom-table docs-list" >
                     <div class="tbl-header">
                         <div class="tbl-row clearfix">
                             <div class="col col-35 name">File name</div>
                         </div>
                     </div>
 
-                    <div class="tbl-body">
+                    <div class="tbl-body" ng-repeat="item in Ctrl.Documents">
                         <div class="tbl-row clearfix">
                             <div class="item" ng-class="{'expanded':toggle}">
                                 <div class="item-header clearfix">
