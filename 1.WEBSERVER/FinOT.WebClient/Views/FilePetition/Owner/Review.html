@@ -7,7 +7,7 @@
             <div class="step-content step1" id="printable">
 
 
-                <div class="subhead no-top-margin">
+                <div class="subhead no-top-margin" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID!=0">
                     <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
                     <p class="no-bottom-margin">
                         {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
@@ -34,7 +34,7 @@
                 <div class="field-group filled-info subhead  no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
-                        <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID != 0">
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>

@@ -2,7 +2,13 @@
 var rapViewPetitionController = ['$scope', '$modal', 'alertService',  '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert,  $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.FromSelectedCase = rapGlobalFactory.FromSelectedCase;
+    if (rapGlobalFactory.FromSelectedCase != null) {
+        self.FromSelectedCase = rapGlobalFactory.FromSelectedCase;
+    }
+    else {
+        self.FromSelectedCase = false;
+    }
+
     self.Back = function()
     {
         if (rapGlobalFactory.FromSelectedCase == true) {
