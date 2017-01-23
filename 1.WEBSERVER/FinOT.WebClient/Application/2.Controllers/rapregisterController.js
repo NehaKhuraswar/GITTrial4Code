@@ -7,10 +7,16 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.ConfirmPassword;
     $scope.required = true;
 
-    //if (rapGlobalFactory.IsEdit == null || rapGlobalFactory.IsEdit == undefined)
-    //{
-    //    $location.path("/publicdashboard");
-    //}
+    if (rapGlobalFactory.IsEdit == null || rapGlobalFactory.IsEdit == undefined)
+    {
+        var userType = rapGlobalFactory.GetUserType();
+        if (userType == 'PublicUser') {
+            $location.path("/publicdashboard");
+        }
+        else if (userType == 'CityUser') {
+            $location.path("/staffdashboard");
+        }      
+    }
 
     self.bEdit =  rapGlobalFactory.IsEdit;
     self.Title = "Create a city user account";

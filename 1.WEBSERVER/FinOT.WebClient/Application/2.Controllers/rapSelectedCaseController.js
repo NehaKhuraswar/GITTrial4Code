@@ -1,6 +1,9 @@
 ﻿'use strict';
 var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelectedCaseFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
+    if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
+        $location.path("/staffdashboard");
+    }
     self.caseinfo = rapGlobalFactory.SelectedCase;
     self.model = rapGlobalFactory.CityUser;
     self.CaseList = [];

@@ -2,10 +2,9 @@
 var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcasestatusFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     self.model = $scope.model;
-    //if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)
-    //{
-    //    $location.path("/publicdashboard");
-    //}
+    if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
+        $location.path("/staffdashboard");
+    }
     self.CityUser = rapGlobalFactory.CityUser;
     //self.custDetails = rapGlobalFactory.CustomerDetails;
 

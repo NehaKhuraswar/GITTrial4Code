@@ -1,5 +1,8 @@
 ﻿var rapCustomEmailController = ['$scope', 'alertService', '$location', 'rapCustomEmailFactory', 'rapGlobalFactory', 'masterdataFactory', 'rapnewcasestatusFactory', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory, rapnewcasestatusFactory) {
     var self = this;
+    if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
+        $location.path("/staffdashboard");
+    }
     self.custDetails = rapGlobalFactory.CityUser;
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     self.caseinfo = rapGlobalFactory.SelectedCase;

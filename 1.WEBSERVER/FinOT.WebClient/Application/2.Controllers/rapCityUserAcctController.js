@@ -4,6 +4,10 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
     // self.CityUserAccount = [];
     self.AccountTypesList = [];
     self.confirmPwd = "";
+    if (rapGlobalFactory.IsEdit == null || rapGlobalFactory.IsEdit == undefined) {
+        $location.path("/staffdashboard");
+    }
+
     self.bEdit = rapGlobalFactory.IsEdit;
     self.Title = "Create a City of Oakland Account";
     self.SubmitText = "Create account";

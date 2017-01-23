@@ -1,6 +1,15 @@
 ﻿'use strict';
 var rapViewPetitionController = ['$scope', '$modal', 'alertService',  '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert,  $location, rapGlobalFactory, masterFactory) {
     var self = this;
+    if (rapGlobalFactory.CaseDetails == null || rapGlobalFactory.CaseDetails == undefined) {
+        var userType = rapGlobalFactory.GetUserType();
+        if (userType == 'PublicUser') {
+            $location.path("/publicdashboard");
+        }
+        else if (userType == 'CityUser') {
+            $location.path("/staffdashboard");
+        }
+    }
     self.caseinfo = rapGlobalFactory.CaseDetails;
     if (rapGlobalFactory.FromSelectedCase != null) {
         self.FromSelectedCase = rapGlobalFactory.FromSelectedCase;
