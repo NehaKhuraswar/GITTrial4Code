@@ -15,7 +15,15 @@
 
             <div class="application-form-wrapper">
                 <div class="application-step step-1">
+                    {{Ctrl.Hide}}
+                    {{Ctrl.Error}}
                     <!-- Page Sub Title - Visible on desktop screens only -->
+                    <div class="alert alert-error" ng-show="Ctrl.Hide==true">
+
+                    </div>
+                    <div class="alert" ng-show="Ctrl.Error!=''">
+                        <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                    </div>
                     <div class="step-heading">Add New Representative</div>
 
                     <form name="frmNewRepresentative" id="frmNewRepresentative" action="#" method="post" class="application-form create-account">
@@ -26,7 +34,7 @@
 
                             <div class="field-group">
                                 <label for="first_name">Name</label>
-                                <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName" />
+                                <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName" ng-click="Ctrl.Error=''" data-error="Name" required />
                             </div>
 
                             <div class="field-group mar-bottom-40">
