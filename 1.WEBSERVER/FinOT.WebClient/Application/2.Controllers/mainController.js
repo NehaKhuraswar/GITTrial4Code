@@ -1,4 +1,4 @@
-﻿var mainController = ['$scope', '$location', 'Page', 'authFactory', 'alertService', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $location, Page, auth, alertService, rapGlobalFactory, masterFactory) {
+﻿var mainController = ['$scope', '$location', '$cookies', 'Page', 'authFactory', 'alertService', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $location, $cookies, Page, auth, alertService, rapGlobalFactory, masterFactory) {
     $scope.Page = Page;
   
     var self = this;
@@ -100,6 +100,8 @@
         rapGlobalFactory.CustID = 0;
         rapGlobalFactory.CaseDetails = null;
         rapGlobalFactory.CityUser = null;
+        sessionStorage.clear();
+        $cookies.remove("userInfo");
         if (publiclogin == true)
         {
            $location.path("/Login");
