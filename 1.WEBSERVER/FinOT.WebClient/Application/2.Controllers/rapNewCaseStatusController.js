@@ -62,7 +62,7 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
         });        
     }
     self.Cancel = function (model, C_ID) {
-        $location.path("/staffdashboard");
+        $location.path("/selectedcase");
     }
 }];
 var rapNewCaseStatusController_resolve = {
