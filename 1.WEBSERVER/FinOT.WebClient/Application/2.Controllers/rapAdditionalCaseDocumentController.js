@@ -93,7 +93,7 @@
                  $location.path("/publicdashboard");
             }
             else {
-             $location.path("/staffdashboard");
+                $location.path("/selectedcase");
             }
 
         });   
@@ -104,7 +104,7 @@
                  $location.path("/publicdashboard");
             }
             else {
-             $location.path("/staffdashboard");
+             $location.path("/selectedcase");
             }
 
         
