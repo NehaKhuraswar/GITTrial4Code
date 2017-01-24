@@ -107,7 +107,10 @@
         rapGlobalFactory.Notification = null;
         $location.path("/selectedcase");
     }
-
+    self.Delete = function (doc) {
+        var index = self.model.Attachments.indexOf(doc);
+        self.model.Attachments.splice(index, 1);     
+    }
     self.Submit = function () {
         self.model.C_ID = self.c_id;
         self.model.EmployeeID = self.custDetails.EmployeeID;
