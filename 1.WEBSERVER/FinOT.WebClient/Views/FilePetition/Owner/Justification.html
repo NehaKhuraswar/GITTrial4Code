@@ -29,7 +29,7 @@
                     </div>
                     <div class="field-group">
                         <!-- Custom Table -->
-                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
+                        <div class="custom-table docs-list" >
                             <div class="tbl-header">
                                 <div class="tbl-row clearfix">
                                     <div class="col col-35 name">File name</div>
@@ -37,17 +37,17 @@
                                 </div>
                             </div>
 
-                            <div class="tbl-body">
+                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
                                 <div class="tbl-row clearfix">
                                     <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
                                             <div class="col col-35 name pad-l30">
                                                 <a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
-                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a role="button" aria-label="Download" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a role="button" aria-label="Delete" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                             </div>
-
-                                            <div class="col col-35 type">&nbsp;</div>
+                                                <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a> 
+                                            </div>
+                                                                                 
                                             <!--<a href="#" class="btn-link btn-delete">Delete</a>-->
                                         </div>
 

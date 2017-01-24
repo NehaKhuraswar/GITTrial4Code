@@ -38,6 +38,7 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
                             }
                         }
                         self.caseinfo.Documents.push(document);
+                        updateDescription();
                     }
                 }
                
@@ -60,7 +61,7 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
     {
         for(var i=0; i<self.caseinfo.Documents.length; i++)
         {
-            if (self.caseinfo.Documents[i].DocTitle == 'OP_Justification')
+            if (self.caseinfo.Documents[i].DocTitle == 'OP_Justification' && self.caseinfo.Documents[i].isUploaded == false)
             self.caseinfo.Documents[i].DocDescription = self.DocDescription;
         }
     }

@@ -46,7 +46,7 @@ namespace RAP.Core.DataModels
        public string Notes { get; set; }
        public int EmployeeID { get; set; }
        public int C_ID { get; set; }
-       public DateTime MailingDate { get; set; }
+       public DateTime? MailingDate { get; set; }
        public List<DocumentM> Attachments
        {
            get
