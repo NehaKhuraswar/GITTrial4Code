@@ -24,7 +24,7 @@
                     </div>
                     <div class="step-heading">Add New Representative</div>
 
-                    <form name="frmNewRepresentative" id="frmNewRepresentative" action="#" method="post" class="application-form create-account">
+                    <form name="frmNewRepresentative" id="frmNewRepresentative" novalidate class="application-form" onsubmit="return false;">
                         <div class="step-content step1">
                             <div class="subhead no-top-margin no-bottom-margin">
                                 <p><strong>This information will be used to send notifications about your case to your representative.</strong></p>
@@ -32,7 +32,7 @@
 
                             <div class="field-group">
                                 <label for="first_name">Name</label>
-                                <input type="text" name="first_name" id="first_name" class="field-input" placeholder="First" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName" ng-click="Ctrl.Error=''" data-error="Name" required />
+                                <input type="text" name="first_name" id="first_name" class="field-input required" placeholder="First" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName" ng-click="Ctrl.Error=''" data-error="Name" required />
                             </div>
 
                             <div class="field-group mar-bottom-40">
@@ -46,7 +46,7 @@
 
                             <div class="field-group">
                                 <label for="mailing_address1">Mailing address 1</label>
-                                <input type="text" name="mailing_address1" id="mailing_address1" class="field-input" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine1" />
+                                <input type="text" name="mailing_address1" id="mailing_address1" class="field-input required" data-error="Mailing address 1" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine1" required />
                             </div>
 
                             <div class="field-group">
@@ -57,7 +57,7 @@
                             <div class="field-group">
                                 <label for="residential_state">State</label>
                                 <div class="input-wrapper">
-                                    <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select"
+                                    <select name="residential_state" id="residential_state" data-placeholder="Select"
                                             ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.State"
                                             ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
                                         <option value="" selected>Select state</option>
@@ -67,7 +67,7 @@
 
                             <div class="field-group">
                                 <label for="city">City</label>
-                                <input type="text" name="city" id="city" class="field-input" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.City" />
+                                <input type="text" name="city" id="city" class="field-input required" data-error="City" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.City" required />
                             </div>
 
                             <div class="field-group">
@@ -132,7 +132,8 @@
                         </div>
 
                         <div class="step-footer no-top-margin">
-                            <input type="button" role="button" aria-label="Save" id="btn-save" name="btn-save" class="btn-primary" value="Save" ng-click="Ctrl.SaveOrUpdateThirdPartyInfo(Ctrl.ThirdPartyInfo)" />
+                            <input type="submit" role="button" aria-label="Save" id="btn-save" name="btn-save" class="btn-primary" value="Save"
+                                   ng-click="Ctrl.Hide = true; (!(frmNewRepresentative.first_name.$error.required || frmNewRepresentative.mailing_address1.$error.required || frmNewRepresentative.city.$error.required )) && Ctrl.SaveOrUpdateThirdPartyInfo(Ctrl.ThirdPartyInfo)" />
                             <input type="button" role="button" aria-label="Cancel" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
                         </div>
                     </form>
@@ -142,6 +143,7 @@
             </div><!-- .application-form-wrapper -->
         </div><!-- .container -->
     </div><!-- .page-content -->
+    <script src='js/functions.js'></script>
 </div><!-- #content -->
 
 

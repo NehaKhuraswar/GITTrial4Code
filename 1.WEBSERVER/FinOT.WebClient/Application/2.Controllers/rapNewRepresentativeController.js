@@ -11,7 +11,8 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     self.Error = "";
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.StateList = response.data;
@@ -21,6 +22,7 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     var _GetThirdPartyInfo = function () {        
         rapFactory.GetThirdPartyInfo(self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.ThirdPartyInfo = response.data;
@@ -30,7 +32,8 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
 
     var _UpdateThirdPartyAccessPrivilege = function (cases) {
         return masterFactory.UpdateThirdPartyAccessPrivilege(cases, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             self.Cases = response.data;
@@ -40,11 +43,12 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     self.SaveOrUpdateThirdPartyInfo = function (model) {
         if (self.bAcknowledge == false)
         {
-            alert.Error("Please acknowledge");
+            self.Error = "Please acknowledge";
             return;
         }
         return rapFactory.SaveOrUpdateThirdPartyInfo(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
             }
             _UpdateThirdPartyAccessPrivilege(self.Cases);           
