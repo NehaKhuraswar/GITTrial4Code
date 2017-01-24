@@ -9,7 +9,7 @@
 @if (hasSubMenu)
 {
     <li dropdown class="dropdown">
-        <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">@Model.Name <span class="caret"></span></a>
+        <a class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">@Model.Name <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
             @foreach (var subMenuItem in subMenuItems.OrderBy(o => o.DisplayOrder))
             {

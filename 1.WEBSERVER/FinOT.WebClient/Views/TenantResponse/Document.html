@@ -23,7 +23,7 @@
                                     <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
                                         <div class="item item-toggle expanded">
                                             <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
+                                                <div class="col col-35 name pad-l30"><a  class="btn-toggle"></a>{{item.DocName}}</div>
                                                 <!--<div class="col col-35 type">Excel</div>-->
                                                 <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-edit">Delete</a>
                                             </div>
