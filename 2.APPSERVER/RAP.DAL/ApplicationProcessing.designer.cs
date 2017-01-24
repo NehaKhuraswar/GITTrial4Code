@@ -54,9 +54,6 @@ namespace RAP.DAL
     partial void InsertOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
     partial void UpdateOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
     partial void DeleteOwnerPetitionTenantInfo(OwnerPetitionTenantInfo instance);
-    partial void InsertOwnerRentIncreaseReason(OwnerRentIncreaseReason instance);
-    partial void UpdateOwnerRentIncreaseReason(OwnerRentIncreaseReason instance);
-    partial void DeleteOwnerRentIncreaseReason(OwnerRentIncreaseReason instance);
     partial void InsertPetitionDetail(PetitionDetail instance);
     partial void UpdatePetitionDetail(PetitionDetail instance);
     partial void DeletePetitionDetail(PetitionDetail instance);
@@ -162,6 +159,9 @@ namespace RAP.DAL
     partial void InsertTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
     partial void UpdateTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
     partial void DeleteTenantResponseExemptContestedInfo1(TenantResponseExemptContestedInfo1 instance);
+    partial void InsertOwnerRentIncreaseReason(OwnerRentIncreaseReason instance);
+    partial void UpdateOwnerRentIncreaseReason(OwnerRentIncreaseReason instance);
+    partial void DeleteOwnerRentIncreaseReason(OwnerRentIncreaseReason instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -255,14 +255,6 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<OwnerPetitionTenantInfo>();
-			}
-		}
-		
-		public System.Data.Linq.Table<OwnerRentIncreaseReason> OwnerRentIncreaseReasons
-		{
-			get
-			{
-				return this.GetTable<OwnerRentIncreaseReason>();
 			}
 		}
 		
@@ -551,6 +543,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantResponseExemptContestedInfo1>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OwnerRentIncreaseReason> OwnerRentIncreaseReasons
+		{
+			get
+			{
+				return this.GetTable<OwnerRentIncreaseReason>();
 			}
 		}
 	}
@@ -1824,148 +1824,6 @@ namespace RAP.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OwnerRentIncreaseReasons")]
-	public partial class OwnerRentIncreaseReason : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ReasonID;
-		
-		private string _Reason;
-		
-		private EntitySet<OwnerRentIncreaseReasonInfo> _OwnerRentIncreaseReasonInfos;
-		
-		private EntitySet<OwnerResponseRentIncreaseReasonInfo> _OwnerResponseRentIncreaseReasonInfos;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnReasonIDChanging(int value);
-    partial void OnReasonIDChanged();
-    partial void OnReasonChanging(string value);
-    partial void OnReasonChanged();
-    #endregion
-		
-		public OwnerRentIncreaseReason()
-		{
-			this._OwnerRentIncreaseReasonInfos = new EntitySet<OwnerRentIncreaseReasonInfo>(new Action<OwnerRentIncreaseReasonInfo>(this.attach_OwnerRentIncreaseReasonInfos), new Action<OwnerRentIncreaseReasonInfo>(this.detach_OwnerRentIncreaseReasonInfos));
-			this._OwnerResponseRentIncreaseReasonInfos = new EntitySet<OwnerResponseRentIncreaseReasonInfo>(new Action<OwnerResponseRentIncreaseReasonInfo>(this.attach_OwnerResponseRentIncreaseReasonInfos), new Action<OwnerResponseRentIncreaseReasonInfo>(this.detach_OwnerResponseRentIncreaseReasonInfos));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReasonID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ReasonID
-		{
-			get
-			{
-				return this._ReasonID;
-			}
-			set
-			{
-				if ((this._ReasonID != value))
-				{
-					this.OnReasonIDChanging(value);
-					this.SendPropertyChanging();
-					this._ReasonID = value;
-					this.SendPropertyChanged("ReasonID");
-					this.OnReasonIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reason", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Reason
-		{
-			get
-			{
-				return this._Reason;
-			}
-			set
-			{
-				if ((this._Reason != value))
-				{
-					this.OnReasonChanging(value);
-					this.SendPropertyChanging();
-					this._Reason = value;
-					this.SendPropertyChanged("Reason");
-					this.OnReasonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo", Storage="_OwnerRentIncreaseReasonInfos", ThisKey="ReasonID", OtherKey="ReasonID")]
-		public EntitySet<OwnerRentIncreaseReasonInfo> OwnerRentIncreaseReasonInfos
-		{
-			get
-			{
-				return this._OwnerRentIncreaseReasonInfos;
-			}
-			set
-			{
-				this._OwnerRentIncreaseReasonInfos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo", Storage="_OwnerResponseRentIncreaseReasonInfos", ThisKey="ReasonID", OtherKey="ReasonID")]
-		public EntitySet<OwnerResponseRentIncreaseReasonInfo> OwnerResponseRentIncreaseReasonInfos
-		{
-			get
-			{
-				return this._OwnerResponseRentIncreaseReasonInfos;
-			}
-			set
-			{
-				this._OwnerResponseRentIncreaseReasonInfos.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_OwnerRentIncreaseReasonInfos(OwnerRentIncreaseReasonInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerRentIncreaseReason = this;
-		}
-		
-		private void detach_OwnerRentIncreaseReasonInfos(OwnerRentIncreaseReasonInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerRentIncreaseReason = null;
-		}
-		
-		private void attach_OwnerResponseRentIncreaseReasonInfos(OwnerResponseRentIncreaseReasonInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerRentIncreaseReason = this;
-		}
-		
-		private void detach_OwnerResponseRentIncreaseReasonInfos(OwnerResponseRentIncreaseReasonInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.OwnerRentIncreaseReason = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PetitionDetails")]
 	public partial class PetitionDetail : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2230,9 +2088,9 @@ namespace RAP.DAL
 		
 		private int _ReasonID;
 		
-		private EntityRef<OwnerRentIncreaseReason> _OwnerRentIncreaseReason;
-		
 		private EntityRef<OwnerPetitionApplicantInfo> _OwnerPetitionApplicantInfo;
+		
+		private EntityRef<OwnerRentIncreaseReason> _OwnerRentIncreaseReason;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2248,8 +2106,8 @@ namespace RAP.DAL
 		
 		public OwnerRentIncreaseReasonInfo()
 		{
-			this._OwnerRentIncreaseReason = default(EntityRef<OwnerRentIncreaseReason>);
 			this._OwnerPetitionApplicantInfo = default(EntityRef<OwnerPetitionApplicantInfo>);
+			this._OwnerRentIncreaseReason = default(EntityRef<OwnerRentIncreaseReason>);
 			OnCreated();
 		}
 		
@@ -2321,40 +2179,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo", Storage="_OwnerRentIncreaseReason", ThisKey="ReasonID", OtherKey="ReasonID", IsForeignKey=true)]
-		public OwnerRentIncreaseReason OwnerRentIncreaseReason
-		{
-			get
-			{
-				return this._OwnerRentIncreaseReason.Entity;
-			}
-			set
-			{
-				OwnerRentIncreaseReason previousValue = this._OwnerRentIncreaseReason.Entity;
-				if (((previousValue != value) 
-							|| (this._OwnerRentIncreaseReason.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._OwnerRentIncreaseReason.Entity = null;
-						previousValue.OwnerRentIncreaseReasonInfos.Remove(this);
-					}
-					this._OwnerRentIncreaseReason.Entity = value;
-					if ((value != null))
-					{
-						value.OwnerRentIncreaseReasonInfos.Add(this);
-						this._ReasonID = value.ReasonID;
-					}
-					else
-					{
-						this._ReasonID = default(int);
-					}
-					this.SendPropertyChanged("OwnerRentIncreaseReason");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerPetitionApplicantInfo_OwnerRentIncreaseReasonInfo", Storage="_OwnerPetitionApplicantInfo", ThisKey="OwnerPetitionApplicantInfoID", OtherKey="OwnerPetitionApplicantInfoID", IsForeignKey=true)]
 		public OwnerPetitionApplicantInfo OwnerPetitionApplicantInfo
 		{
@@ -2385,6 +2209,40 @@ namespace RAP.DAL
 						this._OwnerPetitionApplicantInfoID = default(int);
 					}
 					this.SendPropertyChanged("OwnerPetitionApplicantInfo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo", Storage="_OwnerRentIncreaseReason", ThisKey="ReasonID", OtherKey="ReasonID", IsForeignKey=true)]
+		public OwnerRentIncreaseReason OwnerRentIncreaseReason
+		{
+			get
+			{
+				return this._OwnerRentIncreaseReason.Entity;
+			}
+			set
+			{
+				OwnerRentIncreaseReason previousValue = this._OwnerRentIncreaseReason.Entity;
+				if (((previousValue != value) 
+							|| (this._OwnerRentIncreaseReason.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OwnerRentIncreaseReason.Entity = null;
+						previousValue.OwnerRentIncreaseReasonInfos.Remove(this);
+					}
+					this._OwnerRentIncreaseReason.Entity = value;
+					if ((value != null))
+					{
+						value.OwnerRentIncreaseReasonInfos.Add(this);
+						this._ReasonID = value.ReasonID;
+					}
+					else
+					{
+						this._ReasonID = default(int);
+					}
+					this.SendPropertyChanged("OwnerRentIncreaseReason");
 				}
 			}
 		}
@@ -6415,9 +6273,9 @@ namespace RAP.DAL
 		
 		private int _ReasonID;
 		
-		private EntityRef<OwnerRentIncreaseReason> _OwnerRentIncreaseReason;
-		
 		private EntityRef<OwnerResponseRentalIncrementInfo> _OwnerResponseRentalIncrementInfo;
+		
+		private EntityRef<OwnerRentIncreaseReason> _OwnerRentIncreaseReason;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -6433,8 +6291,8 @@ namespace RAP.DAL
 		
 		public OwnerResponseRentIncreaseReasonInfo()
 		{
-			this._OwnerRentIncreaseReason = default(EntityRef<OwnerRentIncreaseReason>);
 			this._OwnerResponseRentalIncrementInfo = default(EntityRef<OwnerResponseRentalIncrementInfo>);
+			this._OwnerRentIncreaseReason = default(EntityRef<OwnerRentIncreaseReason>);
 			OnCreated();
 		}
 		
@@ -6506,40 +6364,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo", Storage="_OwnerRentIncreaseReason", ThisKey="ReasonID", OtherKey="ReasonID", IsForeignKey=true)]
-		public OwnerRentIncreaseReason OwnerRentIncreaseReason
-		{
-			get
-			{
-				return this._OwnerRentIncreaseReason.Entity;
-			}
-			set
-			{
-				OwnerRentIncreaseReason previousValue = this._OwnerRentIncreaseReason.Entity;
-				if (((previousValue != value) 
-							|| (this._OwnerRentIncreaseReason.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._OwnerRentIncreaseReason.Entity = null;
-						previousValue.OwnerResponseRentIncreaseReasonInfos.Remove(this);
-					}
-					this._OwnerRentIncreaseReason.Entity = value;
-					if ((value != null))
-					{
-						value.OwnerResponseRentIncreaseReasonInfos.Add(this);
-						this._ReasonID = value.ReasonID;
-					}
-					else
-					{
-						this._ReasonID = default(int);
-					}
-					this.SendPropertyChanged("OwnerRentIncreaseReason");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerResponseRentalIncrementInfo_OwnerResponseRentIncreaseReasonInfo", Storage="_OwnerResponseRentalIncrementInfo", ThisKey="RentalIncreaseInfoID", OtherKey="RentalIncreaseInfoID", IsForeignKey=true)]
 		public OwnerResponseRentalIncrementInfo OwnerResponseRentalIncrementInfo
 		{
@@ -6570,6 +6394,40 @@ namespace RAP.DAL
 						this._RentalIncreaseInfoID = default(int);
 					}
 					this.SendPropertyChanged("OwnerResponseRentalIncrementInfo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo", Storage="_OwnerRentIncreaseReason", ThisKey="ReasonID", OtherKey="ReasonID", IsForeignKey=true)]
+		public OwnerRentIncreaseReason OwnerRentIncreaseReason
+		{
+			get
+			{
+				return this._OwnerRentIncreaseReason.Entity;
+			}
+			set
+			{
+				OwnerRentIncreaseReason previousValue = this._OwnerRentIncreaseReason.Entity;
+				if (((previousValue != value) 
+							|| (this._OwnerRentIncreaseReason.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OwnerRentIncreaseReason.Entity = null;
+						previousValue.OwnerResponseRentIncreaseReasonInfos.Remove(this);
+					}
+					this._OwnerRentIncreaseReason.Entity = value;
+					if ((value != null))
+					{
+						value.OwnerResponseRentIncreaseReasonInfos.Add(this);
+						this._ReasonID = value.ReasonID;
+					}
+					else
+					{
+						this._ReasonID = default(int);
+					}
+					this.SendPropertyChanged("OwnerRentIncreaseReason");
 				}
 			}
 		}
@@ -12734,6 +12592,172 @@ namespace RAP.DAL
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OwnerRentIncreaseReasons")]
+	public partial class OwnerRentIncreaseReason : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ReasonID;
+		
+		private string _Reason;
+		
+		private string _ToolTip;
+		
+		private EntitySet<OwnerRentIncreaseReasonInfo> _OwnerRentIncreaseReasonInfos;
+		
+		private EntitySet<OwnerResponseRentIncreaseReasonInfo> _OwnerResponseRentIncreaseReasonInfos;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnReasonIDChanging(int value);
+    partial void OnReasonIDChanged();
+    partial void OnReasonChanging(string value);
+    partial void OnReasonChanged();
+    partial void OnToolTipChanging(string value);
+    partial void OnToolTipChanged();
+    #endregion
+		
+		public OwnerRentIncreaseReason()
+		{
+			this._OwnerRentIncreaseReasonInfos = new EntitySet<OwnerRentIncreaseReasonInfo>(new Action<OwnerRentIncreaseReasonInfo>(this.attach_OwnerRentIncreaseReasonInfos), new Action<OwnerRentIncreaseReasonInfo>(this.detach_OwnerRentIncreaseReasonInfos));
+			this._OwnerResponseRentIncreaseReasonInfos = new EntitySet<OwnerResponseRentIncreaseReasonInfo>(new Action<OwnerResponseRentIncreaseReasonInfo>(this.attach_OwnerResponseRentIncreaseReasonInfos), new Action<OwnerResponseRentIncreaseReasonInfo>(this.detach_OwnerResponseRentIncreaseReasonInfos));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReasonID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ReasonID
+		{
+			get
+			{
+				return this._ReasonID;
+			}
+			set
+			{
+				if ((this._ReasonID != value))
+				{
+					this.OnReasonIDChanging(value);
+					this.SendPropertyChanging();
+					this._ReasonID = value;
+					this.SendPropertyChanged("ReasonID");
+					this.OnReasonIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reason", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Reason
+		{
+			get
+			{
+				return this._Reason;
+			}
+			set
+			{
+				if ((this._Reason != value))
+				{
+					this.OnReasonChanging(value);
+					this.SendPropertyChanging();
+					this._Reason = value;
+					this.SendPropertyChanged("Reason");
+					this.OnReasonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToolTip", DbType="VarChar(MAX)")]
+		public string ToolTip
+		{
+			get
+			{
+				return this._ToolTip;
+			}
+			set
+			{
+				if ((this._ToolTip != value))
+				{
+					this.OnToolTipChanging(value);
+					this.SendPropertyChanging();
+					this._ToolTip = value;
+					this.SendPropertyChanged("ToolTip");
+					this.OnToolTipChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo", Storage="_OwnerRentIncreaseReasonInfos", ThisKey="ReasonID", OtherKey="ReasonID")]
+		public EntitySet<OwnerRentIncreaseReasonInfo> OwnerRentIncreaseReasonInfos
+		{
+			get
+			{
+				return this._OwnerRentIncreaseReasonInfos;
+			}
+			set
+			{
+				this._OwnerRentIncreaseReasonInfos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo", Storage="_OwnerResponseRentIncreaseReasonInfos", ThisKey="ReasonID", OtherKey="ReasonID")]
+		public EntitySet<OwnerResponseRentIncreaseReasonInfo> OwnerResponseRentIncreaseReasonInfos
+		{
+			get
+			{
+				return this._OwnerResponseRentIncreaseReasonInfos;
+			}
+			set
+			{
+				this._OwnerResponseRentIncreaseReasonInfos.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_OwnerRentIncreaseReasonInfos(OwnerRentIncreaseReasonInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerRentIncreaseReason = this;
+		}
+		
+		private void detach_OwnerRentIncreaseReasonInfos(OwnerRentIncreaseReasonInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerRentIncreaseReason = null;
+		}
+		
+		private void attach_OwnerResponseRentIncreaseReasonInfos(OwnerResponseRentIncreaseReasonInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerRentIncreaseReason = this;
+		}
+		
+		private void detach_OwnerResponseRentIncreaseReasonInfos(OwnerResponseRentIncreaseReasonInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.OwnerRentIncreaseReason = null;
 		}
 	}
 }

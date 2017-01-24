@@ -68,14 +68,6 @@
       <Association Name="OwnerPetitionPropertyInfo_OwnerPetitionTenantInfo" Member="OwnerPetitionPropertyInfo" ThisKey="OwnerPropertyID" OtherKey="OwnerPropertyID" Type="OwnerPetitionPropertyInfo" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.OwnerRentIncreaseReasons" Member="OwnerRentIncreaseReasons">
-    <Type Name="OwnerRentIncreaseReason">
-      <Column Name="ReasonID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Reason" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReasonInfos" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReasonInfo" />
-      <Association Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo" Member="OwnerResponseRentIncreaseReasonInfos" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerResponseRentIncreaseReasonInfo" />
-    </Type>
-  </Table>
   <Table Name="dbo.PetitionDetails" Member="PetitionDetails">
     <Type Name="PetitionDetail">
       <Column Name="PetitionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -96,8 +88,8 @@
       <Column Name="RentIncreaseReasonInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="OwnerPetitionApplicantInfoID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ReasonID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReason" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReason" IsForeignKey="true" />
       <Association Name="OwnerPetitionApplicantInfo_OwnerRentIncreaseReasonInfo" Member="OwnerPetitionApplicantInfo" ThisKey="OwnerPetitionApplicantInfoID" OtherKey="OwnerPetitionApplicantInfoID" Type="OwnerPetitionApplicantInfo" IsForeignKey="true" />
+      <Association Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReason" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReason" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.NumberRangeForUnits" Member="NumberRangeForUnits">
@@ -303,8 +295,8 @@
       <Column Name="RentIncreaseReasonInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RentalIncreaseInfoID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ReasonID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo" Member="OwnerRentIncreaseReason" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReason" IsForeignKey="true" />
       <Association Name="OwnerResponseRentalIncrementInfo_OwnerResponseRentIncreaseReasonInfo" Member="OwnerResponseRentalIncrementInfo" ThisKey="RentalIncreaseInfoID" OtherKey="RentalIncreaseInfoID" Type="OwnerResponseRentalIncrementInfo" IsForeignKey="true" />
+      <Association Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo" Member="OwnerRentIncreaseReason" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReason" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TenantResponseApplicationInfo" Member="TenantResponseApplicationInfos">
@@ -587,6 +579,15 @@
       <Column Name="TenantResponseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Explaination" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1" Member="TenantResponseApplicationInfo" ThisKey="TenantResponseID" OtherKey="TenantResponseID" Type="TenantResponseApplicationInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OwnerRentIncreaseReasons" Member="OwnerRentIncreaseReasons">
+    <Type Name="OwnerRentIncreaseReason">
+      <Column Name="ReasonID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Reason" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ToolTip" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="OwnerRentIncreaseReason_OwnerRentIncreaseReasonInfo" Member="OwnerRentIncreaseReasonInfos" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerRentIncreaseReasonInfo" />
+      <Association Name="OwnerRentIncreaseReason_OwnerResponseRentIncreaseReasonInfo" Member="OwnerResponseRentIncreaseReasonInfos" ThisKey="ReasonID" OtherKey="ReasonID" Type="OwnerResponseRentIncreaseReasonInfo" />
     </Type>
   </Table>
 </Database>

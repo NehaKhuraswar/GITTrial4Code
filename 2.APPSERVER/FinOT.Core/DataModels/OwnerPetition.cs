@@ -162,6 +162,7 @@ namespace RAP.Core.DataModels
         private bool _isSelected = false;
         public int ReasonID { get; set; }
         public string ReasonDescription { get; set; }
+        public string ToolTip { get; set; }
         public bool IsSelected
         {
             get

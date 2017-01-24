@@ -4257,6 +4257,7 @@ namespace RAP.DAL
                         OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
                         _reason.ReasonID = item.ReasonID;
                         _reason.ReasonDescription = item.Reason;
+                        _reason.ToolTip = item.ToolTip;
                         _reason.IsSelected = false;
                         _reasons.Add(_reason);
                     }
@@ -5312,6 +5313,7 @@ namespace RAP.DAL
                            OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
                            _reason.ReasonID = reason.ReasonID;
                            _reason.ReasonDescription = reason.Reason;
+                           _reason.ToolTip = reason.ToolTip;
                            _reason.IsSelected = false;
                            model.OwnerResponseInfo.PropertyInfo.Rent.RentIncreaseReasons.Add(_reason);
                        }
@@ -5358,6 +5360,7 @@ namespace RAP.DAL
                                    OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
                                    _reason.ReasonID = reason.ReasonID;
                                    _reason.ReasonDescription = reason.Reason;
+                                   _reason.ToolTip = reason.ToolTip;
                                    _reason.IsSelected = false;
                                    _rentIncrease.RentIncreaseReasons.Add(_reason);
                                }
@@ -5421,6 +5424,7 @@ namespace RAP.DAL
                                        OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
                                        _reason.ReasonID = reason.ReasonID;
                                        _reason.ReasonDescription = reason.Reason;
+                                       _reason.ToolTip = reason.ToolTip;
                                        _reason.IsSelected = false;
                                        _rentIncrease.RentIncreaseReasons.Add(_reason);
                                    }
@@ -6377,6 +6381,7 @@ namespace RAP.DAL
                            OwnerRentIncreaseReasonsM _reason = new OwnerRentIncreaseReasonsM();
                            _reason.ReasonID = item.ReasonID;
                            _reason.ReasonDescription = item.Reason;
+                           _reason.ToolTip = item.ToolTip;
                            _reason.IsSelected = false;
                            _reasons.Add(_reason);
                        }
