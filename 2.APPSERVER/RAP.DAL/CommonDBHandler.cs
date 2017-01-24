@@ -530,7 +530,7 @@ namespace RAP.DAL
                                     doc.CityUserID = Convert.ToInt32(item.CityUserID);
                                     using (AccountManagementDataContext accountDbContext = new AccountManagementDataContext(_connString))
                                     {
-                                        var dbResult = accountDbContext.CityUserAccounts.Where(r => r.CityUserID == doc.CityUserID).First();
+                                        var dbResult = accountDbContext.CityUserAccounts.Where(r => r.CityUserID == doc.CityUserID).FirstOrDefault();
                                         if (dbResult != null)
                                         {
                                             doc.UploadedBy = dbResult.FirstName + " " + dbResult.LastName;
