@@ -317,6 +317,7 @@
     <Content Include="Images\icon-arrow-right-small.png" />
     <Content Include="Images\icon-arrow-right.png" />
     <Content Include="Images\icon-calender.png" />
+    <Content Include="Images\icon-close.png" />
     <Content Include="Images\icon-collapse%402x.png" />
     <Content Include="Images\icon-collapse.png" />
     <Content Include="Images\icon-download-blue.png" />

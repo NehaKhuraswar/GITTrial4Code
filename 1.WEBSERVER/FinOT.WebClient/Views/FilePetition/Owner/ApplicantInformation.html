@@ -253,9 +253,9 @@
 
 
             <div class="field-group no-bottom-margin">
-                <p class="input-label has-info-btn">Have you paid the Rent Adjustment Program Service Fee (${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)? <a role="button" arai-label="Info" ng-click="section_rap_fee=!section_rap_fee" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
+                <p class="input-label has-info-btn">Have you paid the Rent Adjustment Program Service Fee (${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)? <a role="button" arai-label="Info" ng-click="section_rap_fee=!section_rap_fee" class="icon-info" data-toggle="tooltip" >Info</a></p>
                 <div class="info-box-toggle" ng-show="section_rap_fee">
-                                <a  class="btn-close"></a>
+                                <a  ng-click="section_rap_fee=!section_rap_fee"class="btn-close"></a>
                                 <p>The property owner must  be current on payment of the RAP's Service Fee. If they are not current, an Owner Petition or Response to a tenant petition may not be considered in a rent adjustment proceeding. Note: If paid on time, the property owner may charge the tenant one-half of the $68 per-unit RAP Service fee ($34).</p>
                             </div>
 				
@@ -311,7 +311,9 @@
                     <div class="field-group">
                         <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day"
                                 data-placeholder="Day"
-                                ng-options="day for day in  Ctrl.Calender.Days"></select>
+                                ng-options="day for day in  Ctrl.Calender.Days">
+                            <option value="" selected>Select Day</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
