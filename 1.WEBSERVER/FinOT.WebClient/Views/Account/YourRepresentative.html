@@ -47,7 +47,7 @@
                                 <a role="button" aria-label="Update access privileges" ng-click="Ctrl.UpdateThirdPartyAccessPrivilege(Ctrl.Cases)" class="btn-link">Update access privileges</a>
                             </div>
 
-                            <div class="step-footer no-top-margin pad-t60">
+                            <div class="step-footer no-top-margin pad-t60" ng-show="Ctrl.ThirdPartyInfo == null || Ctrl.ThirdPartyInfo.ThirdPartyUser.UserID == 0 ">
                                 <a role="button" aria-label="Add new representative" ng-click="Ctrl.AddNewRepresentative()" class="btn-primary">Add new representative</a>
                             </div>
                         </div>
