@@ -26,6 +26,8 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
             blockUI.stop();
         });
     }
+
+   
     var _GetCaseActivityStatus = function(model) {
         blockUI.start();
 
@@ -80,6 +82,15 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
             blockUI.stop();
         });
     }
+    var _getCaseDocuments = function (cid) {
+        blockUI.start();
+        var url = 'api/dashboard' + '/GetCaseDocuments';
+        if (!(cid == null || cid == undefined)) { url = url + '/' + cid; }
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
 
     factory.GetPetitionViewInfo = _GetPetitionViewInfo;
     factory.GetCaseInfo = _GetCaseInfo;
@@ -89,7 +100,7 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;
     factory.GetAppealInfoForView = _GetTenantAppealInfoForView;
     factory.GetTenantResponseViewInfo = _GetTenantResponseViewInfo;
-
+    factory.GetCaseDocuments = _getCaseDocuments;
 
     return factory;
 }];

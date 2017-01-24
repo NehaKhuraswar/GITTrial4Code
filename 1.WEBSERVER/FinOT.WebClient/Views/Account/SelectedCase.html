@@ -119,7 +119,7 @@
                                         <div class="field-group has-btn">
                                             <label for="analyst" class="hidden">Select analyst</label>
                                             <div class="cmb-wrapper">
-                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select Analyst"
+                                                <select name="analyst" id="analyst"  data-placeholder="Select Analyst"
                                                         ng-model="Analyst"
                                                         ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
                                             </div>
@@ -140,7 +140,7 @@
                                         <div class="field-group has-btn">
                                             <label for="hearing_officer" class="hidden">Select hearing officer</label>
                                             <div class="cmb-wrapper">
-                                                <select name="hearing_officer" id="hearing_officer" class="custom-select" data-placeholder="Select hearing officer"
+                                                <select name="hearing_officer" id="hearing_officer" data-placeholder="Select hearing officer"
                                                         ng-model="HearingOfficer"
                                                         ng-options="hearingofficer as (hearingofficer.FirstName + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
                                             </div>
@@ -248,82 +248,24 @@
                                 </div>
 
                                 <div class="tbl-body">
-                                    <div class="tbl-row clearfix">
-                                        <div class="item item-toggle">
+                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.Documents">
+                                        <div class="item" ng-class=" {'expanded':toggle}">
                                             <div class="item-header clearfix">
-                                                <div class="col col-35 pad-l30 file-name"><a class="btn-toggle"></a> Rental_expenses.xsl</div>
+                                                <div class="col col-35 pad-l30 file-name"><a ng-click="toggle = !toggle" class="btn-toggle"></a> {{item.DocName}}</div>
                                                 <div class="col col-30 date">Nov 20, 2016</div>
                                                 <div class="col col-30 uploaded-by">Tenant (Bob Smith)</div>
-                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
+                                                <div class="col col-5 pad-r0 download"><a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
                                             </div>
 
-                                            <div class="item-content clearfix">
+                                            <div class="item-content clearfix" ng-show="toggle">
                                                 <div class="row">
                                                     <div class="col-md-9 col-sm-12">
-                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                                        <p>{{item.DocDescription}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div><!-- .item-toggle -->
                                     </div><!-- .item-row -->
-
-                                    <div class="tbl-row clearfix">
-                                        <div class="item item-toggle">
-                                            <div class="item-header clearfix">
-                                                <div class="col col-35 pad-l30 file-name"><a class="btn-toggle"></a> floor_damage_01.jpg</div>
-                                                <div class="col col-30 date">Nov 20, 2016</div>
-                                                <div class="col col-30 uploaded-by">Tenant (Bob Smith)</div>
-                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
-                                            </div>
-
-                                            <div class="item-content clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-9 col-sm-12">
-                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- .item-toggle -->
-                                    </div><!-- .item-row -->
-
-                                    <div class="tbl-row clearfix">
-                                        <div class="item item-toggle">
-                                            <div class="item-header clearfix">
-                                                <div class="col col-35 pad-l30 file-name"><a  class="btn-toggle"></a> floor_damage_02.jpg</div>
-                                                <div class="col col-30 date">Nov 20, 2016</div>
-                                                <div class="col col-30 uploaded-by">Tenant (Bob Smith)</div>
-                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
-                                            </div>
-
-                                            <div class="item-content clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-9 col-sm-12">
-                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- .item-toggle -->
-                                    </div><!-- .item-row -->
-
-                                    <div class="tbl-row clearfix">
-                                        <div class="item item-toggle">
-                                            <div class="item-header clearfix">
-                                                <div class="col col-35 pad-l30 file-name"><a  class="btn-toggle"></a> Appeals_draft.doc</div>
-                                                <div class="col col-30 date">Nov 20, 2016</div>
-                                                <div class="col col-30 uploaded-by">Montgomery Washington</div>
-                                                <div class="col col-5 pad-r0 download"><a href="#Rental_expenses.xsl" class="btn-download">Download</a></div>
-                                            </div>
-
-                                            <div class="item-content clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-9 col-sm-12">
-                                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- .item-toggle -->
-                                    </div><!-- .item-row -->
-
                                 </div><!-- .tbl-body -->
                             </div><!-- .custom-table -->
 

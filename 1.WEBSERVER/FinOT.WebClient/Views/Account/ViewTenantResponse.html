@@ -159,7 +159,7 @@
                         <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-                            <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                            <button ng-show="item.isUploaded == true" class="btn-link btn-gray" ng-click="Ctrl.Download(item)">Download</button>
                         </div>
                     </div><!-- .field-group -->
 
@@ -195,7 +195,7 @@
                         <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-                            <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                            <button ng-show="item.isUploaded == true" class="btn-link btn-gray" ng-click="Ctrl.Download(item)">Download</button>
                         </div>
                     </div><!-- .field-group -->
 
@@ -249,7 +249,7 @@
                                             <div class="row">
                                                 <div class="col-md-10 col-sm-12">
                                                     <p>{{item.DocDescription}}</p>
-                                                    <button ng-show="item.isUploaded == true" class="btn-link btn-edit" ng-click="Ctrl.Download(item)">Download</button>
+                                                    <button ng-show="item.isUploaded == true" class="btn-link btn-gray" ng-click="Ctrl.Download(item)">Download</button>
                                                 </div>
                                             </div>
                                         </div>

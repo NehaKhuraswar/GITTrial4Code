@@ -5,7 +5,6 @@
             <div class="step-heading">Justification for Rent Increase</div>
             <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form" onsubmit="return false;">
                 <div class="step-content step1">
-                    <div class="subhead no-top-margin"></div>
 
                     <div class="field-group subhead no-top-margin pad-t15">
                         <div class="form-group-checkbox vertical clearfix">
@@ -14,8 +13,12 @@
                                 <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons">
                                     <label for="{{reason.ReasonID}}">
                                         <input type="checkbox" name="rentcheckbox" class="checkbox" id="{{reason.ReasonID}}" ng-model="reason.IsSelected">
-                                        <i></i><span>{{reason.ReasonDescription}}</span>
+                                        <i></i><span>{{reason.ReasonDescription}}</span><a role="button" arai-label="Info" ng-click="reasonToggle=!reasonToggle" class="icon-info inline" data-toggle="tooltip">Info</a>                                   
                                     </label>
+                                                <div class="info-box-toggle" ng-show="reasonToggle">
+                                                    <a ng-click="reasonToggle=!reasonToggle" class="btn-close"></a>
+                                                    <p>{{reason.ToolTip}}</p>
+                                                </div>
                                 </div>
                             </div>
                         </div>
