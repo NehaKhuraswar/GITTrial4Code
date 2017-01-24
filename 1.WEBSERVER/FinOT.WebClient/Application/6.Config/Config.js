@@ -129,7 +129,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapRepresentativeController_resolve
         })
-        .when('/AddNewRepresentative', {
+        .when('/Representative', {
             templateUrl: 'views/account/AddNewRepresentative.html',
             controller: rapNewRepresentativeController,
             controllerAs: 'Ctrl',

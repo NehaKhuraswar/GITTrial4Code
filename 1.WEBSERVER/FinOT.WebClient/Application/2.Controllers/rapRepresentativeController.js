@@ -8,7 +8,11 @@ var rapRepresentativeController = ['$scope', '$modal', 'alertService', 'raprepre
     self.bAcknowledge = false;
     self.Cases = null;
     self.AddNewRepresentative = function () {
-        $location.path("/AddNewRepresentative");
+        $location.path("/Representative");
+    }
+    self.EditRepresentative = function () {
+        rapGlobalFactory.IsEdit = true;
+        $location.path("/Representative");
     }
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {

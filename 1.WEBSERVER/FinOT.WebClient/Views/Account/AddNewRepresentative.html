@@ -11,7 +11,7 @@
     <div class="page-content full-width">
         <div class="container">
             <!-- Page Sub Title - Visible on mobile screens only -->
-            <div class="page-sub-title">Add New Representative</div>
+            <div class="page-sub-title">{{Ctrl.Title}}</div>
 
             <div class="application-form-wrapper">
                 <div class="application-step step-1">                
@@ -22,7 +22,7 @@
                     <div class="alert" ng-show="Ctrl.Error!=''">
                         <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
                     </div>
-                    <div class="step-heading">Add New Representative</div>
+                    <div class="step-heading">{{Ctrl.Title}}</div>
 
                     <form name="frmNewRepresentative" id="frmNewRepresentative" novalidate class="application-form" onsubmit="return false;">
                         <div class="step-content step1">

@@ -9,6 +9,12 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     self.Cases = null;
     self.Hide = false;
     self.Error = "";
+    self.IsEdit = rapGlobalFactory.IsEdit;
+    self.Title = "Add New Representative";
+    if (self.IsEdit == true)
+    {
+        self.Title = "Edit Representative";
+    }
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkForResponse(response)) {
