@@ -366,7 +366,11 @@
                     </div>
                 </div>
                 <div class="step-footer">
-                    <button role="button" aria-label="Back to case" class="btn-primary" ng-click="Ctrl.Back()">Back to case</button> &nbsp;&nbsp;
+                    <input type="button" id="continue" name="continue" class="btn-primary" value="Back to my Dashboard" ng-click="Ctrl.Back()"
+                           ng-show="Ctrl.FromSelectedCase == false" />
+                    <input type="button" id="continue" name="continue" role="button" aria-label="Back to case" class="btn-primary" value="Back to case" ng-click="Ctrl.Back()"
+                           ng-show="Ctrl.FromSelectedCase == true" />
+                    <!--<button role="button" aria-label="Back to case" class="btn-primary" ng-click="Ctrl.Back()">Back to case</button> &nbsp;&nbsp;-->
                     <!--<button class="btn-primary" ng-click="Ctrl.Print()">Print</button>-->
                 </div>
             </form>
