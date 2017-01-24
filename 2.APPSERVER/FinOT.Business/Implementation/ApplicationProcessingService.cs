@@ -309,7 +309,7 @@ namespace RAP.Business.Implementation
             }
         }
 
-        public ReturnResult<List<DocumentM>> SaveAppeallDocuments(List<DocumentM> documents)
+        public ReturnResult<List<DocumentM>> SaveAppeallDocuments(List<DocumentM> documents, int CustomerID)
         {
             ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();
             List<DocumentM> _documents = new List<DocumentM>();
@@ -331,6 +331,7 @@ namespace RAP.Business.Implementation
                         _documents.Add(doc);
                     }
                 }
+                _dbHandler.AppealUpdateAdditionalDocumentsPageSubmission(CustomerID);
                 result.result = _documents;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

@@ -79,7 +79,7 @@ var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxServ
 
     self.ContinueToServeAppeal = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveAppeallDocuments(self.Documents).then(function (response) {
+        rapFactory.SaveAppealDocuments(self.Documents, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 return;

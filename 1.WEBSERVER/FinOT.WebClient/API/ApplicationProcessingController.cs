@@ -1561,9 +1561,9 @@ namespace RAP.WebClient
 
 
         [AllowAnonymous]
-        [Route("SaveAppeallDocuments")]
+        [Route("SaveAppealDocuments/{CustomerID}")]
         [HttpPost]
-        public HttpResponseMessage SaveAppeallDocuments()
+        public HttpResponseMessage SaveAppealDocuments(string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -1571,7 +1571,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "SaveAppeallDocuments/";
+                string requestUri = _requestURI + "SaveAppealDocuments/" + CustomerID;
                 responseMessage = client.PostAsync(requestUri, Request.Content).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

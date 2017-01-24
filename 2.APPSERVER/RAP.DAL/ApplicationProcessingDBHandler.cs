@@ -5052,6 +5052,29 @@ namespace RAP.DAL
                 return result;
             }
         }
+        public ReturnResult<bool> AppealUpdateAdditionalDocumentsPageSubmission(int CustomerID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                var appealSubmission = _dbContext.AppealPageSubmissionStatus.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                if (appealSubmission != null)
+                {
+                    appealSubmission.AdditionalDocumentation = true;
+                    _dbContext.SubmitChanges();
+                }
+
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
         public ReturnResult<bool> OwnerUpdateAdditionalDocumentsPageSubmission(int CustomerID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();

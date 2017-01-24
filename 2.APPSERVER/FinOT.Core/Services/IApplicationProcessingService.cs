@@ -82,7 +82,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> SubmitOwnerResponse(CaseInfoM model);
         ReturnResult<List<ThirdPartyCaseInfo>> UpdateThirdPartyAccessPrivilege(List<ThirdPartyCaseInfo> ThirdPartyCaseInfo, int CustomerID);
         ReturnResult<List<DocumentM>> GetUploadedDocuments(int CustomerID, string DocTitle);
-        ReturnResult<List<DocumentM>> SaveAppeallDocuments(List<DocumentM> documents);
+        ReturnResult<List<DocumentM>> SaveAppeallDocuments(List<DocumentM> documents, int CustomerID);
         ReturnResult<List<DocumentM>> SaveTenantDocuments(List<DocumentM> documents, int customerID);
     }
 }

@@ -13,9 +13,9 @@ var rapAppealDocumentFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
         });
     }
-    var _SaveAppeallDocuments = function (model) {
+    var _SaveAppealDocuments = function (model,custID) {
         blockUI.start();
-        var url = _routePrefix + '/SaveAppeallDocuments';
+        var url = _routePrefix + '/SaveAppealDocuments/' + custID;
 
         return ajax.Post(model, url)
         .finally(function () {
@@ -24,7 +24,7 @@ var rapAppealDocumentFactory = ['blockUI', 'ajaxService', function (blockUI, aja
     }
 
     factory.GetAppealDocuments = _GetAppealDocuments;
-    factory.SaveAppeallDocuments = _SaveAppeallDocuments;
+    factory.SaveAppealDocuments = _SaveAppealDocuments;
 
     return factory;
 }];
