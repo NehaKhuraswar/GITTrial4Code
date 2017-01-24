@@ -35,7 +35,7 @@
 
                             <div class="field-group">
                                 <!-- Custom Table -->
-                                <div class="custom-table docs-list" ng-repeat="item in Ctrl.Documents">
+                                <div class="custom-table docs-list">
                                     <div class="tbl-header">
                                         <div class="tbl-row clearfix">
                                             <div class="col col-35 name">File name</div>
@@ -44,18 +44,19 @@
                                     </div>
 
                                     <div class="tbl-body">
-                                        <div class="tbl-row clearfix">
-                                            <div class="item item-toggle expanded">
+                                        <div class="tbl-row clearfix" ng-repeat="item in Ctrl.Documents">
+                                            <div class="item" ng-class="{'expanded':toggle}">
                                                 <div class="item-header clearfix">
-                                                    <div class="col col-35 name pad-l30"><a href="#" class="btn-toggle"></a>{{item.DocName}}</div>
-                                                    &nbsp; <input type="button" id="download" name="download" class="btn-primary btn-gray" value="Download" ng-click="Ctrl.Download(item)" />
-                                                    
-                                                   
+                                                    <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                                    &nbsp; <!--<input type="button" id="download" name="download" class="btn-primary btn-gray" value="Download" ng-click="Ctrl.Download(item)" />-->
+
+
                                                     <div class="col col-35 type">&nbsp;</div>
-                                                    <!--<a href="#" class="btn-link btn-delete">Delete</a>-->
+                                                    <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                    <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>                                                   
                                                 </div>
 
-                                                <div class="item-content clearfix">
+                                                <div class="item-content" ng-show="toggle">
                                                     <div class="row">
                                                         <div class="col-md-8 col-sm-12">
                                                             <p>{{item.DocDescription}}</p>

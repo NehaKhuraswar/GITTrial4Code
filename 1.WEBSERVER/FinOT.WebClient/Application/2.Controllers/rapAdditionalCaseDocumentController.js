@@ -6,6 +6,7 @@
         $location.path("/staffdashboard");
     }
     self.CaseID = rapGlobalFactory.SelectedCase.CaseID;
+    self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     self.DocDescriptions = masterFactory.DocDescription();
     self.Home = function () {
         $location.path("/staffdashboard");
@@ -25,7 +26,10 @@
         if (!alert.checkResponse(response)) { return; }
         self.Documents = response.data;       
     });
-
+    self.Delete = function (doc) {
+        var index = self.Documents.indexOf(doc);
+        self.Documents.splice(index, 1);
+    }
     $scope.onFileSelected = function ($files, docTitle) {
         if ($files && $files.length) {
             for (var i = 0; i < $files.length; i++) {
