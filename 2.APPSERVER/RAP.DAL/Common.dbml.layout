@@ -46,12 +46,6 @@
         <classShapeMoniker Id="c9e5cddc-2289-4765-9b08-dfee17208044" />
       </nodes>
     </associationConnector>
-    <classShape Id="db074159-2a4d-4aa0-910f-a938d9c3db22" absoluteBounds="2.25, 4.375, 2, 3.1170068359375">
-      <DataClassMoniker Name="/CommonDataContext/Document" />
-      <nestedChildShapes>
-        <elementListCompartment Id="afe75162-8ecd-4ff4-88aa-a648d9f6b632" absoluteBounds="2.265, 4.835, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="f824845e-a5eb-4801-9431-c240f2cf81b5" absoluteBounds="0.75, 8.5, 2, 2.5401025390625">
       <DataClassMoniker Name="/CommonDataContext/CustomEmailNotification" />
       <nestedChildShapes>
@@ -71,36 +65,42 @@
         <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.25153746153846 : 7.4920068359375); (1.87653746153846 : 7.8670068359375); (0.375 : 7.8670068359375); (0.375 : 11.375); (0.75 : 11.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/CommonDataContext/Document/Document_CustomEmailNotificationAttachment" />
-      <nodes>
-        <classShapeMoniker Id="db074159-2a4d-4aa0-910f-a938d9c3db22" />
-        <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
-      </nodes>
-    </associationConnector>
     <classShape Id="726f55ff-8db0-43dd-9cd4-47983102e46f" absoluteBounds="4.125, 12.625, 2, 1.3862939453125">
       <DataClassMoniker Name="/CommonDataContext/MailNotificationAttachment" />
       <nestedChildShapes>
         <elementListCompartment Id="f747537b-4469-4c4f-b68a-719db8b5f815" absoluteBounds="4.14, 13.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3 : 7.4920068359375); (3 : 13.6050439453125); (4.125 : 13.6050439453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/CommonDataContext/Document/Document_MailNotificationAttachment" />
-      <nodes>
-        <classShapeMoniker Id="db074159-2a4d-4aa0-910f-a938d9c3db22" />
-        <classShapeMoniker Id="726f55ff-8db0-43dd-9cd4-47983102e46f" />
-      </nodes>
-    </associationConnector>
     <classShape Id="1a8e6e16-028b-4bc9-a97e-6ceb8c6d47be" absoluteBounds="4.375, 10, 2, 2.3478011067708335">
       <DataClassMoniker Name="/CommonDataContext/MailNotification" />
       <nestedChildShapes>
         <elementListCompartment Id="1069539c-d9fe-4d1a-bf34-9a1272da653d" absoluteBounds="4.39, 10.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.25 : 12.3478011067708); (5.25 : 12.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.25 : 12.3478011067708); (5.25 : 12.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CommonDataContext/MailNotification/MailNotification_MailNotificationAttachment" />
       <nodes>
         <classShapeMoniker Id="1a8e6e16-028b-4bc9-a97e-6ceb8c6d47be" />
+        <classShapeMoniker Id="726f55ff-8db0-43dd-9cd4-47983102e46f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="5fa5efcb-6c2b-474d-8434-03c63148e02a" absoluteBounds="2, 4.25, 2, 3.1170068359375">
+      <DataClassMoniker Name="/CommonDataContext/Document" />
+      <nestedChildShapes>
+        <elementListCompartment Id="03a367c5-6f6f-4a42-9e27-ab5abffee8d7" absoluteBounds="2.015, 4.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.00153746153846 : 7.3670068359375); (1.62653746153846 : 7.7420068359375); (0.375 : 7.7420068359375); (0.375 : 11.375); (0.75 : 11.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CommonDataContext/Document/Document_CustomEmailNotificationAttachment" />
+      <nodes>
+        <classShapeMoniker Id="5fa5efcb-6c2b-474d-8434-03c63148e02a" />
+        <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3 : 7.3670068359375); (3 : 13.6050439453125); (4.125 : 13.6050439453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CommonDataContext/Document/Document_MailNotificationAttachment" />
+      <nodes>
+        <classShapeMoniker Id="5fa5efcb-6c2b-474d-8434-03c63148e02a" />
         <classShapeMoniker Id="726f55ff-8db0-43dd-9cd4-47983102e46f" />
       </nodes>
     </associationConnector>

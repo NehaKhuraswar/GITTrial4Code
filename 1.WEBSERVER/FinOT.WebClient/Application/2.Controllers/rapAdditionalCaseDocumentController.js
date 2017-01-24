@@ -49,7 +49,7 @@
                     document.MimeType = mimetype;
                     if (self.custDetails != null)
                     {
-                        document.EmployeeID = self.custDetails.EmployeeID;
+                        document.CityUserID = self.custDetails.UserID;
                     }
                     else if (self.customerDetails != null)
                     {

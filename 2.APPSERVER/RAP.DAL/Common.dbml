@@ -54,24 +54,6 @@
       <Association Name="UserInfo_ParcelAddress" Member="UserInfo" ThisKey="UserID" OtherKey="UserID" Type="UserInfo" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Documents" Member="Documents">
-    <Type Name="Document">
-      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DocName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="DocCategory" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="DocTitle" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="DocDescription" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="DocThirdPartyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="C_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IsPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="MimeType" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Document_CustomEmailNotificationAttachment" Member="CustomEmailNotificationAttachments" ThisKey="DocID" OtherKey="DocumentID" Type="CustomEmailNotificationAttachment" />
-      <Association Name="Document_MailNotificationAttachment" Member="MailNotificationAttachments" ThisKey="DocID" OtherKey="DocumentID" Type="MailNotificationAttachment" />
-    </Type>
-  </Table>
   <Table Name="dbo.CustomEmailNotification" Member="CustomEmailNotifications">
     <Type Name="CustomEmailNotification">
       <Column Name="NotificationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -100,8 +82,8 @@
       <Column Name="NotificationAttachmentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="NotificationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="DocumentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Document_MailNotificationAttachment" Member="Document" ThisKey="DocumentID" OtherKey="DocID" Type="Document" IsForeignKey="true" />
       <Association Name="MailNotification_MailNotificationAttachment" Member="MailNotification" ThisKey="NotificationID" OtherKey="NotificationID" Type="MailNotification" IsForeignKey="true" />
+      <Association Name="Document_MailNotificationAttachment" Member="Document" ThisKey="DocumentID" OtherKey="DocID" Type="Document" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MailNotification" Member="MailNotifications">
@@ -115,6 +97,24 @@
       <Column Name="C_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="MailNotification_MailNotificationAttachment" Member="MailNotificationAttachments" ThisKey="NotificationID" OtherKey="NotificationID" Type="MailNotificationAttachment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Documents" Member="Documents">
+    <Type Name="Document">
+      <Column Name="DocID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DocCategory" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="DocTitle" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="DocDescription" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DocThirdPartyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="C_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MimeType" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="CityUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Document_CustomEmailNotificationAttachment" Member="CustomEmailNotificationAttachments" ThisKey="DocID" OtherKey="DocumentID" Type="CustomEmailNotificationAttachment" />
+      <Association Name="Document_MailNotificationAttachment" Member="MailNotificationAttachments" ThisKey="DocID" OtherKey="DocumentID" Type="MailNotificationAttachment" />
     </Type>
   </Table>
 </Database>

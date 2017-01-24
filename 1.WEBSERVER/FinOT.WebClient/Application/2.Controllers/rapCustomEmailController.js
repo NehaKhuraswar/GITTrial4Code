@@ -87,7 +87,7 @@
                     document.DocTitle = docTitle;
                     document.DocName = filename;
                     document.MimeType = mimetype;
-                    document.EmployeeID = self.custDetails.EmployeeID;
+                    document.CityUserID = self.custDetails.UserID;
                     document.C_ID = self.c_id;
                     document.isUploaded = false;
                     document.IsPetitonFiled = true;
@@ -117,7 +117,7 @@
     }
     self.Submit = function () {
         self.model.C_ID = self.c_id;
-        self.model.EmployeeID = self.custDetails.EmployeeID;
+        self.model.CityUserID = self.custDetails.UserID;
         if (self.bTenant)
         {
             self.model.Message.RecipientAddress.push(self.TenantEmail);

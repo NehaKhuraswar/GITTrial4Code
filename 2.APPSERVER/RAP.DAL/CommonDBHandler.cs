@@ -13,7 +13,7 @@ namespace RAP.DAL
     {
         private readonly string _connString;
         private bool _logToDatabase;
-
+       
         public CommonDBHandler()
         {
             _connString = ConfigurationManager.AppSettings["RAPDBConnectionString"];
@@ -368,9 +368,9 @@ namespace RAP.DAL
                         {
                             document.CustomerID = doc.CustomerID;
                         }
-                        if (doc.EmployeeID > 0)
+                        if (doc.CityUserID > 0)
                         {
-                            document.EmployeeID = doc.EmployeeID;
+                            document.CityUserID = doc.CityUserID;
                         }
                         document.DocCategory = doc.DocCategory;
                         document.DocDescription = string.IsNullOrEmpty(doc.DocDescription) ? null : doc.DocDescription;
@@ -447,7 +447,7 @@ namespace RAP.DAL
                                 DocumentM doc = new DocumentM();
                                 doc.C_ID = item.C_ID;
                                 doc.CustomerID =(item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
-                                doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
+                                doc.CityUserID = (item.CityUserID != null) ? Convert.ToInt32(item.CityUserID) : 0;
                                 doc.DocCategory = item.DocCategory;
                                 doc.DocName = item.DocName;
                                 doc.DocID = item.DocID;
@@ -471,7 +471,7 @@ namespace RAP.DAL
                                 DocumentM doc = new DocumentM();                             
                                 doc.C_ID = item.C_ID;
                                 doc.CustomerID =(item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
-                                doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
+                                doc.CityUserID = (item.CityUserID != null) ? Convert.ToInt32(item.CityUserID) : 0;
                                 doc.DocCategory = item.DocCategory;
                                 doc.DocName = item.DocName;
                                 doc.DocID = item.DocID;
@@ -514,9 +514,7 @@ namespace RAP.DAL
                             foreach (var item in _documents)
                             {
                                 DocumentM doc = new DocumentM();
-                                doc.C_ID = item.C_ID;
-                                doc.CustomerID = (item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
-                                doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
+                                doc.C_ID = item.C_ID;                                                        
                                 doc.DocCategory = item.DocCategory;
                                 doc.DocName = item.DocName;
                                 doc.DocID = item.DocID;
@@ -525,7 +523,36 @@ namespace RAP.DAL
                                 doc.DocTitle = item.DocTitle;
                                 doc.MimeType = item.MimeType;
                                 doc.IsPetitonFiled = Convert.ToBoolean(item.IsPetitionFiled);
+                                doc.CreatedDate =Convert.ToDateTime(item.CreatedDate);
                                 doc.isUploaded = true;
+                                if (item.CityUserID != null)
+                                {
+                                    doc.CityUserID = Convert.ToInt32(item.CityUserID);
+                                    using (AccountManagementDataContext accountDbContext = new AccountManagementDataContext(_connString))
+                                    {
+                                        var dbResult = accountDbContext.CityUserAccounts.Where(r => r.CityUserID == doc.CityUserID).First();
+                                        if (dbResult != null)
+                                        {
+                                            doc.UploadedBy = dbResult.FirstName + " " + dbResult.LastName;
+                                        }
+                                    }
+                                }
+                                if (item.CustomerID != null)
+                                {
+                                    doc.CustomerID = Convert.ToInt32(item.CustomerID);
+                                    using (AccountManagementDataContext accountDbContext = new AccountManagementDataContext(_connString))
+                                    {
+                                        var dbResult = accountDbContext.CustomerDetails.Where(r => r.CustomerID == doc.CustomerID).First();
+                                        if (dbResult != null)
+                                        {
+                                            var userInfo = GetUserInfo(Convert.ToInt32(dbResult.UserID));
+                                            if(userInfo.status.Status == StatusEnum.Success)
+                                            {
+                                                doc.UploadedBy = userInfo.result.FirstName + " " + userInfo.result.LastName;
+                                            }
+                                        }
+                                    }
+                                }                                       
                                 docs.Add(doc);
                             }
                         }
@@ -560,9 +587,9 @@ namespace RAP.DAL
                         {
                             document.CustomerID = doc.CustomerID;
                         }
-                        if (doc.EmployeeID > 0)
+                        if (doc.CityUserID > 0)
                         {
-                            document.EmployeeID = doc.EmployeeID;
+                            document.CityUserID = doc.CityUserID;
                         }
                         document.C_ID = doc.C_ID;
                         document.DocCategory = doc.DocCategory;
@@ -607,7 +634,7 @@ namespace RAP.DAL
                             DocumentM doc = new DocumentM();
                             doc.C_ID = item.C_ID;
                             doc.CustomerID = (item.CustomerID != null) ? Convert.ToInt32(item.CustomerID) : 0;
-                            doc.EmployeeID = (item.EmployeeID != null) ? Convert.ToInt32(item.EmployeeID) : 0;
+                            doc.CityUserID = (item.CityUserID != null) ? Convert.ToInt32(item.CityUserID) : 0;
                             doc.DocCategory = item.DocCategory;
                             doc.DocName = item.DocName;
                             doc.DocID = item.DocID;

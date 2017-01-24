@@ -45,9 +45,6 @@ namespace RAP.DAL
     partial void InsertParcelAddress(ParcelAddress instance);
     partial void UpdateParcelAddress(ParcelAddress instance);
     partial void DeleteParcelAddress(ParcelAddress instance);
-    partial void InsertDocument(Document instance);
-    partial void UpdateDocument(Document instance);
-    partial void DeleteDocument(Document instance);
     partial void InsertCustomEmailNotification(CustomEmailNotification instance);
     partial void UpdateCustomEmailNotification(CustomEmailNotification instance);
     partial void DeleteCustomEmailNotification(CustomEmailNotification instance);
@@ -60,6 +57,9 @@ namespace RAP.DAL
     partial void InsertMailNotification(MailNotification instance);
     partial void UpdateMailNotification(MailNotification instance);
     partial void DeleteMailNotification(MailNotification instance);
+    partial void InsertDocument(Document instance);
+    partial void UpdateDocument(Document instance);
+    partial void DeleteDocument(Document instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -132,14 +132,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<Document> Documents
-		{
-			get
-			{
-				return this.GetTable<Document>();
-			}
-		}
-		
 		public System.Data.Linq.Table<CustomEmailNotification> CustomEmailNotifications
 		{
 			get
@@ -169,6 +161,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<MailNotification>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Document> Documents
+		{
+			get
+			{
+				return this.GetTable<Document>();
 			}
 		}
 	}
@@ -1221,388 +1221,6 @@ namespace RAP.DAL
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Documents")]
-	public partial class Document : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DocID;
-		
-		private string _DocName;
-		
-		private string _DocCategory;
-		
-		private string _DocTitle;
-		
-		private string _DocDescription;
-		
-		private int _DocThirdPartyID;
-		
-		private System.Nullable<int> _CustomerID;
-		
-		private System.Nullable<int> _C_ID;
-		
-		private System.Nullable<bool> _IsPetitionFiled;
-		
-		private string _MimeType;
-		
-		private System.Nullable<int> _EmployeeID;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private EntitySet<CustomEmailNotificationAttachment> _CustomEmailNotificationAttachments;
-		
-		private EntitySet<MailNotificationAttachment> _MailNotificationAttachments;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDocIDChanging(int value);
-    partial void OnDocIDChanged();
-    partial void OnDocNameChanging(string value);
-    partial void OnDocNameChanged();
-    partial void OnDocCategoryChanging(string value);
-    partial void OnDocCategoryChanged();
-    partial void OnDocTitleChanging(string value);
-    partial void OnDocTitleChanged();
-    partial void OnDocDescriptionChanging(string value);
-    partial void OnDocDescriptionChanged();
-    partial void OnDocThirdPartyIDChanging(int value);
-    partial void OnDocThirdPartyIDChanged();
-    partial void OnCustomerIDChanging(System.Nullable<int> value);
-    partial void OnCustomerIDChanged();
-    partial void OnC_IDChanging(System.Nullable<int> value);
-    partial void OnC_IDChanged();
-    partial void OnIsPetitionFiledChanging(System.Nullable<bool> value);
-    partial void OnIsPetitionFiledChanged();
-    partial void OnMimeTypeChanging(string value);
-    partial void OnMimeTypeChanged();
-    partial void OnEmployeeIDChanging(System.Nullable<int> value);
-    partial void OnEmployeeIDChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    #endregion
-		
-		public Document()
-		{
-			this._CustomEmailNotificationAttachments = new EntitySet<CustomEmailNotificationAttachment>(new Action<CustomEmailNotificationAttachment>(this.attach_CustomEmailNotificationAttachments), new Action<CustomEmailNotificationAttachment>(this.detach_CustomEmailNotificationAttachments));
-			this._MailNotificationAttachments = new EntitySet<MailNotificationAttachment>(new Action<MailNotificationAttachment>(this.attach_MailNotificationAttachments), new Action<MailNotificationAttachment>(this.detach_MailNotificationAttachments));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int DocID
-		{
-			get
-			{
-				return this._DocID;
-			}
-			set
-			{
-				if ((this._DocID != value))
-				{
-					this.OnDocIDChanging(value);
-					this.SendPropertyChanging();
-					this._DocID = value;
-					this.SendPropertyChanged("DocID");
-					this.OnDocIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string DocName
-		{
-			get
-			{
-				return this._DocName;
-			}
-			set
-			{
-				if ((this._DocName != value))
-				{
-					this.OnDocNameChanging(value);
-					this.SendPropertyChanging();
-					this._DocName = value;
-					this.SendPropertyChanged("DocName");
-					this.OnDocNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocCategory", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string DocCategory
-		{
-			get
-			{
-				return this._DocCategory;
-			}
-			set
-			{
-				if ((this._DocCategory != value))
-				{
-					this.OnDocCategoryChanging(value);
-					this.SendPropertyChanging();
-					this._DocCategory = value;
-					this.SendPropertyChanged("DocCategory");
-					this.OnDocCategoryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocTitle", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string DocTitle
-		{
-			get
-			{
-				return this._DocTitle;
-			}
-			set
-			{
-				if ((this._DocTitle != value))
-				{
-					this.OnDocTitleChanging(value);
-					this.SendPropertyChanging();
-					this._DocTitle = value;
-					this.SendPropertyChanged("DocTitle");
-					this.OnDocTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocDescription", DbType="VarChar(MAX)")]
-		public string DocDescription
-		{
-			get
-			{
-				return this._DocDescription;
-			}
-			set
-			{
-				if ((this._DocDescription != value))
-				{
-					this.OnDocDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._DocDescription = value;
-					this.SendPropertyChanged("DocDescription");
-					this.OnDocDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocThirdPartyID", DbType="Int NOT NULL")]
-		public int DocThirdPartyID
-		{
-			get
-			{
-				return this._DocThirdPartyID;
-			}
-			set
-			{
-				if ((this._DocThirdPartyID != value))
-				{
-					this.OnDocThirdPartyIDChanging(value);
-					this.SendPropertyChanging();
-					this._DocThirdPartyID = value;
-					this.SendPropertyChanged("DocThirdPartyID");
-					this.OnDocThirdPartyIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
-		public System.Nullable<int> CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					this.OnCustomerIDChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int")]
-		public System.Nullable<int> C_ID
-		{
-			get
-			{
-				return this._C_ID;
-			}
-			set
-			{
-				if ((this._C_ID != value))
-				{
-					this.OnC_IDChanging(value);
-					this.SendPropertyChanging();
-					this._C_ID = value;
-					this.SendPropertyChanged("C_ID");
-					this.OnC_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPetitionFiled", DbType="Bit")]
-		public System.Nullable<bool> IsPetitionFiled
-		{
-			get
-			{
-				return this._IsPetitionFiled;
-			}
-			set
-			{
-				if ((this._IsPetitionFiled != value))
-				{
-					this.OnIsPetitionFiledChanging(value);
-					this.SendPropertyChanging();
-					this._IsPetitionFiled = value;
-					this.SendPropertyChanged("IsPetitionFiled");
-					this.OnIsPetitionFiledChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MimeType", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string MimeType
-		{
-			get
-			{
-				return this._MimeType;
-			}
-			set
-			{
-				if ((this._MimeType != value))
-				{
-					this.OnMimeTypeChanging(value);
-					this.SendPropertyChanging();
-					this._MimeType = value;
-					this.SendPropertyChanged("MimeType");
-					this.OnMimeTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
-		public System.Nullable<int> EmployeeID
-		{
-			get
-			{
-				return this._EmployeeID;
-			}
-			set
-			{
-				if ((this._EmployeeID != value))
-				{
-					this.OnEmployeeIDChanging(value);
-					this.SendPropertyChanging();
-					this._EmployeeID = value;
-					this.SendPropertyChanged("EmployeeID");
-					this.OnEmployeeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_CustomEmailNotificationAttachment", Storage="_CustomEmailNotificationAttachments", ThisKey="DocID", OtherKey="DocumentID")]
-		public EntitySet<CustomEmailNotificationAttachment> CustomEmailNotificationAttachments
-		{
-			get
-			{
-				return this._CustomEmailNotificationAttachments;
-			}
-			set
-			{
-				this._CustomEmailNotificationAttachments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_MailNotificationAttachment", Storage="_MailNotificationAttachments", ThisKey="DocID", OtherKey="DocumentID")]
-		public EntitySet<MailNotificationAttachment> MailNotificationAttachments
-		{
-			get
-			{
-				return this._MailNotificationAttachments;
-			}
-			set
-			{
-				this._MailNotificationAttachments.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_CustomEmailNotificationAttachments(CustomEmailNotificationAttachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Document = this;
-		}
-		
-		private void detach_CustomEmailNotificationAttachments(CustomEmailNotificationAttachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Document = null;
-		}
-		
-		private void attach_MailNotificationAttachments(MailNotificationAttachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Document = this;
-		}
-		
-		private void detach_MailNotificationAttachments(MailNotificationAttachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.Document = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CustomEmailNotification")]
 	public partial class CustomEmailNotification : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2089,9 +1707,9 @@ namespace RAP.DAL
 		
 		private int _DocumentID;
 		
-		private EntityRef<Document> _Document;
-		
 		private EntityRef<MailNotification> _MailNotification;
+		
+		private EntityRef<Document> _Document;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2107,8 +1725,8 @@ namespace RAP.DAL
 		
 		public MailNotificationAttachment()
 		{
-			this._Document = default(EntityRef<Document>);
 			this._MailNotification = default(EntityRef<MailNotification>);
+			this._Document = default(EntityRef<Document>);
 			OnCreated();
 		}
 		
@@ -2180,40 +1798,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_MailNotificationAttachment", Storage="_Document", ThisKey="DocumentID", OtherKey="DocID", IsForeignKey=true)]
-		public Document Document
-		{
-			get
-			{
-				return this._Document.Entity;
-			}
-			set
-			{
-				Document previousValue = this._Document.Entity;
-				if (((previousValue != value) 
-							|| (this._Document.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Document.Entity = null;
-						previousValue.MailNotificationAttachments.Remove(this);
-					}
-					this._Document.Entity = value;
-					if ((value != null))
-					{
-						value.MailNotificationAttachments.Add(this);
-						this._DocumentID = value.DocID;
-					}
-					else
-					{
-						this._DocumentID = default(int);
-					}
-					this.SendPropertyChanged("Document");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MailNotification_MailNotificationAttachment", Storage="_MailNotification", ThisKey="NotificationID", OtherKey="NotificationID", IsForeignKey=true)]
 		public MailNotification MailNotification
 		{
@@ -2244,6 +1828,40 @@ namespace RAP.DAL
 						this._NotificationID = default(int);
 					}
 					this.SendPropertyChanged("MailNotification");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_MailNotificationAttachment", Storage="_Document", ThisKey="DocumentID", OtherKey="DocID", IsForeignKey=true)]
+		public Document Document
+		{
+			get
+			{
+				return this._Document.Entity;
+			}
+			set
+			{
+				Document previousValue = this._Document.Entity;
+				if (((previousValue != value) 
+							|| (this._Document.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Document.Entity = null;
+						previousValue.MailNotificationAttachments.Remove(this);
+					}
+					this._Document.Entity = value;
+					if ((value != null))
+					{
+						value.MailNotificationAttachments.Add(this);
+						this._DocumentID = value.DocID;
+					}
+					else
+					{
+						this._DocumentID = default(int);
+					}
+					this.SendPropertyChanged("Document");
 				}
 			}
 		}
@@ -2524,6 +2142,388 @@ namespace RAP.DAL
 		{
 			this.SendPropertyChanging();
 			entity.MailNotification = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Documents")]
+	public partial class Document : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DocID;
+		
+		private string _DocName;
+		
+		private string _DocCategory;
+		
+		private string _DocTitle;
+		
+		private string _DocDescription;
+		
+		private int _DocThirdPartyID;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<int> _C_ID;
+		
+		private System.Nullable<bool> _IsPetitionFiled;
+		
+		private string _MimeType;
+		
+		private System.Nullable<int> _CityUserID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private EntitySet<CustomEmailNotificationAttachment> _CustomEmailNotificationAttachments;
+		
+		private EntitySet<MailNotificationAttachment> _MailNotificationAttachments;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDocIDChanging(int value);
+    partial void OnDocIDChanged();
+    partial void OnDocNameChanging(string value);
+    partial void OnDocNameChanged();
+    partial void OnDocCategoryChanging(string value);
+    partial void OnDocCategoryChanged();
+    partial void OnDocTitleChanging(string value);
+    partial void OnDocTitleChanged();
+    partial void OnDocDescriptionChanging(string value);
+    partial void OnDocDescriptionChanged();
+    partial void OnDocThirdPartyIDChanging(int value);
+    partial void OnDocThirdPartyIDChanged();
+    partial void OnCustomerIDChanging(System.Nullable<int> value);
+    partial void OnCustomerIDChanged();
+    partial void OnC_IDChanging(System.Nullable<int> value);
+    partial void OnC_IDChanged();
+    partial void OnIsPetitionFiledChanging(System.Nullable<bool> value);
+    partial void OnIsPetitionFiledChanged();
+    partial void OnMimeTypeChanging(string value);
+    partial void OnMimeTypeChanged();
+    partial void OnCityUserIDChanging(System.Nullable<int> value);
+    partial void OnCityUserIDChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    #endregion
+		
+		public Document()
+		{
+			this._CustomEmailNotificationAttachments = new EntitySet<CustomEmailNotificationAttachment>(new Action<CustomEmailNotificationAttachment>(this.attach_CustomEmailNotificationAttachments), new Action<CustomEmailNotificationAttachment>(this.detach_CustomEmailNotificationAttachments));
+			this._MailNotificationAttachments = new EntitySet<MailNotificationAttachment>(new Action<MailNotificationAttachment>(this.attach_MailNotificationAttachments), new Action<MailNotificationAttachment>(this.detach_MailNotificationAttachments));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DocID
+		{
+			get
+			{
+				return this._DocID;
+			}
+			set
+			{
+				if ((this._DocID != value))
+				{
+					this.OnDocIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocID = value;
+					this.SendPropertyChanged("DocID");
+					this.OnDocIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string DocName
+		{
+			get
+			{
+				return this._DocName;
+			}
+			set
+			{
+				if ((this._DocName != value))
+				{
+					this.OnDocNameChanging(value);
+					this.SendPropertyChanging();
+					this._DocName = value;
+					this.SendPropertyChanged("DocName");
+					this.OnDocNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocCategory", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string DocCategory
+		{
+			get
+			{
+				return this._DocCategory;
+			}
+			set
+			{
+				if ((this._DocCategory != value))
+				{
+					this.OnDocCategoryChanging(value);
+					this.SendPropertyChanging();
+					this._DocCategory = value;
+					this.SendPropertyChanged("DocCategory");
+					this.OnDocCategoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocTitle", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string DocTitle
+		{
+			get
+			{
+				return this._DocTitle;
+			}
+			set
+			{
+				if ((this._DocTitle != value))
+				{
+					this.OnDocTitleChanging(value);
+					this.SendPropertyChanging();
+					this._DocTitle = value;
+					this.SendPropertyChanged("DocTitle");
+					this.OnDocTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocDescription", DbType="VarChar(MAX)")]
+		public string DocDescription
+		{
+			get
+			{
+				return this._DocDescription;
+			}
+			set
+			{
+				if ((this._DocDescription != value))
+				{
+					this.OnDocDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._DocDescription = value;
+					this.SendPropertyChanged("DocDescription");
+					this.OnDocDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocThirdPartyID", DbType="Int NOT NULL")]
+		public int DocThirdPartyID
+		{
+			get
+			{
+				return this._DocThirdPartyID;
+			}
+			set
+			{
+				if ((this._DocThirdPartyID != value))
+				{
+					this.OnDocThirdPartyIDChanging(value);
+					this.SendPropertyChanging();
+					this._DocThirdPartyID = value;
+					this.SendPropertyChanged("DocThirdPartyID");
+					this.OnDocThirdPartyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C_ID", DbType="Int")]
+		public System.Nullable<int> C_ID
+		{
+			get
+			{
+				return this._C_ID;
+			}
+			set
+			{
+				if ((this._C_ID != value))
+				{
+					this.OnC_IDChanging(value);
+					this.SendPropertyChanging();
+					this._C_ID = value;
+					this.SendPropertyChanged("C_ID");
+					this.OnC_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPetitionFiled", DbType="Bit")]
+		public System.Nullable<bool> IsPetitionFiled
+		{
+			get
+			{
+				return this._IsPetitionFiled;
+			}
+			set
+			{
+				if ((this._IsPetitionFiled != value))
+				{
+					this.OnIsPetitionFiledChanging(value);
+					this.SendPropertyChanging();
+					this._IsPetitionFiled = value;
+					this.SendPropertyChanged("IsPetitionFiled");
+					this.OnIsPetitionFiledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MimeType", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string MimeType
+		{
+			get
+			{
+				return this._MimeType;
+			}
+			set
+			{
+				if ((this._MimeType != value))
+				{
+					this.OnMimeTypeChanging(value);
+					this.SendPropertyChanging();
+					this._MimeType = value;
+					this.SendPropertyChanged("MimeType");
+					this.OnMimeTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityUserID", DbType="Int")]
+		public System.Nullable<int> CityUserID
+		{
+			get
+			{
+				return this._CityUserID;
+			}
+			set
+			{
+				if ((this._CityUserID != value))
+				{
+					this.OnCityUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._CityUserID = value;
+					this.SendPropertyChanged("CityUserID");
+					this.OnCityUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_CustomEmailNotificationAttachment", Storage="_CustomEmailNotificationAttachments", ThisKey="DocID", OtherKey="DocumentID")]
+		public EntitySet<CustomEmailNotificationAttachment> CustomEmailNotificationAttachments
+		{
+			get
+			{
+				return this._CustomEmailNotificationAttachments;
+			}
+			set
+			{
+				this._CustomEmailNotificationAttachments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Document_MailNotificationAttachment", Storage="_MailNotificationAttachments", ThisKey="DocID", OtherKey="DocumentID")]
+		public EntitySet<MailNotificationAttachment> MailNotificationAttachments
+		{
+			get
+			{
+				return this._MailNotificationAttachments;
+			}
+			set
+			{
+				this._MailNotificationAttachments.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CustomEmailNotificationAttachments(CustomEmailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Document = this;
+		}
+		
+		private void detach_CustomEmailNotificationAttachments(CustomEmailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Document = null;
+		}
+		
+		private void attach_MailNotificationAttachments(MailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Document = this;
+		}
+		
+		private void detach_MailNotificationAttachments(MailNotificationAttachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.Document = null;
 		}
 	}
 }
