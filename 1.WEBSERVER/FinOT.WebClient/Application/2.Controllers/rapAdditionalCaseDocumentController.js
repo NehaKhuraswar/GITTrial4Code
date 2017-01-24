@@ -5,9 +5,14 @@
     if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
         $location.path("/staffdashboard");
     }
-    self.c_id = rapGlobalFactory.SelectedCase.C_ID;   
+    self.CaseID = rapGlobalFactory.SelectedCase.CaseID;
     self.DocDescriptions = masterFactory.DocDescription();
-
+    self.Home = function () {
+        $location.path("/staffdashboard");
+    }
+    self.CaseClick = function () {
+        $location.path("/selectedcase");
+    }
     masterFactory.DocDescription().then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         self.DocDescriptions = response.data;

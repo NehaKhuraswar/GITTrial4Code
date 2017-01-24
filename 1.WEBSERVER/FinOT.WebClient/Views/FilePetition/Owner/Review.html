@@ -1,13 +1,13 @@
 ﻿<script src='js/functions.js'></script>
 <div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
-        <h3 class="step-heading">Property Owner Petition for Approval of Rent Increase: <br /><span>Review</span></h3>
+        <h3 class="step-heading">Review</h3>
 
         <form name="frmOwnerResponseReview" id="frmOwnerResponseReview" action="#" method="post" class="application-form" onsubmit="return false;">
             <div class="step-content step1" id="printable">
 
 
-                <div class="subhead no-top-margin" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID!=0">
+                <div class="subhead no-top-margin">
                     <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
                     <p class="no-bottom-margin">
                         {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
@@ -26,15 +26,15 @@
 
                 <div class="subhead type2">
                     <h4>Applicant and property information</h4>
-                    <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
+                    <a role="button" aria-label="Edit" ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
                 </div>
 
 
 
                 <div class="field-group filled-info subhead  no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
-                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID != 0">
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Owner Information</div></div>
+                        <div class="col-sm-6 col-xs-12">
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
@@ -47,7 +47,7 @@
 
                 <div class="field-group filled-info subhead">
                     <div class="row" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Your representative’s information</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null">
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
@@ -61,7 +61,7 @@
 
                 <div class="field-group filled-info subhead">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid your business license</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid your business license?</div></div>
                         <div class="col-sm-6 col-xs-12">
                             <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid">
                                 <i></i><span>Yes</span>
@@ -75,7 +75,7 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber != 0">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Business license number</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Oakland Business License number</div></div>
                         <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber}}</div>
                     </div>
                 </div><!-- .field-group -->
@@ -91,7 +91,7 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid the Rent Adjustment Progrm service fee(${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)?</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid the Rent Adjustment Program Service Fee (${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)?</div></div>
                         <div class="col-sm-6 col-xs-12">
                             <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid">
                                 <i></i><span>Yes</span>
@@ -119,7 +119,7 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Is there more than one street address on the parcel</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Is there more than one street address on the property?</div></div>
                         <div class="col-sm-6 col-xs-12">
                             <label ng-if="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel">
                                 <i></i><span>Yes</span>
@@ -133,7 +133,7 @@
                 <!-- Justification for Rent Increase -->
                 <div class="subhead type2">
                     <h4>Justification for rent increase</h4>
-                    <a ng-click="Ctrl.EditJustification()" class="btn-link btn-edit">Edit</a>
+                    <a role="button" aria-label="Edit" ng-click="Ctrl.EditJustification()" class="btn-link btn-edit">Edit</a>
                 </div>
 
 
@@ -166,7 +166,7 @@
                 <!-- Rental property -->
                 <div class="subhead type2">
                     <h4>Rental property</h4>
-                    <a ng-click="Ctrl.EditRentalProperty()" class="btn-link btn-edit">Edit</a>
+                    <a role="button" aria-label="Edit" ng-click="Ctrl.EditRentalProperty()" class="btn-link btn-edit">Edit</a>
                 </div>
 
                 <div class="field-group filled-info subhead">
@@ -196,7 +196,7 @@
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Rental property</div></div>
                             <div class="col-sm-6 col-xs-12">
                                 {{item.TenantUserInfo.AddressLine1}}  {{item.TenantUserInfo.AddressLine2}}
-                                <br />                                    {{item.TenantUserInfo.City}}, {{item.TenantUserInfo.State.StateName}}, {{item.TenantUserInfo.Zip}}
+                                <br />                                  {{item.TenantUserInfo.City}}, {{item.TenantUserInfo.State.StateName}}, {{item.TenantUserInfo.Zip}}
                             </div>
                         </div>
                     </div><!-- .field-group -->
@@ -205,8 +205,8 @@
                 <!-- Rental history -->
 
                 <div class="subhead type2">
-                    <h4>Rent history</h4>
-                    <a ng-click="Ctrl.EditRentalHistory()" class="btn-link btn-edit">Edit</a>
+                    <h4>Rental history</h4>
+                    <a role="button" aria-label="Edit" ng-click="Ctrl.EditRentalHistory()" class="btn-link btn-edit">Edit</a>
                 </div>
 
                 <div class="field-group filled-info subhead">
@@ -218,14 +218,14 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">The tenant’s initial monthly rent including all services provided was</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">The tenants initial monthly rent including all services provided</div></div>
                         <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.InitialRent}}$</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you (or a previous Owner) given the City of Oakland’s form entitled NOTICE TO TENANTS OF RESIDENTIAL RENT ADJUSTMENT PROGRAM (“RAP Notice”) to all of the petitioning tenants?</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Have you (or a previous Owner) given the City of Oakland’s form entitled Notice to Tenants of Residential Rent Adjustment Program (“RAP Notice”) to all of the petitioning tenants?</div></div>
                         <div class="col-sm-6 col-xs-12">
                             <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus | filter: {RAPNoticeStatusID: Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID}">
                                 <i></i><span>{{item.RAPNoticeStatus}}</span>
@@ -243,7 +243,7 @@
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Upload signed copy of notice</div></div>
+                        <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
                         <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'}">
                             {{item.DocName}}
                         </div>
@@ -271,7 +271,7 @@
                 <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide a RAP Notice with the notice of rent increase?</div></div>
                             <div class="col-sm-6 col-xs-12">
                                 <div class="col-sm-6 col-xs-12">
                                     <label ng-if="item.bRentIncreaseNoticeGiven">
@@ -293,7 +293,7 @@
                     <!-- .field-group -->
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice given to tenant</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                         </div>
                     </div><!-- .field-group -->
@@ -313,8 +313,8 @@
                     </div><!-- .field-group -->
                 </div>
                 <div class="subhead type2">
-                    <h4>Additional Documentation</h4>
-                    <a ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
+                    <h4>Additional documentation</h4>
+                    <a role="button" aria-label="Edit" ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
                 </div>
 
                 <div class="field-group">
@@ -348,7 +348,7 @@
                 </div>
             </div>
             <div class="step-footer">
-                <button class="btn-primary" ng-click="Ctrl.Continue()">Save and continue</button> &nbsp;&nbsp;
+                <button role="button" aria-label="Save and continue" class="btn-primary" ng-click="Ctrl.Continue()">Save and continue</button> &nbsp;&nbsp;
                 <!--<button class="btn-primary" ng-click="Ctrl.Print()">Print</button>-->
             </div>
         </form>

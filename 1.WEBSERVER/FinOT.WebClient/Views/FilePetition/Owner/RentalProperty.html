@@ -23,7 +23,7 @@
 
 
                     <div class="field-group">
-                        <label for="Applicant_firstname">Tenant's Name</label>
+                        <label for="Applicant_firstname">Tenant's name</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName" required />
                     </div>
 
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
-                        <label for="Applicant_zip_code">Zip Code</label>
+                        <label for="Applicant_zip_code">Zip code</label>
                         <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip" required />
                     </div>
 
@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
-                        <label for="Applicant_email">Email Address</label>
+                        <label for="Applicant_email">Email address</label>
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email" required />
                     </div>
 
@@ -75,10 +75,10 @@
                         <div class="field-group filled-info subhead no-top-margin">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12">
-                                    <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}</p>                         <p>{{item.TenantUserInfo.AddressLine1}}</p>
-                                    <p> {{item.TenantUserInfo.AddressLine2}}</p>
-                                    <p>{{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}</p>
-                                    <button class="btn-link btn-edit" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
+                                    <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br/>                        {{item.TenantUserInfo.AddressLine1}}<br/>
+                                     {{item.TenantUserInfo.AddressLine2}}<br/>
+                                    {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}<br/>
+                                    <button role="button" aria-label="Remove" class="btn-link btn-edit" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="step-footer">
-                    <input type="button" id="save" name="save" class="btn-primary" value="Save and Continue" ng-click="Ctrl.Continue()" />
+                    <input role="button" aria-label="Save and comtinue" type="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
                 </div>
             </form>
         </div>

@@ -9,6 +9,12 @@
     self.model = null;
     self.ActivityList = [];
   
+    self.CaseClick = function () {
+        $location.path("/selectedcase");
+    }
+    self.Home = function () {
+        $location.path("/staffdashboard");
+    }
     self.TenantEmail = null;
     self.OwnerEmail = null;
     self.ThirdPartyEmail = null;

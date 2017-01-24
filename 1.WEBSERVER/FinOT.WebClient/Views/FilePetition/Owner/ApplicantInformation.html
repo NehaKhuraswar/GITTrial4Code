@@ -10,17 +10,17 @@
         <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" novalidate class="application-form" onsubmit="return false;">
             <div class=" step-content create-new">
             <div class="subhead no-top-margin">
-                <h4>Applicant’s name and rental address</h4>
-                <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
+                <h4>Owner Information</h4>
+                <a ng-click="Ctrl.ChangeAccountInformation()" role="button" class="btn-link btn-edit">Edit</a>
             </div>
             <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}</p>
-                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
-                <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}</p>
-                <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
+                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}<br/>
+                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}<br/>
+                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}}<br/>
+                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}<br/>
+                {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}<br/>
+                Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}<br/>
+                Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
             </div>
             <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                 <div class="field-group">
@@ -64,7 +64,7 @@
             </div>-->
 
                 <div class="field-group">
-                    <label for="Applicant_zip_code">Zip Code</label>
+                    <label for="Applicant_zip_code">Zip code</label>
                     <input type="text" class="field-input required" name="Applicant_zip" id="Applicant_zip" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip" data-error="Applicant Zip" required />
                 </div>
 
@@ -74,14 +74,14 @@
                 </div>
 
                 <div class="field-group">
-                    <label for="Applicant_email">Email Address</label>
+                    <label for="Applicant_email">Email address</label>
                     <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                 </div>
             </div>
 
             <div class="subhead">
                 <h4>Your representative</h4>
-                <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
+                <a ng-click="" role="button" aria-label="Edit" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
                 <a ng-click="" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
 
             </div>
@@ -104,7 +104,7 @@
             </div>
 
             <div id="representative-info">
-                <p class="input-label">This information will be used to send notifications about your case to your representative.</p>
+                <p class="input-label">We will use this information to send notifications about your case to your representative.</p>
                 <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
                     <div class="field-group">
                         <label for="representative_firstname">Name</label>
@@ -153,7 +153,7 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="representative_zip_code">Zip Code</label>
+                        <label for="representative_zip_code">Zip code</label>
                         <input type="text" name="Thirdparty_zip" id="Thirdparty_zip" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip" data-error="Representative Zip"
                                ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0,
                                                    'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0)}"
@@ -166,36 +166,44 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="representative_email">Email Address</label>
+                        <label for="representative_email">Email address</label>
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                     </div>
                 </div>
                 <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
 
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
-                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
-                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}<br/>
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}<br/>
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}<br/>
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}<br/>
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}<br/>
+                    Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}<br/>
+                    Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
                 </div>
                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                     <a ng-click="" class="btn-link btn-edit">Edit</a>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}</p>
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}</p>
-                    <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}</p>
-                    <p>Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}<br/>
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}<br/>
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}<br/>
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}<br/>
+                    Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}<br/>
+                    Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
                 </div>
 
             </div>
 
             <div class="field-group subhead">
-                <p class="input-label has-info-btn">Have you paid your business license? <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
-                <div class="form-group-radio vertical clearfix">
+                <p class="input-label has-info-btn">Have you paid your business license? <a role="button" arai-label="Info" ng-click="section_license_fee=!section_license_fee" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
+                <div class="info-box-toggle" ng-show="section_license_fee">
+                                <a  class="btn-close"></a>
+                                <p>The property owner must have a current Oakland Business License. If it is not current, an Owner Petition or Response to a tenant petition may not be considered in a rent adjustment proceeding.</p>
+                            </div>
+				
+				
+				
+				
+				<div class="form-group-radio vertical clearfix">
                     <label for="paid_business_license_yes">
                         <input type="radio" name="paid_business_license" id="paid_business_license_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid" ng-value="true" checked="checked" /><i></i><span>Yes</span>
                     </label>
@@ -245,8 +253,13 @@
 
 
             <div class="field-group no-bottom-margin">
-                <p class="input-label has-info-btn">Have you paid the Rent Adjustment Progrm service fee(${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)? <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
-                <div class="form-group-radio vertical clearfix required" data-error="RAP Fee">
+                <p class="input-label has-info-btn">Have you paid the Rent Adjustment Program Service Fee (${{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.RAPFee}} per unit)? <a role="button" arai-label="Info" ng-click="section_rap_fee=!section_rap_fee" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
+                <div class="info-box-toggle" ng-show="section_rap_fee">
+                                <a  class="btn-close"></a>
+                                <p>The property owner must  be current on payment of the RAP's Service Fee. If they are not current, an Owner Petition or Response to a tenant petition may not be considered in a rent adjustment proceeding. Note: If paid on time, the property owner may charge the tenant one-half of the $68 per-unit RAP Service fee ($34).</p>
+                            </div>
+				
+				<div class="form-group-radio vertical clearfix required" data-error="RAP Fee">
                     <label for="paid_rap_service_fee_yes">
                         <input type="radio" name="paid_rap_service_fee" id="paid_rap_service_fee_yes" class="input-field" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid" ng-value="true" checked="checked" /><i></i><span>Yes</span>
                     </label>
@@ -312,7 +325,7 @@
 
 
             <div class="field-group">
-                <div class="has-info-btn"><label for="total_residential_units">Total number of residential units</label> <a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rent_subsidized_HUD">Info</a></div>
+                <div class="has-info-btn"><label for="total_residential_units">Total number of units</label></div>
                 <input type="text" name="total_residential_units" id="total_residential_units" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits" />
             </div>
 
@@ -324,13 +337,20 @@
                 <select name="pi_approx_units" id="pi_approx_units"  data-placeholder="Select range"
                         ng-model=" Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID"
                         ng-options="range.RangeID as range.RangeDesc for range in Ctrl.caseinfo.NumberOfUnitsRange">
-                    <option value="" selected>Select range</option>
+                    <option value="Select" selected>Select range</option>
                 </select>
             </div>
 
             <div class="field-group">
-                <p class="input-label">Is there more than one street address on the Parcel?</p>
-                <div class="form-group-radio vertical clearfix">
+                <p class="input-label">Is there more than one street address on the Parcel? <a role="button" ng-click="section_parcel=!section_parcel" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
+                <div class="info-box-toggle" ng-show="section_parcel">
+                                <a  class="btn-close"></a>
+                                <p>If the units on the property have numbers or letters (ex. 123 A St. Apt #1. Or 123 A. St Unit A) please mark no here. If the units on the property have individual addresses (ex. 123 A St., 124 A St., 125 A St., etc.), please mark yes here. If you do not know please mark no.</p>
+                            </div>
+				
+				
+				
+				<div class="form-group-radio vertical clearfix">
                     <label>
                         <input type="radio" class="input-field"
                                ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bMoreThanOneStreetOnParcel" ng-value="true" checked="checked" /><i></i><span>Yes</span>
@@ -346,7 +366,7 @@
 </div>
 
             <div class="step-footer">
-                <input type="submit" id="save" name="save" class="btn-primary" value="Save and continue"
+                <input role="Save and continue" label-aria="Save and continue" type="submit" id="save" name="save" class="btn-primary" value="Save and continue"
                        ng-click="(Ctrl.Hide=true);
                        (!frmOwnerPetition.Applicant_firstname.$error.required) &&
                        (!frmOwnerPetition.Applicant_lastname.$error.required) &&

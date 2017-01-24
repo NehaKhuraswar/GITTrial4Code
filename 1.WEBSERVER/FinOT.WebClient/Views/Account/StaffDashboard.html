@@ -14,7 +14,7 @@
         <div class="application-form-wrapper">
             <div class="application-step step-1" >
 
-                <div class="account-management" ng-hide="Ctrl.model.IsNonRAPStaff == true">
+                <div class="account-management" ng-show="Ctrl.model.IsCityAdmin == true || Ctrl.model.AccountType.AccountTypeID == 2">
                     <div class="items">
                         <div class="item">
                             <div class="item-header"><a ng-click="Ctrl.ManageAccounts()">Manage accounts</a></div>

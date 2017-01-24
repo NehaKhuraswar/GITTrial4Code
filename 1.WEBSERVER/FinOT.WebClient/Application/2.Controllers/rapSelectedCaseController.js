@@ -15,7 +15,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     if (self.caseinfo.TenantPetitionInfo != null) {
         self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
     }
-    
+    self.Home = function () {
+        $location.path("/staffdashboard");
+    }
     self.NewCaseStatus = function () {
         $location.path("/newCaseStatus");
     }

@@ -13,7 +13,12 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
     self.ActivityList = [];
     self.StatusList = [];
     
-
+    self.CaseClick = function () {
+        $location.path("/selectedcase");
+    }
+    self.Home = function () {
+        $location.path("/staffdashboard");
+    }
     var _getActivity = function () {
         return rapFactory.GetActivity().then(function (response) {
             if (!alert.checkResponse(response)) { return; }
@@ -53,7 +58,7 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
         model.EmployeeID = self.CityUser.EmployeeID;
         rapFactory.SaveNewActivityStatus(model, C_ID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
-            $location.path("/staffdashboard");
+            $location.path("/selectedcase");
         });        
     }
     self.Cancel = function (model, C_ID) {

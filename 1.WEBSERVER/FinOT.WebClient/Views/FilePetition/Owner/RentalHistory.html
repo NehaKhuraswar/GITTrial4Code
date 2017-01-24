@@ -1,7 +1,7 @@
 ﻿<script src='js/functions.js'></script>
 <div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
-        <h3 class="step-heading">Owner Petition for Approval of Rent Increase: <span>Rental History</span></h3>
+        <h3 class="step-heading">Rental History</h3>
 
 
         <div class="step-content create-new">
@@ -35,12 +35,12 @@
 
 
             <div class="field-group">
-                <label for="initial_monthly_rent">The tenant’s initial monthly rent including all services provided was</label>
+                <label for="initial_monthly_rent">The tenants initial monthly rent including all services provided</label>
                 <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.InitialRent" placeholder="Enter dollar amount" />
             </div>
 
             <div class="field-group">
-                <p class="input-label">Have you (or a previous Owner) given the City of Oakland’s form entitled NOTICE TO TENANTS OF RESIDENTIAL RENT ADJUSTMENT PROGRAM (“RAP Notice”) to all of the petitioning tenants?</p>
+                <p class="input-label">Have you (or a previous Owner) given the City of Oakland’s form entitled Notice to Tenants of Residential Rent Adjustment Program (“RAP Notice”) to all of the petitioning tenants?</p>
                 <div class="form-group-radio vertical clearfix">
                     <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus" for="RAPNotice_{{item.RAPNoticeStatusID}}">
                         <input type="radio" id="RAPNotice_{{item.RAPNoticeStatusID}}" class="input-field"
@@ -163,7 +163,7 @@
             </div>
 
             <div class="field-group subhead no-top-margin pad-t15">
-                <p class="input-label">Did you provide rent program notice with the notice of rent increase?</p>
+                <p class="input-label">Did you provide a RAP Notice with the notice of rent increase?</p>
                 <div class="form-group-radio vertical clearfix">
                     <label for="rent_program_notice_yes">
                         <input type="radio" name="rent_program_notice" id="rent_program_notice_yes" class="input-field"
@@ -179,7 +179,7 @@
             </div>
 
             <div class="field-group">
-                <label>Date notice served</label>
+                <label>Date notice given to tenant</label>
                 <div class="row">
                     <div class="col-sm-4 col-xs-12">
                         <div class="field-group">
@@ -250,14 +250,14 @@
                 </div>
             </div><!-- .field-group -->
             <div class="field-group">
-                <button class="btn-link" ng-click="Ctrl.AddRecord(Ctrl.Rent)">Add another rent increase record</button>
+                <button class="btn-link" ng-click="Ctrl.AddRecord(Ctrl.Rent)">Add another rent increase</button>
             </div>
 
             <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length > 0">
                 <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide a RAP Notice with the notice of rent increase?</div></div>
                             <div class="col-sm-6 col-xs-12">
                                 <div class="col-sm-6 col-xs-12">
                                     <label ng-if="item.bRentIncreaseNoticeGiven">
@@ -273,7 +273,7 @@
 
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice given to tenant</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
                         </div>
                     </div>-->
                     <div class="field-group">
-                        <button class="btn-link btn-edit" ng-click="Ctrl.RemoveRecord(item)">Remove</button>
+                        <button role="button" aria-label="Remove" class="btn-link btn-edit" ng-click="Ctrl.RemoveRecord(item)">Remove</button>
                     </div>
                 </div>
                 <div class="field-group">
@@ -323,7 +323,7 @@
 
 
         <div class="step-footer">
-            <button class="btn-primary" ng-click="Ctrl.Continue()">Save and Continue</button>
+            <button role="button" aria-label="Save and continue" class="btn-primary" ng-click="Ctrl.Continue()">Save and continue</button>
         </div>
 
     </div>
