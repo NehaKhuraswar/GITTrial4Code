@@ -1527,7 +1527,10 @@ namespace RAP.Business.Implementation
                     {
                         if (doc != null)
                         {
-                            model.Documents.Add(doc);
+                            if (!model.Documents.Where(d => d.DocID == doc.DocID).Any())
+                            {
+                                model.Documents.Add(doc);
+                            }
                         }
                     }
                 }
