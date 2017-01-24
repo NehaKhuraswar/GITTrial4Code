@@ -101,6 +101,10 @@
         }
     }
 
+     self.Delete = function (doc) {
+         var index = self.model.Message.Attachments.indexOf(doc);
+         self.model.Message.Attachments.splice(index, 1);
+    }
     self.BackToCase = function () {
         rapGlobalFactory.Notification = null;
         $location.path("/selectedcase");
