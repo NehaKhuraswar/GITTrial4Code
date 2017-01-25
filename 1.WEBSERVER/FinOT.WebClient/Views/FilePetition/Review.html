@@ -201,52 +201,35 @@
                     <a ng-click="Ctrl.EditDocumentsInfo()" class="btn-link btn-edit">Edit</a>
                 </div>
 
-                <div class="field-group filled-info no-top-margin">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">File name</div></div>
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">File type</div></div>
+                <div class="field-group">
+                    <!-- Custom Table -->
+                    <div class="custom-table docs-list">
+                        <div class="tbl-header">
+                            <div class="tbl-row clearfix">
+                                <div class="col col-35 name">File name</div>
+                            </div>
+                        </div>
+
+                        <div class="tbl-body" ng-repeat="item in Ctrl.Documents">
+                            <div class="tbl-row clearfix">
+                                <div class="item" ng-class="{'expanded':toggle}">
+                                    <div class="item-header clearfix">
+                                        <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                    </div>
+
+                                    <div class="item-content clearfix" ng-show="toggle">
+                                        <div class="row">
+                                            <div class="col-md-10 col-sm-12">
+                                                <p>{{item.DocDescription}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div><!-- .field-group -->
-
-                <div class="field-group no-top-margin">
-                    <div class="accordion additional-docs">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-6">
-                                        <a class="btn-toggle"></a>
-                                        <div class="file-name">Rental_expenses.xsl</div>
-                                    </div>
-                                    <div class="col-sm-6 col-xs-6">
-                                        <div class="file-type">Excel</div>
-                                    </div>
-                                </div><!-- .row -->
-                            </div>
-
-                            <div class="item-content">
-                                <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                            </div>
-                        </div>
-
-                        <div class="item additional-doc">
-                            <div class="item-header">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-6">
-                                        <a class="btn-toggle"></a>
-                                        <div class="file-name">Rental_expenses.doc</div>
-                                    </div>
-                                    <div class="col-sm-6 col-xs-6">
-                                        <div class="file-type">Word</div>
-                                    </div>
-                                </div><!-- .row -->
-                            </div>
-
-                            <div class="item-content">
-                                <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
-                            </div>
-                        </div>
-                    </div><!-- .accordion -->
-                </div><!-- .field-group -->
+                    <!-- .custom-table -->
+                </div>
 
             </div>
 
