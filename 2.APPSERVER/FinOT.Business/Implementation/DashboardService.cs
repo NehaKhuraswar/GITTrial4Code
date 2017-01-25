@@ -261,6 +261,7 @@ namespace RAP.Business.Implementation
         {
             ReturnResult<MailM> result = new ReturnResult<MailM>();
             result.result = new MailM();
+            result.result.MailingDate = DateTime.Now.Date;
             result.status = new OperationStatus() { Status = StatusEnum.Success };
             return result;
         }
