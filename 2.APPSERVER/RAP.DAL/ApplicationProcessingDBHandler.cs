@@ -1417,59 +1417,70 @@ namespace RAP.DAL
             try
             {                
                 var caseDB = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).FirstOrDefault();
-                var PetitionDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
-                if (PetitionDB.TenantPetitionID != null)
+                if (caseDB != null)
                 {
-                    tenantPetitionResult = GetTenantApplicationInfoForView((int)PetitionDB.TenantPetitionID);
-                    if (tenantPetitionResult.status.Status != StatusEnum.Success)
-                        return caseInfoResult;
+                    caseInfo.PetitionCategoryID = Convert.ToInt32(caseDB.PetitionCategoryID);
+                    caseInfo.CaseID = caseDB.CaseID;
+                    var PetitionDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
 
-                    GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
-                    if (GroundsResult != null)
+                    if (PetitionDB.TenantPetitionID != null)
                     {
-                        tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
-                        tenantPetitionResult.status = GroundsResult.status;
-                        if (GroundsResult.status.Status != StatusEnum.Success)
+                        tenantPetitionResult = GetTenantApplicationInfoForView((int)PetitionDB.TenantPetitionID);
+                        if (tenantPetitionResult.status.Status != StatusEnum.Success)
                             return caseInfoResult;
+
+                        GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
+                        if (GroundsResult != null)
+                        {
+                            tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
+                            tenantPetitionResult.status = GroundsResult.status;
+                            if (GroundsResult.status.Status != StatusEnum.Success)
+                                return caseInfoResult;
+                        }
+
+                        RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
+                        if (RentalHistoryResult != null)
+                        {
+                            tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
+                            tenantPetitionResult.status = RentalHistoryResult.status;
+                            if (RentalHistoryResult.status.Status != StatusEnum.Success)
+                                return caseInfoResult;
+                        }
+
+                        LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
+                        if (LostServicesResult != null)
+                        {
+                            tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
+                            tenantPetitionResult.status = LostServicesResult.status;
+                            if (LostServicesResult.status.Status != StatusEnum.Success)
+                                return caseInfoResult;
+                        }
+
+                        caseInfo.TenantPetitionInfo = tenantPetitionResult.result;
                     }
 
-                    RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
-                    if (RentalHistoryResult != null)
+                    if (PetitionDB.OwnerPetitionID != null)
                     {
-                        tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
-                        tenantPetitionResult.status = RentalHistoryResult.status;
-                        if (RentalHistoryResult.status.Status != StatusEnum.Success)
-                            return caseInfoResult;
+                        var ownerPetitionResult = GetOwnerPetition(Convert.ToInt32(PetitionDB.OwnerPetitionID));
+                        if (ownerPetitionResult.status.Status == StatusEnum.Success)
+                        {
+                            caseInfo.OwnerPetitionInfo = ownerPetitionResult.result;
+                        }
+                    }
+                    var documentResult = _commondbHandler.GetCaseDocuments(C_ID);
+                    if (documentResult.status.Status == StatusEnum.Success)
+                    {
+                        caseInfo.Documents = documentResult.result;
                     }
 
-                    LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
-                    if (LostServicesResult != null)
-                    {
-                        tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
-                        tenantPetitionResult.status = LostServicesResult.status;
-                        if (LostServicesResult.status.Status != StatusEnum.Success)
-                            return caseInfoResult;
-                    }
-
-                    caseInfo.TenantPetitionInfo = tenantPetitionResult.result;
+                    caseInfoResult.result = caseInfo;
+                    caseInfoResult.status = new OperationStatus() { Status = StatusEnum.Success };
                 }
-
-                if (PetitionDB.OwnerPetitionID != null)
+                else
                 {
-                    var ownerPetitionResult = GetOwnerPetition(Convert.ToInt32(PetitionDB.OwnerPetitionID));
-                    if (ownerPetitionResult.status.Status == StatusEnum.Success)
-                    {
-                        caseInfo.OwnerPetitionInfo = ownerPetitionResult.result;
-                    }
+                    caseInfoResult.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
                 }
-                var documentResult = _commondbHandler.GetCaseDocuments(C_ID);
-                if (documentResult.status.Status == StatusEnum.Success)
-                {
-                    caseInfo.Documents = documentResult.result;
-                }
-
-                caseInfoResult.result = caseInfo;
-                caseInfoResult.status = new OperationStatus() { Status = StatusEnum.Success };
+                
                 return caseInfoResult;
             }
             catch (Exception ex)
