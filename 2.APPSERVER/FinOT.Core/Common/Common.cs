@@ -67,7 +67,8 @@ namespace RAP.Core.Common
     }
     public enum StatusDefaults
     {
-        StatusSubmitted = 1
+        StatusSubmitted = 1,
+        NotificationSent = 2
     }
     public enum CityUserRoles
     {
