@@ -4583,7 +4583,10 @@ namespace RAP.DAL
                         applicantInfo.bBusinessLicensePaid = model.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid;
                         applicantInfo.BusinessLicenseNumber = model.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber;
                         applicantInfo.bRentAdjustmentProgramFeePaid = model.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
-                        applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
+                        if (model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
+                        {
+                            applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
+                        }
                         applicantInfo.NumberOfUnits = model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits;
                         if (model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID != 0)
                         {
