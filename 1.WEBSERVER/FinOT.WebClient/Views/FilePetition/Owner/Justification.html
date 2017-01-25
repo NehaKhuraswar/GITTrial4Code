@@ -17,7 +17,7 @@
                                 <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons">
                                     <label for="{{reason.ReasonID}}">
                                         <input type="checkbox" name="rentcheckbox" class="checkbox" id="{{reason.ReasonID}}" ng-model="reason.IsSelected">
-                                        <i></i><span>{{reason.ReasonDescription}}</span><a role="button" arai-label="Info" ng-click="reasonToggle=!reasonToggle" class="icon-info inline" data-toggle="tooltip">Info</a>
+                                        <i></i><span>{{reason.ReasonDescription}}</span><a role="button" arai-label="Info" ng-click="reasonToggle=!reasonToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a>
                                     </label>
                                     <div class="info-box-toggle" ng-show="reasonToggle">
                                         <a ng-click="reasonToggle=!reasonToggle" class="btn-close"></a>

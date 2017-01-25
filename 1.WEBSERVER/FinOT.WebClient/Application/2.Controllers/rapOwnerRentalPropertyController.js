@@ -7,6 +7,8 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     self.caseinfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerPetitionInfo.PropertyInfo.CustomerID = self.custDetails.custID;
     self.StateList = [];
+    self.IsTenant = false;
+    self.Error = "";
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -17,16 +19,45 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     }
     
     _GetStateList();
+    
+    var _GetIsTenant = function()
+    {
+        var isPresent = false;
+        self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.forEach(function (tenant) {
+            if (tenant.IsDeleted == false) {
+                self.IsTenant = true;
+                isPresent = true;
+            }
+        });
+        if (isPresent == false)
+        {
+            self.IsTenant = false;
+        }
+    }
     rapFactory.GetOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
-            self.caseinfo = response.data;
+        self.caseinfo = response.data;
+        _GetIsTenant();
     });
 
     self.Continue = function () {
-        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0)
+        if (self.IsTenant == false)
         {
-            self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(self.caseinfo.OwnerPetitionTenantInfo);
+            if (self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName != "" &&
+                self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 != "" &&
+                self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City != "" &&
+                self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip != "")
+            {
+                self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(self.caseinfo.OwnerPetitionTenantInfo);
+                
+            }
+            _GetIsTenant();            
+        }
+        if (self.IsTenant == false)
+        {
+            self.Error = "Please add tenant information";
+            return;
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
@@ -57,6 +88,7 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(_userInfo1);      
         self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName = "";
         self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName = "";
+        _GetIsTenant();
         //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 = "";
         //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2 = "";
         //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City = "";
@@ -71,6 +103,17 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.splice(index, 1);
         _tenant.IsDeleted = true;
         self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(_tenant);
+        _GetIsTenant();
+        if (self.IsTenant == false) {
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 = "";
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2 = "";
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City = "";
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State.StateName = "";
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip = 0;
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber = 0;
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = "";
+        }
+
         //self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.update(
         //    self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.indexOf(function (item) {
         //        return item.TenantUserInfo.FirstName == _tenant.TenantUserInfo.FirstName && item.TenantUserInfo.LastName == _tenant.TenantUserInfo.LastName;
@@ -80,6 +123,7 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         //_tenant.IsDeleted = true;
         //self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(_tenant);
     }
+
 
 }];
 var rapOwnerRentalPropertyController_resolve = {

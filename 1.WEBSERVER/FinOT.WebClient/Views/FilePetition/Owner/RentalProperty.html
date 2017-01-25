@@ -2,6 +2,15 @@
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
+            <div class="alert alert-error" ng-show="Ctrl.Hide==true">
+                <!--<strong><a href="javascript:void();" data-scrollto="anybody_representing_you">Is anybody representing you</a></strong>  is a required field<br />
+        <strong><a href="javascript:void();" data-scrollto="rao_exemption_contest">I wish to contest an exemption from the Rent Adjustment Ordinance</a></strong>  is a required field<br />
+        <strong><a href="javascript:void();" data-id="representative_firstname">Name</a></strong> is a required field<br />
+        <strong><a href="javascript:void();" data-id="business_name">Business name</a></strong> is a required field-->
+            </div>
+            <div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>
             <div class="step-heading">Rental Property</div>
 
             <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form" onsubmit="return false;">
@@ -24,28 +33,28 @@
 
                     <div class="field-group">
                         <label for="Applicant_firstname">Tenant's name</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName" required />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName"  />
                     </div>
 
                     <div class="field-group">
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName" required />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName"  />
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
+                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_address1">Mailing address 1</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1" required />
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
+                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_address2">Mailing address 2 (optional)</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2" required />
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
+                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_city">City</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City" required />
                     </div>
-                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
+                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_state">State</label>
                         <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
                         <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
@@ -53,17 +62,17 @@
                                 ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
+                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_zip_code">Zip code</label>
                         <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip" required />
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
+                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicante_phone_number">Phone number</label>
                         <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber" required />
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length == 0">
+                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_email">Email address</label>
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email" required />
                     </div>
@@ -86,7 +95,7 @@
                 </div>
 
                 <div class="step-footer">
-                    <input role="button" aria-label="Save and comtinue" type="button" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
+                    <input role="button" aria-label="Save and comtinue" type="submit" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
                 </div>
             </form>
         </div>
