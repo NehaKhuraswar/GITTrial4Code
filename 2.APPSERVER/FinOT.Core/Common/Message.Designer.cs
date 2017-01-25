@@ -70,6 +70,15 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Justification for Rent Increase is required field.
+        /// </summary>
+        internal static string ID_0005 {
+            get {
+                return ResourceManager.GetString("ID_0005", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login.
         /// </summary>
         internal static string ID_0106 {

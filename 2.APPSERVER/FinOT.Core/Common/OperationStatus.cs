@@ -58,6 +58,10 @@ namespace RAP.Core.Common
                     StatusCode = "0004";
                     StatusMessage = Message.ResourceManager.GetString("ID_0004");
                     break;
+                case StatusEnum.JustificationRequired:
+                    StatusCode = "0005";
+                    StatusMessage = Message.ResourceManager.GetString("ID_0005");
+                    break;
 
 
 

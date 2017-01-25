@@ -4730,6 +4730,7 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                bool bSelected = false;
                 int applicantInfoID = petition.ApplicantInfo.OwnerPetitionApplicantInfoID;
                 if (applicantInfoID == 0)
                 {
@@ -4745,6 +4746,7 @@ namespace RAP.DAL
                     {
                         if (item.IsSelected)
                         {
+                            bSelected = true;
                             if (!rentIncreaseReasonDB.Where(x => x.ReasonID == item.ReasonID).Any())
                             {
                                 OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
@@ -4774,6 +4776,7 @@ namespace RAP.DAL
                     {
                         if (item.IsSelected)
                         {
+                            bSelected = true;
                             OwnerRentIncreaseReasonInfo rentIncreaseReason = new OwnerRentIncreaseReasonInfo();
                             rentIncreaseReason.OwnerPetitionApplicantInfoID = applicantInfoID;
                             rentIncreaseReason.ReasonID = item.ReasonID;
@@ -4781,6 +4784,11 @@ namespace RAP.DAL
                             _dbContext.SubmitChanges();
                         }
                     }
+                }
+                if (bSelected == false)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.JustificationRequired };
+                    return result;
                 }
 
                 var justtificationStatus = _dbContext.OwnerPetitionPageSubmissionStatus.Where(r => r.CustomerID == petition.CustomerID).FirstOrDefault();

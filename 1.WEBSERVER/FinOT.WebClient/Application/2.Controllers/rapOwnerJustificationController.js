@@ -5,6 +5,7 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.DocDescription = null;
+    self.Error = "";
     rapFactory.GetRentIncreaseReasonInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
@@ -69,7 +70,10 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
         updateDescription();
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveRentIncreaseReasonInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
         
         $scope.model.ownerJustification = false;

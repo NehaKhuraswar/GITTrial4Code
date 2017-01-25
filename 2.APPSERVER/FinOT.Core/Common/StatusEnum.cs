@@ -18,6 +18,7 @@ namespace RAP.Core.Common
         PinError,
         OwnerResponseSubmissionFailed,
         PetitionGroundRequired,
+        JustificationRequired,
         #endregion
         
         #region Exceptions

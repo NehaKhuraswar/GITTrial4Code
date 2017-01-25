@@ -2,10 +2,14 @@
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
+            <div class="alert alert-error" ng-show="Hide==true">
+            </div>
+            <div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>
             <div class="step-heading">Justification for Rent Increase</div>
-            <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form" onsubmit="return false;">
+            <form name="frmOwnerPetition" id="frmOwnerPetition" novalidate class="application-form" onsubmit="return false;">
                 <div class="step-content step1">
-
                     <div class="field-group subhead no-top-margin pad-t15">
                         <div class="form-group-checkbox vertical clearfix">
                             <p class="input-label">Check all that apply. <b>I (we) petition for approval of one or more rent increases on the following grounds that the increase(es) is/are justified by :</b></p>
@@ -13,12 +17,12 @@
                                 <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons">
                                     <label for="{{reason.ReasonID}}">
                                         <input type="checkbox" name="rentcheckbox" class="checkbox" id="{{reason.ReasonID}}" ng-model="reason.IsSelected">
-                                        <i></i><span>{{reason.ReasonDescription}}</span><a role="button" arai-label="Info" ng-click="reasonToggle=!reasonToggle" class="icon-info inline" data-toggle="tooltip">Info</a>                                   
+                                        <i></i><span>{{reason.ReasonDescription}}</span><a role="button" arai-label="Info" ng-click="reasonToggle=!reasonToggle" class="icon-info inline" data-toggle="tooltip">Info</a>
                                     </label>
-                                                <div class="info-box-toggle" ng-show="reasonToggle">
-                                                    <a ng-click="reasonToggle=!reasonToggle" class="btn-close"></a>
-                                                    <p>{{reason.ToolTip}}</p>
-                                                </div>
+                                    <div class="info-box-toggle" ng-show="reasonToggle">
+                                        <a ng-click="reasonToggle=!reasonToggle" class="btn-close"></a>
+                                        <p>{{reason.ToolTip}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -29,7 +33,7 @@
                     </div>
                     <div class="field-group">
                         <!-- Custom Table -->
-                        <div class="custom-table docs-list" >
+                        <div class="custom-table docs-list">
                             <div class="tbl-header">
                                 <div class="tbl-row clearfix">
                                     <div class="col col-35 name">File name</div>
@@ -44,26 +48,26 @@
                                             <div class="col col-35 name pad-l30">
                                                 <a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
                                             </div>
-                                                <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                                <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a> 
-                                            </div>
-                                                                                 
-                                            <!--<a href="#" class="btn-link btn-delete">Delete</a>-->
+                                            <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                            <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>
                                         </div>
 
-                                        <div class="item-content" ng-show="toggle">
-                                            <div class="row">
-                                                <div class="col-md-8 col-sm-12">
-                                                    <p>{{item.DocDescription}}</p>
-                                                </div>
+                                        <!--<a href="#" class="btn-link btn-delete">Delete</a>-->
+                                    </div>
+
+                                    <div class="item-content" ng-show="toggle">
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-12">
+                                                <p>{{item.DocDescription}}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- .custom-table -->
                     </div>
+                    <!-- .custom-table -->
+
                     <div class="field-group subhead pad-t15">
                         <p><label for="attached_document_description">Describe the document that you are attaching</label></p>
                         <textarea name="attached_document_description" id="attached_document_description" class="field-input textarea" rows="8" ng-model="Ctrl.DocDescription"></textarea>
@@ -77,31 +81,34 @@
                                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_Justification')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
                             </div>
                             <!--<div class="field-group">
-                        <table class="table table-condensed nopadding-bottom">
-                            <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
-                                    <td class="nopadding-left">
-                                        {{item.DocName}}
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                        <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
-                                        <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>-->
+                                <table class="table table-condensed nopadding-bottom">
+                                    <tbody>
+                                        <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
+                                            <td class="nopadding-left">
+                                                {{item.DocName}}
+                                            </td>
+                                            <td>
+                                                &nbsp;
+                                                <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-edit" value="Download" ng-click="Ctrl.Download(item)" />
+                                                <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-edit" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>-->
                         </div>
                     </div><!-- .field-group -->
                 </div>
 
+
                 <div class="step-footer">
-                    <input type="button" role="button" aria-label="Save and continue" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
+                    <input type="submit" role="button" aria-label="Save and continue" id="save" name="save" class="btn-primary"
+                           value="Save and continue" ng-click="Ctrl.Continue()" />
                 </div>
             </form>
 
         </div>
     </div>
+    <script src='js/functions.js'></script>
 </div>
 

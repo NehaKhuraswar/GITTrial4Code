@@ -1,9 +1,10 @@
-﻿<script src='js/functions.js'></script>
-
+﻿
+<script src='js/functions.js'></script>
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            
+            <div class="alert alert-error" ng-show="Hide==true">
+            </div>
             <div class="alert" ng-show="Ctrl.Error!=''">
                 <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
             </div>
@@ -13,24 +14,24 @@
             <form name="frmTenentPetition" id="frmTenentPetition" novalidate class="application-form" onsubmit="return false;">
                 <div class=" step-content create-new">
 
-                <div class="field-group subhead no-top-margin">
-                    <p class="input-label">I (we) contest one or more rent increases on one or more of the following grounds:</p>
+                    <div class="field-group subhead no-top-margin">
+                        <p class="input-label">I (we) contest one or more rent increases on one or more of the following grounds:</p>
 
-                    <div class="form-group-checkbox vertical clearfix" data-error="Contesting ground">
-                        <div class="checkbox-wrapper" name="PetitionGroundsRequired" ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds" required>
-                            <label for="{{petitionground.PetitionGroundID}}">
-                                <input type="checkbox" name="petitiongroundcheckbox" class="checkbox" id="{{petitionground.PetitionGroundID}}"
-                                       ng-model="petitionground.Selected">
-                                <i></i><span>{{petitionground.PetitionGroundDescription}}</span>
-                            </label>
+                        <div class="form-group-checkbox vertical clearfix " data-error="Contesting ground">
+                            <div class="checkbox-wrapper" ng-repeat="petitionground in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds" required>
+                                <label for="{{petitionground.PetitionGroundID}}">
+                                    <input type="checkbox" name="petitiongroundcheckbox" class="checkbox" id="{{petitionground.PetitionGroundID}}"
+                                           ng-model="petitionground.Selected">
+                                    <i></i><span>{{petitionground.PetitionGroundDescription}}</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
+                    <div class="step-footer">
+                        <input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
+                               ng-click="(Hide=true); Ctrl.ContinueToRentalHistory()" />
+                    </div>
                 </div>
-                <div class="step-footer">
-                    <input type="submit" id="continue" name="continue" class="btn-primary" value="Save and continue"
-                           ng-click="(Hide=true); (!frmTenentPetition.PetitionGroundsRequired.$error.required) && Ctrl.ContinueToRentalHistory()" />
-                </div>
-</div>
             </form>
         </div>
     </div>
