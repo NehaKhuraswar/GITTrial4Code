@@ -512,131 +512,131 @@ namespace RAP.DAL
                 List<CaseInfoM> cases = new List<CaseInfoM>();
 
                 var CityUserDB = db.CityUserAccounts.Where(x => x.CityUserID == UserID).FirstOrDefault();
-                if(CityUserDB.IsAnalyst == true)
-                {
-                    var casesDB = _dbContext.CaseDetails.Where(x => x.CityAnalystUserID == UserID).ToList();
-                    foreach (var item in casesDB)
-                    {
-                        CaseInfoM caseinfo = new CaseInfoM();
-                        caseinfo.CaseID = item.CaseID;
-                        caseinfo.C_ID = item.C_ID;
-                        caseinfo.PetitionCategoryID = Convert.ToInt32(item.PetitionCategoryID);
+                //if(CityUserDB.IsAnalyst == true)
+                //{
+                //    var casesDB = _dbContext.CaseDetails.Where(x => x.CityAnalystUserID == UserID).ToList();
+                //    foreach (var item in casesDB)
+                //    {
+                //        CaseInfoM caseinfo = new CaseInfoM();
+                //        caseinfo.CaseID = item.CaseID;
+                //        caseinfo.C_ID = item.C_ID;
+                //        caseinfo.PetitionCategoryID = Convert.ToInt32(item.PetitionCategoryID);
 
-                        if (item.CityAnalystUserID != null)
-                        {
-                            var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == item.CityAnalystUserID).FirstOrDefault();
+                //        if (item.CityAnalystUserID != null)
+                //        {
+                //            var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == item.CityAnalystUserID).FirstOrDefault();
 
-                            caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
-                            caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
-                            caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
-                        }
-                        if (item.HearingOfficerUserID != null)
-                        {
-                            var CityDB = db.CityUserAccounts.Where(x => x.CityUserID == item.HearingOfficerUserID).FirstOrDefault();
+                //            caseinfo.CityAnalyst.UserID = (int)item.CityAnalystUserID;
+                //            caseinfo.CityAnalyst.FirstName = CityAnalystDB.FirstName;
+                //            caseinfo.CityAnalyst.LastName = CityAnalystDB.LastName;
+                //        }
+                //        if (item.HearingOfficerUserID != null)
+                //        {
+                //            var CityDB = db.CityUserAccounts.Where(x => x.CityUserID == item.HearingOfficerUserID).FirstOrDefault();
 
-                            caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
-                            caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
-                            caseinfo.HearingOfficer.LastName = CityDB.LastName;
-                        }
-                        caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
-                        caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
+                //            caseinfo.HearingOfficer.UserID = (int)item.HearingOfficerUserID;
+                //            caseinfo.HearingOfficer.FirstName = CityDB.FirstName;
+                //            caseinfo.HearingOfficer.LastName = CityDB.LastName;
+                //        }
+                //        caseinfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                //        caseinfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
 
 
-                        // Get the petition applicant info
-                        var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == item.PetitionID).FirstOrDefault();
+                //        // Get the petition applicant info
+                //        var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == item.PetitionID).FirstOrDefault();
 
-                        if (petitionDetailsDb.TenantPetitionID != null)
-                        {
-                            var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
-                            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
-                            if (applicantUser != null)
-                            {
-                                if(applicantUser.result.IsAPNAddress== true)
-                                {
-                                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
-                                }
-                                else
-                                {
-                                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
-                                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
-                                    applicantUser.result.apnAddress.City = applicantUser.result.City;
-                                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
-                                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
-                                }
-                                caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
-                            }
-                            ReturnResult<UserInfoM> OwnerUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID);
-                            if (OwnerUser != null)
-                            {
-                                caseinfo.TenantPetitionInfo.OwnerInfo = OwnerUser.result;
-                            }
-                        }
-                        else if (petitionDetailsDb.OwnerPetitionID != null)
-                        {
+                //        if (petitionDetailsDb.TenantPetitionID != null)
+                //        {
+                //            var TenantPetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == petitionDetailsDb.TenantPetitionID).FirstOrDefault();
+                //            ReturnResult<UserInfoM> applicantUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ApplicantUserID);
+                //            if (applicantUser != null)
+                //            {
+                //                if(applicantUser.result.IsAPNAddress== true)
+                //                {
+                //                    applicantUser.result.apnAddress = _commondbHandler.GetAPNAddress(applicantUser.result.UserID).result;
+                //                }
+                //                else
+                //                {
+                //                    applicantUser.result.apnAddress.AddressLine1 = applicantUser.result.AddressLine1;
+                //                    applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
+                //                    applicantUser.result.apnAddress.City = applicantUser.result.City;
+                //                    applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                //                    applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
+                //                }
+                //                caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                //            }
+                //            ReturnResult<UserInfoM> OwnerUser = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID);
+                //            if (OwnerUser != null)
+                //            {
+                //                caseinfo.TenantPetitionInfo.OwnerInfo = OwnerUser.result;
+                //            }
+                //        }
+                //        else if (petitionDetailsDb.OwnerPetitionID != null)
+                //        {
                             
-                            var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
-                             var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == OwnerPetitionDB.OwnerPetitionApplicantInfoID).First();
+                //            var OwnerPetitionDB = _dbContext.OwnerPetitionInfos.Where(x => x.OwnerPetitionID == petitionDetailsDb.OwnerPetitionID).FirstOrDefault();
+                //             var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == OwnerPetitionDB.OwnerPetitionApplicantInfoID).First();
 
-                               if (applicantInfo != null)
-                               {
-                                   OwnerPetitionApplicantInfoM _applicantInfo = new OwnerPetitionApplicantInfoM();
-                                   _applicantInfo.OwnerPetitionApplicantInfoID = applicantInfo.OwnerPetitionApplicantInfoID;
-                                   var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
-                                   if (applicantUserInforesult.status.Status != StatusEnum.Success)
-                                   {
-                                       result.status = applicantUserInforesult.status;
-                                       return result;
-                                   }
-                                   caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUserInforesult.result;
+                //               if (applicantInfo != null)
+                //               {
+                //                   OwnerPetitionApplicantInfoM _applicantInfo = new OwnerPetitionApplicantInfoM();
+                //                   _applicantInfo.OwnerPetitionApplicantInfoID = applicantInfo.OwnerPetitionApplicantInfoID;
+                //                   var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                //                   if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                //                   {
+                //                       result.status = applicantUserInforesult.status;
+                //                       return result;
+                //                   }
+                //                   caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo = applicantUserInforesult.result;
                             
-                            }
-                            var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == OwnerPetitionDB.OwnerPropertyID).First();
-                            OwnerPetitionPropertyInfoM _propertyInfo = new OwnerPetitionPropertyInfoM();
-                            if (propertyInfo != null)
-                            {
+                //            }
+                //            var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == OwnerPetitionDB.OwnerPropertyID).First();
+                //            OwnerPetitionPropertyInfoM _propertyInfo = new OwnerPetitionPropertyInfoM();
+                //            if (propertyInfo != null)
+                //            {
 
-                                _propertyInfo.OwnerPropertyID = propertyInfo.OwnerPropertyID;
+                //                _propertyInfo.OwnerPropertyID = propertyInfo.OwnerPropertyID;
 
-                                var tenantInfo = from r in _dbContext.OwnerPetitionTenantInfos
-                                                 where r.OwnerPropertyID == _propertyInfo.OwnerPropertyID
-                                                 select r;
-                                if (tenantInfo.Any())
-                                {
-                                    List<OwnerPetitionTenantInfoM> _tenants = new List<OwnerPetitionTenantInfoM>();
-                                    foreach (var tenant in tenantInfo)
-                                    {
-                                        OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
-                                        var userResult = _commondbHandler.GetUserInfo(tenant.TenantUserID);
-                                        if (userResult.status.Status == StatusEnum.Success)
-                                        {
-                                            _tenant.TenantUserInfo = userResult.result;
-                                            _tenant.TenantInfoID = tenant.TenantInfoID;
-                                        }
-                                        _tenants.Add(_tenant);
-                                        //model.TenantInfo.Add(_tenant);
-                                    }
-                                    _propertyInfo.TenantInfo = _tenants;
-                                }
+                //                var tenantInfo = from r in _dbContext.OwnerPetitionTenantInfos
+                //                                 where r.OwnerPropertyID == _propertyInfo.OwnerPropertyID
+                //                                 select r;
+                //                if (tenantInfo.Any())
+                //                {
+                //                    List<OwnerPetitionTenantInfoM> _tenants = new List<OwnerPetitionTenantInfoM>();
+                //                    foreach (var tenant in tenantInfo)
+                //                    {
+                //                        OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
+                //                        var userResult = _commondbHandler.GetUserInfo(tenant.TenantUserID);
+                //                        if (userResult.status.Status == StatusEnum.Success)
+                //                        {
+                //                            _tenant.TenantUserInfo = userResult.result;
+                //                            _tenant.TenantInfoID = tenant.TenantInfoID;
+                //                        }
+                //                        _tenants.Add(_tenant);
+                //                        //model.TenantInfo.Add(_tenant);
+                //                    }
+                //                    _propertyInfo.TenantInfo = _tenants;
+                //                }
 
-                            }
-                            caseinfo.OwnerPetitionInfo.PropertyInfo = _propertyInfo;
-                        }
+                //            }
+                //            caseinfo.OwnerPetitionInfo.PropertyInfo = _propertyInfo;
+                //        }
 
-                        caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
-                        var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
-                        if (caseActivityStatusDb != null)
-                        {
-                            var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
-                            if (ActivityDb != null)
-                            {
-                                caseinfo.LastActivity = ActivityDb.ActivityName;
-                            }
-                        }
-                        cases.Add(caseinfo);
-                    }
-                }
-                else if(CityUserDB.IsHearingOfficer == false && CityUserDB.IsAnalyst == false )
-                { 
+                //        caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
+                //        var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
+                //        if (caseActivityStatusDb != null)
+                //        {
+                //            var ActivityDb = _dbDashboard.Activities.Where(x => x.ActivityID == caseActivityStatusDb.ActivityID).FirstOrDefault();
+                //            if (ActivityDb != null)
+                //            {
+                //                caseinfo.LastActivity = ActivityDb.ActivityName;
+                //            }
+                //        }
+                //        cases.Add(caseinfo);
+                //    }
+                //}
+                //else if(CityUserDB.IsHearingOfficer == false && CityUserDB.IsAnalyst == false )
+                //{ 
                     var casesDB = _dbContext.CaseDetails.Where(x => x.CityAnalystUserID == null || x.HearingOfficerUserID == null).ToList();
                     foreach (var item in casesDB)
                     {
@@ -755,7 +755,7 @@ namespace RAP.DAL
                             }
                         }
                         cases.Add(caseinfo);
-                    }
+                    //}
                 }
                 result.result = cases;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
