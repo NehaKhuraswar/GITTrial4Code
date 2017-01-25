@@ -61,8 +61,12 @@
 
                                     <div class="field-group">
                                         <label for="Applicant_state">State</label>
-                                        <div class="row">
-                                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State"></dropdown>
+                                        <div class="input-wrapper">
+                                            <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State"
+                                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                                <option value="" selected>Select state</option>
+                                            </select>
                                         </div>
                                         
                                     </div>
@@ -150,8 +154,12 @@
 
                                         <div class="field-group">
                                             <label for="representative_state">State</label>
-                                            <div class="row">
-                                                <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State"></dropdown>
+                                            <div class="input-wrapper">
+                                                <select ng-init="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State = Ctrl.StateList[0]" name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
+                                                        ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State"
+                                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                                    <option value="" selected>Select state</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="field-group">
@@ -234,11 +242,17 @@
                                         <input type="text" name="po_address2" id="po_address2" class="field-input" placeholder=""
                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2" />
                                     </div>
-
                                     <div class="field-group">
                                         <label for="po_state">State <span>*</span></label>
-                                        <div class="row">
-                                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"></dropdown>
+                                        <div class="input-wrapper">
+                                            <select ng-init="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State = Ctrl.StateList[0]" name="po_state" id="po_state" class="custom-select" data-placeholder="Select"
+                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"
+                                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                                <option value="" selected>Select state</option>
+                                            </select>
+                                            <!--<div class="row">
+                <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"></dropdown>
+            </div>-->
                                         </div>
                                     </div>
 
@@ -326,8 +340,12 @@
 
                                     <div class="field-group">
                                         <label for="pm_state">State</label>
-                                        <div class="row">
-                                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName" selected="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State"></dropdown>
+                                        <div class="input-wrapper">
+                                            <select name="pm_state" id="pm_state" class="custom-select" data-placeholder="Select"
+                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State"
+                                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                                <option value="" selected>Select state</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="field-group">
@@ -372,9 +390,14 @@
 
                                     <div class="field-group">
                                         <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
-                                        <div class="row">
-                                            <dropdown placeholder="Select range" list="Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits" property="RangeDesc" selected="Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits"></dropdown>
-                                        </div>
+                                        
+                                        <select name="pi_approx_units" id="pi_approx_units" class="custom-select" data-placeholder="Select range"
+                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits"
+                                                ng-options="range as (range.RangeDesc) for range in Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits track by range.RangeID">
+                                            <option value="" selected>Select range</option>
+                                        </select>
+                                        <!--<dropdown placeholder="Select range" list="Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits" property="RangeDesc" selected="Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits"></dropdown>-->
+                                       
                                     </div>
 
                                     <div class="field-group">

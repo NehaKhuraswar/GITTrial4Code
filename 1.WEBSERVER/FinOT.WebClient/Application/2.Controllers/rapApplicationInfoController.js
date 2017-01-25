@@ -78,6 +78,11 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     }
 
     self.ContinueToGroundsforPetition = function () {
+        if (self.caseinfo.TenantPetitionInfo.OwnerInfo.State == null)
+        {
+            self.Error = "Owner state is a required field";
+                return;
+        }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkForResponse(response)) {
