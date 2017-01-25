@@ -132,30 +132,41 @@ self.ViewPage = function (activity, caseinfo) {
                     $location.path("/ViewownerPetition");
         }
 
-});
-        }
-        else if (activity.Activity.ActivityID == 26) {
-            rapFactory.GetAppealInfoForView(caseinfo.C_ID).then(function (response) {
-                if(!alert.checkResponse(response)) {
-                    return;
-            }
-        self.caseinfo = response.data;
-        rapGlobalFactory.CaseDetails = self.caseinfo;
-                    rapGlobalFactory.FromSelectedCase = true;
-                $location.path("/ViewAppeal");
         });
+    }
+    else if (activity.Activity.ActivityID == 26) {
+        rapFactory.GetAppealInfoForView(caseinfo.C_ID).then(function (response) {
+            if(!alert.checkResponse(response)) {
+                return;
         }
-        else if (activity.Activity.ActivityID == 27) {
+    self.caseinfo = response.data;
+    rapGlobalFactory.CaseDetails = self.caseinfo;
+                rapGlobalFactory.FromSelectedCase = true;
+            $location.path("/ViewAppeal");
+    });
+    }
+    else if (activity.Activity.ActivityID == 27) {
             rapFactory.GetTenantResponseViewInfo(caseinfo.C_ID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
             self.caseinfo = response.data;
-        rapGlobalFactory.CaseDetails = self.caseinfo;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
             rapGlobalFactory.FromSelectedCase = true;
-        $location.path("/ViewTenantResponse");
+            $location.path("/ViewTenantResponse");
         });
-}
+            }
+            else if (activity.Status.StatusID == 2) {
+            rapFactory.GetTenantResponseViewInfo(caseinfo.C_ID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo = response.data;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+            rapGlobalFactory.FromSelectedCase = true;
+            $location.path("/ViewTenantResponse");
+        });
+    }
 
 }
 

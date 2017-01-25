@@ -135,12 +135,12 @@ namespace RAP.Business.Implementation
            }
        }
 
-       public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id)
+       public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID)
        {
            ReturnResult<bool> result = new ReturnResult<bool>();
            try
            {
-               result = _dbHandler.SaveCustomEmailNotification(message, employeeID, c_id);
+               result = _dbHandler.SaveCustomEmailNotification(message, employeeID, c_id, activityID);
                return result;
            }
            catch (Exception ex)

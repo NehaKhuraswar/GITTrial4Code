@@ -244,7 +244,7 @@ namespace RAP.Business.Implementation
                         }
                     }
                     cMail.Message.Attachments = _documents;
-                    var notifiacationResult = _commonService.SaveCustomEmailNotification(cMail.Message, cMail.CityUserID, cMail.C_ID);
+                    var notifiacationResult = _commonService.SaveCustomEmailNotification(cMail.Message, cMail.CityUserID, cMail.C_ID, cMail.ActivityID);
                     if(notifiacationResult.status.Status != StatusEnum.Success)
                     {
                         result.result = false;

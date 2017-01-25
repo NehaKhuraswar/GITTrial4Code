@@ -752,7 +752,7 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id)
+        public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -776,6 +776,7 @@ namespace RAP.DAL
                         notification.CreatedDate = DateTime.Now;
                         notification.CreatedBy = employeeID;
                         notification.C_ID = c_id;
+                        notification.ActivityID = activityID;
 
                         db.CustomEmailNotifications.InsertOnSubmit(notification);
                         db.SubmitChanges();

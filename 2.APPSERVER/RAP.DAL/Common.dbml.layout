@@ -46,25 +46,12 @@
         <classShapeMoniker Id="c9e5cddc-2289-4765-9b08-dfee17208044" />
       </nodes>
     </associationConnector>
-    <classShape Id="f824845e-a5eb-4801-9431-c240f2cf81b5" absoluteBounds="0.75, 8.5, 2, 2.5401025390625">
-      <DataClassMoniker Name="/CommonDataContext/CustomEmailNotification" />
-      <nestedChildShapes>
-        <elementListCompartment Id="3b6ac298-eb54-4784-b122-00c0d3a9ca9a" absoluteBounds="0.76500000000000012, 8.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" absoluteBounds="0.75, 11.75, 2, 1.3862939453125">
       <DataClassMoniker Name="/CommonDataContext/CustomEmailNotificationAttachment" />
       <nestedChildShapes>
         <elementListCompartment Id="833ffc1d-8b55-4f8b-97c2-d1656edf77b2" absoluteBounds="0.76500000000000012, 12.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.75 : 11.0401025390625); (1.75 : 11.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/CommonDataContext/CustomEmailNotification/CustomEmailNotification_CustomEmailNotificationAttachment" />
-      <nodes>
-        <classShapeMoniker Id="f824845e-a5eb-4801-9431-c240f2cf81b5" />
-        <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
-      </nodes>
-    </associationConnector>
     <classShape Id="726f55ff-8db0-43dd-9cd4-47983102e46f" absoluteBounds="4.125, 12.625, 2, 1.3862939453125">
       <DataClassMoniker Name="/CommonDataContext/MailNotificationAttachment" />
       <nestedChildShapes>
@@ -90,7 +77,7 @@
         <elementListCompartment Id="03a367c5-6f6f-4a42-9e27-ab5abffee8d7" absoluteBounds="2.015, 4.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.00153746153846 : 7.3670068359375); (1.62653746153846 : 7.7420068359375); (0.375 : 7.7420068359375); (0.375 : 11.375); (0.75 : 11.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.375 : 7.3670068359375); (2.375 : 11.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CommonDataContext/Document/Document_CustomEmailNotificationAttachment" />
       <nodes>
         <classShapeMoniker Id="5fa5efcb-6c2b-474d-8434-03c63148e02a" />
@@ -102,6 +89,19 @@
       <nodes>
         <classShapeMoniker Id="5fa5efcb-6c2b-474d-8434-03c63148e02a" />
         <classShapeMoniker Id="726f55ff-8db0-43dd-9cd4-47983102e46f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="79e3c880-3203-40e0-acb1-e0d4d11f9c2c" absoluteBounds="7.375, 8.75, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/CommonDataContext/CustomEmailNotification" />
+      <nestedChildShapes>
+        <elementListCompartment Id="da09436b-f517-4d6d-bd3c-4dc4e6bdce4f" absoluteBounds="7.39, 9.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.375 : 9.47199625651042); (3.08333333333333 : 9.47199625651042 : JumpStart); (2.91666666666667 : 9.47199625651042 : JumpEnd); (2.45833333333333 : 9.47199625651042 : JumpStart); (2.29166666666667 : 9.47199625651042 : JumpEnd); (1.5312475 : 9.47199625651042); (1.5312475 : 11.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CommonDataContext/CustomEmailNotification/CustomEmailNotification_CustomEmailNotificationAttachment" />
+      <nodes>
+        <classShapeMoniker Id="79e3c880-3203-40e0-acb1-e0d4d11f9c2c" />
+        <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
