@@ -139,8 +139,9 @@ namespace RAP.Core.DataModels
         }
         public List<string> Recipients { get; set; }
         public EmailM Message { get; set; }
-        public int EmployeeID { get; set; }
+        public int CityUserID { get; set; }
         public int C_ID { get; set; }
+        public int ActivityID { get; set; }    
     }
     //public class CaseStatusActivity_M
     //{

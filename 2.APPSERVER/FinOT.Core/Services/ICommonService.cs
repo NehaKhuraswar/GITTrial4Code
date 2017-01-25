@@ -15,5 +15,6 @@ namespace RAP.Core.Services
         ReturnResult<APNAddress> UpdateAPNAddress(APNAddress apnAddress);
         ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id);
         ReturnResult<bool> SaveMailNotification(MailM message);
+        ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID);
     }
 }

@@ -37,10 +37,10 @@
                             <div class="field-group">
                                 <label for="notification_type">Notification type</label>
                                 <div>                                   
+                                 
                                     <select name="activity" id="activity" data-placeholder="Select type"
-                                            ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
-                                            ng-model="Ctrl.model.Message.Subject"
-                                            ng-options="activity.ActivityDesc as activity.ActivityDesc for activity in Ctrl.ActivityList"></select>
+                                            ng-model="Ctrl.SelectedActivity"
+                                            ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID"></select>
                                 </div>
                             </div>
 

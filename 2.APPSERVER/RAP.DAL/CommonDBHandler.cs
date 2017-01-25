@@ -427,6 +427,37 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (DashboardDataContext db = new DashboardDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]))
+                {
+                    string errorMessage = "";
+                    int? errorCode = 0;
+                    //TBD
+                    int returnCode = db.USP_NewActivityStatus_Save(ActivityID, (int)StatusDefaults.NotificationSent,
+                                     C_ID, "", DateTime.Now, SentBy, 1, ref errorMessage, ref errorCode);
+
+                    if (errorCode != 0)
+                    {
+                        result.result = false;
+                        result.status = new OperationStatus() { Status = StatusEnum.DatabaseMessage, StatusMessage = errorMessage };
+                        return result;
+                    }
+                }
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
         public ReturnResult<List<DocumentM>> GetDocuments(int CustmerID, bool isPetitiofiled, string docTitle = null)
         {
             ReturnResult<List<DocumentM>> result = new ReturnResult<List<DocumentM>>();

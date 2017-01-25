@@ -15,6 +15,7 @@
     self.Home = function () {
         $location.path("/staffdashboard");
     }
+    self.SelectedActivity = null;
     self.TenantEmail = null;
     self.OwnerEmail = null;
     self.ThirdPartyEmail = null;
@@ -56,10 +57,6 @@
     }
 
         
-
-    
-  
-  
     rapFactory.GetCustomEmail(self.c_id).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         self.model = response.data;
@@ -118,6 +115,7 @@
     self.Submit = function () {
         self.model.C_ID = self.c_id;
         self.model.CityUserID = self.custDetails.UserID;
+        var obj = self.SelectedActivity;
         if (self.bTenant)
         {
             self.model.Message.RecipientAddress.push(self.TenantEmail);
@@ -130,7 +128,9 @@
         {
             self.model.Message.RecipientAddress.push(self.ThirdPartyEmail);
         }
-
+        self.model.Message.Subject = self.SelectedActivity.ActivityDesc;
+        self.model.ActivityID = self.SelectedActivity.ActivityID;
+  
         rapFactory.SubmitCustomEmail(self.model).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             if (response.data) {
