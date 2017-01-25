@@ -36,6 +36,7 @@ var rapAppealTypeController = ['$scope', '$modal', 'alertService', 'rapappealtyp
     self.ContinueToImportantInformation = function () {
         $scope.model.bAppealType = false;
         $scope.model.bImpInfoAppeal = true;
+        $scope.model.AppealSubmissionStatus.AppealType = true;
         
     }
 }];
