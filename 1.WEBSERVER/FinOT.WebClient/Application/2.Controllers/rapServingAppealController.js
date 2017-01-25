@@ -53,16 +53,20 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     //self.OpposingParty = angular.copy(self.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo);
 
     self.AddAnotherOpposingParty = function (model) {
-        var _opposingParty= angular.copy(model);
-        self.serveAppeal.OpposingParty.push(_opposingParty);
-        model.FirstName = "";
-        model.LastName = "";
-        model.AddressLine1 = "";
-        model.AddressLine2 = "";
-        model.City = "";
-        model.State = null;
-        model.Zip = 0;
+        if (model.FirstName != "" && model.LastName != "" && model.AddressLine1 != ""
+            && model.AddressLine2 != "" && model.City != ""
+            && model.State != null && model.Zip != null) {
+            var _opposingParty = angular.copy(model);
+            self.serveAppeal.OpposingParty.push(_opposingParty);
 
+            model.FirstName = "";
+            model.LastName = "";
+            model.AddressLine1 = "";
+            model.AddressLine2 = "";
+            model.City = "";
+            model.State = null;
+            model.Zip = null;
+        }
         }
 
    
