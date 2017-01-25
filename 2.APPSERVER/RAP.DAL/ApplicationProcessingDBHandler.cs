@@ -1977,7 +1977,7 @@ namespace RAP.DAL
                     _dbContext.SubmitChanges();
                 }
 
-                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.AppealFiled);
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.AppealFiled, (int)StatusDefaults.StatusSubmitted);
 
                 var AppealDB = _dbContext.TenantAppealDetails.Where(x => x.AppealID == caseInfo.TenantAppealInfo.AppealID).FirstOrDefault();
                 if (AppealDB != null)
@@ -2162,7 +2162,8 @@ namespace RAP.DAL
                 _dbContext.SubmitChanges();
                 caseInfo.CaseID = caseid;
 
-                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ActivityPetitionFiled);
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ActivityPetitionFiled, (int)StatusDefaults.StatusSubmitted);
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.AdditionalDocumentation, (int)StatusDefaults.InProcess);
 
                 //using (DashboardDataContext db = new DashboardDataContext(ConfigurationManager.AppSettings["RAPDBConnectionString"]))
                 //{
@@ -4085,7 +4086,7 @@ namespace RAP.DAL
                     ResponseDB.IsSubmitted = true;
                     _dbContext.SubmitChanges();
                 }
-                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ResponseFiled);
+                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ResponseFiled, (int)StatusDefaults.StatusSubmitted);
                 var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
                                             .Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
                 if (PageStatus != null)
@@ -5017,7 +5018,8 @@ namespace RAP.DAL
                 _dbContext.SubmitChanges();
                 model.CaseID = caseid;
 
-                _commondbHandler.PetitionFiledActivity(model.C_ID, model.CaseFileBy,(int)ActivityDefaults.ActivityPetitionFiled);
+                _commondbHandler.PetitionFiledActivity(model.C_ID, model.CaseFileBy, (int)ActivityDefaults.ActivityPetitionFiled, (int)StatusDefaults.StatusSubmitted);
+                _commondbHandler.PetitionFiledActivity(model.C_ID, model.CaseFileBy, (int)ActivityDefaults.AdditionalDocumentation, (int)StatusDefaults.InProcess);
 
                 var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == model.OwnerPetitionInfo.ApplicantInfo.OwnerPetitionApplicantInfoID).FirstOrDefault();
                 applicantInfo.bPetitionFiled = true;             
@@ -6216,7 +6218,7 @@ namespace RAP.DAL
                    _dbContext.SubmitChanges();
                }
 
-               _commondbHandler.PetitionFiledActivity(c_id, model.CustomerID, (int)ActivityDefaults.ResponseFiled);
+               _commondbHandler.PetitionFiledActivity(c_id, model.CustomerID, (int)ActivityDefaults.ResponseFiled, (int)StatusDefaults.StatusSubmitted);
                result.result = model;
                result.status = new OperationStatus() { Status = StatusEnum.Success };
                return result;

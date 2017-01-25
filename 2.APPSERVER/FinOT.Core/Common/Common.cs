@@ -63,12 +63,14 @@ namespace RAP.Core.Common
     {
         ActivityPetitionFiled = 1,
         AppealFiled = 26,
-        ResponseFiled = 27
+        ResponseFiled = 27,
+        AdditionalDocumentation = 24
     }
     public enum StatusDefaults
     {
         StatusSubmitted = 1,
-        NotificationSent = 2
+        NotificationSent = 2,
+        InProcess = 14
     }
     public enum CityUserRoles
     {

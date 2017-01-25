@@ -15,7 +15,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
         });
     }
     self.SubmitPetition = function () {
-        if (self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinName != true || Ctrl.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinNameMediation != true)
+        if (self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinName != true || self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinNameMediation != true)
         {
             self.Error = "Please acknowledge the consent to conduct business";
                 return;

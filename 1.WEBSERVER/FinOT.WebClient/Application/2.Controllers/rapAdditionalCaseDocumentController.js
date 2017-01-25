@@ -9,10 +9,20 @@
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     self.DocDescriptions = masterFactory.DocDescription();
     self.Home = function () {
-        $location.path("/staffdashboard");
+        if (self.customerDetails != null) {
+            $location.path("/publicdashboard");
+        }
+        else {
+            $location.path("/staffdashboard");
+        }
     }
     self.CaseClick = function () {
-        $location.path("/selectedcase");
+        if (self.customerDetails != null) {
+            $location.path("/publicdashboard");
+        }
+        else {
+            $location.path("/selectedcase");
+        }
     }
     masterFactory.DocDescription().then(function (response) {
         if (!alert.checkResponse(response)) { return; }

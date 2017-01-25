@@ -395,7 +395,7 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<bool> PetitionFiledActivity(int C_ID, int CaseFileBy, int ActivityID)
+        public ReturnResult<bool> PetitionFiledActivity(int C_ID, int CaseFileBy, int ActivityID, int StatusID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -405,7 +405,7 @@ namespace RAP.DAL
                     string errorMessage = "";
                     int? errorCode = 0;
                     //TBD
-                    int returnCode = db.USP_NewActivityStatus_Save(ActivityID, (int)StatusDefaults.StatusSubmitted,
+                    int returnCode = db.USP_NewActivityStatus_Save(ActivityID, StatusID, 
                                      C_ID, "", DateTime.Now, CaseFileBy, 3,  ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
