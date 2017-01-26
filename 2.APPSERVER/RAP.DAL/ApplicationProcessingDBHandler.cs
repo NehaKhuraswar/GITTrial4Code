@@ -4219,7 +4219,7 @@ namespace RAP.DAL
                     _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                     _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false; 
                     _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
-                    _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
+                    _applicantInfo.NumberOfUnits = applicantInfo.NumberOfUnits; 
                     _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                     _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0;
                     _applicantInfo.bPetitionFiled = applicantInfo.bPetitionFiled;
@@ -4568,7 +4568,10 @@ namespace RAP.DAL
                             applicantInfo.First().bBusinessLicensePaid = model.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid;
                             applicantInfo.First().BusinessLicenseNumber = model.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber;
                             applicantInfo.First().bRentAdjustmentProgramFeePaid = model.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
-                            applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
+                            if (model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
+                            {
+                                applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
+                            }
                             applicantInfo.First().NumberOfUnits = model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnits;
                             if (model.OwnerPetitionInfo.ApplicantInfo.NumberOfUnitsRangeID != 0)
                             {

@@ -6,11 +6,22 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.DocDescription = null;
     self.Error = "";
+    self.ShowDocs = false;
     rapFactory.GetRentIncreaseReasonInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
+        _ShowDocs();
     });
+
+    var _ShowDocs = function()
+    {
+        self.caseinfo.Documents.forEach(function (doc) {
+            if (doc.DocTitle == 'OP_Justification') {
+                self.ShowDocs = true;
+            }
+        });
+    }
 
     $scope.onFileSelected = function ($files,docTitle) {
         if ($files && $files.length) {
@@ -40,6 +51,7 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
                         }
                         self.caseinfo.Documents.push(document);
                         updateDescription();
+                        self.ShowDocs = true;
                     }
                 }
                
@@ -50,12 +62,12 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
     self.Delete = function (doc) {
         var index = self.caseinfo.Documents.indexOf(doc);
         self.caseinfo.Documents.splice(index, 1);
+        _ShowDocs();
     }
 
   
     self.Download = function (doc) {
         masterFactory.GetDocument(doc);
-
     }
 
     function updateDescription()
