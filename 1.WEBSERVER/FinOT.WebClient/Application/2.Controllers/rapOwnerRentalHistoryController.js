@@ -81,7 +81,12 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         self.Rent = self.caseinfo.OwnerPetitionRentalIncrementInfo;
         self.showUploadedFile = false;
     }
-
+    self.RemoveRecord = function (_rent) {
+        var index = self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.indexOf(_rent);
+        self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.splice(index, 1);
+        _rent.isDeleted = true;
+        self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(_rent);
+    }
     self.Continue = function () {
         if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length == 0) {
             self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(self.Rent);
