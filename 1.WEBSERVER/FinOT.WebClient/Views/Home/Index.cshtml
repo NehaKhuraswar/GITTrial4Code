@@ -41,7 +41,7 @@
                     <div class="navigation-wrapper">
                         <!-- Site Choose Language -->
                         <div class="site-language-wrapper toggle-nav-element">
-                            <div class="full-width">
+                            <div class="full-width" style="cursor: hand;cursor: pointer;">
                                 <select class="custom-select" id="choose-language" name="choose-language">
                                     <option value="">Choose language</option>
                                     <option value="">Option 1</option>
@@ -79,10 +79,10 @@
                         </div>
 
                         <div class="account-details-wrapper">
-                            <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout">Log out</a>
+                            <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout" style="cursor: hand;cursor: pointer;">Log out</a>
 
                             <ul class="account-details clearfix">
-                                <li class="search"><a  title="Search">Search</a></li>
+                                <li class="search"><a title="Search">Search</a></li>
                                 <li class="language"><a  title="Choose language" class="toggle-link" data-toggle="site-language-wrapper">Language</a></li>
                                 <li class="signedin" ng-show="Ctrl.UserName !=''"><a ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
                             </ul>
