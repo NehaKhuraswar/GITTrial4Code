@@ -13,8 +13,13 @@
                     <div class="field-group subhead no-top-margin">
                         <div class="form-group-checkbox vertical clearfix">
                             <label for="housing_services_decreased">
-                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" ng-value="true" /><i></i><span><strong>My housing services have decreased.</strong><a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rap_notice">Info</a></span>
+                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" ng-value="true" /><i></i><span><strong>My housing services have decreased.</strong>
+                                <a role="button" arai-label="Info" ng-click="NoticeToggle=!NoticeToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a></span>
                             </label>
+                            <div class="info-box-toggle" ng-show="NoticeToggle">
+                                <a ng-click="NoticeToggle=!NoticeToggle" class="btn-close"></a>
+                                <p>Housing Service Costs are expenses for services provided by the property owner. The costs are related to the use of a rental unit and also known as "operating expenses". The most recent two years of operating expenses are compared to determine if a rent increase is justified. The calculation in both years must provide a reasonable comparison of all expenses. If the increase is challenged by a tenant before the Rent Program, evidence is required to prove each of the claimed expenses.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -42,7 +47,12 @@
                         <div ng-if="item.IsDeleted == false">
                             <div class="field-group filled-info subhead no-top-margin">
                                 <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">What is the estimated dollar value of the lost service or problem?<a href="#info" class="icon-info" data-toggle="tooltip" data-tooltip-id="rh_rap_notice">Info</a></div></div>
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">What is the estimated dollar value of the lost service or problem? </div> </div>
+                                   
+                                    <!--<div class="info-box-toggle" ng-show="NoticeToggle">
+                                        <a ng-click="NoticeToggle=!NoticeToggle" class="btn-close"></a>
+                                        <p>k</p>
+                                    </div>-->
                                     <div class="col-sm-6 col-xs-12">{{item.EstimatedLoss}}</div>
                                 </div>
                             </div><!-- .field-group -->
