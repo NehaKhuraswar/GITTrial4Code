@@ -57,7 +57,7 @@
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_state">State</label>
                         <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                        <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
+                        <select name="Applicant_state" id="Applicant_state" data-placeholder="Select" class="custom-select"
                                 ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State"
                                 ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                     </div>

@@ -56,7 +56,7 @@
                         <div class="field-group">
                             <label for="Applicant_state">State</label>
                             <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                            <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
+                            <select name="Applicant_state" id="Applicant_state" data-placeholder="Select" class="custom-select"
                                     ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.State"
                                     ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                         </div>
@@ -146,7 +146,7 @@
 
                             <div class="field-group">
                                 <label for="representative_state">State</label>
-                                <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
+                                <select name="Applicant_state" id="Applicant_state" data-placeholder="Select" class="custom-select"
                                         ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.State"
                                         ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
                             </div>
@@ -295,21 +295,21 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month"
-                                            data-placeholder="Month"
+                                            data-placeholder="Month" class="custom-select"
                                             ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day"
-                                            data-placeholder="Day"
+                                            data-placeholder="Day" class="custom-select"
                                             ng-options="day for day in  Ctrl.Calender.Days"></select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year"
-                                            data-placeholder="Year"
+                                            data-placeholder="Year" class="custom-select"
                                             ng-options="year for year in  Ctrl.Calender.Years"></select>
                                 </div>
                             </div>
@@ -322,7 +322,7 @@
                     </div>
                     <div class="field-group">
                         <label for="pi_approx_units">If you don’t know the exact number of units in your building, please select an approximate range:</label>
-                        <select name="pi_approx_units" id="pi_approx_units" data-placeholder="Select range"
+                        <select name="pi_approx_units" id="pi_approx_units" data-placeholder="Select range" class="custom-select"
                                 ng-model=" Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID"
                                 ng-options="range.RangeID as range.RangeDesc for range in Ctrl.caseinfo.NumberOfUnitsRange">
                             <option value="" selected>Select range</option>

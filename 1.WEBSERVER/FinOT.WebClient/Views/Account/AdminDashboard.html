@@ -45,8 +45,11 @@
                                     <div class="field-group">
                                         <label for="account_type" class="input-label">Account type</label>
                                         <div class="full-width">
-                                            <dropdown placeholder="Account Type" list="Ctrl.AccountTypesList" property="AccountTypeDesc"
-                                                      selected="Ctrl.AccountSearchModel.AccountType"></dropdown>
+                                            <select name="account_type" id="account_type" class="custom-select" data-placeholder="Account Type"
+                                                    ng-model="Ctrl.AccountSearchModel.AccountType"
+                                                    ng-options="accounttype as (state.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID" required>
+                                                <option value="" selected>Select account type</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

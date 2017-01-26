@@ -40,7 +40,11 @@
                                     <div class="col-md-9 col-sm-12">
                                         <label for="activity">Activity</label>
                                         <div class="full-width">
-                                            <dropdown placeholder="Activities" list="Ctrl.ActivityList" property="ActivityDesc" selected="Ctrl.ActivityStatus.Activity"></dropdown>
+                                            <select name="activity" id="{{activity.ActivityID}}" class="custom-select" data-placeholder="Activity"
+                                                    ng-model="Ctrl.ActivityStatus.Activity"
+                                                    ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID" required>
+                                                <option value="" selected>Select activity</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +54,11 @@
                                     <div class="col-md-9 col-sm-12">
                                         <label for="{{status.StatusID}}">Status</label>
                                         <div class="full-width">
-                                            <dropdown placeholder="Status" list="Ctrl.StatusList" property="StatusDesc" selected="Ctrl.ActivityStatus.Status"></dropdown>
+                                            <select name="activity" id="{{status.StatusID}}" class="custom-select" data-placeholder="status"
+                                                    ng-model="Ctrl.ActivityStatus.Status"
+                                                    ng-options="status as (status.StatusDesc) for status in Ctrl.StatusList track by status.StatusID" required>
+                                                <option value="" selected>Select status </option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

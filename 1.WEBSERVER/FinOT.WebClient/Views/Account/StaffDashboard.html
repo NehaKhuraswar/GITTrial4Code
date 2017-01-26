@@ -83,8 +83,11 @@
 
                                                 <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                                     <div>
-                                                        <dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName"
-                                                                  selected="Analyst"></dropdown>
+                                                        <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
+                                                                ng-model="Analyst" 
+                                                                ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID">
+                                                            <option value="" selected>Select analyst</option>
+                                                        </select>                                                        
                                                         <!--<select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
                                                                 ng-model="Analyst"
                                                                 ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
@@ -103,12 +106,12 @@
                                                 </div>
 
                                                 <div class="item-col col-42 pad-l10 align-left" ><!--ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">-->
-                                                    <div>
-                                                        <dropdown placeholder="Select analyst" list="Ctrl.HearingOfficers" property="FirstName"
-                                                                  selected="HearingOfficer"></dropdown>
-                                                        <!--<select name="hearing" id="hearing" class="custom-select" data-placeholder="Select Hearing Officer"
+                                                    <div>                                                        
+                                                        <select name="hearing" id="hearing" class="custom-select" data-placeholder="Select Hearing Officer"
                                                                 ng-model="HearingOfficer"
-                                                                ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>-->
+                                                                ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID">
+                                                            <option value="" selected>Select hearing officer</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -141,7 +144,7 @@
                                     <label for="case-status" class="small-title">Case status</label>
                                     <div class="full-width">
                                         <!--<dropdown placeholder="Case Status" list="Ctrl.CaseStatusList" property="StatusName" selected="Ctrl.CaseSearchModel.CaseStatus"></dropdown>-->
-                                        <select name="case-status" id="case-status" class="form-control  input-sm" ng-model="Ctrl.CaseSearchModel.CaseStatus" data-placeholder="Select case status">
+                                        <select name="case-status" id="case-status" class="custom-select" ng-model="Ctrl.CaseSearchModel.CaseStatus" data-placeholder="Select case status">
                                             <option value="1">All</option>
                                             <option value="2">Open</option>
                                             <option value="3">Closed</option>
@@ -226,10 +229,12 @@
                                     <div class="field-group">
                                         <label for="analyst" class="small-title">Analyst</label>
                                         <div class="full-width">
-                                            <dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName" selected="Ctrl.CaseSearchModel.Analyst"></dropdown>                                       
-                                            <!--<select name="analyst" id="analyst" data-placeholder="Select analyst"
+                                            <!--<dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName" selected="Ctrl.CaseSearchModel.Analyst"></dropdown>-->                                       
+                                            <select name="analyst" id="analyst" data-placeholder="Select analyst" class="custom-select"
                                                     ng-model="Ctrl.CaseSearchModel.Analyst"
-                                                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
+                                                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID">
+                                                <option value="" selected>Select analyst</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -238,10 +243,12 @@
                                     <div class="field-group">
                                         <label for="hearing_officer" class="small-title">Hearing officer</label>
                                         <div class="full-width">
-                                            <dropdown placeholder="Select hearing officer" list="Ctrl.HearingOfficers" property="FirstName" selected="Ctrl.CaseSearchModel.HearingOfficer"></dropdown>                                       
-                                            <!--<select name="hearing_officer" id="hearing_officer" data-placeholder="Select Hearing Officer"
-                                                    ng-model="Ctrl.CaseSearchModel.HearingOfficer"
-                                                    ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>-->
+                                            <!--<dropdown placeholder="Select hearing officer" list="Ctrl.HearingOfficers" property="FirstName" selected="Ctrl.CaseSearchModel.HearingOfficer"></dropdown>-->                                       
+                                            <select name="hearing_officer" id="hearing_officer" data-placeholder="Select Hearing Officer"
+                                                    ng-model="Ctrl.CaseSearchModel.HearingOfficer" class="custom-select"
+                                                    ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID">
+                                                <option value="" selected>Select hearing officer</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -312,11 +319,13 @@
 
                                         <div class="item-col col-42 pad-l10 align-left">
                                             <div>
-                                                <dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName"
-                                                          selected="AnalystSearch"></dropdown>
-                                                <!--<select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
-                    ng-model="Analyst"
-                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
+                                                <!--<dropdown placeholder="Select analyst" list="Ctrl.Analysts" property="FirstName"
+                                                          selected="AnalystSearch"></dropdown>-->
+                                                <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
+                                                        ng-model="AnalystSearch"
+                                                        ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID">
+                                                    <option value="" selected>Select analyst</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -333,8 +342,14 @@
                                         </div>
                                         <div class="item-col col-42 pad-l10 align-left">
                                             <div>
-                                                <dropdown placeholder="Select Hearing Officer" list="Ctrl.HearingOfficers" property="FirstName"
-                                                          selected="HearingOfficerSearch"></dropdown>
+                                                <select name="searchHearingOfficer" id="searchHearingOfficer" class="custom-select"
+                                                        data-placeholder="Select Hearing Officer"
+                                                        ng-model="HearingOfficerSearch"
+                                                        ng-options="hearingofficer as (hearingofficer.FirstName + ' ' + hearingofficer.LastName) for hearingofficer inCtrl.HearingOfficers track by hearingofficer.UserID">
+                                                    <option value="" selected>Select analyst</option>
+                                                </select>
+                                                <!--<dropdown placeholder="Select Hearing Officer" list="Ctrl.HearingOfficers" property="FirstName"
+                                                          selected="HearingOfficerSearch"></dropdown>-->
                                              </div>
                                         </div>
 

@@ -8,7 +8,7 @@
 
                 <div class="field-group">
                     <label for="account_types">Account types</label>
-                    <select class="form-control"
+                    <select class="custom-select"
                             ng-model="Ctrl.AccountSearchModel.AccountType"
                             ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID"
                             required>

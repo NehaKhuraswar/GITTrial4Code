@@ -58,7 +58,7 @@
                                 <label for="residential_state">State</label>
                                 <div class="input-wrapper">
                                     <select name="residential_state" id="residential_state" data-placeholder="Select"
-                                            ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.State"
+                                            ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.State" class="custom-select"
                                             ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
                                         <option value="" selected>Select state</option>
                                     </select>

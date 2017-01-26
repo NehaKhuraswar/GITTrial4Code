@@ -33,21 +33,21 @@
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <select ng-model="Ctrl.TenantAppealInfo.AppealDate.Month"
-                                               data-placeholder="Month"
+                                                data-placeholder="Month" class="custom-select"
                                                 ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <select ng-model="Ctrl.TenantAppealInfo.AppealDate.Day"
-                                                data-placeholder="Day"
+                                                data-placeholder="Day" class="custom-select"
                                                 ng-options="day for day in  Ctrl.Calender.Days"></select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
                                     <div class="field-group">
                                         <select ng-model="Ctrl.TenantAppealInfo.AppealDate.Year"
-                                                data-placeholder="Year"
+                                                data-placeholder="Year" class="custom-select"
                                                 ng-options="year for year in  Ctrl.Calender.Years"></select>
                                     </div>
                                 </div>
@@ -97,11 +97,15 @@
                         </div>
 
                         <div class="field-group">
-                            <label for="Applicant_state">State</label>
-                            <div class="row">
-                                <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                          selected="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"></dropdown>
-                            </div>
+                            <label for="Applicant_state">State</label>                            
+                            <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                                    ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                <option value="" selected>Select state</option>
+                            </select>
+                                <!--<dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
+                                          selected="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"></dropdown>-->
+                            
                         </div>
 
                         <div class="field-group">
@@ -164,10 +168,14 @@
 
                         <div class="field-group">
                             <label for="representative_state">State</label>
-                            <div class="row">
-                                <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                          selected="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State"></dropdown>
-                            </div>
+                            
+                                <select name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
+                                        ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State"
+                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                    <option value="" selected>Select state</option>
+                                </select>
+                                
+                            
                         </div>
 
                         <div class="field-group">

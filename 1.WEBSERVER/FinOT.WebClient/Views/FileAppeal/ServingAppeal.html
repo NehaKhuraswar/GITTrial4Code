@@ -78,21 +78,21 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.serveAppeal.PenaltyDate.Month"
-                                            data-placeholder="Month"
+                                            data-placeholder="Month" class="custom-select"
                                             ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.serveAppeal.PenaltyDate.Day"
-                                            data-placeholder="Day"
+                                            data-placeholder="Day" class="custom-select"
                                             ng-options="day for day in  Ctrl.Calender.Days"></select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.serveAppeal.PenaltyDate.Year"
-                                            data-placeholder="Year"
+                                            data-placeholder="Year" class="custom-select"
                                             ng-options="year for year in  Ctrl.Calender.Years"></select>
                                 </div>
                             </div>
@@ -143,10 +143,13 @@
                 </div>
 
                 <div class="field-group">
-                    <label for="Applicant_state">State</label>
+                    <label for="opposing_state">State</label>
                     <div class="row">
-                        <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                  selected="Ctrl.OpposingParty.State"></dropdown>
+                        <select name="opposing_state" id="opposing_state" class="custom-select" data-placeholder="Select"
+                                ng-model="Ctrl.OpposingParty.State"
+                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                            <option value="" selected>Select state</option>
+                        </select>
                     </div>
                 </div>
 

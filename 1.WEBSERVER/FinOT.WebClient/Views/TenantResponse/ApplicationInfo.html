@@ -76,11 +76,15 @@
                             </div>
 
                             <div class="field-group">
-                                <label for="Applicant_state">State</label>
-                                <div class="row">
-                                    <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                              selected="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State"></dropdown>
-                                </div>
+                                <label for="Applicant_state">State</label>                               
+                                <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                                        ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State" 
+                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                    <option value="" selected>Select state</option>
+                                </select>
+                                    <!--<dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
+                                              selected="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State"></dropdown>-->
+                                
                             </div>
 
                             <div class="field-group">
@@ -151,8 +155,11 @@
 
                             <div class="field-group">
                                 <label for="representative_state">State</label>
-                                <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                          selected="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State"></dropdown>
+                                <select name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
+                                        ng-model="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State"
+                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                    <option value="" selected>Select state</option>
+                                </select>
                             </div>
 
                             <div class="field-group">
@@ -222,8 +229,11 @@
 
                         <div class="field-group">
                             <label for="owner_state">State</label>
-                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                      selected="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.State"></dropdown>
+                            <select name="owner_state" id="owner_state" class="custom-select" data-placeholder="Select"
+                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.State"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                <option value="" selected>Select state</option>
+                            </select>
                         </div>
 
                         <div class="field-group">
@@ -317,8 +327,13 @@
 
                         <div class="field-group">
                             <label for="pm_state">State</label>
-                            <dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                      selected="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.State"></dropdown>
+                            <select name="pm_state" id="pm_state" class="custom-select" data-placeholder="Select"
+                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.State"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                <option value="" selected>Select state</option>
+                            </select>
+                            <!--<dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
+                                      selected="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.State"></dropdown>-->
                         </div>
 
                         <div class="field-group">
