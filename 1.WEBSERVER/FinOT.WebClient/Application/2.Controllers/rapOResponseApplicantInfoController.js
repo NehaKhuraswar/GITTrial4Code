@@ -20,6 +20,9 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
     _GetStateList();
     self.caseinfo.CaseFileBy = self.custDetails.custID;
     
+    self.EditThirdParty = function () {
+        $location.path("/Representative");
+    }
     rapFactory.GetApplicationInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;

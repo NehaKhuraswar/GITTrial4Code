@@ -112,7 +112,9 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         $location.path("/editcustomerinformation");
     }
 
-
+    self.EditThirdParty = function () {
+        $location.path("/Representative");
+    }
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {

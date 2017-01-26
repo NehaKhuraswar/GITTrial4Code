@@ -80,8 +80,8 @@
 
                     <div class="subhead">
                         <h4>Your representative</h4>
-                        <a ng-click="" role="button" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
-                        <a ng-click="" role="button" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
+                        <a ng-click="Ctrl.EditThirdParty()" role="button" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
+                        <a ng-click="Ctrl.EditThirdParty()" role="button" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
 
                     </div>
 
