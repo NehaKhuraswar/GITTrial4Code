@@ -658,8 +658,8 @@ namespace RAP.API.Controllers
         public HttpResponseMessage SubmitCustomEmail([FromBody] CustomEmailM documents)
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<bool> transaction = new TranInfo<bool>();
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            TranInfo<CustomEmailM> transaction = new TranInfo<CustomEmailM>();
+            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
             try
             {
                 var dbResult = _service.SubmitCustomEmail(documents);
@@ -682,7 +682,7 @@ namespace RAP.API.Controllers
                 result.status = _eHandler.HandleException(ex);
                 _commonService.LogError(result.status);
             }
-            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<CustomEmailM>>(ReturnCode, transaction);
         }
 
         [AllowAnonymous]

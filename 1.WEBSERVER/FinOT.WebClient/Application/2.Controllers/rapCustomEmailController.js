@@ -117,7 +117,7 @@
     self.Submit = function () {
         self.model.C_ID = self.c_id;
         self.model.CityUserID = self.custDetails.UserID;
-        var obj = self.SelectedActivity;
+        self.model.SentBy = self.custDetails.FirstName + ' ' + self.custDetails.LastName;       
         if (self.bTenant)
         {
             self.model.Message.RecipientAddress.push(self.TenantEmail);
@@ -134,11 +134,9 @@
         self.model.ActivityID = self.SelectedActivity.ActivityID;
   
         rapFactory.SubmitCustomEmail(self.model).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
-            if (response.data) {
-                rapGlobalFactory.Notification = self.model;              
-                $location.path("/emailnotificationsent");
-            }
+            if (!alert.checkResponse(response)) { return; }           
+                rapGlobalFactory.Notification = response.data;
+                $location.path("/emailnotificationsent");            
         });   
     }
 

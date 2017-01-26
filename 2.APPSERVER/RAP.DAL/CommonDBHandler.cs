@@ -817,7 +817,7 @@ namespace RAP.DAL
 
         }
 
-        public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID)
+        public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int cityUserID, int c_id, int activityID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -839,7 +839,7 @@ namespace RAP.DAL
                             notification.BCC = message.BCC;
                         }
                         notification.CreatedDate = DateTime.Now;
-                        notification.CreatedBy = employeeID;
+                        notification.CreatedBy = cityUserID;
                         notification.C_ID = c_id;
                         notification.ActivityID = activityID;
 

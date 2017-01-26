@@ -37,7 +37,7 @@
                                         <div ng-repeat="item in Ctrl.model.Message.RecipientAddress">
                                             <p><strong> {{item}} </strong><br /></p>
                                         </div>                                       
-                                       <p>at <strong> {{Ctrl.Date}} </strong></p>
+                                       <p>at <strong> {{Ctrl.Date| date }}</strong></p>
                                     </div>
                                 </div>
                             </div>

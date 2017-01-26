@@ -236,14 +236,14 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<bool> SubmitCustomEmail(CustomEmailM cMail)
+      public ReturnResult<CustomEmailM> SubmitCustomEmail(CustomEmailM cMail)
         {
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
             List<DocumentM> _documents = new List<DocumentM>();
             try
             {
-                result = _emailService.SendEmail(cMail.Message);
-                if (result.status.Status == StatusEnum.Success)
+                var  notificationResult = _emailService.SendEmail(cMail.Message);
+                if (notificationResult.status.Status == StatusEnum.Success)
                 {
                     if (cMail.Message.Attachments != null && cMail.Message.Attachments.Any())
                     {
@@ -261,11 +261,13 @@ namespace RAP.Business.Implementation
                     var notifiacationResult = _commonService.SaveCustomEmailNotification(cMail.Message, cMail.CityUserID, cMail.C_ID, cMail.ActivityID);
                     if(notifiacationResult.status.Status != StatusEnum.Success)
                     {
-                        result.result = false;
-                        result.status = notifiacationResult.status;                       
+                       result.status = notifiacationResult.status;
+                       return result;
                     }
                     _commonService.MailSentActivity(cMail.C_ID, cMail.CityUserID, cMail.ActivityID);
-                    result.result = true;
+                    cMail.CreatedDate = DateTime.Now.Date;
+
+                    result.result = cMail;
                     result.status = new OperationStatus() { Status = StatusEnum.Success };
                 }
 
