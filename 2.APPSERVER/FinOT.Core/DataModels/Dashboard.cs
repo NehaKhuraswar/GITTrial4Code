@@ -141,7 +141,9 @@ namespace RAP.Core.DataModels
         public EmailM Message { get; set; }
         public int CityUserID { get; set; }
         public int C_ID { get; set; }
-        public int ActivityID { get; set; }    
+        public int ActivityID { get; set; }  
+        public DateTime CreatedDate { get; set; }
+        public int NotificationID { get; set; }
     }
     //public class CaseStatusActivity_M
     //{

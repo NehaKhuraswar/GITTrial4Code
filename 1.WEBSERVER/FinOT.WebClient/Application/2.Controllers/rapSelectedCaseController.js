@@ -157,14 +157,13 @@ self.ViewPage = function (activity, caseinfo) {
         });
             }
             else if (activity.Status.StatusID == 2) {
-            rapFactory.GetTenantResponseViewInfo(caseinfo.C_ID).then(function (response) {
+                rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
-            self.caseinfo = response.data;
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-            rapGlobalFactory.FromSelectedCase = true;
-            $location.path("/ViewTenantResponse");
+            rapGlobalFactory.Notification = response.data;
+            $location.path("/emailnotificationsent");
+            
         });
     }
 

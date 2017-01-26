@@ -24,5 +24,6 @@ namespace RAP.DAL
        ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID);
        ReturnResult<bool> SaveMailNotification(MailM message);
        ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID);
+       ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID);
     }
 }

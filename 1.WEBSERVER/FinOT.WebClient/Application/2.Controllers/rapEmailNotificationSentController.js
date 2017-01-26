@@ -26,7 +26,9 @@
         today = mm + '-' + dd + '-' + yyyy;
         return today;
     }
-    self.Date = _date();
+    if (!(self.model.CreatedDate == null || self.model.CreatedDate == undefined)) {
+        self.Date = self.model.CreatedDate;
+    }
     self.SentBy = rapGlobalFactory.CityUser.FirstName + ' ' + rapGlobalFactory.CityUser.LastName;
     self.BackToCase = function () {
         rapGlobalFactory.Notification = null;

@@ -221,7 +221,21 @@ namespace RAP.Business.Implementation
             result.status = new OperationStatus() { Status = StatusEnum.Success };
             return result;
         }
-
+      public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID)
+        {
+            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
+            try
+            {
+                result = _commonService.GetCustomEmailNotification(c_id, ActivityID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         public ReturnResult<bool> SubmitCustomEmail(CustomEmailM cMail)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();

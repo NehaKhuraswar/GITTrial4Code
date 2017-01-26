@@ -378,6 +378,38 @@ namespace RAP.WebClient
                 return responseMessage;
             }
         }
+
+        [AllowAnonymous]
+        [Route("GetCustomEmailNotification/{cid}/{activityid}")]
+        [HttpGet]
+        public HttpResponseMessage GetCustomEmailNotification(string cid, string activityid)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetCustomEmailNotification/" + cid + "/" + activityid;
+                responseMessage = client.GetAsync(requestUri).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
         #endregion
 
         #region "POST REQUEST"

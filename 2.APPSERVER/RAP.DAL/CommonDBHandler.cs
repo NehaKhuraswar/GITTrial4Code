@@ -752,6 +752,60 @@ namespace RAP.DAL
             }
         }
 
+
+        public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID)
+        {
+            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
+            CustomEmailM model = new CustomEmailM();
+
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    var notification = db.CustomEmailNotifications.Where(r => r.C_ID == c_id && r.ActivityID == ActivityID).FirstOrDefault();
+                    if (notification != null)
+                    {
+                        model.ActivityID = ActivityID;
+                        model.C_ID = c_id;
+                        model.Recipients = notification.Recipient.Split(',').Select(r => r.ToString()).ToList();
+                        model.Message.MessageBody = notification.MessageBody;
+                        model.CreatedDate = Convert.ToDateTime(notification.CreatedDate);
+
+                        var attachments = db.CustomEmailNotificationAttachments.Where(r => r.NotificationID == notification.NotificationID);
+                        if (attachments.Any())
+                        {
+                            foreach (var item in attachments)
+                            {
+                                var doc = db.Documents.Where(r => r.DocID == item.DocumentID).FirstOrDefault();
+                                if (doc != null)
+                                {
+                                    DocumentM attachment = new DocumentM();
+                                    attachment.DocName = doc.DocName;
+                                    model.Message.Attachments.Add(attachment);
+                                }
+                            }
+                        }
+                        result.result = model;
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    }
+                    else
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    }
+                }
+                
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+
+        }
+
         public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
