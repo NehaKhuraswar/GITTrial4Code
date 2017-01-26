@@ -5,6 +5,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Error = "";
+    self.Hide = false;
     self.ResendPin = function () {
         masterFactory.ResendPin(self.custDetails).then(function (response) {
             if (!alert.checkForResponse(response)) {
@@ -15,15 +16,21 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
         });
     }
     self.SubmitPetition = function () {
-        if (self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinName != true || self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinNameMediation != true)
+        if (self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinName != true)
         {
             self.Error = "Please acknowledge the consent to conduct business";
                 return;
-    }
-        if (self.caseinfo.TenantPetitionInfo.Verification.bDeclarePenalty != true)
-        {
+                }
+
+        if (self.caseinfo.TenantPetitionInfo.Verification.bDeclarePenalty != true) {
             self.Error = "Please declare that all the entered information true to your knowledge";
                 return;
+            }
+         if (caseInfo.TenantPetitionInfo.Verification.bCaseMediation == true) {
+             if(self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinNameMediation != true) {
+                 self.Error = "Please acknowledge the consent to conduct mediation";
+                return;
+             }
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.CaseFileBy = self.custDetails.custID;
@@ -31,8 +38,8 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 return;
-            }
-            $scope.model.tPetionActiveStatus.Verification = true;
+        }
+        $scope.model.tPetionActiveStatus.Verification = true;
              $scope.model.bVerification = false;
              $scope.model.bConfirm = true;
              rapGlobalFactory.CaseDetails = null;

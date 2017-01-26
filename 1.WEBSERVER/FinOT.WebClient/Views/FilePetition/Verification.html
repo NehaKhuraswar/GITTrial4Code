@@ -1,7 +1,7 @@
 ﻿<script src='js/functions.js'></script>
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            <div class="alert alert-error" ng-show="Hide==true">
+            <div class="alert alert-error" ng-show="Ctrl.Hide==true">
             </div>
             <div class="alert" ng-show="Ctrl.Error!=''">
                 <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
@@ -25,8 +25,8 @@
 
                     <div class="field-group">
                         <label for="your_pin">Enter your PIN to verify your identity.</label>
-                        <input type="text" name="your_pin" id="your_pin" class="field-input required" required data-error="PIN to verify"
-                               placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Verification.pinVerify" />
+                        <input type="text" name="your_pin" id="your_pin" class="field-input required"  data-error="PIN to verify"
+                               placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Verification.pinVerify" required/>
                     </div>
                     <a class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
                     <p>&nbsp;</p>
@@ -83,9 +83,12 @@
 
                     <div class="field-group">
                         <label for="mediation_identity_pin">Enter your PIN to verify your identity.</label>
-                        <input type="text" name="mediation_identity_pin" id="mediation_identity_pin" class="field-input required"
-                               required data-error="PIN to verify"
-                                placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Verification.pinMediation" />
+                        <input type="text" name="mediation_identity_pin" id="mediation_identity_pin"
+                               ng-class="{'field-input required' : Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation,
+                                                   'field-input' : !(Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation)}"
+                               data-error="PIN to verify"
+                               ng-required="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation"
+                               placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.Verification.pinMediation" />
                     </div>
                     <a class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
                     <p>&nbsp;</p>
@@ -124,7 +127,7 @@
                 <div class="step-footer">
                     <input type="submit" id="submit-petition" name="submit-petition" class="btn-primary"
                            value="Submit petition"
-                           ng-click="(Hide=true); (!(frmTenantPetition.your_pin.$error.required && frmTenantPetition.mediation_identity_pin.$error.required)) && Ctrl.SubmitPetition()" />
+                           ng-click="(Ctrl.Hide=true); (!(frmTenantPetition.your_pin.$error.required || frmTenantPetition.mediation_identity_pin.$error.required)) && Ctrl.SubmitPetition()" />
                 </div>
             </form>
         </div>

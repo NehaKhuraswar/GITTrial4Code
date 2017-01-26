@@ -3,6 +3,8 @@ var rapTRVerificationController = ['$scope', '$modal', 'alertService', 'rapTRver
     var self = this;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    self.Error = "";
+    self.Hide = false;
     self.ResendPin = function () {
         masterFactory.ResendPin(self.custDetails).then(function (response) {
             if (!alert.checkResponse(response)) {
