@@ -119,9 +119,11 @@
                                         <div class="field-group has-btn">
                                             <label for="analyst" class="hidden">Select analyst</label>
                                             <div class="cmb-wrapper">
-                                                <select name="analyst" id="analyst" data-placeholder="Select Analyst"
+                                                <select name="analyst" id="analyst" data-placeholder="Select analyst"
                                                         ng-model="Analyst" class="custom-select"
-                                                        ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>
+                                                        ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID">
+                                                    <option value="" selected>Select analyst</option>
+                                                </select>
                                             </div>
                                             <a ng-click="Ctrl.AssignAnalyst(Ctrl.caseinfo.C_ID, Analyst)" class="btn-link">Assign</a>
                                         </div>
@@ -142,7 +144,9 @@
                                             <div class="cmb-wrapper">
                                                 <select name="hearing_officer" id="hearing_officer" data-placeholder="Select hearing officer"
                                                         ng-model="HearingOfficer" class="custom-select"
-                                                        ng-options="hearingofficer as (hearingofficer.FirstName + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID"></select>
+                                                        ng-options="hearingofficer as (hearingofficer.FirstName + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID">
+                                                    <option value="" selected>Select hearing officer</option>
+                                                </select>
                                             </div>
                                             <a ng-click="Ctrl.AssignHearingOfficer(Ctrl.caseinfo.C_ID, HearingOfficer)" class="btn-link">Assign</a>
                                         </div>

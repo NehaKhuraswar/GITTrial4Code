@@ -41,7 +41,9 @@
                                     <select name="activity" id="activity" data-placeholder="Select type"
                                             ng-change="Ctrl.ActivityChanged(Ctrl.ActivityStatus.Activity)"
                                             ng-model="Ctrl.model.Activity" class="custom-select"
-                                            ng-options="activity.ActivityDesc as activity.ActivityDesc for activity in Ctrl.ActivityList"></select>
+                                            ng-options="activity.ActivityDesc as activity.ActivityDesc for activity in Ctrl.ActivityList">
+                                        <option value="" selected>Select activity</option>
+                                    </select>
                                 </div>
                             </div>
 

@@ -391,7 +391,9 @@
                             <div class="input-wrapper">
                                 <select name="units_approx_range" id="units_approx_range" class="custom-select" data-placeholder="Select range"
                                         ng-model="Ctrl.caseinfo.TenantResponseInfo.SelectedRangeOfUnits"
-                                        ng-options="range as (range.RangeDesc) for range in Ctrl.caseinfo.TenantResponseInfo.RangeOfUnits track by range.RangeID"></select>
+                                        ng-options="range as (range.RangeDesc) for range in Ctrl.caseinfo.TenantResponseInfo.RangeOfUnits track by range.RangeID">
+                                    <option value="" selected>Select range</option>
+                                </select>
                             </div>
                         </div>
 

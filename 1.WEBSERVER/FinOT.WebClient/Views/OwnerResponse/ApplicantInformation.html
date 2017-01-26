@@ -58,7 +58,9 @@
                             <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
                             <select name="Applicant_state" id="Applicant_state" data-placeholder="Select" class="custom-select"
                                     ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.State"
-                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                <option value="" selected>Select state</option>
+                            </select>
                         </div>
                         <div class="field-group">
                             <label for="Applicant_zip_code">Zip code</label>
@@ -148,7 +150,9 @@
                                 <label for="representative_state">State</label>
                                 <select name="Applicant_state" id="Applicant_state" data-placeholder="Select" class="custom-select"
                                         ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.State"
-                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                    <option value="" selected>Select state</option>
+                                </select>
                             </div>
 
                             <div class="field-group">
@@ -296,21 +300,27 @@
                                 <div class="field-group">
                                     <select ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month"
                                             data-placeholder="Month" class="custom-select"
-                                            ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                                            ng-options="month.id as month.value for month in Ctrl.Calender.Months">
+                                        <option value="" selected>Select month</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day"
                                             data-placeholder="Day" class="custom-select"
-                                            ng-options="day for day in  Ctrl.Calender.Days"></select>
+                                            ng-options="day for day in  Ctrl.Calender.Days">
+                                        <option value="" selected>Select day</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="field-group">
                                     <select ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year"
                                             data-placeholder="Year" class="custom-select"
-                                            ng-options="year for year in  Ctrl.Calender.Years"></select>
+                                            ng-options="year for year in  Ctrl.Calender.Years">
+                                        <option value="" selected>Select year</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

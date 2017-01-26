@@ -81,7 +81,9 @@
                                 <div class="MW-700">
                                     <select ng-model="Ctrl.description1" class="custom-select"
                                             data-placeholder="Description"
-                                            ng-options="desc for desc in Ctrl.DocDescriptions"></select>                                
+                                            ng-options="desc for desc in Ctrl.DocDescriptions">
+                                        <option value="" selected>Select description</option>
+                                    </select>                                
                                 </div>
                             </div>
 

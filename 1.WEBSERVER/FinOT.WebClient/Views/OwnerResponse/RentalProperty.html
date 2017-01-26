@@ -57,7 +57,9 @@
                         <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
                         <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
                                 ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State" class="custom-select"
-                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                            <option value="" selected>Select state</option>
+                        </select>
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
