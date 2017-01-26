@@ -94,22 +94,27 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
             //_userInfo.TenantUserInfo.Zip = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip;
             //_userInfo.TenantUserInfo.PhoneNumber = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.PhoneNumber;
            // _userInfo.TenantUserInfo.Email = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Email;
-    }
-        var _userInfo1 = angular.copy(_userInfo);
-        //  var _userInfo = self.caseinfo.OwnerPetitionTenantInfo;
-        self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo.push(_userInfo1);
-        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName = null;
-        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName = null;
-        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber = null;
-        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = null;
-        //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 = "";
-        //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2 = "";
-        //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City = "";
-        //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State.StateName = "";
-        //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip = 0;
-        //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber = 0;
-        //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = "";
-        _GetIsTenant();
+        }
+        if (_userInfo.TenantUserInfo.FirstName != null && _userInfo.TenantUserInfo.FirstName != "" &&
+            _userInfo.TenantUserInfo.AddressLine1 != null && _userInfo.TenantUserInfo.AddressLine1 != "" &&
+             _userInfo.TenantUserInfo.City != null && _userInfo.TenantUserInfo.City != "" &&
+             _userInfo.TenantUserInfo.Zip != null && _userInfo.TenantUserInfo.Zip != "") {
+            var _userInfo1 = angular.copy(_userInfo);
+            //  var _userInfo = self.caseinfo.OwnerPetitionTenantInfo;
+            self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo.push(_userInfo1);
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName = null;
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName = null;
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber = null;
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = null;
+            //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 = "";
+            //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2 = "";
+            //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City = "";
+            //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State.StateName = "";
+            //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip = 0;
+            //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber = 0;
+            //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = "";
+            _GetIsTenant();
+        }
     }
     self.RemoveTenant = function (_tenant) {
         var index = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo.indexOf(_tenant);
