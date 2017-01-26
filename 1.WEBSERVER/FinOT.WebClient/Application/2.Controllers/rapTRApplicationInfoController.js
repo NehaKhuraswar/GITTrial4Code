@@ -9,7 +9,9 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.CaseID;
     if (self.caseinfo != null) {
         self.CaseID = self.caseinfo.CaseID;
-        self.bCaseInfo = true;
+        if (self.caseinfo.CaseID != null) {
+            self.bCaseInfo = true;
+        }        
     }
     
     
