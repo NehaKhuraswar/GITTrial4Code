@@ -49,19 +49,19 @@
                                 <div class="form-group-checkbox vertical clearfix">
                                     <div class="checkbox-wrapper no-bottom-margin" ng-show="Ctrl.TenantEmail != null">
                                         <label for="recipient1">
-                                            <input type="checkbox" name="recipient1" id="recipient1" ng-model="Ctrl.bTenant" /><i></i><span>Tenant ({{Ctrl.TenantEmail}})</span>
+                                            <input type="checkbox" ng-show="Ctrl.TenantEmail != null" name="recipient1" id="recipient1" ng-model="Ctrl.bTenant" /><i></i><span>Tenant ({{Ctrl.TenantEmail}})</span>
                                         </label>
                                     </div>
 
                                     <div class="checkbox-wrapper no-bottom-margin" ng-show="Ctrl.OwnerEmail != null">
                                         <label for="recipient2">
-                                            <input type="checkbox" name="recipient2" id="recipient2" ng-model="Ctrl.bOwner" /><i></i><span>Property Owner ({{Ctrl.OwnerEmail}})</span>
+                                            <input type="checkbox" ng-show="Ctrl.OwnerEmail != null" name="recipient2" id="recipient2" ng-model="Ctrl.bOwner" /><i></i><span>Property Owner ({{Ctrl.OwnerEmail}})</span>
                                         </label>
                                     </div>
 
                                     <div class="checkbox-wrapper no-bottom-margin" ng-show="Ctrl.ThirdPartyEmail != null">
                                         <label for="recipient3">
-                                            <input type="checkbox" name="recipient3" id="recipient3" ng-model="Ctrl.bThirdParty" /><i></i><span>Property Owner’s Representative ({{Ctrl.ThirdPartyEmail}})</span>
+                                            <input type="checkbox" ng-show="Ctrl.ThirdPartyEmail != null" name="recipient3" id="recipient3" ng-model="Ctrl.bThirdParty" /><i></i><span>Property Owner’s Representative ({{Ctrl.ThirdPartyEmail}})</span>
                                         </label>
                                     </div>
                                 </div>

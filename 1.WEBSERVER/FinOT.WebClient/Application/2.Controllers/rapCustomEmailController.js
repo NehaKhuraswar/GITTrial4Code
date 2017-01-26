@@ -45,11 +45,13 @@
                 self.ThirdPartyEmail = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email;
             }
             if (self.caseinfo.OwnerPetitionInfo.PropertyInfo != null && self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo != null) {
-                for (i = 0; i < self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length; i++) {
-                    if (i == 0) {
-                        self.TenantEmail = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].Email
+                for (var i = 0; i < self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length; i++) {
+                    if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].Email != null || self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].Email != undefined) {
+                        if (i == 0) {
+                            self.TenantEmail = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].Email
+                        }
+                        self.TenantEmail = self.TenantEmail + ',' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].Email;
                     }
-                    self.TenantEmail = self.TenantEmail + ',' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].Email;
                 }
             }
 

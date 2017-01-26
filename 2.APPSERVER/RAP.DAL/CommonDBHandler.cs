@@ -767,10 +767,21 @@ namespace RAP.DAL
                     {
                         model.ActivityID = ActivityID;
                         model.C_ID = c_id;
-                        model.Recipients = notification.Recipient.Split(',').Select(r => r.ToString()).ToList();
+                        model.Message.RecipientAddress = notification.Recipient.Split(',').Select(r => r.ToString()).ToList();
                         model.Message.MessageBody = notification.MessageBody;
-                        model.CreatedDate = Convert.ToDateTime(notification.CreatedDate);
-
+                        model.CreatedDate = Convert.ToDateTime(notification.CreatedDate).Date;
+                        if (notification.CreatedBy != null)
+                        {
+                            model.CityUserID = Convert.ToInt32(notification.CreatedBy);
+                            using (AccountManagementDataContext accountDbContext = new AccountManagementDataContext(_connString))
+                            {
+                                var dbResult = accountDbContext.CityUserAccounts.Where(r => r.CityUserID == model.CityUserID).FirstOrDefault();
+                                if (dbResult != null)
+                                {
+                                    model.SentBy = dbResult.FirstName + " " + dbResult.LastName;
+                                }
+                            }
+                        }
                         var attachments = db.CustomEmailNotificationAttachments.Where(r => r.NotificationID == notification.NotificationID);
                         if (attachments.Any())
                         {

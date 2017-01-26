@@ -144,6 +144,7 @@ namespace RAP.Core.DataModels
         public int ActivityID { get; set; }  
         public DateTime CreatedDate { get; set; }
         public int NotificationID { get; set; }
+        public string SentBy { get; set; }
     }
     //public class CaseStatusActivity_M
     //{

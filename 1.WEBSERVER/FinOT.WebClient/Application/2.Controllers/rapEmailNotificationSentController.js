@@ -8,7 +8,16 @@
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     self.caseinfo = rapGlobalFactory.SelectedCase;
     self.model = rapGlobalFactory.Notification;
-   
+    //self.Recipient = null;
+    //for (var i = 0 ; i < self.model.Message.RecipientAddress.length; i++)
+    //{
+    //    if(i == 0)
+    //    {
+    //        self.Recipient = self.model.Message.RecipientAddress[i];
+    //        self.Recipient = self.Recipient + ',' + self.model.Message.RecipientAddress[i];
+    //    }
+    //}
+
     var _date = function () {
         var today = new Date();
         var dd = today.getDate();
@@ -29,7 +38,7 @@
     if (!(self.model.CreatedDate == null || self.model.CreatedDate == undefined)) {
         self.Date = self.model.CreatedDate;
     }
-    self.SentBy = rapGlobalFactory.CityUser.FirstName + ' ' + rapGlobalFactory.CityUser.LastName;
+   //    self.SentBy = rapGlobalFactory.CityUser.FirstName + ' ' + rapGlobalFactory.CityUser.LastName;
     self.BackToCase = function () {
         rapGlobalFactory.Notification = null;
         $location.path("/selectedcase");
