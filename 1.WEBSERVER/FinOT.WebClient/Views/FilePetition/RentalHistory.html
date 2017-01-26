@@ -13,7 +13,10 @@
                                     <div class="field-group">
                                         <select ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month"
                                                  placeholder="Month" data-placeholder="Month"
-                                                ng-options="month.id as month.value for month in Ctrl.Calender.Months"></select>
+                                                ng-options="month.id as month.value for month in Ctrl.Calender.Months">
+                                            <option value="" selected>Select Month</option>
+                                        </select>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
