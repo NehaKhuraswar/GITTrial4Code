@@ -77,14 +77,23 @@
                                 <label for="rap_notice" class="has-info-btn">
                                     <input type="radio" name="rap_notice" id="rap_notice" class="input-field" ng-value="true"
                                            ng-model="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven" /><i></i><span>I was never given a <u>RAP NOTICE</u> by my property owner. 
-                                        <a href="#info" class="icon-info"   data-toggle="tooltip" tooltip="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." tooltip-placement="left">Info</a></span>
+                                        <a role="button" arai-label="Info" ng-click="NoticeToggle=!NoticeToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a></span>
                                 </label>
+                                <div class="info-box-toggle" ng-show="NoticeToggle">
+                                    <a ng-click="NoticeToggle=!NoticeToggle" class="btn-close"></a>
+                                    <p>Housing Service Costs are expenses for services provided by the property owner. The costs are related to the use of a rental unit and also known as "operating expenses". The most recent two years of operating expenses are compared to determine if a rent increase is justified. The calculation in both years must provide a reasonable comparison of all expenses. If the increase is challenged by a tenant before the Rent Program, evidence is required to prove each of the claimed expenses.</p>
+                                </div>
                                 <div class="clear"></div>
                             </div>
                         </div>
 
                         <div class="field-group">
-                            <p class="input-label has-info-btn">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?  <a href="#info" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
+                            <p class="input-label has-info-btn">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?  
+                            <a role="button" arai-label="Info" ng-click="SubToggle=!SubToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
+                            <div class="info-box-toggle" ng-show="SubToggle">
+                                <a ng-click="SubToggle=!SubToggle" class="btn-close"></a>
+                                <p>Section 8 units and other units have rents that are controlled, regulated, or subsidized by a governmental unit, agency, or authority. If you do not know if your unit is subsidized please mark “no” here. </p>
+                            </div>
                             <div class="form-group-radio vertical clearfix">
                                 <label for="rent_subsidized_yes">
                                     <input type="radio" name="rent_subsidized" id="rent_subsidized_yes" class="input-field" ng-value="true"
@@ -103,7 +112,12 @@
                             <h4>Rent Increases</h4>
                         </div>
 
-                        <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never received the RAP Notice you can contest all past increases.<a href="#info" class="icon-info" data-toggle="tooltip" tooltip-id="rh_rent_subsidized_HUD">Info</a></p>
+                        <p>List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never received the RAP Notice you can contest all past increases.
+                            <a role="button" arai-label="Info" ng-click="RentIncreaseToggle=!RentIncreaseToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
+                            <div class="info-box-toggle" ng-show="RentIncreaseToggle">
+                                <a ng-click="RentIncreaseToggle=!RentIncreaseToggle" class="btn-close"></a>
+                                <p>You have 90 days from the date your received either your rent increase notice or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later)                                      to contest the rent increase. (O.M.C. 8.22.090 A 2) </p>
+                            </div>
                         
 
                         <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
