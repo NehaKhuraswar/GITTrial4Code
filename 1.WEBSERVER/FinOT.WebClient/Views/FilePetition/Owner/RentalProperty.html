@@ -42,17 +42,17 @@
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_address1">Mailing address 1</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1" required />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1"  />
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_address2">Mailing address 2 (optional)</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2" required />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2"  />
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_city">City</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City" required />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City" />
                     </div>
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_state">State</label>
@@ -64,29 +64,31 @@
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_zip_code">Zip code</label>
-                        <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip" required />
+                        <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip"  />
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
+                    <div class="field-group" >
                         <label for="Applicante_phone_number">Phone number</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber" required />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber"  />
                     </div>
 
-                    <div class="field-group" ng-show="Ctrl.IsTenant == false">
+                    <div class="field-group" >
                         <label for="Applicant_email">Email address</label>
-                        <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email" required />
+                        <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email"  />
                     </div>
 
                     <div>
-                        <button class="btn-primary" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant</button>
+                        <button class="btn-link btn-edit" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant</button>
                     </div>
                     <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
                         <div class="field-group filled-info subhead no-top-margin">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12">
-                                    <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br/>                        {{item.TenantUserInfo.AddressLine1}}<br/>
+                                    <p>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br/> {{item.TenantUserInfo.AddressLine1}}<br/>
                                      {{item.TenantUserInfo.AddressLine2}}<br/>
                                     {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}<br/>
+                                    {{item.TenantUserInfo.Email}}<br />
+                                    {{item.TenantUserInfo.PhoneNumber}}
                                     <button role="button" aria-label="Remove" class="btn-link btn-edit" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
                                 </div>
                             </div>

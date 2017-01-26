@@ -17,7 +17,7 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
             self.StateList = response.data;
         });
     }
-    
+        
     _GetStateList();
     
     var _GetIsTenant = function()
@@ -85,11 +85,33 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         //    _userInfo.TenantUserInfo.PhoneNumber = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.PhoneNumber;
         //    _userInfo.TenantUserInfo.Email = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Email;
         //}
+        if (self.IsTenant == true) {
+            for (var i = 0 ; i < self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length; i++) {
+                var existingTenant;
+                if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].IsDeleted == false) {
+                    _userInfo.TenantUserInfo.AddressLine1 = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.AddressLine1;
+                    _userInfo.TenantUserInfo.AddressLine2 = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.AddressLine2;
+                    _userInfo.TenantUserInfo.City = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.City;
+                    _userInfo.TenantUserInfo.State = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.State;
+                    _userInfo.TenantUserInfo.Zip = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.Zip;
+                    break;
+                }
+            }
+            //_userInfo.TenantUserInfo.AddressLine1 = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine1;
+            //_userInfo.TenantUserInfo.AddressLine2 = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine2;
+            //_userInfo.TenantUserInfo.City = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City;
+            //_userInfo.TenantUserInfo.State = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.State;
+            //_userInfo.TenantUserInfo.Zip = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip;
+            //_userInfo.TenantUserInfo.PhoneNumber = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.PhoneNumber;
+            // _userInfo.TenantUserInfo.Email = self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Email;
+        }
         var _userInfo1 = angular.copy(_userInfo);
       //  var _userInfo = self.caseinfo.OwnerPetitionTenantInfo;
         self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(_userInfo1);      
-        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName = "";
-        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName = "";
+        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName = null;
+        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName = null;
+        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber =null;
+        self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = null;
         _GetIsTenant();
         //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 = "";
         //self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2 = "";
@@ -111,9 +133,9 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
             self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2 = "";
             self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City = "";
             self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State.StateName = "";
-            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip = 0;
-            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber = 0;
-            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = "";
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip = null;
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber = null;
+            self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email = null;
         }
 
         //self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.update(
