@@ -17,7 +17,7 @@
 
                     <div class="col-md-12 col-sm-12">
                         <div class="application-step step-1">
-                            
+
 
                             <form name="frmCreateAccount" id="frmCreateAccount" class="application-form create-account">
                                 <div class="step-content step1">
@@ -90,18 +90,13 @@
 
                                     <div class="field-group">
                                         <label for="residential_state">State</label>
-                                        <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select"
-                                                ng-model="Ctrl.CustomerInfo.User.State"
-                                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
-                                            <option value="" selected>Select state</option>
-                                        </select>
-                                        <!--<div class="input-wrapper">
-                                            <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select" ng-model="Ctrl.CustomerInfo.User.State">
-                                                <option value="option_01">Option 01</option>
-                                                <option value="option_02">Option 02</option>
-                                                <option value="option_03">Option 03</option>
+                                        <div class="input-wrapper">
+                                            <select name="residential_state" id="residential_state" class="custom-select" data-placeholder="Select"
+                                                    ng-model="Ctrl.CustomerInfo.User.State"
+                                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                                <option value="" selected>Select state</option>
                                             </select>
-                                        </div>-->
+                                        </div>
                                     </div>
 
                                     <div class="field-group">
@@ -127,7 +122,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div ng-show="!Ctrl.CustomerInfo.IsSameMailingAddress">
                                         <div class="field-group">
                                             <label for="mailing_street_address1">Street address 1</label>
@@ -192,7 +187,7 @@
                                     <div class="form-group-checkbox vertical clearfix">
                                         <div class="checkbox-wrapper">
                                             <label for="notification_service_proof_mail">
-                                                <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail" ng-model="Ctrl.CustomerInfo.MailNotificationFlag"  /><i></i><span>Proof of service by mail</span>
+                                                <input type="checkbox" name="notification_service_proof_mail" id="notification_service_proof_mail" ng-model="Ctrl.CustomerInfo.MailNotificationFlag" /><i></i><span>Proof of service by mail</span>
                                             </label>
 
                                             <label for="notification_by_email">
@@ -205,9 +200,9 @@
                                 </div>
                                 <div class="step-footer no-top-margin">
                                     <input type="submit" role="button" aria-label="Cancel" id="btn-create-account" name="btn-create-account" class="btn-primary" value="{{Ctrl.SubmitText}}" ng-click="Ctrl.Register(Ctrl.CustomerInfo)" />
-                                    <input type="button" role="button" aria-label="Cancel" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()"/>
+                                    <input type="button" role="button" aria-label="Cancel" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
 
-                                    <input type="button" id="btn-delete" name="btn-cancel" class="btn-primary btn-delete" value="Delete account" ng-show="Ctrl.bEdit" ng-click="bDelete = true"/>
+                                    <input type="button" id="btn-delete" name="btn-cancel" class="btn-primary btn-delete" value="Delete account" ng-show="Ctrl.bEdit" ng-click="bDelete = true" />
                                 </div>
 
                                 <div class="delete-confirmation mar-t40 mar-bottom-40" ng-show="bDelete== true">
@@ -216,7 +211,7 @@
                                         <a ng-click="Ctrl.DeleteCustomer(Ctrl.CustomerInfo); bDelete=false" class="btn-link btn-delete">Delete</a>
                                         <a ng-click="bDelete = false" class="btn-link btn-cancel">Cancel</a>
                                     </div>
-                                </div>                                
+                                </div>
                             </form>
 
                         </div>
