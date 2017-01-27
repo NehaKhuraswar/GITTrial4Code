@@ -15,7 +15,9 @@ namespace RAP.Core.DataModels
         {
             ApplicantInfo = new OwnerPetitionApplicantInfoM();
             PropertyInfo = new OwnerPetitionPropertyInfoM();
+            Verification = new VerificationM();
         }
+        public VerificationM Verification { get; set; }
         private List<OwnerRentIncreaseReasonsM> _rentIncreaseReasons = new List<OwnerRentIncreaseReasonsM>();
         public int OwnerPetitionID { get; set; }
         public OwnerPetitionApplicantInfoM ApplicantInfo { get; set; }

@@ -5030,6 +5030,35 @@ namespace RAP.DAL
                         return result;
                     }
                 }
+                var CustDetails = _dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CaseFileBy).FirstOrDefault();
+                if (CustDetails != null)
+                {
+                    if (CustDetails.CustomerIdentityKey != model.OwnerPetitionInfo.Verification.pinVerify)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                        return result;
+                    }
+                    if (model.OwnerPetitionInfo.Verification.bCaseMediation == true)
+                    {
+                        if (CustDetails.CustomerIdentityKey != model.OwnerPetitionInfo.Verification.pinMediation)
+                        {
+                            result.result = null;
+                            result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                            return result;
+                        }
+                    }
+                }
+                OwnerPetitionVerification verificationDB = new OwnerPetitionVerification();
+                verificationDB.bCaseMediation = model.OwnerPetitionInfo.Verification.bCaseMediation;
+                verificationDB.bDeclarePenalty = model.OwnerPetitionInfo.Verification.bDeclarePenalty;
+                verificationDB.bThirdParty = model.bCaseFiledByThirdParty;
+                verificationDB.bThirdPartyMediation = model.OwnerPetitionInfo.Verification.bThirdPartyMediation;
+                verificationDB.PetitionID = model.OwnerPetitionInfo.OwnerPetitionID;
+                verificationDB.CreatedDate = DateTime.Now;
+                _dbContext.OwnerPetitionVerifications.InsertOnSubmit(verificationDB);
+                _dbContext.SubmitChanges();
+
                 caseDetails.PetitionID = petitionID;
                 caseDetails.PetitionCategoryID = model.PetitionCategoryID;
                 caseDetails.CaseFiledBy = model.CaseFileBy;

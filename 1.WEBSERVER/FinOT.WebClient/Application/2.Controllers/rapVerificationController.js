@@ -26,7 +26,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
             self.Error = "Please declare that all the entered information true to your knowledge";
                 return;
             }
-         if (caseInfo.TenantPetitionInfo.Verification.bCaseMediation == true) {
+        if (self.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == true) {
              if(self.caseinfo.TenantPetitionInfo.Verification.bAcknowledgePinNameMediation != true) {
                  self.Error = "Please acknowledge the consent to conduct mediation";
                 return;
