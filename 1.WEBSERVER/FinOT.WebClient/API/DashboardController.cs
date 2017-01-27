@@ -410,6 +410,38 @@ namespace RAP.WebClient
                 return responseMessage;
             }
         }
+
+        [AllowAnonymous]
+        [Route("GetMailNotification/{NotificationID}")]
+        [HttpGet]
+        public HttpResponseMessage GetMailNotification(string NotificationID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetMailNotification/" + NotificationID;
+                responseMessage = client.GetAsync(requestUri).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
         #endregion
 
         #region "POST REQUEST"

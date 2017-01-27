@@ -881,6 +881,66 @@ namespace RAP.DAL
             }
         }
 
+        public ReturnResult<MailM> GetMailNotification(int notificationID)
+        {
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
+            MailM model = new MailM();
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    var notification = db.MailNotifications.Where(r => r.NotificationID == notificationID).FirstOrDefault();
+                    if (notification != null)
+                    {                                             
+                        model.Recipient = notification.Recipient.Split(',').Select(r => r.ToString()).ToList();
+                        model.Notes = notification.Notes;
+                        model.MailingDate = Convert.ToDateTime(notification.MailingDate).Date;
+                        if (notification.CreatedBy != null)
+                        {
+                            model.CityUserID = Convert.ToInt32(notification.CreatedBy);
+                            using (AccountManagementDataContext accountDbContext = new AccountManagementDataContext(_connString))
+                            {
+                                var dbResult = accountDbContext.CityUserAccounts.Where(r => r.CityUserID == model.CityUserID).FirstOrDefault();
+                                if (dbResult != null)
+                                {
+                                    model.SentBy = dbResult.FirstName + " " + dbResult.LastName;
+                                }
+                            }
+                        }
+                        var attachments = db.MailNotificationAttachments.Where(r => r.NotificationID == notification.NotificationID);
+                        if (attachments.Any())
+                        {
+                            foreach (var item in attachments)
+                            {
+                                var doc = db.Documents.Where(r => r.DocID == item.DocumentID).FirstOrDefault();
+                                if (doc != null)
+                                {
+                                    DocumentM attachment = new DocumentM();
+                                    attachment.DocName = doc.DocName;
+                                    model.Attachments.Add(attachment);
+                                }
+                            }
+                        }
+                        result.result = model;
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    }
+                    else
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    }
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+
+        }
         public ReturnResult<MailM> SaveMailNotification(MailM message)
         {
             ReturnResult<MailM> result = new ReturnResult<MailM>();
@@ -896,7 +956,7 @@ namespace RAP.DAL
                         notification.Recipient = String.Join(",", message.Recipient);
                         notification.MailingDate = message.MailingDate;
                         notification.CreatedDate = DateTime.Now;
-                        notification.CreatedBy = message.EmployeeID;
+                        notification.CreatedBy = message.CityUserID;
                         notification.C_ID = message.C_ID;
                         db.MailNotifications.InsertOnSubmit(notification);
                         db.SubmitChanges();

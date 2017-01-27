@@ -420,6 +420,39 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<CustomEmailM>>(ReturnCode, transaction);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetMailNotification/{NotificationID:int}")]
+        public HttpResponseMessage GetMailNotification(int NotificationID)
+        {
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<MailM> transaction = new TranInfo<MailM>();
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
+            try
+            {
+                result = _service.GetMailNotification(NotificationID);
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+
+            return Request.CreateResponse<TranInfo<MailM>>(ReturnCode, transaction);
+        }
         #endregion
 
         #region "POST REQUEST"

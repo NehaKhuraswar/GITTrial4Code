@@ -44,7 +44,8 @@ namespace RAP.Core.DataModels
        public string Activity { get; set; }
        public List<string> Recipient { get; set; }
        public string Notes { get; set; }
-       public int EmployeeID { get; set; }
+       public int CityUserID { get; set; }
+       public string SentBy { get; set; }
        public int C_ID { get; set; }
        public DateTime? MailingDate { get; set; }
        public List<DocumentM> Attachments

@@ -236,6 +236,21 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<MailM> GetMailNotification(int NotificationID)
+        {
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
+            try
+            {
+                result = _commonService.GetMailNotification(NotificationID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
       public ReturnResult<CustomEmailM> SubmitCustomEmail(CustomEmailM cMail)
         {
             ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
