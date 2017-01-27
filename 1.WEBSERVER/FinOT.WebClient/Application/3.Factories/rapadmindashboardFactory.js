@@ -3,7 +3,7 @@ var rapadmindashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
   
-
+    //Get Case Information
     var _GetCaseInfoWithModel = function (model) {
         blockUI.start();
 
@@ -14,6 +14,7 @@ var rapadmindashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
         });
     }
+    //Get Case Activity Status
     var _GetCaseActivityStatus = function(model) {
         blockUI.start();
 
@@ -24,7 +25,7 @@ var rapadmindashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
          });
     }
-
+    //Get Case Account Types
     var _GetAccountTypes = function () {
         blockUI.start();
         var url = _routePrefix + '/getaccounttypes/'
@@ -34,7 +35,7 @@ var rapadmindashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
         });
     }
-
+    //Get Empty Account Search Model
     var _GetEmptyAccountSearchModel = function () {
         blockUI.start();
         var url = _routePrefix + '/getemptyaccountsearchmodel/'
@@ -44,7 +45,7 @@ var rapadmindashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
         });
     }
-
+    //Get Account Search
     var _GetAccountSearch = function (model) {
         blockUI.start();
         var url = _routePrefix + '/getaccountsearch/'
