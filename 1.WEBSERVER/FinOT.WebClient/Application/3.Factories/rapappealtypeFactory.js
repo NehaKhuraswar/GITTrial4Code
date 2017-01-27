@@ -2,7 +2,7 @@
 var rapappealtypeFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
       var _routePrefix = 'api/applicationprocessing';
-    
+    //Get Case details from Case ID
       var _GetCaseInfo = function (caseID) {
         blockUI.start();
 
@@ -13,6 +13,7 @@ var rapappealtypeFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
       }
+    //Get Petition Category
       var _GetPetitionCategory = function () {
           blockUI.start();
           var url = _routePrefix + '/GetPetitioncategory/';
