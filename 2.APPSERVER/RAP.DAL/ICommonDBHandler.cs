@@ -21,9 +21,9 @@ namespace RAP.DAL
        ReturnResult<List<DocumentM>> GetDocumentsByCategory(int CustmerID, bool isPetitiofiled, string docCategory);
        ReturnResult<bool> UpdateDocumentCaseInfo(int CustmerID, int C_ID, string docCategory);
        ReturnResult<APNAddress> GetAPNAddress(int UserID);
-       ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID);
+       ReturnResult<EmailM> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID);
        ReturnResult<MailM> SaveMailNotification(MailM message);
-       ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID);
-       ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID);
+       ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID);
+       ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID);
     }
 }

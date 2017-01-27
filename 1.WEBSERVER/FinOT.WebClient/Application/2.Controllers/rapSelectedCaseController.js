@@ -157,7 +157,7 @@ self.ViewPage = function (activity, caseinfo) {
         });
             }
             else if (activity.Status.StatusID == 2) {
-                rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID).then(function (response) {
+                rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID, activity.NotificationID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }

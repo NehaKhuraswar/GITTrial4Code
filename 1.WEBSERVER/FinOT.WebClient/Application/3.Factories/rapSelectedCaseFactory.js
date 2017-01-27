@@ -92,11 +92,12 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
         });
     }
 
-    var _GetCustomEmailNotification = function (cid,activityid) {
+    var _GetCustomEmailNotification = function (cid, activityid, NotificationID) {
         blockUI.start();
         var url = 'api/dashboard' + '/GetCustomEmailNotification';
         if (!(cid == null || cid == undefined)) { url = url + '/' + cid; }
         if (!(activityid == null || activityid == undefined)) { url = url + '/' + activityid; }
+        if (!(NotificationID == null || NotificationID == undefined)) { url = url + '/' + NotificationID; }
         return ajax.Get(url)
         .finally(function () {
             blockUI.stop();

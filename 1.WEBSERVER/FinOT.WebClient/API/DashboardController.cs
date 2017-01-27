@@ -380,9 +380,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("GetCustomEmailNotification/{cid}/{activityid}")]
+        [Route("GetCustomEmailNotification/{cid}/{activityid}/{NotificationID}")]
         [HttpGet]
-        public HttpResponseMessage GetCustomEmailNotification(string cid, string activityid)
+        public HttpResponseMessage GetCustomEmailNotification(string cid, string activityid, string NotificationID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -390,7 +390,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "GetCustomEmailNotification/" + cid + "/" + activityid;
+                string requestUri = _requestURI + "GetCustomEmailNotification/" + cid + "/" + activityid + "/" + NotificationID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

@@ -406,7 +406,7 @@ namespace RAP.DAL
                     int? errorCode = 0;
                     //TBD
                     int returnCode = db.USP_NewActivityStatus_Save(ActivityID, StatusID, 
-                                     C_ID, "", DateTime.Now, CaseFileBy, 3,  ref errorMessage, ref errorCode);
+                                     C_ID, "", DateTime.Now, CaseFileBy, 3, null, ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
                     {
@@ -427,7 +427,7 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID)
+        public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -438,7 +438,7 @@ namespace RAP.DAL
                     int? errorCode = 0;
                     //TBD
                     int returnCode = db.USP_NewActivityStatus_Save(ActivityID, (int)StatusDefaults.NotificationSent,
-                                     C_ID, "", DateTime.Now, SentBy, 1, ref errorMessage, ref errorCode);
+                                     C_ID, "", DateTime.Now, SentBy, 1, NotificationID, ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
                     {
@@ -753,7 +753,7 @@ namespace RAP.DAL
         }
 
 
-        public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID)
+        public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID)
         {
             ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
             CustomEmailM model = new CustomEmailM();
@@ -762,7 +762,7 @@ namespace RAP.DAL
             {
                 using (CommonDataContext db = new CommonDataContext(_connString))
                 {
-                    var notification = db.CustomEmailNotifications.Where(r => r.C_ID == c_id && r.ActivityID == ActivityID).FirstOrDefault();
+                    var notification = db.CustomEmailNotifications.Where(r => r.C_ID == c_id && r.ActivityID == ActivityID && r.NotificationID == NotificationID).FirstOrDefault();
                     if (notification != null)
                     {
                         model.ActivityID = ActivityID;
@@ -817,9 +817,9 @@ namespace RAP.DAL
 
         }
 
-        public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int cityUserID, int c_id, int activityID)
+        public ReturnResult<EmailM> SaveCustomEmailNotification(EmailM message, int cityUserID, int c_id, int activityID)
         {
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            ReturnResult<EmailM> result = new ReturnResult<EmailM>();
             try
             {
                 using (CommonDataContext db = new CommonDataContext(_connString))
@@ -861,7 +861,8 @@ namespace RAP.DAL
                                 }
                             }
                         }
-                        result.result = true;
+
+                        result.result = message;
                         result.status = new OperationStatus() { Status = StatusEnum.Success };
                         return result;
                     }

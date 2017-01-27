@@ -123,24 +123,6 @@ namespace RAP.DAL
 			return ((ISingleResult<USP_Status_GetResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_ActivityStatusForCase_Get")]
-		public ISingleResult<USP_ActivityStatusForCase_GetResult> USP_ActivityStatusForCase_Get([global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), c_ID, message, errorCode);
-			message = ((string)(result.GetParameterValue(1)));
-			errorCode = ((System.Nullable<int>)(result.GetParameterValue(2)));
-			return ((ISingleResult<USP_ActivityStatusForCase_GetResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_NewActivityStatus_Save")]
-		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="VarChar(250)")] string notes, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedByAcctType", DbType="Int")] System.Nullable<int> createdByAcctType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, notes, createdDate, createdBy, createdByAcctType, message, errorCode);
-			message = ((string)(result.GetParameterValue(7)));
-			errorCode = ((System.Nullable<int>)(result.GetParameterValue(8)));
-			return ((int)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_SearchCase_Get")]
 		public ISingleResult<ReturnCaseSearch> USP_SearchCase_Get(
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="VarChar(25)")] string firstName, 
@@ -167,6 +149,24 @@ namespace RAP.DAL
 			totalCount = ((System.Nullable<int>)(result.GetParameterValue(17)));
 			message = ((string)(result.GetParameterValue(18)));
 			return ((ISingleResult<ReturnCaseSearch>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_NewActivityStatus_Save")]
+		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="VarChar(250)")] string notes, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedByAcctType", DbType="Int")] System.Nullable<int> createdByAcctType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NotificationID", DbType="Int")] System.Nullable<int> notificationID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, notes, createdDate, createdBy, createdByAcctType, notificationID, message, errorCode);
+			message = ((string)(result.GetParameterValue(8)));
+			errorCode = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_ActivityStatusForCase_Get")]
+		public ISingleResult<USP_ActivityStatusForCase_GetResult> USP_ActivityStatusForCase_Get([global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), c_ID, message, errorCode);
+			message = ((string)(result.GetParameterValue(1)));
+			errorCode = ((System.Nullable<int>)(result.GetParameterValue(2)));
+			return ((ISingleResult<USP_ActivityStatusForCase_GetResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1526,6 +1526,8 @@ namespace RAP.DAL
 		
 		private string _CustName;
 		
+		private System.Nullable<int> _NotificationID;
+		
 		public USP_ActivityStatusForCase_GetResult()
 		{
 		}
@@ -1638,6 +1640,22 @@ namespace RAP.DAL
 				if ((this._CustName != value))
 				{
 					this._CustName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationID", DbType="Int")]
+		public System.Nullable<int> NotificationID
+		{
+			get
+			{
+				return this._NotificationID;
+			}
+			set
+			{
+				if ((this._NotificationID != value))
+				{
+					this._NotificationID = value;
 				}
 			}
 		}

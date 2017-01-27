@@ -134,12 +134,12 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
-       public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID)
+       public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID)
        {
            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
            try
            {
-               result = _dbHandler.GetCustomEmailNotification(c_id, ActivityID);
+               result = _dbHandler.GetCustomEmailNotification(c_id, ActivityID, NotificationID);
                return result;
            }
            catch (Exception ex)
@@ -149,9 +149,9 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
-       public ReturnResult<bool> SaveCustomEmailNotification(EmailM message, int cityUserID, int c_id, int activityID)
+       public ReturnResult<EmailM> SaveCustomEmailNotification(EmailM message, int cityUserID, int c_id, int activityID)
        {
-           ReturnResult<bool> result = new ReturnResult<bool>();
+           ReturnResult<EmailM> result = new ReturnResult<EmailM>();
            try
            {
                result = _dbHandler.SaveCustomEmailNotification(message, cityUserID, c_id, activityID);
@@ -180,12 +180,12 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
-     public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID)
+     public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID)
        {
            ReturnResult<bool> result = new ReturnResult<bool>();
            try
            {
-               result = _dbHandler.MailSentActivity(C_ID,SentBy,ActivityID);
+               result = _dbHandler.MailSentActivity(C_ID, SentBy, ActivityID, NotificationID);
                return result;
            }
            catch (Exception ex)

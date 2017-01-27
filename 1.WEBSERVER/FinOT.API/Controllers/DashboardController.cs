@@ -388,15 +388,15 @@ namespace RAP.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("GetCustomEmailNotification/{cID:int}/{AnalystUserID:int}")]
-        public HttpResponseMessage GetCustomEmailNotification(int cID, int AnalystUserID)
+        [Route("GetCustomEmailNotification/{cID:int}/{AnalystUserID:int}/{NotificationID:int}")]
+        public HttpResponseMessage GetCustomEmailNotification(int cID, int AnalystUserID, int NotificationID)
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<CustomEmailM> transaction = new TranInfo<CustomEmailM>();
             ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
             try
             {
-                result = _service.GetCustomEmailNotification(cID, AnalystUserID);
+                result = _service.GetCustomEmailNotification(cID, AnalystUserID, NotificationID);
 
                 if (result.status.Status == StatusEnum.Success)
                 {

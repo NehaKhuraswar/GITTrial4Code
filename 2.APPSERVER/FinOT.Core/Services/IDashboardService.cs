@@ -18,7 +18,7 @@ namespace RAP.Core.Services
         ReturnResult<List<DocumentM>> GetCaseDocuments(int c_id);
         ReturnResult<List<DocumentM>> SaveCaseDocuments(List<DocumentM> documents);
         ReturnResult<CustomEmailM> GetCustomEmail(int c_id);
-        ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID);
+        ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID);
         ReturnResult<CustomEmailM> SubmitCustomEmail(CustomEmailM cMail);
         ReturnResult<MailM> GetMail();
         ReturnResult<MailM> SubmitMail(MailM mail);

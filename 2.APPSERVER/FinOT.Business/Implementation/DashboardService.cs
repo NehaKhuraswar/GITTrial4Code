@@ -221,12 +221,12 @@ namespace RAP.Business.Implementation
             result.status = new OperationStatus() { Status = StatusEnum.Success };
             return result;
         }
-      public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID)
+        public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID)
         {
             ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();
             try
             {
-                result = _commonService.GetCustomEmailNotification(c_id, ActivityID);
+                result = _commonService.GetCustomEmailNotification(c_id, ActivityID,  NotificationID);
                 return result;
             }
             catch (Exception ex)
@@ -264,7 +264,7 @@ namespace RAP.Business.Implementation
                        result.status = notifiacationResult.status;
                        return result;
                     }
-                    _commonService.MailSentActivity(cMail.C_ID, cMail.CityUserID, cMail.ActivityID);
+                    _commonService.MailSentActivity(cMail.C_ID, cMail.CityUserID, cMail.ActivityID, notifiacationResult.result.NotificationID);
                     cMail.CreatedDate = DateTime.Now.Date;
 
                     result.result = cMail;
