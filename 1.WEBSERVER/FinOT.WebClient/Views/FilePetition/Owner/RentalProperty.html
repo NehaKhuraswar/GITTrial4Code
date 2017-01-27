@@ -56,14 +56,15 @@
                     </div>
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_state">State</label>
-                        <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                        <select name="Applicant_state" id="Applicant_state" data-placeholder="Select" class="custom-select"
-                                ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State"
-                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
-                            <option value="" selected>Select state</option>
-                        </select>
+                        <div class="input-wrapper">
+                            <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
+                            <select name="Applicant_state" id="Applicant_state" data-placeholder="Select" class="custom-select"
+                                    ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                <option value="" selected>Select state</option>
+                            </select>
+                        </div>
                     </div>
-
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_zip_code">Zip code</label>
                         <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip"  />
