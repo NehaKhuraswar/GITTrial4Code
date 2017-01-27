@@ -5,7 +5,7 @@
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
     self.DocDescriptions = masterFactory.DocDescription();
-
+    self.Error = "";
     masterFactory.DocDescription().then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         self.DocDescriptions = response.data;     
@@ -73,7 +73,10 @@
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;       
         rapFactory.SaveOwnerAdditionalDocuments(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.ownerAdditionalDocuments = false;
             $scope.model.ownerReview = true;

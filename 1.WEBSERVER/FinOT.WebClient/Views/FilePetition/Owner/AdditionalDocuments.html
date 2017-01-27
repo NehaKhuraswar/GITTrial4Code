@@ -1,6 +1,9 @@
 ﻿<script src='js/functions.js'></script>
 <div class="col-md-9 col-sm-12">
-    <div class="application-step step-1">
+    <div class="application-step step-1  <div class=" alert" ng-show="Ctrl.Error!=''">
+        <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+    </div>
+
         <h3 class="step-heading">Additional Documentation</h3>
 
         <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form" onsubmit="return false;">

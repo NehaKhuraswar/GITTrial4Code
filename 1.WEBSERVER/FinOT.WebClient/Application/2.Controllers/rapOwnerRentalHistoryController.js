@@ -8,7 +8,9 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
     self.caseinfo.CustomerID = self.custDetails.custID;
     self.showUploadedFile = false;
     self.Calender = masterFactory.Calender;
-
+    self.Error = "";
+    self.Hide = false;
+    self.HasAdditionalRentRecord = false;
     //var range = 10 / 2;
     //var currentYear = new Date().getFullYear();
     //self.years = [];
@@ -21,7 +23,10 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
     //}
 
     rapFactory.GetOwnerRentIncreaseAndPropertyInfo(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
         self.Rent = angular.copy(self.caseinfo.OwnerPetitionRentalIncrementInfo);
@@ -65,7 +70,12 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         }
     }
 
-
+    var _AdditionalRentRecordCheck = function () {
+        self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.forEach(function (item) {
+            if (item.isDeleted == false) {
+                self.HasAdditionalRentRecord = true;            }
+        });
+    }
     self.Download = function (doc) {
         masterFactory.GetDocument(doc);    
     }
@@ -88,12 +98,16 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(_rent);
     }
     self.Continue = function () {
-        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length == 0) {
+        _AdditionalRentRecordCheck();
+        if (!self.HasAdditionalRentRecord) {
             self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(self.Rent);
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.ownerRentalHistory = false;
             $scope.model.ownerAdditionalDocuments = true;

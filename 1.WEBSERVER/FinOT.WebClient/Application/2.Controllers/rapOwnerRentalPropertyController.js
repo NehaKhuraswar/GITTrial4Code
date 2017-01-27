@@ -9,6 +9,8 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     self.StateList = [];
     self.IsTenant = false;
     self.Error = "";
+    self.Hide = false;
+    
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -63,7 +65,10 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.ownerRentalProperty = false;
             $scope.model.ownerRentalHistory = true;

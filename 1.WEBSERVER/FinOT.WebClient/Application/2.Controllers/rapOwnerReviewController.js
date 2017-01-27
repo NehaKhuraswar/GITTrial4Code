@@ -3,7 +3,8 @@
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-
+    self.caseinfo.CustomerID = self.custDetails.custID;
+    self.Error = "";
     rapFactory.GetOwnerReview(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
@@ -13,7 +14,10 @@
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerReviewPageSubmission(self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }           
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             $scope.model.ownerReview = false;
             $scope.model.ownerVerification = true;
             $scope.model.DisableAllCurrent();

@@ -1,6 +1,11 @@
 ﻿<script src='js/functions.js'></script>
 <div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
+        <div class="alert alert-error" ng-show="Ctrl.Hide==true">        
+        </div>
+        <div class="alert" ng-show="Ctrl.Error!=''">
+            <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+        </div>
         <h3 class="step-heading">Rental History</h3>
 
 
@@ -153,7 +158,7 @@
                     <div class="field-group">
                         <table class="table table-condensed nopadding-bottom">
                             <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice'}">
+                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_CurrentOnRent'}">
                                     <td class="nopadding-left">
                                         {{item.DocName}}
                                     </td>
@@ -295,19 +300,19 @@
                         </div>
                     </div>
 
-                    <div class="field-group filled-info subhead no-top-margin">
+                    <div class="field-group filled-info subhead no-top-margin" ng-show="(item.RentIncreaseNoticeDate.Month != 0 && item.RentIncreaseNoticeDate.Day !=0 && item.RentIncreaseNoticeDate.Year !=0)">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice given to tenant</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                         </div>
                     </div>
-                    <div class="field-group filled-info subhead no-top-margin">
+                    <div class="field-group filled-info subhead no-top-margin" ng-show="(item.RentIncreasedTo - item.RentIncreasedFrom) > 0">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.RentIncreasedTo - item.RentIncreasedFrom}}</div>
                         </div>
                     </div>
-                    <div class="field-group filled-info subhead no-top-margin">
+                    <div class="field-group filled-info subhead no-top-margin" ng-show="(item.RentIncreaseEffectiveDate.Month != 0 && item.RentIncreaseEffectiveDate.Day !=0 && item.RentIncreaseEffectiveDate.Year !=0)">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
                             <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>

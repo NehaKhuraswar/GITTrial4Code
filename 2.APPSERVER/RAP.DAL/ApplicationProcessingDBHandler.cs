@@ -4182,10 +4182,10 @@ namespace RAP.DAL
                         }
                     }
                 }
-                var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.CustomerID == model.OwnerPetitionInfo.ApplicantInfo.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
+                var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.CustomerID == model.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
                 if (applicantInfo == null)
                 {
-                    applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.CustomerID == model.OwnerPetitionInfo.ApplicantInfo.CustomerID && r.bPetitionFiled == true).OrderByDescending(c => c.CreatedDate).FirstOrDefault();
+                    applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.CustomerID == model.CustomerID && r.bPetitionFiled == true).OrderByDescending(c => c.CreatedDate).FirstOrDefault();
                 }                 
                 
                 if (applicantInfo != null)
@@ -4387,6 +4387,7 @@ namespace RAP.DAL
                             _rentIncrease.RentIncreaseEffectiveDate = (item.RentIncreaseEffectiveDate == null) ? null : _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
                             _rentIncrease.RentIncreasedFrom = item.RentIncreasedFrom;
                             _rentIncrease.RentIncreasedTo = item.RentIncreasedTo;
+                            _rentIncrease.RentalIncreaseInfoID = item.RentalIncreaseInfoID;
                             _rentIncreases.Add(_rentIncrease);
                            // model.OwnerPetitionInfo.PropertyInfo.RentalInfo.Add(_rentIncrease);
                         }
@@ -4928,6 +4929,7 @@ namespace RAP.DAL
                                 if (rentIncreaseInfo.Any())
                                 {
                                     _dbContext.OwnerPetitionRentalIncrementInfos.DeleteOnSubmit(rentIncreaseInfo.Where(x => x.RentalIncreaseInfoID == rent.RentalIncreaseInfoID).First());
+                                    _dbContext.SubmitChanges();
                                 }
                             }
                         }

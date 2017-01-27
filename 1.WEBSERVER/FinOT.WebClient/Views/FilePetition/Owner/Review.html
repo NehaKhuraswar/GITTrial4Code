@@ -1,6 +1,9 @@
 ﻿<script src='js/functions.js'></script>
 <div class="col-md-9 col-sm-12">
     <div class="application-step step-1">
+        <div class="alert" ng-show="Ctrl.Error!=''">
+            <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+        </div>
         <h3 class="step-heading">Review</h3>
 
         <form name="frmOwnerResponseReview" id="frmOwnerResponseReview" action="#" method="post" class="application-form" onsubmit="return false;">
@@ -244,7 +247,7 @@
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
-                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'}">
+                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice'}">
                             {{item.DocName}}
                         </div>
                     </div>
