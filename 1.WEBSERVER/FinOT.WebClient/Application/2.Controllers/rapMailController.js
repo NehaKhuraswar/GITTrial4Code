@@ -126,7 +126,7 @@
 
         rapFactory.SubmitMail(self.model).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
-            
+            rapGlobalFactory.MailNotification = response.data;
         });
     }
 

@@ -691,8 +691,8 @@ namespace RAP.API.Controllers
         public HttpResponseMessage SubmitMail([FromBody] MailM model)
         {
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
-            TranInfo<bool> transaction = new TranInfo<bool>();
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            TranInfo<MailM> transaction = new TranInfo<MailM>();
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
             try
             {
                 var dbResult = _service.SubmitMail(model);
@@ -715,7 +715,7 @@ namespace RAP.API.Controllers
                 result.status = _eHandler.HandleException(ex);
                 _commonService.LogError(result.status);
             }
-            return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
+            return Request.CreateResponse<TranInfo<MailM>>(ReturnCode, transaction);
         }
 
         

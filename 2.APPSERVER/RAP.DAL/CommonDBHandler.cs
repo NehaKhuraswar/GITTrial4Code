@@ -880,9 +880,9 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<bool> SaveMailNotification(MailM message)
+        public ReturnResult<MailM> SaveMailNotification(MailM message)
         {
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
             try
             {
                 using (CommonDataContext db = new CommonDataContext(_connString))
@@ -915,7 +915,7 @@ namespace RAP.DAL
                                 }
                             }
                         }
-                        result.result = true;
+                        result.result = message;
                         result.status = new OperationStatus() { Status = StatusEnum.Success };
                         return result;
                     }

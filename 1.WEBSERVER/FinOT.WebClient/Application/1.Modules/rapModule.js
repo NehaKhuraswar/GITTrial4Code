@@ -17,6 +17,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         var FromSelectedCase = false;
         var SelectedForEdit = null;
         var Notification = null;
+        var MailNotification = null;
         var IsAdmin = false;
         
         var _getCustomer = function () {

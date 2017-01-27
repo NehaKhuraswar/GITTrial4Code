@@ -165,9 +165,9 @@ namespace RAP.Business.Implementation
            }
        }
 
-       public ReturnResult<bool> SaveMailNotification(MailM message)
+       public ReturnResult<MailM> SaveMailNotification(MailM message)
        {
-           ReturnResult<bool> result = new ReturnResult<bool>();
+           ReturnResult<MailM> result = new ReturnResult<MailM>();
            try
            {
                result = _dbHandler.SaveMailNotification(message);

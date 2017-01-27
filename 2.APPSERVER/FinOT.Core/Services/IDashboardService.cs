@@ -21,7 +21,7 @@ namespace RAP.Core.Services
         ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID);
         ReturnResult<CustomEmailM> SubmitCustomEmail(CustomEmailM cMail);
         ReturnResult<MailM> GetMail();
-        ReturnResult<bool> SubmitMail(MailM mail);
+        ReturnResult<MailM> SubmitMail(MailM mail);
         ReturnResult<SearchCaseResult> GetCaseSearch(CaseSearch caseSearch);
 
     }

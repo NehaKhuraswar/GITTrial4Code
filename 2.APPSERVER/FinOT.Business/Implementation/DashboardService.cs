@@ -289,9 +289,9 @@ namespace RAP.Business.Implementation
             result.status = new OperationStatus() { Status = StatusEnum.Success };
             return result;
         }
-        public ReturnResult<bool> SubmitMail(MailM mail)
+        public ReturnResult<MailM> SubmitMail(MailM mail)
         {
-            ReturnResult<bool> result = new ReturnResult<bool>();
+            ReturnResult<MailM> result = new ReturnResult<MailM>();
             List<DocumentM> _documents = new List<DocumentM>();
             try
             {
