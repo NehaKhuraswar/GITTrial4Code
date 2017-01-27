@@ -2,7 +2,7 @@
 var rapAdditionalCaseDocumentFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
     var _routePrefix = 'api/dashboard';
-
+    //Get the Case Document
     var _getCaseDocuments = function (cid) {
         blockUI.start();
         var url = _routePrefix + '/GetCaseDocuments';
@@ -12,6 +12,7 @@ var rapAdditionalCaseDocumentFactory = ['blockUI', 'ajaxService', function (bloc
             blockUI.stop();
         });
     }
+    //Save the Case Document
     var _saveCaseDocuments = function (model) {
         blockUI.start();
         var url = _routePrefix + '/SaveCaseDocuments';
