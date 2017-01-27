@@ -30,7 +30,7 @@ namespace RAP.Core.DataModels
         public bool bSameAsOwnerInfo { get; set; }
         public UserInfoM PropertyManager { get; set; }
         public int TenantResponseID { get; set; }
-        public int NumberOfUnits { get; set; }
+        public int? NumberOfUnits { get; set; }
         public NumberRangeForUnitsM SelectedRangeOfUnits { get; set; }
         public int UnitTypeId { get; set; }
         public bool bCurrentRentStatus { get; set; }

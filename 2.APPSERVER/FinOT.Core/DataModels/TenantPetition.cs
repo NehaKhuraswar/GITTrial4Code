@@ -235,7 +235,7 @@ namespace RAP.Core.DataModels
         public bool bSameAsOwnerInfo { get; set; }
         public UserInfoM PropertyManager { get; set; }
         public int PetitionID { get; set; }
-        public int NumberOfUnits { get; set; }
+        public int? NumberOfUnits { get; set; }
         public NumberRangeForUnitsM SelectedRangeOfUnits { get; set; }
         public int UnitTypeId { get; set; }
         public bool bCurrentRentStatus { get; set; }
@@ -348,7 +348,7 @@ namespace RAP.Core.DataModels
     public class TenantLostServiceInfoM
     {
         public string ReducedServiceDescription { get; set; }
-        public decimal EstimatedLoss { get; set; }
+        public decimal? EstimatedLoss { get; set; }
         public CustomDate LossBeganDate { get; set; }
         public CustomDate PayingToServiceBeganDate { get; set; }
         public bool IsDeleted { get; set; }
@@ -357,7 +357,7 @@ namespace RAP.Core.DataModels
     public class TenantProblemInfoM
     {
         public string ProblemDescription { get; set; }
-        public decimal EstimatedLoss { get; set; }
+        public decimal? EstimatedLoss { get; set; }
         public CustomDate ProblemBeganDate { get; set; }
         public CustomDate PayingToProblemBeganDate { get; set; }
         public bool IsDeleted { get; set; }
