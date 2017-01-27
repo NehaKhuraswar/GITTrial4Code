@@ -337,6 +337,7 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 result.result = mail;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)

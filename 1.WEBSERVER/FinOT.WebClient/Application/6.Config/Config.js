@@ -99,6 +99,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
              controllerAs: 'Ctrl',
              resolve: rapMailController_resolve
          })
+        .when('/usmailnotificationsent', {
+            templateUrl: 'views/account/EmailNotificationSent.html',
+            controller: rapMailNotificationSentController,
+            controllerAs: 'Ctrl',
+            resolve: rapMailNotificationSentController_resolve
+        })
         .when('/admindashboard', {
                     templateUrl: 'views/account/AdminDashboard.html',
                     controller: rapadmindashboardController,

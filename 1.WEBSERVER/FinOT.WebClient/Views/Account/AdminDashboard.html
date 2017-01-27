@@ -47,7 +47,7 @@
                                         <div class="full-width">
                                             <select name="account_type" id="account_type" class="custom-select" data-placeholder="Account Type"
                                                     ng-model="Ctrl.AccountSearchModel.AccountType"
-                                                    ng-options="accounttype as (state.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID" required>
+                                                    ng-options="accounttype as (accounttype.AccountTypeDesc) for accounttype in Ctrl.AccountTypesList track by accounttype.AccountTypeID" required>
                                                 <option value="" selected>Select account type</option>
                                             </select>
                                         </div>

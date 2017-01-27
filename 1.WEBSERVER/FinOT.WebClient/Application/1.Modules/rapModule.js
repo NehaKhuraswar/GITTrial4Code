@@ -239,6 +239,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapAdditionalCaseDocumentController', rapAdditionalCaseDocumentController)
     .controller('rapCustomEmailController', rapCustomEmailController)
     .controller('rapEmailNotificationSentController', rapEmailNotificationSentController)
+    .controller('rapMailNotificationSentController', rapMailNotificationSentController)
     .controller('rapMailController', rapMailController)
 
     .directive('yearDrop',function(){

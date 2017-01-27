@@ -1406,45 +1406,45 @@ namespace RAP.DAL
                         cityUserTable.EmployeeID = (int)message.EmployeeID;
                         if (message.SelectedRole == (int)CityUserRoles.Analyst)
                         {
-                            CityUserExists.IsAnalyst = true;
+                            cityUserTable.IsAnalyst = true;
                         }
                         else
                         {
-                            CityUserExists.IsAnalyst = false;
+                            cityUserTable.IsAnalyst = false;
                         }
                         if (message.SelectedRole == (int)CityUserRoles.HearingOfficer)
                         {
-                            CityUserExists.IsHearingOfficer = true;
+                            cityUserTable.IsHearingOfficer = true;
                         }
                         else
                         {
-                            CityUserExists.IsHearingOfficer = false;
+                            cityUserTable.IsHearingOfficer = false;
                         }
                         if (message.SelectedRole == (int)CityUserRoles.AdminAssistant)
                         {
-                            CityUserExists.IsAdminAssistant = true;
+                            cityUserTable.IsAdminAssistant = true;
                         }
                         else
                         {
-                            CityUserExists.IsAdminAssistant = false;
+                            cityUserTable.IsAdminAssistant = false;
                         }
                         if (message.SelectedRole == (int)CityUserRoles.CityAdmin)
                         {
-                            CityUserExists.IsCityAdmin = true;
-                            CityUserExists.CityAccountTypeID = 2; //City Admin type
+                            cityUserTable.IsCityAdmin = true;
+                            cityUserTable.CityAccountTypeID = 2; //City Admin type
                         }
                         else
                         {
-                            CityUserExists.IsCityAdmin = false;
-                            CityUserExists.CityAccountTypeID = 1;
+                            cityUserTable.IsCityAdmin = false;
+                            cityUserTable.CityAccountTypeID = 1;
                         }
                         if (message.SelectedRole == (int)CityUserRoles.NonRapStaff)
                         {
-                            CityUserExists.IsNonRAPStaff = true;
+                            cityUserTable.IsNonRAPStaff = true;
                         }
                         else
                         {
-                            CityUserExists.IsNonRAPStaff = false;
+                            cityUserTable.IsNonRAPStaff = false;
                         }
                         cityUserTable.Title = message.Title;
                         cityUserTable.Department = message.Department;

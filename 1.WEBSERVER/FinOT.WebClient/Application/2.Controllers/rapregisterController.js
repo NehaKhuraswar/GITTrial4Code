@@ -5,6 +5,8 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.StateList = [];
     self.Password;
     self.ConfirmPassword;
+    self.Error = '';
+    self.Hide = false;
     $scope.required = true;
 
     if (rapGlobalFactory.IsEdit == null || rapGlobalFactory.IsEdit == undefined)
@@ -35,7 +37,10 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     var _GetCustomerFromID = function(custID)
     {
         return rapFactory.GetCustomerFromID(custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+                return;
+                }
             self.CustomerInfo = response.data;
         });
     }
@@ -53,7 +58,10 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
 
     var _GetCustomerModel = function () {
         return rapFactory.GetCustomer(null).then(function (response) {
-               if (!alert.checkResponse(response)) { return; }
+               if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+                }
                self.CustomerInfo = response.data;
                //rapGlobalFactory.CustomerDetails = self.CustomerInfo;
         });        
@@ -65,9 +73,10 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
 
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+                }
             self.StateList = response.data;
         });
     }
@@ -103,10 +112,15 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.Register = function (model) {
         if (self.Password != self.ConfirmPassword)
         {
-            alert.Error("Password not matching!")
+            self.Error = "Password not matching!";
             return;
             }
         model.Password = self.Password;
+        if (model.EmailNotificationFlag == false && model.MailNotificationFlag == false)
+        {
+            self.Error = "Please select one of the notification preference";
+            return;
+        }
         
         //if (!checkPassword(model.Password, model.email))
         //    {
@@ -120,9 +134,10 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         //}
        
         rapFactory.SaveCustomer(null, model).then(function(response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+                }
             if (rapGlobalFactory.IsEdit == true)
             {
                 rapGlobalFactory.SelectedForEdit = null;
@@ -142,9 +157,10 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
 
     self.DeleteCustomer = function (model) {
         rapFactory.DeleteCustomer(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
                 return;
-            }
+        }
             if (rapGlobalFactory.IsEdit == true) {
                 rapGlobalFactory.SelectedForEdit = null;
                 rapGlobalFactory.IsEdit = false;
