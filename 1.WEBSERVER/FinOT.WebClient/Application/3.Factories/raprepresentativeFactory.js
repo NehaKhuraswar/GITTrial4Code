@@ -10,7 +10,7 @@ var raprepresentativeFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
         });
     }
-
+    //Remove Third Party Information
     var _RemoveThirdPartyInfo = function (model) {
         blockUI.start();
 
@@ -21,7 +21,7 @@ var raprepresentativeFactory = ['blockUI', 'ajaxService', function (blockUI, aja
     }
 
    
-
+    //Get Third Party Information based on Customer ID
     var _GetThirdPartyInfo = function (custID) {
         blockUI.start();
 
