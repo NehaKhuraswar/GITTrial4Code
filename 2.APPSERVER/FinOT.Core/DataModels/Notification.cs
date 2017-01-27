@@ -42,6 +42,7 @@ namespace RAP.Core.DataModels
        private List<DocumentM> _attachments = new List<DocumentM>();
        public int NotificationID { get; set; }
        public string Activity { get; set; }
+       public int ActivityID { get; set; }
        public List<string> Recipient { get; set; }
        public string Notes { get; set; }
        public int CityUserID { get; set; }

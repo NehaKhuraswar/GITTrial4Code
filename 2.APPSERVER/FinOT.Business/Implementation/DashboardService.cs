@@ -311,20 +311,33 @@ namespace RAP.Business.Implementation
             try
             {
                 if (mail.Attachments != null && mail.Attachments.Any())
+                {
+                    foreach (var doc in mail.Attachments)
                     {
-                        foreach (var doc in mail.Attachments)
+                        doc.DocCategory = DocCategory.MailAttachment.ToString();
+                        var docUploadResut = _documentService.UploadDocument(doc);
+                        if (docUploadResut.status.Status == StatusEnum.Success)
                         {
-                            doc.DocCategory = DocCategory.MailAttachment.ToString();
-                            var docUploadResut = _documentService.UploadDocument(doc);
-                            if (docUploadResut.status.Status == StatusEnum.Success)
-                            {
-                                _documents.Add(doc);
-                            }
+                            _documents.Add(doc);
                         }
                     }
-                    mail.Attachments = _documents;
-                  result =  _commonService.SaveMailNotification(mail);              
-                  return result;
+                }
+                mail.Attachments = _documents;
+                var notifiacationResult = _commonService.SaveMailNotification(mail);
+                if (notifiacationResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = notifiacationResult.status;
+                    return result;
+                }
+                mail.NotificationID = notifiacationResult.result.NotificationID;
+                var updateNotification = _commonService.MailSentActivity(mail.C_ID, mail.CityUserID, mail.ActivityID, notifiacationResult.result.NotificationID);
+                if (updateNotification.status.Status != StatusEnum.Success)
+                {
+                    result.status = updateNotification.status;
+                    return result;
+                }
+                result.result = mail;
+                return result;
             }
             catch (Exception ex)
             {

@@ -15,7 +15,7 @@
     self.Home = function () {
         $location.path("/staffdashboard");
     }
-
+    self.SelectedActivity = null;
     self.Tenant = null;
     self.Owner = null;
     self.ThirdParty = null;
@@ -123,7 +123,8 @@
         if (self.bThirdParty) {
             self.model.Recipient.push(self.ThirdParty);
         }
-
+        self.model.Activity = self.SelectedActivity.ActivityDesc;
+        self.model.ActivityID = self.SelectedActivity.ActivityID;
         rapFactory.SubmitMail(self.model).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             rapGlobalFactory.MailNotification = response.data;
