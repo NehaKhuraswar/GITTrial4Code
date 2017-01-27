@@ -5054,7 +5054,7 @@ namespace RAP.DAL
                 verificationDB.bDeclarePenalty = model.OwnerPetitionInfo.Verification.bDeclarePenalty;
                 verificationDB.bThirdParty = model.bCaseFiledByThirdParty;
                 verificationDB.bThirdPartyMediation = model.OwnerPetitionInfo.Verification.bThirdPartyMediation;
-                verificationDB.PetitionID = model.OwnerPetitionInfo.OwnerPetitionID;
+                verificationDB.PetitionID = ownerPetitionID;
                 verificationDB.CreatedDate = DateTime.Now;
                 _dbContext.OwnerPetitionVerifications.InsertOnSubmit(verificationDB);
                 _dbContext.SubmitChanges();

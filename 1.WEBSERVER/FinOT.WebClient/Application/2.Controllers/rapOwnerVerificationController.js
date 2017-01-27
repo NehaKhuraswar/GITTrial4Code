@@ -4,6 +4,7 @@
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
+    self.caseinfo.CaseFileBy = self.custDetails.custID;
     self.Error = '';
     self.Hide = false;
     self.ResendPin = function () {

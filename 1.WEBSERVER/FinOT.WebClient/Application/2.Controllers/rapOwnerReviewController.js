@@ -3,7 +3,9 @@
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-    self.caseinfo.CustomerID = self.custDetails.custID;
+    self.caseinfo.CustomerID = self.custDetails.custID;   
+    self.caseinfo.OwnerPetitionInfo.PropertyInfo.CustomerID = self.custDetails.custID;
+    self.caseinfo.OwnerPetitionInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
     self.Error = "";
     rapFactory.GetOwnerReview(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
