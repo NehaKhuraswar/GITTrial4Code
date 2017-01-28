@@ -777,7 +777,6 @@ namespace RAP.API.Controllers
         [HttpPost]
         public HttpResponseMessage GetAccountSearch([FromBody] AccountSearch accountSearch)
         {
-            System.Diagnostics.EventLog.WriteEntry("Account", "Controller Get account search started");
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<SearchResult> transaction = new TranInfo<SearchResult>();

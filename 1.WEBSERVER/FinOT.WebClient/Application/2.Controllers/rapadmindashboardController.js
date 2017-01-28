@@ -70,7 +70,7 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     }
     self.AccountSearch = function (model) {
         //model.PageSize = 10;
-       
+      
         model.CurrentPage = 1;
         model.SortBy = "Name";
         model.SortReverse = 0;

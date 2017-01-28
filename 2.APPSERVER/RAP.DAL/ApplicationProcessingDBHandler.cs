@@ -441,7 +441,7 @@ namespace RAP.DAL
                         tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
                     }
 
-                    tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                    tenantPetitionInfo.NumberOfUnits = Convert.ToInt32(TenantPetitionInfoDB.NumberOfUnits);
                     tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
                     tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
                     tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
@@ -484,7 +484,7 @@ namespace RAP.DAL
                     tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
                     tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
                 }
-                tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                tenantPetitionInfo.NumberOfUnits = Convert.ToInt32(TenantPetitionInfoDB.NumberOfUnits);
                 tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
                 tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
                 tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
@@ -1087,7 +1087,7 @@ namespace RAP.DAL
                     {
                         tenantPetitionInfo.bSameAsOwnerInfo = true;
                     }
-                    tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                    tenantPetitionInfo.NumberOfUnits = Convert.ToInt32(TenantPetitionInfoDB.NumberOfUnits);
                     tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
                     tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
                     tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
@@ -1131,7 +1131,7 @@ namespace RAP.DAL
                     {
                         tenantPetitionInfo.bSameAsOwnerInfo = true;
                     }
-                    tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                    tenantPetitionInfo.NumberOfUnits = Convert.ToInt32(TenantPetitionInfoDB.NumberOfUnits);
                     tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
                     tenantPetitionInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantPetitionInfoDB.RangeID);
                     tenantPetitionInfo.bCurrentRentStatus = TenantPetitionInfoDB.bRentStatus;
@@ -1216,7 +1216,7 @@ namespace RAP.DAL
                     {
                         tenantPetitionInfo.bSameAsOwnerInfo = true;
                     }
-                    tenantPetitionInfo.NumberOfUnits = (int)TenantPetitionInfoDB.NumberOfUnits;
+                    tenantPetitionInfo.NumberOfUnits = Convert.ToInt32(TenantPetitionInfoDB.NumberOfUnits);
                     tenantPetitionInfo.UnitTypeId = TenantPetitionInfoDB.UnitTypeID;
                     tenantPetitionInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantPetitionInfoDB.RangeID);
                     if (tenantPetitionInfo.SelectedRangeOfUnits.RangeID > 0)
@@ -3264,7 +3264,7 @@ namespace RAP.DAL
                     {
                         tenantResponseInfo.bSameAsOwnerInfo = true;
                     }
-                    tenantResponseInfo.NumberOfUnits = (int)TenantResponseInfoDB.NumberOfUnits;
+                    tenantResponseInfo.NumberOfUnits = Convert.ToInt32(TenantResponseInfoDB.NumberOfUnits);
                     tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
                     tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
                     tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
@@ -3527,7 +3527,7 @@ namespace RAP.DAL
                     {
                         tenantResponseInfo.bSameAsOwnerInfo = true;
                     }
-                    tenantResponseInfo.NumberOfUnits = (int)TenantResponseInfoDB.NumberOfUnits;
+                    tenantResponseInfo.NumberOfUnits = Convert.ToInt32(TenantResponseInfoDB.NumberOfUnits);
                     tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
                     tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
                     tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;

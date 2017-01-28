@@ -696,11 +696,13 @@ namespace RAP.DAL
 
         public ReturnResult<SearchResult> GetAccountSearch(AccountSearch accountSearch)
         {
+            System.Diagnostics.EventLog.WriteEntry("Application", "DAL GetAccountSearch started");
             ReturnResult<SearchResult> result = new ReturnResult<SearchResult>();
 
             try
             {
                 SearchResult searchResult = new SearchResult();
+
                 //List<CustomerInfo accounts = new CustomerInfo();
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
