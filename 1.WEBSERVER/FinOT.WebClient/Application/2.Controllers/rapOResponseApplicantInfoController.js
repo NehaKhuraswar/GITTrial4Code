@@ -8,6 +8,8 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
     self.caseinfo.OwnerResponseInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
 
     self.StateList = [];
+    self.Hide = false;
+    self.Error = '';
 
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
@@ -105,7 +107,10 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             MoveNext()
         });

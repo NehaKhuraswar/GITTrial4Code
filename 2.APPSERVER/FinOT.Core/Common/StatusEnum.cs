@@ -19,6 +19,7 @@ namespace RAP.Core.Common
         OwnerResponseSubmissionFailed,
         PetitionGroundRequired,
         JustificationRequired,
+        CaseNumerIsNotValid,
         #endregion
         
         #region Exceptions

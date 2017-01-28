@@ -79,6 +79,15 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case responding to is not valid.
+        /// </summary>
+        internal static string ID_0006 {
+            get {
+                return ResourceManager.GetString("ID_0006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login.
         /// </summary>
         internal static string ID_0106 {

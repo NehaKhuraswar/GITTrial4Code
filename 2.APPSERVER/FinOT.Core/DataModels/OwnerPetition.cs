@@ -250,7 +250,7 @@ namespace RAP.Core.DataModels
         public string BusinessLicenseNumber { get; set; }
         public bool bRentAdjustmentProgramFeePaid { get; set; }
         public CustomDate BuildingAcquiredDate { get; set; }
-        public int NumberOfUnits { get; set; }
+        public int? NumberOfUnits { get; set; }
         public bool bMoreThanOneStreetOnParcel { get; set; }
         public int CustomerID { get; set; }
         public bool bPetitionFiled { get; set; }

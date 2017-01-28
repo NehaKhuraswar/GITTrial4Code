@@ -62,6 +62,10 @@ namespace RAP.Core.Common
                     StatusCode = "0005";
                     StatusMessage = Message.ResourceManager.GetString("ID_0005");
                     break;
+                case StatusEnum.CaseNumerIsNotValid:
+                    StatusCode = "0006";
+                    StatusMessage = Message.ResourceManager.GetString("ID_0006");
+                    break;
 
 
 

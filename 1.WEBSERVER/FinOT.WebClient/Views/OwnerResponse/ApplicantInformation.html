@@ -2,14 +2,17 @@
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            <div class="alert alert-error" ng-show="Hide==true"></div>
+            <div class="alert alert-error" ng-show="Ctrl.Hide==true"></div>
+            <div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>
             <div class="step-heading">Applicant and Property Information</div>
             <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" onsubmit="return false;" novalidate>
                 <div class="step-content step1">
                     <div class="field-group subhead no-top-margin">
                         <div class="info">
                             <div class="title">Case number</div>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo" required />
+                            <input type="text" id="case_number" name="case_number" case_number"" class="field-input required" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo" data-error="Case number" required />
                         </div>
                     </div>
 
@@ -218,7 +221,8 @@
                         <label for="Business_license">Oakland Business License number</label>
                         <input type="text" name="business_license_number" id="business_license_number" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.BusinessLicenseNumber" data-error="Business License Number" required
                                ng-class="{'field-input required' : Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid,
-                                                   'field-input' : !(Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid)}" />
+                                                   'field-input' : !(Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid)}"
+                               ng-required="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid" />
                     </div>
 
                     <div class="field-group">
@@ -274,7 +278,6 @@
                                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OR_PropertyServiceFee')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
                             </div>
                         </div>
-
                         <div class="field-group">
                             <table class="table table-condensed nopadding-bottom">
                                 <tbody>
@@ -379,7 +382,18 @@
 
 
                     <input aria-label="Save and continue" role="button" type="submit" id="save" name="save" class="btn-primary" value="Save and continue"
-                           ng-click="Ctrl.Continue()" />
+                           ng-click="(Ctrl.Hide=true); (!frmOwnerResponse.Applicant_firstname.$error.required)&&
+                           (!frmOwnerResponse.case_number.$error.required)&&
+                           (!frmOwnerResponse.Applicant_lastname.$error.required)&&
+                           (!frmOwnerResponse.Applicant_address1.$error.required)&&
+                           (!frmOwnerResponse.Applicant_city.$error.required)&&
+                           (!frmOwnerResponse.Applicant_zip.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_firstname.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_lastname.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_address1.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_city.$error.required)&&
+                           (!frmOwnerResponse.Thirdparty_zip.$error.required)&&
+                           (!frmOwnerResponse.business_license_number.$error.required) && Ctrl.Continue()" />
                 </div>
             </form>
         </div>

@@ -5275,7 +5275,7 @@ namespace RAP.DAL
                     _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                     _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
                     _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
-                    _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
+                    _applicantInfo.NumberOfUnits = Convert.ToInt32(applicantInfo.NumberOfUnits);
                     _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                     _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
                     _applicantInfo.bPetitionFiled = Convert.ToBoolean(applicantInfo.bPetitionFiled);
@@ -5733,7 +5733,7 @@ namespace RAP.DAL
                         _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                         _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
                         _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
-                        _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
+                        _applicantInfo.NumberOfUnits = Convert.ToInt32(applicantInfo.NumberOfUnits);
                         _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                         _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
                         _applicantInfo.bPetitionFiled = Convert.ToBoolean(applicantInfo.bPetitionFiled);
@@ -5926,6 +5926,7 @@ namespace RAP.DAL
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             int applicantUserID = 0;
+            bool isCaseValid = false;
             int thirdPartyUserID = 0;
             {
                 try
@@ -5967,6 +5968,12 @@ namespace RAP.DAL
                         var applicantInfo = from r in _dbContext.OwnerResponseApplicantInfos
                                             where r.OwnerResponseApplicantInfoID == model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID
                                             select r;
+                        var respondinngCase = _dbContext.CaseDetails.Where(r => r.CaseID == model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo && r.PetitionCategoryID == 1).FirstOrDefault();
+                        if(respondinngCase !=null)
+                        {
+                            isCaseValid = true;
+                        }
+
                         if (applicantInfo.Any())
                         {
                             OwnerResponseApplicantInfoM _applicantInfo = new OwnerResponseApplicantInfoM();
@@ -5979,7 +5986,11 @@ namespace RAP.DAL
                             applicantInfo.First().bBusinessLicensePaid = model.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid;
                             applicantInfo.First().BusinessLicenseNumber = model.OwnerResponseInfo.ApplicantInfo.BusinessLicenseNumber;
                             applicantInfo.First().bRentAdjustmentProgramFeePaid = model.OwnerResponseInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
-                            applicantInfo.First().CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
+                            if (isCaseValid)
+                            {
+                                applicantInfo.First().CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
+                            }
+
                             if (model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
                             {
                                 applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
@@ -5995,6 +6006,11 @@ namespace RAP.DAL
                     }
                     else
                     {
+                        var respondinngCase = _dbContext.CaseDetails.Where(r => r.CaseID == model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo && r.PetitionCategoryID == 1).FirstOrDefault();
+                        if (respondinngCase != null)
+                        {
+                            isCaseValid = true;
+                        }
                         OwnerResponseApplicantInfo applicantInfo = new OwnerResponseApplicantInfo();
                         applicantInfo.ApplicantUserID = applicantUserID;
                         applicantInfo.bThirdPartyRepresentation = model.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation;
@@ -6016,7 +6032,10 @@ namespace RAP.DAL
                         }
                         applicantInfo.bMoreThanOneStreetOnParcel = model.OwnerResponseInfo.ApplicantInfo.bMoreThanOneStreetOnParcel;
                         applicantInfo.CustomerID = model.OwnerResponseInfo.ApplicantInfo.CustomerID;
-                        applicantInfo.CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
+                        if (isCaseValid)
+                        {
+                            applicantInfo.CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
+                        }
                         applicantInfo.bPetitionFiled = false;
                         _dbContext.OwnerResponseApplicantInfos.InsertOnSubmit(applicantInfo);
                         _dbContext.SubmitChanges();
@@ -6031,7 +6050,14 @@ namespace RAP.DAL
                     }
 
                     result.result = model;
-                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    if (isCaseValid)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    }
+                    else
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.CaseNumerIsNotValid };
+                    }
                     return result;
                 }
                 catch (Exception ex)

@@ -123,6 +123,9 @@
   <data name="ID_0005" xml:space="preserve">
     <value>Justification for Rent Increase is required field</value>
   </data>
+  <data name="ID_0006" xml:space="preserve">
+    <value>Case responding to is not valid</value>
+  </data>
   <data name="ID_0106" xml:space="preserve">
     <value>Invalid login</value>
   </data>
