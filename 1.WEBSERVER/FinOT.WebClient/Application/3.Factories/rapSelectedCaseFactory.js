@@ -2,7 +2,7 @@
 var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     var factory = {};
     var _routePrefix = 'api/accountmanagement';
-  
+
     var _GetSelectedCase = function (C_ID) {
         blockUI.start();
 
@@ -21,14 +21,14 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
 
         //if (!(caseid == null || caseid == undefined)) { url = url + '/' + caseid; }
 
-         return ajax.Post(model, url)
-        .finally(function () {
-            blockUI.stop();
-        });
+        return ajax.Post(model, url)
+       .finally(function () {
+           blockUI.stop();
+       });
     }
 
-   
-    var _GetCaseActivityStatus = function(model) {
+
+    var _GetCaseActivityStatus = function (model) {
         blockUI.start();
 
         var url = 'api/dashboard' + '/getcaseactivitystatus';
@@ -36,7 +36,7 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
         return ajax.Post(model, url)
         .finally(function () {
             blockUI.stop();
-         });
+        });
     }
 
     var _GetCaseInfo = function () {
@@ -48,7 +48,7 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
         .finally(function () {
             blockUI.stop();
         });
-      }
+    }
     var _GetTenantAppealInfoForView = function (CID) {
         blockUI.start();
 
@@ -76,6 +76,18 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
 
         var url = 'api/applicationprocessing' + '/GetTenantResponseViewInfo';
         if (!(CID == null || CID == undefined)) { url = url + '/' + CID; }
+
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+    var _GetOResponseViewByCaseID = function (CID) {
+        blockUI.start();
+        var url = 'api/applicationprocessing' + '/GetOResponseViewByCaseID';
+        if (!(CID == null || CID == undefined)) {
+            url = url + '/' + CID;
+        }
 
         return ajax.Get(url)
         .finally(function () {
@@ -122,6 +134,7 @@ var rapSelectedCaseFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
     factory.GetCaseDocuments = _getCaseDocuments;
     factory.GetCustomEmailNotification = _GetCustomEmailNotification;
     factory.GetMailNotification = _GetMailNotification;
+    factory.GetOResponseViewByCaseID = _GetOResponseViewByCaseID;
 
     return factory;
 }];

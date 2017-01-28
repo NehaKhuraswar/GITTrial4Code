@@ -216,9 +216,10 @@
                                                 <div class="col col-20 date">{{activity.Date | date}}</div>
                                                 <div class="col col-25 initiated-by">{{activity.CreatedBy}}</div>
                                                 <div class="col col-15 status">{{activity.Status.StatusDesc}}</div>
-                                                <div class="col col-10  pad-r0 link" ng-if="activity.Activity.ActivityID == 1 
+                                                <div class="col col-10  pad-r0 link" ng-if="activity.Activity.ActivityID == 1
                                                      || activity.Activity.ActivityID == 26
                                                      || activity.Activity.ActivityID == 27
+                                                     || activity.Activity.ActivityID == 35
                                                      || activity.Status.StatusID == 2"><a ng-click="Ctrl.ViewPage(activity,Ctrl.caseinfo)" class="btn-link">View</a></div>
                                             </div>
                                         </div><!-- item-toggle -->

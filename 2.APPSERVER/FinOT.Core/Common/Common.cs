@@ -64,7 +64,8 @@ namespace RAP.Core.Common
         ActivityPetitionFiled = 1,
         AppealFiled = 26,
         ResponseFiled = 27,
-        AdditionalDocumentation = 24
+        AdditionalDocumentation = 24,
+        OwnerResponse = 35
     }
     public enum StatusDefaults
     {

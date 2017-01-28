@@ -462,6 +462,7 @@
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
     <Content Include="Views\Account\MailNotificationSent.html" />
     <Content Include="Views\Account\EmailNotificationSent.html" />
+    <Content Include="Views\Account\ViewOwnerResponse.html" />
     <Content Include="Views\Account\ViewTenantResponse.html" />
     <Content Include="Views\Account\ViewAppeal.html" />
     <Content Include="Views\Account\SendEmailNotification.html" />

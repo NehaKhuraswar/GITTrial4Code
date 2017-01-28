@@ -1269,7 +1269,29 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<CaseInfoM> GetOResponseViewByCaseID(int C_ID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                var dbResult = _dbHandler.GetOResponseViewByCaseID(C_ID);
 
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = dbResult.status;
+                    return result;
+                }
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+                return result;
+            }
+        }
         #endregion
 
         #region Save Owner Petition Methods

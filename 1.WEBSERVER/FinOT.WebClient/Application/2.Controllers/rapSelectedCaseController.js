@@ -145,8 +145,19 @@ self.ViewPage = function (activity, caseinfo) {
             $location.path("/ViewAppeal");
     });
     }
+    else if (activity.Activity.ActivityID == 35) {
+        rapFactory.GetOResponseViewByCaseID(caseinfo.C_ID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo = response.data;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+            rapGlobalFactory.FromSelectedCase = true;
+            $location.path("/ViewOwnerResponse");
+        });
+    }
     else if (activity.Activity.ActivityID == 27) {
-            rapFactory.GetTenantResponseViewInfo(caseinfo.C_ID).then(function (response) {
+        rapFactory.GetTenantResponseViewInfo(caseinfo.C_ID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
@@ -155,7 +166,7 @@ self.ViewPage = function (activity, caseinfo) {
             rapGlobalFactory.FromSelectedCase = true;
             $location.path("/ViewTenantResponse");
         });
-            }
+    }
             else if (activity.Status.StatusID == 2) {
                 rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID, activity.NotificationID).then(function (response) {
             if (!alert.checkResponse(response)) {
