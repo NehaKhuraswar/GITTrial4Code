@@ -2,28 +2,24 @@
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            <div class="alert alert-error" ng-show="Ctrl.Hide==true">
-                <!--<strong><a href="javascript:void();" data-scrollto="anybody_representing_you">Is anybody representing you</a></strong>  is a required field<br />
-        <strong><a href="javascript:void();" data-scrollto="rao_exemption_contest">I wish to contest an exemption from the Rent Adjustment Ordinance</a></strong>  is a required field<br />
-        <strong><a href="javascript:void();" data-id="representative_firstname">Name</a></strong> is a required field<br />
-        <strong><a href="javascript:void();" data-id="business_name">Business name</a></strong> is a required field-->
-            </div>
+            <div class="alert alert-error" ng-show="Ctrl.Hide==true"></div>
             <div class="alert" ng-show="Ctrl.Error!=''">
                 <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
             </div>
+           
             <div class="step-heading">Rental Property</div>
-            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" onsubmit="return false;">
+            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" novalidate onsubmit="return false;">
                 <div class="step-content create-new">
                     <div class="field-group">
                         <p class="input-label">Type of unit you rent</p>
-                        <div class="form-group-radio vertical clearfix">
+                        <div class="form-group-radio vertical clearfix required" data-error="Type of unit you rent">
                             <label ng-repeat="unittype in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
                                 <input type="radio"
                                        class="input-field"
                                        ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID"
                                        ng-value="unittype.UnitTypeID"
                                        id="{{unittype.UnitTypeID}}"
-                                       name="units"><i></i><span>{{unittype.UnitDescription}}</span>
+                                       name="UnitType" required><i></i><span>{{unittype.UnitDescription}}</span>
                             </label>
 
                         </div>
@@ -31,26 +27,26 @@
 
                     <div class="field-group">
                         <label for="Applicant_firstname">Tenant's name</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName"  />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName" />
                     </div>
 
                     <div class="field-group">
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName"  />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName" />
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_address1">Mailing address 1</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1"  />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1" />
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_address2">Mailing address 2 (optional)</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2"  />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine2" />
                     </div>
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_city">City</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City"  />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City" />
                     </div>
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_state">State</label>
@@ -64,17 +60,17 @@
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_zip_code">Zip code</label>
-                        <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip"  />
+                        <input type="text" class="field-input" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip" />
                     </div>
 
-                    <div class="field-group" >
+                    <div class="field-group">
                         <label for="Applicante_phone_number">Phone number</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber"  />
+                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.PhoneNumber" />
                     </div>
 
-                    <div class="field-group" >
+                    <div class="field-group">
                         <label for="Applicant_email">Email Address</label>
-                        <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email"  />
+                        <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email" />
                     </div>
 
                     <div>
@@ -96,7 +92,9 @@
                 </div>
 
                 <div class="step-footer">
-                    <input aria-label="Save and continue" role="button" type="button" id="continue" name="continue" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
+                   
+                    <input aria-label="Save and continue" role="button" type="button" id="continue" name="continue" class="btn-primary" value="Save and continue"
+                           ng-click="(Ctrl.Hide=true); (!frmOwnerResponse.UnitType.$error.required) && Ctrl.Continue()" />
                 </div>
             </form>
         </div>

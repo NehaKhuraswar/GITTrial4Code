@@ -8,7 +8,8 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
     self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;
     self.StateList = [];
     self.IsTenant = false;
-    self.Error = "";
+    self.Hide = false;
+    self.Error = '';
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -52,12 +53,16 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
             _GetIsTenant();
         }
         if (self.IsTenant == false) {
+            self.Hide = false;
             self.Error = "Please add tenant information";
             return;
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             MoveNext();
         });
@@ -65,7 +70,6 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
     }
 
     function MoveNext() {
-
         $scope.model.oresponseRentalProperty = false;
         $scope.model.oresponseRentalHistory = true;
         $scope.model.DisableAllCurrent();
