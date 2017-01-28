@@ -464,27 +464,6 @@
       <Column Name="Verification" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.OwnerResponseApplicantInfo" Member="OwnerResponseApplicantInfos">
-    <Type Name="OwnerResponseApplicantInfo">
-      <Column Name="OwnerResponseApplicantInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ApplicantUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bBusinessLicensePaid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="BusinessLicenseNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="bRentAdjustmentProgramFeePaid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="BuildingAcquiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="NumberOfUnits" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="bMoreThanOneStreetOnParcel" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="bPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ResponseFiledByThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CaseRespondingTo" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
-      <Column Name="RangeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="OwnerResponseApplicantInfo_OwnerResponseInfo" Member="OwnerResponseInfos" ThisKey="OwnerResponseApplicantInfoID" OtherKey="OwnerResponseApplicantInfoID" Type="OwnerResponseInfo" />
-    </Type>
-  </Table>
   <Table Name="dbo.OwnerPetitionPropertyInfo" Member="OwnerPetitionPropertyInfos">
     <Type Name="OwnerPetitionPropertyInfo">
       <Column Name="OwnerPropertyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -601,6 +580,27 @@
       <Column Name="bCaseMediation" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="OwnerPetitionInfo_OwnerPetitionVerification" Member="OwnerPetitionInfo" ThisKey="PetitionID" OtherKey="OwnerPetitionID" Type="OwnerPetitionInfo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OwnerResponseApplicantInfo" Member="OwnerResponseApplicantInfos">
+    <Type Name="OwnerResponseApplicantInfo">
+      <Column Name="OwnerResponseApplicantInfoID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ApplicantUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bThirdPartyRepresentation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ThirdPartyUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bBusinessLicensePaid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BusinessLicenseNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="bRentAdjustmentProgramFeePaid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BuildingAcquiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NumberOfUnits" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bMoreThanOneStreetOnParcel" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="bPetitionFiled" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ResponseFiledByThirdParty" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CaseRespondingTo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="RangeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="OwnerResponseApplicantInfo_OwnerResponseInfo" Member="OwnerResponseInfos" ThisKey="OwnerResponseApplicantInfoID" OtherKey="OwnerResponseApplicantInfoID" Type="OwnerResponseInfo" />
     </Type>
   </Table>
 </Database>

@@ -339,11 +339,18 @@ namespace RAP.DAL
         {
             try
             {
-                CustomDate FrontEndDate = new CustomDate();
-                FrontEndDate.Day = DatabaseDate.Day;
-                FrontEndDate.Month = DatabaseDate.Month;
-                FrontEndDate.Year = DatabaseDate.Year;
-                return FrontEndDate;
+                if (DatabaseDate.Year != 1 && DatabaseDate.Month != 1 && DatabaseDate.Day != 1)
+                {
+                    CustomDate FrontEndDate = new CustomDate();
+                    FrontEndDate.Day = DatabaseDate.Day;
+                    FrontEndDate.Month = DatabaseDate.Month;
+                    FrontEndDate.Year = DatabaseDate.Year;
+                    return FrontEndDate;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {

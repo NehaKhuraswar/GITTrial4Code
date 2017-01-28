@@ -5275,7 +5275,7 @@ namespace RAP.DAL
                     _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                     _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
                     _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
-                    _applicantInfo.NumberOfUnits = Convert.ToInt32(applicantInfo.NumberOfUnits);
+                    _applicantInfo.NumberOfUnits = applicantInfo.NumberOfUnits;
                     _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                     _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
                     _applicantInfo.bPetitionFiled = Convert.ToBoolean(applicantInfo.bPetitionFiled);
@@ -5995,6 +5995,7 @@ namespace RAP.DAL
                             {
                                 applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                             }
+                            
                             applicantInfo.First().NumberOfUnits = model.OwnerResponseInfo.ApplicantInfo.NumberOfUnits;
                             if (model.OwnerResponseInfo.ApplicantInfo.NumberOfUnitsRangeID != 0)
                             {
@@ -6704,7 +6705,7 @@ namespace RAP.DAL
                         _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                         _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
                         _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
-                        _applicantInfo.NumberOfUnits = (applicantInfo.NumberOfUnits != null) ? Convert.ToInt32(applicantInfo.NumberOfUnits) : 0;
+                        _applicantInfo.NumberOfUnits = Convert.ToInt32(applicantInfo.NumberOfUnits);
                         _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                         _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0;
                         _applicantInfo.bPetitionFiled = applicantInfo.bPetitionFiled;
