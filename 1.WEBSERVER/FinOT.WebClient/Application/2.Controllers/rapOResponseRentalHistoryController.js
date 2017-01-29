@@ -8,9 +8,10 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
     self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;
     self.docDescription = null;
     self.showUploadedFile = false;
-
+    self.Hide = false;
+    self.Error = '';
     self.Calender = masterFactory.Calender;
-
+    self.IsJustificationSelected = false;
 
     rapFactory.GetOResponseRentIncreaseAndPropertyInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
@@ -83,13 +84,36 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
             }
         }
     }
-        
+  
+    var checkSelectedJustification = function (rent) {
+        var isSelected = false;
+        rent.RentIncreaseReasons.forEach(function (item) {
+            if (item.IsSelected == true) {
+                isSelected = true;                
+            }
+        });
+        return isSelected;
+    }
+    self.IsRecordAdded = false;
+    var checkRentRecord = function () {
+        self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.forEach(function (item) {
+            if (item.isDeleted == false) {
+                self.IsRecordAdded = true;
+            }
+        });
+    }
     self.AddRecord = function (_rent)
     {
-        self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(_rent);
-        self.Rent = new Object();
-        self.Rent = self.caseinfo.OwnerResponseInfo.PropertyInfo.Rent;
-        self.showUploadedFile = false;
+        if (checkSelectedJustification(_rent)) {
+            self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(_rent);
+            self.Rent = new Object();
+            self.Rent = self.caseinfo.OwnerResponseInfo.PropertyInfo.Rent;
+            self.showUploadedFile = false;
+        }
+        else
+        {
+            self.Error = 'Justification is not selected';
+        }
     }
     self.RemoveRecord = function (_rent) {
         var index = self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.indexOf(_rent);
@@ -99,14 +123,24 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
     }
 
     self.Continue = function () {
-        if (self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.length == 0)
+        checkRentRecord();
+        if (!self.IsRecordAdded)
         {
-            self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(self.Rent);
+            if (checkSelectedJustification(self.Rent)) {
+                self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(self.Rent);
+            }
+            else
+            {
+                self.Error = 'Justification is not selected';
+            }
         }
         
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOResponseRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             MoveNext()
         });       

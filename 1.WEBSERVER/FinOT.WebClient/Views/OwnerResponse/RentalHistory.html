@@ -2,9 +2,14 @@
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
+            <div class="alert alert-error" ng-show="Hide==true">
+            </div>
+            <div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>
             <div class="step-heading">Rental History</div>
 
-            <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form" onsubmit="return false;">
+            <form name="frmOwnerPetition" id="frmOwnerResponse" action="#" method="post" class="application-form" novalidate onsubmit="return false;">
                 <div class="step-content step1">
                     <!--<div class="subhead no-top-margin">
                 <h4>Boberta Johnson</h4>
@@ -53,12 +58,12 @@
 
                     <div class="field-group">
                         <p class="input-label">Have you (or a previous Owner) given the City of Oakland’s form entitled Notice to Tenants of Residential Rent Adjustment Program (“RAP Notice”) to all of the petitioning tenants?</p>
-                        <div class="form-group-radio vertical clearfix">
+                        <div class="form-group-radio vertical clearfix required" data-error="RAP Notice" >
                             <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus" for="RAPNotice_{{item.RAPNoticeStatusID}}">
                                 <input type="radio" id="RAPNotice_{{item.RAPNoticeStatusID}}" class="input-field"
-                                       name="RAPNotice_item.{{RAPNoticeStatus}}"
+                                       name="RAPNotice"
                                        ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RAPNoticeStatusID"
-                                       ng-value="item.RAPNoticeStatusID"><i></i><span>{{item.RAPNoticeStatus}}</span>
+                                       ng-value="item.RAPNoticeStatusID" required><i></i><span>{{item.RAPNoticeStatus}}</span>
                             </label>
                             <div class="clear"></div>
                         </div>
@@ -97,8 +102,7 @@
                         </div>
                     </div>
 
-                    <div class="field-group">
-                        <div class="field-addfile">
+                    <div class="field-group">                      
                             <div class="input-file-wrapper" ng-show="Ctrl.bRAPNotice1">
                                 <span class="btn-link">Upload signed copy of notice</span>
                                 <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OR_RAPNotice1')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png" multiple />
@@ -117,8 +121,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
+                            </div>                        
                     </div><!-- .field-group -->
 
                     <div class="field-group">
@@ -482,8 +485,9 @@
 
                 </div>
 
-                <div class="step-footer">
-                    <input aria-label="Save and continue" role="button" type="submit" id="save" name="save" class="btn-primary" value="Save and continue" ng-click="Ctrl.Continue()" />
+                <div class="step-footer"> 
+                    <input aria-label="Save and continue" role="button" type="submit" id="save" name="save" class="btn-primary" value="Save and continue"
+                           ng-click="(Ctrl.Hide=true); (!frmOwnerResponse.RAPNotice.$error.required) &&  Ctrl.Continue()" />
 
                 </div>
             </form>
