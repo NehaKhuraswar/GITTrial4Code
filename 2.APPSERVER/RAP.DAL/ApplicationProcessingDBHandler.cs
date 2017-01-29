@@ -5015,21 +5015,6 @@ namespace RAP.DAL
             int petitionID = 0;
             try
             {
-                ownerPetitionID = SaveOwnerPetitionInfo(model.OwnerPetitionInfo);
-                if (ownerPetitionID == 0)
-                {
-                    result.status.Status = StatusEnum.DatabaseException;
-                    return result;
-                }
-                else
-                {
-                    petitionID = GetPetitionID(ownerPetitionID, model.PetitionCategoryID);
-                    if (petitionID == 0)
-                    {
-                        result.status.Status = StatusEnum.DatabaseException;
-                        return result;
-                    }
-                }
                 var CustDetails = _dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CaseFileBy).FirstOrDefault();
                 if (CustDetails != null)
                 {
@@ -5049,6 +5034,22 @@ namespace RAP.DAL
                         }
                     }
                 }
+                ownerPetitionID = SaveOwnerPetitionInfo(model.OwnerPetitionInfo);
+                if (ownerPetitionID == 0)
+                {
+                    result.status.Status = StatusEnum.DatabaseException;
+                    return result;
+                }
+                else
+                {
+                    petitionID = GetPetitionID(ownerPetitionID, model.PetitionCategoryID);
+                    if (petitionID == 0)
+                    {
+                        result.status.Status = StatusEnum.DatabaseException;
+                        return result;
+                    }
+                }
+          
                 OwnerPetitionVerification verificationDB = new OwnerPetitionVerification();
                 verificationDB.bCaseMediation = model.OwnerPetitionInfo.Verification.bCaseMediation;
                 verificationDB.bDeclarePenalty = model.OwnerPetitionInfo.Verification.bDeclarePenalty;
@@ -6479,7 +6480,25 @@ namespace RAP.DAL
             try
             {
                 int c_id = 0;
-
+                var CustDetails = _dbAccount.CustomerDetails.Where(x => x.CustomerID == model.CaseFileBy).FirstOrDefault();
+                if (CustDetails != null)
+                {
+                    if (CustDetails.CustomerIdentityKey != model.OwnerResponseInfo.Verification.pinVerify)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                        return result;
+                    }
+                    if (model.OwnerPetitionInfo.Verification.bCaseMediation == true)
+                    {
+                        if (CustDetails.CustomerIdentityKey != model.OwnerResponseInfo.Verification.pinMediation)
+                        {
+                            result.result = null;
+                            result.status = new OperationStatus() { Status = StatusEnum.PinError };
+                            return result;
+                        }
+                    }
+                }
                 OwnerResponseInfo oResponse = new OwnerResponseInfo();
                 oResponse.OwnerResponseApplicantInfoID = model.OwnerResponseInfo.ApplicantInfo.OwnerResponseApplicantInfoID;
                 oResponse.OwnerResponsePropertyID = model.OwnerResponseInfo.PropertyInfo.OwnerPropertyID;
@@ -6488,6 +6507,16 @@ namespace RAP.DAL
                 _dbContext.OwnerResponseInfos.InsertOnSubmit(oResponse);
                 _dbContext.SubmitChanges();
                 model.OwnerResponseInfo.OwnerResponseID = oResponse.OwnerResponseID;
+
+                OwnerResponseVerification verificationDB = new OwnerResponseVerification();
+                verificationDB.bCaseMediation = model.OwnerResponseInfo.Verification.bCaseMediation;
+                verificationDB.bDeclarePenalty = model.OwnerResponseInfo.Verification.bDeclarePenalty;
+                verificationDB.bThirdParty = model.bCaseFiledByThirdParty;
+                verificationDB.bThirdPartyMediation = model.OwnerResponseInfo.Verification.bThirdPartyMediation;
+                verificationDB.PetitionID = model.OwnerResponseInfo.OwnerResponseID;
+                verificationDB.CreatedDate = DateTime.Now;
+                _dbContext.OwnerResponseVerifications.InsertOnSubmit(verificationDB);
+                _dbContext.SubmitChanges();
 
                 if (model.OwnerResponseInfo.OwnerResponseID > 0)
                 {

@@ -204,6 +204,7 @@ namespace RAP.Core.DataModels
         {
             ApplicantInfo = new OwnerResponseApplicantInfoM();
             PropertyInfo = new OwnerResponsePropertyInfoM();
+            Verification = new VerificationM();
         }
         public int OwnerResponseID { get; set; }
         public OwnerResponseApplicantInfoM ApplicantInfo { get; set; }
@@ -217,6 +218,7 @@ namespace RAP.Core.DataModels
             }
         }
         public string CustomerIdentityKey { get; set; }
+        public VerificationM Verification { get; set; }
     }
 
     public class OwnerResponseApplicantInfoM

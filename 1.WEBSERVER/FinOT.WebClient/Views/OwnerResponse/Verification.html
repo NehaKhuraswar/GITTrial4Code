@@ -2,9 +2,14 @@
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
+            <div class="alert alert-error" ng-show="Ctrl.Hide==true">
+            </div>
+            <div class="alert" ng-show="Ctrl.Error!=''">
+                <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+            </div>
             <div class="step-heading">Verification</div>
 
-            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" onsubmit="return false;">
+            <form name="frmOwnerResponse" id="frmOwnerResponse" action="#" method="post" class="application-form" novalidate onsubmit="return false;">
                 <div class="step-content step1">
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
@@ -21,28 +26,31 @@
 
                     <div class="field-group">
                         <label for="your_pin">Enter your PIN to verify your identity.</label>
-                        <input type="text" name="your_pin" id="your_pin" class="field-input" placeholder="" ng-model="Ctrl.pin1" />
+                        <input type="text" name="your_pin" id="your_pin" class="field-input required" data-error="PIN to verify" required placeholder="" ng-model="Ctrl.caseinfo.OwnerResponseInfo.Verification.pinVerify" />
                     </div>
-                    <a class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
+                    <a role="button" aria-label="Resend PIN" class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
                     <div>&nbsp;</div>
                     <div class="field-group">
                         <p>This PIN number was emailed to you when you created your account. You can have this PIN resent to you from the account management dashboard.</p>
                         <div class="form-group-checkbox vertical clearfix">
                             <div class="checkbox-wrapper">
                                 <label for="chk_condition1">
-                                    <input type="checkbox" name="chk_condition1" id="chk_condition1" value="Yes" /><i></i><span>I acknowledge that entering the name, date, and PIN above indicates my intent to electronically sign this document. Additionally, this signature indicates my consent to conduct business electronically following receipt of disclosures.</span>
+                                    <input type="checkbox" name="chk_condition1" id="chk_condition1" value="true"
+                                           ng-model="Ctrl.caseinfo.OwnerResponseInfo.Verification.bAcknowledgePinName" /><i></i><span>I acknowledge that entering the name, date, and PIN above indicates my intent to electronically sign this document. Additionally, this signature indicates my consent to conduct business electronically following receipt of disclosures.</span>
                                 </label>
                             </div>
 
                             <div class="checkbox-wrapper">
                                 <label for="chk_condition2">
-                                    <input type="checkbox" name="chk_condition2" id="chk_condition2" value="Yes" /><i></i><span>I declare under penalty of perjury pursuant to the laws of the State of California that everything I said in this petition is true and that all documents attached to the petition are true copies of the original.</span>
+                                    <input type="checkbox" name="chk_condition2" id="chk_condition2" value="true"
+                                           ng-model="Ctrl.caseinfo.OwnerResponseInfo.Verification.bDeclarePenalty" /><i></i><span>I declare under penalty of perjury pursuant to the laws of the State of California that everything I said in this petition is true and that all documents attached to the petition are true copies of the original.</span>
                                 </label>
                             </div>
 
                             <div class="checkbox-wrapper">
                                 <label for="chk_condition3">
-                                    <input type="checkbox" name="chk_condition3" id="chk_condition3" ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty" readonly /><i></i><span>This form is being submitted by the third-party representative on behalf of the renter.</span>
+                                    <input type="checkbox" name="chk_condition3" id="chk_condition3" value="true"
+                                           ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty" /><i></i><span>This form is being submitted by the third-party representative on behalf of the renter.</span>
                                 </label>
                             </div>
                         </div>
@@ -75,7 +83,12 @@
 
                     <div class="field-group">
                         <label for="mediation_identity_pin">Enter your PIN to verify your identity.</label>
-                        <input type="text" name="mediation_identity_pin" id="mediation_identity_pin" class="field-input" placeholder="" ng-model="Ctrl.pin2" />
+                        <input type="text" name="mediation_identity_pin" id="mediation_identity_pin"
+                               ng-class="{'field-input required' : Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation,
+                                                   'field-input' : !(Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation)}"
+                               data-error="PIN to verify"
+                               ng-required="Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation"
+                               placeholder="" ng-model="Ctrl.caseinfo.OwnerResponseInfo.Verification.pinMediation" />
                     </div>
                     <a class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
                     <div>&nbsp;</div>
@@ -84,19 +97,22 @@
                         <div class="form-group-checkbox vertical clearfix">
                             <div class="checkbox-wrapper">
                                 <label for="chk_mediation_condition1">
-                                    <input type="checkbox" name="chk_mediation_condition1" id="chk_mediation_condition1" value="Yes" /><i></i><span>I acknowledge that entering the name, date, and PIN above indicates my intent to electronically sign this document. Additionally, this signature indicates my consent to conduct business electronically following receipt of disclosures.</span>
+                                    <input type="checkbox" name="chk_mediation_condition1" id="chk_mediation_condition1" value="true"
+                                           ng-model="Ctrl.caseinfo.OwnerResponseInfo.Verification.bAcknowledgePinNameMediation" /><i></i><span>I acknowledge that entering the name, date, and PIN above indicates my intent to electronically sign this document. Additionally, this signature indicates my consent to conduct business electronically following receipt of disclosures.</span>
                                 </label>
                             </div>
 
                             <div class="checkbox-wrapper">
                                 <label for="chk_mediation_condition2">
-                                    <input type="checkbox" name="chk_mediation_condition2" id="chk_mediation_condition2" ng-model="Ctrl.caseinfo.OwnerResponseInfo.bAgreeToCityMediation" /><i></i><span>I agree to have my case mediated by a Rent Adjustment Program Staff Hearing Officer (no charge).</span>
+                                    <input type="checkbox" name="chk_mediation_condition2" id="chk_mediation_condition2" value="true"
+                                           ng-model="Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation" /><i></i><span>I agree to have my case mediated by a Rent Adjustment Program Staff Hearing Officer (no charge).</span>
                                 </label>
                             </div>
 
                             <div class="checkbox-wrapper">
                                 <label for="chk_mediation_condition3">
-                                    <input type="checkbox" name="chk_mediation_condition3" id="chk_mediation_condition3" ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty" readonly /><i></i><span>This form is being submitted by the third-party representative on behalf of the property owner.</span>
+                                    <input type="checkbox" name="chk_mediation_condition3" id="chk_mediation_condition3" value="true"
+                                           ng-model="Ctrl.caseinfo.bCaseFiledByThirdParty" /><i></i><span>This form is being submitted by the third-party representative on behalf of the property owner.</span>
                                 </label>
                             </div>
                         </div>
@@ -106,7 +122,9 @@
 
 
                 <div class="step-footer">
-                    <button role="button" aria-label="Submit" class="btn-primary" ng-click="Ctrl.Continue()">Submit</button>
+                    <input type="submit" id="submit-petition" name="submit-petition" class="btn-primary"
+                           value="Submit"
+                           ng-click="(Ctrl.Hide=true); (!(frmOwnerResponse.your_pin.$error.required || frmOwnerResponse.mediation_identity_pin.$error.required)) && Ctrl.Continue()" />
                 </div>
             </form>
         </div>

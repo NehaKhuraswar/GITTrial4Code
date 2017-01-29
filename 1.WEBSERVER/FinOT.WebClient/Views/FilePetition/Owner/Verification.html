@@ -87,7 +87,7 @@
                                                    'field-input' : !(Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation)}"
                            data-error="PIN to verify"
                            ng-required="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation"
-                           placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.Verification.pinMediation" />                    
+                           placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.Verification.pinMediation" />
                 </div>
                 <a role="button" aria-label="Resend PIN" class="btn-link" ng-click="Ctrl.ResendPin()">Resend PIN</a>
                 <div>&nbsp;</div>
@@ -116,6 +116,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
                 <div class="step-footer">
                     <input type="submit" id="submit-petition" name="submit-petition" class="btn-primary"
@@ -123,7 +124,7 @@
                            ng-click="(Ctrl.Hide=true); (!(frmOwnerPetition.your_pin.$error.required || frmOwnerPetition.mediation_identity_pin.$error.required)) && Ctrl.Continue()" />
                     
                 </div>
-            </div>
+            
         </form>
 </div>
 </div>

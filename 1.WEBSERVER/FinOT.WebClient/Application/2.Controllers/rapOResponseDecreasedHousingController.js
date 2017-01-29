@@ -6,7 +6,8 @@
     self.caseinfo.CustomerID = self.custDetails.custID;
  
     self.description = null;
-    
+    self.Hide = false;
+    self.Error = '';
 
     rapFactory.GetOResponseDecreasedHousing(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
@@ -63,7 +64,10 @@
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOResponseDecreasedHousing(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             MoveNext();
         });

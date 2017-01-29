@@ -12,7 +12,8 @@
     });
     self.description1 = null;
     self.description2 = null;
-
+    self.Hide = false;
+    self.Error = '';
     rapFactory.GetOResponseAdditionalDocuments(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
@@ -73,7 +74,10 @@
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOResponseAdditionalDocuments(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             MoveNext();
         });      

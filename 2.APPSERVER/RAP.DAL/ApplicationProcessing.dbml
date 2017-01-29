@@ -445,6 +445,7 @@
       <Column Name="bAgreeToCityMediation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="OwnerResponseInfo_OwnerResponseVerification" Member="OwnerResponseVerifications" ThisKey="OwnerResponseID" OtherKey="PetitionID" Type="OwnerResponseVerification" />
       <Association Name="OwnerResponsePropertyInfo_OwnerResponseInfo" Member="OwnerResponsePropertyInfo" ThisKey="OwnerResponsePropertyID" OtherKey="PropertyID" Type="OwnerResponsePropertyInfo" IsForeignKey="true" />
       <Association Name="OwnerResponseApplicantInfo_OwnerResponseInfo" Member="OwnerResponseApplicantInfo" ThisKey="OwnerResponseApplicantInfoID" OtherKey="OwnerResponseApplicantInfoID" Type="OwnerResponseApplicantInfo" IsForeignKey="true" />
     </Type>
@@ -601,6 +602,18 @@
       <Column Name="CaseRespondingTo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="RangeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="OwnerResponseApplicantInfo_OwnerResponseInfo" Member="OwnerResponseInfos" ThisKey="OwnerResponseApplicantInfoID" OtherKey="OwnerResponseApplicantInfoID" Type="OwnerResponseInfo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OwnerResponseVerification" Member="OwnerResponseVerifications">
+    <Type Name="OwnerResponseVerification">
+      <Column Name="VerificationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PetitionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bDeclarePenalty" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="bThirdParty" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="bThirdPartyMediation" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="bCaseMediation" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="OwnerResponseInfo_OwnerResponseVerification" Member="OwnerResponseInfo" ThisKey="PetitionID" OtherKey="OwnerResponseID" Type="OwnerResponseInfo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

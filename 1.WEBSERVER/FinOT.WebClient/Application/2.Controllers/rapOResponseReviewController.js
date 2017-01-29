@@ -45,7 +45,10 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOResponseReviewPageSubmission(self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }            
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             MoveNext();
         });
     }

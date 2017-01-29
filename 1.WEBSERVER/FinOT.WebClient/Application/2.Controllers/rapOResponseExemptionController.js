@@ -8,6 +8,8 @@ var rapOResponseExemptionController = ['$scope', '$modal', 'alertService', 'rapO
     self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;  
 
     self.Calender = masterFactory.Calender;
+    self.Hide = false;
+    self.Error = '';
 
     rapFactory.GetOResponseExemption(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
@@ -18,7 +20,10 @@ var rapOResponseExemptionController = ['$scope', '$modal', 'alertService', 'rapO
     self.Continue = function () {   
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOResponseExemption(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
             MoveNext();
         });   
