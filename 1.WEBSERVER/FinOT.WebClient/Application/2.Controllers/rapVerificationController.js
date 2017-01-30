@@ -42,7 +42,7 @@ var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverific
         $scope.model.tPetionActiveStatus.Verification = true;
              $scope.model.bVerification = false;
              $scope.model.bConfirm = true;
-             rapGlobalFactory.CaseDetails = null;
+             rapGlobalFactory.CaseDetails = response.data;
           //  $location.path("/publicdashboard");
         });
     }

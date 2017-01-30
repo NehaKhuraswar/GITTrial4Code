@@ -6,6 +6,7 @@ var rapTPConfirmationController = ['$scope', '$modal', 'alertService', '$locatio
     self.caseinfo = rapGlobalFactory.CaseDetails;
 
     self.Continue = function () {
+        rapGlobalFactory.CaseDetails = null;
         $location.path("/publicdashboard");
     }
 }];
