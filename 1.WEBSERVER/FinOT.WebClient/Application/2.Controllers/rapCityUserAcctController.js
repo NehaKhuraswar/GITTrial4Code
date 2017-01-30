@@ -22,12 +22,22 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
         _GetCityUserFromID(rapGlobalFactory.SelectedForEdit.custID);
     }
 
-
+    var checkPassword = function (pwd, email) {
+        if (email == pwd)
+            return false;
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\_\-])(?=.{8,})");
+        return strongRegex.test(pwd);
+        }
     self.CreateAccount = function (model) {
         if (model.Password != self.confirmPwd) {
             alert.Error("Please enter same password in password fields.");
             return;
         }
+         if (!checkPassword(model.Password, model.email)) {
+            self.PasswordError = true;
+            self.Error = "Enter password matching the requirements";
+            return;
+            }
         rapFactory.CreateCityUserAccount(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

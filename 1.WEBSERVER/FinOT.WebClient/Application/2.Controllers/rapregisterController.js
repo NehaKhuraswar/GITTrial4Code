@@ -8,7 +8,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.Error = '';
     self.Hide = false;
     $scope.required = true;
-
+    self.PasswordError = false;
     if (rapGlobalFactory.IsEdit == null || rapGlobalFactory.IsEdit == undefined)
     {
         var userType = rapGlobalFactory.GetUserType();
@@ -122,11 +122,11 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             return;
         }
         
-        //if (!checkPassword(model.Password, model.email))
-        //    {
-        //        alert.Error("The password you have entered is not valid! ")
-        //    return;
-        //        }
+        if (!checkPassword(model.Password, model.email)) {
+            self.PasswordError = true;
+            self.Error = "Enter password matching the requirements";
+            return;
+         }
         //if (!checkPhoneNumber(model.PhoneNumber))
         //            {
         //        alert.Error("Phone number is not valid")
