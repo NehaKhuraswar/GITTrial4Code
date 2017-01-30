@@ -110,21 +110,21 @@
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into this unit?</div></div>
-                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Year}}</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate!= null">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Year}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Initial monthly rent</div></div>
-                        <div class="col-sm-6 col-xs-12">${{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.InitialRent}}</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.InitialRent!= null">${{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.InitialRent}}</div>
                     </div>
                 </div><!-- .field-group -->
 
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
-                        <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
+                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate!= null">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
                     </div>
                 </div><!-- .field-group -->
 
@@ -148,21 +148,21 @@
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
-                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                            <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreaseNoticeDate != null">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                         </div>
                     </div><!-- .field-group -->
 
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
-                            <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
+                            <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreasedFrom != null">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
                         </div>
                     </div><!-- .field-group -->
 
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
-                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                            <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreaseEffectiveDate != null">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
                         </div>
                     </div><!-- .field-group -->
 

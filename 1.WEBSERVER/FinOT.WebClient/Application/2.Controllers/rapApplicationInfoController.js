@@ -83,6 +83,10 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
             self.Error = "Owner state is a required field";
                 return;
         }
+        if (self.caseinfo.TenantPetitionInfo.UnitTypeId == 0)
+        {
+            return;
+        }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkForResponse(response)) {

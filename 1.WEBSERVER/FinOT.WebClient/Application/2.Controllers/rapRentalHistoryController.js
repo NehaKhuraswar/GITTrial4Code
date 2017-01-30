@@ -46,7 +46,10 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
         if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
+            if (self.RentalIncreaseModel.RentIncreaseNoticeDate != null && self.RentalIncreaseModel.RentIncreaseEffectiveDate != null)
+                {
             self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+            }
         }
         rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }

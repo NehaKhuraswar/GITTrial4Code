@@ -28,13 +28,13 @@
                                 </div>
                                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
                                     <div class="field-group">
-                                        <label for="Applicant_firstname">Name</label>
-                                        <input type="text" class="field-input required" id="Applicant_firstname" name="Applicant_firstname" data-error="Applicant name"
+                                        <label for="Applicant_firstname">Name <span>*</span></label>
+                                        <input type="text" class="field-input required" id="Applicant_firstname" name="Applicant_firstname" data-error="Applicant first name"
                                                ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName" placeholder="First" required />
                                     </div>
 
                                     <div class="field-group">
-                                        <input type="text" class="field-input required" data-error="Applicant name" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName" placeholder="Last" />
+                                        <input type="text" class="field-input required" data-error="Applicant last name" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName" placeholder="Last" />
                                     </div>
                                     <p>&nbsp;</p>
                                     <div class="field-group">
@@ -43,7 +43,7 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="Applicant_address1">Mailing address 1</label>
+                                        <label for="Applicant_address1">Mailing address 1 <span>*</span></label>
                                         <input type="text" class="field-input required" id="Applicant_address1" name="Applicant_address1" data-error="Address"
                                                ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1" required />
                                     </div>
@@ -54,13 +54,13 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="Applicant_city">City</label>
+                                        <label for="Applicant_city">City <span>*</span></label>
                                         <input type="text" id="Applicant_city" name="Applicant_city" class="field-input required" data-error="City"
                                                ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City" />
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="Applicant_state">State</label>
+                                        <label for="Applicant_state">State <span>*</span></label>
                                         <div class="input-wrapper">
                                             <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
                                                     ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State"
@@ -72,20 +72,21 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="Applicant_zip_code">Zip code</label>
-                                        <input type="text" class="field-input required" id="Applicant_zip_code" name="Applicant_zip_code" data-error="City" maxlength="5"
+                                        <label for="Applicant_zip_code">Zip code <span>*</span></label>
+                                        <input type="text" class="field-input required" id="Applicant_zip_code" name="Applicant_zip_code" data-error="Zip code" maxlength="5"
                                                ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip" />
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="Applicante_phone_number">Phone number</label>
-                                        <input type="text" class="field-input required" data-error="Phone number" id="Applicante_phone_number" name="Applicante_phone_number" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber"
+                                        <label for="Applicante_phone_number">Phone number <span>*</span></label>
+                                        <input type="text" class="field-input required" data-error="Phone number" id="Applicante_phone_number" 
+                                               name="Applicante_phone_number" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber"
                                                ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" />
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="Applicant_email">Email address</label>
-                                        <input type="email" class="field-input required" id="Applicant_email" name="Applicant_email" data-error="Email address1" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email"
+                                        <label for="Applicant_email">Email address <span>*</span></label>
+                                        <input type="email" class="field-input required" id="Applicant_email" name="Applicant_email" data-error="Email address" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email"
                                                ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" />
                                     </div>
                                 </div>
@@ -114,11 +115,11 @@
                                         <p class="input-label">We will use this information to send notifications about your case to your representative.</p>
 
                                         <div class="field-group">
-                                            <label for="representative_firstname">Name</label>
+                                            <label for="representative_firstname">Name <span>*</span></label>
                                             <input type="text" name="representative_firstname" id="representative_firstname"
                                                    ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation))}"
-                                                   data-error="Third party name"
+                                                   data-error="Representative name"
                                                    ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)"
                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName" placeholder="First" />
                                             
@@ -130,14 +131,17 @@
                                         </div>
 
                                         <div class="field-group">
-                                            <label for="business_name">Business name</label>
-                                            <input type="text" name="business_name" id="business_name" class="field-input" placeholder=""
-                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.BusinessName" data-error="Business name" />                                            
+                                            <label for="business_name">Business name <span>*</span></label>
+                                            <input type="text" name="business_name" id="business_name" 
+                                                   ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation),
+                                                   'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation))}"
+                                                   ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)" placeholder=""
+                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.BusinessName" data-error="Representative business name" />                                            
                                         </div>
 
                                         <div class="field-group">
-                                            <label for="representative_address1">Mailing address 1</label>
-                                            <input type="text" name="representative_address1" id="representative_address1"
+                                            <label for="representative_address1">Mailing address 1 <span>*</span></label>
+                                            <input type="text" name="representative_address1" id="representative_address1" data-error="Representative mailing address 1"
                                                    ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation))}"
                                                    ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)"
@@ -153,7 +157,7 @@
 
 
                                         <div class="field-group">
-                                            <label for="representative_state">State</label>
+                                            <label for="representative_state">State <span>*</span></label>
                                             <div class="input-wrapper">
                                                 <select ng-init="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State = Ctrl.StateList[0]" name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
                                                         ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State"
@@ -163,38 +167,41 @@
                                             </div>
                                         </div>
                                         <div class="field-group">
-                                            <label for="representative_city">City</label>
+                                            <label for="representative_city">City <span>*</span></label>
                                             <input type="text" name="representative_city" id="representative_city"
+                                                   data-error="Representative city"
                                                    ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation))}"
                                                    ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)"
-                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City" />
+                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City" />
                                         </div>
 
                                         <div class="field-group">
-                                            <label for="representative_zip_code">Zip code</label>
+                                            <label for="representative_zip_code">Zip code <span>*</span></label>
                                             <input type="text" name="representative_zip_code" id="representative_zip_code"
                                                    ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation))}"
                                                    ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)"
-                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip" />
+                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip" 
+                                                   data-error="Representative zip code"/>
                                         </div>
 
                                         <div class="field-group">
-                                            <label for="representative_phone_number">Phone number</label>
+                                            <label for="representative_phone_number">Phone number <span>*</span></label>
                                             <input type="text" name="representative_phone_number" id="representative_phone_number"
                                                    ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation))}"
                                                    ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)"
-                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber" />
+                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber"
+                                                   data-error="Representative phone number" />
                                         </div>
 
                                         <div class="field-group">
-                                            <label for="representative_email">Email address</label>
-                                            <input type="text" name="representative_email" id="representative_email"
+                                            <label for="representative_email">Email address <span>*</span></label>
+                                            <input type="text" name="representative_email" id="representative_email" data-error="Representative email"
                                                    ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation))}"
-                                                   ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)" 
+                                                   ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)"
                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email" />
                                         </div>
                                     </div>
@@ -216,16 +223,16 @@
                                     <div class="field-group">
                                         <label for="po_firstname">Name <span>*</span></label>
                                         <input type="text" name="po_firstname" id="po_firstname" class="field-input required" placeholder="First"
-                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName" data-error="Property owner name" required/>                                      
+                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName" data-error="Property owner first name" required/>                                      
                                     </div>
 
                                     <div class="field-group mar-bottom-40">
                                         <input type="text" name="po_lastname" id="po_lastname" class="field-input required" placeholder="Last"
-                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName" data-error="Property owner name" required />
+                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName" data-error="Property owner last name" required />
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="po_business_name">Business name</label>
+                                        <label for="po_business_name">Business name <span>*</span></label>
                                         <input type="text" name="po_business_name" id="po_business_name" class="field-input required" placeholder=""
                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.BusinessName" data-error="Property owner business name" required />
                                     </div>
@@ -233,8 +240,7 @@
                                     <div class="field-group">
                                         <label for="po_address1">Mailing address 1 <span>*</span></label>
                                         <input type="text" name="po_address1" id="po_address1" class="field-input required" placeholder=""
-                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1" data-error="Property owner Mailing address 1" required/>
-                                        <span class="input-error-msg hidden"></span>
+                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1" data-error="Property owner Mailing address 1" required/>                                     
                                     </div>
 
                                     <div class="field-group">
@@ -300,7 +306,7 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="pm_firstname">Name</label>
+                                        <label for="pm_firstname">Name <span>*</span></label>
                                         <input type="text" name="pm_firstname" id="pm_firstname"
                                                ng-class="{'field-input required' :(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo),
                                                    'field-input' : Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo}"
@@ -339,7 +345,7 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <label for="pm_state">State</label>
+                                        <label for="pm_state">State <span>*</span></label>
                                         <div class="input-wrapper">
                                             <select name="pm_state" id="pm_state" class="custom-select" data-placeholder="Select"
                                                     ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State"
@@ -349,8 +355,8 @@
                                         </div>
                                     </div>
                                     <div class="field-group">
-                                        <label for="pm_city">City</label>
-                                        <input type="text" name="pm_city" id="pm_city" 
+                                        <label for="pm_city">City <span>*</span></label>
+                                        <input type="text" name="pm_city" id="pm_city" data-error="Property manager city"
                                                ng-class="{'field-input required' :(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo),
                                                    'field-input' : Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo}"
                                                ng-required="(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo)"
@@ -368,12 +374,14 @@
 
                                     <div class="field-group">
                                         <label for="pm_phone_number">Phone number</label>
-                                        <input type="text" name="pm_phone_number" id="pm_phone_number" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber" />
+                                        <input type="text" name="pm_phone_number" id="pm_phone_number" class="field-input" 
+                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber" />
                                     </div>
 
                                     <div class="field-group">
                                         <label for="pm_email">Email Address</label>
-                                        <input type="text" name="pm_email" id="pm_email" class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email" />
+                                        <input type="text" name="pm_email" id="pm_email" class="field-input"
+                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email" />
                                     </div>
                                 </div>
 
@@ -385,7 +393,8 @@
                                 <div id="property-info">
                                     <div class="field-group">
                                         <label for="pi_units_count">Number of units</label>
-                                        <input type="text" name="pi_units_count" id="pi_units_count" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits" />
+                                        <input type="text" name="pi_units_count" id="pi_units_count" class="field-input" placeholder=""
+                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits" />
                                     </div>
 
                                     <div class="field-group">
@@ -401,7 +410,7 @@
                                     </div>
 
                                     <div class="field-group">
-                                        <p class="input-label">Type of unit you rent</p>
+                                        <p class="input-label">Type of unit you rent <span>*</span></p>
                                         <div class="form-group-radio vertical clearfix required" data-error="Type of unit you rent">
                                             <label ng-repeat="unittype in Ctrl.caseinfo.TenantPetitionInfo.UnitTypes" for="{{unittype.UnitTypeID}}">
                                                 <input type="radio" class="input-field"
