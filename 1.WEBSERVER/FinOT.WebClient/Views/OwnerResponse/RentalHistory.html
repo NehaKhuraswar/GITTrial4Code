@@ -2,7 +2,7 @@
 <div class="col-md-9 col-sm-12">
     <div class="application-form-wrapper">
         <div class="application-step step-1">
-            <div class="alert alert-error" ng-show="Hide==true">
+            <div class="alert alert-error" ng-show="Ctrl.Hide==true">
             </div>
             <div class="alert" ng-show="Ctrl.Error!=''">
                 <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
@@ -58,7 +58,7 @@
 
                     <div class="field-group">
                         <p class="input-label">Have you (or a previous Owner) given the City of Oakland’s form entitled Notice to Tenants of Residential Rent Adjustment Program (“RAP Notice”) to all of the petitioning tenants?</p>
-                        <div class="form-group-radio vertical clearfix required" data-error="RAP Notice" >
+                        <div class="form-group-radio vertical clearfix required" data-error="RAP Notice status">
                             <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus" for="RAPNotice_{{item.RAPNoticeStatusID}}">
                                 <input type="radio" id="RAPNotice_{{item.RAPNoticeStatusID}}" class="input-field"
                                        name="RAPNotice"

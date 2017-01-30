@@ -44,6 +44,10 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     });
 
     self.Continue = function () {
+        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.UnitTypeID == 0)
+        {
+            return;
+        }
         if (self.IsTenant == false)
         {
             if ((self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName != "") &&

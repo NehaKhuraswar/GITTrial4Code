@@ -21,7 +21,7 @@
                                        id="{{unittype.UnitTypeID}}"
                                        name="UnitType" required><i></i><span>{{unittype.UnitDescription}}</span>
                             </label>
-
+                            <div class="clear"></div>
                         </div>
                     </div>
 
@@ -94,7 +94,7 @@
                 <div class="step-footer">
                    
                     <input aria-label="Save and continue" role="button" type="button" id="continue" name="continue" class="btn-primary" value="Save and continue"
-                           ng-click="(Ctrl.Hide=true); (!frmOwnerResponse.UnitType.$error.required) && Ctrl.Continue()" />
+                           ng-click="(Ctrl.Hide=true); Ctrl.Continue()" />
                 </div>
             </form>
         </div>

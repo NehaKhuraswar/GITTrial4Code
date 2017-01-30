@@ -40,6 +40,9 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
     });
 
     self.Continue = function () {
+        if (self.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID == null || self.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID == 0) {
+            return;
+        }
         if (self.IsTenant == false) {
             if (self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName != "" &&
                 self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.AddressLine1 != "" &&

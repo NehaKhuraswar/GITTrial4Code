@@ -98,6 +98,9 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(_rent);
     }
     self.Continue = function () {
+        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID == null || self.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID == 0) {
+            return;
+        }
         _AdditionalRentRecordCheck();
         if (!self.HasAdditionalRentRecord) {
             self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(self.Rent);

@@ -123,6 +123,9 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
     }
 
     self.Continue = function () {
+        if (self.caseinfo.OwnerResponseInfo.PropertyInfo.RAPNoticeStatusID == null || self.caseinfo.OwnerResponseInfo.PropertyInfo.RAPNoticeStatusID == 0) {
+            return;
+        }
         checkRentRecord();
         if (!self.IsRecordAdded)
         {
