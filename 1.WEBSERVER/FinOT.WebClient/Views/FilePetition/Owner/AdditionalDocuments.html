@@ -9,15 +9,15 @@
         <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form" onsubmit="return false;">
             <div class=" step-content step1">
 
-            <div class="subhead no-top-margin">
-                <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
-                <p class="no-bottom-margin">
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}},
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
-                </p>
-            </div>
+                <div class="subhead no-top-margin" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName != null && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName != null">
+                    <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
+                    <p class="no-bottom-margin">
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}},
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
+                    </p>
+                </div>
 
             <div class="subhead no-top-margin">
                 <p class="no-bottom-margin">Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to review.</p>

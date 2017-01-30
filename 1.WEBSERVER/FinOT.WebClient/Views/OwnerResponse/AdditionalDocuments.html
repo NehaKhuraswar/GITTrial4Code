@@ -10,7 +10,7 @@
         <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form" onsubmit="return false;">
             <div class="step-content step1">
 
-                <div class="subhead no-top-margin">
+                <div class="subhead no-top-margin" ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName != null && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName != null">
                     <h4>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
                     <p class="no-bottom-margin">
                         {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
