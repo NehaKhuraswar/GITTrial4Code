@@ -4569,7 +4569,7 @@ namespace RAP.DAL
                             applicantInfo.First().bBusinessLicensePaid = model.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid;
                             applicantInfo.First().BusinessLicenseNumber = model.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber;
                             applicantInfo.First().bRentAdjustmentProgramFeePaid = model.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
-                            if (model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
+                            if (model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate != null && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
                             {
                                 applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                             }
@@ -4594,7 +4594,7 @@ namespace RAP.DAL
                         applicantInfo.bBusinessLicensePaid = model.OwnerPetitionInfo.ApplicantInfo.bBusinessLicensePaid;
                         applicantInfo.BusinessLicenseNumber = model.OwnerPetitionInfo.ApplicantInfo.BusinessLicenseNumber;
                         applicantInfo.bRentAdjustmentProgramFeePaid = model.OwnerPetitionInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
-                        if (model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
+                        if (model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate != null && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
                         {
                             applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                         }
@@ -4672,7 +4672,7 @@ namespace RAP.DAL
                 }
                 if (model.TenantInfo.Any())
                 {
-                    OwnerPetitionTenantInfo tenantInfo = new OwnerPetitionTenantInfo();
+                    
                     List<OwnerPetitionTenantInfoM> tenantsInfoM = new List<OwnerPetitionTenantInfoM>();
                     foreach (var tenant in model.TenantInfo)
                     {
@@ -4686,7 +4686,7 @@ namespace RAP.DAL
                                                select r;
                                 if (!userinfo.Any())
                                 {
-
+                                    OwnerPetitionTenantInfo tenantInfo = new OwnerPetitionTenantInfo();
                                     tenant.TenantUserInfo = userResult.result;
                                     tenantInfo.TenantUserID = tenant.TenantUserInfo.UserID;
                                     tenantInfo.OwnerPropertyID = model.OwnerPropertyID;
@@ -4847,13 +4847,13 @@ namespace RAP.DAL
                                        select r;
                     if (propertyInfo.Any())
                     {
-                        if (model.MovedInDate.Year != 0 && model.MovedInDate.Month != 0 && model.MovedInDate.Day != 0)
+                        if (model.MovedInDate != null && model.MovedInDate.Year != 0 && model.MovedInDate.Month != 0 && model.MovedInDate.Day != 0)
                         {
                             propertyInfo.First().MovedInDate = new DateTime(model.MovedInDate.Year, model.MovedInDate.Month, model.MovedInDate.Day);
                         }
                         propertyInfo.First().InitialRent = model.InitialRent;
                         propertyInfo.First().RAPNoticeStatusID = model.RAPNoticeStatusID;
-                        if (model.RAPNoticeGivenDate.Year != 0 && model.RAPNoticeGivenDate.Month != 0 && model.RAPNoticeGivenDate.Day != 0)
+                        if (model.RAPNoticeGivenDate != null && model.RAPNoticeGivenDate.Year != 0 && model.RAPNoticeGivenDate.Month != 0 && model.RAPNoticeGivenDate.Day != 0)
                         {
                             propertyInfo.First().RAPNoticeGivenDate = new DateTime(model.RAPNoticeGivenDate.Year, model.RAPNoticeGivenDate.Month, model.RAPNoticeGivenDate.Day);
                         }
@@ -4884,11 +4884,11 @@ namespace RAP.DAL
                                 if (rentIncreaseInfo.Any())
                                 {
                                     rentIncreaseInfo.First().bRentIncreaseNoticeGiven = rent.bRentIncreaseNoticeGiven;
-                                    if (rent.RentIncreaseNoticeDate.Year != 0 && rent.RentIncreaseNoticeDate.Month != 0 && rent.RentIncreaseNoticeDate.Day != 0)
+                                    if (rent.RentIncreaseNoticeDate != null && rent.RentIncreaseNoticeDate.Year != 0 && rent.RentIncreaseNoticeDate.Month != 0 && rent.RentIncreaseNoticeDate.Day != 0)
                                     {
                                         rentIncreaseInfo.First().RentIncreaseNoticeDate = new DateTime(rent.RentIncreaseNoticeDate.Year, rent.RentIncreaseNoticeDate.Month, rent.RentIncreaseNoticeDate.Day);
                                     }
-                                    if (rent.RentIncreaseEffectiveDate.Year != 0 && rent.RentIncreaseEffectiveDate.Month != 0 && rent.RentIncreaseEffectiveDate.Day != 0)
+                                    if (rent.RentIncreaseEffectiveDate != null && rent.RentIncreaseEffectiveDate.Year != 0 && rent.RentIncreaseEffectiveDate.Month != 0 && rent.RentIncreaseEffectiveDate.Day != 0)
                                     {
                                         rentIncreaseInfo.First().RentIncreaseEffectiveDate = new DateTime(rent.RentIncreaseEffectiveDate.Year, rent.RentIncreaseEffectiveDate.Month, rent.RentIncreaseEffectiveDate.Day);
                                     }
@@ -4903,11 +4903,11 @@ namespace RAP.DAL
                                 OwnerPetitionRentalIncrementInfo rentIncreaseInfo = new OwnerPetitionRentalIncrementInfo();
                                 rentIncreaseInfo.OwnerPropertyID = propertyID;
                                 rentIncreaseInfo.bRentIncreaseNoticeGiven = rent.bRentIncreaseNoticeGiven;
-                                if (rent.RentIncreaseNoticeDate.Year != 0 && rent.RentIncreaseNoticeDate.Month != 0 && rent.RentIncreaseNoticeDate.Day != 0)
+                                if (rent.RentIncreaseNoticeDate != null && rent.RentIncreaseNoticeDate.Year != 0 && rent.RentIncreaseNoticeDate.Month != 0 && rent.RentIncreaseNoticeDate.Day != 0)
                                 {
                                     rentIncreaseInfo.RentIncreaseNoticeDate = new DateTime(rent.RentIncreaseNoticeDate.Year, rent.RentIncreaseNoticeDate.Month, rent.RentIncreaseNoticeDate.Day);
                                 }
-                                if (rent.RentIncreaseEffectiveDate.Year != 0 && rent.RentIncreaseEffectiveDate.Month != 0 && rent.RentIncreaseEffectiveDate.Day != 0)
+                                if (rent.RentIncreaseEffectiveDate != null && rent.RentIncreaseEffectiveDate.Year != 0 && rent.RentIncreaseEffectiveDate.Month != 0 && rent.RentIncreaseEffectiveDate.Day != 0)
                                 {
                                     rentIncreaseInfo.RentIncreaseEffectiveDate = new DateTime(rent.RentIncreaseEffectiveDate.Year, rent.RentIncreaseEffectiveDate.Month, rent.RentIncreaseEffectiveDate.Day);
                                 }
@@ -5993,7 +5993,7 @@ namespace RAP.DAL
                                 applicantInfo.First().CaseRespondingTo = model.OwnerResponseInfo.ApplicantInfo.CaseRespondingTo;
                             }
 
-                            if (model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
+                            if (model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate != null && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
                             {
                                 applicantInfo.First().BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                             }
@@ -6024,7 +6024,7 @@ namespace RAP.DAL
                         applicantInfo.bBusinessLicensePaid = model.OwnerResponseInfo.ApplicantInfo.bBusinessLicensePaid;
                         applicantInfo.BusinessLicenseNumber = model.OwnerResponseInfo.ApplicantInfo.BusinessLicenseNumber;
                         applicantInfo.bRentAdjustmentProgramFeePaid = model.OwnerResponseInfo.ApplicantInfo.bRentAdjustmentProgramFeePaid;
-                        if (model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
+                        if (model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate != null && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month != 0 && model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day != 0)
                         {
                             applicantInfo.BuildingAcquiredDate = new DateTime(model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Year, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Month, model.OwnerResponseInfo.ApplicantInfo.BuildingAcquiredDate.Day);
                         }

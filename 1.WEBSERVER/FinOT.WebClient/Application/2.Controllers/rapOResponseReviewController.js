@@ -8,7 +8,7 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
     self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;
 
     self.Calender = masterFactory.Calender;
-
+    self.Error = '';
 
     //rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
     //    if (!alert.checkResponse(response)) { return; }
