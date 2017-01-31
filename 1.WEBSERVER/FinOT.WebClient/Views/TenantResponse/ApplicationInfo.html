@@ -26,7 +26,9 @@
                         </div>
                         <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                             <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}<br/>
-							{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName}}<br/>
+                                <div ng-show="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName != null">
+                                    {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName}}<br />
+                                </div>
                             {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Zip}}<br/>
                             Tel: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber}}     <br />Email: {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email}}</p>
                         </div>
