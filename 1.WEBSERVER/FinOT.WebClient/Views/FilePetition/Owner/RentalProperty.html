@@ -89,26 +89,32 @@
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email" />
                     </div>
 
-                    <div>
+                    <div class="field-group mar-bottom-40">
                         <button class="btn-link btn-edit" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant</button>
                     </div>
-                    <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12">
+                   
+                    <div>
+                        <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
+                            <div class="field-group  subhead ">
+                                <div class="row">
                                     <p>
                                         {{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br /> {{item.TenantUserInfo.AddressLine1}}<br />
                                         {{item.TenantUserInfo.AddressLine2}}<br />
                                         {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}<br />
-                                    {{item.TenantUserInfo.Email}}<br />
-                                    {{item.TenantUserInfo.PhoneNumber}}
-                                    <button role="button" aria-label="Remove" class="btn-link btn-delete" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
+                                        {{item.TenantUserInfo.Email}}<br />
+                                        {{item.TenantUserInfo.PhoneNumber}}
+                                    </p>
                                 </div>
                             </div>
+                            <div class="field-group ">
+                                <div class="row">
+                                    <button role="button" aria-label="Remove" class="btn-link btn-delete" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
+                                </div>
+                            </div><!-- .field-group -->                               
+                           
                         </div>
                     </div>
                 </div>
-
                 <div class="step-footer">
                     <input role="button" aria-label="Save and comtinue" type="submit"
                            id="save" name="save" class="btn-primary" value="Save and continue" ng-click="(Ctrl.Hide=true); Ctrl.Continue()" />
