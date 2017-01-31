@@ -41,6 +41,8 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
 
     self.Continue = function () {
         if (self.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID == null || self.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID == 0) {
+            self.Hide = false;
+            self.Error = "Type of unit you rent is required";
             return;
         }
         if (self.IsTenant == false) {
@@ -59,7 +61,7 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
             self.Hide = false;
             self.Error = "Please add tenant information";
             return;
-        }
+        }   
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
