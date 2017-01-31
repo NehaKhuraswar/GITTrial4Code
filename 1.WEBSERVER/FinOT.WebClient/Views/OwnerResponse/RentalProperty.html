@@ -50,13 +50,15 @@
                     </div>
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_state">State</label>
-                        <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                        <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
-                                ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State" class="custom-select"
-                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
-                            <option value="" selected>Select state</option>
-                        </select>
-                    </div>
+                        <div class="input-wrapper">
+                            <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
+                            <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
+                                    ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.State" class="custom-select"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
+                                <option value="" selected>Select state</option>
+                            </select>
+                        </div>
+                      </div>
 
                     <div class="field-group" ng-show="Ctrl.IsTenant == false">
                         <label for="Applicant_zip_code">Zip code</label>
@@ -69,24 +71,35 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="Applicant_email">Email Address</label>
+                        <label for="Applicant_email">Email</label>
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Email" />
                     </div>
 
                     <div>
                         <button class="btn-link btn-edit" ng-click="Ctrl.AddTenant(Ctrl.caseinfo.OwnerPetitionTenantInfo)">Add another tenant’s name</button>
                     </div>
-                    <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
-                        <div class="field-group filled-info subhead no-top-margin">
-                            <div class="row">
-                                {{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br />
-                                {{item.TenantUserInfo.AddressLine1}}<br />
-                                {{item.TenantUserInfo.AddressLine2}}<br />
-                                {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}<br />
-                                {{item.TenantUserInfo.Email}}<br />
-                                {{item.TenantUserInfo.PhoneNumber}}
-                                <button class="btn-link btn-delete" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
+                   
+
+                    <div>
+                        <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
+                            <div class="field-group  subhead ">
+                                <div class="row">
+                                    <p>
+                                        {{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br />
+                                        {{item.TenantUserInfo.AddressLine1}}<br />
+                                        {{item.TenantUserInfo.AddressLine2}}<br />
+                                        {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}<br />
+                                        {{item.TenantUserInfo.Email}}<br />
+                                        {{item.TenantUserInfo.PhoneNumber}}
+                                    </p>
+                                </div>
                             </div>
+                            <div class="field-group ">
+                                <div class="row">
+                                    <button role="button" aria-label="Remove" class="btn-link btn-delete" ng-click="Ctrl.RemoveTenant(item)">Remove</button>
+                                </div>
+                            </div><!-- .field-group -->
+
                         </div>
                     </div>
                 </div>

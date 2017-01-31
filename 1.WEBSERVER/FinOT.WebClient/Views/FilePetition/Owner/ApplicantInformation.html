@@ -56,9 +56,11 @@
                 <div class="field-group">
                     <label for="Applicant_state">State</label>
                     <!--<input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State" required />-->
-                    <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
-                            ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State" class="custom-select"
-                            ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                    <div class="input-wrapper">
+                        <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
+                                ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State" class="custom-select"
+                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                    </div>
                 </div>
                 <!--<div class="field-group">
                 <label for="Applicant_state">State</label>
@@ -76,7 +78,7 @@
                 </div>
 
                 <div class="field-group">
-                    <label for="Applicant_email">Email address</label>
+                    <label for="Applicant_email">Email</label>
                     <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                 </div>
             </div>
@@ -148,10 +150,12 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="representative_state">State</label>
-                        <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
-                                ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State" class="custom-select"
-                                ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                        <div class="input-wrapper">
+                            <label for="representative_state">State</label>
+                            <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
+                                    ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State" class="custom-select"
+                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                        </div>
                     </div>
 
                     <div class="field-group">
@@ -168,7 +172,7 @@
                     </div>
 
                     <div class="field-group">
-                        <label for="representative_email">Email address</label>
+                        <label for="representative_email">Email</label>
                         <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                     </div>
                 </div>
