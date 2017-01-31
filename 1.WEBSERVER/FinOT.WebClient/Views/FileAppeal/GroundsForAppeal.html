@@ -66,21 +66,34 @@
                                 <span class="btn-link">Attach explanation</span>
                                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'A_Grounds')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png" multiple />
                             </div>
-                            <div class="field-group">
-                                <table class="table table-condensed nopadding-bottom">
-                                    <tbody>
-                                        <tr ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'}">
-                                            <td class="nopadding-left">
-                                                {{item.DocName}}
-                                            </td>
-                                            <td>
-                                                &nbsp;<input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-gray" value="Download" ng-click="Ctrl.Download(item)" />
-                                                <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="custom-table docs-list" ng-show="Ctrl.caseinfo.TenantAppealInfo.Documents != null && Ctrl.caseinfo.TenantAppealInfo.Documents.length != 0">
+                                <div class="tbl-header">
+                                    <div class="tbl-row clearfix">
+                                        <div class="col col-35 name">File name</div>
+                                    </div>
+                                </div>
+
+                                <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'}">
+                                    <div class="tbl-row clearfix">
+                                        <div class="item" ng-class="{'expanded':toggle}">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                                <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>
+                                            </div>
+
+                                            <div class="item-content clearfix" ng-show="toggle">
+                                                <div class="row">
+                                                    <div class="col-md-10 col-sm-12">
+                                                        <p>{{item.DocDescription}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
 
