@@ -49,13 +49,16 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
                 self.caseinfo.bCaseFiledByThirdParty = self.bCaseFiledByThirdParty;
                 self.caseinfo.PetitionCategoryID = 1;
                 rapGlobalFactory.CaseDetails = self.caseinfo;
+                $scope.model.FileCategoryActive = true;
             });
         }
         else if(self.caseinfo.PetitionCategoryID == 2)
         {
             $scope.model.bPetitionType = false;
             $scope.model.ownerImpInfo = true;
-}
+            $scope.model.FileCategoryActive = true;
+
+        }
         //$location.path("/applicationinfo");
     }
     //self.ContinueToGroundsforPetition = function () {

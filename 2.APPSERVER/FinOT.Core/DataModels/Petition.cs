@@ -203,6 +203,7 @@ namespace RAP.Core.DataModels
         }
         public OwnerPetitionPageSubnmissionStatusM OwnerPetition { get; set; }
         public TenantPetitionPageSubnmissionStatusM TenantPetition { get; set; } 
+        public bool FileCategoryActive { get; set; }
     }
     public class OwnerPetitionPageSubnmissionStatusM
     {

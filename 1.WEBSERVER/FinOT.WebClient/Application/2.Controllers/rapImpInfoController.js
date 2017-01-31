@@ -5,6 +5,7 @@ var rapImpInfoController = ['$scope', '$modal', 'alertService', 'rapfilepetition
     self.Continue = function () {
         $scope.model.bImpInfo = false;
         $scope.model.bAppInfo = true;
+        $scope.model.tPetionActiveStatus.ImportantInformation = true;
     }
 }];
 var rapImpInfoController_resolve = {
