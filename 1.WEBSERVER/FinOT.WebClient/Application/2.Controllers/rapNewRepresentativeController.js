@@ -47,8 +47,16 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
         });
     }
     self.SaveOrUpdateThirdPartyInfo = function (model) {
-        if (self.bAcknowledge == false)
-        {
+        
+        if (model.MailNotification == false && model.EmailNotification == false) {
+            self.Error = "Please select one of the notification preference";
+            return;
+        }
+        if (model.ThirdPartyUser.State == null) {
+            self.Error = "State is a required field";
+            return;
+        }
+        if (self.bAcknowledge == false) {
             self.Error = "Please acknowledge";
             return;
         }

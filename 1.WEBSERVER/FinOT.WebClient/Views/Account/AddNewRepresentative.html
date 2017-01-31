@@ -72,17 +72,17 @@
 
                             <div class="field-group">
                                 <label for="zipcode">Zip code</label>
-                                <input type="text" name="zipcode" id="zipcode" class="field-input" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.Zip" />
+                                <input type="text" name="zipcode" id="zipcode" class="field-input required" data-error="Zip code" required placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.Zip" />
                             </div>
 
                             <div class="field-group">
                                 <label for="phone">Phone number</label>
-                                <input type="text" name="phone" id="phone" class="field-input" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.PhoneNumber" />
+                                <input type="text" name="phone" id="phone" class="field-input required" data-error="Phone number" required placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.PhoneNumber" />
                             </div>
 
                             <div class="field-group mar-bottom-40">
                                 <label for="email">Email address</label>
-                                <input type="text" name="email" id="email" class="field-input email" placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.Email" />
+                                <input type="email" name="email" id="email" class="field-input required" data-error="Email" required placeholder="" ng-model="Ctrl.ThirdPartyInfo.ThirdPartyUser.Email" />
                             </div>
 
                             <div class="field-group subhead">
@@ -133,7 +133,13 @@
 
                         <div class="step-footer no-top-margin">
                             <input type="submit" role="button" aria-label="Save" id="btn-save" name="btn-save" class="btn-primary" value="Save"
-                                   ng-click="Ctrl.Hide = true; (!(frmNewRepresentative.first_name.$error.required || frmNewRepresentative.mailing_address1.$error.required || frmNewRepresentative.city.$error.required )) && Ctrl.SaveOrUpdateThirdPartyInfo(Ctrl.ThirdPartyInfo)" />
+                                   ng-click="Ctrl.Hide = true;
+                                   (!(frmNewRepresentative.first_name.$error.required
+                                   || frmNewRepresentative.mailing_address1.$error.required
+                                   || frmNewRepresentative.city.$error.required
+                                   || frmNewRepresentative.zipcode.$error.required
+                                   || frmNewRepresentative.email.$error.required
+                                   || frmNewRepresentative.phone.$error.required)) && Ctrl.SaveOrUpdateThirdPartyInfo(Ctrl.ThirdPartyInfo)"/> 
                             <input type="button" role="button" aria-label="Cancel" id="btn-cancel" name="btn-cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.Cancel()" />
                         </div>
                     </form>
