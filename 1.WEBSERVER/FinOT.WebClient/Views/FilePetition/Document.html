@@ -17,7 +17,7 @@
 
                       
                         <!-- .custom-table -->
-                        <div class="custom-table docs-list" ng-repeat="item in Ctrl.Documents | filter: {DocTitle: 'TP_AdditionalDocuments'}">
+                        <div class="custom-table docs-list" ng-show="Ctrl.Documents != null && Ctrl.Documents.length != 0">
                             <div class="tbl-header">
                                 <div class="tbl-row clearfix">
                                     <div class="col col-35 name">File name</div>
@@ -25,7 +25,7 @@
                             </div>
 
                             <div class="tbl-body">
-                                <div class="tbl-row clearfix">
+                                <div class="tbl-row clearfix" ng-repeat="item in Ctrl.Documents | filter: {DocTitle: 'TP_AdditionalDocuments'}">
                                     <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
                                             <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
