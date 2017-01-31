@@ -214,6 +214,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
             self.model = response.data;
             self.caseinfo = self.model;
             rapGlobalFactory.CaseDetails = self.caseinfo;
+            rapGlobalFactory.CaseDetails.PetitionCategoryID = rapGlobalFactory.PetitionCategoryID;
             self.bPetitionType = true;
         });
     }

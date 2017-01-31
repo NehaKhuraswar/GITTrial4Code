@@ -19,6 +19,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         var Notification = null;
         var MailNotification = null;
         var IsAdmin = false;
+        var PetitionCategoryID = 0;
         
         var _getCustomer = function () {
             //if (!(CustomerDetails == null || CustomerDetails == undefined)) {

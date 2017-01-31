@@ -1,6 +1,7 @@
 ﻿'use strict';
 var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
+    rapGlobalFactory.CaseDetails = null;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CustomerDetails;
     //if (self.model == null || self.model == undefined)
@@ -21,7 +22,8 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     self.ThirdPartyRepresentative = function () {
         $location.path("/YourRepresentative");
     }
-    self.FilePetition = function () {
+    self.FilePetition = function (type) {
+        rapGlobalFactory.PetitionCategoryID = type;
         $location.path("/filePetition");
     }
     self.NewCaseStatus = function () {
