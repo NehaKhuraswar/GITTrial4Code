@@ -87,13 +87,13 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
         }
     };
     self.ShowOresponseException = function () {
-        if (self.oResponseActiveStatus.Review) {
+        if (self.oResponseActiveStatus.Exeption) {
             _DisableAll();
             self.oresponseException = true;
         }
     };
     self.ShowOresponseDocument = function () {
-        if (self.oResponseActiveStatus.RentHisAdditionalDocumentationtory) {
+        if (self.oResponseActiveStatus.AdditionalDocumentation) {
             _DisableAll();
             self.oresponseDocument = true;
         }        
