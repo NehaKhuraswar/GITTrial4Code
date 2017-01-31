@@ -307,7 +307,7 @@ namespace RAP.DAL
 
                 using (DashboardDataContext db = new DashboardDataContext(_connString))
                 {
-                    var ActivitiesDB = db.Activities.ToList();
+                    var ActivitiesDB = db.Activities.OrderBy(x => x.ActivityName).ToList();
 
                     foreach (var item in ActivitiesDB)
                     {
