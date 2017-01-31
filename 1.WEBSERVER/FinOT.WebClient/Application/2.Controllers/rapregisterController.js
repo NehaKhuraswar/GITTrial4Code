@@ -26,7 +26,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
 
     if (rapGlobalFactory.IsEdit == true)
     {
-        self.Title = "Edit a city user account";
+        self.Title = "Change Account Information";
         self.SubmitText = "Update account";
     }
     else
