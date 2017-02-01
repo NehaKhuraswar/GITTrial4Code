@@ -22,7 +22,7 @@
                         <!-- Applicant’s name and address -->
                         <div class="subhead no-top-margin">
                             <h4>Applicant information</h4>
-                            <a ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
+                            <a style="cursor: pointer;" ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
                         </div>
                         <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                             <p>{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}<br/>
@@ -115,7 +115,7 @@
                         <!-- Your Representative -->
                         <div class="subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                             <h4>Your representative</h4>
-                            <a ng-click="Ctrl.bEditRepresentative = true; Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation = true" class="btn-link btn-edit">Edit</a>
+                            <a style="cursor: pointer;" ng-click="Ctrl.bEditRepresentative = true; Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation = true" class="btn-link btn-edit">Edit</a>
                         </div>
                         <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditRepresentative== true">
                             <div class="field-group">

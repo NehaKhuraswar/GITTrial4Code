@@ -41,7 +41,7 @@
                     <div class="navigation-wrapper">
                         <!-- Site Choose Language -->
                         <div class="site-language-wrapper toggle-nav-element">
-                            <div class="full-width" style="cursor: hand;cursor: pointer;">
+                            <div class="full-width" style="cursor: pointer;">
                                 <select class="custom-select" id="choose-language" name="choose-language">
                                     <option value="">Choose language</option>
                                     <option value="">Option 1</option>
@@ -67,10 +67,10 @@
                                 <li class="menu-item-has-children">
                                     <a href="#resources">Resources</a>
                                     <ul class="sub-menu">
-                                        <li><a >Loss of Service</a></li>
-                                        <li><a >Rent Increase</a></li>
-                                        <li><a >Eviction</a></li>
-                                        <li><a >Exemptions</a></li>
+                                        <li><a style="cursor: pointer;">Loss of Service</a></li>
+                                        <li><a style="cursor: pointer;">Rent Increase</a></li>
+                                        <li><a style="cursor: pointer;">Eviction</a></li>
+                                        <li><a style="cursor: pointer;">Exemptions</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#petition Forms">Petition Forms</a></li>
@@ -79,12 +79,12 @@
                         </div>
 
                         <div class="account-details-wrapper">
-                            <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout" style="cursor: hand;cursor: pointer;">Log out</a>
+                            <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout" style="cursor: pointer;">Log out</a>
 
                             <ul class="account-details clearfix">
-                                <li class="search"><a title="Search">Search</a></li>
-                                <li class="language"><a  title="Choose language" class="toggle-link" data-toggle="site-language-wrapper">Language</a></li>
-                                <li class="signedin" ng-show="Ctrl.UserName !=''"><a ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
+                                <li class="search"><a style="cursor: pointer;" title="Search">Search</a></li>
+                                <li class="language"><a style="cursor: pointer;" title="Choose language" class="toggle-link" data-toggle="site-language-wrapper">Language</a></li>
+                                <li class="signedin" ng-show="Ctrl.UserName !=''"><a style="cursor: pointer;" ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
                             </ul>
                         </div>
 
@@ -102,7 +102,7 @@
             <div id="body" ng-view class="container-fluid"></div>
         <footer id="footer" role="contentinfo">
             <div class="container">
-                <div class="site-title"><a>City of Oakland</a></div>
+                <div class="site-title"><a style="cursor: pointer;">City of Oakland</a></div>
 
                 <div class="site-info">
                     <div class="row">
@@ -129,16 +129,16 @@
                                         <div class="row">
                                             <div class="col-md-5 col-sm-12 col-xs-12">
                                                 <ul>
-                                                    <li><a >Housing & Community Development</a></li>
-                                                    <li><a >City of Oakland</a></li>
-                                                    <li><a >Calculators</a></li>
+                                                    <li><a style="cursor: pointer;">Housing & Community Development</a></li>
+                                                    <li><a style="cursor: pointer;">City of Oakland</a></li>
+                                                    <li><a style="cursor: pointer;">Calculators</a></li>
                                                 </ul>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12 col-xs-12">
                                                 <ul>
-                                                    <li><a >Glossary of Terms</a></li>
-                                                    <li><a >Frequently Asked Questions</a></li>
+                                                    <li><a style="cursor: pointer;">Glossary of Terms</a></li>
+                                                    <li><a style="cursor: pointer;">Frequently Asked Questions</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -157,8 +157,8 @@
                             <div class="copyright">&copy; 2016 City of Oakland All Rights Reserved</div>
 
                             <ul class="footer-links">
-                                <li><a >Privacy Policy</a></li>
-                                <li><a >Terms of Service</a></li>
+                                <li><a style="cursor: pointer;">Privacy Policy</a></li>
+                                <li><a style="cursor: pointer;">Terms of Service</a></li>
                             </ul>
                         </div>
 

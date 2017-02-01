@@ -13,7 +13,7 @@
 
             <div class="breadcrumb border-bottom-green">
                 <ul>
-                    <li><a ng-click="Ctrl.Home()" >Home</a></li>
+                    <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
                     <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
                 </ul>
             </div>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="field-group" ng-show="Ctrl.EditAPNAddress== false">
                                 <div class="small-title">APN address</div>
-                                <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine2}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.Zip}} &nbsp;&nbsp;<a ng-click="Ctrl.EditAPNAddress=true" ng-hide="Ctrl.model.IsNonRAPStaff == true" class="btn-link">Edit</a></p>
+                                <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine2}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.Zip}} &nbsp;&nbsp;<a style="cursor: pointer;" ng-click="Ctrl.EditAPNAddress=true" ng-hide="Ctrl.model.IsNonRAPStaff == true" class="btn-link">Edit</a></p>
                             </div>
                             <!-- Accounts List -->
                             <div class="custom-table selected-case mar-bottom-40" ng-show="Ctrl.EditAPNAddress==true">
@@ -78,7 +78,7 @@
                                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.Zip" />
                                                         </div>
                                                     </div>
-                                                    <a ng-click="Ctrl.UpdateAPNAddress(Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress)" class="btn-link btn-abs">Save</a>
+                                                    <a style="cursor: pointer;" ng-click="Ctrl.UpdateAPNAddress(Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress)" class="btn-link btn-abs">Save</a>
                                                 </div>
 
                                             </div>
@@ -101,7 +101,7 @@
                                             <label for="apn_number" class="hidden">APN Number</label>
                                             <input type="text" name="apn_number" id="apn_number" class="field-input" placeholder="Enter APN number"
                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber" />
-                                            <a ng-click="Ctrl.UpdateAPNNumber(Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress)" class="btn-link">Save</a>
+                                            <a style="cursor: pointer;" ng-click="Ctrl.UpdateAPNNumber(Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress)" class="btn-link">Save</a>
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                                     <option value="" selected>Select analyst</option>
                                                 </select>
                                             </div>
-                                            <a ng-click="Ctrl.AssignAnalyst(Ctrl.caseinfo.C_ID, Analyst)" class="btn-link">Assign</a>
+                                            <a style="cursor: pointer;" ng-click="Ctrl.AssignAnalyst(Ctrl.caseinfo.C_ID, Analyst)" class="btn-link">Assign</a>
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
                                                     <option value="" selected>Select hearing officer</option>
                                                 </select>
                                             </div>
-                                            <a ng-click="Ctrl.AssignHearingOfficer(Ctrl.caseinfo.C_ID, HearingOfficer)" class="btn-link">Assign</a>
+                                            <a style="cursor: pointer;" ng-click="Ctrl.AssignHearingOfficer(Ctrl.caseinfo.C_ID, HearingOfficer)" class="btn-link">Assign</a>
                                         </div>
                                     </div>
                                 </div>
@@ -163,19 +163,19 @@
                                 <div class="account-management">
                                     <div class="items">
                                         <div class="item">
-                                            <div class="item-header mar-b0"><a ng-click="Ctrl.NewCaseStatus()">New case status</a></div>
+                                            <div class="item-header mar-b0"><a style="cursor: pointer;" ng-click="Ctrl.NewCaseStatus()">New case status</a></div>
                                         </div>
 
                                         <div class="item">
-                                            <div class="item-header mar-b0"><a ng-click="Ctrl.SendEmailNotification()">Send email notification</a></div>
+                                            <div class="item-header mar-b0"><a style="cursor: pointer;" ng-click="Ctrl.SendEmailNotification()">Send email notification</a></div>
                                         </div>
 
                                         <div class="item">
-                                            <div class="item-header mar-b0"><a ng-click="Ctrl.USMailNotification()">Add U.S. mail notification</a></div>
+                                            <div class="item-header mar-b0"><a style="cursor: pointer;" ng-click="Ctrl.USMailNotification()">Add U.S. mail notification</a></div>
                                         </div>
 
                                         <div class="item">
-                                            <div class="item-header mar-b0"><a ng-click="Ctrl.AdditionalDocs()">Upload additional case materials</a></div>
+                                            <div class="item-header mar-b0"><a style="cursor: pointer;" ng-click="Ctrl.AdditionalDocs()">Upload additional case materials</a></div>
                                         </div>
                                     </div><!-- .items -->
                                 </div><!-- .account-management -->
@@ -190,7 +190,7 @@
                                 <div class="account-management">
                                     <div class="items">
                                         <div class="item">
-                                            <div class="item-header mar-b0"><a ng-click="Ctrl.NewCaseStatus()">New case status</a></div>
+                                            <div class="item-header mar-b0"><a style="cursor: pointer;" ng-click="Ctrl.NewCaseStatus()">New case status</a></div>
                                         </div>
                                     </div><!-- .items -->
                                 </div><!-- .account-management -->
@@ -212,7 +212,7 @@
                                     <div class="tbl-row clearfix" ng-repeat="activity in Ctrl.caseinfo.ActivityStatus">
                                         <div class="item " ng-class="{'expanded':toggle}">
                                             <div class="item-header clearfix">
-                                                <div class="col col-30 pad-l30 activity"><a ng-click="ActivityToggle = !ActivityToggle" class="btn-toggle"></a>  {{activity.Activity.ActivityDesc}}</div>
+                                                <div class="col col-30 pad-l30 activity"><a style="cursor: pointer;" ng-click="ActivityToggle = !ActivityToggle" class="btn-toggle"></a>  {{activity.Activity.ActivityDesc}}</div>
                                                 <div class="col col-20 date">{{activity.Date | date}}</div>
                                                 <div class="col col-25 initiated-by">{{activity.CreatedBy}}</div>
                                                 <div class="col col-15 status">{{activity.Status.StatusDesc}}</div>
@@ -220,7 +220,7 @@
                                                      || activity.Activity.ActivityID == 26
                                                      || activity.Activity.ActivityID == 27
                                                      || activity.Activity.ActivityID == 35
-                                                     || activity.Status.StatusID == 6"><a ng-click="Ctrl.ViewPage(activity,Ctrl.caseinfo)" class="btn-link">View</a></div>
+                                                     || activity.Status.StatusID == 6"><a style="cursor: pointer;" ng-click="Ctrl.ViewPage(activity,Ctrl.caseinfo)" class="btn-link">View</a></div>
                                             </div>
                                             <div class="item-content clearfix pad-l40" ng-show="ActivityToggle">
                                                 <div class="row">
@@ -243,7 +243,7 @@
                                 <div class="account-management">
                                     <div class="items">
                                         <div class="item">
-                                            <div class="item-header mar-b0"><a ng-click="Ctrl.AdditionalDocs()">Upload additional case materials</a></div>
+                                            <div class="item-header mar-b0"><a style="cursor: pointer;" ng-click="Ctrl.AdditionalDocs()">Upload additional case materials</a></div>
                                         </div>
                                     </div><!-- .items -->
                                 </div><!-- .account-management -->
@@ -264,10 +264,10 @@
                                     <div class="tbl-row clearfix" ng-repeat="item in Ctrl.Documents">
                                         <div class="item" ng-class=" {'expanded':toggle}">
                                             <div class="item-header clearfix">
-                                                <div class="col col-35 pad-l30 file-name"><a ng-click="toggle = !toggle" class="btn-toggle"></a> {{item.DocName}}</div>
+                                                <div class="col col-35 pad-l30 file-name"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> {{item.DocName}}</div>
                                                 <div class="col col-30 date">{{item.CreatedDate | date}}</div>
                                                 <div class="col col-30 uploaded-by">{{item.UploadedBy}}</div>
-                                                <div class="col col-5 pad-r0 download"><a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                <div class="col col-5 pad-r0 download"><a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
                                             </div>
 
                                             <div class="item-content clearfix" ng-show="toggle">

@@ -8,7 +8,7 @@
         <div class="container">
             <div class="breadcrumb border-bottom-grey">
                 <ul>
-                    <li><a ng-click="Ctrl.Home()">Home</a></li>
+                    <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
                     <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
                 </ul>
             </div>
@@ -255,7 +255,7 @@
                                             <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
                                                 <div class="item item-toggle expanded">
                                                     <div class="item-header clearfix">
-                                                        <div class="col col-35 name pad-l30"><a ng-click="Ctrl.Download(item)" class="btn-toggle"></a> {{item.DocName}}</div>
+                                                        <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-toggle"></a> {{item.DocName}}</div>
                                                         <!--<div class="col col-35 type">Excel</div>-->
                                                     </div>
 

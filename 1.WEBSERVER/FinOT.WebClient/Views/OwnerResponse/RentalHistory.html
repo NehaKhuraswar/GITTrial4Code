@@ -115,8 +115,8 @@
                                                 {{item.DocName}}
                                             </td>
                                             <td>
-                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -247,8 +247,8 @@
                                                 {{item.DocName}}
                                             </td>
                                             <td>
-                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
 
                                             </td>
                                         </tr>
@@ -352,10 +352,10 @@
                                 <div ng-repeat="reason in Ctrl.Rent.RentIncreaseReasons">
                                     <label for="{{reason.ReasonID}}">
                                         <input type="checkbox" name="rentcheckbox" class="checkbox" id="{{reason.ReasonID}}" ng-model="reason.IsSelected">
-                                        <i></i><span>{{reason.ReasonDescription}}</span><a role="button" arai-label="Info" ng-click="reasonToggle=!reasonToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a>
+                                        <i></i><span>{{reason.ReasonDescription}}</span><a style="cursor: pointer;" role="button" arai-label="Info" ng-click="reasonToggle=!reasonToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a>
                                     </label>
                                     <div class="info-box-toggle" ng-show="reasonToggle">
-                                        <a ng-click="reasonToggle=!reasonToggle" class="btn-close"></a>
+                                        <a style="cursor: pointer;" ng-click="reasonToggle=!reasonToggle" class="btn-close"></a>
                                         <p>{{reason.ToolTip}}</p>
                                     </div>
                                 </div>
@@ -391,8 +391,8 @@
                                                 {{item.DocName}}
                                             </td>
                                             <td>
-                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -463,8 +463,8 @@
                                             {{item.DocName}}
                                         </td>
                                         <td>
-                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -476,8 +476,8 @@
                                             {{item.DocName}}
                                         </td>
                                         <td>
-                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                         </td>
                                     </tr>
                                 </tbody>

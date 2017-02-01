@@ -12,7 +12,7 @@
 
  <div class="breadcrumb border-bottom-grey">
                 <ul>
-                    <li><a ng-click="Ctrl.Home()" >Home</a></li>
+                    <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
                     <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
                 </ul>
             </div>
@@ -345,7 +345,7 @@
                                     <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
                                             <div class="col col-35 name pad-l30">
-                                                <a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
+                                                <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
                                             </div>
 
                                             <div class="item-content clearfix" ng-show="toggle">

@@ -14,10 +14,10 @@
                         <div class="form-group-checkbox vertical clearfix">
                             <label for="housing_services_decreased">
                                 <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" ng-value="true" /><i></i><span class="has-info-btn"><strong>My housing services have decreased.</strong>
-                                <a role="button" aria-label="Info" ng-click="NoticeToggle=!NoticeToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a></span>
+                                <a style="cursor: pointer;" role="button" aria-label="Info" ng-click="NoticeToggle=!NoticeToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a></span>
                             </label>
                             <div class="info-box-toggle" ng-show="NoticeToggle">
-                                <a ng-click="NoticeToggle=!NoticeToggle" class="btn-close"></a>
+                                <a style="cursor: pointer;" ng-click="NoticeToggle=!NoticeToggle" class="btn-close"></a>
                                 <p>Housing Service Costs are expenses for services provided by the property owner. The costs are related to the use of a rental unit and also known as "operating expenses". The most recent two years of operating expenses are compared to determine if a rent increase is justified. The calculation in both years must provide a reasonable comparison of all expenses. If the increase is challenged by a tenant before the Rent Program, evidence is required to prove each of the claimed expenses.</p>
                             </div>
                         </div>
@@ -137,8 +137,8 @@
                                                     {{item.DocName}}
                                                 </td>
                                                 <td>
-                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -148,7 +148,7 @@
                         </div>
 
 
-                        <a class="btn-link" ng-click="Ctrl.AddAnotherLostServices(Ctrl.LostServices)">Add another lost service</a>
+                        <a style="cursor: pointer;" class="btn-link" ng-click="Ctrl.AddAnotherLostServices(Ctrl.LostServices)">Add another lost service</a>
                         <p>&nbsp;</p>
                     </div><!-- .field-group -->
 
@@ -259,8 +259,8 @@
                                                     {{item.DocName}}
                                                 </td>
                                                 <td>
-                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
-                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -269,7 +269,7 @@
                             </div>
                         </div>
 
-                        <a class="btn-link" ng-click="Ctrl.AddAnotherProblem(Ctrl.Problems)">Add another problem</a>
+                        <a style="cursor: pointer;" class="btn-link" ng-click="Ctrl.AddAnotherProblem(Ctrl.Problems)">Add another problem</a>
                     </div><!-- .field-group -->
 
                     <div class="field-group">

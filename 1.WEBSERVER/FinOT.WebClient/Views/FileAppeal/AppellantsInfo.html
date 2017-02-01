@@ -64,7 +64,7 @@
 
                     <div class="subhead" ng-show="Ctrl.bShowApplicantInfo">
                         <h4>Applicant information</h4>
-                        <a ng-click="Ctrl.EditApplicantName()" class="btn-link btn-edit" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditApplicant == false && Ctrl.bShowApplicantInfo == true">Edit</a>
+                        <a style="cursor: pointer;" ng-click="Ctrl.EditApplicantName()" class="btn-link btn-edit" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditApplicant == false && Ctrl.bShowApplicantInfo == true">Edit</a>
                     </div>
                     <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditApplicant == false && Ctrl.bShowApplicantInfo == true">
                         {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName}}</br>
@@ -142,7 +142,7 @@
 
                     <div class="subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bShowApplicantInfo">
                         <h4>Your Representative</h4>
-                        <a ng-click="Ctrl.bEditRepresentative = true; Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation = true" class="btn-link btn-edit">Edit</a>
+                        <a style="cursor: pointer;" ng-click="Ctrl.bEditRepresentative = true; Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation = true" class="btn-link btn-edit">Edit</a>
                     </div>
                     <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.bEditRepresentative== true">
                         <div class="field-group">

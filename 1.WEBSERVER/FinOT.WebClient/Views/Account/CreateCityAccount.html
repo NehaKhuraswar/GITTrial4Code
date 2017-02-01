@@ -12,8 +12,8 @@
         <div class="container">
             <div class="breadcrumb">
                 <ul>
-                    <li><a>Home</a></li>
-                    <li><a>Account management</a></li>
+                    <li><a style="cursor: pointer;">Home</a></li>
+                    <li><a style="cursor: pointer;">Account management</a></li>
                     <li class="active">{{Ctrl.Title}}</li>
                 </ul>
             </div>
@@ -130,8 +130,8 @@
                         <div class="delete-confirmation mar-t40 mar-bottom-40" ng-show="bDelete== true">
                             <strong>Are you sure that you want to delete this user?</strong>
                             <div class="action-links">
-                                <a ng-click="Ctrl.DeleteCityUser(Ctrl.CityUserAccount.UserID)" class="btn-link btn-delete">Delete</a>
-                                <a ng-click="bDelete=false" class="btn-link btn-cancel">Cancel</a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.DeleteCityUser(Ctrl.CityUserAccount.UserID)" class="btn-link btn-delete">Delete</a>
+                                <a style="cursor: pointer;" ng-click="bDelete=false" class="btn-link btn-cancel">Cancel</a>
                             </div>
                         </div>
 

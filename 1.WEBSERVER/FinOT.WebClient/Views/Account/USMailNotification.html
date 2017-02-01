@@ -14,8 +14,8 @@
 
             <div class="breadcrumb border-bottom-grey">
                 <ul>
-                     <li><a ng-click="Ctrl.Home()" >Home</a></li>
-                    <li><a ng-click="Ctrl.CaseClick()">{{Ctrl.caseinfo.CaseID}}</a></li>
+                     <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
+                    <li><a style="cursor: pointer;" ng-click="Ctrl.CaseClick()">{{Ctrl.caseinfo.CaseID}}</a></li>
                     <li class="active">Add U.S. mail notifications</li>
                 </ul>
             </div>
@@ -100,7 +100,7 @@
                                                     {{item.DocName}}
                                                 </td>
                                                 <td>
-                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                                 </td>
                                             </tr>
                                         </tbody>

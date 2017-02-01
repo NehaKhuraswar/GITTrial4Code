@@ -51,7 +51,7 @@
 
                                     <div class="accordion case-status">
                                         <div class="item" ng-class="{'expanded':toggle}">
-                                            <div class="item-header"><a ng-click="toggle = !toggle" class="btn-toggle"></a> View case progress</div>
+                                            <div class="item-header"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> View case progress</div>
 
                                             <div class="item-content" ng-show="toggle">
                                                 <div class="table">
@@ -71,10 +71,10 @@
                                                         <div class="tbl-col status" ng-if="activity.Status.StatusID != 3"><strong class="visible-sm">Status:</strong> <span>{{activity.Status.StatusDesc}}</span></div>
 
                                                         <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 1 || activity.Activity.ActivityID == 26 || activity.Activity.ActivityID == 27 ||  activity.Activity.ActivityID == 35"><a ng-click="Ctrl.ViewPage(activity,caseinfo)" class="btn-link">View</a></div>
-                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 22 && activity.Status.StatusID == 3 && caseinfo.PetitionCategoryID == 1"><a ng-click="Ctrl.OwnerResponse()" class="btn-link">File online</a></div>
-                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 22 && activity.Status.StatusID == 3 && caseinfo.PetitionCategoryID == 2"><a ng-click="Ctrl.FileTenantResponse()" class="btn-link">File online</a></div>
-                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 23 && activity.Status.StatusID == 3"><a ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link">File online</a></div>
-                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 24"><a ng-click="Ctrl.UploadDocumentation(caseinfo)" class="btn-link">Upload documentation</a></div>
+                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 22 && activity.Status.StatusID == 3 && caseinfo.PetitionCategoryID == 1"><a style="cursor: pointer;" ng-click="Ctrl.OwnerResponse()" class="btn-link">File online</a></div>
+                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 22 && activity.Status.StatusID == 3 && caseinfo.PetitionCategoryID == 2"><a style="cursor: pointer;" ng-click="Ctrl.FileTenantResponse()" class="btn-link">File online</a></div>
+                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 23 && activity.Status.StatusID == 3"><a style="cursor: pointer;" ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link">File online</a></div>
+                                                        <div class="tbl-col link" ng-if="activity.Activity.ActivityID == 24"><a style="cursor: pointer;" ng-click="Ctrl.UploadDocumentation(caseinfo)" class="btn-link">Upload documentation</a></div>
                                                     </div>
                                                 </div><!-- .table -->
 
@@ -90,13 +90,13 @@
                             <div class="results-paging mar-t60" ng-show="false">
                                 <div class="show-records">Showing 1-4 of 896 records</div>
                                 <div class="pages">
-                                    <a  class="link active">1</a>
-                                    <a  class="link">2</a>
-                                    <a  class="link">3</a>
-                                    <a  class="link">4</a>
-                                    <a  class="link">5</a>
-                                    <a  class="link">6</a>
-                                    <a  class="link next">Next <span>&#8250;</span></a>
+                                    <a style="cursor: pointer;" class="link active">1</a>
+                                    <a style="cursor: pointer;" class="link">2</a>
+                                    <a style="cursor: pointer;" class="link">3</a>
+                                    <a style="cursor: pointer;" class="link">4</a>
+                                    <a style="cursor: pointer;" class="link">5</a>
+                                    <a style="cursor: pointer;" class="link">6</a>
+                                    <a style="cursor: pointer;" class="link next">Next <span>&#8250;</span></a>
                                 </div>
                             </div>
 
@@ -114,7 +114,7 @@
 
                             <div class="forms-groups-wrapper">
                                 <div class="forms-group" ng-class="{'expanded':Ownertoggle}">
-                                    <div class="group-header item-header">For property owners <a ng-click="Ownertoggle = !Ownertoggle" class="btn-toggle"></a></div>
+                                    <div class="group-header item-header">For property owners <a style="cursor: pointer;" ng-click="Ownertoggle = !Ownertoggle" class="btn-toggle"></a></div>
 
                                     <div class="group-content item-content" ng-show="Ownertoggle">
                                         <div class="form-section">
@@ -122,7 +122,7 @@
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Property Owner Petition Form</div>
                                                     <div class="summary">Provides form for property owner to apply for Rent Adjustment Program pre-approval of increases that would exceed the annual allowable rate</div>
-                                                    <p><a ng-click="Ctrl.FilePetition(2)" class="btn-link" role="button" aria-label="File online">File online</a></p>
+                                                    <p><a style="cursor: pointer;" ng-click="Ctrl.FilePetition(2)" class="btn-link" role="button" aria-label="File online">File online</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
@@ -130,10 +130,10 @@
                                                         <div class="info-header">Related information <a  class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                                <li><a >Rent Adjustment Program</a></li>
-                                                                <li><a >Rent Increase</a></li>
-                                                                <li><a >Petition Process</a></li>
-                                                                <li><a >Online Portal</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Adjustment Program</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Increase</a></li>
+                                                                <li><a style="cursor: pointer;">Petition Process</a></li>
+                                                                <li><a style="cursor: pointer;">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -146,7 +146,7 @@
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Owner Response Form</div>
                                                     <div class="summary">Provides the Owner Response to a Tenant petition form</div>
-                                                    <p><a role="button" aria-label="File online" ng-click="Ctrl.OwnerResponse()" class="btn-link">File online</a></p>
+                                                    <p><a style="cursor: pointer;" role="button" aria-label="File online" ng-click="Ctrl.OwnerResponse()" class="btn-link">File online</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
@@ -154,11 +154,11 @@
                                                         <div class="info-header">Related information <a  class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                                <li><a >Rent Adjustment Program</a></li>
-                                                                <li><a >Loss of Service</a></li>
-                                                                <li><a >Rent Increase</a></li>
-                                                                <li><a >Petition Process</a></li>
-                                                                <li><a >Online Portal</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Adjustment Program</a></li>
+                                                                <li><a style="cursor: pointer;">Loss of Service</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Increase</a></li>
+                                                                <li><a style="cursor: pointer;">Petition Process</a></li>
+                                                                <li><a style="cursor: pointer;">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -176,15 +176,15 @@
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Enhanced Notice to Tenants for Grandparented Capital Improvements</div>
                                                     <div class="summary">Enhanced Notice form for owners with grandfathered Capital Improvements. Note: Effective 2/1/17, all rent increases above the annual CPI increase will require an owner petition for pre-approval of increase. </div>
-                                                    <p><a href="http://www2.oaklandnet.com/government/o/hcd/s/LandlordResources/OAK048808" class="link-download-form">Download Form</a></p>
+                                                    <p><a style="cursor: pointer;" href="http://www2.oaklandnet.com/government/o/hcd/s/LandlordResources/OAK048808" class="link-download-form">Download Form</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class="info-header">Related information <a  class="btn-toggle"></a></div>
+                                                        <div class="info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                                <li><a >Rent Adjustment Program</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Adjustment Program</a></li>
 
                                                             </ul>
                                                         </div>
@@ -199,7 +199,7 @@
 
 
                                 <div class="forms-group" ng-class="{'expanded':Tenanttoggle}">
-                                    <div class="group-header item-header">For tenants <a ng-click="Tenanttoggle = !Tenanttoggle" class="btn-toggle"></a></div>
+                                    <div class="group-header item-header">For tenants <a style="cursor: pointer;" ng-click="Tenanttoggle = !Tenanttoggle" class="btn-toggle"></a></div>
 
                                     <div class="group-content item-content" ng-show="Tenanttoggle">
                                         <div class="form-section">
@@ -207,19 +207,19 @@
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Tenant Petition Form</div>
                                                     <div class="summary">Provides the tenant petition form</div>
-                                                    <p><a ng-click="Ctrl.FilePetition(1)" class="btn-link" role="button" aria-label="File online">File online</a></p>
+                                                    <p><a style="cursor: pointer;" ng-click="Ctrl.FilePetition(1)" class="btn-link" role="button" aria-label="File online">File online</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class="info-header">Related information <a class="btn-toggle"></a></div>
+                                                        <div class="info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                                <li><a >Rent Adjustment Program</a></li>
-                                                                <li><a >Loss of Service</a></li>
-                                                                <li><a >Rent Increase</a></li>
-                                                                <li><a >Petition Process</a></li>
-                                                                <li><a >Online Portal</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Adjustment Program</a></li>
+                                                                <li><a style="cursor: pointer;">Loss of Service</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Increase</a></li>
+                                                                <li><a style="cursor: pointer;">Petition Process</a></li>
+                                                                <li><a style="cursor: pointer;">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -232,19 +232,19 @@
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Tenant Response Form</div>
                                                     <div class="summary">Provides form for tenant to respond to an owner petition</div>
-                                                    <p><a ng-click="Ctrl.FileTenantResponse()" class="btn-link" role="button" aria-label="File online">File online</a></p>
+                                                    <p><a style="cursor: pointer;" ng-click="Ctrl.FileTenantResponse()" class="btn-link" role="button" aria-label="File online">File online</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class="info-header">Related information <a  class="btn-toggle"></a></div>
+                                                        <div class="info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                                <li><a >Rent Adjustment Program</a></li>
-                                                                <li><a >Loss of Service</a></li>
-                                                                <li><a >Rent Increase</a></li>
-                                                                <li><a >Petition Process</a></li>
-                                                                <li><a >Online Portal</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Adjustment Program</a></li>
+                                                                <li><a style="cursor: pointer;">Loss of Service</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Increase</a></li>
+                                                                <li><a style="cursor: pointer;">Petition Process</a></li>
+                                                                <li><a style="cursor: pointer;">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -260,7 +260,7 @@
 
 
                                 <div class="forms-group" ng-class="{'expanded':EveryOnetoggle}">
-                                    <div class="group-header item-header">For everyone <a ng-click="EveryOnetoggle = !EveryOnetoggle" class="btn-toggle"></a></div>
+                                    <div class="group-header item-header">For everyone <a style="cursor: pointer;" ng-click="EveryOnetoggle = !EveryOnetoggle" class="btn-toggle"></a></div>
 
                                     <div class="group-content item-content" ng-show="EveryOnetoggle">
 
@@ -270,19 +270,19 @@
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
                                                     <div class="title">Appeal Form</div>
                                                     <div class="summary">Provides form for appealing a RAP decision</div>
-                                                    <p><a ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link" role="button" aria-label="File online">File online</a></p>
+                                                    <p><a style="cursor: pointer;" ng-click="Ctrl.FileAppeal(Ctrl.caseinfo)" class="btn-link" role="button" aria-label="File online">File online</a></p>
                                                 </div><!-- .col-md-9 -->
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class="info-header">Related information <a  class="btn-toggle"></a></div>
+                                                        <div class="info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                                <li><a >Rent Adjustment Program</a></li>
-                                                                <li><a >Loss of Service</a></li>
-                                                                <li><a >Rent Increase</a></li>
-                                                                <li><a >Petition Process</a></li>
-                                                                <li><a >Online Portal</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Adjustment Program</a></li>
+                                                                <li><a style="cursor: pointer;">Loss of Service</a></li>
+                                                                <li><a style="cursor: pointer;">Rent Increase</a></li>
+                                                                <li><a style="cursor: pointer;">Petition Process</a></li>
+                                                                <li><a style="cursor: pointer;">Online Portal</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -303,11 +303,11 @@
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class="info-header">Related information <a  class="btn-toggle"></a></div>
+                                                        <div class="info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
 
-                                                                <li><a>Petition Process</a></li>
+                                                                <li><a style="cursor: pointer;">Petition Process</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -325,10 +325,10 @@
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class="info-header">Related information <a href="#" class="btn-toggle"></a></div>
+                                                        <div class="info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
-                                                                <li><a href="#">Petition process</a></li>
+                                                                <li><a style="cursor: pointer;">Petition process</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -346,11 +346,11 @@
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class=" info-header">Related information <a  class="btn-toggle"></a></div>
+                                                        <div class=" info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
 
-                                                                <li><a>Petition process</a></li>
+                                                                <li><a style="cursor: pointer;">Petition process</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -368,11 +368,11 @@
 
                                                 <div class="col-md-4 col-sm-5 col-xs-12">
                                                     <div class="related-info info-toggle">
-                                                        <div class=" info-header">Related information <a class="btn-toggle"></a></div>
+                                                        <div class=" info-header">Related information <a style="cursor: pointer;" class="btn-toggle"></a></div>
                                                         <div class="info-content">
                                                             <ul>
 
-                                                                <li><a >Petition process</a></li>
+                                                                <li><a style="cursor: pointer;">Petition process</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -392,19 +392,19 @@
 
                                 <div class="items">
                                     <div class="item">
-                                        <div class="item-header"><a role="button" ng-click="Ctrl.ChangeAccountInformation()">Change account information</a></div>
+                                        <div class="item-header"><a style="cursor: pointer;" role="button" ng-click="Ctrl.ChangeAccountInformation()">Change account information</a></div>
                                     </div>
 
                                     <div class="item">
-                                        <div class="item-header"><a role="button" ng-click="Ctrl.ChangePassword()">Change password</a></div>
+                                        <div class="item-header"><a style="cursor: pointer;" role="button" ng-click="Ctrl.ChangePassword()">Change password</a></div>
                                     </div>
 
                                     <div class="item">
-                                        <div class="item-header"><a role="button" ng-click="Ctrl.ResendPin()">Resend PIN number</a></div>
+                                        <div class="item-header"><a style="cursor: pointer;" role="button" ng-click="Ctrl.ResendPin()">Resend PIN number</a></div>
                                     </div>
 
                                     <div class="item has-summary">
-                                        <div class="item-header"><a role="button" ng-click="Ctrl.ThirdPartyRepresentative()">Your representative</a></div>
+                                        <div class="item-header"><a style="cursor: pointer;" role="button" ng-click="Ctrl.ThirdPartyRepresentative()">Your representative</a></div>
                                         <div class="item-content">
                                             <p>A representative is a person who will be receiving official notifications about your case from the Rent Adjustment Program. You can add or edit their contact information by clicking on the link above.</p>
                                         </div>

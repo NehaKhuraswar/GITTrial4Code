@@ -17,7 +17,7 @@
                 <div class="account-management" ng-show="Ctrl.model.IsCityAdmin == true || Ctrl.model.AccountType.AccountTypeID == 2">
                     <div class="items">
                         <div class="item">
-                            <div class="item-header"><a ng-click="Ctrl.ManageAccounts()">Manage accounts</a></div>
+                            <div class="item-header"><a style="cursor: pointer;" ng-click="Ctrl.ManageAccounts()">Manage accounts</a></div>
                         </div>
                     </div><!-- .items -->
                 </div><!-- .account-management -->
@@ -44,8 +44,8 @@
                                 <div class="tbl-row clearfix" ng-repeat="item in Ctrl.CaseList">
                                     <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
-                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 1"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}</div>
-                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 2"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.StateName}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</div>
+                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 1"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}</div>
+                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 2"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.StateName}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</div>
                                             <div class="col col-20 filling-date">{{item.CreatedDate | date}}</div>
                                             <div class="col col-20 ast-activity">{{item.LastModifiedDate | date}}</div>
                                             <div class="col col-15 activity">{{item.LastActivity}}</div>
@@ -95,7 +95,7 @@
                                                 </div>
 
                                                 <div class="item-col col-10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
-                                                    <a ng-click="Ctrl.AssignAnalyst(item.C_ID, Analyst)" class="btn-link btn-assign">Assign</a>
+                                                    <a style="cursor: pointer;" ng-click="Ctrl.AssignAnalyst(item.C_ID, Analyst)" class="btn-link btn-assign">Assign</a>
                                                 </div>
                                             </div>
 
@@ -116,7 +116,7 @@
                                                 </div>
 
                                                 <div class="item-col col-10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
-                                                    <a ng-click="Ctrl.AssignHearingOfficer(item.C_ID, HearingOfficer)" class="btn-link btn-assign">Assign</a>
+                                                    <a style="cursor: pointer;" ng-click="Ctrl.AssignHearingOfficer(item.C_ID, HearingOfficer)" class="btn-link btn-assign">Assign</a>
                                                 </div>
                                             </div>
 
@@ -270,21 +270,21 @@
                         <div class="tbl-row clearfix">
                             <div class="col col-45 case-number clickable" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)">
                                 Case number 
-                                <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>                            
-                                <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
-                                <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CaseID')" class="sort grey"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>                            
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CaseID')" class="sort grey"></a>
                             </div>
                             <div class="col col-20 filling-date clickable" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)">
                                 Date of filing
-                                <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
-                                <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
-                                <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CreatedDate')" class="sort grey"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CreatedDate')" class="sort grey"></a>
                             </div>
                             <div class="col col-20 last-activity clickable" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)">
                                 Last activity
-                                <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
-                                <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
-                                <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate')" class="sort grey"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate')" class="sort grey"></a>
                             </div>
                             <div class="col col-15 activity">Activity</div>
                         </div>
@@ -294,8 +294,8 @@
                         <div class="tbl-row clearfix" ng-repeat="result in Ctrl.CaseSearchResult">
                             <div class="item" ng-class="{'expanded':toggle}">
                                 <div class="item-header clearfix">
-                                    <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==1"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
-                                    <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==2"><a ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.OPAddressLine1}} {{result.OPAddressLine2}}, {{result.OPCity}}, {{result.OPStateCode}} {{result.OPOwnerZip}}</div>
+                                    <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==1"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
+                                    <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==2"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.OPAddressLine1}} {{result.OPAddressLine2}}, {{result.OPCity}}, {{result.OPStateCode}} {{result.OPOwnerZip}}</div>
                                     <div class="col col-20 filling-date">{{result.CreatedDate | date}}</div>
                                     <div class="col col-20 ast-activity">{{result.LastModifiedDate |date}}</div>
                                     <div class="col col-15 activity">{{result.ActivityName}}</div>
@@ -345,7 +345,7 @@
                                         </div>
 
                                         <div class="item-col col-10 align-left" >
-                                            <a ng-click="Ctrl.AssignAnalystSearch(result.C_ID, AnalystSearch)" class="btn-link btn-assign">Assign</a>
+                                            <a style="cursor: pointer;" ng-click="Ctrl.AssignAnalystSearch(result.C_ID, AnalystSearch)" class="btn-link btn-assign">Assign</a>
                                         </div>
                                     </div>
 
@@ -369,7 +369,7 @@
                                         </div>
 
                                         <div class="item-col col-10 align-left">
-                                            <a ng-click="Ctrl.AssignHearingOfficerSearch(result.C_ID, HearingOfficerSearch)" class="btn-link btn-assign">Assign</a>
+                                            <a style="cursor: pointer;" ng-click="Ctrl.AssignHearingOfficerSearch(result.C_ID, HearingOfficerSearch)" class="btn-link btn-assign">Assign</a>
                                         </div>
                                     </div>
 
@@ -383,9 +383,9 @@
                 <div class="results-paging mar-t60" ng-show="Ctrl.CaseSearchResult.length > 0">
                     <div class="show-records">Showing {{Ctrl.FromRecord}}-{{Ctrl.ToRecord}} of {{Ctrl.CaseSearchModel.TotalCount}} records</div>
                     <div class="pages">
-                        <a ng-click="Ctrl.GetPreviousPage()" ng-hide="Ctrl.isFirstPage()" class="link next"><span>&#8249;</span>Previous</a>
-                        <a ng-click="Ctrl.GetPage(pageNumber.text, Ctrl.CaseSearchModel)" ng-class="link 'active':pageNumber.active" ng-repeat="pageNumber in Ctrl.pageNumberList">{{pageNumber.text}}</a>
-                        <a ng-click="Ctrl.GetNextPage()" ng-hide="Ctrl.isLastPage()" class="link next">Next <span>&#8250;</span></a>
+                        <a style="cursor: pointer;" ng-click="Ctrl.GetPreviousPage()" ng-hide="Ctrl.isFirstPage()" class="link next"><span>&#8249;</span>Previous</a>
+                        <a style="cursor: pointer;" ng-click="Ctrl.GetPage(pageNumber.text, Ctrl.CaseSearchModel)" ng-class="link 'active':pageNumber.active" ng-repeat="pageNumber in Ctrl.pageNumberList">{{pageNumber.text}}</a>
+                        <a style="cursor: pointer;" ng-click="Ctrl.GetNextPage()" ng-hide="Ctrl.isLastPage()" class="link next">Next <span>&#8250;</span></a>
                     </div>
                 </div>
 

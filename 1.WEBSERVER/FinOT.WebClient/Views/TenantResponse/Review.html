@@ -13,7 +13,7 @@
 
                                     <div class="subhead type2">
                                         <h4>Applicant and property information</h4>
-                                        <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
+                                        <a style="cursor: pointer;" ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
                                     </div>
 
                                     <div class="field-group filled-info subhead">
@@ -136,7 +136,7 @@
                                     <!-- Exemption contested -->
                                     <div class="subhead type2">
                                         <h4>Exemption contested</h4>
-                                        <a ng-click="Ctrl.EditExemptContested()" class="btn-link btn-edit">Edit</a>
+                                        <a style="cursor: pointer;" ng-click="Ctrl.EditExemptContested()" class="btn-link btn-edit">Edit</a>
                                     </div>
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="info-title full-width">Please attach a brief statement explaining why the property owner is not entitled to the proposed increase.</div>
@@ -147,7 +147,7 @@
                                     <!-- Rent increases -->
                                     <div class="subhead type2">
                                         <h4>Rent increases</h4>
-                                        <a ng-click="Ctrl.EditRentalHistoryInfo()" class="btn-link btn-edit">Edit</a>
+                                        <a style="cursor: pointer;" ng-click="Ctrl.EditRentalHistoryInfo()" class="btn-link btn-edit">Edit</a>
                                     </div>
 
                                     <div class="field-group filled-info subhead">
@@ -227,7 +227,7 @@
                                     <!-- Additional Documentation -->
                                     <div class="subhead type2">
                                         <h4>Additional Documentation</h4>
-                                        <a ng-click="Ctrl.EditDocumentsInfo()" class="btn-link btn-edit">Edit</a>
+                                        <a style="cursor: pointer;" ng-click="Ctrl.EditDocumentsInfo()" class="btn-link btn-edit">Edit</a>
                                     </div>
 
                                     <div class="field-group">
@@ -244,7 +244,7 @@
                                                 <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
                                                     <div class="item item-toggle expanded">
                                                         <div class="item-header clearfix">
-                                                            <div class="col col-35 name pad-l30"><a ng-click="Ctrl.Download(item)" class="btn-toggle"></a> {{item.DocName}}</div>
+                                                            <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-toggle"></a> {{item.DocName}}</div>
                                                             <!--<div class="col col-35 type">Excel</div>-->
                                                         </div>
 

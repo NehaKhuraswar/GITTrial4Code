@@ -131,10 +131,10 @@
             <nav class="pull-left" ng-if="Ctrl.AccountSearchResult.length">
                 <ul class="pager nopadding-bottom">
                     <li ng-class="{'disabled': Ctrl.AccountSearchModel.CurrentPage == 1}">
-                        <a href="" title="Previous page" ng-click="Ctrl.GetPage((Ctrl.AccountSearchModel.CurrentPage - 1),Ctrl.AccountSearchModel)">&lsaquo; Previous</a>
+                        <a style="cursor: pointer;" title="Previous page" ng-click="Ctrl.GetPage((Ctrl.AccountSearchModel.CurrentPage - 1),Ctrl.AccountSearchModel)">&lsaquo; Previous</a>
                     </li>
                     <li ng-class="{'disabled': Ctrl.isLastPage()}">
-                        <a href="" title="Next page" ng-click="Ctrl.GetPage((Ctrl.AccountSearchModel.CurrentPage + 1),Ctrl.AccountSearchModel)">Next &rsaquo;</a>
+                        <a style="cursor: pointer;" title="Next page" ng-click="Ctrl.GetPage((Ctrl.AccountSearchModel.CurrentPage + 1),Ctrl.AccountSearchModel)">Next &rsaquo;</a>
                     </li>
                     <li>
                         <span class="range-label">Displaying {{ Ctrl.AccountSearchModel.CurrentPage }} of {{ Ctrl.TotalPage() }}</span>

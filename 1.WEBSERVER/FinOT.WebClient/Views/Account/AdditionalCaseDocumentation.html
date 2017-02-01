@@ -13,8 +13,8 @@
 
             <div class="breadcrumb border-bottom-grey">
                 <ul>
-                    <li><a ng-click="Ctrl.Home()">Home</a></li>
-                    <li><a ng-click="Ctrl.CaseClick()">{{Ctrl.CaseID}}</a></li>
+                    <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
+                    <li><a style="cursor: pointer;" ng-click="Ctrl.CaseClick()">{{Ctrl.CaseID}}</a></li>
                     <li class="active">Additional case documentation</li>
                 </ul>
             </div>
@@ -47,13 +47,13 @@
                                         <div class="tbl-row clearfix" ng-repeat="item in Ctrl.Documents">
                                             <div class="item" ng-class="{'expanded':toggle}">
                                                 <div class="item-header clearfix">
-                                                    <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                                    <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
                                                     &nbsp; <!--<input type="button" id="download" name="download" class="btn-primary btn-gray" value="Download" ng-click="Ctrl.Download(item)" />-->
 
 
                                                     <div class="col col-35 type">&nbsp;</div>
-                                                    <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                                    <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>                                                   
+                                                    <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>                                                   
                                                 </div>
 
                                                 <div class="item-content" ng-show="toggle">

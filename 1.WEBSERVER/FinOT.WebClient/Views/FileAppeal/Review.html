@@ -18,7 +18,7 @@
 
     <div class="subhead type2">
         <h4>Applicant and property information</h4>
-        <a ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
+        <a style="cursor: pointer;" ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
     </div>
 
     <div class="field-group filled-info subhead">
@@ -85,7 +85,7 @@
 
     <div class="subhead type2 no-bottom-margin">
         <h4>Grounds for Appeal</h4>
-        <a ng-click="Ctrl.EditGrounds()" class="btn-link btn-edit">Edit</a>
+        <a style="cursor: pointer;" ng-click="Ctrl.EditGrounds()" class="btn-link btn-edit">Edit</a>
     </div>
 
     <div class="field-group filled-info">
@@ -110,7 +110,7 @@
     <!-- Additional Documentation -->
     <div class="subhead type2 no-bottom-margin">
         <h4>Additional Documentation</h4>
-        <a class="btn-link btn-edit" ng-click="Ctrl.EditDocuments()">Edit</a>
+        <a style="cursor: pointer;" class="btn-link btn-edit" ng-click="Ctrl.EditDocuments()">Edit</a>
     </div>
 
     <div class="field-group">
@@ -126,7 +126,7 @@
                 <div class="tbl-row clearfix">
                     <div class="item" ng-class="{'expanded':toggle}">
                         <div class="item-header clearfix">
-                            <div class="col col-35 name pad-l30"><a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                            <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
                         </div>
 
                         <div class="item-content clearfix" ng-show="toggle">
@@ -148,7 +148,7 @@
     <!-- Serving of appeal to the opposing parties -->
     <div class="subhead type2">
         <h4>Serving of Appeal to Opposing Party</h4>
-        <a ng-click="Ctrl.EditServeAppeal()" class="btn-link btn-edit">Edit</a>
+        <a style="cursor: pointer;" ng-click="Ctrl.EditServeAppeal()" class="btn-link btn-edit">Edit</a>
     </div>
 
     <div class="field-group">
