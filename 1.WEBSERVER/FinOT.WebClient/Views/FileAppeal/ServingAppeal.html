@@ -150,7 +150,7 @@
 
                 <div class="field-group">
                     <label for="opposing_state">State</label>
-                    <div class="row">
+                    <div class="input-wrapper">
                         <select name="opposing_state" id="opposing_state" class="custom-select" data-placeholder="Select"
                                 ng-model="Ctrl.OpposingParty.State"
                                 ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
