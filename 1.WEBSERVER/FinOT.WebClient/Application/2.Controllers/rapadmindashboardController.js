@@ -186,7 +186,8 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
         rapGlobalFactory.SelectedForEdit = model;
          rapGlobalFactory.IsEdit = true;
         if(self.AccountSearchModel.AccountType.AccountTypeID == 3)
-        {           
+        {
+            rapGlobalFactory.IsAdmin = true;
             $location.path("/editcustomerinformation");
         }
         else 
