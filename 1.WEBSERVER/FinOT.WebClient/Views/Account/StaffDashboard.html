@@ -34,7 +34,7 @@
                             <div class="tbl-header">
                                 <div class="tbl-row clearfix">
                                     <div class="col col-45 case-number">Case number</div>
-                                    <div class="col col-20 filling-date">Date of filing <i class="sort"></i></div>
+                                    <div class="col col-20 filling-date">Date of filing <i class="sort "></i></div>
                                     <div class="col col-20 last-activity">Last activity <i class="sort"></i></div>
                                     <div class="col col-15 activity">Activity <i class="sort"></i></div>
                                 </div>
@@ -268,9 +268,24 @@
                 <div class="custom-table active-cases-table" ng-show="Ctrl.CaseSearchResult.length > 0">
                     <div class="tbl-header">
                         <div class="tbl-row clearfix">
-                            <div class="col col-45 case-number">Case number <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" class="sort"></a></div>
-                            <div class="col col-20 filling-date">Date of filing <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" class="sort"></a></div>
-                            <div class="col col-20 last-activity">Last activity <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" class="sort"></a></div>
+                            <div class="col col-45 case-number clickable" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)">
+                                Case number 
+                                <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>                            
+                                <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CaseID')" class="sort grey"></a>
+                            </div>
+                            <div class="col col-20 filling-date clickable" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)">
+                                Date of filing
+                                <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
+                                <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CreatedDate')" class="sort grey"></a>
+                            </div>
+                            <div class="col col-20 last-activity clickable" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)">
+                                Last activity
+                                <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
+                                <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate')" class="sort grey"></a>
+                            </div>
                             <div class="col col-15 activity">Activity</div>
                         </div>
                     </div>

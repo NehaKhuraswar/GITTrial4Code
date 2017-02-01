@@ -4807,6 +4807,20 @@ Toggle Menu Button
   background-size: 10px 8px;
   margin-left: 5px;
 }
+.custom-table .tbl-header .col .sort.desc {
+ width: 10px; height: 8px;
+            display: inline-block;
+            background: url(../Images/drop-up-triangle.png) no-repeat 0 0;
+            background-size: 10px 8px;
+            margin-left: 5px;
+}
+.custom-table .tbl-header .col .sort.grey {
+ width: 10px; height: 8px;
+            display: inline-block;
+            background: url(../Images/sort-grey-triangle.png) no-repeat 0 0;
+            background-size: 10px 8px;
+            margin-left: 5px;
+}
 /* line 1865, ../sass/styles.scss */
 .custom-table .tbl-header .col.pad-l0 {
   padding-left: 0;
@@ -7018,3 +7032,4 @@ Toggle Menu Button
         -o-transform: scale(1, 1);
         -moz-transform: scale(1, 1);
       }
+

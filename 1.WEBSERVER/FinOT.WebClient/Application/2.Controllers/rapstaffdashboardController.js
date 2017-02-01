@@ -3,13 +3,14 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CityUser;
+
     self.CaseSearchModel = [];
     self.CaseSearchResult = [];
     self.SearchModel = {
         TotalCount: 0,
         PageSize: null,
         CurrentPage: 1,
-        SortBy: 'Name',
+        SortBy: 'CaseID',
         SortReverse: true
     };
     self.pageNumberList = [];
@@ -173,7 +174,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.CaseSearch = function (model) {
 
         model.CurrentPage = 1;
-        model.SortBy = "CreatedDate";
+        model.SortBy = "CaseID";
         model.SortReverse = 0;
         
         rapFactory.GetCaseSearch(model).then(function (response) {
@@ -270,6 +271,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
             self.CaseSearchModel.SortBy = model.SortBy;
             self.CaseSearchModel.SortReverse = model.SortReverse;
+
 
         });
 }

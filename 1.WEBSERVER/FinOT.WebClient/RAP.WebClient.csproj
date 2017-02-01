@@ -312,6 +312,7 @@
     <Content Include="Images\chevron-left.svg" />
     <Content Include="Images\chevron-right.svg" />
     <Content Include="Images\drop-down-triangle.png" />
+    <Content Include="Images\drop-up-triangle.png" />
     <Content Include="Images\icon-arrow-down-medium.png" />
     <Content Include="Images\icon-arrow-down-small.png" />
     <Content Include="Images\icon-arrow-right-medium.png" />
@@ -339,6 +340,7 @@
     <Content Include="Images\radio-button-error.png" />
     <Content Include="Images\radio-button-inside.png" />
     <Content Include="Images\radio-button.png" />
+    <Content Include="Images\sort-grey-triangle.png" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\functions.js" />
     <Content Include="js\jquery-2.1.3.min.js" />

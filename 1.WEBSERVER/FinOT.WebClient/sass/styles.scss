@@ -1854,12 +1854,16 @@ Toggle Menu Button
       .sort{
         width: 10px; height: 8px;
         display: inline-block;
-        background: url(../img/drop-down-triangle.png) no-repeat 0 0;
+        background: url(../Images/drop-down-triangle.png) no-repeat 0 0;
         background-size: 10px 8px;
         margin-left: 5px;
         
         &.desc{
-          
+            width: 10px; height: 8px;
+            display: inline-block;
+            background: url(../Images/drop-up-triangle.png) no-repeat 0 0;
+            background-size: 10px 8px;
+            margin-left: 5px;
         }
       }
       &.pad-l0{
