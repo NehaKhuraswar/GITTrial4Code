@@ -38,7 +38,7 @@
                                 <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
                                 </div>
                                 <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>
+                                <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                 <!--<div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
                     <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>-->
                             </div>
@@ -79,11 +79,13 @@
 
                     <select ng-model="Ctrl.description1"
                             data-placeholder="Description" class="custom-select"
-                            ng-options="desc for desc in Ctrl.DocDescriptions"></select>
+                            ng-options="desc for desc in Ctrl.DocDescriptions">
+                        <option value="" selected>Other</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == '<--Select-->'">
+            <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == null">
                 <label for="document_description">If none of the above apply, please describe the attached document.</label>
                 <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
             </div>

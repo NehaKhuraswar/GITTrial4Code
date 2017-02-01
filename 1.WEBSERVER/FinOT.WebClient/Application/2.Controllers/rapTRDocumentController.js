@@ -40,6 +40,14 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
         self.caseinfo = response.data;
     });
 
+    self.Delete = function (doc) {
+        var index = self.caseinfo.Documents.indexOf(doc);
+        self.caseinfo.Documents.splice(index, 1);
+    }
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+
+    }
     $scope.onFileSelected = function ($files, docTitle) {
         if ($files && $files.length) {
             for (var i = 0; i < $files.length; i++) {
@@ -68,7 +76,7 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
                     }
                     //document.DocDescription = angular.copy(self.description2);
                     var desc = angular.copy(self.description1);
-                    if (desc == null ||  (desc =='<--Select-->')) {
+                    if (desc == null) {
                         desc = angular.copy(self.description2);
                     }
                     document.DocDescription = desc;

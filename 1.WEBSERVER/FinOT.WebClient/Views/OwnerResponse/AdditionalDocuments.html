@@ -25,20 +25,20 @@
                 </div>
 
 
-                <div class="custom-table docs-list" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
+                <div class="custom-table docs-list" >
                     <div class="tbl-header">
                         <div class="tbl-row clearfix">
                             <div class="col col-35 name">File name</div>
                         </div>
                     </div>
 
-                    <div class="tbl-body">
+                    <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
                         <div class="tbl-row clearfix">
                             <div class="item" ng-class="{'expanded':toggle}">
                                 <div class="item-header clearfix">
                                     <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
                                     <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>
+                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                 </div>
 
                                 <div class="item-content clearfix" ng-show="toggle">
@@ -60,11 +60,13 @@
 
                         <select ng-model="Ctrl.description1"
                                 data-placeholder="Description" class="custom-select"
-                                ng-options="desc for desc in Ctrl.DocDescriptions"></select>
+                                ng-options="desc for desc in Ctrl.DocDescriptions">
+                            <option value="" selected>Other</option> 
+                        </select>
                     </div>
                 </div>
 
-                <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == '<--Select-->'">
+                <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == null">
                     <label for="document_description">If none of the above apply, please describe the document you’re attaching.</label>
                     <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
                 </div>

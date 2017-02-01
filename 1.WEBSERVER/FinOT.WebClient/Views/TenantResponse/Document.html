@@ -1,4 +1,4 @@
-﻿
+﻿<script src='js/functions.js'></script>
                 <!-- Page Sub Title - Visible on desktop screens only -->
                 <div class="step-heading">Additional Documentation</div>
 
@@ -8,41 +8,37 @@
                             <p>Please use the form below to include any additional documentation that you would like the Rent Adjustment Program to examine.</p>
                         </div>
 
+                    <div class="custom-table docs-list">
+                        <div class="tbl-header">
+                            <div class="tbl-row clearfix">
+                                <div class="col col-35 name">File name</div>
+                            </div>
+                        </div>
 
-                        <div class="field-group">
-                            <!-- Custom Table -->
-                            <div class="custom-table docs-list">
-                                <div class="tbl-header">
-                                    <div class="tbl-row clearfix">
-                                        <div class="col col-35 name">File name</div>
-                                        <div class="col col-35 type">File type</div>
+                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
+                            <div class="tbl-row clearfix">
+                                <div class="item" ng-class="{'expanded':toggle}">
+                                    <div class="item-header clearfix">
+                                        <div class="col col-35 name pad-l30">
+                                            <a ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
+                                        </div>
+                                        <a ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                        <a ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                        <!--<div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a ng-click="Ctrl.Download(item)" class="btn-download">Download</a></div>
+                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>-->
                                     </div>
-                                </div>
 
-                                <div class="tbl-body">
-                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
-                                        <div class="item item-toggle expanded">
-                                            <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a style="cursor: pointer;" class="btn-toggle"></a>{{item.DocName}}</div>
-                                                <!--<div class="col col-35 type">Excel</div>-->
-                                                <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-delete">Delete</a>
-                                            </div>
-
-                                            <div class="item-content clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-sm-12">
-                                                        <p>{{item.DocDescription}}</p>
-                                                    </div>
-                                                </div>
+                                    <div class="item-content clearfix" ng-show="toggle">
+                                        <div class="row">
+                                            <div class="col-md-10 col-sm-12">
+                                                <p>{{item.DocDescription}}</p>
                                             </div>
                                         </div>
                                     </div>
-
-                                    
                                 </div>
                             </div>
-                            <!-- .custom-table -->
-                        </div><!-- .field-group -->
+                        </div>
+                    </div>
 
                         <div class="subhead">
                             <h4>Upload document</h4>
@@ -54,12 +50,13 @@
                                 <select ng-model="Ctrl.description1"
                                         data-placeholder="Description"
                                         ng-options="desc for desc in Ctrl.DocDescriptions" class="custom-select">
+                                    <option value="" selected>Other</option> 
                                 </select>
                                 
                             </div>
                         </div>
 
-                    <div class="field-group mar-bottom-40" ng-show="(Ctrl.description1 == null) || (Ctrl.description1 =='<--Select-->')">
+                    <div class="field-group mar-bottom-40" ng-show="(Ctrl.description1 == null)">
                         <label for="document_description">If none of the above descriptions apply, please provide a description of the document you’re attaching.</label>
                         <textarea name="document_description" id="document_description" class="field-input textarea" rows="8" ng-model="Ctrl.description2"></textarea>
                     </div>

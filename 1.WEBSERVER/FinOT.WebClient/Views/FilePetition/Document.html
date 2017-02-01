@@ -30,7 +30,7 @@
                                         <div class="item-header clearfix">
                                             <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
                                             <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                            <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>
+                                            <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                         </div>
 
                                         <div class="item-content clearfix" ng-show="toggle">
@@ -53,13 +53,15 @@
 
                                 <select ng-model="Ctrl.description1"
                                         data-placeholder="Description" class="custom-select"
-                                        ng-options="desc for desc in Ctrl.DocDescriptions"></select>
+                                        ng-options="desc for desc in Ctrl.DocDescriptions">
+                                    <option value="" selected>Other</option> 
+                                </select>
                             </div>
                         </div>
 
-                        <div class="field-group">
+                        <div class="field-group" ng-show="Ctrl.description1 == null">
                             <label for="document_description">If none of the above descriptions apply, please provide a description of the document you’re attaching. </label>
-                            <textarea name="document_description" id="document_description" class="field-input textarea" rows="6"></textarea>
+                            <textarea name="document_description" id="document_description" class="field-input textarea" ng-model="Ctrl.description2" rows="6"></textarea>
                         </div>
 
                         <p><strong>You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. The maximum file size limit for uploads is 25MB</strong></p>

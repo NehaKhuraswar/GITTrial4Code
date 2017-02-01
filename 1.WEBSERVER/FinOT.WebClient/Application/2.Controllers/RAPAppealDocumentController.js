@@ -53,7 +53,7 @@ var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxServ
                         }
                     }
                     var desc = angular.copy(self.description1);
-                    if (desc == '<--Select-->') {
+                    if (desc == null) {
                         desc = angular.copy(self.description2);
                     }
                     document.DocDescription = desc

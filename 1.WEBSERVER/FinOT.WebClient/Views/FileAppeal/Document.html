@@ -27,7 +27,7 @@
                                 <div class="item-header clearfix">
                                     <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
                                     <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>
+                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                 </div>
 
                                 <div class="item-content clearfix" ng-show="toggle">
@@ -54,11 +54,12 @@
                         <select ng-model="Ctrl.description1" 
                                 data-placeholder="Description" class="custom-select"
                                 ng-options="desc for desc in Ctrl.DocDescriptions">
+                            <option value="" selected>Other</option> 
                         </select>
                     </div>
                 </div>
 
-                <div class="field-group mar-bottom-40">
+                <div class="field-group mar-bottom-40" ng-show="Ctrl.description1 == null">
                     <label for="document_description">If none of the above apply, please describe the attached document.</label>
                     <textarea name="document_description" id="document_description" class="field-input textarea" ng-model="Ctrl.description2" rows="8"></textarea>
                 </div>
