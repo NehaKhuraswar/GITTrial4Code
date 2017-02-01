@@ -50,12 +50,12 @@ namespace RAP.WebClient
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                     "~/Content/angular-block-ui.min.css"
-                    ,"~/Content/angular-inform.min.css"
-                    ,"~/Content/bootstrap.css"
-                    , "~/Content/font-awesome.css"
-                    , "~/Content/select2.css"
-                    , "~/Content/select.css"
-                    ,"~/Content/site.css"));
+                    , "~/Content/angular-inform.min.css"));
+                    //,"~/Content/bootstrap.css"
+                    //, "~/Content/font-awesome.css"
+                    //, "~/Content/select2.css"
+                    //, "~/Content/select.css"
+                    //,"~/Content/site.css"));
 
             //enable minification if compilation is otherthan DEBUG 
 #if DEBUG
