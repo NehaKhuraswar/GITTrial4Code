@@ -167,7 +167,7 @@ self.ViewPage = function (activity, caseinfo) {
             $location.path("/ViewTenantResponse");
         });
     }
-            else if (activity.Status.StatusID == 2) {
+            else if (activity.Status.StatusID == 6) {
                 rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID, activity.NotificationID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

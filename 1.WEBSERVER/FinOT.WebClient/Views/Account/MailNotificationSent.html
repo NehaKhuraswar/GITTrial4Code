@@ -34,17 +34,17 @@
                                 <div class="row">
                                     <div class="col-md-8 col-sm-12 col-xs-12">
                                         <p>The following notification has been sent to</p>
-                                        <div ng-repeat="item in Ctrl.model.Message.RecipientAddress">
+                                        <div ng-repeat="item in Ctrl.model.Recipient">
                                             <p><strong> {{item}} </strong><br /></p>
                                         </div>
-                                        <p>at <strong> {{Ctrl.Date| date }}</strong></p>
+                                        <p>at <strong> {{Ctrl.model.MailingDate| date }}</strong></p>   
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Message -->
                             <div class="table-list mar-b0">
-                                <div class="small-title pad-b5">{{Ctrl.model.Message.MessageBody}}</div>
+                                <div class="small-title pad-b5">{{Ctrl.model.Notes}}</div>
 
                                 <div class="table-row clearfix pad-t15">
                                     <div class="row">

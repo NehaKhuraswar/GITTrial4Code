@@ -100,7 +100,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
              resolve: rapMailController_resolve
          })
         .when('/usmailnotificationsent', {
-            templateUrl: 'views/account/EmailNotificationSent.html',
+            templateUrl: 'views/account/MailNotificationSent.html',
             controller: rapMailNotificationSentController,
             controllerAs: 'Ctrl',
             resolve: rapMailNotificationSentController_resolve
