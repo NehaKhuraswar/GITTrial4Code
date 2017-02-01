@@ -1113,7 +1113,43 @@ namespace RAP.DAL
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
             try
             {
+                List<UnitTypeM> _units = new List<UnitTypeM>();
+                List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
 
+                var units = _dbContext.UnitTypes;
+                if (units == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var unit in units)
+                    {
+                        UnitTypeM _unit = new UnitTypeM();
+                        _unit.UnitTypeID = unit.UnitTypeID;
+                        _unit.UnitDescription = unit.Description;
+                        _units.Add(_unit);
+                    }
+
+                }
+
+                var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                if (rangeDB == null)
+                {
+                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                    return result;
+                }
+                else
+                {
+                    foreach (var item in rangeDB)
+                    {
+                        NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                        obj.RangeID = item.RangeID;
+                        obj.RangeDesc = item.RangeDesc;
+                        _rangeOfUnits.Add(obj);
+                    }
+                }
                 var TenantPetitionInfoDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == PetitionID).FirstOrDefault();
                 TenantPetitionInfoM tenantPetitionInfo = new TenantPetitionInfoM();
                 if (TenantPetitionInfoDB != null)
@@ -1138,6 +1174,9 @@ namespace RAP.DAL
                     tenantPetitionInfo.ProvideExplanation = TenantPetitionInfoDB.ProvideExplanation;
                     tenantPetitionInfo.CustomerID = (int)TenantPetitionInfoDB.PetitionFiledBy;
                 }
+                tenantPetitionInfo.UnitTypes = _units;
+                tenantPetitionInfo.RangeOfUnits = _rangeOfUnits;
+
                 result.result = tenantPetitionInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
