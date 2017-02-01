@@ -231,7 +231,7 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;&quot;&quot;Dear &lt;Name&gt;, 
+        ///   Looks up a localized string similar to Dear &lt;Name&gt;, 
         ///
         ///The following changes have been made to a representative in your case, Case Number &lt;Enter Case Number&gt;:
         ///

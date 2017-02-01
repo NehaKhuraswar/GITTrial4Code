@@ -54,7 +54,7 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
 
     self.AddAnotherOpposingParty = function (model) {
         if (model.FirstName != "" && model.LastName != "" && model.AddressLine1 != ""
-            && model.AddressLine2 != "" && model.City != ""
+            && model.City != ""
             && model.State != null && model.Zip != null) {
             var _opposingParty = angular.copy(model);
             self.serveAppeal.OpposingParty.push(_opposingParty);
@@ -66,6 +66,10 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
             model.City = "";
             model.State = null;
             model.Zip = null;
+        }
+        else
+        {
+            self.Error = 'Opposing parties First Name, Address 1, City , State , Zip fields required';
         }
         }
 

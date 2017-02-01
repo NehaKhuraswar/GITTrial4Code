@@ -119,7 +119,7 @@ namespace RAP.Business.Implementation
         public ReturnResult<CityUserAccount_M> CreateCityUserAccount(CityUserAccount_M message)
         {          
            ReturnResult<CityUserAccount_M> result = new ReturnResult<CityUserAccount_M>();
-            string _loginURL = ConfigurationManager.AppSettings["loginURL"];
+           string _loginURL = ConfigurationManager.AppSettings["CityloginURL"];
             bool bEdit = false;
             try
             {
