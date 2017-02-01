@@ -1528,6 +1528,8 @@ namespace RAP.DAL
 		
 		private System.Nullable<int> _NotificationID;
 		
+		private string _Notes;
+		
 		public USP_ActivityStatusForCase_GetResult()
 		{
 		}
@@ -1656,6 +1658,22 @@ namespace RAP.DAL
 				if ((this._NotificationID != value))
 				{
 					this._NotificationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(250)")]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this._Notes = value;
 				}
 			}
 		}

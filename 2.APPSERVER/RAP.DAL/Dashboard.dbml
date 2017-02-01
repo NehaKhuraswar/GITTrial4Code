@@ -127,6 +127,7 @@
       <Column Name="CityName" Type="System.String" DbType="VarChar(51)" CanBeNull="true" />
       <Column Name="CustName" Type="System.String" DbType="VarChar(51)" CanBeNull="true" />
       <Column Name="NotificationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

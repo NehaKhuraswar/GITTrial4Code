@@ -54,6 +54,7 @@ namespace RAP.DAL
                         objActivityStatus.Status.StatusID = item.StatusID;
                         objActivityStatus.Status.StatusDesc = item.StatusDesc;
                         objActivityStatus.Date = item.CreatedDate;
+                        objActivityStatus.Notes = item.Notes;
                         objActivityStatus.NotificationID = Convert.ToInt32(item.NotificationID);
                         if (item.CityName != null)
                         {
