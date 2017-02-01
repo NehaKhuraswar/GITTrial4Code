@@ -23,7 +23,7 @@ namespace RAP.DAL
        ReturnResult<APNAddress> GetAPNAddress(int UserID);
        ReturnResult<EmailM> SaveCustomEmailNotification(EmailM message, int employeeID, int c_id, int activityID);
        ReturnResult<MailM> SaveMailNotification(MailM message);
-       ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID);
+       ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID, int NotificationType);
        ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID);
        ReturnResult<MailM> GetMailNotification(int notificationID);
     }

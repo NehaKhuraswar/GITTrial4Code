@@ -195,12 +195,12 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
-     public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID)
+     public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID, int NotificationType)
        {
            ReturnResult<bool> result = new ReturnResult<bool>();
            try
            {
-               result = _dbHandler.MailSentActivity(C_ID, SentBy, ActivityID, NotificationID);
+               result = _dbHandler.MailSentActivity(C_ID, SentBy, ActivityID, NotificationID, NotificationType);
                return result;
            }
            catch (Exception ex)

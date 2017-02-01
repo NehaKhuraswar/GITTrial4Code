@@ -56,6 +56,7 @@ namespace RAP.Core.DataModels
         public string CreatedBy { get; set; }
         public string Notes { get; set; }
         public int NotificationID { get;set; }
+        public int? NotificationType { get; set; }
         public int EmployeeID { get; set; }
     }
     public class Activity_M

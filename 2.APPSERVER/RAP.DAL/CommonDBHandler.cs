@@ -412,8 +412,8 @@ namespace RAP.DAL
                     string errorMessage = "";
                     int? errorCode = 0;
                     //TBD
-                    int returnCode = db.USP_NewActivityStatus_Save(ActivityID, StatusID, 
-                                     C_ID, "", DateTime.Now, CaseFileBy, 3, null, ref errorMessage, ref errorCode);
+                    int returnCode = db.USP_NewActivityStatus_Save(ActivityID, StatusID,
+                                     C_ID, "", DateTime.Now, CaseFileBy, 3, null, null, ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
                     {
@@ -434,7 +434,7 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID)
+        public ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID, int NotificationType)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
@@ -445,7 +445,7 @@ namespace RAP.DAL
                     int? errorCode = 0;
                     //TBD
                     int returnCode = db.USP_NewActivityStatus_Save(ActivityID, (int)StatusDefaults.NotificationSent,
-                                     C_ID, "", DateTime.Now, SentBy, 1, NotificationID, ref errorMessage, ref errorCode);
+                                     C_ID, "", DateTime.Now, SentBy, 1, NotificationID, NotificationType, ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
                     {

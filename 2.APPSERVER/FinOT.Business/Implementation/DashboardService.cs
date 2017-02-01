@@ -279,7 +279,7 @@ namespace RAP.Business.Implementation
                        result.status = notifiacationResult.status;
                        return result;
                     }
-                    _commonService.MailSentActivity(cMail.C_ID, cMail.CityUserID, cMail.ActivityID, notifiacationResult.result.NotificationID);
+                    _commonService.MailSentActivity(cMail.C_ID, cMail.CityUserID, cMail.ActivityID, notifiacationResult.result.NotificationID, 1);
                     cMail.CreatedDate = DateTime.Now.Date;
 
                     result.result = cMail;
@@ -330,7 +330,7 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 mail.NotificationID = notifiacationResult.result.NotificationID;
-                var updateNotification = _commonService.MailSentActivity(mail.C_ID, mail.CityUserID, mail.ActivityID, notifiacationResult.result.NotificationID);
+                var updateNotification = _commonService.MailSentActivity(mail.C_ID, mail.CityUserID, mail.ActivityID, notifiacationResult.result.NotificationID, 2);
                 if (updateNotification.status.Status != StatusEnum.Success)
                 {
                     result.status = updateNotification.status;

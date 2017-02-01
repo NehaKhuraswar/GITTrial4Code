@@ -56,6 +56,7 @@ namespace RAP.DAL
                         objActivityStatus.Date = item.CreatedDate;
                         objActivityStatus.Notes = item.Notes;
                         objActivityStatus.NotificationID = Convert.ToInt32(item.NotificationID);
+                        objActivityStatus.NotificationType = item.NotificationType;
                         if (item.CityName != null)
                         {
                             objActivityStatus.CreatedBy = item.CityName;
@@ -394,7 +395,7 @@ namespace RAP.DAL
 
                     //TBD
                     int returnCode =  db.USP_NewActivityStatus_Save(activityStatus.Activity.ActivityID, activityStatus.Status.StatusID,
-                                    C_ID, activityStatus.Notes, activityStatus.Date, activityStatus.EmployeeID, 1, null,ref errorMessage, ref errorCode);
+                                    C_ID, activityStatus.Notes, activityStatus.Date, activityStatus.EmployeeID, 1, null, null, ref errorMessage, ref errorCode);
 
                     if (errorCode != 0)
                     {

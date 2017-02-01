@@ -152,11 +152,11 @@ namespace RAP.DAL
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.USP_NewActivityStatus_Save")]
-		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="VarChar(250)")] string notes, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedByAcctType", DbType="Int")] System.Nullable<int> createdByAcctType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NotificationID", DbType="Int")] System.Nullable<int> notificationID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
+		public int USP_NewActivityStatus_Save([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ActivityID", DbType="Int")] System.Nullable<int> activityID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StatusID", DbType="Int")] System.Nullable<int> statusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="C_ID", DbType="Int")] System.Nullable<int> c_ID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Notes", DbType="VarChar(250)")] string notes, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedDate", DbType="DateTime")] System.Nullable<System.DateTime> createdDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedBy", DbType="Int")] System.Nullable<int> createdBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CreatedByAcctType", DbType="Int")] System.Nullable<int> createdByAcctType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NotificationID", DbType="Int")] System.Nullable<int> notificationID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NotificationType", DbType="Int")] System.Nullable<int> notificationType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Message", DbType="VarChar(MAX)")] ref string message, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorCode)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, notes, createdDate, createdBy, createdByAcctType, notificationID, message, errorCode);
-			message = ((string)(result.GetParameterValue(8)));
-			errorCode = ((System.Nullable<int>)(result.GetParameterValue(9)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), activityID, statusID, c_ID, notes, createdDate, createdBy, createdByAcctType, notificationID, notificationType, message, errorCode);
+			message = ((string)(result.GetParameterValue(9)));
+			errorCode = ((System.Nullable<int>)(result.GetParameterValue(10)));
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -1530,6 +1530,8 @@ namespace RAP.DAL
 		
 		private string _Notes;
 		
+		private System.Nullable<int> _NotificationType;
+		
 		public USP_ActivityStatusForCase_GetResult()
 		{
 		}
@@ -1674,6 +1676,22 @@ namespace RAP.DAL
 				if ((this._Notes != value))
 				{
 					this._Notes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationType", DbType="Int")]
+		public System.Nullable<int> NotificationType
+		{
+			get
+			{
+				return this._NotificationType;
+			}
+			set
+			{
+				if ((this._NotificationType != value))
+				{
+					this._NotificationType = value;
 				}
 			}
 		}

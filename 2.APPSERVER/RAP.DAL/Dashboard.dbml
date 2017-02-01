@@ -110,6 +110,7 @@
     <Parameter Name="CreatedBy" Parameter="createdBy" Type="System.Int32" DbType="Int" />
     <Parameter Name="CreatedByAcctType" Parameter="createdByAcctType" Type="System.Int32" DbType="Int" />
     <Parameter Name="NotificationID" Parameter="notificationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NotificationType" Parameter="notificationType" Type="System.Int32" DbType="Int" />
     <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
     <Parameter Name="errorCode" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
@@ -128,6 +129,7 @@
       <Column Name="CustName" Type="System.String" DbType="VarChar(51)" CanBeNull="true" />
       <Column Name="NotificationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Notes" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="NotificationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
