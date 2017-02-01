@@ -97,7 +97,15 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         if (rapGlobalFactory.IsEdit == true) {
             rapGlobalFactory.SelectedForEdit = null;
             rapGlobalFactory.IsEdit = false;
-            $location.path("/admindashboard");
+            if (rapGlobalFactory.IsAdmin == true) {
+                rapGlobalFactory.IsAdmin = false;
+                $location.path("/admindashboard");
+                }
+        else {
+                $location.path("/publicdashboard");
+            }
+            
+            
         }
         else if(rapGlobalFactory.IsAdmin == true)
         {
@@ -142,7 +150,13 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             {
                 rapGlobalFactory.SelectedForEdit = null;
                 rapGlobalFactory.IsEdit = false;
-                $location.path("/admindashboard");
+                if (rapGlobalFactory.IsAdmin == true) {
+                    rapGlobalFactory.IsAdmin = false;
+                    $location.path("/admindashboard");
+                }
+                else {
+                    $location.path("/publicdashboard");
+            }
             }
             else if(rapGlobalFactory.IsAdmin == true) {
                 rapGlobalFactory.IsAdmin = false;
@@ -164,7 +178,19 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             if (rapGlobalFactory.IsEdit == true) {
                 rapGlobalFactory.SelectedForEdit = null;
                 rapGlobalFactory.IsEdit = false;
-                $location.path("/admindashboard");
+                if (rapGlobalFactory.IsAdmin == true) {
+                    rapGlobalFactory.IsAdmin = false;
+                    $location.path("/admindashboard");
+                }
+                else {
+                    rapGlobalFactory.CustomerDetails = null;
+                    rapGlobalFactory.CustID = 0;
+                    rapGlobalFactory.CaseDetails = null;
+                    rapGlobalFactory.CityUser = null;
+                    sessionStorage.clear();
+                    $cookies.remove("userInfo");
+                    $location.path("/Login");
+            }
             }
             else {
                 $location.path("/Login");
