@@ -71,12 +71,24 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
     }
+    var _GetOResponseViewByCaseID = function (CID) {
+        blockUI.start();
+        var url = 'api/applicationprocessing' + '/GetOResponseViewByCaseID';
+        if (!(CID == null || CID == undefined)) {
+            url = url + '/' + CID;
+        }
 
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     factory.GetPetitionViewInfo = _GetPetitionViewInfo;
     factory.GetCaseInfo = _GetCaseInfo;
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;
     factory.GetAppealInfoForView = _GetTenantAppealInfoForView;
     factory.GetTenantResponseViewInfo = _GetTenantResponseViewInfo;
+    factory.GetOResponseViewByCaseID = _GetOResponseViewByCaseID;
     return factory;
 }];

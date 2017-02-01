@@ -143,6 +143,17 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
             $location.path("/ViewTenantResponse");
             });
         }
+        else if (activity.Activity.ActivityID == 35) {
+            rapFactory.GetOResponseViewByCaseID(caseinfo.C_ID).then(function (response) {
+                if (!alert.checkResponse(response)) {
+                    return;
+                }
+                self.caseinfo = response.data;
+                rapGlobalFactory.CaseDetails = self.caseinfo;
+                rapGlobalFactory.FromSelectedCase = false;
+                $location.path("/ViewOwnerResponse");
+            });
+        }
        
     }
 
