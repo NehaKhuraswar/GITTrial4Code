@@ -2871,7 +2871,10 @@ namespace RAP.DAL
                     appealExistsDB.AppealCategoryID = caseInfo.TenantAppealInfo.AppealCategoryID;
                     appealExistsDB.IsSubmitted = false;
                     appealExistsDB.CreatedDate = DateTime.Now;
-                    appealExistsDB.AppealDate = new DateTime(caseInfo.TenantAppealInfo.AppealDate.Year, caseInfo.TenantAppealInfo.AppealDate.Month, caseInfo.TenantAppealInfo.AppealDate.Day);
+                    if (caseInfo.TenantAppealInfo.AppealDate != null && caseInfo.TenantAppealInfo.AppealDate.Year != 0 && caseInfo.TenantAppealInfo.AppealDate.Month != 0 && caseInfo.TenantAppealInfo.AppealDate.Day != 0)
+                    {
+                        appealExistsDB.AppealDate = new DateTime(caseInfo.TenantAppealInfo.AppealDate.Year, caseInfo.TenantAppealInfo.AppealDate.Month, caseInfo.TenantAppealInfo.AppealDate.Day);
+                    }
                     _dbContext.SubmitChanges();
                 }
                 else
@@ -2882,7 +2885,10 @@ namespace RAP.DAL
                     appealDB.AppealCategoryID = caseInfo.TenantAppealInfo.AppealCategoryID;
                     appealDB.IsSubmitted = false;
                     appealDB.CreatedDate = DateTime.Now;
-                    appealDB.AppealDate = new DateTime(caseInfo.TenantAppealInfo.AppealDate.Year, caseInfo.TenantAppealInfo.AppealDate.Month, caseInfo.TenantAppealInfo.AppealDate.Day);
+                    if (caseInfo.TenantAppealInfo.AppealDate != null && caseInfo.TenantAppealInfo.AppealDate.Year != 0 && caseInfo.TenantAppealInfo.AppealDate.Month != 0 && caseInfo.TenantAppealInfo.AppealDate.Day != 0)
+                    {
+                        appealDB.AppealDate = new DateTime(caseInfo.TenantAppealInfo.AppealDate.Year, caseInfo.TenantAppealInfo.AppealDate.Month, caseInfo.TenantAppealInfo.AppealDate.Day);
+                    }
                     var applicantUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantAppealInfo.ApplicantUserInfo);
                     if (applicantUserResult.status.Status != StatusEnum.Success)
                     {
@@ -3070,7 +3076,10 @@ namespace RAP.DAL
                     appealDB.bDeclaration = tenantAppealInfo.serveAppeal.bDeclaration;
                     appealDB.bThirdParty = tenantAppealInfo.serveAppeal.bThirdParty;
                     appealDB.bDeclartionOfOriginalDocs = tenantAppealInfo.serveAppeal.bDeclartionOfOriginalDocs;
+                    if (tenantAppealInfo.serveAppeal.PenaltyDate != null && tenantAppealInfo.serveAppeal.PenaltyDate.Year != 0 && tenantAppealInfo.serveAppeal.PenaltyDate.Month != 0 && tenantAppealInfo.serveAppeal.PenaltyDate.Day != 0)
+                    {
                     appealDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Year, tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day);
+                    }
                     appealDB.CreatedDate = DateTime.Now;
                 }
                 else
@@ -3081,7 +3090,10 @@ namespace RAP.DAL
                     appealNewDB.bDeclaration = tenantAppealInfo.serveAppeal.bDeclaration;
                     appealNewDB.bThirdParty = tenantAppealInfo.serveAppeal.bThirdParty;
                     appealNewDB.bDeclartionOfOriginalDocs = tenantAppealInfo.serveAppeal.bDeclartionOfOriginalDocs;
-                    appealNewDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Year, tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day);
+                    if (tenantAppealInfo.serveAppeal.PenaltyDate != null && tenantAppealInfo.serveAppeal.PenaltyDate.Year != 0 && tenantAppealInfo.serveAppeal.PenaltyDate.Month != 0 && tenantAppealInfo.serveAppeal.PenaltyDate.Day != 0)
+                    {
+                        appealNewDB.PenaltyDate = new DateTime(tenantAppealInfo.serveAppeal.PenaltyDate.Year, tenantAppealInfo.serveAppeal.PenaltyDate.Month, tenantAppealInfo.serveAppeal.PenaltyDate.Day);
+                    }
                     appealNewDB.CreatedDate = DateTime.Now;
                     _dbContext.ServeAppeals.InsertOnSubmit(appealNewDB);
                 }
