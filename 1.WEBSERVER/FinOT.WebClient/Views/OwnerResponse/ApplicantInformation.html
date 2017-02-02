@@ -207,7 +207,7 @@
                     <div class="field-group subhead">
                         <p class="input-label has-info-btn">Have you paid your business license?<a style="cursor: pointer;" ng-click="section_license=!section_license" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
                         <div class="info-box-toggle" ng-show="section_license">
-                            <a style="cursor: pointer;" class="btn-close"></a>
+                            <a style="cursor: pointer;" ng-click="section_license=!section_license" class="btn-close"></a>
                             <p>The property owner must have a current Oakland Business License. If it is not current, an Owner Petition or Response to a tenant petition may not be considered in a rent adjustment proceeding.</p>
                         </div>
                         <div class="form-group-radio vertical clearfix">
@@ -260,7 +260,7 @@
                     <div class="field-group">
                         <p class="input-label has-info-btn">Have you paid the Rent Adjustment Program Service Fee (${{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.RAPFee}} per unit)? <a style="cursor: pointer;" ng-click="section_fee=!section_fee" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
                         <div class="info-box-toggle" ng-show="section_fee">
-                            <a style="cursor: pointer;" class="btn-close"></a>
+                            <a style="cursor: pointer;" ng-click="section_fee=!section_fee" class="btn-close"></a>
                             <p>The property owner must  be current on payment of the RAP's Service Fee. If they are not current, an Owner Petition or Response to a tenant petition may not be considered in a rent adjustment proceeding. Note: If paid on time, the property owner may charge the tenant one-half of the $68 per-unit RAP Service fee ($34).</p>
                         </div>
                         <div class="form-group-radio vertical clearfix">
@@ -350,7 +350,7 @@
                     <div class="field-group">
                         <p class="input-label has-info-btn">Is there more than one street address on the property? <a ng-click="section_more_than_one=!section_more_than_one" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p>
                         <div class="info-box-toggle" ng-show="section_more_than_one">
-                            <a style="cursor: pointer;" class="btn-close"></a>
+                            <a style="cursor: pointer;" ng-click="section_more_than_one=!section_more_than_one" class="btn-close"></a>
                             <p>If the units on the property have numbers or letters (ex. 123 A St. Apt #1. Or 123 A. St Unit A) please mark no here. If the units on the property have individual addresses (ex. 123 A St., 124 A St., 125 A St., etc.), please mark yes here. If you do not know please mark no. </p>
                         </div>
 

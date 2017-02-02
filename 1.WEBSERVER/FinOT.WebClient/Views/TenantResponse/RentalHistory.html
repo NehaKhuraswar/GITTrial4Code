@@ -131,14 +131,14 @@
 
     <div class="field-group">
         <div class="form-group-checkbox vertical clearfix">
-            <label for="never_given_rap_notice">
+            <label for="never_given_rap_notice" class="has-info-btn">
                 <input type="checkbox" name="never_given_rap_notice" id="never_given_rap_notice" class="input-field"
                        ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.bRAPNoticeGiven" value="True" /><i></i><span>I was never given a RAP NOTICE by my property owner.<a style="cursor: pointer;" ng-click="section_rap_notice=!section_rap_notice" class="icon-info" data-toggle="tooltip" tooltip>Info</a></span>
 
 
             </label>
             <div class="info-box-toggle" ng-show="section_rap_notice">
-                <a style="cursor: pointer;" class="btn-close"></a>
+                <a style="cursor: pointer;" ng-click="section_rap_notice=!section_rap_notice" class="btn-close"></a>
                 <p>Owners must give tenants the "Notice to Tenants of the Residential Rent Adjustment Program," also known as the "RAP Notice."The RAP Notice notifies tenants of the Rent Adjustment Program and their rights as tenants. This notice must be given to tenants when they first move in and with any change of terms of tenancy, including notices of rent increase.  The RAP Notice can be found here [LINK]</p>
             </div>
             <div class="clear"></div>
@@ -170,13 +170,13 @@
 
     <div class="field-group">
         <div class="row">
-            <div class="col-md-11 col-sm-12"><p class="no-bottom-margin">List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never got the RAP Notice you can contest all past increases.<a style="cursor: pointer;" ng-click="section_increase=!section_increase" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p></div>
+            <div class="col-md-11 col-sm-12"><p class="no-bottom-margin has-info-btn">List all rent increases that you want to challenge. Begin with the most recent and work backwards. If you never got the RAP Notice you can contest all past increases.<a style="cursor: pointer;" ng-click="section_increase=!section_increase" class="icon-info" data-toggle="tooltip" tooltip>Info</a></p></div>
 			
 	
 		</div>
 		
 		<div class="info-box-toggle" ng-show="section_increase">
-            <a style="cursor: pointer;" class="btn-close"></a>
+            <a style="cursor: pointer;" ng-click="section_increase=!section_increase" class="btn-close"></a>
                                 <p>You have 90 days from the date of notice of increase or from the first date you received written notice of the existence of the Rent Adjustment program (whichever is later) to contest the rent increase. (O.M.C. 8.22.090 A 2)
 </p>
                             </div>
