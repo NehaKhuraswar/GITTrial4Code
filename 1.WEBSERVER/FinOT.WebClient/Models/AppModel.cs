@@ -26,11 +26,11 @@ namespace RAP.WebClient.Models
     {
         public AppDetails()
         {
-            Environment = WebConfigurationManager.AppSettings[Constants.ENVIRONMENT];
-            DeploymentDate = WebConfigurationManager.AppSettings[Constants.DEPLOYMENT_DATE];
-            FinancePortalURL = WebConfigurationManager.AppSettings[Constants.FINPORTAL_URL];
-            MyRolesPrivilegesURL = WebConfigurationManager.AppSettings[Constants.MYROLESPRIVILEGES_URL];
-            LogoutURL = WebConfigurationManager.AppSettings[Constants.LOGOUT_URL];
+            //Environment = WebConfigurationManager.AppSettings[Constants.ENVIRONMENT];
+            //DeploymentDate = WebConfigurationManager.AppSettings[Constants.DEPLOYMENT_DATE];
+            //FinancePortalURL = WebConfigurationManager.AppSettings[Constants.FINPORTAL_URL];
+            //MyRolesPrivilegesURL = WebConfigurationManager.AppSettings[Constants.MYROLESPRIVILEGES_URL];
+            //LogoutURL = WebConfigurationManager.AppSettings[Constants.LOGOUT_URL];
             ApiBaseURL = WebConfigurationManager.AppSettings[Constants.RCAPIBASE_URL];
         }
         public string Environment { get; set; }
