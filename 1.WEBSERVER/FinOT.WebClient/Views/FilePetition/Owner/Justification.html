@@ -49,7 +49,7 @@
                                                 <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
                                             </div>
                                             <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
-                                            <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-gray">Download</a>
+                                            <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                         </div>
 
                                         <!--<a href="#" class="btn-link btn-delete">Delete</a>-->
@@ -78,7 +78,7 @@
                         <div class="field-addfile">
                             <div class="input-file-wrapper">
                                 <span role="button" aria-label="Attach Document" class="btn-link">Attach Document</span>
-                                <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_Justification')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg" multiple />
+                                <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'OP_Justification')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                             </div>
                             <!--<div class="field-group">
                                 <table class="table table-condensed nopadding-bottom">
