@@ -160,14 +160,14 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
                     if (!alert.checkForResponse(response)) {
                         return;
                     }
-                    rapGlobalFactory.Notification = response.data;
-                    $location.path("/emailnotificationsent");
-                });
-            }
-            else if (activity.NotificationType == 2) {
-                rapFactory.GetMailNotification(activity.NotificationID).then(function (response) {
-                    if (!alert.checkForResponse(response)) {
-                        return;
+                        rapGlobalFactory.Notification = response.data;
+                        $location.path("/emailnotificationsent");
+                        });
+                        }
+                        else if(activity.NotificationType == 2) {
+                    rapFactory.GetMailNotification(activity.NotificationID).then(function (response) {
+                        if(!alert.checkForResponse(response)) {
+                            return;
                     }
                     rapGlobalFactory.MailNotification = response.data;
                     $location.path("/usmailnotificationsent");
