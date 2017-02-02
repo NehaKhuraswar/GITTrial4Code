@@ -4,6 +4,7 @@ var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFac
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    $scope.model.stepNo = 7;
 
     var _GetTenantResponseReviewInfo = function (CaseNumber,custID) {
         rapFactory.GetTenantResponseReviewInfo(CaseNumber, custID).then(function (response) {

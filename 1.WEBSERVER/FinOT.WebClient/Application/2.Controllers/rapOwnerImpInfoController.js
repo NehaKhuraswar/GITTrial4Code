@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapOwnerImpInfoController = ['$scope', '$modal', 'alertService','$location', 'rapGlobalFactory', function ($scope, $modal, alert, $location, rapGlobalFactory) {
     var self = this;
-  
+    $scope.model.stepNo = 2;
 
     self.Continue = function () {
         $scope.model.ownerImpInfo = false;

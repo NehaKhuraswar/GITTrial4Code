@@ -1,6 +1,7 @@
 ﻿'use strict';
 var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'rapOResponsePetitionTypeFactory', 'model', function ($scope, $modal, alert, $location, rapGlobalFactory, rapFactory, model) {
     var self = this;
+    self.stepNo = 1;
     self.custDetails = rapGlobalFactory.CustomerDetails;
 
     self.oResponseActiveStatus = null;

@@ -4,8 +4,10 @@
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
+    $scope.model.stepNo = 7;
     self.DocDescriptions = masterFactory.DocDescription();
     self.Error = "";
+    
     masterFactory.DocDescription().then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         self.DocDescriptions = response.data;     

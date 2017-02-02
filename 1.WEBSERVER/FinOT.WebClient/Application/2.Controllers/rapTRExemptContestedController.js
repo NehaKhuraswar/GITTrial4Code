@@ -2,6 +2,7 @@
 var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTRExemptContestedFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     self.model = $scope.model;
+    $scope.model.stepNo = 4;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Error = "";

@@ -96,83 +96,84 @@
                 </div><!-- .container -->
             </div><!-- .bottom-header -->
         </div>
-
+        <div id="main">
             @*modal dialog has z-index of 1050 so set the z-index of inform more than that to bring it to front.*@
             <div inform class="inform-animate inform-fixed inform-shadow" style="z-index: 1051"></div>
             <div id="body" ng-view class="container-fluid"></div>
-        <footer id="footer" role="contentinfo">
-            <div class="container">
-                <div class="site-title"><a style="cursor: pointer;">City of Oakland</a></div>
+            <footer id="footer" role="contentinfo">
+                <div class="container">
+                    <div class="site-title"><a style="cursor: pointer;">City of Oakland</a></div>
 
-                <div class="site-info">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-12 col-xs-12">
-                            <div class="footer-widget about">
-                                <h3>About the Rent Adjustment Program</h3>
-                                <p>Edis doluptatur, tescium eliscia conseq uiatur simus asse cusaerem. Namet et quidem quassusa quo etur rest ma qui corro quam et re, exerore voluptaqui repudi quias.</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-8 col-sm-12 col-xs-12">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-12 col-xs-12">
-                                    <div class="footer-widget get-assistance">
-                                        <h3>Get assistance</h3>
-                                        <p>(510) 000-0000</p>
-                                    </div>
+                    <div class="site-info">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <div class="footer-widget about">
+                                    <h3>About the Rent Adjustment Program</h3>
+                                    <p>Edis doluptatur, tescium eliscia conseq uiatur simus asse cusaerem. Namet et quidem quassusa quo etur rest ma qui corro quam et re, exerore voluptaqui repudi quias.</p>
                                 </div>
+                            </div>
 
-                                <div class="col-md-9 col-sm-12 col-xs-12">
-                                    <div class="footer-widget helpful-links">
-                                        <h3>Helpful links</h3>
+                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="footer-widget get-assistance">
+                                            <h3>Get assistance</h3>
+                                            <p>(510) 000-0000</p>
+                                        </div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-md-5 col-sm-12 col-xs-12">
-                                                <ul>
-                                                    <li><a style="cursor: pointer;">Housing & Community Development</a></li>
-                                                    <li><a style="cursor: pointer;">City of Oakland</a></li>
-                                                    <li><a style="cursor: pointer;">Calculators</a></li>
-                                                </ul>
-                                            </div>
+                                    <div class="col-md-9 col-sm-12 col-xs-12">
+                                        <div class="footer-widget helpful-links">
+                                            <h3>Helpful links</h3>
 
-                                            <div class="col-md-4 col-sm-12 col-xs-12">
-                                                <ul>
-                                                    <li><a style="cursor: pointer;">Glossary of Terms</a></li>
-                                                    <li><a style="cursor: pointer;">Frequently Asked Questions</a></li>
-                                                </ul>
+                                            <div class="row">
+                                                <div class="col-md-5 col-sm-12 col-xs-12">
+                                                    <ul>
+                                                        <li><a style="cursor: pointer;">Housing & Community Development</a></li>
+                                                        <li><a style="cursor: pointer;">City of Oakland</a></li>
+                                                        <li><a style="cursor: pointer;">Calculators</a></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                                    <ul>
+                                                        <li><a style="cursor: pointer;">Glossary of Terms</a></li>
+                                                        <li><a style="cursor: pointer;">Frequently Asked Questions</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </div><!-- .row -->
-                        </div>
-                    </div><!-- .row -->
-                </div>
+                                </div><!-- .row -->
+                            </div>
+                        </div><!-- .row -->
+                    </div>
 
 
-                <div class="copyright-info">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="copyright">&copy; 2016 City of Oakland All Rights Reserved</div>
+                    <div class="copyright-info">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="copyright">&copy; 2016 City of Oakland All Rights Reserved</div>
 
-                            <ul class="footer-links">
-                                <li><a style="cursor: pointer;">Privacy Policy</a></li>
-                                <li><a style="cursor: pointer;">Terms of Service</a></li>
-                            </ul>
-                        </div>
+                                <ul class="footer-links">
+                                    <li><a style="cursor: pointer;">Privacy Policy</a></li>
+                                    <li><a style="cursor: pointer;">Terms of Service</a></li>
+                                </ul>
+                            </div>
 
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="site-by">Site by <a href="http://tomorrowpartners.com" target="_blank">Tomorrow Partners</a></div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="site-by">Site by <a href="http://tomorrowpartners.com" target="_blank">Tomorrow Partners</a></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div><!-- .container -->
-        </footer><!-- #footer -->
+                </div><!-- .container -->
+            </footer><!-- #footer -->
+        </div><!-- #main -->
             @Scripts.Render("~/bundles/angular")
             @Scripts.Render("~/bundles/angularApp")
             @Scripts.Render("~/bundles/angularTemplates")
 
-    </body>
+</body>
     </html>

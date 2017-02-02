@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapFileAppealController = ['$scope', '$modal', 'alertService', 'rapfileappealFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    
+    $scope.model.stepNo = 1;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.rent = [];

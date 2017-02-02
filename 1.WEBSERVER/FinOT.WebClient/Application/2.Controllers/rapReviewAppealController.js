@@ -4,7 +4,8 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-   self.Error = "";
+    self.Error = "";
+    $scope.model.stepNo = 7;
     //var _GetCaseInfoWithModel = function (CaseID) {
     //    rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
     //        if (!alert.checkResponse(response)) {

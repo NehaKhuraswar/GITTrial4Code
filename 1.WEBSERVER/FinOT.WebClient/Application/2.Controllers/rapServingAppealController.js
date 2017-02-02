@@ -7,7 +7,8 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     self.Calender = masterFactory.Calender;
     self.StateList = [];
     self.serveAppeal;
-    self.Error="";
+    self.Error = "";
+    $scope.model.stepNo = 6;
     var _GetStateList = function () {
     masterFactory.GetStateList().then(function (response) {
         if (!alert.checkForResponse(response)) {

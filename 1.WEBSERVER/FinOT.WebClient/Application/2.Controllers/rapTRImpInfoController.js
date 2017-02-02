@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapTRImpInfoController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTypeFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
-    
+    $scope.model.stepNo = 2;
     self.Continue = function () {
         $scope.model.bImpInfo = false;
         $scope.model.bAppInfo = true;

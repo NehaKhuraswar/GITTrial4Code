@@ -5,6 +5,7 @@ var rapTRVerificationController = ['$scope', '$modal', 'alertService', 'rapTRver
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Error = "";
     self.Hide = false;
+    $scope.model.stepNo = 8;
     self.ResendPin = function () {
         masterFactory.ResendPin(self.custDetails).then(function (response) {
             if (!alert.checkResponse(response)) {

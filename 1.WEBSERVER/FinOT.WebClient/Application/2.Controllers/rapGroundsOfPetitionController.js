@@ -5,6 +5,7 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Error = "";
+    $scope.model.stepNo = 4;
     var _GetPetitionGroundInfo = function (petitionId) {
         rapFactory.GetPetitionGroundInfo(petitionId).then(function (response) {
             if (!alert.checkForResponse(response)) {

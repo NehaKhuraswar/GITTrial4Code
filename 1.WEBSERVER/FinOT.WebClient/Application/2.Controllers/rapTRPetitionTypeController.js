@@ -8,6 +8,7 @@ var rapTRPetitionTypeController = ['$scope', '$modal', 'alertService', 'rapTRPet
     self.model = $scope.model;
     self.bCaseFiledByThirdParty = false;
     self.TRSubmissionStatus = null;
+    $scope.model.stepNo = 1;
 
     
 

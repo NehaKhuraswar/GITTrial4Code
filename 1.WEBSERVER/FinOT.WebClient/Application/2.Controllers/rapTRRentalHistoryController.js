@@ -5,6 +5,7 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.RentalIncreaseModel;
+    $scope.model.stepNo = 5;
 
     self.Calender = masterFactory.Calender;
     var _GetEmptyTenantResponseRentalIncrementInfo = function () {

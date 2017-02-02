@@ -7,6 +7,7 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
     self.DocDescription = null;
     self.Error = "";
     self.ShowDocs = false;
+    $scope.model.stepNo = 4;
     rapFactory.GetRentIncreaseReasonInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;

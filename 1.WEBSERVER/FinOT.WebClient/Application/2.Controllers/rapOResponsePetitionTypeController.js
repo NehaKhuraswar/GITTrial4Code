@@ -1,6 +1,7 @@
 ﻿'use strict';
 var rapOResponsePetitionTypeController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, $location, rapGlobalFactory) {
     var self = this;
+    $scope.model.stepNo = 1;
     // self.model = model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;

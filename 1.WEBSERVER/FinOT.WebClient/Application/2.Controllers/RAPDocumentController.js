@@ -2,6 +2,7 @@
     var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', 'masterdataFactory', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory, rapFactory, masterFactory) {
         var self = this;
         self.model = $scope.model;
+        $scope.model.stepNo = 7;
         self.custDetails = rapGlobalFactory.CustomerDetails;
         self.caseinfo = rapGlobalFactory.CaseDetails;
         self.caseinfo.CustomerID = self.custDetails.custID;

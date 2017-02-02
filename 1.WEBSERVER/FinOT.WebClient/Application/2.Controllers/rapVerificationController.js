@@ -1,7 +1,8 @@
 ﻿'use strict';
 var rapVerificationController = ['$scope', '$modal', 'alertService', 'rapverificationFactory', '$location', 'rapGlobalFactory','masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
-    //   self.model = $scope.model;
+    self.model = $scope.model;
+    $scope.model.stepNo = 9;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Error = "";

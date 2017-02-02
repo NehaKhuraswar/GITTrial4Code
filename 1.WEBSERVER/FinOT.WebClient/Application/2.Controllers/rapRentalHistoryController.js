@@ -5,6 +5,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.RentalIncreaseModel;
+    $scope.model.stepNo = 5;
     self.Error = "";
     $http.get('..js/tooltips.json').success(function (data) {
         $scope.tooltips = data;

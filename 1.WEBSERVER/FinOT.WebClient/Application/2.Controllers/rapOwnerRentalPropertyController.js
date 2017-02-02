@@ -10,6 +10,7 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     self.IsTenant = false;
     self.Error = "";
     self.Hide = false;
+    $scope.model.stepNo = 5;
     
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {

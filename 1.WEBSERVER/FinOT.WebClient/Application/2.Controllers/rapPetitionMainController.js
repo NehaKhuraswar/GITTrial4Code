@@ -4,6 +4,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.model = [];
     self.PageTitle = 'Petition';
     self.Error = "";
+    self.stepNo = 1;
     //self.indexModel = {
     //    bPetitionType: false,
     //    bImpInfo: false,

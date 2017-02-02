@@ -1,6 +1,7 @@
 ﻿'use strict';
 var rapImpInfoController = ['$scope', '$modal', 'alertService', 'rapfilepetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
+    $scope.model.stepNo = 2;
     
     self.Continue = function () {
         $scope.model.bImpInfo = false;

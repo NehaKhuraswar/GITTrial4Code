@@ -1,6 +1,7 @@
 ﻿var rapOResponseVerificationController = ['$scope', '$modal', 'alertService', '$location', 'rapOResponseVerificationFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
+    $scope.model.stepNo = 10;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;

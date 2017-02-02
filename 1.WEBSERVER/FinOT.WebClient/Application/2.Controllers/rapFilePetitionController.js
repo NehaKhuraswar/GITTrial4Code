@@ -9,7 +9,7 @@ var rapFilePetitionController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.selectedObj = {};
     self.model = $scope.model;
     self.bCaseFiledByThirdParty = false;
-    
+    $scope.model.stepNo = 1;
     //var _getrent = function () {
     //    return rapFactory.GetRent().then(function (response) {
     //        if (!alert.checkResponse(response)) {

@@ -6,6 +6,7 @@
     self.caseinfo.CustomerID = self.custDetails.custID;
     self.caseinfo.CaseFileBy = self.custDetails.custID;
     self.Error = '';
+    $scope.model.stepNo = 9;
     self.Hide = false;
     self.ResendPin = function () {
         masterFactory.ResendPin(self.custDetails).then(function (response) {

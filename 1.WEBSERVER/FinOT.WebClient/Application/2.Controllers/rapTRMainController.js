@@ -2,11 +2,12 @@
 var rapTRMainController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTypeFactory', '$location', 'rapGlobalFactory', 'model', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, model) {
     var self = this;
     self.model = [];
-
+    self.stepNo = 1;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.selectedObj = {};
     self.TRSubmissionStatus = null;
+
 
     var _DisableAll = function () {
         self.bPetitionType = false;

@@ -6,6 +6,7 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Error = "";
     self.Documents = null;
+    $scope.model.stepNo = 8;
     rapTenantlDocumentFactory.GetTenantDocuments(self.custDetails.custID, 'TP_AdditionalDocuments').then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         self.Documents = response.data;

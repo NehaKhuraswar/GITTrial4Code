@@ -20,30 +20,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <ul class="application-steps">
-                        <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.AppealType, 'current' : !Ctrl.AppealSubmissionStatus.AppealType && Ctrl.bAppealType}">
-                            <a style="cursor: pointer;" ng-click="Ctrl.showAppealType()">Appeal Type</a>
-                        </li>
-                        <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.ImportantInformation, 'current' : !Ctrl.AppealSubmissionStatus.ImportantInformation && Ctrl.bImpInfoAppeal}">
-                            <a style="cursor: pointer;" ng-click="Ctrl.showImpInfo()">Important Information</a>
-                        </li>
-                        <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.ApplicantInformation, 'current' : !Ctrl.AppealSubmissionStatus.ApplicantInformation && Ctrl.bAppellantInfo}">
-                            <a style="cursor: pointer;" ng-click="Ctrl.showAppellantInfo()">Applicant Information</a>
-                        </li>
-                        <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.GroundsOfAppeal, 'current' : !Ctrl.AppealSubmissionStatus.GroundsOfAppeal && Ctrl.bGrounds}">
-                            <a style="cursor: pointer;" ng-click="Ctrl.showGrounds()">Grounds for Appeal</a>
-                        </li>
-                        <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.AdditionalDocumentation, 'current' : !Ctrl.AppealSubmissionStatus.AdditionalDocumentation && Ctrl.bAddDocs}">
-                            <a style="cursor: pointer;" ng-click="Ctrl.showAddDoc()">Additional Documentation</a>
-                        </li>
-                        <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.ServingAppeal, 'current' : !Ctrl.AppealSubmissionStatus.ServingAppeal && Ctrl.bServingAppeal}">
-                            <a style="cursor: pointer;" ng-click="Ctrl.showServingAppeal()">Serving an Appeal</a>
-                        </li>
-                        <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.Review, 'current' : !Ctrl.AppealSubmissionStatus.Review && Ctrl.bReview}">
-                            <a style="cursor: pointer;" ng-click="Ctrl.showReview()">Review</a>
-                        </li>
+                    <div>
+                        <div class="application-steps-toggle clearfix ">
+                            <button type="button" class="steps-toggle">Step {{Ctrl.stepNo}} / 7</button>
+                        </div>
+                    
+                        <ul class="application-steps">
+                            <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.AppealType, 'current' : !Ctrl.AppealSubmissionStatus.AppealType && Ctrl.bAppealType}">
+                                <a style="cursor: pointer;" ng-click="Ctrl.showAppealType()">Appeal Type</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.ImportantInformation, 'current' : !Ctrl.AppealSubmissionStatus.ImportantInformation && Ctrl.bImpInfoAppeal}">
+                                <a style="cursor: pointer;" ng-click="Ctrl.showImpInfo()">Important Information</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.ApplicantInformation, 'current' : !Ctrl.AppealSubmissionStatus.ApplicantInformation && Ctrl.bAppellantInfo}">
+                                <a style="cursor: pointer;" ng-click="Ctrl.showAppellantInfo()">Applicant Information</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.GroundsOfAppeal, 'current' : !Ctrl.AppealSubmissionStatus.GroundsOfAppeal && Ctrl.bGrounds}">
+                                <a style="cursor: pointer;" ng-click="Ctrl.showGrounds()">Grounds for Appeal</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.AdditionalDocumentation, 'current' : !Ctrl.AppealSubmissionStatus.AdditionalDocumentation && Ctrl.bAddDocs}">
+                                <a style="cursor: pointer;" ng-click="Ctrl.showAddDoc()">Additional Documentation</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.ServingAppeal, 'current' : !Ctrl.AppealSubmissionStatus.ServingAppeal && Ctrl.bServingAppeal}">
+                                <a style="cursor: pointer;" ng-click="Ctrl.showServingAppeal()">Serving an Appeal</a>
+                            </li>
+                            <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.Review, 'current' : !Ctrl.AppealSubmissionStatus.Review && Ctrl.bReview}">
+                                <a style="cursor: pointer;" ng-click="Ctrl.showReview()">Review</a>
+                            </li>
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-9 col-sm-12">
                     <div class="application-step step-1">

@@ -11,6 +11,7 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
     self.Error = "";
     self.Hide = false;
     self.HasAdditionalRentRecord = false;
+    $scope.model.stepNo = 6;
     //var range = 10 / 2;
     //var currentYear = new Date().getFullYear();
     //self.years = [];

@@ -2,6 +2,7 @@
 var rapAppealTypeController = ['$scope', '$modal', 'alertService', 'rapappealtypeFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
     var self = this;
     self.model = $scope.model;
+    $scope.model.stepNo = 1;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.Error = "";
     //self.caseinfo = rapGlobalFactory.CaseDetails;

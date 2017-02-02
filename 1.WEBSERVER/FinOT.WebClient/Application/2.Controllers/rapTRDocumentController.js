@@ -1,7 +1,7 @@
 ﻿'use strict';
 var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapTRDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, ajaxService, $location, rapFactory, rapGlobalFactory, masterFactory) {
     var self = this;
-
+    $scope.model.stepNo = 6;
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;

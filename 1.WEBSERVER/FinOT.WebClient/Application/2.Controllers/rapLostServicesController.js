@@ -7,6 +7,7 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
     self.LostServices;
     self.Problems;
     self.Error = "";
+    $scope.model.stepNo = 6;
 
     var range = 10 / 2;
     var currentYear = new Date().getFullYear();
