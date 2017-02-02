@@ -37,26 +37,32 @@
     }
     else {
         if (self.caseinfo.OwnerPetitionInfo != null) {
-            if (self.caseinfo.OwnerPetitionInfo.ApplicantUserInfo != null && self.caseinfo.OwnerPetitionInfo.ApplicantUserInfo.ApplicantUserInfo != null) {
-                self.Owner = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName + ' ' + self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName;
-            }
-            if (self.caseinfo.OwnerPetitionInfo.ApplicantUserInfo != null && self.caseinfo.OwnerPetitionInfo.ApplicantUserInfo.ThirdPartyUser != null) {
+            if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo != null && self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo != null) {
+                if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName != null && self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName != null) 
 
-                self.ThirdParty = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName + ' ' + self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName;
+                    self.Owner = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName + ' ' + self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName;
+            }
+            }
+        if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo != null && self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null) {
+                if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName != null && self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName != null) {
+                    self.ThirdParty = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName + ' ' + self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName;
+                }
             }
             if (self.caseinfo.OwnerPetitionInfo.PropertyInfo != null && self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo != null) {
                 for (i = 0; i < self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length; i++) {
                     if (i == 0) {
-                        self.Tenant = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].FirstName + ' ' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].LastName;
+                        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.FirstName != null && self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.LastName != null) {
+                            self.Tenant = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.FirstName + ' ' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.LastName;
+                        }
                     }
-                    self.TenantEmail = self.TenantEmail + ',' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].Email;
+                    if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.FirstName != null && self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.LastName != null) {
+                        self.Tenant = self.Tenant + ',' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.FirstName + ' ' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.LastName;
+                    }
                 }
             }
 
         }
-    }
-
-
+    
     rapFactory.GetMail().then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         self.model = response.data;
