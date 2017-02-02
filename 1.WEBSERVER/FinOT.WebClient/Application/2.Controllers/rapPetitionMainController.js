@@ -212,7 +212,13 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
                 return;
             }
             self.model = response.data;
-            self.caseinfo = self.model;
+            if (self.caseinfo == null) {
+                self.caseinfo = self.model;
+            }
+            else
+            {
+                self.caseinfo.PetitionCategory = self.model.PetitionCategory;
+            }
             rapGlobalFactory.CaseDetails = self.caseinfo;
             rapGlobalFactory.CaseDetails.PetitionCategoryID = rapGlobalFactory.PetitionCategoryID;
             self.bPetitionType = true;
@@ -238,9 +244,9 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         });
     }
     // _getrent();
-    if (self.caseinfo == null) {
+    
         _getPetitionCategory();
-    }
+    //}
     if (self.PetitionSubmissionStatus == null)
     {
         _getPageSubmission();
