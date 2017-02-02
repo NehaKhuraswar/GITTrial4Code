@@ -13,7 +13,7 @@
                     <div class="field-group subhead no-top-margin pad-t15">
                         <div class="form-group-checkbox vertical clearfix">
                             <p class="input-label">Check all that apply. <b>I (we) petition for approval of one or more rent increases on the following grounds that the increase(es) is/are justified by :</b></p>
-                            <div class="checkbox-wrapper">
+                            <div class="checkbox-wrapper has-info-btn no-bottom-margin">
                                 <div ng-repeat="reason in Ctrl.caseinfo.OwnerPetitionInfo.RentIncreaseReasons">
                                     <label for="{{reason.ReasonID}}">
                                         <input type="checkbox" name="rentcheckbox" class="checkbox" id="{{reason.ReasonID}}" ng-model="reason.IsSelected">
