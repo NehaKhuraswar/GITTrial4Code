@@ -89,7 +89,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
 
     self.ContinueToExemptionContested = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
-        rapFactory.SaveTenantResponseApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
+        rapFactory.SaveTenantResponseApplicationInfo(rapGlobalFactory.CaseDetails, self.custDetails.custID).then(function (response) {
              if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 return;

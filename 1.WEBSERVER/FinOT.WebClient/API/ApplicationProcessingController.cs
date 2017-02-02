@@ -1177,9 +1177,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("savetenantresponseapplicationinfo")]
+        [Route("savetenantresponseapplicationinfo/{CustomerID}")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantResponseApplicationInfo()
+        public HttpResponseMessage SaveTenantResponseApplicationInfo(string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -1187,7 +1187,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "savetenantresponseapplicationinfo/";
+                string requestUri = _requestURI + "savetenantresponseapplicationinfo/" + CustomerID;
                 responseMessage = client.PostAsync(requestUri, Request.Content).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

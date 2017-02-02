@@ -1567,9 +1567,9 @@ namespace RAP.API.Controllers
             return Request.CreateResponse<TranInfo<bool>>(ReturnCode, transaction);
         }
         [AllowAnonymous]
-        [Route("savetenantresponseapplicationinfo")]
+        [Route("savetenantresponseapplicationinfo/{CustomerID:int}")]
         [HttpPost]
-        public HttpResponseMessage SaveTenantResponseApplicationInfo([FromBody] CaseInfoM caseInfo)
+        public HttpResponseMessage SaveTenantResponseApplicationInfo([FromBody] CaseInfoM caseInfo, [FromUri] int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -1580,7 +1580,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.SaveTenantResponseApplicationInfo(caseInfo, UserID);
+                result = _service.SaveTenantResponseApplicationInfo(caseInfo, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

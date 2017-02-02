@@ -3,10 +3,11 @@ var rapTRapplicationinfoFactory = ['blockUI', 'ajaxService', function (blockUI, 
     var factory = {};
     var _routePrefix = 'api/applicationprocessing';
 
-    var _SaveTenantResponseApplicationInfo = function (model) {
+    var _SaveTenantResponseApplicationInfo = function (model, customerid) {
         blockUI.start();
 
         var url = _routePrefix + '/savetenantresponseapplicationinfo';
+        if (!(customerid == null || customerid == undefined)) { url = url + '/' + customerid; }
 
         return ajax.Post(model, url)
         .finally(function () {
