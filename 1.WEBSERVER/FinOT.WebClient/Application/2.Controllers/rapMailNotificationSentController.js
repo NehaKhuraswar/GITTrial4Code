@@ -1,13 +1,32 @@
 ﻿var rapMailNotificationSentController = ['$scope', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, alert, $location, rapGlobalFactory, masterFactory) {
     var self = this;
-    self.custDetails = rapGlobalFactory.CityUser;
-    if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)
-    {
-        $location.path("/staffdashboard");
+    //self.custDetails = rapGlobalFactory.CityUser;
+    //if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)
+    //{
+    //    $location.path("/staffdashboard");
+    //}
+    //self.c_id = rapGlobalFactory.SelectedCase.C_ID;
+    //self.caseinfo = rapGlobalFactory.SelectedCase;
+    self.Title = '';
+    if (rapGlobalFactory.MailNotification == null || rapGlobalFactory.MailNotification == undefined) {
+        var userType = rapGlobalFactory.GetUserType();
+        if (userType == 'PublicUser') {
+            $location.path("/publicdashboard");
+        }
+        else if (userType == 'CityUser') {
+            $location.path("/staffdashboard");
+        }
     }
-    self.c_id = rapGlobalFactory.SelectedCase.C_ID;
-    self.caseinfo = rapGlobalFactory.SelectedCase;
     self.model = rapGlobalFactory.MailNotification;
+    self.caseid = rapGlobalFactory.Notification_CaseID;
+
+    if (rapGlobalFactory.FromSelectedCase == true) {
+
+        self.Title = 'Staff Dashboard';
+    }
+    else {
+        self.Title = 'Dashboard';
+    }
     //self.Recipient = null;
     //for (var i = 0 ; i < self.model.Message.RecipientAddress.length; i++)
     //{
@@ -40,8 +59,15 @@
     //}
    //    self.SentBy = rapGlobalFactory.CityUser.FirstName + ' ' + rapGlobalFactory.CityUser.LastName;
     self.BackToCase = function () {
-        rapGlobalFactory.Notification = null;
-        $location.path("/selectedcase");
+        rapGlobalFactory.MailNotification = null;
+        rapGlobalFactory.Notification_CaseID = null;
+        if (rapGlobalFactory.FromSelectedCase == true) {
+            rapGlobalFactory.FromSelectedCase = false;
+            $location.path("/selectedcase");
+        }
+        else {
+            $location.path("publicdashboard");
+        }       
     }
 
 }];

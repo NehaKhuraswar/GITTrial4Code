@@ -175,6 +175,8 @@ self.ViewPage = function (activity, caseinfo) {
                     return;
                 }
                 rapGlobalFactory.Notification = response.data;
+                rapGlobalFactory.Notification_CaseID = self.caseinfo.CaseID;
+                rapGlobalFactory.FromSelectedCase = true;
                 $location.path("/emailnotificationsent");
             });
         }  
@@ -185,6 +187,8 @@ self.ViewPage = function (activity, caseinfo) {
                     return;
                 }
                 rapGlobalFactory.MailNotification = response.data;
+                rapGlobalFactory.Notification_CaseID = self.caseinfo.CaseID;
+                rapGlobalFactory.FromSelectedCase = true;
                 $location.path("/usmailnotificationsent");
             });
         }     

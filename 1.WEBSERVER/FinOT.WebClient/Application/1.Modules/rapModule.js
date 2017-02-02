@@ -18,6 +18,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
         var SelectedForEdit = null;
         var Notification = null;
         var MailNotification = null;
+        var Notification_CaseID = null;
         var IsAdmin = false;
         var PetitionCategoryID = 0;
         

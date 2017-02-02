@@ -25,13 +25,19 @@
     if (self.caseinfo.PetitionCategoryID == 1) {
         if (self.caseinfo.TenantPetitionInfo != null) {
             if (self.caseinfo.TenantPetitionInfo.ApplicantUserInfo != null) {
-                self.Tenant = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName + ' ' + self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName;
+                if (self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName != null && self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName != null) {
+                    self.Tenant = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName + ' ' + self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName;
+                }
             }
             if (self.caseinfo.TenantPetitionInfo.OwnerInfo != null) {
-                self.Owner = self.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName + ' ' + self.caseinfo.TenantPetitionInfo.OwnerInfo.LastName;
+                if (self.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName != null && self.caseinfo.TenantPetitionInfo.OwnerInfo.LastName != null) {
+                    self.Owner = self.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName + ' ' + self.caseinfo.TenantPetitionInfo.OwnerInfo.LastName;
+                }
             }
             if (self.caseinfo.TenantPetitionInfo.ThirdPartyInfo != null) {
-                self.ThirdParty = self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName + ' ' + self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName;
+                if (self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null && self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName != null) {
+                    self.ThirdParty = self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName + ' ' + self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName;
+                }
             }
         }
     }
@@ -137,6 +143,8 @@
             rapFactory.GetMailNotification(rapGlobalFactory.MailNotification.NotificationID).then(function (response) {
                 if (!alert.checkResponse(response)) { return; }
                 rapGlobalFactory.MailNotification = response.data;
+                rapGlobalFactory.Notification_CaseID = rapGlobalFactory.SelectedCase.CaseID;
+                rapGlobalFactory.FromSelectedCase = true;
                 $location.path("/usmailnotificationsent");
             });
         });

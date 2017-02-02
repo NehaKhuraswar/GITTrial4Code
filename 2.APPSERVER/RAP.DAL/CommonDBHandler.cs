@@ -901,6 +901,7 @@ namespace RAP.DAL
                     {                                             
                         model.Recipient = notification.Recipient.Split(',').Select(r => r.ToString()).ToList();
                         model.Notes = notification.Notes;
+                        model.C_ID = Convert.ToInt32(notification.C_ID);
                         model.MailingDate = Convert.ToDateTime(notification.MailingDate).Date;
                         if (notification.CreatedBy != null)
                         {
