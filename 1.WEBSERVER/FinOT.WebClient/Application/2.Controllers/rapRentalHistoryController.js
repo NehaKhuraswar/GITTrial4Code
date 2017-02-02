@@ -66,8 +66,8 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
         rentalIncrease.bRentIncreaseNoticeGiven = 0;
         rentalIncrease.RentIncreaseNoticeDate = null;
         rentalIncrease.RentIncreaseEffectiveDate = null;
-        rentalIncrease.RentIncreasedFrom = 0;
-        rentalIncrease.RentIncreasedTo = 0;
+        rentalIncrease.RentIncreasedFrom = null;
+        rentalIncrease.RentIncreasedTo = null;
         rentalIncrease.bRentIncreaseContested = 0;
 
     }

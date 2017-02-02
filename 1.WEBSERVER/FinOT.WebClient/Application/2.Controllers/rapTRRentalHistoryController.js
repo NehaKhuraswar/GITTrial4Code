@@ -31,7 +31,9 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.TenantResponseInfo.TenantRentalHistory.TenantResponseID = self.caseinfo.TenantResponseInfo.TenantResponseID;
         if (self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.length == 0) {
-            self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+            if (self.RentalIncreaseModel.RentIncreaseEffectiveDate != null && self.RentalIncreaseModel.RentIncreaseNoticeDate != null) {
+                self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+            }
         }
         rapFactory.SaveTenantResponseRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantResponseInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }

@@ -57,7 +57,7 @@ namespace RAP.Core.DataModels
         public int TenantResponseID { get; set; }
         public CustomDate RentalAgreementDate { get; set; }
         public CustomDate MoveInDate { get; set; }
-        public decimal InitialRent { get; set; }
+        public decimal? InitialRent { get; set; }
         public bool bRAPNoticeGiven { get; set; }
         public CustomDate RAPNoticeGivenDate { get; set; }
         public List<TenantResponseRentIncreaseInfoM> RentIncreases { get; set; }
@@ -69,8 +69,8 @@ namespace RAP.Core.DataModels
     {
         public bool bRentIncreaseNoticeGiven { get; set; }
         public CustomDate RentIncreaseNoticeDate { get; set; }
-        public decimal RentIncreasedFrom { get; set; }
-        public decimal RentIncreasedTo { get; set; }
+        public decimal? RentIncreasedFrom { get; set; }
+        public decimal? RentIncreasedTo { get; set; }
         public CustomDate RentIncreaseEffectiveDate { get; set; }
         public bool IsDeleted { get; set; }
     }   

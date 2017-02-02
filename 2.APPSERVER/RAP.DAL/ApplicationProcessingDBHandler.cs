@@ -1319,8 +1319,8 @@ namespace RAP.DAL
                         objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
                         objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
                         objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
-                        objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
-                        objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
+                        objTenantRentIncreaseInfoM.RentIncreasedFrom = item.RentIncreasedFrom;
+                        objTenantRentIncreaseInfoM.RentIncreasedTo = item.RentIncreasedTo;
                         objTenantRentIncreaseInfoM.bRentIncreaseContested = Convert.ToBoolean(item.bRentIncreaseContested);
 
                         tenantRentalHistory.RentIncreases.Add(objTenantRentIncreaseInfoM);
@@ -3436,7 +3436,7 @@ namespace RAP.DAL
                     tenantResponseRentalHistory.TenantResponseID = TenantResponseRentalHistoryDB.TenantResponseID;
                     tenantResponseRentalHistory.RentalAgreementDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantResponseRentalHistoryDB.RentalAgreementDate));
                     tenantResponseRentalHistory.MoveInDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantResponseRentalHistoryDB.MoveInDate));
-                    tenantResponseRentalHistory.InitialRent = Convert.ToDecimal(TenantResponseRentalHistoryDB.InitialRent);
+                    tenantResponseRentalHistory.InitialRent = TenantResponseRentalHistoryDB.InitialRent;
                     tenantResponseRentalHistory.bRAPNoticeGiven = Convert.ToBoolean(TenantResponseRentalHistoryDB.bRAPNoticeGiven);
                     tenantResponseRentalHistory.RAPNoticeGivenDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(TenantResponseRentalHistoryDB.RAPNoticeGivenDate));
 
@@ -3447,8 +3447,8 @@ namespace RAP.DAL
                         objTenantRentIncreaseInfoM.bRentIncreaseNoticeGiven = Convert.ToBoolean(item.bRentIncreaseNoticeGiven);
                         objTenantRentIncreaseInfoM.RentIncreaseNoticeDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseNoticeDate));
                         objTenantRentIncreaseInfoM.RentIncreaseEffectiveDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(item.RentIncreaseEffectiveDate));
-                        objTenantRentIncreaseInfoM.RentIncreasedFrom = Convert.ToDecimal(item.RentIncreasedFrom);
-                        objTenantRentIncreaseInfoM.RentIncreasedTo = Convert.ToDecimal(item.RentIncreasedTo);
+                        objTenantRentIncreaseInfoM.RentIncreasedFrom = item.RentIncreasedFrom;
+                        objTenantRentIncreaseInfoM.RentIncreasedTo = item.RentIncreasedTo;
 
                         tenantResponseRentalHistory.RentIncreases.Add(objTenantRentIncreaseInfoM);
                     }

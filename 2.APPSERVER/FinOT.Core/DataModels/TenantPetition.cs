@@ -338,8 +338,8 @@ namespace RAP.Core.DataModels
     {
         public bool bRentIncreaseNoticeGiven { get; set; }
         public CustomDate RentIncreaseNoticeDate { get; set; }
-        public decimal RentIncreasedFrom { get; set; }
-        public decimal RentIncreasedTo { get; set; }
+        public decimal? RentIncreasedFrom { get; set; }
+        public decimal? RentIncreasedTo { get; set; }
         public CustomDate RentIncreaseEffectiveDate { get; set; }
         public bool bRentIncreaseContested { get; set; }
         public bool IsDeleted { get; set; }

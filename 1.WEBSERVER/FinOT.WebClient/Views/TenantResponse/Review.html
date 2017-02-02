@@ -153,11 +153,11 @@
                                     <div class="field-group filled-info subhead">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">When did you enter into the rental agreement for this unit?</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Year}}</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate != null">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
-                                    <div class="field-group filled-info subhead no-top-margin">
+                                    <div class="field-group filled-info subhead no-top-margin">                                        
                                         <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
                                             <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
@@ -168,7 +168,7 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into the unit?</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Year}}</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate!=null">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -182,7 +182,7 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate!=null">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
