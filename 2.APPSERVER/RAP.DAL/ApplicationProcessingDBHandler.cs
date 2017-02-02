@@ -2552,12 +2552,12 @@ namespace RAP.DAL
                 {
                     TenantRentalHistory rentalHistoryDB = new TenantRentalHistory();
                     rentalHistoryDB.PetitionID = rentalHistory.PetitionID;
-                    if (rentalHistory.MoveInDate != null)
+                    if (rentalHistory.MoveInDate != null && rentalHistory.MoveInDate.Year != 0 && rentalHistory.MoveInDate.Month != 0 && rentalHistory.MoveInDate.Day != 0)
                     {
                         rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
                     }
                     rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
-                    if (rentalHistory.RAPNoticeGivenDate != null)
+                    if (rentalHistory.RAPNoticeGivenDate != null && rentalHistory.RAPNoticeGivenDate.Year != 0 && rentalHistory.RAPNoticeGivenDate.Month != 0 && rentalHistory.RAPNoticeGivenDate.Day != 0)
                     {
                         rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
                     }
@@ -2591,15 +2591,16 @@ namespace RAP.DAL
                         rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
                         if (item.bRentIncreaseNoticeGiven)
                         {
-                            if (item.RentIncreaseNoticeDate != null)
+                            if (item.RentIncreaseNoticeDate != null && item.RentIncreaseNoticeDate.Year != 0 && item.RentIncreaseNoticeDate.Day != 0 && item.RentIncreaseNoticeDate.Month != 0)
                             {
                                 rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
                                     item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
                             }
 
                         }
-                        if (item.RentIncreaseEffectiveDate != null)
+                        if (item.RentIncreaseEffectiveDate != null && item.RentIncreaseEffectiveDate.Year!= 0 && item.RentIncreaseEffectiveDate.Day!=0 && item.RentIncreaseEffectiveDate.Month!=0)
                         {
+
                             rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
                                 item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
                         }
@@ -2663,8 +2664,11 @@ namespace RAP.DAL
                             lostServiceDB.TenantPetitionID = message.PetitionID;
                             lostServiceDB.ReducedServiceDescription = item.ReducedServiceDescription;
                             lostServiceDB.EstimatedLoss = item.EstimatedLoss;
-                            lostServiceDB.LossBeganDate = new DateTime(item.LossBeganDate.Year,
-                                item.LossBeganDate.Month, item.LossBeganDate.Day);
+                            if (item.LossBeganDate != null && item.LossBeganDate.Day != 0 && item.LossBeganDate.Year != 0 && item.LossBeganDate.Month != 0)
+                            {
+                                lostServiceDB.LossBeganDate = new DateTime(item.LossBeganDate.Year,
+                                    item.LossBeganDate.Month, item.LossBeganDate.Day);
+                            }
                             //lostServiceDB.PayingToServiceBeganDate = new DateTime(item.PayingToServiceBeganDate.Year,
                             //    item.PayingToServiceBeganDate.Month, item.PayingToServiceBeganDate.Day);
 
@@ -2733,8 +2737,11 @@ namespace RAP.DAL
                         problemDB.EstimatedLoss = item.EstimatedLoss;
                         //TBD
                         //  problemDB.ProblemBeganDate = item.ProblemBeganDate;
-                        problemDB.ProblemBeganDate = new DateTime(item.ProblemBeganDate.Year,
-                            item.ProblemBeganDate.Month, item.ProblemBeganDate.Day);
+                        if (item.ProblemBeganDate != null && item.ProblemBeganDate.Day != 0 && item.ProblemBeganDate.Month != 0 && item.ProblemBeganDate.Year != 0)
+                        {
+                            problemDB.ProblemBeganDate = new DateTime(item.ProblemBeganDate.Year,
+                                item.ProblemBeganDate.Month, item.ProblemBeganDate.Day);
+                        }
 
 
 
@@ -4004,10 +4011,19 @@ namespace RAP.DAL
                 if (rentalHistoryRecord != null)
                 {
                     rentalHistoryRecord.TenantResponseID = rentalHistory.TenantResponseID;
-                    rentalHistoryRecord.RentalAgreementDate = new DateTime(rentalHistory.RentalAgreementDate.Year, rentalHistory.RentalAgreementDate.Month, rentalHistory.RentalAgreementDate.Day);
-                    rentalHistoryRecord.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    if (rentalHistory.RentalAgreementDate != null && rentalHistory.RentalAgreementDate.Day != 0 && rentalHistory.RentalAgreementDate.Month != 0 && rentalHistory.RentalAgreementDate.Year != 0)
+                    {
+                        rentalHistoryRecord.RentalAgreementDate = new DateTime(rentalHistory.RentalAgreementDate.Year, rentalHistory.RentalAgreementDate.Month, rentalHistory.RentalAgreementDate.Day);
+                    }
+                    if (rentalHistory.MoveInDate != null && rentalHistory.MoveInDate.Day != 0 && rentalHistory.MoveInDate.Month != 0 && rentalHistory.MoveInDate.Year != 0)
+                    {
+                        rentalHistoryRecord.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    }
                     rentalHistoryRecord.InitialRent = rentalHistory.InitialRent;
-                    rentalHistoryRecord.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    if (rentalHistory.RAPNoticeGivenDate != null && rentalHistory.RAPNoticeGivenDate.Day != 0 && rentalHistory.RAPNoticeGivenDate.Month != 0 && rentalHistory.RAPNoticeGivenDate.Year != 0)
+                    {
+                        rentalHistoryRecord.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    }
                     rentalHistoryRecord.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
                     rentalHistoryRecord.CreatedDate = DateTime.Now;
                     _dbContext.SubmitChanges();
@@ -4016,10 +4032,19 @@ namespace RAP.DAL
                 {
                     TenantResponseRentalHistory rentalHistoryDB = new TenantResponseRentalHistory();
                     rentalHistoryDB.TenantResponseID = rentalHistory.TenantResponseID;
-                    rentalHistoryDB.RentalAgreementDate = new DateTime(rentalHistory.RentalAgreementDate.Year, rentalHistory.RentalAgreementDate.Month, rentalHistory.RentalAgreementDate.Day);
-                    rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    if (rentalHistory.RentalAgreementDate != null && rentalHistory.RentalAgreementDate.Year != 0 && rentalHistory.RentalAgreementDate.Day != 0 && rentalHistory.RentalAgreementDate.Month != 0)
+                    {
+                        rentalHistoryDB.RentalAgreementDate = new DateTime(rentalHistory.RentalAgreementDate.Year, rentalHistory.RentalAgreementDate.Month, rentalHistory.RentalAgreementDate.Day);
+                    }
+                    if (rentalHistory.MoveInDate != null && rentalHistory.MoveInDate.Year != 0 && rentalHistory.MoveInDate.Day != 0 && rentalHistory.MoveInDate.Month != 0)
+                    {
+                        rentalHistoryDB.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
+                    }
                     rentalHistoryDB.InitialRent = rentalHistory.InitialRent;
-                    rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    if (rentalHistory.RAPNoticeGivenDate != null && rentalHistory.RAPNoticeGivenDate.Year != 0 && rentalHistory.RAPNoticeGivenDate.Day != 0 && rentalHistory.RAPNoticeGivenDate.Month != 0)
+                    {
+                        rentalHistoryDB.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
+                    }
                     rentalHistoryDB.bRAPNoticeGiven = rentalHistory.bRAPNoticeGiven;
                     rentalHistoryDB.CreatedDate = DateTime.Now;
                     _dbContext.TenantResponseRentalHistories.InsertOnSubmit(rentalHistoryDB);
@@ -4042,14 +4067,17 @@ namespace RAP.DAL
                         TenantResponseRentalIncrementInfo rentIncrementDB = new TenantResponseRentalIncrementInfo();
                         rentIncrementDB.TenantResponseID = rentalHistory.TenantResponseID;
                         rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
-                        if (item.bRentIncreaseNoticeGiven)
+                        if (item.bRentIncreaseNoticeGiven )
                         {
                             rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
                                 item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
 
                         }
-                        rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
-                                item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
+                        if (item.RentIncreaseEffectiveDate != null && item.RentIncreaseEffectiveDate.Day != 0 && item.RentIncreaseEffectiveDate.Year != 0 && item.RentIncreaseEffectiveDate.Month != 0)
+                        {
+                            rentIncrementDB.RentIncreaseEffectiveDate = new DateTime(item.RentIncreaseEffectiveDate.Year,
+                                    item.RentIncreaseEffectiveDate.Month, item.RentIncreaseEffectiveDate.Day);
+                        }
                         rentIncrementDB.RentIncreasedFrom = item.RentIncreasedFrom;
                         rentIncrementDB.RentIncreasedTo = item.RentIncreasedTo;
 
