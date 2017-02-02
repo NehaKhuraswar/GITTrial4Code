@@ -3923,7 +3923,8 @@ namespace RAP.DAL
                     caseInfo.TenantResponseInfo.TenantResponseID = responseDB.TenantResponseID;
 
                     var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
-                                             .Where(x => x.CustomerID == caseInfo.TenantResponseInfo.CustomerID).FirstOrDefault();
+                                             .Where(x => x.CustomerID == caseInfo.TenantResponseInfo.CustomerID && 
+                                                        x.TenantResponseID == caseInfo.TenantResponseInfo.TenantResponseID).FirstOrDefault();
                     if (PageStatus != null)
                     {
                         PageStatus.ApplicantInformation = true;
@@ -3933,6 +3934,7 @@ namespace RAP.DAL
                     {
                         var PageStatusNew = new TenantResponsePageSubmissionStatus();
                         PageStatusNew.CustomerID = caseInfo.TenantResponseInfo.CustomerID;
+                        PageStatusNew.TenantResponseID = caseInfo.TenantResponseInfo.TenantResponseID;
                         PageStatusNew.ApplicantInformation = true;
                         _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
                         _dbContext.SubmitChanges();
@@ -4086,7 +4088,8 @@ namespace RAP.DAL
                     }
                 }
 
-                var PageStatus = _dbContext.TenantResponsePageSubmissionStatus.Where(x => x.CustomerID == CustomerID).FirstOrDefault();
+                var PageStatus = _dbContext.TenantResponsePageSubmissionStatus.Where(x => x.CustomerID == CustomerID && 
+                                                                x.TenantResponseID == rentalHistory.TenantResponseID).FirstOrDefault();
                 if (PageStatus != null)
                 {
                     PageStatus.RentHistory = true;
@@ -4096,6 +4099,7 @@ namespace RAP.DAL
                 {
                     var PageStatusNew = new TenantResponsePageSubmissionStatus();
                     PageStatusNew.CustomerID = CustomerID;
+                    PageStatusNew.TenantResponseID = rentalHistory.TenantResponseID;
                     PageStatusNew.RentHistory = true;
                     _dbContext.TenantResponsePageSubmissionStatus.InsertOnSubmit(PageStatusNew);
                     _dbContext.SubmitChanges();
@@ -4173,7 +4177,7 @@ namespace RAP.DAL
                 }
                 _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ResponseFiled, (int)StatusDefaults.StatusSubmitted);
                 var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
-                                            .Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
+                                            .Where(x => x.CustomerID == caseInfo.CaseFileBy && x.TenantResponseID== caseInfo.TenantResponseInfo.TenantResponseID).FirstOrDefault();
                 if (PageStatus != null)
                 {
                     _dbContext.TenantResponsePageSubmissionStatus.DeleteOnSubmit(PageStatus);
@@ -6814,7 +6818,7 @@ namespace RAP.DAL
                         _applicantInfo.BusinessLicenseNumber = applicantInfo.BusinessLicenseNumber;
                         _applicantInfo.bRentAdjustmentProgramFeePaid = (applicantInfo.bRentAdjustmentProgramFeePaid != null) ? Convert.ToBoolean(applicantInfo.bRentAdjustmentProgramFeePaid) : false;
                         _applicantInfo.BuildingAcquiredDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(applicantInfo.BuildingAcquiredDate));
-                        _applicantInfo.NumberOfUnits = Convert.ToInt32(applicantInfo.NumberOfUnits);
+                        _applicantInfo.NumberOfUnits = applicantInfo.NumberOfUnits;
                         _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                         _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0;
                         _applicantInfo.bPetitionFiled = applicantInfo.bPetitionFiled;
