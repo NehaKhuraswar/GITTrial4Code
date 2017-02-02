@@ -46,6 +46,23 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
         var a = self.selectedObj;
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
+        if (self.RentalIncreaseModel.bRentIncreaseContested == true)
+        {
+            if (self.RentalIncreaseModel.RentIncreaseNoticeDate == null || self.RentalIncreaseModel.RentIncreaseEffectiveDate == null)
+            {
+                self.Error = "Please enter the valid dates for the rent increased contested section";
+                return;
+            }
+            if (self.RentalIncreaseModel.RentIncreaseNoticeDate == null || self.RentalIncreaseModel.RentIncreaseEffectiveDate == null) {
+                self.Error = "Please enter the valid dates for the rent increased contested section";
+                return;
+            }
+            if(self.RentalIncreaseModel.RentIncreasedTo == null || self.RentalIncreaseModel.RentIncreasedFrom == null)
+            {
+                self.Error = "Please enter rent increase";
+                return;
+            }
+        }
         if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
             if (self.RentalIncreaseModel.RentIncreaseNoticeDate != null && self.RentalIncreaseModel.RentIncreaseEffectiveDate != null)
                 {
@@ -62,6 +79,20 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
     }
 
     self.AddAnotherRentIncrease = function (rentalIncrease) {
+        if (rentalIncrease.bRentIncreaseContested == true) {
+            if (rentalIncrease.RentIncreaseNoticeDate == null || rentalIncrease.RentIncreaseEffectiveDate == null) {
+                self.Error = "Please enter the valid dates for the rent increased contested section";
+                return;
+            }
+            if (rentalIncrease.RentIncreaseNoticeDate == null || rentalIncrease.RentIncreaseEffectiveDate == null) {
+                self.Error = "Please enter the valid dates for the rent increased contested section";
+                return;
+            }
+            if (rentalIncrease.RentIncreasedTo == null || rentalIncrease.RentIncreasedFrom == null) {
+                self.Error = "Please enter rent increase";
+                return;
+            }
+        }
         var _rentalIncrease = angular.copy(rentalIncrease);
         self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(_rentalIncrease);
         rentalIncrease.bRentIncreaseNoticeGiven = 0;
