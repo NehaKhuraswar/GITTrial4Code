@@ -167,15 +167,27 @@ self.ViewPage = function (activity, caseinfo) {
             $location.path("/ViewTenantResponse");
         });
     }
-            else if (activity.Status.StatusID == 6) {
-                rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID, activity.NotificationID).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                return;
-            }
-            rapGlobalFactory.Notification = response.data;
-            $location.path("/emailnotificationsent");
-            
-        });
+    else if (activity.Status.StatusID == 6) {
+        if (activity.NotificationType == 1)
+        {
+            rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID, activity.NotificationID).then(function (response) {
+                if (!alert.checkForResponse(response)) {
+                    return;
+                }
+                rapGlobalFactory.Notification = response.data;
+                $location.path("/emailnotificationsent");
+            });
+        }  
+        else if (activity.NotificationType == 2)
+        {
+            rapFactory.GetMailNotification(activity.NotificationID).then(function (response) {
+                if (!alert.checkForResponse(response)) {
+                    return;
+                }
+                rapGlobalFactory.MailNotification = response.data;
+                $location.path("/usmailnotificationsent");
+            });
+        }     
     }
 
 }

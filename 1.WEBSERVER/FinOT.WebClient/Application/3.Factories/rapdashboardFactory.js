@@ -83,6 +83,26 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
             blockUI.stop();
         });
     }
+    var _GetCustomEmailNotification = function (cid, activityid, NotificationID) {
+        blockUI.start();
+        var url = 'api/dashboard' + '/GetCustomEmailNotification';
+        if (!(cid == null || cid == undefined)) { url = url + '/' + cid; }
+        if (!(activityid == null || activityid == undefined)) { url = url + '/' + activityid; }
+        if (!(NotificationID == null || NotificationID == undefined)) { url = url + '/' + NotificationID; }
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
+    var _GetMailNotification = function (NotificationID) {
+        blockUI.start();
+        var url = 'api/dashboard' + '/GetMailNotification';
+        if (!(NotificationID == null || NotificationID == undefined)) { url = url + '/' + NotificationID; }
+        return ajax.Get(url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
     factory.GetPetitionViewInfo = _GetPetitionViewInfo;
     factory.GetCaseInfo = _GetCaseInfo;
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
@@ -90,5 +110,7 @@ var rapdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) {
     factory.GetAppealInfoForView = _GetTenantAppealInfoForView;
     factory.GetTenantResponseViewInfo = _GetTenantResponseViewInfo;
     factory.GetOResponseViewByCaseID = _GetOResponseViewByCaseID;
+    factory.GetCustomEmailNotification = _GetCustomEmailNotification;
+    factory.GetMailNotification = _GetMailNotification;
     return factory;
 }];
