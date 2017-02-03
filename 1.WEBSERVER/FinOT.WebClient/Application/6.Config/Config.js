@@ -1,6 +1,7 @@
 ﻿'use strict';
 var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectConfig', 'blockUIConfig', 'informProvider', 'paginationTemplateProvider', function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig, blockUIConfig, informProvider, paginationTemplateProvider) {
     //config routes
+    $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider
         
         .when('/register', {
@@ -45,7 +46,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: raploginURLController_resolve
         })
-        .when('/Login', {
+        .when('/', {
             templateUrl: 'views/account/Login.html',
             controller: raploginController,
             controllerAs: 'Ctrl',
@@ -288,7 +289,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
         })
         .otherwise({ redirectTo: '/' });
 
-    //$locationProvider.html5Mode(true);
+   
     //Enable cross domain calls
     $httpProvider.defaults.useXDomain = true;
     //Remove the header used to identify ajax call  that would prevent CORS from working

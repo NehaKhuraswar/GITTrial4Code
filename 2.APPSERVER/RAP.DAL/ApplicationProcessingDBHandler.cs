@@ -804,7 +804,7 @@ namespace RAP.DAL
                     }
                     caseinfo.CreatedDate = Convert.ToDateTime(caseDB.CreatedDate);
                     caseinfo.LastModifiedDate = Convert.ToDateTime(caseDB.LastModifiedDate);
-
+                    caseinfo.CaseFileBy = Convert.ToInt32(caseDB.CaseFiledBy);
 
                     // Get the petition applicant info
                     var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
@@ -846,6 +846,12 @@ namespace RAP.DAL
                         {
                             caseinfo.OwnerPetitionInfo = ownerPetitionResult.result;
                         }
+                        caseinfo.OwnerPetitionInfo.Verification.bCaseMediation = _dbContext.OwnerPetitionVerifications.Where(x => x.PetitionID == petitionDetailsDb.OwnerPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
+                    }
+                    var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.CaseFileBy);
+                    if (TranslationServiceResult.status.Status == StatusEnum.Success)
+                    {
+                         caseinfo.TranslationServiceInfo= TranslationServiceResult.result;
                     }
                     caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
                     var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();

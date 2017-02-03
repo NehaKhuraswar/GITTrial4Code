@@ -16,7 +16,8 @@ namespace RAP.Core.DataModels
             OwnerPetitionRentalIncrementInfo = new OwnerPetitionRentalIncrementInfoM();
             Document = new DocumentM();
             OwnerResponseInfo = new OwnerResponseInfoM();
-            TenantResponseInfo = new TenantResponseInfoM();           
+            TenantResponseInfo = new TenantResponseInfoM();
+            TranslationServiceInfo = new TranslationServiceInfoM();
         }
         private TenantPetitionInfoM _tenantPetitionInfo = new TenantPetitionInfoM();
         private TenantAppealInfoM _tenantappealInfo = new TenantAppealInfoM();  
@@ -29,6 +30,7 @@ namespace RAP.Core.DataModels
         private List<DocumentM> _documents = new List<DocumentM>();
         private List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
 
+        public TranslationServiceInfoM TranslationServiceInfo;
         public string CaseID { get; set; }
         public int C_ID { get; set; }
         public int CustomerID { get; set; }
