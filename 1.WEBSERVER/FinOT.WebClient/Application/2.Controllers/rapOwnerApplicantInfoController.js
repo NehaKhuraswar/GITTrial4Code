@@ -11,6 +11,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     self.StateList = [];   
     self.Hide = false;
     self.Error = '';
+    self.bAcknowledgeNotification = false;
      var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -21,7 +22,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
     }
     _GetStateList();
     self.caseinfo.CaseFileBy = self.custDetails.custID;
-   
+    self.bEditThirdParty = false;
     rapFactory.GetApplicationInfo(self.caseinfo).then(function (response) {
         if (!alert.checkResponse(response)) { return; }
         rapGlobalFactory.CaseDetails = response.data;
@@ -91,8 +92,23 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
             }
         }
     }
-
-   
+    
+    var _CheckNotification = function() 
+    {
+        var bInValid = false;
+        if (self.caseinfo.bCaseFiledByThirdParty == false && self.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || self.bEditThirdParty == true))
+        {
+            if (!(self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification || self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification)) {
+                self.Error = 'Third party notification preference is required';
+                bInValid = true;
+            }
+            else if (!self.bAcknowledgeNotification) {
+                self.Error = 'Please acknowledge Third party notification preference';
+                bInValid = true;
+            }
+        }
+        return bInValid;
+    }
 
 
     self.Download = function(doc)
@@ -117,6 +133,10 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         $location.path("/Representative");
     }
     self.Continue = function () {
+        if (_CheckNotification())
+        {
+            return;
+        }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {

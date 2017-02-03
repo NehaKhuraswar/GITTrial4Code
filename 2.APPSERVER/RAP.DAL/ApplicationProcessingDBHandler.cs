@@ -4303,6 +4303,8 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         _applicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                        _applicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                        _applicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
                     }
                     //if (_applicantInfo.bThirdPartyRepresentation)
                     //{
@@ -4332,6 +4334,8 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                        model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                        model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
                     }
                     result.result = model;
 
@@ -4640,7 +4644,7 @@ namespace RAP.DAL
                                 result.status = thirdpartyUserResult.status;
                                 return result;
                             }
-                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = model.OwnerPetitionInfo.ApplicantInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = model.OwnerPetitionInfo.ApplicantInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result, MailNotification = model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification, EmailNotification = model.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification });
                             if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                             {
                                 result.status = saveThirdPartyResult.status;

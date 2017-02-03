@@ -85,11 +85,11 @@
 
             <div class="subhead">
                 <h4>Your representative</h4>
-                <a style="cursor: pointer;" ng-click="Ctrl.EditThirdParty()" role="button" aria-label="Edit" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
-                <a style="cursor: pointer;" ng-click="Ctrl.EditThirdParty()" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
+                <a style="cursor: pointer;" ng-click="Ctrl.ChangeAccountInformation()" role="button" aria-label="Edit" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
+                <a style="cursor: pointer;" ng-click="Ctrl.bEditThirdParty = true;" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0" class="btn-link btn-edit">Edit</a>
 
             </div>
-            <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
+            <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                 <p class=" input-label">
                     Is anybody representing you?
                 </p>
@@ -109,82 +109,119 @@
 
             <div id="representative-info">
                 <p class="input-label">We will use this information to send notifications about your case to your representative.</p>
-                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">
-                    <div class="field-group">
-                        <label for="representative_firstname">Name</label>
-                        <input type="text" name="Thirdparty_firstname" id="Thirdparty_firstname" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" data-error="Representative First name"
-                               ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0,
-                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0)}"
-                               ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0" />
-                    </div>
+                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true">
+                    <div ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty == true">
+                        <div class="field-group">
+                            <label for="representative_firstname">Name</label>
+                            <input type="text" name="Thirdparty_firstname" id="Thirdparty_firstname" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName" data-error="Representative First name"
+                                   ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty),
+                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty))}"
+                                   ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty)" />
+                        </div>
 
-                    <div class="field-group">
-                        <input type="text" name="Thirdparty_lastname" id="Thirdparty_lastname" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName" data-error="Representative Last name"
-                               ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0,
-                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0)}"
-                               ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0" />
-                    </div>
-                    <div class="field-group">
-                        <label for="businessname">Business name</label>
-                        <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName" />
-                    </div>
-                    <div class="field-group">
-                        <label for="representative_address1">Mailing address 1</label>
-                        <input type="text" name="Thirdparty_address1" id="Thirdparty_address1" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1" data-error="Representative Mailing Address1"
-                               ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0,
-                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0)}"
-                               ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0" />
-                    </div>
+                        <div class="field-group">
+                            <input type="text" name="Thirdparty_lastname" id="Thirdparty_lastname" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName" data-error="Representative Last name"
+                                   ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty),
+                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty))}"
+                                   ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty)" />
+                        </div>
+                        <div class="field-group">
+                            <label for="businessname">Business name</label>
+                            <input type="text" name="businessname" id="businessname" class="field-input" placeholder="" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName" />
+                        </div>
+                        <div class="field-group">
+                            <label for="representative_address1">Mailing address 1</label>
+                            <input type="text" name="Thirdparty_address1" id="Thirdparty_address1" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1" data-error="Representative Mailing Address1"
+                                   ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty),
+                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty))}"
+                                   ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty)" />
+                        </div>
 
-                    <div class="field-group">
-                        <label for="representative_address2">Mailing address 2 (optional)</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2" required />
-                    </div>
+                        <div class="field-group">
+                            <label for="representative_address2">Mailing address 2 (optional)</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2" required />
+                        </div>
 
-                    <div class="field-group">
-                        <label for="representative_city">City</label>
-                        <input type="text" name="Thirdparty_city" id="Thirdparty_city" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City" data-error="Representative City"
-                               ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0,
-                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0)}"
-                               ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0" />
-                    </div>
+                        <div class="field-group">
+                            <label for="representative_city">City</label>
+                            <input type="text" name="Thirdparty_city" id="Thirdparty_city" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City" data-error="Representative City"
+                                   ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty),
+                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty))}"
+                                   ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty)" />
+                        </div>
 
-                    <div class="field-group">
-                        <div class="input-wrapper">
+                        <div class="field-group">
                             <label for="representative_state">State</label>
-                            <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
-                                    ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State" class="custom-select"
-                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                            <div class="input-wrapper">                                
+                                <select name="Applicant_state" id="Applicant_state" data-placeholder="Select"
+                                        ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State" class="custom-select"
+                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID"></select>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_zip_code">Zip code</label>
+                            <input type="text" name="Thirdparty_zip" id="Thirdparty_zip" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip" data-error="Representative Zip"
+                                   ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty),
+                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty))}"
+                                   ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && (Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty)" />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_phone_number">Phone number</label>
+                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber" required />
+                        </div>
+
+                        <div class="field-group">
+                            <label for="representative_email">Email</label>
+                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                        </div>
+                        <div class="subhead">
+                            <h4>Preferred way of receiving notifications</h4>
+                        </div>
+                        <div class="field-group no-bottom-margin">
+                            <div class="row">
+                                <div class="col-md-11 col-sm-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group no-bottom-margin">
+                            <div class="form-group-checkbox vertical clearfix">
+                                <div class="checkbox-wrapper">
+                                    <label for="chk_service_proof">
+                                        <input type="checkbox" name="chk_service_proof" id="chk_service_proof" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification" /><i></i><span>Proof of service by mail</span>
+                                    </label>
+
+                                    <label for="chk_email">
+                                        <input type="checkbox" name="chk_email" id="chk_email" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification" /><i></i><span>Email</span>
+                                    </label>
+                                    <br />
+
+                                    <label for="chk_acknowledgement">
+                                        <input type="checkbox" name="chk_acknowledgement" id="chk_acknowledgement" ng-model="Ctrl.bAcknowledgeNotification" /><i></i><span>I acknowledge that representatives will receive notifications</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="field-group">
-                        <label for="representative_zip_code">Zip code</label>
-                        <input type="text" name="Thirdparty_zip" id="Thirdparty_zip" maxlength="5" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip" data-error="Representative Zip"
-                               ng-class="{'field-input required' : Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0,
-                                                   'field-input' : !(Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0)}"
-                               ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID == 0" />
-                    </div>
+                    <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 && Ctrl.bEditThirdParty == false">
 
-                    <div class="field-group">
-                        <label for="representative_phone_number">Phone number</label>
-                        <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber" required />
+                        <p>
+                            {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}<br />
+                            {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}<br />
+                            {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}<br />
+                            {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}<br />
+                            {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}<br />
+                            Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}<br />
+                            Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}
+                        </p>
+                        Notification preference :
+                        <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification">Mail</span>
+                        <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification">Email</span>
                     </div>
-
-                    <div class="field-group">
-                        <label for="representative_email">Email</label>
-                        <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
-                    </div>
-                </div>
-                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
-
-                    <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}<br/>
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}<br/>
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}<br/>
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}}<br/>
-                    {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}<br/>
-                    Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}<br/>
-                    Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
                 </div>
                 <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">                   
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}
@@ -194,6 +231,9 @@
                     {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}<br/>
                     Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}<br/>
                     Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
+                    Notification preference :
+                    <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification">Mail, &nbsp;</span>
+                    <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification">Email</span>
                 </div>
 
             </div>
