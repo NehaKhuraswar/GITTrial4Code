@@ -1250,7 +1250,10 @@ namespace RAP.DAL
                     }
                     tenantPetitionInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ApplicantUserID).result;
                     tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
-                    tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                    if (TenantPetitionInfoDB.PropertyManagerUserID != null)
+                    {
+                        tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                    }
                     if (tenantPetitionInfo.OwnerInfo.UserID == tenantPetitionInfo.PropertyManager.UserID)
                     {
                         tenantPetitionInfo.bSameAsOwnerInfo = true;
@@ -2316,11 +2319,14 @@ namespace RAP.DAL
                     }
                     else
                     {
-                        PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager).result.UserID;
-                        if (PropertyManagerUserID == 0)
+                        if (caseInfo.TenantPetitionInfo.PropertyManager.FirstName != null && caseInfo.TenantPetitionInfo.PropertyManager.AddressLine1 != null && caseInfo.TenantPetitionInfo.PropertyManager.City != null && caseInfo.TenantPetitionInfo.PropertyManager.State != null && caseInfo.TenantPetitionInfo.PropertyManager.Zip != null)
                         {
-                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                            return result;
+                            PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager).result.UserID;
+                            if (PropertyManagerUserID == 0)
+                            {
+                                result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                                return result;
+                            }
                         }
                     }
 
@@ -2331,7 +2337,10 @@ namespace RAP.DAL
                     petitionDB.ThirdPartyUserID = thirdPartyUserID;
                     petitionDB.ApplicantUserID = applicantUserID;
                     petitionDB.OwnerUserID = ownerUserID;
-                    petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    if (PropertyManagerUserID > 0)
+                    {
+                        petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    }
                     petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
                     petitionDB.UnitTypeID = caseInfo.TenantPetitionInfo.UnitTypeId;
                     petitionDB.bRentStatus = caseInfo.TenantPetitionInfo.bCurrentRentStatus;
@@ -2414,11 +2423,14 @@ namespace RAP.DAL
                     }
                     else
                     {
-                        PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager).result.UserID;
-                        if (PropertyManagerUserID == 0)
+                        if (caseInfo.TenantPetitionInfo.PropertyManager.FirstName != null && caseInfo.TenantPetitionInfo.PropertyManager.AddressLine1 != null && caseInfo.TenantPetitionInfo.PropertyManager.City != null && caseInfo.TenantPetitionInfo.PropertyManager.State != null && caseInfo.TenantPetitionInfo.PropertyManager.Zip != null)
                         {
-                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                            return result;
+                            PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantPetitionInfo.PropertyManager).result.UserID;
+                            if (PropertyManagerUserID == 0)
+                            {
+                                result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                                return result;
+                            }
                         }
                     }
 
@@ -2428,7 +2440,10 @@ namespace RAP.DAL
                     petitionDB.ThirdPartyUserID = thirdPartyUserID;
                     petitionDB.ApplicantUserID = applicantUserID;
                     petitionDB.OwnerUserID = ownerUserID;
-                    petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    if (PropertyManagerUserID > 0)
+                    {
+                        petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    }
                     petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
                     petitionDB.UnitTypeID = caseInfo.TenantPetitionInfo.UnitTypeId;
                     petitionDB.RangeID = caseInfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID;

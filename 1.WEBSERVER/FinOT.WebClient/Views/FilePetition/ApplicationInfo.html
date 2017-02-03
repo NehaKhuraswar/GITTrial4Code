@@ -307,21 +307,14 @@
 
                                     <div class="field-group">
                                         <label for="pm_firstname">Name <span>*</span></label>
-                                        <input type="text" name="pm_firstname" id="pm_firstname"
-                                               ng-class="{'field-input required' :(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo),
-                                                   'field-input' : Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo}"
-                                               ng-required="(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo)"
+                                        <input type="text" name="pm_firstname" id="pm_firstname" class="field-input"                                              
                                                placeholder="First" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName"
-                                               data-error="Property manager first name" />
+                                                />
                                     </div>
 
                                     <div class="field-group mar-bottom-40">
-                                        <input type="text" name="pm_lastname" id="pm_lastname" placeholder="Last"
-                                               ng-class="{'field-input required' :(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo),
-                                                   'field-input' : Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo}"
-                                               ng-required="(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo)"
-                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName"
-                                               data-error="Property manager last name" />
+                                        <input type="text" name="pm_lastname" id="pm_lastname" placeholder="Last" class="field-input"                                              
+                                               ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName"/>
                                     </div>
 
                                     <div class="field-group">
@@ -331,12 +324,9 @@
 
                                     <div class="field-group">
                                         <label for="pm_address1">Mailing address 1</label>
-                                        <input type="text" name="pm_address1" id="pm_address1" class="field-input"
-                                               ng-class="{'field-input required' :(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo),
-                                                   'field-input' : Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo}"
-                                               ng-required="(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo)"
+                                        <input type="text" name="pm_address1" id="pm_address1" class="field-input"                                               
                                                placeholder="" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1"
-                                               data-error="Property manager mailing address 1" />
+                                                />
                                     </div>
 
                                     <div class="field-group">
@@ -356,20 +346,14 @@
                                     </div>
                                     <div class="field-group">
                                         <label for="pm_city">City <span>*</span></label>
-                                        <input type="text" name="pm_city" id="pm_city" data-error="Property manager city"
-                                               ng-class="{'field-input required' :(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo),
-                                                   'field-input' : Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo}"
-                                               ng-required="(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo)"
-                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City" />
+                                        <input type="text" name="pm_city" id="pm_city" class="field-input"                                           
+                                              ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City" />
                                     </div>
 
                                     <div class="field-group">
                                         <label for="pm_zip_code">Zip Code</label>
-                                        <input type="text" name="pm_zip_code" id="pm_zip_code"
-                                               ng-class="{'field-input required' :(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo),
-                                                   'field-input' : Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo}"
-                                               ng-required="(!Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo)" data-error="Property manager zip code"
-                                                class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip" />
+                                        <input type="text" name="pm_zip_code" id="pm_zip_code"                                                
+                                                    class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip" />
                                     </div>
 
                                     <div class="field-group">
@@ -475,11 +459,7 @@
                                                             || frmTenentPetition.po_address1.$error.required
                                                             || frmTenentPetition.po_city.$error.required
                                                             || frmTenentPetition.po_zip_code.$error.required
-                                                            || frmTenentPetition.pm_firstname.$error.required
-                                                            || frmTenentPetition.pm_lastname.$error.required
-                                                            || frmTenentPetition.pm_city.$error.required
-                                                            || frmTenentPetition.pm_address1.$error.required
-                                                            || frmTenentPetition.pm_zip_code.$error.required
+                                                         
                                                             || frmTenentPetition.UnitType.$error.required))
                                                          && Ctrl.ContinueToGroundsforPetition()" />
                                 </div>
