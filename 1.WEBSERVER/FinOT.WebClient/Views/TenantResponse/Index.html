@@ -18,9 +18,9 @@
                 <div class="col-md-3 col-sm-12">
                     <div>
                         <div class="application-steps-toggle clearfix ">
-                            <button type="button" class="steps-toggle">Step {{Ctrl.stepNo}} / 8</button>
+                            <button type="button" class="steps-toggle" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 8</button>
                         </div>
-                        <ul class="application-steps">
+                        <ul class="application-steps" ng-show="Ctrl.Toggle">
                             <li ng-class="{'active' : Ctrl.TRSubmissionStatus.PetitionType, 'current' : !Ctrl.TRSubmissionStatus.PetitionType && Ctrl.bImpInfo}">
                                 <a style="cursor: pointer;" ng-click="Ctrl.showPetitionType()">Petition Type</a>
                             </li>

@@ -10,7 +10,7 @@ var rapAppealMainController = ['$scope', '$modal', 'alertService', 'rapfileappea
     self.selectedObj = {};
     self.AppealSubmissionStatus = null;
     self.Error = "";
-
+    self.Toggle = true;
     var _getPageSubmission = function () {
         rapFactory.GetAppealPageSubmissionStatus(self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {

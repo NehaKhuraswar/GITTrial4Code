@@ -5,6 +5,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.PageTitle = 'Petition';
     self.Error = "";
     self.stepNo = 1;
+    self.Toggle = true;
     //self.indexModel = {
     //    bPetitionType: false,
     //    bImpInfo: false,

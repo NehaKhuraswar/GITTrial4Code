@@ -7,7 +7,7 @@ var rapTRMainController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTyp
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.selectedObj = {};
     self.TRSubmissionStatus = null;
-
+    self.Toggle = true;
 
     var _DisableAll = function () {
         self.bPetitionType = false;

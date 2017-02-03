@@ -22,10 +22,10 @@
                 <div class="col-md-3 col-sm-12">
                     <div>
                         <div class="application-steps-toggle clearfix ">
-                            <button type="button" class="steps-toggle">Step {{Ctrl.stepNo}} / 7</button>
+                            <button type="button" class="steps-toggle" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 7</button>
                         </div>
                     
-                        <ul class="application-steps">
+                        <ul class="application-steps" ng-show="Ctrl.Toggle">
                             <li ng-class="{'active' : Ctrl.AppealSubmissionStatus.AppealType, 'current' : !Ctrl.AppealSubmissionStatus.AppealType && Ctrl.bAppealType}">
                                 <a style="cursor: pointer;" ng-click="Ctrl.showAppealType()">Appeal Type</a>
                             </li>

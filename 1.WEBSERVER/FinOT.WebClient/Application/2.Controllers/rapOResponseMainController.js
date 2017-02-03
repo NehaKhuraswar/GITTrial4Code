@@ -3,7 +3,7 @@ var rapOResponseMainController = ['$scope', '$modal', 'alertService', '$location
     var self = this;
     self.stepNo = 1;
     self.custDetails = rapGlobalFactory.CustomerDetails;
-
+    self.Toggle = true;
     self.oResponseActiveStatus = null;
 
 

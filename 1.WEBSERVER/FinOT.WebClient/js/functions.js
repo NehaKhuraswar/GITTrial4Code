@@ -95,7 +95,7 @@ var tooltips;
     
     
     //Set Sidebar Steps Nav
-  //  setApplicationSteps();
+    //setApplicationSteps();
     
     //Application Steps - Mobile Toggle
     if($('.application-steps-toggle').length > 0){
@@ -103,7 +103,7 @@ var tooltips;
         var $btnToggle = $(this);
         var $applicationSteps = $('.application-steps');
         $btnToggle.toggleClass('collapsed');
-        $applicationSteps.stop().slideToggle();
+       // $applicationSteps.stop().slideToggle();
       });
     }
     
