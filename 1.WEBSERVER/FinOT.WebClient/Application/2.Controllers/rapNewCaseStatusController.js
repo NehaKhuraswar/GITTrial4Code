@@ -55,7 +55,7 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
 
     self.Submit = function (model, C_ID) {
         //TBD remove C_ID hardcoding
-        model.EmployeeID = self.CityUser.EmployeeID;
+        model.EmployeeID = self.CityUser.UserID;
         rapFactory.SaveNewActivityStatus(model, C_ID).then(function (response) {
             if (!alert.checkResponse(response)) { return; }
             $location.path("/selectedcase");
