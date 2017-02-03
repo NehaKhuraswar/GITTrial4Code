@@ -1,7 +1,7 @@
 ﻿'use strict';
 var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectConfig', 'blockUIConfig', 'informProvider', 'paginationTemplateProvider', function ($routeProvider, $locationProvider, $httpProvider, uiSelectConfig, blockUIConfig, informProvider, paginationTemplateProvider) {
     //config routes
-    $locationProvider.html5Mode(true).hashPrefix('!');
+    //$locationProvider.html5Mode(true).hashPrefix('');
     $routeProvider
         
         .when('/register', {
@@ -46,7 +46,7 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: raploginURLController_resolve
         })
-        .when('/', {
+        .when('/Login', {
             templateUrl: 'views/account/Login.html',
             controller: raploginController,
             controllerAs: 'Ctrl',
