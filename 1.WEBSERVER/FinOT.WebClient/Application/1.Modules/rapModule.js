@@ -165,6 +165,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .factory('rapAdditionalCaseDocumentFactory', rapAdditionalCaseDocumentFactory)
     .factory('rapCustomEmailFactory', rapCustomEmailFactory)
     .factory('rapMailFactory', rapMailFactory)
+    .factory('rapTranslationFactory', rapTranslationFactory)
     .factory('rapAppealDocumentFactory', rapAppealDocumentFactory)
     .factory('rapTenantlDocumentFactory', rapTenantlDocumentFactory)
     .controller('raploginURLController', raploginURLController)
@@ -243,6 +244,7 @@ var rapModule = angular.module('rapModule', ['ngFileUpload'])
     .controller('rapEmailNotificationSentController', rapEmailNotificationSentController)
     .controller('rapMailNotificationSentController', rapMailNotificationSentController)
     .controller('rapMailController', rapMailController)
+    .controller('rapTranslationController', rapTranslationController)
 
     .directive('yearDrop',function(){
         function getYears(offset, range) {

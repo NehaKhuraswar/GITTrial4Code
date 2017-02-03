@@ -90,6 +90,7 @@
       <Association Name="CustomerDetail_CollaboratorAccess1" Member="CollaboratorAccesses1" ThisKey="CustomerID" OtherKey="CollaboratorCustID" Type="CollaboratorAccess" />
       <Association Name="CustomerDetail_MailingAddress" Member="MailingAddresses" ThisKey="CustomerID" OtherKey="CustomerID" Type="MailingAddress" />
       <Association Name="CustomerDetail_CustomerDetail" Member="CustomerDetail2" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" Cardinality="One" />
+      <Association Name="CustomerDetail_TranslationServiceInfo" Member="TranslationServiceInfos" ThisKey="CustomerID" OtherKey="CustomerID" Type="TranslationServiceInfo" />
       <Association Name="CustomerDetail_CustomerDetail" Member="CustomerDetail1" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
@@ -123,6 +124,19 @@
       <Column Name="CityAccountTypeDesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="PermissionToAccountTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="CityAccountType_CityUserAccount" Member="CityUserAccounts" ThisKey="CityAccountTypeID" OtherKey="CityAccountTypeID" Type="CityUserAccount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TranslationServiceInfo" Member="TranslationServiceInfos">
+    <Type Name="TranslationServiceInfo">
+      <Column Name="TranslationServiceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsTranslatorRequired" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TranslationLanguage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CustomerDetail_TranslationServiceInfo" Member="CustomerDetail" ThisKey="CustomerID" OtherKey="CustomerID" Type="CustomerDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.USP_SearchAccount_Get" Method="USP_SearchAccount_Get">

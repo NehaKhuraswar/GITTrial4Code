@@ -134,6 +134,7 @@
     <Content Include="Application\2.Controllers\rapEmailNotificationSentController.js" />
     <Content Include="Application\2.Controllers\rapMailController.js" />
     <Content Include="Application\2.Controllers\rapMailNotificationSentController.js" />
+    <Content Include="Application\2.Controllers\rapTranslationController.js" />
     <Content Include="Application\2.Controllers\rapRepresentativeController.js" />
     <Content Include="Application\2.Controllers\rapOResponseConfirmController.js" />
     <Content Include="Application\2.Controllers\rapOwnerConfirmationController.js" />
@@ -219,6 +220,7 @@
     <Content Include="Application\3.Factories\rapappellantsinfoFactory.js" />
     <Content Include="Application\3.Factories\rapCustomEmailFactory.js" />
     <Content Include="Application\3.Factories\rapMailFactory.js" />
+    <Content Include="Application\3.Factories\rapTranslationFactory.js" />
     <Content Include="Application\3.Factories\raprepresentativeFactory.js" />
     <Content Include="Application\3.Factories\rapnewrepresentativeFactory.js" />
     <Content Include="Application\3.Factories\rapOResponseApplicantInfoFactory.js" />
@@ -462,6 +464,7 @@
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\textcounter.js" />
     <Content Include="Views\Account\AdditionalCaseDocumentation.html" />
+    <Content Include="Views\Account\TranslationServicesSimpler.html" />
     <Content Include="Views\Account\MailNotificationSent.html" />
     <Content Include="Views\Account\EmailNotificationSent.html" />
     <Content Include="Views\Account\ViewOwnerResponse.html" />

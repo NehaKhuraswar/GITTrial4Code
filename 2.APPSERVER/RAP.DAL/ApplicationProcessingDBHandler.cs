@@ -837,6 +837,7 @@ namespace RAP.DAL
                         }
                         caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID).result;
                         caseinfo.TenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionDB.PropertyManagerUserID).result;
+                        caseinfo.TenantPetitionInfo.Verification.bCaseMediation = _dbContext.TenantPetitionVerifications.Where(x => x.PetitionID == TenantPetitionDB.TenantPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
                     }
                     else if (petitionDetailsDb.OwnerPetitionID != null)
                     {

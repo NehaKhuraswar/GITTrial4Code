@@ -987,6 +987,51 @@ namespace RAP.DAL
 
         }
 
+        public ReturnResult<bool> SaveTranslationServiceInfo(TranslationServiceInfoM model)
+        {
+            ReturnResult<bool> result = new ReturnResult<bool>();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+
+                    var translationService = db.TranslationServiceInfos.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+
+                    if (translationService != null)
+                    {
+                        translationService.CustomerID = model.CustomerID;
+                        translationService.IsTranslatorRequired = model.IsTranslatorRequired;
+                        translationService.TranslationLanguage = model.TranslationLanguage;
+                        translationService.LastModifiedDate = DateTime.Now;
+                        translationService.LastModifiedBy = model.CustomerID;
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        TranslationServiceInfo _newtranslationService = new TranslationServiceInfo();
+                        _newtranslationService.CustomerID = model.CustomerID;
+                        _newtranslationService.IsTranslatorRequired = model.IsTranslatorRequired;
+                        _newtranslationService.TranslationLanguage = model.TranslationLanguage;
+                        _newtranslationService.CreatedDate = DateTime.Now;
+                        _newtranslationService.CreatedBy = model.CustomerID;
+                        db.TranslationServiceInfos.InsertOnSubmit(_newtranslationService);
+                        db.SubmitChanges();
+                    }
+                }
+                result.result = true;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+
+        }
+
         public ReturnResult<ThirdPartyInfoM> RemoveThirdPartyInfo(ThirdPartyInfoM model)
         {
             ReturnResult<ThirdPartyInfoM> result = new ReturnResult<ThirdPartyInfoM>();
@@ -1044,6 +1089,43 @@ namespace RAP.DAL
                     else
                     {
                         model.CustomerID = CustomerID;                       
+                    }
+                }
+                result.result = model;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
+        /// <summary>
+        ///  Get Translation Service Info for the customer
+        /// </summary>
+        /// <param name="CustomerID"></param>
+        /// <returns></returns>
+        public ReturnResult<TranslationServiceInfoM> GetTranslationServiceInfo(int CustomerID)
+        {
+            ReturnResult<TranslationServiceInfoM> result = new ReturnResult<TranslationServiceInfoM>();
+            TranslationServiceInfoM model = new TranslationServiceInfoM();
+            try
+            {
+                using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
+                {
+                    var translationService = db.TranslationServiceInfos.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                    if (translationService != null)
+                    {
+                        model.CustomerID = CustomerID;
+                        model.IsTranslatorRequired = translationService.IsTranslatorRequired;
+                        model.TranslationLanguage = translationService.TranslationLanguage;
+                    }
+                    else
+                    {
+                        model.CustomerID = CustomerID;
                     }
                 }
                 result.result = model;

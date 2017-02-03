@@ -104,10 +104,18 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.GetThirdPartyInfo(CustomerID);
         }
+        public ReturnResult<TranslationServiceInfoM> GetTranslationServiceInfo(int CustomerID)
+        {
+            return accDBHandler.GetTranslationServiceInfo(CustomerID);
+        }
         public ReturnResult<bool> SaveOrUpdateThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model)
         {
             return accDBHandler.SaveOrUpdateThirdPartyInfo(model);
-        }        
+        }
+        public ReturnResult<bool> SaveTranslationServiceInfo(RAP.Core.DataModels.TranslationServiceInfoM model)
+        {
+            return accDBHandler.SaveTranslationServiceInfo(model);
+        }   
         public ReturnResult<ThirdPartyInfoM> RemoveThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model)
         {
             return accDBHandler.RemoveThirdPartyInfo(model);

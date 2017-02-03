@@ -41,6 +41,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     self.ResendPin = function () {
         $location.path("/resendpin");
     }
+    self.RequestTranslationService = function () {
+        $location.path("/TranslationService");
+    }
     self.Collaborator = function () {
         $location.path("/collaborator");
     }

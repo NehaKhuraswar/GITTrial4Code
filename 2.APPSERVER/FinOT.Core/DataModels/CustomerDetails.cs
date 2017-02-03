@@ -105,6 +105,12 @@ namespace RAP.Core.DataModels
         public bool EmailNotification { get; set; }
         public bool MailNotification { get; set; }
     }
+    public class TranslationServiceInfoM
+    {
+        public int CustomerID { get; set; }
+        public bool IsTranslatorRequired { get; set; }
+        public string TranslationLanguage { get; set; }
+    }
     public class Collaborator
     {
         public Collaborator()

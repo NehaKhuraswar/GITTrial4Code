@@ -1,0 +1,80 @@
+﻿<div id="content">
+    <!-- Page Title -->
+    <div class="page-title-wrapper">
+        <div class="container">
+            <h2 class="page-title">Dashboard</h2>
+        </div>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="page-content full-width">
+        <div class="container">
+            <div class="page-sub-title">Translation Services for the Hearing</div>
+            <div class="application-form-wrapper">
+                <div class="application-step step-1">
+                    <div class="alert alert-error" ng-show="Ctrl.Hide==true">
+
+                    </div>
+                    <div class="alert" ng-show="Ctrl.Error!=''">
+                        <strong><a style="cursor: pointer;" href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                    </div>
+                    <form name="frmTransHearingServices" id="frmTransHearingServices" novalidate class="application-form" onsubmit="return false;">
+                        <div class="step-content step1">
+                            <div class="step-heading">Translation Services for the Hearing</div>
+                            <div class="field-group subhead no-top-margin">
+
+
+                                <div class="row">
+                                    <div class="col-md-8 col-xs-12">
+
+                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</p>
+                                    </div>
+                                </div>
+
+
+                                <p class="input-label">Would you like to request translation services for the hearing?</p>
+
+                                <div class="form-group-radio vertical clearfix">
+                                    <label for="HearingYes">
+                                        <input type="radio" name="Hearing" id="HearingYes" class="input-field" ng-value="true"
+                                               ng-model="Ctrl.TranslationService.IsTranslatorRequired" checked="checked" /><i></i> <span><strong>Yes</strong></span>
+                                    </label>
+
+                                    <label for="HearingNo">
+                                        <input type="radio" name="Hearing" id="HearingNo" class="input-field" ng-value="false"
+                                               ng-model="Ctrl.TranslationService.IsTranslatorRequired" /><i></i> <span><strong>No</strong></span>
+                                    </label>
+                                    <div class="clear"></div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="field-group" ng-show="Ctrl.TranslationService.IsTranslatorRequired== true">
+                                <label for="language">Language</label>
+                                <input type="text" name="language" id="language"
+                                       ng-class="{'field-input required' : Ctrl.TranslationService.IsTranslatorRequired,
+                                                   'field-input' : !Ctrl.TranslationService.IsTranslatorRequired}"
+                                       data-error="Language"
+                                       ng-required="(Ctrl.TranslationService.IsTranslatorRequired)"
+                                       ng-model="Ctrl.TranslationService.TranslationLanguage" placeholder="Specify language" />
+                                <!--<span class="input-error-msg hidden"></span>-->
+                            </div>
+
+
+                        </div>
+
+                        <div class="step-footer no-top-margin">
+                            <input type="submit" role="button" aria-label="Request" id="btn-request" name="btn-request" class="btn-primary" value="Request"
+                                   ng-click="(Ctrl.Hide=true); !frmTransHearingServices.language.$error.required
+                                                         && Ctrl.SaveTranslationServiceInfo(Ctrl.TranslationService)" />
+                        </div>
+                    </form>
+                </div>
+
+            </div><!-- .application-form-wrapper -->
+        </div><!-- .container -->
+    </div><!-- .page-content -->
+    <script src='js/functions.js'></script>
+</div><!-- #content -->

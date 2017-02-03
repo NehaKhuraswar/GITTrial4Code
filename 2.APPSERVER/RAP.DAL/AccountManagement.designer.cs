@@ -57,6 +57,9 @@ namespace RAP.DAL
     partial void InsertCityAccountType(CityAccountType instance);
     partial void UpdateCityAccountType(CityAccountType instance);
     partial void DeleteCityAccountType(CityAccountType instance);
+    partial void InsertTranslationServiceInfo(TranslationServiceInfo instance);
+    partial void UpdateTranslationServiceInfo(TranslationServiceInfo instance);
+    partial void DeleteTranslationServiceInfo(TranslationServiceInfo instance);
     #endregion
 		
 		public AccountManagementDataContext() : 
@@ -166,6 +169,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<CityAccountType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TranslationServiceInfo> TranslationServiceInfos
+		{
+			get
+			{
+				return this.GetTable<TranslationServiceInfo>();
 			}
 		}
 		
@@ -1577,6 +1588,8 @@ namespace RAP.DAL
 		
 		private EntityRef<CustomerDetail> _CustomerDetail2;
 		
+		private EntitySet<TranslationServiceInfo> _TranslationServiceInfos;
+		
 		private EntityRef<CustomerDetail> _CustomerDetail1;
 		
     #region Extensibility Method Definitions
@@ -1613,6 +1626,7 @@ namespace RAP.DAL
 			this._CollaboratorAccesses1 = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses1), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses1));
 			this._MailingAddresses = new EntitySet<MailingAddress>(new Action<MailingAddress>(this.attach_MailingAddresses), new Action<MailingAddress>(this.detach_MailingAddresses));
 			this._CustomerDetail2 = default(EntityRef<CustomerDetail>);
+			this._TranslationServiceInfos = new EntitySet<TranslationServiceInfo>(new Action<TranslationServiceInfo>(this.attach_TranslationServiceInfos), new Action<TranslationServiceInfo>(this.detach_TranslationServiceInfos));
 			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
 			OnCreated();
 		}
@@ -1931,6 +1945,19 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_TranslationServiceInfo", Storage="_TranslationServiceInfos", ThisKey="CustomerID", OtherKey="CustomerID")]
+		public EntitySet<TranslationServiceInfo> TranslationServiceInfos
+		{
+			get
+			{
+				return this._TranslationServiceInfos;
+			}
+			set
+			{
+				this._TranslationServiceInfos.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail1", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
 		public CustomerDetail CustomerDetail1
 		{
@@ -2028,6 +2055,18 @@ namespace RAP.DAL
 		}
 		
 		private void detach_MailingAddresses(MailingAddress entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = null;
+		}
+		
+		private void attach_TranslationServiceInfos(TranslationServiceInfo entity)
+		{
+			this.SendPropertyChanging();
+			entity.CustomerDetail = this;
+		}
+		
+		private void detach_TranslationServiceInfos(TranslationServiceInfo entity)
 		{
 			this.SendPropertyChanging();
 			entity.CustomerDetail = null;
@@ -2704,6 +2743,277 @@ namespace RAP.DAL
 		{
 			this.SendPropertyChanging();
 			entity.CityAccountType = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TranslationServiceInfo")]
+	public partial class TranslationServiceInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TranslationServiceID;
+		
+		private int _CustomerID;
+		
+		private bool _IsTranslatorRequired;
+		
+		private string _TranslationLanguage;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.DateTime> _LastModifiedDate;
+		
+		private System.Nullable<int> _CreatedBy;
+		
+		private System.Nullable<int> _LastModifiedBy;
+		
+		private EntityRef<CustomerDetail> _CustomerDetail;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTranslationServiceIDChanging(int value);
+    partial void OnTranslationServiceIDChanged();
+    partial void OnCustomerIDChanging(int value);
+    partial void OnCustomerIDChanged();
+    partial void OnIsTranslatorRequiredChanging(bool value);
+    partial void OnIsTranslatorRequiredChanged();
+    partial void OnTranslationLanguageChanging(string value);
+    partial void OnTranslationLanguageChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnLastModifiedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastModifiedDateChanged();
+    partial void OnCreatedByChanging(System.Nullable<int> value);
+    partial void OnCreatedByChanged();
+    partial void OnLastModifiedByChanging(System.Nullable<int> value);
+    partial void OnLastModifiedByChanged();
+    #endregion
+		
+		public TranslationServiceInfo()
+		{
+			this._CustomerDetail = default(EntityRef<CustomerDetail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TranslationServiceID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TranslationServiceID
+		{
+			get
+			{
+				return this._TranslationServiceID;
+			}
+			set
+			{
+				if ((this._TranslationServiceID != value))
+				{
+					this.OnTranslationServiceIDChanging(value);
+					this.SendPropertyChanging();
+					this._TranslationServiceID = value;
+					this.SendPropertyChanged("TranslationServiceID");
+					this.OnTranslationServiceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
+		public int CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					if (this._CustomerDetail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomerIDChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerID = value;
+					this.SendPropertyChanged("CustomerID");
+					this.OnCustomerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsTranslatorRequired", DbType="Bit NOT NULL")]
+		public bool IsTranslatorRequired
+		{
+			get
+			{
+				return this._IsTranslatorRequired;
+			}
+			set
+			{
+				if ((this._IsTranslatorRequired != value))
+				{
+					this.OnIsTranslatorRequiredChanging(value);
+					this.SendPropertyChanging();
+					this._IsTranslatorRequired = value;
+					this.SendPropertyChanged("IsTranslatorRequired");
+					this.OnIsTranslatorRequiredChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TranslationLanguage", DbType="VarChar(50)")]
+		public string TranslationLanguage
+		{
+			get
+			{
+				return this._TranslationLanguage;
+			}
+			set
+			{
+				if ((this._TranslationLanguage != value))
+				{
+					this.OnTranslationLanguageChanging(value);
+					this.SendPropertyChanging();
+					this._TranslationLanguage = value;
+					this.SendPropertyChanged("TranslationLanguage");
+					this.OnTranslationLanguageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="Date")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedDate", DbType="Date")]
+		public System.Nullable<System.DateTime> LastModifiedDate
+		{
+			get
+			{
+				return this._LastModifiedDate;
+			}
+			set
+			{
+				if ((this._LastModifiedDate != value))
+				{
+					this.OnLastModifiedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedDate = value;
+					this.SendPropertyChanged("LastModifiedDate");
+					this.OnLastModifiedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="Int")]
+		public System.Nullable<int> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastModifiedBy", DbType="Int")]
+		public System.Nullable<int> LastModifiedBy
+		{
+			get
+			{
+				return this._LastModifiedBy;
+			}
+			set
+			{
+				if ((this._LastModifiedBy != value))
+				{
+					this.OnLastModifiedByChanging(value);
+					this.SendPropertyChanging();
+					this._LastModifiedBy = value;
+					this.SendPropertyChanged("LastModifiedBy");
+					this.OnLastModifiedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_TranslationServiceInfo", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
+		public CustomerDetail CustomerDetail
+		{
+			get
+			{
+				return this._CustomerDetail.Entity;
+			}
+			set
+			{
+				CustomerDetail previousValue = this._CustomerDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CustomerDetail.Entity = null;
+						previousValue.TranslationServiceInfos.Remove(this);
+					}
+					this._CustomerDetail.Entity = value;
+					if ((value != null))
+					{
+						value.TranslationServiceInfos.Add(this);
+						this._CustomerID = value.CustomerID;
+					}
+					else
+					{
+						this._CustomerID = default(int);
+					}
+					this.SendPropertyChanged("CustomerDetail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

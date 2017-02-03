@@ -7,6 +7,12 @@
     //}
     //self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     //self.caseinfo = rapGlobalFactory.SelectedCase;
+    self.CaseClick = function () {
+        $location.path("/selectedcase");
+    }
+    self.Home = function () {
+        $location.path("/staffdashboard");
+    }
     self.Title = '';
     if (rapGlobalFactory.MailNotification == null || rapGlobalFactory.MailNotification == undefined) {
         var userType = rapGlobalFactory.GetUserType();

@@ -256,6 +256,41 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
+        [Route("GetTranslationServiceInfo/{CustomerID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTranslationServiceInfo(int CustomerID)
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<TranslationServiceInfoM> transaction = new TranInfo<TranslationServiceInfoM>();
+            ReturnResult<TranslationServiceInfoM> result = new ReturnResult<TranslationServiceInfoM>();
+            try
+            {
+
+                result = accService.GetTranslationServiceInfo(CustomerID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<TranslationServiceInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
         [Route("changepwd")]
         [HttpPost]
         public HttpResponseMessage ChangePassword([FromBody] CustomerInfo custInfo)
@@ -927,7 +962,6 @@ namespace RAP.API.Controllers
         [HttpPost]
         public HttpResponseMessage SaveOrUpdateThirdPartyInfo([FromBody] ThirdPartyInfoM model)
         {
-            System.Diagnostics.EventLog.WriteEntry("Application", "Controller Save Customer started");
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
             TranInfo<Boolean> transaction = new TranInfo<Boolean>();
@@ -938,6 +972,42 @@ namespace RAP.API.Controllers
                 result = accService.SaveOrUpdateThirdPartyInfo(model);
                 if (result.status.Status == StatusEnum.Success)
                 {                    
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<Boolean>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("SaveTranslationServiceInfo")]
+        [HttpPost]
+        public HttpResponseMessage SaveTranslationServiceInfo([FromBody] TranslationServiceInfoM model)
+        {
+            AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<Boolean> transaction = new TranInfo<Boolean>();
+            ReturnResult<Boolean> result = new ReturnResult<Boolean>();
+
+            try
+            {
+                result = accService.SaveTranslationServiceInfo(model);
+                if (result.status.Status == StatusEnum.Success)
+                {
                     transaction.status = true;
                 }
                 else

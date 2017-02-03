@@ -135,6 +135,12 @@ var Config = ['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectC
             controllerAs: 'Ctrl',
             resolve: rapRepresentativeController_resolve
         })
+        .when('/TranslationService', {
+             templateUrl: 'views/account/TranslationServicesSimpler.html',
+             controller: rapTranslationController,
+             controllerAs: 'Ctrl',
+             resolve: rapTranslationController_resolve
+         })
         .when('/Representative', {
             templateUrl: 'views/account/AddNewRepresentative.html',
             controller: rapNewRepresentativeController,

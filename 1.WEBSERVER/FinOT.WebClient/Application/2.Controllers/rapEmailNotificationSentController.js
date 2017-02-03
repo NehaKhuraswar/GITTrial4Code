@@ -19,6 +19,12 @@
     else {
         self.Title = 'Dashboard';
     }
+    self.CaseClick = function () {
+        $location.path("/selectedcase");
+    }
+    self.Home = function () {
+        $location.path("/staffdashboard");
+    }
     //self.custDetails = rapGlobalFactory.CityUser;
     //if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)
     //{
