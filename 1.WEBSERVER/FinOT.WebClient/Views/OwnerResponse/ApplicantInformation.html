@@ -110,9 +110,9 @@
                         </div>
                     </div>
 
-                    <div id="representative-info" class="field-group">
-                        <p class="input-label">We will use this information to send notifications about your case to your representative.</p>
+                    <div id="representative-info" class="field-group">                       
                         <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation == true">
+                            <p class="input-label">We will use this information to send notifications about your case to your representative.</p>
                             <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || Ctrl.bEditThirdParty == true">
                                 <div class="field-group">
                                     <label for="representative_firstname">Name</label>

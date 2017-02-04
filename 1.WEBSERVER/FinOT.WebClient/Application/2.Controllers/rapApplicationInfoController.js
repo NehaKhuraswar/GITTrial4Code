@@ -7,7 +7,8 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Hide = false;
     self.Error = "";
-
+    self.bAcknowledgeNotification = false;
+    self.bEditThirdParty = false;
     var _GetTenantApplicationInfo = function (custID) {
         rapFactory.GetTenantApplicationInfo(custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
@@ -72,13 +73,32 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
         }
 
     }
-
+    var _CheckNotification = function () {
+        var bInValid = false;
+        if (self.caseinfo.bCaseFiledByThirdParty == false && self.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation == true && (self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID == 0 || self.bEditThirdParty == true)) {
+            if (!(self.caseinfo.TenantPetitionInfo.ThirdPartyMailNotification || self.caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification)) {
+                self.Error = 'Third party notification preference is required';
+                bInValid = true;
+            }
+            else if (!self.bAcknowledgeNotification) {
+                self.Error = 'Please acknowledge Third party notification preference';
+                bInValid = true;
+            }
+        }
+        return bInValid;
+    }
+    self.EditThirdParty = function () {
+        $location.path("/Representative");
+    }
     self.ChangeAccountInformation = function () {
         rapGlobalFactory.IsEdit = true;
         $location.path("/editcustomerinformation");
     }
 
     self.ContinueToGroundsforPetition = function () {
+        if (_CheckNotification()) {
+            return;
+        }
         if (self.caseinfo.TenantPetitionInfo.OwnerInfo.State == null)
         {
             self.Error = "Owner state is a required field";

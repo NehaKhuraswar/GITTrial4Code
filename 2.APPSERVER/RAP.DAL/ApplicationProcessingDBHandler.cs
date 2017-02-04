@@ -1254,6 +1254,8 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         tenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                        tenantPetitionInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                        tenantPetitionInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
                     }
                     tenantPetitionInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ApplicantUserID).result;
                     tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
@@ -1283,6 +1285,8 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         tenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                        tenantPetitionInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                        tenantPetitionInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
                     }
                 }
                 tenantPetitionInfo.UnitTypes = _units;
@@ -2298,7 +2302,7 @@ namespace RAP.DAL
                                 result.status = thirdpartyUserResult.status;
                                 return result;
                             }
-                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = caseInfo.TenantPetitionInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = caseInfo.TenantPetitionInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result, EmailNotification = caseInfo.TenantPetitionInfo.ThirdPartyEmailNotification, MailNotification = caseInfo.TenantPetitionInfo.ThirdPartyMailNotification });
                             if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                             {
                                 result.status = saveThirdPartyResult.status;
@@ -2402,7 +2406,7 @@ namespace RAP.DAL
                                 result.status = thirdpartyUserResult.status;
                                 return result;
                             }
-                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = caseInfo.TenantPetitionInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = caseInfo.TenantPetitionInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result, EmailNotification = caseInfo.TenantPetitionInfo.ThirdPartyEmailNotification, MailNotification = caseInfo.TenantPetitionInfo.ThirdPartyMailNotification });
                             if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                             {
                                 result.status = saveThirdPartyResult.status;
