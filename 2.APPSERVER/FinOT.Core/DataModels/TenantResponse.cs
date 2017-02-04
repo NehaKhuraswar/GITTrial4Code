@@ -26,6 +26,8 @@ namespace RAP.Core.DataModels
         public bool bThirdPartyRepresentation { get; set; }
         public UserInfoM ApplicantUserInfo { get; set; } 
         public UserInfoM ThirdPartyInfo { get; set; }
+        public bool ThirdPartyEmailNotification { get; set; }
+        public bool ThirdPartyMailNotification { get; set; }
         public UserInfoM OwnerInfo { get; set; }
         public bool bSameAsOwnerInfo { get; set; }
         public UserInfoM PropertyManager { get; set; }

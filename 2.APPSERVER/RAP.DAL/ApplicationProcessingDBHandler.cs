@@ -3323,22 +3323,24 @@ namespace RAP.DAL
                 {
                     tenantResponseInfo.TenantResponseID = TenantResponseInfoDB.TenantResponseID;
                     tenantResponseInfo.bThirdPartyRepresentation = (bool)TenantResponseInfoDB.bThirdPartyRepresentation;
-                    if (tenantResponseInfo.bThirdPartyRepresentation)
-                    {
-                        tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
-                    }
+                    //if (tenantResponseInfo.bThirdPartyRepresentation)
+                    //{
+                    //    tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
+                    //}
                     var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                        if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
-                        {
-                            tenantResponseInfo.bThirdPartyRepresentation = true;
-                        }
-                        else
-                        {
-                            tenantResponseInfo.bThirdPartyRepresentation = false;
-                        }
+                        tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                        tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                        //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
+                        //{
+                        //    tenantResponseInfo.bThirdPartyRepresentation = true;
+                        //}
+                        //else
+                        //{
+                        //    tenantResponseInfo.bThirdPartyRepresentation = false;
+                        //}
                     }
 
                     tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
@@ -3361,14 +3363,16 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                        if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
-                        {
-                            tenantResponseInfo.bThirdPartyRepresentation = true;
-                        }
-                        else
-                        {
-                            tenantResponseInfo.bThirdPartyRepresentation = false;
-                        }
+                        tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                        tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                        //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
+                        //{
+                        //    tenantResponseInfo.bThirdPartyRepresentation = true;
+                        //}
+                        //else
+                        //{
+                        //    tenantResponseInfo.bThirdPartyRepresentation = false;
+                        //}
                     }
                     var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
 
@@ -3803,7 +3807,7 @@ namespace RAP.DAL
                             result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                             return result;
                         }
-                        var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = UserID, ThirdPartyUser = thirdPartyUser.result });
+                        var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = UserID, ThirdPartyUser = thirdPartyUser.result, EmailNotification = caseInfo.TenantResponseInfo.ThirdPartyEmailNotification, MailNotification = caseInfo.TenantResponseInfo.ThirdPartyMailNotification });
                         if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                         {
                             result.status = saveThirdPartyResult.status;
@@ -3890,7 +3894,7 @@ namespace RAP.DAL
                             result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                             return result;
                         }
-                        var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = UserID, ThirdPartyUser = thirdPartyUser.result });
+                        var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = UserID, ThirdPartyUser = thirdPartyUser.result, EmailNotification = caseInfo.TenantResponseInfo.ThirdPartyEmailNotification, MailNotification = caseInfo.TenantResponseInfo.ThirdPartyMailNotification });
                         if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                         {
                             result.status = saveThirdPartyResult.status;

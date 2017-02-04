@@ -7,6 +7,8 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.bCaseInfo = false;
     self.Error = "";
+    self.bAcknowledgeNotification = false;
+    self.bEditThirdParty = false;
     self.CaseID;
     if (self.caseinfo != null) {
         self.CaseID = self.caseinfo.CaseID;
@@ -82,13 +84,29 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
         }
 
     }
-
+    var _CheckNotification = function () {
+        var bInValid = false;
+        if (self.caseinfo.bCaseFiledByThirdParty == false && self.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true && (self.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID == 0 || self.bEditThirdParty == true)) {
+            if (!(self.caseinfo.TenantResponseInfo.ThirdPartyMailNotification || self.caseinfo.TenantResponseInfo.ThirdPartyEmailNotification)) {
+                self.Error = 'Third party notification preference is required';
+                bInValid = true;
+            }
+            else if (!self.bAcknowledgeNotification) {
+                self.Error = 'Please acknowledge Third party notification preference';
+                bInValid = true;
+            }
+        }
+        return bInValid;
+    }
     self.ChangeAccountInformation = function () {
         rapGlobalFactory.IsEdit = true;
         $location.path("/editcustomerinformation");
     }
 
     self.ContinueToExemptionContested = function () {
+        if (_CheckNotification()) {
+            return;
+        }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveTenantResponseApplicationInfo(rapGlobalFactory.CaseDetails, self.custDetails.custID).then(function (response) {
              if (!alert.checkForResponse(response)) {
