@@ -11,7 +11,8 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
     self.StateList = [];
     self.Hide = false;
     self.Error = '';
-
+    self.bAcknowledgeNotification = false;
+    self.bEditThirdParty = false;
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkResponse(response)) {
@@ -104,8 +105,24 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
         $location.path("/editcustomerinformation");
     }
 
-
+    var _CheckNotification = function () {
+        var bInValid = false;
+        if (self.caseinfo.bCaseFiledByThirdParty == false && self.caseinfo.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation == true && (self.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || self.bEditThirdParty == true)) {
+            if (!(self.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyMailNotification || self.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyEmailNotification)) {
+                self.Error = 'Third party notification preference is required';
+                bInValid = true;
+            }
+            else if (!self.bAcknowledgeNotification) {
+                self.Error = 'Please acknowledge Third party notification preference';
+                bInValid = true;
+            }
+        }
+        return bInValid;
+    }
     self.Continue = function () {
+        if (_CheckNotification()) {
+            return;
+        }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {

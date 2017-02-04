@@ -5379,6 +5379,8 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         _applicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                        _applicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                        _applicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
                     }
 
                     _applicantInfo.bBusinessLicensePaid = (applicantInfo.bBusinessLicensePaid != null) ? Convert.ToBoolean(applicantInfo.bBusinessLicensePaid) : false;
@@ -5400,6 +5402,7 @@ namespace RAP.DAL
                     if (accdbResult.status.Status == StatusEnum.Success)
                     {
                         model.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                        model.OwnerResponseInfo.ApplicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
                     }
                     result.result = model;
                 }
@@ -6063,7 +6066,7 @@ namespace RAP.DAL
                                 result.status = thirdpartyUserResult.status;
                                 return result;
                             }
-                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = model.OwnerResponseInfo.ApplicantInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = model.OwnerResponseInfo.ApplicantInfo.CustomerID, ThirdPartyUser = thirdpartyUserResult.result, EmailNotification = model.OwnerResponseInfo.ApplicantInfo.ThirdPartyEmailNotification, MailNotification = model.OwnerResponseInfo.ApplicantInfo.ThirdPartyMailNotification });
                             if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                             {
                                 result.status = saveThirdPartyResult.status;
