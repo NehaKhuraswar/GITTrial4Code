@@ -10,6 +10,17 @@
             <div class="step-heading">Rental History</div>
             <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form" novalidate onsubmit="return false;">
         <div class="step-content create-new">
+            <div class="subhead no-top-margin">
+                <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
+                    <h4>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br /> </h4>
+                </div>
+                <p class="no-bottom-margin">
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine2}}
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}}
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.State.StateName}}
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip}}
+                </p>
+            </div>
             <div class="field-group subhead no-top-margin">
                 <label>The tenant moved into the rental unit on</label>
             </div>
