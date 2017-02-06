@@ -235,20 +235,19 @@
                                         <div class="custom-table docs-list">
                                             <div class="tbl-header">
                                                 <div class="tbl-row clearfix">
-                                                    <div class="col col-35 name">File name</div>
-                                                    <div class="col col-35 type">File type</div>
+                                                    <div class="col col-35 name">File name</div>                                                    
                                                 </div>
                                             </div>
 
-                                            <div class="tbl-body">
-                                                <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
-                                                    <div class="item item-toggle expanded">
+                                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
+                                                <div class="tbl-row clearfix">
+                                                    <div class="item" ng-class="{'expanded':toggle}">
                                                         <div class="item-header clearfix">
                                                             <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-toggle"></a> {{item.DocName}}</div>
                                                             <!--<div class="col col-35 type">Excel</div>-->
                                                         </div>
 
-                                                        <div class="item-content clearfix">
+                                                        <div class="item-content clearfix" ng-show="toggle">
                                                             <div class="row">
                                                                 <div class="col-md-10 col-sm-12">
                                                                     <p>{{item.DocDescription}}</p>
@@ -257,7 +256,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>                                               
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- .custom-table -->
