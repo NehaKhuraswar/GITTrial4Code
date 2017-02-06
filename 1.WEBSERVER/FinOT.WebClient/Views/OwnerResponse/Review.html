@@ -173,7 +173,7 @@
                         <h4>Rent history</h4>
                         <a style="cursor: pointer;" ng-click="Ctrl.EditRentalHistory()" class="btn-link btn-edit">Edit</a>
                     </div>
-                    <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
+                    
                         <div class="field-group filled-info subhead">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">The tenant moved into the rental unit on</div></div>
@@ -213,6 +213,7 @@
                                     {{item.DocName}}
                                 </div>
                             </div><!-- .field-group -->
+                        </div>
 
                             <div class="field-group filled-info subhead no-top-margin">
                                 <div class="row">
@@ -227,32 +228,60 @@
                                     </div>
                                 </div>
                             </div><!-- .field-group -->
-                            <!--<!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Proof</div></div>
-                            <div class="col-sm-6 col-xs-12">copy_of_notice.pdf</div>
-                        </div>
-                    </div><!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Is the contested increase a Capital Improvements increase?</div></div>
-                            <div class="col-sm-6 col-xs-12">Yes</div>
-                        </div>
-                    </div>-->
-                            <!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you submit a petition for rent increase for Capital Improvements?</div></div>
-                            <div class="col-sm-6 col-xs-12">Yes</div>
-                        </div>
-                    </div>-->
-                            <!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
-                            <div class="col-sm-6 col-xs-12">T17-0238</div>
-                        </div>
-                    </div>-->
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Is the contested increase a capital improvements increase?</div></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bCapitalImprovementIncrease">
+                                            <i></i><span>Yes</span>
+                                        </label>
+                                        <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bCapitalImprovementIncrease">
+                                            <i></i><span>No</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you submit a petition for rent increase for capital improvements?</div></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bCaptialImprovementContested">
+                                            <i></i><span>Yes</span>
+                                        </label>
+                                        <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bCaptialImprovementContested">
+                                            <i></i><span>No</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.CaseNumbers}}                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you submit a copy of the Enhanced Notice to the RAP office within 10 days of serving the tenant?</div></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRAPNoticeToRAPOffice">
+                                            <i></i><span>Yes</span>
+                                        </label>
+                                        <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRAPNoticeToRAPOffice">
+                                            <i></i><span>No</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field-group filled-info subhead">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RAPNoticeToRAPOfficeDate.Month}}/{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RAPNoticeToRAPOfficeDate.Day}}/{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RAPNoticeToRAPOfficeDate.Year}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+                   
                             <!-- .field-group -->
                             <!--<div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
                         <div class="field-group filled-info subhead no-top-margin">
@@ -276,84 +305,84 @@
                         </div>
                     </div>-->
                             <!-- .field-group -->
-
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                    <div ng-repeat="item in Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                                <div class="col-sm-6 col-xs-12">
                                     <div class="col-sm-6 col-xs-12">
-                                        <div class="col-sm-6 col-xs-12">
-                                            <label ng-if="item.bRentIncreaseNoticeGiven">
-                                                <i></i><span>Yes</span>
-                                            </label>
-                                            <label ng-if="!item.bRentIncreaseNoticeGiven">
-                                                <i></i><span>No</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- .field-group -->
-
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
-                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
-                                </div>
-                            </div><!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
-                            <div class="col-sm-6 col-xs-12">Yes</div>
-                        </div>
-                    </div>-->
-                            <!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
-                            <div class="col-sm-6 col-xs-12">01/09/16</div>
-                        </div>
-                    </div>-->
-                            <!-- .field-group -->
-
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
-                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreasedTo - item.RentIncreasedFrom}}</div>
-                                </div>
-                            </div><!-- .field-group -->
-
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
-                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
-                                </div>
-                            </div><!-- .field-group -->
-
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Justification for rent increase</div></div>
-                                    <div class="col-sm-6 col-xs-12" ng-repeat="reason in item.RentIncreaseReasons  | filter: {IsSelected: true}">
-                                        <label for="{{reason.ReasonID}}">
-                                            <i></i><span>{{reason.ReasonDescription}}</span>
+                                        <label ng-if="item.bRentIncreaseNoticeGiven">
+                                            <i></i><span>Yes</span>
+                                        </label>
+                                        <label ng-if="!item.bRentIncreaseNoticeGiven">
+                                            <i></i><span>No</span>
                                         </label>
                                     </div>
                                 </div>
-                            </div><!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="info-title full-width">Description of the document that you are attaching</div>
-                        <div class="row">
-                            <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
-                        </div>
-                    </div>-->
-                            <!-- .field-group -->
-                            <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Justification document</div></div>
-                            <div class="col-sm-6 col-xs-12">justification_document.pdf</div>
-                        </div>
-                    </div>-->
-                            <!-- .field-group -->
-                        </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which the notice was given?</div></div>
+                                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
+                <div class="col-sm-6 col-xs-12">Yes</div>
+            </div>
+        </div>-->
+                        <!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
+                <div class="col-sm-6 col-xs-12">01/09/16</div>
+            </div>
+        </div>-->
+                        <!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                                <div class="col-sm-6 col-xs-12">{{item.RentIncreasedTo - item.RentIncreasedFrom}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase effective</div></div>
+                                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Justification for rent increase</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-repeat="reason in item.RentIncreaseReasons  | filter: {IsSelected: true}">
+                                    <label for="{{reason.ReasonID}}">
+                                        <i></i><span>{{reason.ReasonDescription}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+            <div class="info-title full-width">Description of the document that you are attaching</div>
+            <div class="row">
+                <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
+            </div>
+        </div>-->
+                        <!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12"><div class="info-title">Justification document</div></div>
+                <div class="col-sm-6 col-xs-12">justification_document.pdf</div>
+            </div>
+        </div>-->
+                        <!-- .field-group -->
                     </div>
+                   
                     <!-- Decreased housing services -->
                     <div class="subhead type2">
                         <h4>Decreased housing services</h4>
@@ -421,52 +450,299 @@
                                 </label>
                             </div>
                         </div>
-                    </div><!-- .field-group -->
-
+                        <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteQuitNoticeExplenation != null">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Explanation</div></div>
+                                <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteQuitNoticeExplenation}}</div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
-                            <div class="info-title full-width">Explanation</div>
-                            <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteQuitNoticeExplenation}}</div>
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">2. Did the prior tenant leave after being given a notice of rent increase (Civil Code Section 827)?</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteRentIncreaseNotice">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantLeftAfteRentIncreaseNotice">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
                         </div>
-                    </div><!-- .field-group -->
-                    <!-- Additional Documentation -->
-                    <div class="subhead type2">
-                        <h4>Additional Documentation</h4>
-                        <a style="cursor: pointer;" ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
-                    </div>
 
-                    <div class="field-group">
-                        <!-- Custom Table -->
-                        <div class="custom-table docs-list" >
-                            <div class="tbl-header">
-                                <div class="tbl-row clearfix">
-                                    <div class="col col-35 name">File name</div>
+                        <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation != null">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="info-title">Explanation</div>
+                                </div>
+                                    <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantLeftAfteRentIncreaseNoticeExplenation}}</div>                                
+                            </div>
+                      </div>
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">3. Was the prior tenant evicted for cause?</div></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantEvicted">
+                                        <i></i><span>Yes</span>
+                                    </label>
+                                    <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bPriorTenantEvicted">
+                                        <i></i><span>No</span>
+                                    </label>
                                 </div>
                             </div>
 
-                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
-                                <div class="tbl-row clearfix">
-                                    <div class="item" ng-class="{'expanded':toggle}">
-                                        <div class="item-header clearfix">
-                                            <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
-                                        </div>
+                            <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantEvictedExplenation != null">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Explanation</div></div>
+                                    <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PriorTenantEvictedExplenation}}</div>
+                                </div>
+                            </div>
+                        </div>
 
-                                        <div class="item-content clearfix" ng-show="toggle">
-                                            <div class="row">
-                                                <div class="col-md-10 col-sm-12">
-                                                    <p>{{item.DocDescription}}</p>
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">4. Are there any outstanding violations of building housing, fire or safety codes in the unit or building?</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bOutstandingViolations">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bOutstandingViolations">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                   
+                        <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.OutstandingViolationsExplenation != null">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="info-title">Explanation</div>
+                                </div>
+                                <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.OutstandingViolationsExplenation}}</div>                                
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">5. Is the unit a single family dwelling or condominium that can be sold separately?</div></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bSingleFamilyUnitOrCondominium">
+                                        <i></i><span>Yes</span>
+                                    </label>
+                                    <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bSingleFamilyUnitOrCondominium">
+                                        <i></i><span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.SingleFamilyUnitOrCondominiumExplenation != null">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="info-title">Explanation</div>
+                                    </div>
+                                    <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.SingleFamilyUnitOrCondominiumExplenation}}</div>
+                                </div>
+                         </div>
+                        </div>
+                        
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">6. Did the petitioning tenant have roommates when he/she moved in?</div></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRoommatesWhenMoviedIN">
+                                        <i></i><span>Yes</span>
+                                    </label>
+                                    <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRoommatesWhenMoviedIN">
+                                        <i></i><span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RoommatesWhenMoviedINExplenation != null">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="info-title">Explanation</div>
+                                     </div>
+                                        <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.RoommatesWhenMoviedINExplenation}}</div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">7. If the unit is a condominium, did you purchase it?</div></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased">
+                                        <i></i><span>Yes</span>
+                                    </label>
+                                    <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitPruchased">
+                                        <i></i><span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitPruchasedExplenation != null">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="info-title">Explanation</div>
+                                    </div>
+                                        <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.UnitPruchasedExplenation}}</div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">8. From whom did you purchase it?</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                {{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.PurchasedFrom}}                                
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">9. Did you purchase the entire building?</div></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bEntireBuildingPurchased">
+                                        <i></i><span>Yes</span>
+                                    </label>
+                                    <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bEntireBuildingPurchased">
+                                        <i></i><span>No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.EntireBuildingPurchasedExplenation != null">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <div class="info-title">Explanation</div>
+                                    </div>
+                                        <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.EntireBuildingPurchasedExplenation}}</div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">The rent for the unit is controlled, regulated or subsidized by a governmental unit, agency or authority other than the City of Oakland Rent Adjustment Ordinance.</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRentControlledOtherThanRAP">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bRentControlledOtherThanRAP">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">The unit was newly constructed and a certificate of occupancy was issued for it on or after January 1, 1983.</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitNewlyConstructed">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitNewlyConstructed">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">On the day the petition was filed, the tenant petitioner was a resident of a motel, hotel, or boarding house for less than 30 days.</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bTenantWasResidentOfHotelWhileFiling">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bTenantWasResidentOfHotelWhileFiling">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">The subject unit is in a building that was rehabilitated at a cost of 50% or more of the average basic cost of new construction.</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitWasRehabilitated">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitWasRehabilitated">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">The unit is an accommodation in a hospital, convent, monastery, extended care facility, convalescent home, non-profit home for aged, or dormitory owned and operated by an educational institution.</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitIsAccommodation">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bUnitIsAccommodation">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-group filled-info subhead no-top-margin">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12"><div class="info-title">The unit is located in a building with three or fewer units. The owner occupies one of the units continuously as his or her principal residence and has done so for at least one year.</div></div>
+                            <div class="col-sm-6 col-xs-12">
+                                <label ng-if="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bHasUnitOccupiedByOwner">
+                                    <i></i><span>Yes</span>
+                                </label>
+                                <label ng-if="!Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.bHasUnitOccupiedByOwner">
+                                    <i></i><span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                  
+
+                        <!-- Additional Documentation -->
+                        <div class="subhead type2">
+                            <h4>Additional Documentation</h4>
+                            <a style="cursor: pointer;" ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
+                        </div>
+
+                        <div class="field-group">
+                            <!-- Custom Table -->
+                            <div class="custom-table docs-list">
+                                <div class="tbl-header">
+                                    <div class="tbl-row clearfix">
+                                        <div class="col col-35 name">File name</div>
+                                    </div>
+                                </div>
+
+                                <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_AdditionalDocuments'}">
+                                    <div class="tbl-row clearfix">
+                                        <div class="item" ng-class="{'expanded':toggle}">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                            </div>
+
+                                            <div class="item-content clearfix" ng-show="toggle">
+                                                <div class="row">
+                                                    <div class="col-md-10 col-sm-12">
+                                                        <p>{{item.DocDescription}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- .custom-table -->
                         </div>
-                        <!-- .custom-table -->
-                    </div>
-                    <!-- .field-group -->
+                        <!-- .field-group -->
 
-                </div>
+                    </div>
 
 
                 <div class="step-footer">
