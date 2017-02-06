@@ -198,12 +198,45 @@
                             <label for="representative_email">Email address</label>
                             <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email" />
                         </div>
+                        <div class="subhead">
+                            <h4>Preferred way of receiving notifications</h4>
+                        </div>
+                        <div class="field-group no-bottom-margin">
+                            <div class="row">
+                                <div class="col-md-11 col-sm-12">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-group no-bottom-margin">
+                            <div class="form-group-checkbox vertical clearfix">
+                                <div class="checkbox-wrapper">
+                                    <label for="chk_service_proof">
+                                        <input type="checkbox" name="chk_service_proof" id="chk_service_proof" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyMailNotification" /><i></i><span>Proof of service by mail</span>
+                                    </label>
+
+                                    <label for="chk_email">
+                                        <input type="checkbox" name="chk_email" id="chk_email" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyEmailNotification" /><i></i><span>Email</span>
+                                    </label>
+                                    <br />
+
+                                    <label for="chk_acknowledgement">
+                                        <input type="checkbox" name="chk_acknowledgement" id="chk_acknowledgement" ng-model="Ctrl.bAcknowledgeNotification" /><i></i><span>I acknowledge that representatives will receive notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="field-group" ng-show="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation== true && Ctrl.bEditRepresentative == false
                                 && Ctrl.bShowApplicantInfo == true && Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                         {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.LastName}}<br />
                         {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip}}<br />
                         Tel: {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email}}<br />
+                        Notification preference :
+                        <span ng-show="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyMailNotification">Mail</span>
+                        <span ng-show="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyMailNotification && Ctrl.caseinfo.TenantAppealInfo.ThirdPartyEmailNotification"> , </span>
+                        <span ng-show="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyEmailNotification">Email</span>
                     </div>
                 </div>
 

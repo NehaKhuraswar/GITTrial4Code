@@ -9,6 +9,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     self.CaseID = self.caseinfo.CaseID;
     self.bEditApplicant = false;
     self.Error = "";
+    self.bAcknowledgeNotification = false;
     self.bCaseFiledByThirdParty = self.caseinfo.bCaseFiledByThirdParty;
     self.bShowApplicantInfo = false;
     if (self.caseinfo.CaseID != null)
@@ -59,14 +60,30 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
 
             });
         }
-            
+    var _CheckNotification = function () {
+        var bInValid = false;     
+        if (self.caseinfo.bCaseFiledByThirdParty == false && self.bEditRepresentative == true) {
+            if (!(self.caseinfo.TenantAppealInfo.ThirdPartyMailNotification || self.caseinfo.TenantAppealInfo.ThirdPartyEmailNotification)) {
+                self.Error = 'Third party notification preference is required';
+                bInValid = true;
+            }
+            else if (!self.bAcknowledgeNotification) {
+                self.Error = 'Please acknowledge Third party notification preference';
+                bInValid = true;
+            }
+        }
+        return bInValid;
+    }
 
     
     self.EditApplicantName = function () {
         self.bEditApplicant = true;
     }
     
-    self.ContinueToGroundsforAppeal = function (model) {        
+    self.ContinueToGroundsforAppeal = function (model) {
+        if (_CheckNotification()) {
+            return;
+        }
         rapFactory.SaveTenantAppealInfo(model, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;

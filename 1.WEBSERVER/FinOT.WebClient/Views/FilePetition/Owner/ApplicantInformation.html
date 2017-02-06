@@ -220,7 +220,7 @@
                         </p>
                         Notification preference :
                         <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification">Mail</span>
-                        <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification && ctrl.caseinfo.OwnerPetitionInfo.applicantinfo.thirdpartyemailnotification"> , </span>
+                        <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification"> , </span>
                         <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification">Email</span>
                     </div>
                 </div>
@@ -233,7 +233,8 @@
                     Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}}<br/>
                     Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}}</p>
                     Notification preference :
-                    <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification">Mail, &nbsp;</span>
+                    <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification">Mail &nbsp;</span>
+                    <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification"> , </span>
                     <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification">Email</span>
                 </div>
 

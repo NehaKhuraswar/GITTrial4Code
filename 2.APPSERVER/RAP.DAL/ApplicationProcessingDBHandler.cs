@@ -340,6 +340,8 @@ namespace RAP.DAL
                         caseInfo.TenantAppealInfo.bThirdPartyRepresentation = false;
                     }
                     caseInfo.TenantAppealInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                    caseInfo.TenantAppealInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                    caseInfo.TenantAppealInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
                 }
                 //}
                 //else
@@ -2929,7 +2931,7 @@ namespace RAP.DAL
                                 result.status = thirdpartyUserResult.status;
                                 return result;
                             }
-                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = CustomerID, ThirdPartyUser = thirdpartyUserResult.result, MailNotification = caseInfo.TenantAppealInfo.ThirdPartyMailNotification, EmailNotification = caseInfo.TenantAppealInfo.ThirdPartyEmailNotification });
                             if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                             {
                                 result.status = saveThirdPartyResult.status;
@@ -2986,7 +2988,7 @@ namespace RAP.DAL
                                 result.status = thirdpartyUserResult.status;
                                 return result;
                             }
-                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = CustomerID, ThirdPartyUser = thirdpartyUserResult.result });
+                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = CustomerID, ThirdPartyUser = thirdpartyUserResult.result, MailNotification = caseInfo.TenantAppealInfo.ThirdPartyMailNotification, EmailNotification = caseInfo.TenantAppealInfo.ThirdPartyEmailNotification });
                             if (saveThirdPartyResult.status.Status != StatusEnum.Success)
                             {
                                 result.status = saveThirdPartyResult.status;

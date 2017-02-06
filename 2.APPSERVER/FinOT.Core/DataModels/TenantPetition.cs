@@ -145,6 +145,8 @@ namespace RAP.Core.DataModels
         public UserInfoM ApplicantUserInfo { get; set; }
         // private UserInfoM _appealThirdPartyInfo = new UserInfoM();
         public UserInfoM ThirdPartyInfo = new UserInfoM();
+        public bool ThirdPartyEmailNotification { get; set; }
+        public bool ThirdPartyMailNotification { get; set; }
         public UserInfoM AppealPropertyUserInfo = new UserInfoM();
         public int thirdPartyUserID;
 
