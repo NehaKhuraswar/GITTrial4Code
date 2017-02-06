@@ -84,7 +84,8 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     var checkPassword = function (pwd, email) {
         if (email == pwd)
             return false;
-        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\_\-])(?=.{8,})");
+        //var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\_\-])(?=.{8,})");
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
         return strongRegex.test(pwd);
     }
     var checkPhoneNumber = function (phoneNumber) {
