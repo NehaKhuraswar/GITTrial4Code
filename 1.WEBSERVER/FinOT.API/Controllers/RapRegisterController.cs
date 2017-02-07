@@ -867,8 +867,7 @@ namespace RAP.API.Controllers
                 else
                 {
                     transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage + result.status.StatusDetails);                    
-                    
+                    transaction.AddException(result.status.StatusMessage);                  
                 }
             }
             catch(Exception ex)

@@ -199,7 +199,7 @@
 
                                     <div class="field-group">
                                         <label for="representative_zip_code">Zip code <span>*</span></label>
-                                        <input type="text" name="representative_zip_code" id="representative_zip_code"
+                                        <input type="text" name="representative_zip_code" id="representative_zip_code" maxlength="5"
                                                ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation) && (Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation) && (Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true))}"
                                                ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation) && (Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true)"
@@ -444,7 +444,7 @@
 
                         <div class="field-group">
                             <label for="manager_zipcode">Zip code</label>
-                            <input type="text" name="manager_zipcode" id="manager_zipcode"
+                            <input type="text" name="manager_zipcode" id="manager_zipcode" maxlength="5"
                                    ng-class="{'field-input required' :(Ctrl.bCaseInfo == true) ,
                                                    'field-input' : !(Ctrl.bCaseInfo == true) }"
                                    ng-required="(Ctrl.bCaseInfo == true)" placeholder=""

@@ -181,7 +181,7 @@
 
                                             <div class="field-group">
                                                 <label for="representative_zip_code">Zip code <span>*</span></label>
-                                                <input type="text" name="representative_zip_code" id="representative_zip_code"
+                                                <input type="text" name="representative_zip_code" id="representative_zip_code" maxlength="5"
                                                        ng-class="{'field-input required' :(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation) && (Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true),
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation) && (Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true))}"
                                                        ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation) && (Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true)"
@@ -320,8 +320,8 @@
 
                                     <div class="field-group">
                                         <label for="po_zip_code">Zip Code <span>*</span></label>
-                                        <input type="text" name="po_zip_code" id="po_zip_code" class="field-input required"
-                                                data-error="Property owner Zip Code" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip" required />
+                                        <input type="text" name="po_zip_code" id="po_zip_code" class="field-input required" maxlength="5"
+                                               data-error="Property owner Zip Code" ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip" required />
                                     </div>
 
                                     <div class="field-group">
@@ -401,8 +401,8 @@
 
                                     <div class="field-group">
                                         <label for="pm_zip_code">Zip Code</label>
-                                        <input type="text" name="pm_zip_code" id="pm_zip_code"                                                
-                                                    class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip" />
+                                        <input type="text" name="pm_zip_code" id="pm_zip_code" maxlength="5"
+                                               class="field-input" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip" />
                                     </div>
 
                                     <div class="field-group">

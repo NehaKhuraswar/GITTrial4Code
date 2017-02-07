@@ -108,7 +108,7 @@
 
                                     <div class="field-group">
                                         <label for="residential_zipcode">Zip code</label>
-                                        <input type="text" name="residential_zipcode" id="residential_zipcode" class="field-input  required" data-error="Zip" required placeholder="" ng-model="Ctrl.CustomerInfo.User.Zip" />
+                                        <input type="text" name="residential_zipcode" id="residential_zipcode" maxlength="5" class="field-input  required" data-error="Zip" required placeholder="" ng-model="Ctrl.CustomerInfo.User.Zip" />
                                     </div>
 
                                     <div class="field-group mar-bottom-60">
@@ -178,7 +178,7 @@
                                             <input type="text" name="mailing_zipcode" id="mailing_zipcode"
                                                    ng-class="{'field-input required' :(!Ctrl.CustomerInfo.IsSameMailingAddress),
                                                    'field-input' : Ctrl.CustomerInfo.IsSameMailingAddress}"
-                                                   ng-required="(!Ctrl.CustomerInfo.IsSameMailingAddress)" data-error="Mailing zip code" placeholder=""
+                                                   ng-required="(!Ctrl.CustomerInfo.IsSameMailingAddress)" maxlength="5" data-error="Mailing zip code" placeholder=""
                                                    ng-model="Ctrl.CustomerInfo.MailingAddress.Zip" />
                                         </div>
 
