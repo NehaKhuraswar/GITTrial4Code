@@ -1,6 +1,7 @@
 ﻿var rapEmailNotificationSentController = ['$scope', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, alert, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.Title = '';
+    self.FromSelectedCase = rapGlobalFactory.FromSelectedCase;
     if (rapGlobalFactory.Notification == null || rapGlobalFactory.Notification == undefined) {
         var userType = rapGlobalFactory.GetUserType();
         if (userType == 'PublicUser') {
@@ -23,7 +24,13 @@
         $location.path("/selectedcase");
     }
     self.Home = function () {
-        $location.path("/staffdashboard");
+        if (rapGlobalFactory.FromSelectedCase == true) {
+            rapGlobalFactory.FromSelectedCase = false;
+            $location.path("/staffdashboard");
+        }
+        else {
+            $location.path("publicdashboard");
+        }
     }
     //self.custDetails = rapGlobalFactory.CityUser;
     //if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)

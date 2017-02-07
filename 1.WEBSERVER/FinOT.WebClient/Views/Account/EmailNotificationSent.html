@@ -11,10 +11,16 @@
     <div class="page-content full-width">
         <div class="container">
 
-            <div class="breadcrumb border-bottom-grey">
+            <div class="breadcrumb border-bottom-grey" ng-show="Ctrl.FromSelectedCase == true">
                 <ul>
                     <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
                     <li><a style="cursor: pointer;" ng-click="Ctrl.CaseClick()">{{Ctrl.caseid}}</a></li>
+                    <li class="active">Email notifications</li>
+                </ul>
+            </div>
+            <div class="breadcrumb border-bottom-grey" ng-show="Ctrl.FromSelectedCase == false">
+                <ul>
+                    <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
                     <li class="active">Email notifications</li>
                 </ul>
             </div>
