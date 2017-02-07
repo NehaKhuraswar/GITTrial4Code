@@ -201,6 +201,19 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         }
         return _years;
     }
+    var _Years1900 = function () {
+        var startYear = 1900;
+        var currentYear = new Date().getFullYear();
+        var _years = [];
+        for (var i = startYear; i <= currentYear ; i++) {
+                _years.push(i);
+            
+        }
+        //for (var i = 0; i < range + 1; i++) {
+        //    _years.push(currentYear + i);
+        //}
+        return _years;
+    }
 
     var _Months = function () {
         return ([
@@ -229,6 +242,11 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         Days: _Days(),
         Years: _Years()
     }
+    var _Calender1900 = {
+        Months: _Months(),
+        Days: _Days(),
+        Years: _Years1900()
+    }
 
     //var _getDocument = function (model) {
     //    blockUI.start();
@@ -253,6 +271,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
     factory.GetThirdPartyCasesForCustomer = _GetThirdPartyCasesForCustomer;
     factory.GetCustomer = _GetCustomer;
     factory.Calender = _Calender;
+    factory.Calender1900 = _Calender1900;
     factory.GetDocument = _getDocument;
     factory.ResendPin = _ResendPin;
     factory.FileExtensons = _fileExtensons;

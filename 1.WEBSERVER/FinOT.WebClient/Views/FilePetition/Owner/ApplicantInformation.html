@@ -351,7 +351,7 @@
                     <div class="field-group">
                         <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Month"
                                 data-placeholder="Month" class="custom-select"
-                                ng-options="month.id as month.value for month in Ctrl.Calender.Months">
+                                ng-options="month.id as month.value for month in Ctrl.Calender1900.Months">
                             <option value="" selected>Select month</option>
                         </select>
                     </div>
@@ -360,7 +360,7 @@
                     <div class="field-group">
                         <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Day"
                                 data-placeholder="Day" class="custom-select"
-                                ng-options="day for day in  Ctrl.Calender.Days">
+                                ng-options="day for day in  Ctrl.Calender1900.Days">
                             <option value="" selected>Select day</option>
                         </select>
                     </div>
@@ -369,7 +369,7 @@
                     <div class="field-group">
                         <select ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.BuildingAcquiredDate.Year"
                                 data-placeholder="Year" class="custom-select"
-                                ng-options="year for year in  Ctrl.Calender.Years">
+                                ng-options="year for year in  Ctrl.Calender1900.Years">
                             <option value="" selected>Select year</option>
                         </select>
                     </div>

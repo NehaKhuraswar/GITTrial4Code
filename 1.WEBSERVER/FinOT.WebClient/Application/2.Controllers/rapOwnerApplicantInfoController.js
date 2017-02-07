@@ -57,6 +57,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', '$anchorScroll', 'ale
 
     
     self.Calender = masterFactory.Calender;
+    self.Calender1900 = masterFactory.Calender1900;
 
 
     $scope.onFileSelected = function ($files, docTitle) {
