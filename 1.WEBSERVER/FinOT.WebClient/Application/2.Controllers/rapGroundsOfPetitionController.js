@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgroundsofpetitionFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgroundsofpetitionFactory', '$location', 'rapGlobalFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -10,9 +10,11 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
         rapFactory.GetPetitionGroundInfo(petitionId).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.TenantPetitionInfo.PetitionGrounds = response.data;
+            $anchorScroll();
         });
     }
     _GetPetitionGroundInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
@@ -51,6 +53,7 @@ var rapGroundsOfPetitionController = ['$scope', '$modal', 'alertService', 'rapgr
         rapFactory.SavePetitionGroundInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             $scope.model.bGrounds = false;

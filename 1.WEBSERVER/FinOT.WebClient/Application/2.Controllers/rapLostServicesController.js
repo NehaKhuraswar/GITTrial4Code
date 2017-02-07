@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostservicesFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostservicesFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -24,9 +24,11 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
         rapFactory.GetEmptyLostServicesInfo().then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.LostServices = response.data;
+            $anchorScroll();
          });
      }
     _GetEmptyLostServicesInfo();
@@ -35,9 +37,12 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
         rapFactory.GetEmptyProblemsInfo().then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                $anchorScroll();
                 return;
             }
             self.Problems = response.data;
+            $anchorScroll();
         });
      }
     _GetEmptyProblemsInfo();
@@ -47,9 +52,11 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
          rapFactory.GetTenantLostServiceInfo(petitionId, self.custDetails.custID).then(function (response) {
              if (!alert.checkForResponse(response)) {
                  self.Error = rapGlobalFactory.Error;
+                 $anchorScroll();
                  return;
              }
-        self.caseinfo.TenantPetitionInfo.LostServicesPage = response.data;
+             self.caseinfo.TenantPetitionInfo.LostServicesPage = response.data;
+             $anchorScroll();
         });
     }
     _GetTenantLostServiceInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
@@ -84,7 +91,11 @@ var rapLostServicesController = ['$scope', '$modal', 'alertService', 'raplostser
             }
         }
         rapFactory.SaveTenantLostServiceInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.LostServicesPage, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             $scope.model.bLostServices = false;
             $scope.model.bAddDocuments = true;
             $scope.model.tPetionActiveStatus.LostService = true;

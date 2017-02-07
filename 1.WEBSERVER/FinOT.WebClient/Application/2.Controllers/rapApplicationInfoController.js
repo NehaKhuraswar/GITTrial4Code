@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapapplicationinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapapplicationinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 3;
@@ -13,6 +13,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
         rapFactory.GetTenantApplicationInfo(custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
                 }
             self.caseinfo.TenantPetitionInfo = response.data;
@@ -25,7 +26,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
                 self.caseinfo.TenantPetitionInfo.ThirdPartyUser.Email = self.custDetails.email;
             }
             self.caseinfo.TenantPetitionInfo.CustomerID = self.custDetails.custID;
-            
+            $anchorScroll();
         });
     }
     _GetTenantApplicationInfo(self.custDetails.custID);
@@ -35,6 +36,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
     }
             self.StateList = response.data;
@@ -78,10 +80,12 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
         if (self.caseinfo.bCaseFiledByThirdParty == false && self.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation == true && (self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID == 0 || self.bEditThirdParty == true)) {
             if (!(self.caseinfo.TenantPetitionInfo.ThirdPartyMailNotification || self.caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification)) {
                 self.Error = 'Third party notification preference is required';
+                $anchorScroll();
                 bInValid = true;
             }
             else if (!self.bAcknowledgeNotification) {
                 self.Error = 'Please acknowledge Third party notification preference';
+                $anchorScroll();
                 bInValid = true;
             }
         }
@@ -102,6 +106,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
         if (self.caseinfo.TenantPetitionInfo.OwnerInfo.State == null)
         {
             self.Error = "Owner state is a required field";
+            $anchorScroll();
                 return;
         }
         if (self.caseinfo.TenantPetitionInfo.UnitTypeId == 0)
@@ -112,6 +117,7 @@ var rapApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapappl
         rapFactory.SaveApplicationInfo(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

@@ -1,5 +1,5 @@
 ﻿    'use strict';
-    var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', 'masterdataFactory', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory, rapFactory, masterFactory) {
+    var rapDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory, rapFactory, masterFactory, $anchorScroll) {
         var self = this;
         self.model = $scope.model;
         $scope.model.stepNo = 7;
@@ -9,15 +9,24 @@
         self.DocDescriptions = masterFactory.DocDescription();
         self.Error = '';
         masterFactory.DocDescription().then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+             if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.DocDescriptions = response.data;
         });
         self.description1 = null;
         self.description2 = null;
         self.Documents = null;
         rapFactory.GetTenantDocuments(self.custDetails.custID, 'TP_AdditionalDocuments').then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.Documents = response.data;
+            $anchorScroll();
         });
 
         $scope.onFileSelected = function ($files, docTitle) {
@@ -74,7 +83,11 @@
     self.ContinueToReview = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveTenantDocuments(self.Documents, self.caseinfo.CustomerID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             $scope.model.bAddDocuments = false;
             $scope.model.bReview = true;
             $scope.model.tPetionActiveStatus.AdditionalDocumentation = true;

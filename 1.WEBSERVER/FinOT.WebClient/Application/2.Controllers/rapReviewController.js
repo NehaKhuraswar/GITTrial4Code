@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapTenantlDocumentFactory) {
+var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapTenantlDocumentFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -8,16 +8,22 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
     self.Documents = null;
     $scope.model.stepNo = 8;
     rapTenantlDocumentFactory.GetTenantDocuments(self.custDetails.custID, 'TP_AdditionalDocuments').then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.Documents = response.data;
     });
     var _GetTenantReviewInfo = function (custID) {
         rapFactory.GetTenantReviewInfo(custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.TenantPetitionInfo = response.data;
+            $anchorScroll();
         });
     }
     _GetTenantReviewInfo(self.custDetails.custID);
