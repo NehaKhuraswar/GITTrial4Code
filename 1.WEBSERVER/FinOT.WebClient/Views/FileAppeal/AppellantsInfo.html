@@ -103,16 +103,18 @@
                         </div>
 
                         <div class="field-group">
-                            <label for="Applicant_state">State</label>                            
-                            <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
-                                    ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"
-                                    ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
-                                <option value="" selected>Select state</option>
-                            </select>
+                            <label for="Applicant_state">State</label>
+                            <div class="input-wrapper">
+                                <select name="Applicant_state" id="Applicant_state" class="custom-select" data-placeholder="Select"
+                                        ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"
+                                        ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
+                                    <option value="" selected>Select state</option>
+                                </select>
+                            </div>
                                 <!--<dropdown placeholder="States" list="Ctrl.StateList" property="StateName"
-                                          selected="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"></dropdown>-->
-                            
-                        </div>
+                  selected="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State"></dropdown>-->
+
+                            </div>
 
                         <div class="field-group">
                             <label for="Applicant_zip_code">Zip code</label>
@@ -174,15 +176,14 @@
 
                         <div class="field-group">
                             <label for="representative_state">State</label>
-                            
+                            <div class="input-wrapper">
                                 <select name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
                                         ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State"
                                         ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
                                     <option value="" selected>Select state</option>
                                 </select>
-                                
-                            
-                        </div>
+                            </div>
+                            </div>
 
                         <div class="field-group">
                             <label for="representative_zip_code">Zip code</label>
