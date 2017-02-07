@@ -85,7 +85,8 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         if (email == pwd)
             return false;
         //var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\_\-])(?=.{8,})");
-        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+        var strongRegex = new RegExp("^(?=.*[a-zA-Z])(?=.*[0-9])(?=.{8,})");
+        //var strongRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
         return strongRegex.test(pwd);
     }
     var checkPhoneNumber = function (phoneNumber) {
@@ -135,13 +136,12 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             self.PasswordError = true;
             self.Error = "Enter password matching the requirements";
             return;
-         }
+        }
         //if (!checkPhoneNumber(model.PhoneNumber))
         //            {
         //        alert.Error("Phone number is not valid")
         //    return;
         //}
-       
         rapFactory.SaveCustomer(null, model).then(function(response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
