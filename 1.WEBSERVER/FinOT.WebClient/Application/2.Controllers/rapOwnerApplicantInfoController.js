@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapOwnerApplicantInfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapOwnerApplicantInfoController = ['$scope', '$modal', '$anchorScroll', 'alertService', 'rapOwnerApplicantInfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, $anchorScroll, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 3;
@@ -35,6 +35,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
             
         }
         RestrictUpload();
+        $anchorScroll();
     });
 
     function RestrictUpload() {
@@ -101,10 +102,12 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
             if (!(self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification || self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification)) {
                 self.Error = 'Third party notification preference is required';
                 bInValid = true;
+                $anchorScroll();
             }
             else if (!self.bAcknowledgeNotification) {
                 self.Error = 'Please acknowledge Third party notification preference';
                 bInValid = true;
+                $anchorScroll();
             }
         }
         return bInValid;
@@ -141,6 +144,7 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapO
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;               
             }
             rapGlobalFactory.CaseDetails = response.data;
