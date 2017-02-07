@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapOwnerJustificationFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapOwnerJustificationFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -9,10 +9,15 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
     self.ShowDocs = false;
     $scope.model.stepNo = 4;
     rapFactory.GetRentIncreaseReasonInfo(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
         _ShowDocs();
+        $anchorScroll();
     });
 
     var _ShowDocs = function()
@@ -85,6 +90,7 @@ var rapOwnerJustificationController = ['$scope', '$modal', 'alertService', 'rapO
         rapFactory.SaveRentIncreaseReasonInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

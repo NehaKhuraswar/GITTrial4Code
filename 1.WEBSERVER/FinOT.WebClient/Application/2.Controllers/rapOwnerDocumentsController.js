@@ -1,4 +1,4 @@
-﻿var rapOwnerDocumentsController = ['$scope', '$modal', 'alertService', '$location', 'rapOwnerDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
+﻿var rapOwnerDocumentsController = ['$scope', '$modal', 'alertService', '$location', 'rapOwnerDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -16,9 +16,14 @@
     self.description2 = null;
     
     rapFactory.GetOwnerAdditionalDocuments(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
-        self.caseinfo = response.data;    
+        self.caseinfo = response.data;
+        $anchorScroll();
     });
 
     $scope.onFileSelected = function ($files, docTitle) {
@@ -77,6 +82,7 @@
         rapFactory.SaveOwnerAdditionalDocuments(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

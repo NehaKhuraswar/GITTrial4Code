@@ -1,4 +1,4 @@
-﻿var rapOwnerReviewController = ['$scope', '$modal', 'alertService', '$location', 'rapOwnerReviewFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
+﻿var rapOwnerReviewController = ['$scope', '$modal', 'alertService', '$location', 'rapOwnerReviewFactory', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -9,9 +9,14 @@
     self.Error = "";
     $scope.model.stepNo = 8;
     rapFactory.GetOwnerReview(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
+        $anchorScroll();
     });
 
     self.Continue = function () {

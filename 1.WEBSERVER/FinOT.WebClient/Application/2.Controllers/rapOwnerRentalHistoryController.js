@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapOwnerRentalHistoryFactory', '$location', 'rapGlobalFactory','masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory,masterFactory) {
+var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapOwnerRentalHistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -26,6 +26,7 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
     rapFactory.GetOwnerRentIncreaseAndPropertyInfo(self.caseinfo).then(function (response) {
         if (!alert.checkForResponse(response)) {
             self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
             return;
         }
         rapGlobalFactory.CaseDetails = response.data;
@@ -34,6 +35,7 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         //if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length > 0) {
         //    self.caseinfo.OwnerPetitionRentalIncrementInfo = self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo[0];
         //}
+            $anchorScroll();
     });
 
     $scope.onFileSelected = function ($files, docTitle) {
@@ -110,6 +112,7 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         rapFactory.SaveOwnerRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

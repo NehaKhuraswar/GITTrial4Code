@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rapOwnerRentalPropertyFactory', '$location', 'rapGlobalFactory','masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory,masterFactory) {
+var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rapOwnerRentalPropertyFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -14,10 +14,13 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
     
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.StateList = response.data;
+            $anchorScroll();
         });
     }
         
@@ -66,12 +69,14 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
         if (self.IsTenant == false)
         {
             self.Error = "Please add tenant information";
+            $anchorScroll();
             return;
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;
