@@ -13,6 +13,7 @@ var app = angular.module('OTS', ['ngRoute', 'ngAria', 'ngCookies', 'blockUI', 'i
 //binding global directives and filters
 .directive('otsMaxinput', otsMaxinput)
 .directive('numeric', numeric)
+.directive('numbernocomma', numbernocomma)
 .directive('alphaNumeric', alphaNumeric)
 .directive('inputPercent', inputPercent)
 .directive('ngRedirectTo', ngRedirectTo)
