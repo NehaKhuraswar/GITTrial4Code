@@ -120,23 +120,27 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     }
 
     self.Register = function (model) {
-        if (self.Password != self.ConfirmPassword)
-        {
-            self.Error = "Password not matching!";
-            return;
-            }
-        model.Password = self.Password;
+        if (self.bEdit !=true){
+        
+            if (self.Password != self.ConfirmPassword)
+            {
+                self.Error = "Password not matching!";
+                return;
+                }
+            model.Password = self.Password;
+            if (!checkPassword(model.Password, model.email)) {
+                self.PasswordError = true;
+                self.Error = "Enter password matching the requirements";
+                return;
+                }
+        }
         if (model.EmailNotificationFlag == false && model.MailNotificationFlag == false)
         {
             self.Error = "Please select one of the notification preference";
             return;
         }
         
-        if (!checkPassword(model.Password, model.email)) {
-            self.PasswordError = true;
-            self.Error = "Enter password matching the requirements";
-            return;
-        }
+        
         //if (!checkPhoneNumber(model.PhoneNumber))
         //            {
         //        alert.Error("Phone number is not valid")

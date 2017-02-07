@@ -61,16 +61,20 @@
                                         </ul>
                                     </div>
 
-                                    <div class="field-group">
+                                    <div class="field-group" ng-show="Ctrl.bEdit!=true">
                                         <label for="password">Create a password</label>
-                                        <input type="password" name="password" id="password" class="field-input required"
-                                               maxlength="24" data-error="Password" required ng-model="Ctrl.Password" placeholder="" />
+                                        <input type="password" name="password" id="password"
+                                               ng-class="{'field-input required' :Ctrl.bEdit!=true,
+                                                   'field-input' : Ctrl.bEdit==true}"
+                                               maxlength="24" data-error="Password" ng-required="Ctrl.bEdit!=true" ng-model="Ctrl.Password" placeholder="" />
                                     </div>
 
-                                    <div class="field-group mar-bottom-60">
+                                    <div class="field-group mar-bottom-60" ng-show="Ctrl.bEdit!=true">
                                         <label for="confirm_password">Confirm your password</label>
                                         <input type="password" name="confirm_password" id="confirm_password"
-                                               maxlength="24" class="field-input required" data-error="Confirm password" required ng-model="Ctrl.ConfirmPassword" placeholder="" />
+                                               maxlength="24" ng-class="{'field-input required' :Ctrl.bEdit!=true,
+                                                   'field-input' : Ctrl.bEdit==true}" data-error="Confirm password"
+                                               ng-required="Ctrl.bEdit!=true" ng-model="Ctrl.ConfirmPassword" placeholder="" />
 
 
                                     </div>
