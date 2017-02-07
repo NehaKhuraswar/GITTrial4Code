@@ -47,7 +47,7 @@
 
                                     <div class="field-group">
                                         <label for="email">Email <span style="color:red">*</span></label>
-                                        <input type="text" name="email" id="email" class="field-input required" data-error="Email" required placeholder="" ng-model="Ctrl.CustomerInfo.email" />
+                                        <input type="text" name="email" maxlength="50" id="email" class="field-input required" data-error="Email" required placeholder="" ng-model="Ctrl.CustomerInfo.email" />
                                     </div>
 
                                     <div class="field-group password-requirements">
@@ -113,7 +113,7 @@
 
                                     <div class="field-group mar-bottom-60">
                                         <label for="residential_phone">Phone number</label>
-                                        <input type="text" name="residential_phone" id="residential_phone" class="field-input  required" data-error="Phone number" placeholder="" ng-model="Ctrl.CustomerInfo.User.PhoneNumber" />
+                                        <input type="text" name="residential_phone" id="residential_phone" maxlength="15" class="field-input  required" data-error="Phone number" placeholder="" ng-model="Ctrl.CustomerInfo.User.PhoneNumber" />
                                     </div>
 
                                     <!-- Mailing address -->
@@ -184,7 +184,7 @@
 
                                         <div class="field-group mar-bottom-60">
                                             <label for="mailing_phone">Phone number</label>
-                                            <input type="text" name="mailing_phone" id="mailing_phone" 
+                                            <input type="text" name="mailing_phone" id="mailing_phone" maxlength="15"
                                                    ng-class="{'field-input required' :(!Ctrl.CustomerInfo.IsSameMailingAddress),
                                                    'field-input' : Ctrl.CustomerInfo.IsSameMailingAddress}"
                                                    ng-required="(!Ctrl.CustomerInfo.IsSameMailingAddress)" data-error="Mailing phone number"

@@ -121,12 +121,12 @@
 
                         <div class="field-group">
                             <label for="Applicante_phone_number">Phone number</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber" />
+                            <input type="text" class="field-input" ng-trim="false" maxlength="15" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber" />
                         </div>
 
                         <div class="field-group">
                             <label for="Applicant_email">Email address</label>
-                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email" />
+                            <input type="email" class="field-input" maxlength="50" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Email" />
                         </div>
                     </div>
 
@@ -191,12 +191,12 @@
 
                         <div class="field-group">
                             <label for="representative_phone_number">Phone number</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber" />
+                            <input type="text" class="field-input" ng-trim="false" maxlength="15" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber" />
                         </div>
 
                         <div class="field-group">
                             <label for="representative_email">Email address</label>
-                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email" />
+                            <input type="email" class="field-input" maxlength="50" ng-trim="false" ng-model="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email" />
                         </div>
                         <div class="subhead">
                             <h4>Preferred way of receiving notifications</h4>

@@ -74,12 +74,12 @@
 
                 <div class="field-group">
                     <label for="Applicante_phone_number">Phone number</label>
-                    <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber" required />
+                    <input type="text" class="field-input" ng-trim="false" maxlength="15" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber" required />
                 </div>
 
                 <div class="field-group">
                     <label for="Applicant_email">Email</label>
-                    <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                    <input type="email" class="field-input" ng-trim="false" maxlength="50" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                 </div>
             </div>
 
@@ -169,12 +169,12 @@
 
                         <div class="field-group">
                             <label for="representative_phone_number">Phone number</label>
-                            <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber" required />
+                            <input type="text" class="field-input" ng-trim="false" maxlength="15" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber" required />
                         </div>
 
                         <div class="field-group">
                             <label for="representative_email">Email</label>
-                            <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
+                            <input type="email" class="field-input" ng-trim="false" maxlength="50" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email" required />
                         </div>
                         <div class="subhead">
                             <h4>Preferred way of receiving notifications</h4>

@@ -102,12 +102,12 @@
 
                             <div class="field-group">
                                 <label for="Applicante_phone_number">Phone number</label>
-                                <input type="text" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber" />
+                                <input type="text" class="field-input" maxlength="15" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber" />
                             </div>
 
                             <div class="field-group">
                                 <label for="Applicant_email">Email</label>
-                                <input type="email" class="field-input" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email" />
+                                <input type="email" class="field-input" maxlength="50" ng-trim="false" ng-model="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email" />
                             </div>
                         </div>
 
@@ -352,13 +352,13 @@
 
                         <div class="field-group">
                             <label for="owner_phone">Phone number</label>
-                            <input type="text" name="owner_phone" id="owner_phone" class="field-input phone" placeholder=""
+                            <input type="text" name="owner_phone" id="owner_phone" maxlength="15" class="field-input phone" placeholder=""
                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.PhoneNumber" />
                         </div>
 
                         <div class="field-group mar-bottom-60">
                             <label for="owner_email">Email</label>
-                            <input type="email" name="owner_email" id="owner_email" class="field-input" placeholder=""
+                            <input type="email" name="owner_email" id="owner_email" maxlength="50" class="field-input" placeholder=""
                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Email" />
                         </div>
 
@@ -454,13 +454,13 @@
 
                         <div class="field-group">
                             <label for="manager_phone">Phone number</label>
-                            <input type="text" name="manager_phone" id="manager_phone" class="field-input phone" placeholder=""
+                            <input type="text" name="manager_phone" id="manager_phone" maxlength="15" class="field-input phone" placeholder=""
                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.PhoneNumber" />
                         </div>
 
                         <div class="field-group">
                             <label for="manager_email">Email</label>
-                            <input type="email" name="manager_email" id="manager_email" class="field-input" placeholder=""
+                            <input type="email" name="manager_email" id="manager_email" maxlength="50" class="field-input" placeholder=""
                                    ng-model="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.Email" />
                         </div>
 
