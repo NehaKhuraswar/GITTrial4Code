@@ -4,7 +4,8 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
     // self.CityUserAccount = [];
     self.AccountTypesList = [];
     self.confirmPwd = "";
-    
+    self.Error = '';
+    self.Hide = false;
 
     self.bEdit = rapGlobalFactory.IsEdit;
     self.Title = "Create a City of Oakland Account";
@@ -29,15 +30,17 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
         return strongRegex.test(pwd);
         }
     self.CreateAccount = function (model) {
-        if (model.Password != self.confirmPwd) {
-            alert.Error("Please enter same password in password fields.");
-            return;
-        }
-         if (!checkPassword(model.Password, model.email)) {
-            self.PasswordError = true;
-            self.Error = "Enter password matching the requirements";
-            return;
+        if (self.bEdit != true) {
+            if (model.Password != self.confirmPwd) {
+                self.Error = "Please enter same password in password fields.";
+                return;
             }
+            if (!checkPassword(model.Password, model.email)) {
+                self.PasswordError = true;
+                self.Error = "Enter password matching the requirements";
+                return;
+            }
+        }
         rapFactory.CreateCityUserAccount(model).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;

@@ -512,6 +512,7 @@ namespace RAP.DAL
                         cityUser.CreatedDate = cityDetails.CreatedDate;
                         cityUser.Email = cityDetails.Email;
                         cityUser.EmployeeID = (int)cityDetails.EmployeeID;
+                        cityUser.Password = cityDetails.Password;
                         cityUser.IsAnalyst = Convert.ToBoolean(cityDetails.IsAnalyst);
                         if (cityUser.IsAnalyst == true)
                         {
