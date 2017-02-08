@@ -1588,8 +1588,6 @@ namespace RAP.DAL
 		
 		private EntityRef<CustomerDetail> _CustomerDetail2;
 		
-		private EntitySet<TranslationServiceInfo> _TranslationServiceInfos;
-		
 		private EntityRef<CustomerDetail> _CustomerDetail1;
 		
     #region Extensibility Method Definitions
@@ -1626,7 +1624,6 @@ namespace RAP.DAL
 			this._CollaboratorAccesses1 = new EntitySet<CollaboratorAccess>(new Action<CollaboratorAccess>(this.attach_CollaboratorAccesses1), new Action<CollaboratorAccess>(this.detach_CollaboratorAccesses1));
 			this._MailingAddresses = new EntitySet<MailingAddress>(new Action<MailingAddress>(this.attach_MailingAddresses), new Action<MailingAddress>(this.detach_MailingAddresses));
 			this._CustomerDetail2 = default(EntityRef<CustomerDetail>);
-			this._TranslationServiceInfos = new EntitySet<TranslationServiceInfo>(new Action<TranslationServiceInfo>(this.attach_TranslationServiceInfos), new Action<TranslationServiceInfo>(this.detach_TranslationServiceInfos));
 			this._CustomerDetail1 = default(EntityRef<CustomerDetail>);
 			OnCreated();
 		}
@@ -1945,19 +1942,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_TranslationServiceInfo", Storage="_TranslationServiceInfos", ThisKey="CustomerID", OtherKey="CustomerID")]
-		public EntitySet<TranslationServiceInfo> TranslationServiceInfos
-		{
-			get
-			{
-				return this._TranslationServiceInfos;
-			}
-			set
-			{
-				this._TranslationServiceInfos.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_CustomerDetail", Storage="_CustomerDetail1", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
 		public CustomerDetail CustomerDetail1
 		{
@@ -2055,18 +2039,6 @@ namespace RAP.DAL
 		}
 		
 		private void detach_MailingAddresses(MailingAddress entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = null;
-		}
-		
-		private void attach_TranslationServiceInfos(TranslationServiceInfo entity)
-		{
-			this.SendPropertyChanging();
-			entity.CustomerDetail = this;
-		}
-		
-		private void detach_TranslationServiceInfos(TranslationServiceInfo entity)
 		{
 			this.SendPropertyChanging();
 			entity.CustomerDetail = null;
@@ -2754,7 +2726,7 @@ namespace RAP.DAL
 		
 		private int _TranslationServiceID;
 		
-		private int _CustomerID;
+		private int _UserID;
 		
 		private bool _IsTranslatorRequired;
 		
@@ -2768,16 +2740,14 @@ namespace RAP.DAL
 		
 		private System.Nullable<int> _LastModifiedBy;
 		
-		private EntityRef<CustomerDetail> _CustomerDetail;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnTranslationServiceIDChanging(int value);
     partial void OnTranslationServiceIDChanged();
-    partial void OnCustomerIDChanging(int value);
-    partial void OnCustomerIDChanged();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
     partial void OnIsTranslatorRequiredChanging(bool value);
     partial void OnIsTranslatorRequiredChanged();
     partial void OnTranslationLanguageChanging(string value);
@@ -2794,7 +2764,6 @@ namespace RAP.DAL
 		
 		public TranslationServiceInfo()
 		{
-			this._CustomerDetail = default(EntityRef<CustomerDetail>);
 			OnCreated();
 		}
 		
@@ -2818,26 +2787,22 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int NOT NULL")]
-		public int CustomerID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		public int UserID
 		{
 			get
 			{
-				return this._CustomerID;
+				return this._UserID;
 			}
 			set
 			{
-				if ((this._CustomerID != value))
+				if ((this._UserID != value))
 				{
-					if (this._CustomerDetail.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomerIDChanging(value);
+					this.OnUserIDChanging(value);
 					this.SendPropertyChanging();
-					this._CustomerID = value;
-					this.SendPropertyChanged("CustomerID");
-					this.OnCustomerIDChanged();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
 				}
 			}
 		}
@@ -2958,40 +2923,6 @@ namespace RAP.DAL
 					this._LastModifiedBy = value;
 					this.SendPropertyChanged("LastModifiedBy");
 					this.OnLastModifiedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerDetail_TranslationServiceInfo", Storage="_CustomerDetail", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
-		public CustomerDetail CustomerDetail
-		{
-			get
-			{
-				return this._CustomerDetail.Entity;
-			}
-			set
-			{
-				CustomerDetail previousValue = this._CustomerDetail.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerDetail.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerDetail.Entity = null;
-						previousValue.TranslationServiceInfos.Remove(this);
-					}
-					this._CustomerDetail.Entity = value;
-					if ((value != null))
-					{
-						value.TranslationServiceInfos.Add(this);
-						this._CustomerID = value.CustomerID;
-					}
-					else
-					{
-						this._CustomerID = default(int);
-					}
-					this.SendPropertyChanged("CustomerDetail");
 				}
 			}
 		}

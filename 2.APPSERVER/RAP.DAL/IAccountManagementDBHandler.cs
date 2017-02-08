@@ -20,7 +20,7 @@ namespace RAP.DAL
         ReturnResult<RAP.Core.DataModels.CustomerInfo> GetCustomer(int CustomerID);
         ReturnResult<System.Collections.Generic.List<RAP.Core.DataModels.StateM>> GetStateList();
         ReturnResult<RAP.Core.DataModels.ThirdPartyInfoM> GetThirdPartyInfo(int CustomerID);
-        ReturnResult<RAP.Core.DataModels.TranslationServiceInfoM> GetTranslationServiceInfo(int CustomerID);
+        ReturnResult<RAP.Core.DataModels.TranslationServiceInfoM> GetTranslationServiceInfo(int UserID);
         ReturnResult<bool> RemoveThirdParty(int CustID, int thirdPartyRepresentationID);
         ReturnResult<string> ResendPin(RAP.Core.DataModels.CustomerInfo message);
         ReturnResult<RAP.Core.DataModels.CustomerInfo> SaveCustomer(RAP.Core.DataModels.CustomerInfo message);

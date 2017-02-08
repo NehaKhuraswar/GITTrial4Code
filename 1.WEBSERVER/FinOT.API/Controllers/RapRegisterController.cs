@@ -256,9 +256,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("GetTranslationServiceInfo/{CustomerID:int}")]
+        [Route("GetTranslationServiceInfo/{UserID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetTranslationServiceInfo(int CustomerID)
+        public HttpResponseMessage GetTranslationServiceInfo(int UserID)
         {
             AccountManagementService accService = new AccountManagementService();
             HttpStatusCode ReturnCode = HttpStatusCode.OK;
@@ -267,7 +267,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = accService.GetTranslationServiceInfo(CustomerID);
+                result = accService.GetTranslationServiceInfo(UserID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

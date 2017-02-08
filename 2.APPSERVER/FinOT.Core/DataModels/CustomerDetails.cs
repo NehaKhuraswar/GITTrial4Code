@@ -107,7 +107,7 @@ namespace RAP.Core.DataModels
     }
     public class TranslationServiceInfoM
     {
-        public int CustomerID { get; set; }
+        public int UserID { get; set; }
         public bool IsTranslatorRequired { get; set; }
         public string TranslationLanguage { get; set; }
     }

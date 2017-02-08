@@ -297,13 +297,11 @@
                                         <div class="small-title">Notifications</div>
                                         <p>Mail</p>
                                         <div class="small-title">Mediation</div>
-                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==1">No</p>
-                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==1">Yes</p>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==2">No</p>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==2">Yes</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==1">No</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==1">Yes</p>
                                         <div class="small-title">Request of translation services</div>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes <br />{{Ctrl.caseinfo.TranslationServiceInfo.TranslationLanguage}}</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo.TranslationLanguage}}</p>
                                     </div>
 
                                     <div class="col-md-4 col-sm-12">
@@ -332,11 +330,9 @@
                                         <div class="small-title">Mediation</div>
                                         <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==1">No</p>
                                         <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==1">Yes</p>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==2">No</p>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==2">Yes</p>
                                         <div class="small-title">Request of translation services</div>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes <br />{{Ctrl.caseinfo.TranslationServiceInfo.TranslationLanguage}}</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.TranslationServiceInfo.TranslationLanguage}}</p>
 
                                     </div>
 
@@ -365,8 +361,8 @@
                                         <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==2">No</p>
                                         <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==2">Yes</p>
                                         <div class="small-title">Request of translation services</div>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.TranslationServiceInfo.TranslationLanguage}}</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.TranslationServiceInfo.TranslationLanguage}}</p>
                                     </div>
 
                                     <!--<div class="col-md-4 col-sm-12">
@@ -387,19 +383,17 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Tenant</div>
-                                        <div class="fs20-title">{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}</div>
-                                        <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}  </p>
-                                        <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email}} </p>
+                                        <div class="fs20-title">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.LastName}}</div>
+                                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine2}},<br />{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}}, {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.State.StateCode}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip}}  </p>
+                                        <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Email}} </p>
                                         <div class="small-title">Notifications</div>
                                         <p>Mail</p>
                                         <div class="small-title">Mediation</div>
-                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==1">No</p>
-                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==1">Yes</p>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==2">No</p>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==2">Yes</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantResponseInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==2">No</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantResponseInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==2">Yes</p>
                                         <div class="small-title">Request of translation services</div>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
-                                        <p ng-show="Ctrl.caseinfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.TranslationServiceInfo.TranslationLanguage}}</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo.TranslationLanguage}}</p>
 
                                     </div>
 

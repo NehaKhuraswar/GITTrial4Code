@@ -995,25 +995,25 @@ namespace RAP.DAL
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
 
-                    var translationService = db.TranslationServiceInfos.Where(r => r.CustomerID == model.CustomerID).FirstOrDefault();
+                    var translationService = db.TranslationServiceInfos.Where(r => r.UserID == model.UserID).FirstOrDefault();
 
                     if (translationService != null)
                     {
-                        translationService.CustomerID = model.CustomerID;
+                        translationService.UserID = model.UserID;
                         translationService.IsTranslatorRequired = model.IsTranslatorRequired;
                         translationService.TranslationLanguage = model.TranslationLanguage;
                         translationService.LastModifiedDate = DateTime.Now;
-                        translationService.LastModifiedBy = model.CustomerID;
+                        translationService.LastModifiedBy = model.UserID;
                         db.SubmitChanges();
                     }
                     else
                     {
                         TranslationServiceInfo _newtranslationService = new TranslationServiceInfo();
-                        _newtranslationService.CustomerID = model.CustomerID;
+                        _newtranslationService.UserID = model.UserID;
                         _newtranslationService.IsTranslatorRequired = model.IsTranslatorRequired;
                         _newtranslationService.TranslationLanguage = model.TranslationLanguage;
                         _newtranslationService.CreatedDate = DateTime.Now;
-                        _newtranslationService.CreatedBy = model.CustomerID;
+                        _newtranslationService.CreatedBy = model.UserID;
                         db.TranslationServiceInfos.InsertOnSubmit(_newtranslationService);
                         db.SubmitChanges();
                     }
@@ -1108,7 +1108,7 @@ namespace RAP.DAL
         /// </summary>
         /// <param name="CustomerID"></param>
         /// <returns></returns>
-        public ReturnResult<TranslationServiceInfoM> GetTranslationServiceInfo(int CustomerID)
+        public ReturnResult<TranslationServiceInfoM> GetTranslationServiceInfo(int UserID)
         {
             ReturnResult<TranslationServiceInfoM> result = new ReturnResult<TranslationServiceInfoM>();
             TranslationServiceInfoM model = new TranslationServiceInfoM();
@@ -1116,16 +1116,16 @@ namespace RAP.DAL
             {
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    var translationService = db.TranslationServiceInfos.Where(r => r.CustomerID == CustomerID).FirstOrDefault();
+                    var translationService = db.TranslationServiceInfos.Where(r => r.UserID == UserID).FirstOrDefault();
                     if (translationService != null)
                     {
-                        model.CustomerID = CustomerID;
+                        model.UserID = UserID;
                         model.IsTranslatorRequired = translationService.IsTranslatorRequired;
                         model.TranslationLanguage = translationService.TranslationLanguage;
                     }
                     else
                     {
-                        model.CustomerID = CustomerID;
+                        model.UserID = UserID;
                     }
                 }
                 result.result = model;

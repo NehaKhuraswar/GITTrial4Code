@@ -104,9 +104,9 @@ namespace RAP.Business.Implementation
         {
             return accDBHandler.GetThirdPartyInfo(CustomerID);
         }
-        public ReturnResult<TranslationServiceInfoM> GetTranslationServiceInfo(int CustomerID)
+        public ReturnResult<TranslationServiceInfoM> GetTranslationServiceInfo(int UserID)
         {
-            return accDBHandler.GetTranslationServiceInfo(CustomerID);
+            return accDBHandler.GetTranslationServiceInfo(UserID);
         }
         public ReturnResult<bool> SaveOrUpdateThirdPartyInfo(RAP.Core.DataModels.ThirdPartyInfoM model)
         {

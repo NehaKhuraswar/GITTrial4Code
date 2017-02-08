@@ -11,10 +11,10 @@ var rapTranslationFactory = ['blockUI', 'ajaxService', function (blockUI, ajax) 
         });
     }
 
-    var _GetTranslationServiceInfo = function (custID) {
+    var _GetTranslationServiceInfo = function (UserID) {
         blockUI.start();
 
-        return ajax.Get(_routePrefix + '/GetTranslationServiceInfo/' + custID)
+        return ajax.Get(_routePrefix + '/GetTranslationServiceInfo/' + UserID)
         .finally(function () {
             blockUI.stop();
         });

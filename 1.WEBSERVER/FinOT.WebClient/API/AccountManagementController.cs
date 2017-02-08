@@ -285,9 +285,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("GetTranslationServiceInfo/{CustomerID}")]
+        [Route("GetTranslationServiceInfo/{UserID}")]
         [HttpGet]
-        public HttpResponseMessage GetTranslationServiceInfo(string CustomerID)
+        public HttpResponseMessage GetTranslationServiceInfo(string UserID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -295,7 +295,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "GetTranslationServiceInfo/" + CustomerID;
+                string requestUri = _requestURI + "GetTranslationServiceInfo/" + UserID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

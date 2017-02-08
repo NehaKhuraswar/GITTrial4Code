@@ -787,7 +787,8 @@ namespace RAP.DAL
                     caseinfo.CaseID = caseDB.CaseID;
                     caseinfo.C_ID = caseDB.C_ID;
                     caseinfo.PetitionCategoryID = Convert.ToInt32(caseDB.PetitionCategoryID);
-
+                    caseinfo.OwnerResponseInfo.OwnerResponseID =  Convert.ToInt32(caseDB.OwnerResponseID);
+                    caseinfo.TenantResponseInfo.TenantResponseID = Convert.ToInt32(caseDB.TenantResponseID);
                     if (caseDB.CityAnalystUserID != null)
                     {
                         var CityAnalystDB = db.CityUserAccounts.Where(x => x.CityUserID == caseDB.CityAnalystUserID).FirstOrDefault();
@@ -831,6 +832,11 @@ namespace RAP.DAL
                                 applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
                             }
                             caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
+                            var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID);
+                            if (TranslationServiceResult.status.Status == StatusEnum.Success)
+                            {
+                                caseinfo.TenantPetitionInfo.ApplicantUserInfo.TranslationServiceInfo = TranslationServiceResult.result;
+                            }
                         }
                         caseinfo.TenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionDB.bThirdPartyRepresentation;
                         if (caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)
@@ -838,8 +844,14 @@ namespace RAP.DAL
                             caseinfo.TenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ThirdPartyUserID).result;
                         }
                         caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID).result;
+                        var TranslationServiceOwnerResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.TenantPetitionInfo.OwnerInfo.UserID);
+                        if (TranslationServiceOwnerResult.status.Status == StatusEnum.Success)
+                        {
+                            caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo = TranslationServiceOwnerResult.result;
+                        }
                         caseinfo.TenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionDB.PropertyManagerUserID).result;
                         caseinfo.TenantPetitionInfo.Verification.bCaseMediation = _dbContext.TenantPetitionVerifications.Where(x => x.PetitionID == TenantPetitionDB.TenantPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
+                        caseinfo.OwnerResponseInfo.Verification.bCaseMediation = _dbContext.OwnerResponseVerifications.Where(x => x.PetitionID == caseinfo.OwnerResponseInfo.OwnerResponseID).Select(x => x.bCaseMediation).FirstOrDefault();
                     }
                     else if (petitionDetailsDb.OwnerPetitionID != null)
                     {
@@ -848,13 +860,20 @@ namespace RAP.DAL
                         {
                             caseinfo.OwnerPetitionInfo = ownerPetitionResult.result;
                         }
+                        var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID);
+                        if (TranslationServiceResult.status.Status == StatusEnum.Success)
+                        {
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.TranslationServiceInfo = TranslationServiceResult.result;
+                        }
+                        var TranslationServiceTenantResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.UserID);
+                        if (TranslationServiceTenantResult.status.Status == StatusEnum.Success)
+                        {
+                            caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo = TranslationServiceTenantResult.result;
+                        }
                         caseinfo.OwnerPetitionInfo.Verification.bCaseMediation = _dbContext.OwnerPetitionVerifications.Where(x => x.PetitionID == petitionDetailsDb.OwnerPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
+                        caseinfo.TenantResponseInfo.Verification.bCaseMediation = _dbContext.TenantResponseVerifications.Where(x => x.TenantResponseID == caseinfo.TenantResponseInfo.TenantResponseID).Select(x => x.bCaseMediation).FirstOrDefault();
                     }
-                    var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.CaseFileBy);
-                    if (TranslationServiceResult.status.Status == StatusEnum.Success)
-                    {
-                         caseinfo.TranslationServiceInfo= TranslationServiceResult.result;
-                    }
+                    
                     caseinfo.ActivityStatus = _dashboarddbHandler.GetActivityStatusForCase(caseinfo.C_ID).result;
                     var caseActivityStatusDb = _dbDashboard.CaseActivityStatus.Where(x => x.C_ID == caseinfo.C_ID).OrderByDescending(y => y.LastModifiedDate).FirstOrDefault();
                     if (caseActivityStatusDb != null)

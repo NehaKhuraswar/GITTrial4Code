@@ -9,7 +9,7 @@ var rapTranslationController = ['$scope', '$modal', 'alertService', 'rapTranslat
    
    
     var _GetTranslationServiceInfo = function () {
-        rapFactory.GetTranslationServiceInfo(self.custDetails.custID).then(function (response) {
+        rapFactory.GetTranslationServiceInfo(self.custDetails.User.UserID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 return;

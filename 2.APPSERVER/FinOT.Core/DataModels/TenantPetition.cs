@@ -92,6 +92,7 @@ namespace RAP.Core.DataModels
             State = new StateM();
             City = "Oakland";
             apnAddress = new APNAddress();
+            TranslationServiceInfo = new TranslationServiceInfoM();
         }
         public int UserID { get; set; }
         public string BusinessName { get; set; }
@@ -107,6 +108,7 @@ namespace RAP.Core.DataModels
         public bool IsDeleted { get; set; }
         public bool IsAPNAddress { get; set; }
         public APNAddress apnAddress { get; set; }
+        public TranslationServiceInfoM TranslationServiceInfo { get; set; }
     }
 
     public class APNAddress
