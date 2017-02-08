@@ -53,7 +53,7 @@
 
                     <div class="field-group">
                         <label for="initial_monthly_rent">The tenant’s initial monthly rent including all services provided was</label>
-                        <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.InitialRent" placeholder="Enter dollar amount" />
+                        <input numbernocomma type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input" ng-model="Ctrl.caseinfo.OwnerResponseInfo.PropertyInfo.InitialRent" placeholder="Enter dollar amount" />
                     </div>
 
                     <div class="field-group">
@@ -296,12 +296,12 @@
                         <div class="row">
                             <div class="col-sm-6 col-xs-12">
                                 <label for="monthly_increase_from" class="hidden"></label>
-                                <input type="text" name="monthly_increase_from" id="monthly_increase_from" class="field-input" placeholder="From" ng-model="Ctrl.Rent.RentIncreasedFrom" />
+                                <input numbernocomma type="text" name="monthly_increase_from" id="monthly_increase_from" class="field-input" placeholder="From $" ng-model="Ctrl.Rent.RentIncreasedFrom" />
                             </div>
 
                             <div class="col-sm-6 col-xs-12">
                                 <label for="monthly_increase_to" class="hidden"></label>
-                                <input type="text" name="monthly_increase_to" id="monthly_increase_to" class="field-input" placeholder="To" ng-model="Ctrl.Rent.RentIncreasedTo" />
+                                <input numbernocomma type="text" name="monthly_increase_to" id="monthly_increase_to" class="field-input" placeholder="To $" ng-model="Ctrl.Rent.RentIncreasedTo" />
                             </div>
                         </div>
                     </div><!-- .field-group -->

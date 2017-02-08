@@ -92,7 +92,7 @@
 
     <div class="field-group">
         <label for="initial_monthly_rent">Initial monthly rent</label>
-        <input type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input"
+        <input numbernocomma type="text" name="initial_monthly_rent" id="initial_monthly_rent" class="field-input"
                ng-model="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.InitialRent" placeholder="" />
     </div>
 
@@ -266,13 +266,13 @@
         <label>Monthly rent increase</label>
         <div class="row">
             <div class="col-sm-6 col-xs-12">
-                <input type="text" name="monthly_rent_increase_from" id="monthly_rent_increase_from" class="field-input"
-                       placeholder="From" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedFrom" />
+                <input numbernocomma type="text" name="monthly_rent_increase_from" id="monthly_rent_increase_from" class="field-input"
+                       placeholder="From $" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedFrom" />
             </div>
 
             <div class="col-sm-6 col-xs-12">
-                <input type="text" name="monthly_rent_increase_to" id="monthly_rent_increase_to" class="field-input"
-                       placeholder="To" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedTo" />
+                <input numbernocomma type="text" name="monthly_rent_increase_to" id="monthly_rent_increase_to" class="field-input"
+                       placeholder="To $" ng-model="Ctrl.RentalIncreaseModel.RentIncreasedTo" />
             </div>
         </div>
     </div><!-- .field-group -->
