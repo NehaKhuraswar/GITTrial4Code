@@ -85,8 +85,8 @@
 
                     <div class="field-group">
                         <label for="estimated_dollar_value">What is the estimated dollar value of the lost service or problem?</label>
-                        <input type="text" name="estimated_dollar_value" id="estimated_dollar_value" class="field-input"
-                               ng-model="Ctrl.LostServices.EstimatedLoss" placeholder="" />
+                        <input numbernocomma type="text" name="estimated_dollar_value" id="estimated_dollar_value" class="field-input"
+                               ng-model="Ctrl.LostServices.EstimatedLoss" placeholder="$" />
                     </div>
 
                     <div class="field-group no-top-margin">
@@ -209,7 +209,7 @@
 
                     <div class="field-group">
                         <label for="dollar_monetary_loss">Your estimated dollar value of incurred monetary loss as a result these problem(s)</label>
-                        <input type="text" name="dollar_monetary_loss" id="dollar_monetary_loss" class="field-input" placeholder="" ng-model="Ctrl.Problems.EstimatedLoss" />
+                        <input numbernocomma type="text" name="dollar_monetary_loss" id="dollar_monetary_loss" class="field-input" placeholder="$" ng-model="Ctrl.Problems.EstimatedLoss" />
                     </div>
 
                     <div class="field-group no-top-margin">
