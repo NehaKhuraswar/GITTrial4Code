@@ -1,10 +1,10 @@
 ﻿'use strict';
-var rapResponseConfirmationController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, $location, rapGlobalFactory) {
+var rapResponseConfirmationController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapGlobalFactory, $anchorScroll) {
     var self = this;
 
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
-
+    $anchorScroll();
     self.Continue = function () {
         $location.path("/publicdashboard");
     }

@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -8,11 +8,14 @@ var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFac
 
     var _GetTenantResponseReviewInfo = function (CaseNumber,custID) {
         rapFactory.GetTenantResponseReviewInfo(CaseNumber, custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.TenantResponseInfo = response.data.TenantResponseInfo;
             self.caseinfo.Documents = response.data.Documents;
+            $anchorScroll();
         });
     }
     _GetTenantResponseReviewInfo(self.caseinfo.CaseID, self.custDetails.custID);

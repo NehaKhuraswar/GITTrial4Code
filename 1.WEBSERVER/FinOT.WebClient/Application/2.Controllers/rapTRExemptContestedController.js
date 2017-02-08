@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTRExemptContestedFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTRExemptContestedFactory', '$location', 'rapGlobalFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 4;
@@ -9,10 +9,14 @@ var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTR
     
     var _GetTenantResponseExemptContestedInfo = function (TenantResponseID) {
         rapFactory.GetTenantResponseExemptContestedInfo(TenantResponseID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
+        
             self.caseinfo.TenantResponseInfo.ExemptContestedInfo = response.data.TenantResponseInfo.ExemptContestedInfo;
+            $anchorScroll();
         });
     }
     _GetTenantResponseExemptContestedInfo(self.caseinfo.TenantResponseInfo.TenantResponseID);

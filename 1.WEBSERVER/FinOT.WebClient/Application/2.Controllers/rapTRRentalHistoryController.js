@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRrentalhistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRrentalhistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -10,7 +10,9 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
     self.Calender = masterFactory.Calender;
     var _GetEmptyTenantResponseRentalIncrementInfo = function () {
         rapFactory.GetEmptyTenantResponseRentalIncrementInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.RentalIncreaseModel = response.data;
@@ -19,10 +21,13 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
     _GetEmptyTenantResponseRentalIncrementInfo();
     var _GetTenantResponseRentalHistoryInfo = function (tenantresponseID) {
         rapFactory.GetTenantResponseRentalHistoryInfo(tenantresponseID, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.TenantResponseInfo.TenantRentalHistory = response.data;
+            $anchorScroll();
         });
     }
     _GetTenantResponseRentalHistoryInfo(self.caseinfo.TenantResponseInfo.TenantResponseID);
@@ -37,7 +42,11 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
             }
         }
         rapFactory.SaveTenantResponseRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantResponseInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             $scope.model.bRentalHistory = false;
             $scope.model.bAddDocuments = true;
             $scope.model.TRSubmissionStatus.RentHistory = true;

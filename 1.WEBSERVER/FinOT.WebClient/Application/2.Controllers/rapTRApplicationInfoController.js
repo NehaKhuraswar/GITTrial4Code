@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTRapplicationinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTRapplicationinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 3;
@@ -22,7 +22,8 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     self.GetTenantResponseApplicationInfo = function (CaseNumber) {
         rapFactory.GetTenantResponseApplicationInfo(CaseNumber, self.custDetails.custID).then(function (response) {
              if (!alert.checkForResponse(response)) {
-                self.Error = rapGlobalFactory.Error;
+                 self.Error = rapGlobalFactory.Error;
+                 $anchorScroll();
                 return;
                 }
             self.caseinfo = response.data;
@@ -38,7 +39,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             self.caseinfo.TenantResponseInfo.CustomerID = self.custDetails.custID;
             self.bCaseInfo = true;
             rapGlobalFactory.CaseDetails = self.caseinfo;
-
+            $anchorScroll();
         });
     }
     if (self.caseinfo)
@@ -48,7 +49,8 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
              if (!alert.checkForResponse(response)) {
-                self.Error = rapGlobalFactory.Error;
+                 self.Error = rapGlobalFactory.Error;
+                  $anchorScroll();
                 return;
                 }
             self.StateList = response.data;
@@ -89,10 +91,12 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
         if (self.caseinfo.bCaseFiledByThirdParty == false && self.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true && (self.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID == 0 || self.bEditThirdParty == true)) {
             if (!(self.caseinfo.TenantResponseInfo.ThirdPartyMailNotification || self.caseinfo.TenantResponseInfo.ThirdPartyEmailNotification)) {
                 self.Error = 'Third party notification preference is required';
+                $anchorScroll();
                 bInValid = true;
             }
             else if (!self.bAcknowledgeNotification) {
                 self.Error = 'Please acknowledge Third party notification preference';
+                $anchorScroll();
                 bInValid = true;
             }
         }
@@ -110,8 +114,9 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveTenantResponseApplicationInfo(rapGlobalFactory.CaseDetails, self.custDetails.custID).then(function (response) {
              if (!alert.checkForResponse(response)) {
-                self.Error = rapGlobalFactory.Error;
-                return;
+                 self.Error = rapGlobalFactory.Error;
+                 $anchorScroll();
+                 return;
         }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.bAppInfo = false;

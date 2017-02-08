@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapTRDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, ajaxService, $location, rapFactory, rapGlobalFactory, masterFactory) {
+var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapTRDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, ajaxService, $location, rapFactory, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     $scope.model.stepNo = 6;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -8,7 +8,11 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
     self.DocDescriptions = masterFactory.DocDescription();
 
     masterFactory.DocDescription().then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.DocDescriptions = response.data;
     });
     self.description1 = null;
@@ -35,9 +39,14 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
     }
 
     rapFactory.GetTRAdditionalDocuments(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
+        $anchorScroll();
     });
 
     self.Delete = function (doc) {

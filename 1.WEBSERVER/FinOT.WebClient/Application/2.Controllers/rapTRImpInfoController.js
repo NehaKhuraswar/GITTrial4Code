@@ -1,7 +1,8 @@
 ﻿'use strict';
-var rapTRImpInfoController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTypeFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapTRImpInfoController = ['$scope', '$modal', 'alertService', 'rapTRPetitionTypeFactory', '$location', 'rapGlobalFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, $anchorScroll) {
     var self = this;
     $scope.model.stepNo = 2;
+    $anchorScroll();
     self.Continue = function () {
         $scope.model.bImpInfo = false;
         $scope.model.bAppInfo = true;
