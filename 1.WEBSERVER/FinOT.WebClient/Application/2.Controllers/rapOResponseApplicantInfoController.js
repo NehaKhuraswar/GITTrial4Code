@@ -41,6 +41,7 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
     });
 
     self.Calender = masterFactory.Calender;
+    self.Calender1900 = masterFactory.Calender1900;
 
     function RestrictUpload() {
         self.bBusinessTaxProofUpload = true;
