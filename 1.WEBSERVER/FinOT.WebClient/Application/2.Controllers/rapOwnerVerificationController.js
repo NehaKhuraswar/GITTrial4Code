@@ -16,7 +16,7 @@
                 $anchorScroll();
                 return;
             }
-            self.Error = "Pin is sent to your email";
+            self.Error = "Your pin has been sent to your email address";
             $anchorScroll();
         });
     }
