@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgroundsofappealFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgroundsofappealFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     $scope.model.stepNo = 4;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -10,18 +10,22 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
         rapFactory.GetAppealDocuments(CustomerID, DocTitle).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.TenantAppealInfo.Documents = response.data;
+            $anchorScroll();
         });
     }
     var _GetAppealGroundInfo = function (CaseNumber, appealFiledBy) {
         rapFactory.GetAppealGroundInfo(CaseNumber, appealFiledBy).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.TenantAppealInfo.AppealGrounds = response.data;
+            $anchorScroll();
         });
     }
     _GetAppealGroundInfo(self.caseinfo.CaseID, self.custDetails.custID);
@@ -85,6 +89,7 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
         if (selected == false)
         {
             self.Error = "Grounds of appeal is a required field";
+            $anchorScroll();
             return;
         }
 
@@ -96,6 +101,7 @@ var rapGroundsOfAppealController = ['$scope', '$modal', 'alertService', 'rapgrou
         rapFactory.SaveAppealGroundInfo(model).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;

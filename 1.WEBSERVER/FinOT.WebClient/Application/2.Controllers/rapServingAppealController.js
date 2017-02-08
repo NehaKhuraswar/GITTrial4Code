@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rapservingappealFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $q, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rapservingappealFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $q, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -13,9 +13,11 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     masterFactory.GetStateList().then(function (response) {
         if (!alert.checkForResponse(response)) {
             self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
             return;
          }
             self.StateList = response.data;
+            $anchorScroll();
         });
      }
     //_GetStateList();
@@ -24,9 +26,11 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     rapFactory.GetOpposingParty ().then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.OpposingParty = response.data;
+                $anchorScroll();
             });
     }
 
@@ -35,12 +39,14 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
         rapFactory.GetAppealServe(appealID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             // self.caseinfo = response.data;
             self.caseinfo.TenantAppealInfo.serveAppeal = response.data.TenantAppealInfo.serveAppeal;
             self.serveAppeal = self.caseinfo.TenantAppealInfo.serveAppeal;
             self.serveAppeal.AppealID = appealID;
+            $anchorScroll();
         });
     }
    // _GetAppealServe(self.caseinfo.TenantAppealInfo.AppealID);
@@ -71,6 +77,7 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
         else
         {
             self.Error = 'Opposing parties First Name, Address 1, City , State , Zip fields required';
+            $anchorScroll();
         }
         }
 
@@ -79,9 +86,11 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
         masterFactory.ResendPin(self.custDetails).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
-            alert.Error("Pin is sent to your email");
+            self.Error("Pin is sent to your email");
+            $anchorScroll();
         });
     }
     
@@ -93,6 +102,7 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
         rapFactory.SaveTenantServingAppeal(self.caseinfo.TenantAppealInfo, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                 $anchorScroll();
                 return;
             }
             $scope.model.bServingAppeal = false;

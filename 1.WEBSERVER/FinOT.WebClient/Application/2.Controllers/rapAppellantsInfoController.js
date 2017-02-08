@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappellantsinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappellantsinfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     $scope.model.stepNo = 3;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -22,9 +22,11 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.StateList = response.data;
+            $anchorScroll();
         });
     }
     _GetStateList();
@@ -32,6 +34,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
         rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                 $anchorScroll();
                 return;
             }
             self.caseinfo = response.data;
@@ -65,10 +68,12 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
         if (self.caseinfo.bCaseFiledByThirdParty == false && self.bEditRepresentative == true) {
             if (!(self.caseinfo.TenantAppealInfo.ThirdPartyMailNotification || self.caseinfo.TenantAppealInfo.ThirdPartyEmailNotification)) {
                 self.Error = 'Third party notification preference is required';
+                $anchorScroll();
                 bInValid = true;
             }
             else if (!self.bAcknowledgeNotification) {
                 self.Error = 'Please acknowledge Third party notification preference';
+                $anchorScroll();
                 bInValid = true;
             }
         }
@@ -87,6 +92,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
         rapFactory.SaveTenantAppealInfo(model, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                 $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails.TenantAppealInfo = response.data;

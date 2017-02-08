@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', 'rapAppealDocumentFactory', 'masterdataFactory', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory, rapFactory, masterFactory) {
+var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService', '$location', 'rapGlobalFactory', 'rapAppealDocumentFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, ajaxService, $location, rapGlobalFactory, rapFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 5;
@@ -21,9 +21,11 @@ var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxServ
     rapFactory.GetAppealDocuments(self.custDetails.custID, 'A_AdditionalDocuments').then(function (response) {
         if (!alert.checkForResponse(response)) {
             self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
             return;
         }
         self.Documents = response.data;
+       $anchorScroll();
     });
 
     $scope.onFileSelected = function ($files, docTitle) {
@@ -83,6 +85,7 @@ var rapAppealDocumentController = ['$scope', '$modal', 'alertService', 'ajaxServ
         rapFactory.SaveAppealDocuments(self.Documents, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             $scope.model.bAddDocs = false;

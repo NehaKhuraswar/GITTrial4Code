@@ -1,11 +1,12 @@
 ﻿'use strict';
-var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewappealFactory', '$location', 'rapGlobalFactory', 'rapAppealDocumentFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapAppealDocumentFactory) {
+var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewappealFactory', '$location', 'rapGlobalFactory', 'rapAppealDocumentFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapAppealDocumentFactory, $anchorScroll) {
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.Error = "";
     $scope.model.stepNo = 7;
+    
     //var _GetCaseInfoWithModel = function (CaseID) {
     //    rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
     //        if (!alert.checkResponse(response)) {
@@ -22,12 +23,14 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
            return;
        }
        self.Documents = response.data;
+       $anchorScroll();
    });
     self.SubmitAppeal = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SubmitAppeal(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
         }
             //$scope.model.bServingAppeal = false;
