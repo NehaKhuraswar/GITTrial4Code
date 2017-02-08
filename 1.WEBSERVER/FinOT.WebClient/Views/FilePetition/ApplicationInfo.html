@@ -31,11 +31,11 @@
                                     <div class="field-group">
                                         <label for="Applicant_firstname">Name <span>*</span></label>
                                         <input type="text" class="field-input required" id="Applicant_firstname" name="Applicant_firstname" data-error="Applicant first name"
-                                               ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName" placeholder="First" required />
+                                               ng-required="Ctrl.caseinfo.bCaseFiledByThirdParty == true" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName" placeholder="First name" required />
                                     </div>
 
                                     <div class="field-group">
-                                        <input type="text" class="field-input required" data-error="Applicant last name" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName" placeholder="Last" />
+                                        <input type="text" class="field-input required" data-error="Applicant last name" ng-trim="false" ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName" placeholder="Last name" />
                                     </div>
                                     <p>&nbsp;</p>
                                     <div class="field-group">
@@ -124,13 +124,13 @@
                                                    'field-input' : !((!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)  && (Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true) )}"
                                                        data-error="Representative name"
                                                        ng-required="(!Ctrl.caseinfo.bCaseFiledByThirdParty)  && (Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation) && (Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID == 0 || Ctrl.bEditThirdParty == true)"
-                                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName" placeholder="First" />
+                                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName" placeholder="First name" />
 
                                             </div>
 
                                             <div class="field-group mar-bottom-40">
                                                 <input type="text" name="representative_lastname" id="representative_lastname" class="field-input"
-                                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName" placeholder="Last" />
+                                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName" placeholder="Last name" />
                                             </div>
 
                                             <div class="field-group">
@@ -271,12 +271,12 @@
                                 <div id="property-owner-info">
                                     <div class="field-group">
                                         <label for="po_firstname">Name <span>*</span></label>
-                                        <input type="text" name="po_firstname" id="po_firstname" class="field-input required" placeholder="First"
+                                        <input type="text" name="po_firstname" id="po_firstname" class="field-input required" placeholder="First name"
                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName" data-error="Property owner first name" required/>                                      
                                     </div>
 
                                     <div class="field-group mar-bottom-40">
-                                        <input type="text" name="po_lastname" id="po_lastname" class="field-input required" placeholder="Last"
+                                        <input type="text" name="po_lastname" id="po_lastname" class="field-input required" placeholder="Last name"
                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName" data-error="Property owner last name" required />
                                     </div>
 
@@ -357,12 +357,12 @@
                                     <div class="field-group">
                                         <label for="pm_firstname">Name <span>*</span></label>
                                         <input type="text" name="pm_firstname" id="pm_firstname" class="field-input"                                              
-                                               placeholder="First" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName"
+                                               placeholder="First name" ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName"
                                                 />
                                     </div>
 
                                     <div class="field-group mar-bottom-40">
-                                        <input type="text" name="pm_lastname" id="pm_lastname" placeholder="Last" class="field-input"                                              
+                                        <input type="text" name="pm_lastname" id="pm_lastname" placeholder="Last name" class="field-input"                                              
                                                ng-model="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName"/>
                                     </div>
 
