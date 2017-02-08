@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 'rapOResponseRentalPropertyFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 'rapOResponseRentalPropertyFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 4;
@@ -13,7 +13,9 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
     self.Error = '';
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.StateList = response.data;
@@ -38,12 +40,14 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
         _GetIsTenant();
+        $anchorScroll();
     });
 
     self.Continue = function () {
         if (self.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID == null || self.caseinfo.OwnerResponseInfo.PropertyInfo.UnitTypeID == 0) {
             self.Hide = false;
             self.Error = "Type of unit you rent is required";
+            $anchorScroll();
             return;
         }
         if (self.IsTenant == false) {
@@ -61,12 +65,14 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
         if (self.IsTenant == false) {
             self.Hide = false;
             self.Error = "Please add tenant information";
+            $anchorScroll();
             return;
         }   
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerPropertyAndTenantInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

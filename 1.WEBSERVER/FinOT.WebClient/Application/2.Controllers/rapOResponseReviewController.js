@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapOResponseReviewFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapOResponseReviewFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 9;
@@ -10,7 +10,7 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
 
     self.Calender = masterFactory.Calender;
     self.Error = '';
-
+    $anchorScroll();
     //rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
     //    if (!alert.checkResponse(response)) { return; }
     //    rapGlobalFactory.CaseDetails = response.data;
@@ -48,6 +48,7 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
         rapFactory.SaveOResponseReviewPageSubmission(self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             MoveNext();

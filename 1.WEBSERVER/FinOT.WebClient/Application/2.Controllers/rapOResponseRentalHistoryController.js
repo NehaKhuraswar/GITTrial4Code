@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapOResponseRentalHistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapOResponseRentalHistoryFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 5;
@@ -15,11 +15,16 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
     self.IsJustificationSelected = false;
 
     rapFactory.GetOResponseRentIncreaseAndPropertyInfo(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
         self.Rent = angular.copy(self.caseinfo.OwnerResponseInfo.PropertyInfo.Rent);
-        RestrictUpload()
+        RestrictUpload();
+        $anchorScroll();
         //if (self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.length > 0) {
         //    self.caseinfo.OwnerPetitionRentalIncrementInfo = self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo[0];
         //}
@@ -114,6 +119,7 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
         else
         {
             self.Error = 'Justification is not selected';
+            $anchorScroll();
         }
     }
     self.RemoveRecord = function (_rent) {
@@ -136,6 +142,7 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
             else
             {
                 self.Error = 'Justification is not selected';
+                $anchorScroll();
             }
         }
         
@@ -143,6 +150,7 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
         rapFactory.SaveOResponseRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

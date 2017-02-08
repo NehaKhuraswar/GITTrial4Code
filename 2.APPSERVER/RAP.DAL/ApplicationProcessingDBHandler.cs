@@ -5487,22 +5487,24 @@ namespace RAP.DAL
                 }
                 else
                 {
-
-                    var applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.CustomerID == model.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
-                    if (applicantInfo != null)
+                    if (model.TenantInfo.Count == 0)
                     {
-                        string caseid = applicantInfo.CaseRespondingTo;
-                        var caseinfo = _dbContext.CaseDetails.Where(r => r.CaseID == caseid).FirstOrDefault();
-                        if (caseinfo != null && caseinfo.PetitionCategoryID == 1)
+                        var applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.CustomerID == model.CustomerID && r.bPetitionFiled == false).FirstOrDefault();
+                        if (applicantInfo != null)
                         {
-                            var tenantPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == caseinfo.PetitionID).Select(x => x.TenantPetitionID).FirstOrDefault();
-                            var userid = Convert.ToInt32(_dbContext.TenantPetitionInfos.Where(r => r.TenantPetitionID == tenantPetitionID).Select(x => x.ApplicantUserID).FirstOrDefault());
-                            var tenantInfo = _commondbHandler.GetUserInfo(userid);
-                            if (tenantInfo.status.Status == StatusEnum.Success)
+                            string caseid = applicantInfo.CaseRespondingTo;
+                            var caseinfo = _dbContext.CaseDetails.Where(r => r.CaseID == caseid).FirstOrDefault();
+                            if (caseinfo != null && caseinfo.PetitionCategoryID == 1)
                             {
-                                OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
-                                _tenant.TenantUserInfo = tenantInfo.result;
-                                model.TenantInfo.Add(_tenant);
+                                var tenantPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == caseinfo.PetitionID).Select(x => x.TenantPetitionID).FirstOrDefault();
+                                var userid = Convert.ToInt32(_dbContext.TenantPetitionInfos.Where(r => r.TenantPetitionID == tenantPetitionID).Select(x => x.ApplicantUserID).FirstOrDefault());
+                                var tenantInfo = _commondbHandler.GetUserInfo(userid);
+                                if (tenantInfo.status.Status == StatusEnum.Success)
+                                {
+                                    OwnerPetitionTenantInfoM _tenant = new OwnerPetitionTenantInfoM();
+                                    _tenant.TenantUserInfo = tenantInfo.result;
+                                    model.TenantInfo.Add(_tenant);
+                                }
                             }
                         }
                     }

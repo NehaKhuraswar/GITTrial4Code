@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapOResponseApplicantInfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', 'rapOResponseApplicantInfoFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 3;
@@ -15,7 +15,9 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
     self.bEditThirdParty = false;
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.StateList = response.data;
@@ -37,7 +39,8 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
         else {
             self.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser = self.custDetails.User;
         }
-        RestrictUpload()
+        RestrictUpload();
+        $anchorScroll();
     });
 
     self.Calender = masterFactory.Calender;
@@ -111,10 +114,12 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
         if (self.caseinfo.bCaseFiledByThirdParty == false && self.caseinfo.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation == true && (self.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID == 0 || self.bEditThirdParty == true)) {
             if (!(self.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyMailNotification || self.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyEmailNotification)) {
                 self.Error = 'Third party notification preference is required';
+                $anchorScroll();
                 bInValid = true;
             }
             else if (!self.bAcknowledgeNotification) {
                 self.Error = 'Please acknowledge Third party notification preference';
+                $anchorScroll();
                 bInValid = true;
             }
         }
@@ -128,6 +133,7 @@ var rapOResponseApplicantInfoController = ['$scope', '$modal', 'alertService', '
         rapFactory.SaveApplicationInfo(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

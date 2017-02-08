@@ -1,4 +1,4 @@
-﻿var rapOresponseDocumentsController = ['$scope', '$modal', 'alertService', '$location', 'rapOResponseDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
+﻿var rapOresponseDocumentsController = ['$scope', '$modal', 'alertService', '$location', 'rapOResponseDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 8;
@@ -8,7 +8,11 @@
     self.DocDescriptions = masterFactory.DocDescription();
 
     masterFactory.DocDescription().then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.DocDescriptions = response.data;
     });
     self.description1 = null;
@@ -16,9 +20,14 @@
     self.Hide = false;
     self.Error = '';
     rapFactory.GetOResponseAdditionalDocuments(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
+        $anchorScroll();
     });
 
     $scope.onFileSelected = function ($files, docTitle) {
@@ -77,6 +86,7 @@
         rapFactory.SaveOResponseAdditionalDocuments(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;

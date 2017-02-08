@@ -1,4 +1,4 @@
-﻿var rapOResponseDecreasedHousingController = ['$scope', '$modal', 'alertService', '$location', 'rapOResponseDecreasedHousingFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
+﻿var rapOResponseDecreasedHousingController = ['$scope', '$modal', 'alertService', '$location', 'rapOResponseDecreasedHousingFactory', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     $scope.model.stepNo = 6;
@@ -11,9 +11,14 @@
     self.Error = '';
 
     rapFactory.GetOResponseDecreasedHousing(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
+        $anchorScroll();
     });
 
     $scope.onFileSelected = function ($files, docTitle) {
@@ -67,6 +72,7 @@
         rapFactory.SaveOResponseDecreasedHousing(self.caseinfo).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             rapGlobalFactory.CaseDetails = response.data;
