@@ -128,6 +128,7 @@ namespace RAP.DAL
                         message.email = custdetails.Email;
                         message.custID = custdetails.CustomerID;
                         message.IsSameMailingAddress = !Convert.ToBoolean(custdetails.bMailingAddress);
+                        message.Password = custdetails.Password;
 
                         if(!message.IsSameMailingAddress)
                         {

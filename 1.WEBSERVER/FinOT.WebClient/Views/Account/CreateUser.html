@@ -50,7 +50,7 @@
                                         <input type="text" name="email" maxlength="50" id="email" class="field-input required" data-error="Email" required placeholder="" ng-model="Ctrl.CustomerInfo.email" />
                                     </div>
 
-                                    <div class="field-group password-requirements">
+                                    <div class="field-group password-requirements" ng-show="Ctrl.bEdit!=true">
                                         <p>Password requirements</p>
                                         <ul>
                                             <li>Must be 8-24 characters</li>

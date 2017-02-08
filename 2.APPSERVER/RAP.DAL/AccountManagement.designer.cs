@@ -185,7 +185,7 @@ namespace RAP.DAL
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="AcctType", DbType="Int")] System.Nullable<int> acctType, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FirstName", DbType="VarChar(25)")] string firstName, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="LastName", DbType="VarChar(25)")] string lastName, 
-					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(35)")] string email, 
+					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(100)")] string email, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="APNNumber", DbType="Int")] System.Nullable<int> aPNNumber, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="FromDate", DbType="DateTime")] System.Nullable<System.DateTime> fromDate, 
 					[global::System.Data.Linq.Mapping.ParameterAttribute(Name="ToDate", DbType="DateTime")] System.Nullable<System.DateTime> toDate, 
