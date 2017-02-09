@@ -79,28 +79,6 @@
       <Column Name="StatusDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.USP_SearchCase_Get" Method="USP_SearchCase_Get">
-    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(25)" />
-    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(25)" />
-    <Parameter Name="APNNumber" Parameter="aPNNumber" Type="System.Int32" DbType="Int" />
-    <Parameter Name="AnalystID" Parameter="analystID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="HearingOfficerID" Parameter="hearingOfficerID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="FromDate" Parameter="fromDate" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="ToDate" Parameter="toDate" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="AddressLine1" Parameter="addressLine1" Type="System.String" DbType="VarChar(25)" />
-    <Parameter Name="AddressLine2" Parameter="addressLine2" Type="System.String" DbType="VarChar(25)" />
-    <Parameter Name="Zip" Parameter="zip" Type="System.String" DbType="VarChar(5)" />
-    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(15)" />
-    <Parameter Name="CaseNumber" Parameter="caseNumber" Type="System.String" DbType="VarChar(25)" />
-    <Parameter Name="CaseStatus" Parameter="caseStatus" Type="System.Int32" DbType="Int" />
-    <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="SortReverse" Parameter="sortReverse" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="PageSize" Parameter="pageSize" Type="System.Int32" DbType="Int" />
-    <Parameter Name="CurrentPage" Parameter="currentPage" Type="System.Int32" DbType="Int" />
-    <Parameter Name="TotalCount" Parameter="totalCount" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
-    <ElementType IdRef="ID1" />
-  </Function>
   <Function Name="dbo.USP_NewActivityStatus_Save" Method="USP_NewActivityStatus_Save">
     <Parameter Name="ActivityID" Parameter="activityID" Type="System.Int32" DbType="Int" />
     <Parameter Name="StatusID" Parameter="statusID" Type="System.Int32" DbType="Int" />
@@ -131,5 +109,27 @@
       <Column Name="Notes" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="NotificationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.USP_SearchCase_Get" Method="USP_SearchCase_Get">
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="APNNumber" Parameter="aPNNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AnalystID" Parameter="analystID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="HearingOfficerID" Parameter="hearingOfficerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FromDate" Parameter="fromDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ToDate" Parameter="toDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="AddressLine1" Parameter="addressLine1" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="AddressLine2" Parameter="addressLine2" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="Zip" Parameter="zip" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="PhoneNumber" Parameter="phoneNumber" Type="System.String" DbType="VarChar(15)" />
+    <Parameter Name="CaseNumber" Parameter="caseNumber" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="CaseStatus" Parameter="caseStatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="SortReverse" Parameter="sortReverse" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="PageSize" Parameter="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CurrentPage" Parameter="currentPage" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalCount" Parameter="totalCount" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="Message" Parameter="message" Type="System.String" DbType="VarChar(MAX)" Direction="InOut" />
+    <ElementType IdRef="ID1" />
   </Function>
 </Database>

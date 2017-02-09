@@ -270,23 +270,28 @@
                         <div class="tbl-row clearfix">
                             <div class="col col-45 case-number clickable" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)">
                                 Case number 
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>                            
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CaseID',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CaseID')" class="sort grey"></a>
+                                <a style="cursor: pointer;"  ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>                            
+                                <a style="cursor: pointer;"  ng-show="Ctrl.CaseSearchModel.SortBy == 'CaseID' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a style="cursor: pointer;"  ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CaseID')" class="sort grey"></a>
                             </div>
                             <div class="col col-20 filling-date clickable" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)">
                                 Date of filing
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('CreatedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CreatedDate')" class="sort grey"></a>
+                                <a style="cursor: pointer;" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
+                                <a style="cursor: pointer;" ng-show="Ctrl.CaseSearchModel.SortBy == 'CreatedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a style="cursor: pointer;" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'CreatedDate')" class="sort grey"></a>
                             </div>
                             <div class="col col-20 last-activity clickable" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)">
                                 Last activity
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
-                                <a style="cursor: pointer;" ng-click="Ctrl.onSort('LastModifiedDate',Ctrl.CaseSearchModel)" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate')" class="sort grey"></a>
+                                <a style="cursor: pointer;" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
+                                <a style="cursor: pointer;" ng-show="Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a style="cursor: pointer;" ng-show="!(Ctrl.CaseSearchModel.SortBy == 'LastModifiedDate')" class="sort grey"></a>
                             </div>
-                            <div class="col col-15 activity">Activity</div>
+                            <div class="col col-15 activity clickable" ng-click="Ctrl.onSort('Activity',Ctrl.CaseSearchModel)">
+                                Activity
+                                <a style="cursor: pointer;"  ng-show="Ctrl.CaseSearchModel.SortBy == 'Activity' && !Ctrl.CaseSearchModel.SortReverse" class="sort"></a>
+                                <a style="cursor: pointer;"  ng-show="Ctrl.CaseSearchModel.SortBy == 'Activity' && Ctrl.CaseSearchModel.SortReverse" class="sort desc"></a>
+                                <a style="cursor: pointer;"  ng-show="!(Ctrl.CaseSearchModel.SortBy == 'Activity')" class="sort grey"></a>
+                            </div>
                         </div>
                     </div>
 
