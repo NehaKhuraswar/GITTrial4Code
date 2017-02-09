@@ -625,9 +625,40 @@ namespace RAP.Business.Implementation
         public ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID)
         {
             ReturnResult<TenantPetitionInfoM> result = new ReturnResult<TenantPetitionInfoM>();
+            List<DocumentM> documents = new List<DocumentM>();
             try
             {
-                result = _dbHandler.GetTenantReviewInfo(CustomerID);
+                var dbResult = _dbHandler.GetTenantReviewInfo(CustomerID);
+                if (dbResult.status.Status != StatusEnum.Success)
+                {
+                    result = dbResult;
+                    return result;
+                }
+                var lostdocsResult = _commonService.GetDocuments(CustomerID, false, "TP_LostService");
+                if (lostdocsResult.status.Status == StatusEnum.Success && lostdocsResult.result != null)
+                {
+                    foreach (var doc in lostdocsResult.result)
+                    {
+                        if (doc != null)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                }
+                var problemdocsResult = _commonService.GetDocuments(CustomerID, false, "TP_Problem");
+                if (problemdocsResult.status.Status == StatusEnum.Success && problemdocsResult.result != null)
+                {
+                    foreach (var doc in problemdocsResult.result)
+                    {
+                        if (doc != null)
+                        {
+                            documents.Add(doc);
+                        }
+                    }
+                }
+                dbResult.result.LostServicesPage.Documents = documents;
+                result.result = dbResult.result;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
             }
             catch (Exception ex)
@@ -651,7 +682,7 @@ namespace RAP.Business.Implementation
 
                 //if (result.result.Documents.Where(x => x.DocTitle == "TP_LostServive").Count() == 0)
                 //{
-                var lostdocsResult = _commonService.GetDocuments(CustomerID, false, "TP_LostServive");
+                var lostdocsResult = _commonService.GetDocuments(CustomerID, false, "TP_LostService");
                 if (lostdocsResult.status.Status == StatusEnum.Success && lostdocsResult.result != null)
                 {
                     foreach (var doc in lostdocsResult.result)

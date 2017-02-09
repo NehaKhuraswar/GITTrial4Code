@@ -2265,6 +2265,13 @@ namespace RAP.DAL
 
                 if (caseInfo.C_ID > 0)
                 {
+                    var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(caseInfo.CaseFileBy, caseInfo.C_ID, DocCategory.TenantPetition.ToString());
+                    if (updateDocumentResult.status.Status != StatusEnum.Success)
+                    {
+                        result.status = updateDocumentResult.status;
+                        return result;
+                    }
+
                     TenantPetitionInfo PetitionDB = _dbContext.TenantPetitionInfos.Where(x => x.TenantPetitionID == caseInfo.TenantPetitionInfo.PetitionID).FirstOrDefault();
                     if (PetitionDB != null)
                     {

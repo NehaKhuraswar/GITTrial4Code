@@ -128,12 +128,12 @@
                             <div class="field-addfile no-top-margin">
                                 <div class="input-file-wrapper">
                                     <span class="btn-link">Attach</span>
-                                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TP_LostServive')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
+                                    <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TP_LostService')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                                 </div>
                                 <div class="field-group">
                                     <table class="table table-condensed nopadding-bottom">
                                         <tbody>
-                                            <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostServive'}">
+                                            <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'}">
                                                 <td class="nopadding-left">
                                                     {{item.DocName}}
                                                 </td>

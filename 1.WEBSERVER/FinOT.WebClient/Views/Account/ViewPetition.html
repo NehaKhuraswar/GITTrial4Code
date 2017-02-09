@@ -33,8 +33,8 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
                                     <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID!=0">
-                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}                             {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}   <br />
-                                        T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}
+                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}} <br />                             {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName}}                           <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}                            <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}                                        <br />
+                                        T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email}}
                                     </div>
                                 </div>
                             </div><!-- .field-group -->
@@ -251,6 +251,23 @@
                             </div>
                             <div class="field-group filled-info subhead no-top-margin">
                                 <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Loss of service documentary evidence</div></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <table class="table table-condensed nopadding-bottom">
+                                            <tbody>
+                                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TP_LostService'}">
+                                                    <td class="nopadding-left">
+                                                        {{item.DocName}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Are you claiming any serious problems with the condition of your unit?</div></div>
                                     <div class="col-sm-6 col-xs-12"
                                          ng-show="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bProblem">Yes</div>
@@ -282,7 +299,22 @@
                                     </div><!-- .field-group -->
                                 </div>
                             </div>
-
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Problem documentary evidence</div></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <table class="table table-condensed nopadding-bottom">
+                                            <tbody>
+                                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TP_Problem'}">
+                                                    <td class="nopadding-left">
+                                                        {{item.DocName}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="subhead type2">
                                 <h4>Additional Documentation</h4>
                             </div>
