@@ -40,6 +40,10 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
         $scope.model.bReview = false;
         $scope.model.bRentalHistory = true;
     }
+    self.EditLostServicesInfo = function () {
+        $scope.model.bReview = false;
+        $scope.model.bLostServices = true;
+    }
     self.EditDocumentsInfo = function () {
         $scope.model.bReview = false;
         $scope.model.bAddDocuments = true;
