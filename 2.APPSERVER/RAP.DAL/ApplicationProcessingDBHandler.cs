@@ -1386,7 +1386,11 @@ namespace RAP.DAL
             List<TenantLostServiceInfoM> tenantLostServiceInfo = new List<TenantLostServiceInfoM>();
             try
             {
-
+                var LostServiceDB = _dbContext.TenantPetitionLostServices.Where(x => x.PetitionID == PetitionID).FirstOrDefault();
+                if(LostServiceDB != null)
+                {
+                    obj.bHouseServiceDecreased = Convert.ToBoolean(LostServiceDB.bHouseServiceDecreased);
+                }
                 var TenantLostServiceInfoDB = _dbContext.TenantLostServiceInfos.Where(x => x.TenantPetitionID == PetitionID).ToList();
                 foreach (var item in TenantLostServiceInfoDB)
                 {
@@ -2692,6 +2696,20 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                var lostService = _dbContext.TenantPetitionLostServices.Where(x => x.PetitionID == message.PetitionID).FirstOrDefault();
+                if(lostService != null)
+                {
+                    lostService.bHouseServiceDecreased = message.bHouseServiceDecreased;
+                    _dbContext.SubmitChanges();
+                }
+                else
+                {
+                    var lostServiceDB = new TenantPetitionLostService();
+                    lostServiceDB.PetitionID = message.PetitionID;
+                    lostServiceDB.bHouseServiceDecreased = message.bHouseServiceDecreased;
+                    _dbContext.TenantPetitionLostServices.InsertOnSubmit(lostServiceDB);
+                    _dbContext.SubmitChanges();
+                }
                 var lostServicesRecord = _dbContext.TenantLostServiceInfos.Where(x => x.TenantPetitionID == message.PetitionID).ToList();
                 if (lostServicesRecord != null)
                 {

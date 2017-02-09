@@ -168,6 +168,9 @@ namespace RAP.DAL
     partial void InsertTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
     partial void UpdateTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
     partial void DeleteTenantResponseApplicationInfo(TenantResponseApplicationInfo instance);
+    partial void InsertTenantPetitionLostService(TenantPetitionLostService instance);
+    partial void UpdateTenantPetitionLostService(TenantPetitionLostService instance);
+    partial void DeleteTenantPetitionLostService(TenantPetitionLostService instance);
     #endregion
 		
 		public ApplicationProcessingDataContext() : 
@@ -573,6 +576,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TenantResponseApplicationInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TenantPetitionLostService> TenantPetitionLostServices
+		{
+			get
+			{
+				return this.GetTable<TenantPetitionLostService>();
 			}
 		}
 	}
@@ -4622,6 +4633,8 @@ namespace RAP.DAL
 		
 		private EntitySet<TenantRentalHistory> _TenantRentalHistories;
 		
+		private EntitySet<TenantPetitionLostService> _TenantPetitionLostServices;
+		
 		private EntityRef<NumberRangeForUnit> _NumberRangeForUnit;
 		
     #region Extensibility Method Definitions
@@ -4668,6 +4681,7 @@ namespace RAP.DAL
 			this._TenantLostServiceInfos = new EntitySet<TenantLostServiceInfo>(new Action<TenantLostServiceInfo>(this.attach_TenantLostServiceInfos), new Action<TenantLostServiceInfo>(this.detach_TenantLostServiceInfos));
 			this._TenantPetitionVerifications = new EntitySet<TenantPetitionVerification>(new Action<TenantPetitionVerification>(this.attach_TenantPetitionVerifications), new Action<TenantPetitionVerification>(this.detach_TenantPetitionVerifications));
 			this._TenantRentalHistories = new EntitySet<TenantRentalHistory>(new Action<TenantRentalHistory>(this.attach_TenantRentalHistories), new Action<TenantRentalHistory>(this.detach_TenantRentalHistories));
+			this._TenantPetitionLostServices = new EntitySet<TenantPetitionLostService>(new Action<TenantPetitionLostService>(this.attach_TenantPetitionLostServices), new Action<TenantPetitionLostService>(this.detach_TenantPetitionLostServices));
 			this._NumberRangeForUnit = default(EntityRef<NumberRangeForUnit>);
 			OnCreated();
 		}
@@ -5054,6 +5068,19 @@ namespace RAP.DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantPetitionInfo_TenantPetitionLostService", Storage="_TenantPetitionLostServices", ThisKey="TenantPetitionID", OtherKey="PetitionID")]
+		public EntitySet<TenantPetitionLostService> TenantPetitionLostServices
+		{
+			get
+			{
+				return this._TenantPetitionLostServices;
+			}
+			set
+			{
+				this._TenantPetitionLostServices.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NumberRangeForUnit_TenantPetitionInfo", Storage="_NumberRangeForUnit", ThisKey="RangeID", OtherKey="RangeID", IsForeignKey=true)]
 		public NumberRangeForUnit NumberRangeForUnit
 		{
@@ -5175,6 +5202,18 @@ namespace RAP.DAL
 		}
 		
 		private void detach_TenantRentalHistories(TenantRentalHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantPetitionInfo = null;
+		}
+		
+		private void attach_TenantPetitionLostServices(TenantPetitionLostService entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantPetitionInfo = this;
+		}
+		
+		private void detach_TenantPetitionLostServices(TenantPetitionLostService entity)
 		{
 			this.SendPropertyChanging();
 			entity.TenantPetitionInfo = null;
@@ -12697,13 +12736,13 @@ namespace RAP.DAL
 		
 		private EntitySet<TenantResponseExemptContestedInfo> _TenantResponseExemptContestedInfos;
 		
-		private EntitySet<TenantResponseExemptContestedInfo1> _TenantResponseExemptContestedInfo1s;
-		
 		private EntitySet<TenantResponseRentalIncrementInfo> _TenantResponseRentalIncrementInfos;
 		
 		private EntitySet<TenantResponseRentalHistory> _TenantResponseRentalHistories;
 		
 		private EntitySet<TenantResponseVerification> _TenantResponseVerifications;
+		
+		private EntitySet<TenantResponseExemptContestedInfo1> _TenantResponseExemptContestedInfo1s;
 		
 		private EntityRef<CaseDetail> _CaseDetail;
 		
@@ -12748,10 +12787,10 @@ namespace RAP.DAL
 		public TenantResponseApplicationInfo()
 		{
 			this._TenantResponseExemptContestedInfos = new EntitySet<TenantResponseExemptContestedInfo>(new Action<TenantResponseExemptContestedInfo>(this.attach_TenantResponseExemptContestedInfos), new Action<TenantResponseExemptContestedInfo>(this.detach_TenantResponseExemptContestedInfos));
-			this._TenantResponseExemptContestedInfo1s = new EntitySet<TenantResponseExemptContestedInfo1>(new Action<TenantResponseExemptContestedInfo1>(this.attach_TenantResponseExemptContestedInfo1s), new Action<TenantResponseExemptContestedInfo1>(this.detach_TenantResponseExemptContestedInfo1s));
 			this._TenantResponseRentalIncrementInfos = new EntitySet<TenantResponseRentalIncrementInfo>(new Action<TenantResponseRentalIncrementInfo>(this.attach_TenantResponseRentalIncrementInfos), new Action<TenantResponseRentalIncrementInfo>(this.detach_TenantResponseRentalIncrementInfos));
 			this._TenantResponseRentalHistories = new EntitySet<TenantResponseRentalHistory>(new Action<TenantResponseRentalHistory>(this.attach_TenantResponseRentalHistories), new Action<TenantResponseRentalHistory>(this.detach_TenantResponseRentalHistories));
 			this._TenantResponseVerifications = new EntitySet<TenantResponseVerification>(new Action<TenantResponseVerification>(this.attach_TenantResponseVerifications), new Action<TenantResponseVerification>(this.detach_TenantResponseVerifications));
+			this._TenantResponseExemptContestedInfo1s = new EntitySet<TenantResponseExemptContestedInfo1>(new Action<TenantResponseExemptContestedInfo1>(this.attach_TenantResponseExemptContestedInfo1s), new Action<TenantResponseExemptContestedInfo1>(this.detach_TenantResponseExemptContestedInfo1s));
 			this._CaseDetail = default(EntityRef<CaseDetail>);
 			OnCreated();
 		}
@@ -13093,19 +13132,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1", Storage="_TenantResponseExemptContestedInfo1s", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
-		public EntitySet<TenantResponseExemptContestedInfo1> TenantResponseExemptContestedInfo1s
-		{
-			get
-			{
-				return this._TenantResponseExemptContestedInfo1s;
-			}
-			set
-			{
-				this._TenantResponseExemptContestedInfo1s.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseRentalIncrementInfo", Storage="_TenantResponseRentalIncrementInfos", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
 		public EntitySet<TenantResponseRentalIncrementInfo> TenantResponseRentalIncrementInfos
 		{
@@ -13142,6 +13168,19 @@ namespace RAP.DAL
 			set
 			{
 				this._TenantResponseVerifications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantResponseApplicationInfo_TenantResponseExemptContestedInfo1", Storage="_TenantResponseExemptContestedInfo1s", ThisKey="TenantResponseID", OtherKey="TenantResponseID")]
+		public EntitySet<TenantResponseExemptContestedInfo1> TenantResponseExemptContestedInfo1s
+		{
+			get
+			{
+				return this._TenantResponseExemptContestedInfo1s;
+			}
+			set
+			{
+				this._TenantResponseExemptContestedInfo1s.Assign(value);
 			}
 		}
 		
@@ -13211,18 +13250,6 @@ namespace RAP.DAL
 			entity.TenantResponseApplicationInfo = null;
 		}
 		
-		private void attach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = this;
-		}
-		
-		private void detach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
-		{
-			this.SendPropertyChanging();
-			entity.TenantResponseApplicationInfo = null;
-		}
-		
 		private void attach_TenantResponseRentalIncrementInfos(TenantResponseRentalIncrementInfo entity)
 		{
 			this.SendPropertyChanging();
@@ -13257,6 +13284,169 @@ namespace RAP.DAL
 		{
 			this.SendPropertyChanging();
 			entity.TenantResponseApplicationInfo = null;
+		}
+		
+		private void attach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = this;
+		}
+		
+		private void detach_TenantResponseExemptContestedInfo1s(TenantResponseExemptContestedInfo1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.TenantResponseApplicationInfo = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TenantPetitionLostService")]
+	public partial class TenantPetitionLostService : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _LostServiceID;
+		
+		private int _PetitionID;
+		
+		private System.Nullable<bool> _bHouseServiceDecreased;
+		
+		private EntityRef<TenantPetitionInfo> _TenantPetitionInfo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLostServiceIDChanging(int value);
+    partial void OnLostServiceIDChanged();
+    partial void OnPetitionIDChanging(int value);
+    partial void OnPetitionIDChanged();
+    partial void OnbHouseServiceDecreasedChanging(System.Nullable<bool> value);
+    partial void OnbHouseServiceDecreasedChanged();
+    #endregion
+		
+		public TenantPetitionLostService()
+		{
+			this._TenantPetitionInfo = default(EntityRef<TenantPetitionInfo>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LostServiceID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int LostServiceID
+		{
+			get
+			{
+				return this._LostServiceID;
+			}
+			set
+			{
+				if ((this._LostServiceID != value))
+				{
+					this.OnLostServiceIDChanging(value);
+					this.SendPropertyChanging();
+					this._LostServiceID = value;
+					this.SendPropertyChanged("LostServiceID");
+					this.OnLostServiceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PetitionID", DbType="Int NOT NULL")]
+		public int PetitionID
+		{
+			get
+			{
+				return this._PetitionID;
+			}
+			set
+			{
+				if ((this._PetitionID != value))
+				{
+					if (this._TenantPetitionInfo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPetitionIDChanging(value);
+					this.SendPropertyChanging();
+					this._PetitionID = value;
+					this.SendPropertyChanged("PetitionID");
+					this.OnPetitionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bHouseServiceDecreased", DbType="Bit")]
+		public System.Nullable<bool> bHouseServiceDecreased
+		{
+			get
+			{
+				return this._bHouseServiceDecreased;
+			}
+			set
+			{
+				if ((this._bHouseServiceDecreased != value))
+				{
+					this.OnbHouseServiceDecreasedChanging(value);
+					this.SendPropertyChanging();
+					this._bHouseServiceDecreased = value;
+					this.SendPropertyChanged("bHouseServiceDecreased");
+					this.OnbHouseServiceDecreasedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TenantPetitionInfo_TenantPetitionLostService", Storage="_TenantPetitionInfo", ThisKey="PetitionID", OtherKey="TenantPetitionID", IsForeignKey=true)]
+		public TenantPetitionInfo TenantPetitionInfo
+		{
+			get
+			{
+				return this._TenantPetitionInfo.Entity;
+			}
+			set
+			{
+				TenantPetitionInfo previousValue = this._TenantPetitionInfo.Entity;
+				if (((previousValue != value) 
+							|| (this._TenantPetitionInfo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TenantPetitionInfo.Entity = null;
+						previousValue.TenantPetitionLostServices.Remove(this);
+					}
+					this._TenantPetitionInfo.Entity = value;
+					if ((value != null))
+					{
+						value.TenantPetitionLostServices.Add(this);
+						this._PetitionID = value.TenantPetitionID;
+					}
+					else
+					{
+						this._PetitionID = default(int);
+					}
+					this.SendPropertyChanged("TenantPetitionInfo");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

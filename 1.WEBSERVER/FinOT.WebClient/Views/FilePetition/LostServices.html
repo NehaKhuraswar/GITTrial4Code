@@ -13,7 +13,8 @@
                     <div class="field-group subhead no-top-margin">
                         <div class="form-group-checkbox vertical clearfix">
                             <label for="housing_services_decreased">
-                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased" ng-value="true" /><i></i><span class="has-info-btn"><strong>My housing services have decreased.</strong>
+                                <input type="checkbox" name="housing_services_decreased" id="housing_services_decreased"
+                                       ng-model="Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.bHouseServiceDecreased" ng-value="true" /><i></i><span class="has-info-btn"><strong>My housing services have decreased.</strong>
                                 <a style="cursor: pointer;" role="button" aria-label="Info" ng-click="NoticeToggle=!NoticeToggle" class="icon-info" data-toggle="tooltip" tooltip>Info</a></span>
                             </label>
                             <div class="info-box-toggle" ng-show="NoticeToggle">
