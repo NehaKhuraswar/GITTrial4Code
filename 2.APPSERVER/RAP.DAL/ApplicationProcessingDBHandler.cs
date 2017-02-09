@@ -1720,6 +1720,7 @@ namespace RAP.DAL
                     }
                     appealInfo.AppealPropertyUserInfo = _commondbHandler.GetUserInfo((int)appealInfoDB.PropertyUserID).result;
                     appealInfo.AppealDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(appealInfoDB.AppealDate));
+                    appealInfo.AppealCategoryID = Convert.ToInt32( appealInfoDB.AppealCategoryID);
                 }
 
                 result.result = appealInfo;

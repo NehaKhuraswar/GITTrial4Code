@@ -12,6 +12,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     self.bAcknowledgeNotification = false;
     self.bCaseFiledByThirdParty = self.caseinfo.bCaseFiledByThirdParty;
     self.bShowApplicantInfo = false;
+    self.AppealCategoryID  = 0;
     if (self.caseinfo.CaseID != null)
     {
         self.bShowApplicantInfo = true;
@@ -31,6 +32,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     }
     _GetStateList();
     self.GetCaseInfoWithModel = function (CaseID) {
+        self.AppealCategoryID = rapGlobalFactory.CaseDetails.PetitionCategoryID;
         rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
@@ -41,6 +43,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
             rapGlobalFactory.CaseDetails = self.caseinfo;
             self.TenantAppealInfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
             self.caseinfo.bCaseFiledByThirdParty = self.bCaseFiledByThirdParty;
+            rapGlobalFactory.CaseDetails.PetitionCategoryID = self.AppealCategoryID;
             if (self.TenantAppealInfo.AppealID == 0) {
                 if (self.caseinfo.bCaseFiledByThirdParty != true) {
                     self.TenantAppealInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
@@ -52,7 +55,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
                 else if (self.caseinfo.PetitionCategoryID == 2){
                        self.TenantAppealInfo.AppealPropertyUserInfo = angular.copy(rapGlobalFactory.CaseDetails.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo);
                 }
-
+                self.TenantAppealInfo.AppealCategoryID = self.AppealCategoryID;
             }
             if (self.caseinfo.bCaseFiledByThirdParty == true)
             {
@@ -89,6 +92,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
         if (_CheckNotification()) {
             return;
         }
+        model.TenantAppealInfo.AppealCategoryID = self.AppealCategoryID;
         rapFactory.SaveTenantAppealInfo(model, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;

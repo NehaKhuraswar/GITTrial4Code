@@ -21,7 +21,8 @@
                         <div class="field-group filled-info subhead no-top-margin hidden-xs">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Petition type</div></div>
-                                <div class="col-sm-6 col-xs-12">Property type</div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.AppealCategoryID == 1">Tenant</div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.AppealCategoryID == 2">Property owner</div>
                             </div>
                         </div><!-- .field-group -->
 
