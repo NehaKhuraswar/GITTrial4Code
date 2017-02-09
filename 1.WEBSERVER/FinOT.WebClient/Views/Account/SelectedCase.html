@@ -212,7 +212,7 @@
                                     <div class="tbl-row clearfix" ng-repeat="activity in Ctrl.caseinfo.ActivityStatus">
                                         <div class="item " ng-class="{'expanded':toggle}">
                                             <div class="item-header clearfix">
-                                                <div class="col col-30 pad-l30 activity"><a style="cursor: pointer;" ng-click="ActivityToggle = !ActivityToggle" class="btn-toggle"></a>  {{activity.Activity.ActivityDesc}}</div>
+                                                <div class="col col-30 pad-l30 activity"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>  {{activity.Activity.ActivityDesc}}</div>
                                                 <div class="col col-20 date">{{activity.Date | date}}</div>
                                                 <div class="col col-25 initiated-by">{{activity.CreatedBy}}</div>
                                                 <div class="col col-15 status">{{activity.Status.StatusDesc}}</div>
@@ -222,7 +222,7 @@
                                                      || activity.Activity.ActivityID == 35
                                                      || activity.Status.StatusID == 6"><a style="cursor: pointer;" ng-click="Ctrl.ViewPage(activity,Ctrl.caseinfo)" class="btn-link">View</a></div>
                                             </div>
-                                            <div class="item-content clearfix pad-l40" ng-show="ActivityToggle">
+                                            <div class="item-content clearfix pad-l30" ng-show="toggle">
                                                 <div class="row">
                                                     <div class="col-md-9 col-sm-12">
                                                         <p>{{activity.Notes}}</p>
@@ -420,4 +420,5 @@
             </div><!-- .application-form-wrapper -->
         </div><!-- .container -->
     </div><!-- .page-content -->
+    <script src='../js/functions.js'></script>
 </div><!-- #content -->
