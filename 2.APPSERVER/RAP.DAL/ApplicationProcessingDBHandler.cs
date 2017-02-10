@@ -3768,6 +3768,13 @@ namespace RAP.DAL
                         return result;
                 }
                 caseInfo.TenantResponseInfo = tenantResponseResult.result;
+                var documentResult = _commondbHandler.GetCaseDocuments(C_ID);
+                if (documentResult.status.Status == StatusEnum.Success)
+                {
+                    caseInfo.Documents = documentResult.result;
+                }
+                result.result = caseInfo;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
                 result.result = caseInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
@@ -4264,6 +4271,14 @@ namespace RAP.DAL
                     _dbContext.SubmitChanges();
                 }
                 _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ResponseFiled, (int)StatusDefaults.StatusSubmitted);
+
+                var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(caseInfo.CaseFileBy, caseInfo.C_ID, DocCategory.TenantResponse.ToString());
+                if (updateDocumentResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = updateDocumentResult.status;
+                    return result;
+                }
+                
                 var PageStatus = _dbContext.TenantResponsePageSubmissionStatus
                                             .Where(x => x.CustomerID == caseInfo.CaseFileBy && x.TenantResponseID== caseInfo.TenantResponseInfo.TenantResponseID).FirstOrDefault();
                 if (PageStatus != null)
