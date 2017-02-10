@@ -1,13 +1,16 @@
 ﻿'use strict';
-var rapResendPinController = ['$scope', '$modal', 'alertService', 'rapresendpinFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapResendPinController = ['$scope', '$modal', 'alertService', 'rapresendpinFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = [];
     self.Pwd1;
     self.Pwd2;
     self.custDetails = rapGlobalFactory.CustomerDetails;
+    $anchorScroll();
     self.ResendPin = function () {
         rapFactory.ResendPin(self.custDetails).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             $location.path("/publicdashboard");

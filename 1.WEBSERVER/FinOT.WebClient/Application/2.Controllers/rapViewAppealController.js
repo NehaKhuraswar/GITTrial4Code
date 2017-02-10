@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapViewAppealController = ['$scope', '$modal', 'alertService',  '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert,  $location, rapGlobalFactory, masterFactory) {
+var rapViewAppealController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.Title ='';
     if (rapGlobalFactory.CaseDetails == null || rapGlobalFactory.CaseDetails == undefined)
@@ -13,6 +13,7 @@ var rapViewAppealController = ['$scope', '$modal', 'alertService',  '$location',
         }
     }
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    $anchorScroll();
     if (rapGlobalFactory.FromSelectedCase == true) {
 
         self.Title = 'Staff Dashboard';

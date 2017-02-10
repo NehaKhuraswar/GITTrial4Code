@@ -353,6 +353,7 @@
                                                     <div class="col-md-10 col-sm-12">
                                                         <p>{{item.DocDescription}}</p>
                                                     </div>
+                                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,12 +1,12 @@
 ﻿'use strict';
-var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinvitethirdpartyFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinvitethirdpartyFactory', '$location', 'rapGlobalFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, $anchorScroll) {
     var self = this;
     self.model = rapGlobalFactory.CustomerDetails;
     self.showEmailNotFound = false;
     self.showEmailFound = false;
     self.IsConsent = false;
-    
-    
+    $anchorScroll();
+    self.Error = '';
    // self.AuthorizedUsers = [];
     var _getauthorizedusers = function () {
         return rapFactory.GetAuthorizedUsers(self.model.custID).then(function (response) {            
@@ -39,8 +39,9 @@ var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinv
         self.showEmailFound = false;
         self.showEmailNotFound = false;
         rapFactory.SearchInviteThirdPartyUser(email).then(function (response) {
-            if (!alert.checkResponse(response)) {
-                self.showEmailNotFound = true;
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.showEmailFound = true;
@@ -56,7 +57,7 @@ var rapinvitethirdpartyController = ['$scope', '$modal', 'alertService', 'rapinv
             });
         }
         else {
-            alert.Error("Please consent to Authorize the third party")
+            self.Error = "Please consent to Authorize the third party";
         }
     }
     self.Invite = function (model) {

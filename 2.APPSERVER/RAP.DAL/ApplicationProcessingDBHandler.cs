@@ -2026,6 +2026,11 @@ namespace RAP.DAL
 
                 }
                 caseinfo.TenantAppealInfo = tenantAppealResult.result;
+                var documentResult = _commondbHandler.GetCaseDocuments(C_ID);
+                if (documentResult.status.Status == StatusEnum.Success)
+                {
+                    caseinfo.Documents = documentResult.result;
+                }
                 result.result = caseinfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;
@@ -2063,6 +2068,12 @@ namespace RAP.DAL
                 {
                     AppealDB.IsSubmitted = true;
                     _dbContext.SubmitChanges();
+                }
+                var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(caseInfo.TenantAppealInfo.AppealFiledBy, caseInfo.C_ID, DocCategory.Appeal.ToString());
+                if (updateDocumentResult.status.Status != StatusEnum.Success)
+                {
+                    result.status = updateDocumentResult.status;
+                    return result;
                 }
 
                 var PageStatus = _dbContext.AppealPageSubmissionStatus

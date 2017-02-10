@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', 'masterdataFactory', 'rapGlobalFactory', '$location', function ($scope, $modal, alert, rapFactory, masterFactory, rapGlobalFactory, $location) {
+var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', 'masterdataFactory', 'rapGlobalFactory', '$location', '$anchorScroll', function ($scope, $modal, alert, rapFactory, masterFactory, rapGlobalFactory, $location, $anchorScroll) {
     var self = this;
     self.CustomerInfo = null;
     self.StateList = [];
@@ -23,7 +23,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.bEdit =  rapGlobalFactory.IsEdit;
     self.Title = "Create a city user account";
     self.SubmitText = "Create account"
-
+     $anchorScroll();
     if (rapGlobalFactory.IsEdit == true)
     {
         self.Title = "Change Account Information";
@@ -38,7 +38,8 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     {
         return rapFactory.GetCustomerFromID(custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
-            self.Error = rapGlobalFactory.Error;
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
                 }
             self.CustomerInfo = response.data;
@@ -59,7 +60,8 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     var _GetCustomerModel = function () {
         return rapFactory.GetCustomer(null).then(function (response) {
                if (!alert.checkForResponse(response)) {
-                self.Error = rapGlobalFactory.Error;
+                   self.Error = rapGlobalFactory.Error;
+                   $anchorScroll();
                 return;
                 }
                self.CustomerInfo = response.data;
@@ -75,6 +77,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
                 }
             self.StateList = response.data;
@@ -123,22 +126,25 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
             if (self.Password != self.ConfirmPassword)
             {
                 self.Error = "Password not matching!";
+                $anchorScroll();
                 return;
                 }
             model.Password = self.Password;
             if (!checkPassword(model.Password, model.email)) {
                 self.PasswordError = true;
                 self.Error = "Enter password matching the requirements";
+                $anchorScroll();
                 return;
                 }
         }
         if (model.EmailNotificationFlag == false && model.MailNotificationFlag == false)
         {
             self.Error = "Please select one of the notification preference";
+            $anchorScroll();
             return;
         }
         
-        
+        $anchorScroll();
         //if (!checkPhoneNumber(model.PhoneNumber))
         //            {
         //        alert.Error("Phone number is not valid")
@@ -147,6 +153,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         rapFactory.SaveCustomer(null, model).then(function(response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
                 }
             if (rapGlobalFactory.IsEdit == true)
@@ -176,6 +183,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         rapFactory.DeleteCustomer(model).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
         }
             if (rapGlobalFactory.IsEdit == true) {

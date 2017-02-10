@@ -1,4 +1,4 @@
-﻿var rapEmailNotificationSentController = ['$scope', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, alert, $location, rapGlobalFactory, masterFactory) {
+﻿var rapEmailNotificationSentController = ['$scope', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, alert, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.Title = '';
     self.FromSelectedCase = rapGlobalFactory.FromSelectedCase;
@@ -13,6 +13,7 @@
     }
     self.model = rapGlobalFactory.Notification;
     self.caseid = rapGlobalFactory.Notification_CaseID;
+    $anchorScroll();
     if (rapGlobalFactory.FromSelectedCase == true) {
 
         self.Title = 'Staff Dashboard';

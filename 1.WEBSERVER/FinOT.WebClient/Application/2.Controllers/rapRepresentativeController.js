@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapRepresentativeController = ['$scope', '$modal', 'alertService', 'raprepresentativeFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapRepresentativeController = ['$scope', '$modal', 'alertService', 'raprepresentativeFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = [];
     self.StateList = [];
@@ -7,6 +7,7 @@ var rapRepresentativeController = ['$scope', '$modal', 'alertService', 'raprepre
     self.ThirdPartyInfo = null;
     self.bAcknowledge = false;
     self.Cases = null;
+    self.Error = '';
     self.AddNewRepresentative = function () {
         $location.path("/Representative");
     }
@@ -16,16 +17,21 @@ var rapRepresentativeController = ['$scope', '$modal', 'alertService', 'raprepre
     }
     var _GetStateList = function () {
         masterFactory.GetStateList().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.StateList = response.data;
         });
     }
     _GetStateList();
+    $anchorScroll();
     var _GetThirdPartyInfo = function () {        
         rapFactory.GetThirdPartyInfo(self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.ThirdPartyInfo = response.data;
@@ -40,7 +46,9 @@ var rapRepresentativeController = ['$scope', '$modal', 'alertService', 'raprepre
             return;
         }
         rapFactory.SaveOrUpdateThirdPartyInfo(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.custDetails = response.data;

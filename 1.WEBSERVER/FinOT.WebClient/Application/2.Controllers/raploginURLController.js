@@ -1,7 +1,7 @@
 ﻿'use strict';
-var raploginURLController = ['$scope', '$modal', 'alertService', '$location', function ($scope, $modal, alert,  $location) {
+var raploginURLController = ['$scope', '$modal', 'alertService', '$location', '$anchorScroll', function ($scope, $modal, alert, $location, $anchorScroll) {
     var self = this;
-   
+    $anchorScroll();
     self.LoginPublic = function () {
         $location.path("/Login");
     }

@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelectedCaseFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelectedCaseFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
         $location.path("/staffdashboard");
@@ -51,6 +51,7 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
         });
     }
     _GetCaseDocuments(self.caseinfo.C_ID);
+    $anchorScroll();
 
     self.GetCaseActivityStatus = function (model) {
         //self.caseinfo.CaseID = 

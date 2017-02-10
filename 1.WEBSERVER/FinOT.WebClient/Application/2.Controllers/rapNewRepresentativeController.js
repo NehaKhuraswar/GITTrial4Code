@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapnewrepresentativeFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapnewrepresentativeFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = [];
     self.StateList = [];
@@ -19,6 +19,7 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
         masterFactory.GetStateList().then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.StateList = response.data;
@@ -29,17 +30,19 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
         rapFactory.GetThirdPartyInfo(self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.ThirdPartyInfo = response.data;
         });
     }
     _GetThirdPartyInfo();
-
+    $anchorScroll();
     var _UpdateThirdPartyAccessPrivilege = function (cases) {
         return masterFactory.UpdateThirdPartyAccessPrivilege(cases, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.Cases = response.data;
@@ -50,19 +53,23 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
         
         if (model.MailNotification == false && model.EmailNotification == false) {
             self.Error = "Please select one of the notification preference";
+            $anchorScroll();
             return;
         }
         if (model.ThirdPartyUser.State == null) {
             self.Error = "State is a required field";
+            $anchorScroll();
             return;
         }
         if (self.bAcknowledge == false) {
             self.Error = "Please acknowledge";
+            $anchorScroll();
             return;
         }
         return rapFactory.SaveOrUpdateThirdPartyInfo(model).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             _UpdateThirdPartyAccessPrivilege(self.Cases);           

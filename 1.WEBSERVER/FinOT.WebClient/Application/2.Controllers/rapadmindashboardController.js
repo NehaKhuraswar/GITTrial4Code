@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmindashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmindashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.CityUser = rapGlobalFactory.CityUser;
@@ -47,19 +47,29 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     //};
     var _getAccountTypes = function (AccountTypeID) {        
         masterFactory.GetAccountTypes(AccountTypeID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.AccountTypesList = response.data;
+            $anchorScroll();
         });
     }
     var _getEmptyAccountSearchModel = function () {
         rapFactory.GetEmptyAccountSearchModel().then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.AccountSearchModel = response.data;
             self.AccountSearchModel.PageSize = 5;
         });
     }
     _getAccountTypes(self.CityUser.AccountType.AccountTypeID);
     _getEmptyAccountSearchModel();
+    $anchorScroll();
     self.GeneratePageNumberList = function () {
         self.pageNumberList = [];
         var TotalPages = Math.ceil(self.AccountSearchModel.TotalCount / self.AccountSearchModel.PageSize);
@@ -75,7 +85,11 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
         model.SortBy = "Name";
         model.SortReverse = 0;
         rapFactory.GetAccountSearch(model).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.AccountSearchResult = response.data.List;
             self.AccountSearchModel.TotalCount = response.data.TotalCount;
             self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
@@ -103,7 +117,11 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
         if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.AccountSearchModel.CurrentPage)) {
             self.AccountSearchModel.CurrentPage = newPage;            
             rapFactory.GetAccountSearch(model).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.AccountSearchResult = response.data.List;
                 self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecord = self.AccountSearchResult[0].RankNo;
@@ -116,7 +134,11 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
         if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.AccountSearchModel.CurrentPage)) {
             self.AccountSearchModel.CurrentPage = self.AccountSearchModel.CurrentPage + 1;
             rapFactory.GetAccountSearch(self.AccountSearchModel).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.AccountSearchResult = response.data.List;
                 self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecord = self.AccountSearchResult[0].RankNo;
@@ -129,7 +151,11 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
         if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.AccountSearchModel.CurrentPage)) {
             self.AccountSearchModel.CurrentPage = self.AccountSearchModel.CurrentPage - 1;
             rapFactory.GetAccountSearch(self.AccountSearchModel).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.AccountSearchResult = response.data.List;
                 self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecord = self.AccountSearchResult[0].RankNo;
@@ -145,7 +171,11 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
         self.AccountSearchModel.CurrentPage = 1;
         
         rapFactory.GetAccountSearch(self.AccountSearchModel).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.AccountSearchResult = response.data.List;
             self.AccountSearchModel.TotalCount = response.data.TotalCount;
             self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
@@ -159,7 +189,11 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
             model.SortReverse = false;
         }
         rapFactory.GetAccountSearch(model).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.AccountSearchResult = response.data.List;
             self.AccountSearchModel.TotalCount = response.data.TotalCount;
             self.AccountSearchModel.CurrentPage = response.data.CurrentPage;
@@ -171,7 +205,9 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     self.GetCaseActivityStatus = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseActivityStatus(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.ActivityStatus = response.data;

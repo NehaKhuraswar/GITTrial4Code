@@ -1,4 +1,4 @@
-﻿var rapMailNotificationSentController = ['$scope', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, alert, $location, rapGlobalFactory, masterFactory) {
+﻿var rapMailNotificationSentController = ['$scope', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, alert, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     //self.custDetails = rapGlobalFactory.CityUser;
     //if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)
@@ -25,7 +25,7 @@
     }
     self.model = rapGlobalFactory.MailNotification;
     self.caseid = rapGlobalFactory.Notification_CaseID;
-
+    $anchorScroll();
     if (rapGlobalFactory.FromSelectedCase == true) {
 
         self.Title = 'Staff Dashboard';

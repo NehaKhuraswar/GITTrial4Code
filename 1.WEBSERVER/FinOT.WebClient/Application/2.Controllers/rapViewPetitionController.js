@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapViewPetitionController = ['$scope', '$modal', 'alertService',  '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert,  $location, rapGlobalFactory, masterFactory) {
+var rapViewPetitionController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapGlobalFactory, masterFactor, $anchorScroll) {
     var self = this;
     self.Title = '';
     if (rapGlobalFactory.CaseDetails == null || rapGlobalFactory.CaseDetails == undefined) {
@@ -12,6 +12,7 @@ var rapViewPetitionController = ['$scope', '$modal', 'alertService',  '$location
         }
     }
     self.caseinfo = rapGlobalFactory.CaseDetails;
+    $anchorScroll();
     if (rapGlobalFactory.FromSelectedCase == true) {
         
         self.Title = 'Staff Dashboard';
@@ -25,7 +26,10 @@ var rapViewPetitionController = ['$scope', '$modal', 'alertService',  '$location
     else {
         self.FromSelectedCase = false;
     }
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
 
+    }
     self.Back = function()
     {
         if (rapGlobalFactory.FromSelectedCase == true) {

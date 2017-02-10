@@ -1,9 +1,9 @@
 ﻿'use strict';
-var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaffdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaffdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CityUser;
-
+    self.Error = "";
     self.CaseSearchModel = [];
     self.CaseSearchResult = [];
     self.SearchModel = {
@@ -38,12 +38,14 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         $location.path("/admindashboard");
     }
 
-    
+    $anchorScroll();
    
     self.FileAppeal = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseInfoWithModel(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
 
@@ -55,7 +57,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
 
     self.GetCaseActivityStatus = function (model) {
         rapFactory.GetCaseActivityStatus(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.ActivityStatus = response.data;
@@ -63,7 +67,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     }
     var _GetCasesNoAnalyst = function (userID) {
         rapFactory.GetCasesNoAnalyst(userID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.CaseList = response.data;
@@ -73,7 +79,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
 
     var _GetAnalysts = function () {
         masterFactory.GetAnalysts().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.Analysts = response.data;
@@ -83,7 +91,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
 
     var _GetHearingOfficers = function () {
         masterFactory.GetHearingOfficers().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.HearingOfficers = response.data;
@@ -93,7 +103,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     var _GetCaseInfo = function () {
 
         rapFactory.GetCaseInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
 
@@ -103,7 +115,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     }
     var _getEmptyCaseSearchModel = function () {
         rapFactory.GetEmptyCaseSearchModel().then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CaseSearchModel = response.data;
             self.CaseSearchModel.PageSize = 5;
         });
@@ -116,7 +132,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.AssignAnalyst = function (C_ID, Analyst) {
 
         masterFactory.AssignAnalyst(C_ID, Analyst.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             _GetCasesNoAnalyst(self.model.UserID);
@@ -125,7 +143,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.AssignAnalystSearch = function (C_ID, Analyst) {
 
         masterFactory.AssignAnalyst(C_ID, Analyst.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             _GetCaseSearch();
@@ -135,14 +155,20 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     var _GetCaseSearch = function()
     {
         rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CaseSearchResult = response.data.List;
         })
     }
     self.AssignHearingOfficer = function (C_ID, HearingOfficer) {
 
         masterFactory.AssignHearingOfficer(C_ID, HearingOfficer.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             _GetCasesNoAnalyst(self.model.UserID);
@@ -151,7 +177,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.AssignHearingOfficerSearch = function (C_ID, HearingOfficer) {
 
         masterFactory.AssignHearingOfficer(C_ID, HearingOfficer.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             _GetCaseSearch();
@@ -178,7 +206,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         model.SortReverse = 0;
         
         rapFactory.GetCaseSearch(model).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CaseSearchResult = response.data.List;
             self.CaseSearchModel.TotalCount = response.data.TotalCount;
             self.CaseSearchModel.CurrentPage = response.data.CurrentPage;

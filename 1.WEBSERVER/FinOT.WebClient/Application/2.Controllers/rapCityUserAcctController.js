@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuserregisterFactory', 'rapGlobalFactory', 'masterdataFactory', '$location', function ($scope, $modal, alert, rapFactory,rapGlobalFactory, masterFactory, $location) {
+var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuserregisterFactory', 'rapGlobalFactory', 'masterdataFactory', '$location', '$anchorScroll', function ($scope, $modal, alert, rapFactory, rapGlobalFactory, masterFactory, $location, $anchorScroll) {
     var self = this;
     // self.CityUserAccount = [];
     self.AccountTypesList = [];
@@ -10,11 +10,16 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
     self.bEdit = rapGlobalFactory.IsEdit;
     self.Title = "Create a City of Oakland Account";
     self.SubmitText = "Create account";
-
+    $anchorScroll();
     var _GetCityUserFromID = function (CityUserID) {
         return rapFactory.GetCityUserFromID(CityUserID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CityUserAccount = response.data;
+            $anchorScroll();
         });
     }
     if (rapGlobalFactory.IsEdit == true) {
@@ -42,7 +47,9 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
             }
         }
         rapFactory.CreateCityUserAccount(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             if (rapGlobalFactory.IsEdit == true) {
@@ -64,7 +71,9 @@ var rapCityUserAcctController = ['$scope', '$modal', 'alertService', 'rapcityuse
     }
     self.DeleteCityUser = function (UserID) {
         rapFactory.DeleteCityUser(UserID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             if (rapGlobalFactory.IsEdit == true) {

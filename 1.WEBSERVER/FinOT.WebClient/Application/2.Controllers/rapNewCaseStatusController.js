@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcasestatusFactory', '$location', 'rapGlobalFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory) {
+var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcasestatusFactory', '$location', 'rapGlobalFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
@@ -7,12 +7,12 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
     }
     self.CityUser = rapGlobalFactory.CityUser;
     //self.custDetails = rapGlobalFactory.CustomerDetails;
-
+    self.Error = '';
     self.caseinfo = rapGlobalFactory.SelectedCase;
     self.ActivityStatus = [];
     self.ActivityList = [];
     self.StatusList = [];
-    
+    $anchorScroll();
     self.CaseClick = function () {
         $location.path("/selectedcase");
     }
@@ -21,7 +21,11 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
     }
     var _getActivity = function () {
         return rapFactory.GetActivity().then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.ActivityList = response.data;            
         });
     }
@@ -47,7 +51,11 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
 
     var _getStatus = function () {
         return rapFactory.GetStatus(1).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.StatusList = response.data;
         });               
     }
@@ -57,7 +65,11 @@ var rapNewCaseStatusController = ['$scope', '$modal', 'alertService', 'rapnewcas
         //TBD remove C_ID hardcoding
         model.EmployeeID = self.CityUser.UserID;
         rapFactory.SaveNewActivityStatus(model, C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             $location.path("/selectedcase");
         });        
     }

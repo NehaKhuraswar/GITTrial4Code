@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     rapGlobalFactory.CaseDetails = null;
     self.caseinfo = rapGlobalFactory.CaseDetails;
@@ -17,7 +17,7 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     //    });
     //}
   //  self.model = rapGlobalFactory.GetCustomer();
-
+    $anchorScroll();
     self.btoggle = false;
     self.ThirdPartyRepresentative = function () {
         $location.path("/YourRepresentative");
@@ -80,7 +80,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
             return;
         }
         return masterFactory.GetCasesForCustomer(self.model.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.Cases = response.data;
@@ -91,7 +93,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     self.GetCaseActivityStatus = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseActivityStatus(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.ActivityStatus = response.data;
@@ -118,7 +122,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     {
         if (activity.Activity.ActivityID == 1) {
             rapFactory.GetPetitionViewInfo(caseinfo.C_ID).then(function (response) {
-                if (!alert.checkResponse(response)) {
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
                     return;
                 }
                 self.caseinfo = response.data;
@@ -128,8 +134,10 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         }
         else if (activity.Activity.ActivityID == 26) {
             rapFactory.GetAppealInfoForView(caseinfo.C_ID).then(function (response) {
-                if (!alert.checkResponse(response)) {
-                    return;
+                if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
                 }
                 self.caseinfo = response.data;
                 rapGlobalFactory.CaseDetails = self.caseinfo;
@@ -138,7 +146,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         }
         else if (activity.Activity.ActivityID == 27) {
             rapFactory.GetTenantResponseViewInfo(caseinfo.C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+             if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
                 }
                 self.caseinfo = response.data;
@@ -148,7 +158,9 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
         }
         else if (activity.Activity.ActivityID == 35) {
             rapFactory.GetOResponseViewByCaseID(caseinfo.C_ID).then(function (response) {
-                if (!alert.checkResponse(response)) {
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
                     return;
                 }
                 self.caseinfo = response.data;
@@ -161,6 +173,8 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
             if (activity.NotificationType == 1) {
                 rapFactory.GetCustomEmailNotification(caseinfo.C_ID, activity.Activity.ActivityID, activity.NotificationID).then(function (response) {
                     if (!alert.checkForResponse(response)) {
+                        self.Error = rapGlobalFactory.Error;
+                        $anchorScroll();
                         return;
                     }
                     rapGlobalFactory.Notification = response.data;
@@ -171,9 +185,11 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
                         }
                         else if(activity.NotificationType == 2) {
                     rapFactory.GetMailNotification(activity.NotificationID).then(function (response) {
-                        if(!alert.checkForResponse(response)) {
+                        if (!alert.checkForResponse(response)) {
+                            self.Error = rapGlobalFactory.Error;
+                            $anchorScroll();
                             return;
-                    }
+                        }
                         rapGlobalFactory.MailNotification = response.data;
                         rapGlobalFactory.Notification_CaseID = caseinfo.CaseID;
                         rapGlobalFactory.FromSelectedCase = false;

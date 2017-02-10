@@ -1,4 +1,4 @@
-﻿var rapAdditionalCaseDocumentController = ['$scope', '$modal', 'alertService', '$location', 'rapAdditionalCaseDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory) {
+﻿var rapAdditionalCaseDocumentController = ['$scope', '$modal', 'alertService', '$location', 'rapAdditionalCaseDocumentFactory', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapFactory, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.custDetails = rapGlobalFactory.CityUser;
     self.customerDetails = rapGlobalFactory.CustomerDetails;
@@ -8,6 +8,7 @@
     self.CaseID = rapGlobalFactory.SelectedCase.CaseID;
     self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     self.DocDescriptions = masterFactory.DocDescription();
+    $anchorScroll();
     self.Home = function () {
         if (self.customerDetails != null) {
             $location.path("/publicdashboard");
@@ -25,7 +26,11 @@
         }
     }
     masterFactory.DocDescription().then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.DocDescriptions = response.data;
     });
     self.description1 = null;
@@ -33,7 +38,11 @@
  
     self.Documents = null;
     rapFactory.GetCaseDocuments(self.c_id).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.Documents = response.data;       
     });
     self.Delete = function (doc) {
@@ -97,7 +106,11 @@
     }
     self.Submit = function () {
          rapFactory.SaveCaseDocuments(self.Documents).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+             if (!alert.checkForResponse(response)) {
+                 self.Error = rapGlobalFactory.Error;
+                 $anchorScroll();
+                 return;
+             }
             self.Documents = response.data;
             if(self.customerDetails != null){
                  $location.path("/publicdashboard");

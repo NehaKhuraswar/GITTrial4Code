@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearchAccountFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearchAccountFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.AccountTypesList = [];
     self.AccountSearchModel = [];
@@ -11,7 +11,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
         SortBy: 'Name',
         SortReverse: true
     };
-    
+    self.Error = "";
     self.pagesizeOptions = [5, 10, 20, 50];
     
     //self.model.PageSize = 10;
@@ -37,7 +37,7 @@ var rapSearchAccountController = ['$scope', '$modal', 'alertService', 'rapSearch
     }
     _getAccountTypes(self.model.AccountType.AccountTypeID);
     _getEmptyAccountSearchModel();
-    
+    $anchorScroll();
     self.AccountSearch = function (model) {
         //model.PageSize = 10;
        

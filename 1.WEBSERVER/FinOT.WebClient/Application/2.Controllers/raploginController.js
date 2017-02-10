@@ -1,5 +1,5 @@
 ﻿'use strict';
-var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory) {
+var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = [];
     self.AccountTypesList = [];
@@ -41,11 +41,13 @@ var raploginController = ['$scope', '$modal', 'alertService', 'raploginFactory',
 
     //    });
     //}
+    $anchorScroll();
     self.Login = function (model, accounttype) {
         self.Hide = false;
         rapFactory.Login(model).then(function (response) {
             if (!alert.checkForResponse(response)) {
-                 self.Error = rapGlobalFactory.Error;
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                     return;
             }
           

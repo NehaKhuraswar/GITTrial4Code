@@ -1,4 +1,4 @@
-﻿var rapCustomEmailController = ['$scope', 'alertService', '$location', 'rapCustomEmailFactory', 'rapGlobalFactory', 'masterdataFactory', 'rapnewcasestatusFactory', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory, rapnewcasestatusFactory) {
+﻿var rapCustomEmailController = ['$scope', 'alertService', '$location', 'rapCustomEmailFactory', 'rapGlobalFactory', 'masterdataFactory', 'rapnewcasestatusFactory', '$anchorScroll', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory, rapnewcasestatusFactory, $anchorScroll) {
     var self = this;
     if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
         $location.path("/staffdashboard");
@@ -8,7 +8,7 @@
     self.caseinfo = rapGlobalFactory.SelectedCase;
     self.model = null;
     self.ActivityList = [];
-  
+    $anchorScroll();
     self.CaseClick = function () {
         $location.path("/selectedcase");
     }
@@ -64,12 +64,20 @@ else {
 }
         
     rapFactory.GetCustomEmail(self.c_id).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.model = response.data;
     });
 
     rapnewcasestatusFactory.GetActivity().then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
             self.ActivityList = response.data;
         });
     

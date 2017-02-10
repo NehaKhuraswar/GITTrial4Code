@@ -21,7 +21,7 @@
                         </div>
                     </div>
 
-                    <div class="tbl-body" ng-repeat="item in Ctrl.Documents">
+                    <div class="tbl-body" ng-repeat="item in Ctrl.Documents | filter: {DocTitle: 'A_AdditionalDocuments'}">
                         <div class="tbl-row clearfix">
                             <div class="item" ng-class="{'expanded':toggle}">
                                 <div class="item-header clearfix">

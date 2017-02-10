@@ -1,4 +1,4 @@
-﻿var rapMailController = ['$scope', 'alertService', '$location', 'rapMailFactory', 'rapGlobalFactory', 'masterdataFactory', 'rapnewcasestatusFactory', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory, rapnewcasestatusFactory) {
+﻿var rapMailController = ['$scope', 'alertService', '$location', 'rapMailFactory', 'rapGlobalFactory', 'masterdataFactory', 'rapnewcasestatusFactory', '$anchorScroll', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory, rapnewcasestatusFactory, $anchorScroll) {
     var self = this;
     self.custDetails = rapGlobalFactory.CityUser;
     if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
@@ -21,6 +21,7 @@
     self.ThirdParty = null;
     self.bTenant = false;
     self.bOwner = false;
+    $anchorScroll();
     self.bThirdParty = false;
     if (self.caseinfo.PetitionCategoryID == 1) {
         if (self.caseinfo.TenantPetitionInfo != null) {
@@ -70,12 +71,20 @@
         }
     
     rapFactory.GetMail().then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+                }
         self.model = response.data;
     });
 
     rapnewcasestatusFactory.GetActivity().then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.ActivityList = response.data;
     });
 
