@@ -19,6 +19,10 @@
         $anchorScroll();
     });
 
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+    }
+
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerReviewPageSubmission(self.custDetails.custID).then(function (response) {

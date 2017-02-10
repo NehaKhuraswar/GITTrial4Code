@@ -28,7 +28,9 @@ var rapViewAppealController = ['$scope', '$modal', 'alertService', '$location', 
     else {
         self.FromSelectedCase = false;
     }
-   
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+    }
     self.Back = function()
     {
         if (rapGlobalFactory.FromSelectedCase == true) {

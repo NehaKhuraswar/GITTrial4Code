@@ -258,6 +258,7 @@
                                     <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'}">
                                         <td class="nopadding-left">
                                             {{item.DocName}}
+                                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -307,6 +308,7 @@
                                     <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_Problem'}">
                                         <td class="nopadding-left">
                                             {{item.DocName}}
+                                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -333,8 +335,8 @@
                                 <div class="item" ng-class="{'expanded':toggle}">
                                     <div class="item-header clearfix">
                                         <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                        &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                     </div>
-
                                     <div class="item-content clearfix" ng-show="toggle">
                                         <div class="row">
                                             <div class="col-md-10 col-sm-12">

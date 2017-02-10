@@ -161,7 +161,7 @@
                                         <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
                                             <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-                                            <button ng-show="item.isUploaded == true" class="btn-link btn-download" ng-click="Ctrl.Download(item)">Download</button>
+                                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -196,8 +196,10 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-                                            <button ng-show="item.isUploaded == true" class="btn-link btn-download" ng-click="Ctrl.Download(item)">Download</button>
+                                            <div class="col-sm-6 col-xs-12">
+                                                {{item.DocName}}
+                                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                            </div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -243,19 +245,21 @@
                                             <div class="tbl-row clearfix">
                                                 <div class="item" ng-class="{'expanded':toggle}">
                                                     <div class="item-header clearfix">
-                                                        <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
-                                                    </div>
-
-                                                    <div class="item-content clearfix" ng-show="toggle">
-                                                        <div class="row">
-                                                            <div class="col-md-10 col-sm-12">
-                                                                <p>{{item.DocDescription}}</p>
+                                                        <div class="col col-35 name pad-l30">
+                                                            <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
+                                                        </div>
+                                                        &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                                        <div class="item-content clearfix" ng-show="toggle">
+                                                            <div class="row">
+                                                                <div class="col-md-10 col-sm-12">
+                                                                    <p>{{item.DocDescription}}</p>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
                                     </div>
                                     <!-- .custom-table -->
                                 </div>

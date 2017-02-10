@@ -88,7 +88,9 @@
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Proof of payment</div></div>
                         <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'}">
                             {{item.DocName}}
+                           &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                         </div>
+                       
                     </div>
                 </div><!-- .field-group -->
 
@@ -157,15 +159,41 @@
                 </div>
             </div>-->
                 <!-- .field-group -->
+                <div class="subhead type2">
+                    <h4>Justification documentation</h4>                   
+                </div>
 
-                <div class="field-group filled-info subhead">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Attached document</div></div>
-                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
-                            {{item.DocName}}
+                <div class="field-group">
+                    <!-- Custom Table -->
+                    <div class="custom-table docs-list">
+                        <div class="tbl-header">
+                            <div class="tbl-row clearfix">
+                                <div class="col col-35 name">File name</div>
+                            </div>
+                        </div>
+
+                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
+                            <div class="tbl-row clearfix">
+                                <div class="item" ng-class="{'expanded':toggle}">
+                                    <div class="item-header clearfix">
+                                        <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                        &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                    </div>
+
+                                    <div class="item-content clearfix" ng-show="toggle">
+                                        <div class="row">
+                                            <div class="col-md-10 col-sm-12">
+                                                <p>{{item.DocDescription}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div><!-- .field-group -->
+                    <!-- .custom-table -->
+                </div>
+
                 <!-- Rental property -->
                 <div class="subhead type2">
                     <h4>Rental property</h4>
@@ -249,7 +277,8 @@
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
                         <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice'}">
                             {{item.DocName}}
-                        </div>
+                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                        </div>                       
                     </div>
                 </div><!-- .field-group -->
 
@@ -334,13 +363,14 @@
                                 <div class="item" ng-class="{'expanded':toggle}">
                                     <div class="item-header clearfix">
                                         <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                        &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                     </div>
-
+                                   
                                     <div class="item-content clearfix" ng-show="toggle">
                                         <div class="row">
                                             <div class="col-md-10 col-sm-12">
                                                 <p>{{item.DocDescription}}</p>
-                                            </div>
+                                            </div>                                           
                                         </div>
                                     </div>
                                 </div>

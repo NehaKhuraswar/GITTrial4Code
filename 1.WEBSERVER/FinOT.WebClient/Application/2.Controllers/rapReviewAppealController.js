@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewappealFactory', '$location', 'rapGlobalFactory', 'rapAppealDocumentFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapAppealDocumentFactory, $anchorScroll) {
+var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewappealFactory', '$location', 'rapGlobalFactory', 'rapAppealDocumentFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapAppealDocumentFactory, masterFactory, $anchorScroll) {
     var self = this;
     
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -39,6 +39,10 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
             $scope.model.bConfirm = true;
             $scope.model.AppealSubmissionStatus.Review = true;
         });
+    }
+
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
     }
     self.EditApplicantInfo = function () {
         $scope.model.bReview = false;

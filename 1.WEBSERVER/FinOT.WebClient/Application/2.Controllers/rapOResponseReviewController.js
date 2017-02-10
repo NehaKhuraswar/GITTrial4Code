@@ -42,6 +42,9 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
         $scope.model.oresponseDocument = true;
     }
 
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+    }
    
     self.Continue = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;

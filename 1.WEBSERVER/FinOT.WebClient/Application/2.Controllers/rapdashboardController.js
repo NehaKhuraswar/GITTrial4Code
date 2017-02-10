@@ -129,7 +129,14 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
                 }
                 self.caseinfo = response.data;
                 rapGlobalFactory.CaseDetails = self.caseinfo;
-                $location.path("/ViewPetition");
+                rapGlobalFactory.FromSelectedCase = false;
+                if (rapGlobalFactory.CaseDetails.PetitionCategoryID == 1) {
+                    $location.path("/ViewPetition");
+                }
+                else {
+                    $location.path("/ViewownerPetition");
+                }
+               
             });
         }
         else if (activity.Activity.ActivityID == 26) {

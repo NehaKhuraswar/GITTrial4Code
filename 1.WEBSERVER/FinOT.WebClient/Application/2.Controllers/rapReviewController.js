@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapTenantlDocumentFactory, $anchorScroll) {
+var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory', '$location', 'rapGlobalFactory', 'rapTenantlDocumentFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, rapTenantlDocumentFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.model = $scope.model;
     self.custDetails = rapGlobalFactory.CustomerDetails;
@@ -27,7 +27,9 @@ var rapReviewController = ['$scope', '$modal', 'alertService', 'rapreviewFactory
         });
     }
     _GetTenantReviewInfo(self.custDetails.custID);
-
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+    }
     self.EditApplicantInfo = function () {
         $scope.model.bReview = false;
         $scope.model.bAppInfo = true;

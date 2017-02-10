@@ -1,5 +1,5 @@
 ﻿'use strict';
-var rapViewPetitionController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapGlobalFactory, masterFactor, $anchorScroll) {
+var rapViewPetitionController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.Title = '';
     if (rapGlobalFactory.CaseDetails == null || rapGlobalFactory.CaseDetails == undefined) {
