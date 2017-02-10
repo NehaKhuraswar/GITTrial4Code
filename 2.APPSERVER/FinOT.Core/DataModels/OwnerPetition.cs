@@ -62,6 +62,8 @@ namespace RAP.Core.DataModels
         private bool _bThirdPartyRepresentation = false;
         public int OwnerPetitionApplicantInfoID { get; set; }
         public UserInfoM ApplicantUserInfo { get; set; }
+        public bool bApplicantEmailNotification { get; set; }
+        public bool bApplicantMailNotification { get; set; }
         public bool bThirdPartyRepresentation
         {
             get

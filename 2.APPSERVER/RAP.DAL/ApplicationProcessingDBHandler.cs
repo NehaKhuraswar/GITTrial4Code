@@ -809,6 +809,8 @@ namespace RAP.DAL
                     caseinfo.LastModifiedDate = Convert.ToDateTime(caseDB.LastModifiedDate);
                     caseinfo.CaseFileBy = Convert.ToInt32(caseDB.CaseFiledBy);
 
+                    
+
                     // Get the petition applicant info
                     var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
 
@@ -837,6 +839,8 @@ namespace RAP.DAL
                             {
                                 caseinfo.TenantPetitionInfo.ApplicantUserInfo.TranslationServiceInfo = TranslationServiceResult.result;
                             }
+                            caseinfo.TenantPetitionInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
+                            caseinfo.TenantPetitionInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
                         }
                         caseinfo.TenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionDB.bThirdPartyRepresentation;
                         if (caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)
@@ -860,15 +864,20 @@ namespace RAP.DAL
                         {
                             caseinfo.OwnerPetitionInfo = ownerPetitionResult.result;
                         }
+                        caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
+                        caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
                         var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID);
                         if (TranslationServiceResult.status.Status == StatusEnum.Success)
                         {
                             caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.TranslationServiceInfo = TranslationServiceResult.result;
                         }
-                        var TranslationServiceTenantResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.UserID);
-                        if (TranslationServiceTenantResult.status.Status == StatusEnum.Success)
+                        for (int i = 0; i < caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.Count; i++)
                         {
-                            caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo = TranslationServiceTenantResult.result;
+                            var TranslationServiceTenantResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.UserID);
+                            if (TranslationServiceTenantResult.status.Status == StatusEnum.Success)
+                            {
+                                caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.TranslationServiceInfo = TranslationServiceTenantResult.result;
+                            }
                         }
                         caseinfo.OwnerPetitionInfo.Verification.bCaseMediation = _dbContext.OwnerPetitionVerifications.Where(x => x.PetitionID == petitionDetailsDb.OwnerPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
                         caseinfo.TenantResponseInfo.Verification.bCaseMediation = _dbContext.TenantResponseVerifications.Where(x => x.TenantResponseID == caseinfo.TenantResponseInfo.TenantResponseID).Select(x => x.bCaseMediation).FirstOrDefault();

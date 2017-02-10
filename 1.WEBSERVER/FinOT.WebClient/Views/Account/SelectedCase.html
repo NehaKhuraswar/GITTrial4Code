@@ -294,8 +294,7 @@
                                         <div class="fs20-title">{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}</div>
                                         <p>{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}  </p>
                                         <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}} </p>
-                                        <div class="small-title">Notifications</div>
-                                        <p>Mail</p>
+                                        
                                         <div class="small-title">Mediation</div>
                                         <p ng-show="Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==1">No</p>
                                         <p ng-show="Ctrl.caseinfo.OwnerResponseInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==1">Yes</p>
@@ -326,7 +325,8 @@
                                         <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}  </p>
                                         <p>Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email}} </p>
                                         <div class="small-title">Notifications</div>
-                                        <p>Mail</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.bApplicantMailNotification == true">Mail</p>
+                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.bApplicantEmailNotification == true">Email</p>
                                         <div class="small-title">Mediation</div>
                                         <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==1">No</p>
                                         <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==1">Yes</p>
@@ -356,7 +356,8 @@
                                         <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},<br />{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}  </p>
                                         <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}} </p>
                                         <div class="small-title">Notifications</div>
-                                        <p>Mail</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantMailNotification == true">Mail</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantEmailNotification == true">Email</p>
                                         <div class="small-title">Mediation</div>
                                         <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==2">No</p>
                                         <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==2">Yes</p>
@@ -383,21 +384,20 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Tenant</div>
-                                        <div class="fs20-title">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.LastName}}</div>
-                                        <p>{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine2}},<br />{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}}, {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.State.StateCode}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip}}  </p>
-                                        <p>Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Email}} </p>
-                                        <div class="small-title">Notifications</div>
-                                        <p>Mail</p>
-                                        <div class="small-title">Mediation</div>
+                                        <div class="fs20-title" ng-repeat-start="tenant in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo">{{tenant.TenantUserInfo.FirstName}} {{tenant.TenantUserInfo.LastName}}</div>
+                                        <p>{{tenant.TenantUserInfo.AddressLine1}} {{tenant.TenantUserInfo.AddressLine2}},<br />{{tenant.TenantUserInfo.City}}, {{tenant.TenantUserInfo.State.StateCode}} {{tenant.TenantUserInfo.Zip}}  </p>
+                                        <p >Tel: {{tenant.TenantUserInfo.PhoneNumber}} <br />Email: {{tenant.TenantUserInfo.Email}} </p>
+                                       
+                                        <div  class="small-title">Mediation</div>
                                         <p ng-show="Ctrl.caseinfo.TenantResponseInfo.Verification.bCaseMediation == false && Ctrl.caseinfo.PetitionCategoryID==2">No</p>
                                         <p ng-show="Ctrl.caseinfo.TenantResponseInfo.Verification.bCaseMediation == true && Ctrl.caseinfo.PetitionCategoryID==2">Yes</p>
                                         <div class="small-title">Request of translation services</div>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
-                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo.TranslationLanguage}}</p>
+                                        <p ng-show="tenant.TenantUserInfo.TranslationServiceInfo.IsTranslatorRequired == false">No</p>
+                                        <p ng-repeat-end ng-show="tenant.TenantUserInfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo.TranslationLanguage}}</p>
 
                                     </div>
 
-                                    <div class="col-md-4 col-sm-12">
+                                    <div  class="col-md-4 col-sm-12">
                                         <div class="small-title">Tenant representative</div>
                                         <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName == null">n/a</div>
                                         <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null">{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}</div>

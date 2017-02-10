@@ -233,7 +233,9 @@ namespace RAP.Core.DataModels
         private List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
         
         public bool bThirdPartyRepresentation { get; set; }
-        public UserInfoM ApplicantUserInfo { get; set; } 
+        public UserInfoM ApplicantUserInfo { get; set; }
+        public bool bApplicantEmailNotification { get; set; }
+        public bool bApplicantMailNotification { get; set; }
         public UserInfoM ThirdPartyInfo { get; set; }
         public bool ThirdPartyEmailNotification { get; set; }
         public bool ThirdPartyMailNotification { get; set; }
