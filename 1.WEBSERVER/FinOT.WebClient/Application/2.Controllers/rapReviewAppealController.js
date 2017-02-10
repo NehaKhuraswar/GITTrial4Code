@@ -27,6 +27,7 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
    });
     self.SubmitAppeal = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
+        rapGlobalFactory.CaseDetails.CaseFileBy = self.custDetails.custID;
         rapFactory.SubmitAppeal(rapGlobalFactory.CaseDetails).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
