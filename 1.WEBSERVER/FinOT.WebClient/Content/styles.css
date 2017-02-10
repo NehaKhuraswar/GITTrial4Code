@@ -5138,7 +5138,7 @@ Toggle Menu Button
 .case-wrapper .case-status .item .item-header {
   padding: 0 0 10px 25px;
   margin: 0;
-  border-bottom: 2px solid #cfd0ce;
+  
   font-family: "FaktPro-Medium", "sans-serif";
   font-size: 16px;
   font-weight: 500;
@@ -5147,6 +5147,7 @@ Toggle Menu Button
 }
 /* line 2211, ../sass/styles.scss */
 .case-wrapper .case-status .item .item-content {
+  border-top: 2px solid #cfd0ce;	
   max-width: 100%;
 }
 /* line 2214, ../sass/styles.scss */
