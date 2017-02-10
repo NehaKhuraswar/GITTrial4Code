@@ -121,7 +121,7 @@
     <value>Petition grounds is a required field</value>
   </data>
   <data name="ID_0005" xml:space="preserve">
-    <value>Justification for Rent Increase is required field</value>
+    <value>Justification for Rent Increase is a required field</value>
   </data>
   <data name="ID_0006" xml:space="preserve">
     <value>Case responding to is not valid</value>
