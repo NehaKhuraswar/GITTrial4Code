@@ -239,8 +239,7 @@
                         <div class="subhead type2">
                             <h4>Additional Documentation</h4>
                         </div>
-
-                        <div class="field-group">
+                        <div class="field-group" ng-show="FilteredDocs.length != 0">
                             <!-- Custom Table -->
                             <div class="custom-table docs-list">
                                 <div class="tbl-header">
@@ -251,7 +250,7 @@
                                 </div>
 
                                 <div class="tbl-body">
-                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'}">
+                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'} as FilteredDocs">
                                         <div class="item item-toggle expanded">
                                             <div class="item-header clearfix">
                                                 <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-toggle"></a> {{item.DocName}}</div>

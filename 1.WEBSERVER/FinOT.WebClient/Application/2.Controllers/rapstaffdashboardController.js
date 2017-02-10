@@ -130,7 +130,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
                 return;
             }
             self.CaseSearchModel = response.data;
-            self.CaseSearchModel.PageSize = 5;
+            self.CaseSearchModel.PageSize = 20;
             self.pagingsortingModel = angular.copy(response.data);
             self.pagingsortingModel.PageSize = 10;
             self.pagingsortingModel.CurrentPage = 1;

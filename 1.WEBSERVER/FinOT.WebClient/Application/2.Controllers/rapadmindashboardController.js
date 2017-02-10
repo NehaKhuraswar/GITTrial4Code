@@ -64,7 +64,7 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
                 return;
             }
             self.AccountSearchModel = response.data;
-            self.AccountSearchModel.PageSize = 5;
+            self.AccountSearchModel.PageSize = 20;
         });
     }
     _getAccountTypes(self.CityUser.AccountType.AccountTypeID);

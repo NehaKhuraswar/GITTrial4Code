@@ -318,8 +318,7 @@
                             <div class="subhead type2">
                                 <h4>Additional Documentation</h4>
                             </div>
-
-                            <div class="field-group" ng-show="Ctrl.caseinfo.Documents!=null && Ctrl.caseinfo.Documents.length != 0">
+                            <div class="field-group" ng-show="FilteredDocs.length != 0">
                                 <!-- Custom Table -->
                                 <div class="custom-table docs-list">
                                     <div class="tbl-header">
@@ -329,7 +328,7 @@
                                     </div>
 
 
-                                    <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TP_AdditionalDocuments'}">
+                                    <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TP_AdditionalDocuments'} as FilteredDocs">
                                         <div class="tbl-row clearfix">
                                             <div class="item" ng-class="{'expanded':toggle}">
                                                 <div class="item-header clearfix">
