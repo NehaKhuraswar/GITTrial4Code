@@ -16,6 +16,6 @@ namespace RAP.DAL
         ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID);
         ReturnResult<bool> AssignHearingOfficer(int cID, int HearingOfficerUserID);
         ReturnResult<SearchCaseResult> GetCaseSearch(CaseSearch caseSearch);
-
+        ReturnResult<SearchCaseResult> GetCaseswithNoAnalyst(CaseSearch caseSearch, int UserID);
     }
 }

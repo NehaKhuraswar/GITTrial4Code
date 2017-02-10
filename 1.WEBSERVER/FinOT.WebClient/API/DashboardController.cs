@@ -508,6 +508,38 @@ namespace RAP.WebClient
                 return responseMessage;
             }
         }
+        [AllowAnonymous]
+        [Route("GetCaseswithNoAnalyst/{UserID}")]
+        [HttpPost]
+        public HttpResponseMessage GetCaseswithNoAnalyst(string UserID)
+        {
+            HttpResponseMessage responseMessage;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_baseURL);
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                string requestUri = _requestURI + "GetCaseswithNoAnalyst/" + UserID;
+                responseMessage = client.PostAsync(requestUri, Request.Content).Result;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return responseMessage;
+                }
+                else
+                {
+                    responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    responseMessage.ReasonPhrase = _errorMessage;
+                }
+                return responseMessage;
+            }
+            catch
+            {
+                responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                responseMessage.ReasonPhrase = _exception;
+                return responseMessage;
+            }
+        }
+
 
         [AllowAnonymous]
         [Route("UpdateAPNAddress")]

@@ -33,80 +33,103 @@
                         <div class="custom-table active-cases-table">
                             <div class="tbl-header">
                                 <div class="tbl-row clearfix">
-                                    <div class="col col-45 case-number">Case number</div>
-                                    <div class="col col-20 filling-date">Date of filing <i class="sort "></i></div>
-                                    <div class="col col-20 last-activity">Last activity <i class="sort"></i></div>
-                                    <div class="col col-15 activity">Activity <i class="sort"></i></div>
+                                    <div class="col col-45 case-number clickable" ng-click="Ctrl.onSortNoAnalyst('CaseID',Ctrl.pagingsortingModel)">
+                                        Case number
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'CaseID' && !Ctrl.pagingsortingModel.SortReverse" class="sort"></a>
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'CaseID' && Ctrl.pagingsortingModel.SortReverse" class="sort desc"></a>
+                                        <a style="cursor: pointer;" ng-show="!(Ctrl.pagingsortingModel.SortBy == 'CaseID')" class="sort grey"></a>
+                                    </div>
+                                    <div class="col col-20 filling-date clickable" ng-click="Ctrl.onSortNoAnalyst('CreatedDate',Ctrl.pagingsortingModel)">
+                                        Date of filing
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'CreatedDate' && !Ctrl.pagingsortingModel.SortReverse" class="sort"></a>
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'CreatedDate' && Ctrl.pagingsortingModel.SortReverse" class="sort desc"></a>
+                                        <a style="cursor: pointer;" ng-show="!(Ctrl.pagingsortingModel.SortBy == 'CreatedDate')" class="sort grey"></a>
+                                    </div>
+                                    <div class="col col-20 last-activity clickable" ng-click="Ctrl.onSortNoAnalyst('LastModifiedDate',Ctrl.pagingsortingModel)">
+                                        Last activity
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'LastModifiedDate' && !Ctrl.pagingsortingModel.SortReverse" class="sort"></a>
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'LastModifiedDate' && Ctrl.pagingsortingModel.SortReverse" class="sort desc"></a>
+                                        <a style="cursor: pointer;" ng-show="!(Ctrl.pagingsortingModel.SortBy == 'LastModifiedDate')" class="sort grey"></a>
+                                    </div>
+                                    <div class="col col-15 activity clickable" ng-click="Ctrl.onSortNoAnalyst
+                                         ('Activity',Ctrl.pagingsortingModel)">
+                                        Activity
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'Activity' && !Ctrl.pagingsortingModel.SortReverse" class="sort"></a>
+                                        <a style="cursor: pointer;" ng-show="Ctrl.pagingsortingModel.SortBy == 'Activity' && Ctrl.pagingsortingModel.SortReverse" class="sort desc"></a>
+                                        <a style="cursor: pointer;" ng-show="!(Ctrl.pagingsortingModel.SortBy == 'Activity')" class="sort grey"></a>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="tbl-body">
-                                <div class="tbl-row clearfix" ng-repeat="item in Ctrl.CaseList">
+                                <div class="tbl-row clearfix" ng-repeat="result in Ctrl.CasewithNoAnalystResult.List">
                                     <div class="item" ng-class="{'expanded':toggle}">
                                         <div class="item-header clearfix">
-                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 1"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a style="cursor: pointer;" ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{item.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{item.TenantPetitionInfo.ApplicantUserInfo.City}}, {{item.TenantPetitionInfo.ApplicantUserInfo.StateName}} {{item.TenantPetitionInfo.ApplicantUserInfo.Zip}}</div>
-                                            <div class="col col-45 pad-l40 case-number" ng-show="item.PetitionCategoryID == 2"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a style="cursor: pointer;" ng-click="Ctrl.OpenSelectedCase(item)">{{item.CaseID}}</a></strong><br />{{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.StateName}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</div>
-                                            <div class="col col-20 filling-date">{{item.CreatedDate | date}}</div>
-                                            <div class="col col-20 ast-activity">{{item.LastModifiedDate | date}}</div>
-                                            <div class="col col-15 activity">{{item.LastActivity}}</div>
+                                            <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==1"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a style="cursor: pointer;" ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.ApplicantAddressLine1}} {{result.ApplicantAddressLine2}}, {{result.ApplicantCity}}, {{result.ApplicantStateCode}} {{result.ApplicantZip}}</div>
+                                            <div class="col col-45 pad-l40 case-number" ng-show="result.PetitionCategoryID ==2"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> <strong><a style="cursor: pointer;" ng-click="Ctrl.OpenSelectedCase(result)">{{result.CaseID}}</a></strong><br />{{result.OPAddressLine1}} {{result.OPAddressLine2}}, {{result.OPCity}}, {{result.OPStateCode}} {{result.OPOwnerZip}}</div>
+                                            <div class="col col-20 filling-date">{{result.CreatedDate | date}}</div>
+                                            <div class="col col-20 ast-activity">{{result.LastModifiedDate |date}}</div>
+                                            <div class="col col-15 activity">{{result.ActivityName}}</div>
                                         </div>
-                                            
+
                                         <div class="item-content clearfix" ng-show="toggle">
-                                            <div class="item-row clearfix" ng-show="item.PetitionCategoryID == 2">
+                                            <div class="item-row clearfix" ng-show="result.PetitionCategoryID == 2">
                                                 <div class="item-col col-45 pad-l40 align-left">
                                                     <div class="small-title">Tenant</div>
-                                                    <p>{{item.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.FirstName}} {{item.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.LastName}}</p>
+                                                    <p>{{result.OwnerTenantName}}</p>
                                                 </div>
 
                                                 <div class="item-col col-55 pad-l10 align-left">
                                                     <div class="small-title">Property Owner</div>
-                                                    <p>{{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{item.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</p>
+                                                    <p>{{result.OPOwnerName}}</p>
                                                 </div>
                                             </div>
-                                            <div class="item-row clearfix" ng-show="item.PetitionCategoryID == 1">
+                                            <div class="item-row clearfix" ng-show="result.PetitionCategoryID == 1">
                                                 <div class="item-col col-45 pad-l40 align-left">
                                                     <div class="small-title">Tenant</div>
-                                                    <p>{{item.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{item.TenantPetitionInfo.ApplicantUserInfo.LastName}}</p>
+                                                    <p>{{result.TenantName}}</p>
                                                 </div>
 
                                                 <div class="item-col col-55 pad-l10 align-left">
                                                     <div class="small-title">Property Owner</div>
-                                                    <p>{{item.TenantPetitionInfo.OwnerInfo.FirstName}} {{item.TenantPetitionInfo.OwnerInfo.LastName}}</p>
+                                                    <p>{{result.OwnerName}}</p>
                                                 </div>
                                             </div>
 
                                             <div class="item-row clearfix">
                                                 <div class="item-col col-45  pad-l40 align-left">
                                                     <div class="small-title">Analyst</div>
-                                                    <p>{{item.CityAnalyst.FirstName}} {{item.CityAnalyst.LastName}}</p>
+                                                    <p class="alert-error-msg" ng-show="result.Analyst==null">assignment required</p>
+                                                    <p>{{result.Analyst}}</p>
                                                 </div>
 
                                                 <div class="item-col col-42 pad-l10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
                                                     <div>
                                                         <select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
-                                                                ng-model="Analyst" 
+                                                                ng-model="Analyst"
                                                                 ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID">
                                                             <option value="" selected>Select analyst</option>
-                                                        </select>                                                        
+                                                        </select>
                                                         <!--<select name="analyst" id="analyst" class="custom-select" data-placeholder="Select analyst"
-                                                                ng-model="Analyst"
-                                                                ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
+                                    ng-model="Analyst"
+                                    ng-options="analyst as (analyst.FirstName + ' ' + analyst.LastName) for analyst in Ctrl.Analysts track by analyst.UserID"></select>-->
                                                     </div>
                                                 </div>
 
                                                 <div class="item-col col-10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
-                                                    <a style="cursor: pointer;" ng-click="Ctrl.AssignAnalyst(item.C_ID, Analyst)" class="btn-link btn-assign">Assign</a>
+                                                    <a style="cursor: pointer;" ng-click="Ctrl.AssignAnalyst(result.C_ID, Analyst)" class="btn-link btn-assign">Assign</a>
                                                 </div>
                                             </div>
 
                                             <div class="item-row clearfix">
                                                 <div class="item-col col-45  pad-l40 align-left">
                                                     <div class="small-title">Hearing Officer</div>
-                                                    <p>{{item.HearingOfficer.FirstName}} {{item.HearingOfficer.LastName}}</p>
+                                                    <p>{{result.HearingOfficer}}</p>
                                                 </div>
 
-                                                <div class="item-col col-42 pad-l10 align-left" ><!--ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">-->
-                                                    <div>                                                        
+                                                <div class="item-col col-42 pad-l10 align-left">
+                                                    <!--ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">-->
+                                                    <div>
                                                         <select name="hearing" id="hearing" class="custom-select" data-placeholder="Select Hearing Officer"
                                                                 ng-model="HearingOfficer"
                                                                 ng-options="hearingofficer as (hearingofficer.FirstName  + ' ' + hearingofficer.LastName) for hearingofficer in Ctrl.HearingOfficers track by hearingofficer.UserID">
@@ -116,7 +139,7 @@
                                                 </div>
 
                                                 <div class="item-col col-10 align-left" ng-hide="Ctrl.model.IsAnalyst == true || Ctrl.model.IsHearingOfficer == true">
-                                                    <a style="cursor: pointer;" ng-click="Ctrl.AssignHearingOfficer(item.C_ID, HearingOfficer)" class="btn-link btn-assign">Assign</a>
+                                                    <a style="cursor: pointer;" ng-click="Ctrl.AssignHearingOfficer(result.C_ID, HearingOfficer)" class="btn-link btn-assign">Assign</a>
                                                 </div>
                                             </div>
 
@@ -126,7 +149,14 @@
                             </div>
                         </div>
                         <!-- .custom-table -->
-
+                        <div class="results-paging mar-t60" ng-show="Ctrl.CasewithNoAnalystResult.List.length > 0">
+                            <div class="show-records">Showing {{Ctrl.FromRecordNoAnalyst}}-{{Ctrl.ToRecordNoAnalyst}} of {{Ctrl.pagingsortingModel.TotalCount}} records</div>
+                            <div class="pages">
+                                <a style="cursor: pointer;" ng-click="Ctrl.GetPreviousPageNoAnalyst()" ng-hide="Ctrl.isFirstPageNoAnalyst()" class="link next"><span>&#8249;</span>Previous</a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.GetPageNoAnalyst(pageNumber.text, Ctrl.pagingsortingModel)" ng-class="link 'active':pageNumber.active" ng-repeat="pageNumber in Ctrl.pageNumberListNoAnalyst">{{pageNumber.text}}</a>
+                                <a style="cursor: pointer;" ng-click="Ctrl.GetNextPageNoAnalyst()" ng-hide="Ctrl.isLastPageNoAnalyst()" class="link next">Next <span>&#8250;</span></a>
+                            </div>
+                        </div>
 
 
                         <div class="subhead type2 mar-t40">

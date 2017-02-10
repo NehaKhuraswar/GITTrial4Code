@@ -567,6 +567,46 @@ namespace RAP.API.Controllers
 
             return Request.CreateResponse<TranInfo<SearchCaseResult>>(ReturnCode, transaction);
         }
+        [AllowAnonymous]
+        [Route("GetCaseswithNoAnalyst/{UserID:int}")]
+        [HttpPost]
+        public HttpResponseMessage GetCaseswithNoAnalyst([FromBody] CaseSearch caseSearch, [FromUri] int UserID)
+        {
+
+            //Appl accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<SearchCaseResult> transaction = new TranInfo<SearchCaseResult>();
+            ReturnResult<SearchCaseResult> result = new ReturnResult<SearchCaseResult>();
+            try
+            {
+                result = _service.GetCaseswithNoAnalyst(caseSearch, UserID);
+
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+
+                //if (ex.InnerException != null) { InnerExceptionMessage = ex.InnerException.Message; }
+                //LogHelper.Instance.Error(CorrelationID, Username, Request.GetRequestContext().VirtualPathRoot, ex.Message, InnerExceptionMessage, 0, ex);
+            }
+
+            return Request.CreateResponse<TranInfo<SearchCaseResult>>(ReturnCode, transaction);
+        }
 
         [AllowAnonymous]
         [Route("UpdateAPNAddress")]

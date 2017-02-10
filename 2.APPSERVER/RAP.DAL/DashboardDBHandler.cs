@@ -19,6 +19,78 @@ namespace RAP.DAL
             _connString =  ConfigurationManager.AppSettings["RAPDBConnectionString"];
         }
         #region "Get"
+        
+        // Get cases for the staff dashboard which doesnot have analyst or the hearing officer assigned
+        public ReturnResult<SearchCaseResult> GetCaseswithNoAnalyst(CaseSearch caseSearch, int UserID)
+        {
+            ReturnResult<SearchCaseResult> result = new ReturnResult<SearchCaseResult>();
+
+            try
+            {
+                SearchCaseResult searchResult = new SearchCaseResult();
+                //List<CustomerInfo accounts = new CustomerInfo();
+                using (DashboardDataContext db = new DashboardDataContext(_connString))
+                {
+
+                    string errorMessage = "";
+                    int? TotalCount = 0;
+
+                    var Resultdb = db.USP_GetCase_NoAnalyst(
+                         caseSearch.SortBy, caseSearch.SortReverse,
+                        caseSearch.PageSize, caseSearch.CurrentPage, ref TotalCount, ref errorMessage);
+
+
+                    foreach (var item in Resultdb)
+                    {
+                        SearchResultCaseInfo caseInfo = new SearchResultCaseInfo();
+                        caseInfo.C_ID = Convert.ToInt32(item.C_ID);
+                        caseInfo.CaseID = item.CaseID;
+                        caseInfo.RankNo = Convert.ToInt32(item.RankNo);
+                        caseInfo.ActivityID = Convert.ToInt32(item.ActivityID);
+                        caseInfo.ActivityName = Convert.ToString(item.ActivityName);
+                        caseInfo.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                        caseInfo.LastModifiedDate = Convert.ToDateTime(item.LastModifiedDate);
+                        caseInfo.Analyst = Convert.ToString(item.Analyst);
+                        caseInfo.HearingOfficer = Convert.ToString(item.HearingOfficer);
+                        caseInfo.TenantName = Convert.ToString(item.TenantName);
+                        caseInfo.ApplicantAddressLine1 = Convert.ToString(item.ApplicantAddressLine1);
+                        caseInfo.ApplicantAddressLine2 = Convert.ToString(item.ApplicantAddressLine2);
+                        caseInfo.ApplicantCity = Convert.ToString(item.ApplicantCity);
+                        caseInfo.ApplicantStateID = Convert.ToInt32(item.ApplicantStateID);
+                        caseInfo.ApplicantStateCode = Convert.ToString(item.ApplicantStateCode);
+                        caseInfo.ApplicantZip = Convert.ToString(item.ApplicantZip);
+                        caseInfo.OwnerName = Convert.ToString(item.OwnerName);
+                        caseInfo.OPOwnerName = Convert.ToString(item.OPOwnerName);
+                        caseInfo.OPAddressLine1 = Convert.ToString(item.OPAddressLine1);
+                        caseInfo.OPAddressLine2 = Convert.ToString(item.OPAddressLine2);
+                        caseInfo.OPStateCode = Convert.ToString(item.OPStateCode);
+                        caseInfo.OPCity = Convert.ToString(item.OPCity);
+                        caseInfo.OPOwnerZip = Convert.ToString(item.OPOwnerZip);
+                        caseInfo.OwnerTenantName = Convert.ToString(item.OwnerTenantName);
+                        caseInfo.PetitionCategoryID = Convert.ToInt32(item.PetitionCategoryID);
+
+                        searchResult.List.Add(caseInfo);
+                    }
+                    searchResult.PageSize = caseSearch.PageSize;
+                    searchResult.SortBy = caseSearch.SortBy;
+                    searchResult.SortReverse = caseSearch.SortReverse;
+                    searchResult.CurrentPage = caseSearch.CurrentPage;
+                    searchResult.TotalCount = (int)TotalCount;
+                }
+
+                result.result = searchResult;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+
+        }
         /// <summary>
         /// Get customer information
         /// </summary>

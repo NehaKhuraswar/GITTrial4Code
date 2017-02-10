@@ -132,6 +132,20 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
+        public ReturnResult<SearchCaseResult> GetCaseswithNoAnalyst(CaseSearch caseSearch, int UserID)
+        {
+            ReturnResult<SearchCaseResult> result = new ReturnResult<SearchCaseResult>();
+            try
+            {
+                result = _dbHandler.GetCaseswithNoAnalyst(caseSearch, UserID);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result.status = _eHandler.HandleException(ex);
+                return result;
+            }
+        }
         public ReturnResult<bool> AssignAnalyst(int cID, int AnalystUserID)
         {
             ReturnResult<bool> result = new ReturnResult<bool>();

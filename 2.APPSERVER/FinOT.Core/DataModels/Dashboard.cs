@@ -128,6 +128,17 @@ namespace RAP.Core.DataModels
         public bool SortReverse { get; set; }
         public int CurrentPage { get; set; }
     }
+    public class PagingSorting
+    {
+        public PagingSorting()
+        {
+           
+        }
+        public int PageSize { get; set; }
+        public string SortBy { get; set; }
+        public bool SortReverse { get; set; }
+        public int CurrentPage { get; set; }
+    }
     public class AccountType
     {
         public int AccountTypeID { get; set; }

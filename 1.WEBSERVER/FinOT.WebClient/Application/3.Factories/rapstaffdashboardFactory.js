@@ -66,6 +66,15 @@ var rapstaffdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
             blockUI.stop();
         });
     }
+    var _GetCaseswithNoAnalyst = function (model, UserID) {
+        blockUI.start();
+        var url = 'api/dashboard' + '/GetCaseswithNoAnalyst/' + UserID;
+
+        return ajax.Post(model, url)
+        .finally(function () {
+            blockUI.stop();
+        });
+    }
      
     factory.GetCaseInfo = _GetCaseInfo;
     factory.GetCasesNoAnalyst = _GetCasesNoAnalyst;
@@ -73,6 +82,7 @@ var rapstaffdashboardFactory = ['blockUI', 'ajaxService', function (blockUI, aja
     factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
     factory.GetCaseActivityStatus = _GetCaseActivityStatus;
     factory.GetEmptyCaseSearchModel = _GetEmptyCaseSearchModel;
+    factory.GetCaseswithNoAnalyst = _GetCaseswithNoAnalyst;
 
 
     return factory;

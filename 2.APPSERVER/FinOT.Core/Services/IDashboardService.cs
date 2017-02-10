@@ -24,6 +24,7 @@ namespace RAP.Core.Services
         ReturnResult<MailM> GetMail();
         ReturnResult<MailM> SubmitMail(MailM mail);
         ReturnResult<SearchCaseResult> GetCaseSearch(CaseSearch caseSearch);
+        ReturnResult<SearchCaseResult> GetCaseswithNoAnalyst(CaseSearch caseSearch, int UserID);
 
     }
 }

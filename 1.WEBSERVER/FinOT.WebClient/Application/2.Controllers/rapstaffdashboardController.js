@@ -6,6 +6,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.Error = "";
     self.CaseSearchModel = [];
     self.CaseSearchResult = [];
+    self.CasewithNoAnalystResult = [];
     self.SearchModel = {
         TotalCount: 0,
         PageSize: null,
@@ -16,11 +17,13 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     self.pageNumberList = [];
     self.pagesizeOptions = [5, 10, 20, 50];
     self.CaseStatusList =[{ "StatusID": "1", "StatusName": "All" }, { "StatusID": "2", "StatusName": "Open"}, { "StatusID": "3", "StatusName": "Closed"}]
-
+    self.pagingsortingModel = [];
     self.CaseList = [];
     self.Analysts = [];
     self.FromRecord = 1;
     self.ToRecord = 5;
+    self.FromRecordNoAnalyst = 1;
+    self.ToRecordNoAnalyst = 10;
     self.HearingOfficers = [];
     self.InviteThirdPartyUser = function () {
         $location.path("/invitethirdparty");
@@ -65,17 +68,23 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             self.caseinfo.ActivityStatus = response.data;
         });
     }
-    var _GetCasesNoAnalyst = function (userID) {
-        rapFactory.GetCasesNoAnalyst(userID).then(function (response) {
+    var _GetCaseswithNoAnalyst = function (pagingsortingModel, userID) {
+        pagingsortingModel.SortBy = 'CaseID';
+        rapFactory.GetCaseswithNoAnalyst(pagingsortingModel, userID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 $anchorScroll();
                 return;
             }
-            self.CaseList = response.data;
+            self.CasewithNoAnalystResult = response.data;
+            self.pagingsortingModel.TotalCount = response.data.TotalCount;
+            self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
+            self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
+            self.ToRecordNoAnalyst = self.CasewithNoAnalystResult.List[(self.CasewithNoAnalystResult.List.length - 1)].RankNo;
+            self.GeneratePageNumberListNoAnalyst();
         });
     }
-    _GetCasesNoAnalyst(self.model.UserID);
+    
 
     var _GetAnalysts = function () {
         masterFactory.GetAnalysts().then(function (response) {
@@ -122,13 +131,107 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             }
             self.CaseSearchModel = response.data;
             self.CaseSearchModel.PageSize = 5;
+            self.pagingsortingModel = angular.copy(response.data);
+            self.pagingsortingModel.PageSize = 10;
+            self.pagingsortingModel.CurrentPage = 1;
+            self.pagingsortingModel.SortBy = 'CaseID';
+            _GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID);
         });
     }
     _getEmptyCaseSearchModel();
+
     if (self.caseinfo == null) {
         _GetCaseInfo();
     }
 
+    self.GeneratePageNumberListNoAnalyst = function()
+    {
+        self.pageNumberListNoAnalyst =[];
+        var TotalPages = Math.ceil(self.pagingsortingModel.TotalCount / self.pagingsortingModel.PageSize);
+        for (var i = 1; i <= TotalPages; i++)
+        {
+            self.pageNumberListNoAnalyst.push({ text: i, active: true });
+        }
+         
+    }
+    
+    self.isLastPageNoAnalyst = function () {
+        return (self.pagingsortingModel.TotalCount - (self.pagingsortingModel.CurrentPage * self.pagingsortingModel.PageSize) <= 0);
+    };
+    self.isFirstPageNoAnalyst = function () {
+        return (self.pagingsortingModel.CurrentPage == 1);
+    };
+    self.GetPageNoAnalyst = function (newPage, model) {
+
+        //if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
+        self.pagingsortingModel.CurrentPage = newPage;
+        rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CasewithNoAnalystResult = response.data;
+            self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
+            self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
+            self.ToRecordNoAnalyst = self.CasewithNoAnalystResult.List[(self.CasewithNoAnalystResult.List.length - 1)].RankNo;
+        });
+        // }
+    }
+    self.GetNextPageNoAnalyst = function (model) {
+        var newPage = self.pagingsortingModel.CurrentPage + 1;
+        if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
+            self.pagingsortingModel.CurrentPage = self.pagingsortingModel.CurrentPage+1;
+            rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
+                if (!alert.checkResponse(response)) { return; }
+                self.CasewithNoAnalystResult = response.data;
+                self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
+                self.ToRecordNoAnalyst = self.CasewithNoAnalystResult.List[(self.CasewithNoAnalystResult.List.length - 1)].RankNo;
+            });
+        }
+    }
+    self.GetPreviousPageNoAnalyst = function (model) {
+        var newPage = self.pagingsortingModel.CurrentPage - 1;
+        if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.pagingsortingModel.CurrentPage)) {
+            self.pagingsortingModel.CurrentPage = self.pagingsortingModel.CurrentPage - 1;
+            rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
+                if (!alert.checkResponse(response)) { return; }
+                self.CasewithNoAnalystResult = response.data;
+                self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
+                self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
+                self.ToRecordNoAnalyst = self.CasewithNoAnalystResult.List[(self.CasewithNoAnalystResult.List.length - 1)].RankNo;
+            });
+        }
+    }
+    self.OnPageSizeChangeNoAnalyst = function () {
+        self.pagingsortingModel.CurrentPage = 1;
+
+        rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CasewithNoAnalystResult = response.data;
+            self.pagingsortingModel.TotalCount = response.data.TotalCount;
+            self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
+            self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
+            self.ToRecordNoAnalyst = self.CasewithNoAnalystResult.List[(self.CasewithNoAnalystResult.List.length - 1)].RankNo;
+        });
+    }
+
+    self.onSortNoAnalyst = function (_sortBy, model) {
+       
+        if (model.SortBy == _sortBy) {
+            model.SortReverse = !model.SortReverse;
+        } else {
+            model.SortBy = _sortBy;
+            model.SortReverse = false;
+        }
+        rapFactory.GetCaseswithNoAnalyst(model, self.model.UserID).then(function (response) {
+            if (!alert.checkResponse(response)) { return; }
+            self.CasewithNoAnalystResult = response.data;
+            self.pagingsortingModel.TotalCount = response.data.TotalCount;
+            self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
+            self.pagingsortingModel.SortBy = model.SortBy;
+            self.pagingsortingModel.SortReverse = model.SortReverse;
+
+
+        });
+        }
     self.AssignAnalyst = function (C_ID, Analyst) {
 
         masterFactory.AssignAnalyst(C_ID, Analyst.UserID).then(function (response) {
@@ -137,7 +240,8 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
                 $anchorScroll();
                 return;
             }
-            _GetCasesNoAnalyst(self.model.UserID);
+            _GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID);
+            //_GetCasesNoAnalyst(self.model.UserID);
         });
     }
     self.AssignAnalystSearch = function (C_ID, Analyst) {
@@ -171,7 +275,8 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
                 $anchorScroll();
                 return;
             }
-            _GetCasesNoAnalyst(self.model.UserID);
+            _GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID);
+           // _GetCasesNoAnalyst(self.model.UserID);
         });
     }
     self.AssignHearingOfficerSearch = function (C_ID, HearingOfficer) {

@@ -111,5 +111,7 @@
             $location.path("/CityLogin");
         }
     }
-  //  $location.path("/loginURL");
+    if ($location.$$path == "") {
+        $location.path("/Login");
+    }
 }];
