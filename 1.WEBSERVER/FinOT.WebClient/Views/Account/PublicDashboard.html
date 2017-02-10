@@ -20,41 +20,20 @@
                                 <h4>Cases in progress</h4>
                             </div>
 
-                            <div class="field-group subhead type2 case-wrapper mar-bottom-60 no-top-margin">
+                            <div class="field-group subhead type2 case-wrapper mar-bottom-30 no-top-margin" ng-repeat="caseinfo in Ctrl.Cases">
                                 <!-- Case in progress -->
-                                <div class="case"  ng-repeat="caseinfo in Ctrl.Cases">
+                                <div class="case"  >
                                     <div class="field-group">
                                         <div class="case-heading">Case number</div>
                                         <div class="case-number">{{caseinfo.CaseID}}</div>
                                     </div>
-
-                                    <div class="field-group">
-                                        <div class="row">
-                                            <div class="col-md-5 col-sm-12">
-                                                <div class="case-heading mar-b10">Property address</div>
-                                                <p ng-show="caseinfo.PetitionCategoryID==1">{{caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}</p>
-                                                <p ng-show="caseinfo.PetitionCategoryID==2">{{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.StateCode}} {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
-                                            </div>
-
-                                            <div class="col-md-3 col-sm-12">
-                                                <div class="case-heading mar-b10">Case analyst</div>
-                                                <p>{{caseinfo.CityAnalyst.FirstName}} {{caseinfo.CityAnalyst.LastName}} <br />{{caseinfo.CityAnalyst.Email}} <br />{{caseinfo.CityAnalyst.OfficePhoneNumber}}</p>
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12">
-                                                <div class="case-heading mar-b10">Hearing officer</div>
-                                                <p>{{caseinfo.HearingOfficer.FirstName}} {{caseinfo.HearingOfficer.LastName}} <br />{{caseinfo.HearingOfficer.Email}} <br />{{caseinfo.HearingOfficer.OfficePhoneNumber}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="accordion case-status">
+									
+									<div class="accordion case-status">
                                         <div class="item" ng-class="{'expanded':toggle}">
                                             <div class="item-header"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> View case progress</div>
 
                                             <div class="item-content" ng-show="toggle">
-                                                <div class="table">
+                                                <div class="table mar-bottom-60">
                                                     <div class="tbl-row ">
                                                         <div class="tbl-head activity">Activity</div>
                                                         <div class="tbl-head date">Date</div>
@@ -81,6 +60,29 @@
                                             </div>
                                         </div>
                                     </div><!-- .accordion -->
+
+                                    <div class="field-group" style="border-top: 1px solid #d0e7d4;padding-top:20px;">
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-12">
+                                                <div class="case-heading mar-b10">Property address</div>
+                                                <p ng-show="caseinfo.PetitionCategoryID==1">{{caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}</p>
+                                                <p ng-show="caseinfo.PetitionCategoryID==2">{{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.StateCode}} {{caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
+                                            </div>
+
+                                            <div class="col-md-3 col-sm-12">
+                                                <div class="case-heading mar-b10">Case analyst</div>
+                                                <p>{{caseinfo.CityAnalyst.FirstName}} {{caseinfo.CityAnalyst.LastName}} <br />{{caseinfo.CityAnalyst.Email}} <br />{{caseinfo.CityAnalyst.OfficePhoneNumber}}</p>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12">
+                                                <div class="case-heading mar-b10">Hearing officer</div>
+                                                <p>{{caseinfo.HearingOfficer.FirstName}} {{caseinfo.HearingOfficer.LastName}} <br />{{caseinfo.HearingOfficer.Email}} <br />{{caseinfo.HearingOfficer.OfficePhoneNumber}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    
                                 </div>
                             </div>
                             <!-- End of case -->
@@ -114,13 +116,13 @@
 
                             <div class="forms-groups-wrapper">
                                 <div class="forms-group" ng-class="{'expanded':Ownertoggle}">
-                                    <div class="group-header item-header">For property owners <a style="cursor: pointer;" ng-click="Ownertoggle = !Ownertoggle" class="btn-toggle"></a></div>
+                                    <div class="group-header item-header" ng-click="Ownertoggle = !Ownertoggle">For property owners <a style="cursor: pointer;"  class="btn-toggle"></a></div>
 
                                     <div class="group-content item-content" ng-show="Ownertoggle">
                                         <div class="form-section">
                                             <div class="row">
                                                 <div class="col-md-8 col-sm-7 col-xs-12">
-                                                    <div class="title">Property Owner Petition Form</div>
+                                                    <div class="title" >Property Owner Petition Form</div>
                                                     <div class="summary">Provides form for property owner to apply for Rent Adjustment Program pre-approval of increases that would exceed the annual allowable rate</div>
                                                     <p><a style="cursor: pointer;" ng-click="Ctrl.FilePetition(2)" class="btn-link" role="button" aria-label="File online">File online</a></p>
                                                 </div><!-- .col-md-9 -->
@@ -199,7 +201,7 @@
 
 
                                 <div class="forms-group" ng-class="{'expanded':Tenanttoggle}">
-                                    <div class="group-header item-header">For tenants <a style="cursor: pointer;" ng-click="Tenanttoggle = !Tenanttoggle" class="btn-toggle"></a></div>
+                                    <div class="group-header item-header" ng-click="Tenanttoggle = !Tenanttoggle">For tenants <a style="cursor: pointer;"  class="btn-toggle"></a></div>
 
                                     <div class="group-content item-content" ng-show="Tenanttoggle">
                                         <div class="form-section">
@@ -260,7 +262,7 @@
 
 
                                 <div class="forms-group" ng-class="{'expanded':EveryOnetoggle}">
-                                    <div class="group-header item-header">For everyone <a style="cursor: pointer;" ng-click="EveryOnetoggle = !EveryOnetoggle" class="btn-toggle"></a></div>
+                                    <div class="group-header item-header" ng-click="EveryOnetoggle = !EveryOnetoggle">For everyone <a style="cursor: pointer;"  class="btn-toggle"></a></div>
 
                                     <div class="group-content item-content" ng-show="EveryOnetoggle">
 
