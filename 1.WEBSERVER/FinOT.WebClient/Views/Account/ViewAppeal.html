@@ -74,14 +74,15 @@
                         <div class="subhead type2 no-bottom-margin">
                             <h4>Grounds for Appeal</h4>
                         </div>
-
                         <div class="field-group filled-info">
                             <div ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds">
-                                <div ng-show="item.Selected">
-                                    {{item.AppealDescription}}
-                                </div>
+                                <p>
+                                    <div ng-show="item.Selected">
+                                        {{item.AppealDescription}}
+                                    </div>
+                                </p>
                                 <!--<p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
-                                <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
+            <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
                             </div>
                         </div>
                         <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsGrounds.length != 0">

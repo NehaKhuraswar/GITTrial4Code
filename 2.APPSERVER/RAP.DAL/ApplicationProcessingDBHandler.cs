@@ -2020,6 +2020,7 @@ namespace RAP.DAL
             try
             {
                 var CaseNumber = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).Select(x => x.CaseID).First();
+                caseinfo.CaseID = CaseNumber;
                 tenantAppealResult = GetAppealApplicantInfoForView(CaseNumber);
                 if (tenantAppealResult.status.Status != StatusEnum.Success)
                     return result;
