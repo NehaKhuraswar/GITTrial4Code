@@ -808,9 +808,8 @@ namespace RAP.DAL
                     caseinfo.CreatedDate = Convert.ToDateTime(caseDB.CreatedDate);
                     caseinfo.LastModifiedDate = Convert.ToDateTime(caseDB.LastModifiedDate);
                     caseinfo.CaseFileBy = Convert.ToInt32(caseDB.CaseFiledBy);
-
+                    caseinfo.bCaseFiledByThirdParty = Convert.ToBoolean(caseDB.bCaseFiledByThirdParty);                    
                     
-
                     // Get the petition applicant info
                     var petitionDetailsDb = _dbContext.PetitionDetails.Where(x => x.PetitionID == caseDB.PetitionID).FirstOrDefault();
 
@@ -839,13 +838,45 @@ namespace RAP.DAL
                             {
                                 caseinfo.TenantPetitionInfo.ApplicantUserInfo.TranslationServiceInfo = TranslationServiceResult.result;
                             }
-                            caseinfo.TenantPetitionInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
-                            caseinfo.TenantPetitionInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
+                            
                         }
                         caseinfo.TenantPetitionInfo.bThirdPartyRepresentation = (bool)TenantPetitionDB.bThirdPartyRepresentation;
-                        if (caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                        if (!caseinfo.bCaseFiledByThirdParty)
                         {
-                            caseinfo.TenantPetitionInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ThirdPartyUserID).result;
+                            if (caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID > 0)
+                            {
+                                caseinfo.TenantPetitionInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
+                                caseinfo.TenantPetitionInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
+                            }
+                            if (caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                            {
+                                var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(TenantPetitionDB.ApplicantUserID)).FirstOrDefault();
+                                if (customerInfo != null && customerInfo.CustomerID != 0)
+                                {
+
+                                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
+                                    if (accdbResult.status.Status == StatusEnum.Success)
+                                    {
+                                        caseinfo.TenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                                        caseinfo.TenantPetitionInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                                        caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                                    }
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var thirdPartyResult = _commondbHandler.GetUserInfo((int)TenantPetitionDB.ThirdPartyUserID);
+                            if (thirdPartyResult.status.Status == StatusEnum.Success)
+                            {
+                                caseinfo.TenantPetitionInfo.ThirdPartyInfo = thirdPartyResult.result;
+                                if (caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID > 0)
+                                {
+                                    caseinfo.TenantPetitionInfo.ThirdPartyMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
+                                    caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
+                                }
+                            }
                         }
                         caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID).result;
                         var TranslationServiceOwnerResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.TenantPetitionInfo.OwnerInfo.UserID);
@@ -860,12 +891,48 @@ namespace RAP.DAL
                     else if (petitionDetailsDb.OwnerPetitionID != null)
                     {
                         var ownerPetitionResult = GetOwnerPetition(Convert.ToInt32(petitionDetailsDb.OwnerPetitionID));
-                        if (ownerPetitionResult.status.Status == StatusEnum.Success)
+                        if (ownerPetitionResult.status.Status != StatusEnum.Success)
                         {
-                            caseinfo.OwnerPetitionInfo = ownerPetitionResult.result;
+                            result.status = ownerPetitionResult.status;
+                            return result;
                         }
-                        caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
-                        caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
+                        caseinfo.OwnerPetitionInfo = ownerPetitionResult.result;
+                        if (!caseinfo.bCaseFiledByThirdParty)
+                        {
+                            if (caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID > 0)
+                            {
+                                caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
+                                caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
+                            }
+                            if (caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation)
+                            {
+                                var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID)).FirstOrDefault();
+                                if (customerInfo != null && customerInfo.CustomerID != 0)
+                                {
+                                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
+                                    if (accdbResult.status.Status == StatusEnum.Success)
+                                    {
+                                        caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                                        caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                                        caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                                    }
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var thirdPartyResult = _commondbHandler.GetUserInfo(caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID);
+                            if (thirdPartyResult.status.Status == StatusEnum.Success)
+                            {
+                                caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = thirdPartyResult.result;
+                                if (caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID > 0)
+                                {
+                                    caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID).Select(x => x.MailNotification).FirstOrDefault();
+                                    caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID).Select(x => x.EmailNotification).FirstOrDefault();
+                                }
+                            }
+                        }                        
                         var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID);
                         if (TranslationServiceResult.status.Status == StatusEnum.Success)
                         {
@@ -4722,6 +4789,7 @@ namespace RAP.DAL
                 {
                     if (model.bCaseFiledByThirdParty)
                     {
+                        model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID = 0;
                         var applicantUserResult = _commondbHandler.SaveUserInfo(model.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo);
                         if (applicantUserResult.status.Status != StatusEnum.Success)
                         {
@@ -6140,6 +6208,7 @@ namespace RAP.DAL
                 {
                     if (model.bCaseFiledByThirdParty)
                     {
+                        model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.UserID = 0;
                         var applicantUserResult = _commondbHandler.SaveUserInfo(model.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo);
                         if (applicantUserResult.status.Status != StatusEnum.Success)
                         {

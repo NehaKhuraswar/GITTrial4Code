@@ -25,6 +25,7 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
         $location.path("/additionaldocuments");
     }
     self.SendEmailNotification = function () {
+        rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/sendemailnotification");
     }
     self.USMailNotification = function () {
@@ -36,6 +37,7 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
                 return;
             }
             self.caseinfo = response.data;
+            checkRecipients();
         });
     }
     _GetSelectedCase(self.caseinfo.C_ID);
@@ -226,7 +228,62 @@ self.UpdateAPNAddress = function (apnAddress) {
             self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
 });
     }
-    
+    self.bEnableSendEmail = false
+    var checkRecipients = function () {
+        if (self.caseinfo.PetitionCategoryID == 1) {
+            if (self.caseinfo.TenantPetitionInfo != null) {
+                if (!self.caseinfo.bCaseFiledByThirdParty) {
+                    if (self.caseinfo.TenantPetitionInfo.bApplicantEmailNotification) {
+                        if (self.caseinfo.TenantPetitionInfo.ApplicantUserInfo != null && self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email != null) {
+                            self.bEnableSendEmail = true;
+                        }
+                    }
+                }
+                //if (self.caseinfo.TenantPetitionInfo.OwnerInfo != null && self.caseinfo.TenantPetitionInfo.OwnerInfo.Email != null) {
+                //    self.OwnerEmail = self.caseinfo.TenantPetitionInfo.OwnerInfo.Email;
+                //}
+                if (self.caseinfo.bCaseFiledByThirdParty || self.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation) {
+                    if (self.caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification) {
+                        if (self.caseinfo.TenantPetitionInfo.ThirdPartyInfo != null && self.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email != null) {
+                            self.bEnableSendEmail = true;
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if (self.caseinfo.OwnerPetitionInfo != null) {
+                if (!self.caseinfo.bCaseFiledByThirdParty) {
+                    if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantEmailNotification) {
+                        if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo != null && self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo != null) {
+                            if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email != null)
+                                self.bEnableSendEmail = true;
+                        }
+                    }
+                }
+                if (self.caseinfo.bCaseFiledByThirdParty || self.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation) {
+                    if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification) {
+                        if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo != null && self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null) {
+                            if (self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email != null) {
+                                self.bEnableSendEmail = true;
+                            }
+                        }
+                    }
+                }
+                //if (self.caseinfo.OwnerPetitionInfo.PropertyInfo != null && self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo != null) {
+                //    for (i = 0; i < self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.length; i++) {
+                //        if (i == 0) {
+                //            if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.Email != null) {
+                //                self.TenantEmail = self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.Email;
+                //            }
+                //        }
+                //        if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.Email != null) {
+                //            self.TenantEmail = self.TenantEmail + ',' + self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.Email;
+                //        }
+                //    }
+            }
+        }
+    }
 
 }];
 var rapSelectedCaseController_resolve = {
