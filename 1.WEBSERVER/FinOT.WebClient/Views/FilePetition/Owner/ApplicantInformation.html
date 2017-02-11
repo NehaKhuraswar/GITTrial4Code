@@ -13,7 +13,7 @@
                 <h4>Owner Information</h4>
                 <a style="cursor: pointer;" ng-click="Ctrl.ChangeAccountInformation()" role="button" class="btn-link btn-edit">Edit</a>
             </div>
-            <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+            <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                 {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}<br/>
                 <div ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName != null">
                     {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}<br />
@@ -24,7 +24,7 @@
                 Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}<br/>
                 Email : {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Email}}</p>
             </div>
-            <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+            <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">
                 <div class="field-group">
                     <label for="Applicant_firstname">Name</label>
                     <input type="text" class="field-input required" name="Applicant_firstname" id="Applicant_firstname" ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName"
@@ -224,7 +224,7 @@
                         <span ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification">Email</span>
                     </div>
                 </div>
-                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">                   
+                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">                   
                     <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}
                     {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}<br/>
                     {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}<br/>

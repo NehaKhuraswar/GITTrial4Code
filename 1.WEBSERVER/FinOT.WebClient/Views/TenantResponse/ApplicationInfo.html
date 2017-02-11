@@ -118,7 +118,7 @@
                             <a style="cursor: pointer;" ng-click="Ctrl.ChangeAccountInformation()" role="button" aria-label="Edit" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true" class="btn-link btn-edit">Edit</a>
                             <a style="cursor: pointer;" ng-click="Ctrl.bEditThirdParty = true;" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID != 0" class="btn-link btn-edit">Edit</a>           
                         </div>
-                        <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                        <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                             <p class="input-label">Is anybody representing you?</p>
                             <div id="anybody_representing_you" class="form-group-radio vertical clearfix required" data-error="Is anybody representing you">
                                 <label for="anybody_representing_you_yes">
@@ -256,12 +256,14 @@
                                     </div>
                                 </div>
                                 <div class="field-group" ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID != 0 && Ctrl.bEditThirdParty == false">
-                                    <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</p>
-                                    <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}}</p>
-                                    <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}</p>
-                                    <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}</p>
-                                    <p>Tel: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}</p>
-                                    <p>Email : {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}</p>
+                                    <p>
+                                        {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}<br />
+                                        <div ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName != null">
+                                            {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}<br />
+                                        </div>
+                                        {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}<br />
+                                        Tel: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}     <br />Email: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}
+                                    </p>
                                     Notification preference :
                                     <span ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyMailNotification">Mail</span>
                                     <span ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyMailNotification && Ctrl.caseinfo.TenantResponseInfo.ThirdPartyEmailNotification"> , </span>
@@ -269,16 +271,18 @@
                                 </div>
                             </div>
                          
-                             <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
-                                <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</p>
-                                <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}}</p>
-                                <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}</p>
-                                <p>{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}</p>
-                                <p>Tel: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}</p>
-                                <p>Email : {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}</p>
+                            <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">
+                                <p>
+                                    {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}<br />
+                                    <div ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName != null">
+                                        {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}<br />
+                                    </div>
+                                    {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}<br />
+                                    Tel: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}     <br />Email: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}
+                                </p>
                                 Notification preference :
                                 <span ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyMailNotification">Mail</span>
-                                 <span ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyMailNotification && Ctrl.caseinfo.TenantResponseInfo.ThirdPartyEmailNotification"> , </span>
+                                <span ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyMailNotification && Ctrl.caseinfo.TenantResponseInfo.ThirdPartyEmailNotification"> , </span>
                                 <span ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyEmailNotification">Email</span>
                             </div>
                         </div>

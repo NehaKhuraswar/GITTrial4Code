@@ -20,7 +20,7 @@
                         <h4>Applicant Information</h4>
                         <a style="cursor: pointer;" ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit" role="button">Edit</a>
                     </div>
-                    <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                    <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                         {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.LastName}}<br />
                         <div ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.BusinessName != null">
                             {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.BusinessName}}<br />
@@ -31,7 +31,7 @@
                         Tel: {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.PhoneNumber}}<br />
                         Email : {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.Email}}<br />
                     </div>
-                    <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                    <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">
                         <div class="field-group">
                             <label for="Applicant_firstname">Name</label>
                             <input type="text" class="field-input required" name="Applicant_firstname" id="Applicant_firstname" ng-trim="false" ng-model="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ApplicantUserInfo.FirstName" data-error="First Name" required />
@@ -227,7 +227,7 @@
                                 <span ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyEmailNotification">Email</span>
                             </div>
                         </div>
-                        <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                        <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.BusinessName}}</p>
                             <p>{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}}</p>

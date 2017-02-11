@@ -20,14 +20,14 @@
                                     <h4>Tenant information</h4>
                                     <a style="cursor: pointer;" ng-click="Ctrl.ChangeAccountInformation()" class="btn-link btn-edit">Edit</a>
                                 </div>
-                                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                                     {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}<br />
                                     {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}<br />
                                     {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}<br />
                                     {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}}<br />
                                     {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email}}
                                 </div>
-                                <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                                <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">
                                     <div class="field-group">
                                         <label for="Applicant_firstname">Name <span>*</span></label>
                                         <input type="text" class="field-input required" id="Applicant_firstname" name="Applicant_firstname" data-error="Applicant first name"
@@ -99,7 +99,7 @@
                                     <a style="cursor: pointer;" ng-click="Ctrl.bEditThirdParty = true;" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation == true && Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.UserID != 0" class="btn-link btn-edit">Edit</a>
                                 </div>
 
-                                <div class="field-group" ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == false}}">
+                                <div class="field-group" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                                     <p class="input-label">Is anybody representing you?</p>
                                     <div id="anybody_representing_you" class="form-group-radio vertical clearfix required" data-error="Is anybody representing you">
                                         <label for="anybody_representing_you_yes">
@@ -250,7 +250,7 @@
                                             <span ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification">Email</span>
                                         </div>
                                      </div>
-                                    <div ng-show="{{Ctrl.caseinfo.bCaseFiledByThirdParty == true}}">
+                                    <div ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true">
                                         <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}</p>
                                         <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}}</p>
                                         <p>{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}</p>
