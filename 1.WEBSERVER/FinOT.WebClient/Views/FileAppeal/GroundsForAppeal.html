@@ -67,23 +67,23 @@
                                 <span class="btn-link">Attach explanation</span>
                                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'A_Grounds')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                             </div>
-                            <div class="custom-table docs-list" ng-show="Ctrl.caseinfo.TenantAppealInfo.Documents != null && Ctrl.caseinfo.TenantAppealInfo.Documents.length != 0">
+                            <div class="custom-table docs-list" ng-show="FilteredDocsGrounds.length != 0">
                                 <div class="tbl-header">
                                     <div class="tbl-row clearfix">
                                         <div class="col col-35 name">File name</div>
                                     </div>
                                 </div>
 
-                                <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'}">
+                                <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'} asd FilteredDocsGrounds">
                                     <div class="tbl-row clearfix">
-                                        <div class="item" >
+                                        <div class="item">
                                             <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a style="cursor: pointer;"  ></a>{{item.DocName}}</div>
+                                                <div class="col col-35 name pad-l30"><a style="cursor: pointer;"></a>{{item.DocName}}</div>
                                                 <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
                                                 <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                             </div>
 
-                                            
+
                                         </div>
                                     </div>
                                 </div>

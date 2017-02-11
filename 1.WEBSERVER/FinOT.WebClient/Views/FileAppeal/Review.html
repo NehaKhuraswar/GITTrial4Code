@@ -93,7 +93,7 @@
         <a style="cursor: pointer;" class="btn-link btn-edit" ng-click="Ctrl.EditDocuments()">Edit</a>
     </div>
 
-    <div class="field-group">
+    <div class="field-group" ng-show="FilteredDocs.length != 0">
         <!-- Custom Table -->
         <div class="custom-table docs-list">
             <div class="tbl-header">
@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            <div class="tbl-body" ng-repeat="item in Ctrl.Documents | filter: {DocTitle: 'A_AdditionalDocuments'}">
+            <div class="tbl-body" ng-repeat="item in Ctrl.Documents | filter: {DocTitle: 'A_AdditionalDocuments'} as FilteredDocs">
                 <div class="tbl-row clearfix">
                     <div class="item" ng-class="{'expanded':toggle}">
                         <div class="item-header clearfix">

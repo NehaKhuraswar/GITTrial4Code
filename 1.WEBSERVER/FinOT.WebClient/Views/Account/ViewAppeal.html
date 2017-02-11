@@ -84,10 +84,10 @@
                                 <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
                             </div>
                         </div>
-                        <div class="field-group filled-info subhead no-top-margin">
+                        <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsGrounds.length != 0">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Explanation</div></div>
-                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'A_Grounds'}">
+                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'A_Grounds'} as FilteredDocsGrounds">
                                     {{item.DocName}}
                                     &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                 </div>
@@ -97,7 +97,7 @@
                         <div class="subhead type2 no-bottom-margin">
                             <h4>Additional Documentation</h4>
                         </div>
-                        <div class="field-group">
+                        <div class="field-group" ng-show="FilteredDocs.length != 0">
                             <!-- Custom Table -->
                             <div class="custom-table docs-list">
                                 <div class="tbl-header">
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
 
-                                <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'A_AdditionalDocuments'}">
+                                <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'A_AdditionalDocuments'} as FilteredDocs">
                                     <div class="tbl-row clearfix">
                                         <div class="item" ng-class="{'expanded':toggle}">
                                             <div class="item-header clearfix">

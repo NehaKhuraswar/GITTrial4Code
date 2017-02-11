@@ -83,14 +83,14 @@
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
+                <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsBusinessTaxProof.length != 0">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Proof of payment</div></div>
-                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'}">
+                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_BusinessTaxProof'} as FilteredDocsBusinessTaxProof">
                             {{item.DocName}}
-                           &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                            &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                         </div>
-                       
+
                     </div>
                 </div><!-- .field-group -->
 
@@ -163,7 +163,7 @@
                     <h4>Justification documentation</h4>                   
                 </div>
 
-                <div class="field-group">
+                <div class="field-group" ng-show="FilteredDocsJustification.length != 0">
                     <!-- Custom Table -->
                     <div class="custom-table docs-list">
                         <div class="tbl-header">
@@ -172,7 +172,7 @@
                             </div>
                         </div>
 
-                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'}">
+                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_Justification'} as FilteredDocsJustification">
                             <div class="tbl-row clearfix">
                                 <div class="item" ng-class="{'expanded':toggle}">
                                     <div class="item-header clearfix">
@@ -272,13 +272,13 @@
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
+                <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsRAPNotice.length != 0">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
-                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice'}">
+                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice'} as FilteredDocsRAPNotice ">
                             {{item.DocName}}
                             &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                        </div>                       
+                        </div>
                     </div>
                 </div><!-- .field-group -->
 
@@ -349,28 +349,28 @@
                     <a style="cursor: pointer;" role="button" aria-label="Edit" ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
                 </div>
 
-                <div class="field-group">
+                <div class="field-group" ng-show="FilteredDocs.length != 0">
                     <!-- Custom Table -->
-                    <div class="custom-table docs-list" >
+                    <div class="custom-table docs-list">
                         <div class="tbl-header">
                             <div class="tbl-row clearfix">
                                 <div class="col col-35 name">File name</div>
                             </div>
                         </div>
 
-                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_AdditionalDocuments'}">
+                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_AdditionalDocuments'} as FilteredDocs">
                             <div class="tbl-row clearfix">
                                 <div class="item" ng-class="{'expanded':toggle}">
                                     <div class="item-header clearfix">
                                         <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
                                         &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                     </div>
-                                   
+
                                     <div class="item-content clearfix" ng-show="toggle">
                                         <div class="row">
                                             <div class="col-md-10 col-sm-12">
                                                 <p>{{item.DocDescription}}</p>
-                                            </div>                                           
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
