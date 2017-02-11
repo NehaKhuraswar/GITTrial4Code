@@ -104,7 +104,7 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
         }
         else
         {
-            self.Error = 'Add at least one Oppositing Party';
+            self.Error = 'Add at least one Opposing Party';
             $anchorScroll();
             return;
          }
