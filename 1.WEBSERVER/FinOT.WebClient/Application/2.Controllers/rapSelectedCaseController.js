@@ -29,6 +29,7 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
         $location.path("/sendemailnotification");
     }
     self.USMailNotification = function () {
+        rapGlobalFactory.CaseDetails = self.caseinfo;
         $location.path("/usmailnotification");
     }
     var _GetSelectedCase = function (C_ID) {

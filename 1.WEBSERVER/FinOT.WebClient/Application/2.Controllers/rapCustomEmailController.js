@@ -1,10 +1,10 @@
 ﻿var rapCustomEmailController = ['$scope', 'alertService', '$location', 'rapCustomEmailFactory', 'rapGlobalFactory', 'masterdataFactory', 'rapnewcasestatusFactory', '$anchorScroll', function ($scope, alert, $location, rapFactory, rapGlobalFactory, masterFactory, rapnewcasestatusFactory, $anchorScroll) {
     var self = this;
-    if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
+    if (rapGlobalFactory.CaseDetails == null || rapGlobalFactory.CaseDetails == undefined) {
         $location.path("/staffdashboard");
     }
     self.custDetails = rapGlobalFactory.CityUser;
-    self.c_id = rapGlobalFactory.SelectedCase.C_ID;
+    self.c_id = rapGlobalFactory.CaseDetails.C_ID;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = null;
     self.ActivityList = [];
@@ -12,6 +12,7 @@
     self.CaseClick = function () {
         $location.path("/selectedcase");
     }
+    self.Error = '';
     self.Home = function () {
         $location.path("/staffdashboard");
     }
@@ -160,13 +161,17 @@ else {
         self.model.ActivityID = self.SelectedActivity.ActivityID;
         if (self.model.Message.RecipientAddress.length > 0) {
             rapFactory.SubmitCustomEmail(self.model).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 rapGlobalFactory.Notification = response.data;
                 rapGlobalFactory.FromSelectedCase = true;
                 rapGlobalFactory.Notification_CaseID = angular.copy(rapGlobalFactory.CaseDetails.CaseID);
                 rapGlobalFactory.CaseDetails = null;
                 $location.path("/emailnotificationsent");
-            });
+            }); 
         }
     }
 

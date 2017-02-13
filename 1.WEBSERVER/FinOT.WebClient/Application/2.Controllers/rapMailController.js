@@ -4,11 +4,11 @@
     if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined) {
         $location.path("/staffdashboard");
     }
-    self.c_id = rapGlobalFactory.SelectedCase.C_ID;
-    self.caseinfo = rapGlobalFactory.SelectedCase;
+    self.c_id = rapGlobalFactory.CaseDetails.C_ID;
+    self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = null;
     self.ActivityList = [];
-
+    self.Error = '';
     self.CaseClick = function () {
         $location.path("/selectedcase");
     }
@@ -146,17 +146,24 @@
         }
         self.model.Activity = self.SelectedActivity.ActivityDesc;
         self.model.ActivityID = self.SelectedActivity.ActivityID;
-        rapFactory.SubmitMail(self.model).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
-            rapGlobalFactory.MailNotification = response.data;
-            rapFactory.GetMailNotification(rapGlobalFactory.MailNotification.NotificationID).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+        if (self.model.Recipient.length > 0) {
+            rapFactory.SubmitMail(self.model).then(function (response) {
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 rapGlobalFactory.MailNotification = response.data;
-                rapGlobalFactory.Notification_CaseID = rapGlobalFactory.SelectedCase.CaseID;
-                rapGlobalFactory.FromSelectedCase = true;
-                $location.path("/usmailnotificationsent");
+                rapFactory.GetMailNotification(rapGlobalFactory.MailNotification.NotificationID).then(function (response) {
+                    if (!alert.checkResponse(response)) { return; }
+                    rapGlobalFactory.MailNotification = response.data;
+                    rapGlobalFactory.FromSelectedCase = true;
+                    rapGlobalFactory.Notification_CaseID = angular.copy(rapGlobalFactory.CaseDetails.CaseID);
+                    rapGlobalFactory.CaseDetails = null;
+                    $location.path("/usmailnotificationsent");
+                });
             });
-        });
+        }
     }
 
 }];

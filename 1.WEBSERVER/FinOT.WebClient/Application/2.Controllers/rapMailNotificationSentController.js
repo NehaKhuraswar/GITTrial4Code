@@ -8,7 +8,7 @@
     //self.c_id = rapGlobalFactory.SelectedCase.C_ID;
     //self.caseinfo = rapGlobalFactory.SelectedCase;
     self.CaseClick = function () {
-        $location.path("/selectedcase");
+        $location.path("/selectedcase");    
     }
     self.Home = function () {
         $location.path("/staffdashboard");
@@ -24,6 +24,20 @@
         }
     }
     self.model = rapGlobalFactory.MailNotification;
+    self.Recipient = '';
+    var _GetRecipient = function () {
+        for (i = 0; i < self.model.Recipient.length; i++)
+        {
+            if (i == 0) {
+                self.Recipient = self.model.Recipient[i];
+            }
+            else {
+                self.Recipient = self.Recipient + ',' + self.model.Recipient[i];
+            }
+        }       
+    }
+
+    _GetRecipient();
     self.caseid = rapGlobalFactory.Notification_CaseID;
     $anchorScroll();
     if (rapGlobalFactory.FromSelectedCase == true) {

@@ -22,6 +22,9 @@
 
             <div class="application-form-wrapper">
                 <div class="application-step step-1">
+                    <div class="alert alert-error" ng-show="Ctrl.Error!=''">
+                        <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                    </div>
 					 <h3 class="step-heading mar-t30">Add U.S. Mail Notification</h3>
                     <form name="frmUSMailNotification" id="frmUSMailNotification" action="#" method="post" class="application-form">
                         <div class="step-content step1">

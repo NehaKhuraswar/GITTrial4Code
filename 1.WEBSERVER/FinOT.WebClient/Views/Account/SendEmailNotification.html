@@ -21,7 +21,9 @@
 
             <div class="application-form-wrapper">
                 <div class="application-step step-1">
-
+                    <div class="alert alert-error" ng-show="Ctrl.Error!=''">
+                        <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                    </div>
                     <form name="frmSendEmailNotification" id="frmSendEmailNotification" action="#" method="post" class="application-form">
                         <div class="step-content step1">
 							<h3 class="step-heading mar-t30">Send Email Notification</h3>
