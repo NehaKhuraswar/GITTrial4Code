@@ -15,253 +15,255 @@
             <!--<div class="col-md-9 col-sm-12">-->
             <div class="application-step step-1">
                 <div class="step-heading">View Tenant Response</div>
-                <div class="step-content step1">
-                    <div class="field-group filled-info subhead no-top-margin hidden-sm">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Petition type</div></div>
-                            <div class="col-sm-6 col-xs-12">Tenant</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="subhead type2">
-                        <h4>Applicant and property information</h4>
-                    </div>
-
-                    <div class="field-group filled-info subhead">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.CaseID}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead  no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
-                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.UserID !=0">
-                                {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Zip}}   <br />
-                                T {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email}}
-                            </div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
-                        <div class=" row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
-                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true">
-                                {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}   <br />
-                                T {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}
-                            </div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
-                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.UserID !=0">
-                                {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.LastName}}                                                {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Zip}}   <br />
-                                T {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Email}}
-                            </div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
-                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.UserID !=0">
-                                {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.BusinessName}}   <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.Zip}}   <br />
-                                T {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.Email}}
-                            </div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.NumberOfUnits}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.UnitTypes[(Ctrl.caseinfo.TenantResponseInfo.UnitTypeId - 1)].UnitDescription}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>
-                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">Yes</div>
-                            <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">No</div>
-                        </div>
-                    </div><!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid your business license</div></div>
-                            <div class="col-sm-6 col-xs-12">Yes</div>
-                        </div>
-                    </div><!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Business license number</div></div>
-                            <div class="col-sm-6 col-xs-12">45345670754</div>
-                        </div>
-                    </div>-->
-                    <!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Proof of payment</div></div>
-                            <div class="col-sm-6 col-xs-12">Business_license.pdf</div>
-                        </div>
-                    </div>-->
-                    <!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid the Rent Adjustment Program service fee ($69 per unit)?</div></div>
-                            <div class="col-sm-6 col-xs-12">Yes</div>
-                        </div>
-                    </div>-->
-                    <!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Date of which you aquired the building</div></div>
-                            <div class="col-sm-6 col-xs-12">01/09/16</div>
-                        </div>
-                    </div>-->
-                    <!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Total number of units</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.NumberOfUnits}}</div>
-                        </div>
-                    </div>-->
-                    <!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead n
-                    o-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Is there more than one street address on the parcel</div></div>
-                            <div class="col-sm-6 col-xs-12">Yes</div>
-                        </div>
-                    </div>-->
-                    <!-- .field-group -->
-                    <!-- Exemption contested -->
-
-                    <div class="subhead type2">
-                        <h4>Exemption contested</h4>
-                    </div>
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="info-title full-width">Please explain below why the property owner is not entitled to the proposed increase.</div>
-                        <div class="row">
-                            <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.ExemptContestedInfo.Explaination}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-                    <!-- Rent increases -->
-                    <div class="subhead type2">
-                        <h4>Rent increases</h4>
-                    </div>
-
-                    <div class="field-group filled-info subhead">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">When did you enter into the rental agreement for this unit?</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Year}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
-                            <div class="col-sm-6 col-xs-12">
-                                {{item.DocName}}
-                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                            </div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into the unit?</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Year}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Initial monthly rent</div></div>
-                            <div class="col-sm-6 col-xs-12">${{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.InitialRent}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">I was never given a RAP NOTICE by my property owner.</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.bRAPNoticeGiven}}</div>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div class="field-group filled-info subhead no-top-margin">
-                        <div class="row" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
-                            <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
-                            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                        </div>
-                    </div><!-- .field-group -->
-
-                    <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
-                        <div class="field-group filled-info subhead no-top-margin">
+                <form name="frmTenentPetition" id="frmTenentPetition" action="#" method="post" class="application-form">
+                    <div class="step-content step1">
+                        <div class="field-group filled-info subhead no-top-margin hidden-sm">
                             <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Petition type</div></div>
+                                <div class="col-sm-6 col-xs-12">Tenant</div>
                             </div>
                         </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
+                        <div class="subhead type2">
+                            <h4>Applicant and property information</h4>
+                        </div>
+
+                        <div class="field-group filled-info subhead">
                             <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
-                                <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Case number</div></div>
+                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.CaseID}}</div>
                             </div>
                         </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
+                        <div class="field-group filled-info subhead  no-top-margin">
                             <div class="row">
-                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
-                            </div>
-                        </div><!-- .field-group -->
-                    </div>
-
-                    <!-- Additional Documentation -->
-                    <div class="subhead type2">
-                        <h4>Additional Documentation</h4>
-                    </div>
-
-                    <div class="field-group" ng-show="FilteredDocs.length != 0">
-                        <!-- Custom Table -->
-                        <div class="custom-table docs-list">
-                            <div class="tbl-header">
-                                <div class="tbl-row clearfix">
-                                    <div class="col col-35 name">File name</div>
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.UserID !=0">
+                                    {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Zip}}   <br />
+                                    T {{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email}}
                                 </div>
                             </div>
+                        </div><!-- .field-group -->
 
-                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'} as FilteredDocs">
-                                <div class="tbl-row clearfix">
-                                    <div class="item" ng-class="{'expanded':toggle}">
-                                        <div class="item-header clearfix">
-                                            <div class="col col-35 name pad-l30">
-                                                <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
-                                            </div>
-                                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                                            <div class="item-content clearfix" ng-show="toggle">
-                                                <div class="row">
-                                                    <div class="col-md-10 col-sm-12">
-                                                        <p>{{item.DocDescription}}</p>
+                        <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
+                            <div class=" row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true">
+                                    {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}   <br />
+                                    T {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.UserID !=0">
+                                    {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.LastName}}                                                {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Zip}}   <br />
+                                    T {{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantResponseInfo.OwnerInfo.Email}}
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.PropertyManager.UserID !=0">
+                                    {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.BusinessName}}   <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.Zip}}   <br />
+                                    T {{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.PropertyManager.Email}}
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units</div></div>
+                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.NumberOfUnits}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Type of unit you rent</div></div>
+                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.UnitTypes[(Ctrl.caseinfo.TenantResponseInfo.UnitTypeId - 1)].UnitDescription}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Are you current on your rent?</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">Yes</div>
+                                <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantResponseInfo.bCurrentRentStatus">No</div>
+                            </div>
+                        </div><!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid your business license</div></div>
+                    <div class="col-sm-6 col-xs-12">Yes</div>
+                </div>
+            </div><!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Business license number</div></div>
+                    <div class="col-sm-6 col-xs-12">45345670754</div>
+                </div>
+            </div>-->
+                        <!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Proof of payment</div></div>
+                    <div class="col-sm-6 col-xs-12">Business_license.pdf</div>
+                </div>
+            </div>-->
+                        <!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Have you paid the Rent Adjustment Program service fee ($69 per unit)?</div></div>
+                    <div class="col-sm-6 col-xs-12">Yes</div>
+                </div>
+            </div>-->
+                        <!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date of which you aquired the building</div></div>
+                    <div class="col-sm-6 col-xs-12">01/09/16</div>
+                </div>
+            </div>-->
+                        <!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Total number of units</div></div>
+                    <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.NumberOfUnits}}</div>
+                </div>
+            </div>-->
+                        <!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead n
+            o-top-margin">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12"><div class="info-title">Is there more than one street address on the parcel</div></div>
+                    <div class="col-sm-6 col-xs-12">Yes</div>
+                </div>
+            </div>-->
+                        <!-- .field-group -->
+                        <!-- Exemption contested -->
+
+                        <div class="subhead type2">
+                            <h4>Exemption contested</h4>
+                        </div>
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="info-title full-width">Please explain below why the property owner is not entitled to the proposed increase.</div>
+                            <div class="row">
+                                <div class="col-sm-9 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.ExemptContestedInfo.Explaination}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+                        <!-- Rent increases -->
+                        <div class="subhead type2">
+                            <h4>Rent increases</h4>
+                        </div>
+
+                        <div class="field-group filled-info subhead">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">When did you enter into the rental agreement for this unit?</div></div>
+                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentalAgreementDate.Year}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    {{item.DocName}}
+                                    &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into the unit?</div></div>
+                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.MoveInDate.Year}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Initial monthly rent</div></div>
+                                <div class="col-sm-6 col-xs-12">${{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.InitialRent}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
+                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">I was never given a RAP NOTICE by my property owner.</div></div>
+                                <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.bRAPNoticeGiven}}</div>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div class="field-group filled-info subhead no-top-margin">
+                            <div class="row" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
+                                <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
+                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                            </div>
+                        </div><!-- .field-group -->
+
+                        <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
+                                    <div class="col-sm-6 col-xs-12">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
+                                    <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                                </div>
+                            </div><!-- .field-group -->
+                        </div>
+
+                        <!-- Additional Documentation -->
+                        <div class="subhead type2">
+                            <h4>Additional Documentation</h4>
+                        </div>
+
+                        <div class="field-group" ng-show="FilteredDocs.length != 0">
+                            <!-- Custom Table -->
+                            <div class="custom-table docs-list">
+                                <div class="tbl-header">
+                                    <div class="tbl-row clearfix">
+                                        <div class="col col-35 name">File name</div>
+                                    </div>
+                                </div>
+
+                                <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'TR_AdditionalDocuments'} as FilteredDocs">
+                                    <div class="tbl-row clearfix">
+                                        <div class="item" ng-class="{'expanded':toggle}">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 name pad-l30">
+                                                    <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
+                                                </div>
+                                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                                <div class="item-content clearfix" ng-show="toggle">
+                                                    <div class="row">
+                                                        <div class="col-md-10 col-sm-12">
+                                                            <p>{{item.DocDescription}}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -269,24 +271,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- .custom-table -->
-                    </div><!-- .field-group -->
+                            <!-- .custom-table -->
+                        </div><!-- .field-group -->
 
 
-                </div>
+                    </div>
 
 
-                <div class="step-footer">
-                    <input type="button" id="continue" name="continue" class="btn-primary" value="Back to my Dashboard" ng-click="Ctrl.Back()"
-                           ng-show="Ctrl.FromSelectedCase == false" />
-                    <input type="button" id="continue" name="continue" class="btn-primary" value="Back to case" ng-click="Ctrl.Back()"
-                           ng-show="Ctrl.FromSelectedCase == true" />
-                </div>
-
-            </div>
+                    <div class="step-footer">
+                        <input type="button" id="continue" name="continue" class="btn-primary" value="Back to my Dashboard" ng-click="Ctrl.Back()"
+                               ng-show="Ctrl.FromSelectedCase == false" />
+                        <input type="button" id="continue" name="continue" class="btn-primary" value="Back to case" ng-click="Ctrl.Back()"
+                               ng-show="Ctrl.FromSelectedCase == true" />
+                    </div>
+                    </form>
+</div>
         </div>
     </div>
 </div>
-    </div>
+   
 <!--</div>-->
