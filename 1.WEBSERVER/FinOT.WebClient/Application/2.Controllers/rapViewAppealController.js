@@ -41,6 +41,15 @@ var rapViewAppealController = ['$scope', '$modal', 'alertService', '$location', 
             $location.path("publicdashboard");
         }
     }
+    self.Home = function () {
+        if (rapGlobalFactory.FromSelectedCase == true) {
+            rapGlobalFactory.FromSelectedCase = false;
+            $location.path("/staffdashboard");
+        }
+        else {
+            $location.path("publicdashboard");
+        }
+    }
 }];
 var rapViewAppealController_resolve = {
     model: ['$route', 'alertService',  function ($route, alert) {

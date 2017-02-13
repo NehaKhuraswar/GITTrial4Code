@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-12">                       
                         <div class="application-steps-toggle clearfix ">
-                            <button type="button" class="steps-toggle" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 9</button>
+                            <button type="button" ng-class="{'steps-toggle collapsed' : Ctrl.Toggle, 'steps-toggle' : !Ctrl.Toggle}" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 9</button>
                         </div>
 
                             <!--<ul class="application-steps">                                
