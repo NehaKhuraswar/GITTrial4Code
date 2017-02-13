@@ -48,8 +48,8 @@
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead">
-                    <div class="row" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true">
+                <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 || Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation == true">
+                    <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Your representative’s information</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser != null">
                             <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</p>

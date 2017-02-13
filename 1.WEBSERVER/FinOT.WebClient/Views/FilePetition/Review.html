@@ -33,7 +33,7 @@
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead">
+                <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
@@ -244,7 +244,7 @@
                         <div class="field-group filled-info subhead no-top-margin">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Date loss of this service began</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
+                                <div class="col-sm-6 col-xs-12" ng-show="item.LossBeganDate != null">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
                             </div>
                         </div><!-- .field-group -->
                     </div>
@@ -294,7 +294,7 @@
                         <div class="field-group filled-info subhead no-top-margin">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Date problem(s) began</div></div>
-                                <div class="col-sm-6 col-xs-12">{{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}</div>
+                                <div class="col-sm-6 col-xs-12" ng-show="item.ProblemBeganDate != null">{{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}</div>
                             </div>
                         </div><!-- .field-group -->
                     </div>

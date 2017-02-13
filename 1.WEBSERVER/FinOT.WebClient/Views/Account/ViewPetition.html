@@ -39,7 +39,7 @@
                                 </div>
                             </div><!-- .field-group -->
 
-                            <div class="field-group filled-info subhead">
+                            <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
                                     <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
@@ -100,18 +100,19 @@
                             <div class="subhead type2">
                                 <h4>Grounds for Petition</h4>
                             </div>
-
-                            <div class="field-group filled-info">
+                            <div class="field-group filled-info no-top-margin">
                                 <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.PetitionGrounds">
-                                    <div ng-show="item.Selected">
-                                        {{item.PetitionGroundDescription}}
-                                    </div>
+                                    <p>
+                                        <div ng-show="item.Selected">
+                                            {{item.PetitionGroundDescription}}
+                                        </div>
+                                    </p>
                                     <!--<p>b) The owner did not give me a summary of the justification(s) for the increase despite my written request</p>
-                                    <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
+            <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
                                 </div>
 
                             </div>
-
+                            
 
 
                             <div class="subhead type2">
@@ -244,7 +245,7 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date loss of this service began</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="item.LossBeganDate != null">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
                                         </div>
                                     </div><!-- .field-group -->
                                 </div>
@@ -295,7 +296,7 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date problem(s) began</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="item.ProblemBeganDate != null">{{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}</div>
                                         </div>
                                     </div><!-- .field-group -->
                                 </div>
