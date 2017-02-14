@@ -59,10 +59,8 @@ var rapOwnerRentalPropertyController = ['$scope', '$modal', 'alertService', 'rap
                 (self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.City != "") &&
                 (self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip != ""))
             {
-                self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(self.caseinfo.OwnerPetitionTenantInfo);
-                
-                self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName = "";
-                self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName = "";
+                self.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.push(self.caseinfo.OwnerPetitionTenantInfo);                
+            
             }
             _GetIsTenant();            
         }

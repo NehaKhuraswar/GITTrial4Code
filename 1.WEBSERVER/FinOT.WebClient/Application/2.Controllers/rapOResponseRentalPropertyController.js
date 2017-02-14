@@ -57,8 +57,7 @@ var rapOResponseRentalPropertyController = ['$scope', '$modal', 'alertService', 
                 self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip != null && self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.Zip != "")     {
 
                 self.caseinfo.OwnerResponseInfo.PropertyInfo.TenantInfo.push(self.caseinfo.OwnerPetitionTenantInfo);
-                self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.FirstName = "";
-                self.caseinfo.OwnerPetitionTenantInfo.TenantUserInfo.LastName = "";
+              
             }
             _GetIsTenant();
         }
