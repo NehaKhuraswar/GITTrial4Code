@@ -8,6 +8,7 @@
         $scope.model.oresponseApplicantInfo = true;
         $scope.model.DisableAllCurrent();
         $scope.model.oResponseCurrentStatus.ApplicantInformation = true;
+        $scope.model.oResponseActiveStatus.ImportantInformation = true;
     }
 
 }];
