@@ -60,6 +60,26 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     //self.OpposingParty = angular.copy(self.caseinfo.TenantAppealInfo.AppealOpposingPartyInfo);
 
     self.AddAnotherOpposingParty = function (model) {
+        self.Error = "";
+        if (model.FirstName==null || model.FirstName == "")
+        {
+            self.Error = self.Error + 'Opposing parties first Name is a required field \n';
+        }
+        if (model.LastName == null || model.LastName == "") {
+            self.Error = self.Error + 'Opposing parties last Name is a required field \n';
+        }
+        if (model.AddressLine1 == null || model.AddressLine1 == "") {
+            self.Error = self.Error + 'Opposing parties address line1 is a required field \n';
+        }
+        if (model.City == null || model.City == "") {
+            self.Error = self.Error + 'Opposing parties city is a required field \n';
+        }
+        if (model.State == null) {
+            self.Error = self.Error + 'Opposing parties state is a required field \n';
+        }
+        if (model.Zip == null) {
+            self.Error = self.Error + 'Opposing parties zip is a required field \n';
+        }
         if (model.FirstName != "" && model.LastName != "" && model.AddressLine1 != ""
             && model.City != ""
             && model.State != null && model.Zip != null) {
@@ -76,10 +96,10 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
         }
         else
         {
-            self.Error = 'Opposing parties First Name, Address 1, City , State , Zip fields required';
+            
             $anchorScroll();
         }
-        }
+   }
 
    
     self.ResendPin = function () {
