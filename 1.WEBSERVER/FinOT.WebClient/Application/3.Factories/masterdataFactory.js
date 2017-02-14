@@ -205,7 +205,7 @@ var masterdataFactory = ['blockUI', 'ajaxService', '$timeout', '$http', function
         var startYear = 1900;
         var currentYear = new Date().getFullYear();
         var _years = [];
-        for (var i = startYear; i <= currentYear ; i++) {
+        for (var i = currentYear; i >= startYear ; i--) {
                 _years.push(i);
             
         }
