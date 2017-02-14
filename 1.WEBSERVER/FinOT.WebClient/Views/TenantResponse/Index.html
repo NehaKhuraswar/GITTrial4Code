@@ -21,10 +21,10 @@
                             <button type="button" ng-class="{'steps-toggle collapsed' : Ctrl.Toggle, 'steps-toggle' : !Ctrl.Toggle}" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 8</button>
                         </div>
                         <ul class="application-steps" ng-show="Ctrl.Toggle">
-                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.PetitionType, 'current' : !Ctrl.TRSubmissionStatus.PetitionType && Ctrl.bImpInfo}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.PetitionType || Ctrl.TRSubmissionStatus.ImportantInformation || Ctrl.TRSubmissionStatus.ApplicantInformation, 'current' : !Ctrl.TRSubmissionStatus.PetitionType && Ctrl.bPetitionType}">
                                 <a style="cursor: pointer;" ng-click="Ctrl.showPetitionType()">Petition Type</a>
                             </li>
-                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.ImportantInformation, 'current' : !Ctrl.TRSubmissionStatus.ImportantInformation && Ctrl.bImpInfo}">
+                            <li ng-class="{'active' : Ctrl.TRSubmissionStatus.ImportantInformation || Ctrl.TRSubmissionStatus.ApplicantInformation, 'current' : !Ctrl.TRSubmissionStatus.ImportantInformation && Ctrl.bImpInfo}">
                                 <a style="cursor: pointer;" ng-click="Ctrl.showImpInfo()">Important Information</a>
                             </li>
                             <li ng-class="{'active' : Ctrl.TRSubmissionStatus.ApplicantInformation, 'current' : !Ctrl.TRSubmissionStatus.ApplicantInformation && Ctrl.bAppInfo}">
