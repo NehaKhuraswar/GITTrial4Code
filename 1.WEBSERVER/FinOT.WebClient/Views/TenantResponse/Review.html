@@ -33,15 +33,15 @@
                                         </div>
                                     </div><!-- .field-group -->
 
-                                <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false">
-                                        <div class=" row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
-                                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true">
-                                                {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}   <br />
-                                                T {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}
-                                            </div>
-                                </div>
-                                    </div><!-- .field-group -->
+                                <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == false && Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true">
+                                    <div class=" row">
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
+                                        <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.bThirdPartyRepresentation == true">
+                                            {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}                                                 {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}   <br />
+                                            T {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}}
+                                        </div>
+                                    </div>
+                                </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead">
                                         <div class="row">

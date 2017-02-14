@@ -52,8 +52,8 @@
                                     </div>
                                 </div><!-- .field-group -->
 
-                                <div class="field-group filled-info subhead">
-                                    <div class="row" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 || Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation == true">
+                                <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.bCaseFiledByThirdParty == true || Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0 || Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.bThirdPartyRepresentation == true">
+                                    <div class="row">
                                         <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
                                         <div class="col-sm-6 col-xs-12">
                                             {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.LastName}}<br />
