@@ -264,29 +264,29 @@
                             <div class="col-sm-6 col-xs-12">${{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.InitialRent}}</div>
                         </div>
                     </div><!-- .field-group -->
-
+                    {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID}}
                     <div class="field-group filled-info subhead no-top-margin">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Have you (or a previous Owner) given the City of Oakland’s form entitled NOTICE TO TENANTS OF RESIDENTIAL RENT ADJUSTMENT PROGRAM (“RAP Notice”) to all of the petitioning tenants?</div></div>
                             <div class="col-sm-6 col-xs-12">
-                                <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus | filter: {RAPNoticeStatusID: Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID}">
+                                <label ng-repeat="item in Ctrl.caseinfo.RAPNoticeStatus | filter: {RAPNoticeStatusID: Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID} as SelectedNoticeStatus">
                                     <i></i><span>{{item.RAPNoticeStatus}}</span>
                                 </label>
                             </div>
                         </div>
                     </div><!-- .field-group -->
 
-                    <div class="field-group filled-info subhead no-top-margin">
+                    <div class="field-group filled-info subhead no-top-margin" ng-show="SelectedNoticeStatus[0].RAPNoticeStatus != 'No'">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">On what date was the Notice first given?</div></div>
-                            <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Year}}</div>
+                            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate != null">{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeGivenDate.Year}}</div>
                         </div>
                     </div><!-- .field-group -->
 
-                    <div class="field-group filled-info subhead no-top-margin">
+                    <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsRAPNotice.length != 0 && SelectedNoticeStatus[0].RAPNoticeStatus != 'No'">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Upload signed copy of notice</div></div>
-                            <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'}">
+                            <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'} as FilteredDocsRAPNotice">
                                 {{item.DocName}}
                                 &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                             </div>

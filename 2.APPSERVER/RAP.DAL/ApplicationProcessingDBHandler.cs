@@ -1615,6 +1615,7 @@ namespace RAP.DAL
 
                     if (PetitionDB.OwnerPetitionID != null)
                     {
+                        caseInfo.RAPNoticeStatus = getRAPNoticeStatus();
                         var ownerPetitionResult = GetOwnerPetition(Convert.ToInt32(PetitionDB.OwnerPetitionID));
                         if (ownerPetitionResult.status.Status == StatusEnum.Success)
                         {
