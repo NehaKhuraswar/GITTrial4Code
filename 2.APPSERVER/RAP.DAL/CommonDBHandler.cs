@@ -798,7 +798,12 @@ namespace RAP.DAL
                                 if (doc != null)
                                 {
                                     DocumentM attachment = new DocumentM();
+                                    attachment.DocID = doc.DocID;
+                                    attachment.DocThirdPartyID = doc.DocThirdPartyID;
                                     attachment.DocName = doc.DocName;
+                                    attachment.DocTitle = doc.DocTitle;
+                                    attachment.isUploaded = true;
+                                    attachment.MimeType = doc.MimeType;
                                     model.Message.Attachments.Add(attachment);
                                 }
                             }
@@ -924,7 +929,12 @@ namespace RAP.DAL
                                 if (doc != null)
                                 {
                                     DocumentM attachment = new DocumentM();
+                                    attachment.DocID = doc.DocID;
+                                    attachment.DocThirdPartyID = doc.DocThirdPartyID;
                                     attachment.DocName = doc.DocName;
+                                    attachment.DocTitle = doc.DocTitle;
+                                    attachment.isUploaded = true;
+                                    attachment.MimeType = doc.MimeType;                                   
                                     model.Attachments.Add(attachment);
                                 }
                             }

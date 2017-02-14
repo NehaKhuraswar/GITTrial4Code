@@ -33,6 +33,11 @@
             $location.path("publicdashboard");
         }
     }
+
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+    }
+
     //self.custDetails = rapGlobalFactory.CityUser;
     //if (rapGlobalFactory.SelectedCase == null || rapGlobalFactory.SelectedCase == undefined)
     //{

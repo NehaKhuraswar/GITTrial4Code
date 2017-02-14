@@ -66,7 +66,10 @@
                                 <div class="small-title pad-b5">File name</div>
 
                                 <div ng-repeat="item in Ctrl.model.Message.Attachments">
-                                    <p><strong> {{item.DocName}} </strong><br /></p>
+                                    <p>
+                                        <strong> {{item.DocName}} </strong>
+                                        &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a><br />
+                                    </p>
                                 </div>
                             </div>
 

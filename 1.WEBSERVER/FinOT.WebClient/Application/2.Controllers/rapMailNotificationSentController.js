@@ -47,6 +47,10 @@
     else {
         self.Title = 'Dashboard';
     }
+
+    self.Download = function (doc) {
+        masterFactory.GetDocument(doc);
+    }
     //self.Recipient = null;
     //for (var i = 0 ; i < self.model.Message.RecipientAddress.length; i++)
     //{
