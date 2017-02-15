@@ -24,7 +24,11 @@ var rapOwnerApplicantInfoController = ['$scope', '$modal', '$anchorScroll', 'ale
     self.caseinfo.CaseFileBy = self.custDetails.custID;
     self.bEditThirdParty = false;
     rapFactory.GetApplicationInfo(self.caseinfo).then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
         if (self.caseinfo.bCaseFiledByThirdParty == false) {
