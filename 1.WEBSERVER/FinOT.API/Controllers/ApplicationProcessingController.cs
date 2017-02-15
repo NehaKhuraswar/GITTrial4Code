@@ -1271,6 +1271,7 @@ namespace RAP.API.Controllers
             }
             return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
         }
+
         [AllowAnonymous]
         [Route("GetTenantAppealInfoForView/{CID:int}")]
         [HttpGet]
@@ -1286,6 +1287,44 @@ namespace RAP.API.Controllers
             {
 
                 result = _service.GetTenantAppealInfoForView(CID);
+                if (result.status.Status == StatusEnum.Success)
+                {
+                    transaction.data = result.result;
+                    transaction.status = true;
+                }
+                else
+                {
+                    transaction.status = false;
+                    transaction.AddException(result.status.StatusMessage);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                transaction.status = false;
+                transaction.AddException(ex.Message);
+                ReturnCode = HttpStatusCode.InternalServerError;
+                result.status = _eHandler.HandleException(ex);
+                _commonService.LogError(result.status);
+            }
+            return Request.CreateResponse<TranInfo<CaseInfoM>>(ReturnCode, transaction);
+        }
+
+        [AllowAnonymous]
+        [Route("GetTenantAppealInfoForReview/{AppealID:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetTenantAppealInfoForReview(int AppealID)
+        {
+            ExtractClaimDetails();
+
+            //AccountManagementService accService = new AccountManagementService();
+            HttpStatusCode ReturnCode = HttpStatusCode.OK;
+            TranInfo<CaseInfoM> transaction = new TranInfo<CaseInfoM>();
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+
+                result = _service.GetTenantAppealInfoForReview(AppealID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

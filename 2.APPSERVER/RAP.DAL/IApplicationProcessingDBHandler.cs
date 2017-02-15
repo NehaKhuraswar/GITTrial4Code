@@ -40,6 +40,7 @@ namespace RAP.DAL
         ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID);
         ReturnResult<CaseInfoM> GetPetitionViewInfo(int C_ID);
         ReturnResult<CaseInfoM> GetTenantAppealInfoForView(int C_ID);
+        ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo, int CustomerID);
         ReturnResult<bool> AppealUpdateAdditionalDocumentsPageSubmission(int CustomerID);
         ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);

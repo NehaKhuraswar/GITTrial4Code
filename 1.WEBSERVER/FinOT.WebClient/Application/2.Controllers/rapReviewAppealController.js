@@ -7,15 +7,15 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
     self.Error = "";
     $scope.model.stepNo = 7;
     
-    //var _GetCaseInfoWithModel = function (CaseID) {
-    //    rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
-    //        if (!alert.checkResponse(response)) {
-    //            return;
-    //        }
-    //        self.caseinfo.TenantAppealInfo = response.data.TenantAppealInfo;
-    //    });
-    //}
-    //_GetCaseInfoWithModel(rapGlobalFactory.CaseDetails.CaseID);
+    var _GetTenantAppealInfoForReview = function (AppealID) {
+        rapFactory.GetTenantAppealInfoForReview(AppealID).then(function (response) {
+            if (!alert.checkResponse(response)) {
+                return;
+            }
+            self.caseinfo.TenantAppealInfo = response.data.TenantAppealInfo;
+        });
+    }
+    _GetTenantAppealInfoForReview(self.caseinfo.TenantAppealInfo.AppealID);
    self.Documents = null;
    rapAppealDocumentFactory.GetAppealDocuments(self.custDetails.custID, 'A_AdditionalDocuments').then(function (response) {
        if (!alert.checkForResponse(response)) {

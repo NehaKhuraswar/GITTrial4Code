@@ -26,41 +26,44 @@
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant information</div></div>
             <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID!=0">
-                {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}                {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}} <br />
-                T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.email}}
+                {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.LastName}}             
+                <br/>{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.BusinessName}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.Zip}} <br />
+                T {{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.email}}
             </div>
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation== true && Ctrl.caseinfo.bCaseFiledByThirdParty == false">
+    <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.UserID!=0 && Ctrl.caseinfo.bCaseFiledByThirdParty == false">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
-            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.bThirdPartyRepresentation== true && Ctrl.caseinfo.bCaseFiledByThirdParty == false">
+            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.UserID!=0 && Ctrl.caseinfo.bCaseFiledByThirdParty == false">
                 {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.LastName}}                {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.BusinessName}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine1}},{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Zip}} <br />
                 T {{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantAppealInfo.ThirdPartyInfo.Email}}
             </div>
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead" ng-hide="Ctrl.caseinfo.PetitionCategoryID == 2">
+    <div class="field-group filled-info subhead" ng-show="self.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.UserID!=0">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
-            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.UserID!=0">
-                {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}                {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.BusinessName}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}} <br />
-                T {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}}
+            <div class="col-sm-6 col-xs-12" ng-show="self.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.UserID!=0">
+                {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.LastName}}               <br />
+                {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.BusinessName}} <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine1}},{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.Zip}} <br />
+                T {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.Email}}
             </div>
         </div>
     </div><!-- .field-group -->
 
-    <div class="field-group filled-info subhead" ng-hide="Ctrl.caseinfo.PetitionCategoryID == 2">
+    <!--<div class="field-group filled-info subhead" ng-show="self.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.UserID!=0">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
-            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.UserID!=0">
-                {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}                {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.BusinessName}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}},{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}} <br />
-                T {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}}
+            <div class="col-sm-6 col-xs-12" ng-show="self.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.UserID!=0">
+                {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.FirstName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.LastName}}               <br />
+                {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.BusinessName}} <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine1}},{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.City}}, {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.Zip}} <br />
+                T {{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantAppealInfo.AppealPropertyUserInfo.Email}}
             </div>
         </div>
-    </div><!-- .field-group -->
+    </div>--><!-- .field-group -->
     
     <div class="subhead type2 no-bottom-margin">
         <h4>Grounds for Appeal</h4>

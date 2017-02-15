@@ -14,7 +14,17 @@ var rapreviewappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
               blockUI.stop();
           });
       }
+      var _GetTenantAppealInfoForReview = function (AppealID) {
+          blockUI.start();
 
+          var url = 'api/applicationprocessing' + '/GetTenantAppealInfoForReview';
+          if (!(AppealID == null || AppealID == undefined)) { url = url + '/' + AppealID; }
+
+          return ajax.Get(url)
+          .finally(function () {
+              blockUI.stop();
+          });
+      }
       var _GetCaseInfoWithModel = function (caseid, custID) {
           blockUI.start();
 
@@ -30,6 +40,7 @@ var rapreviewappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
       }
       factory.SubmitAppeal = _SubmitAppeal;
       factory.GetCaseInfoWithModel = _GetCaseInfoWithModel;
+      factory.GetTenantAppealInfoForReview = _GetTenantAppealInfoForReview;
     
     return factory;
 }];
