@@ -139,7 +139,7 @@
         </div>
     </div>
 
-    <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty">
+    <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty | filter: {IsDeleted: false}">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>
             <div class="col-sm-6 col-xs-12">

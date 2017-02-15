@@ -115,19 +115,32 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
     }
     
     self.ContinueToReview = function (serveAppeal) {
-        if (self.serveAppeal.OpposingParty.length == 0 && self.OpposingParty.FirstName != "" && self.OpposingParty.LastName != "" 
+        var OppositePartyExists = false;
+        angular.forEach(self.serveAppeal.OpposingParty, function (item) {
+            if (item.IsDeleted == false) {
+                OppositePartyExists = true;
+            }
+        });
+
+        if (OppositePartyExists == false && self.OpposingParty.FirstName != "" && self.OpposingParty.LastName != ""
             && self.OpposingParty.AddressLine1 != ""
             && self.OpposingParty.City != ""
             && self.OpposingParty.State != null && self.OpposingParty.Zip != null) 
         {
             self.serveAppeal.OpposingParty.push(self.OpposingParty);
         }
-        else
+        OppositePartyExists = false;
+        angular.forEach(self.serveAppeal.OpposingParty, function (item) {
+            if (item.IsDeleted == false) {
+                OppositePartyExists = true;
+            }
+        });
+        if (OppositePartyExists == false)
         {
             self.Error = 'Add at least one opposing party';
             $anchorScroll();
             return;
-         }
+        }
         rapFactory.SaveTenantServingAppeal(self.caseinfo.TenantAppealInfo, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
