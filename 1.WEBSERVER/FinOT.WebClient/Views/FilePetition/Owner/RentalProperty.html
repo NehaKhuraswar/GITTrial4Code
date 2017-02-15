@@ -15,15 +15,15 @@
 
             <form name="frmOwnerPetition" id="frmOwnerPetition" action="#" method="post" class="application-form" novalidate onsubmit="return false;">
                 <div class="step-content create-new">
-                    <div class="subhead no-top-margin" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName != null && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName != null">
+                    <!--<div class="subhead no-top-margin" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName != null && Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName != null">
                         <h4>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.LastName}}</h4>
                         <p class="no-bottom-margin">
                             {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}},
                             {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}},
-                            {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateName}},
+                            {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateCode}},
                             {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}
                         </p>
-                    </div>
+                    </div>-->
                     <div class="field-group">
                         <p class="input-label">Type of unit you rent</p>
                         <div class="form-group-radio vertical clearfix required" data-error="Type of unit you rent">
@@ -101,7 +101,7 @@
                                     <p>
                                         {{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br /> {{item.TenantUserInfo.AddressLine1}}<br />
                                         {{item.TenantUserInfo.AddressLine2}}<br />
-                                        {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateName}} {{item.TenantUserInfo.Zip}}<br />
+                                        {{item.TenantUserInfo.City}} {{item.TenantUserInfo.State.StateCode}} {{item.TenantUserInfo.Zip}}<br />
                                         {{item.TenantUserInfo.Email}}<br />
                                         {{item.TenantUserInfo.PhoneNumber}}
                                     </p>
@@ -115,7 +115,7 @@
                    
                 </div>
                 <div class="step-footer">
-                    <input role="button" aria-label="Save and comtinue" type="submit"
+                    <input role="button" aria-label="Save and continue" type="submit"
                            id="save" name="save" class="btn-primary" value="Save and continue" ng-click="(Ctrl.Hide=true); Ctrl.Continue()" />
                 </div>
             </form>
