@@ -548,7 +548,6 @@
     <Content Include="Views\TenantResponse\RentalHistory.html" />
     <Content Include="Views\TenantResponse\Review.html" />
     <Content Include="Views\TenantResponse\Verification.html" />
-    <Content Include="Webforms\Report.aspx" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
     <Content Include="Content\angular-block-ui.css.map" />
@@ -653,14 +652,6 @@
     </Compile>
     <Compile Include="Models\AppModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Webforms\Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Webforms\Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Webforms\ReportCredential.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\2.APPSERVER\FinOT.Core\RAP.Core.csproj">

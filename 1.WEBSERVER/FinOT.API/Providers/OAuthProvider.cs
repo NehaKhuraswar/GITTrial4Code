@@ -7,7 +7,6 @@ using System.Security.Principal;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using RAP.Core.FinServices.APIService;
 using RAP.API.Common;
 using RAP.Core.DataModels;
 using RAP.Business.Implementation;

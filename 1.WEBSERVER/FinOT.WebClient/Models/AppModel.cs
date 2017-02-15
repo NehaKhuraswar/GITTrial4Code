@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Web;
-
-using RAP.Core.FinServices.APIService;
 using System.Web.Configuration;
 using RAP.WebClient.Common;
 
@@ -14,8 +12,7 @@ namespace RAP.WebClient.Models
             AppDetails = new AppDetails();
 
         }
-        public ApplicationHeader Header { get; set; }
-
+      
         public AppDetails AppDetails { get; set; }
 
         //public string DefaultURL { get; set; }
@@ -26,12 +23,8 @@ namespace RAP.WebClient.Models
     {
         public AppDetails()
         {
-            //Environment = WebConfigurationManager.AppSettings[Constants.ENVIRONMENT];
-            //DeploymentDate = WebConfigurationManager.AppSettings[Constants.DEPLOYMENT_DATE];
-            //FinancePortalURL = WebConfigurationManager.AppSettings[Constants.FINPORTAL_URL];
-            //MyRolesPrivilegesURL = WebConfigurationManager.AppSettings[Constants.MYROLESPRIVILEGES_URL];
-            //LogoutURL = WebConfigurationManager.AppSettings[Constants.LOGOUT_URL];
-            ApiBaseURL = WebConfigurationManager.AppSettings[Constants.RCAPIBASE_URL];
+        
+            ApiBaseURL = WebConfigurationManager.AppSettings[Constants.RAPAPIBASE_URL];
         }
         public string Environment { get; set; }
         public string DeploymentDate { get; set; }

@@ -72,13 +72,10 @@
     <Compile Include="DataModels\IDDescription.cs" />
     <Compile Include="DataModels\Notes.cs" />
     <Compile Include="DataModels\Notification.cs" />
-    <Compile Include="DataModels\OTRequest.cs" />
     <Compile Include="DataModels\OwnerPetition.cs" />
     <Compile Include="DataModels\Dashboard.cs" />
     <Compile Include="DataModels\TenantResponse.cs" />
     <Compile Include="DataModels\TenantPetition.cs" />
-    <Compile Include="FinServices\APIService.cs" />
-    <Compile Include="FinServices\LogService.cs" />
     <Compile Include="Persisters\IAccountManagementPersister.cs" />
     <Compile Include="Persisters\IOTRequestPersister.cs" />
     <Compile Include="Persisters\IApplicationProcessingPersister.cs" />
@@ -89,7 +86,6 @@
     <Compile Include="Services\ICommonService.cs" />
     <Compile Include="Services\IdocumentService.cs" />
     <Compile Include="Services\IEmailService.cs" />
-    <Compile Include="Services\IOTRequestService.cs" />
     <Compile Include="Services\IApplicationProcessingService.cs" />
     <Compile Include="Services\INotificationService.cs" />
   </ItemGroup>
@@ -103,6 +99,7 @@
       <LastGenOutput>NotificationMessage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

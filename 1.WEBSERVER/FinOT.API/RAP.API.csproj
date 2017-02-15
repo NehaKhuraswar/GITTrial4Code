@@ -159,8 +159,6 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Common\APIHelper.cs" />
-    <Compile Include="Common\LogHelper.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\RapRegisterController.cs" />
     <Compile Include="Controllers\ApplicationProcessingController.cs" />
@@ -189,10 +187,6 @@
     <ProjectReference Include="..\..\2.APPSERVER\FinOT.Core\RAP.Core.csproj">
       <Project>{71ee247b-df70-4636-bca3-b20eab4e875f}</Project>
       <Name>RAP.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\2.APPSERVER\FinOT.Persistence\RAP.Persistence.csproj">
-      <Project>{ae980304-914e-410c-b747-3a969bff63fd}</Project>
-      <Name>RAP.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

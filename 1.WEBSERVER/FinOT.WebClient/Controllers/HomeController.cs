@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using RAP.WebClient.Models;
 using RAP.WebClient.Common;
-using RAP.Core.FinServices.APIService;
 using System.Web.Configuration;
 using System.Diagnostics;
 using System.Net;
@@ -22,16 +21,9 @@ namespace RAP.Web.Controllers
                 AppModel model = (AppModel)Session[Constants.SESSION_APPMODEL];
                 if (model == null)
                 {
-                    model = new AppModel();
-                    string username = "abc\\neha"; // User.Identity.Name;
-                    string domain = username.Contains(@"\") ? username.Substring(0, username.IndexOf(@"\")) : null;
-                    username = username.Contains(@"\") ? username.Substring(username.LastIndexOf(@"\") + 1) : username;
-                    username = username.ToLower();
-
+                    model = new AppModel();                  
                     System.Net.WebClient client = new System.Net.WebClient();
-                    string url = WebConfigurationManager.AppSettings[Constants.RCAPIBASE_URL] + string.Format(Constants.APPHEADER_URL, username);
-                  //  model.Header = JsonConvert.DeserializeObject<RAP.Core.FinServices.APIService.ApplicationHeader>(client.DownloadString(url));
-
+                    string url = WebConfigurationManager.AppSettings[Constants.RAPAPIBASE_URL];             
                     Session.Add(Constants.SESSION_APPMODEL, model);
                 }
 

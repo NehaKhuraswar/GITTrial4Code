@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using RAP.Core.Common;
 using RAP.Core.Services;
 using RAP.Core.DataModels;
-using RAP.Business.Helper;
 using RAP.DAL;
 using System.Configuration;
 using System.Resources;

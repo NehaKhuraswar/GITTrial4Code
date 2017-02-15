@@ -6,7 +6,6 @@ using System.Configuration;
 using RAP.Core.Common;
 using RAP.Core.Services;
 using RAP.Core.DataModels;
-using RAP.Business.Helper;
 using RAP.DAL;
 
 namespace RAP.Business.Implementation

@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using RAP.Core.DataModels;
 using RAP.Core.Services;
-using RAP.Core.Persisters;
-using RAP.Business.Helper;
 using RAP.DAL;
 using RAP.Core.Common;
 
@@ -16,13 +14,8 @@ namespace RAP.Business.Implementation
 {
     public class AccountManagementService : IAccountManagementService
     {
-        public string CorrelationId { get; set; }
-        private readonly IAccountManagementPersister persister;
-        //public AccountManagementService(IAccountManagementPersister _persister)
-        //{
-        //    this.persister = _persister;
-        //}
-
+        public string CorrelationId { get; set; }      
+     
         //implements all methods from IMasterDataService
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();

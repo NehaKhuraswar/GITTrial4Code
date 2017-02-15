@@ -57,14 +57,11 @@
   <ItemGroup>
     <Compile Include="Binding\RAPBinding.cs" />
     <Compile Include="Binding\RAPDependancyResolver.cs" />
-    <Compile Include="Helper\DataTableHelper.cs" />
-    <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Implementation\AccountManagementService.cs" />
     <Compile Include="Implementation\DashboardService.cs" />
     <Compile Include="Implementation\CommonService.cs" />
     <Compile Include="Implementation\DocumentService.cs" />
     <Compile Include="Implementation\EmailService.cs" />
-    <Compile Include="Implementation\OTRequestService.cs" />
     <Compile Include="Implementation\NotificationService.cs" />
     <Compile Include="Implementation\ApplicationProcessingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,9 +177,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Proxy Class\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

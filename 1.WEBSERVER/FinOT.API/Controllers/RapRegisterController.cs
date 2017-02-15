@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using RAP.API.Common;
 using System.Text;
-using RAP.Core.FinServices.APIService;
 using RAP.API.Models;
 using System.Web.Http.Controllers;
 using System.Security.Claims;
@@ -43,27 +42,6 @@ namespace RAP.API.Controllers
             ExceptionMessage = "An error occured while processing your request. Reference# " + CorrelationID;
         }
 
-        [AllowAnonymous]
-        [Route("header/{username}")]
-        public ApplicationHeader GetAppHeader(string username)
-        {
-            try
-            {
-                APIHelper api = new APIHelper();
-                ApplicationHeader header = null;// api.GetAppHeader(username, string.Empty);
-
-                ////limit menus to the list that user has access to.
-                //IList<int> userroles = header.UserPrivileges.Select(s => s.RoleId).Distinct().ToList<int>();
-                //IList<string> pagetags = header.PageRoles.Where(w => userroles.Contains(w.RoleId)).Select(s => s.PageTag).ToList<string>();
-                //header.Menus = header.Menus.Where(w => pagetags.Contains(w.PageTag)).Select(s => s).ToArray();
-
-                return header;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
         [AllowAnonymous]
         [HttpGet]
