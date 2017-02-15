@@ -43,7 +43,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
             rapGlobalFactory.CaseDetails = self.caseinfo;
             self.TenantAppealInfo = rapGlobalFactory.CaseDetails.TenantAppealInfo;
             self.caseinfo.bCaseFiledByThirdParty = self.bCaseFiledByThirdParty;
-            rapGlobalFactory.CaseDetails.PetitionCategoryID = self.AppealCategoryID;
+            
             if (self.TenantAppealInfo.AppealID == 0) {
                 if (self.caseinfo.bCaseFiledByThirdParty != true) {
                     self.TenantAppealInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
@@ -61,6 +61,7 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
             {
 
             }
+            rapGlobalFactory.CaseDetails.PetitionCategoryID = self.AppealCategoryID;
             self.bShowApplicantInfo = true;
 
 
