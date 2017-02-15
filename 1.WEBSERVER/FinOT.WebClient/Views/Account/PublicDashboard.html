@@ -13,7 +13,9 @@
 
             <div class="application-form-wrapper">
                 <div class="application-step step-1">
-
+                    <div class="alert alert-error" ng-show="Ctrl.Error!=''">
+                        <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                    </div>
                     <div class="application-form">
                         <div class="step-content step1">
                             <div class="subhead border-top0 no-top-margin mar-b0">

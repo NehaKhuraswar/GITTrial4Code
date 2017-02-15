@@ -1273,7 +1273,14 @@ namespace RAP.DAL
                     }
                     tenantPetitionInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.ApplicantUserID).result;
                     tenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.OwnerUserID).result;
-                    tenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID).result;
+                    if (TenantPetitionInfoDB.PropertyManagerUserID != null)
+                    {
+                        var userInfo = _commondbHandler.GetUserInfo((int)TenantPetitionInfoDB.PropertyManagerUserID);
+                        if(userInfo.status.Status == StatusEnum.Success)
+                        {
+                            tenantPetitionInfo.PropertyManager = userInfo.result;
+                        }
+                    }                   
                     if (tenantPetitionInfo.OwnerInfo.UserID == tenantPetitionInfo.PropertyManager.UserID)
                     {
                         tenantPetitionInfo.bSameAsOwnerInfo = true;

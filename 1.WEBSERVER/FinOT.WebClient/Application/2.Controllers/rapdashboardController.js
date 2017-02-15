@@ -18,6 +18,7 @@ var rapdashboardController = ['$scope', '$modal', 'alertService', 'rapdashboardF
     //}
   //  self.model = rapGlobalFactory.GetCustomer();
     $anchorScroll();
+    self.Error = '';
     self.btoggle = false;
     self.ThirdPartyRepresentative = function () {
         $location.path("/YourRepresentative");
