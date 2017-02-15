@@ -884,7 +884,14 @@ namespace RAP.DAL
                         {
                             caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo = TranslationServiceOwnerResult.result;
                         }
-                        caseinfo.TenantPetitionInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantPetitionDB.PropertyManagerUserID).result;
+                        if (TenantPetitionDB.PropertyManagerUserID != null)
+                        {
+                            var userInfoResult = _commondbHandler.GetUserInfo((int)TenantPetitionDB.PropertyManagerUserID);
+                            if (userInfoResult.status.Status == StatusEnum.Success)
+                            {
+                                caseinfo.TenantPetitionInfo.PropertyManager = userInfoResult.result;
+                            }                           
+                        }
                         caseinfo.TenantPetitionInfo.Verification.bCaseMediation = _dbContext.TenantPetitionVerifications.Where(x => x.PetitionID == TenantPetitionDB.TenantPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
                         caseinfo.OwnerResponseInfo.Verification.bCaseMediation = _dbContext.OwnerResponseVerifications.Where(x => x.PetitionID == caseinfo.OwnerResponseInfo.OwnerResponseID).Select(x => x.bCaseMediation).FirstOrDefault();
                     }

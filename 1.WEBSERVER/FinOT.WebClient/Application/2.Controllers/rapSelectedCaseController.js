@@ -12,6 +12,7 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.apnAddress = null;
     self.EditAPNAddress = false;
     self.EditAPNNumber = false;
+    self.Error = '';
     if (self.caseinfo.TenantPetitionInfo != null) {
         self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
     }
@@ -34,7 +35,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     }
     var _GetSelectedCase = function (C_ID) {
         rapFactory.GetSelectedCase(C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo = response.data;
@@ -47,9 +50,11 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
 
     var _GetCaseDocuments = function(C_ID) {
         rapFactory.GetCaseDocuments(C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
-        }
+            }
         self.Documents = response.data;
         });
     }
@@ -59,7 +64,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.GetCaseActivityStatus = function (model) {
         //self.caseinfo.CaseID = 
         rapFactory.GetCaseActivityStatus(model).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.ActivityStatus = response.data;
@@ -76,7 +83,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     }
     var _GetAnalysts = function () {
         masterFactory.GetAnalysts().then(function (response) {
-            if (!alert.checkResponse(response)) {
+               if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.Analysts = response.data;
@@ -86,7 +95,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
 
     var _GetHearingOfficers = function () {
         masterFactory.GetHearingOfficers().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.HearingOfficers = response.data;
@@ -96,7 +107,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     var _GetCaseInfo = function () {
 
         rapFactory.GetCaseInfo().then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
 
@@ -112,7 +125,9 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.AssignAnalyst = function (C_ID, Analyst) {
 
         masterFactory.AssignAnalyst(C_ID, Analyst.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.CityAnalyst.FirstName = Analyst.FirstName;
@@ -123,9 +138,11 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
 self.ViewPage = function (activity, caseinfo) {
     if (activity.Activity.ActivityID == 1) {
         rapFactory.GetPetitionViewInfo(caseinfo.C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
-        }
+            }
             //self.caseinfo = response.data;
             rapGlobalFactory.CaseDetails = response.data;
             rapGlobalFactory.FromSelectedCase = true;
@@ -140,9 +157,11 @@ self.ViewPage = function (activity, caseinfo) {
     }
     else if (activity.Activity.ActivityID == 26) {
         rapFactory.GetAppealInfoForView(caseinfo.C_ID).then(function (response) {
-            if(!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
-        }
+            }
     self.caseinfo = response.data;
     rapGlobalFactory.CaseDetails = self.caseinfo;
                 rapGlobalFactory.FromSelectedCase = true;
@@ -151,7 +170,9 @@ self.ViewPage = function (activity, caseinfo) {
     }
     else if (activity.Activity.ActivityID == 35) {
         rapFactory.GetOResponseViewByCaseID(caseinfo.C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo = response.data;
@@ -162,7 +183,9 @@ self.ViewPage = function (activity, caseinfo) {
     }
     else if (activity.Activity.ActivityID == 27) {
         rapFactory.GetTenantResponseViewInfo(caseinfo.C_ID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo = response.data;
@@ -203,9 +226,11 @@ self.ViewPage = function (activity, caseinfo) {
 self.AssignHearingOfficer = function (C_ID, HearingOfficer) {
 
     masterFactory.AssignHearingOfficer(C_ID, HearingOfficer.UserID).then(function (response) {
-        if (!alert.checkResponse(response)) {
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
             return;
-            }
+        }
             self.caseinfo.HearingOfficer.FirstName = HearingOfficer.FirstName;
             self.caseinfo.HearingOfficer.LastName = HearingOfficer.LastName;
 });
@@ -214,15 +239,19 @@ self.AssignHearingOfficer = function (C_ID, HearingOfficer) {
 self.UpdateAPNAddress = function (apnAddress) {
     apnAddress.APNNumber = self.APNNumber;
     masterFactory.UpdateAPNAddress(apnAddress).then(function (response) {
-        if (!alert.checkResponse(response)) {
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
             return;
-            }
+        }
             self.EditAPNAddress = false;
         });
         }
     self.UpdateAPNNumber = function (apnAddress) {
         masterFactory.UpdateAPNAddress(apnAddress).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.EditAPNNumber = false;

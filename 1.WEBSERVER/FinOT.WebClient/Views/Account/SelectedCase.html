@@ -21,7 +21,9 @@
 
             <div class="application-form-wrapper">
                 <div class="application-step step-1">
-
+                    <div class="alert alert-error" ng-show="Ctrl.Error!=''">
+                        <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                    </div>
                     <form name="frmSelectedCase" id="frmSelectedCase" action="#" method="post" class="application-form">
                         <div class="step-content step1">
 
@@ -303,7 +305,7 @@
                                         <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo.IsTranslatorRequired == true">Yes, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo.TranslationLanguage}}</p>
                                     </div>
 
-                                    <div class="col-md-4 col-sm-12">
+                                    <div class="col-md-4 col-sm-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.UserID != 0">
                                         <div class="small-title">Property manager</div>
                                         <div class="fs20-title">{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}</div>
                                         <p>{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}  </p>
