@@ -249,13 +249,13 @@
                         </div><!-- .field-group -->
                     </div>
                 </div>
-                <div class="field-group filled-info subhead no-top-margin">
+                <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsLostService.length != 0">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Loss of service documentary evidence</div></div>
                         <div class="col-sm-6 col-xs-12">
                             <table class="table table-condensed nopadding-bottom">
                                 <tbody>
-                                    <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'}">
+                                    <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'} as FilteredDocsLostService">
                                         <td class="nopadding-left">
                                             {{item.DocName}}
                                             &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
@@ -299,13 +299,13 @@
                         </div><!-- .field-group -->
                     </div>
                 </div>
-                <div class="field-group filled-info subhead no-top-margin">
+                <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsProblem.length != 0">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Problem documentary evidence</div></div>
                         <div class="col-sm-6 col-xs-12">
                             <table class="table table-condensed nopadding-bottom">
                                 <tbody>
-                                    <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_Problem'}">
+                                    <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_Problem'} as FilteredDocsProblem">
                                         <td class="nopadding-left">
                                             {{item.DocName}}
                                             &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>

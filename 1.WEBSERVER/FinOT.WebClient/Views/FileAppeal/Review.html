@@ -78,10 +78,10 @@
         <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
 </div>
     </div>
-    <div class="field-group filled-info subhead no-top-margin">
+    <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsExplanation.length != 0">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Explanation</div></div>
-            <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'}">
+            <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.Documents | filter: {DocTitle: 'A_Grounds'} as FilteredDocsExplanation">
                 {{item.DocName}}
                 &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
             </div>

@@ -157,13 +157,13 @@
                                         </div>
                                     </div><!-- .field-group -->
 
-                                    <div class="field-group filled-info subhead no-top-margin">                                        
-                                        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
-                                            <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-                                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                                        </div>
-                                    </div><!-- .field-group -->
+                                <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsLease.length != 0">
+                                    <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'} as FilteredDocsLease">
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
+                                        <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
+                                        &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                    </div>
+                                </div><!-- .field-group -->
 
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
@@ -193,15 +193,15 @@
                                         </div>
                                     </div><!-- .field-group -->
 
-                                    <div class="field-group filled-info subhead no-top-margin">
-                                        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
-                                            <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
-                                            <div class="col-sm-6 col-xs-12">
-                                                {{item.DocName}}
-                                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                                            </div>
+                                <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsNotice.length != 0">
+                                    <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'} as FilteredDocsNotice">
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            {{item.DocName}}
+                                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                         </div>
-                                    </div><!-- .field-group -->
+                                    </div>
+                                </div><!-- .field-group -->
 
                                 <div ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases">
                                     <div class="field-group filled-info subhead no-top-margin">
