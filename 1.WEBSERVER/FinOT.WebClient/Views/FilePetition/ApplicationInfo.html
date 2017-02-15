@@ -162,7 +162,7 @@
                                             <div class="field-group">
                                                 <label for="representative_state">State <span>*</span></label>
                                                 <div class="input-wrapper">
-                                                    <select ng-init="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State = Ctrl.StateList[0]" name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
+                                                    <select  name="representative_state" id="representative_state" class="custom-select" data-placeholder="Select"
                                                             ng-model="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State"
                                                             ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID">
                                                         <option value="" selected>Select state</option>
@@ -300,7 +300,7 @@
                                     <div class="field-group">
                                         <label for="po_state">State <span>*</span></label>
                                         <div class="input-wrapper">
-                                            <select ng-init="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State = Ctrl.StateList[0]" name="po_state" id="po_state" class="custom-select" data-placeholder="Select"
+                                            <select name="po_state" id="po_state" class="custom-select" data-placeholder="Select"
                                                     ng-model="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State"
                                                     ng-options="state as (state.StateName) for state in Ctrl.StateList track by state.StateID" required>
                                                 <option value="" selected>Select state</option>
