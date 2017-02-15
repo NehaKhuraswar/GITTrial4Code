@@ -252,7 +252,7 @@
                             </div>
 
                             <!-- Case Documentations -->
-                            <div class="custom-table selected-case-documentation">
+                            <div class="custom-table selected-case-documentation" ng-show="FilteredDocs.length != 0">
                                 <div class="tbl-header">
                                     <div class="tbl-row clearfix">
                                         <div class="col col-35 pad-l0 file-name">File name</div>
@@ -263,7 +263,7 @@
                                 </div>
 
                                 <div class="tbl-body">
-                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.Documents">
+                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.Documents as FilteredDocs">
                                         <div class="item" ng-class=" {'expanded':toggle}">
                                             <div class="item-header clearfix">
                                                 <div class="col col-35 pad-l30 file-name"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a> {{item.DocName}}</div>
