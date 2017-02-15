@@ -16,6 +16,7 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
                 return;
             }
             self.RentalIncreaseModel = response.data;
+            RestrictUpload();
         });
     }
     _GetEmptyTenantResponseRentalIncrementInfo();
@@ -57,6 +58,23 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
         masterFactory.GetDocument(doc);
 
     }
+    self.Delete = function (doc) {      
+        var index = self.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents.indexOf(doc);
+        self.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents.splice(index, 1);
+        RestrictUpload();
+    }
+    function RestrictUpload() {
+        self.bRentalHistoryLeaseUpload = true;
+        self.bRentalHistoryNoticeUpload = true;
+        for (var i = 0 ; i < self.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents.length; i++) {
+            if (self.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents[i].DocTitle == 'TR_RentalHistoryLease') {
+                self.bRentalHistoryLeaseUpload = false;
+            }
+            if (self.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents[i].DocTitle == 'TR_RentalHistoryNotice') {
+                self.bRentalHistoryNoticeUpload = false;
+            }
+        }
+    }
     self.AddAnotherRentIncrease = function (rentalIncrease) {
         var _rentalIncrease = angular.copy(rentalIncrease);
         self.caseinfo.TenantResponseInfo.TenantRentalHistory.RentIncreases.push(_rentalIncrease);
@@ -94,6 +112,7 @@ var rapTRRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapTRre
                             }
                         }
                         self.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents.push(document);
+                        RestrictUpload();
                     }
                 }
 

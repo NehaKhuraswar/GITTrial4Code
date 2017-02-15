@@ -37,25 +37,31 @@
         </div>
     </div>
 
-    <div class="field-group filled-info subhead no-top-margin">
-        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
-            <div class="col-sm-6 col-xs-12"><div class="info-title">Lease agreement</div></div>
-            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-            <button ng-show="item.isUploaded == true" class="btn-link btn-download" ng-click="Ctrl.Download(item)">Download</button>
-        </div>
-    </div><!-- .field-group -->
-    <div class="field-group">
-        <p class="no-bottom-margin">Your lease agreement (Optional)</p>
-        <div class="field-addfile">
-            <div class="input-file-wrapper">
-                <span class="btn-link">Upload</span>
-                <input type="file" id="notice_signed_copy" name="notice_signed_copy"
-                       ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryLease')"
-                       accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg" multiple />
+    <div class="field-group no-top-margin mar-bottom-40">
+        <label>Your lease agreement (Optional)</label>
+        <div class="field-addfile no-top-margin ">
+            <div class="input-file-wrapper" ng-show="Ctrl.bRentalHistoryLeaseUpload">
+                <span class="btn-link">Attach</span>
+                <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryLease')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
+            </div>
+            <div class="field-group">
+                <table class="table table-condensed nopadding-bottom">
+                    <tbody>
+                        <tr ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
+                            <td class="nopadding-left">
+                                {{item.DocName}}
+                            </td>
+                            <td>
+                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
+                                <div class="col col-35 type" ng-show="item.isUploaded == false"> &nbsp; <a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div><!-- .field-group -->
-
+    </div>
+    
     <div class="field-group">
         <label>When did you move into this unit?</label>
         <div class="row">
@@ -145,24 +151,31 @@
         </div>
     </div>
 
-    <div class="field-group filled-info subhead no-top-margin">
-        <div class="row" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
-            <div class="col-sm-6 col-xs-12"><div class="info-title">Copy of RAP notice</div></div>
-            <div class="col-sm-6 col-xs-12">{{item.DocName}}</div>
-            <button ng-show="item.isUploaded == true" class="btn-link btn-download" ng-click="Ctrl.Download(item)">Download</button>
-        </div>
-    </div><!-- .field-group -->
-    <div class="field-group">
-        <p class="no-bottom-margin">RAP Notice (Optional)</p>
-        <div class="field-addfile">
-            <div class="input-file-wrapper">
-                <span class="btn-link">Upload</span>
-                <input type="file" id="proof_of_rent_notice" name="proof_of_rent_notice"
-                       ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryNotice')"
-                       accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg" multiple />
+    <div class="field-group no-top-margin mar-bottom-40">
+        <label>RAP Notice (Optional)</label>
+        <div class="field-addfile no-top-margin ">
+            <div class="input-file-wrapper" ng-show="Ctrl.bRentalHistoryNoticeUpload">
+                <span class="btn-link">Attach</span>
+                <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryNotice')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
+            </div>
+            <div class="field-group">
+                <table class="table table-condensed nopadding-bottom">
+                    <tbody>
+                        <tr ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
+                            <td class="nopadding-left">
+                                {{item.DocName}}
+                            </td>
+                            <td>
+                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
+                                <div class="col col-35 type" ng-show="item.isUploaded == false"> &nbsp; <a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div><!-- .field-group -->
+    </div>
+  
     <!-- Rent increases -->
     <div class="subhead">
         <h4>Rent increases</h4>
