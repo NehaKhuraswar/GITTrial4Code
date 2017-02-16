@@ -58,7 +58,10 @@
             
         //});
     
-    
+    self.PublicLoginPage = function()
+    {
+        $location.path("/Login");
+    }
     self.Home =function()
     {
         if (rapGlobalFactory.CustomerDetails != null) {

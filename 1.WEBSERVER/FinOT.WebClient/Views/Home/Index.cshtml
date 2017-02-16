@@ -86,7 +86,7 @@
                                 <li class="search"><a style="cursor: pointer;" title="Search">Search</a></li>
                                 <li class="language"><a style="cursor: pointer;" title="Choose language" class="toggle-link" data-toggle="site-language-wrapper">Language</a></li>
                                 <li class="signedin" ng-show="Ctrl.UserName !=''"><a style="cursor: pointer;" ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
-                                <li class="signedin" ng-show="Ctrl.UserName ==''"><a >Log in</a></li>
+                                <li class="signedin" ng-show="Ctrl.UserName ==''"><a style="cursor: pointer;" ng-click="Ctrl.PublicLoginPage()">Log in</a></li>
                             </ul>
                             
                         </div>
