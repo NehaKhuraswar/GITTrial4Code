@@ -19,7 +19,7 @@
                                    ng-model="Ctrl.caseinfo.PetitionCategoryID"
                                    ng-value="category.PetitionCategoryID"
                                    id="{{category.PetitionCategoryID}}"
-                                   ng-change="Ctrl.model.ChangeTitle()"
+                                   ng-change="Ctrl.model.ChangeTitle(Ctrl.caseinfo.PetitionCategoryID)"
                                    name="PetitionCategory"><i></i><span>{{category.PetitionCategory}}</span>
 
                         </label>

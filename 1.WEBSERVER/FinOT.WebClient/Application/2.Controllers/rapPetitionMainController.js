@@ -31,11 +31,13 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
     self.oPetionActiveStatus = null;
     self.tPetionActiveStatus = null;
     
-    self.ChangeTitle = function () {
-        if (self.caseinfo.PetitionCategoryID == 1) {
+    self.ChangeTitle = function (CategoryID) {
+        self.caseinfo.PetitionCategoryID = CategoryID;
+        if (CategoryID == 1) {
             self.PageTitle = 'Tenant Petition';
+            
         }
-        else if (self.caseinfo.PetitionCategoryID == 2) {
+        else if (CategoryID == 2) {
             self.PageTitle = 'Owner Petition for Approval of Rent Increase';
         }
     }
@@ -223,6 +225,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
             }
             rapGlobalFactory.CaseDetails = self.caseinfo;
             rapGlobalFactory.CaseDetails.PetitionCategoryID = rapGlobalFactory.PetitionCategoryID;
+            self.ChangeTitle(rapGlobalFactory.CaseDetails.PetitionCategoryID);
             self.bPetitionType = true;
         });
     }
