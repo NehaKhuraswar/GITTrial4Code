@@ -1848,7 +1848,8 @@ namespace RAP.DAL
                 else
                 {
                     appealInfo.AppealID = appealInfoDB.AppealID;
-                    appealInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(appealInfoDB.AppealFiledBy)).result;
+                    var appealfiledbyUserID = _dbAccount.CustomerDetails.Where(x => x.CustomerID == appealInfoDB.AppealFiledBy).Select(x => x.UserID).FirstOrDefault();
+                    appealInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(appealfiledbyUserID)).result;
                     appealInfo.bThirdPartyRepresentation = Convert.ToBoolean(appealInfoDB.bThirdPartyRepresentation);
                     if (appealInfoDB.ThirdPartyUserID != null && (int)appealInfoDB.ThirdPartyUserID != 0)
                     {
