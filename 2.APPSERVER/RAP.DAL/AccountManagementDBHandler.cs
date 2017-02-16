@@ -895,7 +895,7 @@ namespace RAP.DAL
             {
                 using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    var cityUser = db.CityUserAccounts.Where(x => x.Email == Email)
+                    var cityUser = db.CityUserAccounts.Where(x => x.Email == Email && (x.IsDeleted == null || x.IsDeleted != true))
                                     .Select(c => new CustomerInfo()
                                     {
                                         custID = c.CityUserID
