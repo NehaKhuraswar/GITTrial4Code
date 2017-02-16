@@ -33,9 +33,9 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant Info</div></div>
                                     <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID!=0">
-                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}}<br />
-                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName}} <br />
-                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />
+                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.LastName}},<br />
+                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.BusinessName}}, <br />
+                                        {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}} <br />
                                         {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}} <br />
                                         T {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.PhoneNumber}} <br />{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Email}}
                                     </div>
@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Representative</div></div>
                                     <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.bThirdPartyRepresentation">
-                                        {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}                             {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
+                                        {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}},<br />                             {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.BusinessName}},  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}}, <br />                                         {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}   <br />
                                         T {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}}
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Property owner</div></div>
                                     <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.UserID!=0">
-                                        {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}}                             {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
+                                        {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.LastName}},<br />                             {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.BusinessName}},  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine1}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Zip}}   <br />
                                         T {{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.OwnerInfo.Email}}
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Property manager</div></div>
                                     <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.UserID!=0">
-                                        {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}}                             {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.BusinessName}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}   <br />
+                                        {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.LastName}},<br />                             {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.BusinessName}},  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine1}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.AddressLine2}}, <br />                                         {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.State.StateName}} {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Zip}}   <br />
                                         T {{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.PhoneNumber}}  <br />{{Ctrl.caseinfo.TenantPetitionInfo.PropertyManager.Email}}
                                     </div>
                                 </div>

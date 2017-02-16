@@ -2582,7 +2582,14 @@ namespace RAP.DAL
                     }
                     petitionDB.CreatedDate = DateTime.Now;
                     petitionDB.PetitionFiledBy = caseInfo.TenantPetitionInfo.CustomerID;
-                    petitionDB.RangeID = caseInfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID;
+                    if (caseInfo.TenantPetitionInfo.SelectedRangeOfUnits != null)
+                    {
+                        petitionDB.RangeID = caseInfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID;
+                    }
+                    else
+                    {
+                        petitionDB.RangeID = null;
+                    }
                     petitionDB.IsSubmitted = false;
                     _dbContext.SubmitChanges();
                     caseInfo.TenantPetitionInfo.PetitionID = petitionDB.TenantPetitionID;
@@ -2678,7 +2685,14 @@ namespace RAP.DAL
                     }
                     petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
                     petitionDB.UnitTypeID = caseInfo.TenantPetitionInfo.UnitTypeId;
-                    petitionDB.RangeID = caseInfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID;
+                    if (caseInfo.TenantPetitionInfo.SelectedRangeOfUnits != null)
+                    {
+                        petitionDB.RangeID = caseInfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID;
+                    }
+                    else
+                    {
+                        petitionDB.RangeID = null;
+                    }
                     petitionDB.bRentStatus = caseInfo.TenantPetitionInfo.bCurrentRentStatus;
                     if (caseInfo.TenantPetitionInfo.bCurrentRentStatus == false)
                     {
