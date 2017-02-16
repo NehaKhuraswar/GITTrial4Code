@@ -33,16 +33,16 @@
                             <div class="subhead no-bottom-margin" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
                                 <label>Select all cases that you would like your representative to have access to</label>
                             </div>
-
-                            <div class="form-group-checkbox vertical clearfix" ng-repeat="caseinfo in Ctrl.Cases" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
-                                <div class="checkbox-wrapper">
-                                    <label for="{{caseinfo.CaseID}}">
-                                        <input type="checkbox" name="{{caseinfo.CaseID}}" id="{{caseinfo.CaseID}}" value="{{caseinfo.CaseID}}"
-                                               ng-model="caseinfo.Selected" /><i></i><span>{{caseinfo.CaseID}}</span>
-                                    </label>
+                            <div class="field-group">
+                                <div class="form-group-checkbox vertical clearfix no-bottom-margin" ng-repeat="caseinfo in Ctrl.Cases" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
+                                    
+                                        <label for="{{caseinfo.CaseID}}">
+                                            <input type="checkbox" name="{{caseinfo.CaseID}}" id="{{caseinfo.CaseID}}" value="{{caseinfo.CaseID}}"
+                                                   ng-model="caseinfo.Selected" /><i></i><span>{{caseinfo.CaseID}}</span>
+                                        </label>
+                                    
                                 </div>
                             </div>
-
                             <div class="field-group mar-bottom-40" ng-show="Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName != null">
                                 <a style="cursor: pointer;" role="button" aria-label="Update access privileges" ng-click="Ctrl.UpdateThirdPartyAccessPrivilege(Ctrl.Cases)" class="btn-link">Update access privileges</a>
                             </div>
@@ -50,7 +50,7 @@
                             <div class="step-footer no-top-margin pad-t60" ng-show="Ctrl.ThirdPartyInfo == null || Ctrl.ThirdPartyInfo.ThirdPartyUser.UserID == 0 ">
                                 <a style="cursor: pointer;" role="button" aria-label="Add new representative" ng-click="Ctrl.AddNewRepresentative()" class="btn-primary">Add new representative</a>
                             </div>
-                        </div>
+                         </div>
                     </div><!-- .application-form -->
                 </div>
 
