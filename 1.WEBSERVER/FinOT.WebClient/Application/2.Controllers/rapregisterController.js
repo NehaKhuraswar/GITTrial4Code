@@ -1,5 +1,6 @@
 ﻿'use strict';
-var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', 'masterdataFactory', 'rapGlobalFactory', '$location', '$anchorScroll', function ($scope, $modal, alert, rapFactory, masterFactory, rapGlobalFactory, $location, $anchorScroll) {
+var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory', 'masterdataFactory', 'rapGlobalFactory', '$location', '$anchorScroll', '$cookies',
+        function ($scope, $modal, alert, rapFactory, masterFactory, rapGlobalFactory, $location, $anchorScroll, $cookies) {
     var self = this;
     self.CustomerInfo = null;
     self.StateList = [];
@@ -7,6 +8,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     self.ConfirmPassword;
     self.Error = '';
     self.Hide = false;
+    self.model = $scope;
     $scope.required = true;
     self.PasswordError = false;
     if (rapGlobalFactory.IsEdit == null || rapGlobalFactory.IsEdit == undefined)
@@ -200,8 +202,18 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
                     rapGlobalFactory.CityUser = null;
                     sessionStorage.clear();
                     $cookies.remove("userInfo");
+                    if (self.model.$parent != null) {
+                        if (self.model.$parent.$parent != null) {
+                            if (self.model.$parent.$parent.Ctrl != null) {
+                                if (self.model.$parent.$parent.Ctrl.LogOut != null) {
+                                    self.model.$parent.$parent.Ctrl.LogOut();
+                                }
+                            }
+                        }
+
+                    }
                     $location.path("/Login");
-            }
+                }
             }
             else {
                 $location.path("/Login");
