@@ -921,7 +921,7 @@ namespace RAP.DAL
             {               
                  using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
                 {
-                    var custInfo = db.CustomerDetails.Where(x => x.Email == message.email && x.IsDeleted != true)
+                    var custInfo = db.CustomerDetails.Where(x => x.Email == message.email && (x.IsDeleted == null || x.IsDeleted != true))
                                     .Select(c => new CustomerInfo()
                                     {
                                         custID = c.CustomerID,
