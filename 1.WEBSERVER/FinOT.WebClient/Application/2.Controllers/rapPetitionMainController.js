@@ -244,8 +244,6 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
             self.PetitionSubmissionStatus = response.data;
             self.oPetionActiveStatus = self.PetitionSubmissionStatus.OwnerPetition;
             self.tPetionActiveStatus = self.PetitionSubmissionStatus.TenantPetition;
-            self.bPetitionType = true;
-            self.FileCategoryActive = self.PetitionSubmissionStatus.FileCategoryActive;
         });
     }
     // _getrent();
