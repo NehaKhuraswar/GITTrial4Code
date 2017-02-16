@@ -139,7 +139,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
         }
         if (model.EmailNotificationFlag == false && model.MailNotificationFlag == false)
         {
-            self.Error = "Please select one of the notification preference";
+            self.Error = "Please select the preferred way of receiving notifications.";
             $anchorScroll();
             return;
         }

@@ -52,7 +52,7 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
     self.SaveOrUpdateThirdPartyInfo = function (model) {
         
         if (model.MailNotification == false && model.EmailNotification == false) {
-            self.Error = "Please select one of the notification preference";
+            self.Error = "Please select the preferred way of receiving notifications.";
             $anchorScroll();
             return;
         }
@@ -62,7 +62,7 @@ var rapNewRepresentativeController = ['$scope', '$modal', 'alertService', 'rapne
             return;
         }
         if (self.bAcknowledge == false) {
-            self.Error = "Please acknowledge";
+            self.Error = "Please acknowledge that your representative will receive notifications";
             $anchorScroll();
             return;
         }
