@@ -22,9 +22,14 @@
                             </div>
 
                             <div class="field-group mar-bottom-40">
-                                <p><strong>{{Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName}} {{Ctrl.ThirdPartyInfo.ThirdPartyUser.LastName}}</strong> <br />{{Ctrl.ThirdPartyInfo.ThirdPartyUser.BusinessName}}</p>
-                                <p>{{Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine1}}<br /> {{Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine2}}, <br />{{Ctrl.ThirdPartyInfo.ThirdPartyUser.City}}, {{Ctrl.ThirdPartyInfo.ThirdPartyUser.State.StateCode}} {{Ctrl.ThirdPartyInfo.ThirdPartyUser.Zip}}</p>
-                                <p>Tel: {{Ctrl.ThirdPartyInfo.ThirdPartyUser.PhoneNumber}}<br />Email: {{Ctrl.ThirdPartyInfo.ThirdPartyUser.Email}}</p>
+                                <p>
+                                    <strong>{{Ctrl.ThirdPartyInfo.ThirdPartyUser.FirstName}} {{Ctrl.ThirdPartyInfo.ThirdPartyUser.LastName}},</strong><br />
+                                    {{Ctrl.ThirdPartyInfo.ThirdPartyUser.BusinessName}},<br />                             
+                                    {{Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine1}}, {{Ctrl.ThirdPartyInfo.ThirdPartyUser.AddressLine2}}, <br />
+                                    {{Ctrl.ThirdPartyInfo.ThirdPartyUser.City}}, {{Ctrl.ThirdPartyInfo.ThirdPartyUser.State.StateCode}} {{Ctrl.ThirdPartyInfo.ThirdPartyUser.Zip}}<br />
+                                    Tel: {{Ctrl.ThirdPartyInfo.ThirdPartyUser.PhoneNumber}}<br />
+                                    Email: {{Ctrl.ThirdPartyInfo.ThirdPartyUser.Email}}<br />
+                                </p>
                                 <p><a style="cursor: pointer;" role="button" aria-label="Remove representatives" ng-click="Ctrl.RemoveRepresentative()" class="btn-link btn-link-red">Remove representative</a></p>
                             </div>
                         </div>
