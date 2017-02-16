@@ -27,7 +27,7 @@
                                 
                             </ul>-->
                         <!--</div>-->
-                        <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 1">
+                        <div ng-show="Ctrl.caseinfo.PetitionCategoryID == 1">
                             <ul class="application-steps" ng-show="Ctrl.Toggle">
                                 <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation || Ctrl.tPetionActiveStatus.ApplicantInformation||Ctrl.bImpInfo || Ctrl.ownerImpInfo || Ctrl.oPetionActiveStatus.ImportantInformation|| Ctrl.tPetionActiveStatus.ImportantInformation
                                         , 'current' : (!Ctrl.oPetionCurrentStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.PetitionCategory) || (Ctrl.bPetitionType)}"><a ng-click="Ctrl.stepNo = 1;Ctrl.showPetitionType()">Petition Type</a></li>
@@ -57,7 +57,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div ng-show="Ctrl.caseinfo.PetitionCategoryID.toString() == 2">
+                        <div ng-show="Ctrl.caseinfo.PetitionCategoryID == 2">
                             <ul class="application-steps" ng-show="Ctrl.Toggle">
                                 <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation || Ctrl.tPetionActiveStatus.ApplicantInformation||Ctrl.bImpInfo || Ctrl.ownerImpInfo || Ctrl.oPetionActiveStatus.ImportantInformation|| Ctrl.tPetionActiveStatus.ImportantInformation
                                     , 'current' : (!Ctrl.oPetionCurrentStatus.ApplicantInformation && Ctrl.oPetionCurrentStatus.PetitionCategory) || (Ctrl.bPetitionType)}"><a ng-click="Ctrl.showPetitionType()">Petition Type</a></li>
