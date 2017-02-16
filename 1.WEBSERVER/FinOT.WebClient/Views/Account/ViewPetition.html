@@ -145,22 +145,29 @@
 
                             <div class="field-group filled-info subhead no-top-margin">
                                 <div class="row">
-                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?</div></div>
-                                    <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">Yes</div>
-                                    <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">No</div>
-                                </div>
-                            </div><!-- .field-group -->
-
-                            <div class="field-group filled-info subhead no-top-margin">
-                                <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a rent program notice with the notice of increase?</div></div>
                                     <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">Yes</div>
                                     <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRAPNoticeGiven">No</div>
                                 </div>
                             </div><!-- .field-group -->
 
+                            <div class="field-group filled-info subhead no-top-margin">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12"><div class="info-title">Is your rent subsidized or controlled by any government agency, including HUD (Section 8)?</div></div>
+                                    <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">Yes</div>
+                                    <div class="col-sm-6 col-xs-12" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.bRentControlledByAgency">No</div>
+                                </div>
+                            </div><!-- .field-group -->                            
+
                             <div ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases">
                                 <div class="field-group filled-info subhead no-top-margin">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12"><div class="info-title">Did you receive a RAP Notice with the notice of rent increase?</div></div>
+                                        <div class="col-sm-6 col-xs-12" ng-show="item.bRentIncreaseNoticeGiven">Yes</div>
+                                        <div class="col-sm-6 col-xs-12" ng-show="!item.bRentIncreaseNoticeGiven">No</div>
+                                    </div>
+                                </div><!-- .field-group -->
+                                <div class="field-group filled-info subhead no-top-margin" ng-show="item.bRentIncreaseNoticeGiven">
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
                                         <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreaseNoticeDate != null">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>

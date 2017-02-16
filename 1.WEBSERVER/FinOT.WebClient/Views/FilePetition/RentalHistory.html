@@ -155,7 +155,7 @@
                                     <div class="col-sm-6 col-xs-12" ng-show="!item.bRentIncreaseNoticeGiven">No</div>
                                 </div>
                             </div><!-- .field-group -->
-                            <div class="field-group filled-info subhead no-top-margin">
+                            <div class="field-group filled-info subhead no-top-margin" ng-show="item.bRentIncreaseNoticeGiven">
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
                                     <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
@@ -207,7 +207,7 @@
                         </div>
                     </div>
 
-                    <div class="field-group">
+                    <div class="field-group" ng-show="Ctrl.RentalIncreaseModel.bRentIncreaseNoticeGiven">
                         <label for="date_increase_effective_month">Date you received the notice</label>
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
