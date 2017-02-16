@@ -2246,7 +2246,7 @@ namespace RAP.DAL
                     AppealDB.IsSubmitted = true;
                     _dbContext.SubmitChanges();
                 }
-                var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(caseInfo.TenantAppealInfo.AppealFiledBy, caseInfo.C_ID, DocCategory.Appeal.ToString());
+                var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(caseInfo.CaseFileBy, caseInfo.C_ID, DocCategory.Appeal.ToString());
                 if (updateDocumentResult.status.Status != StatusEnum.Success)
                 {
                     result.status = updateDocumentResult.status;
@@ -2254,7 +2254,7 @@ namespace RAP.DAL
                 }
 
                 var PageStatus = _dbContext.AppealPageSubmissionStatus
-                                            .Where(x => x.CustomerID == caseInfo.TenantAppealInfo.AppealFiledBy).FirstOrDefault();
+                                            .Where(x => x.CustomerID == caseInfo.CaseFileBy).FirstOrDefault();
                 if (PageStatus != null)
                 {
                     _dbContext.AppealPageSubmissionStatus.DeleteOnSubmit(PageStatus);
