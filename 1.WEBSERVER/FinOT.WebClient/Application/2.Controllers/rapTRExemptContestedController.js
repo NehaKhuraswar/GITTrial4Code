@@ -25,7 +25,11 @@ var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTR
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapGlobalFactory.CaseDetails.TenantResponseInfo.ExemptContestedInfo.TenantResponseID = self.caseinfo.TenantResponseInfo.TenantResponseID;
         rapFactory.SaveTenantResponseExemptContestedInfo(rapGlobalFactory.CaseDetails.TenantResponseInfo.ExemptContestedInfo, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             $scope.model.bExemptionContested = false;
             $scope.model.bRentalHistory = true;
             $scope.model.TRSubmissionStatus.ExemptionContested = true;
