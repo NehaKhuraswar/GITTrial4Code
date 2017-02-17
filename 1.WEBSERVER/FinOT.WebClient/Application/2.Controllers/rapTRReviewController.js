@@ -13,8 +13,9 @@ var rapTRReviewController = ['$scope', '$modal', 'alertService', 'rapTRreviewFac
                 $anchorScroll();
                 return;
             }
-            self.caseinfo.TenantResponseInfo = response.data.TenantResponseInfo;
-            self.caseinfo.Documents = response.data.Documents;
+            self.caseinfo = response.data;
+            rapGlobalFactory.CaseDetails = self.caseinfo;
+            //self.caseinfo.Documents = response.data.Documents;
             $anchorScroll();
         });
     }

@@ -8,7 +8,7 @@ var rapTRExemptContestedController = ['$scope', '$modal', 'alertService', 'rapTR
     self.Error = "";
     
     var _GetTenantResponseExemptContestedInfo = function (TenantResponseID) {
-        rapFactory.GetTenantResponseExemptContestedInfo(TenantResponseID).then(function (response) {
+        rapFactory.GetTenantResponseExemptContestedInfo(TenantResponseID, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 $anchorScroll();

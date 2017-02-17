@@ -24,13 +24,13 @@ namespace RAP.DAL
         ReturnResult<TenantPetitionInfoM> GetTenantApplicationInfo(int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseViewInfo(int C_ID);
         ReturnResult<CaseInfoM> GetTenantResponseApplicationInfo(string CaseNumber, int CustomerID);
-        ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
-        ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID);
+        ReturnResult<CaseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
+        ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID, int CustomerID);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID);
         ReturnResult<CaseInfoM> GetSelectedCase(int C_ID);
         ReturnResult<List<CaseInfoM>> GetCasesForCustomer(int CustomerID);
         ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId, int CustomerID);
-        ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID);
+        ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID, int CustomerID);
         ReturnResult<bool> SaveTenantRentalHistoryInfo(TenantRentalHistoryM rentalHistory, int CustomerID);
         ReturnResult<bool> SaveTenantResponseRentalHistoryInfo(TenantResponseRentalHistoryM rentalHistory, int CustomerID);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID, int CustomerID);

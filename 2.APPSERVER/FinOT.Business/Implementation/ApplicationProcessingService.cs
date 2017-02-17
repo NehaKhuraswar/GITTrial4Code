@@ -746,12 +746,12 @@ namespace RAP.Business.Implementation
         }
 
         #region TenantResponseMethods
-        public ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID)
+        public ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                result = _dbHandler.GetTenantResponseExemptContestedInfo(TenantResponseID);
+                result = _dbHandler.GetTenantResponseExemptContestedInfo(TenantResponseID, CustomerID);
                 return result;
             }
             catch (Exception ex)
@@ -864,7 +864,7 @@ namespace RAP.Business.Implementation
             ReturnResult<TenantResponseRentalHistoryM> result = new ReturnResult<TenantResponseRentalHistoryM>();
             try
             {
-                result = _dbHandler.GetTenantResponseRentalHistoryInfo(TenantResponseID);
+                result = _dbHandler.GetTenantResponseRentalHistoryInfo(TenantResponseID, CustomerID);
                 if (result.status.Status != StatusEnum.Success)
                 {
                     return result;
@@ -910,7 +910,7 @@ namespace RAP.Business.Implementation
         public ReturnResult<CaseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
-            ReturnResult<TenantResponseInfoM> responseResult = new ReturnResult<TenantResponseInfoM>();
+            ReturnResult<CaseInfoM> responseResult = new ReturnResult<CaseInfoM>();
             try
             {
                 responseResult = _dbHandler.GetTenantResponseReviewInfo(CaseNumber, CustomerID);
@@ -920,7 +920,7 @@ namespace RAP.Business.Implementation
                     return result;
                 }
 
-                if (responseResult.result.TenantRentalHistory.Documents.Where(x => x.DocTitle == "TR_RentalHistoryNotice").Count() == 0)
+                if (responseResult.result.TenantResponseInfo.TenantRentalHistory.Documents.Where(x => x.DocTitle == "TR_RentalHistoryNotice").Count() == 0)
                 {
                     var docsResult = _commonService.GetDocuments(CustomerID, false, "TR_RentalHistoryNotice");
                     if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
@@ -929,13 +929,13 @@ namespace RAP.Business.Implementation
                         {
                             if (doc != null)
                             {
-                                responseResult.result.TenantRentalHistory.Documents.Add(doc);
+                                responseResult.result.TenantResponseInfo.TenantRentalHistory.Documents.Add(doc);
                             }
                         }
                     }
                 }
 
-                if (responseResult.result.TenantRentalHistory.Documents.Where(x => x.DocTitle == "TR_RentalHistoryLease").Count() == 0)
+                if (responseResult.result.TenantResponseInfo.TenantRentalHistory.Documents.Where(x => x.DocTitle == "TR_RentalHistoryLease").Count() == 0)
                 {
                     var docsResult = _commonService.GetDocuments(CustomerID, false, "TR_RentalHistoryLease");
                     if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
@@ -944,7 +944,7 @@ namespace RAP.Business.Implementation
                         {
                             if (doc != null)
                             {
-                                responseResult.result.TenantRentalHistory.Documents.Add(doc);
+                                responseResult.result.TenantResponseInfo.TenantRentalHistory.Documents.Add(doc);
                             }
                         }
                     }
@@ -956,7 +956,8 @@ namespace RAP.Business.Implementation
                 {
                     caseInfo.CustomerID = CustomerID;
                     caseInfo = GetTRAdditionalDocuments(caseInfo).result;
-                    caseInfo.TenantResponseInfo = responseResult.result;
+                    caseInfo.TenantResponseInfo = responseResult.result.TenantResponseInfo;
+                    caseInfo.CaseID = responseResult.result.CaseID;
                 }
                 else
                 {

@@ -443,9 +443,9 @@ namespace RAP.WebClient
 
 
         [AllowAnonymous]
-        [Route("gettenantresponseexemptcontestedinfo/{TenantResponseID}")]
+        [Route("gettenantresponseexemptcontestedinfo/{TenantResponseID}/{CustomerID}")]
         [HttpGet]
-        public HttpResponseMessage GetTenantResponseExemptContestedInfo(string TenantResponseID)
+        public HttpResponseMessage GetTenantResponseExemptContestedInfo(string TenantResponseID, string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -453,7 +453,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "gettenantresponseexemptcontestedinfo/" + TenantResponseID;
+                string requestUri = _requestURI + "gettenantresponseexemptcontestedinfo/" + TenantResponseID + "/" + CustomerID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

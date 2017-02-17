@@ -26,24 +26,29 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
                  $anchorScroll();
                 return;
                 }
-            self.caseinfo = response.data;
-            self.caseinfo.bCaseFiledByThirdParty = rapGlobalFactory.bCaseFiledByThirdParty;
-            rapGlobalFactory.bCaseFiledByThirdParty = false;
-            if (self.caseinfo.bCaseFiledByThirdParty == false) {
-                self.caseinfo.TenantResponseInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
-                self.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email = angular.copy(self.custDetails.email);
-            }
-            //else {
-            //   // self.caseinfo.TenantResponseInfo.ThirdPartyUser = self.custDetails.User;
-            //}
-            self.caseinfo.TenantResponseInfo.CustomerID = self.custDetails.custID;
-            self.bCaseInfo = true;
-            rapGlobalFactory.CaseDetails = self.caseinfo;
-            $anchorScroll();
+             self.caseinfo = response.data;
+             if (self.caseinfo.CaseID != null) {
+
+                 self.caseinfo.bCaseFiledByThirdParty = rapGlobalFactory.bCaseFiledByThirdParty;
+                 rapGlobalFactory.bCaseFiledByThirdParty = false;
+                 if (self.caseinfo.bCaseFiledByThirdParty == false) {
+                     self.caseinfo.TenantResponseInfo.ApplicantUserInfo = angular.copy(self.custDetails.User);
+                     self.caseinfo.TenantResponseInfo.ApplicantUserInfo.Email = angular.copy(self.custDetails.email);
+                 }
+                 //else {
+                 //   // self.caseinfo.TenantResponseInfo.ThirdPartyUser = self.custDetails.User;
+                 //}
+                 self.caseinfo.TenantResponseInfo.CustomerID = self.custDetails.custID;
+                 self.bCaseInfo = true;
+                 rapGlobalFactory.CaseDetails = self.caseinfo;
+                 self.CaseID = self.caseinfo.CaseID;
+                 $anchorScroll();
+             }
         });
     }
-    if (self.caseinfo)
+    //if (self.caseinfo)
    // _GetTenantResponseApplicationInfo(self.custDetails.custID);
+    self.GetTenantResponseApplicationInfo(null);
 
     self.StateList = [];
     var _GetStateList = function () {

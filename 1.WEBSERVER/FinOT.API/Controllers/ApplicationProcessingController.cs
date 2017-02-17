@@ -745,9 +745,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("gettenantresponseexemptcontestedinfo/{TenantResponseID:int}")]
+        [Route("gettenantresponseexemptcontestedinfo/{TenantResponseID:int}/{CustomerID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetTenantResponseExemptContestedInfo(int TenantResponseID)
+        public HttpResponseMessage GetTenantResponseExemptContestedInfo(int TenantResponseID, int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -758,7 +758,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetTenantResponseExemptContestedInfo(TenantResponseID);
+                result = _service.GetTenantResponseExemptContestedInfo(TenantResponseID, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

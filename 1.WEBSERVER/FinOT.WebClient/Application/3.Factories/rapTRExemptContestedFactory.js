@@ -13,11 +13,12 @@ var rapTRExemptContestedFactory = ['blockUI', 'ajaxService', function (blockUI, 
           });
       }
 
-      var _GetTenantResponseExemptContestedInfo = function (TenantResponseID) {
+      var _GetTenantResponseExemptContestedInfo = function (TenantResponseID, CustomerID) {
           blockUI.start();
 
           var url = _routePrefix + '/gettenantresponseexemptcontestedinfo';
           if (!(TenantResponseID == null || TenantResponseID == undefined)) { url = url + '/' + TenantResponseID; }
+          if (!(CustomerID == null || CustomerID == undefined)) { url = url + '/' + CustomerID; }
 
           return ajax.Get(url)
           .finally(function () {

@@ -3545,152 +3545,259 @@ namespace RAP.DAL
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.CaseID == CaseNumber).FirstOrDefault();
-                if (CaseDetailsDB == null)
+                if (CaseNumber == null || CaseNumber== "null")
                 {
-                    result.result = null;
-                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
-                    return result;
-                }
-                CaseInfoM caseInfo = new CaseInfoM();
-                caseInfo.C_ID = CaseDetailsDB.C_ID;
-                caseInfo.CaseID = CaseDetailsDB.CaseID;
+                    List<UnitTypeM> _units = new List<UnitTypeM>();
+                    List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
 
-                List<UnitTypeM> _units = new List<UnitTypeM>();
-                List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
-
-                var units = _dbContext.UnitTypes;
-                if (units == null)
-                {
-                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
-                    return result;
-                }
-                else
-                {
-                    foreach (var unit in units)
+                    var units = _dbContext.UnitTypes;
+                    if (units == null)
                     {
-                        UnitTypeM _unit = new UnitTypeM();
-                        _unit.UnitTypeID = unit.UnitTypeID;
-                        _unit.UnitDescription = unit.Description;
-                        _units.Add(_unit);
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
                     }
-
-                }
-
-                var rangeDB = _dbContext.NumberRangeForUnits.ToList();
-                if (rangeDB == null)
-                {
-                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
-                    return result;
-                }
-                else
-                {
-                    foreach (var item in rangeDB)
+                    else
                     {
-                        NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
-                        obj.RangeID = item.RangeID;
-                        obj.RangeDesc = item.RangeDesc;
-                        _rangeOfUnits.Add(obj);
-                    }
-                }
-                var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
-                                                && x.C_ID == caseInfo.C_ID
-                                                && x.IsSubmitted == false).FirstOrDefault();
-                TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
-                if (TenantResponseInfoDB != null)
-                {
-                    tenantResponseInfo.TenantResponseID = TenantResponseInfoDB.TenantResponseID;
-                    tenantResponseInfo.bThirdPartyRepresentation = (bool)TenantResponseInfoDB.bThirdPartyRepresentation;
-                    //if (tenantResponseInfo.bThirdPartyRepresentation)
-                    //{
-                    //    tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
-                    //}
-                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
-                    if (accdbResult.status.Status == StatusEnum.Success)
-                    {
-                        tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                        tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
-                        tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
-                        //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
-                        //{
-                        //    tenantResponseInfo.bThirdPartyRepresentation = true;
-                        //}
-                        //else
-                        //{
-                        //    tenantResponseInfo.bThirdPartyRepresentation = false;
-                        //}
-                    }
-
-                    tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
-                    tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
-                    tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
-                    if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
-                    {
-                        tenantResponseInfo.bSameAsOwnerInfo = true;
-                    }
-                    tenantResponseInfo.NumberOfUnits = TenantResponseInfoDB.NumberOfUnits;
-                    tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
-                    tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
-                    tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
-                    tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
-                    tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
-                }
-                else
-                {
-                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
-                    if (accdbResult.status.Status == StatusEnum.Success)
-                    {
-                        tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                        tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
-                        tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
-                        //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
-                        //{
-                        //    tenantResponseInfo.bThirdPartyRepresentation = true;
-                        //}
-                        //else
-                        //{
-                        //    tenantResponseInfo.bThirdPartyRepresentation = false;
-                        //}
-                    }
-                    var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
-
-                    if (ownerPetitionID != null)
-                    {
-                        var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == Convert.ToInt32(ownerPetitionID)).First();
-                        if (petitionInfo != null)
+                        foreach (var unit in units)
                         {
-                            var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == petitionInfo.OwnerPetitionApplicantInfoID).First();
+                            UnitTypeM _unit = new UnitTypeM();
+                            _unit.UnitTypeID = unit.UnitTypeID;
+                            _unit.UnitDescription = unit.Description;
+                            _units.Add(_unit);
+                        }
 
-                            if (applicantInfo != null)
-                            {
-                                var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
-                                if (applicantUserInforesult.status.Status != StatusEnum.Success)
-                                {
-                                    result.status = applicantUserInforesult.status;
-                                    return result;
-                                }
-                                tenantResponseInfo.OwnerInfo = applicantUserInforesult.result;
-                                tenantResponseInfo.NumberOfUnits = applicantInfo.NumberOfUnits;
-                                tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(applicantInfo.RangeID);
-                            }
-                            var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == petitionInfo.OwnerPropertyID).First();
+                    }
 
-                            if (propertyInfo != null)
-                            {
-                                tenantResponseInfo.UnitTypeId = propertyInfo.UnitTypeID;
-                                tenantResponseInfo.bCurrentRentStatus = Convert.ToBoolean(propertyInfo.CurrentOnRent);
-                            }
+                    var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                    if (rangeDB == null)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    else
+                    {
+                        foreach (var item in rangeDB)
+                        {
+                            NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                            obj.RangeID = item.RangeID;
+                            obj.RangeDesc = item.RangeDesc;
+                            _rangeOfUnits.Add(obj);
                         }
                     }
+                    CaseInfoM caseInfo = new CaseInfoM();
+                    //caseInfo.C_ID = CaseDetailsDB.C_ID;
+                    //caseInfo.CaseID = CaseDetailsDB.CaseID;
+                    var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID                                                   
+                                                    && x.IsSubmitted == false).FirstOrDefault();
+                    TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
+                    if (TenantResponseInfoDB != null)
+                    {
+                        tenantResponseInfo.TenantResponseID = TenantResponseInfoDB.TenantResponseID;
+                        tenantResponseInfo.bThirdPartyRepresentation = (bool)TenantResponseInfoDB.bThirdPartyRepresentation;
+                        //if (tenantResponseInfo.bThirdPartyRepresentation)
+                        //{
+                        //    tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
+                        //}
+                        var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                        if (accdbResult.status.Status == StatusEnum.Success)
+                        {
+                            tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                            tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                            tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                            //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
+                            //{
+                            //    tenantResponseInfo.bThirdPartyRepresentation = true;
+                            //}
+                            //else
+                            //{
+                            //    tenantResponseInfo.bThirdPartyRepresentation = false;
+                            //}
+                        }
+
+                        tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
+                        tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
+                        tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                        if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
+                        {
+                            tenantResponseInfo.bSameAsOwnerInfo = true;
+                        }
+                        tenantResponseInfo.NumberOfUnits = TenantResponseInfoDB.NumberOfUnits;
+                        tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
+                        tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
+                        tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
+                        tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
+                        tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
+                        caseInfo.C_ID = Convert.ToInt32(TenantResponseInfoDB.C_ID);
+                        if(caseInfo.C_ID != 0)
+                        {
+                            var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.C_ID == caseInfo.C_ID).FirstOrDefault();
+                            if (CaseDetailsDB == null)
+                            {
+                                result.result = null;
+                                result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                                return result;
+                            }
+                            caseInfo.CaseID = CaseDetailsDB.CaseID;
+                        }
+                    }
+                    tenantResponseInfo.UnitTypes = _units;
+                    tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
+
+
+                    caseInfo.TenantResponseInfo = tenantResponseInfo;
+                    result.result = caseInfo;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
                 }
+                else
+                {
+                    var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.CaseID == CaseNumber).FirstOrDefault();
+                    if (CaseDetailsDB == null)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    CaseInfoM caseInfo = new CaseInfoM();
+                    caseInfo.C_ID = CaseDetailsDB.C_ID;
+                    caseInfo.CaseID = CaseDetailsDB.CaseID;
 
-                tenantResponseInfo.UnitTypes = _units;
-                tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
+                    List<UnitTypeM> _units = new List<UnitTypeM>();
+                    List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
+
+                    var units = _dbContext.UnitTypes;
+                    if (units == null)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    else
+                    {
+                        foreach (var unit in units)
+                        {
+                            UnitTypeM _unit = new UnitTypeM();
+                            _unit.UnitTypeID = unit.UnitTypeID;
+                            _unit.UnitDescription = unit.Description;
+                            _units.Add(_unit);
+                        }
+
+                    }
+
+                    var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                    if (rangeDB == null)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    else
+                    {
+                        foreach (var item in rangeDB)
+                        {
+                            NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                            obj.RangeID = item.RangeID;
+                            obj.RangeDesc = item.RangeDesc;
+                            _rangeOfUnits.Add(obj);
+                        }
+                    }
+                    var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
+                                                    && x.IsSubmitted == false).FirstOrDefault();
+                    TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
+                    if (TenantResponseInfoDB != null)
+                    {
+                        tenantResponseInfo.TenantResponseID = TenantResponseInfoDB.TenantResponseID;
+                    }
+                    //    tenantResponseInfo.bThirdPartyRepresentation = (bool)TenantResponseInfoDB.bThirdPartyRepresentation;
+                    //    //if (tenantResponseInfo.bThirdPartyRepresentation)
+                    //    //{
+                    //    //    tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
+                    //    //}
+                    //    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    //    if (accdbResult.status.Status == StatusEnum.Success)
+                    //    {
+                    //        tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                    //        tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                    //        tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                    //        //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
+                    //        //{
+                    //        //    tenantResponseInfo.bThirdPartyRepresentation = true;
+                    //        //}
+                    //        //else
+                    //        //{
+                    //        //    tenantResponseInfo.bThirdPartyRepresentation = false;
+                    //        //}
+                    //    }
+
+                    //    tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
+                    //    tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
+                    //    tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                    //    if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
+                    //    {
+                    //        tenantResponseInfo.bSameAsOwnerInfo = true;
+                    //    }
+                    //    tenantResponseInfo.NumberOfUnits = TenantResponseInfoDB.NumberOfUnits;
+                    //    tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
+                    //    tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
+                    //    tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
+                    //    tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
+                    //    tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
+                    //}
+                    //else
+                    //{
+                        var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                        if (accdbResult.status.Status == StatusEnum.Success)
+                        {
+                            tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                            tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                            tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                            //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
+                            //{
+                            //    tenantResponseInfo.bThirdPartyRepresentation = true;
+                            //}
+                            //else
+                            //{
+                            //    tenantResponseInfo.bThirdPartyRepresentation = false;
+                            //}
+                        }
+                        var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
+
+                        if (ownerPetitionID != null)
+                        {
+                            var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == Convert.ToInt32(ownerPetitionID)).First();
+                            if (petitionInfo != null)
+                            {
+                                var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == petitionInfo.OwnerPetitionApplicantInfoID).First();
+
+                                if (applicantInfo != null)
+                                {
+                                    var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                                    if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                                    {
+                                        result.status = applicantUserInforesult.status;
+                                        return result;
+                                    }
+                                    tenantResponseInfo.OwnerInfo = applicantUserInforesult.result;
+                                    tenantResponseInfo.NumberOfUnits = applicantInfo.NumberOfUnits;
+                                    tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(applicantInfo.RangeID);
+                                }
+                                var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == petitionInfo.OwnerPropertyID).First();
+
+                                if (propertyInfo != null)
+                                {
+                                    tenantResponseInfo.UnitTypeId = propertyInfo.UnitTypeID;
+                                    tenantResponseInfo.bCurrentRentStatus = Convert.ToBoolean(propertyInfo.CurrentOnRent);
+                                }
+                            }
+                        }
+                   // }
+
+                    tenantResponseInfo.UnitTypes = _units;
+                    tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
 
 
-                caseInfo.TenantResponseInfo = tenantResponseInfo;
-                result.result = caseInfo;
-                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                    caseInfo.TenantResponseInfo = tenantResponseInfo;
+                    result.result = caseInfo;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                }
+                
 
                 return result;
             }
@@ -3703,13 +3810,18 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID)
+        public ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             CaseInfoM caseInfo = new CaseInfoM();
             TenantResponseExemptContestedInfoM exemptContested = new TenantResponseExemptContestedInfoM();
             try
             {
+                if(TenantResponseID == 0)
+                {
+                    TenantResponseID = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID                                                
+                                                && x.IsSubmitted == false).OrderByDescending(x=>x.ModifiedDate).Select(x=>x.TenantResponseID).FirstOrDefault();
+                }
                 var exemptContestedDB = _dbContext.TenantResponseExemptContestedInfos.Where(x => x.TenantResponseID == TenantResponseID).FirstOrDefault();
                 if (exemptContestedDB != null)
                 {
@@ -3732,12 +3844,17 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID)
+        public ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID, int CustomerID)
         {
             ReturnResult<TenantResponseRentalHistoryM> result = new ReturnResult<TenantResponseRentalHistoryM>();
             TenantResponseRentalHistoryM tenantResponseRentalHistory = new TenantResponseRentalHistoryM();
             try
             {
+                if (TenantResponseID == 0)
+                {
+                    TenantResponseID = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
+                                                && x.IsSubmitted == false).OrderByDescending(x => x.ModifiedDate).Select(x => x.TenantResponseID).FirstOrDefault();
+                }
                 var TenantResponseRentalHistoryDB = _dbContext.TenantResponseRentalHistories.Where(x => x.TenantResponseID == TenantResponseID).FirstOrDefault();
                 if (TenantResponseRentalHistoryDB != null)
                 {
@@ -3778,9 +3895,9 @@ namespace RAP.DAL
         }
 
         //Get Review Tenant Respomse
-        public ReturnResult<TenantResponseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID)
+        public ReturnResult<CaseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID)
         {
-            ReturnResult<TenantResponseInfoM> tenantResponseResult = new ReturnResult<TenantResponseInfoM>();
+            ReturnResult<CaseInfoM> Result = new ReturnResult<CaseInfoM>();
             ReturnResult<CaseInfoM> ApplicationInfoResult = new ReturnResult<CaseInfoM>();
             ReturnResult<CaseInfoM> ExemptContestedInfoResult = new ReturnResult<CaseInfoM>();
             ReturnResult<TenantResponseRentalHistoryM> RentalHistoryResult = new ReturnResult<TenantResponseRentalHistoryM>();
@@ -3789,35 +3906,35 @@ namespace RAP.DAL
             try
             {
                 ApplicationInfoResult = GetTenantResponseApplicationInfo(CaseNumber, CustomerID);
-                tenantResponseResult.result = ApplicationInfoResult.result.TenantResponseInfo;
+                Result.result = ApplicationInfoResult.result;
                 if (ApplicationInfoResult.status.Status != StatusEnum.Success)
-                    return tenantResponseResult;
+                    return Result;
 
-                ExemptContestedInfoResult = GetTenantResponseExemptContestedInfo((int)tenantResponseResult.result.TenantResponseID);
+                ExemptContestedInfoResult = GetTenantResponseExemptContestedInfo((int)Result.result.TenantResponseInfo.TenantResponseID, CustomerID);
                 if (ExemptContestedInfoResult != null)
                 {
-                    tenantResponseResult.result.ExemptContestedInfo = ExemptContestedInfoResult.result.TenantResponseInfo.ExemptContestedInfo;
-                    tenantResponseResult.status = ExemptContestedInfoResult.status;
+                    Result.result.TenantResponseInfo.ExemptContestedInfo = ExemptContestedInfoResult.result.TenantResponseInfo.ExemptContestedInfo;
+                    Result.status = ExemptContestedInfoResult.status;
                     if (ExemptContestedInfoResult.status.Status != StatusEnum.Success)
-                        return tenantResponseResult;
+                        return Result;
                 }
-                RentalHistoryResult = GetTenantResponseRentalHistoryInfo((int)tenantResponseResult.result.TenantResponseID);
+                RentalHistoryResult = GetTenantResponseRentalHistoryInfo((int)Result.result.TenantResponseInfo.TenantResponseID, CustomerID);
                 if (RentalHistoryResult != null)
                 {
-                    tenantResponseResult.result.TenantRentalHistory = RentalHistoryResult.result;
-                    tenantResponseResult.status = RentalHistoryResult.status;
+                    Result.result.TenantResponseInfo.TenantRentalHistory = RentalHistoryResult.result;
+                    Result.status = RentalHistoryResult.status;
                     if (RentalHistoryResult.status.Status != StatusEnum.Success)
-                        return tenantResponseResult;
+                        return Result;
                 }
 
-                return tenantResponseResult;
+                return Result;
             }
             catch (Exception ex)
             {
                 IExceptionHandler eHandler = new ExceptionHandler();
-                tenantResponseResult.status = eHandler.HandleException(ex);
-                _commondbHandler.SaveErrorLog(tenantResponseResult.status);
-                return tenantResponseResult;
+                Result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(Result.status);
+                return Result;
             }
         }
         public ReturnResult<CaseInfoM> GetTenantResponseApplicationInfoForView(int C_ID)
@@ -3971,7 +4088,7 @@ namespace RAP.DAL
                 if (ApplicationInfoResult.status.Status != StatusEnum.Success)
                     return result;
 
-                ExemptContestedInfoResult = GetTenantResponseExemptContestedInfo((int)tenantResponseResult.result.TenantResponseID);
+                ExemptContestedInfoResult = GetTenantResponseExemptContestedInfo((int)tenantResponseResult.result.TenantResponseID, 0);
                 if (ExemptContestedInfoResult != null)
                 {
                     tenantResponseResult.result.ExemptContestedInfo = ExemptContestedInfoResult.result.TenantResponseInfo.ExemptContestedInfo;
@@ -3979,7 +4096,7 @@ namespace RAP.DAL
                     if (ExemptContestedInfoResult.status.Status != StatusEnum.Success)
                         return result;
                 }
-                RentalHistoryResult = GetTenantResponseRentalHistoryInfo((int)tenantResponseResult.result.TenantResponseID);
+                RentalHistoryResult = GetTenantResponseRentalHistoryInfo((int)tenantResponseResult.result.TenantResponseID, 0);
                 if (RentalHistoryResult != null)
                 {
                     tenantResponseResult.result.TenantRentalHistory = RentalHistoryResult.result;
@@ -4146,6 +4263,7 @@ namespace RAP.DAL
                     petitionDB.CreatedDate = DateTime.Now;
                     petitionDB.ResponseFiledBy = caseInfo.TenantResponseInfo.CustomerID;
                     petitionDB.RangeID = caseInfo.TenantResponseInfo.SelectedRangeOfUnits.RangeID;
+                    petitionDB.C_ID = caseInfo.C_ID;
                     petitionDB.IsSubmitted = false;
                     _dbContext.SubmitChanges();
                     caseInfo.TenantResponseInfo.TenantResponseID = petitionDB.TenantResponseID;
@@ -4274,6 +4392,11 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                if (message.TenantResponseID == 0)
+                {
+                    message.TenantResponseID = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
+                                                && x.IsSubmitted == false).OrderByDescending(x => x.ModifiedDate).Select(x => x.TenantResponseID).FirstOrDefault();
+                }
                 var exemptContestedDB = _dbContext.TenantResponseExemptContestedInfos.Where(x => x.TenantResponseID == message.TenantResponseID).FirstOrDefault();
                 if (exemptContestedDB != null)
                 {
@@ -4324,6 +4447,11 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                if (rentalHistory.TenantResponseID == 0)
+                {
+                    rentalHistory.TenantResponseID = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
+                                                && x.IsSubmitted == false).OrderByDescending(x => x.ModifiedDate).Select(x => x.TenantResponseID).FirstOrDefault();
+                }
                 var rentalHistoryRecord = _dbContext.TenantResponseRentalHistories.Where(x => x.TenantResponseID == rentalHistory.TenantResponseID).FirstOrDefault();
                 if (rentalHistoryRecord != null)
                 {
