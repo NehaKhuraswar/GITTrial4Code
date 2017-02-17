@@ -11,12 +11,16 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
     self.Calender = masterFactory.Calender;
     self.Error = '';
     $anchorScroll();
-    //rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
-    //    if (!alert.checkResponse(response)) { return; }
-    //    rapGlobalFactory.CaseDetails = response.data;
-    //    self.caseinfo = response.data;
+    rapFactory.GetOResponseReview(self.caseinfo).then(function (response) {
+         if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
+        rapGlobalFactory.CaseDetails = response.data;
+        self.caseinfo = response.data;
         
-    //});
+    });
     self.EditApplicantInfo = function () {
         $scope.model.oresponseReview = false;
         $scope.model.oresponseApplicantInfo = true;

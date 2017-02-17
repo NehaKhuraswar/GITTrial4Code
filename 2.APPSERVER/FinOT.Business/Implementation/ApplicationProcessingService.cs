@@ -2003,8 +2003,8 @@ namespace RAP.Business.Implementation
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
-                
-               result = _dbHandler.OResponseUpdateDecreasedHousingPageSubmission(CustomerID);          
+
+                result = _dbHandler.OResponseUpdateReviewPageSubmission(CustomerID);          
                return result;
             }
             catch (Exception ex)
