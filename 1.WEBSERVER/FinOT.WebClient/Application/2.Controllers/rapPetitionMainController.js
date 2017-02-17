@@ -116,7 +116,7 @@ var rapPetitionMainController = ['$scope', '$modal', 'alertService', 'rapfilepet
         }
     };
     self.showReview = function () {
-        if (self.tPetionActiveStatus.Review) {
+        if (self.tPetionActiveStatus.AdditionalDocumentation) {
             _DisableAll();
             self.bReview = true;
         }
