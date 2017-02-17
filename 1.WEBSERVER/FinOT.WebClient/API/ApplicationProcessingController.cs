@@ -314,9 +314,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("getgroundsinfo/{petitionID}")]
+        [Route("getgroundsinfo/{petitionID}/{CustomerID}")]
         [HttpGet]
-        public HttpResponseMessage GetPetitionGroundInfo(string petitionID)
+        public HttpResponseMessage GetPetitionGroundInfo(string petitionID, string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -324,7 +324,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "getgroundsinfo/" + petitionID;
+                string requestUri = _requestURI + "getgroundsinfo/" + petitionID + "/" + CustomerID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {
@@ -601,9 +601,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("getrentalhistoryinfo/{PetitionId}")]
+        [Route("getrentalhistoryinfo/{PetitionId}/{CustomerID}")]
         [HttpGet]
-        public HttpResponseMessage GetRentalHistoryInfo(string PetitionId)
+        public HttpResponseMessage GetRentalHistoryInfo(string PetitionId, string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -611,7 +611,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "getrentalhistoryinfo/" + PetitionId;
+                string requestUri = _requestURI + "getrentalhistoryinfo/" + PetitionId + "/" + CustomerID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

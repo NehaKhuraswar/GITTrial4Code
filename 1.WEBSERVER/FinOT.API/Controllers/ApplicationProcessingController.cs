@@ -707,9 +707,9 @@ namespace RAP.API.Controllers
         }
         
         [AllowAnonymous]
-        [Route("getgroundsinfo/{petitionID:int}")]
+        [Route("getgroundsinfo/{petitionID:int}/{CustomerID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetPetitionGroundInfo(int petitionID)
+        public HttpResponseMessage GetPetitionGroundInfo(int petitionID, int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -720,7 +720,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetPetitionGroundInfo(petitionID);
+                result = _service.GetPetitionGroundInfo(petitionID, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -1084,9 +1084,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("getrentalhistoryinfo/{PetitionId:int}")]
+        [Route("getrentalhistoryinfo/{PetitionId:int}/{CustomerID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetRentalHistoryInfo(int PetitionId)
+        public HttpResponseMessage GetRentalHistoryInfo(int PetitionId, int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -1097,7 +1097,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetRentalHistoryInfo(PetitionId);
+                result = _service.GetRentalHistoryInfo(PetitionId, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

@@ -13,11 +13,12 @@ var raprentalhistoryFactory = ['blockUI', 'ajaxService', function (blockUI, ajax
               blockUI.stop();
           });
       }
-      var _GetRentalHistoryInfo = function (petitionID) {
+      var _GetRentalHistoryInfo = function (petitionID, CustomerID) {
           blockUI.start();
 
           var url = _routePrefix + '/getrentalhistoryinfo';
           if (!(petitionID == null || petitionID == undefined)) { url = url + '/' + petitionID; }
+          if (!(CustomerID == null || CustomerID == undefined)) { url = url + '/' + CustomerID; }
 
           return ajax.Get(url)
           .finally(function () {

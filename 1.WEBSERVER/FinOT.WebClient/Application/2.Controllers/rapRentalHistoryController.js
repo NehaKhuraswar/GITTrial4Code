@@ -33,8 +33,8 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
         });
     }
     _GetEmptyTenantRentalIncrementInfo();
-    var _GetRentalHistoryInfo = function (petitionId) {
-        rapFactory.GetRentalHistoryInfo(petitionId).then(function (response) {
+    var _GetRentalHistoryInfo = function (petitionId, customerID) {
+        rapFactory.GetRentalHistoryInfo(petitionId, customerID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 $anchorScroll();
@@ -43,7 +43,7 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
             self.caseinfo.TenantPetitionInfo.TenantRentalHistory = response.data;
         });
     }
-    _GetRentalHistoryInfo(self.caseinfo.TenantPetitionInfo.PetitionID);
+    _GetRentalHistoryInfo(self.caseinfo.TenantPetitionInfo.PetitionID, self.custDetails.custID);
 
     self.ContinueToLostServices = function () {
         var a = self.selectedObj;

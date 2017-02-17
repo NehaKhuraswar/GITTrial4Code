@@ -13,11 +13,12 @@ var rapgroundsofpetitionFactory = ['blockUI', 'ajaxService', function (blockUI, 
           });
       }
 
-      var _GetPetitionGroundInfo = function (petitionID) {
+      var _GetPetitionGroundInfo = function (petitionID, CustomerID) {
           blockUI.start();
 
           var url = _routePrefix + '/getgroundsinfo';
           if (!(petitionID == null || petitionID == undefined)) { url = url + '/' + petitionID; }
+          if (!(CustomerID == null || CustomerID == undefined)) { url = url + '/' + CustomerID; }
 
           return ajax.Get(url)
           .finally(function () {

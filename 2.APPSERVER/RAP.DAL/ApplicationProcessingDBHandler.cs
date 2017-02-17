@@ -366,7 +366,7 @@ namespace RAP.DAL
                         return result;
 
 
-                    GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
+                    GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
                     if (GroundsResult != null)
                     {
                         tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
@@ -375,7 +375,7 @@ namespace RAP.DAL
                             return result;
                     }
 
-                    RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
+                    RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
                     if (RentalHistoryResult != null)
                     {
                         tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
@@ -384,7 +384,7 @@ namespace RAP.DAL
                             return result;
                     }
 
-                    LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
+                    LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
                     if (LostServicesResult != null)
                     {
                         tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
@@ -1416,12 +1416,17 @@ namespace RAP.DAL
             }
         }
 
-        public ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId)
+        public ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId, int CustomerID)
         {
             ReturnResult<TenantRentalHistoryM> result = new ReturnResult<TenantRentalHistoryM>();
             TenantRentalHistoryM tenantRentalHistory = new TenantRentalHistoryM();
             try
             {
+                if (PetitionId == 0)
+                {
+                    PetitionId = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
+                                                && x.IsSubmitted == false).Select(x => x.TenantPetitionID).FirstOrDefault();
+                }
                 var TenantRentalHistoryDB = _dbContext.TenantRentalHistories.Where(x => x.PetitionID == PetitionId).FirstOrDefault();
                 if (TenantRentalHistoryDB != null)
                 {
@@ -1451,7 +1456,7 @@ namespace RAP.DAL
                         tenantRentalHistory.RentIncreases.Add(objTenantRentIncreaseInfoM);
                     }
                 }
-
+                tenantRentalHistory.PetitionID = PetitionId;
                 result.result = tenantRentalHistory;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
@@ -1469,13 +1474,18 @@ namespace RAP.DAL
 
 
         // getting the lost services and problems for the tenant petition form
-        public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID)
+        public ReturnResult<LostServicesPageM> GetTenantLostServiceInfo(int PetitionID, int CustomerID)
         {
             ReturnResult<LostServicesPageM> result = new ReturnResult<LostServicesPageM>();
             LostServicesPageM obj = new LostServicesPageM();
             List<TenantLostServiceInfoM> tenantLostServiceInfo = new List<TenantLostServiceInfoM>();
             try
             {
+                if (PetitionID == 0)
+                {
+                    PetitionID = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
+                                                && x.IsSubmitted == false).Select(x => x.TenantPetitionID).FirstOrDefault();
+                }
                 var LostServiceDB = _dbContext.TenantPetitionLostServices.Where(x => x.PetitionID == PetitionID).FirstOrDefault();
                 if(LostServiceDB != null)
                 {
@@ -1507,7 +1517,7 @@ namespace RAP.DAL
                 {
                     obj.bProblem = true;
                 }
-
+                obj.PetitionID = PetitionID;
                 result.result = obj;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
@@ -1536,7 +1546,7 @@ namespace RAP.DAL
                 if (tenantPetitionResult.status.Status != StatusEnum.Success)
                     return tenantPetitionResult;
 
-                GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
+                GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
                 if (GroundsResult != null)
                 {
                     tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
@@ -1545,7 +1555,7 @@ namespace RAP.DAL
                         return tenantPetitionResult;
                 }
 
-                RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
+                RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
                 if (RentalHistoryResult != null)
                 {
                     tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
@@ -1554,7 +1564,7 @@ namespace RAP.DAL
                         return tenantPetitionResult;
                 }
 
-                LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
+                LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
                 if (LostServicesResult != null)
                 {
                     tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
@@ -1597,7 +1607,7 @@ namespace RAP.DAL
                         if (tenantPetitionResult.status.Status != StatusEnum.Success)
                             return caseInfoResult;
 
-                        GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID);
+                        GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID, caseInfo.CaseFileBy);
                         if (GroundsResult != null)
                         {
                             tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
@@ -1606,7 +1616,7 @@ namespace RAP.DAL
                                 return caseInfoResult;
                         }
 
-                        RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID);
+                        RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID, caseInfo.CaseFileBy);
                         if (RentalHistoryResult != null)
                         {
                             tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
@@ -1615,7 +1625,7 @@ namespace RAP.DAL
                                 return caseInfoResult;
                         }
 
-                        LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID);
+                        LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID, caseInfo.CaseFileBy);
                         if (LostServicesResult != null)
                         {
                             tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
@@ -1696,7 +1706,7 @@ namespace RAP.DAL
         /// </summary>
         /// <param name="petitionID"></param>
         /// <returns>Petition Ground Object</returns>
-        public ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
+        public ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID, int CustomerID)
         {
             ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
             List<PetitionGroundM> PetitionGroundInfo = new List<PetitionGroundM>();
@@ -1719,6 +1729,11 @@ namespace RAP.DAL
                         PetitionGroundInfo.Add(_petitionGround);
                     }
                 }
+                if(petitionID == 0)
+                {
+                    petitionID = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
+                                                && x.IsSubmitted == false).Select(x=>x.TenantPetitionID).FirstOrDefault();                    
+                }
                 var TenantPetitionGroundInfoDB = _dbContext.TenantPetitionGroundInfos.Where(x => x.TenantPetitionID == petitionID).ToList();
                 foreach (var item in TenantPetitionGroundInfoDB)
                 {
@@ -1729,8 +1744,7 @@ namespace RAP.DAL
                             item1.Selected = true;
                         }
                     }
-                }
-
+                }                
                 result.result = PetitionGroundInfo;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
 
@@ -1922,7 +1936,7 @@ namespace RAP.DAL
                 }
 
 
-                caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
+                caseInfo.TenantPetitionInfo.PetitionGrounds = GetPetitionGroundInfo(caseInfo.TenantPetitionInfo.PetitionID, UserID).result;
                 //caseInfo.TenantPetitionInfo.LostServices = GetTenantLostServiceInfo(caseInfo.TenantPetitionInfo.PetitionID).result;
 
                 result.result = caseInfo;
@@ -2786,6 +2800,11 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                if (rentalHistory.PetitionID == 0)
+                {
+                    rentalHistory.PetitionID = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
+                                                && x.IsSubmitted == false).Select(x => x.TenantPetitionID).FirstOrDefault();
+                }
                 var rentalHistoryRecord = _dbContext.TenantRentalHistories.Where(x => x.PetitionID == rentalHistory.PetitionID).FirstOrDefault();
                 if (rentalHistoryRecord != null)
                 {
@@ -2906,6 +2925,11 @@ namespace RAP.DAL
             ReturnResult<bool> result = new ReturnResult<bool>();
             try
             {
+                if (message.PetitionID == 0)
+                {
+                    message.PetitionID = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
+                                                && x.IsSubmitted == false).Select(x => x.TenantPetitionID).FirstOrDefault();
+                }
                 var lostService = _dbContext.TenantPetitionLostServices.Where(x => x.PetitionID == message.PetitionID).FirstOrDefault();
                 if(lostService != null)
                 {
@@ -3034,6 +3058,11 @@ namespace RAP.DAL
             try
             {
                 bool bSelected = false;
+                if (petition.PetitionID== 0)
+                {
+                    petition.PetitionID = _dbContext.TenantPetitionInfos.Where(x => x.PetitionFiledBy == CustomerID
+                                                && x.IsSubmitted == false).Select(x => x.TenantPetitionID).FirstOrDefault();
+                }
                 var groundsDb = from r in _dbContext.TenantPetitionGroundInfos
                                 where r.TenantPetitionID == petition.PetitionID
                                 select r;

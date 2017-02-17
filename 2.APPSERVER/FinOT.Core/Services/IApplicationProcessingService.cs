@@ -30,7 +30,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetTenantAppealInfoForView(int C_ID);
         ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID);
         ReturnResult<CaseInfoM> GetTenantResponseViewInfo(int C_ID);
-        ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId);
+        ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId, int CustomerID);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID);
         ReturnResult<CaseInfoM> GetSelectedCase(int C_ID);
        // ReturnResult<List<CaseInfoM>> GetCasesforPublicDashboard(int CustomerID);
@@ -41,7 +41,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetTenantResponseReviewInfo(string CaseNumber, int CustomerID);
         ReturnResult<TenantResponseRentalHistoryM> GetTenantResponseRentalHistoryInfo(int TenantResponseID, int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID);
-        ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID);
+        ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID, int CustomerID);
         ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);
         ReturnResult<CaseInfoM> GetAppealServe(int AppealID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo, int CustomerID);

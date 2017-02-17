@@ -396,12 +396,12 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID)
+        public ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID, int CustomerID)
         {
             ReturnResult<List<PetitionGroundM>> result = new ReturnResult<List<PetitionGroundM>>();
             try
             {
-                result = _dbHandler.GetPetitionGroundInfo(petitionID);
+                result = _dbHandler.GetPetitionGroundInfo(petitionID, CustomerID);
                 return result;
             }
             catch (Exception ex)
@@ -411,13 +411,13 @@ namespace RAP.Business.Implementation
             }
         }
 
-       
-        public ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId)
+
+        public ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId, int CustomerID)
         {
             ReturnResult<TenantRentalHistoryM> result = new ReturnResult<TenantRentalHistoryM>();
             try
             {
-                result = _dbHandler.GetRentalHistoryInfo(PetitionId);
+                result = _dbHandler.GetRentalHistoryInfo(PetitionId, CustomerID);
                 return result;
             }
             catch (Exception ex)
@@ -686,7 +686,7 @@ namespace RAP.Business.Implementation
             List<DocumentM> documents = new List<DocumentM>();
             try
             {
-                var dbResult = _dbHandler.GetTenantLostServiceInfo(PetitionID);
+                var dbResult = _dbHandler.GetTenantLostServiceInfo(PetitionID, CustomerID);
                 if (dbResult.status.Status != StatusEnum.Success)
                 {
                     result = dbResult;
