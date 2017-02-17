@@ -9,15 +9,15 @@
         <form name="frmAppeal" id="frmAppeal" action="#" method="post" class="application-form" onsubmit="return false;">
             <div class=" step-content step1">
 
-                <div class="subhead no-top-margin" >
-                    <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false }">
+                <div class="subhead no-top-margin" ng-show="tenants.length > 0">
+                    <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo | filter: { IsDeleted: false } as tenants">
                         <h4>{{item.TenantUserInfo.FirstName}} {{item.TenantUserInfo.LastName}}<br /> </h4>
                     </div>
                     <p class="no-bottom-margin">
                         {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.AddressLine2}}
                         {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.City}}
                         {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.State.StateCode}}
-                        {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip}}                      
+                        {{Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.Zip}}
                     </p>
                 </div>
 
