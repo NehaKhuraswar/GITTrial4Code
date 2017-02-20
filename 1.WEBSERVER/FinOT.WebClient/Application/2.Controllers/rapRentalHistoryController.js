@@ -51,13 +51,14 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
         rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory.PetitionID = self.caseinfo.TenantPetitionInfo.PetitionID;
         if (self.RentalIncreaseModel.bRentIncreaseContested == true)
         {
-            if (self.RentalIncreaseModel.RentIncreaseNoticeDate == null || self.RentalIncreaseModel.RentIncreaseEffectiveDate == null)
-            {
-                self.Error = "Please enter the valid dates for the rent increased contested section";
-                $anchorScroll();
-                return;
+            if (self.RentalIncreaseModel.bRentIncreaseNoticeGiven) {
+                if (self.RentalIncreaseModel.RentIncreaseNoticeDate == null) {
+                    self.Error = "Please enter the valid dates for the rent increased contested section";
+                    $anchorScroll();
+                    return;
+                }
             }
-            if (self.RentalIncreaseModel.RentIncreaseNoticeDate == null || self.RentalIncreaseModel.RentIncreaseEffectiveDate == null) {
+            if (self.RentalIncreaseModel.RentIncreaseEffectiveDate == null) {
                 self.Error = "Please enter the valid dates for the rent increased contested section";
                 $anchorScroll();
                 return;
@@ -70,9 +71,15 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
             }
         }
         if (self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.length == 0) {
-            if (self.RentalIncreaseModel.RentIncreaseNoticeDate != null && self.RentalIncreaseModel.RentIncreaseEffectiveDate != null)
-                {
-            self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+            if (self.RentalIncreaseModel.bRentIncreaseNoticeGiven) {
+                if (self.RentalIncreaseModel.RentIncreaseNoticeDate != null && self.RentalIncreaseModel.RentIncreaseEffectiveDate != null) {
+                    self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+                }
+            }
+            else {
+                if (self.RentalIncreaseModel.RentIncreaseEffectiveDate != null) {
+                    self.caseinfo.TenantPetitionInfo.TenantRentalHistory.RentIncreases.push(self.RentalIncreaseModel);
+                }
             }
         }
         rapFactory.SaveTenantRentalHistoryInfo(rapGlobalFactory.CaseDetails.TenantPetitionInfo.TenantRentalHistory, self.custDetails.custID).then(function (response) {
@@ -90,12 +97,14 @@ var rapRentalHistoryController = ['$scope', '$modal', 'alertService', '$http', '
 
     self.AddAnotherRentIncrease = function (rentalIncrease) {
         if (rentalIncrease.bRentIncreaseContested == true) {
-            if (rentalIncrease.RentIncreaseNoticeDate == null || rentalIncrease.RentIncreaseEffectiveDate == null) {
-                self.Error = "Please enter the valid dates for the rent increased contested section";
-                $anchorScroll();
-                return;
+            if (rentalIncrease.bRentIncreaseNoticeGiven) {
+                if (rentalIncrease.RentIncreaseNoticeDate == null) {
+                    self.Error = "Please enter the valid dates for the rent increased contested section";
+                    $anchorScroll();
+                    return;
+                }
             }
-            if (rentalIncrease.RentIncreaseNoticeDate == null || rentalIncrease.RentIncreaseEffectiveDate == null) {
+            if (rentalIncrease.RentIncreaseEffectiveDate == null) {
                 self.Error = "Please enter the valid dates for the rent increased contested section";
                 $anchorScroll();
                 return;

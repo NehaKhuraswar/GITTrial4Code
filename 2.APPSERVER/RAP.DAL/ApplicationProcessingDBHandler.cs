@@ -2809,12 +2809,12 @@ namespace RAP.DAL
                 if (rentalHistoryRecord != null)
                 {
                     rentalHistoryRecord.PetitionID = rentalHistory.PetitionID;
-                    if (rentalHistory.MoveInDate != null)
+                    if (rentalHistory.MoveInDate != null && rentalHistory.MoveInDate.Year != 0 && rentalHistory.MoveInDate.Month != 0 && rentalHistory.MoveInDate.Day != 0)
                     {
                         rentalHistoryRecord.MoveInDate = new DateTime(rentalHistory.MoveInDate.Year, rentalHistory.MoveInDate.Month, rentalHistory.MoveInDate.Day);
                     }
                     rentalHistoryRecord.InitialRent = rentalHistory.InitialRent;
-                    if (rentalHistory.RAPNoticeGivenDate != null)
+                    if (rentalHistory.RAPNoticeGivenDate != null && rentalHistory.RAPNoticeGivenDate.Year != 0 && rentalHistory.RAPNoticeGivenDate.Month != 0 && rentalHistory.RAPNoticeGivenDate.Day != 0)
                     {
                         rentalHistoryRecord.RAPNoticeGivenDate = new DateTime(rentalHistory.RAPNoticeGivenDate.Year, rentalHistory.RAPNoticeGivenDate.Month, rentalHistory.RAPNoticeGivenDate.Day);
                     }
@@ -4514,8 +4514,11 @@ namespace RAP.DAL
                         rentIncrementDB.bRentIncreaseNoticeGiven = item.bRentIncreaseNoticeGiven;
                         if (item.bRentIncreaseNoticeGiven )
                         {
-                            rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
+                            if (item.RentIncreaseNoticeDate != null && item.RentIncreaseNoticeDate.Day != 0 && item.RentIncreaseNoticeDate.Year != 0 && item.RentIncreaseNoticeDate.Month != 0)
+                            {
+                                rentIncrementDB.RentIncreaseNoticeDate = new DateTime(item.RentIncreaseNoticeDate.Year,
                                 item.RentIncreaseNoticeDate.Month, item.RentIncreaseNoticeDate.Day);
+                            }
 
                         }
                         if (item.RentIncreaseEffectiveDate != null && item.RentIncreaseEffectiveDate.Day != 0 && item.RentIncreaseEffectiveDate.Year != 0 && item.RentIncreaseEffectiveDate.Month != 0)
