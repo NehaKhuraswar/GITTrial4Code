@@ -1901,8 +1901,8 @@ namespace RAP.DAL
             TenantAppealInfoM appealInfo = new TenantAppealInfoM();
             try
             {
-
-                var appealInfoDB = _dbContext.TenantAppealDetails.Where(x => x.CaseNumber == CaseNumber).FirstOrDefault();
+                var AppealID = _dbContext.CaseDetails.Where(x => x.CaseID == CaseNumber).Select(x => x.TenantAppealID).FirstOrDefault();
+                var appealInfoDB = _dbContext.TenantAppealDetails.Where(x => x.AppealID == AppealID).FirstOrDefault();
                 if (appealInfoDB == null)
                 {
                     result.result = appealInfo;
@@ -4063,8 +4063,10 @@ namespace RAP.DAL
                         _rangeOfUnits.Add(obj);
                     }
                 }
+
+                var TenantResponseID = _dbContext.CaseDetails.Where(x => x.CaseID == caseInfo.CaseID).Select(x => x.TenantResponseID).FirstOrDefault();
                 var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(
-                                                x => x.C_ID == caseInfo.C_ID
+                                                x => x.TenantResponseID == TenantResponseID
                                                 ).FirstOrDefault();
                 TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
                 if (TenantResponseInfoDB != null)
