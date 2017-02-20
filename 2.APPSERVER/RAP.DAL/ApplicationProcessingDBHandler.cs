@@ -4696,9 +4696,9 @@ namespace RAP.DAL
                     ResponseDB.IsSubmitted = true;
                     _dbContext.SubmitChanges();
                 }
-                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ResponseFiled, (int)StatusDefaults.StatusSubmitted);
+                _commondbHandler.PetitionFiledActivity(CaseInfoDB.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.ResponseFiled, (int)StatusDefaults.StatusSubmitted);
 
-                var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(caseInfo.CaseFileBy, caseInfo.C_ID, DocCategory.TenantResponse.ToString());
+                var updateDocumentResult = _commondbHandler.UpdateDocumentCaseInfo(caseInfo.CaseFileBy, CaseInfoDB.C_ID, DocCategory.TenantResponse.ToString());
                 if (updateDocumentResult.status.Status != StatusEnum.Success)
                 {
                     result.status = updateDocumentResult.status;
