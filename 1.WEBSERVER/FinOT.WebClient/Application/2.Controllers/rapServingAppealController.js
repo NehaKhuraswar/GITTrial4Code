@@ -36,7 +36,7 @@ var rapServingAppealController = ['$scope', '$q', '$modal', 'alertService', 'rap
 
 
     var _GetAppealServe = function (appealID) {
-        rapFactory.GetAppealServe(appealID).then(function (response) {
+        rapFactory.GetAppealServe(appealID, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
                 $anchorScroll();

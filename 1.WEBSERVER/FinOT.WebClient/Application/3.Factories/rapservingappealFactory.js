@@ -22,10 +22,10 @@ var rapservingappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax
             blockUI.stop();
         });
     }
-    var _GetAppealServe = function (AppealID) {
+    var _GetAppealServe = function (AppealID, custID) {
         blockUI.start();
 
-        var url = _routePrefix + '/getappealserve/' + AppealID;
+        var url = _routePrefix + '/getappealserve/' + AppealID + '/' + custID;
 
         return ajax.Get( url)
         .finally(function () {

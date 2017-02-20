@@ -313,97 +313,127 @@ namespace RAP.DAL
                     result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
                     return result;
                 }
-                var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.CaseID == CaseID).FirstOrDefault();
-                if (CaseDetailsDB == null)
-                {
-                    result.result = null;
-                    result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
-                    return result;
-                }
                 CaseInfoM caseInfo = new CaseInfoM();
-                caseInfo.C_ID = CaseDetailsDB.C_ID;
-                caseInfo.CaseID = CaseDetailsDB.CaseID;
-                //caseInfo.AppealDate = Convert.ToDateTime(CaseDetailsDB.AppealDate);
-
-                //if(CaseDetailsDB.TenantAppealID > 0)
-                //{
-                caseInfo.TenantAppealInfo = GetAppealApplicantInfo(caseInfo.CaseID, CustomerID).result;
-                var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
-                if (accdbResult.status.Status == StatusEnum.Success)
+                if (CaseID == null || CaseID == "null")
                 {
-                    if (accdbResult.result.ThirdPartyUser.UserID > 0)
+                    caseInfo.TenantAppealInfo = GetAppealApplicantInfo(CaseID, CustomerID).result;
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
                     {
-                        caseInfo.TenantAppealInfo.bThirdPartyRepresentation = true;
-                    }
-                    else
-                    {
-                        caseInfo.TenantAppealInfo.bThirdPartyRepresentation = false;
-                    }
-                    caseInfo.TenantAppealInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                    caseInfo.TenantAppealInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
-                    caseInfo.TenantAppealInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
-                }
-                //}
-                //else
-                //{
-                //    caseInfo.TenantAppealInfo.ApplicantUserInfo = caseInfo.TenantPetitionInfo.ApplicantUserInfo;
-                //    caseInfo.TenantAppealInfo.AppealPropertyUserInfo = caseInfo.TenantAppealInfo.ApplicantUserInfo;
-                //}
-                AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
-                if (accDBHandler != null && CaseDetailsDB.CityAnalystUserID != null)
-                {
-                    caseInfo.CityAnalyst = accDBHandler.GetCityUser((int)CaseDetailsDB.CityAnalystUserID).result;
-                }
-
-                caseInfo.PetitionCategoryID = (int)CaseDetailsDB.PetitionCategoryID;
-
-                if (caseInfo.PetitionCategoryID == 1)
-                {
-                    var PetitionDetailsDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == CaseDetailsDB.PetitionID).FirstOrDefault();
-
-                    tenantPetitionResult = GetCaseTenantApplicationInfo((int)PetitionDetailsDB.TenantPetitionID);
-                    if (tenantPetitionResult.status.Status != StatusEnum.Success)
-                        return result;
-
-
-                    GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
-                    if (GroundsResult != null)
-                    {
-                        tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
-                        tenantPetitionResult.status = GroundsResult.status;
-                        if (GroundsResult.status.Status != StatusEnum.Success)
-                            return result;
-                    }
-
-                    RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
-                    if (RentalHistoryResult != null)
-                    {
-                        tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
-                        tenantPetitionResult.status = RentalHistoryResult.status;
-                        if (RentalHistoryResult.status.Status != StatusEnum.Success)
-                            return result;
-                    }
-
-                    LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
-                    if (LostServicesResult != null)
-                    {
-                        tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
-                        tenantPetitionResult.status = LostServicesResult.status;
-                        if (LostServicesResult.status.Status != StatusEnum.Success)
-                            return result;
-                    }
-                    caseInfo.TenantPetitionInfo = tenantPetitionResult.result;
-
-                }
-                else if (caseInfo.PetitionCategoryID == 2)
-                {
-                    var PetitionDetailsDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == CaseDetailsDB.PetitionID).FirstOrDefault();
-                    if (PetitionDetailsDB != null)
-                    {
-                        var OwnerPetitionInfo = GetOwnerPetition(Convert.ToInt32(PetitionDetailsDB.OwnerPetitionID));
-                        if (OwnerPetitionInfo.status.Status == StatusEnum.Success)
+                        if (accdbResult.result.ThirdPartyUser.UserID > 0)
                         {
-                            caseInfo.OwnerPetitionInfo = OwnerPetitionInfo.result;
+                            caseInfo.TenantAppealInfo.bThirdPartyRepresentation = true;
+                        }
+                        else
+                        {
+                            caseInfo.TenantAppealInfo.bThirdPartyRepresentation = false;
+                        }
+                        caseInfo.TenantAppealInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                        caseInfo.TenantAppealInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                        caseInfo.TenantAppealInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+
+                        if(caseInfo.TenantAppealInfo.AppealID != 0)
+                        {
+                            caseInfo.CaseID = _dbContext.TenantAppealDetails.Where(x => x.AppealID == caseInfo.TenantAppealInfo.AppealID).Select(x => x.CaseNumber).FirstOrDefault();
+                            //caseInfo.TenantAppealInfo.AppealCategoryID = Convert.ToInt32(_dbContext.TenantAppealDetails.Where(x => x.AppealID == caseInfo.TenantAppealInfo.AppealID).Select(x => x.AppealCategoryID).FirstOrDefault());
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.CaseID == CaseID).FirstOrDefault();
+                    if (CaseDetailsDB == null)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    
+                    caseInfo.C_ID = CaseDetailsDB.C_ID;
+                    caseInfo.CaseID = CaseDetailsDB.CaseID;
+                    //caseInfo.AppealDate = Convert.ToDateTime(CaseDetailsDB.AppealDate);
+
+                    //if(CaseDetailsDB.TenantAppealID > 0)
+                    //{
+                    caseInfo.TenantAppealInfo = GetAppealApplicantInfo(caseInfo.CaseID, CustomerID).result;
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
+                    {
+                        if (accdbResult.result.ThirdPartyUser.UserID > 0)
+                        {
+                            caseInfo.TenantAppealInfo.bThirdPartyRepresentation = true;
+                        }
+                        else
+                        {
+                            caseInfo.TenantAppealInfo.bThirdPartyRepresentation = false;
+                        }
+                        caseInfo.TenantAppealInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                        caseInfo.TenantAppealInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                        caseInfo.TenantAppealInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                    }
+                    //}
+                    //else
+                    //{
+                    //    caseInfo.TenantAppealInfo.ApplicantUserInfo = caseInfo.TenantPetitionInfo.ApplicantUserInfo;
+                    //    caseInfo.TenantAppealInfo.AppealPropertyUserInfo = caseInfo.TenantAppealInfo.ApplicantUserInfo;
+                    //}
+                    AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
+                    if (accDBHandler != null && CaseDetailsDB.CityAnalystUserID != null)
+                    {
+                        caseInfo.CityAnalyst = accDBHandler.GetCityUser((int)CaseDetailsDB.CityAnalystUserID).result;
+                    }
+
+                    caseInfo.PetitionCategoryID = (int)CaseDetailsDB.PetitionCategoryID;
+
+                    if (caseInfo.PetitionCategoryID == 1)
+                    {
+                        var PetitionDetailsDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == CaseDetailsDB.PetitionID).FirstOrDefault();
+
+                        tenantPetitionResult = GetCaseTenantApplicationInfo((int)PetitionDetailsDB.TenantPetitionID);
+                        if (tenantPetitionResult.status.Status != StatusEnum.Success)
+                            return result;
+
+
+                        GroundsResult = GetPetitionGroundInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
+                        if (GroundsResult != null)
+                        {
+                            tenantPetitionResult.result.PetitionGrounds = GroundsResult.result;
+                            tenantPetitionResult.status = GroundsResult.status;
+                            if (GroundsResult.status.Status != StatusEnum.Success)
+                                return result;
+                        }
+
+                        RentalHistoryResult = GetRentalHistoryInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
+                        if (RentalHistoryResult != null)
+                        {
+                            tenantPetitionResult.result.TenantRentalHistory = RentalHistoryResult.result;
+                            tenantPetitionResult.status = RentalHistoryResult.status;
+                            if (RentalHistoryResult.status.Status != StatusEnum.Success)
+                                return result;
+                        }
+
+                        LostServicesResult = GetTenantLostServiceInfo((int)tenantPetitionResult.result.PetitionID, CustomerID);
+                        if (LostServicesResult != null)
+                        {
+                            tenantPetitionResult.result.LostServicesPage = LostServicesResult.result;
+                            tenantPetitionResult.status = LostServicesResult.status;
+                            if (LostServicesResult.status.Status != StatusEnum.Success)
+                                return result;
+                        }
+                        caseInfo.TenantPetitionInfo = tenantPetitionResult.result;
+
+                    }
+                    else if (caseInfo.PetitionCategoryID == 2)
+                    {
+                        var PetitionDetailsDB = _dbContext.PetitionDetails.Where(x => x.PetitionID == CaseDetailsDB.PetitionID).FirstOrDefault();
+                        if (PetitionDetailsDB != null)
+                        {
+                            var OwnerPetitionInfo = GetOwnerPetition(Convert.ToInt32(PetitionDetailsDB.OwnerPetitionID));
+                            if (OwnerPetitionInfo.status.Status == StatusEnum.Success)
+                            {
+                                caseInfo.OwnerPetitionInfo = OwnerPetitionInfo.result;
+                            }
                         }
                     }
                 }
@@ -1810,25 +1840,45 @@ namespace RAP.DAL
             TenantAppealInfoM appealInfo = new TenantAppealInfoM();
             try
             {
-
-                var appealInfoDB = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == CustomerID && x.IsSubmitted == false && x.CaseNumber == caseID).FirstOrDefault();
-                if (appealInfoDB == null)
+                if (caseID == null || caseID == "null")
                 {
-                    result.result = appealInfo;
-                    result.status = new OperationStatus() { Status = StatusEnum.Success };
-                    return result;
+                    var appealInfoDB = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == CustomerID && x.IsSubmitted == false).FirstOrDefault();
+                    if (appealInfoDB == null)
+                    {
+                        result.result = appealInfo;
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                        return result;
+                    }
+                    else
+                    {
+                        appealInfo.AppealID = appealInfoDB.AppealID;
+                        appealInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(appealInfoDB.ApplicantUserID)).result;
+                        appealInfo.bThirdPartyRepresentation = Convert.ToBoolean(appealInfoDB.bThirdPartyRepresentation);
+                        if (appealInfoDB.bThirdPartyRepresentation == true)
+                        {
+                            appealInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)appealInfoDB.ThirdPartyUserID).result;
+                        }
+                        appealInfo.AppealPropertyUserInfo = _commondbHandler.GetUserInfo((int)appealInfoDB.PropertyUserID).result;
+                        appealInfo.AppealDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(appealInfoDB.AppealDate));
+                    }
                 }
                 else
                 {
-                    appealInfo.AppealID = appealInfoDB.AppealID;
-                    appealInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(appealInfoDB.ApplicantUserID)).result;
-                    appealInfo.bThirdPartyRepresentation = Convert.ToBoolean(appealInfoDB.bThirdPartyRepresentation);
-                    if (appealInfoDB.bThirdPartyRepresentation == true)
+
+                    var applicantUserID = _dbAccount.CustomerDetails.Where(x => x.CustomerID == CustomerID).Select(x => x.UserID).FirstOrDefault();
+                    var appealInfoDB = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == CustomerID && x.IsSubmitted == false).FirstOrDefault();
+                    if (appealInfoDB == null)
                     {
-                        appealInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)appealInfoDB.ThirdPartyUserID).result;
+                        appealInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(applicantUserID)).result;
+                        result.result = appealInfo;
+                        result.status = new OperationStatus() { Status = StatusEnum.Success };
+                        return result;
                     }
-                    appealInfo.AppealPropertyUserInfo = _commondbHandler.GetUserInfo((int)appealInfoDB.PropertyUserID).result;
-                    appealInfo.AppealDate = _commondbHandler.GetDateFromDatabase(Convert.ToDateTime(appealInfoDB.AppealDate));
+                    else
+                    {
+                        appealInfo.AppealID = appealInfoDB.AppealID;
+                        appealInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo(Convert.ToInt32(applicantUserID)).result;
+                    }
                 }
 
                 result.result = appealInfo;
@@ -1960,13 +2010,17 @@ namespace RAP.DAL
             return result;
 
         }
-        public ReturnResult<CaseInfoM> GetAppealServe(int AppealID)
+        public ReturnResult<CaseInfoM> GetAppealServe(int AppealID, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             CaseInfoM caseInfo = new CaseInfoM();
             ServeAppealM appealServe = new ServeAppealM();
             try
             {
+                if(AppealID == 0)
+                {
+                    AppealID = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == CustomerID && x.IsSubmitted == false).Select(x => x.AppealID).FirstOrDefault();
+                }
                 var appealServeDB = _dbContext.ServeAppeals.Where(x => x.AppealID == AppealID).FirstOrDefault();
                 if (appealServeDB != null)
                 {
@@ -2030,7 +2084,7 @@ namespace RAP.DAL
                         AppealGroundInfo.Add(_appealGround);
                     }
                 }
-                var appealInfoDb = _dbContext.TenantAppealDetails.Where(x => x.CaseNumber == CaseNumber && x.AppealFiledBy == AppealFiledBy
+                var appealInfoDb = _dbContext.TenantAppealDetails.Where(x=>x.AppealFiledBy == AppealFiledBy
                                                                         && x.IsSubmitted == false).FirstOrDefault();
                 if (appealInfoDb != null)
                 {
@@ -2133,7 +2187,7 @@ namespace RAP.DAL
                 if (tenantAppealResult.status.Status != StatusEnum.Success)
                     return tenantAppealResult;
 
-                ServeAppealResult.result = GetAppealServe((int)tenantAppealResult.result.AppealID).result.TenantAppealInfo.serveAppeal;
+                ServeAppealResult.result = GetAppealServe((int)tenantAppealResult.result.AppealID, AppealFiledBy).result.TenantAppealInfo.serveAppeal;
                 if (ServeAppealResult != null)
                 {
                     tenantAppealResult.result.serveAppeal = ServeAppealResult.result;
@@ -2153,7 +2207,7 @@ namespace RAP.DAL
             }
         }
         //Get Review Tenant Appeal
-        public ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID)
+        public ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             ReturnResult<TenantAppealInfoM> tenantAppealResult = new ReturnResult<TenantAppealInfoM>();
@@ -2163,6 +2217,12 @@ namespace RAP.DAL
             {
                 //var CaseNumber = _dbContext.CaseDetails.Where(x => x.C_ID == C_ID).Select(x => x.CaseID).First();
                 //caseinfo.CaseID = CaseNumber;
+                if (AppealID == 0)
+                {
+                    AppealID = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == CustomerID && x.IsSubmitted == false).Select(x => x.AppealID).FirstOrDefault();
+                    
+                }
+                caseinfo.CaseID = _dbContext.TenantAppealDetails.Where(x => x.AppealID == AppealID).Select(x => x.CaseNumber).FirstOrDefault();
                 tenantAppealResult = GetAppealApplicantInfoForReview(AppealID);
                 if (tenantAppealResult.status.Status != StatusEnum.Success)
                     return result;
@@ -2171,7 +2231,7 @@ namespace RAP.DAL
                 if (tenantAppealResult.status.Status != StatusEnum.Success)
                     return result;
 
-                ServeAppealResult.result = GetAppealServe(AppealID).result.TenantAppealInfo.serveAppeal;
+                ServeAppealResult.result = GetAppealServe(AppealID, 0).result.TenantAppealInfo.serveAppeal;
                 if (ServeAppealResult != null)
                 {
                     tenantAppealResult.result.serveAppeal = ServeAppealResult.result;
@@ -2210,7 +2270,7 @@ namespace RAP.DAL
                 if (tenantAppealResult.status.Status != StatusEnum.Success)
                     return result;
 
-                ServeAppealResult.result = GetAppealServe((int)tenantAppealResult.result.AppealID).result.TenantAppealInfo.serveAppeal;
+                ServeAppealResult.result = GetAppealServe((int)tenantAppealResult.result.AppealID,0).result.TenantAppealInfo.serveAppeal;
                 if (ServeAppealResult != null)
                 {
                     tenantAppealResult.result.serveAppeal = ServeAppealResult.result;
@@ -2252,7 +2312,7 @@ namespace RAP.DAL
                     _dbContext.SubmitChanges();
                 }
 
-                _commondbHandler.PetitionFiledActivity(caseInfo.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.AppealFiled, (int)StatusDefaults.StatusSubmitted);
+                _commondbHandler.PetitionFiledActivity(CaseInfoDB.C_ID, caseInfo.CaseFileBy, (int)ActivityDefaults.AppealFiled, (int)StatusDefaults.StatusSubmitted);
 
                 var AppealDB = _dbContext.TenantAppealDetails.Where(x => x.AppealID == caseInfo.TenantAppealInfo.AppealID).FirstOrDefault();
                 if (AppealDB != null)
@@ -3178,54 +3238,58 @@ namespace RAP.DAL
             {
                 CommonDBHandler _dbCommon = new CommonDBHandler();
 
-                var appealExistsDB = _dbContext.TenantAppealDetails.Where(x => x.CaseNumber == caseInfo.CaseID && x.AppealFiledBy == CustomerID).FirstOrDefault();
-                if (appealExistsDB != null)
+                if (caseInfo.TenantAppealInfo.AppealID != 0)
                 {
-                    tenantAppeal.AppealID = appealExistsDB.AppealID;
-                    var applicantUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantAppealInfo.ApplicantUserInfo);
-                    if (applicantUserResult.status.Status != StatusEnum.Success)
+                    var appealExistsDB = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == CustomerID && x.AppealID == caseInfo.TenantAppealInfo.AppealID).FirstOrDefault();
+                    if (appealExistsDB != null)
                     {
-                        result.status = applicantUserResult.status;
-                        return result;
-                    }
-                    appealExistsDB.ApplicantUserID = applicantUserResult.result.UserID;
-
-                    var propertyUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantAppealInfo.AppealPropertyUserInfo);
-                    if (applicantUserResult.status.Status != StatusEnum.Success)
-                    {
-                        result.status = propertyUserResult.status;
-                        return result;
-                    }
-                    appealExistsDB.PropertyUserID = propertyUserResult.result.UserID;
-                    if (caseInfo.bCaseFiledByThirdParty == false)
-                    {
-                        if (caseInfo.TenantAppealInfo.bThirdPartyRepresentation)
+                        tenantAppeal.AppealID = appealExistsDB.AppealID;
+                        var applicantUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantAppealInfo.ApplicantUserInfo);
+                        if (applicantUserResult.status.Status != StatusEnum.Success)
                         {
-                            var thirdpartyUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantAppealInfo.ThirdPartyInfo);
-                            if (thirdpartyUserResult.status.Status != StatusEnum.Success)
-                            {
-                                result.status = thirdpartyUserResult.status;
-                                return result;
-                            }
-                            var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = CustomerID, ThirdPartyUser = thirdpartyUserResult.result, MailNotification = caseInfo.TenantAppealInfo.ThirdPartyMailNotification, EmailNotification = caseInfo.TenantAppealInfo.ThirdPartyEmailNotification });
-                            if (saveThirdPartyResult.status.Status != StatusEnum.Success)
-                            {
-                                result.status = saveThirdPartyResult.status;
-                                return result;
-                            }
-                            appealExistsDB.ThirdPartyUserID = thirdpartyUserResult.result.UserID;
+                            result.status = applicantUserResult.status;
+                            return result;
                         }
-                    }
-                    appealExistsDB.AppealFiledBy = CustomerID;
-                    appealExistsDB.CaseNumber = caseInfo.CaseID;
-                    appealExistsDB.AppealCategoryID = caseInfo.TenantAppealInfo.AppealCategoryID;
-                    appealExistsDB.IsSubmitted = false;
-                    appealExistsDB.CreatedDate = DateTime.Now;
-                    if (caseInfo.TenantAppealInfo.AppealDate != null && caseInfo.TenantAppealInfo.AppealDate.Year != 0 && caseInfo.TenantAppealInfo.AppealDate.Month != 0 && caseInfo.TenantAppealInfo.AppealDate.Day != 0)
-                    {
-                        appealExistsDB.AppealDate = new DateTime(caseInfo.TenantAppealInfo.AppealDate.Year, caseInfo.TenantAppealInfo.AppealDate.Month, caseInfo.TenantAppealInfo.AppealDate.Day);
-                    }
-                    _dbContext.SubmitChanges();
+                        appealExistsDB.ApplicantUserID = applicantUserResult.result.UserID;
+
+                        var propertyUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantAppealInfo.AppealPropertyUserInfo);
+                        if (applicantUserResult.status.Status != StatusEnum.Success)
+                        {
+                            result.status = propertyUserResult.status;
+                            return result;
+                        }
+                        appealExistsDB.PropertyUserID = propertyUserResult.result.UserID;
+                        if (caseInfo.bCaseFiledByThirdParty == false)
+                        {
+                            if (caseInfo.TenantAppealInfo.bThirdPartyRepresentation)
+                            {
+                                var thirdpartyUserResult = _commondbHandler.SaveUserInfo(caseInfo.TenantAppealInfo.ThirdPartyInfo);
+                                if (thirdpartyUserResult.status.Status != StatusEnum.Success)
+                                {
+                                    result.status = thirdpartyUserResult.status;
+                                    return result;
+                                }
+                                var saveThirdPartyResult = _accountdbHandler.SaveOrUpdateThirdPartyInfo(new ThirdPartyInfoM() { CustomerID = CustomerID, ThirdPartyUser = thirdpartyUserResult.result, MailNotification = caseInfo.TenantAppealInfo.ThirdPartyMailNotification, EmailNotification = caseInfo.TenantAppealInfo.ThirdPartyEmailNotification });
+                                if (saveThirdPartyResult.status.Status != StatusEnum.Success)
+                                {
+                                    result.status = saveThirdPartyResult.status;
+                                    return result;
+                                }
+                                appealExistsDB.ThirdPartyUserID = thirdpartyUserResult.result.UserID;
+                            }
+                        }
+                        appealExistsDB.AppealFiledBy = CustomerID;
+                        appealExistsDB.CaseNumber = caseInfo.CaseID;
+                        appealExistsDB.AppealCategoryID = caseInfo.TenantAppealInfo.AppealCategoryID;
+                        appealExistsDB.IsSubmitted = false;
+                        appealExistsDB.CreatedDate = DateTime.Now;
+                        if (caseInfo.TenantAppealInfo.AppealDate != null && caseInfo.TenantAppealInfo.AppealDate.Year != 0 && caseInfo.TenantAppealInfo.AppealDate.Month != 0 && caseInfo.TenantAppealInfo.AppealDate.Day != 0)
+                        {
+                            appealExistsDB.AppealDate = new DateTime(caseInfo.TenantAppealInfo.AppealDate.Year, caseInfo.TenantAppealInfo.AppealDate.Month, caseInfo.TenantAppealInfo.AppealDate.Day);
+                        }
+                        _dbContext.SubmitChanges();
+                }
+                
                 }
                 else
                 {
@@ -3319,6 +3383,12 @@ namespace RAP.DAL
             ReturnResult<TenantAppealInfoM> result = new ReturnResult<TenantAppealInfoM>();
             try
             {
+                if (tenantAppealInfo.AppealID == 0)
+                {
+                    tenantAppealInfo.AppealID = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == tenantAppealInfo.AppealFiledBy
+                                                                            && x.IsSubmitted == false).Select(x=>x.AppealID).FirstOrDefault();                    
+                }
+                
 
 
                 var groundsDb = from r in _dbContext.TenantAppealGroundInfos
@@ -3418,7 +3488,10 @@ namespace RAP.DAL
                     }
                 }
 
-
+                if(tenantAppealInfo.AppealID == 0)
+                {
+                    tenantAppealInfo.AppealID = _dbContext.TenantAppealDetails.Where(x => x.AppealFiledBy == CustomerID && x.IsSubmitted == false).Select(x => x.AppealID).FirstOrDefault();
+                }
                 ServeAppeal appealDB = _dbContext.ServeAppeals.Where(i => i.AppealID == tenantAppealInfo.AppealID).FirstOrDefault();
                 if (appealDB != null)
                 {
@@ -3452,7 +3525,7 @@ namespace RAP.DAL
                 AddAnotherOpposingParty(tenantAppealInfo);
 
                 var PageStatus = _dbContext.AppealPageSubmissionStatus
-                                            .Where(x => x.CustomerID == tenantAppealInfo.AppealFiledBy).FirstOrDefault();
+                                            .Where(x => x.CustomerID == CustomerID).FirstOrDefault();
                 if (PageStatus != null)
                 {
                     PageStatus.ServingAppeal = true;

@@ -16,9 +16,9 @@ var rapappellantsinfoFactory = ['blockUI', 'ajaxService', function (blockUI, aja
       var _GetCaseInfoWithModel = function (caseid, custID) {
           blockUI.start();
 
-          var url = 'api/applicationprocessing' + '/getcaseinfo';
+          var url = 'api/applicationprocessing' + '/getcaseinfo' + '/' + caseid;
 
-          if (!(caseid == null || caseid == undefined)) { url = url + '/' + caseid; }
+          //if (!(caseid == null || caseid == undefined)) { url = url + '/' + caseid; }
           if (!(custID == null || custID == undefined)) { url = url + '/' + custID; }
 
           return ajax.Get(url)

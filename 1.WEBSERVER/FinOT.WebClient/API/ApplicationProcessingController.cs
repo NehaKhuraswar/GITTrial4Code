@@ -90,9 +90,9 @@ namespace RAP.WebClient
         }
 
         [AllowAnonymous]
-        [Route("getappealserve/{AppealID}")]
+        [Route("getappealserve/{AppealID}/{CustomerID}")]
         [HttpGet]
-        public HttpResponseMessage GetAppealServe(string AppealID)
+        public HttpResponseMessage GetAppealServe(string AppealID, string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -100,7 +100,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "getappealserve/" + AppealID;
+                string requestUri = _requestURI + "getappealserve/" + AppealID + "/" + CustomerID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {
@@ -790,9 +790,9 @@ namespace RAP.WebClient
             }
         }
         [AllowAnonymous]
-        [Route("GetTenantAppealInfoForReview/{AppealID}")]
+        [Route("GetTenantAppealInfoForReview/{AppealID}/{CustomerID}")]
         [HttpGet]
-        public HttpResponseMessage GetTenantAppealInfoForReview(string AppealID)
+        public HttpResponseMessage GetTenantAppealInfoForReview(string AppealID, string CustomerID)
         {
             HttpResponseMessage responseMessage;
             try
@@ -800,7 +800,7 @@ namespace RAP.WebClient
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_baseURL);
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                string requestUri = _requestURI + "GetTenantAppealInfoForReview/" + AppealID;
+                string requestUri = _requestURI + "GetTenantAppealInfoForReview/" + AppealID + '/' + CustomerID;
                 responseMessage = client.GetAsync(requestUri).Result;
                 if (responseMessage.IsSuccessStatusCode)
                 {

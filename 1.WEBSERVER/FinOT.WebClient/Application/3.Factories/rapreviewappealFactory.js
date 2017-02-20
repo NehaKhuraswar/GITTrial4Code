@@ -14,11 +14,12 @@ var rapreviewappealFactory = ['blockUI', 'ajaxService', function (blockUI, ajax)
               blockUI.stop();
           });
       }
-      var _GetTenantAppealInfoForReview = function (AppealID) {
+      var _GetTenantAppealInfoForReview = function (AppealID, custID) {
           blockUI.start();
 
           var url = 'api/applicationprocessing' + '/GetTenantAppealInfoForReview';
           if (!(AppealID == null || AppealID == undefined)) { url = url + '/' + AppealID; }
+          if (!(custID == null || custID == undefined)) { url = url + '/' + custID; }
 
           return ajax.Get(url)
           .finally(function () {

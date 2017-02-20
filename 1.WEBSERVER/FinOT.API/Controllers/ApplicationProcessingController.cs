@@ -225,9 +225,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("getappealserve/{AppealID:int}")]
+        [Route("getappealserve/{AppealID:int}/{CustomerID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetAppealServe( int AppealID)
+        public HttpResponseMessage GetAppealServe(int AppealID, int CustomerID)
         {
 
             //Appl accService = new AccountManagementService();
@@ -237,7 +237,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetAppealServe(AppealID);
+                result = _service.GetAppealServe(AppealID,  CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;
@@ -1311,9 +1311,9 @@ namespace RAP.API.Controllers
         }
 
         [AllowAnonymous]
-        [Route("GetTenantAppealInfoForReview/{AppealID:int}")]
+        [Route("GetTenantAppealInfoForReview/{AppealID:int}/{CustomerID:int}")]
         [HttpGet]
-        public HttpResponseMessage GetTenantAppealInfoForReview(int AppealID)
+        public HttpResponseMessage GetTenantAppealInfoForReview(int AppealID, int CustomerID)
         {
             ExtractClaimDetails();
 
@@ -1324,7 +1324,7 @@ namespace RAP.API.Controllers
             try
             {
 
-                result = _service.GetTenantAppealInfoForReview(AppealID);
+                result = _service.GetTenantAppealInfoForReview(AppealID, CustomerID);
                 if (result.status.Status == StatusEnum.Success)
                 {
                     transaction.data = result.result;

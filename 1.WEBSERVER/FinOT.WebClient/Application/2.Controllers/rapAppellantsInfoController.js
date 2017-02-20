@@ -32,6 +32,10 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     }
     _GetStateList();
     self.GetCaseInfoWithModel = function (CaseID) {
+        if (rapGlobalFactory.CaseDetails.CaseID == CaseID)
+        {
+            return;
+        }
         self.AppealCategoryID = rapGlobalFactory.CaseDetails.PetitionCategoryID;
         rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
             if (!alert.checkForResponse(response)) {
@@ -57,16 +61,29 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
                 }
                 self.TenantAppealInfo.AppealCategoryID = self.AppealCategoryID;
             }
+            else {
+                if (self.caseinfo.PetitionCategoryID == 1) {
+                    self.TenantAppealInfo.AppealPropertyUserInfo = angular.copy(rapGlobalFactory.CaseDetails.TenantPetitionInfo.ApplicantUserInfo);
+                }
+                else if (self.caseinfo.PetitionCategoryID == 2) {
+                    self.TenantAppealInfo.AppealPropertyUserInfo = angular.copy(rapGlobalFactory.CaseDetails.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo);
+                }
+                self.TenantAppealInfo.AppealCategoryID = self.AppealCategoryID;
+            }
             if (self.caseinfo.bCaseFiledByThirdParty == true)
             {
 
             }
             rapGlobalFactory.CaseDetails.PetitionCategoryID = self.AppealCategoryID;
-            self.bShowApplicantInfo = true;
+            if (rapGlobalFactory.CaseDetails.CaseID != null) {
+                self.CaseID = rapGlobalFactory.CaseDetails.CaseID;
+                self.bShowApplicantInfo = true;
+            }
 
 
             });
-        }
+    }
+    self.GetCaseInfoWithModel(null);
     var _CheckNotification = function () {
         var bInValid = false;     
         if (self.caseinfo.bCaseFiledByThirdParty == false && self.bEditRepresentative == true) {

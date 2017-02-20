@@ -8,11 +8,12 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
     $scope.model.stepNo = 7;
     
     var _GetTenantAppealInfoForReview = function (AppealID) {
-        rapFactory.GetTenantAppealInfoForReview(AppealID).then(function (response) {
+        rapFactory.GetTenantAppealInfoForReview(AppealID, self.custDetails.custID).then(function (response) {
             if (!alert.checkResponse(response)) {
                 return;
             }
             self.caseinfo.TenantAppealInfo = response.data.TenantAppealInfo;
+            self.caseinfo.CaseID = response.data.CaseID;
         });
     }
     _GetTenantAppealInfoForReview(self.caseinfo.TenantAppealInfo.AppealID);

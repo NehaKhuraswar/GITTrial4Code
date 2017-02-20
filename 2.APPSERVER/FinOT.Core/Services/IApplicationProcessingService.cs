@@ -28,7 +28,7 @@ namespace RAP.Core.Services
         ReturnResult<TenantPetitionInfoM> GetTenantReviewInfo(int CustomerID);
         ReturnResult<CaseInfoM> GetPetitionViewInfo(int C_ID);
         ReturnResult<CaseInfoM> GetTenantAppealInfoForView(int C_ID);
-        ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID);
+        ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID, int CustomerID);
         ReturnResult<CaseInfoM> GetTenantResponseViewInfo(int C_ID);
         ReturnResult<TenantRentalHistoryM> GetRentalHistoryInfo(int PetitionId, int CustomerID);
         ReturnResult<List<CaseInfoM>> GetCasesNoAnalyst(int UserID);
@@ -43,7 +43,7 @@ namespace RAP.Core.Services
         ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID, int CustomerID);
         ReturnResult<List<PetitionGroundM>> GetPetitionGroundInfo(int petitionID, int CustomerID);
         ReturnResult<List<AppealGroundM>> GetAppealGroundInfo(string CaseNumber, int AppealFiledBy);
-        ReturnResult<CaseInfoM> GetAppealServe(int AppealID);
+        ReturnResult<CaseInfoM> GetAppealServe(int AppealID, int CustomerID);
         ReturnResult<TenantAppealInfoM> SaveTenantAppealInfo(CaseInfoM caseInfo, int CustomerID);
         ReturnResult<TenantAppealInfoM> SaveAppealGroundInfo(TenantAppealInfoM tenantAppealInfo);
         ReturnResult<bool> AddAnotherOpposingParty(TenantAppealInfoM tenantAppealInfo);

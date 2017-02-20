@@ -122,12 +122,12 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<CaseInfoM> GetAppealServe(int AppealID)
+        public ReturnResult<CaseInfoM> GetAppealServe(int AppealID, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                result = _dbHandler.GetAppealServe(AppealID);
+                result = _dbHandler.GetAppealServe(AppealID,  CustomerID);
                 return result;
             }
             catch (Exception ex)
@@ -579,12 +579,12 @@ namespace RAP.Business.Implementation
                 return result;
             }
         }
-        public ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID)
+        public ReturnResult<CaseInfoM> GetTenantAppealInfoForReview(int AppealID, int CustomerID)
         {
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-                result = _dbHandler.GetTenantAppealInfoForReview(AppealID);
+                result = _dbHandler.GetTenantAppealInfoForReview(AppealID, CustomerID);
                 return result;
             }
             catch (Exception ex)
