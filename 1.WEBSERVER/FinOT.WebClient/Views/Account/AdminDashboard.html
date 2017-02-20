@@ -16,10 +16,14 @@
                     <li class="active">Account management</li>
                 </ul>
             </div>
-
+            
             <div class="application-form-wrapper">
                 <div class="application-step step-1">
-
+                    <div class="alert alert-error" ng-show="Ctrl.Hide==true">
+                    </div>
+                    <div class="alert alert-error" ng-show="Ctrl.Error!=''">
+                        <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                    </div>
                     <div class="step-content step1 mar-bottom-40" ng-hide="Ctrl.CityUser.AccountType.AccountTypeID != 2">
                         <div class="subhead no-top-margin"><h4>Actions</h4></div>
 
