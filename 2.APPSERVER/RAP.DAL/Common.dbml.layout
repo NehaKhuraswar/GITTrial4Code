@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 14.25" name="Common">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 15.5" name="Common">
   <DataContextMoniker Name="/CommonDataContext" />
   <nestedChildShapes>
     <classShape Id="9e4aacf8-98bd-411e-8721-006a8b407229" absoluteBounds="4.125, 1, 2, 1.3862939453125">
@@ -64,7 +64,7 @@
         <classShapeMoniker Id="1156d67f-1c50-4dc6-9cdd-b726371e0aac" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3 : 7.3670068359375); (3 : 13.6050439453125); (4.125 : 13.6050439453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.125 : 7.3670068359375); (3.125 : 13.5056469726562); (4.125 : 13.5056469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CommonDataContext/Document/Document_MailNotificationAttachment" />
       <nodes>
         <classShapeMoniker Id="5fa5efcb-6c2b-474d-8434-03c63148e02a" />
@@ -77,7 +77,7 @@
         <elementListCompartment Id="da09436b-f517-4d6d-bd3c-4dc4e6bdce4f" absoluteBounds="7.39, 9.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.375 : 9.47199625651042); (3.08333333333333 : 9.47199625651042 : JumpStart); (2.91666666666667 : 9.47199625651042 : JumpEnd); (1.5312475 : 9.47199625651042); (1.5312475 : 11.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.375 : 9.47199625651042); (3.20833333333333 : 9.47199625651042 : JumpStart); (3.04166666666667 : 9.47199625651042 : JumpEnd); (2.45833333333333 : 9.47199625651042 : JumpStart); (2.29166666666667 : 9.47199625651042 : JumpEnd); (1.5312475 : 9.47199625651042); (1.5312475 : 11.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CommonDataContext/CustomEmailNotification/CustomEmailNotification_CustomEmailNotificationAttachment" />
       <nodes>
         <classShapeMoniker Id="79e3c880-3203-40e0-acb1-e0d4d11f9c2c" />
@@ -90,12 +90,18 @@
         <elementListCompartment Id="bf9540cd-53f7-422d-b0cb-277cc52a92f0" absoluteBounds="5.64, 3.96, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.625 : 5.07774983723958); (8.875 : 5.07774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.625 : 5.07774983723958); (8.875 : 5.07774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CommonDataContext/UserInfo/UserInfo_ParcelAddress" />
       <nodes>
         <classShapeMoniker Id="690e62e3-70f0-437d-8f8d-062990a01208" />
         <classShapeMoniker Id="c9e5cddc-2289-4765-9b08-dfee17208044" />
       </nodes>
     </associationConnector>
+    <classShape Id="ad183b3d-7e2e-4d79-bbaf-2a563ce4303b" absoluteBounds="1, 13.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CommonDataContext/WebCenterReferenceTypeMapping" />
+      <nestedChildShapes>
+        <elementListCompartment Id="470aa2c8-e091-4c52-8926-3eae4418f563" absoluteBounds="1.0150000000000001, 14.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

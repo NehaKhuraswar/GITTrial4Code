@@ -133,6 +133,21 @@ namespace RAP.Business.Implementation
                return result;
            }
        }
+       public ReturnResult<int> GetDocReferenceID(DocumentM doc)
+       {
+           ReturnResult<int> result = new ReturnResult<int>();
+           try
+           {
+               result = _dbHandler.GetDocReferenceID(doc);
+               return result;
+           }
+           catch (Exception ex)
+           {
+               result.status = _eHandler.HandleException(ex);
+               LogError(result.status);
+               return result;
+           }
+       }
        public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID)
        {
            ReturnResult<CustomEmailM> result = new ReturnResult<CustomEmailM>();

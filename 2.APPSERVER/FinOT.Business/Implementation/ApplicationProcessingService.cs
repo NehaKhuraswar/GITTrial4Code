@@ -1233,8 +1233,8 @@ namespace RAP.Business.Implementation
                     return result;
                 }
                 model = dbResult.result;
-                model = GetUploadedDocuments(model, "OP_RAPNotice");
-                model = GetUploadedDocuments(model, "OP_CurrentOnRent");
+                model = GetUploadedDocuments(model, "OP_RAPNotice1");
+                model = GetUploadedDocuments(model, "OP_RAPNotice2");
                 result.result = model;
                 result.status = new OperationStatus() { Status = StatusEnum.Success };
                 return result;

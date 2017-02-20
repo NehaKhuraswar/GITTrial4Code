@@ -758,7 +758,49 @@ namespace RAP.DAL
                 return result;
             }
         }
-
+       /// <summary>
+       /// Get the Webcenter Reference ID based on document type
+       /// </summary>
+       /// <param name="doc"></param>
+       /// <returns></returns>
+        public ReturnResult<int> GetDocReferenceID(DocumentM doc)
+        {
+            ReturnResult<int> result = new ReturnResult<int>();
+            //Default value if none of the criteria’s are met
+            int RefID = 6312;
+            try
+            {
+                using (CommonDataContext db = new CommonDataContext(_connString))
+                {
+                    if (doc.DocTitle.Contains("AdditionalDocuments"))
+                    {
+                        var WebCenterMapping = db.WebCenterReferenceTypeMappings.Where(r => r.DocumentType == doc.DocDescription).FirstOrDefault();
+                        if (WebCenterMapping != null)
+                        {
+                            RefID = WebCenterMapping.RefID;
+                        }
+                    }
+                    else
+                    {
+                        var WebCenterMapping = db.WebCenterReferenceTypeMappings.Where(r => r.DocumentType == doc.DocTitle).FirstOrDefault();
+                        if (WebCenterMapping != null)
+                        {
+                            RefID = WebCenterMapping.RefID;
+                        }
+                    }
+                }
+                result.result = RefID;
+                result.status = new OperationStatus() { Status = StatusEnum.Success };
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                SaveErrorLog(result.status);
+                return result;
+            }
+        }
 
         public ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID)
         {

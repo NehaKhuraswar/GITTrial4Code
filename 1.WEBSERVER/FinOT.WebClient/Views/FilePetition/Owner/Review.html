@@ -170,8 +170,8 @@
                 </div>
             </div>-->
                 <!-- .field-group -->
-                <div class="subhead type2">
-                    <h4>Justification documentation</h4>                   
+                <div class="subhead type2" ng-show="FilteredDocsJustification.length != 0">
+                    <h4>Justification documentation</h4>
                 </div>
 
                 <div class="field-group" ng-show="FilteredDocsJustification.length != 0">
@@ -285,10 +285,12 @@
 
                 <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsRAPNotice.length != 0 && SelectedNoticeStatus[0].RAPNoticeStatus != 'No'">
                     <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
-                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice'} as FilteredDocsRAPNotice ">
-                            {{item.DocName}}
-                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="info-title">Signed copy of notice</div>
+                            <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'} as FilteredDocsRAPNotice ">
+                                {{item.DocName}}
+                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a><br />
+                            </div>
                         </div>
                     </div>
                 </div><!-- .field-group -->
@@ -303,12 +305,7 @@
                             <label ng-if="!Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.CurrentOnRent">
                                 <i></i><span>No</span>
                             </label>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <label ng-repeat="item in Ctrl.caseinfo.CurrentOnRent | filter: {StatusID: 'Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID'}">
-                                <i></i><span>{{item.Status}}</span>
-                            </label>
-                        </div>
+                        </div>                       
                     </div>
                 </div><!-- .field-group -->
                 <div ng-repeat="item in Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo  | filter: {isDeleted: false}">
@@ -325,13 +322,7 @@
                              </div>
                            
                         </div>
-                    </div><!-- .field-group -->
-                    <!--<div class="field-group filled-info subhead no-top-margin">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12"><div class="info-title">Signed copy of notice</div></div>
-                        <div class="col-sm-6 col-xs-12">Yes</div>
-                    </div>
-                </div>-->
+                    </div><!-- .field-group -->                 
                     <!-- .field-group -->
                     <div class="field-group filled-info subhead no-top-margin" ng-show="item.bRentIncreaseNoticeGiven">
                         <div class="row">
@@ -354,12 +345,13 @@
                         </div>
                     </div><!-- .field-group -->
                 </div>
-                <div class="subhead type2">
-                    <h4>Additional documentation</h4>
-                    <a style="cursor: pointer;" role="button" aria-label="Edit" ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
-                </div>
 
-                <div class="field-group" ng-show="FilteredDocs.length != 0">
+
+                <div class="subhead type2" ng-show="FilteredDocsRAPNotice2.length != 0">
+                    <h4>Signed copy of RAP notice</h4>
+                </div>f
+
+                <div class="field-group" ng-show="FilteredDocsRAPNotice2.length != 0">
                     <!-- Custom Table -->
                     <div class="custom-table docs-list">
                         <div class="tbl-header">
@@ -368,28 +360,54 @@
                             </div>
                         </div>
 
-                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_AdditionalDocuments'} as FilteredDocs">
+                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice2'} as FilteredDocsRAPNotice2">
                             <div class="tbl-row clearfix">
-                                <div class="item" ng-class="{'expanded':toggle}">
-                                    <div class="item-header clearfix">
-                                        <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
-                                        &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                                    </div>
+                            <div class="item">
+                                <div class="item-header clearfix">
+                                    <div class="col col-35 name pad-l30">{{item.DocName}}</div>
+                                    &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                               
+                    <div class="subhead type2">
+                        <h4>Additional documentation</h4>
+                        <a style="cursor: pointer;" role="button" aria-label="Edit" ng-click="Ctrl.EditAdditionalDocuments()" class="btn-link btn-edit">Edit</a>
+                    </div>
 
-                                    <div class="item-content clearfix" ng-show="toggle">
-                                        <div class="row">
-                                            <div class="col-md-10 col-sm-12">
-                                                <p>{{item.DocDescription}}</p>
+                    <div class="field-group" ng-show="FilteredDocs.length != 0">
+                        <!-- Custom Table -->
+                        <div class="custom-table docs-list">
+                            <div class="tbl-header">
+                                <div class="tbl-row clearfix">
+                                    <div class="col col-35 name">File name</div>
+                                </div>
+                            </div>
+
+                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_AdditionalDocuments'} as FilteredDocs">
+                                <div class="tbl-row clearfix">
+                                    <div class="item" ng-class="{'expanded':toggle}">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
+                                            &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                        </div>
+
+                                        <div class="item-content clearfix" ng-show="toggle">
+                                            <div class="row">
+                                                <div class="col-md-10 col-sm-12">
+                                                    <p>{{item.DocDescription}}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- .custom-table -->
                     </div>
-                    <!-- .custom-table -->
                 </div>
-            </div>
             <div class="step-footer">
                 <button role="button" aria-label="Save and continue" class="btn-primary" ng-click="Ctrl.Continue()">Save and continue</button> &nbsp;&nbsp;
                 <!--<button class="btn-primary" ng-click="Ctrl.Print()">Print</button>-->

@@ -26,5 +26,6 @@ namespace RAP.DAL
        ReturnResult<bool> MailSentActivity(int C_ID, int SentBy, int ActivityID, int NotificationID, int NotificationType);
        ReturnResult<CustomEmailM> GetCustomEmailNotification(int c_id, int ActivityID, int NotificationID);
        ReturnResult<MailM> GetMailNotification(int notificationID);
+       ReturnResult<int> GetDocReferenceID(DocumentM doc);
     }
 }

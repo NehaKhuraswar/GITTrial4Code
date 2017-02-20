@@ -109,16 +109,16 @@
                 </div>
             </div>
 
-            <div class="field-group">
+            <div class="field-group" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RAPNoticeStatusID.toString() == 1">
                 <div class="field-addfile">
                     <div class="input-file-wrapper">
                         <span class="btn-link">Upload signed copy of notice</span>
-                        <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OP_RAPNotice')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
+                        <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OP_RAPNotice1')" accept=".doc,.docx,.pdf,.xlsx,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                     </div>
                     <div class="field-group">
                         <table class="table table-condensed nopadding-bottom">
                             <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice'}">
+                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'}">
                                     <td class="nopadding-left">
                                         {{item.DocName}}
                                     </td>
@@ -132,19 +132,7 @@
                     </div>
                 </div>
             </div><!-- .field-group -->
-            <!--<div class="field-group">
-                <p class="input-label">Is the tenant current on the rent?</p>
-
-                <div class="form-group-radio vertical clearfix">
-                    <label ng-repeat="item in Ctrl.caseinfo.CurrentOnRent" for="RAPNotice_{{item.StatusID}}">
-                        <input type="radio" id="CurrentOnRent_{{item.StatusID}}"
-                               class="input-field" name="CurrentOnRent_{{item.Status}}"
-                               ng-model="Ctrl.caseinfo.OwnerPetitionInfo.PropertyInfo.RentStatusID"
-                               ng-value="item.StatusID"><i></i><span>{{item.Status}}</span>
-                    </label>
-                    <div class="clear"></div>
-                </div>
-            </div>-->
+  
             <div class="field-group">
                 <p class="input-label">Is the tenant current on the rent?</p>
                 <div class="form-group-radio vertical clearfix">
@@ -159,32 +147,6 @@
                     <div class="clear"></div>
                 </div>
             </div>
-
-
-            <div class="field-group">
-                <div class="field-addfile">
-                    <div class="input-file-wrapper">
-                        <span class="btn-link">Upload proof</span>
-                        <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OP_CurrentOnRent')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
-                    </div>
-                    <div class="field-group">
-                        <table class="table table-condensed nopadding-bottom">
-                            <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_CurrentOnRent'}">
-                                    <td class="nopadding-left">
-                                        {{item.DocName}}
-                                    </td>
-                                    <td>
-                                        &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                        <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-download" value="Download" ng-click="Ctrl.Download(item)" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div><!-- .field-group -->
-
 
             <div class="subhead type2 no-bottom-margin">
                 <h4>Rent increases</h4><br />
@@ -206,7 +168,28 @@
                     <div class="clear"></div>
                 </div>
             </div>
-
+            <div class="field-group" ng-show="Ctrl.Rent.bRentIncreaseNoticeGiven">
+                <div class="field-addfile">
+                    <div class="input-file-wrapper">
+                        <span class="btn-link">Upload proof</span>
+                        <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OP_RAPNotice2')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
+                    </div>
+                    <div class="field-group">
+                        <table class="table table-condensed nopadding-bottom">
+                            <tbody>
+                                <tr ng-repeat="item in Ctrl.TempDocs">
+                                    <td class="nopadding-left">
+                                        {{item.DocName}}
+                                    </td>
+                                    <td>
+                                        &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.DeleteFromTempDocs(item)" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- .field-group -->
             <div class="field-group" ng-show="Ctrl.Rent.bRentIncreaseNoticeGiven">
                 <label>Date notice given to tenant</label>
                 <div class="row">
@@ -344,21 +327,28 @@
                         <button role="button" aria-label="Remove" class="btn-link btn-delete" ng-click="Ctrl.RemoveRecord(item)">Remove</button>
                     </div>
                 </div>
-                <div class="field-group">
-                    <table class="table table-condensed nopadding-bottom">
-                        <tbody>
-                            <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2'}">
-                                <td class="nopadding-left">
-                                    {{item.DocName}}
-                                </td>
-                                <td>
-                                    <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-download" value="Download" ng-click="Ctrl.Download(item)" />
-                                    <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
+                <div class="field-group" ng-show="FilteredDocsRAPNotice2.length != 0">
+                    <!-- Custom Table -->
+                    <div class="custom-table docs-list">
+                        <div class="tbl-header">
+                            <div class="tbl-row clearfix">
+                                <div class="col col-35 name">File name</div>
+                            </div>
+                        </div>
+
+                        <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice2'} as FilteredDocsRAPNotice2">
+                            <div class=" tbl-row clearfix">
+                            <div class="item">
+                                <div class="item-header clearfix">
+                                    <div class="col col-35 name pad-l30">{{item.DocName}}</div>
+                                    &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                    &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>               
             </div>
         </div>
 

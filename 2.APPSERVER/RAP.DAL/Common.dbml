@@ -116,4 +116,11 @@
       <Association Name="UserInfo_ParcelAddress" Member="ParcelAddresses" ThisKey="UserID" OtherKey="UserID" Type="ParcelAddress" />
     </Type>
   </Table>
+  <Table Name="dbo.WebCenterReferenceTypeMapping" Member="WebCenterReferenceTypeMappings">
+    <Type Name="WebCenterReferenceTypeMapping">
+      <Column Name="ReferenceMappingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DocumentType" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RefID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

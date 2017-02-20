@@ -60,6 +60,9 @@ namespace RAP.DAL
     partial void InsertUserInfo(UserInfo instance);
     partial void UpdateUserInfo(UserInfo instance);
     partial void DeleteUserInfo(UserInfo instance);
+    partial void InsertWebCenterReferenceTypeMapping(WebCenterReferenceTypeMapping instance);
+    partial void UpdateWebCenterReferenceTypeMapping(WebCenterReferenceTypeMapping instance);
+    partial void DeleteWebCenterReferenceTypeMapping(WebCenterReferenceTypeMapping instance);
     #endregion
 		
 		public CommonDataContext() : 
@@ -169,6 +172,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<UserInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<WebCenterReferenceTypeMapping> WebCenterReferenceTypeMappings
+		{
+			get
+			{
+				return this.GetTable<WebCenterReferenceTypeMapping>();
 			}
 		}
 	}
@@ -2479,6 +2490,116 @@ namespace RAP.DAL
 		{
 			this.SendPropertyChanging();
 			entity.UserInfo = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WebCenterReferenceTypeMapping")]
+	public partial class WebCenterReferenceTypeMapping : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ReferenceMappingID;
+		
+		private string _DocumentType;
+		
+		private int _RefID;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnReferenceMappingIDChanging(int value);
+    partial void OnReferenceMappingIDChanged();
+    partial void OnDocumentTypeChanging(string value);
+    partial void OnDocumentTypeChanged();
+    partial void OnRefIDChanging(int value);
+    partial void OnRefIDChanged();
+    #endregion
+		
+		public WebCenterReferenceTypeMapping()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReferenceMappingID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ReferenceMappingID
+		{
+			get
+			{
+				return this._ReferenceMappingID;
+			}
+			set
+			{
+				if ((this._ReferenceMappingID != value))
+				{
+					this.OnReferenceMappingIDChanging(value);
+					this.SendPropertyChanging();
+					this._ReferenceMappingID = value;
+					this.SendPropertyChanged("ReferenceMappingID");
+					this.OnReferenceMappingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DocumentType", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string DocumentType
+		{
+			get
+			{
+				return this._DocumentType;
+			}
+			set
+			{
+				if ((this._DocumentType != value))
+				{
+					this.OnDocumentTypeChanging(value);
+					this.SendPropertyChanging();
+					this._DocumentType = value;
+					this.SendPropertyChanged("DocumentType");
+					this.OnDocumentTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefID", DbType="Int NOT NULL")]
+		public int RefID
+		{
+			get
+			{
+				return this._RefID;
+			}
+			set
+			{
+				if ((this._RefID != value))
+				{
+					this.OnRefIDChanging(value);
+					this.SendPropertyChanging();
+					this._RefID = value;
+					this.SendPropertyChanged("RefID");
+					this.OnRefIDChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

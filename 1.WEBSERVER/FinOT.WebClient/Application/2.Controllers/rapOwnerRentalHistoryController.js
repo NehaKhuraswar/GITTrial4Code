@@ -6,23 +6,12 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.OwnerPetitionInfo.PropertyInfo.CustomerID = self.custDetails.custID;
     self.caseinfo.CustomerID = self.custDetails.custID;
-    self.showUploadedFile = false;
     self.Calender = masterFactory.Calender;
     self.Error = "";
     self.Hide = false;
     self.HasAdditionalRentRecord = false;
     $scope.model.stepNo = 6;
-    //var range = 10 / 2;
-    //var currentYear = new Date().getFullYear();
-    //self.years = [];
-    //for (var i = range; i > 0 ; i--) {
-
-    //    self.years.push(currentYear - i);
-    //}
-    //for (var i = 0; i < range + 1; i++) {
-    //    self.years.push(currentYear + i);
-    //}
-
+    self.TempDocs = [];
     rapFactory.GetOwnerRentIncreaseAndPropertyInfo(self.caseinfo).then(function (response) {
         if (!alert.checkForResponse(response)) {
             self.Error = rapGlobalFactory.Error;
@@ -32,10 +21,7 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         rapGlobalFactory.CaseDetails = response.data;
         self.caseinfo = response.data;
         self.Rent = angular.copy(self.caseinfo.OwnerPetitionRentalIncrementInfo);
-        //if (self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.length > 0) {
-        //    self.caseinfo.OwnerPetitionRentalIncrementInfo = self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo[0];
-        //}
-            $anchorScroll();
+        $anchorScroll();
     });
 
     $scope.onFileSelected = function ($files, docTitle) {
@@ -44,12 +30,10 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
                 var file = $files[i];
                 var filename = file.name;
                 var mimetype = file.type;
-                var filesize = ((file.size / 1024) / 1024).toFixed(4);
-                //if (filesize < 25) {
+                var filesize = ((file.size / 1024) / 1024).toFixed(4);                
                 if (filesize < masterFactory.FileSize) {
                     var index = filename.lastIndexOf(".");
-                    var ext = filename.substring(index, filename.length).toUpperCase();
-                    //if (ext == '.PDF' || ext == '.DOC' || ext == '.DOCX' || ext == '.XLS' || ext == '.JPEG' || ext == '.TIFF' || ext == '.PNG') {
+                    var ext = filename.substring(index, filename.length).toUpperCase();       
                     if (masterFactory.FileExtensons.indexOf(ext) > -1) {
                         var document = angular.copy(self.caseinfo.Document);
                         document.DocTitle = docTitle;
@@ -64,8 +48,14 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
                                 document.Base64Content = base64.substring(base64.indexOf('base64') + 7);
                             }
                         }
-                        self.caseinfo.Documents.push(document);
-                        self.showUploadedFile = true;
+                        if (docTitle == 'OP_RAPNotice2')
+                        {
+                            self.TempDocs.push(document);
+                        }
+                        else
+                        {
+                          self.caseinfo.Documents.push(document);
+                        }                   
                     }
                 }
 
@@ -87,12 +77,20 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         var index = self.caseinfo.Documents.indexOf(doc);
         self.caseinfo.Documents.splice(index, 1);
     }
+    self.DeleteFromTempDocs = function (doc) {
+        var index = self.TempDocs.indexOf(doc);
+        self.TempDocs.splice(index, 1);
+    }
 
     self.AddRecord = function (_rent) {
         self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(_rent);
         self.Rent = new Object();
         self.Rent = self.caseinfo.OwnerPetitionRentalIncrementInfo;
-        self.showUploadedFile = false;
+        var RAP2documents = angular.copy(self.TempDocs);
+        RAP2documents.forEach(function (document) {
+            self.caseinfo.Documents.push(document);             
+        });
+        self.TempDocs = [];
     }
     self.RemoveRecord = function (_rent) {
         var index = self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.indexOf(_rent);

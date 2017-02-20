@@ -28,8 +28,7 @@ namespace RAP.Business.Implementation
       {
           ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
           try
-          {
-              var serviceObj = ConvertToServiceObj(doc);
+          {             
               string endpoint = ConfigurationManager.AppSettings["WebcenterEndPoint"];
               BasicHttpBinding myBinding = new BasicHttpBinding();
               myBinding.Security.Mode = BasicHttpSecurityMode.Transport;
@@ -41,12 +40,13 @@ namespace RAP.Business.Implementation
               CheckInService.CheckInSoapClient checkInService = new CheckInService.CheckInSoapClient(myBinding,ea);
               checkInService.ClientCredentials.UserName.UserName = ConfigurationManager.AppSettings["WebcenterUserName"];
               checkInService.ClientCredentials.UserName.Password = ConfigurationManager.AppSettings["WebcenterPassword"];
-              string docAuthor = ConfigurationManager.AppSettings["DocAuthor"];
               string docType = ConfigurationManager.AppSettings["DocType"];
-              string securityGroup = ConfigurationManager.AppSettings["SecurityGroup"];
-              CheckInService.IdcProperty[] idcProperty = new CheckInService.IdcProperty[0];
-              CheckInService.IdcFile idcFile = new CheckInService.IdcFile();
-              var serviceResult = checkInService.CheckInUniversal(doc.DocName.Replace(" ","").Trim(), doc.DocTitle, docType, docAuthor, securityGroup, "", idcProperty, serviceObj, idcFile, idcProperty);
+              string docAuthor = ConfigurationManager.AppSettings["DocAuthor"];
+              string securityGroup = ConfigurationManager.AppSettings["SecurityGroup"]; 
+              string docAccount = ConfigurationManager.AppSettings["DocAccount"];                    
+              var customDocMetaData = GetCustomDocMetaData(doc);
+              var serviceObj = ConvertToServiceObj(doc);            
+              var serviceResult = checkInService.CheckInUniversal(null, doc.DocName.Replace(" ", "").Trim(), docType, docAuthor, securityGroup, docAccount, customDocMetaData.ToArray(), serviceObj, null, null);
               if(serviceResult == null)
               {
                   throw new Exception("Document upload failed for the document" + doc.DocName);               
@@ -135,20 +135,27 @@ namespace RAP.Business.Implementation
           }
           return serviceObj;
       }
-      //To be removed
-      //private DocumentM getDocumentObj(HttpPostedFile file)
-      //{
-      //    DocumentM doc = new DocumentM();
-      //    doc.DocName = file.FileName;
-            
-      //    BinaryReader b = new BinaryReader(file.InputStream);
-      //    var content = b.ReadBytes(file.ContentLength);
-      //    if(content !=null)
-      //    {
-      //        doc.Content = content;
-      //    }
 
-      //    return doc;
-      //}
+      private List<CheckInService.IdcProperty> GetCustomDocMetaData(DocumentM doc)
+      {
+          List<CheckInService.IdcProperty> customDocMetaData = new List<CheckInService.IdcProperty>();
+          int RefID;
+          customDocMetaData.Add(new CheckInService.IdcProperty() { name = "xProfileTrigger", value = ConfigurationManager.AppSettings["xProfileTrigger"] });
+          customDocMetaData.Add(new CheckInService.IdcProperty() { name = "xIdcProfile", value = ConfigurationManager.AppSettings["xIdcProfile"] });
+          customDocMetaData.Add(new CheckInService.IdcProperty() { name = "xAgencyDepartment", value = ConfigurationManager.AppSettings["xAgencyDepartment"] });
+          customDocMetaData.Add(new CheckInService.IdcProperty() { name = "xDivision", value = ConfigurationManager.AppSettings["xDivision"] });
+          var refIDResult = _commonService.GetDocReferenceID(doc);
+          if(refIDResult.status.Status == StatusEnum.Success)
+          {
+              RefID = refIDResult.result;
+          }
+          else
+          {
+              RefID = 6312;
+          }
+          customDocMetaData.Add(new CheckInService.IdcProperty() { name = "xReferenceType", value = RefID.ToString() });
+          return customDocMetaData;
+      }
+      
     }
 }
