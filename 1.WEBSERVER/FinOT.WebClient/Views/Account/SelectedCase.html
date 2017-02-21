@@ -314,7 +314,11 @@
 
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Property owner’s representative</div>
-                                        <div class="fs20-title">n/a</div>
+                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID == 0">n/a</div>
+                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">
+                                        {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.LastName}}</div>
+                                        <p ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">{{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}} {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}},<br />                                         {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.City}}, {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}  </p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.UserID != 0">Tel: {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser.Email}} </p>
                                     </div>
                                 </div>
                             </div>
@@ -377,7 +381,14 @@
 
                                     <div class="col-md-4 col-sm-12">
                                         <div class="small-title">Property owner’s representative</div>
-                                        <div class="fs20-title">n/a</div>
+                                        <div class="fs20-title" ng-show="!Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation">n/a</div>
+                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.FirstName}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.LastName}}</div>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.AddressLine2}},<br />                                         {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.City}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.State.StateCode}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Zip}}  </p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation">Tel: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.Email}} </p>
+                                        <div class="small-title" ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation">Notifications</div>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification == true">Mail</p>
+                                        <p ng-show="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification == true">Email</p>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -401,10 +412,11 @@
 
                                     <div  class="col-md-4 col-sm-12">
                                         <div class="small-title">Tenant representative</div>
-                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName == null">n/a</div>
-                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null">{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.LastName}}</div>
-                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null">{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.AddressLine2}},<br />{{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Zip}}  </p>
-                                        <p ng-show="Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.FirstName != null">Tel: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantPetitionInfo.ThirdPartyInfo.Email}} </p>
+                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID == 0">n/a</div>
+                                        <div class="fs20-title" ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID != 0">
+                                        {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.FirstName}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.LastName}}</div>
+                                        <p ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID != 0">{{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine1}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.AddressLine2}},<br />                                         {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.TenantResponseInfo.State.StateCode}} {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Zip}}  </p>
+                                        <p ng-show="Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.UserID != 0">Tel: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.PhoneNumber}} <br />Email: {{Ctrl.caseinfo.TenantResponseInfo.ThirdPartyInfo.Email}} </p>
                                     </div>
 
                                     <div class="col-md-4 col-sm-12">

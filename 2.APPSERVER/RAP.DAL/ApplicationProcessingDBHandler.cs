@@ -921,11 +921,27 @@ namespace RAP.DAL
                         {
                             var ownerApplicantInfoID = _dbContext.OwnerResponseInfos.Where(x => x.OwnerResponseID == caseinfo.OwnerResponseInfo.OwnerResponseID).Select(x => x.OwnerResponseApplicantInfoID).FirstOrDefault();// _dbContext.OwnerResponseApplicantInfos.Where(x=>x.Own)
                             int applicantUserID = 0;
+                            bool bOwnerResponseThirdParty = false;
                             if (ownerApplicantInfoID != null && ownerApplicantInfoID > 0)
                             {
                                 applicantUserID = _dbContext.OwnerResponseApplicantInfos.Where(r => r.OwnerResponseApplicantInfoID == ownerApplicantInfoID).Select(x => x.ApplicantUserID).FirstOrDefault();
+                                bOwnerResponseThirdParty = Convert.ToBoolean(_dbContext.OwnerResponseApplicantInfos.Where(r => r.OwnerResponseApplicantInfoID == ownerApplicantInfoID).Select(x => x.bThirdPartyRepresentation).FirstOrDefault());
+                                // Getting the third party for the tenant response if the user has selected bThirdParty
+                                
+
                             }
                             caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo(applicantUserID).result;
+                            if (bOwnerResponseThirdParty)
+                            {
+                                var OwnerCustomerID = _dbAccount.CustomerDetails.Where(x => x.UserID == (int)applicantUserID).Select(x => x.CustomerID).FirstOrDefault();
+                                var accdbResult = _accountdbHandler.GetThirdPartyInfo(OwnerCustomerID);
+                                if (accdbResult.status.Status == StatusEnum.Success)
+                                {
+                                    caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                                    caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                                    caseinfo.OwnerResponseInfo.ApplicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                                }
+                            }
                             var TranslationServiceOwnerResult = _accountdbHandler.GetTranslationServiceInfo(applicantUserID);
                             if (TranslationServiceOwnerResult.status.Status == StatusEnum.Success)
                             {
@@ -994,6 +1010,8 @@ namespace RAP.DAL
                         {
                             caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.TranslationServiceInfo = TranslationServiceResult.result;
                         }
+
+                        // if the tenant response is filed then only get the information for the tenant from there else take it from the owner petition
                         if (caseinfo.TenantResponseInfo.TenantResponseID == 0)
                         {
                             for (int i = 0; i < caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.Count; i++)
@@ -1008,6 +1026,7 @@ namespace RAP.DAL
                         else
                         {
                             var TenantUserID = _dbContext.TenantResponseApplicationInfos.Where(x => x.TenantResponseID == caseinfo.TenantResponseInfo.TenantResponseID).Select(x => x.ApplicantUserID).FirstOrDefault();
+                            var bThirdPartyRepresentation = _dbContext.TenantResponseApplicationInfos.Where(x => x.TenantResponseID == caseinfo.TenantResponseInfo.TenantResponseID).Select(x => x.bThirdPartyRepresentation).FirstOrDefault();
                             caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo = new List<OwnerPetitionTenantInfoM>();
                             OwnerPetitionTenantInfoM tenantInfo = new OwnerPetitionTenantInfoM();
                             tenantInfo.TenantUserInfo = _commondbHandler.GetUserInfo((int)TenantUserID).result;
@@ -1016,6 +1035,20 @@ namespace RAP.DAL
                             if (TranslationServiceTenantResult.status.Status == StatusEnum.Success)
                             {
                                 caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo = TranslationServiceTenantResult.result;
+                            }
+
+
+                            // Getting the third party for the tenant response if the user has selected bThirdParty
+                            if (Convert.ToBoolean(bThirdPartyRepresentation) == true)
+                            {
+                                var TenantCustomerID = _dbAccount.CustomerDetails.Where(x => x.UserID== (int)TenantUserID).Select(x => x.CustomerID).FirstOrDefault();
+                                var accdbResult = _accountdbHandler.GetThirdPartyInfo(TenantCustomerID);
+                                if (accdbResult.status.Status == StatusEnum.Success)
+                                {
+                                    caseinfo.TenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                                    caseinfo.TenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                                    caseinfo.TenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                                }
                             }
                         }
                         caseinfo.OwnerPetitionInfo.Verification.bCaseMediation = _dbContext.OwnerPetitionVerifications.Where(x => x.PetitionID == petitionDetailsDb.OwnerPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
