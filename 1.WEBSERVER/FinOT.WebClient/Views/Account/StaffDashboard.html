@@ -13,7 +13,11 @@
 
         <div class="application-form-wrapper">
             <div class="application-step step-1" >
-
+                <div class="alert alert-error" ng-show="Ctrl.Hide==true">
+                </div>
+                <div class="alert alert-error" ng-show="Ctrl.Error!='' && Ctrl.Error!=null">
+                    <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
+                </div>
                 <div class="account-management" ng-show="Ctrl.model.IsCityAdmin == true || Ctrl.model.AccountType.AccountTypeID == 2">
                     <div class="items">
                         <div class="item">

@@ -83,11 +83,23 @@ var rapadmindashboardController = ['$scope', '$modal', 'alertService', 'rapadmin
     }
     self.AccountSearch = function (model) {
         //model.PageSize = 10;
-      
+        self.AccountSearchResult = [];
+        self.pageNumberList = [];
         model.CurrentPage = 1;
         model.SortBy = "Name";
         model.SortReverse = 0;
         self.Error = "";
+        if (model.FromDate != null && (model.ToDate == null || model.ToDate ==""))
+        {
+            self.Error = "Please select valid End Date.";
+            $anchorScroll();
+            return;
+        }
+        if ((model.FromDate == null || model.FromDate == "") && model.ToDate != null) {
+            self.Error = "Please select valid Start Date.";
+            $anchorScroll();
+            return;
+        }
         rapFactory.GetAccountSearch(model).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;

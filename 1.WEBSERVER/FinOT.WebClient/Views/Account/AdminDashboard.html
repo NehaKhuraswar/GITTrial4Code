@@ -21,7 +21,7 @@
                 <div class="application-step step-1">
                     <div class="alert alert-error" ng-show="Ctrl.Hide==true">
                     </div>
-                    <div class="alert alert-error" ng-show="Ctrl.Error!=''">
+                    <div class="alert alert-error" ng-show="Ctrl.Error!='' && Ctrl.Error!=null">
                         <strong><a href="javascript:void();">{{Ctrl.Error}}</a></strong>
                     </div>
                     <div class="step-content step1 mar-bottom-40" ng-hide="Ctrl.CityUser.AccountType.AccountTypeID != 2">
@@ -168,7 +168,8 @@
                             <div class="tbl-row clearfix" ng-repeat="item in Ctrl.AccountSearchResult">
                                 <div class="item" ng-class="{'expanded':toggle}">
                                     <div class="item-header clearfix">
-                                        <div class="col col-20 name pad-l40"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.Name}}</div>
+                                        <div class="col col-20 name pad-l40" ng-show="item.AccountType == 'Public User'"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.Name}}</div>
+                                        <div class="col col-20 name pad-l40" ng-show="item.AccountType != 'Public User'">{{item.Name}}</div>
                                         <div class="col col-20 account-type">{{item.AccountType}}</div>
                                         <div class="col col-25 email"><a href="mailto: {{item.email}}">{{item.email}}</a></div>
                                         <div class="col col-20 created-on">{{item.CreatedDate | date}}</div>

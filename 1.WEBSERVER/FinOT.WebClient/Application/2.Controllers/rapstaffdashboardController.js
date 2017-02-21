@@ -1,9 +1,11 @@
 ﻿'use strict';
 var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaffdashboardFactory', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, rapFactory, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
+    self.Error = "";
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.model = rapGlobalFactory.CityUser;
-    self.Error = "";
+    
+    self.Hide = false;
     self.CaseSearchModel = [];
     self.CaseSearchResult = [];
     self.CasewithNoAnalystResult = [];
@@ -166,7 +168,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         //if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
         self.pagingsortingModel.CurrentPage = newPage;
         rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CasewithNoAnalystResult = response.data;
             self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
             self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
@@ -179,7 +185,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
             self.pagingsortingModel.CurrentPage = self.pagingsortingModel.CurrentPage+1;
             rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.CasewithNoAnalystResult = response.data;
                 self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
@@ -192,7 +202,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.pagingsortingModel.CurrentPage)) {
             self.pagingsortingModel.CurrentPage = self.pagingsortingModel.CurrentPage - 1;
             rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.CasewithNoAnalystResult = response.data;
                 self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecordNoAnalyst = self.CasewithNoAnalystResult.List[0].RankNo;
@@ -204,7 +218,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         self.pagingsortingModel.CurrentPage = 1;
 
         rapFactory.GetCaseswithNoAnalyst(self.pagingsortingModel, self.model.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CasewithNoAnalystResult = response.data;
             self.pagingsortingModel.TotalCount = response.data.TotalCount;
             self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
@@ -222,7 +240,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             model.SortReverse = false;
         }
         rapFactory.GetCaseswithNoAnalyst(model, self.model.UserID).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CasewithNoAnalystResult = response.data;
             self.pagingsortingModel.TotalCount = response.data.TotalCount;
             self.pagingsortingModel.CurrentPage = response.data.CurrentPage;
@@ -258,6 +280,7 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     }
     var _GetCaseSearch = function()
     {
+
         rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
@@ -305,11 +328,22 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     
 
     self.CaseSearch = function (model) {
-
+        self.CaseSearchResult = [];
+        self.pageNumberList = [];
         model.CurrentPage = 1;
         model.SortBy = "CaseID";
         model.SortReverse = 0;
-        
+        self.Error = "";
+        if (model.FromDate != null && (model.ToDate == null || model.ToDate == "")) {
+            self.Error = "Please select valid End Date.";
+            $anchorScroll();
+            return;
+        }
+        if ((model.FromDate == null || model.FromDate == "") && model.ToDate != null) {
+            self.Error = "Please select valid Start Date.";
+            $anchorScroll();
+            return;
+        }
         rapFactory.GetCaseSearch(model).then(function (response) {
             if (!alert.checkForResponse(response)) {
                 self.Error = rapGlobalFactory.Error;
@@ -346,7 +380,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         //if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
             self.CaseSearchModel.CurrentPage = newPage;
             rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.CaseSearchResult = response.data.List;
                 self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecord = self.CaseSearchResult[0].RankNo;
@@ -359,7 +397,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
             self.CaseSearchModel.CurrentPage = self.CaseSearchModel.CurrentPage+1;
             rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.CaseSearchResult = response.data.List;
                 self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecord = self.CaseSearchResult[0].RankNo;
@@ -372,7 +414,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         if ((newPage > 0 && !self.isLastPage()) || (newPage > 0 && newPage < self.CaseSearchModel.CurrentPage)) {
             self.CaseSearchModel.CurrentPage = self.CaseSearchModel.CurrentPage - 1;
             rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
-                if (!alert.checkResponse(response)) { return; }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
+                }
                 self.CaseSearchResult = response.data.List;
                 self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
                 self.FromRecord = self.CaseSearchResult[0].RankNo;
@@ -384,7 +430,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
         self.CaseSearchModel.CurrentPage = 1;
 
         rapFactory.GetCaseSearch(self.CaseSearchModel).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CaseSearchResult = response.data.List;
             self.CaseSearchModel.TotalCount = response.data.TotalCount;
             self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
@@ -402,7 +452,11 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
             model.SortReverse = false;
             }
         rapFactory.GetCaseSearch(model).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             self.CaseSearchResult = response.data.List;
             self.CaseSearchModel.TotalCount = response.data.TotalCount;
             self.CaseSearchModel.CurrentPage = response.data.CurrentPage;
