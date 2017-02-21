@@ -908,11 +908,29 @@ namespace RAP.DAL
                                 }
                             }
                         }
-                        caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID).result;
-                        var TranslationServiceOwnerResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.TenantPetitionInfo.OwnerInfo.UserID);
-                        if (TranslationServiceOwnerResult.status.Status == StatusEnum.Success)
+                        if (caseinfo.OwnerResponseInfo.OwnerResponseID == 0)
                         {
-                            caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo = TranslationServiceOwnerResult.result;
+                            caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantPetitionDB.OwnerUserID).result;
+                            var TranslationServiceOwnerResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.TenantPetitionInfo.OwnerInfo.UserID);
+                            if (TranslationServiceOwnerResult.status.Status == StatusEnum.Success)
+                            {
+                                caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo = TranslationServiceOwnerResult.result;
+                            }
+                        }
+                        else
+                        {
+                            var ownerApplicantInfoID = _dbContext.OwnerResponseInfos.Where(x => x.OwnerResponseID == caseinfo.OwnerResponseInfo.OwnerResponseID).Select(x => x.OwnerResponseApplicantInfoID).FirstOrDefault();// _dbContext.OwnerResponseApplicantInfos.Where(x=>x.Own)
+                            int applicantUserID = 0;
+                            if (ownerApplicantInfoID != null && ownerApplicantInfoID > 0)
+                            {
+                                applicantUserID = _dbContext.OwnerResponseApplicantInfos.Where(r => r.OwnerResponseApplicantInfoID == ownerApplicantInfoID).Select(x => x.ApplicantUserID).FirstOrDefault();
+                            }
+                            caseinfo.TenantPetitionInfo.OwnerInfo = _commondbHandler.GetUserInfo(applicantUserID).result;
+                            var TranslationServiceOwnerResult = _accountdbHandler.GetTranslationServiceInfo(applicantUserID);
+                            if (TranslationServiceOwnerResult.status.Status == StatusEnum.Success)
+                            {
+                                caseinfo.TenantPetitionInfo.OwnerInfo.TranslationServiceInfo = TranslationServiceOwnerResult.result;
+                            }
                         }
                         if (TenantPetitionDB.PropertyManagerUserID != null)
                         {
@@ -969,18 +987,35 @@ namespace RAP.DAL
                                     caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID).Select(x => x.EmailNotification).FirstOrDefault();
                                 }
                             }
-                        }                        
+                        }          
+                        
                         var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID);
                         if (TranslationServiceResult.status.Status == StatusEnum.Success)
                         {
                             caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.TranslationServiceInfo = TranslationServiceResult.result;
                         }
-                        for (int i = 0; i < caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.Count; i++)
+                        if (caseinfo.TenantResponseInfo.TenantResponseID == 0)
                         {
-                            var TranslationServiceTenantResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.UserID);
+                            for (int i = 0; i < caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.Count; i++)
+                            {
+                                var TranslationServiceTenantResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.UserID);
+                                if (TranslationServiceTenantResult.status.Status == StatusEnum.Success)
+                                {
+                                    caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.TranslationServiceInfo = TranslationServiceTenantResult.result;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var TenantUserID = _dbContext.TenantResponseApplicationInfos.Where(x => x.TenantResponseID == caseinfo.TenantResponseInfo.TenantResponseID).Select(x => x.ApplicantUserID).FirstOrDefault();
+                            caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo = new List<OwnerPetitionTenantInfoM>();
+                            OwnerPetitionTenantInfoM tenantInfo = new OwnerPetitionTenantInfoM();
+                            tenantInfo.TenantUserInfo = _commondbHandler.GetUserInfo((int)TenantUserID).result;
+                            caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo.Add(tenantInfo);
+                            var TranslationServiceTenantResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.UserID);
                             if (TranslationServiceTenantResult.status.Status == StatusEnum.Success)
                             {
-                                caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[i].TenantUserInfo.TranslationServiceInfo = TranslationServiceTenantResult.result;
+                                caseinfo.OwnerPetitionInfo.PropertyInfo.TenantInfo[0].TenantUserInfo.TranslationServiceInfo = TranslationServiceTenantResult.result;
                             }
                         }
                         caseinfo.OwnerPetitionInfo.Verification.bCaseMediation = _dbContext.OwnerPetitionVerifications.Where(x => x.PetitionID == petitionDetailsDb.OwnerPetitionID).Select(x => x.bCaseMediation).FirstOrDefault();
@@ -3882,6 +3917,154 @@ namespace RAP.DAL
                 return result;
             }
         }
+        public ReturnResult<CaseInfoM> GetTenantResponseApplicationInfoForReview(string CaseNumber, int CustomerID)
+        {
+            ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
+            try
+            {
+                
+                    var CaseDetailsDB = _dbContext.CaseDetails.Where(x => x.CaseID == CaseNumber).FirstOrDefault();
+                    if (CaseDetailsDB == null)
+                    {
+                        result.result = null;
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    CaseInfoM caseInfo = new CaseInfoM();
+                    caseInfo.C_ID = CaseDetailsDB.C_ID;
+                    caseInfo.CaseID = CaseDetailsDB.CaseID;
+
+                    List<UnitTypeM> _units = new List<UnitTypeM>();
+                    List<NumberRangeForUnitsM> _rangeOfUnits = new List<NumberRangeForUnitsM>();
+
+                    var units = _dbContext.UnitTypes;
+                    if (units == null)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    else
+                    {
+                        foreach (var unit in units)
+                        {
+                            UnitTypeM _unit = new UnitTypeM();
+                            _unit.UnitTypeID = unit.UnitTypeID;
+                            _unit.UnitDescription = unit.Description;
+                            _units.Add(_unit);
+                        }
+
+                    }
+
+                    var rangeDB = _dbContext.NumberRangeForUnits.ToList();
+                    if (rangeDB == null)
+                    {
+                        result.status = new OperationStatus() { Status = StatusEnum.NoDataFound };
+                        return result;
+                    }
+                    else
+                    {
+                        foreach (var item in rangeDB)
+                        {
+                            NumberRangeForUnitsM obj = new NumberRangeForUnitsM();
+                            obj.RangeID = item.RangeID;
+                            obj.RangeDesc = item.RangeDesc;
+                            _rangeOfUnits.Add(obj);
+                        }
+                    }
+                    var TenantResponseInfoDB = _dbContext.TenantResponseApplicationInfos.Where(x => x.ResponseFiledBy == CustomerID
+                                                    && x.IsSubmitted == false).FirstOrDefault();
+                    TenantResponseInfoM tenantResponseInfo = new TenantResponseInfoM();
+                    if (TenantResponseInfoDB != null)
+                    {
+                        tenantResponseInfo.TenantResponseID = TenantResponseInfoDB.TenantResponseID;
+                    }
+                        tenantResponseInfo.bThirdPartyRepresentation = (bool)TenantResponseInfoDB.bThirdPartyRepresentation;
+                        //if (tenantResponseInfo.bThirdPartyRepresentation)
+                        //{
+                        //    tenantResponseInfo.ThirdPartyInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ThirdPartyUserID).result;
+                        //}
+                        
+                        tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
+                        tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
+                        tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                        if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
+                        {
+                            tenantResponseInfo.bSameAsOwnerInfo = true;
+                        }
+                        tenantResponseInfo.NumberOfUnits = TenantResponseInfoDB.NumberOfUnits;
+                        tenantResponseInfo.UnitTypeId = TenantResponseInfoDB.UnitTypeID;
+                        tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(TenantResponseInfoDB.RangeID);
+                        tenantResponseInfo.bCurrentRentStatus = TenantResponseInfoDB.bRentStatus;
+                        tenantResponseInfo.ProvideExplanation = TenantResponseInfoDB.ProvideExplanation;
+                        tenantResponseInfo.CustomerID = (int)TenantResponseInfoDB.ResponseFiledBy;
+                    
+                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(CustomerID);
+                    if (accdbResult.status.Status == StatusEnum.Success)
+                    {
+                        tenantResponseInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                        tenantResponseInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                        tenantResponseInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                        //if (tenantResponseInfo.ThirdPartyInfo.UserID != 0)
+                        //{
+                        //    tenantResponseInfo.bThirdPartyRepresentation = true;
+                        //}
+                        //else
+                        //{
+                        //    tenantResponseInfo.bThirdPartyRepresentation = false;
+                        //}
+                    }
+                    //var ownerPetitionID = _dbContext.PetitionDetails.Where(r => r.PetitionID == CaseDetailsDB.PetitionID).Select(x => x.OwnerPetitionID).First();
+
+                    //if (ownerPetitionID != null)
+                    //{
+                    //    var petitionInfo = _dbContext.OwnerPetitionInfos.Where(r => r.OwnerPetitionID == Convert.ToInt32(ownerPetitionID)).First();
+                    //    if (petitionInfo != null)
+                    //    {
+                    //        var applicantInfo = _dbContext.OwnerPetitionApplicantInfos.Where(r => r.OwnerPetitionApplicantInfoID == petitionInfo.OwnerPetitionApplicantInfoID).First();
+
+                    //        if (applicantInfo != null)
+                    //        {
+                    //            var applicantUserInforesult = _commondbHandler.GetUserInfo(applicantInfo.ApplicantUserID);
+                    //            if (applicantUserInforesult.status.Status != StatusEnum.Success)
+                    //            {
+                    //                result.status = applicantUserInforesult.status;
+                    //                return result;
+                    //            }
+                    //            tenantResponseInfo.OwnerInfo = applicantUserInforesult.result;
+                    //            tenantResponseInfo.NumberOfUnits = applicantInfo.NumberOfUnits;
+                    //            tenantResponseInfo.SelectedRangeOfUnits.RangeID = Convert.ToInt32(applicantInfo.RangeID);
+                    //        }
+                    //        var propertyInfo = _dbContext.OwnerPetitionPropertyInfos.Where(r => r.OwnerPropertyID == petitionInfo.OwnerPropertyID).First();
+
+                    //        if (propertyInfo != null)
+                    //        {
+                    //            tenantResponseInfo.UnitTypeId = propertyInfo.UnitTypeID;
+                    //            tenantResponseInfo.bCurrentRentStatus = Convert.ToBoolean(propertyInfo.CurrentOnRent);
+                    //        }
+                    //    }
+                    //}
+                    // }
+
+                    tenantResponseInfo.UnitTypes = _units;
+                    tenantResponseInfo.RangeOfUnits = _rangeOfUnits;
+
+
+                    caseInfo.TenantResponseInfo = tenantResponseInfo;
+                    result.result = caseInfo;
+                    result.status = new OperationStatus() { Status = StatusEnum.Success };
+                
+
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                IExceptionHandler eHandler = new ExceptionHandler();
+                result.status = eHandler.HandleException(ex);
+                _commondbHandler.SaveErrorLog(result.status);
+                return result;
+            }
+        }
 
         public ReturnResult<CaseInfoM> GetTenantResponseExemptContestedInfo(int TenantResponseID, int CustomerID)
         {
@@ -3978,7 +4161,7 @@ namespace RAP.DAL
 
             try
             {
-                ApplicationInfoResult = GetTenantResponseApplicationInfo(CaseNumber, CustomerID);
+                ApplicationInfoResult = GetTenantResponseApplicationInfoForReview(CaseNumber, CustomerID);
                 Result.result = ApplicationInfoResult.result;
                 if (ApplicationInfoResult.status.Status != StatusEnum.Success)
                     return Result;

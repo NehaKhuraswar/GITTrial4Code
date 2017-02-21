@@ -32,9 +32,11 @@ var rapAppellantsInfoController = ['$scope', '$modal', 'alertService', 'rapappel
     }
     _GetStateList();
     self.GetCaseInfoWithModel = function (CaseID) {
-        if (rapGlobalFactory.CaseDetails.CaseID == CaseID)
-        {
-            return;
+        if (CaseID != null) {
+
+            if (rapGlobalFactory.CaseDetails.CaseID == CaseID) {
+                return;
+            }
         }
         self.AppealCategoryID = rapGlobalFactory.CaseDetails.PetitionCategoryID;
         rapFactory.GetCaseInfoWithModel(CaseID, self.custDetails.custID).then(function (response) {
