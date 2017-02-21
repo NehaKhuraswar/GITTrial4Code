@@ -164,6 +164,19 @@ namespace RAP.Core.DataModels
         public string Name { get; set; }
         public int RankNo { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string ResAddressLine1 { get; set; }
+        public string ResAddressLine2 { get; set; }
+        public string ResCity { get; set; }
+        public string ResStateCode { get; set; }
+        public string ResZip { get; set; }
+        public string ResPhone { get; set; }
+        public bool bMailingAddress {get;set;}
+        public string MailAddressLine1 { get; set; }
+        public string MailAddressLine2 { get; set; }
+        public string MailCity { get; set; }
+        public string MailStateCode { get; set; }
+        public string MailZip { get; set; }
+        public string MailPhone { get; set; }
     }
 
     public class SearchCaseResult

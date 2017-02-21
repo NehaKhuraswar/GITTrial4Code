@@ -730,6 +730,19 @@ namespace RAP.DAL
                         account.CreatedDate = Convert.ToDateTime(item.CreatedDate);
                         account.Name = item.Name;
                         account.RankNo = (int)item.RankNo;
+                        account.ResAddressLine1 = item.ResAddressLine1;
+                        account.ResAddressLine2 = item.ResAddressLine2;
+                        account.ResCity = item.ResCity;
+                        account.ResStateCode = item.ResStateCode;
+                        account.ResPhone = item.ResPhone;
+                        account.ResZip = item.ResZip;
+                        account.bMailingAddress = Convert.ToBoolean(item.bMailingAddress);
+                        account.MailAddressLine1 = item.MailAddressLine1;
+                        account.MailAddressLine2 = item.MailAddressLine2;
+                        account.MailCity = item.MailCity;
+                        account.MailStateCode = item.MailStateCode;
+                        account.MailPhone = item.MailPhone;
+                        account.MailZip = item.MailZip;
                         searchResult.List.Add(account);
                         
                     }

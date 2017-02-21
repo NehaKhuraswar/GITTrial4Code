@@ -100,14 +100,6 @@ namespace RAP.DAL
 			}
 		}
 		
-		public System.Data.Linq.Table<ReturnAccountSearch> ReturnAccountSearches
-		{
-			get
-			{
-				return this.GetTable<ReturnAccountSearch>();
-			}
-		}
-		
 		public System.Data.Linq.Table<NotificationPreference> NotificationPreferences
 		{
 			get
@@ -177,6 +169,14 @@ namespace RAP.DAL
 			get
 			{
 				return this.GetTable<TranslationServiceInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReturnAccountSearch> ReturnAccountSearches
+		{
+			get
+			{
+				return this.GetTable<ReturnAccountSearch>();
 			}
 		}
 		
@@ -290,123 +290,6 @@ namespace RAP.DAL
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReturnAccountSearch")]
-	public partial class ReturnAccountSearch
-	{
-		
-		private System.Nullable<int> _RankNo;
-		
-		private string _Name;
-		
-		private string _AcctTypeDesc;
-		
-		private string _Email;
-		
-		private System.Nullable<int> _CustomerID;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		public ReturnAccountSearch()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RankNo", DbType="Int")]
-		public System.Nullable<int> RankNo
-		{
-			get
-			{
-				return this._RankNo;
-			}
-			set
-			{
-				if ((this._RankNo != value))
-				{
-					this._RankNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcctTypeDesc", DbType="VarChar(25)")]
-		public string AcctTypeDesc
-		{
-			get
-			{
-				return this._AcctTypeDesc;
-			}
-			set
-			{
-				if ((this._AcctTypeDesc != value))
-				{
-					this._AcctTypeDesc = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(35)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this._Email = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
-		public System.Nullable<int> CustomerID
-		{
-			get
-			{
-				return this._CustomerID;
-			}
-			set
-			{
-				if ((this._CustomerID != value))
-				{
-					this._CustomerID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this._CreatedDate = value;
-				}
 			}
 		}
 	}
@@ -2944,6 +2827,357 @@ namespace RAP.DAL
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReturnAccountSearch")]
+	public partial class ReturnAccountSearch
+	{
+		
+		private System.Nullable<int> _RankNo;
+		
+		private string _Name;
+		
+		private string _AcctTypeDesc;
+		
+		private string _Email;
+		
+		private System.Nullable<int> _CustomerID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private string _ResAddressLine1;
+		
+		private string _ResAddressLine2;
+		
+		private string _ResCity;
+		
+		private string _ResStateCode;
+		
+		private string _ResZip;
+		
+		private string _ResPhone;
+		
+		private System.Nullable<bool> _bMailingAddress;
+		
+		private string _MailAddressLine1;
+		
+		private string _MailAddressLine2;
+		
+		private string _MailCity;
+		
+		private string _MailStateCode;
+		
+		private string _MailZip;
+		
+		private string _MailPhone;
+		
+		public ReturnAccountSearch()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RankNo", DbType="Int")]
+		public System.Nullable<int> RankNo
+		{
+			get
+			{
+				return this._RankNo;
+			}
+			set
+			{
+				if ((this._RankNo != value))
+				{
+					this._RankNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcctTypeDesc", DbType="VarChar(25)")]
+		public string AcctTypeDesc
+		{
+			get
+			{
+				return this._AcctTypeDesc;
+			}
+			set
+			{
+				if ((this._AcctTypeDesc != value))
+				{
+					this._AcctTypeDesc = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(35)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerID", DbType="Int")]
+		public System.Nullable<int> CustomerID
+		{
+			get
+			{
+				return this._CustomerID;
+			}
+			set
+			{
+				if ((this._CustomerID != value))
+				{
+					this._CustomerID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this._CreatedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResAddressLine1", DbType="VarChar(25)")]
+		public string ResAddressLine1
+		{
+			get
+			{
+				return this._ResAddressLine1;
+			}
+			set
+			{
+				if ((this._ResAddressLine1 != value))
+				{
+					this._ResAddressLine1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResAddressLine2", DbType="VarChar(25)")]
+		public string ResAddressLine2
+		{
+			get
+			{
+				return this._ResAddressLine2;
+			}
+			set
+			{
+				if ((this._ResAddressLine2 != value))
+				{
+					this._ResAddressLine2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResCity", DbType="VarChar(20)")]
+		public string ResCity
+		{
+			get
+			{
+				return this._ResCity;
+			}
+			set
+			{
+				if ((this._ResCity != value))
+				{
+					this._ResCity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResStateCode", DbType="VarChar(2)")]
+		public string ResStateCode
+		{
+			get
+			{
+				return this._ResStateCode;
+			}
+			set
+			{
+				if ((this._ResStateCode != value))
+				{
+					this._ResStateCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResZip", DbType="VarChar(5)")]
+		public string ResZip
+		{
+			get
+			{
+				return this._ResZip;
+			}
+			set
+			{
+				if ((this._ResZip != value))
+				{
+					this._ResZip = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResPhone", DbType="VarChar(15)")]
+		public string ResPhone
+		{
+			get
+			{
+				return this._ResPhone;
+			}
+			set
+			{
+				if ((this._ResPhone != value))
+				{
+					this._ResPhone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bMailingAddress", DbType="Bit")]
+		public System.Nullable<bool> bMailingAddress
+		{
+			get
+			{
+				return this._bMailingAddress;
+			}
+			set
+			{
+				if ((this._bMailingAddress != value))
+				{
+					this._bMailingAddress = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailAddressLine1", DbType="VarChar(25)")]
+		public string MailAddressLine1
+		{
+			get
+			{
+				return this._MailAddressLine1;
+			}
+			set
+			{
+				if ((this._MailAddressLine1 != value))
+				{
+					this._MailAddressLine1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailAddressLine2", DbType="VarChar(25)")]
+		public string MailAddressLine2
+		{
+			get
+			{
+				return this._MailAddressLine2;
+			}
+			set
+			{
+				if ((this._MailAddressLine2 != value))
+				{
+					this._MailAddressLine2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailCity", DbType="VarChar(20)")]
+		public string MailCity
+		{
+			get
+			{
+				return this._MailCity;
+			}
+			set
+			{
+				if ((this._MailCity != value))
+				{
+					this._MailCity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailStateCode", DbType="VarChar(2)")]
+		public string MailStateCode
+		{
+			get
+			{
+				return this._MailStateCode;
+			}
+			set
+			{
+				if ((this._MailStateCode != value))
+				{
+					this._MailStateCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailZip", DbType="VarChar(5)")]
+		public string MailZip
+		{
+			get
+			{
+				return this._MailZip;
+			}
+			set
+			{
+				if ((this._MailZip != value))
+				{
+					this._MailZip = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MailPhone", DbType="VarChar(15)")]
+		public string MailPhone
+		{
+			get
+			{
+				return this._MailPhone;
+			}
+			set
+			{
+				if ((this._MailPhone != value))
+				{
+					this._MailPhone = value;
+				}
 			}
 		}
 	}

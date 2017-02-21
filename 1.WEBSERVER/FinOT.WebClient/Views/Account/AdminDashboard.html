@@ -166,24 +166,28 @@
 
                         <div class="tbl-body" ng-if="Ctrl.AccountSearchResult.length">
                             <div class="tbl-row clearfix" ng-repeat="item in Ctrl.AccountSearchResult">
-                                <div class="item item-toggle">
+                                <div class="item" ng-class="{'expanded':toggle}">
                                     <div class="item-header clearfix">
-                                        <div class="col col-20 name pad-l40"><a style="cursor: pointer;" href="#" class="btn-toggle"></a>{{item.Name}}</div>
+                                        <div class="col col-20 name pad-l40"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.Name}}</div>
                                         <div class="col col-20 account-type">{{item.AccountType}}</div>
                                         <div class="col col-25 email"><a href="mailto: {{item.email}}">{{item.email}}</a></div>
                                         <div class="col col-20 created-on">{{item.CreatedDate | date}}</div>
                                         <div class="col col-15 link"><a style="cursor: pointer;" ng-click="Ctrl.EditAccount(item)" class="btn-link">Edit</a></div>
                                     </div>
 
-                                    <div class="item-content clearfix pad-l40">
+                                    <div class="item-content clearfix pad-l40" ng-show="toggle && Ctrl.AccountSearchModel.AccountType.AccountTypeID == 3">
                                         <div class="col-40">
                                             <div class="small-title">Residential address</div>
-                                            <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                            <p>{{item.ResAddressLine1}}, {{item.ResAddressLine2}} <br />{{item.ResCity}}, {{item.ResStateCode}} {{item.ResZip}} <br />Tel: {{item.ResPhone}} <br />Email: {{item.email}}</p>
                                         </div>
 
-                                        <div class="col-40">
-                                            <div class="small-title">Residential address</div>
-                                            <p>1543 Grand View Dr,  <br />Oakland, CA 94611 <br />Tel: (510) 223-5465 <br />Email: johnsmith@gmail.com</p>
+                                        <div class="col-40" ng-show="item.bMailingAddress">
+                                            <div class="small-title">Mailing address</div>
+                                            <p>{{item.MailAddressLine1}}, {{item.MailAddressLine2}} <br />{{item.MailCity}}, {{item.MailStateCode}} {{item.MailZip}} <br />Tel: {{item.MailPhone}} <br />Email: {{item.email}}</p>
+                                        </div>
+                                        <div class="col-40" ng-show="!item.bMailingAddress">
+                                            <div class="small-title">Mailing address</div>
+                                            <p>{{item.ResAddressLine1}}, {{item.ResAddressLine2}} <br />{{item.ResCity}}, {{item.ResStateCode}} {{item.ResZip}} <br />Tel: {{item.ResPhone}} <br />Email: {{item.email}}</p>
                                         </div>
                                     </div>
                                 </div><!-- item-toggle -->
