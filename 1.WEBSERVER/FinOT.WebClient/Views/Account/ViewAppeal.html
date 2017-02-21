@@ -9,7 +9,9 @@
             <div class="breadcrumb border-bottom-grey">
                 <ul>
                     <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
-                    <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
+                    <li ng-show="Ctrl.ShowCase"><a style="cursor: pointer;" ng-click="Ctrl.Back()">{{Ctrl.caseinfo.CaseID}}</a></li>
+                    <li ng-show="!Ctrl.ShowCase"><a style="cursor: pointer;" ng-click="Ctrl.Home()">{{Ctrl.caseinfo.CaseID}}</a></li>
+                    <li class="active">Submitted Appeal</li>
                 </ul>
             </div>
             <!--<div class="col-md-9 col-sm-12">-->
@@ -142,7 +144,14 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="field-group filled-info subhead">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which a copy of the appeal was served</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate != null">
+                                    {{Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate.Month}} / {{Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate.Day}} / {{Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate.Year}}
+                                </div>
+                            </div>
+                        </div><!-- .field-group -->
                         <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>

@@ -2,6 +2,7 @@
 var rapViewResponseController = ['$scope', '$modal', 'alertService', '$location', 'rapGlobalFactory', 'masterdataFactory', '$anchorScroll', function ($scope, $modal, alert, $location, rapGlobalFactory, masterFactory, $anchorScroll) {
     var self = this;
     self.Title = '';
+    self.ShowCase = rapGlobalFactory.FromSelectedCase;
     if (rapGlobalFactory.CaseDetails == null || rapGlobalFactory.CaseDetails == undefined) {
         var userType = rapGlobalFactory.GetUserType();
         if (userType == 'PublicUser') {

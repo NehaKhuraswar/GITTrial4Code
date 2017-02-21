@@ -9,7 +9,9 @@
             <div class="breadcrumb border-bottom-grey">
                 <ul>
                     <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
-                    <li class="active">{{Ctrl.caseinfo.CaseID}}</li>
+                    <li ng-show="Ctrl.ShowCase"><a style="cursor: pointer;" ng-click="Ctrl.Back()">{{Ctrl.caseinfo.CaseID}}</a></li>
+                    <li ng-show="!Ctrl.ShowCase"><a style="cursor: pointer;" ng-click="Ctrl.Home()">{{Ctrl.caseinfo.CaseID}}</a></li>
+                    <li class="active">Submitted Petition Form</li>
                 </ul>
             </div>
             <!--<div class="col-md-9 col-sm-12">-->

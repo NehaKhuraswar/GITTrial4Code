@@ -141,7 +141,14 @@
             </div>
         </div>
     </div>
-
+    <div class="field-group filled-info subhead">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which a copy of the appeal was served</div></div>
+            <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate != null">
+                {{Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate.Month}} / {{Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate.Day}} / {{Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate.Year}}
+            </div>
+        </div>
+    </div><!-- .field-group -->
     <div class="field-group filled-info subhead" ng-repeat="item in Ctrl.caseinfo.TenantAppealInfo.serveAppeal.OpposingParty | filter: {IsDeleted: false}">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Opposing party</div></div>
