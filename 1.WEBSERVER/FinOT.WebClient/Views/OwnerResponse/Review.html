@@ -324,21 +324,7 @@
                                 <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                             </div>
                         </div><!-- .field-group -->
-                        <!--<div class="field-group filled-info subhead no-top-margin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12"><div class="info-title">Did you provide rent program notice with the notice of rent increase?</div></div>
-                <div class="col-sm-6 col-xs-12">Yes</div>
-            </div>
-        </div>-->
-                        <!-- .field-group -->
-                        <!--<div class="field-group filled-info subhead no-top-margin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12"><div class="info-title">Date notice served</div></div>
-                <div class="col-sm-6 col-xs-12">01/09/16</div>
-            </div>
-        </div>-->
-                        <!-- .field-group -->
-
+                   
                         <div class="field-group filled-info subhead no-top-margin">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
@@ -363,22 +349,55 @@
                                 </div>
                             </div>
                         </div><!-- .field-group -->
-                        <!--<div class="field-group filled-info subhead no-top-margin">
-            <div class="info-title full-width">Description of the document that you are attaching</div>
-            <div class="row">
-                <div class="col-sm-9 col-xs-12">Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam. Vivamus lacus metus, aliquam vitae erat tristique, semper rutrum nibh.</div>
-            </div>
-        </div>-->
-                        <!-- .field-group -->
-                        <!--<div class="field-group filled-info subhead no-top-margin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12"><div class="info-title">Justification document</div></div>
-                <div class="col-sm-6 col-xs-12">justification_document.pdf</div>
-            </div>
-        </div>-->
-                        <!-- .field-group -->
+                        
                     </div>
-                   
+                    <div class="subhead type2" ng-show="FilteredDocsRAPNotice2.length != 0">
+                        <h4>Signed copy of notice</h4>
+                    </div>
+                    <div class="field-group" ng-show="FilteredDocsRAPNotice2.length != 0">
+                        <!-- Custom Table -->
+                        <div class="custom-table docs-list">
+                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2'} as FilteredDocsRAPNotice2">
+                                <div class=" tbl-row clearfix">
+                                    <div class="item">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30">{{item.DocName}}</div>
+                                            &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                            &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subhead type2" ng-show="FilteredDocJustification.length != 0">
+                        <h4>Justification documentation</h4>
+                    </div>
+                    <div class="field-group" ng-show="FilteredDocJustification.length != 0">
+                        <!-- Custom Table -->
+                        <div class="custom-table docs-list">
+                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_Justification'} as FilteredDocJustification">
+                                <div class=" tbl-row clearfix">
+                                    <div class="item" ng-class="{'expanded':toggle}">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30">
+                                                <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
+                                            </div>
+                                            &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                            &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                        </div>
+                                    </div>
+                                    <div class="item-content" ng-show="toggle">
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-12">
+                                                <p>{{item.DocDescription}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Decreased housing services -->
                     <div class="subhead type2">
                         <h4>Decreased housing services</h4>

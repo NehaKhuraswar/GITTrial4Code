@@ -8,12 +8,11 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
     self.caseinfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;
     self.docDescription = null;
-    self.showUploadedFile = false;
     self.Hide = false;
     self.Error = '';
     self.Calender = masterFactory.Calender;
     self.IsJustificationSelected = false;
-
+    self.TempDocs = [];
     rapFactory.GetOResponseRentIncreaseAndPropertyInfo(self.caseinfo).then(function (response) {
         if (!alert.checkForResponse(response)) {
             self.Error = rapGlobalFactory.Error;
@@ -56,13 +55,18 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
                                 document.Base64Content = base64.substring(base64.indexOf('base64') + 7);
                             }
                         }
-                        if (docTitle == 'OR_Justification')
+                        if (docTitle == 'OR_RAPNotice1')
                         {
-                            document.DocDescription = angular.copy(self.docDescription);
-                            self.docDescription = null;
+                            self.caseinfo.Documents.push(document);
                         }
-                        self.caseinfo.Documents.push(document);
-                        self.showUploadedFile = true;
+                        else
+                        {
+                            if (docTitle == 'OR_Justification') {
+                                document.DocDescription = angular.copy(self.docDescription);
+                                self.docDescription = null;
+                            }
+                            self.TempDocs.push(document);
+                        }                    
                         RestrictUpload()
                     }
                 }
@@ -80,6 +84,10 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
         var index = self.caseinfo.Documents.indexOf(doc);
         self.caseinfo.Documents.splice(index, 1);
         RestrictUpload();
+    }
+    self.DeleteFromTempDocs = function (doc) {
+        var index = self.TempDocs.indexOf(doc);
+        self.TempDocs.splice(index, 1);
     }
     function RestrictUpload() {
    
@@ -114,7 +122,11 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
             self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(_rent);
             self.Rent = new Object();
             self.Rent = self.caseinfo.OwnerResponseInfo.PropertyInfo.Rent;
-            self.showUploadedFile = false;
+            var RAP2documents = angular.copy(self.TempDocs);
+            RAP2documents.forEach(function (document) {
+                self.caseinfo.Documents.push(document);
+            });
+            self.TempDocs = []
         }
         else
         {

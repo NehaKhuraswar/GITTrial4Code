@@ -239,16 +239,16 @@
                                 <span class="btn-link">Upload signed copy of notice</span>
                                 <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OR_RAPNotice2')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                             </div>
-                            <div class="field-group" ng-show="Ctrl.showUploadedFile">
+                            <div class="field-group">
                                 <table class="table table-condensed nopadding-bottom">
                                     <tbody>
-                                        <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2'}">
+                                        <tr ng-repeat="item in Ctrl.TempDocs | filter: {DocTitle: 'OR_RAPNotice2'}">
                                             <td class="nopadding-left">
                                                 {{item.DocName}}
                                             </td>
                                             <td>
-                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                
+                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.DeleteFromTempDocs(item)" class="btn-link btn-delete">Delete</a></div>
 
                                             </td>
                                         </tr>
@@ -383,16 +383,15 @@
                                 <span class="btn-link">Attach document</span>
                                 <input type="file" id="attached_document" name="attached_document" ngf-select ngf-change="onFileSelected($files,'OR_Justification')" accept=".doc,.docx,.pdf,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                             </div>
-                            <div class="field-group" ng-show="Ctrl.showUploadedFile">
+                            <div class="field-group">
                                 <table class="table table-condensed nopadding-bottom">
                                     <tbody>
-                                        <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_Justification'}">
+                                        <tr ng-repeat="item in Ctrl.TempDocs | filter: {DocTitle: 'OR_Justification'}">
                                             <td class="nopadding-left">
                                                 {{item.DocName}}
                                             </td>
                                             <td>
-                                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.DeleteFromTempDocs(item)" class="btn-link btn-delete">Delete</a></div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -455,38 +454,54 @@
                                 <button class="btn-link btn-delete" ng-click="Ctrl.RemoveRecord(item)">Remove</button>
                             </div>
                         </div>
-                        <div class="field-group">
-                            <table class="table table-condensed nopadding-bottom">
-                                <tbody>
-                                    <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2'}">
-                                        <td class="nopadding-left">
-                                            {{item.DocName}}
-                                        </td>
-                                        <td>
-                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-condensed nopadding-bottom">
-                                <tbody>
-                                    <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_Justification'}">
-                                        <td class="nopadding-left">
-                                            {{item.DocName}}
-                                        </td>
-                                        <td>
-                                            <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                            <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    </div>
+                    <div class="subhead type2" ng-show="FilteredDocsRAPNotice2.length != 0">
+                        <h4>Signed copy of notice</h4>
+                    </div>
+                    <div class="field-group" ng-show="FilteredDocsRAPNotice2.length != 0">
+                        <!-- Custom Table -->
+                        <div class="custom-table docs-list">
+                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_RAPNotice2'} as FilteredDocsRAPNotice2">
+                                <div class=" tbl-row clearfix">
+                                    <div class="item">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30">{{item.DocName}}</div>
+                                            &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                            &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- .field-group -->
-
+                    <div class="subhead type2" ng-show="FilteredDocJustification.length != 0">
+                        <h4>Justification documentation</h4>
+                    </div>
+                    <div class="field-group" ng-show="FilteredDocJustification.length != 0">
+                        <!-- Custom Table -->
+                        <div class="custom-table docs-list">
+                            <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OR_Justification'} as FilteredDocJustification">
+                                <div class=" tbl-row clearfix">
+                                    <div class="item" ng-class="{'expanded':toggle}">
+                                        <div class="item-header clearfix">
+                                            <div class="col col-35 name pad-l30">
+                                            <a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}
+                                            </div>
+                                            &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                            &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
+                                        </div>
+                                    </div>
+                                    <div class="item-content" ng-show="toggle">
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-12">
+                                                <p>{{item.DocDescription}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 

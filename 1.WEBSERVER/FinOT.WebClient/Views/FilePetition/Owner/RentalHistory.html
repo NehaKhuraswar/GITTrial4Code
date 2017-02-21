@@ -331,12 +331,6 @@
                 <div class="field-group" ng-show="FilteredDocsRAPNotice2.length != 0">
                     <!-- Custom Table -->
                     <div class="custom-table docs-list">
-                        <div class="tbl-header">
-                            <div class="tbl-row clearfix">
-                                <div class="col col-35 name">File name</div>
-                            </div>
-                        </div>
-
                         <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice2'} as FilteredDocsRAPNotice2">
                             <div class=" tbl-row clearfix">
                             <div class="item">

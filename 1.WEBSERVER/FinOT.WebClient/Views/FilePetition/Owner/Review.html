@@ -287,14 +287,14 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
                             <div class="info-title">Signed copy of notice</div>
-                            <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'} as FilteredDocsRAPNotice ">
-                                {{item.DocName}}
-                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a><br />
-                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'} as FilteredDocsRAPNotice ">
+                            {{item.DocName}}
+                            &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a><br />
                         </div>
                     </div>
-                </div><!-- .field-group -->
-
+                </div>
+              
                 <div class="field-group filled-info subhead no-top-margin">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Is the tenant current on the rent?</div></div>
@@ -349,7 +349,7 @@
 
                 <div class="subhead type2" ng-show="FilteredDocsRAPNotice2.length != 0">
                     <h4>Signed copy of RAP notice</h4>
-                </div>f
+                </div>
 
                 <div class="field-group" ng-show="FilteredDocsRAPNotice2.length != 0">
                     <!-- Custom Table -->
