@@ -319,10 +319,10 @@
                                 <label ng-if="!item.bRentIncreaseNoticeGiven">
                                     <i></i><span>No</span>
                                 </label>
-                             </div>
-                           
+                            </div>
+
                         </div>
-                    </div><!-- .field-group -->                 
+                    </div><!-- .field-group -->
                     <!-- .field-group -->
                     <div class="field-group filled-info subhead no-top-margin" ng-show="item.bRentIncreaseNoticeGiven">
                         <div class="row">
@@ -362,11 +362,12 @@
 
                         <div class="tbl-body" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice2'} as FilteredDocsRAPNotice2">
                             <div class="tbl-row clearfix">
-                            <div class="item">
-                                <div class="item-header clearfix">
-                                    <div class="col col-35 name pad-l30">{{item.DocName}}</div>
-                                    &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
-                                </div>                               
+                                <div class="item">
+                                    <div class="item-header clearfix">
+                                        <div class="col col-35 name pad-l30">{{item.DocName}}</div>
+                                        &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
