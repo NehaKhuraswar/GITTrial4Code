@@ -42,12 +42,12 @@
                                 <p ng-show="Ctrl.caseinfo.PetitionCategoryID == 1">{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.AddressLine2}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.Zip}}</p>
                                 <p ng-show="Ctrl.caseinfo.PetitionCategoryID == 2">{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State.StateCode}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip}}</p>
                             </div>
-                            <div class="field-group" ng-show="Ctrl.EditAPNAddress== false">
+                            <div class="field-group" ng-show="Ctrl.EditAPNAddress== false && Ctrl.caseinfo.PetitionCategoryID == 1">
                                 <div class="small-title">APN address</div>
                                 <p>{{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine1}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.AddressLine2}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.City}}, {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.State.StateCode}} {{Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.Zip}} &nbsp;&nbsp;<a style="cursor: pointer;" ng-click="Ctrl.EditAPNAddress=true" ng-hide="Ctrl.model.IsNonRAPStaff == true" class="btn-link">Edit</a></p>
                             </div>
                             <!-- Accounts List -->
-                            <div class="custom-table selected-case mar-bottom-40" ng-show="Ctrl.EditAPNAddress==true">
+                            <div class="custom-table selected-case mar-bottom-40" ng-show="Ctrl.EditAPNAddress==true && Ctrl.caseinfo.PetitionCategoryID == 1">
                                 <div class="tbl-body">
                                     <div class="tbl-row clearfix">
                                         <div class="item highlighted">
@@ -89,6 +89,52 @@
                                 </div>
                             </div>
                             <!-- .custom-table -->
+                            <div class="field-group" ng-show="Ctrl.EditAPNAddress== false && Ctrl.caseinfo.PetitionCategoryID == 2">
+                                <div class="small-title">APN address</div>
+                                <p>{{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.AddressLine1}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.AddressLine2}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.City}}, {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.State.StateCode}} {{Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.Zip}} &nbsp;&nbsp;<a style="cursor: pointer;" ng-click="Ctrl.EditAPNAddress=true" ng-hide="Ctrl.model.IsNonRAPStaff == true" class="btn-link">Edit</a></p>
+                            </div>
+                            <!-- Accounts List -->
+                            <div class="custom-table selected-case mar-bottom-40" ng-show="Ctrl.EditAPNAddress==true && Ctrl.caseinfo.PetitionCategoryID == 2">
+                                <div class="tbl-body">
+                                    <div class="tbl-row clearfix">
+                                        <div class="item highlighted">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-100  pad-l20 pad-r20"><strong>Edit APN address</strong></div>
+                                            </div>
+
+                                            <div class="item-content pad-l20 pad-r20 clearfix">
+                                                <div class="item-row clearfix">
+                                                    <div class="item-col col-100 align-left">
+                                                        <div class="field-group">
+                                                            <label for="mailing_address1">Mailing address 1</label>
+                                                            <input type="text" name="mailing_address1" id="mailing_address1" class="field-input" placeholder=""
+                                                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.AddressLine1" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="item-col col-100 align-left">
+                                                        <div class="field-group">
+                                                            <label for="mailing_address2">Mailing address 2 (optional)</label>
+                                                            <input type="text" name="mailing_address2" id="mailing_address2" class="field-input" placeholder=""
+                                                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.AddressLine2" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="item-col col-100 align-left">
+                                                        <div class="field-group">
+                                                            <label for="zip_code">Zip code</label>
+                                                            <input type="text" name="zip_code" id="zip_code" maxlength="5" class="field-input" placeholder=""
+                                                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.Zip" />
+                                                        </div>
+                                                    </div>
+                                                    <a style="cursor: pointer;" ng-click="Ctrl.UpdateAPNAddress(Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress)" class="btn-link btn-abs">Save</a>
+                                                </div>
+
+                                            </div>
+                                        </div><!-- item-toggle -->
+                                    </div><!-- item-row -->
+                                </div>
+                            </div>
 
 
                             <div class="field-group selected-case mar-b10">
@@ -99,11 +145,17 @@
                                     </div>
 
                                     <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsNonRAPStaff == true">
-                                        <div class="field-group has-btn">
+                                        <div class="field-group has-btn" ng-show="Ctrl.caseinfo.PetitionCategoryID == 1">
                                             <label for="apn_number" class="hidden">APN Number</label>
                                             <input type="text" name="apn_number" id="apn_number" class="field-input" placeholder="Enter APN number"
                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber" />
                                             <a style="cursor: pointer;" ng-click="Ctrl.UpdateAPNNumber(Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress)" class="btn-link">Save</a>
+                                        </div>
+                                        <div class="field-group has-btn" ng-show="Ctrl.caseinfo.PetitionCategoryID == 2">
+                                            <label for="apn_number" class="hidden">APN Number</label>
+                                            <input type="text" name="apn_number" id="apn_number" class="field-input" placeholder="Enter APN number"
+                                                   ng-model="Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.APNNumber" />
+                                            <a style="cursor: pointer;" ng-click="Ctrl.UpdateAPNNumber(Ctrl.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress)" class="btn-link">Save</a>
                                         </div>
                                     </div>
                                 </div>

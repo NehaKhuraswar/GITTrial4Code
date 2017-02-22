@@ -13,8 +13,13 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
     self.EditAPNAddress = false;
     self.EditAPNNumber = false;
     self.Error = '';
+
+    // Setting the local APN NUmber after getting it back
     if (self.caseinfo.TenantPetitionInfo != null) {
         self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
+    }
+    if (self.caseinfo.OwnerPetitionInfo != null) {
+        self.APNNumber = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.APNNumber;
     }
     self.Home = function () {
         $location.path("/staffdashboard");
@@ -41,6 +46,13 @@ var rapSelectedCaseController = ['$scope', '$modal', 'alertService', 'rapSelecte
                 return;
             }
             self.caseinfo = response.data;
+            // Setting the local APN NUmber after getting it back
+            if (self.caseinfo.TenantPetitionInfo != null) {
+                self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
+            }
+            if (self.caseinfo.OwnerPetitionInfo != null) {
+                self.APNNumber = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.APNNumber;
+            }
             checkRecipients();
         });
     }
@@ -255,7 +267,12 @@ self.UpdateAPNAddress = function (apnAddress) {
                 return;
             }
             self.EditAPNNumber = false;
-            self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
+            if (self.caseinfo.PetitionCategoryID == 1) {
+                self.APNNumber = self.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber;
+            }
+            if (self.caseinfo.PetitionCategoryID == 2) {
+                self.APNNumber = self.caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.APNNumber;
+            }
 });
     }
     self.bEnableSendEmail = false

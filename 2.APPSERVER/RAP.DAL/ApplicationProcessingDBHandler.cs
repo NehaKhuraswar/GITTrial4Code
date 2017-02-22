@@ -860,6 +860,7 @@ namespace RAP.DAL
                                 applicantUser.result.apnAddress.AddressLine2 = applicantUser.result.AddressLine2;
                                 applicantUser.result.apnAddress.City = applicantUser.result.City;
                                 applicantUser.result.apnAddress.Zip = applicantUser.result.Zip;
+                                applicantUser.result.apnAddress.State = applicantUser.result.State;
                                 applicantUser.result.apnAddress.UserID = applicantUser.result.UserID;
                             }
                             caseinfo.TenantPetitionInfo.ApplicantUserInfo = applicantUser.result;
@@ -1003,8 +1004,21 @@ namespace RAP.DAL
                                     caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser.UserID).Select(x => x.EmailNotification).FirstOrDefault();
                                 }
                             }
-                        }          
-                        
+                        }
+
+                        if (caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.IsAPNAddress == true)
+                        {
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress = _commondbHandler.GetAPNAddress(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).result;
+                        }
+                        else
+                        {
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.AddressLine1 = caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine1;
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.AddressLine2 = caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.AddressLine2;
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.City = caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.City;
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.Zip = caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.Zip;
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.State = caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.State;
+                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.apnAddress.UserID = caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID;
+                        }
                         var TranslationServiceResult = _accountdbHandler.GetTranslationServiceInfo(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID);
                         if (TranslationServiceResult.status.Status == StatusEnum.Success)
                         {
