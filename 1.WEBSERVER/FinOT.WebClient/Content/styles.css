@@ -6707,7 +6707,7 @@ Toggle Menu Button
     width: 50%;
   }
   /* line 3578, ../sass/styles.scss */
-  .custom-table.docs-list .tbl-body .item .item-header .btn-delete {
+  .custom-table.docs-list .tbl-body .item .item-header .btn-delete,.custom-table.docs-list .tbl-body .item .item-header .btn-download {
     position: relative;
     top: -5px !important;
     right: none;

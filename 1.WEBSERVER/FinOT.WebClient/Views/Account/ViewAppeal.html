@@ -87,15 +87,24 @@
             <p>g) The contested increase is the second rent increase in a 12-month period.</p>-->
                             </div>
                         </div>
-                        <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsGrounds.length != 0">
+                        <div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsExplanation.length != 0">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Explanation</div></div>
-                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'A_Grounds'} as FilteredDocsGrounds">
-                                    {{item.DocName}}
-                                    &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'A_Grounds'} as FilteredDocsExplanation">
+                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)"> {{item.DocName}}</a>
+                                    &nbsp;
                                 </div>
                             </div>
                         </div><!-- .field-group -->
+                        <!--<div class="field-group filled-info subhead no-top-margin" ng-show="FilteredDocsGrounds.length != 0">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12"><div class="info-title">Explanation</div></div>
+                                <div class="col-sm-6 col-xs-12" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'A_Grounds'} as FilteredDocsGrounds">
+                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)"> {{item.DocName}}</a>
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>--><!-- .field-group -->
                         <!-- Additional Documentation -->
                         <div class="subhead type2 no-bottom-margin">
                             <h4>Additional Documentation</h4>
@@ -114,7 +123,8 @@
                                         <div class="item" ng-class="{'expanded':toggle}">
                                             <div class="item-header clearfix">
                                                 <div class="col col-35 name pad-l30"><a style="cursor: pointer;" ng-click="toggle = !toggle" class="btn-toggle"></a>{{item.DocName}}</div>
-                                                &nbsp;<a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                                <div class="col col-35 name type">&nbsp;</div>
+                                                <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                             </div>
 
                                             <div class="item-content clearfix" ng-show="toggle">
