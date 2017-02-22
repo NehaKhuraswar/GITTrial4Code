@@ -48,6 +48,7 @@
             }
             rapGlobalFactory.CaseDetails = response.data;
             $scope.model.oresponseVerification = false;
+            $scope.model.oResponseCurrentStatus.Verification = false;
             $scope.model.DisableAllCurrent();
             $scope.model.oResponseActiveStatus.Verification = true;
             $scope.model.oresponseConfirmation = true;
