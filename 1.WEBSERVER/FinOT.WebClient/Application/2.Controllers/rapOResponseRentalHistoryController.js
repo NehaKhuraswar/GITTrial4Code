@@ -153,8 +153,7 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
             }
             else
             {
-                self.Error = 'Justification is not selected';
-                $anchorScroll();
+                self.Error = 'Justification is not selected';              
             }
         }
         

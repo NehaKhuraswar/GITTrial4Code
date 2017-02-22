@@ -6,6 +6,7 @@ var rapOResponseReviewController = ['$scope', '$modal', 'alertService', 'rapORes
     self.custDetails = rapGlobalFactory.CustomerDetails;
     self.caseinfo = rapGlobalFactory.CaseDetails;
     self.caseinfo.CustomerID = self.custDetails.custID;
+    self.caseinfo.OwnerResponseInfo.ApplicantInfo.CustomerID = self.custDetails.custID;
     self.caseinfo.OwnerResponseInfo.PropertyInfo.CustomerID = self.custDetails.custID;
 
     self.Calender = masterFactory.Calender;
