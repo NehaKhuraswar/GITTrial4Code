@@ -585,6 +585,20 @@ namespace RAP.Business.Implementation
             try
             {
                 result = _dbHandler.GetTenantAppealInfoForReview(AppealID, CustomerID);
+                if(result.status.Status == StatusEnum.Success)
+                {
+                    var docsResult = _commonService.GetDocuments(CustomerID, false, "A_Grounds");
+                    if (docsResult.status.Status == StatusEnum.Success && docsResult.result != null)
+                    {
+                        foreach (var doc in docsResult.result)
+                        {
+                            if (doc != null)
+                            {
+                                result.result.TenantAppealInfo.Documents.Add(doc);
+                            }
+                        }
+                    }
+                }
                 return result;
             }
             catch (Exception ex)
