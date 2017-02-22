@@ -6074,7 +6074,7 @@ namespace RAP.DAL
             ReturnResult<CaseInfoM> result = new ReturnResult<CaseInfoM>();
             try
             {
-
+                bool pageSubmitted = true;
                 if (model.NumberOfUnitsRange == null || model.NumberOfUnitsRange.Count == 0)
                 {
                     var rangeDB = _dbContext.NumberRangeForUnits.ToList();
@@ -6099,6 +6099,7 @@ namespace RAP.DAL
                 if (applicantInfo == null)
                 {
                     applicantInfo = _dbContext.OwnerResponseApplicantInfos.Where(r => r.CustomerID == model.OwnerResponseInfo.ApplicantInfo.CustomerID && r.bPetitionFiled == true).OrderByDescending(c => c.CreatedDate).FirstOrDefault();
+                    pageSubmitted = false;
                 }
 
                 if (applicantInfo != null)
@@ -6129,7 +6130,10 @@ namespace RAP.DAL
                     _applicantInfo.bMoreThanOneStreetOnParcel = (applicantInfo.bMoreThanOneStreetOnParcel != null) ? Convert.ToBoolean(applicantInfo.bMoreThanOneStreetOnParcel) : false;
                     _applicantInfo.CustomerID = (applicantInfo.CustomerID != null) ? Convert.ToInt32(applicantInfo.CustomerID) : 0; ;
                     _applicantInfo.bPetitionFiled = Convert.ToBoolean(applicantInfo.bPetitionFiled);
-                    _applicantInfo.CaseRespondingTo = applicantInfo.CaseRespondingTo;
+                    if (pageSubmitted)
+                    {
+                        _applicantInfo.CaseRespondingTo = applicantInfo.CaseRespondingTo;
+                    }
                     _applicantInfo.NumberOfUnitsRangeID = (applicantInfo.RangeID != null) ? Convert.ToInt32(applicantInfo.RangeID) : 0;
                     model.OwnerResponseInfo.ApplicantInfo = _applicantInfo;
                     result.result = model;
