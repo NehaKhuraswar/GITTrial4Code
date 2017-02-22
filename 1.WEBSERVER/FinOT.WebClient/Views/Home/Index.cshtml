@@ -25,17 +25,17 @@
     <body>
         <div id="site-header">
             <div class="top-header">
-                <div class="container">OAKLAND HOUSING & COMMUNITY DEVELOPMENT</div>
+                <div class="container"><a href="http://www2.oaklandnet.com/government/o/hcd/index.htm" target="_blank">OAKLAND HOUSING &amp; COMMUNITY DEVELOPMENT</a></div>
             </div>
 
             <div class="bottom-header">
                 <div class="container">
                     <div id="sitetitle-wrapper">
                         <h1 id="sitetitle"><a>City of Oakland</a></h1>
-                        <div class="description">Rent Adjustment  <br />Program</div>
+                        <div class="description">Rent Adjustment <br />Program</div>
                     </div>
 
-                    <div class="get-assistance"><strong>Get assistance</strong> &nbsp;&nbsp;(510) 000-0000</div>
+                    <div class="get-assistance"><strong>Get assistance</strong> &nbsp;&nbsp;(510) 238-3721</div>
 
 
                     <a href="javascript:void();" class="menu-toggle"><span></span></a>
@@ -63,19 +63,43 @@
 
                         <div class="site-navigation">
                             <ul>
-                                <li><a href="#about">About</a></li>
-                                <li><a href="#issues">Issues</a></li>
+                                <li><a href="http://rapwp.oaklandnet.com/about/">About</a>
+								<ul class="sub-menu">
+										<li><a href="http://rapwp.oaklandnet.com/about/rap/">Rent Adjustment Program</a></li> 
+                                        <li><a href="http://rapwp.oaklandnet.com/about/rent-board-meetings/">Rent Board Meetings</a></li>
+                                        <li><a href="http://rapwp.oaklandnet.com/about/petition-process/">Petition Process</a></li>
+                                        <li><a href="http://rapwp.oaklandnet.com/about/laws/">Laws</a></li>
+                                    </ul>
+								
+								
+								
+								</li>
+                                <li><a href="http://rapwp.oaklandnet.com/issues/">Issues</a>
+									 <ul class="sub-menu">
+                                       
+                                        <li><a href="http://rapwp.oaklandnet.com/issues/loss-of-service/">Loss of service</a></li>
+                                        <li><a href="http://rapwp.oaklandnet.com/issues/rent-increase/">Rent Increase</a></li>
+                                        <li><a href="http://rapwp.oaklandnet.com/issues/eviction/">Eviction</a></li>
+										<li><a href="http://rapwp.oaklandnet.com/issues/exemptions/">Exemptions</a></li>
+                                    </ul>
+								
+								
+								</li>
                                 <li class="menu-item-has-children">
-                                    <a href="#resources">Resources</a>
+                                    <a href="http://rapwp.oaklandnet.com/resources/">Resources</a>
                                     <ul class="sub-menu">
-                                        <li><a style="cursor: pointer;">Loss of Service</a></li>
-                                        <li><a style="cursor: pointer;">Rent Increase</a></li>
-                                        <li><a style="cursor: pointer;">Eviction</a></li>
-                                        <li><a style="cursor: pointer;">Exemptions</a></li>
+                                       
+                                        <li><a href="http://rapwp.oaklandnet.com/resources/faq/">FAQ</a></li>
+                                        <li><a href="http://rapwp.oaklandnet.com/resources/calculators/">Calculators</a></li>
+                                        <li><a href="http://rapwp.oaklandnet.com/resources/glossary-of-terms/">Glossary of Terms</a></li>
+										<li><a href="http://rapwp.oaklandnet.com/resources/helpful-contacts/">Helpful Contacts</a></li>
+										<li><a href="http://rapwp.oaklandnet.com/resources/required-notices/">Required Notices</a></li>
+										<li><a href="http://rapwp.oaklandnet.com/resources/additional-info/">Additional Information</a></li>
+										
                                     </ul>
                                 </li>
-                                <li><a href="#petition Forms">Petition Forms</a></li>
-                                <li><a href="#cases-database">Cases Database</a></li>
+                                <li><a href="http://rapwp.oaklandnet.com/petition-forms/">Petition Forms</a></li>
+                                
                             </ul>
                         </div>
 
@@ -83,8 +107,7 @@
                             <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout" style="cursor: pointer;">Log out</a>
 
                             <ul class="account-details clearfix">
-                                <li class="search"><a style="cursor: pointer;" title="Search">Search</a></li>
-                                <li class="language"><a style="cursor: pointer;" title="Choose language" class="toggle-link" data-toggle="site-language-wrapper">Language</a></li>
+                                
                                 <li class="signedin" ng-show="Ctrl.UserName !=''"><a style="cursor: pointer;" ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
                                 <li class="signedin" ng-show="Ctrl.UserName ==''"><a style="cursor: pointer;" ng-click="Ctrl.PublicLoginPage()">Log in</a></li>
                             </ul>
@@ -112,7 +135,7 @@
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 <div class="footer-widget about">
                                     <h3>About the Rent Adjustment Program</h3>
-                                    <p>Edis doluptatur, tescium eliscia conseq uiatur simus asse cusaerem. Namet et quidem quassusa quo etur rest ma qui corro quam et re, exerore voluptaqui repudi quias.</p>
+                                    <p>We believe community begins with where you live, and we’re committed to fostering healthy relationships between property owners and tenants. RAP does not provide legal advice but can help put you in contact with organizations who can.</p>
                                 </div>
                             </div>
 
@@ -121,7 +144,7 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="footer-widget get-assistance">
                                             <h3>Get assistance</h3>
-                                            <p>(510) 000-0000</p>
+                                            <p>(510) 238-3721</p>
                                         </div>
                                     </div>
 
@@ -132,16 +155,16 @@
                                             <div class="row">
                                                 <div class="col-md-5 col-sm-12 col-xs-12">
                                                     <ul>
-                                                        <li><a style="cursor: pointer;">Housing & Community Development</a></li>
-                                                        <li><a style="cursor: pointer;">City of Oakland</a></li>
-                                                        <li><a style="cursor: pointer;">Calculators</a></li>
+                                                        <li><a href="http://www2.oaklandnet.com/government/o/hcd/index.htm" target="_blank">Housing &amp; Community Development</a></li>
+                                                        <li><a href="http://www2.oaklandnet.com/" target="_blank">City of Oakland</a></li>
+                                                        <li><a href="http://rapwp.oaklandnet.com/resources/calculators/">Calculators</a></li>
                                                     </ul>
                                                 </div>
 
                                                 <div class="col-md-4 col-sm-12 col-xs-12">
                                                     <ul>
-                                                        <li><a style="cursor: pointer;">Glossary of Terms</a></li>
-                                                        <li><a style="cursor: pointer;">Frequently Asked Questions</a></li>
+                                                        <li><a href="http://rapwp.oaklandnet.com/resources/glossary-of-terms/">Glossary of Terms</a></li>
+                                                        <li><a href="http://rapwp.oaklandnet.com/resources/faq/">Frequently Asked Questions</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -157,12 +180,9 @@
                     <div class="copyright-info">
                         <div class="row">
                             <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="copyright">&copy; 2016 City of Oakland All Rights Reserved</div>
+                                <div class="copyright">&copy; 2017 City of Oakland All Rights Reserved</div>
 
-                                <ul class="footer-links">
-                                    <li><a style="cursor: pointer;">Privacy Policy</a></li>
-                                    <li><a style="cursor: pointer;">Terms of Service</a></li>
-                                </ul>
+                                
                             </div>
 
                             <div class="col-md-6 col-sm-12 col-xs-12">
