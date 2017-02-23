@@ -18,7 +18,7 @@
                     <li class="active">Send email notifications</li>
                 </ul>
             </div>
-
+            <div class="page-sub-title">Send Email Notification</div>
             <div class="application-form-wrapper">
                 <div class="application-step step-1">
                     <div class="alert alert-error" ng-show="Ctrl.Error!=''">
@@ -26,11 +26,11 @@
                     </div>
                     <form name="frmSendEmailNotification" id="frmSendEmailNotification" action="#" method="post" class="application-form">
                         <div class="step-content step1">
-							<h3 class="step-heading mar-t30">Send Email Notification</h3>
+                            <h3 class="step-heading mar-t30">Send Email Notification</h3>
                             <div class="field-group no-top-margin no-bottom-margin">
                                 <div class="row">
                                     <div class="col-md-8 col-sm-12 col-xs-12">
-                                        <p>Maecenas varius ex sed nisl sagittis ultrices. Vivamus congue ultrices purus nec tempus. Fusce convallis nunc dolor, vitae lacinia erat rutrum id. Donec nec urna tempus diam ultrices pharetra vel vel diam.</p>
+                                        <p>Please use the form below to send custom email notifications to individuals attached to their case.</p>
                                     </div>
                                 </div>
                             </div>
@@ -38,8 +38,8 @@
 
                             <div class="field-group">
                                 <label for="notification_type">Notification type</label>
-                                <div>                                   
-                                 
+                                <div>
+
                                     <select name="activity" id="activity" data-placeholder="Select type"
                                             ng-model="Ctrl.SelectedActivity" class="custom-select"
                                             ng-options="activity as (activity.ActivityDesc) for activity in Ctrl.ActivityList track by activity.ActivityID">
@@ -98,7 +98,7 @@
                                                     {{item.DocName}}
                                                 </td>
                                                 <td>
-                                                   <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
+                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -107,12 +107,12 @@
                             </div>
 
 
-                           
+
 
                         </div>
 
 
-                        <div class="step-footer">                            
+                        <div class="step-footer">
                             <input role="button" aria-label="Submit" type="button" id="submit" name="submit" class="btn-primary" value="Submit" ng-click="Ctrl.Submit()" />
                             <input role="button" aria-label="Cancel" type="button" id="cancel" name="cancel" class="btn-primary btn-gray" value="Cancel" ng-click="Ctrl.BackToCase()" />
                         </div>

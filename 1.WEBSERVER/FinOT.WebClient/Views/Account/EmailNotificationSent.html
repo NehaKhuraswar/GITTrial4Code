@@ -18,6 +18,7 @@
                     <li class="active">Email notifications</li>
                 </ul>
             </div>
+
             <div class="breadcrumb border-bottom-grey" ng-show="Ctrl.FromSelectedCase == false">
                 <ul>
                     <li><a style="cursor: pointer;" ng-click="Ctrl.Home()">Home</a></li>
@@ -39,23 +40,23 @@
                             <div class="field-group no-top-margin no-bottom-margin mar-bottom-20">
                                 <div class="row">
                                     <div class="col-md-8 col-sm-12 col-xs-12">
-                                        <p>The following notification has been sent to</p>
+                                        <p>The following notification has been sent to:</p>
                                         <div ng-repeat="item in Ctrl.model.Message.RecipientAddress">
                                             <p><strong> {{item}} </strong><br /></p>
-                                        </div>                                       
-                                       <p>at <strong> {{Ctrl.Date| date }}</strong></p>
+                                        </div>
+                                        <p>on <strong> {{Ctrl.Date| date }}</strong></p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Message -->
                             <div class="table-list mar-b0">
-                                <div class="small-title pad-b5">{{Ctrl.model.Message.MessageBody}}</div>
+                                <div class="small-title pad-b5">Message</div>
 
                                 <div class="table-row clearfix pad-t15">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-12">
-                                            <p>This is an official notice from the City of Oakland Rent Adjustment Program. Please check the attached files promptly.</p>
+                                            <p>{{Ctrl.model.Message.MessageBody}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -90,6 +91,3 @@
         </div><!-- .container -->
     </div><!-- .page-content -->
 </div><!-- #content -->
-<?php
-  include('../include/footer.html');
-?>
