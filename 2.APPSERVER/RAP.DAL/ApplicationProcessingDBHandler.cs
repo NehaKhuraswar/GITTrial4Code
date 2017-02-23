@@ -879,22 +879,45 @@ namespace RAP.DAL
                                 caseinfo.TenantPetitionInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
                                 caseinfo.TenantPetitionInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.TenantPetitionInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
                             }
-                            if (caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                            var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(TenantPetitionDB.ApplicantUserID)).FirstOrDefault();
+                            if (customerInfo != null && customerInfo.CustomerID != 0)
                             {
-                                var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(TenantPetitionDB.ApplicantUserID)).FirstOrDefault();
-                                if (customerInfo != null && customerInfo.CustomerID != 0)
+                                var thirdPartydb = _dbAccount.ThirdPartyCaseAssignments.Where(x => x.CustomerID == customerInfo.CustomerID && x.CaseAssignedToThirdParty == caseinfo.C_ID).FirstOrDefault();
+                                if (thirdPartydb != null)
                                 {
-
-                                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
-                                    if (accdbResult.status.Status == StatusEnum.Success)
+                                    if (thirdPartydb.CaseAssignedToThirdParty == caseinfo.C_ID)
                                     {
-                                        caseinfo.TenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
-                                        caseinfo.TenantPetitionInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
-                                        caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
-                                    }
-
+                                        caseinfo.TenantPetitionInfo.bThirdPartyRepresentation = true;
+                                        var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
+                                        if (accdbResult.status.Status == StatusEnum.Success)
+                                        {
+                                            caseinfo.TenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                                            caseinfo.TenantPetitionInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                                            caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                                        }
+                                    }                                    
+                                }
+                                else
+                                {
+                                    caseinfo.TenantPetitionInfo.bThirdPartyRepresentation = false;
                                 }
                             }
+                            //if (caseinfo.TenantPetitionInfo.bThirdPartyRepresentation)
+                            //{
+                            //    var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(TenantPetitionDB.ApplicantUserID)).FirstOrDefault();
+                            //    if (customerInfo != null && customerInfo.CustomerID != 0)
+                            //    {
+
+                            //        var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
+                            //        if (accdbResult.status.Status == StatusEnum.Success)
+                            //        {
+                            //            caseinfo.TenantPetitionInfo.ThirdPartyInfo = accdbResult.result.ThirdPartyUser;
+                            //            caseinfo.TenantPetitionInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                            //            caseinfo.TenantPetitionInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                            //        }
+
+                            //    }
+                            //}
                         }
                         else
                         {
@@ -976,21 +999,44 @@ namespace RAP.DAL
                                 caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantEmailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.EmailNotification).FirstOrDefault();
                                 caseinfo.OwnerPetitionInfo.ApplicantInfo.bApplicantMailNotification = _dbAccount.NotificationPreferences.Where(x => x.UserID == caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID).Select(x => x.MailNotification).FirstOrDefault();
                             }
-                            if (caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation)
+                            var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID)).FirstOrDefault();
+                            if (customerInfo != null && customerInfo.CustomerID != 0)
                             {
-                                var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID)).FirstOrDefault();
-                                if (customerInfo != null && customerInfo.CustomerID != 0)
+                                var thirdPartydb = _dbAccount.ThirdPartyCaseAssignments.Where(x => x.CustomerID == customerInfo.CustomerID && x.CaseAssignedToThirdParty == caseinfo.C_ID).FirstOrDefault();
+                                if (thirdPartydb != null)
                                 {
-                                    var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
-                                    if (accdbResult.status.Status == StatusEnum.Success)
+                                    if (thirdPartydb.CaseAssignedToThirdParty == caseinfo.C_ID)
                                     {
-                                        caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
-                                        caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
-                                        caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                                        caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation = true;
+                                        var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
+                                        if (accdbResult.status.Status == StatusEnum.Success)
+                                        {
+                                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                                            caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                                        }
                                     }
-
+                                }
+                                else
+                                {
+                                    caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation = false;
                                 }
                             }
+                            //if (caseinfo.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation)
+                            //{
+                            //    var customerInfo = _dbAccount.CustomerDetails.Where(r => r.UserID == Convert.ToInt32(caseinfo.OwnerPetitionInfo.ApplicantInfo.ApplicantUserInfo.UserID)).FirstOrDefault();
+                            //    if (customerInfo != null && customerInfo.CustomerID != 0)
+                            //    {
+                            //        var accdbResult = _accountdbHandler.GetThirdPartyInfo(customerInfo.CustomerID);
+                            //        if (accdbResult.status.Status == StatusEnum.Success)
+                            //        {
+                            //            caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyUser = accdbResult.result.ThirdPartyUser;
+                            //            caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyMailNotification = accdbResult.result.MailNotification;
+                            //            caseinfo.OwnerPetitionInfo.ApplicantInfo.ThirdPartyEmailNotification = accdbResult.result.EmailNotification;
+                            //        }
+
+                            //    }
+                            //}
                         }
                         else
                         {
@@ -2581,6 +2627,24 @@ namespace RAP.DAL
                 _dbContext.CaseDetails.InsertOnSubmit(caseDetailsDB);
                 _dbContext.SubmitChanges();
                 caseInfo.C_ID = caseDetailsDB.C_ID;
+
+                // Updating the ThirdPartyCaseAssignment table for the thirdPartyRepresentative
+                TenantPetitionInfo petitionDB = _dbContext.TenantPetitionInfos
+                                                        .Where(x => x.TenantPetitionID == caseInfo.TenantPetitionInfo.PetitionID).FirstOrDefault();
+                bool bThirdPartyRepresentative = Convert.ToBoolean(petitionDB.bThirdPartyRepresentation);                
+                if(bThirdPartyRepresentative)
+                {
+                    var ThirdPartyDB = new ThirdPartyCaseAssignment();
+                    ThirdPartyDB.CustomerID = caseInfo.CaseFileBy;
+                    ThirdPartyDB.CaseAssignedToThirdParty = caseInfo.C_ID;
+                    _dbAccount.ThirdPartyCaseAssignments.InsertOnSubmit(ThirdPartyDB);
+                    _dbAccount.SubmitChanges();
+                }
+
+               // petitionDB.bThirdPartyRepresentation = caseInfo.TenantPetitionInfo.bThirdPartyRepresentation;
+
+              //  petitionDB.ThirdPartyUserID = thirdPartyUserID;
+
 
                 string caseid = "T" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + caseInfo.C_ID.ToString().PadLeft(4, '0');
                 var _caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == caseInfo.C_ID).First();
@@ -5917,6 +5981,20 @@ namespace RAP.DAL
                 _dbContext.CaseDetails.InsertOnSubmit(caseDetails);
                 _dbContext.SubmitChanges();
                 model.C_ID = caseDetails.C_ID;
+
+                // Updating the ThirdPartyCaseAssignment table for the thirdPartyRepresentative
+                //var OwnerPetitionApplicantInfoID = _dbContext.OwnerPetitionInfos
+                //                                        .Where(x => x.OwnerPetitionID == ownerPetitionID).Select(x=>x.OwnerPetitionApplicantInfoID).FirstOrDefault();
+                //var bThirdPartyRepresentative = _dbContext.OwnerPetitionApplicantInfos.Where(x => x.OwnerPetitionApplicantInfoID == OwnerPetitionApplicantInfoID).Select(x => x.bThirdPartyRepresentation).FirstOrDefault();
+
+                if (Convert.ToBoolean(model.OwnerPetitionInfo.ApplicantInfo.bThirdPartyRepresentation))
+                {
+                    var ThirdPartyDB = new ThirdPartyCaseAssignment();
+                    ThirdPartyDB.CustomerID = model.CaseFileBy;
+                    ThirdPartyDB.CaseAssignedToThirdParty = model.C_ID;
+                    _dbAccount.ThirdPartyCaseAssignments.InsertOnSubmit(ThirdPartyDB);
+                    _dbAccount.SubmitChanges();
+                }
 
                 string caseid = "L" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + model.C_ID.ToString().PadLeft(4, '0');
                 var caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == model.C_ID).First();
