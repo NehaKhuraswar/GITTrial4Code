@@ -1578,7 +1578,7 @@ namespace RAP.DAL
             using (AccountManagementDataContext db = new AccountManagementDataContext(_connString))
             {
                 var CustomerIdentityKeys = from r in db.CustomerDetails select r.CustomerIdentityKey;
-                if (CustomerIdentityKeys != null)
+                if (CustomerIdentityKeys != null && CustomerIdentityKeys.Any())
                 {
                     for (int i = 0; i < CustomerIdentityKeys.Count(); i++)
                     {
