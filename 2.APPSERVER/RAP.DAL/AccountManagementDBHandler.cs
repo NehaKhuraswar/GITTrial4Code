@@ -1593,6 +1593,10 @@ namespace RAP.DAL
                         }
                     }
                 }
+                else
+                {
+                    randomNo = random.Next(CustomerIdentityKeyFrom, CustomerIdentityKeyTo);
+                }
             }
             return Convert.ToString(randomNo);
         }
