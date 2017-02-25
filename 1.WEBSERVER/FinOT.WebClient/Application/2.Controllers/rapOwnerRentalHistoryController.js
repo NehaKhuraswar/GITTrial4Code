@@ -105,6 +105,11 @@ var rapOwnerRentalHistoryController = ['$scope', '$modal', 'alertService', 'rapO
         _AdditionalRentRecordCheck();
         if (!self.HasAdditionalRentRecord) {
             self.caseinfo.OwnerPetitionInfo.PropertyInfo.RentalInfo.push(self.Rent);
+            var RAP2documents = angular.copy(self.TempDocs);
+            RAP2documents.forEach(function (document) {
+                self.caseinfo.Documents.push(document);
+            });
+            self.TempDocs = [];
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveOwnerRentIncreaseAndUpdatePropertyInfo(self.caseinfo).then(function (response) {

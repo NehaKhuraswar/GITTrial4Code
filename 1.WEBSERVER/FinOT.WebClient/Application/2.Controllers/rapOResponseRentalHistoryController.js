@@ -150,6 +150,11 @@ var rapOResponseRentalHistoryController = ['$scope', '$modal', 'alertService', '
         {
             if (checkSelectedJustification(self.Rent)) {
                 self.caseinfo.OwnerResponseInfo.PropertyInfo.RentalInfo.push(self.Rent);
+                var RAP2documents = angular.copy(self.TempDocs);
+                RAP2documents.forEach(function (document) {
+                    self.caseinfo.Documents.push(document);
+                });
+                self.TempDocs = []
             }
             else
             {
