@@ -42,10 +42,11 @@
                             <div class="checkbox-wrapper" ng-repeat="appealground in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds.slice(2, 3) track by $index" border-top-green pad-t15">
                                 <p>
                                     <label for="{{appealground.AppealGroundID}}">
-                                        <input type="checkbox" name="appealgroundcheckbox" class="checkbox" id="{{appealground.AppealGroundID}}" ng-model="appealground.Selected">
-                                        <i></i><span><strong>{{appealground.AppealDescription}}</strong></span>
+                                        <span><strong>{{appealground.AppealDescription}}</strong></span>
+                                        <!--<input type="checkbox" name="appealgroundcheckbox" class="checkbox" id="{{appealground.AppealGroundID}}" ng-model="appealground.Selected">
+                <i></i><span><strong>{{appealground.AppealDescription}}</strong></span>-->
                                     </label>
-                                </p> 
+                                </p>
                                 <p>
                                     <div class="checkbox-wrapper" ng-repeat="appealgroundSub in Ctrl.caseinfo.TenantAppealInfo.AppealGrounds.slice(3, 11) track by $index">
                                         <label for="{{appealgroundSub.AppealGroundID}}">
@@ -53,8 +54,8 @@
                                             <i></i><span>{{appealgroundSub.AppealDescription}}</span>
                                         </label>
                                     </div>
-                                </p> 
-</div>
+                                </p>
+                            </div>
                             <!--</div>-->
                         </div>
                     </div>

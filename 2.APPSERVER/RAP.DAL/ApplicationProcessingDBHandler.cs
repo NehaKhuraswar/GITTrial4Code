@@ -2715,7 +2715,7 @@ namespace RAP.DAL
 
             int ownerUserID = 0;
             int thirdPartyUserID = 0;
-            int PropertyManagerUserID = 0;
+            int? PropertyManagerUserID = 0;
             int applicantUserID = 0;
             try
             {
@@ -2780,6 +2780,10 @@ namespace RAP.DAL
                                 return result;
                             }
                         }
+                        else
+                        {
+                            PropertyManagerUserID = null;
+                        }
                     }
 
                     TenantPetitionInfo petitionDB = _dbContext.TenantPetitionInfos
@@ -2789,10 +2793,9 @@ namespace RAP.DAL
                     petitionDB.ThirdPartyUserID = thirdPartyUserID;
                     petitionDB.ApplicantUserID = applicantUserID;
                     petitionDB.OwnerUserID = ownerUserID;
-                    if (PropertyManagerUserID > 0)
-                    {
-                        petitionDB.PropertyManagerUserID = PropertyManagerUserID;
-                    }
+                    
+                    petitionDB.PropertyManagerUserID = PropertyManagerUserID;
+                    
                     petitionDB.NumberOfUnits = caseInfo.TenantPetitionInfo.NumberOfUnits;
                     petitionDB.UnitTypeID = caseInfo.TenantPetitionInfo.UnitTypeId;
                     petitionDB.bRentStatus = caseInfo.TenantPetitionInfo.bCurrentRentStatus;
@@ -3835,7 +3838,10 @@ namespace RAP.DAL
 
                         tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
                         tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
-                        tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                        if (TenantResponseInfoDB.PropertyManagerUserID != null)
+                        {
+                            tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                        }
                         if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
                         {
                             tenantResponseInfo.bSameAsOwnerInfo = true;
@@ -4562,7 +4568,7 @@ namespace RAP.DAL
 
             int ownerUserID = 0;
             int thirdPartyUserID = 0;
-            int PropertyManagerUserID = 0;
+            int? PropertyManagerUserID = 0;
             int applicantUserID = 0;
             try
             {
@@ -4605,11 +4611,18 @@ namespace RAP.DAL
                     }
                     else
                     {
-                        PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.PropertyManager).result.UserID;
-                        if (PropertyManagerUserID == 0)
+                        if (caseInfo.TenantResponseInfo.PropertyManager.FirstName != null && caseInfo.TenantResponseInfo.PropertyManager.AddressLine1 != null && caseInfo.TenantResponseInfo.PropertyManager.City != null && caseInfo.TenantResponseInfo.PropertyManager.State != null && caseInfo.TenantResponseInfo.PropertyManager.Zip != null)
                         {
-                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                            return result;
+                            PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.PropertyManager).result.UserID;
+                            if (PropertyManagerUserID == 0)
+                            {
+                                result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                                return result;
+                            }
+                        }
+                        else
+                        {
+                            PropertyManagerUserID = null;
                         }
                     }
 
