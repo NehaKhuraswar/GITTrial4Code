@@ -35,7 +35,6 @@ namespace RAP.Business.Implementation
                     using (MailMessage mail = new MailMessage())
                     {
                         mail.From = new MailAddress(senderAddress);
-                        mail.To.Add("RAP.Oakland@gmail.com");
                         if (message.RecipientAddress != null && message.RecipientAddress.Any())
                         {
                            mail.To.Add(String.Join(",",message.RecipientAddress));
