@@ -266,7 +266,7 @@
 
                                 <!-- Property Owner Information -->
                                 <div class="subhead">
-                                    <h4>Property owner(s) name and mailing address</h4>
+                                    <h4>Property owner or manager's  name and mailing address</h4>
                                 </div>
                                 <div id="property-owner-info">
                                     <div class="field-group">
@@ -342,14 +342,14 @@
 
                                 <!-- Property Manager Information -->
                                 <div class="subhead">
-                                    <h4>Property manager(s) name and mailing address</h4>
+                                    <h4>Property owner or manager's  name and mailing address</h4>
                                 </div>
 
                                 <div id="property-manager-info">
                                     <div class="form-group-radio vertical clearfix">
                                         <label for="same_as_po_info">
                                             <input type="checkbox" class="checkbox" id="same_as_po_info" ng-model="Ctrl.caseinfo.TenantPetitionInfo.bSameAsOwnerInfo"
-                                                   value="Yes" ng-change="Ctrl.ChangeSameAsPropertyOwner()"><i></i><span>Same as property owner</span>
+                                                   value="Yes" ng-change="Ctrl.ChangeSameAsPropertyOwner()"><i></i><span>Property owner and manager are the same</span>
                                         </label>
                                         <div class="clear"></div>
                                     </div>
@@ -474,7 +474,7 @@
                                     </div>
 
                                     <div id="explanation" class="field-group" ng-show="!Ctrl.caseinfo.TenantPetitionInfo.bCurrentRentStatus">
-                                        <label for="pi_explanation">If you are not current on your rent, please explain.</label>
+                                        <label for="pi_explanation">If you are not current on your rent, please explain. (If you are legally withholding rent state what, if any, habitability violations exist in your unit.)</label>
                                         <textarea name="pi_explanation" id="pi_explanation" class="field-input textarea" rows="8"
                                                   ng-model="Ctrl.caseinfo.TenantPetitionInfo.ProvideExplanation"></textarea>
                                     </div>
