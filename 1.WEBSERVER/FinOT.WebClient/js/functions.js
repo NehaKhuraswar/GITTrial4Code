@@ -108,63 +108,45 @@ var tooltips;
     }
     
     
-    //Toggle Menu
-    if($('.menu-toggle').length > 0){
-      var $navigation = $('.navigation-wrapper');
-      var mobNavInCache = 0;
-      var $pageSlide = $('.pageSlide');
-      var $toggleContainer;
+      //Toggle Menu
+    if ($('.menu-toggle').length > 0) {
+        var $navigation = $('.navigation-wrapper');
+        var mobNavInCache = 0;
 
-      $('.menu-toggle').on('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
+        $('.menu-toggle').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $navigation.toggleClass('open');
+            $(this).toggleClass('open');
 
-        if( $pageSlide.hasClass('open') ){
-          $pageSlide.stop().animate({'right': '-100%' }, 500);
-        } else {
-          $pageSlide.stop().animate({ 'right': '0' }, 500);
-        }
+            //First Time only
+            if (mobNavInCache === 0) {
+                //Mobile Nav Accordian
+                if ($navigation.hasClass('open')) {
+                    if ($('li.toggle-nav > a', $navigation).length > 0) {
+                        $('li.toggle-nav > a', $navigation).each(function () {
+                            var $item = $(this);
+                            var $itemParent = $(this).parent('li.toggle-nav');
+                            var $subMenu = $('.sub-menu', $itemParent);
 
-        $pageSlide.toggleClass('open');
+                            if ($itemParent.hasClass('current-menu-parent')) {
+                                $itemParent.addClass('active');
+                            }
 
-        //Appened Navigation Links
-        if(mobNavInCache===0){
-          $toggleContainer = $('<div class="toggle-container">'+$navigation.html()+'</div>');
-          $pageSlide.html($toggleContainer);
-          mobNavInCache = 1;
-        }
-        
-        //Toggle Menu Class
-        $(this).toggleClass('open');
-        
-        
-        //Mobile Nav Accordian
-        if($pageSlide.hasClass('open')){
-          $('li.menu-item-has-children', $pageSlide).each(function(){
-            var $item = $(this);
-            var $btnToggle = $('<a href="#" class="btn-toggle"></a>');
-            $item.append($btnToggle);
-            
-            $btnToggle.on('click', function(e){
-              e.preventDefault();
-              var $subMenu = $('.sub-menu', $item);
-              $('.menu-item-has-children').not($item).removeClass('active');
-              $subMenu.slideToggle();
-              $item.toggleClass('active');
-            });
-          });
-        }
-      });
+                            $item.on('click', function (e) {
+                                e.preventDefault();
+                                e.stopPropagation();
 
-//      $(document).on('click', function closeMenu(e){
-//        if( !$(e.target).hasClass('open') ) {
-//          closeToggleMenu();
-//        }
-//      });
-
-      $('.close-menu').on('click', function(){
-        closeToggleMenu();
-      });
+                                $subMenu.slideToggle(400, function () {
+                                    $itemParent.toggleClass('active');
+                                });
+                            });
+                        });
+                    }
+                }
+                mobNavInCache = 1;
+            }
+        });
     }
     
     

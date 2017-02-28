@@ -23,105 +23,95 @@
 
     </head>
     <body>
-        <div id="site-header">
-            <div class="top-header">
-                <div class="container"><a href="http://www2.oaklandnet.com/government/o/hcd/index.htm" target="_blank">OAKLAND HOUSING &amp; COMMUNITY DEVELOPMENT</a></div>
-            </div>
+        <header>
+            <div id="site-header">
+                <div class="top-header">
+                    <div class="container"><a href="http://www2.oaklandnet.com/government/o/hcd/index.htm" target="_blank">OAKLAND HOUSING &amp; COMMUNITY DEVELOPMENT</a></div>
+                </div>
 
-            <div class="bottom-header">
-                <div class="container">
-                    <div id="sitetitle-wrapper">
-                        <h1 id="sitetitle"><a>City of Oakland</a></h1>
-                        <div class="description">Rent Adjustment <br />Program</div>
-                    </div>
+                <div class="bottom-header">
+                    <div class="container">
+                        <div id="sitetitle-wrapper">
+                            <h1 id="sitetitle"><a>City of Oakland</a></h1>
+                            <div class="description">Rent Adjustment <br />Program</div>
+                        </div>
 
-                    <div class="get-assistance"><strong>Get assistance</strong> &nbsp;&nbsp;(510) 238-3721</div>
+                        <div class="get-assistance"><strong>Get assistance</strong> &nbsp;&nbsp;(510) 238-3721</div>
 
 
-                    <a href="javascript:void();" class="menu-toggle"><span></span></a>
-                    <div class="navigation-wrapper">
-                        <!-- Site Choose Language -->
-                        <div class="site-language-wrapper toggle-nav-element">
-                            <div class="full-width" style="cursor: pointer;">
-                                <select class="custom-select" id="choose-language" name="choose-language">
-                                    <option value="">Choose language</option>
-                                    <option value="">Option 1</option>
-                                    <option value="">Option 2</option>
-                                    <option value="">Option 3</option>
-                                    <option value="">Option 4</option>
-                                </select>
+                        <a href="javascript:void();" class="menu-toggle"><span></span></a>
+                        <div class="navigation-wrapper clearfix">
+
+                            <div class="container clearfix">
+                                <!-- Site Nav -->
+                                <div id="primary-navigation" role="navigation" class="clearfix">
+                                    <div class="menu-main-menu-container">
+                                        <ul class="nav-menu">
+                                            <li class="toggle-nav menu-item-has-children">
+                                                <a href="http://rapwp.oaklandnet.com/about/">About</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="http://rapwp.oaklandnet.com/about/rap/">Rent Adjustment Program</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/about/rent-board-meetings/">Rent Board Meetings</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/about/petition-process/">Petition Process</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/about/laws/">Laws</a></li>
+                                                </ul>
+
+
+
+                                            </li>
+                                            <li class="toggle-nav menu-item-has-children">
+                                                <a href="http://rapwp.oaklandnet.com/issues/">Issues</a>
+                                                <ul class="sub-menu">
+
+                                                    <li><a href="http://rapwp.oaklandnet.com/issues/loss-of-service/">Loss of service</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/issues/rent-increase/">Rent Increase</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/issues/eviction/">Eviction</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/issues/exemptions/">Exemptions</a></li>
+                                                </ul>
+
+
+                                            </li>
+                                            <li class="toggle-nav menu-item-has-children">
+                                                <a href="http://rapwp.oaklandnet.com/resources/">Resources</a>
+                                                <ul class="sub-menu">
+
+                                                    <li><a href="http://rapwp.oaklandnet.com/resources/faq/">FAQ</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/resources/calculators/">Calculators</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/resources/glossary-of-terms/">Glossary of Terms</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/resources/helpful-contacts/">Helpful Contacts</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/resources/required-notices/">Required Notices</a></li>
+                                                    <li><a href="http://rapwp.oaklandnet.com/resources/additional-info/">Additional Information</a></li>
+
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item"><a href="http://rapwp.oaklandnet.com/petition-forms/">Petition Forms</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                                <div class="account-details-wrapper">
+                                    <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout" style="cursor: pointer;">Log out</a>
+
+                                    <ul class="account-details clearfix">
+
+                                        <li class="login" ng-show="Ctrl.UserName !=''"><a style="cursor: pointer;" ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
+
+                                        <li class="login" ng-show="Ctrl.UserName ==''"><a style="cursor: pointer;" ng-click="Ctrl.PublicLoginPage()">Log in</a></li>
+                                    </ul>
+
+                                </div>
+
+                                @*<div class="mb-account-details-wrapper">
+                                    <a href="#login" class="btn-link login">Log in</a>
+                                </div>*@
                             </div>
                         </div>
-
-                        <!-- Site Search -->
-                        <div class="site-search-wrapper toggle-nav-element">
-                            <form name="site-search-form" id="site-search-form" method="post" action="#" class="search-form">
-                                <input type="text" name="txt-site-search" id="txt-site-search" class="input-field" value="" placeholder="Search" />
-                                <input type="submit" name="btn-site-search" id="btn-site-search" class="btn-search" value="" />
-                            </form>
-                        </div>
-
-                        <div class="site-navigation">
-                            <ul>
-                                <li><a href="http://rapwp.oaklandnet.com/about/">About</a>
-								<ul class="sub-menu">
-										<li><a href="http://rapwp.oaklandnet.com/about/rap/">Rent Adjustment Program</a></li> 
-                                        <li><a href="http://rapwp.oaklandnet.com/about/rent-board-meetings/">Rent Board Meetings</a></li>
-                                        <li><a href="http://rapwp.oaklandnet.com/about/petition-process/">Petition Process</a></li>
-                                        <li><a href="http://rapwp.oaklandnet.com/about/laws/">Laws</a></li>
-                                    </ul>
-								
-								
-								
-								</li>
-                                <li><a href="http://rapwp.oaklandnet.com/issues/">Issues</a>
-									 <ul class="sub-menu">
-                                       
-                                        <li><a href="http://rapwp.oaklandnet.com/issues/loss-of-service/">Loss of service</a></li>
-                                        <li><a href="http://rapwp.oaklandnet.com/issues/rent-increase/">Rent Increase</a></li>
-                                        <li><a href="http://rapwp.oaklandnet.com/issues/eviction/">Eviction</a></li>
-										<li><a href="http://rapwp.oaklandnet.com/issues/exemptions/">Exemptions</a></li>
-                                    </ul>
-								
-								
-								</li>
-                                <li class="menu-item-has-children">
-                                    <a href="http://rapwp.oaklandnet.com/resources/">Resources</a>
-                                    <ul class="sub-menu">
-                                       
-                                        <li><a href="http://rapwp.oaklandnet.com/resources/faq/">FAQ</a></li>
-                                        <li><a href="http://rapwp.oaklandnet.com/resources/calculators/">Calculators</a></li>
-                                        <li><a href="http://rapwp.oaklandnet.com/resources/glossary-of-terms/">Glossary of Terms</a></li>
-										<li><a href="http://rapwp.oaklandnet.com/resources/helpful-contacts/">Helpful Contacts</a></li>
-										<li><a href="http://rapwp.oaklandnet.com/resources/required-notices/">Required Notices</a></li>
-										<li><a href="http://rapwp.oaklandnet.com/resources/additional-info/">Additional Information</a></li>
-										
-                                    </ul>
-                                </li>
-                                <li><a href="http://rapwp.oaklandnet.com/petition-forms/">Petition Forms</a></li>
-                                
-                            </ul>
-                        </div>
-
-                        <div class="account-details-wrapper">
-                            <a ng-click="Ctrl.LogOut()" ng-show="Ctrl.UserName !=''" class="logout" style="cursor: pointer;">Log out</a>
-
-                            <ul class="account-details clearfix">
-                                
-                                <li class="signedin" ng-show="Ctrl.UserName !=''"><a style="cursor: pointer;" ng-click="Ctrl.Home()">Hi, {{Ctrl.GetUserName()}}</a></li>
-                                <li class="signedin" ng-show="Ctrl.UserName ==''"><a style="cursor: pointer;" ng-click="Ctrl.PublicLoginPage()">Log in</a></li>
-                            </ul>
-                            
-                        </div>
-                        
-                        @*<div class="mb-account-details-wrapper">
-                            <a href="#login" class="btn-link login">Log in</a>
-                        </div>*@
-                    </div>
-
-                </div><!-- .container -->
-            </div><!-- .bottom-header -->
-        </div>
+                    </div><!-- .container -->
+                </div><!-- .bottom-header -->
+            </div>
+        </header>
         <div id="main">
             @*modal dialog has z-index of 1050 so set the z-index of inform more than that to bring it to front.*@
             <div inform class="inform-animate inform-fixed inform-shadow" style="z-index: 1051"></div>
@@ -197,6 +187,6 @@
             @Scripts.Render("~/bundles/angular")
             @Scripts.Render("~/bundles/angularApp")
             @Scripts.Render("~/bundles/angularTemplates")
-
+        <script src='../js/functions.js'></script>
 </body>
     </html>
