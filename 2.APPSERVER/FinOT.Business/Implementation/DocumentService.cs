@@ -28,7 +28,11 @@ namespace RAP.Business.Implementation
       {
           ReturnResult<DocumentM> result = new ReturnResult<DocumentM>();
           try
-          {             
+          {           
+              if(doc.Base64Content == null)
+              {
+                  throw new Exception("Document file size is not acceptable " + doc.DocName);     
+              }
               string endpoint = ConfigurationManager.AppSettings["WebcenterEndPoint"];
               BasicHttpBinding myBinding = new BasicHttpBinding();
               myBinding.Security.Mode = BasicHttpSecurityMode.Transport;
