@@ -147,7 +147,7 @@
                                     <div class="col-md-6 col-sm-12" ng-hide="Ctrl.model.IsNonRAPStaff == true">
                                         <div class="field-group has-btn" ng-show="Ctrl.caseinfo.PetitionCategoryID == 1">
                                             <label for="apn_number" class="hidden">APN Number</label>
-                                            <input type="text" name="apn_number" id="apn_number" class="field-input" placeholder="Enter APN number"
+                                            <input type="text" name="apn_number" id="apn_number" class="field-input" placeholder="Enter APN number" maxlength="10"
                                                    ng-model="Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress.APNNumber" />
                                             <a style="cursor: pointer;" ng-click="Ctrl.UpdateAPNNumber(Ctrl.caseinfo.TenantPetitionInfo.ApplicantUserInfo.apnAddress)" class="btn-link">Save</a>
                                         </div>
