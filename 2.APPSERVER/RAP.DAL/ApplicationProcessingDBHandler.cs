@@ -2645,8 +2645,8 @@ namespace RAP.DAL
 
               //  petitionDB.ThirdPartyUserID = thirdPartyUserID;
 
-
-                string caseid = "T" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + caseInfo.C_ID.ToString().PadLeft(4, '0');
+                
+                string caseid = "T" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (caseInfo.C_ID + 999).ToString();
                 var _caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == caseInfo.C_ID).First();
                 _caseinfo.CaseID = caseid;
                 _dbContext.SubmitChanges();
@@ -4706,11 +4706,19 @@ namespace RAP.DAL
                     }
                     else
                     {
-                        PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.PropertyManager).result.UserID;
-                        if (PropertyManagerUserID == 0)
+                        
+                        if (caseInfo.TenantResponseInfo.PropertyManager.FirstName != null && caseInfo.TenantResponseInfo.PropertyManager.AddressLine1 != null && caseInfo.TenantResponseInfo.PropertyManager.City != null && caseInfo.TenantResponseInfo.PropertyManager.State != null && caseInfo.TenantResponseInfo.PropertyManager.Zip != null)
                         {
-                            result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
-                            return result;
+                            PropertyManagerUserID = _dbCommon.SaveUserInfo(caseInfo.TenantResponseInfo.PropertyManager).result.UserID;
+                            if (PropertyManagerUserID == 0)
+                            {
+                                result.status = new OperationStatus() { Status = StatusEnum.DatabaseException };
+                                return result;
+                            }
+                        }
+                        else
+                        {
+                            PropertyManagerUserID = null;
                         }
                     }
 
@@ -6009,7 +6017,7 @@ namespace RAP.DAL
                     _dbAccount.SubmitChanges();
                 }
 
-                string caseid = "L" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + model.C_ID.ToString().PadLeft(4, '0');
+                string caseid = "L" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (model.C_ID + 999).ToString();
                 var caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == model.C_ID).First();
                 caseinfo.CaseID = caseid;
                 _dbContext.SubmitChanges();
