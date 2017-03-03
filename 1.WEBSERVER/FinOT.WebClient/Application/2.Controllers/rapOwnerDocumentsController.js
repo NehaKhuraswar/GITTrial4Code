@@ -9,7 +9,11 @@
     self.Error = "";
     
     masterFactory.DocDescription().then(function (response) {
-        if (!alert.checkResponse(response)) { return; }
+        if (!alert.checkForResponse(response)) {
+            self.Error = rapGlobalFactory.Error;
+            $anchorScroll();
+            return;
+        }
         self.DocDescriptions = response.data;     
     });
     self.description1 = null;

@@ -21,7 +21,11 @@ var rapTRDocumentController = ['$scope', '$modal', 'alertService', 'ajaxService'
     self.ContinueToReview = function () {
         rapGlobalFactory.CaseDetails = self.caseinfo;
         rapFactory.SaveTRAdditionalDocuments(self.caseinfo).then(function (response) {
-            if (!alert.checkResponse(response)) { return; }
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
+                return;
+            }
             rapGlobalFactory.CaseDetails = response.data;
         });
         $scope.model.bAddDocuments = false;

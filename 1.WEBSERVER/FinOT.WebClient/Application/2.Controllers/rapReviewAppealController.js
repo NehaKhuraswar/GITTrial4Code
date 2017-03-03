@@ -9,7 +9,9 @@ var rapReviewAppealController = ['$scope', '$modal', 'alertService', 'rapreviewa
     
     var _GetTenantAppealInfoForReview = function (AppealID) {
         rapFactory.GetTenantAppealInfoForReview(AppealID, self.custDetails.custID).then(function (response) {
-            if (!alert.checkResponse(response)) {
+            if (!alert.checkForResponse(response)) {
+                self.Error = rapGlobalFactory.Error;
+                $anchorScroll();
                 return;
             }
             self.caseinfo.TenantAppealInfo = response.data.TenantAppealInfo;
