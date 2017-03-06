@@ -377,21 +377,31 @@ namespace RAP.API.Controllers
 
             try
             {
-                result = accService.ForgetPwd(customerInfo.email);
-                if (result.status.Status == StatusEnum.Success)
+                if (customerInfo == null || customerInfo.email == null || customerInfo.email == "")
                 {
-                    transaction.data = result.result;
-                    transaction.status = true;
+                    transaction.status = false;
+                    transaction.AddException("Please enter email address");
                 }
                 else
                 {
-                    // transaction.warnings.Add(result.status.StatusMessage);
+                    result = accService.ForgetPwd(customerInfo.email);
+                    if (result.status.Status == StatusEnum.Success)
+                    {
+                        transaction.data = result.result;
+                        transaction.status = true;
+                    }
+                    else
+                    {
+                        // transaction.warnings.Add(result.status.StatusMessage);
 
-                    transaction.status = false;
-                    transaction.AddException(result.status.StatusMessage);
+                        transaction.status = false;
+                        transaction.AddException(result.status.StatusMessage);
 
-                    //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
+                        //_commonService.LogError(result.status.StatusCode, result.status.StatusMessage, result.status.StatusDetails, 0, "LoginCust");
+                    }
+
                 }
+               
 
 
             }
