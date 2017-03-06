@@ -4103,7 +4103,10 @@ namespace RAP.DAL
                         
                         tenantResponseInfo.ApplicantUserInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.ApplicantUserID).result;
                         tenantResponseInfo.OwnerInfo = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.OwnerUserID).result;
-                        tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                        if ((int)TenantResponseInfoDB.PropertyManagerUserID >= 1)
+                        {
+                            tenantResponseInfo.PropertyManager = _commondbHandler.GetUserInfo((int)TenantResponseInfoDB.PropertyManagerUserID).result;
+                        }
                         if (tenantResponseInfo.OwnerInfo.UserID == tenantResponseInfo.PropertyManager.UserID)
                         {
                             tenantResponseInfo.bSameAsOwnerInfo = true;
