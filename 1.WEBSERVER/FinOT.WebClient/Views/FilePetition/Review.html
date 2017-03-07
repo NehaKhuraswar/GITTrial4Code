@@ -63,13 +63,13 @@
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead">
+                <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits!=null">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Number of units in the building</div></div>
                         <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.NumberOfUnits}}</div>
                     </div>
                 </div><!-- .field-group -->
-                <div class="field-group filled-info subhead">
+                <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID > 0">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Approximate range of units in the building</div></div>
                         <div class="col-sm-6 col-xs-12">{{Ctrl.caseinfo.TenantPetitionInfo.RangeOfUnits[Ctrl.caseinfo.TenantPetitionInfo.SelectedRangeOfUnits.RangeID - 1].RangeDesc}}</div>
@@ -116,21 +116,21 @@
                     <a style="cursor: pointer;" ng-click="Ctrl.EditRentalHistoryInfo()" class="btn-link btn-edit">Edit</a>
                 </div>
 
-                <div class="field-group filled-info subhead no-top-margin">
+                <div class="field-group filled-info subhead no-top-margin" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate!= null">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">When did you move into this unit?</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate!= null">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.MoveInDate.Year}}</div>
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
+                <div class="field-group filled-info subhead no-top-margin" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.InitialRent!= null">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">Initial monthly rent</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.InitialRent!= null">${{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.InitialRent}}</div>
                     </div>
                 </div><!-- .field-group -->
 
-                <div class="field-group filled-info subhead no-top-margin">
+                <div class="field-group filled-info subhead no-top-margin" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate!= null">
                     <div class="row">
                         <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate!= null">{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantPetitionInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>
@@ -168,14 +168,14 @@
                         </div>
                     </div><!-- .field-group -->
 
-                    <div class="field-group filled-info subhead no-top-margin">
+                    <div class="field-group filled-info subhead no-top-margin" ng-show="item.RentIncreasedFrom != null">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Monthly rent increase</div></div>
                             <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreasedFrom != null">${{item.RentIncreasedTo-item.RentIncreasedFrom}}</div>
                         </div>
                     </div><!-- .field-group -->
 
-                    <div class="field-group filled-info subhead no-top-margin">
+                    <div class="field-group filled-info subhead no-top-margin" ng-show="item.RentIncreaseEffectiveDate != null">
                         <div class="row">
                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
                             <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreaseEffectiveDate != null">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
@@ -248,7 +248,7 @@
                             </div>
                         </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
+                        <div class="field-group filled-info subhead no-top-margin" ng-show="item.LossBeganDate != null">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Date loss of this service began</div></div>
                                 <div class="col-sm-6 col-xs-12" ng-show="item.LossBeganDate != null">{{item.LossBeganDate.Year}}/{{item.LossBeganDate.Month}}/{{item.LossBeganDate.Day}}</div>
@@ -298,7 +298,7 @@
                             </div>
                         </div><!-- .field-group -->
 
-                        <div class="field-group filled-info subhead no-top-margin">
+                        <div class="field-group filled-info subhead no-top-margin" ng-show="item.ProblemBeganDate != null">
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12"><div class="info-title">Date problem(s) began</div></div>
                                 <div class="col-sm-6 col-xs-12" ng-show="item.ProblemBeganDate != null">{{item.ProblemBeganDate.Year}}/{{item.ProblemBeganDate.Month}}/{{item.ProblemBeganDate.Day}}</div>

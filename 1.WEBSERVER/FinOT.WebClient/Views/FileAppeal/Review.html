@@ -22,7 +22,7 @@
         <a style="cursor: pointer;" ng-click="Ctrl.EditApplicantInfo()" class="btn-link btn-edit">Edit</a>
     </div>
 
-    <div class="field-group filled-info subhead">
+    <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.UserID!=0">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Applicant information</div></div>
             <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.ApplicantUserInfo.UserID!=0">
@@ -142,7 +142,7 @@
             </div>
         </div>
     </div>
-    <div class="field-group filled-info subhead">
+    <div class="field-group filled-info subhead" ng-show="Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate != null">
         <div class="row">
             <div class="col-sm-6 col-xs-12"><div class="info-title">Date on which a copy of the appeal was served</div></div>
             <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantAppealInfo.serveAppeal.PenaltyDate != null">

@@ -200,7 +200,7 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date you received the notice</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreaseNoticeDate != null">{{item.RentIncreaseNoticeDate.Month}}/{{item.RentIncreaseNoticeDate.Day}}/{{item.RentIncreaseNoticeDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
 
@@ -214,7 +214,7 @@
                                     <div class="field-group filled-info subhead no-top-margin">
                                         <div class="row">
                                             <div class="col-sm-6 col-xs-12"><div class="info-title">Date increase goes into effect</div></div>
-                                            <div class="col-sm-6 col-xs-12">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
+                                            <div class="col-sm-6 col-xs-12" ng-show="item.RentIncreaseEffectiveDate != null">{{item.RentIncreaseEffectiveDate.Month}}/{{item.RentIncreaseEffectiveDate.Day}}/{{item.RentIncreaseEffectiveDate.Year}}</div>
                                         </div>
                                     </div><!-- .field-group -->
                                 </div>

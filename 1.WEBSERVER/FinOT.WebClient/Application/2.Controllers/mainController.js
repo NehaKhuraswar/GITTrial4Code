@@ -3,6 +3,7 @@
   
     var self = this;
     self.UserName = '';
+    self.MenuToggle = false;
     var _getCustomer = function (custid) {
         var url = '/api/accountmanagement' + '/getCustomer';
         if (!(custid == null || custid == undefined)) { url = url + '/' + custid; }
