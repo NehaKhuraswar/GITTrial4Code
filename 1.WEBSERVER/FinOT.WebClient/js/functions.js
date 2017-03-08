@@ -119,33 +119,7 @@ var tooltips;
             $navigation.toggleClass('open');
             $(this).toggleClass('open');
 
-            //First Time only
-            if (mobNavInCache === 0) {
-                //Mobile Nav Accordian
-                if ($navigation.hasClass('open')) {
-                    if ($('li.toggle-nav > a', $navigation).length > 0) {
-                        $('li.toggle-nav > a', $navigation).each(function () {
-                            var $item = $(this);
-                            var $itemParent = $(this).parent('li.toggle-nav');
-                            var $subMenu = $('.sub-menu', $itemParent);
-
-                            if ($itemParent.hasClass('current-menu-parent')) {
-                                $itemParent.addClass('active');
-                            }
-
-                            $item.on('click', function (e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-
-                                $subMenu.slideToggle(400, function () {
-                                    $itemParent.toggleClass('active');
-                                });
-                            });
-                        });
-                    }
-                }
-                mobNavInCache = 1;
-            }
+           
         });
     }
     
