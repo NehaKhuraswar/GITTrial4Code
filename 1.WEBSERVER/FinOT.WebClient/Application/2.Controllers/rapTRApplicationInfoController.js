@@ -20,6 +20,7 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
     
     self.bEditRepresentative = false;
     self.GetTenantResponseApplicationInfo = function (CaseNumber) {
+        self.Error = "";
         rapFactory.GetTenantResponseApplicationInfo(CaseNumber, self.custDetails.custID).then(function (response) {
              if (!alert.checkForResponse(response)) {
                  self.Error = rapGlobalFactory.Error;
@@ -117,6 +118,12 @@ var rapTRApplicationInfoController = ['$scope', '$modal', 'alertService', 'rapTR
             return;
         }
         rapGlobalFactory.CaseDetails = self.caseinfo;
+        if (self.caseinfo.CaseID == null) {
+            self.Error = 'Please load the case information before proceeding';
+            $anchorScroll();
+            return;
+        }
+
         rapFactory.SaveTenantResponseApplicationInfo(rapGlobalFactory.CaseDetails, self.custDetails.custID).then(function (response) {
              if (!alert.checkForResponse(response)) {
                  self.Error = rapGlobalFactory.Error;
