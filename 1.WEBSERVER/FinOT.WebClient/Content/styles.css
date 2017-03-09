@@ -4049,7 +4049,7 @@ strong {
     max-width: 100%;
     background: #ffffff;
     margin: 0;
-    padding: 20px 0 30px 0;
+    padding: 0 0 20px 0;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   }
   /* line 1085, ../sass/styles.scss */
@@ -6595,133 +6595,6 @@ strong {
     display: block !important;
   }
 
-  /* line 3291, ../sass/styles.scss */
-  #main {
-    padding-top: 170px;
-  }
-
-  /**
-   * H E A D ER
-   * ----------------------------------------------------------------------------
-   */
-  /* line 3299, ../sass/styles.scss */
-  #site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-  }
-  /* line 3304, ../sass/styles.scss */
-  #site-header .top-header {
-    font-size: 10px;
-  }
-  /* line 3306, ../sass/styles.scss */
-  #site-header .mb-account-details-wrapper {
-    display: block;
-  }
-  /* line 3311, ../sass/styles.scss */
-  #site-header .bottom-header .get-assistance {
-    display: none;
-  }
-  /* line 3312, ../sass/styles.scss */
-  #site-header .bottom-header .account-details-wrapper {
-    display: none;
-  }
-  /* line 3313, ../sass/styles.scss */
-  #site-header .bottom-header .navigation-wrapper {
-    display: none;
-  }
-  /* line 3314, ../sass/styles.scss */
-  #site-header .bottom-header .logout {
-    display: none;
-  }
-  /* line 3315, ../sass/styles.scss */
-  #site-header .bottom-header .menu-toggle {
-    display: block;
-  }
-  /* line 3317, ../sass/styles.scss */
-  #site-header .bottom-header .container {
-    padding-bottom: 30px;
-  }
-  /* line 3321, ../sass/styles.scss */
-  #site-header .bottom-header #sitetitle-wrapper {
-    max-width: 260px;
-  }
-  /* line 3324, ../sass/styles.scss */
-  #site-header .bottom-header #sitetitle-wrapper #sitetitle {
-    border-left: 2px solid #00870b;
-    border-right: none;
-    padding: 20px 20px 50px 20px;
-    margin: 0;
-  }
-  /* line 3330, ../sass/styles.scss */
-  #site-header .bottom-header #sitetitle-wrapper #sitetitle a {
-    display: block;
-    width: 151px;
-    height: 38px;
-    background: url(../Images/logo.png) no-repeat 0 0;
-    background-size: 151px 38px;
-    padding: 0;
-    color: #4a4a4a;
-    font-family: "FaktPro-Blond", "sans-serif";
-    font-size: 22px;
-    font-family: 300;
-    line-height: 1.27;
-    text-indent: -999em;
-  }
-  /* line 3345, ../sass/styles.scss */
-  #site-header .bottom-header #sitetitle-wrapper .description {
-    position: absolute;
-    top: 70px;
-    left: 100px;
-    font-size: 19px;
-    line-height: 1.11;
-  }
-
-  /* line 3357, ../sass/styles.scss */
-  .toggle-nav-element {
-    position: relative;
-    top: none;
-    left: none;
-    display: block;
-    margin: 0;
-    max-width: 100%;
-    padding: 0 25px;
-  }
-
-  /* line 3366, ../sass/styles.scss */
-  .site-language-wrapper {
-    background: url(../Images/icon-translate@2x.png) no-repeat 25px center;
-    background-size: 22px 20px;
-    padding: 0 25px 0 45px;
-    margin: 0;
-  }
-  /* line 3372, ../sass/styles.scss */
-  .site-language-wrapper .select {
-    max-width: 245px;
-    margin: 0;
-    z-index: 999999;
-    font-size: 16px;
-  }
-
-  /* line 3380, ../sass/styles.scss */
-  .site-search-wrapper {
-    margin: 0 0 20px 0;
-  }
-  /* line 3382, ../sass/styles.scss */
-  .site-search-wrapper .search-form {
-    padding-left: 32px;
-    border: 1px solid #cfd0ce;
-  }
-  /* line 3386, ../sass/styles.scss */
-  .site-search-wrapper .search-form .input-field {
-    width: 100%;
-  }
-  /* line 3387, ../sass/styles.scss */
-  .site-search-wrapper .search-form .btn-search {
-    top: 13px;
-  }
 
   /**
    * C O N T E N T

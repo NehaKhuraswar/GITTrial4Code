@@ -108,20 +108,6 @@ var tooltips;
     }
     
     
-      //Toggle Menu
-    if ($('.menu-toggle').length > 0) {
-        var $navigation = $('.navigation-wrapper');
-        var mobNavInCache = 0;
-
-        $('.menu-toggle').on('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            $navigation.toggleClass('open');
-            $(this).toggleClass('open');
-
-           
-        });
-    }
     
     
     //Toggle - Search and Choose Language
