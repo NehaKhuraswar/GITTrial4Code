@@ -14,7 +14,7 @@
                     <div class="info">
                         <div class="field-group">
                             <label for="CaseID">Case number</label>
-                            <input type="text" class="field-input required" data-error="Case number" ng-trim="false" ng-model="Ctrl.CaseID" required />
+                            <input type="text" id="CaseID" name="CaseID" class="field-input required" data-error="Case number" ng-trim="false" ng-model="Ctrl.CaseID" required />
                         </div>
                         <button class="btn-link" role="button" aria-label="Load case info" ng-click="Ctrl.GetTenantResponseApplicationInfo(Ctrl.CaseID)">Load case info</button>
                     </div>
@@ -533,6 +533,7 @@
                                         ||(frmTenantResponse.owner_mailing_address1.$error.required)
                                         ||(frmTenantResponse.owner_city.$error.required)
                                         ||(frmTenantResponse.owner_zipcode.$error.required)
+                                        ||(frmTenantResponse.CaseID.$error.required)
                                         ||(frmTenantResponse.UnitType.$error.required))
                                            ) && Ctrl.ContinueToExemptionContested()" />
                 </div>
