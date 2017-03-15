@@ -65,7 +65,7 @@
                         <p class="fs-14"><strong>You are permitted to upload the following file types: PDF, Word, Excel, JPEG, TIFF and PNG. <br/> The maximum file size limit for uploads is 25MB</strong></p>
                         <p class="fs-14"><strong>Submissions to the Board are limited to 25 pages from each party.</strong></p>
                         <div class="field-addfile">
-                            <div class="input-file-wrapper">
+                            <div class="input-file-wrapper mar-b30">
                                 <span class="btn-link">Attach explanation</span>
                                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'A_Grounds')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                             </div>
@@ -80,7 +80,7 @@
                                     <div class="tbl-row clearfix">
                                         <div class="item">
                                             <div class="item-header clearfix">
-                                                <div class="col col-35 name pad-l30"><a style="cursor: pointer;"></a>{{item.DocName}}</div>
+                                                <div class="col col-35 name"><a style="cursor: pointer;"></a>{{item.DocName}}</div>
                                                 <div class="col col-35 name type">&nbsp;</div>
                                                 <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
                                                 <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
