@@ -66,6 +66,10 @@ namespace RAP.Core.Common
                     StatusCode = "0006";
                     StatusMessage = Message.ResourceManager.GetString("ID_0006");
                     break;
+                case StatusEnum.DocumentSizeError:
+                    StatusCode = "0007";
+                    StatusMessage = Message.ResourceManager.GetString("ID_0007");
+                    break;
 
 
 

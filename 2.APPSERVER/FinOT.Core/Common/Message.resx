@@ -126,10 +126,16 @@
   <data name="ID_0006" xml:space="preserve">
     <value>Case responding to is not valid</value>
   </data>
+  <data name="ID_0007" xml:space="preserve">
+    <value>Document file size is not acceptable</value>
+  </data>
   <data name="ID_0106" xml:space="preserve">
     <value>Invalid login</value>
   </data>
   <data name="ID_0107" xml:space="preserve">
     <value>Invalid email</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>

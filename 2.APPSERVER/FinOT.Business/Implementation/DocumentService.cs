@@ -31,7 +31,8 @@ namespace RAP.Business.Implementation
           {           
               if(doc.Base64Content == null)
               {
-                  throw new Exception("Document file size is not acceptable " + doc.DocName);     
+                  result.status = new OperationStatus() { Status = StatusEnum.DocumentSizeError };
+                  return result;
               }
               string endpoint = ConfigurationManager.AppSettings["WebcenterEndPoint"];
               BasicHttpBinding myBinding = new BasicHttpBinding();
@@ -53,7 +54,7 @@ namespace RAP.Business.Implementation
               var serviceResult = checkInService.CheckInUniversal(null, doc.DocName.Replace(" ", "").Trim(), docType, docAuthor, securityGroup, docAccount, customDocMetaData.ToArray(), serviceObj, null, null);
               if(serviceResult == null)
               {
-                  throw new Exception("Document upload failed for the document" + doc.DocName);               
+                  throw new Exception("Document upload failed for the document" + doc.DocName);          
               }
               doc.DocThirdPartyID = serviceResult.dID;
               if (doc.DocThirdPartyID > 0)

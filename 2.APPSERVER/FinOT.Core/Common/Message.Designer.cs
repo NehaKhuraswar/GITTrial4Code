@@ -88,6 +88,15 @@ namespace RAP.Core.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document file size is not acceptable.
+        /// </summary>
+        internal static string ID_0007 {
+            get {
+                return ResourceManager.GetString("ID_0007", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login.
         /// </summary>
         internal static string ID_0106 {
@@ -102,6 +111,15 @@ namespace RAP.Core.Common {
         internal static string ID_0107 {
             get {
                 return ResourceManager.GetString("ID_0107", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }

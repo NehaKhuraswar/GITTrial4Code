@@ -142,9 +142,9 @@ var rapstaffdashboardController = ['$scope', '$modal', 'alertService', 'rapstaff
     }
     _getEmptyCaseSearchModel();
 
-    if (self.caseinfo == null) {
-        _GetCaseInfo();
-    }
+    //if (self.caseinfo == null) {
+    //        _GetCaseInfo();
+    //}
 
     self.GeneratePageNumberListNoAnalyst = function()
     {

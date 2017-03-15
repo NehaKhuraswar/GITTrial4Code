@@ -20,6 +20,7 @@ namespace RAP.Core.Common
         PetitionGroundRequired,
         JustificationRequired,
         CaseNumerIsNotValid,
+        DocumentSizeError,
         #endregion
         
         #region Exceptions

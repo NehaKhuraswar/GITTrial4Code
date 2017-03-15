@@ -53,14 +53,13 @@ var raploginCityUserController = ['$scope', '$modal', 'alertService', 'raploginC
         //}
         //else //if (accounttype.AccountTypeID == 1 || ) 
         //{
-           // model.AccountType = accounttype;
+        // model.AccountType = accounttype;
+        self.Error = "";
             rapFactory.LoginCity(model).then(function (response) {
-                if (response != null && response != undefined) {
-                    if (response.exceptions != null && response.exceptions.length) {
-                        self.Error = response.exceptions[0];
-                        // alert.Error(response.warnings[0]);
-                        return;
-                    }
+                if (!alert.checkForResponse(response)) {
+                    self.Error = rapGlobalFactory.Error;
+                    $anchorScroll();
+                    return;
                 }
                 rapGlobalFactory.CityUser = response.data;
                 rapGlobalFactory.SaveCityUser(response.data);

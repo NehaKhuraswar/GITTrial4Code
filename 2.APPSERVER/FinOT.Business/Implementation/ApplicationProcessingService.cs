@@ -250,6 +250,14 @@ namespace RAP.Business.Implementation
                         {
                             documents.Add(doc);
                         }
+                        else
+                        {
+                            dbResult.result.Documents = documents;
+                            result.result = dbResult.result;
+                            result.status = docUploadResut.status;
+                            return result;
+
+                        }
                     }
                     else
                     {
