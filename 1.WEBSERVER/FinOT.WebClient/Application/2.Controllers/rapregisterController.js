@@ -23,7 +23,7 @@ var rapregisterController = ['$scope', '$modal', 'alertService', 'rapcustFactory
     }
 
     self.bEdit =  rapGlobalFactory.IsEdit;
-    self.Title = "Create a city user account";
+    self.Title = "Create a public user account";
     self.SubmitText = "Create account"
      $anchorScroll();
     if (rapGlobalFactory.IsEdit == true)
