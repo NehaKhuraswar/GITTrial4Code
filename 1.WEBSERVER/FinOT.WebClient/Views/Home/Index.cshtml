@@ -105,8 +105,8 @@
                             </div>
 
                                 <div class="mb-account-details-wrapper">
-                                    <a ng-show="Ctrl.UserName ==''"  style="cursor: pointer;" ng-click="Ctrl.PublicLoginPage()" class="btn-link login">Log in</a>
-                                    <a ng-show="Ctrl.UserName !=''" style="cursor: pointer;" ng-click="Ctrl.Home()" class="btn-link login">Hi, {{Ctrl.GetUserName()}}</a>
+                                    <a ng-show="Ctrl.UserName ==''" style="cursor: pointer;" ng-click="Ctrl.MenuToggle = !Ctrl.MenuToggle; Ctrl.PublicLoginPage()" class="btn-link login">Log in</a>
+                                    <a ng-show="Ctrl.UserName !=''" style="cursor: pointer;" ng-click="Ctrl.MenuToggle = !Ctrl.MenuToggle; Ctrl.Home()" class="btn-link login">Hi, {{Ctrl.GetUserName()}}</a>
                             </div>
                         </div>
                        
