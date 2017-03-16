@@ -73,11 +73,13 @@
 
                                             <div class="col-md-3 col-sm-12">
                                                 <div class="case-heading mar-b10">Case analyst</div>
+                                                <p ng-show="caseinfo.CityAnalyst.UserID ==0">Not assigned</p>
                                                 <p>{{caseinfo.CityAnalyst.FirstName}} {{caseinfo.CityAnalyst.LastName}} <br />{{caseinfo.CityAnalyst.Email}} <br />{{caseinfo.CityAnalyst.OfficePhoneNumber}}</p>
                                             </div>
 
                                             <div class="col-md-4 col-sm-12">
                                                 <div class="case-heading mar-b10">Hearing officer</div>
+                                                <p ng-show="caseinfo.HearingOfficer.UserID ==0">Not assigned</p>
                                                 <p>{{caseinfo.HearingOfficer.FirstName}} {{caseinfo.HearingOfficer.LastName}} <br />{{caseinfo.HearingOfficer.Email}} <br />{{caseinfo.HearingOfficer.OfficePhoneNumber}}</p>
                                             </div>
                                         </div>

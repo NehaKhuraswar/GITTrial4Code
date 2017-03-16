@@ -131,6 +131,22 @@
                                     <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TP_LostService')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                                 </div>
                                 <div class="field-group">
+                                    <!-- .custom-table -->
+                                    <div class="custom-table docs-list" >                                       
+                                        <div class="tbl-body">
+                                            <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'}">
+                                                <div class="item">
+                                                    <div class="item-header clearfix">
+                                                        <div class="col col-35 name">{{item.DocName}}</div>
+                                                        <div class="col col-35 name type">&nbsp;</div>
+                                                        <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                        <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <table class="table table-condensed nopadding-bottom">
                                         <tbody>
                                             <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'}">
