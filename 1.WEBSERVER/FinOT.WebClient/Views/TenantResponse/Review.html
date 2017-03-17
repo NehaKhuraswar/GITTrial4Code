@@ -172,7 +172,7 @@
                                     </div>
                                 </div><!-- .field-group -->
 
-                                <div class="field-group filled-info subhead no-top-margin" ng-show="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate!=null">
+                                <div class="field-group filled-info subhead no-top-margin" ng-show="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate!=null && Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.bRAPNoticeGiven == false">
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-12"><div class="info-title">When did the property owner first provide you with the RAP Notice, a written notice of the existence of the Rent Adjustment Program?</div></div>
                                         <div class="col-sm-6 col-xs-12" ng-show="Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate!=null">{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Month}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Day}}/{{Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.RAPNoticeGivenDate.Year}}</div>

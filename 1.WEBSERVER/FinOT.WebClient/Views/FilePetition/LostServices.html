@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-
+                        
                         <div class="field-group">
                             <label>Please attach documentary evidence if available</label>
                             <div class="field-addfile no-top-margin">
@@ -130,23 +130,34 @@
                                     <span class="btn-link">Attach</span>
                                     <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TP_LostService')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                                 </div>
-                                <div class="field-group">
-                                    <table class="table table-condensed nopadding-bottom">
-                                        <tbody>
-                                            <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'}">
-                                                <td class="nopadding-left">
-                                                    {{item.DocName}}
-                                                </td>
-                                                <td>
-                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
+                        <div class="field-group">
+                            <!-- Documents Attached -->
+                            <div class="custom-table docs-list" ng-show="FilteredDocs.length != 0">
+                                <div class="tbl-header" >
+                                    <div class="tbl-row clearfix">
+                                        <div class="col col-35 name">File name</div>
+                                        <div class="col col-35 type">&nbsp;</div>
+                                    </div>
+                                </div>
+
+                                <div class="tbl-body">
+                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_LostService'} as FilteredDocs">
+                                        <div class="item item-toggle">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 name">{{item.DocName}}</div>
+                                                <div class="col col-35 type">&nbsp;</div>
+                                                <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .custom-table -->
+                        </div><!-- .field-group -->
 
 
                         <a style="cursor: pointer;" class="btn-link" ng-click="Ctrl.AddAnotherLostServices(Ctrl.LostServices)">Add another lost service</a>
@@ -252,23 +263,36 @@
                                     <span class="btn-link">Attach</span>
                                     <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TP_Problem')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                                 </div>
-                                <div class="field-group">
-                                    <table class="table table-condensed nopadding-bottom">
-                                        <tbody>
-                                            <tr ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_Problem'}">
-                                                <td class="nopadding-left">
-                                                    {{item.DocName}}
-                                                </td>
-                                                <td>
-                                                    <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                
                             </div>
                         </div>
+                        <div class="field-group">
+                            <!-- Documents Attached -->
+                            <div class="custom-table docs-list" ng-show="FilteredProblemDocs.length != 0">
+                                <div class="tbl-header">
+                                    <div class="tbl-row clearfix">
+                                        <div class="col col-35 name">File name</div>
+                                        <div class="col col-35 type">&nbsp;</div>
+                                    </div>
+                                </div>
+
+                                <div class="tbl-body">
+                                    <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.TenantPetitionInfo.LostServicesPage.Documents | filter: {DocTitle: 'TP_Problem'} as FilteredProblemDocs">
+                                        <div class="item item-toggle">
+                                            <div class="item-header clearfix">
+                                                <div class="col col-35 name">{{item.DocName}}</div>
+                                                <div class="col col-35 type">&nbsp;</div>
+                                                <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .custom-table -->
+                        </div><!-- .field-group -->
+
 
                         <a style="cursor: pointer;" class="btn-link" ng-click="Ctrl.AddAnotherProblem(Ctrl.Problems)">Add another problem</a>
                     </div><!-- .field-group -->

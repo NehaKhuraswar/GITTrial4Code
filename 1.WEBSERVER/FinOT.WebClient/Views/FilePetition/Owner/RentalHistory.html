@@ -115,24 +115,35 @@
                         <span class="btn-link">Upload signed copy of notice</span>
                         <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OP_RAPNotice1')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                     </div>
-                    <div class="field-group">
-                        <table class="table table-condensed nopadding-bottom">
-                            <tbody>
-                                <tr ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'}">
-                                    <td class="nopadding-left">
-                                        {{item.DocName}}
-                                    </td>
-                                    <td>
-                                        &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
-                                        <input type="button" ng-show="item.isUploaded == true" id="download" name="Download" class="btn-link btn-download" value="Download" ng-click="Ctrl.Download(item)" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- Documents Attached -->
+                    
+                    <!-- .custom-table -->                    
                 </div>
             </div><!-- .field-group -->
-  
+            <div class="field-group">
+                <div class="custom-table docs-list" ng-show="FilteredNoticeDocs.length != 0">
+                    <div class="tbl-header">
+                        <div class="tbl-row clearfix">
+                            <div class="col col-35 name">File name</div>
+                            <div class="col col-35 type">&nbsp;</div>
+                        </div>
+                    </div>
+
+                    <div class="tbl-body">
+                        <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.Documents | filter: {DocTitle: 'OP_RAPNotice1'} as FilteredNoticeDocs">
+                            <div class="item item-toggle">
+                                <div class="item-header clearfix">
+                                    <div class="col col-35 name">{{item.DocName}}</div>
+                                    <div class="col col-35 type">&nbsp;</div>
+                                    <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                    <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="field-group">
                 <p class="input-label">Is the tenant current on the rent?</p>
                 <div class="form-group-radio vertical clearfix">
@@ -176,22 +187,34 @@
                         <span class="btn-link">Upload proof</span>
                         <input type="file" id="notice_signed_copy" name="notice_signed_copy" ngf-select ngf-change="onFileSelected($files,'OP_RAPNotice2')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
                     </div>
-                    <div class="field-group">
-                        <table class="table table-condensed nopadding-bottom">
-                            <tbody>
-                                <tr ng-repeat="item in Ctrl.TempDocs">
-                                    <td class="nopadding-left">
-                                        {{item.DocName}}
-                                    </td>
-                                    <td>
-                                        &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.DeleteFromTempDocs(item)" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+
                 </div>
             </div><!-- .field-group -->
+            <!-- .custom-table -->
+            <div class="field-group">
+                <div class="custom-table docs-list" ng-show="Ctrl.TempDocs.length != 0">
+                    <div class="tbl-header">
+                        <div class="tbl-row clearfix">
+                            <div class="col col-35 name">File name</div>
+                            <div class="col col-35 type">&nbsp;</div>
+                        </div>
+                    </div>
+
+                    <div class="tbl-body">
+                        <div class="tbl-row clearfix" ng-repeat="item in Ctrl.TempDocs ">
+                            <div class="item item-toggle">
+                                <div class="item-header clearfix">
+                                    <div class="col col-35 name">{{item.DocName}}</div>
+                                    <div class="col col-35 type">&nbsp;</div>
+                                    <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.DeleteFromTempDocs(item)" class="btn-link btn-delete">Delete</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="field-group" ng-show="Ctrl.Rent.bRentIncreaseNoticeGiven">
                 <label>Date notice given to tenant</label>
                 <div class="row">
@@ -337,14 +360,14 @@
                             <div class=" tbl-row clearfix">
                             <div class="item">
                                 <div class="item-header clearfix">
-                                    <div class="col col-35 name pad-l30">{{item.DocName}}</div>
+                                    <div class="col col-35 name ">{{item.DocName}}</div>
                                     &nbsp; <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
                                     &nbsp; <input type="button" ng-show="item.isUploaded == false" id="delete" name="delete" class="btn-link btn-delete" value="Delete" ng-click="Ctrl.Delete(item)" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>               
+                </div>
             </div>
         </div>
 

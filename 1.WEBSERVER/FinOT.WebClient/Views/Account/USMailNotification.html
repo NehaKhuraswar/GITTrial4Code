@@ -96,19 +96,31 @@
                                     </div>
                                 </div> 
                                 <div class="field-group">
-                                    <table class="table table-condensed nopadding-bottom">
-                                        <tbody>
-                                            <tr ng-repeat="item in Ctrl.model.Attachments">
-                                                <td class="nopadding-left">
-                                                    {{item.DocName}}
-                                                </td>
-                                                <td>
-                                                    <div class="col col-35 type" ng-show="item.isUploaded == false">  &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>                     
+                                    <!-- Documents Attached -->
+                                    <div class="custom-table docs-list" ng-show="Ctrl.model.Attachments.length != 0">
+                                        <div class="tbl-header">
+                                            <div class="tbl-row clearfix">
+                                                <div class="col col-35 name">File name</div>
+                                                <div class="col col-35 type">&nbsp;</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tbl-body">
+                                            <div class="tbl-row clearfix" ng-repeat="item in Ctrl.model.Attachments">
+                                                <div class="item item-toggle">
+                                                    <div class="item-header clearfix">
+                                                        <div class="col col-35 name">{{item.DocName}}</div>
+                                                        <div class="col col-35 type">&nbsp;</div>
+                                                        <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- .custom-table -->
+                                </div><!-- .field-group -->
+                          
 
                         </div>
                     </div>
