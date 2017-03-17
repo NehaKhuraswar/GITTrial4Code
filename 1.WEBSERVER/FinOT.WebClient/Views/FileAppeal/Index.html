@@ -21,6 +21,15 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <div>
+                        <div ng-if="Ctrl.bAppealType" class="page-sub-title">Appeal Type</div>
+                        <div ng-if="Ctrl.bImpInfoAppeal" class="page-sub-title">Important Information</div>
+                        <div ng-if="Ctrl.bAppellantInfo" class="page-sub-title">Applicant and Property Information</div>
+                        <div ng-if="Ctrl.bGrounds" class="page-sub-title">Grounds for Appeal</div>
+                        <div ng-if="Ctrl.bAddDocs" class="page-sub-title">Additional Documentation</div>
+                        <div ng-if="Ctrl.bReview" class="page-sub-title">Review</div>
+                        <div ng-if="Ctrl.bServingAppeal" class="page-sub-title">Serving of Appeal to Opposing Party</div>
+                        <div ng-if="Ctrl.bConfirm" class="page-sub-title">Confirmation</div>
+
                         <div class="application-steps-toggle clearfix ">
                             <button type="button" ng-class="{'steps-toggle collapsed' : Ctrl.Toggle, 'steps-toggle' : !Ctrl.Toggle}" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 7</button>                            
                         </div>

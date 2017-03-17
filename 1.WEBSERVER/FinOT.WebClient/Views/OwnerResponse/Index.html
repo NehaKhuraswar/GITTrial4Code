@@ -17,6 +17,18 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <div>
+                        <div ng-if="Ctrl.petitionType" class="page-sub-title">Petition Type</div>
+                        <div ng-if="Ctrl.oresponseImpInfo" class="page-sub-title">Important Information</div>
+                        <div ng-if="Ctrl.oresponseApplicantInfo" class="page-sub-title">Applicant and Property Information</div>
+                        <div ng-if="Ctrl.oresponseDecreasedHousing" class="page-sub-title">Decreased Housing Services</div>
+                        <div ng-if="Ctrl.oresponseException" class="page-sub-title">Exemption</div>                        
+                        <div ng-if="Ctrl.oresponseRentalHistory" class="page-sub-title">Rental History</div>
+                        <div ng-if="Ctrl.oresponseRentalProperty" class="page-sub-title">Rental Property</div>
+                        <div ng-if="Ctrl.oresponseDocument" class="page-sub-title">Additional Documentation</div>
+                        <div ng-if="Ctrl.oresponseReview" class="page-sub-title">Review</div>
+                        <div ng-if="Ctrl.oresponseVerification" class="page-sub-title">Verification</div>
+                        <div ng-if="Ctrl.oresponseConfirmation" class="page-sub-title">Confirmation</div>
+
                         <div class="application-steps-toggle clearfix ">
                             <button type="button" ng-class="{'steps-toggle collapsed' : Ctrl.Toggle, 'steps-toggle' : !Ctrl.Toggle}" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 10</button>
                         </div>

@@ -16,7 +16,29 @@
     <div class="page-content">
         <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-12">                       
+                    <div class="col-md-3 col-sm-12">  
+                        <div ng-if="Ctrl.bPetitionType" class="page-sub-title">Petition Type</div>
+                        <div ng-if="Ctrl.bImpInfo" class="page-sub-title">Important Information</div>
+                        <div ng-if="Ctrl.bAppInfo" class="page-sub-title">Applicant and Property Information</div>
+                        <div ng-if="Ctrl.bGrounds" class="page-sub-title">Grounds for Petition</div>
+                        <div ng-if="Ctrl.bLostServices" class="page-sub-title">Description of loss of service and problems</div>
+                        <div ng-if="Ctrl.bRentalHistory" class="page-sub-title">Rental History</div>
+                        <div ng-if="Ctrl.bAddDocuments" class="page-sub-title">Additional Documentation</div>
+                        <div ng-if="Ctrl.bReview" class="page-sub-title">Review</div>
+                        <div ng-if="Ctrl.bVerification" class="page-sub-title">Verification</div>
+                        <div ng-if="Ctrl.bConfirm" class="page-sub-title">Confirmation</div>
+
+                        <!--Owner related mobile titles-->
+                        <div ng-if="Ctrl.ownerImpInfo" class="page-sub-title">Important Information</div>
+                        <div ng-if="Ctrl.ownerApplicantInfo" class="page-sub-title">Applicant and Property Information</div>
+                        <div ng-if="Ctrl.ownerJustification" class="page-sub-title">Justification for Rent Increase</div>
+                        <div ng-if="Ctrl.ownerRentalHistory" class="page-sub-title">Rental History</div>
+                        <div ng-if="Ctrl.ownerRentalProperty" class="page-sub-title">Rental Property</div>
+                        <div ng-if="Ctrl.ownerAdditionalDocuments" class="page-sub-title">Additional Documentation</div>
+                        <div ng-if="Ctrl.ownerReview" class="page-sub-title">Review</div>
+                        <div ng-if="Ctrl.ownerVerification" class="page-sub-title">Verification</div>
+                        <div ng-if="Ctrl.ownerConfirmation" class="page-sub-title">Confirmation</div>
+                                             
                         <div class="application-steps-toggle clearfix ">
                             <button type="button" ng-class="{'steps-toggle collapsed' : Ctrl.Toggle, 'steps-toggle' : !Ctrl.Toggle}" ng-click="Ctrl.Toggle=!Ctrl.Toggle">Step {{Ctrl.stepNo}} / 9</button>
                         </div>
@@ -27,6 +49,7 @@
                                 
                             </ul>-->
                         <!--</div>-->
+                        
                         <div ng-show="Ctrl.caseinfo.PetitionCategoryID == 1">
                             <ul class="application-steps" ng-show="Ctrl.Toggle">
                                 <li ng-class="{'active' : Ctrl.oPetionActiveStatus.ApplicantInformation || Ctrl.tPetionActiveStatus.ApplicantInformation||Ctrl.bImpInfo || Ctrl.ownerImpInfo || Ctrl.oPetionActiveStatus.ImportantInformation|| Ctrl.tPetionActiveStatus.ImportantInformation
