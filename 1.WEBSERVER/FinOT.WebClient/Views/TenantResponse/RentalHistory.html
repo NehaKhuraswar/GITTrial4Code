@@ -39,25 +39,32 @@
 
     <div class="field-group no-top-margin mar-bottom-40">
         <label>Your lease agreement (Optional)</label>
-        <div class="field-addfile no-top-margin ">
-            <div class="input-file-wrapper" ng-show="Ctrl.bRentalHistoryLeaseUpload">
+        <div class="field-addfile no-top-margin " ng-show="Ctrl.bRentalHistoryLeaseUpload">
+            <div class="input-file-wrapper">
                 <span class="btn-link">Attach</span>
                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryLease')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
+            </div>            
+        </div>
+        <div class="custom-table docs-list" ng-show="FilteredLeaseDocs.length != 0">
+            <div class="tbl-header">
+                <div class="tbl-row clearfix">
+                    <div class="col col-35 name">File name</div>
+                    <div class="col col-35 type">&nbsp;</div>
+                </div>
             </div>
-            <div class="field-group">
-                <table class="table table-condensed nopadding-bottom">
-                    <tbody>
-                        <tr ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'}">
-                            <td class="nopadding-left">
-                                {{item.DocName}}
-                            </td>
-                            <td>
-                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                <div class="col col-35 type" ng-show="item.isUploaded == false"> &nbsp; <a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <div class="tbl-body">
+                <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryLease'} as FilteredLeaseDocs">
+                    <div class="item item-toggle">
+                        <div class="item-header clearfix">
+                            <div class="col col-35 name">{{item.DocName}}</div>
+                            <div class="col col-35 type">&nbsp;</div>
+                            <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                            <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -153,25 +160,32 @@
 
     <div class="field-group no-top-margin mar-bottom-40">
         <label>RAP Notice (Optional)</label>
-        <div class="field-addfile no-top-margin ">
-            <div class="input-file-wrapper" ng-show="Ctrl.bRentalHistoryNoticeUpload">
+        <div class="field-addfile no-top-margin " ng-show="Ctrl.bRentalHistoryNoticeUpload">
+            <div class="input-file-wrapper">
                 <span class="btn-link">Attach</span>
                 <input type="file" id="attach_buiness_tax_proof" name="attach_buiness_tax_proof" ngf-select ngf-change="onFileSelected($files,'TR_RentalHistoryNotice')" accept=".doc,.docx,.pdf,.xlsx,.xls,.jpeg,.tiff,.png,.jpg,.jpeg" multiple />
             </div>
-            <div class="field-group">
-                <table class="table table-condensed nopadding-bottom">
-                    <tbody>
-                        <tr ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'}">
-                            <td class="nopadding-left">
-                                {{item.DocName}}
-                            </td>
-                            <td>
-                                <div class="col col-5 pad-r0 download" ng-show="item.isUploaded == true"> &nbsp;<a style="cursor: pointer;" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a></div>
-                                <div class="col col-35 type" ng-show="item.isUploaded == false"> &nbsp; <a style="cursor: pointer;" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+        <div class="custom-table docs-list" ng-show="FilteredNoticeDocs.length != 0">
+            <div class="tbl-header">
+                <div class="tbl-row clearfix">
+                    <div class="col col-35 name">File name</div>
+                    <div class="col col-35 type">&nbsp;</div>
+                </div>
+            </div>
+
+            <div class="tbl-body">
+                <div class="tbl-row clearfix" ng-repeat="item in Ctrl.caseinfo.TenantResponseInfo.TenantRentalHistory.Documents | filter: {DocTitle: 'TR_RentalHistoryNotice'} as FilteredNoticeDocs">
+                    <div class="item item-toggle">
+                        <div class="item-header clearfix">
+                            <div class="col col-35 name">{{item.DocName}}</div>
+                            <div class="col col-35 type">&nbsp;</div>
+                            <a style="cursor: pointer;" ng-show="item.isUploaded == false" ng-click="Ctrl.Delete(item)" class="btn-link btn-delete">Delete</a>
+                            <a style="cursor: pointer;" ng-show="item.isUploaded == true" ng-click="Ctrl.Download(item)" class="btn-link btn-download">Download</a>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
