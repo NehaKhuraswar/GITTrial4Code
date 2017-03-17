@@ -2644,9 +2644,8 @@ namespace RAP.DAL
                // petitionDB.bThirdPartyRepresentation = caseInfo.TenantPetitionInfo.bThirdPartyRepresentation;
 
               //  petitionDB.ThirdPartyUserID = thirdPartyUserID;
-
-                
-                string caseid = "T" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (caseInfo.C_ID + 999).ToString();
+                string caseid = _dbContext.UFN_GenerateTenantCaseID();                
+                //string caseid = "T" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (caseInfo.C_ID + 999).ToString();
                 var _caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == caseInfo.C_ID).First();
                 _caseinfo.CaseID = caseid;
                 _dbContext.SubmitChanges();
@@ -6019,8 +6018,9 @@ namespace RAP.DAL
                     _dbAccount.ThirdPartyCaseAssignments.InsertOnSubmit(ThirdPartyDB);
                     _dbAccount.SubmitChanges();
                 }
-
-                string caseid = "L" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (model.C_ID + 999).ToString();
+              //  string caseid = _dbContext.UFN_GenerateOwnertCaseID();   
+                string caseid = _dbContext.UFN_GenerateOwnerCaseID();
+                //string caseid = "L" + DateTime.Now.Year.ToString().Substring(2, 2) + "-" + (model.C_ID + 999).ToString();
                 var caseinfo = _dbContext.CaseDetails.Where(r => r.C_ID == model.C_ID).First();
                 caseinfo.CaseID = caseid;
                 _dbContext.SubmitChanges();

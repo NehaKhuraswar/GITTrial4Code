@@ -623,4 +623,10 @@
       <Association Name="TenantPetitionInfo_TenantPetitionLostService" Member="TenantPetitionInfo" ThisKey="PetitionID" OtherKey="TenantPetitionID" Type="TenantPetitionInfo" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.UFN_GenerateOwnerCaseID" Method="UFN_GenerateOwnerCaseID" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.UFN_GenerateTenantCaseID" Method="UFN_GenerateTenantCaseID" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
 </Database>

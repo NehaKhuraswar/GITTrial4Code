@@ -586,6 +586,18 @@ namespace RAP.DAL
 				return this.GetTable<TenantPetitionLostService>();
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UFN_GenerateOwnerCaseID", IsComposable=true)]
+		public string UFN_GenerateOwnerCaseID()
+		{
+			return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod()))).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.UFN_GenerateTenantCaseID", IsComposable=true)]
+		public string UFN_GenerateTenantCaseID()
+		{
+			return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod()))).ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CurrentOnRentStatus")]
