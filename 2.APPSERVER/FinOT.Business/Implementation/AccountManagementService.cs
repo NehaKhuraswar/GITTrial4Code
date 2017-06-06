@@ -16,7 +16,7 @@ namespace RAP.Business.Implementation
     {
         public string CorrelationId { get; set; }      
      
-        //implements all methods from IMasterDataService
+        //implements all methods from IMasterDataService rtret
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
         EmailService emailservice = new EmailService();
