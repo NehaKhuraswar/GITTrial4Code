@@ -15,8 +15,8 @@ namespace RAP.Business.Implementation
     public class AccountManagementService : IAccountManagementService
     {
         public string CorrelationId { get; set; }      
-     
-        //implements all methods from IMasterDataService rtret
+      //Neha check github
+        //implements all methods from IMasterDataService 
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
         EmailService emailservice = new EmailService();
