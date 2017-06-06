@@ -15,7 +15,7 @@ namespace RAP.Business.Implementation
     public class AccountManagementService : IAccountManagementService
     {
         public string CorrelationId { get; set; }      
-      //Neha check github
+      //Neha check github check if the github is getting updated
         //implements all methods from IMasterDataService 
 
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
