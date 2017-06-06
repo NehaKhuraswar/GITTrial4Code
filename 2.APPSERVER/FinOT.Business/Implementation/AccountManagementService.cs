@@ -13,7 +13,7 @@ using RAP.Core.Common;
 namespace RAP.Business.Implementation
 {
     public class AccountManagementService : IAccountManagementService
-    {
+    {//sdssdflsdkfl
         public string CorrelationId { get; set; }      
       //Neha check github check if the github is getting updated
         //implements all methods from IMasterDataService 
@@ -21,7 +21,7 @@ namespace RAP.Business.Implementation
         AccountManagementDBHandler accDBHandler = new AccountManagementDBHandler();
         EmailService emailservice = new EmailService();
         ExceptionHandler _eHandler = new ExceptionHandler();
-
+        
         public ReturnResult<CustomerInfo> SaveCustomer(CustomerInfo message)
         {
             ReturnResult<CustomerInfo> result = new ReturnResult<CustomerInfo>();
