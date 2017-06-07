@@ -9,7 +9,8 @@ using ValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 namespace RAP.API.Common
 {//erwer
     public static class Extensions
-    {
+    { 
+        // trial for the github
         /// <summary>
         /// Converts the Fluent Validation result to the type the both mvc and ef expect
         /// </summary>
