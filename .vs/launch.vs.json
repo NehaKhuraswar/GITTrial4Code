@@ -1,0 +1,12 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "dll",
+      "exe": "",
+      "project": "1.WEBSERVER\\FinOT.WebClient\\Views\\FilePetition\\ApplicationInfo.html",
+      "name": "ApplicationInfo.html"
+    }
+  ]
+}
